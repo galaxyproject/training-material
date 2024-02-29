@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -634,7 +634,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Sequencing (determining of DNA/RNA nucleotide sequence) is used all over"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -749,12 +749,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/assembly/tutorials/mrsa-illumina/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/assembly/tutorials/mrsa-illumina/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/assembly/tutorials/mrsa-illumina/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1222,7 +1216,7 @@ genome sequences of eight MRSA strains isolated from patients in Japan.</p>
   <div class="box-title hands-on-title" id="hands-on-import-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import datasets</div>
   <ol>
     <li>
-      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the files from <a href="https://zenodo.org/record/10669812">Zenodo</a> or from Galaxy shared data libraries:</p>
+      <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> the files from <a href="https://zenodo.org/record/10669812">Zenodo</a> or from Galaxy shared data libraries:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10669812/files/DRR187559_1.fastqsanger.bz2
 https://zenodo.org/record/10669812/files/DRR187559_2.fastqsanger.bz2
@@ -1313,7 +1307,7 @@ reads include:</p>
   <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.74+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.74%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.74+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: both <code class="language-plaintext highlighter-rouge">DRR187559_1</code> and <code class="language-plaintext highlighter-rouge">DRR187559_2</code></li>
       </ul>
@@ -1390,7 +1384,7 @@ is needed. In this case we are going to trim the data using <strong>fastp</stron
   <div class="box-title hands-on-title" id="hands-on-quality-improvement"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality improvement</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.2+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffastp%2Ffastp%2F0.23.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.2+galaxy0)</a> with the following parameters:
       <ul>
         <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
@@ -1483,7 +1477,7 @@ is needed. In this case we are going to trim the data using <strong>fastp</stron
   <div class="box-title hands-on-title" id="hands-on-assembly-using-shovill"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly using Shovill</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy1" title="Shovill tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Shovill</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy1" title="Shovill tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fshovill%2Fshovill%2F1.1.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Shovill</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy1)</a> with the following parameters:
       <ul>
         <li><em>“Input reads type, collection or single library”</em>: <code class="language-plaintext highlighter-rouge">Paired End</code>
           <ul>
@@ -1545,7 +1539,7 @@ is needed. In this case we are going to trim the data using <strong>fastp</stron
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-assembly-inspection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly inspection</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/2022.09+galaxy2" title="Bandage Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2022.09+galaxy2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/2022.09+galaxy2" title="Bandage Info tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbandage%2Fbandage_info%2F2022.09%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2022.09+galaxy2)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Graphical Fragment Assembly”</em>: <strong>Shovill</strong> <code class="language-plaintext highlighter-rouge">Contig Graph</code></li>
       </ul>
@@ -1579,7 +1573,7 @@ is needed. In this case we are going to trim the data using <strong>fastp</stron
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-assembly-inspection-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly inspection</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4" title="Bandage Image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2022.09+galaxy4)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4" title="Bandage Image tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbandage%2Fbandage_image%2F2022.09%2Bgalaxy4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2022.09+galaxy4)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Graphical Fragment Assembly”</em>: <strong>Shovill</strong> <code class="language-plaintext highlighter-rouge">Contig Graph</code></li>
       </ul>
@@ -1612,7 +1606,7 @@ is needed. In this case we are going to trim the data using <strong>fastp</stron
   <div class="box-title hands-on-title" id="hands-on-quality-control-of-assembly-using-quast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control of assembly using Quast</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fquast%2Fquast%2F5.2.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy1)</a> with the following parameters:
       <ul>
         <li><em>Assembly mode?</em>: <code class="language-plaintext highlighter-rouge">Co-assembly</code>
           <ul>
@@ -2108,7 +2102,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2136,7 +2130,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

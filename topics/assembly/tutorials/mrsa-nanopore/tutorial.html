@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -593,7 +593,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "In this training you're going to make an assembly of data produced by"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -708,12 +708,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/assembly/tutorials/mrsa-nanopore/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/assembly/tutorials/mrsa-nanopore/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/assembly/tutorials/mrsa-nanopore/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1127,7 +1121,7 @@ Nanopore Technologies sequencing have much longer variable lengths.</p>
   <ol>
     <li>Create a new history for this tutorial</li>
     <li>
-      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the files from <a href="https://zenodo.org/record/10669812">Zenodo</a> or from the shared data library</p>
+      <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> the files from <a href="https://zenodo.org/record/10669812">Zenodo</a> or from the shared data library</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10669812/files/DRR187567.fastq.bz2
 </code></pre></div>      </div>
@@ -1228,7 +1222,7 @@ reads include:</p>
   <div class="box-title hands-on-title" id="hands-on-qc-amp-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: QC &amp; Filtering</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0" title="filtlong tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>filtlong</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0" title="filtlong tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffiltlong%2Ffiltlong%2F0.2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>filtlong</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ”</em>: <code class="language-plaintext highlighter-rouge">DRR187567</code> (output of <strong>Convert compressed file to uncompressed.</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Output thresholds”</em>:
@@ -1252,7 +1246,7 @@ reads include:</p>
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Nanoplot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Nanoplot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.28.2+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Nanoplot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fnanoplot%2Fnanoplot%2F1.28.2%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Nanoplot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.28.2+galaxy1)</a> with the following parameters:
       <ul>
         <li><em>“Select multifile mode”</em>: <code class="language-plaintext highlighter-rouge">batch</code>
           <ul>
@@ -1383,9 +1377,9 @@ datasets that will be shown on the screen together.</p>
 <p>While there is currently no community consensus over
 the best trimming or filtering practices with long read data, there are still
 some steps that can be beneficial to do for the assembly process.
-<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3" title="Porechop tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Porechop</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.3)</span>
+<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3" title="Porechop tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fporechop%2Fporechop%2F0.2.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Porechop</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.3)</a>
 is a commonly used tool for removing adapter sequences, and we used
-<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0" title="filtlong tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>filtlong</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</span>
+<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0" title="filtlong tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffiltlong%2Ffiltlong%2F0.2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>filtlong</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</a>
 for removing shorter reads which might make the assembly process more difficult.</p>
 
 <h1 id="assembly">Assembly</h1>
@@ -1410,7 +1404,7 @@ assembly in a .fasta file, which looks like a .fastq file without the 3rd and
   <div class="box-title hands-on-title" id="hands-on-assembly-using-flye"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly using Flye</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6" title="Flye assembly tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flye assembly</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6" title="Flye assembly tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fflye%2Fflye%2F2.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flye assembly</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads”</em>: <code class="language-plaintext highlighter-rouge">DRR187567-filtered</code> (output of <strong>filtlong</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“estimated genome size (for example, 5m or 2.6g)”</em>: <code class="language-plaintext highlighter-rouge">2.8m</code> or <code class="language-plaintext highlighter-rouge">2800000</code> (average genome size of MRSA)</li>
@@ -1456,7 +1450,7 @@ assembly in a .fasta file, which looks like a .fastq file without the 3rd and
       <p><em>NOTE: The results can differ from this example, because Flye can differ a bit per assembly</em></p>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2" title="Bandage Image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.1+galaxy2)</span> with the following parameters:</p>
+      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2" title="Bandage Image tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbandage%2Fbandage_image%2F0.8.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.1+galaxy2)</a> with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Graphical Fragment Assembly”</em>: <code class="language-plaintext highlighter-rouge">Flye assembly on data .. (Graphical Fragment Assembly)</code></li>
@@ -1506,7 +1500,7 @@ also possible with QUAST.</p>
   <div class="box-title hands-on-title" id="hands-on-quality-control-of-assembly-using-quast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control of assembly using Quast</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.2+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Quast tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fquast%2Fquast%2F5.0.2%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.2+galaxy1)</a> with the following parameters:
       <ul>
         <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
           <ul>
@@ -1561,7 +1555,7 @@ the largest contig can mean that it is the total chromosomal DNA of the <em>S. a
   <div class="box-title hands-on-title" id="hands-on-run-staramr"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run staramr</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2" title="staramr tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>staramr</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.1+galaxy2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2" title="staramr tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fstaramr%2Fstaramr_search%2F0.7.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>staramr</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.1+galaxy2)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“genomes”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1667,7 +1661,7 @@ from prokka as an information track.</p>
   <div class="box-title hands-on-title" id="hands-on-annotating-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotating the Genome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0" title="Prokka tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Prokka</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.14.5+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0" title="Prokka tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fcrs4%2Fprokka%2Fprokka%2F1.14.5%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Prokka</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.14.5+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs to annotate”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Genus name (–genus)”</em>: <code class="language-plaintext highlighter-rouge">staphylococcus </code></li>
@@ -1676,7 +1670,7 @@ from prokka as an information track.</p>
         <li><em>“Additional outputs”</em>: Select only the “Annotation in GFF3 format containing both sequences and annotations”</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">staramr on data .. detailed_summary.tsv</code></li>
         <li><em>“that”</em>: Matching</li>
@@ -1685,7 +1679,7 @@ from prokka as an information track.</p>
 
       <p>This will select lines with a decimal value (###.##) followed by a tab character, the column separator in Galaxy. As a result, any lines without an identity value will be filtered out.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2" title="Table to GFF3 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table to GFF3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2)</span>
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2" title="Table to GFF3 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ftbl2gff3%2Ftbl2gff3%2F1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table to GFF3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2)</a>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: the output of the above <strong>Select lines</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step.</li>
         <li><em>“Record ID column or value”</em>: <code class="language-plaintext highlighter-rouge">8</code></li>
@@ -1713,7 +1707,7 @@ from prokka as an information track.</p>
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2" title="Map with minimap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2" title="Map with minimap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fminimap2%2Fminimap2%2F2.17%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy2)</a> with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history and build index</code>
           <ul>
@@ -1725,7 +1719,7 @@ from prokka as an information track.</p>
         <li><em>“Select a profile of preset options”</em>: <code class="language-plaintext highlighter-rouge">Oxford Nanopore read to reference mapping. Slightly more sensitive for Oxford Nanopore to reference mapping (-k15). For PacBio reads, HPC minimizers consistently leads to faster performance and more sensitive results in comparison to normal minimizers. For Oxford Nanopore data, normal minimizers are better, though not much. The effectiveness of HPC is determined by the sequencing error mode. (map-ont)</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="JBrowse tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.9+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="JBrowse tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fjbrowse%2Fjbrowse%2F1.16.9%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.9+galaxy0)</a> with the following parameters:
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
@@ -2296,7 +2290,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2324,7 +2318,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

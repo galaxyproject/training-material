@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -558,7 +558,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "[Galaxy-SynBioCAD portal](https://galaxy-synbiocad.org/) is the first toolshed for synthetic biology, metabolic engineering, and industrial biotechnology ({% cite Hrisson2022 %}). It provides a set of Retrosynthesis tools aimed at finding pathways to synthesize heterologous compounds in chassis organisms (**RetroRules** ({% cite Duigou2018 %}), **RetroPath2.0** ({% cite Delpine2018 %}), **RP2Paths**, **rpCompletion**)."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -673,12 +673,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/synthetic-biology/tutorials/retrosynthesis_analysis/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/synthetic-biology/tutorials/retrosynthesis_analysis/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/synthetic-biology/tutorials/retrosynthesis_analysis/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1012,7 +1006,7 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
   <div class="box-title hands-on-title" id="hands-on-select-a-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Select a model.</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1" title="Pick SBML Model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pick SBML Model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1" title="Pick SBML Model tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Fget_sbml_model%2Fget_sbml_model%2F0.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pick SBML Model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</a> with the following parameters:
       <ul>
         <li><i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> <em>“Strain”</em>: <code class="language-plaintext highlighter-rouge">Escherichia coli str. K-12 substr. MG1655 (iML1515)</code></li>
       </ul>
@@ -1051,7 +1045,7 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
   <div class="box-title hands-on-title" id="hands-on-generate-a-sink-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate a sink file.</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1" title="Sink from SBML tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sink from SBML</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</span> with the following parameters:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1" title="Sink from SBML tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Frpextractsink%2Frpextractsink%2F5.12.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sink from SBML</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Strain”</em>: <code class="language-plaintext highlighter-rouge">sbml_model</code> (output of <strong>Pick SBML Model</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“SBML compartment ID”</em>: <code class="language-plaintext highlighter-rouge">c</code></li>
@@ -1094,7 +1088,7 @@ If the user wishes to upload an SBML file from another source, then this value m
   <div class="box-title hands-on-title" id="hands-on-generate-a-file-with-all-reactions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate a file with all reactions.</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6" title="RRules Parser  tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RRules Parser </strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.6)</span> with the following parameters:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6" title="RRules Parser  tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Frrparser%2Frrparser%2F2.4.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RRules Parser </strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.6)</a> with the following parameters:
       <ul>
         <li><em>“Rule Type”</em>: <code class="language-plaintext highlighter-rouge">retro</code></li>
         <li><em>“Select the diameters of the reactions rules”</em>: <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">4</code>, <code class="language-plaintext highlighter-rouge">6</code>, <code class="language-plaintext highlighter-rouge">8</code>, <code class="language-plaintext highlighter-rouge">10</code>, <code class="language-plaintext highlighter-rouge">12</code>, <code class="language-plaintext highlighter-rouge">14</code> and <code class="language-plaintext highlighter-rouge">16</code></li>
@@ -1143,7 +1137,7 @@ The retrosynthesis network is outputted as a CSV file providing reactions in the
   <div class="box-title hands-on-title" id="hands-on-build-a-reaction-network"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build a reaction network</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0" title="RetroPath2.0 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RetroPath2.0</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.0)</span> with the following parameters:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0" title="RetroPath2.0 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Fretropath2%2Fretropath2%2F2.3.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RetroPath2.0</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Rules File”</em>: <code class="language-plaintext highlighter-rouge">out_rules</code> (output of <strong>RRules Parser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sink File”</em>: <code class="language-plaintext highlighter-rouge">sink</code> (output of <strong>Sink from SBML</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1191,7 +1185,7 @@ We need to split the network and perform some adjustments to these pathways.</p>
   <div class="box-title hands-on-title" id="hands-on-build-a-reaction-network-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build a reaction network</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0" title="RP2paths tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RP2paths</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5.0)</span> with the following parameters:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0" title="RP2paths tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Frp2paths%2Frp2paths%2F1.5.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RP2paths</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RetroPath2.0 Pathways”</em>: <code class="language-plaintext highlighter-rouge">Reaction_Network</code> (output of <strong>RetroPath2.0</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1231,7 +1225,7 @@ We need to split the network and perform some adjustments to these pathways.</p>
   <div class="box-title hands-on-title" id="hands-on-refine-reactions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Refine reactions</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2" title="Complete Reactions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Complete Reactions</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.2)</span> with the following parameters:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2" title="Complete Reactions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Frpcompletion%2Frpcompletion%2F5.12.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Complete Reactions</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.2)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RP2paths pathways”</em>: <code class="language-plaintext highlighter-rouge">master_pathways</code> (output of <strong>RP2paths</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RP2paths compounds”</em>: <code class="language-plaintext highlighter-rouge">compounds</code> (output of <strong>RP2paths</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1530,7 +1524,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1558,7 +1552,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

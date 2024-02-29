@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -386,7 +386,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -501,12 +501,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -811,7 +805,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-fetching-inbuild-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Fetching inbuild data</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0" title="PDAUG Peptide Data Access tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Peptide Data Access</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0" title="PDAUG Peptide Data Access tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_peptide_data_access%2Fpdaug_peptide_data_access%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Peptide Data Access</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><em>“Datasets”</em>: <code class="language-plaintext highlighter-rouge">AMPvsTMP</code></li>
       </ul>
@@ -828,7 +822,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-converting-tabular-data-into-fasta-formate"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Converting tabular data into fasta formate</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0" title="PDAUG TSVtoFASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG TSVtoFASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0" title="PDAUG TSVtoFASTA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_tsvtofasta%2Fpdaug_tsvtofasta%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG TSVtoFASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Peptide Data Access - AMPvsTMP (tabular)</code> (output of <strong>PDAUG Peptide Data Access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Peptide Column”</em>:  <code class="language-plaintext highlighter-rouge">name</code></li>
@@ -850,7 +844,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-generating-a-summary-plot-to-assess-peptide-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating a summary plot to assess peptide dataset</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0" title="PDAUG Peptide Sequence Analysis tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Peptide Sequence Analysis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0" title="PDAUG Peptide Sequence Analysis tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_peptide_sequence_analysis%2Fpdaug_peptide_sequence_analysis%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Peptide Sequence Analysis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><em>“Analysis options”</em>: <code class="language-plaintext highlighter-rouge">Plot Summary</code>
           <ul>
@@ -894,7 +888,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-generating-a-fisher-s-plot-to-assess-peptide-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating a Fisher's plot to assess peptide dataset</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0" title="PDAUG Fisher's Plot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Fisher’s Plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0" title="PDAUG Fisher's Plot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_fishers_plot%2Fpdaug_fishers_plot%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Fisher’s Plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - first (fasta)</code> (first output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - second (fasta)</code> (second output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -931,13 +925,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-calculating-descriptors-for-the-peptide-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculating descriptors for the peptide dataset</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="PDAUG Sequence Property Based Descriptors tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Sequence Property Based Descriptors</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="PDAUG Sequence Property Based Descriptors tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_sequence_property_based_descriptors%2Fpdaug_sequence_property_based_descriptors%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Sequence Property Based Descriptors</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - first (fasta)</code> (first output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Descriptor Type”</em>: <code class="language-plaintext highlighter-rouge">CTD</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="PDAUG Sequence Property Based Descriptors tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Sequence Property Based Descriptors</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="PDAUG Sequence Property Based Descriptors tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_sequence_property_based_descriptors%2Fpdaug_sequence_property_based_descriptors%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Sequence Property Based Descriptors</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - second (fasta)</code> (second output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Descriptor Type”</em>: <code class="language-plaintext highlighter-rouge">CTD</code></li>
@@ -959,13 +953,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-adding-class-labels-target-labels-to-the-tabular-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding Class Labels (target labels) to the tabular data</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="PDAUG Add Class Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Add Class Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="PDAUG Add Class Label tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_addclasslabel%2Fpdaug_addclasslabel%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Add Class Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)</code> (output of <strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Class Label”</em>: <code class="language-plaintext highlighter-rouge">TMPs</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="PDAUG Add Class Label tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Add Class Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="PDAUG Add Class Label tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_addclasslabel%2Fpdaug_addclasslabel%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Add Class Label</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Sequence Property Based Descriptors on data 3 - CTD (tabular)</code> (output of <strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Class Label”</em>: <code class="language-plaintext highlighter-rouge">AMPs</code></li>
@@ -983,7 +977,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-merging-two-tabular-data-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Merging two tabular data files</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="PDAUG Merge Dataframes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Merge Dataframes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="PDAUG Merge Dataframes tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_merge_dataframes%2Fpdaug_merge_dataframes%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Merge Dataframes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input files”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Add Class Label on data 6 - (tabular)</code> (output of <strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG Add Class Label on data 7 - (tabular)</code> (output of <strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Option to merg data”</em>: <code class="language-plaintext highlighter-rouge">Merge data without adding class label</code></li>
@@ -1001,7 +995,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-generating-a-scatter-plot-to-assess-features"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating a scatter plot to assess features</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0" title="PDAUG Basic Plots tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Basic Plots</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0" title="PDAUG Basic Plots tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fjay%2Fpdaug_basic_plots%2Fpdaug_basic_plots%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PDAUG Basic Plots</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> with the following parameters:
       <ul>
         <li><em>“Data plotting method”</em>: <code class="language-plaintext highlighter-rouge">Scatter Plot</code>
           <ul>
@@ -1253,7 +1247,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1281,7 +1275,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

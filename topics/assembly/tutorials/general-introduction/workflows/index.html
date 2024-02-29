@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/assembly/tutorials/general-introduction/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/assembly/tutorials/general-introduction/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/assembly/tutorials/general-introduction/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -265,13 +259,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/general-introduction/workflows/assembly-general-introduction.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-general-introduction/versions/assembly-general-introduction" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-general-introduction/versions/assembly-general-introduction" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-general-introduction/versions/assembly-general-introduction" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-general-introduction/versions/assembly-general-introduction" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-general-introduction/versions/assembly-general-introduction" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-general-introduction/versions/assembly-general-introduction" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-general-introduction/versions/assembly-general-introduction"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -279,27 +273,62 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["Input dataset"];
+  0["ℹ️ Input Dataset\nmutant_R1.fastq"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nmutant_R2.fastq"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nwildtype.fna"];
+  style 2 stroke:#2c3143,stroke-width:4px;
   3["FastQC"];
   0 -->|output| 3;
+  22a51e6e-2e5f-4415-a127-e0b1c179a1b1["Output\nfastqc_html"];
+  3 --> 22a51e6e-2e5f-4415-a127-e0b1c179a1b1;
+  style 22a51e6e-2e5f-4415-a127-e0b1c179a1b1 stroke:#2c3143,stroke-width:4px;
+  51ec8c05-eb47-4359-9120-0eca1a6d5c2f["Output\nfastqc_txt"];
+  3 --> 51ec8c05-eb47-4359-9120-0eca1a6d5c2f;
+  style 51ec8c05-eb47-4359-9120-0eca1a6d5c2f stroke:#2c3143,stroke-width:4px;
   4["FastQC"];
   1 -->|output| 4;
   5["FASTQ interlacer"];
   0 -->|output| 5;
   1 -->|output| 5;
+  225edf5f-3b90-4f84-a38a-5c786000a3fc["Output\noutput_pairs"];
+  5 --> 225edf5f-3b90-4f84-a38a-5c786000a3fc;
+  style 225edf5f-3b90-4f84-a38a-5c786000a3fc stroke:#2c3143,stroke-width:4px;
+  dae90093-ae96-4bb2-824d-c92b61585096["Output\noutput_singles"];
+  5 --> dae90093-ae96-4bb2-824d-c92b61585096;
+  style dae90093-ae96-4bb2-824d-c92b61585096 stroke:#2c3143,stroke-width:4px;
   6["MultiQC"];
   3 -->|text_file| 6;
   4 -->|text_file| 6;
+  85e3704a-859d-4657-b3d7-9b67e4981d21["Output\nmultiqc_stats"];
+  6 --> 85e3704a-859d-4657-b3d7-9b67e4981d21;
+  style 85e3704a-859d-4657-b3d7-9b67e4981d21 stroke:#2c3143,stroke-width:4px;
+  fab7e06a-604e-4432-b0ed-b63157a8643b["Output\nmultiqc_report"];
+  6 --> fab7e06a-604e-4432-b0ed-b63157a8643b;
+  style fab7e06a-604e-4432-b0ed-b63157a8643b stroke:#2c3143,stroke-width:4px;
   7["velveth"];
   5 -->|outfile_pairs| 7;
+  607a214d-9137-4e73-9b73-954c79678937["Output\nvelveth_out"];
+  7 --> 607a214d-9137-4e73-9b73-954c79678937;
+  style 607a214d-9137-4e73-9b73-954c79678937 stroke:#2c3143,stroke-width:4px;
   8["velvetg"];
   7 -->|out_file1| 8;
+  b0cf3779-6199-42c9-963f-a733559f90bb["Output\nvelvet_contigs"];
+  8 --> b0cf3779-6199-42c9-963f-a733559f90bb;
+  style b0cf3779-6199-42c9-963f-a733559f90bb stroke:#2c3143,stroke-width:4px;
+  54926701-ccae-4143-b649-b7e08e1c6a8e["Output\nvelvet_stats"];
+  8 --> 54926701-ccae-4143-b649-b7e08e1c6a8e;
+  style 54926701-ccae-4143-b649-b7e08e1c6a8e stroke:#2c3143,stroke-width:4px;
   9["Quast"];
   2 -->|output| 9;
   8 -->|contigs| 9;
-
+  0babe959-4d63-4838-9e18-4526b3dd0db5["Output\nquast_report_html"];
+  9 --> 0babe959-4d63-4838-9e18-4526b3dd0db5;
+  style 0babe959-4d63-4838-9e18-4526b3dd0db5 stroke:#2c3143,stroke-width:4px;
+  f41c43c4-763c-42bc-b36e-9ea76e7752c2["Output\nquast_report_pdf"];
+  9 --> f41c43c4-763c-42bc-b36e-9ea76e7752c2;
+  style f41c43c4-763c-42bc-b36e-9ea76e7752c2 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -329,7 +358,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -353,7 +382,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

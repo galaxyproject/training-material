@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -266,11 +260,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/Scanpy-Parameter-Iterator-workflow-full.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
@@ -280,42 +274,83 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Scanpy ParameterIterator"];
-  2["Input dataset"];
-  3["Scanpy ParameterIterator"];
-  4["Input dataset"];
-  5["Scanpy ParameterIterator"];
+  0["ℹ️ Input Dataset\nScanpy RunPCA: AnnData object"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ParameterIterator n-neighbors"];
+  2["ℹ️ Input Dataset\nScanpy ComputeGraph on data X and data Y: Graph object AnnData"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ParameterIterator perplexity"];
+  4["ℹ️ Input Dataset\nScanpy RunUMAP on data X: UMAP object AnnData"];
+  style 4 stroke:#2c3143,stroke-width:4px;
+  5["ParameterIterator resolution"];
   6["Scanpy ComputeGraph"];
   0 -->|output| 6;
   1 -->|parameter_iteration| 6;
+  1e60c7cd-7e02-450f-a403-f3df1e548757["Output\nScanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)"];
+  6 --> 1e60c7cd-7e02-450f-a403-f3df1e548757;
+  style 1e60c7cd-7e02-450f-a403-f3df1e548757 stroke:#2c3143,stroke-width:4px;
   7["Scanpy RunTSNE"];
   2 -->|output| 7;
   3 -->|parameter_iteration| 7;
+  15143fea-5e2b-4b25-b5d1-0726da910f67["Output\nScanpy RunTSNE on collection X: tSNE object AnnData (perplexity)"];
+  7 --> 15143fea-5e2b-4b25-b5d1-0726da910f67;
+  style 15143fea-5e2b-4b25-b5d1-0726da910f67 stroke:#2c3143,stroke-width:4px;
   8["Scanpy FindCluster"];
   4 -->|output| 8;
   5 -->|parameter_iteration| 8;
+  6fdddfe7-c4da-4421-86a0-9819ce4c769c["Output\nScanpy FindCluster on collection X: Clusters AnnData (resolution)"];
+  8 --> 6fdddfe7-c4da-4421-86a0-9819ce4c769c;
+  style 6fdddfe7-c4da-4421-86a0-9819ce4c769c stroke:#2c3143,stroke-width:4px;
   9["Scanpy RunTSNE"];
   6 -->|output_h5ad| 9;
+  7c988247-b167-4733-859f-fcd582f91959["Output\nScanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)"];
+  9 --> 7c988247-b167-4733-859f-fcd582f91959;
+  style 7c988247-b167-4733-859f-fcd582f91959 stroke:#2c3143,stroke-width:4px;
   10["Scanpy RunUMAP"];
   7 -->|output_h5ad| 10;
+  1f5abfa2-845c-4763-9f87-e4b167aa7bc8["Output\nScanpy RunUMAP on collection X: UMAP object AnnData (perplexity)"];
+  10 --> 1f5abfa2-845c-4763-9f87-e4b167aa7bc8;
+  style 1f5abfa2-845c-4763-9f87-e4b167aa7bc8 stroke:#2c3143,stroke-width:4px;
   11["Scanpy PlotEmbed"];
   8 -->|output_h5ad| 11;
+  99185d1e-047f-47f2-9081-07506e1c17df["Output\nresolution_pca_plots"];
+  11 --> 99185d1e-047f-47f2-9081-07506e1c17df;
+  style 99185d1e-047f-47f2-9081-07506e1c17df stroke:#2c3143,stroke-width:4px;
   12["Scanpy PlotEmbed"];
   8 -->|output_h5ad| 12;
+  65d7b619-8659-4008-9e56-db21fda6ce8c["Output\nresolution_umap_plots"];
+  12 --> 65d7b619-8659-4008-9e56-db21fda6ce8c;
+  style 65d7b619-8659-4008-9e56-db21fda6ce8c stroke:#2c3143,stroke-width:4px;
   13["Scanpy PlotEmbed"];
   8 -->|output_h5ad| 13;
+  bdcaf837-5fc4-4024-a87a-eabfa0110127["Output\nresolution_tsne_plots"];
+  13 --> bdcaf837-5fc4-4024-a87a-eabfa0110127;
+  style bdcaf837-5fc4-4024-a87a-eabfa0110127 stroke:#2c3143,stroke-width:4px;
   14["Scanpy RunUMAP"];
   9 -->|output_h5ad| 14;
+  8a0b3d69-e7df-4977-b8eb-ec478b914a26["Output\nScanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)"];
+  14 --> 8a0b3d69-e7df-4977-b8eb-ec478b914a26;
+  style 8a0b3d69-e7df-4977-b8eb-ec478b914a26 stroke:#2c3143,stroke-width:4px;
   15["Scanpy FindCluster"];
   10 -->|output_h5ad| 15;
+  c2e0d48f-9f0e-4452-8fb5-e78420578c65["Output\nScanpy FindCluster on collection X: Clusters AnnData (perplexity)"];
+  15 --> c2e0d48f-9f0e-4452-8fb5-e78420578c65;
+  style c2e0d48f-9f0e-4452-8fb5-e78420578c65 stroke:#2c3143,stroke-width:4px;
   16["Scanpy FindCluster"];
   14 -->|output_h5ad| 16;
+  c952b32e-99d5-4b94-a6d7-be59439c4dca["Output\nScanpy FindCluster on collection X: Clusters AnnData (n-neighbours)"];
+  16 --> c952b32e-99d5-4b94-a6d7-be59439c4dca;
+  style c952b32e-99d5-4b94-a6d7-be59439c4dca stroke:#2c3143,stroke-width:4px;
   17["Scanpy PlotEmbed"];
   15 -->|output_h5ad| 17;
+  44c0ec07-b64e-428f-9254-5217e8041416["Output\nperplexity_plots"];
+  17 --> 44c0ec07-b64e-428f-9254-5217e8041416;
+  style 44c0ec07-b64e-428f-9254-5217e8041416 stroke:#2c3143,stroke-width:4px;
   18["Scanpy PlotEmbed"];
   16 -->|output_h5ad| 18;
-
+  0b30f573-8ebd-4582-9bcd-58ba5c778658["Output\nn-neighbors_plots"];
+  18 --> 0b30f573-8ebd-4582-9bcd-58ba5c778658;
+  style 0b30f573-8ebd-4582-9bcd-58ba5c778658 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -345,7 +380,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -369,7 +404,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/variant-analysis/tutorials/trio-analysis/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/variant-analysis/tutorials/trio-analysis/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/variant-analysis/tutorials/trio-analysis/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -266,11 +260,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
@@ -281,36 +275,78 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	<pre class="mermaid">flowchart TD
   0["EGA Download Client"];
+  85672f3a-1556-49b6-be09-2e6c81721fb3["Output\nEGA Download Client: authorized datasets"];
+  0 --> 85672f3a-1556-49b6-be09-2e6c81721fb3;
+  style 85672f3a-1556-49b6-be09-2e6c81721fb3 stroke:#2c3143,stroke-width:4px;
   1["EGA Download Client"];
-  2["Input dataset"];
+  acd2bcf0-4b9d-4743-9034-716e73d4824f["Output\nList of files in EGAD00001008392"];
+  1 --> acd2bcf0-4b9d-4743-9034-716e73d4824f;
+  style acd2bcf0-4b9d-4743-9034-716e73d4824f stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\npedigree"];
+  style 2 stroke:#2c3143,stroke-width:4px;
   3["Search in textfiles"];
   1 -->|dataset_file_list| 3;
+  6d5d135e-a373-4938-9374-019a09f45a51["Output\nList of Case 5 VCFs"];
+  3 --> 6d5d135e-a373-4938-9374-019a09f45a51;
+  style 6d5d135e-a373-4938-9374-019a09f45a51 stroke:#2c3143,stroke-width:4px;
   4["EGA Download Client"];
   3 -->|output| 4;
+  bdce7169-390b-4adb-9305-5550d5d70a73["Output\nCase 5 VCFs.gz"];
+  4 --> bdce7169-390b-4adb-9305-5550d5d70a73;
+  style bdce7169-390b-4adb-9305-5550d5d70a73 stroke:#2c3143,stroke-width:4px;
   5["Convert compressed file to uncompressed."];
   4 -->|downloaded_file_collection| 5;
+  82b71cdc-d813-4c77-8ff3-fa59e1725709["Output\nCase 5 VCFs"];
+  5 --> 82b71cdc-d813-4c77-8ff3-fa59e1725709;
+  style 82b71cdc-d813-4c77-8ff3-fa59e1725709 stroke:#2c3143,stroke-width:4px;
   6["Column Regex Find And Replace"];
   5 -->|output1| 6;
+  5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27["Output\nCase 5 VCFs (Fixed Header and Chr)"];
+  6 --> 5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27;
+  style 5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27 stroke:#2c3143,stroke-width:4px;
   7["bcftools norm"];
   6 -->|out_file1| 7;
+  96b34c8d-fa92-48cb-b01f-c05364deba5d["Output\nCase 5 Normalized VCFs"];
+  7 --> 96b34c8d-fa92-48cb-b01f-c05364deba5d;
+  style 96b34c8d-fa92-48cb-b01f-c05364deba5d stroke:#2c3143,stroke-width:4px;
   8["Filter"];
   7 -->|output_file| 8;
+  a8539eb9-8bc3-473b-a27f-201c3acf5539["Output\nCase 5 Normalized VCFs (Removed <NON_REF>)"];
+  8 --> a8539eb9-8bc3-473b-a27f-201c3acf5539;
+  style a8539eb9-8bc3-473b-a27f-201c3acf5539 stroke:#2c3143,stroke-width:4px;
   9["bcftools merge"];
   8 -->|out_file1| 9;
+  b5c479b2-e58a-4fe2-b1cf-fc64476c8192["Output\nCase 5 Merged VCF"];
+  9 --> b5c479b2-e58a-4fe2-b1cf-fc64476c8192;
+  style b5c479b2-e58a-4fe2-b1cf-fc64476c8192 stroke:#2c3143,stroke-width:4px;
   10["SnpEff eff:"];
   9 -->|output_file| 10;
+  cd7b4941-4f4c-4631-8ad5-3411e60fbbd9["Output\nCase 5 SnpEff Annotated vcf"];
+  10 --> cd7b4941-4f4c-4631-8ad5-3411e60fbbd9;
+  style cd7b4941-4f4c-4631-8ad5-3411e60fbbd9 stroke:#2c3143,stroke-width:4px;
   11["Convert uncompressed file to compressed"];
   10 -->|snpeff_output| 11;
+  6e5e1084-b5e1-4daf-8f3b-bd3868a52a25["Output\nSnpEff Annotated vcf_bgzip"];
+  11 --> 6e5e1084-b5e1-4daf-8f3b-bd3868a52a25;
+  style 6e5e1084-b5e1-4daf-8f3b-bd3868a52a25 stroke:#2c3143,stroke-width:4px;
   12["gene.iobio visualisation"];
   11 -->|output1| 12;
   11 -->|output1| 12;
   11 -->|output1| 12;
-  13["GEMINI load"];
+  0b30f4e0-7328-4479-8a56-bbf828fcfdba["Output\nCase 5 gene.iobio results"];
+  12 --> 0b30f4e0-7328-4479-8a56-bbf828fcfdba;
+  style 0b30f4e0-7328-4479-8a56-bbf828fcfdba stroke:#2c3143,stroke-width:4px;
+  13["Case 5 GEMINI Database"];
   11 -->|output1| 13;
   2 -->|output| 13;
-  14["GEMINI inheritance pattern"];
+  8a1964d9-607c-4dd3-a2dc-0f9a68dbb681["Output\nGEMINI Database"];
+  13 --> 8a1964d9-607c-4dd3-a2dc-0f9a68dbb681;
+  style 8a1964d9-607c-4dd3-a2dc-0f9a68dbb681 stroke:#2c3143,stroke-width:4px;
+  14["Case 5 GEMINI Inheritance pattern"];
   13 -->|outfile| 14;
-
+  960ef978-089c-4292-81b5-731965c72a0d["Output\nCase 5 GEMINI results"];
+  14 --> 960ef978-089c-4292-81b5-731965c72a0d;
+  style 960ef978-089c-4292-81b5-731965c72a0d stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -340,7 +376,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -364,7 +400,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

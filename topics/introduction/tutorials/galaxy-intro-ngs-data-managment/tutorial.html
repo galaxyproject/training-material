@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -429,7 +429,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -544,12 +544,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1467,7 +1461,7 @@ Here is how it should look like:
   <div class="box-title hands-on-title" id="hands-on-creating-a-subset-of-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating a subset of data</div>
 
   <ol>
-    <li>Find <span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> tool in <strong>Filter and Sort</strong> section of the tool panel.
+    <li>Find <a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> tool in <strong>Filter and Sort</strong> section of the tool panel.
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-finding-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-finding-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Finding tools</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.</p>
@@ -1477,7 +1471,7 @@ Here is how it should look like:
     <li>In “<em>the pattern</em>” field enter the following expression → <code class="language-plaintext highlighter-rouge">SRR12733957|SRR11954102</code>. These are two accession we want to find separated by the pipe symbol <code class="language-plaintext highlighter-rouge">|</code>. The <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>: find lines containing <code class="language-plaintext highlighter-rouge">SRR12733957</code> <strong>or</strong> <code class="language-plaintext highlighter-rouge">SRR11954102</code>.</li>
     <li>Click the <code class="language-plaintext highlighter-rouge">Run Tool</code> button.</li>
     <li>This will generate a file containing two lines (well … one line is also used as the header, so it will appear the the file has three lines. It is OK.)</li>
-    <li>Cut the first column from the file using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> tool, which you will find in <strong>Text Manipulation</strong> section of the tool pane.</li>
+    <li>Cut the first column from the file using <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> tool, which you will find in <strong>Text Manipulation</strong> section of the tool pane.</li>
     <li>Make sure the dataset produced by the previous step is selected in the “<em>File to cut</em>” field of the tool form.</li>
     <li>Change “<em>Delimited by</em>” to <code class="language-plaintext highlighter-rouge">Comma</code></li>
     <li>In “<em>List of fields</em>” select <code class="language-plaintext highlighter-rouge">Column: 1</code>.</li>
@@ -1498,7 +1492,7 @@ SRR11954102
   <div class="box-title hands-on-title" id="hands-on-get-data-from-sra"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get data from SRA</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0" title="Faster Download and Extract Reads in FASTQ tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Faster Download and Extract Reads in FASTQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.9+galaxy0)</span> with the following parameters:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0" title="Faster Download and Extract Reads in FASTQ tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsra_tools%2Ffasterq_dump%2F2.10.9%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Faster Download and Extract Reads in FASTQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.9+galaxy0)</a> with the following parameters:
       <ul>
         <li><em>“select input type”</em>: <code class="language-plaintext highlighter-rouge">List of SRA accession, one per line</code>
           <ul>
@@ -1575,7 +1569,7 @@ being updated continuously as new datasets are made public.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-running-fastp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Running `fastp`</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0" title="fastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.1+galaxy0)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0" title="fastp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffastp%2Ffastp%2F0.20.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.1+galaxy0)</a> with the following parameters:</p>
   <ul>
     <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
       <ul>
@@ -1597,7 +1591,7 @@ being updated continuously as new datasets are made public.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-map-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Map sequencing reads to reference genome</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.1)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.1)</a> with the following parameters:</p>
   <ul>
     <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
       <ul>
@@ -1622,7 +1616,7 @@ being updated continuously as new datasets are made public.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicates</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="MarkDuplicates tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MarkDuplicates</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.2)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="MarkDuplicates tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fpicard%2Fpicard_MarkDuplicates%2F2.18.2.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MarkDuplicates</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.2)</a> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1656,7 +1650,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-realign-reads-around-indels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Realign reads around indels</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0" title="Realign reads tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Realign reads</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.5+galaxy0)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0" title="Realign reads tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Flofreq_viterbi%2Flofreq_viterbi%2F2.1.5%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Realign reads</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.5+galaxy0)</a> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads to realign”</em>: <code class="language-plaintext highlighter-rouge">outFile</code> (output of <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">History</code>
@@ -1679,7 +1673,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-add-indel-qualities"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add indel qualities</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0" title="Insert indel qualities tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Insert indel qualities</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.5+galaxy0)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0" title="Insert indel qualities tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Flofreq_indelqual%2Flofreq_indelqual%2F2.1.5%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Insert indel qualities</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.5+galaxy0)</a> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads”</em>: <code class="language-plaintext highlighter-rouge">realigned</code> (output of <strong>Realign reads</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Indel calculation approach”</em>: <code class="language-plaintext highlighter-rouge">Dindel</code>
@@ -1702,7 +1696,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-call-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Call variants</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1" title="Call variants tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Call variants</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.5+galaxy1)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1" title="Call variants tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Flofreq_call%2Flofreq_call%2F2.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Call variants</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.5+galaxy1)</a> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads in BAM format”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Insert indel qualities</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">History</code>
@@ -1745,7 +1739,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-annotate-variant-effects"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotate variant effects</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19" title="SnpEff eff: annotate variants for SARS-CoV-2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.5covid19)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19" title="SnpEff eff: annotate variants for SARS-CoV-2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpeff_sars_cov_2%2Fsnpeff_sars_cov_2%2F4.5covid19"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.5covid19)</a> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence changes (SNPs, MNPs, InDels)”</em>: <code class="language-plaintext highlighter-rouge">variants</code> (output of <strong>Call variants</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">VCF (only if input is VCF)</code></li>
@@ -1766,7 +1760,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-table-of-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create table of variants</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0" title="SnpSift Extract Fields tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpSift Extract Fields</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.3+t.galaxy0)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0" title="SnpSift Extract Fields tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpsift%2FsnpSift_extractFields%2F4.3%2Bt.galaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpSift Extract Fields</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.3+t.galaxy0)</a> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variant input file in VCF format”</em>: <code class="language-plaintext highlighter-rouge">snpeff_output</code> (output of <strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Fields to extract”</em>: <code class="language-plaintext highlighter-rouge">CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON</code></li>
@@ -1787,7 +1781,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-summarize-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Summarize data</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.8%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</a> with the following parameters:</p>
   <ul>
     <li>In <em>“Results”</em>:
       <ul>
@@ -1834,7 +1828,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-collapse-a-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Collapse a collection</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0)</span> with the following parameters:</p>
+  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0)</a> with the following parameters:</p>
   <ul>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">snpsift extract fields</code> (output of <strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li>“<em>Keep one header line</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2466,7 +2460,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2494,7 +2488,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

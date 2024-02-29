@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -413,7 +413,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Single-cell RNA-seq (scRNA-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -528,12 +528,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -980,7 +974,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
   <div class="box-title hands-on-title" id="hands-on-calculate-qc-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculate QC metrics</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2" title="Scater: Calculate QC metrics tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: Calculate QC metrics</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</span>  with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2" title="Scater: Calculate QC metrics tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_create_qcmetric_ready_sce%2Fscater_create_qcmetric_ready_sce%2F1.12.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: Calculate QC metrics</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</a>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in tabular format”</em>: <code class="language-plaintext highlighter-rouge">counts.txt</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Format dataset describing the features in tabular format”</em>: <code class="language-plaintext highlighter-rouge">annotation.txt</code> (Input dataset)</li>
@@ -1003,7 +997,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
   <div class="box-title hands-on-title" id="hands-on-plot-library-qc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot library QC</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Scater: plot library QC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: plot library QC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</span>  with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Scater: plot library QC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_plot_dist_scatter%2Fscater_plot_dist_scatter%2F1.12.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: plot library QC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</a>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Plot on log scale”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1045,7 +1039,7 @@ Here, we’ll use the manual filtering method.</p>
   <div class="box-title hands-on-title" id="hands-on-filtering-with-scater"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering with scater</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Scater: filter SCE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: filter SCE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</span>  with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Scater: filter SCE tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_filter%2Fscater_filter%2F1.12.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: filter SCE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</a>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Type of filter”</em>: <code class="language-plaintext highlighter-rouge">manual</code>
@@ -1078,7 +1072,7 @@ Here, we’ll use the manual filtering method.</p>
   <div class="box-title hands-on-title" id="hands-on-plot-library-qc-after-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot library QC after filtering</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Scater: plot library QC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: plot library QC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</span>  with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Scater: plot library QC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_plot_dist_scatter%2Fscater_plot_dist_scatter%2F1.12.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: plot library QC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</a>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1107,7 +1101,7 @@ Here, we’ll use the manual filtering method.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Scater: filter SCE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: filter SCE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</span>  with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Scater: filter SCE tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_filter%2Fscater_filter%2F1.12.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: filter SCE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</a>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Type of filter”</em>: <code class="language-plaintext highlighter-rouge">automatic</code></li>
@@ -1138,7 +1132,7 @@ Here, we’ll use the manual filtering method.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-pca-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: PCA plot</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2" title="Scater: PCA plot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: PCA plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</span>  with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2" title="Scater: PCA plot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fscater_plot_pca%2Fscater_plot_pca%2F1.12.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scater: PCA plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.12.2)</a>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Feature (from annotation file) to colour PCA plot points by”</em>: <code class="language-plaintext highlighter-rouge">Mutation_Status</code></li>
@@ -1480,7 +1474,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1508,7 +1502,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

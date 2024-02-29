@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -592,7 +592,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "In this tutorial, we will assess the assembly quality of 2 assemblies generated with Hifiasm and Flye using PacBio HiFi reads of a species of fungi, *Saccharomyces cerevisiae* INSC1019 and compare the results with the actual reference genome [*Saccharomyces cerevisiae* S288C](https://www.ncbi.nlm.nih.gov/genome/?term=Saccharomyces%20cerevisiae)."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -707,12 +707,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/assembly/tutorials/assembly-quality-control/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/assembly/tutorials/assembly-quality-control/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/assembly/tutorials/assembly-quality-control/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1126,7 +1120,7 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-assembly-evaluation-with-quast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: assembly evaluation with Quast</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0" title="Quast tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fquast%2Fquast%2F5.2.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy0)</a> with the following parameters:
       <ul>
         <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use datasets names</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.flye.30x.fa</code> and <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.hifiasm.30x.fa</code></li>
@@ -1188,7 +1182,7 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-assessing-assembly-completness-with-busco"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: assessing assembly completness with BUSCO</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.3.2+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0" title="Busco tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbusco%2Fbusco%2F5.3.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.3.2+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequences to analyse”</em>:<code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.flye.30x.fa</code>, <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.hifiasm.30x.fa</code> and <code class="language-plaintext highlighter-rouge">GCA_000146045.2_genomic.fna</code></li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (DNA)</code>
@@ -1253,7 +1247,7 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-generate-k-mers-count-distribution"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate k-mers count distribution</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Meryl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy6)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmeryl%2Fmeryl%2F1.3%2Bgalaxy6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Meryl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy6)</a> with the following parameters:
       <ul>
         <li><em>“Operation type selector”</em>: <code class="language-plaintext highlighter-rouge">Count operations</code>
           <ul>
@@ -1278,7 +1272,7 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-k-mer-based-evaluation-with-merqury"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: K-mer based evaluation with Merqury</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2" title="Merqury tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merqury</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2" title="Merqury tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmerqury%2Fmerqury%2F1.3%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merqury</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy2)</a> with the following parameters:
       <ul>
         <li><em>“Evaluation mode”</em>: <code class="language-plaintext highlighter-rouge">Default mode</code>
           <ul>
@@ -1322,7 +1316,7 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-synteny-evaluation-with-chromeister"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Synteny evaluation with Chromeister</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1" title="Chromeister tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Chromeister</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5.a+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1" title="Chromeister tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fchromeister%2Fchromeister%2F1.5.a%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Chromeister</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5.a+galaxy1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Query sequence”</em>: <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.flye.30x.fa</code> and <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.hifiasm.30x.fa</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference sequence”</em>: <code class="language-plaintext highlighter-rouge">GCA_000146045.2_genomic.fna</code></li>
@@ -1634,7 +1628,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1662,7 +1656,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -565,7 +565,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance {% cite Hugo2015 %}."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -680,12 +680,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/epigenetics/tutorials/ewas-suite/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/epigenetics/tutorials/ewas-suite/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/epigenetics/tutorials/ewas-suite/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1197,7 +1191,7 @@ This will launch UCSC Genome Browser with your Custom Track</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-detecting-methylated-loci-sites"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: detecting methylated loci sites</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0" title="Infinium Human Methylation BeadChip tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infinium Human Methylation BeadChip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.0)</span> with the following parameters to map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0" title="Infinium Human Methylation BeadChip tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fewastools%2Fminfi_analysis%2F2.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infinium Human Methylation BeadChip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.0)</a> with the following parameters to map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“red channel files”</em>: all files ending in <code class="language-plaintext highlighter-rouge">_Red</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“green channel files”</em>: all files ending in <code class="language-plaintext highlighter-rouge">Grn</code></li>
@@ -1245,9 +1239,9 @@ Default TRUE as it is recommended when sample sizes are small &lt;10</li>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-annotate-differentially-methylated-position"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Annotate Differentially Methylated Position</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0" title="ChIPpeakAnno annoPeaks tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ChIPpeakAnno annoPeaks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> on the output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0" title="Infinium Human Methylation BeadChip tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infinium Human Methylation BeadChip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.0)</span> with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0" title="ChIPpeakAnno annoPeaks tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fchipeakanno_annopeaks%2Fchipeakanno_annopeaks%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ChIPpeakAnno annoPeaks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> on the output of <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0" title="Infinium Human Methylation BeadChip tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fewastools%2Fminfi_analysis%2F2.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infinium Human Methylation BeadChip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.0)</a> with the following parameters
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Differentialy methylated Positions”</em>: output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0" title="Infinium Human Methylation BeadChip tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infinium Human Methylation BeadChip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.0)</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Differentialy methylated Positions”</em>: output of <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0" title="Infinium Human Methylation BeadChip tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fewastools%2Fminfi_analysis%2F2.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infinium Human Methylation BeadChip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.0)</a></li>
         <li><em>“bindingType”</em>: <code class="language-plaintext highlighter-rouge">StartSite</code></li>
         <li><em>“bindingRegionStart”</em>:<code class="language-plaintext highlighter-rouge">-5000</code></li>
         <li><em>“bindingRegionEnd”</em>:<code class="language-plaintext highlighter-rouge">3000</code></li>
@@ -1258,26 +1252,26 @@ Default TRUE as it is recommended when sample sizes are small &lt;10</li>
         </li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> on the previous output adjusting the following parameters to cut “gene_name” column from table of annotated peaks and then get a list of genes
+    <li>Run <a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> on the previous output adjusting the following parameters to cut “gene_name” column from table of annotated peaks and then get a list of genes
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c16</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0" title="ChIPpeakAnno annoPeaks tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ChIPpeakAnno annoPeaks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0" title="ChIPpeakAnno annoPeaks tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fchipeakanno_annopeaks%2Fchipeakanno_annopeaks%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ChIPpeakAnno annoPeaks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a></li>
       </ul>
     </li>
-    <li>Use <span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></span> on <code class="language-plaintext highlighter-rouge">Gene List</code> with the following parameters
+    <li>Use <a class="tool" data-tool="Remove beginning1" title="Remove beginning tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DRemove+beginning1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></a> on <code class="language-plaintext highlighter-rouge">Gene List</code> with the following parameters
       <ul>
         <li><em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of <span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of <a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a></li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0" title="Cluster Profiler Bitr tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster Profiler Bitr</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> on the previous output adjusting the following parameters to convert the list of genes to list of entrez ID
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0" title="Cluster Profiler Bitr tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fclusterprofiler_bitr%2Fclusterprofiler_bitr%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster Profiler Bitr</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> on the previous output adjusting the following parameters to convert the list of genes to list of entrez ID
       <ul>
         <li><em>“Input Type Gene ID”</em>: <code class="language-plaintext highlighter-rouge">SYMBOL</code></li>
         <li><em>“Output Type Gene ID”</em>: <code class="language-plaintext highlighter-rouge">ENTREZID</code></li>
       </ul>
     </li>
-    <li>Run a GO Enrichment Analysis using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0" title="clusterProfiler go tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>clusterProfiler go</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> on the output of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0" title="Cluster Profiler Bitr tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster Profiler Bitr</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span></li>
+    <li>Run a GO Enrichment Analysis using <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0" title="clusterProfiler go tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fclusterprofiler_go%2Fclusterprofiler_go%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>clusterProfiler go</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> on the output of the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0" title="Cluster Profiler Bitr tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fclusterprofiler_bitr%2Fclusterprofiler_bitr%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cluster Profiler Bitr</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a></li>
   </ol>
 </blockquote>
 
@@ -1552,7 +1546,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1580,7 +1574,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/epigenetics/tutorials/ewas-suite/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/epigenetics/tutorials/ewas-suite/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/epigenetics/tutorials/ewas-suite/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -272,11 +266,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -284,16 +278,26 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["Input dataset"];
-  3["Input dataset"];
-  4["Input dataset"];
-  5["Input dataset"];
-  6["Input dataset"];
-  7["Input dataset"];
-  8["Input dataset"];
-  9["Input dataset"];
+  0["ℹ️ Input Dataset\nR01C02_Red.idat"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nR02C02_Red.idat"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nR05C02_Red.idat"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ℹ️ Input Dataset\nR06C02_Red.idat"];
+  style 3 stroke:#2c3143,stroke-width:4px;
+  4["ℹ️ Input Dataset\nR01C02_Green.idat"];
+  style 4 stroke:#2c3143,stroke-width:4px;
+  5["ℹ️ Input Dataset\nR02C02_Green.idat"];
+  style 5 stroke:#2c3143,stroke-width:4px;
+  6["ℹ️ Input Dataset\nR05C02_Green.idat"];
+  style 6 stroke:#2c3143,stroke-width:4px;
+  7["ℹ️ Input Dataset\nR06C02_Green.idat"];
+  style 7 stroke:#2c3143,stroke-width:4px;
+  8["ℹ️ Input Dataset\nphenotype Table txt file"];
+  style 8 stroke:#2c3143,stroke-width:4px;
+  9["ℹ️ Input Dataset\nUCSC Main on Human"];
+  style 9 stroke:#2c3143,stroke-width:4px;
   10["Infinium Human Methylation BeadChip"];
   4 -->|output| 10;
   5 -->|output| 10;
@@ -305,17 +309,49 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   3 -->|output| 10;
   8 -->|output| 10;
   9 -->|output| 10;
+  2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a["Output\nSNPInfo Table"];
+  10 --> 2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a;
+  style 2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a stroke:#2c3143,stroke-width:4px;
+  d1732a98-1861-4612-bdaa-f68861c22f56["Output\nDifferentially Methylated Regions"];
+  10 --> d1732a98-1861-4612-bdaa-f68861c22f56;
+  style d1732a98-1861-4612-bdaa-f68861c22f56 stroke:#2c3143,stroke-width:4px;
+  9aa8b4a9-611e-4a39-864f-400f17866a9e["Output\nDifferentially Methylated Positions"];
+  10 --> 9aa8b4a9-611e-4a39-864f-400f17866a9e;
+  style 9aa8b4a9-611e-4a39-864f-400f17866a9e stroke:#2c3143,stroke-width:4px;
+  14ddb6f7-637e-4193-bfb5-80aeae4fab64["Output\nQuality Control Report"];
+  10 --> 14ddb6f7-637e-4193-bfb5-80aeae4fab64;
+  style 14ddb6f7-637e-4193-bfb5-80aeae4fab64 stroke:#2c3143,stroke-width:4px;
+  c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d["Output\nQuality Control Plot"];
+  10 --> c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d;
+  style c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d stroke:#2c3143,stroke-width:4px;
   11["ChIPpeakAnno annoPeaks"];
   10 -->|dmp| 11;
+  bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5["Output\nTable of Annotated Peaks"];
+  11 --> bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5;
+  style bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5 stroke:#2c3143,stroke-width:4px;
   12["Cut"];
   11 -->|tab| 12;
+  0b54dfe5-f84a-4288-b631-ae4dc2384a17["Output\nCut on Table of Annotated Peaks"];
+  12 --> 0b54dfe5-f84a-4288-b631-ae4dc2384a17;
+  style 0b54dfe5-f84a-4288-b631-ae4dc2384a17 stroke:#2c3143,stroke-width:4px;
   13["Remove beginning"];
   12 -->|out_file1| 13;
+  8f65cf82-7427-4273-ba0b-a6673ee1ff2d["Output\nRemove beginning on the cut output"];
+  13 --> 8f65cf82-7427-4273-ba0b-a6673ee1ff2d;
+  style 8f65cf82-7427-4273-ba0b-a6673ee1ff2d stroke:#2c3143,stroke-width:4px;
   14["Cluster Profiler Bitr"];
   13 -->|out_file1| 14;
+  7989f80a-3e79-4d2f-bbe4-e4d641eebd6a["Output\nTable of Translated Gene ID's"];
+  14 --> 7989f80a-3e79-4d2f-bbe4-e4d641eebd6a;
+  style 7989f80a-3e79-4d2f-bbe4-e4d641eebd6a stroke:#2c3143,stroke-width:4px;
   15["Cluster Profiler GO"];
   14 -->|translation| 15;
-
+  ff6c7018-b821-4ade-9931-fa99aeb0a86c["Output\nGO Enrichment Analysis of a Gene Set"];
+  15 --> ff6c7018-b821-4ade-9931-fa99aeb0a86c;
+  style ff6c7018-b821-4ade-9931-fa99aeb0a86c stroke:#2c3143,stroke-width:4px;
+  03b88399-095b-4bd5-9693-528c60338407["Output\nGO Enrichment Analysis Visualization"];
+  15 --> 03b88399-095b-4bd5-9693-528c60338407;
+  style 03b88399-095b-4bd5-9693-528c60338407 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -345,7 +381,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -369,7 +405,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

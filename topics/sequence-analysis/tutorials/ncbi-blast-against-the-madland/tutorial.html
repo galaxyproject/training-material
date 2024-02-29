@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -341,7 +341,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "MAdLandDB is a protein database comprising of a comprehensive collection of fully sequenced plant and algal genomes, with a particular emphasis on non-seed plants and streptophyte algae. Additionally, for comparative analysis, the database also includes genomes from various other organisms such as fungi, animals, the SAR group, bacteria, and archaea. The database is actively developed and maintained by the [Rensing lab](http://plantco.de) and released in the [MAdLand](https://madland.science/) setting. It employs a system of species abbreviation using a 5 letter code, which is constructed using the first three letters of the genus and the first two letters of the species name, for example, CHABR for *Chara braunii*. Furthermore, the database provides gene identification through the addition of gene ID’s and supplementary information such as the encoding source of the gene, whether it is plastome encoded (pt) or transcriptome-based (tr) in cases when a genome is not yet available. The key advantage of this database is its non-redundant nature, and the fact that all sequences are predominantly from genome projects, thereby increasing their reliability."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -456,12 +456,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -807,13 +801,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="perform-ncbi-blast-on-galaxy">Perform NCBI Blast+ on Galaxy</h2>
 
-<p>Since MAdLandDB is the collection of protein sequences, You can perform <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2" title="BLASTp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BLASTp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</span> and <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2" title="BLASTx tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BLASTx</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</span> tools.</p>
+<p>Since MAdLandDB is the collection of protein sequences, You can perform <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2" title="BLASTp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fncbi_blast_plus%2Fncbi_blastp_wrapper%2F2.10.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BLASTp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</a> and <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2" title="BLASTx tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fncbi_blast_plus%2Fncbi_blastx_wrapper%2F2.10.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BLASTx</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</a> tools.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-similarity-search-against-madland-database"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Similarity search against MAdLand Database</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2" title="BLASTp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BLASTp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</span> OR <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2" title="BLASTx tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BLASTx</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2" title="BLASTp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fncbi_blast_plus%2Fncbi_blastp_wrapper%2F2.10.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BLASTp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</a> OR <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2" title="BLASTx tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fncbi_blast_plus%2Fncbi_blastx_wrapper%2F2.10.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BLASTx</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</a> with the following parameters:
       <ul>
         <li><em>“Protein query sequence(s)”</em>: <code class="language-plaintext highlighter-rouge">Amino acid input sequence</code> (In case of BLASTp) <em>OR</em></li>
         <li><em>“Translated nucleotide query sequence(s)”</em>: <code class="language-plaintext highlighter-rouge">Translated nucleotide input sequence</code> (In case of BLASTx)</li>
@@ -917,7 +911,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h2 id="more-similarity-search-tools-on-galaxy">More Similarity Search Tools on Galaxy</h2>
 
 <ul>
-  <li><strong>Diamond</strong>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0" title="Diamond tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Diamond</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.15+galaxy0)</span> is a high-throughput program for alignment of  large-scale data sets. It aligns sequences to the reference database using a compressed version of the reference sequences called a “database diamond” which is faster to read and can save computational time (~20,000 times the speed of Blastx, with high sensitivity).</li>
+  <li><strong>Diamond</strong>: <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0" title="Diamond tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdiamond%2Fbg_diamond%2F2.0.15%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Diamond</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.15+galaxy0)</a> is a high-throughput program for alignment of  large-scale data sets. It aligns sequences to the reference database using a compressed version of the reference sequences called a “database diamond” which is faster to read and can save computational time (~20,000 times the speed of Blastx, with high sensitivity).</li>
 </ul>
 
 <blockquote class="details">
@@ -1132,7 +1126,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1160,7 +1154,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -273,9 +267,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_matrix" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_matrix" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_matrix" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_matrix" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_matrix"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -284,28 +278,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	<pre class="mermaid">flowchart TD
   0["EBI SCXA Data Retrieval"];
-  1["Input dataset"];
+  1["ℹ️ Input Dataset\nSingle cell metadata"];
+  style 1 stroke:#2c3143,stroke-width:4px;
   2["Scanpy Read10x"];
   0 -->|barcode_tsv| 2;
   0 -->|genes_tsv| 2;
   0 -->|matrix_mtx| 2;
+  6bd01730-f0b5-4824-8cfc-d563cc9c7f7d["Output\nScanpy Read10x on input dataset(s): anndata"];
+  2 --> 6bd01730-f0b5-4824-8cfc-d563cc9c7f7d;
+  style 6bd01730-f0b5-4824-8cfc-d563cc9c7f7d stroke:#2c3143,stroke-width:4px;
   3["Inspect AnnData"];
   2 -->|output_h5| 3;
   4["Transpose"];
   3 -->|X| 4;
   5["annotateMyIDs"];
   4 -->|out_file| 5;
-  6["1st step removed - Convert from Ensembl to GeneSymbol, summing duplicate genes"];
+  c39c7d69-550e-4b54-a412-317b599c5e55["Output\nannotateMyIDs on input dataset(s): Annotated IDs"];
+  5 --> c39c7d69-550e-4b54-a412-317b599c5e55;
+  style c39c7d69-550e-4b54-a412-317b599c5e55 stroke:#2c3143,stroke-width:4px;
+  6["🛠️ Subworkflow\n1st step removed - Convert from Ensembl to GeneSymbol, summing duplicate genes"];
+  style 6 fill:#edd,stroke:#900,stroke-width:4px;
   5 -->|out_tab| 6;
   4 -->|out_file| 6;
   7["Construct Expression Set Object"];
   6 -->|Gene Symbol Count Matrix| 7;
   1 -->|output| 7;
+  e8c91df0-4e6c-4eb2-9807-c2679b494958["Output\nConstruct Expression Set Object on input dataset(s): RData ESet Object"];
+  7 --> e8c91df0-4e6c-4eb2-9807-c2679b494958;
+  style e8c91df0-4e6c-4eb2-9807-c2679b494958 stroke:#2c3143,stroke-width:4px;
+  2912d09b-b178-4035-b7c8-7038392e2bf2["Output\nConstruct Expression Set Object on input dataset(s): General Info"];
+  7 --> 2912d09b-b178-4035-b7c8-7038392e2bf2;
+  style 2912d09b-b178-4035-b7c8-7038392e2bf2 stroke:#2c3143,stroke-width:4px;
   8["Manipulate Expression Set Object"];
   7 -->|out_rds| 8;
+  08de92d8-32fe-4b47-9038-298cdd13fac5["Output\nManipulate Expression Set Object on input dataset(s): ExpressionSet Object"];
+  8 --> 08de92d8-32fe-4b47-9038-298cdd13fac5;
+  style 08de92d8-32fe-4b47-9038-298cdd13fac5 stroke:#2c3143,stroke-width:4px;
   9["Manipulate Expression Set Object"];
   7 -->|out_rds| 9;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -368,14 +378,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   0 -->|design_tsv| 1;
   2["Add line to file"];
   0 -->|barcode_tsv| 2;
-  3["Regex Find And Replace"];
+  3["Reformatting metadata columns"];
   1 -->|out_file1| 3;
   4["Join two Datasets"];
   2 -->|outfile| 4;
   3 -->|out_file1| 4;
   5["Advanced Cut"];
   4 -->|out_file1| 5;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -405,7 +414,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -429,7 +438,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

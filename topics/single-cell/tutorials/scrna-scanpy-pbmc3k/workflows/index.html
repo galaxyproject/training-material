@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -274,11 +268,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-scanpy-pbmc3k/versions/clustering-3k-pbmc-with-scanpy"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -286,10 +280,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["Input dataset"];
-  3["Input dataset"];
+  0["ℹ️ Input Dataset\nBarcodes"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nGenes"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nMatrix"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ℹ️ Input Dataset\nmito header"];
+  style 3 stroke:#2c3143,stroke-width:4px;
   4["Import Anndata and loom"];
   2 -->|output| 4;
   0 -->|output| 4;
@@ -326,12 +324,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   16 -->|anndata| 18;
   19["Plot"];
   17 -->|anndata_out| 19;
+  4ab8b810-4e79-46b2-b740-74e267f5e209["Output\nout_png"];
+  19 --> 4ab8b810-4e79-46b2-b740-74e267f5e209;
+  style 4ab8b810-4e79-46b2-b740-74e267f5e209 stroke:#2c3143,stroke-width:4px;
   20["Filter"];
   17 -->|anndata_out| 20;
   21["Plot"];
   17 -->|anndata_out| 21;
+  02478047-eb04-4a4e-b1ff-f3cb3c7673d5["Output\nout_png"];
+  21 --> 02478047-eb04-4a4e-b1ff-f3cb3c7673d5;
+  style 02478047-eb04-4a4e-b1ff-f3cb3c7673d5 stroke:#2c3143,stroke-width:4px;
   22["Plot"];
   17 -->|anndata_out| 22;
+  3eb66a4a-79fe-43a3-889b-d43daeae5e17["Output\nout_png"];
+  22 --> 3eb66a4a-79fe-43a3-889b-d43daeae5e17;
+  style 3eb66a4a-79fe-43a3-889b-d43daeae5e17 stroke:#2c3143,stroke-width:4px;
   23["Filter"];
   20 -->|anndata_out| 23;
   24["Manipulate AnnData"];
@@ -354,10 +361,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   31 -->|anndata_out| 32;
   33["Cluster, infer trajectories and embed"];
   32 -->|anndata_out| 33;
+  96cbb37e-e755-4479-9f14-f0e14f689868["Output\nanndata_out"];
+  33 --> 96cbb37e-e755-4479-9f14-f0e14f689868;
+  style 96cbb37e-e755-4479-9f14-f0e14f689868 stroke:#2c3143,stroke-width:4px;
   34["Plot"];
   33 -->|anndata_out| 34;
   35["Plot"];
   33 -->|anndata_out| 35;
+  5dc45ef9-c56e-4dbd-9817-367c981a2041["Output\nout_png"];
+  35 --> 5dc45ef9-c56e-4dbd-9817-367c981a2041;
+  style 5dc45ef9-c56e-4dbd-9817-367c981a2041 stroke:#2c3143,stroke-width:4px;
   36["Inspect and manipulate"];
   33 -->|anndata_out| 36;
   37["Plot"];
@@ -370,47 +383,85 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   39 -->|anndata_out| 40;
   41["Plot"];
   39 -->|anndata_out| 41;
+  29513947-d16c-48b2-93ff-dd78cd99ecb7["Output\nout_png"];
+  41 --> 29513947-d16c-48b2-93ff-dd78cd99ecb7;
+  style 29513947-d16c-48b2-93ff-dd78cd99ecb7 stroke:#2c3143,stroke-width:4px;
   42["Inspect and manipulate"];
   40 -->|anndata_out| 42;
   43["Inspect and manipulate"];
   40 -->|anndata_out| 43;
+  da91ad5a-dd9c-482e-accc-8e42d645e7b1["Output\nanndata_out"];
+  43 --> da91ad5a-dd9c-482e-accc-8e42d645e7b1;
+  style da91ad5a-dd9c-482e-accc-8e42d645e7b1 stroke:#2c3143,stroke-width:4px;
   44["Plot"];
   40 -->|anndata_out| 44;
   45["Inspect AnnData"];
   42 -->|anndata_out| 45;
+  868797a3-ab74-45bf-96d1-84451a16f882["Output\nuns_rank_genes_groups_names"];
+  45 --> 868797a3-ab74-45bf-96d1-84451a16f882;
+  style 868797a3-ab74-45bf-96d1-84451a16f882 stroke:#2c3143,stroke-width:4px;
   46["Plot"];
   42 -->|anndata_out| 46;
   47["Plot"];
   43 -->|anndata_out| 47;
+  2d042636-8fd1-42e3-af8d-83b4d613f075["Output\nout_png"];
+  47 --> 2d042636-8fd1-42e3-af8d-83b4d613f075;
+  style 2d042636-8fd1-42e3-af8d-83b4d613f075 stroke:#2c3143,stroke-width:4px;
   48["Manipulate AnnData"];
   43 -->|anndata_out| 48;
+  51289df3-101f-4c6c-ae85-a8f46c2f33ea["Output\nanndata"];
+  48 --> 51289df3-101f-4c6c-ae85-a8f46c2f33ea;
+  style 51289df3-101f-4c6c-ae85-a8f46c2f33ea stroke:#2c3143,stroke-width:4px;
   49["Inspect and manipulate"];
   43 -->|anndata_out| 49;
   50["Inspect AnnData"];
   43 -->|anndata_out| 50;
+  e617acd1-e59d-4f20-b39d-9dc0f832b0db["Output\nuns_rank_genes_groups_names"];
+  50 --> e617acd1-e59d-4f20-b39d-9dc0f832b0db;
+  style e617acd1-e59d-4f20-b39d-9dc0f832b0db stroke:#2c3143,stroke-width:4px;
   51["Plot"];
   43 -->|anndata_out| 51;
-  52["Inspect AnnData"];
+  983e7cee-7028-456c-9db2-bf0ad3e52de5["Output\nout_png"];
+  51 --> 983e7cee-7028-456c-9db2-bf0ad3e52de5;
+  style 983e7cee-7028-456c-9db2-bf0ad3e52de5 stroke:#2c3143,stroke-width:4px;
+  52["Inspect clusters"];
   43 -->|anndata_out| 52;
   53["Plot"];
   43 -->|anndata_out| 53;
+  734099bb-f454-4d8c-bc78-a269b0570c41["Output\nout_png"];
+  53 --> 734099bb-f454-4d8c-bc78-a269b0570c41;
+  style 734099bb-f454-4d8c-bc78-a269b0570c41 stroke:#2c3143,stroke-width:4px;
   54["Plot"];
   43 -->|anndata_out| 54;
   55["Plot"];
   43 -->|anndata_out| 55;
+  39f2d4b6-f2e8-41b3-a00a-a2c5b54face2["Output\nout_png"];
+  55 --> 39f2d4b6-f2e8-41b3-a00a-a2c5b54face2;
+  style 39f2d4b6-f2e8-41b3-a00a-a2c5b54face2 stroke:#2c3143,stroke-width:4px;
   56["Plot"];
   48 -->|anndata| 56;
+  e0979d1e-eb87-4a7b-904f-a5116c7b8fff["Output\nout_svg"];
+  56 --> e0979d1e-eb87-4a7b-904f-a5116c7b8fff;
+  style e0979d1e-eb87-4a7b-904f-a5116c7b8fff stroke:#2c3143,stroke-width:4px;
   57["Plot"];
   48 -->|anndata| 57;
   58["Plot"];
   48 -->|anndata| 58;
+  bd14e644-2a32-4a81-bd83-042ee46d118a["Output\nout_png"];
+  58 --> bd14e644-2a32-4a81-bd83-042ee46d118a;
+  style bd14e644-2a32-4a81-bd83-042ee46d118a stroke:#2c3143,stroke-width:4px;
   59["Plot"];
   49 -->|anndata_out| 59;
+  e9cf90db-ac42-4876-8abd-183fea271666["Output\ncollection_png"];
+  59 --> e9cf90db-ac42-4876-8abd-183fea271666;
+  style e9cf90db-ac42-4876-8abd-183fea271666 stroke:#2c3143,stroke-width:4px;
   60["Plot"];
   49 -->|anndata_out| 60;
+  aef215b1-dbb4-447b-9297-c90536842c8e["Output\nout_png"];
+  60 --> aef215b1-dbb4-447b-9297-c90536842c8e;
+  style aef215b1-dbb4-447b-9297-c90536842c8e stroke:#2c3143,stroke-width:4px;
   61["Datamash"];
   52 -->|obs| 61;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -440,7 +491,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -464,7 +515,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

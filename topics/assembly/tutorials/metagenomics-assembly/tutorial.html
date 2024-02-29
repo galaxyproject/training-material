@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -69,7 +69,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Assembly of metagenomic sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-29 00:11:23 +0000">
+<meta name="DC.date" content="2024-02-29 12:31:05 +0000">
 <meta name="DC.creator" content="Polina Polunina">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -120,8 +120,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-02-29 00:11:23 +0000",
-  "datePublished": "2024-02-29 00:11:23 +0000",
+  "dateModified": "2024-02-29 12:31:05 +0000",
+  "datePublished": "2024-02-29 12:31:05 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Assembly of metagenomic sequencing data",
   "interactivityType": "mixed",
@@ -473,7 +473,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Metagenomics involves the extraction, sequencing and analysis of combined genomic DNA from **entire microbiome** samples. It includes then DNA from **many different organisms**, with different taxonomic background."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -588,12 +588,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/assembly/tutorials/metagenomics-assembly/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/assembly/tutorials/metagenomics-assembly/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/assembly/tutorials/metagenomics-assembly/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1172,7 +1166,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-individual-assembly-of-short-reads-with-megahit"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Individual assembly of short-reads with MEGAHIT</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0" title="MEGAHIT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MEGAHIT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.9+galaxy0)</span> with parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0" title="MEGAHIT tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmegahit%2Fmegahit%2F1.2.9%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MEGAHIT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.9+galaxy0)</a> with parameters:
       <ul>
         <li><em>“Select your input option”</em>: <code class="language-plaintext highlighter-rouge">Paired-end collection</code>
           <ul>
@@ -1267,7 +1261,7 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
     <div class="box-title hands-on-title" id="hands-on-assembly-with-metaspades"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly with MetaSPAdes</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2" title="MetaSPAdes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaSPAdes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.15.4+galaxy2)</span> with following parameters
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2" title="MetaSPAdes tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fmetaspades%2Fmetaspades%2F3.15.4%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaSPAdes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.15.4+galaxy2)</a> with following parameters
         <ul>
           <li><em>“Pair-end reads input format”</em>: <code class="language-plaintext highlighter-rouge">Paired-end: list of dataset pairs</code>
             <ul>
@@ -1295,7 +1289,7 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
   <div class="box-title hands-on-title" id="hands-on-evaluation-assembly-quality-with-metaquast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Evaluation assembly quality with metaQUAST</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy1)</span> with parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fquast%2Fquast%2F5.2.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy1)</a> with parameters:
       <ul>
         <li><em>“Assembly mode?</em>”: <code class="language-plaintext highlighter-rouge">Individual assembly (1 contig file per samples)</code>
           <ul>
@@ -1449,7 +1443,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
             <div class="box-title hands-on-title" id="hands-on-calculate-coverage-using-coverm"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculate coverage using CoverM</div>
 
             <ol>
-              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1" title="CoverM-CONTIG tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CoverM-CONTIG</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.1)</span> with parameters:
+              <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1" title="CoverM-CONTIG tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcoverm_contig%2Fcoverm_contig%2F0.2.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CoverM-CONTIG</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.1)</a> with parameters:
                 <ul>
                   <li><em>“Read type”</em>: <code class="language-plaintext highlighter-rouge">Paired collection</code>
                     <ul>
@@ -1470,7 +1464,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
             <div class="box-title hands-on-title" id="hands-on-computation-of-the-reads-used-in-assemblies"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Computation of the % reads used in assemblies</div>
 
             <ol>
-              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0" title="Bowtie2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bowtie2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.0+galaxy0)</span> with the following parameters:
+              <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0" title="Bowtie2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbowtie2%2Fbowtie2%2F2.5.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bowtie2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.0+galaxy0)</a> with the following parameters:
                 <ul>
                   <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Dataset Collection</code>
                     <ul>
@@ -1857,7 +1851,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     <div class="box-title hands-on-title" id="hands-on-visualization-the-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualization the assembly graph</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10" title="megahit contig2fastg tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>megahit contig2fastg</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3+galaxy10)</span> with parameters:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10" title="megahit contig2fastg tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmegahit_contig2fastg%2Fmegahit_contig2fastg%2F1.1.3%2Bgalaxy10"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>megahit contig2fastg</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3+galaxy10)</a> with parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contig file”</em>: Output of <strong>MEGAHIT</strong></li>
           <li>
@@ -1876,7 +1870,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4" title="Bandage Image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.1+galaxy4)</span> with parameters:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4" title="Bandage Image tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbandage%2Fbandage_image%2F0.8.1%2Bgalaxy4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.1+galaxy4)</a> with parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Graphical Fragment Assembly”</em>: Output of <strong>megahit contig2fastg</strong></li>
         </ul>
@@ -1895,12 +1889,12 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     <div class="box-title hands-on-title" id="hands-on-visualization-the-de-novo-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualization the *de novo* assembly graph</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2" title="Bandage Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.1+galaxy2)</span> with parameters:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2" title="Bandage Info tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbandage%2Fbandage_info%2F0.8.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.1+galaxy2)</a> with parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Graphical Fragment Assembly”</em>: Output of <strong>megahit contig2fastg</strong></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</span> with parameters:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcollection_column_join%2Fcollection_column_join%2F0.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</a> with parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: Output of <strong>Bandage Info</strong></li>
         </ul>
@@ -2305,7 +2299,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2333,7 +2327,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

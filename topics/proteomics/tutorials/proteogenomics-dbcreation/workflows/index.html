@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/proteomics/tutorials/proteogenomics-dbcreation/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/proteomics/tutorials/proteogenomics-dbcreation/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/proteomics/tutorials/proteogenomics-dbcreation/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -265,11 +259,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/workflows/galaxy-workflow-mouse_rnaseq_dbcreation.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse_rnaseq_dbcreation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse_rnaseq_dbcreation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse_rnaseq_dbcreation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse_rnaseq_dbcreation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse_rnaseq_dbcreation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
@@ -279,13 +273,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["Input dataset"];
+  0["ℹ️ Input Dataset\nFASTQ_ProB_22LIST.fastqsanger"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nMus_musculus.GRCm38.86.gtf"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nTrimmed_ref_5000_uniprot_cRAP.fasta"];
+  style 2 stroke:#2c3143,stroke-width:4px;
   3["HISAT2"];
   0 -->|output| 3;
-  4["Replace Text"];
+  4["Editing GTF File"];
   1 -->|output| 4;
+  70b6f719-803f-4fa9-8394-a3b64b71ec01["Output\nchr_corrected_gtf"];
+  4 --> 70b6f719-803f-4fa9-8394-a3b64b71ec01;
+  style 70b6f719-803f-4fa9-8394-a3b64b71ec01 stroke:#2c3143,stroke-width:4px;
   5["FASTA-to-Tabular"];
   2 -->|output| 5;
   6["FreeBayes"];
@@ -309,6 +309,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   9 -->|output_rpkm| 13;
   9 -->|output_snv| 13;
   9 -->|output_indel| 13;
+  a5054be9-dd74-4d60-a4c6-494fdbcb97a1["Output\nCustomProDB_FASTA"];
+  13 --> a5054be9-dd74-4d60-a4c6-494fdbcb97a1;
+  style a5054be9-dd74-4d60-a4c6-494fdbcb97a1 stroke:#2c3143,stroke-width:4px;
   14["FASTA-to-Tabular"];
   9 -->|output_rpkm| 14;
   15["Convert gffCompare annotated GTF to BED"];
@@ -325,11 +328,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   15 -->|output| 20;
   21["Query Tabular"];
   17 -->|out_file1| 21;
+  e9468479-4ebd-4ced-8086-c10e916b97c5["Output\nvariant_annoation_sqlite"];
+  21 --> e9468479-4ebd-4ced-8086-c10e916b97c5;
+  style e9468479-4ebd-4ced-8086-c10e916b97c5 stroke:#2c3143,stroke-width:4px;
   22["Column Regex Find And Replace"];
   18 -->|output| 22;
-  23["Concatenate datasets"];
+  23["Reference Protein Accessions"];
   19 -->|output| 23;
   8 -->|output| 23;
+  19aa5a85-5933-4ab5-ae76-e4b1ec5b2f85["Output\nReference_Protein_Accessions"];
+  23 --> 19aa5a85-5933-4ab5-ae76-e4b1ec5b2f85;
+  style 19aa5a85-5933-4ab5-ae76-e4b1ec5b2f85 stroke:#2c3143,stroke-width:4px;
   24["bed to protein map"];
   20 -->|translation_bed| 24;
   25["Tabular-to-FASTA"];
@@ -341,9 +350,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   2 -->|output| 27;
   25 -->|output| 27;
   20 -->|translation_fasta| 27;
-  28["Query Tabular"];
+  924bce7c-5c6a-4cb3-a459-18784a55ae01["Output\nUniprot_cRAP_SAV_indel_translatedbed_FASTA"];
+  27 --> 924bce7c-5c6a-4cb3-a459-18784a55ae01;
+  style 924bce7c-5c6a-4cb3-a459-18784a55ae01 stroke:#2c3143,stroke-width:4px;
+  28["Genomic_mapping_sqlite"];
   26 -->|out_file1| 28;
-
+  6542c4e5-289a-4be4-9b42-7a4e170ba198["Output\ngenomic_mapping_sqlite"];
+  28 --> 6542c4e5-289a-4be4-9b42-7a4e170ba198;
+  style 6542c4e5-289a-4be4-9b42-7a4e170ba198 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -373,7 +387,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -397,7 +411,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

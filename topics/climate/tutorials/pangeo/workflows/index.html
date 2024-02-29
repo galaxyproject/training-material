@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/climate/tutorials/pangeo/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/climate/tutorials/pangeo/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/climate/tutorials/pangeo/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -266,13 +260,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main_workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -280,27 +274,41 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input parameter"];
-  1["Input dataset"];
-  2["Input parameter"];
-  3["Input parameter"];
-  4["Input parameter"];
-  5["Input parameter"];
-  6["Input parameter"];
-  7["Input parameter"];
-  8["Input parameter"];
-  9["Input parameter"];
-  10["Input parameter"];
+  0["ℹ️ Input Parameter\nplot first time e.g. index=0"];
+  style 0 fill:#ded,stroke:#393,stroke-width:4px;
+  1["ℹ️ Input Dataset\nCAMS-PM2_5-20211222.netcdf"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Parameter\nplot forecast time 2 days 12:00 UTC"];
+  style 2 fill:#ded,stroke:#393,stroke-width:4px;
+  3["ℹ️ Input Parameter\ntime=5"];
+  style 3 fill:#ded,stroke:#393,stroke-width:4px;
+  4["ℹ️ Input Parameter\ntime=6"];
+  style 4 fill:#ded,stroke:#393,stroke-width:4px;
+  5["ℹ️ Input Parameter\ntime=3"];
+  style 5 fill:#ded,stroke:#393,stroke-width:4px;
+  6["ℹ️ Input Parameter\ntime=2"];
+  style 6 fill:#ded,stroke:#393,stroke-width:4px;
+  7["ℹ️ Input Parameter\ntime=7"];
+  style 7 fill:#ded,stroke:#393,stroke-width:4px;
+  8["ℹ️ Input Parameter\ntime=1"];
+  style 8 fill:#ded,stroke:#393,stroke-width:4px;
+  9["ℹ️ Input Parameter\ntime=4"];
+  style 9 fill:#ded,stroke:#393,stroke-width:4px;
+  10["ℹ️ Input Parameter\ntime=0"];
+  style 10 fill:#ded,stroke:#393,stroke-width:4px;
   11["NetCDF xarray Coordinate Info"];
   1 -->|output| 11;
   12["NetCDF xarray Metadata Info"];
   1 -->|output| 12;
-  13["Extract dataset"];
+  13["extract longitude"];
   11 -->|output_dir| 13;
-  14["Extract dataset"];
+  14["extract latitude"];
   11 -->|output_dir| 14;
-  15["Extract dataset"];
+  15["Extract time from coordinate info"];
   11 -->|output_dir| 15;
+  3b4968d7-8984-4e66-87a9-a3ab8fc12ca4["Output\ninput dataset(s) (extracted element)"];
+  15 --> 3b4968d7-8984-4e66-87a9-a3ab8fc12ca4;
+  style 3b4968d7-8984-4e66-87a9-a3ab8fc12ca4 stroke:#2c3143,stroke-width:4px;
   16["NetCDF xarray operations"];
   1 -->|output| 16;
   14 -->|output| 16;
@@ -316,16 +324,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   14 -->|output| 18;
   13 -->|output| 18;
   12 -->|output| 18;
-  19["NetCDF xarray map plotting"];
+  19["PM2.5 CAMS Europe 0 days 00:00 UTC reference time"];
   15 -->|output| 19;
   0 -->|output| 19;
   1 -->|output| 19;
   12 -->|output| 19;
-  20["NetCDF xarray map plotting"];
+  42483031-21e2-4d88-8898-4a9aa9bb10e5["Output\nPM2.5 reference date Europe"];
+  19 --> 42483031-21e2-4d88-8898-4a9aa9bb10e5;
+  style 42483031-21e2-4d88-8898-4a9aa9bb10e5 stroke:#2c3143,stroke-width:4px;
+  20["PM2.5 CAMS forecast 2 days 12:00 UTC"];
   15 -->|output| 20;
   2 -->|output| 20;
   1 -->|output| 20;
   12 -->|output| 20;
+  07ba8141-bad3-4a61-833d-3b3e82b53fdb["Output\nPM2.5 fc 2 days 12:00 UTC Europe"];
+  20 --> 07ba8141-bad3-4a61-833d-3b3e82b53fdb;
+  style 07ba8141-bad3-4a61-833d-3b3e82b53fdb stroke:#2c3143,stroke-width:4px;
   21["NetCDF xarray Selection"];
   16 -->|output_netcdf| 21;
   12 -->|output| 21;
@@ -337,14 +351,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   18 -->|output_netcdf| 24;
   25["Column Regex Find And Replace"];
   21 -->|simpleoutput| 25;
-  26["Scatterplot with ggplot2"];
+  26["PM2.5 over Naples 4 days forecast"];
   21 -->|simpleoutput| 26;
-  27["Extract dataset"];
+  8984beb4-e593-42f8-8de5-0e92631061c7["Output\n1D plot PM2.5 over Naples (4 days forecast)"];
+  26 --> 8984beb4-e593-42f8-8de5-0e92631061c7;
+  style 8984beb4-e593-42f8-8de5-0e92631061c7 stroke:#2c3143,stroke-width:4px;
+  27["Extract times from coordinates"];
   22 -->|output_dir| 27;
-  28["Extract dataset"];
+  28["Extract time"];
   23 -->|output_dir| 28;
-  29["climate stripes"];
+  29[" stripes PM2.5 over Naples 4 days forecast"];
   25 -->|out_file1| 29;
+  92cad576-78b5-4e07-9a07-6f05ff8f4a56["Output\nPM2.5 stripes Naples for 4 days forecast from reference date"];
+  29 --> 92cad576-78b5-4e07-9a07-6f05ff8f4a56;
+  style 92cad576-78b5-4e07-9a07-6f05ff8f4a56 stroke:#2c3143,stroke-width:4px;
   30["NetCDF xarray map plotting"];
   27 -->|output| 30;
   0 -->|output| 30;
@@ -448,11 +468,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   38 -->|output_dir| 48;
   39 -->|output_dir| 48;
   44 -->|output_dir| 48;
-  49["Image Montage"];
+  49["PM2.5 forecast 10:00 - 17:00 UTC > 30 um/m3"];
   47 -->|output| 49;
-  50["Image Montage"];
+  1c16eeb7-dfe1-40de-9be7-3aa2a8568308["Output\nPM2.5 (values > 30 um/m3)  fc 10:00 - 17:00 UTC over Italy"];
+  49 --> 1c16eeb7-dfe1-40de-9be7-3aa2a8568308;
+  style 1c16eeb7-dfe1-40de-9be7-3aa2a8568308 stroke:#2c3143,stroke-width:4px;
+  50["PM2.5 forecast 10:00 - 17:00 UTC "];
   48 -->|output| 50;
-
+  070fe227-b533-4c77-bed0-4d005b174920["Output\nPM2.5 fc 10:00 - 17:00 UTC over Italy"];
+  50 --> 070fe227-b533-4c77-bed0-4d005b174920;
+  style 070fe227-b533-4c77-bed0-4d005b174920 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -482,7 +507,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -506,7 +531,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

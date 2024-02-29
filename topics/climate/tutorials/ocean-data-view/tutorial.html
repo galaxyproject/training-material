@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -371,7 +371,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "# Introduction"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -486,12 +486,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/climate/tutorials/ocean-data-view/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/climate/tutorials/ocean-data-view/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/climate/tutorials/ocean-data-view/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -791,7 +785,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h1 id="managing-odv-galaxy-interactive-tool">Managing ODV Galaxy interactive tool</h1>
 <p>ODV is now integrated in Galaxy as an interactive tool. This kind of tools is working differently than classical tools as it allows the user to interact with a dedicated graphical interface. This kind of tools is used to give access to Jupyter notebooks, RStudio or R Shiny apps for example.</p>
 
-<p>To use ODV, you need to use the <span class="tool" data-tool="interactive_tool_odv" title="dedicated form tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>dedicated form</strong></span>, you can specify input datasets from your hisrtory you want to use in ODV, then press the <strong>execute</strong> button to launch a ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don’t see it, you can see and access it through the “Active InteractiveTools” space of the “User” menu or you can click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> on the tool in the history.</p>
+<p>To use ODV, you need to use the <a class="tool" data-tool="interactive_tool_odv" title="dedicated form tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dinteractive_tool_odv"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>dedicated form</strong></a>, you can specify input datasets from your hisrtory you want to use in ODV, then press the <strong>execute</strong> button to launch a ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don’t see it, you can see and access it through the “Active InteractiveTools” space of the “User” menu or you can click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> on the tool in the history.</p>
 
 <p>Once you finished your work on ODV, if you want to retrieve data and/or entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through the “Project” Menu tab.</p>
 
@@ -843,7 +837,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <p><!--END_SNIPPET--></p>
     </li>
     <li><em>“Select if you are using a ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are a Netdcdf or tabular text files</code></li>
-    <li>Select your new data before deploying <span class="tool" data-tool="interactive_tool_odv" title="ODV instance tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ODV instance</strong></span> by pressing <strong>execute</strong></li>
+    <li>Select your new data before deploying <a class="tool" data-tool="interactive_tool_odv" title="ODV instance tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dinteractive_tool_odv"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ODV instance</strong></a> by pressing <strong>execute</strong></li>
     <li>Access ODV</li>
   </ol>
 
@@ -1258,7 +1252,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1286,7 +1280,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

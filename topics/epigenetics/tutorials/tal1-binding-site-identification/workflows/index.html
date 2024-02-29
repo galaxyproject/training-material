@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -265,11 +259,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/tal1-binding-site-identification-workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-tal1-binding-site-identification/versions/tal1-binding-site-identification-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-tal1-binding-site-identification/versions/tal1-binding-site-identification-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-tal1-binding-site-identification/versions/tal1-binding-site-identification-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-tal1-binding-site-identification/versions/tal1-binding-site-identification-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-tal1-binding-site-identification/versions/tal1-binding-site-identification-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
@@ -279,15 +273,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["G1E_input_R1_downsampled_SRR507859.fastqsanger"];
-  1["G1E_input_R2_downsampled_SRR507860.fastqsanger"];
-  2["G1E_Tal1_R1_downsampled_SRR492444.fastqsanger"];
-  3["G1E_Tal1_R2_downsampled_SRR492445.fastqsanger"];
-  4["Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger"];
-  5["Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger"];
-  6["Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger"];
-  7["Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger"];
-  8["RefSeq_gene_annotations_mm10.bed"];
+  0["ℹ️ Input Dataset\nG1E_input_R1_downsampled_SRR507859.fastqsanger"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nG1E_input_R2_downsampled_SRR507860.fastqsanger"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ℹ️ Input Dataset\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger"];
+  style 3 stroke:#2c3143,stroke-width:4px;
+  4["ℹ️ Input Dataset\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger"];
+  style 4 stroke:#2c3143,stroke-width:4px;
+  5["ℹ️ Input Dataset\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger"];
+  style 5 stroke:#2c3143,stroke-width:4px;
+  6["ℹ️ Input Dataset\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger"];
+  style 6 stroke:#2c3143,stroke-width:4px;
+  7["ℹ️ Input Dataset\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger"];
+  style 7 stroke:#2c3143,stroke-width:4px;
+  8["ℹ️ Input Dataset\nRefSeq_gene_annotations_mm10.bed"];
+  style 8 stroke:#2c3143,stroke-width:4px;
   9["FastQC"];
   0 -->|output| 9;
   10["Trimmomatic"];
@@ -418,12 +421,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   60["bedtools Intersect intervals"];
   47 -->|output_narrowpeaks| 60;
   56 -->|output_narrowpeaks| 60;
+  d3108480-e9c1-49a0-8de1-984bae1054d8["Output\noutput_overlapping_peaks"];
+  60 --> d3108480-e9c1-49a0-8de1-984bae1054d8;
+  style d3108480-e9c1-49a0-8de1-984bae1054d8 stroke:#2c3143,stroke-width:4px;
   61["bedtools Intersect intervals"];
   47 -->|output_narrowpeaks| 61;
   56 -->|output_narrowpeaks| 61;
+  882bf343-a5ad-4485-b40e-00986ea2f6ee["Output\noutput_g1e_peaks"];
+  61 --> 882bf343-a5ad-4485-b40e-00986ea2f6ee;
+  style 882bf343-a5ad-4485-b40e-00986ea2f6ee stroke:#2c3143,stroke-width:4px;
   62["bedtools Intersect intervals"];
   56 -->|output_narrowpeaks| 62;
   47 -->|output_narrowpeaks| 62;
+  19ab23b5-8f24-44b1-bba7-f8016a4ef8e0["Output\noutput_megakaryocyte_peaks"];
+  62 --> 19ab23b5-8f24-44b1-bba7-f8016a4ef8e0;
+  style 19ab23b5-8f24-44b1-bba7-f8016a4ef8e0 stroke:#2c3143,stroke-width:4px;
   63["computeMatrix"];
   52 -->|outFileName| 63;
   57 -->|outFileName| 63;
@@ -432,7 +444,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   58 -->|outFileName| 64;
   65["plotHeatmap"];
   63 -->|outFileName| 65;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -462,7 +473,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -486,7 +497,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -579,7 +579,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes ({% cite PlanasRiverola2019 %}, {% cite Ivashuta2011 %}). These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -694,12 +694,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1280,7 +1274,7 @@ miRNA_stem-loop_seq.fasta	https://zenodo.org/record/4710649/files/miRNA_stem-loo
     <div class="box-title hands-on-title" id="hands-on-dataset-subsampling"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Dataset subsampling</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs/sample_seqs/0.2.5" title="Sub-sample sequences files  tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sub-sample sequences files </strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.5)</span> with the following parameters:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs/sample_seqs/0.2.5" title="Sub-sample sequences files  tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fpeterjc%2Fsample_seqs%2Fsample_seqs%2F0.2.5"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sub-sample sequences files </strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.5)</a> with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Multiple datasets”</em>: Each of the fastq files</li>
           <li><em>“Subsampling approach”</em>: <code class="language-plaintext highlighter-rouge">Take every N-th sequence (or pair e.g. every fifth sequence)</code></li>
@@ -1313,14 +1307,14 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-initial-quality-check"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Initial quality check</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">Control miRNA</code></li>
       </ul>
     </li>
     <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">FastQC unprocessed control miRNA: RawData</code> and <code class="language-plaintext highlighter-rouge">FastQC unprocessed control miRNA: Webpage</code></li>
     <li>Repeat the previous steps with the <code class="language-plaintext highlighter-rouge">BR treated miRNA</code> collection.</li>
-    <li><span class="tool" data-tool="__MERGE_COLLECTION__" title="Merge Collections tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Collections</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="__MERGE_COLLECTION__" title="Merge Collections tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__MERGE_COLLECTION__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Collections</strong></a> with the following parameters:
       <ul>
         <li>In <em>“Input collections”</em>:
           <ul>
@@ -1330,7 +1324,7 @@ For more information on the topic of quality control, please see our <a href="/t
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.8%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</a> with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
@@ -1371,7 +1365,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-trimming-of-adapter-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Trimming of adapter sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1" title="Trim Galore! tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trim Galore!</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4.3.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1" title="Trim Galore! tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftrim_galore%2Ftrim_galore%2F0.4.3.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trim Galore!</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4.3.1)</a> with the following parameters:
       <ul>
         <li><em>“Is this library paired- or single-end?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
@@ -1393,14 +1387,14 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-post-processing-quality-check"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Post-processing quality check</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">Control miRNA trimmed</code></li>
       </ul>
     </li>
     <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">FastQC processed control miRNA: RawData</code> and <code class="language-plaintext highlighter-rouge">FastQC processed control miRNA: Webpage</code></li>
     <li>Repeat the previous steps with the <code class="language-plaintext highlighter-rouge">BR treated miRNA trimmed</code> collection.</li>
-    <li><span class="tool" data-tool="__MERGE_COLLECTION__" title="Merge Collections tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Collections</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="__MERGE_COLLECTION__" title="Merge Collections tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__MERGE_COLLECTION__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Collections</strong></a> with the following parameters:
       <ul>
         <li>In <em>“Input collections”</em>:
           <ul>
@@ -1410,7 +1404,7 @@ For more information on the topic of quality control, please see our <a href="/t
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.8%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</a> with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
@@ -1455,7 +1449,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-quantification-of-mirnas"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quantification of miRNAs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0" title="MiRDeep2 Mapper tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MiRDeep2 Mapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0" title="MiRDeep2 Mapper tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Frnateam%2Fmirdeep2_mapper%2Frbc_mirdeep2_mapper%2F2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MiRDeep2 Mapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Deep sequencing reads”</em>: <code class="language-plaintext highlighter-rouge">Control miRNA trimmed</code></li>
         <li><em>“Remove reads with non-standard nucleotides”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1467,7 +1461,7 @@ For more information on the topic of quality control, please see our <a href="/t
     <li>
       <p>Repeat the previous stages by providing <code class="language-plaintext highlighter-rouge">BR treated miRNA trimmed</code>as input, and rename it as <code class="language-plaintext highlighter-rouge">Collapsed BR treated miRNA</code>.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_quantifier/rbc_mirdeep2_quantifier/2.0.0" title="MiRDeep2 Quantifier tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MiRDeep2 Quantifier</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_quantifier/rbc_mirdeep2_quantifier/2.0.0" title="MiRDeep2 Quantifier tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Frnateam%2Fmirdeep2_quantifier%2Frbc_mirdeep2_quantifier%2F2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MiRDeep2 Quantifier</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collapsed deep sequencing reads”</em>: <code class="language-plaintext highlighter-rouge">Collapsed control miRNA</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Precursor sequences”</em>: <code class="language-plaintext highlighter-rouge">miRNA_stem-loop_seq.fasta</code></li>
@@ -1487,7 +1481,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-edition-of-mirdeep2-quantifier-outputs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Edition of MiRDeep2 Quantifier outputs</div>
 
   <ol>
-    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1495,7 +1489,7 @@ For more information on the topic of quality control, please see our <a href="/t
       </ul>
     </li>
     <li>Rename the output as <code class="language-plaintext highlighter-rouge">control miRNA counts</code></li>
-    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span>  with the following parameters:
+    <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a>  with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1521,7 +1515,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-differential-expression-analysis-using-deseq2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Differential expression analysis using DESeq2</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1" title="DESeq2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DESeq2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.40.6+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1" title="DESeq2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdeseq2%2Fdeseq2%2F2.11.40.6%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DESeq2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.40.6+galaxy1)</a> with the following parameters:
       <ul>
         <li><em>“How”</em>: <code class="language-plaintext highlighter-rouge">Select datasets per level</code>
           <ul>
@@ -1581,7 +1575,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-filter-differentially-expressed-mirnas"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter differentially expressed miRNAs</div>
 
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">DESeq2 results miRNA</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
@@ -1635,21 +1629,21 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-filter-and-sort-differentially-expressed-mirnas-from-the-full-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter and sort differentially expressed miRNAs from the full dataset</div>
 
   <ol class="comment">
-    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">miRNA_DESeq2_results_complete_dataset</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
       </ul>
     </li>
     <li>Rename the output as <code class="language-plaintext highlighter-rouge">Differentially expressed miRNAs</code></li>
-    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Differentially expressed miRNAs</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&gt;0</code></li>
       </ul>
     </li>
     <li>Rename the output as <code class="language-plaintext highlighter-rouge">Upregulated miRNAs</code></li>
-    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></span> data in ascending or descending order (Galaxy Version 1.1.0) with the following parameters:
+    <li><a class="tool" data-tool="sort1" title="Sort tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dsort1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></a> data in ascending or descending order (Galaxy Version 1.1.0) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: <code class="language-plaintext highlighter-rouge">Upregulated miRNAs</code></li>
         <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
@@ -1690,14 +1684,14 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-initial-quality-check-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Initial quality check</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">Control mRNA</code></li>
       </ul>
     </li>
     <li>Rename the outputs as <code class="language-plaintext highlighter-rouge">FastQC unprocessed control mRNA: RawData</code> and <code class="language-plaintext highlighter-rouge">FastQC unprocessed control mRNA: Webpage</code></li>
     <li>Repeat the previous step with the <code class="language-plaintext highlighter-rouge">BR treated mRNA</code> collection.</li>
-    <li><span class="tool" data-tool="__MERGE_COLLECTION__" title="Merge Collections tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Collections</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="__MERGE_COLLECTION__" title="Merge Collections tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__MERGE_COLLECTION__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Collections</strong></a> with the following parameters:
       <ul>
         <li>In <em>“Input collections”</em>:
           <ul>
@@ -1707,7 +1701,7 @@ For more information on the topic of quality control, please see our <a href="/t
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.8%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</a> with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
@@ -1766,7 +1760,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-quantify-gene-expression-with-salmon"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quantify gene expression with Salmon</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1" title="Salmon quant tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Salmon quant</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.14.1.2+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1" title="Salmon quant tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsalmon%2Fsalmon%2F0.14.1.2%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Salmon quant</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.14.1.2+galaxy1)</a> with the following parameters:
       <ul>
         <li><em>“Select salmon quantification mode:”</em>: <code class="language-plaintext highlighter-rouge">Reads</code>
           <ul>
@@ -1867,7 +1861,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-differential-expression-analysis-using-deseq2-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Differential expression analysis using DEseq2</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1" title="DESeq2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DESeq2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.40.6+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1" title="DESeq2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdeseq2%2Fdeseq2%2F2.11.40.6%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DESeq2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.40.6+galaxy1)</a> with the following parameters:
       <ul>
         <li><em>“How”</em>: <code class="language-plaintext highlighter-rouge">Select datasets per level</code>
           <ul>
@@ -1963,7 +1957,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-extract-significantly-de-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract significantly DE genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">mRNA_DESeq2_results_complete_dataset</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
@@ -1972,7 +1966,7 @@ For more information on the topic of quality control, please see our <a href="/t
     <li>
       <p>Rename the output as <code class="language-plaintext highlighter-rouge">Differentially expressed mRNAs</code></p>
     </li>
-    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span>data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a>data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Differentially expressed mRNAs</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&gt;1</code></li>
@@ -1981,7 +1975,7 @@ For more information on the topic of quality control, please see our <a href="/t
     <li>
       <p>Rename it as <code class="language-plaintext highlighter-rouge">Upregulated mRNAs</code></p>
     </li>
-    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
+    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Differentially expressed mRNAs</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&lt;-1</code></li>
@@ -2027,7 +2021,7 @@ For more information on the topic of quality control, please see our <a href="/t
   </blockquote>
 
   <ol>
-    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -2035,7 +2029,7 @@ For more information on the topic of quality control, please see our <a href="/t
       </ul>
     </li>
     <li>Rename the output as <code class="language-plaintext highlighter-rouge">Upregulated miRNA ids</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Filter FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Filter FASTA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Ffilter_by_fasta_ids%2Ffilter_by_fasta_ids%2F2.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">mature_miRNA_AT.fasta</code></li>
         <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">List of IDs</code>
@@ -2046,7 +2040,7 @@ For more information on the topic of quality control, please see our <a href="/t
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Filter FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Filter FASTA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Ffilter_by_fasta_ids%2Ffilter_by_fasta_ids%2F2.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">star_miRNA_seq.fasta</code></li>
         <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">List of IDs</code>
@@ -2057,7 +2051,7 @@ For more information on the topic of quality control, please see our <a href="/t
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></span> tail-to-head (Galaxy Version 1.0.0) with the following parameters:
+    <li><a class="tool" data-tool="cat1" title="Concatenate datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dcat1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></a> tail-to-head (Galaxy Version 1.0.0) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: output of <strong>Filter FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on <code class="language-plaintext highlighter-rouge">mature_miRNA_AT.fasta</code></li>
         <li>
@@ -2081,7 +2075,7 @@ For more information on the topic of quality control, please see our <a href="/t
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-obtaining-the-gene-sequences-of-downregulated-mrnas"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtaining the gene sequences of downregulated mRNAs</div>
   <ol>
-    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -2089,7 +2083,7 @@ For more information on the topic of quality control, please see our <a href="/t
       </ul>
     </li>
     <li>Rename the output as <code class="language-plaintext highlighter-rouge">Downregulated mRNA ids</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Filter FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1" title="Filter FASTA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Ffilter_by_fasta_ids%2Ffilter_by_fasta_ids%2F2.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.fasta</code> (Input dataset)</li>
         <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">List of IDs</code>
@@ -2117,7 +2111,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title hands-on-title" id="hands-on-identification-of-potential-mirna-targets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: identification of potential miRNA targets</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1" title="TargetFinder tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TargetFinder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.0+galaxy1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1" title="TargetFinder tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Frnateam%2Ftargetfinder%2Ftargetfinder%2F1.7.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TargetFinder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.0+galaxy1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input small RNA sequences file”</em>: <code class="language-plaintext highlighter-rouge">Upreguled miRNA sequences</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Target sequence database file</em>”: <code class="language-plaintext highlighter-rouge">Downregulated mRNA sequences</code></li>
@@ -2475,7 +2469,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2503,7 +2497,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

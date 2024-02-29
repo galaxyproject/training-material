@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,14 +67,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="My Galaxy Instance">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-13 10:58:22 +0000"><meta name="description" content="This page will redirect you to a specific page in your preferred Galaxy instance.">
+<meta name="DC.date" content="2024-02-29 12:21:40 +0000"><meta name="description" content="This page will redirect you to a specific page in your preferred Galaxy instance.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="My Galaxy Instance">
         <meta property="og:description" content="This page will redirect you to a specific page in your preferred Galaxy instance.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -178,12 +178,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/short/galaxy.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/short/galaxy.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/short/galaxy.html">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -234,16 +228,30 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<details id="set-preferred" open>
 				<summary>Select your Preferred Galaxy Server</summary>
 				<p class="card-text">
+					<span>
 					
 					
-					<a class="clickthrough btn btn-primary" href="https://usegalaxy.org">Galaxy Main (US)</a>
+					<a id="eu" class="clickthrough btn btn-primary" href="https://usegalaxy.eu">
+						<img alt="logo" src="https://usegalaxy.eu/static/favicon.svg" style="height: 1em; margin-right: 0.5em" onload="doneLoading('eu')"/>
+						Galaxy Europe
+					</a>
 					
-					<a class="clickthrough btn btn-primary" href="https://usegalaxy.fr">Galaxy France (FR)</a>
+					<a id="au" class="clickthrough btn btn-primary" href="https://usegalaxy.org.au">
+						<img alt="logo" src="https://usegalaxy.org.au/static/favicon.svg" style="height: 1em; margin-right: 0.5em" onload="doneLoading('au')"/>
+						Galaxy Australia
+					</a>
 					
-					<a class="clickthrough btn btn-primary" href="https://usegalaxy.eu">Galaxy Europe (EU)</a>
+					<a id="fr" class="clickthrough btn btn-primary" href="https://usegalaxy.fr">
+						<img alt="logo" src="https://usegalaxy.fr/static/favicon.svg" style="height: 1em; margin-right: 0.5em" onload="doneLoading('fr')"/>
+						Galaxy France
+					</a>
 					
-					<a class="clickthrough btn btn-primary" href="https://usegalaxy.org.au">Galaxy Australia (AU)</a>
+					<a id="us" class="clickthrough btn btn-primary" href="https://usegalaxy.org">
+						<img alt="logo" src="https://usegalaxy.org/static/favicon.svg" style="height: 1em; margin-right: 0.5em" onload="doneLoading('us')"/>
+						Galaxy Main
+					</a>
 					
+					</span>
 					<button id="set-other" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Other</button>
 				</p>
 			</details>
@@ -284,6 +292,27 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <script>
 let path = params.get('path') || '/';
 var preferred_server = localStorage.getItem('gxy-url');
+
+
+var startTime = new Date().getTime();
+let serverLoadTimes = {};
+function doneLoading(server) {
+	var loadtime = new Date().getTime() - startTime;
+	serverLoadTimes[server] = loadtime;
+	console.log(`${server} image took ${loadtime} ms to load`);
+	reorderServers();
+};
+
+function reorderServers() {
+	var servers = document.querySelectorAll('.clickthrough');
+	var serverArray = Array.from(servers);
+	serverArray.sort(function(a, b) {
+		return serverLoadTimes[a.id] - serverLoadTimes[b.id];
+	});
+	serverArray.forEach(function(el) {
+		document.getElementById(el.id).parentElement.appendChild(el);
+	});
+}
 
 document.getElementById('path').innerHTML = path;
 
@@ -339,6 +368,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 </script>
 
+<style>
+.clickthrough {
+	margin: 0.1em;
+}
+</style>
+
         </div>
         <footer>
 	<hr />
@@ -353,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -377,7 +412,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

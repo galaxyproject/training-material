@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -343,7 +343,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "The objective of this tutorial is to learn how to clean and manage AB1 data files freshly obtained from Sanger sequencing. "
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -458,12 +458,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -867,7 +861,7 @@ TGCTGTGACAAGCCAACCAATGG
   <div class="box-title hands-on-title" id="hands-on-create-separate-files-for-each-primer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create separate files for each primer</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3" title="Filter FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3" title="Filter FASTA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Ffilter_by_fasta_ids%2Ffilter_by_fasta_ids%2F2.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">Primer file</code></li>
         <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">Regular expression on the headers</code>
@@ -886,7 +880,7 @@ TGCTGTGACAAGCCAACCAATGG
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-re-running-a-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-re-running-a-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Re-running a tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>   <li><strong>Click</strong> re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the tool</li> </ol>   <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3" title="Filter FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3" title="Filter FASTA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Ffilter_by_fasta_ids%2Ffilter_by_fasta_ids%2F2.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">Primer file</code></li>
         <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">Regular expression on the headers</code>
@@ -902,7 +896,7 @@ TGCTGTGACAAGCCAACCAATGG
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Remove eventual gaps from primers <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_degap_seqs/mothur_degap_seqs/1.39.5.0" title="Degap.seqs tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Degap.seqs</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.39.5.0)</span> with the following parameters:</p>
+      <p>Remove eventual gaps from primers <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_degap_seqs/mothur_degap_seqs/1.39.5.0" title="Degap.seqs tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_degap_seqs%2Fmothur_degap_seqs%2F1.39.5.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Degap.seqs</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.39.5.0)</a> with the following parameters:</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Select multiple datasets</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
@@ -924,7 +918,7 @@ TGCTGTGACAAGCCAACCAATGG
   <div class="box-title hands-on-title" id="hands-on-compute-reverse-complement-of-the-antisense-reverse-primer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Compute Reverse-Complement of the antisense (reverse) primer</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastx_reverse_complement/cshl_fastx_reverse_complement/1.0.2+galaxy0" title="Reverse-Complement tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Reverse-Complement</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2+galaxy0)</span> the sequence antisense (reverse) primer with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastx_reverse_complement/cshl_fastx_reverse_complement/1.0.2+galaxy0" title="Reverse-Complement tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastx_reverse_complement%2Fcshl_fastx_reverse_complement%2F1.0.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Reverse-Complement</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2+galaxy0)</a> the sequence antisense (reverse) primer with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file in FASTA or FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">Degap.seqs #Reverse FASTA output</code> (output of <strong>Degap.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -943,7 +937,7 @@ TGCTGTGACAAGCCAACCAATGG
   <div class="box-title hands-on-title" id="hands-on-unzip"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Unzip</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0" title="Unzip tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unzip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.0+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0" title="Unzip tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fimgteam%2Funzip%2Funzip%2F6.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unzip</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.0+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input_file”</em>: <code class="language-plaintext highlighter-rouge">AOPEP_and_CHD8_sequences_20220907.zip?download=1</code></li>
         <li><em>“Extract single file”</em>: <code class="language-plaintext highlighter-rouge">All files</code></li>
@@ -979,12 +973,12 @@ TGCTGTGACAAGCCAACCAATGG
   <div class="box-title hands-on-title" id="hands-on-filter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Filter</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract element identifiers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcollection_element_identifiers%2Fcollection_element_identifiers%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract element identifiers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">output collection</code> (output of <strong>Unzip</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2Fregex1%2F1.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Extract element identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Check”</em>:
@@ -1014,7 +1008,7 @@ TGCTGTGACAAGCCAACCAATGG
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-re-running-a-tool-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-re-running-a-tool-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Re-running a tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>   <li><strong>Click</strong> re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the tool</li> </ol>   <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2Fregex1%2F1.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Extract element identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Check”</em>:
@@ -1040,7 +1034,7 @@ TGCTGTGACAAGCCAACCAATGG
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="__FILTER_FROM_FILE__" title="Filter collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter collection</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="__FILTER_FROM_FILE__" title="Filter collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__FILTER_FROM_FILE__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter collection</strong></a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Collection</em>: <code class="language-plaintext highlighter-rouge">output collection</code> (output of <strong>Unzip</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“How should the elements to remove be determined?”</em>: <code class="language-plaintext highlighter-rouge">Remove if identifiers are ABSENT from file</code>
@@ -1091,7 +1085,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
   <p><!--END_SNIPPET--></p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ab1_fastq_converter/ab1_fastq_converter/1.20.0" title="ab1 to FASTQ converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ab1 to FASTQ converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.20.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ab1_fastq_converter/ab1_fastq_converter/1.20.0" title="ab1 to FASTQ converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fab1_fastq_converter%2Fab1_fastq_converter%2F1.20.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ab1 to FASTQ converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.20.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input ab1 file”</em>: <code class="language-plaintext highlighter-rouge">(filtered) output collection</code> (output of <strong>Filter collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Do you want trim ends according to quality scores ?”</em>: <code class="language-plaintext highlighter-rouge">No, use full sequences.</code></li>
@@ -1102,7 +1096,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
   <p>In this tool, it is possible to trim low-quality ends along with the conversion of the file but parametrization is less precise.</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_trimfq/1.3.1" title="seqtk_trimfq tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqtk_trimfq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_trimfq/1.3.1" title="seqtk_trimfq tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseqtk%2Fseqtk_trimfq%2F1.3.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqtk_trimfq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file”</em>: <code class="language-plaintext highlighter-rouge">output collection</code> (output of <strong>ab1 to FASTQ converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Mode for trimming FASTQ File”</em>: <code class="language-plaintext highlighter-rouge">Quality</code>
@@ -1124,7 +1118,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
   <div class="box-title hands-on-title" id="hands-on-reverse-complement"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Reverse complement</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5" title="FASTQ Groomer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ Groomer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5" title="FASTQ Groomer tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastq_groomer%2Ffastq_groomer%2F1.1.5"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ Groomer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to groom”</em>: <code class="language-plaintext highlighter-rouge">#Reverse output collection</code> (output of <strong>seqtk_trimfq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Advanced Options”</em>: <code class="language-plaintext highlighter-rouge">Show Advanced Options</code>
@@ -1140,7 +1134,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
         <p>It is a necessary step to get the right input format for the following step <strong>Reverse-Complement</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastx_reverse_complement/cshl_fastx_reverse_complement/1.0.2+galaxy0" title="Reverse-Complement tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Reverse-Complement</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastx_reverse_complement/cshl_fastx_reverse_complement/1.0.2+galaxy0" title="Reverse-Complement tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastx_reverse_complement%2Fcshl_fastx_reverse_complement%2F1.0.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Reverse-Complement</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file in FASTA or FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">#Reverse output collection</code> (output of <strong>FASTQ Groomer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1161,7 +1155,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
   <p><!--END_SNIPPET--></p>
 
   <ol>
-    <li><span class="tool" data-tool="__SORTLIST__" title="Sort collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort collection</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="__SORTLIST__" title="Sort collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__SORTLIST__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort collection</strong></a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Collection”</em>: <code class="language-plaintext highlighter-rouge">Collection</code> (output of <strong>seqtk_trimfq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> &amp; output of <strong>Reverse-Complement</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Sort type”</em>: <code class="language-plaintext highlighter-rouge">alphabetical</code></li>
@@ -1175,7 +1169,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
   <div class="box-title hands-on-title" id="hands-on-merge-sense-forward-and-antisense-reverse-sequence-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Merge sense (forward) and antisense (reverse) sequence files</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_mergepe/1.3.1" title="seqtk_mergepe tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqtk_mergepe</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_mergepe/1.3.1" title="seqtk_mergepe tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseqtk%2Fseqtk_mergepe%2F1.3.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqtk_mergepe</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file #1”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Sort collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file #2”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Sort collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1193,7 +1187,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
   <div class="box-title hands-on-title" id="hands-on-fastq-to-fasta"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  FASTQ to FASTA</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5" title="FASTQ Groomer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ Groomer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5" title="FASTQ Groomer tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastq_groomer%2Ffastq_groomer%2F1.1.5"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ Groomer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to groom”</em>: <code class="language-plaintext highlighter-rouge">default</code> (output of <strong>seqtk_mergepe</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Advanced Options”</em>: <code class="language-plaintext highlighter-rouge">Show Advanced Options</code>
@@ -1210,7 +1204,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_fasta/cshl_fastq_to_fasta/1.0.2+galaxy2" title="FASTQ to FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ to FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2+galaxy2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_fasta/cshl_fastq_to_fasta/1.0.2+galaxy2" title="FASTQ to FASTA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastq_to_fasta%2Fcshl_fastq_to_fasta%2F1.0.2%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ to FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2+galaxy2)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file to convert”</em>: <code class="language-plaintext highlighter-rouge">output collection</code> (output of <strong>FASTQ Groomer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Discard sequences with unknown (N) bases”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -1234,20 +1228,20 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
   <div class="box-title hands-on-title" id="hands-on-align-and-consensus"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Align and consensus</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/qiime_align_seqs/qiime_align_seqs/1.9.1.0" title="Align sequences tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Align sequences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/qiime_align_seqs/qiime_align_seqs/1.9.1.0" title="Align sequences tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fqiime_align_seqs%2Fqiime_align_seqs%2F1.9.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Align sequences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">output collection</code> (output of <strong>FASTQ-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Method for aligning sequences”</em>: <code class="language-plaintext highlighter-rouge">clustalw</code></li>
         <li><em>“Minimum percent sequence identity to closest blast hit to include sequence in alignment”</em>: <code class="language-plaintext highlighter-rouge">0.1</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/aligned_to_consensus/aligned_to_consensus/1.0.0" title="Consensus sequence from aligned FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Consensus sequence from aligned FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/aligned_to_consensus/aligned_to_consensus/1.0.0" title="Consensus sequence from aligned FASTA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Faligned_to_consensus%2Faligned_to_consensus%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Consensus sequence from aligned FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input fasta file with at least two sequences”</em>: <code class="language-plaintext highlighter-rouge">aligned_sequences</code> (output of <strong>Align sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>Add tag “#Consensus”</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_merge_files/mothur_merge_files/1.39.5.0" title="Merge.files tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge.files</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.39.5.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_merge_files/mothur_merge_files/1.39.5.0" title="Merge.files tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_merge_files%2Fmothur_merge_files%2F1.39.5.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge.files</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.39.5.0)</a> with the following parameters:
       <ul>
         <li><em>“Merge”</em>: <code class="language-plaintext highlighter-rouge">fasta files</code>
           <ul>
@@ -1268,7 +1262,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
   <div class="box-title hands-on-title" id="hands-on-merge-and-format-consensus-sequences-primers-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Merge and format consensus sequences + primers file</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_merge_files/mothur_merge_files/1.39.5.0" title="Merge.files tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge.files</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.39.5.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_merge_files/mothur_merge_files/1.39.5.0" title="Merge.files tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_merge_files%2Fmothur_merge_files%2F1.39.5.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge.files</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.39.5.0)</a> with the following parameters:
       <ul>
         <li><em>“Merge”</em>: <code class="language-plaintext highlighter-rouge">fasta files</code>
           <ul>
@@ -1285,7 +1279,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
         <li>Remove tags “#Forward” and “#Reverse”</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2Fregex1%2F1.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Merge.files</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Check”</em>:
@@ -1357,7 +1351,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
     <li>
       <p>You need to go back to your FASTQ sequences to understand the origin of the ambiguity</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2Fregex1%2F1.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">#Consensus #Primer output</code> (output of <strong>Regex Find and Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Check”</em>:
@@ -1397,7 +1391,7 @@ Fourth step: Select files in the collection -&gt; creating two distinct collecti
     - the 20 nucleotides before the Y at position 121 in sequence <code class="language-plaintext highlighter-rouge">consensus_B05_CHD8-III6brother-18</code>: <code class="language-plaintext highlighter-rouge">CAGGCACGATGTCATCGAAT</code>
     - and the 20 nuleotides before the W at position 286 in sequence <code class="language-plaintext highlighter-rouge">consensus_05_CHD8-III6mother-18</code>: <code class="language-plaintext highlighter-rouge">AGTCCTCTTAGTTTATAGAT</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_masker_by_quality/fastq_masker_by_quality/1.1.5" title="FASTQ masker tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ masker</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_masker_by_quality/fastq_masker_by_quality/1.1.5" title="FASTQ masker tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastq_masker_by_quality%2Ffastq_masker_by_quality%2F1.1.5"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ masker</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to mask”</em>: <code class="language-plaintext highlighter-rouge">#Forward #Reverse collection</code> (output of <strong>FASTQ groomer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Mask input with”</em>: <code class="language-plaintext highlighter-rouge">Lowercase</code></li>
@@ -1445,7 +1439,7 @@ and click on <strong>export</strong></li>
   <div class="box-title hands-on-title" id="hands-on-align-sequences-and-primers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Align sequences and primers</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/qiime_align_seqs/qiime_align_seqs/1.9.1.0" title="Align sequences tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Align sequences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.1.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/qiime_align_seqs/qiime_align_seqs/1.9.1.0" title="Align sequences tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fqiime_align_seqs%2Fqiime_align_seqs%2F1.9.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Align sequences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.1.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> <strong>Regex Find And Replace (modified)</strong></li>
         <li><em>“Method for aligning sequences”</em>: <code class="language-plaintext highlighter-rouge">mafft</code></li>
@@ -1462,7 +1456,7 @@ and click on <strong>export</strong></li>
   <div class="box-title hands-on-title" id="hands-on-nvbi-blast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  NVBI Blast</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy2" title="NCBI BLAST+ blastn tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI BLAST+ blastn</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy2" title="NCBI BLAST+ blastn tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fncbi_blast_plus%2Fncbi_blastn_wrapper%2F2.10.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI BLAST+ blastn</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Nucleotide query sequence(s)”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Subject database/sequences”</em>: <code class="language-plaintext highlighter-rouge">Locally installed BLAST database</code>
@@ -1784,7 +1778,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1812,7 +1806,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

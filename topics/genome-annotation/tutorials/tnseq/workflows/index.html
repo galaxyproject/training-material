@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/genome-annotation/tutorials/tnseq/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/genome-annotation/tutorials/tnseq/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/genome-annotation/tutorials/tnseq/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -265,13 +259,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/tnseq/workflows/essential-genes-detection-transposon-insertion-sequencing-workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-tnseq/versions/essential-genes-detection-transposon-insertion-sequencing-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-tnseq/versions/essential-genes-detection-transposon-insertion-sequencing-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-tnseq/versions/essential-genes-detection-transposon-insertion-sequencing-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-tnseq/versions/essential-genes-detection-transposon-insertion-sequencing-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-tnseq/versions/essential-genes-detection-transposon-insertion-sequencing-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-tnseq/versions/essential-genes-detection-transposon-insertion-sequencing-workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -279,11 +273,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Tnseq-Tutorial-reads.fastqsanger.gz"];
-  1["condition_barcodes.fasta"];
-  2["construct_barcodes.fasta"];
-  3["staph_aur.fasta"];
-  4["staph_aur.gff3"];
+  0["ℹ️ Input Dataset\nTnseq-Tutorial-reads.fastqsanger.gz"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\ncondition_barcodes.fasta"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nconstruct_barcodes.fasta"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ℹ️ Input Dataset\nstaph_aur.fasta"];
+  style 3 stroke:#2c3143,stroke-width:4px;
+  4["ℹ️ Input Dataset\nstaph_aur.gff3"];
+  style 4 stroke:#2c3143,stroke-width:4px;
   5["Cutadapt"];
   0 -->|output| 5;
   1 -->|output| 5;
@@ -347,18 +346,32 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   30 -->|sites| 31;
   32["Extract Dataset"];
   31 -->|out_file1| 32;
+  8796f62f-4676-4ad2-b085-7597f894c32c["Output\ncontrol"];
+  32 --> 8796f62f-4676-4ad2-b085-7597f894c32c;
+  style 8796f62f-4676-4ad2-b085-7597f894c32c stroke:#2c3143,stroke-width:4px;
   33["Extract Dataset"];
   31 -->|out_file1| 33;
+  bd014de4-708e-419c-bd1e-8bf350661aad["Output\ncondition"];
+  33 --> bd014de4-708e-419c-bd1e-8bf350661aad;
+  style bd014de4-708e-419c-bd1e-8bf350661aad stroke:#2c3143,stroke-width:4px;
   34["Join"];
   32 -->|output| 34;
   33 -->|output| 34;
+  5cdfb5c9-c677-41dc-a838-c4a61d62f5be["Output\nessential_both"];
+  34 --> 5cdfb5c9-c677-41dc-a838-c4a61d62f5be;
+  style 5cdfb5c9-c677-41dc-a838-c4a61d62f5be stroke:#2c3143,stroke-width:4px;
   35["Join"];
   32 -->|output| 35;
   33 -->|output| 35;
+  8b2b65ea-37c3-43d2-b416-38f8f920fbd9["Output\nessential_control"];
+  35 --> 8b2b65ea-37c3-43d2-b416-38f8f920fbd9;
+  style 8b2b65ea-37c3-43d2-b416-38f8f920fbd9 stroke:#2c3143,stroke-width:4px;
   36["Join"];
   32 -->|output| 36;
   33 -->|output| 36;
-
+  37639319-b053-4fbc-bf61-fd3e38263502["Output\nessential_condition"];
+  36 --> 37639319-b053-4fbc-bf61-fd3e38263502;
+  style 37639319-b053-4fbc-bf61-fd3e38263502 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -388,7 +401,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -412,7 +425,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

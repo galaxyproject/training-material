@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -649,7 +649,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Exome sequencing is a method that enables the selective sequencing of the"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -764,12 +764,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/variant-analysis/tutorials/exome-seq/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/variant-analysis/tutorials/exome-seq/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/variant-analysis/tutorials/exome-seq/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1500,7 +1494,7 @@ tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quali
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control of the input datasets</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.74+galaxy0)</span> on each of your six fastq datasets
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.74%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.74+galaxy0)</a> on each of your six fastq datasets
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: all 6 FASTQ  datasets selected with <strong>Multiple datasets</strong></li>
       </ul>
@@ -1513,7 +1507,7 @@ tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quali
 data, another one with an html report of the findings for each input
 dataset) will get added to your history.</p>
     </li>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the raw <strong>FastQC</strong> data of all input datasets into one report
+    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the raw <strong>FastQC</strong> data of all input datasets into one report
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -1550,7 +1544,7 @@ should you be worried?</li>
 consider trimming the 3’ ends of reads (base qualities decline
 slightly towards the 3’ ends) or to filter out the small fraction
 of reads with a mean base quality &lt; 5.
-Feel free to run, <em>e.g.</em>, <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.1)</span> on the
+Feel free to run, <em>e.g.</em>, <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fpjbriggs%2Ftrimmomatic%2Ftrimmomatic%2F0.38.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.1)</a> on the
 fastq datasets if you want to, but don’t expect this to have a big
 effect on the analysis given the high overall quality of the data
 of all samples.</li>
@@ -1591,7 +1585,7 @@ the dedicated <a href="/training-material/topics/sequence-analysis/tutorials/map
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-read-mapping"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read Mapping</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</span> to map the reads from the <strong>father</strong> sample to the reference genome
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</a> to map the reads from the <strong>father</strong> sample to the reference genome
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
@@ -1671,7 +1665,7 @@ remember sample names since you will have to type them in again!</p>
       </blockquote>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</span> to map the reads from the <strong>mother</strong> sample to the reference genome <strong>using the same parameters as before</strong> except</p>
+      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</a> to map the reads from the <strong>mother</strong> sample to the reference genome <strong>using the same parameters as before</strong> except</p>
 
       <ul>
         <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
@@ -1699,7 +1693,7 @@ reverse reads (R2) dataset of the <strong>mother</strong> sample</li>
       </ul>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</span> to map the reads from the <strong>child</strong> sample to the reference genome <strong>using the same parameters as before</strong> except</p>
+      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</a> to map the reads from the <strong>child</strong> sample to the reference genome <strong>using the same parameters as before</strong> except</p>
 
       <ul>
         <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
@@ -1810,7 +1804,7 @@ callers.</p>
   <div class="box-title hands-on-title" id="hands-on-filtering-for-read-pair-mapping-status"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering for read pair mapping status</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</span> with the following
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_view%2Fsamtools_view%2F1.15.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</a> with the following
 parameters (leaving non-mentioned ones at their defaults):
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“SAM/BAM/CRAM data set”</em>: all 3 mapped reads
@@ -1876,7 +1870,7 @@ mapped reads with a mapped mate, you could run the alternative:</p>
     <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</span>:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_view%2Fsamtools_view%2F1.15.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</a>:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“SAM/BAM/CRAM data set”</em>: all 3 mapped reads
  datasets of the family trio, outputs of <strong>Map with BWA-MEM</strong>
@@ -1904,7 +1898,7 @@ mapped reads with a mapped mate, you could run the alternative:</p>
   <div class="box-title hands-on-title" id="hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicates</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1" title="RmDup tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RmDup</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1" title="RmDup tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_rmdup%2Fsamtools_rmdup%2F2.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RmDup</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file”</em>: all 3 filtered reads datasets; the
  outputs of <strong>Samtools view</strong></li>
@@ -1947,7 +1941,7 @@ alignment.</p>
   <div class="box-title hands-on-title" id="hands-on-generating-freebayes-calls"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating FreeBayes calls</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0" title="FreeBayes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FreeBayes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</span>:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0" title="FreeBayes tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffreebayes%2Ffreebayes%2F1.3.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FreeBayes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</a>:
       <ul>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code>
           <ul>
@@ -2119,7 +2113,7 @@ standards in some other, less important respects is <strong>bcftools norm</stron
   <div class="box-title hands-on-title" id="hands-on-post-processing-freebayes-calls"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Post-processing FreeBayes calls</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.15.1+galaxy3" title="bcftools norm tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bcftools norm</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy3)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.15.1+galaxy3" title="bcftools norm tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbcftools_norm%2Fbcftools_norm%2F1.15.1%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bcftools norm</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy3)</a> with the following parameters:
       <ul>
         <li><em>“VCF/BCF Data”</em>: the VCF output of <strong>FreeBayes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code>
@@ -2260,11 +2254,11 @@ which is rather simple to generate manually.</p>
         <p>You can skip this step if the Galaxy server you are working on offers
 <code class="language-plaintext highlighter-rouge">Homo sapiens: hg19</code> as a locally installed snpEff database. You can
 check the <strong>Genome source</strong> select list of the
-<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2" title="SnpEff eff tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff eff</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.3+T.galaxy2)</span>
+<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2" title="SnpEff eff tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpeff%2FsnpEff%2F4.3%2BT.galaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff eff</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.3+T.galaxy2)</a>
 tool to see if this is the case.</p>
       </blockquote>
 
-      <p>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.3+T.galaxy2" title="SnpEff Download tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff Download</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.3+T.galaxy2)</span> to download genome annotation
+      <p>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.3+T.galaxy2" title="SnpEff Download tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpeff%2FsnpEff_download%2F4.3%2BT.galaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff Download</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.3+T.galaxy2)</a> to download genome annotation
  database <code class="language-plaintext highlighter-rouge">hg19</code>.</p>
     </li>
     <li>
@@ -2303,7 +2297,7 @@ the pedigree dataset accordingly!</p>
         <div class="box-title details-title" id="details-more-on-ped-files"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-on-ped-files" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More on PED files</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The PED format is explained in the help section of
-<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GEMINI load</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.1+galaxy2)</span>.</p>
+<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgemini_load%2Fgemini_load%2F0.20.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GEMINI load</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.1+galaxy2)</a>.</p>
 
         <p>Take a moment and try to understand the information that is encoded in
 the PED dataset we are using here.</p>
@@ -2321,7 +2315,7 @@ with SnpEff.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-adding-annotations-with-snpeff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding annotations with SnpEff</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2" title="SnpEff eff tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff eff</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.3+T.galaxy2)</span>
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2" title="SnpEff eff tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpeff%2FsnpEff%2F4.3%2BT.galaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff eff</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.3+T.galaxy2)</a>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence changes (SNPs, MNPs, InDels)”</em>: the
 output of <strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2413,7 +2407,7 @@ the database.</p>
   <div class="box-title hands-on-title" id="hands-on-creating-a-gemini-database-from-a-variants-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating a GEMINI database from a variants dataset</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GEMINI load</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.1+galaxy2)</span> with
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgemini_load%2Fgemini_load%2F0.20.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GEMINI load</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.1+galaxy2)</a> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF dataset to be loaded in the GEMINI database”</em>:
 the output of <strong>SnpEff eff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2574,7 +2568,7 @@ you think could plausibly be causative for the child’s disease.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-finding-and-reporting-plausible-causative-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Finding and reporting plausible causative variants</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1" title="GEMINI inheritance pattern tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GEMINI inheritance pattern</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.1)</span>
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1" title="GEMINI inheritance pattern tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgemini_inheritance%2Fgemini_inheritance%2F0.20.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GEMINI inheritance pattern</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.1)</a>
       <ul>
         <li><em>“GEMINI database”</em>: the GEMINI database of annotated variants; output
 of <strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -3141,7 +3135,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3169,7 +3163,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/transcriptomics/tutorials/ref-based/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/transcriptomics/tutorials/ref-based/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/transcriptomics/tutorials/ref-based/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -284,13 +278,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -298,23 +292,33 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
-  1["Input dataset"];
-  2["Input dataset"];
-  3["Input dataset"];
-  4["Extract element identifiers"];
+  0["ℹ️ Input Collection\nInput Dataset Collection"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nDrosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nheader"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ℹ️ Input Dataset\nKEGG pathways to plot"];
+  style 3 stroke:#2c3143,stroke-width:4px;
+  4["Extract samples’ name"];
   0 -->|output| 4;
-  5["Gene length and GC content"];
+  5["Compute gene length"];
   1 -->|output| 5;
-  6["Replace Text"];
+  6["Extract groups"];
   4 -->|output| 6;
   7["Change Case"];
   5 -->|length| 7;
-  8["Tag elements"];
+  8["Tag elements with groups"];
   0 -->|output| 8;
   6 -->|outfile| 8;
-  9["DESeq2"];
+  9["Differential Analysis"];
   8 -->|output| 9;
+  c1ff3e9a-46d3-4862-adb6-076ea951be26["Output\nDESeq2_plots"];
+  9 --> c1ff3e9a-46d3-4862-adb6-076ea951be26;
+  style c1ff3e9a-46d3-4862-adb6-076ea951be26 stroke:#2c3143,stroke-width:4px;
+  b430e84e-cfa5-48e8-92a7-ef5630ced1e5["Output\nDESeq2_normalized_counts"];
+  9 --> b430e84e-cfa5-48e8-92a7-ef5630ced1e5;
+  style b430e84e-cfa5-48e8-92a7-ef5630ced1e5 stroke:#2c3143,stroke-width:4px;
   10["Compute"];
   9 -->|deseq_out| 10;
   11["Annotate DESeq2/DEXSeq output tables"];
@@ -327,9 +331,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   14["Concatenate datasets"];
   2 -->|output| 14;
   11 -->|output| 14;
+  11f46837-7dbb-453b-962a-3c97cb0faad4["Output\nDESeq2_annotated_results_with_header"];
+  14 --> 11f46837-7dbb-453b-962a-3c97cb0faad4;
+  style 11f46837-7dbb-453b-962a-3c97cb0faad4 stroke:#2c3143,stroke-width:4px;
   15["Table Compute"];
   9 -->|counts_out| 15;
   12 -->|table| 15;
+  32004d23-7c99-4405-a65f-fd861b40c949["Output\nz_score"];
+  15 --> 32004d23-7c99-4405-a65f-fd861b40c949;
+  style 32004d23-7c99-4405-a65f-fd861b40c949 stroke:#2c3143,stroke-width:4px;
   16["Change Case"];
   13 -->|out_file1| 16;
   17["Filter"];
@@ -337,38 +347,79 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   18["goseq"];
   16 -->|out_file1| 18;
   7 -->|out_file1| 18;
+  c06c58d4-ab5d-49da-b481-baf668c6fc29["Output\ngo_terms"];
+  18 --> c06c58d4-ab5d-49da-b481-baf668c6fc29;
+  style c06c58d4-ab5d-49da-b481-baf668c6fc29 stroke:#2c3143,stroke-width:4px;
+  a0dd7397-7262-4336-abd6-a915ab6be36a["Output\ngo_genes"];
+  18 --> a0dd7397-7262-4336-abd6-a915ab6be36a;
+  style a0dd7397-7262-4336-abd6-a915ab6be36a stroke:#2c3143,stroke-width:4px;
+  659fec58-4ed5-4aee-9e50-7acce21113cb["Output\ngo_plot"];
+  18 --> 659fec58-4ed5-4aee-9e50-7acce21113cb;
+  style 659fec58-4ed5-4aee-9e50-7acce21113cb stroke:#2c3143,stroke-width:4px;
   19["goseq"];
   16 -->|out_file1| 19;
   7 -->|out_file1| 19;
+  8d0ac5be-ac7d-4f10-85ac-d3461f561a50["Output\nkegg_pathways"];
+  19 --> 8d0ac5be-ac7d-4f10-85ac-d3461f561a50;
+  style 8d0ac5be-ac7d-4f10-85ac-d3461f561a50 stroke:#2c3143,stroke-width:4px;
+  9872b017-9b39-4cd3-b232-a305979a782b["Output\nkegg_genes"];
+  19 --> 9872b017-9b39-4cd3-b232-a305979a782b;
+  style 9872b017-9b39-4cd3-b232-a305979a782b stroke:#2c3143,stroke-width:4px;
   20["Cut"];
   17 -->|out_file1| 20;
   21["Filter"];
   17 -->|out_file1| 21;
   22["Filter"];
   18 -->|wallenius_tab| 22;
+  ae762394-0e90-4b9a-a7b4-7cffeccc80a7["Output\ngo_underrepresented"];
+  22 --> ae762394-0e90-4b9a-a7b4-7cffeccc80a7;
+  style ae762394-0e90-4b9a-a7b4-7cffeccc80a7 stroke:#2c3143,stroke-width:4px;
   23["Filter"];
   18 -->|wallenius_tab| 23;
+  b788d5b7-119c-418a-a12b-a97ef7ea5bf2["Output\ngo_overrepresented"];
+  23 --> b788d5b7-119c-418a-a12b-a97ef7ea5bf2;
+  style b788d5b7-119c-418a-a12b-a97ef7ea5bf2 stroke:#2c3143,stroke-width:4px;
   24["Filter"];
   19 -->|wallenius_tab| 24;
+  69f80c89-fc7d-4bea-836f-34e68615abcd["Output\nkegg_underrepresented"];
+  24 --> 69f80c89-fc7d-4bea-836f-34e68615abcd;
+  style 69f80c89-fc7d-4bea-836f-34e68615abcd stroke:#2c3143,stroke-width:4px;
   25["Filter"];
   19 -->|wallenius_tab| 25;
+  930f1461-0ade-4744-a83d-843108c4b597["Output\nkegg_overrepresented"];
+  25 --> 930f1461-0ade-4744-a83d-843108c4b597;
+  style 930f1461-0ade-4744-a83d-843108c4b597 stroke:#2c3143,stroke-width:4px;
   26["Pathview"];
   20 -->|out_file1| 26;
   3 -->|output| 26;
+  7cdd4475-6de3-4c02-be8d-d76e788980f6["Output\npathview_plot"];
+  26 --> 7cdd4475-6de3-4c02-be8d-d76e788980f6;
+  style 7cdd4475-6de3-4c02-be8d-d76e788980f6 stroke:#2c3143,stroke-width:4px;
   27["Join two Datasets"];
   9 -->|counts_out| 27;
   21 -->|out_file1| 27;
   28["Group"];
   22 -->|out_file1| 28;
+  d1ae921d-2e2b-46d8-95a2-4443f5a1b3b4["Output\ngo_underrepresented_categories"];
+  28 --> d1ae921d-2e2b-46d8-95a2-4443f5a1b3b4;
+  style d1ae921d-2e2b-46d8-95a2-4443f5a1b3b4 stroke:#2c3143,stroke-width:4px;
   29["Group"];
   23 -->|out_file1| 29;
+  4d2d01eb-15d2-4863-a522-9462c15eb51c["Output\ngo_overrepresented_categories"];
+  29 --> 4d2d01eb-15d2-4863-a522-9462c15eb51c;
+  style 4d2d01eb-15d2-4863-a522-9462c15eb51c stroke:#2c3143,stroke-width:4px;
   30["Cut"];
   27 -->|out_file1| 30;
   31["heatmap2"];
   30 -->|out_file1| 31;
+  42cb6b68-4ed6-4b6e-9312-744b9e0c1442["Output\nheatmap_log"];
+  31 --> 42cb6b68-4ed6-4b6e-9312-744b9e0c1442;
+  style 42cb6b68-4ed6-4b6e-9312-744b9e0c1442 stroke:#2c3143,stroke-width:4px;
   32["heatmap2"];
   30 -->|out_file1| 32;
-
+  0ecef5aa-76ed-4fe7-9244-3b32d231e7f3["Output\nheatmap_zscore"];
+  32 --> 0ecef5aa-76ed-4fe7-9244-3b32d231e7f3;
+  style 0ecef5aa-76ed-4fe7-9244-3b32d231e7f3 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -427,13 +478,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting-paired-and-single.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -441,109 +492,165 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
-  1["Input dataset collection"];
-  2["Input dataset"];
-  3["Cutadapt"];
+  0["ℹ️ Input Collection\nsingle fastqs"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Collection\npaired fastqs"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nDrosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["Cutadapt: remove bad quality bp"];
   0 -->|output| 3;
-  4["Flatten collection"];
+  4["Flatten paired collection for FastQC"];
   1 -->|output| 4;
   5["Cutadapt"];
   1 -->|output| 5;
-  6["Gene length and GC content"];
+  6["Get gene length"];
   2 -->|output| 6;
-  7["Convert GTF to BED12"];
+  077640cc-edbb-4185-9eb1-d11b522774af["Output\nGene length"];
+  6 --> 077640cc-edbb-4185-9eb1-d11b522774af;
+  style 077640cc-edbb-4185-9eb1-d11b522774af stroke:#2c3143,stroke-width:4px;
+  7["convert gtf to bed12"];
   2 -->|output| 7;
-  8["RNA STAR"];
+  8["STAR: map single reads"];
   2 -->|output| 8;
   3 -->|out1| 8;
-  9["Merge collections"];
+  9["Merge fastqs for FastQC"];
   4 -->|output| 9;
   0 -->|output| 9;
-  10["Merge collections"];
+  10["Merge Cutadapt reports"];
   5 -->|report| 10;
   3 -->|report| 10;
-  11["RNA STAR"];
+  11["STAR: map paired reads"];
   2 -->|output| 11;
   5 -->|out_pairs| 11;
-  12["featureCounts"];
+  12["count reads per gene for SR"];
   8 -->|mapped_reads| 12;
   2 -->|output| 12;
-  13["FastQC"];
+  13["FastQC check read qualities"];
   9 -->|output| 13;
-  14["MultiQC"];
+  14["Combine cutadapt results"];
   10 -->|output| 14;
-  15["Merge collections"];
+  cab760db-5c9d-4a3c-b768-998bfbac6b57["Output\nmultiqc_cutadapt_html"];
+  14 --> cab760db-5c9d-4a3c-b768-998bfbac6b57;
+  style cab760db-5c9d-4a3c-b768-998bfbac6b57 stroke:#2c3143,stroke-width:4px;
+  15["Merge STAR logs"];
   11 -->|output_log| 15;
   8 -->|output_log| 15;
-  16["Merge collections"];
+  16["Merge STAR counts"];
   8 -->|reads_per_gene| 16;
   11 -->|reads_per_gene| 16;
-  17["featureCounts"];
+  17["count fragments per gene for PE"];
   11 -->|mapped_reads| 17;
   2 -->|output| 17;
-  18["Merge collections"];
+  1527b5d7-1681-4934-9d9e-3a5f86ae0fee["Output\nfeatureCounts_gene_length"];
+  17 --> 1527b5d7-1681-4934-9d9e-3a5f86ae0fee;
+  style 1527b5d7-1681-4934-9d9e-3a5f86ae0fee stroke:#2c3143,stroke-width:4px;
+  18["Merge STAR BAM"];
   11 -->|mapped_reads| 18;
   8 -->|mapped_reads| 18;
-  19["Merge collections"];
+  802017f4-fb1a-4243-b50d-2ed46f746f11["Output\nSTAR_BAM"];
+  18 --> 802017f4-fb1a-4243-b50d-2ed46f746f11;
+  style 802017f4-fb1a-4243-b50d-2ed46f746f11 stroke:#2c3143,stroke-width:4px;
+  19["merge coverage unique strand 1"];
   8 -->|signal_unique_str1| 19;
   11 -->|signal_unique_str1| 19;
-  20["Merge collections"];
+  20["merge coverage unique strand 2"];
   8 -->|signal_unique_str2| 20;
   11 -->|signal_unique_str2| 20;
-  21["MultiQC"];
+  21["Combine FastQC results"];
   13 -->|text_file| 21;
-  22["MultiQC"];
+  8d0ce9ee-e4e4-4c0c-8261-420ce756ecfd["Output\nmultiqc_fastqc_html"];
+  21 --> 8d0ce9ee-e4e4-4c0c-8261-420ce756ecfd;
+  style 8d0ce9ee-e4e4-4c0c-8261-420ce756ecfd stroke:#2c3143,stroke-width:4px;
+  22["Combine STAR Results"];
   15 -->|output| 22;
-  23["Select last"];
+  204e3f6c-6f54-46f0-b07c-1f31113265e7["Output\nmultiqc_star_html"];
+  22 --> 204e3f6c-6f54-46f0-b07c-1f31113265e7;
+  style 204e3f6c-6f54-46f0-b07c-1f31113265e7 stroke:#2c3143,stroke-width:4px;
+  23["Remove statistics from STAR counts"];
   16 -->|output| 23;
-  24["MultiQC"];
+  24["Determine library strandness with STAR"];
   16 -->|output| 24;
-  25["Merge collections"];
+  fe7b84dd-4466-4fe7-94a8-408f4ac7ed1a["Output\nmultiqc_star_counts_html"];
+  24 --> fe7b84dd-4466-4fe7-94a8-408f4ac7ed1a;
+  style fe7b84dd-4466-4fe7-94a8-408f4ac7ed1a stroke:#2c3143,stroke-width:4px;
+  25["merge counts from featureCounts"];
   12 -->|output_short| 25;
   17 -->|output_short| 25;
-  26["Merge collections"];
+  c82388f8-cb09-4fdf-8a0e-03cdad579f37["Output\nfeatureCounts"];
+  25 --> c82388f8-cb09-4fdf-8a0e-03cdad579f37;
+  style c82388f8-cb09-4fdf-8a0e-03cdad579f37 stroke:#2c3143,stroke-width:4px;
+  26["merge featureCounts summary"];
   12 -->|output_summary| 26;
   17 -->|output_summary| 26;
-  27["Infer Experiment"];
+  27["Determine library strandness with Infer Experiment"];
   18 -->|output| 27;
   7 -->|bed_file| 27;
+  940ec3ec-dd2e-4d50-bbc4-756945eb16b2["Output\ninferexperiment"];
+  27 --> 940ec3ec-dd2e-4d50-bbc4-756945eb16b2;
+  style 940ec3ec-dd2e-4d50-bbc4-756945eb16b2 stroke:#2c3143,stroke-width:4px;
   28["Read Distribution"];
   18 -->|output| 28;
   7 -->|bed_file| 28;
-  29["Read Distribution"];
+  29["Compute read distribution statistics"];
   18 -->|output| 29;
   7 -->|bed_file| 29;
-  30["Samtools view"];
+  30["sample BAM"];
   18 -->|output| 30;
-  31["Samtools idxstats"];
+  31["Get reads number per chromosome"];
   18 -->|output| 31;
-  32["MarkDuplicates"];
+  32["Remove duplicates"];
   18 -->|output| 32;
-  33["pyGenomeTracks"];
+  33["Determine library strandness with STAR coverage"];
   19 -->|output| 33;
   20 -->|output| 33;
   2 -->|output| 33;
-  34["Cut"];
+  89e1b053-03c2-467a-95a0-d2dc404670ec["Output\npgt"];
+  33 --> 89e1b053-03c2-467a-95a0-d2dc404670ec;
+  style 89e1b053-03c2-467a-95a0-d2dc404670ec stroke:#2c3143,stroke-width:4px;
+  34["Select unstranded counts"];
   23 -->|outfile| 34;
-  35["Sort"];
+  bce755be-ac3b-4346-9ac5-1128a287bf00["Output\ncounts_from_star"];
+  34 --> bce755be-ac3b-4346-9ac5-1128a287bf00;
+  style bce755be-ac3b-4346-9ac5-1128a287bf00 stroke:#2c3143,stroke-width:4px;
+  35["Sort counts to get gene with highest count on feature Counts"];
   25 -->|output| 35;
-  36["MultiQC"];
+  6aeb4dd1-445f-4c66-b1ce-4bb8faac53db["Output\nfeatureCounts_sorted"];
+  35 --> 6aeb4dd1-445f-4c66-b1ce-4bb8faac53db;
+  style 6aeb4dd1-445f-4c66-b1ce-4bb8faac53db stroke:#2c3143,stroke-width:4px;
+  36["Combine read asignments statistics"];
   26 -->|output| 36;
-  37["MultiQC"];
+  fc72242a-f23c-4ceb-9a8b-5280343ea5d6["Output\nmultiqc_featureCounts_html"];
+  36 --> fc72242a-f23c-4ceb-9a8b-5280343ea5d6;
+  style fc72242a-f23c-4ceb-9a8b-5280343ea5d6 stroke:#2c3143,stroke-width:4px;
+  37["Combine read distribution on known features"];
   29 -->|output| 37;
-  38["Gene Body Coverage (BAM)"];
+  07dca732-0ac7-432e-9e61-2b77f921a23b["Output\nmultiqc_read_distrib"];
+  37 --> 07dca732-0ac7-432e-9e61-2b77f921a23b;
+  style 07dca732-0ac7-432e-9e61-2b77f921a23b stroke:#2c3143,stroke-width:4px;
+  38["Get gene body coverage"];
   30 -->|outputsam| 38;
   7 -->|bed_file| 38;
-  39["MultiQC"];
+  39["Combine results on reads per chromosome"];
   31 -->|output| 39;
-  40["MultiQC"];
+  7bfa8ae7-8ffd-46a1-a56e-815ed2c9f1cf["Output\nmultiqc_reads_per_chrom"];
+  39 --> 7bfa8ae7-8ffd-46a1-a56e-815ed2c9f1cf;
+  style 7bfa8ae7-8ffd-46a1-a56e-815ed2c9f1cf stroke:#2c3143,stroke-width:4px;
+  40["Combine results of duplicate reads"];
   32 -->|metrics_file| 40;
-  41["Sort"];
+  66553d0f-e851-458b-82c2-f9b30e394bac["Output\nmultiqc_dup"];
+  40 --> 66553d0f-e851-458b-82c2-f9b30e394bac;
+  style 66553d0f-e851-458b-82c2-f9b30e394bac stroke:#2c3143,stroke-width:4px;
+  41["Sort counts to get gene with highest count on STAR"];
   34 -->|out_file1| 41;
-  42["MultiQC"];
+  383df008-0ccb-4d67-98dd-33fa5e2db81e["Output\ncounts_from_star_sorted"];
+  41 --> 383df008-0ccb-4d67-98dd-33fa5e2db81e;
+  style 383df008-0ccb-4d67-98dd-33fa5e2db81e stroke:#2c3143,stroke-width:4px;
+  42["Combine gene body coverage"];
   38 -->|outputtxt| 42;
-
+  8544ea5c-faf2-44c9-85d6-40658fc9b9eb["Output\nmultiqc_gene_body_cov"];
+  42 --> 8544ea5c-faf2-44c9-85d6-40658fc9b9eb;
+  style 8544ea5c-faf2-44c9-85d6-40658fc9b9eb stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -602,13 +709,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -616,31 +723,93 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
-  1["Input dataset"];
-  2["FastQC"];
+  0["ℹ️ Input Collection\nPaired list collection with PE fastqs"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nDrosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["🛠️ Subworkflow\nFastQC"];
+  style 2 fill:#edd,stroke:#900,stroke-width:4px;
   0 -->|output| 2;
-  3["cutadapt"];
+  5f7652f1-e225-4ad1-8dbd-4d21544edb89["Output\nmultiqc_fastqc_html"];
+  2 --> 5f7652f1-e225-4ad1-8dbd-4d21544edb89;
+  style 5f7652f1-e225-4ad1-8dbd-4d21544edb89 stroke:#2c3143,stroke-width:4px;
+  3["🛠️ Subworkflow\ncutadapt"];
+  style 3 fill:#edd,stroke:#900,stroke-width:4px;
   0 -->|output| 3;
-  4["STAR + multiQC"];
+  41c7fbb5-655b-457c-8ba7-0e2eeab3d7ee["Output\nmultiqc_cutadapt_html"];
+  3 --> 41c7fbb5-655b-457c-8ba7-0e2eeab3d7ee;
+  style 41c7fbb5-655b-457c-8ba7-0e2eeab3d7ee stroke:#2c3143,stroke-width:4px;
+  4["🛠️ Subworkflow\nSTAR + multiQC"];
+  style 4 fill:#edd,stroke:#900,stroke-width:4px;
   1 -->|output| 4;
   3 -->|out_pairs| 4;
-  5["more QC"];
+  8aa5ef30-3f09-4a93-944d-0d89101c056a["Output\nmultiqc_star_html"];
+  4 --> 8aa5ef30-3f09-4a93-944d-0d89101c056a;
+  style 8aa5ef30-3f09-4a93-944d-0d89101c056a stroke:#2c3143,stroke-width:4px;
+  11af5c57-91b4-496c-9b0c-b02904963f81["Output\nSTAR_BAM"];
+  4 --> 11af5c57-91b4-496c-9b0c-b02904963f81;
+  style 11af5c57-91b4-496c-9b0c-b02904963f81 stroke:#2c3143,stroke-width:4px;
+  5["🛠️ Subworkflow\nmore QC"];
+  style 5 fill:#edd,stroke:#900,stroke-width:4px;
   1 -->|output| 5;
   4 -->|STAR_BAM| 5;
-  6["Determine strandness"];
+  b306cb12-a275-4c6d-b609-47fdc208864b["Output\nmultiqc_reads_per_chrom_html"];
+  5 --> b306cb12-a275-4c6d-b609-47fdc208864b;
+  style b306cb12-a275-4c6d-b609-47fdc208864b stroke:#2c3143,stroke-width:4px;
+  3ea82568-5698-49a7-88fe-91381070aac2["Output\nmultiqc_dup_html"];
+  5 --> 3ea82568-5698-49a7-88fe-91381070aac2;
+  style 3ea82568-5698-49a7-88fe-91381070aac2 stroke:#2c3143,stroke-width:4px;
+  f2eed352-ca21-4d65-8810-f5a1d3c282b4["Output\nmultiqc_read_distrib_html"];
+  5 --> f2eed352-ca21-4d65-8810-f5a1d3c282b4;
+  style f2eed352-ca21-4d65-8810-f5a1d3c282b4 stroke:#2c3143,stroke-width:4px;
+  3375d63c-cdc3-4fbb-8a55-6f504c934918["Output\nmultiqc_gene_body_cov_html"];
+  5 --> 3375d63c-cdc3-4fbb-8a55-6f504c934918;
+  style 3375d63c-cdc3-4fbb-8a55-6f504c934918 stroke:#2c3143,stroke-width:4px;
+  6["🛠️ Subworkflow\nDetermine strandness"];
+  style 6 fill:#edd,stroke:#900,stroke-width:4px;
   4 -->|STAR_BAM| 6;
   1 -->|output| 6;
   4 -->|signal_unique_str1| 6;
   4 -->|signal_unique_str2| 6;
   4 -->|reads_per_gene| 6;
-  7["count STAR"];
+  9727824a-3eb2-4430-92d1-b3c40c3041d1["Output\npgt"];
+  6 --> 9727824a-3eb2-4430-92d1-b3c40c3041d1;
+  style 9727824a-3eb2-4430-92d1-b3c40c3041d1 stroke:#2c3143,stroke-width:4px;
+  105313d8-e31a-405d-8fcd-cc5fd93275e2["Output\nmultiqc_star_counts_html"];
+  6 --> 105313d8-e31a-405d-8fcd-cc5fd93275e2;
+  style 105313d8-e31a-405d-8fcd-cc5fd93275e2 stroke:#2c3143,stroke-width:4px;
+  fb810859-f2d0-43f8-ac7c-5c714c5c6805["Output\ninferexperiment"];
+  6 --> fb810859-f2d0-43f8-ac7c-5c714c5c6805;
+  style fb810859-f2d0-43f8-ac7c-5c714c5c6805 stroke:#2c3143,stroke-width:4px;
+  7["🛠️ Subworkflow\ncount STAR"];
+  style 7 fill:#edd,stroke:#900,stroke-width:4px;
   1 -->|output| 7;
   4 -->|reads_per_gene| 7;
-  8["count featureCount"];
+  7b7c698b-4808-4b45-adf1-686f8d273d18["Output\nGene length"];
+  7 --> 7b7c698b-4808-4b45-adf1-686f8d273d18;
+  style 7b7c698b-4808-4b45-adf1-686f8d273d18 stroke:#2c3143,stroke-width:4px;
+  bd3388e6-5b45-4fdc-9780-3efd1c34ebf8["Output\ncounts_from_star_sorted"];
+  7 --> bd3388e6-5b45-4fdc-9780-3efd1c34ebf8;
+  style bd3388e6-5b45-4fdc-9780-3efd1c34ebf8 stroke:#2c3143,stroke-width:4px;
+  5fee8aff-4023-43f1-a653-f5af5357d798["Output\ncounts_from_star"];
+  7 --> 5fee8aff-4023-43f1-a653-f5af5357d798;
+  style 5fee8aff-4023-43f1-a653-f5af5357d798 stroke:#2c3143,stroke-width:4px;
+  8["🛠️ Subworkflow\ncount featureCount"];
+  style 8 fill:#edd,stroke:#900,stroke-width:4px;
   1 -->|output| 8;
   4 -->|STAR_BAM| 8;
-
+  46c7a2e8-7819-4715-a028-7ad1de9ed605["Output\nfeatureCounts"];
+  8 --> 46c7a2e8-7819-4715-a028-7ad1de9ed605;
+  style 46c7a2e8-7819-4715-a028-7ad1de9ed605 stroke:#2c3143,stroke-width:4px;
+  152ba01e-d4f2-4227-8812-87648a1c19ea["Output\nmultiqc_featureCounts_html"];
+  8 --> 152ba01e-d4f2-4227-8812-87648a1c19ea;
+  style 152ba01e-d4f2-4227-8812-87648a1c19ea stroke:#2c3143,stroke-width:4px;
+  8b9d6c76-6e82-4691-b8bc-9996d6ae1594["Output\nfeatureCounts_gene_length"];
+  8 --> 8b9d6c76-6e82-4691-b8bc-9996d6ae1594;
+  style 8b9d6c76-6e82-4691-b8bc-9996d6ae1594 stroke:#2c3143,stroke-width:4px;
+  f0de4714-4df8-4506-90d9-384537ad663e["Output\nfeatureCounts_sorted"];
+  8 --> f0de4714-4df8-4506-90d9-384537ad663e;
+  style f0de4714-4df8-4506-90d9-384537ad663e stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -670,7 +839,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -694,7 +863,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

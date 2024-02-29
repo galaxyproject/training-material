@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -272,9 +266,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_datasets_gene_based_pathogenic_identification"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -282,61 +276,149 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
-  1["Input dataset"];
+  0["ℹ️ Input Collection\nNanopore Sequenced Reads Collection"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nMLST Report Header"];
+  style 1 stroke:#2c3143,stroke-width:4px;
   2["Build list"];
   0 -->|output| 2;
+  d63f1fa1-14ae-4646-b73b-d45b06f59fff["Output\nList of Lists of Processed Samples"];
+  2 --> d63f1fa1-14ae-4646-b73b-d45b06f59fff;
+  style d63f1fa1-14ae-4646-b73b-d45b06f59fff stroke:#2c3143,stroke-width:4px;
   3["Extract element identifiers"];
   0 -->|output| 3;
+  203bf2c8-195a-40d8-9e3a-0615e5c7a34c["Output\nExtracted Lables"];
+  3 --> 203bf2c8-195a-40d8-9e3a-0615e5c7a34c;
+  style 203bf2c8-195a-40d8-9e3a-0615e5c7a34c stroke:#2c3143,stroke-width:4px;
   4["Flye"];
   2 -->|output| 4;
+  05a7b98b-ee61-4c6c-bddd-48552fd6c545["Output\nFlye Assembly GFA"];
+  4 --> 05a7b98b-ee61-4c6c-bddd-48552fd6c545;
+  style 05a7b98b-ee61-4c6c-bddd-48552fd6c545 stroke:#2c3143,stroke-width:4px;
+  b57041a7-6a1d-4dfa-b599-815f4152b7c6["Output\nFlye Assembly Graph"];
+  4 --> b57041a7-6a1d-4dfa-b599-815f4152b7c6;
+  style b57041a7-6a1d-4dfa-b599-815f4152b7c6 stroke:#2c3143,stroke-width:4px;
+  357bbc74-9c8d-47c1-906d-7338d39d4f78["Output\nFlye Assembly Info Tabular"];
+  4 --> 357bbc74-9c8d-47c1-906d-7338d39d4f78;
+  style 357bbc74-9c8d-47c1-906d-7338d39d4f78 stroke:#2c3143,stroke-width:4px;
+  d2a6d4ef-a89c-4eeb-81e7-eb742da32242["Output\nFlye Consensus Fasta"];
+  4 --> d2a6d4ef-a89c-4eeb-81e7-eb742da32242;
+  style d2a6d4ef-a89c-4eeb-81e7-eb742da32242 stroke:#2c3143,stroke-width:4px;
   5["Split file"];
   3 -->|output| 5;
+  2980230b-5248-4a54-b3ae-30fcd055d69d["Output\nSplitted Extracted Lables"];
+  5 --> 2980230b-5248-4a54-b3ae-30fcd055d69d;
+  style 2980230b-5248-4a54-b3ae-30fcd055d69d stroke:#2c3143,stroke-width:4px;
   6["Bandage Image"];
   4 -->|assembly_gfa| 6;
+  07176f8f-6974-4d78-b4b4-73653b320723["Output\nBandage Image on input dataset(s): Assembly Graph Image"];
+  6 --> 07176f8f-6974-4d78-b4b4-73653b320723;
+  style 07176f8f-6974-4d78-b4b4-73653b320723 stroke:#2c3143,stroke-width:4px;
   7["medaka consensus pipeline"];
   4 -->|consensus| 7;
   0 -->|output| 7;
+  511579ff-c4df-432e-a73f-0aa9988f14f6["Output\nMedaka Gaps in draft bed file"];
+  7 --> 511579ff-c4df-432e-a73f-0aa9988f14f6;
+  style 511579ff-c4df-432e-a73f-0aa9988f14f6 stroke:#2c3143,stroke-width:4px;
+  40e198a9-029d-4341-8129-32f3e72867c0["Output\nMedaka propability h5 file"];
+  7 --> 40e198a9-029d-4341-8129-32f3e72867c0;
+  style 40e198a9-029d-4341-8129-32f3e72867c0 stroke:#2c3143,stroke-width:4px;
+  62f819ea-2caa-43c8-a677-565202166e21["Output\nMedaka log file"];
+  7 --> 62f819ea-2caa-43c8-a677-565202166e21;
+  style 62f819ea-2caa-43c8-a677-565202166e21 stroke:#2c3143,stroke-width:4px;
+  fc7a33a1-c2f9-45be-ad65-6383a903f68d["Output\nMedaka calls of draft Bam file"];
+  7 --> fc7a33a1-c2f9-45be-ad65-6383a903f68d;
+  style fc7a33a1-c2f9-45be-ad65-6383a903f68d stroke:#2c3143,stroke-width:4px;
+  46f43f5c-04ac-4e25-8e32-846a273dd309["Output\nMedaka consensus with all contigs Fasta file"];
+  7 --> 46f43f5c-04ac-4e25-8e32-846a273dd309;
+  style 46f43f5c-04ac-4e25-8e32-846a273dd309 stroke:#2c3143,stroke-width:4px;
   8["Parse parameter value"];
   5 -->|list_output_txt| 8;
+  adc77934-abf6-4df2-8cf8-ae81b85227ff["Output\nParsed Extracted Lables to text"];
+  8 --> adc77934-abf6-4df2-8cf8-ae81b85227ff;
+  style adc77934-abf6-4df2-8cf8-ae81b85227ff stroke:#2c3143,stroke-width:4px;
   9["Build list"];
   7 -->|out_consensus| 9;
+  89b6d5ea-b24e-47e1-affa-b2c99dda6f2d["Output\nList of Lists of Assembles samples"];
+  9 --> 89b6d5ea-b24e-47e1-affa-b2c99dda6f2d;
+  style 89b6d5ea-b24e-47e1-affa-b2c99dda6f2d stroke:#2c3143,stroke-width:4px;
   10["ABRicate"];
   7 -->|out_consensus| 10;
+  ad90e04d-2c38-4d9a-a879-c78754fcc0c3["Output\nABRicate with VFDB to Idetify genes with VFs "];
+  10 --> ad90e04d-2c38-4d9a-a879-c78754fcc0c3;
+  style ad90e04d-2c38-4d9a-a879-c78754fcc0c3 stroke:#2c3143,stroke-width:4px;
   11["FASTA-to-Tabular"];
   7 -->|out_consensus| 11;
+  bf358cd9-af19-4319-83d3-63b3745e550d["Output\nPreparing for a Sample Specific Contigs Tabular file"];
+  11 --> bf358cd9-af19-4319-83d3-63b3745e550d;
+  style bf358cd9-af19-4319-83d3-63b3745e550d stroke:#2c3143,stroke-width:4px;
   12["ABRicate"];
   7 -->|out_consensus| 12;
+  dfc81350-2047-48b7-bbfa-f532cbf71145["Output\nABRicate report using NCBI database to Indentify AMR"];
+  12 --> dfc81350-2047-48b7-bbfa-f532cbf71145;
+  style dfc81350-2047-48b7-bbfa-f532cbf71145 stroke:#2c3143,stroke-width:4px;
   13["Compose text parameter value"];
   8 -->|text_param| 13;
+  9f9c9cf3-a311-46a7-b0b5-2af5814915cb["Output\nSampleID Regex Expression2"];
+  13 --> 9f9c9cf3-a311-46a7-b0b5-2af5814915cb;
+  style 9f9c9cf3-a311-46a7-b0b5-2af5814915cb stroke:#2c3143,stroke-width:4px;
   14["MLST"];
   9 -->|output| 14;
+  9f3a7d25-57dc-4658-a4f6-06d418ef058e["Output\nMLST on input dataset(s): report.tsv"];
+  14 --> 9f3a7d25-57dc-4658-a4f6-06d418ef058e;
+  style 9f3a7d25-57dc-4658-a4f6-06d418ef058e stroke:#2c3143,stroke-width:4px;
   15["Cut"];
   10 -->|report| 15;
+  5f491cdd-f47f-4a08-83b6-b3c034205a56["Output\nVFs accessions"];
+  15 --> 5f491cdd-f47f-4a08-83b6-b3c034205a56;
+  style 5f491cdd-f47f-4a08-83b6-b3c034205a56 stroke:#2c3143,stroke-width:4px;
   16["Cut"];
   12 -->|report| 16;
+  a183ffb5-b270-4799-89fc-80802b4a2ee9["Output\nAMR NCBI Accession"];
+  16 --> a183ffb5-b270-4799-89fc-80802b4a2ee9;
+  style a183ffb5-b270-4799-89fc-80802b4a2ee9 stroke:#2c3143,stroke-width:4px;
   17["Replace"];
   8 -->|text_param| 17;
   13 -->|out1| 17;
   10 -->|report| 17;
+  e08927b4-c5b0-4dee-b5b4-0183dfc7b151["Output\nVFs "];
+  17 --> e08927b4-c5b0-4dee-b5b4-0183dfc7b151;
+  style e08927b4-c5b0-4dee-b5b4-0183dfc7b151 stroke:#2c3143,stroke-width:4px;
   18["Replace"];
   13 -->|out1| 18;
   11 -->|output| 18;
+  31a8f807-f01b-46ef-8f56-70b7c0b20d64["Output\nSample Specific Contigs Tabular file"];
+  18 --> 31a8f807-f01b-46ef-8f56-70b7c0b20d64;
+  style 31a8f807-f01b-46ef-8f56-70b7c0b20d64 stroke:#2c3143,stroke-width:4px;
   19["Replace Text"];
   14 -->|report| 19;
   8 -->|text_param| 19;
-  20["Add line to file"];
+  ed91520b-2dc0-4720-ad3b-8c422a109621["Output\nMLST Report Tabular with the sample name"];
+  19 --> ed91520b-2dc0-4720-ad3b-8c422a109621;
+  style ed91520b-2dc0-4720-ad3b-8c422a109621 stroke:#2c3143,stroke-width:4px;
+  20["VFDB Accession Tabular with SampleID as a header"];
   15 -->|out_file1| 20;
   8 -->|text_param| 20;
-  21["Add line to file"];
+  0fbbc648-791e-4a6e-8bf5-133b9cf89716["Output\nVFs accessions with SampleID"];
+  20 --> 0fbbc648-791e-4a6e-8bf5-133b9cf89716;
+  style 0fbbc648-791e-4a6e-8bf5-133b9cf89716 stroke:#2c3143,stroke-width:4px;
+  21["AMR NCBI Accession Tabular with SampleID as a header"];
   16 -->|out_file1| 21;
   8 -->|text_param| 21;
+  5e929a43-8dd4-4961-85ce-b619937d0357["Output\nAMR NCBI Accession Tabular with SampleID as a header"];
+  21 --> 5e929a43-8dd4-4961-85ce-b619937d0357;
+  style 5e929a43-8dd4-4961-85ce-b619937d0357 stroke:#2c3143,stroke-width:4px;
   22["Tabular-to-FASTA"];
   18 -->|outfile| 22;
-  23["Concatenate datasets"];
+  54b09443-83f3-42c9-be7f-3828d13c4a1a["Output\nContigs"];
+  22 --> 54b09443-83f3-42c9-be7f-3828d13c4a1a;
+  style 54b09443-83f3-42c9-be7f-3828d13c4a1a stroke:#2c3143,stroke-width:4px;
+  23["MLST Report with Header"];
   1 -->|output| 23;
   19 -->|outfile| 23;
-
+  20ca955e-bc82-4269-9104-068c938abc23["Output\nMLST Report with Header"];
+  23 --> 20ca955e-bc82-4269-9104-068c938abc23;
+  style 20ca955e-bc82-4269-9104-068c938abc23 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -393,61 +475,136 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
-  1["Input dataset collection"];
-  2["Input dataset collection"];
-  3["Input dataset collection"];
+  0["ℹ️ Input Collection\nVFs"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Collection\nContigs"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Collection\nVFs accessions"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ℹ️ Input Collection\nVFs accessions with SampleID"];
+  style 3 stroke:#2c3143,stroke-width:4px;
   4["Collapse Collection"];
   0 -->|output| 4;
+  7a18e075-d238-4570-8fba-2c8f05376d9a["Output\nAll VFs in one Tabular"];
+  4 --> 7a18e075-d238-4570-8fba-2c8f05376d9a;
+  style 7a18e075-d238-4570-8fba-2c8f05376d9a stroke:#2c3143,stroke-width:4px;
   5["Collapse Collection"];
   1 -->|output| 5;
+  81ade1e9-9942-4ac8-9ee0-ab141355864d["Output\nAll Samples Contigs in one Fasta file"];
+  5 --> 81ade1e9-9942-4ac8-9ee0-ab141355864d;
+  style 81ade1e9-9942-4ac8-9ee0-ab141355864d stroke:#2c3143,stroke-width:4px;
   6["Collapse Collection"];
   2 -->|output| 6;
+  f0a6eae7-4791-4300-b231-52c093eccb38["Output\nVFs accessions in one Tabular "];
+  6 --> f0a6eae7-4791-4300-b231-52c093eccb38;
+  style f0a6eae7-4791-4300-b231-52c093eccb38 stroke:#2c3143,stroke-width:4px;
   7["Split by group"];
   4 -->|output| 7;
+  19292bb5-ef34-4451-aea7-204370016c33["Output\nSplit by group collection"];
+  7 --> 19292bb5-ef34-4451-aea7-204370016c33;
+  style 19292bb5-ef34-4451-aea7-204370016c33 stroke:#2c3143,stroke-width:4px;
   8["Add line to file"];
   6 -->|output| 8;
+  c08dfea8-de8f-43e4-b4c9-e68525f9bb13["Output\nVFDB Accession Column without Sample ID in one Tabular with a header"];
+  8 --> c08dfea8-de8f-43e4-b4c9-e68525f9bb13;
+  style c08dfea8-de8f-43e4-b4c9-e68525f9bb13 stroke:#2c3143,stroke-width:4px;
   9["Cut"];
   7 -->|split_output| 9;
+  80240279-b99b-4bef-8767-d445b8ecb0fb["Output\nAdjusted ABRicate VFs tabular part1"];
+  9 --> 80240279-b99b-4bef-8767-d445b8ecb0fb;
+  style 80240279-b99b-4bef-8767-d445b8ecb0fb stroke:#2c3143,stroke-width:4px;
   10["Filter sequences by ID"];
   7 -->|split_output| 10;
   5 -->|output| 10;
+  af8e144f-a116-4aa7-bcc6-c307a2a25c63["Output\nFiltered Sequences with VFs"];
+  10 --> af8e144f-a116-4aa7-bcc6-c307a2a25c63;
+  style af8e144f-a116-4aa7-bcc6-c307a2a25c63 stroke:#2c3143,stroke-width:4px;
   11["Multi-Join"];
   3 -->|output| 11;
   8 -->|outfile| 11;
+  bfa17fb2-6dda-4cce-a92a-e753cb179e50["Output\nbacteria pathogen genes in all samples"];
+  11 --> bfa17fb2-6dda-4cce-a92a-e753cb179e50;
+  style bfa17fb2-6dda-4cce-a92a-e753cb179e50 stroke:#2c3143,stroke-width:4px;
   12["Remove beginning"];
   9 -->|out_file1| 12;
+  41f4240f-ecf3-4085-ad54-3d6916a5b100["Output\nAdjusted ABRicate VFs tabular part2"];
+  12 --> 41f4240f-ecf3-4085-ad54-3d6916a5b100;
+  style 41f4240f-ecf3-4085-ad54-3d6916a5b100 stroke:#2c3143,stroke-width:4px;
   13["Replace"];
   11 -->|outfile| 13;
+  16e61d6c-6d2f-4076-805d-6b142932f021["Output\nbacteria pathogen genes in all samples prep 1 for heatmap"];
+  13 --> 16e61d6c-6d2f-4076-805d-6b142932f021;
+  style 16e61d6c-6d2f-4076-805d-6b142932f021 stroke:#2c3143,stroke-width:4px;
   14["Advanced Cut"];
   11 -->|outfile| 14;
+  f989ff37-3d82-4862-81fa-662fa77bb7f1["Output\nbacteria pathogen genes in all samples first column"];
+  14 --> f989ff37-3d82-4862-81fa-662fa77bb7f1;
+  style f989ff37-3d82-4862-81fa-662fa77bb7f1 stroke:#2c3143,stroke-width:4px;
   15["bedtools getfasta"];
   10 -->|output_pos| 15;
   12 -->|out_file1| 15;
+  30d023b4-0764-4f0a-a5fb-a05f4a5e5e56["Output\nFiltered Sequences with VFs FASTA"];
+  15 --> 30d023b4-0764-4f0a-a5fb-a05f4a5e5e56;
+  style 30d023b4-0764-4f0a-a5fb-a05f4a5e5e56 stroke:#2c3143,stroke-width:4px;
   16["Replace"];
   13 -->|outfile| 16;
+  a92fbb34-eca4-45bf-be18-803b23721566["Output\nbacteria pathogen genes in all samples prep 2 for heatmap"];
+  16 --> a92fbb34-eca4-45bf-be18-803b23721566;
+  style a92fbb34-eca4-45bf-be18-803b23721566 stroke:#2c3143,stroke-width:4px;
   17["ClustalW"];
   15 -->|output| 17;
+  6e8b431a-8873-43ff-a165-d5cd21974b73["Output\nClustalW on input dataset(s): dnd"];
+  17 --> 6e8b431a-8873-43ff-a165-d5cd21974b73;
+  style 6e8b431a-8873-43ff-a165-d5cd21974b73 stroke:#2c3143,stroke-width:4px;
+  5fda5b67-5027-45be-b4c8-6203f726a565["Output\nClustalW on input dataset(s): clustal"];
+  17 --> 5fda5b67-5027-45be-b4c8-6203f726a565;
+  style 5fda5b67-5027-45be-b4c8-6203f726a565 stroke:#2c3143,stroke-width:4px;
   18["Replace"];
   16 -->|outfile| 18;
+  8d56febc-da67-45d2-bf59-d196b436f997["Output\nbacteria pathogen genes in all samples prep 3 for heatmap"];
+  18 --> 8d56febc-da67-45d2-bf59-d196b436f997;
+  style 8d56febc-da67-45d2-bf59-d196b436f997 stroke:#2c3143,stroke-width:4px;
   19["Filter empty datasets"];
   17 -->|output| 19;
+  100bbbfa-0936-4ab1-be4d-405971dfce7b["Output\ninput dataset(s) (filtered empty datasets)"];
+  19 --> 100bbbfa-0936-4ab1-be4d-405971dfce7b;
+  style 100bbbfa-0936-4ab1-be4d-405971dfce7b stroke:#2c3143,stroke-width:4px;
   20["Advanced Cut"];
   18 -->|outfile| 20;
+  b385d66e-e7ae-4c85-a4a6-ef776593799a["Output\nbacteria pathogen genes in all samples prep 4 for heatmap"];
+  20 --> b385d66e-e7ae-4c85-a4a6-ef776593799a;
+  style b385d66e-e7ae-4c85-a4a6-ef776593799a stroke:#2c3143,stroke-width:4px;
   21["FASTTREE"];
   19 -->|output| 21;
+  8c6f2919-bfb7-4214-b4f3-cce9a484574e["Output\nFASTTREE on input dataset(s):tree.nhx"];
+  21 --> 8c6f2919-bfb7-4214-b4f3-cce9a484574e;
+  style 8c6f2919-bfb7-4214-b4f3-cce9a484574e stroke:#2c3143,stroke-width:4px;
   22["Paste"];
   14 -->|output| 22;
   20 -->|output| 22;
+  a069e610-d8b1-428c-8e39-2df6a75e4d70["Output\nbacteria pathogen genes in all samples prep 5 for heatmap"];
+  22 --> a069e610-d8b1-428c-8e39-2df6a75e4d70;
+  style a069e610-d8b1-428c-8e39-2df6a75e4d70 stroke:#2c3143,stroke-width:4px;
   23["Newick Display"];
   21 -->|output| 23;
+  2418f286-5d89-4222-a5ce-d03041d3fc2b["Output\nNewick Genes: Tree Graphs Collection"];
+  23 --> 2418f286-5d89-4222-a5ce-d03041d3fc2b;
+  style 2418f286-5d89-4222-a5ce-d03041d3fc2b stroke:#2c3143,stroke-width:4px;
   24["Transpose"];
   22 -->|out_file1| 24;
+  93400928-3170-4a73-b972-fae67c4b28f7["Output\nTranspose on input dataset(s)"];
+  24 --> 93400928-3170-4a73-b972-fae67c4b28f7;
+  style 93400928-3170-4a73-b972-fae67c4b28f7 stroke:#2c3143,stroke-width:4px;
   25["Replace"];
   22 -->|out_file1| 25;
+  b91ea6d5-624d-4b02-b3dc-c33b59db72a6["Output\nTabular For Hearmap"];
+  25 --> b91ea6d5-624d-4b02-b3dc-c33b59db72a6;
+  style b91ea6d5-624d-4b02-b3dc-c33b59db72a6 stroke:#2c3143,stroke-width:4px;
   26["Heatmap w ggplot"];
   24 -->|out_file| 26;
-
+  d1766dc9-d2fe-4ca2-bb8c-c018c77db3fa["Output\nHeatmap w ggplot on input dataset(s): png"];
+  26 --> d1766dc9-d2fe-4ca2-bb8c-c018c77db3fa;
+  style d1766dc9-d2fe-4ca2-bb8c-c018c77db3fa stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -492,11 +649,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -504,33 +661,105 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
+  0["ℹ️ Input Collection\nCollection of all samples"];
+  style 0 stroke:#2c3143,stroke-width:4px;
   1["Porechop"];
   0 -->|output| 1;
+  4f51f33f-e2a9-4a3f-81d3-b924e2e6d751["Output\nPorechop output Trimmed Reads"];
+  1 --> 4f51f33f-e2a9-4a3f-81d3-b924e2e6d751;
+  style 4f51f33f-e2a9-4a3f-81d3-b924e2e6d751 stroke:#2c3143,stroke-width:4px;
   2["NanoPlot"];
   0 -->|output| 2;
+  2e38fcb0-9e13-4ef5-9b7e-7423b4794dcc["Output\nNanoplot on Reads Before Preprocessing Log Transformed Histogram Read Length"];
+  2 --> 2e38fcb0-9e13-4ef5-9b7e-7423b4794dcc;
+  style 2e38fcb0-9e13-4ef5-9b7e-7423b4794dcc stroke:#2c3143,stroke-width:4px;
+  c1513a6f-392c-406b-9a9e-5a05f54014a8["Output\nNanoplot QC on Reads Before Preprocessing HTML Report"];
+  2 --> c1513a6f-392c-406b-9a9e-5a05f54014a8;
+  style c1513a6f-392c-406b-9a9e-5a05f54014a8 stroke:#2c3143,stroke-width:4px;
+  059eab67-5735-4a8c-bc9f-408da9f088c0["Output\nNanoplot on Reads Before Preprocessing NanoStats"];
+  2 --> 059eab67-5735-4a8c-bc9f-408da9f088c0;
+  style 059eab67-5735-4a8c-bc9f-408da9f088c0 stroke:#2c3143,stroke-width:4px;
+  dcc872d2-02f4-4fb7-bea5-c7b2e69ba3b1["Output\nNanoplot on Reads Before Preprocessing NanoStats post filtering"];
+  2 --> dcc872d2-02f4-4fb7-bea5-c7b2e69ba3b1;
+  style dcc872d2-02f4-4fb7-bea5-c7b2e69ba3b1 stroke:#2c3143,stroke-width:4px;
+  c727d318-e1a7-4f06-91ea-5edbc6fade01["Output\nNanoplot on Reads Before Preprocessing Histogram Read Length"];
+  2 --> c727d318-e1a7-4f06-91ea-5edbc6fade01;
+  style c727d318-e1a7-4f06-91ea-5edbc6fade01 stroke:#2c3143,stroke-width:4px;
   3["FastQC"];
   0 -->|output| 3;
+  bd2e36d7-a4f8-425c-a732-d88f42f94f8c["Output\nFastQC Quality Check Before Preprocessing Text file"];
+  3 --> bd2e36d7-a4f8-425c-a732-d88f42f94f8c;
+  style bd2e36d7-a4f8-425c-a732-d88f42f94f8c stroke:#2c3143,stroke-width:4px;
+  57e6b0be-4896-4da0-ac1a-31d7bf3a26c7["Output\nFastQC Quality Check Before Preprocessing HTML file"];
+  3 --> 57e6b0be-4896-4da0-ac1a-31d7bf3a26c7;
+  style 57e6b0be-4896-4da0-ac1a-31d7bf3a26c7 stroke:#2c3143,stroke-width:4px;
   4["fastp"];
   1 -->|outfile| 4;
+  cd5d8fc9-e725-4835-98d9-0bca217f4dd8["Output\nNanopore sequenced reads processed with Fastp HTML Report "];
+  4 --> cd5d8fc9-e725-4835-98d9-0bca217f4dd8;
+  style cd5d8fc9-e725-4835-98d9-0bca217f4dd8 stroke:#2c3143,stroke-width:4px;
+  cf423d0c-ab15-4a1e-930c-0c8ed367aeba["Output\nNanopore sequenced reads processed with Fastp"];
+  4 --> cf423d0c-ab15-4a1e-930c-0c8ed367aeba;
+  style cf423d0c-ab15-4a1e-930c-0c8ed367aeba stroke:#2c3143,stroke-width:4px;
   5["NanoPlot"];
   4 -->|out1| 5;
+  f32ba6ef-9bc1-4a81-8146-bb346b6ffa8e["Output\nNanoplot on Reads After Preprocessing Histogram Read Length"];
+  5 --> f32ba6ef-9bc1-4a81-8146-bb346b6ffa8e;
+  style f32ba6ef-9bc1-4a81-8146-bb346b6ffa8e stroke:#2c3143,stroke-width:4px;
+  0cfee358-4f8b-4a9d-8c1a-0a940cdeedae["Output\nNanoplot on Reads After Preprocessing NanoStats"];
+  5 --> 0cfee358-4f8b-4a9d-8c1a-0a940cdeedae;
+  style 0cfee358-4f8b-4a9d-8c1a-0a940cdeedae stroke:#2c3143,stroke-width:4px;
+  8f3cfd7b-6ac5-4917-bd48-1bedc12a0a76["Output\nNanoplot on Reads After Preprocessing NanoStats post filtering"];
+  5 --> 8f3cfd7b-6ac5-4917-bd48-1bedc12a0a76;
+  style 8f3cfd7b-6ac5-4917-bd48-1bedc12a0a76 stroke:#2c3143,stroke-width:4px;
+  3ae0f96b-10bc-4869-a810-817b3467e657["Output\nNanoplot QC on Reads After Preprocessing HTML Report"];
+  5 --> 3ae0f96b-10bc-4869-a810-817b3467e657;
+  style 3ae0f96b-10bc-4869-a810-817b3467e657 stroke:#2c3143,stroke-width:4px;
+  a678588d-233a-47d7-95e8-c7939d7677d5["Output\nNanoplot on Reads After Preprocessing Log Transformed Histogram Read Length"];
+  5 --> a678588d-233a-47d7-95e8-c7939d7677d5;
+  style a678588d-233a-47d7-95e8-c7939d7677d5 stroke:#2c3143,stroke-width:4px;
   6["Kraken2"];
   4 -->|out1| 6;
+  dadf4422-55c7-412b-a735-dbd638a80736["Output\nKraken2 with Kalamri database output"];
+  6 --> dadf4422-55c7-412b-a735-dbd638a80736;
+  style dadf4422-55c7-412b-a735-dbd638a80736 stroke:#2c3143,stroke-width:4px;
+  4cbf81c5-07cc-4466-ad62-7ffce8fc99a4["Output\nKraken2 with Kalamri database Report"];
+  6 --> 4cbf81c5-07cc-4466-ad62-7ffce8fc99a4;
+  style 4cbf81c5-07cc-4466-ad62-7ffce8fc99a4 stroke:#2c3143,stroke-width:4px;
   7["FastQC"];
   4 -->|out1| 7;
+  b03b7ac6-5759-427b-b613-2bd822606338["Output\nFastQC Quality Check After Preprocessing HTML file"];
+  7 --> b03b7ac6-5759-427b-b613-2bd822606338;
+  style b03b7ac6-5759-427b-b613-2bd822606338 stroke:#2c3143,stroke-width:4px;
+  218c340c-d245-42c2-afb0-5b493faad109["Output\nFastQC Quality Check After Preprocessing Text file"];
+  7 --> 218c340c-d245-42c2-afb0-5b493faad109;
+  style 218c340c-d245-42c2-afb0-5b493faad109 stroke:#2c3143,stroke-width:4px;
   8["Filter failed datasets"];
   6 -->|output| 8;
+  3c1cc394-29be-4d4a-a02c-b695ed34fe36["Output\nSuccessful Kraken2 with Kalamari Tabular output"];
+  8 --> 3c1cc394-29be-4d4a-a02c-b695ed34fe36;
+  style 3c1cc394-29be-4d4a-a02c-b695ed34fe36 stroke:#2c3143,stroke-width:4px;
   9["Filter failed datasets"];
   6 -->|report_output| 9;
+  5c034d4b-e26d-4357-bd23-25f766e351bb["Output\nSuccessful Kraken2 with Kalamari Tabular Report output"];
+  9 --> 5c034d4b-e26d-4357-bd23-25f766e351bb;
+  style 5c034d4b-e26d-4357-bd23-25f766e351bb stroke:#2c3143,stroke-width:4px;
   10["MultiQC"];
   3 -->|text_file| 10;
   7 -->|text_file| 10;
+  a9025e09-e05d-4ed0-beaf-39d212996b55["Output\nMultiQC HTML report Before and After Preprocessing"];
+  10 --> a9025e09-e05d-4ed0-beaf-39d212996b55;
+  style a9025e09-e05d-4ed0-beaf-39d212996b55 stroke:#2c3143,stroke-width:4px;
+  1f055aaa-a283-4620-b926-f0b6de57410b["Output\nMultiQC Stats Before and After Preprocessing"];
+  10 --> 1f055aaa-a283-4620-b926-f0b6de57410b;
+  style 1f055aaa-a283-4620-b926-f0b6de57410b stroke:#2c3143,stroke-width:4px;
   11["Krakentools: Extract Kraken Reads By ID"];
   4 -->|out1| 11;
   9 -->|output| 11;
   8 -->|output| 11;
-
+  0f9bb996-d78f-4dd7-bc2b-334558a04865["Output\nNanopore Processed Sequenced Reads"];
+  11 --> 0f9bb996-d78f-4dd7-bc2b-334558a04865;
+  style 0f9bb996-d78f-4dd7-bc2b-334558a04865 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -573,13 +802,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_snp_based_pathogenetic_identification.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_snp_based_pathogenetic_identification"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -587,27 +816,55 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
-  1["Input dataset"];
+  0["ℹ️ Input Collection\nNanopore Preprocessed reads collection"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nReference Genome of Tested Strain"];
+  style 1 stroke:#2c3143,stroke-width:4px;
   2["Convert compressed file to uncompressed."];
   1 -->|output| 2;
+  184566b5-5604-4c6c-9501-6503a183ca69["Output\ndecompressed RG file"];
+  2 --> 184566b5-5604-4c6c-9501-6503a183ca69;
+  style 184566b5-5604-4c6c-9501-6503a183ca69 stroke:#2c3143,stroke-width:4px;
   3["Map with minimap2"];
   0 -->|output| 3;
   2 -->|output1| 3;
+  cdf75d72-4500-4bf7-914f-ad5e6fec1a80["Output\nMap with minimap2 on input dataset(s) (mapped reads in BAM format)"];
+  3 --> cdf75d72-4500-4bf7-914f-ad5e6fec1a80;
+  style cdf75d72-4500-4bf7-914f-ad5e6fec1a80 stroke:#2c3143,stroke-width:4px;
   4["Clair3"];
   3 -->|alignment_output| 4;
   2 -->|output1| 4;
+  b555896e-93a2-40a2-b936-2dedfa400d51["Output\nClair3: Pileup VCF"];
+  4 --> b555896e-93a2-40a2-b936-2dedfa400d51;
+  style b555896e-93a2-40a2-b936-2dedfa400d51 stroke:#2c3143,stroke-width:4px;
+  ab134770-8a1d-4f8f-a8f1-2e72b8afe1b2["Output\nClair3: Full_alignment VCF"];
+  4 --> ab134770-8a1d-4f8f-a8f1-2e72b8afe1b2;
+  style ab134770-8a1d-4f8f-a8f1-2e72b8afe1b2 stroke:#2c3143,stroke-width:4px;
+  75af6a5d-c2a3-4b56-b406-1365186eadb4["Output\nClair3: merged output"];
+  4 --> 75af6a5d-c2a3-4b56-b406-1365186eadb4;
+  style 75af6a5d-c2a3-4b56-b406-1365186eadb4 stroke:#2c3143,stroke-width:4px;
   5["bcftools norm"];
   4 -->|merge_output| 5;
   2 -->|output1| 5;
+  7c89cb1b-6054-4725-9048-ee1739fc7ce2["Output\nNormalized VCF output"];
+  5 --> 7c89cb1b-6054-4725-9048-ee1739fc7ce2;
+  style 7c89cb1b-6054-4725-9048-ee1739fc7ce2 stroke:#2c3143,stroke-width:4px;
   6["SnpSift Filter"];
   5 -->|output_file| 6;
+  54f8b736-ec20-4049-94bd-46ddc1a4a2bc["Output\nQuality Filtered VCF output"];
+  6 --> 54f8b736-ec20-4049-94bd-46ddc1a4a2bc;
+  style 54f8b736-ec20-4049-94bd-46ddc1a4a2bc stroke:#2c3143,stroke-width:4px;
   7["SnpSift Extract Fields"];
   6 -->|output| 7;
+  ee8c9713-7644-4e12-b00b-5f0f1c72bf83["Output\nExtracted Fields from the VCF output"];
+  7 --> ee8c9713-7644-4e12-b00b-5f0f1c72bf83;
+  style ee8c9713-7644-4e12-b00b-5f0f1c72bf83 stroke:#2c3143,stroke-width:4px;
   8["bcftools consensus"];
   6 -->|output| 8;
   2 -->|output1| 8;
-
+  d74f4728-75ed-4b45-9ad6-b7709ac7eb6d["Output\nbcftools consensus on input dataset(s): consensus fasta"];
+  8 --> d74f4728-75ed-4b45-9ad6-b7709ac7eb6d;
+  style d74f4728-75ed-4b45-9ad6-b7709ac7eb6d stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -654,9 +911,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_taxonomy_profiling_and_visualization"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -664,16 +921,32 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
-  1["Input dataset"];
+  0["ℹ️ Input Collection\nNanopore Preprocessed reads collection"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nSample Metadata"];
+  style 1 stroke:#2c3143,stroke-width:4px;
   2["Kraken2"];
   0 -->|output| 2;
+  556fef83-c3d7-41eb-9843-674ed36d75be["Output\nKraken2 with PlusPF database output report"];
+  2 --> 556fef83-c3d7-41eb-9843-674ed36d75be;
+  style 556fef83-c3d7-41eb-9843-674ed36d75be stroke:#2c3143,stroke-width:4px;
+  c11d1cab-2058-4e3f-a7e6-06ceb99dc67f["Output\nKraken2 with PlusPF database output"];
+  2 --> c11d1cab-2058-4e3f-a7e6-06ceb99dc67f;
+  style c11d1cab-2058-4e3f-a7e6-06ceb99dc67f stroke:#2c3143,stroke-width:4px;
   3["Kraken-biom"];
   2 -->|report_output| 3;
   1 -->|output| 3;
+  d0e1ffbd-ad44-49c3-ae37-2113f7634012["Output\nOTU mother.map output"];
+  3 --> d0e1ffbd-ad44-49c3-ae37-2113f7634012;
+  style d0e1ffbd-ad44-49c3-ae37-2113f7634012 stroke:#2c3143,stroke-width:4px;
+  355bdba9-97d2-4c09-b902-79f19219b7e8["Output\nKraken-biom output JSON file"];
+  3 --> 355bdba9-97d2-4c09-b902-79f19219b7e8;
+  style 355bdba9-97d2-4c09-b902-79f19219b7e8 stroke:#2c3143,stroke-width:4px;
   4["Phinch Visualisation"];
   3 -->|biomOutput| 4;
-
+  1f7547ba-6fde-4f7f-b44e-2d4f75272fc2["Output\nTaxonomy Visualization with Metadata, use Active interactive tools under User"];
+  4 --> 1f7547ba-6fde-4f7f-b44e-2d4f75272fc2;
+  style 1f7547ba-6fde-4f7f-b44e-2d4f75272fc2 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -703,7 +976,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -727,7 +1000,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

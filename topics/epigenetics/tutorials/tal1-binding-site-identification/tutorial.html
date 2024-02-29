@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -663,7 +663,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "This tutorial uses ChIP-seq datasets from a study published by {% cite Wu_2014 %}. The goal of this study was to investigate \"the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.\""
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -778,12 +778,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1381,7 +1375,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
       </blockquote>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span>: Run FastQC on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC web page</a>.</p>
+      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</a>: Run FastQC on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC web page</a>.</p>
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: The uploaded fastqsanger files.</li>
       </ul>
@@ -1416,7 +1410,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
   <div class="box-title hands-on-title" id="hands-on-trimming-and-clipping-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Trimming and clipping reads</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Trimmomatic tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.0)</span>: Run Trimmomatic to trim low-quality reads.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Trimmomatic tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fpjbriggs%2Ftrimmomatic%2Ftrimmomatic%2F0.38.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.0)</a>: Run Trimmomatic to trim low-quality reads.
       <ul>
         <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file”</em>: Select all of the FASTQ files</li>
@@ -1432,7 +1426,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
         <p>If the FASTQ files cannot be selected, check whether their format is FASTQ with Sanger-scaled quality values (<em>fastqsanger</em>). If not, you can edit the data type by clicking on the pencil symbol next to a file in the history, clicking the “Datatype” tab, and choosing <em>fastqsanger</em> as the “New Type”.</p>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span>: Rerun FastQC on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</a>: Rerun FastQC on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: The output of Trimmomatic.</li>
       </ul>
@@ -1466,7 +1460,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
   <div class="box-title hands-on-title" id="hands-on-aligning-reads-to-a-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Aligning reads to a reference genome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4" title="BWA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.4)</span>: Run BWA to map the trimmed/clipped reads to the mouse genome.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4" title="BWA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa%2F0.7.17.4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.4)</a>: Run BWA to map the trimmed/clipped reads to the mouse genome.
       <ul>
         <li><em>“Will you select a reference genome…“</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code></li>
         <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Mouse (mus musculus) mm10</code></li>
@@ -1501,7 +1495,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Samtools idxstats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools idxstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.3)</span>: Run idxstats to get statistics of the BWA alignments.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Samtools idxstats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_idxstats%2Fsamtools_idxstats%2F2.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools idxstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.3)</a>: Run idxstats to get statistics of the BWA alignments.
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file”</em>: Select all of the mapped BAM files</li>
       </ul>
@@ -1546,14 +1540,14 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <p>multiBamSummary splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small bin size here because we are working with a subset of reads that align to only a fraction of the genome.</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0" title="multiBamSummary tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>multiBamSummary</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span>: Run multiBamSummary to get read coverage of the alignments.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.3.2.0.0" title="multiBamSummary tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_multi_bam_summary%2Fdeeptools_multi_bam_summary%2F3.3.2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>multiBamSummary</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</a>: Run multiBamSummary to get read coverage of the alignments.
       <ul>
         <li><em>“Sample order matters”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Bam files”</em>: Select all of the aligned BAM files</li>
         <li><em>“Bin size in bp”</em>: 1000</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0" title="plotCorrelation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>plotCorrelation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span>: Run plotCorrelation to visualize the results.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.3.2.0.0" title="plotCorrelation tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_correlation%2Fdeeptools_plot_correlation%2F3.3.2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>plotCorrelation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</a>: Run plotCorrelation to visualize the results.
       <ul>
         <li><em>“Matrix file from the multiBamSummary tool”</em>: Select the multiBamSummary output file</li>
         <li><em>“Correlation method”</em>: <code class="language-plaintext highlighter-rouge">Pearson</code></li>
@@ -1599,7 +1593,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <div class="box-title hands-on-title" id="hands-on-assessing-ip-strength"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing IP strength</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0" title="plotFingerprint tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>plotFingerprint</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span>: Run plotFingerprint to assess ChIP signal strength.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0" title="plotFingerprint tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_fingerprint%2Fdeeptools_plot_fingerprint%2F3.3.2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>plotFingerprint</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</a>: Run plotFingerprint to assess ChIP signal strength.
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Bam files”</em>: Select all of the aligned BAM files for the G1E cell type</li>
         <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1657,7 +1651,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <div class="box-title hands-on-title" id="hands-on-determining-tal1-binding-sites"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Determining TAL1 binding sites</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="MACS2 callpeak tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MACS2 callpeak</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1.20160309.6)</span>: Run MACS2 callpeak with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="MACS2 callpeak tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmacs2%2Fmacs2_callpeak%2F2.1.1.20160309.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MACS2 callpeak</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1.20160309.6)</a>: Run MACS2 callpeak with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
       <ul>
         <li><em>“Are you pooling Treatment Files?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“ChIP-Seq Treatment File”</em>: Select all of the replicate ChIP-Seq treatment aligned BAM files for one cell type</li>
@@ -1778,21 +1772,21 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <div class="box-title hands-on-title" id="hands-on-identifying-unique-and-common-tal1-peaks-between-states"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Identifying unique and common TAL1 peaks between states</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.29.0)</span>: Run bedtools Intersect intervals to find peaks that exist both in G1E and megakaryocytes.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_intersectbed%2F2.29.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.29.0)</a>: Run bedtools Intersect intervals to find peaks that exist both in G1E and megakaryocytes.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the TAL1 G1E narrow peaks BED file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>: Select the TAL1 Megakaryocytes narrow peaks BED file</li>
         <li>Running this tool with the default settings will return overlapping peaks of both files.</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.29.0)</span>: Run bedtools Intersect intervals to find peaks that exist only in G1E.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_intersectbed%2F2.29.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.29.0)</a>: Run bedtools Intersect intervals to find peaks that exist only in G1E.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the TAL1 G1E narrow peaks BED file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>: Select the TAL1 Megakaryocytes narrow peaks BED file</li>
         <li><em>“Report only those alignments that **do not** overlap the BED file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.29.0)</span>: Run bedtools Intersect intervals to find peaks that exist only in megakaryocytes.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_intersectbed%2F2.29.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.29.0)</a>: Run bedtools Intersect intervals to find peaks that exist only in megakaryocytes.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the TAL1 Megakaryocytes narrow peaks BED file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>: Select the TAL1 G1E narrow peaks BED file</li>
@@ -1832,7 +1826,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <div class="box-title hands-on-title" id="hands-on-generating-input-normalized-bigwigs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating input-normalized bigwigs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0" title="bamCompare tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bamCompare</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span>: Run bamCompare to get the log2 read ratios between treatment and control samples.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0" title="bamCompare tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_compare%2Fdeeptools_bam_compare%2F3.3.2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bamCompare</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</a>: Run bamCompare to get the log2 read ratios between treatment and control samples.
       <ul>
         <li><em>“First BAM/CRAM file (</em>e.g.* treated sample)”*: Select the Megakaryocyte TAL1 aligned BAM file for replicate 1 (R1)</li>
         <li><em>“Second BAM/CRAM file (</em>e.g.* control sample)”*: Select the Megakaryocyte input aligned BAM file for replicate 1 (R1)</li>
@@ -1864,7 +1858,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <div class="box-title hands-on-title" id="hands-on-calculating-signal-matrix-on-macs2-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculating signal matrix on MACS2 output</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="computeMatrix tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>computeMatrix</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span>: Run computeMatrix to prepare data for plotting a heatmap of TAL1 peaks.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="computeMatrix tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_matrix%2Fdeeptools_compute_matrix%2F3.3.2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>computeMatrix</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</a>: Run computeMatrix to prepare data for plotting a heatmap of TAL1 peaks.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select Regions</em> &gt; <em>“Regions to plot”</em>: Select the MACS2 narrow peaks files for G1E cells (TAL1 over Input)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Score file”</em>: Select the bigWig files for the G1E cells (log2 ratios from bamCompare)</li>
@@ -1885,7 +1879,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <div class="box-title hands-on-title" id="hands-on-plotting-a-heatmap-of-tal1-peaks"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plotting a heatmap of TAL1 peaks</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="plotHeatmap tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>plotHeatmap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.1)</span>: Run plotHeatmap to create a heatmap for score distributions across TAL1 peak genomic regions in each cell type.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="plotHeatmap tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_heatmap%2Fdeeptools_plot_heatmap%2F3.3.2.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>plotHeatmap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.1)</a>: Run plotHeatmap to create a heatmap for score distributions across TAL1 peak genomic regions in each cell type.
       <ul>
         <li><em>“Matrix file from the computeMatrix tool”</em>: Select the computeMatrix output for G1E cells</li>
         <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1912,7 +1906,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <div class="box-title hands-on-title" id="hands-on-assessing-gc-bias"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing GC bias</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0" title="computeGCbias tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>computeGCbias</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span>: Run computeGCbias to determine the GC bias of the sequenced reads.
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0" title="computeGCbias tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_gc_bias%2Fdeeptools_compute_gc_bias%2F3.3.2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>computeGCbias</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</a>: Run computeGCbias to determine the GC bias of the sequenced reads.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bam file”</em>: Select an aligned BAM file</li>
         <li><em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">locally cached</code></li>
@@ -1940,7 +1934,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       </blockquote>
     </li>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0" title="correctGCbias tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>correctGCbias</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span>: Run correctGCbias to generate GC-corrected BAM/CRAM files.</p>
+      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0" title="correctGCbias tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_correct_gc_bias%2Fdeeptools_correct_gc_bias%2F3.3.2.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>correctGCbias</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</a>: Run correctGCbias to generate GC-corrected BAM/CRAM files.</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2243,7 +2237,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2271,7 +2265,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

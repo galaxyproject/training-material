@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -697,7 +697,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "{% include topics/microbiome/tutorials/metatranscriptomics/content.md short=false %}"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -812,12 +812,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/microbiome/tutorials/metatranscriptomics/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/microbiome/tutorials/metatranscriptomics/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/microbiome/tutorials/metatranscriptomics/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1231,7 +1225,7 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code> from <a href="https://zenodo.org/record/4776250">Zenodo</a> or from the data library (ask your instructor)</p>
+      <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code> from <a href="https://zenodo.org/record/4776250">Zenodo</a> or from the data library (ask your instructor)</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4776250/files/T1A_forward.fastqsanger
 https://zenodo.org/record/4776250/files/T1A_reverse.fastqsanger
@@ -1286,7 +1280,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.73%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: both <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code> datasets selected with <strong>Multiple datasets</strong></li>
       </ul>
@@ -1312,7 +1306,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> with the following parameters to aggregate the FastQC reports:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> with the following parameters to aggregate the FastQC reports:
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -1437,7 +1431,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read trimming and filtering</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1" title="Cutadapt tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0+galaxy1)</span> with the following parameters to trim low quality sequences:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1" title="Cutadapt tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Flparsons%2Fcutadapt%2Fcutadapt%2F4.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0+galaxy1)</a> with the following parameters to trim low quality sequences:
       <ul>
         <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
@@ -1520,7 +1514,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <div class="box-title hands-on-title" id="hands-on-ribosomal-rna-fragments-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Ribosomal RNA fragments filtering</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/sortmerna/bg_sortmerna/2.1b.6" title="Filter with SortMeRNA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with SortMeRNA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1b.6)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/sortmerna/bg_sortmerna/2.1b.6" title="Filter with SortMeRNA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Frnateam%2Fsortmerna%2Fbg_sortmerna%2F2.1b.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter with SortMeRNA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1b.6)</a> with the following parameters:
       <ul>
         <li><em>“Sequencing type”</em>: <code class="language-plaintext highlighter-rouge">Reads are paired</code>
           <ul>
@@ -1618,7 +1612,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <div class="box-title hands-on-title" id="hands-on-interlace-fastq-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Interlace FastQ files</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0" title="FASTQ interlacer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ interlacer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.0.1+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0" title="FASTQ interlacer tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastq_paired_end_interlacer%2Ffastq_paired_end_interlacer%2F1.2.0.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ interlacer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.0.1+galaxy0)</a> with the following parameters:
       <ul>
         <li><em>“Type of paired-end datasets”</em>: <code class="language-plaintext highlighter-rouge">2 separate datasets</code></li>
       </ul>
@@ -1661,7 +1655,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <div class="box-title hands-on-title" id="hands-on-extract-the-community-structure"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the community structure</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy0" title="MetaPhlAn tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaPhlAn</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.6+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy0" title="MetaPhlAn tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmetaphlan%2Fmetaphlan%2F4.0.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaPhlAn</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.6+galaxy0)</a> with the following parameters:
       <ul>
         <li>In <em>“Input(s)”</em>
           <ul>
@@ -1791,7 +1785,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-format-taxon-relative-abundances-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Format taxon relative abundances table</div>
   <ol>
-    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c3</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code> (output of <strong>MetaPhlAn</strong>)</li>
@@ -1815,7 +1809,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <div class="box-title hands-on-title" id="hands-on-interactive-community-structure-visualization-with-krona"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Interactive community structure visualization with KRONA</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Krona pie chart tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Krona pie chart</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.1+galaxy0)</span> with
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Krona pie chart tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fcrs4%2Ftaxonomy_krona_chart%2Ftaxonomy_krona_chart%2F2.7.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Krona pie chart</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.1+galaxy0)</a> with
       <ul>
         <li><em>“What is the type of your input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code>
           <ul>
@@ -1870,7 +1864,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <div class="box-title hands-on-title" id="hands-on-publication-ready-community-structure-visualization-with-graphlan"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Publication-ready community structure visualization with GraPhlAn</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+galaxy0" title="Export to GraPhlAn tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Export to GraPhlAn</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+galaxy0" title="Export to GraPhlAn tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fexport2graphlan%2Fexport2graphlan%2F0.20%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Export to GraPhlAn</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">Cut predicted taxon relative abundances table</code></li>
         <li><em>“List which levels should be annotated in the tree”</em>: <code class="language-plaintext highlighter-rouge">1,2</code></li>
@@ -1878,13 +1872,13 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
         <li><em>“List which levels should be highlight with a shaded background”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0" title="Generation, personalization and annotation of tree tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Generation, personalization and annotation of tree</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0" title="Generation, personalization and annotation of tree tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgraphlan_annotate%2Fgraphlan_annotate%2F1.0.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Generation, personalization and annotation of tree</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tree”</em>: <code class="language-plaintext highlighter-rouge">Tree</code> (output of <strong>Export to GraPhlAn</strong>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation file”</em>: <code class="language-plaintext highlighter-rouge">Annotation</code> (output of <strong>Export to GraPhlAn</strong>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.0.0.0" title="GraPhlAn tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GraPhlAn</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0.0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.0.0.0" title="GraPhlAn tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgraphlan%2Fgraphlan%2F1.0.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GraPhlAn</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0.0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tree”</em>: <code class="language-plaintext highlighter-rouge">Tree in PhyloXML</code></li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
@@ -1910,7 +1904,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <div class="box-title hands-on-title" id="hands-on-extract-the-functional-information"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the functional information</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.7+galaxy0" title="HUMAnN tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>HUMAnN</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.7+galaxy0" title="HUMAnN tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann%2Fhumann%2F3.7%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>HUMAnN</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</a> with the following parameters:
       <ul>
         <li><em>“Input(s)”</em>: <code class="language-plaintext highlighter-rouge">Quality-controlled shotgun sequencing reads (metagenome (DNA reads) or metatranscriptome (RNA reads))</code>
           <ul>
@@ -1999,7 +1993,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
       <blockquote class="solution">
         <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
         <ol>
-          <li>The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.7+galaxy0" title="Rename features of a HUMAnN generated table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Rename features of a HUMAnN generated table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</span> to add extra information about the gene family.
+          <li>The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.7+galaxy0" title="Rename features of a HUMAnN generated table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_rename_table%2Fhumann_rename_table%2F3.7%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Rename features of a HUMAnN generated table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</a> to add extra information about the gene family.
             <ul>
               <li><em>“Type of feature renaming”</em>: <code class="language-plaintext highlighter-rouge">Advanced feature renaming</code></li>
               <li><em>“Features to be renamed”</em>: <code class="language-plaintext highlighter-rouge">Mapping (full) between UniRef90 ids and names</code></li>
@@ -2009,7 +2003,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
           <li>
             <p>There is 6,392 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.</p>
 
-            <p>To know the number of gene families, we need to remove all lines with the species information, i.e. lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.7+galaxy0" title="Split a HUMAnN table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split a HUMAnN table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</span></p>
+            <p>To know the number of gene families, we need to remove all lines with the species information, i.e. lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.7+galaxy0" title="Split a HUMAnN table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_split_stratified_table%2Fhumann_split_stratified_table%2F3.7%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split a HUMAnN table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</a></p>
 
             <p>The tool generates 2 output file:</p>
             <ul>
@@ -2061,7 +2055,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
           <li>The most abundant pathway is PWY-6609. It produces the adenine and adenosine salvage III.</li>
           <li>Like the gene family, this pathway is mostly achieved by <em>Hungateiclostridium thermocellum</em>.</li>
           <li>
-            <p>There are 115 lines in the pathway file, including the lines with species information. To compute the number of pathways, we need to apply a similar approach as for the gene families by removing the lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.7+galaxy0" title="Split a HUMAnN table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split a HUMAnN table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</span>.
+            <p>There are 115 lines in the pathway file, including the lines with species information. To compute the number of pathways, we need to apply a similar approach as for the gene families by removing the lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.7+galaxy0" title="Split a HUMAnN table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_split_stratified_table%2Fhumann_split_stratified_table%2F3.7%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split a HUMAnN table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</a>.
   The unstratified output file has 62 lines, including the header, UNMAPPED and UNINTEGRATED. Therefore, 59 MetaCyc pathways have been identified for our sample.</p>
           </li>
           <li>The “UNINTEGRATED” abundance corresponds to the total abundance of genes in the different levels that do not contribute to any pathways.</li>
@@ -2100,7 +2094,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
   <div class="box-title hands-on-title" id="hands-on-normalize-the-gene-family-abundances"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalize the gene family abundances</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0" title="Renormalize a HUMAnN generated table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Renormalize a HUMAnN generated table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</span> with
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0" title="Renormalize a HUMAnN generated table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_renorm_table%2Fhumann_renorm_table%2F3.6.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Renormalize a HUMAnN generated table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</a> with
       <ul>
         <li><em>“Gene/pathway table”</em>: <code class="language-plaintext highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN</strong>)</li>
         <li><em>“Normalization scheme”</em>: <code class="language-plaintext highlighter-rouge">Relative abundance</code></li>
@@ -2137,7 +2131,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
   <div class="box-title hands-on-title" id="hands-on-normalize-the-pathway-abundances"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalize the pathway abundances</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0" title="Renormalize a HUMAnN generated table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Renormalize a HUMAnN generated table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</span> with
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0" title="Renormalize a HUMAnN generated table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_renorm_table%2Fhumann_renorm_table%2F3.6.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Renormalize a HUMAnN generated table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</a> with
       <ul>
         <li><em>“Gene/pathway table”</em>: <code class="language-plaintext highlighter-rouge">Pathways and their abundance</code> (output of <strong>HUMAnN</strong>)</li>
         <li><em>“Normalization scheme”</em>: <code class="language-plaintext highlighter-rouge">Relative abundance</code></li>
@@ -2178,7 +2172,7 @@ For this, we use the tool <strong>Unpack pathway abundances to show genes includ
   <div class="box-title hands-on-title" id="hands-on-normalize-the-gene-family-abundances-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalize the gene family abundances</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.6.0+galaxy0" title="Unpack pathway abundances to show genes included tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unpack pathway abundances to show genes included</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</span> with
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.6.0+galaxy0" title="Unpack pathway abundances to show genes included tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_unpack_pathways%2Fhumann_unpack_pathways%2F3.6.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unpack pathway abundances to show genes included</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</a> with
       <ul>
         <li><em>“Gene family or EC abundance file”</em>: <code class="language-plaintext highlighter-rouge">Normalized gene families</code></li>
         <li><em>“Pathway abundance file”</em>: <code class="language-plaintext highlighter-rouge">Normalized pathways</code></li>
@@ -2234,7 +2228,7 @@ PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3D
   <div class="box-title hands-on-title" id="hands-on-group-abundances-into-go-terms"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Group abundances into GO terms</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.6.0+galaxy0" title="Regroup HUMAnN table features tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regroup HUMAnN table features</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.6.0+galaxy0" title="Regroup HUMAnN table features tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_regroup_table%2Fhumann_regroup_table%2F3.6.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regroup HUMAnN table features</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene families table”</em>: <code class="language-plaintext highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN</strong>)</li>
         <li><em>“How to combine grouped features?”</em>: <code class="language-plaintext highlighter-rouge">Sum</code></li>
@@ -2269,7 +2263,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>Using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0" title="Split a HUMAnN table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split a HUMAnN table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</span>, we see that the unstratified table has 1,174 lines (including the UNMAPPED, UNGROUPED and the header). So 1,171 GO terms have been identified.</p>
+    <p>Using the tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0" title="Split a HUMAnN table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_split_stratified_table%2Fhumann_split_stratified_table%2F3.6.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split a HUMAnN table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</a>, we see that the unstratified table has 1,174 lines (including the UNMAPPED, UNGROUPED and the header). So 1,171 GO terms have been identified.</p>
   </blockquote>
 </blockquote>
 
@@ -2279,7 +2273,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
   <div class="box-title hands-on-title" id="hands-on-rename-go-terms"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rename GO terms</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.7+galaxy0" title="Rename features of a HUMAnN generated table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Rename features of a HUMAnN generated table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.7+galaxy0" title="Rename features of a HUMAnN generated table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_rename_table%2Fhumann_rename_table%2F3.7%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Rename features of a HUMAnN generated table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene families table”</em>: output of <strong>Regroup HUMAnN table features</strong></li>
         <li><em>“Type of feature renaming”</em>: <code class="language-plaintext highlighter-rouge">Advanced feature renaming</code>
@@ -2289,7 +2283,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: output of last <strong>Rename features of a HUMAnN generated table</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -2299,7 +2293,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
     <li>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the generated file <code class="language-plaintext highlighter-rouge">[CC] GO terms and their abundance</code></p>
     </li>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: output of last <strong>Rename features of a HUMAnN generated table</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -2309,7 +2303,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
     <li>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the generated file <code class="language-plaintext highlighter-rouge">[MF] GO terms and their abundance</code></p>
     </li>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: output of last <strong>Rename features of a HUMAnN generated table</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -2334,7 +2328,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
     <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>After running <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0" title="Split a HUMAnN table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split a HUMAnN table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</span> on the 3 outputs, we found:
+      <li>After running <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0" title="Split a HUMAnN table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhumann_split_stratified_table%2Fhumann_split_stratified_table%2F3.6.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split a HUMAnN table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.0+galaxy0)</a> on the 3 outputs, we found:
         <ul>
           <li>411 BP GO terms</li>
           <li>696 MF GO terms</li>
@@ -2353,7 +2347,7 @@ GO:0000036: [MF] acyl carrier activity|unclassified	143.868
 GO:0000049: [MF] tRNA binding	4818.299
 </code></pre></div>        </div>
 
-        <p>So to identify the most abundant GO terms, we first need to sort the file using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> tool (on column 2, in descending order):</p>
+        <p>So to identify the most abundant GO terms, we first need to sort the file using the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> tool (on column 2, in descending order):</p>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GO:0015035: [MF] protein disulfide oxidoreductase activity	42908.123
 GO:0003735: [MF] structural constituent of ribosome	42815.337
@@ -2391,7 +2385,7 @@ naming conventions.
 To overcome this discrepancy, the naming of <code class="language-plaintext highlighter-rouge">Hungateiclostridium_thermocellum</code> must be changed in the 
 <strong>HUMAnN</strong> output, this can be done with:</p>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace parts of text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace parts of text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.4)</span>
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace parts of text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_find_and_replace%2F1.1.4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace parts of text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.4)</a>
 with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Normalized gene families</code></li>
@@ -2410,7 +2404,7 @@ with the following parameters:
   <div class="box-title hands-on-title" id="hands-on-combine-taxonomic-and-functional-information"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combine taxonomic and functional information</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0" title="Combine MetaPhlAn2 and HUMAnN2 outputs tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</span>  with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0" title="Combine MetaPhlAn2 and HUMAnN2 outputs tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbebatut%2Fcombine_metaphlan2_humann2%2Fcombine_metaphlan2_humann2%2F0.2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</a>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding to MetaPhlAN output”</em>: <code class="language-plaintext highlighter-rouge">Cut predicted taxon relative abundances table</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding HUMAnN output”</em>: <code class="language-plaintext highlighter-rouge">Normalized gene families adapted taxon</code></li>
@@ -2463,7 +2457,7 @@ Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y
         <blockquote class="notranslate hands_on">
           <div class="box-title hands-on-title" id="hands-on-group-by-genus-and-count-gene-families"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Group by genus and count gene families</div>
           <ol>
-            <li><span class="tool" data-tool="Grouping1" title="Group data by a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></span>
+            <li><a class="tool" data-tool="Grouping1" title="Group data by a column tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrouping1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></a>
               <ul>
                 <li><em>“Select data”</em>: output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong></li>
                 <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column:1</code></li>
@@ -2493,7 +2487,7 @@ Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y
         <blockquote class="notranslate hands_on">
           <div class="box-title hands-on-title" id="hands-on-group-by-species-and-count-gene-families"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Group by species and count gene families</div>
           <ol>
-            <li><span class="tool" data-tool="Grouping1" title="Group data by a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></span>
+            <li><a class="tool" data-tool="Grouping1" title="Group data by a column tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrouping1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data by a column</strong></a>
               <ul>
                 <li><em>“Select data”</em>: output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong></li>
                 <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">Column:3</code></li>
@@ -2860,7 +2854,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2888,7 +2882,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

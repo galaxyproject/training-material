@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -517,7 +517,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Patient samples for pathogen detection are usually \"contaminated\" with human host DNA."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -632,12 +632,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1251,7 +1245,7 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
   <div class="box-title hands-on-title" id="hands-on-trim-reads-and-map-them-to-the-human-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Trim reads and map them to the human reference genome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Trimmomatic tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.0)</span> with default settings and:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Trimmomatic tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fpjbriggs%2Ftrimmomatic%2Ftrimmomatic%2F0.38.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.0)</a> with default settings and:
       <ul>
         <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>
           <ul>
@@ -1260,7 +1254,7 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</a> with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
@@ -1306,7 +1300,7 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
   <div class="box-title hands-on-title" id="hands-on-filter-for-read-pairs-not-mapping-to-the-human-genome-and-extract-their-identifiers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter for read pairs not mapping to the human genome and extract their identifiers</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1" title="Samtools fastx tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools fastx</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy1)</span> with the following parameter settings:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1" title="Samtools fastx tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_fastx%2Fsamtools_fastx%2F1.9%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools fastx</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy1)</a> with the following parameter settings:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM or SAM file to convert”</em>: the output of <strong>Map with BWA-MEM</strong></li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">FASTA</code></li>
@@ -1331,7 +1325,7 @@ Since the forward and reverse reads of a pair share their read identifier, we do
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
+    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: the output of <strong>Samtools fastx</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1340,7 +1334,7 @@ Since the forward and reverse reads of a pair share their read identifier, we do
 
       <p>This will select only those lines from the FASTA inputs that start with a <code class="language-plaintext highlighter-rouge">&gt;</code> character, <em>i.e.</em> will retain the identifier lines, but not the sequence lines.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_line%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: the output of <strong>Select</strong></li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Replacement”</em>:
@@ -1382,12 +1376,12 @@ Then, after processing both with <strong>seqtk_subseq</strong>, we zip the filte
   <div class="box-title hands-on-title" id="hands-on-identifier-based-extraction-of-non-human-reads-from-the-input-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Identifier-based extraction of non-human reads from the input data</div>
 
   <ol>
-    <li><span class="tool" data-tool="__UNZIP_COLLECTION__" title="Unzip Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unzip Collection</strong></span> with the following setting:
+    <li><a class="tool" data-tool="__UNZIP_COLLECTION__" title="Unzip Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__UNZIP_COLLECTION__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unzip Collection</strong></a> with the following setting:
       <ul>
         <li><em>“Input Paired Dataset”</em>: the collection of original sequenced reads input datasets</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="seqtk_subseq tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqtk_subseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="seqtk_subseq tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseqtk%2Fseqtk_subseq%2F1.3.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqtk_subseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file”</em>: the first (forward reads) output of <strong>Unzip Collection</strong></li>
         <li><em>“Select source of sequence choices”</em>: <code class="language-plaintext highlighter-rouge">FASTA/Q ID list</code>
@@ -1397,7 +1391,7 @@ Then, after processing both with <strong>seqtk_subseq</strong>, we zip the filte
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="seqtk_subseq tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqtk_subseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="seqtk_subseq tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fseqtk%2Fseqtk_subseq%2F1.3.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqtk_subseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file”</em>: the second (reverse reads) output of <strong>Unzip Collection</strong></li>
         <li><em>“Select source of sequence choices”</em>: <code class="language-plaintext highlighter-rouge">FASTA/Q ID list</code>
@@ -1407,7 +1401,7 @@ Then, after processing both with <strong>seqtk_subseq</strong>, we zip the filte
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="__ZIP_COLLECTION__" title="Zip Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Zip Collection</strong></span> with the following settings:
+    <li><a class="tool" data-tool="__ZIP_COLLECTION__" title="Zip Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__ZIP_COLLECTION__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Zip Collection</strong></a> with the following settings:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Dataset (Forward)”</em>: the collection of cleaned forward reads; output of the first run of <strong>seqtk_subseq</strong></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Dataset (Reverse)”</em>: the collection of cleaned reverse reads; output of the second run of <strong>seqtk_subseq</strong></li>
@@ -1661,7 +1655,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1689,7 +1683,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

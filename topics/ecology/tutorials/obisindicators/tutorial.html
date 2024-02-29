@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -408,7 +408,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "OBIS is a global open-access data and information clearing-house on marine biodiversity for science, conservation and sustainable development. In order to visualize their marine data OBIS created the package obisindicators."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -523,12 +523,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/ecology/tutorials/obisindicators/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/ecology/tutorials/obisindicators/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/ecology/tutorials/obisindicators/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -891,7 +885,7 @@ This tutorial will guide you on getting obis marine data and processing them in 
     <div class="box-title hands-on-title" id="hands-on-download-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Download your data</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2" title="OBIS occurences tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OBIS occurences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with the following parameters:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2" title="OBIS occurences tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fobis_data%2Fobis_data%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OBIS occurences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with the following parameters:
         <ul>
           <li><em>“Scientific name of the species”</em>: Empty</li>
           <li><em>“Taxon ID”</em>: Empty</li>
@@ -911,7 +905,7 @@ This tutorial will guide you on getting obis marine data and processing them in 
     <div class="box-title hands-on-title" id="hands-on-clean-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clean your data</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with the following parameters:
 -<em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Species occurences</code>
         <ul>
           <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
@@ -1003,7 +997,7 @@ You should have the 5 folowing columns : basisOfRecord, decimalLatitude, decimal
     <div class="box-title hands-on-title" id="hands-on-clean-your-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clean your data</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with the following parameters:
 -<em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">obis data</code>
         <ul>
           <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
@@ -1026,7 +1020,7 @@ You should have the 5 folowing columns: basisOfRecord, decimalLatitude, decimalL
   <div class="box-title hands-on-title" id="hands-on-ocean-biodiversity-indicators"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Ocean biodiversity indicators</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1" title="Ocean biodiversity indicators tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean biodiversity indicators</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1" title="Ocean biodiversity indicators tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fobisindicators%2Fobisindicators%2F0.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean biodiversity indicators</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</a> with the following parameters:
       <ul>
         <li><em>“Input table”</em>: The result tabular of the Advanced Cut tool</li>
         <li><em>“What character is the separator in your data? (Mostlikely a comma for a csv file and t for a tabular)”</em>: <code class="language-plaintext highlighter-rouge">Tabulator (\t)</code></li>
@@ -1386,7 +1380,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1414,7 +1408,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

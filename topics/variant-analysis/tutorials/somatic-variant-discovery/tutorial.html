@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -649,7 +649,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Human Copy Number Variations (hCNVs) are the result of structural genomic rearrangements that result in the duplication or deletion of DNA segments. These changes contribute significantly to human genetic variability, diseases, and somatic genome variations in cancer and other diseases {% cite Nam2015 %}. hCNVs can be routinely investigated by genomic hybridisation and sequencing technologies"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -764,12 +764,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/variant-analysis/tutorials/somatic-variant-discovery/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/variant-analysis/tutorials/somatic-variant-discovery/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/variant-analysis/tutorials/somatic-variant-discovery/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -1306,7 +1300,7 @@ For mapping <a href="/training-material/topics/sequence-analysis/tutorials/mappi
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control of the input datasets</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span> on the fastq datasets
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</a> on the fastq datasets
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from the current history”</em>: all 4 FASTQ  datasets selected with <strong>Multiple datasets</strong></li>
       </ul>
@@ -1320,7 +1314,7 @@ parse the quality results view the html report of each dataset.</p>
 
       <p>For the next step use the raw data fidings from FastQC.</p>
     </li>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> to aggregate the raw <strong>FastQC</strong> data of all four input datasets into one report
+    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.8%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</a> to aggregate the raw <strong>FastQC</strong> data of all four input datasets into one report
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -1385,7 +1379,7 @@ However, the aim is to detect clear reads for hCNVs and will use a trimming step
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-normal-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read trimming and filtering of the normal tissue reads</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5" title="Trimmomatic tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.36.5)</span> to trim and filter the normal tissue reads
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5" title="Trimmomatic tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fpjbriggs%2Ftrimmomatic%2Ftrimmomatic%2F0.36.5"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.36.5)</a> to trim and filter the normal tissue reads
       <ul>
         <li>
           <p><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (two separate
@@ -1457,7 +1451,7 @@ that expect reads to be in a specific order and having unmapped reads can result
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-exercise-quality-control-of-the-polished-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exercise: Quality control of the polished datasets</div>
-  <p>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span> and <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> like before,
+  <p>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</a> and <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.8%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</a> like before,
 but using the four trimmed datasets produced by Trimmomatic as input.</p>
 
   <blockquote class="question">
@@ -1482,7 +1476,7 @@ we can point out that some of the adapters were removed.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-read-mapping"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read Mapping</div>
   <ol class="comment">
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.1)</span> to map the reads from the <strong>normal tissue</strong> sample to the reference genome
+    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.1)</a> to map the reads from the <strong>normal tissue</strong> sample to the reference genome
       <ul class="comment">
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
@@ -1544,7 +1538,7 @@ while the SM value should identify the biological sample.</p>
   </ol>
 
   <ol>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.1)</span> to map the reads from the <strong>tumor tissue</strong> sample
+    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.1)</a> to map the reads from the <strong>tumor tissue</strong> sample
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
@@ -1603,7 +1597,7 @@ reads (r2) dataset of the <strong>tumor tissue</strong> sample; output of
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filtrate-the-mapped-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtrate the mapped reads</div>
   <ol>
-    <li>Use <span class="tool" data-tool="__BUILD_LIST__" title="Build list tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Build list</strong></span> to creat a list from the maped reads of the <strong>normal tissue</strong> and <strong>tumor tissue</strong>
+    <li>Use <a class="tool" data-tool="__BUILD_LIST__" title="Build list tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__BUILD_LIST__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Build list</strong></a> to creat a list from the maped reads of the <strong>normal tissue</strong> and <strong>tumor tissue</strong>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset”</em>: <code class="language-plaintext highlighter-rouge">Insert dataset</code>
           <ul>
@@ -1617,7 +1611,7 @@ reads (r2) dataset of the <strong>tumor tissue</strong> sample; output of
         </li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/1.1.0" title="Create text file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create text file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/1.1.0" title="Create text file tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_text_file_with_recurring_lines%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create text file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a>  with the following parameters
       <ul>
         <li><em>“Characters to insert”</em>: <code class="language-plaintext highlighter-rouge">normal reads</code></li>
         <li><em>“Specify the number of iterations by”</em>: <code class="language-plaintext highlighter-rouge">User defined number</code></li>
@@ -1631,7 +1625,7 @@ reads (r2) dataset of the <strong>tumor tissue</strong> sample; output of
      - This will create a text file with only two lines normal reads and tumor reads</li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="__RELABEL_FROM_FILE__" title="Relabel identifiers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Relabel identifiers</strong></span>  with the following parameters
+    <li>Run <a class="tool" data-tool="__RELABEL_FROM_FILE__" title="Relabel identifiers tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__RELABEL_FROM_FILE__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Relabel identifiers</strong></a>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Collection”</em>: the creat a list from <code class="language-plaintext highlighter-rouge">Build lsit tool</code>.</li>
         <li><em>“How should the new labels be specified?”</em>: <code class="language-plaintext highlighter-rouge">Using lines in a simple text file.</code></li>
@@ -1655,7 +1649,7 @@ and in results interpretation.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-filtration-and-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data filtration and Remove duplicates</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy3)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_view%2Fsamtools_view%2F1.9%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy3)</a>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“SAM/BAM/CRAM dataset”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">Relabel identifiers</code> dataset cpllection.</li>
         <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code></li>
@@ -1673,7 +1667,7 @@ and in results interpretation.</p>
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Selecting a dataset collection as input</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1" title="RmDup tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RmDup</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.1)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1" title="RmDup tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_rmdup%2Fsamtools_rmdup%2F2.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RmDup</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.1)</a>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM File”</em>:  The outpot of  <code class="language-plaintext highlighter-rouge">Samtools view</code></li>
         <li><em>“Is this paired-end or single end data”</em>: <code class="language-plaintext highlighter-rouge">BAM is paired-end</code></li>
@@ -1690,7 +1684,7 @@ and in results interpretation.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-homogenize-the-positional-distributed-indels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Homogenize the positional distributed indels</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1" title="BamLeftAlign tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BamLeftAlign</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1" title="BamLeftAlign tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffreebayes%2Fbamleftalign%2F1.3.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BamLeftAlign</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</a>  with the following parameters
       <ul>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Locally cached </code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select alignment file in BAM format”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">tool RmDup</code>.</li>
@@ -1698,7 +1692,7 @@ and in results interpretation.</p>
         <li><em>“Maximum number of iterations”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2" title="Samtools calmd tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools calmd</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.2)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2" title="Samtools calmd tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_calmd%2Fsamtools_calmd%2F2.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools calmd</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.2)</a>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file to recalculate”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">BamLeftAlign</code>.</li>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code></li>
@@ -1719,7 +1713,7 @@ and in results interpretation.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filtrate-the-indels-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtrate the indels reads</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy3)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_view%2Fsamtools_view%2F1.9%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy3)</a>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file to recalculate”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">Samtools CalMD</code>.</li>
         <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">Just the input header (-H)</code></li>
@@ -1728,7 +1722,7 @@ and in results interpretation.</p>
         <li><em>“Reference data”</em>: <code class="language-plaintext highlighter-rouge">No, see help (-output-fmt-option no_ref)</code></li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="Grep1" title="Select tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></span>  with the following parameters
+    <li>Run <a class="tool" data-tool="Grep1" title="Select tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></a>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">Samtools view</code>.</li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1736,7 +1730,7 @@ and in results interpretation.</p>
         <li><em>“Keep header line”</em>: <code class="language-plaintext highlighter-rouge">False</code></li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_line%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: The output of <code class="language-plaintext highlighter-rouge">Select</code></li>
         <li><em>“pattern”</em>: <code class="language-plaintext highlighter-rouge">^@SQ\tSN:(chr[0-9]+|chrM|chrX|chrY)\tLN:([0-9]+)</code></li>
@@ -1749,7 +1743,7 @@ and in results interpretation.</p>
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy3)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_view%2Fsamtools_view%2F1.9%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy3)</a>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“SAM/BAM/CRAM data set”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">CalMD</code>.</li>
         <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code></li>
@@ -1761,7 +1755,7 @@ and in results interpretation.</p>
         <li><em>“Reference data”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy3)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_view%2Fsamtools_view%2F1.9%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy3)</a>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“SAM/BAM/CRAM data set”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">Samtools view</code>.</li>
         <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code></li>
@@ -1782,14 +1776,14 @@ and in results interpretation.</p>
   <div class="box-title hands-on-title" id="hands-on-extract-files-form-list"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract files form list</div>
   <p>extract the files from the list to handel them separitly</p>
   <ol>
-    <li>Run <span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span>  with the following parameters:
+    <li>Run <a class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__EXTRACT_DATASET__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></a>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input List”</em>: <code class="language-plaintext highlighter-rouge">The outpot of Samtools view</code>.</li>
         <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by element identifier</code></li>
         <li><em>“Element identifier:”</em>: <code class="language-plaintext highlighter-rouge">tumor reads</code></li>
       </ul>
     </li>
-    <li>Run <span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span>  with the following parameters:
+    <li>Run <a class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__EXTRACT_DATASET__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></a>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input List”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">Samtools view</code>.</li>
         <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by element identifier</code></li>
@@ -1842,7 +1836,7 @@ The presence of normal cells within tumour cells can have an impact on the const
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/control_freec/control_freec/11.6+galaxy1" title="Control-FREEC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Control-FREEC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 11.6+galaxy1)</span>  with the following parameters</p>
+      <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/control_freec/control_freec/11.6+galaxy1" title="Control-FREEC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcontrol_freec%2Fcontrol_freec%2F11.6%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Control-FREEC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 11.6+galaxy1)</a>  with the following parameters</p>
       <ul>
         <li><em>“Select the sequencing method of the input file(s)?”</em>: <code class="language-plaintext highlighter-rouge">whole-exome sequencing (WES)</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample file”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">Extract Dataset</code> (<strong>cancer reads</strong>)</li>
@@ -1911,7 +1905,7 @@ the relationships between the genomic intervals <a href="https://genome.cshlp.or
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-visualise-the-hcnv-findings"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualise the hCNV findings</div>
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Circos tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy7)</span>  with the following parameters
+    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Circos tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcircos%2Fcircos%2F0.69.8%2Bgalaxy7"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy7)</a>  with the following parameters
       <ul>
         <li><em>“Reference Genome Source”</em>: <code class="language-plaintext highlighter-rouge">Custom Karyotype</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample file”</em>: The outpot of  <code class="language-plaintext highlighter-rouge">Output dataset out_chr_sorted_circos from control freec</code></li>
@@ -2332,7 +2326,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2360,7 +2354,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

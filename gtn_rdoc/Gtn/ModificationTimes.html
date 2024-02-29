@@ -66,7 +66,11 @@
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
+    <li ><a href="#method-c-cached_command">::cached_command</a>
+    <li ><a href="#method-c-command">::command</a>
     <li ><a href="#method-c-commit_count_cache">::commit_count_cache</a>
+    <li ><a href="#method-c-discover_caches">::discover_caches</a>
+    <li ><a href="#method-c-generate_cache">::generate_cache</a>
     <li ><a href="#method-c-init_cache">::init_cache</a>
     <li ><a href="#method-c-obtain_modification_count">::obtain_modification_count</a>
     <li ><a href="#method-c-obtain_time">::obtain_time</a>
@@ -99,6 +103,55 @@
          <h3>Public Class Methods</h3>
        </header>
 
+      <div id="method-c-cached_command" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">cached_command</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="cached_command-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cached_command</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">command</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">discover_caches</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/Time/Mod] Using cached modification times&#39;</span>
+
+  <span class="ruby-identifier">previous_commit</span> = <span class="ruby-identifier">discover_caches</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;-&#39;</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">previous</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">discover_caches</span>)
+
+  <span class="ruby-node">`git log --name-only --pretty=&#39;GTN_GTN:%ct&#39; #{previous_commit}..`</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">previous</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-command" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">command</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="command-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">command</span>
+  <span class="ruby-string">`git log --name-only --pretty=&#39;GTN_GTN:%ct&#39;`</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-c-commit_count_cache" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">commit_count_cache</span><span
@@ -110,9 +163,61 @@
           
 
           <div class="method-source-code" id="commit_count_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 33</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">commit_count_cache</span>
   <span class="ruby-identifier">@@COMMIT_COUNT_CACHE</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-discover_caches" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">discover_caches</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="discover_caches-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">discover_caches</span>
+  <span class="ruby-comment"># Really there should only be one, but maybe someone&#39;s been silly so</span>
+  <span class="ruby-comment"># we&#39;ll just take the first one we find.</span>
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-string">&#39;metadata/git-mod-*.txt&#39;</span>).<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-generate_cache" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">generate_cache</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_cache-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_cache</span>
+  <span class="ruby-identifier">rev</span> = <span class="ruby-string">`git rev-list -n 1 main`</span>.<span class="ruby-identifier">strip</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">discover_caches</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-node">&quot;metadata/git-mod-#{rev}.txt&quot;</span>, <span class="ruby-identifier">command</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">prev</span> = <span class="ruby-identifier">discover_caches</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-node">&quot;metadata/git-mod-#{rev}.txt&quot;</span>, <span class="ruby-identifier">cached_command</span>)
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">prev</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -138,7 +243,7 @@
   <span class="ruby-identifier">@@TIME_CACHE</span> = {}
   <span class="ruby-identifier">@@COMMIT_COUNT_CACHE</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
   <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/Time/Mod] Filling Time Cache&#39;</span>
-  <span class="ruby-string">`git log --name-only --pretty=&#39;GTN_GTN:%ct&#39;`</span>
+  <span class="ruby-identifier">cached_command</span>
     .<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;GTN_GTN:&#39;</span>)
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n\n&quot;</span>) }
     .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> }
@@ -166,7 +271,7 @@
           
 
           <div class="method-source-code" id="obtain_modification_count-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 37</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">obtain_modification_count</span>(<span class="ruby-identifier">f</span>)
   <span class="ruby-identifier">init_cache</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@COMMIT_COUNT_CACHE</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">f</span>
@@ -192,7 +297,7 @@
           
 
           <div class="method-source-code" id="obtain_time-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 46</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">obtain_time</span>(<span class="ruby-identifier">f</span>)
   <span class="ruby-identifier">init_cache</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">f</span>
@@ -201,6 +306,7 @@
     <span class="ruby-keyword">begin</span>
       <span class="ruby-comment"># Non git file.</span>
       <span class="ruby-identifier">@@TIME_CACHE</span>[<span class="ruby-identifier">f</span>] = <span class="ruby-constant">File</span>.<span class="ruby-identifier">mtime</span>(<span class="ruby-identifier">f</span>)
+      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warning</span> <span class="ruby-node">&quot;[GTN/Time/Mod] No git cached time available for #{f}, defaulting to checkout&quot;</span>
       <span class="ruby-identifier">@@TIME_CACHE</span>[<span class="ruby-identifier">f</span>]
     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
       <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-value">0</span>)
@@ -224,7 +330,7 @@
           
 
           <div class="method-source-code" id="time_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 29</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">time_cache</span>
   <span class="ruby-identifier">@@TIME_CACHE</span>
 <span class="ruby-keyword">end</span></pre>

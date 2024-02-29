@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -265,13 +259,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main_workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -279,17 +273,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  10["Input dataset"];
-  11["Input dataset"];
-  12["Input dataset"];
-  13["Input dataset"];
-  14["Input dataset"];
-  15["Input dataset"];
-  16["Input dataset"];
-  17["Input dataset"];
-  18["Input dataset"];
+  0["ℹ️ Input Dataset\npancan_rnaseq_freeze.tsv"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\npancan_mutation_freeze.tsv"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  10["ℹ️ Input Dataset\nGSE69822_pi3k_sign.txt"];
+  style 10 stroke:#2c3143,stroke-width:4px;
+  11["ℹ️ Input Dataset\nGSE69822_pi3k_trans.csv"];
+  style 11 stroke:#2c3143,stroke-width:4px;
+  12["ℹ️ Input Dataset\nGDSC_CCLE_common_mut_cnv_binary.tsv.gz"];
+  style 12 stroke:#2c3143,stroke-width:4px;
+  13["ℹ️ Input Dataset\nccle_rnaseq_genes_rpkm_20180929_mod.tsv.gz"];
+  style 13 stroke:#2c3143,stroke-width:4px;
+  14["ℹ️ Input Dataset\nGDSC_EXP_CCLE_converted_name.tsv.gz"];
+  style 14 stroke:#2c3143,stroke-width:4px;
+  15["ℹ️ Input Dataset\nCCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv"];
+  style 15 stroke:#2c3143,stroke-width:4px;
+  16["ℹ️ Input Dataset\ncompounds_of_interest.txt"];
+  style 16 stroke:#2c3143,stroke-width:4px;
+  17["ℹ️ Input Dataset\ncosmic_cancer_classification.tsv"];
+  style 17 stroke:#2c3143,stroke-width:4px;
+  18["ℹ️ Input Dataset\npath_rtk_ras_pi3k_genes.txt"];
+  style 18 stroke:#2c3143,stroke-width:4px;
   19["PAPAA: PanCancer classifier"];
   17 -->|output| 19;
   3 -->|output| 19;
@@ -298,7 +303,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   4 -->|output| 19;
   5 -->|output| 19;
   0 -->|output| 19;
-  2["Input dataset"];
+  2["ℹ️ Input Dataset\ncopy_number_loss_status.tsv"];
+  style 2 stroke:#2c3143,stroke-width:4px;
   20["PAPAA: PanCancer within disease analysis"];
   17 -->|output| 20;
   3 -->|output| 20;
@@ -374,20 +380,26 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   28 -->|nucleotide_mutation_scores| 29;
   19 -->|classifier_coefficients| 29;
   18 -->|output| 29;
-  3["Input dataset"];
+  3["ℹ️ Input Dataset\ncopy_number_gain_status.tsv"];
+  style 3 stroke:#2c3143,stroke-width:4px;
   30["PAPAA: PanCancer targene pharmacology"];
   16 -->|output| 30;
   29 -->|gdsc1_ccle_targene_pharmacology_predictions| 30;
   29 -->|gdsc1_targene_pharmacology_predictions| 30;
   29 -->|gdsc2_ccle_targene_pharmacology_predictions| 30;
   29 -->|gdsc2_targene_pharmacology_predictions| 30;
-  4["Input dataset"];
-  5["Input dataset"];
-  6["Input dataset"];
-  7["Input dataset"];
-  8["Input dataset"];
-  9["Input dataset"];
-
+  4["ℹ️ Input Dataset\nmutation_burden_freeze.tsv"];
+  style 4 stroke:#2c3143,stroke-width:4px;
+  5["ℹ️ Input Dataset\nsample_freeze.tsv"];
+  style 5 stroke:#2c3143,stroke-width:4px;
+  6["ℹ️ Input Dataset\nmc3.v0.2.8.PUBLIC.maf"];
+  style 6 stroke:#2c3143,stroke-width:4px;
+  7["ℹ️ Input Dataset\nCCLE_DepMap_18Q1_maf_20180207.txt"];
+  style 7 stroke:#2c3143,stroke-width:4px;
+  8["ℹ️ Input Dataset\ngdsc1_ccle_pharm_fitted_dose_data.txt"];
+  style 8 stroke:#2c3143,stroke-width:4px;
+  9["ℹ️ Input Dataset\ngdsc2_ccle_pharm_fitted_dose_data.txt"];
+  style 9 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -417,7 +429,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -441,7 +453,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

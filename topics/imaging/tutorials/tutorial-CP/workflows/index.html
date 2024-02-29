@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/imaging/tutorials/tutorial-CP/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/imaging/tutorials/tutorial-CP/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/imaging/tutorials/tutorial-CP/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -279,56 +273,55 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Starting Modules"];
-  1["IDR Download"];
-  2["IdentifyPrimaryObjects"];
+  0["Starting modules"];
+  1["Download images"];
+  2["Segment complete nuclei"];
   0 -->|output_pipeline| 2;
-  3["ConvertObjectsToImage"];
+  3["Segmentation mask complete nuclei"];
   2 -->|output_pipeline| 3;
-  4["DisplayDataOnImage"];
+  4["Label nuclei"];
   3 -->|output_pipeline| 4;
-  5["SaveImages"];
+  5["Save labelled nuclei"];
   4 -->|output_pipeline| 5;
-  6["EnhanceOrSuppressFeatures"];
+  6["Detect dark holes in nuclei"];
   5 -->|output_pipeline| 6;
-  7["MaskImage"];
+  7["Segment nucleoli that fall inside nuclei"];
   6 -->|output_pipeline| 7;
-  8["IdentifyPrimaryObjects"];
+  8["Segment nucleoli"];
   7 -->|output_pipeline| 8;
-  9["ConvertObjectsToImage"];
+  9["Convert the segmented nucleoli into an image"];
   8 -->|output_pipeline| 9;
-  10["GrayToColor"];
+  10["Combine masks nuclei + nucleoli"];
   9 -->|output_pipeline| 10;
-  11["SaveImages"];
+  11["Save combined segmentation masks"];
   10 -->|output_pipeline| 11;
-  12["IdentifyPrimaryObjects"];
+  12["Segment all nuclei"];
   11 -->|output_pipeline| 12;
-  13["ConvertObjectsToImage"];
+  13["Segmentation mask nucleoli including cells touching borders"];
   12 -->|output_pipeline| 13;
-  14["ImageMath"];
+  14["Extract background"];
   13 -->|output_pipeline| 14;
-  15["MeasureGranularity"];
+  15["Measure the image granularity"];
   14 -->|output_pipeline| 15;
-  16["MeasureTexture"];
+  16["Measure the nuclei texture"];
   15 -->|output_pipeline| 16;
-  17["MeasureObjectIntensity"];
+  17["Measure the nuclei intensity"];
   16 -->|output_pipeline| 17;
-  18["MeasureObjectSizeShape"];
+  18["Measure size and shape of nuclei and nucleoli"];
   17 -->|output_pipeline| 18;
-  19["RelateObjects"];
+  19["Relate nucleoli with their parent nuclei"];
   18 -->|output_pipeline| 19;
-  20["MeasureImageQuality"];
+  20["Measure the image quality"];
   19 -->|output_pipeline| 20;
-  21["MeasureImageAreaOccupied"];
+  21["Measure the area occupied by nuclei and nucleoli"];
   20 -->|output_pipeline| 21;
-  22["MeasureImageIntensity"];
+  22["Measure the image intensity"];
   21 -->|output_pipeline| 22;
-  23["ExportToSpreadsheet"];
+  23["Export measurements"];
   22 -->|output_pipeline| 23;
-  24["CellProfiler"];
+  24["Run CellProfiler"];
   1 -->|output_tar| 24;
   23 -->|output_pipeline| 24;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -358,7 +351,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -382,7 +375,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

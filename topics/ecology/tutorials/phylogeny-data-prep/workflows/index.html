@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/ecology/tutorials/phylogeny-data-prep/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/ecology/tutorials/phylogeny-data-prep/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/ecology/tutorials/phylogeny-data-prep/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -266,13 +260,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/phylogeny-data-prep/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-phylogeny-data-prep/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-phylogeny-data-prep/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-phylogeny-data-prep/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-phylogeny-data-prep/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-phylogeny-data-prep/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-phylogeny-data-prep/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-phylogeny-data-prep/versions/main_workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -280,21 +274,43 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset collection"];
+  0["ℹ️ Input Collection\nInput genomes as collection"];
+  style 0 stroke:#2c3143,stroke-width:4px;
   1["Replace Text"];
   0 -->|output| 1;
+  6a2d3fcd-b557-4440-910d-b4c537feef20["Output\nheaders_shortened"];
+  1 --> 6a2d3fcd-b557-4440-910d-b4c537feef20;
+  style 6a2d3fcd-b557-4440-910d-b4c537feef20 stroke:#2c3143,stroke-width:4px;
   2["RepeatMasker"];
   1 -->|outfile| 2;
+  1db6607a-343a-4a61-9a3b-43101eb8223b["Output\nrepeat_masked"];
+  2 --> 1db6607a-343a-4a61-9a3b-43101eb8223b;
+  style 1db6607a-343a-4a61-9a3b-43101eb8223b stroke:#2c3143,stroke-width:4px;
   3["Funannotate predict annotation"];
   2 -->|output_masked_genome| 3;
+  642c1c09-82f4-4ef4-bd53-d14a583044e2["Output\nfunannotate_predicted_proteins"];
+  3 --> 642c1c09-82f4-4ef4-bd53-d14a583044e2;
+  style 642c1c09-82f4-4ef4-bd53-d14a583044e2 stroke:#2c3143,stroke-width:4px;
   4["Extract ORF"];
   3 -->|annot_gbk| 4;
+  07fb8c04-990e-4bc7-b607-9c4161b4786d["Output\nextracted_ORFs"];
+  4 --> 07fb8c04-990e-4bc7-b607-9c4161b4786d;
+  style 07fb8c04-990e-4bc7-b607-9c4161b4786d stroke:#2c3143,stroke-width:4px;
   5["Regex Find And Replace"];
   4 -->|aa_output| 5;
+  8dc378a8-d485-42df-8322-6cf8230257a0["Output\nsample_names_to_headers"];
+  5 --> 8dc378a8-d485-42df-8322-6cf8230257a0;
+  style 8dc378a8-d485-42df-8322-6cf8230257a0 stroke:#2c3143,stroke-width:4px;
   6["Collapse Collection"];
   5 -->|out_file1| 6;
+  e9a55459-4a2c-4238-8494-e99ec67307ea["Output\nproteomes_to_one_file"];
+  6 --> e9a55459-4a2c-4238-8494-e99ec67307ea;
+  style e9a55459-4a2c-4238-8494-e99ec67307ea stroke:#2c3143,stroke-width:4px;
   7["Proteinortho"];
   5 -->|out_file1| 7;
+  ee688b7a-2a9e-4480-a27a-db8cf795b635["Output\nProteinortho on input dataset(s): orthology-groups"];
+  7 --> ee688b7a-2a9e-4480-a27a-db8cf795b635;
+  style ee688b7a-2a9e-4480-a27a-db8cf795b635 stroke:#2c3143,stroke-width:4px;
   8["Busco"];
   5 -->|out_file1| 8;
   9["Filter"];
@@ -302,15 +318,35 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   10["Proteinortho grab proteins"];
   6 -->|output| 10;
   9 -->|out_file1| 10;
+  8625e8b1-e3af-4afa-bf85-1a3258cbbfb2["Output\nProteinortho_extract_by_orthogroup"];
+  10 --> 8625e8b1-e3af-4afa-bf85-1a3258cbbfb2;
+  style 8625e8b1-e3af-4afa-bf85-1a3258cbbfb2 stroke:#2c3143,stroke-width:4px;
   11["Regex Find And Replace"];
   10 -->|listproteinorthograbproteins| 11;
+  b072d32e-f725-4833-af0b-74f4df526d9a["Output\nfasta_header_cleaned"];
+  11 --> b072d32e-f725-4833-af0b-74f4df526d9a;
+  style b072d32e-f725-4833-af0b-74f4df526d9a stroke:#2c3143,stroke-width:4px;
   12["ClustalW"];
   11 -->|out_file1| 12;
+  f704b4b2-5214-4393-8a85-6274bda27c8c["Output\nClustalW on input dataset(s): clustal"];
+  12 --> f704b4b2-5214-4393-8a85-6274bda27c8c;
+  style f704b4b2-5214-4393-8a85-6274bda27c8c stroke:#2c3143,stroke-width:4px;
   13["ClipKIT. Alignment trimming software for phylogenetics."];
   12 -->|output| 13;
+  37092981-191a-4413-8f60-51802dd95f9c["Output\nTrimmed alignment."];
+  13 --> 37092981-191a-4413-8f60-51802dd95f9c;
+  style 37092981-191a-4413-8f60-51802dd95f9c stroke:#2c3143,stroke-width:4px;
   14["PhyKit - Alignment-based functions"];
   13 -->|trimmed_output| 14;
-
+  09ad25e3-cd68-4fb4-9c57-3e79212b8e01["Output\nConcatenated fasta alignment file"];
+  14 --> 09ad25e3-cd68-4fb4-9c57-3e79212b8e01;
+  style 09ad25e3-cd68-4fb4-9c57-3e79212b8e01 stroke:#2c3143,stroke-width:4px;
+  1d546e4c-7e3c-499d-870c-4846feb7a46d["Output\nA partition file ready for input into RAxML or IQ-tree"];
+  14 --> 1d546e4c-7e3c-499d-870c-4846feb7a46d;
+  style 1d546e4c-7e3c-499d-870c-4846feb7a46d stroke:#2c3143,stroke-width:4px;
+  26846814-d43a-4ce7-9f26-cfb70f184dce["Output\nAn occupancy file that summarizes the taxon occupancy per sequence"];
+  14 --> 26846814-d43a-4ce7-9f26-cfb70f184dce;
+  style 26846814-d43a-4ce7-9f26-cfb70f184dce stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -340,7 +376,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -364,7 +400,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

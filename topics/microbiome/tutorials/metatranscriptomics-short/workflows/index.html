@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/microbiome/tutorials/metatranscriptomics-short/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/microbiome/tutorials/metatranscriptomics-short/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/microbiome/tutorials/metatranscriptomics-short/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -294,25 +288,50 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["FastQC"];
+  0["ℹ️ Input Dataset\nT1A_forward"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nT1A_reverse"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["Quality control Forward"];
   0 -->|output| 2;
-  3["FastQC"];
+  025f2766-0802-461e-afbd-a716e6f81ba8["Output\nFastQC on input dataset(s): RawData"];
+  2 --> 025f2766-0802-461e-afbd-a716e6f81ba8;
+  style 025f2766-0802-461e-afbd-a716e6f81ba8 stroke:#2c3143,stroke-width:4px;
+  a54ee2fd-7bce-439a-9f1f-f9ec9bf00efd["Output\nFastQC on input dataset(s): Webpage"];
+  2 --> a54ee2fd-7bce-439a-9f1f-f9ec9bf00efd;
+  style a54ee2fd-7bce-439a-9f1f-f9ec9bf00efd stroke:#2c3143,stroke-width:4px;
+  3["Quality control Reverse"];
   1 -->|output| 3;
   4["Cutadapt"];
   0 -->|output| 4;
   1 -->|output| 4;
+  4bc7c8a4-b985-41dd-b67f-a3dfecd38a67["Output\nCutadapt on input dataset(s): Read 1 Output"];
+  4 --> 4bc7c8a4-b985-41dd-b67f-a3dfecd38a67;
+  style 4bc7c8a4-b985-41dd-b67f-a3dfecd38a67 stroke:#2c3143,stroke-width:4px;
+  36ec0bba-e49a-47e2-b916-afec9b35cc3e["Output\nCutadapt on input dataset(s): Read 2 Output"];
+  4 --> 36ec0bba-e49a-47e2-b916-afec9b35cc3e;
+  style 36ec0bba-e49a-47e2-b916-afec9b35cc3e stroke:#2c3143,stroke-width:4px;
   5["MultiQC"];
   2 -->|text_file| 5;
   3 -->|text_file| 5;
-  6["Filter with SortMeRNA"];
+  b9ca2123-0ee0-40a0-b2ec-cfc94fa35849["Output\nMultiQC on input dataset(s): Stats"];
+  5 --> b9ca2123-0ee0-40a0-b2ec-cfc94fa35849;
+  style b9ca2123-0ee0-40a0-b2ec-cfc94fa35849 stroke:#2c3143,stroke-width:4px;
+  e94ceb7a-0d6b-41c8-b79d-035b315e0a06["Output\nMultiQC on input dataset(s): Webpage"];
+  5 --> e94ceb7a-0d6b-41c8-b79d-035b315e0a06;
+  style e94ceb7a-0d6b-41c8-b79d-035b315e0a06 stroke:#2c3143,stroke-width:4px;
+  6["rRNA/rDNA selection"];
   4 -->|out1| 6;
   4 -->|out2| 6;
   7["FASTQ interlacer"];
   6 -->|unaligned_forward| 7;
   6 -->|unaligned_reverse| 7;
-
+  b060eebc-cd14-486e-806e-aae983bdf52d["Output\nFASTQ interlacer singles from input dataset(s)"];
+  7 --> b060eebc-cd14-486e-806e-aae983bdf52d;
+  style b060eebc-cd14-486e-806e-aae983bdf52d stroke:#2c3143,stroke-width:4px;
+  70b738db-5451-4eaa-91c0-eb445be297fb["Output\nFASTQ interlacer pairs from input dataset(s)"];
+  7 --> 70b738db-5451-4eaa-91c0-eb445be297fb;
+  style 70b738db-5451-4eaa-91c0-eb445be297fb stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -367,13 +386,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metatranscriptomics-short/workflows/workflow2_community_profile.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow2_community_profile" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow2_community_profile" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow2_community_profile" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow2_community_profile" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow2_community_profile" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow2_community_profile" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow2_community_profile"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -381,23 +400,48 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["MetaPhlAn"];
+  0["ℹ️ Input Dataset\nQC controlled forward reads"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nQC controlled reverse reads"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["Taxonomic assignation"];
   0 -->|output| 2;
   1 -->|output| 2;
+  b3e3198d-394e-4aeb-ba6c-9e73bfe8d049["Output\nMetaPhlAn on input dataset(s): SAM file"];
+  2 --> b3e3198d-394e-4aeb-ba6c-9e73bfe8d049;
+  style b3e3198d-394e-4aeb-ba6c-9e73bfe8d049 stroke:#2c3143,stroke-width:4px;
+  a4ecdc94-d012-413f-a9cb-6f3e9ee70d5b["Output\nMetaPhlAn on input dataset(s): Predicted taxon relative abundances"];
+  2 --> a4ecdc94-d012-413f-a9cb-6f3e9ee70d5b;
+  style a4ecdc94-d012-413f-a9cb-6f3e9ee70d5b stroke:#2c3143,stroke-width:4px;
+  30a9e692-8d31-45bd-9246-81ddead3ba03["Output\nMetaPhlAn on input dataset(s): Bowtie2 output"];
+  2 --> 30a9e692-8d31-45bd-9246-81ddead3ba03;
+  style 30a9e692-8d31-45bd-9246-81ddead3ba03 stroke:#2c3143,stroke-width:4px;
+  2465a9ab-a28e-4c58-b647-b6792f77ddf2["Output\nMetaPhlAn on input dataset(s): BIOM file"];
+  2 --> 2465a9ab-a28e-4c58-b647-b6792f77ddf2;
+  style 2465a9ab-a28e-4c58-b647-b6792f77ddf2 stroke:#2c3143,stroke-width:4px;
   3["Cut"];
   2 -->|output_file| 3;
   4["Krona pie chart"];
   2 -->|krona_output_file| 4;
   5["Export to GraPhlAn"];
   3 -->|out_file1| 5;
+  f578de2e-6edd-4ee0-9bc4-9371d6fd957f["Output\nExport to GraPhlAn on input dataset(s): Annotation"];
+  5 --> f578de2e-6edd-4ee0-9bc4-9371d6fd957f;
+  style f578de2e-6edd-4ee0-9bc4-9371d6fd957f stroke:#2c3143,stroke-width:4px;
+  4e9cfae0-ee7b-4347-84db-5a3e24688e50["Output\nExport to GraPhlAn on input dataset(s): Tree"];
+  5 --> 4e9cfae0-ee7b-4347-84db-5a3e24688e50;
+  style 4e9cfae0-ee7b-4347-84db-5a3e24688e50 stroke:#2c3143,stroke-width:4px;
   6["Generation, personalization and annotation of tree"];
   5 -->|annotation| 6;
   5 -->|tree| 6;
-  7["GraPhlAn"];
+  edf4ecaf-dddd-43a3-ba4a-d683671c1815["Output\nGeneration, personalization and annotation of tree on input dataset(s): Tree in PhyloXML"];
+  6 --> edf4ecaf-dddd-43a3-ba4a-d683671c1815;
+  style edf4ecaf-dddd-43a3-ba4a-d683671c1815 stroke:#2c3143,stroke-width:4px;
+  7["Visualisation GraPhlAn"];
   6 -->|output_tree| 7;
-
+  b304fe87-de7e-48d2-8774-9c52d2395fa4["Output\nGraPhlAn on input dataset(s): PNG"];
+  7 --> b304fe87-de7e-48d2-8774-9c52d2395fa4;
+  style b304fe87-de7e-48d2-8774-9c52d2395fa4 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -454,9 +498,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
@@ -466,13 +510,27 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
+  0["ℹ️ Input Dataset\nInterlaced non-rRNA reads"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nPredicted taxon relative abundances"];
+  style 1 stroke:#2c3143,stroke-width:4px;
   2["Cut"];
   1 -->|output| 2;
-  3["HUMAnN"];
+  3["Metabolic assignation"];
   0 -->|output| 3;
   1 -->|output| 3;
+  65797303-6f12-4ae8-9511-1af40f52e71d["Output\nHUMAnN on input dataset(s): Pathways and their abundance"];
+  3 --> 65797303-6f12-4ae8-9511-1af40f52e71d;
+  style 65797303-6f12-4ae8-9511-1af40f52e71d stroke:#2c3143,stroke-width:4px;
+  5cae6935-448b-4af9-ad78-7b17490e4d4a["Output\nHUMAnN on input dataset(s): Pathways and their coverage"];
+  3 --> 5cae6935-448b-4af9-ad78-7b17490e4d4a;
+  style 5cae6935-448b-4af9-ad78-7b17490e4d4a stroke:#2c3143,stroke-width:4px;
+  60492d72-7b3c-45c9-b32b-b6374ab08228["Output\nHUMAnN on input dataset(s): Log"];
+  3 --> 60492d72-7b3c-45c9-b32b-b6374ab08228;
+  style 60492d72-7b3c-45c9-b32b-b6374ab08228 stroke:#2c3143,stroke-width:4px;
+  ba124b0f-cbd5-4b65-b87a-84cfa578a927["Output\nHUMAnN on input dataset(s): Gene families and their abundance"];
+  3 --> ba124b0f-cbd5-4b65-b87a-84cfa578a927;
+  style ba124b0f-cbd5-4b65-b87a-84cfa578a927 stroke:#2c3143,stroke-width:4px;
   4["Renormalize"];
   3 -->|gene_families_tsv| 4;
   5["Renormalize"];
@@ -488,16 +546,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   6 -->|output| 9;
   10["Split a HUMAnN table"];
   6 -->|output| 10;
-  11["Combine MetaPhlAn2 and HUMAnN2 outputs"];
+  1ff60d0a-4a64-44c0-8b6f-bbdfa8566a0c["Output\nSplit a HUMAnN table on input dataset(s): Unstratified table"];
+  10 --> 1ff60d0a-4a64-44c0-8b6f-bbdfa8566a0c;
+  style 1ff60d0a-4a64-44c0-8b6f-bbdfa8566a0c stroke:#2c3143,stroke-width:4px;
+  6a65ee93-3a2e-4a81-94ff-35917396bdfa["Output\nSplit a HUMAnN table on input dataset(s): Stratified table"];
+  10 --> 6a65ee93-3a2e-4a81-94ff-35917396bdfa;
+  style 6a65ee93-3a2e-4a81-94ff-35917396bdfa stroke:#2c3143,stroke-width:4px;
+  11["Combination of taxonomic and metabolic assignations for gene families"];
   7 -->|outfile| 11;
   2 -->|out_file1| 11;
+  b34cf972-ec0c-4ecc-ab77-bd0e61d8a0e2["Output\nCombine MetaPhlAn2 and HUMAnN2 outputs on input dataset(s): Gene family abundances related to genus/species abundances"];
+  11 --> b34cf972-ec0c-4ecc-ab77-bd0e61d8a0e2;
+  style b34cf972-ec0c-4ecc-ab77-bd0e61d8a0e2 stroke:#2c3143,stroke-width:4px;
   12["Select"];
   9 -->|output| 12;
   13["Select"];
   9 -->|output| 13;
   14["Select"];
   9 -->|output| 14;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -552,13 +618,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metatranscriptomics-short/workflows/workflow3_functional_information_quick.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information_quick" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information_quick" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information_quick" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information_quick" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information_quick" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information_quick" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-metatranscriptomics-short/versions/workflow3_functional_information_quick"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -566,9 +632,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["Input dataset"];
+  0["ℹ️ Input Dataset\nPredicted taxon relative abundances"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nGene Family abundance"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nPathway abundance"];
+  style 2 stroke:#2c3143,stroke-width:4px;
   3["Cut"];
   0 -->|output| 3;
   4["Renormalize"];
@@ -583,19 +652,27 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   5 -->|output| 8;
   9["Split a HUMAnN table"];
   5 -->|output| 9;
+  7aba96f3-1648-4126-8e58-ca10cbd2e46d["Output\nSplit a HUMAnN table on input dataset(s): Stratified table"];
+  9 --> 7aba96f3-1648-4126-8e58-ca10cbd2e46d;
+  style 7aba96f3-1648-4126-8e58-ca10cbd2e46d stroke:#2c3143,stroke-width:4px;
+  2c36dc33-5981-4b2c-b615-a1677002e007["Output\nSplit a HUMAnN table on input dataset(s): Unstratified table"];
+  9 --> 2c36dc33-5981-4b2c-b615-a1677002e007;
+  style 2c36dc33-5981-4b2c-b615-a1677002e007 stroke:#2c3143,stroke-width:4px;
   10["Unpack pathway abundances"];
   4 -->|output| 10;
   6 -->|output| 10;
-  11["Combine MetaPhlAn2 and HUMAnN2 outputs"];
+  11["Combination of taxonomic and metabolic assignations for gene families"];
   7 -->|outfile| 11;
   3 -->|out_file1| 11;
+  46161015-b2db-4241-846e-27dd803b0fb3["Output\nCombine MetaPhlAn2 and HUMAnN2 outputs on input dataset(s): Gene family abundances related to genus/species abundances"];
+  11 --> 46161015-b2db-4241-846e-27dd803b0fb3;
+  style 46161015-b2db-4241-846e-27dd803b0fb3 stroke:#2c3143,stroke-width:4px;
   12["Select"];
   8 -->|output| 12;
   13["Select"];
   8 -->|output| 13;
   14["Select"];
   8 -->|output| 14;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -625,7 +702,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -649,7 +726,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

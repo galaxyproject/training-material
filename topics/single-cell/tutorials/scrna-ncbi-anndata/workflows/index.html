@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/scrna-ncbi-anndata/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/single-cell/tutorials/scrna-ncbi-anndata/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/single-cell/tutorials/scrna-ncbi-anndata/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -272,9 +266,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-ncbi-anndata/versions/ncbi_to_anndata" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-ncbi-anndata/versions/ncbi_to_anndata" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-ncbi-anndata/versions/ncbi_to_anndata" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-ncbi-anndata/versions/ncbi_to_anndata" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-ncbi-anndata/versions/ncbi_to_anndata"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -282,16 +276,26 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
-  1["Input dataset"];
-  2["Input dataset"];
-  3["Input dataset"];
-  4["Input dataset"];
-  5["Input dataset"];
-  6["Input dataset"];
-  7["Input dataset"];
-  8["Input dataset"];
-  9["Input dataset"];
+  0["ℹ️ Input Dataset\nGSM5353219_PA_PB1B_Pool_2_S24_L001_dge.txt"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nGSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nGSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ℹ️ Input Dataset\nGSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt"];
+  style 3 stroke:#2c3143,stroke-width:4px;
+  4["ℹ️ Input Dataset\nGSM5353221_PA_PB2A_Pool_1_3_S25_L001_dge.txt"];
+  style 4 stroke:#2c3143,stroke-width:4px;
+  5["ℹ️ Input Dataset\nGSM5353215_PA_AUG_PB_1B_S2_dge.txt"];
+  style 5 stroke:#2c3143,stroke-width:4px;
+  6["ℹ️ Input Dataset\nGSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt"];
+  style 6 stroke:#2c3143,stroke-width:4px;
+  7["ℹ️ Input Dataset\nGSM5353220_PA_PB1B_Pool_3_S51_L002_dge.txt"];
+  style 7 stroke:#2c3143,stroke-width:4px;
+  8["ℹ️ Input Dataset\nGSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt"];
+  style 8 stroke:#2c3143,stroke-width:4px;
+  9["ℹ️ Input Dataset\nGSM5353214_PA_AUG_PB_1A_S1_dge.txt"];
+  style 9 stroke:#2c3143,stroke-width:4px;
   10["Import Anndata and loom"];
   0 -->|output| 10;
   11["Import Anndata and loom"];
@@ -377,9 +381,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   43 -->|anndata| 44;
   45["AnnData Operations"];
   44 -->|output_h5ad| 45;
+  98fdc079-8b71-4841-a9aa-a3adda888616["Output\noutput_h5ad"];
+  45 --> 98fdc079-8b71-4841-a9aa-a3adda888616;
+  style 98fdc079-8b71-4841-a9aa-a3adda888616 stroke:#2c3143,stroke-width:4px;
   46["Inspect AnnData"];
   45 -->|output_h5ad| 46;
-
+  e4df8425-3c1e-439c-abe5-42b705eed1b3["Output\nobs"];
+  46 --> e4df8425-3c1e-439c-abe5-42b705eed1b3;
+  style e4df8425-3c1e-439c-abe5-42b705eed1b3 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -409,7 +418,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -433,7 +442,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

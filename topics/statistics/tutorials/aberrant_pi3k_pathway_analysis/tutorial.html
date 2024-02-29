@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -403,7 +403,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Signaling pathways are among the most commonly altered across different tumor types. Many tumors possess at least one driver alteration and nearly half of such alterations are potentially targeted by currently available drugs. A recent study in TCGA tumors has identified patterns of somatic variations and mechanisms in 10 canonical pathways"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -518,12 +518,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 
             <div id="archive-selector">
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/statistics/tutorials/aberrant_pi3k_pathway_analysis/tutorial.html">2024-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -960,7 +954,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-generating-model-from-erbb2-pik3ca-kras-akt1-genes-with-specific-disease-types"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9" title="PAPAA: PanCancer classifier tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer classifier</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9" title="PAPAA: PanCancer classifier tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_classifier%2Fpancancer_classifier%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer classifier</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset).</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset).</li>
@@ -1031,7 +1025,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-generating-models-for-individual-diseases-listed-for-erbb2-pik3ca-kras-akt1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9" title="PAPAA: PanCancer within disease analysis tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer within disease analysis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9" title="PAPAA: PanCancer within disease analysis tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_within_disease_analysis%2Fpancancer_within_disease_analysis%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer within disease analysis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
@@ -1089,7 +1083,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-compare-the-erbb2-pik3ca-kras-akt1-pan-model-with-individual-disease-models"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9" title="PAPAA: PanCancer compare within models tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer compare within models</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9" title="PAPAA: PanCancer compare within models tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_compare_within_models%2Fpancancer_compare_within_models%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer compare within models</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier summary”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: Pancancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1124,7 +1118,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-apply-weights-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9" title="PAPAA: PanCancer apply weights tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer apply weights</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9" title="PAPAA: PanCancer apply weights tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_apply_weights%2Fpancancer_apply_weights%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer apply weights</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
@@ -1172,7 +1166,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-visualize-decisions-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9" title="PAPAA: PanCancer visualize decisions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer visualize decisions</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9" title="PAPAA: PanCancer visualize decisions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_visualize_decisions%2Fpancancer_visualize_decisions%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer visualize decisions</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1206,7 +1200,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-map-mutation-class-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9" title="PAPAA: PanCancer map mutation class tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer map mutation class</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9" title="PAPAA: PanCancer map mutation class tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_map_mutation_class%2Fpancancer_map_mutation_class%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer map mutation class</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“string of the genes to extract or gene list file”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
@@ -1245,7 +1239,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-alternative-genes-pathway-mapper-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9" title="PAPAA: PanCancer alternative genes pathwaymapper tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9" title="PAPAA: PanCancer alternative genes pathwaymapper tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_alternative_genes_pathwaymapper%2Fpancancer_alternative_genes_pathwaymapper%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Comma separated string of HUGO gene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2,PIK3CA,KRAS,AKT1</code></li>
@@ -1291,7 +1285,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-heatmaps-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9" title="PAPAA: PanCancer pathway count heatmaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer pathway count heatmaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9" title="PAPAA: PanCancer pathway count heatmaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_pathway_count_heatmaps%2Fpancancer_pathway_count_heatmaps%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer pathway count heatmaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer metrics pathwaymapper”</em>: <code class="language-plaintext highlighter-rouge">pathway_metrics_pathwaymapper.txt</code> (output of <strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1344,7 +1338,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-summary-figures-for-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9" title="PAPAA: PanCancer targene summary figures tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer targene summary figures</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9" title="PAPAA: PanCancer targene summary figures tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_targene_summary_figures%2Fpancancer_targene_summary_figures%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer targene summary figures</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1392,7 +1386,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-analysis-of-ccle-and-gdsc-cell-lines-using-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9" title="PAPAA: PanCancer targene cell line predictions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer targene cell line predictions</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9" title="PAPAA: PanCancer targene cell line predictions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_targene_cell_line_predictions%2Fpancancer_targene_cell_line_predictions%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer targene cell line predictions</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1454,7 +1448,7 @@ https://zenodo.org/records/4306639/files/path_wnt_genes.txt
   <div class="box-title hands-on-title" id="hands-on-external-sample-evaluation-with-erbb2-pik3ca-kras-akt1-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9" title="PAPAA: PanCancer external sample status prediction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer external sample status prediction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</span> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9" title="PAPAA: PanCancer external sample status prediction tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fvijay%2Fpancancer_external_sample_status_prediction%2Fpancancer_external_sample_status_prediction%2F0.1.9"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PAPAA: PanCancer external sample status prediction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1805,7 +1799,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1833,7 +1827,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>

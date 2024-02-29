@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f",
+		release: "galaxy-training-network@de667137167ab7805ef0930a8d14112b5aa41549",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709165480' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709209861' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -74,7 +74,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709209861'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -186,12 +186,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/">smorgasbord2023</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-02-01/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/">2024-02-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2024-01-01/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/">2024-01-01</a>
-            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
@@ -267,9 +261,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3_filter,_plot_and_explore_single-cell_rna-seq_data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3_filter,_plot_and_explore_single-cell_rna-seq_data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3_filter,_plot_and_explore_single-cell_rna-seq_data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3_filter,_plot_and_explore_single-cell_rna-seq_data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3_filter,_plot_and_explore_single-cell_rna-seq_data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
@@ -279,47 +273,99 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
+  0["ℹ️ Input Dataset\nMito-counted AnnData"];
+  style 0 stroke:#2c3143,stroke-width:4px;
   1["Inspect AnnData"];
   0 -->|output| 1;
   2["Scanpy FilterCells"];
   0 -->|output| 2;
+  08175d7f-f4f4-413c-ad86-f59587ff692e["Output\nGenes-filtered Object"];
+  2 --> 08175d7f-f4f4-413c-ad86-f59587ff692e;
+  style 08175d7f-f4f4-413c-ad86-f59587ff692e stroke:#2c3143,stroke-width:4px;
   3["Plot"];
   0 -->|output| 3;
+  bfc499ee-630a-498b-9be6-696d9bb78837["Output\nScatter - genes x UMIs"];
+  3 --> bfc499ee-630a-498b-9be6-696d9bb78837;
+  style bfc499ee-630a-498b-9be6-696d9bb78837 stroke:#2c3143,stroke-width:4px;
   4["Plot"];
   0 -->|output| 4;
+  f2c78ef3-7d31-4930-954c-0133cce27a41["Output\nScatter - mito x genes"];
+  4 --> f2c78ef3-7d31-4930-954c-0133cce27a41;
+  style f2c78ef3-7d31-4930-954c-0133cce27a41 stroke:#2c3143,stroke-width:4px;
   5["Plot"];
   0 -->|output| 5;
+  348818e6-9def-41fd-a390-6f8525c57cd8["Output\nViolin - genotype - log"];
+  5 --> 348818e6-9def-41fd-a390-6f8525c57cd8;
+  style 348818e6-9def-41fd-a390-6f8525c57cd8 stroke:#2c3143,stroke-width:4px;
   6["Plot"];
   0 -->|output| 6;
+  844f5e7c-78c8-4f28-8e15-cea35ada8fef["Output\nViolin - batch - log"];
+  6 --> 844f5e7c-78c8-4f28-8e15-cea35ada8fef;
+  style 844f5e7c-78c8-4f28-8e15-cea35ada8fef stroke:#2c3143,stroke-width:4px;
   7["Inspect AnnData"];
   0 -->|output| 7;
   8["Plot"];
   0 -->|output| 8;
+  3b1232c5-d16a-434d-806e-79fd77f7c05f["Output\nScatter - mito x UMIs"];
+  8 --> 3b1232c5-d16a-434d-806e-79fd77f7c05f;
+  style 3b1232c5-d16a-434d-806e-79fd77f7c05f stroke:#2c3143,stroke-width:4px;
   9["Inspect AnnData"];
   0 -->|output| 9;
   10["Plot"];
   0 -->|output| 10;
+  a639cdc0-da40-4df9-8348-23117528b24a["Output\nViolin - sex - log"];
+  10 --> a639cdc0-da40-4df9-8348-23117528b24a;
+  style a639cdc0-da40-4df9-8348-23117528b24a stroke:#2c3143,stroke-width:4px;
   11["Plot"];
   2 -->|output_h5ad| 11;
+  69bf3e42-63e2-4b5b-9d63-5aac9d6b5691["Output\nViolin - Filterbygenes"];
+  11 --> 69bf3e42-63e2-4b5b-9d63-5aac9d6b5691;
+  style 69bf3e42-63e2-4b5b-9d63-5aac9d6b5691 stroke:#2c3143,stroke-width:4px;
   12["Scanpy FilterCells"];
   2 -->|output_h5ad| 12;
+  f378cb4e-0a77-49d9-b92a-752dbea4b09a["Output\nCounts-filtered Object"];
+  12 --> f378cb4e-0a77-49d9-b92a-752dbea4b09a;
+  style f378cb4e-0a77-49d9-b92a-752dbea4b09a stroke:#2c3143,stroke-width:4px;
   13["Inspect AnnData"];
   2 -->|output_h5ad| 13;
+  f9e862db-eb22-4124-8fe0-0fdcfcfb8393["Output\nGeneral - Filterbygenes"];
+  13 --> f9e862db-eb22-4124-8fe0-0fdcfcfb8393;
+  style f9e862db-eb22-4124-8fe0-0fdcfcfb8393 stroke:#2c3143,stroke-width:4px;
   14["Inspect AnnData"];
   12 -->|output_h5ad| 14;
+  794f72b5-c2c3-46a0-ac15-b9f1e94941d2["Output\nGeneral - Filterbycounts"];
+  14 --> 794f72b5-c2c3-46a0-ac15-b9f1e94941d2;
+  style 794f72b5-c2c3-46a0-ac15-b9f1e94941d2 stroke:#2c3143,stroke-width:4px;
   15["Scanpy FilterCells"];
   12 -->|output_h5ad| 15;
+  b915da66-6435-4871-baa0-3e494ba73c96["Output\nMito-filtered Object"];
+  15 --> b915da66-6435-4871-baa0-3e494ba73c96;
+  style b915da66-6435-4871-baa0-3e494ba73c96 stroke:#2c3143,stroke-width:4px;
   16["Plot"];
   12 -->|output_h5ad| 16;
+  3aef86d7-d34d-4b24-bc97-bf8c97d8d2fa["Output\nViolin - Filterbycounts"];
+  16 --> 3aef86d7-d34d-4b24-bc97-bf8c97d8d2fa;
+  style 3aef86d7-d34d-4b24-bc97-bf8c97d8d2fa stroke:#2c3143,stroke-width:4px;
   17["Inspect AnnData"];
   15 -->|output_h5ad| 17;
+  cd94a4c6-5665-4bdf-88ea-4f4d41efa893["Output\nGeneral - Filterbymito"];
+  17 --> cd94a4c6-5665-4bdf-88ea-4f4d41efa893;
+  style cd94a4c6-5665-4bdf-88ea-4f4d41efa893 stroke:#2c3143,stroke-width:4px;
   18["Scanpy FilterGenes"];
   15 -->|output_h5ad| 18;
+  ee63ef0a-98ed-45cb-b144-1154f84ae452["Output\nFiltered Object"];
+  18 --> ee63ef0a-98ed-45cb-b144-1154f84ae452;
+  style ee63ef0a-98ed-45cb-b144-1154f84ae452 stroke:#2c3143,stroke-width:4px;
   19["Plot"];
   15 -->|output_h5ad| 19;
+  7e48a14f-08fd-45ab-b613-606bf64dcf9d["Output\nViolin - Filterbymito"];
+  19 --> 7e48a14f-08fd-45ab-b613-606bf64dcf9d;
+  style 7e48a14f-08fd-45ab-b613-606bf64dcf9d stroke:#2c3143,stroke-width:4px;
   20["Inspect AnnData"];
   18 -->|output_h5ad| 20;
+  d59efa9b-d049-4f0e-8bd8-8ae982a45d0a["Output\nGeneral - Filtered object"];
+  20 --> d59efa9b-d049-4f0e-8bd8-8ae982a45d0a;
+  style d59efa9b-d049-4f0e-8bd8-8ae982a45d0a stroke:#2c3143,stroke-width:4px;
   21["Scanpy NormaliseData"];
   18 -->|output_h5ad| 21;
   22["Scanpy FindVariableGenes"];
@@ -330,6 +376,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   23 -->|output_h5ad| 24;
   25["Plot"];
   24 -->|output_h5ad| 25;
+  993dea99-990f-460a-beb9-46e5c97ee898["Output\nPCA Variance"];
+  25 --> 993dea99-990f-460a-beb9-46e5c97ee898;
+  style 993dea99-990f-460a-beb9-46e5c97ee898 stroke:#2c3143,stroke-width:4px;
   26["Scanpy ComputeGraph"];
   24 -->|output_h5ad| 26;
   27["Scanpy RunTSNE"];
@@ -340,8 +389,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   28 -->|output_h5ad| 29;
   30["Scanpy FindMarkers"];
   29 -->|output_h5ad| 30;
+  308b4961-4d50-442b-9bca-bbb1992426ba["Output\nMarkers - cluster"];
+  30 --> 308b4961-4d50-442b-9bca-bbb1992426ba;
+  style 308b4961-4d50-442b-9bca-bbb1992426ba stroke:#2c3143,stroke-width:4px;
+  035bbbce-fb57-48c8-83d5-2b0cd0376541["Output\nFinal object"];
+  30 --> 035bbbce-fb57-48c8-83d5-2b0cd0376541;
+  style 035bbbce-fb57-48c8-83d5-2b0cd0376541 stroke:#2c3143,stroke-width:4px;
   31["Scanpy FindMarkers"];
   29 -->|output_h5ad| 31;
+  1705e219-192a-4f52-9b26-64fcbcd303ea["Output\nMarkers - genotype"];
+  31 --> 1705e219-192a-4f52-9b26-64fcbcd303ea;
+  style 1705e219-192a-4f52-9b26-64fcbcd303ea stroke:#2c3143,stroke-width:4px;
   32["Scanpy PlotEmbed"];
   30 -->|output_h5ad| 32;
   33["Scanpy PlotEmbed"];
@@ -363,13 +421,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   36 -->|var| 39;
   40["AnnData Operations"];
   37 -->|output_h5ad| 40;
+  a6d48df0-403f-4efc-a75f-9504a960884e["Output\nFinal cell annotated object"];
+  40 --> a6d48df0-403f-4efc-a75f-9504a960884e;
+  style a6d48df0-403f-4efc-a75f-9504a960884e stroke:#2c3143,stroke-width:4px;
   41["Cut"];
   38 -->|out_file1| 41;
+  0ee7f9b6-b065-4e26-93df-6e6e2fe458a9["Output\nMarkers - cluster - named"];
+  41 --> 0ee7f9b6-b065-4e26-93df-6e6e2fe458a9;
+  style 0ee7f9b6-b065-4e26-93df-6e6e2fe458a9 stroke:#2c3143,stroke-width:4px;
   42["Cut"];
   39 -->|out_file1| 42;
+  fdb88faa-9b76-4edb-b89b-427c098a473e["Output\nMarkers - genotype - named"];
+  42 --> fdb88faa-9b76-4edb-b89b-427c098a473e;
+  style fdb88faa-9b76-4edb-b89b-427c098a473e stroke:#2c3143,stroke-width:4px;
   43["Scanpy PlotEmbed"];
   40 -->|output_h5ad| 43;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -412,13 +478,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter,-plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter,-plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter,-plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter,-plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter,-plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter,-plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter,-plot-and-explore-single-cell-rna-seq-data-updated"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -426,57 +492,118 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["Input dataset"];
+  0["ℹ️ Input Dataset\nMito-counted AnnData"];
+  style 0 stroke:#2c3143,stroke-width:4px;
   1["Inspect AnnData"];
   0 -->|output| 1;
   2["Scanpy FilterCells"];
   0 -->|output| 2;
+  6a00b14b-d3f8-4771-963a-76115c8eaf2f["Output\nGenes-filtered Object"];
+  2 --> 6a00b14b-d3f8-4771-963a-76115c8eaf2f;
+  style 6a00b14b-d3f8-4771-963a-76115c8eaf2f stroke:#2c3143,stroke-width:4px;
   3["Plot"];
   0 -->|output| 3;
+  c123842e-b2d2-43ad-81f0-6ba3b45d4021["Output\nScatter - genes x UMIs"];
+  3 --> c123842e-b2d2-43ad-81f0-6ba3b45d4021;
+  style c123842e-b2d2-43ad-81f0-6ba3b45d4021 stroke:#2c3143,stroke-width:4px;
   4["Plot"];
   0 -->|output| 4;
+  f1020d4d-555e-42fa-ba21-52a151b91a5b["Output\nScatter - mito x genes"];
+  4 --> f1020d4d-555e-42fa-ba21-52a151b91a5b;
+  style f1020d4d-555e-42fa-ba21-52a151b91a5b stroke:#2c3143,stroke-width:4px;
   5["Plot"];
   0 -->|output| 5;
+  a7fe6020-8f1e-470a-9ed3-f2b5e95516e0["Output\nViolin - genotype - log"];
+  5 --> a7fe6020-8f1e-470a-9ed3-f2b5e95516e0;
+  style a7fe6020-8f1e-470a-9ed3-f2b5e95516e0 stroke:#2c3143,stroke-width:4px;
   6["Plot"];
   0 -->|output| 6;
+  15e501bc-8ddb-4519-89eb-dde431ea96c1["Output\nViolin - batch - log"];
+  6 --> 15e501bc-8ddb-4519-89eb-dde431ea96c1;
+  style 15e501bc-8ddb-4519-89eb-dde431ea96c1 stroke:#2c3143,stroke-width:4px;
   7["Inspect AnnData"];
   0 -->|output| 7;
   8["Plot"];
   0 -->|output| 8;
+  eff22f46-baa6-4e00-ba82-d5e12ce26ff0["Output\nScatter - mito x UMIs"];
+  8 --> eff22f46-baa6-4e00-ba82-d5e12ce26ff0;
+  style eff22f46-baa6-4e00-ba82-d5e12ce26ff0 stroke:#2c3143,stroke-width:4px;
   9["Inspect AnnData"];
   0 -->|output| 9;
   10["Plot"];
   0 -->|output| 10;
+  56677ca4-129c-476c-85ec-69d1bb3d800d["Output\nViolin - sex - log"];
+  10 --> 56677ca4-129c-476c-85ec-69d1bb3d800d;
+  style 56677ca4-129c-476c-85ec-69d1bb3d800d stroke:#2c3143,stroke-width:4px;
   11["Plot"];
   2 -->|output_h5ad| 11;
+  acb61ea4-bcb9-45db-beef-e2bf1a176701["Output\nViolin - Filterbygenes"];
+  11 --> acb61ea4-bcb9-45db-beef-e2bf1a176701;
+  style acb61ea4-bcb9-45db-beef-e2bf1a176701 stroke:#2c3143,stroke-width:4px;
   12["Scanpy FilterCells"];
   2 -->|output_h5ad| 12;
+  51853662-4519-4229-a2ea-b22a53e7ef73["Output\nCounts-filtered Object"];
+  12 --> 51853662-4519-4229-a2ea-b22a53e7ef73;
+  style 51853662-4519-4229-a2ea-b22a53e7ef73 stroke:#2c3143,stroke-width:4px;
   13["Inspect AnnData"];
   2 -->|output_h5ad| 13;
+  362a7fe6-24bb-4398-ae48-870f4b4bb774["Output\nGeneral - Filterbygenes"];
+  13 --> 362a7fe6-24bb-4398-ae48-870f4b4bb774;
+  style 362a7fe6-24bb-4398-ae48-870f4b4bb774 stroke:#2c3143,stroke-width:4px;
   14["Inspect AnnData"];
   12 -->|output_h5ad| 14;
+  edf24149-9341-4fe7-b10c-3fcf092faaa5["Output\nGeneral - Filterbycounts"];
+  14 --> edf24149-9341-4fe7-b10c-3fcf092faaa5;
+  style edf24149-9341-4fe7-b10c-3fcf092faaa5 stroke:#2c3143,stroke-width:4px;
   15["Scanpy FilterCells"];
   12 -->|output_h5ad| 15;
+  a88ec405-265f-4a59-a75e-34e3b05b0096["Output\nMito-filtered Object"];
+  15 --> a88ec405-265f-4a59-a75e-34e3b05b0096;
+  style a88ec405-265f-4a59-a75e-34e3b05b0096 stroke:#2c3143,stroke-width:4px;
   16["Plot"];
   12 -->|output_h5ad| 16;
+  a7c8b0d9-82d3-4438-a212-b5f7c56d36b8["Output\nViolin - Filterbycounts"];
+  16 --> a7c8b0d9-82d3-4438-a212-b5f7c56d36b8;
+  style a7c8b0d9-82d3-4438-a212-b5f7c56d36b8 stroke:#2c3143,stroke-width:4px;
   17["Inspect AnnData"];
   15 -->|output_h5ad| 17;
+  56882809-e19f-451a-8010-bc55dcee482f["Output\nGeneral - Filterbymito"];
+  17 --> 56882809-e19f-451a-8010-bc55dcee482f;
+  style 56882809-e19f-451a-8010-bc55dcee482f stroke:#2c3143,stroke-width:4px;
   18["Scanpy FilterGenes"];
   15 -->|output_h5ad| 18;
+  00846477-dec5-408a-83b2-105fff7ce05b["Output\nFiltered Object"];
+  18 --> 00846477-dec5-408a-83b2-105fff7ce05b;
+  style 00846477-dec5-408a-83b2-105fff7ce05b stroke:#2c3143,stroke-width:4px;
   19["Plot"];
   15 -->|output_h5ad| 19;
+  7582e113-2004-4255-a1f3-d3123373f342["Output\nViolin - Filterbymito"];
+  19 --> 7582e113-2004-4255-a1f3-d3123373f342;
+  style 7582e113-2004-4255-a1f3-d3123373f342 stroke:#2c3143,stroke-width:4px;
   20["Inspect AnnData"];
   18 -->|output_h5ad| 20;
+  2d870a40-c602-4a1c-afef-450489354d39["Output\nGeneral - Filtered object"];
+  20 --> 2d870a40-c602-4a1c-afef-450489354d39;
+  style 2d870a40-c602-4a1c-afef-450489354d39 stroke:#2c3143,stroke-width:4px;
   21["Scanpy NormaliseData"];
   18 -->|output_h5ad| 21;
   22["Scanpy FindVariableGenes"];
   21 -->|output_h5ad| 22;
+  a0eb92b1-0263-4179-b7af-4bd9bcc9c960["Output\nUse_me_FVG"];
+  22 --> a0eb92b1-0263-4179-b7af-4bd9bcc9c960;
+  style a0eb92b1-0263-4179-b7af-4bd9bcc9c960 stroke:#2c3143,stroke-width:4px;
   23["Scanpy ScaleData"];
   22 -->|output_h5ad| 23;
+  5776dbb9-0cac-40c0-9bae-9accae16a7a0["Output\nUse_me_Scaled"];
+  23 --> 5776dbb9-0cac-40c0-9bae-9accae16a7a0;
+  style 5776dbb9-0cac-40c0-9bae-9accae16a7a0 stroke:#2c3143,stroke-width:4px;
   24["Scanpy RunPCA"];
   23 -->|output_h5ad| 24;
   25["Plot"];
   24 -->|output_h5ad| 25;
+  f0b6f578-050f-4936-9ee7-9956b0760c6f["Output\nPCA Variance"];
+  25 --> f0b6f578-050f-4936-9ee7-9956b0760c6f;
+  style f0b6f578-050f-4936-9ee7-9956b0760c6f stroke:#2c3143,stroke-width:4px;
   26["Scanpy ComputeGraph"];
   24 -->|output_h5ad| 26;
   27["Scanpy RunTSNE"];
@@ -487,8 +614,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   28 -->|output_h5ad| 29;
   30["Scanpy FindMarkers"];
   29 -->|output_h5ad| 30;
+  7cfe5c9c-1c80-41b4-b669-633b1d7d40e3["Output\nMarkers - cluster"];
+  30 --> 7cfe5c9c-1c80-41b4-b669-633b1d7d40e3;
+  style 7cfe5c9c-1c80-41b4-b669-633b1d7d40e3 stroke:#2c3143,stroke-width:4px;
+  98e98405-951e-4c6c-be01-3c925ae35449["Output\nFinal object"];
+  30 --> 98e98405-951e-4c6c-be01-3c925ae35449;
+  style 98e98405-951e-4c6c-be01-3c925ae35449 stroke:#2c3143,stroke-width:4px;
   31["Scanpy FindMarkers"];
   29 -->|output_h5ad| 31;
+  1e9f229d-eb34-4a5b-a6d9-e70c7b0581f4["Output\nMarkers - genotype"];
+  31 --> 1e9f229d-eb34-4a5b-a6d9-e70c7b0581f4;
+  style 1e9f229d-eb34-4a5b-a6d9-e70c7b0581f4 stroke:#2c3143,stroke-width:4px;
   32["Scanpy PlotEmbed"];
   30 -->|output_h5ad| 32;
   33["Scanpy PlotEmbed"];
@@ -510,13 +646,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   36 -->|var| 39;
   40["AnnData Operations"];
   37 -->|output_h5ad| 40;
+  10bd70f8-ffcb-442b-9647-e5b947b6d35e["Output\nFinal cell annotated object"];
+  40 --> 10bd70f8-ffcb-442b-9647-e5b947b6d35e;
+  style 10bd70f8-ffcb-442b-9647-e5b947b6d35e stroke:#2c3143,stroke-width:4px;
   41["Cut"];
   38 -->|out_file1| 41;
+  4f822c1c-91c5-4be4-8f9b-d5bdda0a037e["Output\nMarkers - cluster - named"];
+  41 --> 4f822c1c-91c5-4be4-8f9b-d5bdda0a037e;
+  style 4f822c1c-91c5-4be4-8f9b-d5bdda0a037e stroke:#2c3143,stroke-width:4px;
   42["Cut"];
   39 -->|out_file1| 42;
+  3b471f3d-263d-4299-9b7d-8a8ae1aa556e["Output\nMarkers - genotype - named"];
+  42 --> 3b471f3d-263d-4299-9b7d-8a8ae1aa556e;
+  style 3b471f3d-263d-4299-9b7d-8a8ae1aa556e stroke:#2c3143,stroke-width:4px;
   43["Scanpy PlotEmbed"];
   40 -->|output_h5ad| 43;
-
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -546,7 +690,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b082ab628b46ae519f7dd9939a6e5aa07e1ad8f">1b082ab</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/de667137167ab7805ef0930a8d14112b5aa41549">de66713</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -570,7 +714,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709165480'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709209861'></script>
         
     </body>
 </html>
