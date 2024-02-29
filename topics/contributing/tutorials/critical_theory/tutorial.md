@@ -21,7 +21,7 @@ contributions:
 
 Critical Learning Theory (also known as Critical Theory of Education) is rooted in the broader Critical Theory tradition, originated with the Frankfurt School school of thought.
 
-![Frankfurt_school_picture.](.../images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 by Jeremy J. Shapiro at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Back left: Siegfried Landshut. Right back: Jürgen Habermas. Licence: CC BY-SA 4.0")
+![Frankfurt_school_picture.](../../images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 by Jeremy J. Shapiro at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Back left: Siegfried Landshut. Right back: Jürgen Habermas. Licence: CC BY-SA 4.0")
 
 The Frankfurt School, formally known as the Institute for Social Research (Institut für Sozialforschung), is a renowned intellectual and academic hub founded in 1923 at Goethe University in Frankfurt, Germany. Comprising a group of critical theorists, including Max Horkheimer, Theodor Adorno, and Herbert Marcuse, the Frankfurt School developed Critical Theory as a multidisciplinary approach to understanding and challenging the oppressive dynamics of industrial societies.
 
