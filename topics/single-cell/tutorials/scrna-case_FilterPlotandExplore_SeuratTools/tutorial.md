@@ -95,8 +95,6 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 ><tip-title>AnnData to Seurat</tip-title>
 >If you have uploaded your data from Zenodo, and it came in AnnData format, we will need to convert this to a Seurat Object. This can be easily accomplished using the Seurat FilterCells tool.
 >Simply run the tool without any actual filtering thresholds and with the following parameters: 
->
-
 {: .tip}
 
 # Generating a Seurat object
