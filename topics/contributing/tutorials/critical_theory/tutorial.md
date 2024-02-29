@@ -20,15 +20,17 @@ contributions:
 > This training can be considered as the continuation of [Principles of learning and how they apply to training and teaching ]({% link topics/contributing/tutorials/learning-principles/tutorial.md %}). If you wish to have a panoramic view of the theoretical corpus in which the **Critical Learning Theory** is embedded, we recommend that you start with the above-mentioned training.
 {: .warning}
 
-**Critical Learning Theory** (also known as *Critical Education Theory*) is rooted in the broader **Critical Theory** tradition, originated with the Frankfurt School of thought, formally known as the Institute for Social Research (*Institut für Sozialforschung*).
+# Introduction
 
-![Frankfurt_school_picture.](../../images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 by Jeremy J. Shapiro at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Back left: Siegfried Landshut. Right back: Jürgen Habermas. Licence: CC BY-SA 4.0")
+The **Critical Learning Theory** (also known as *Critical Education Theory* or *Transformative Learning Theory*) is a pedagogical paradigm rooted in the broader **Critical Theory** tradition originated with the **Frankfurt School** of thought, a renowned intellectual and academic hub founded in 1923 at Goethe University in Frankfurt, Germany. 
 
-The Frankfurt School is a renowned intellectual and academic hub founded in 1923 at Goethe University in Frankfurt, Germany. Comprising a group of critical theorists, including Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the Frankfurt School developed the **Critical Theory** as a multidisciplinary approach to understand and challenge the oppressive dynamics of industrial societies.
+Comprising a group of critical theorists, including Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the **Frankfurt School** developed the **Critical Theory** as a multidisciplinary approach to understand and challenge the oppressive dynamics of industrial societies.
 
-In the realm of education, the **Critical Learning Theory** aligns with the Frankfurt School's tradition, emphasizing a critical analysis of education as a social institution. It represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of **critical thinking**. A leading figure of this school of thought is  prominent American-Canadian critical pedagogue Henry Giroux.
+![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Licence: CC BY-SA 4.0")
 
-Within the realm of **Critical Learning Theory**, the concept of **Hidden Curriculum**, extensively explored by Giroux, refers to the implicit messages, values, and norms transmitted to students through the informal aspects of the educational system, distinct from the explicit and planned syllabus.
+In the realm of education, the **Critical Learning Theory** aligns with the Frankfurt School's tradition, emphasizing a critical analysis of education as a social institution. It represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of **critical thinking** ({% cite Giroux2018 %}). A leading figure of this school of thought is  prominent American-Canadian critical pedagogue Henry Giroux.
+
+Within the realm of **Critical Learning Theory**, the concept of **Hidden Curriculum**, extensively explored by Giroux, refers to the implicit messages, values, and norms transmitted to students through the informal aspects of the educational system, distinct from the explicit and planned syllabus ({% cite Giroux1988 %}).
 
 This training aspires to be a introduction on the **Critical Learning Theory** and the concept of **Hidden Curriculum**, with the aim of pointing out which pedagogical elements are the most appropriate to stimulate **critical thinking**, the backbone of scientific development.
 
