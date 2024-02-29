@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "On Critical Learning Theory: the Hidden Curriculum"
+level: Advanced
 subtopic: pedagogy
 time_estimation: 2h
 questions:
@@ -17,14 +18,14 @@ contributions:
 ---
 
 > <warning-title>Recommended starting point</warning-title>
-> This training can be considered as the continuation of [Principles of learning and how they apply to training and teaching ]({% link topics/contributing/tutorials/learning-principles/tutorial.md %}). If you wish to have a panoramic view of the theoretical corpus in which the **Critical Learning Theory** is embedded, we recommend that you start with the above-mentioned training.
+> This training can be considered as the continuation of [Principles of learning and how they apply to training and teaching ]({% link topics/contributing/tutorials/learning-principles/tutorial.md %}). If you wish to have a panoramic view of the theoretical corpus in which the **Critical Learning Theory** is embedded, we recommend to start with the above-mentioned training.
 {: .warning}
 
 # Introduction
 
-The **Critical Learning Theory** (also known as *Critical Education Theory* or *Transformative Learning Theory*) is a pedagogical paradigm rooted in the broader **Critical Theory** tradition originated with the **Frankfurt School** of thought, a renowned intellectual and academic hub founded in 1923 at Goethe University in Frankfurt, Germany. 
+The **Critical Learning Theory**  is a pedagogical paradigm rooted in the broader **Critical Theory** tradition originated with the **Frankfurt School** of thought, formally known as the Institute for Social Research (*Institut für Sozialforschung*), an academic hub founded in 1923 at Goethe University in Frankfurt, Germany. 
 
-Comprising a group of critical theorists, including Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the **Frankfurt School** developed the **Critical Theory** as a multidisciplinary approach to understand and challenge the oppressive dynamics of industrial societies.
+Consisting of a renowned collective of critical theorists such as Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the **Frankfurt School** developed the **Critical Theory** as a multidisciplinary approach crafted with the intent to comprehend and actively confront the oppressive dynamics ingrained within industrial societies.
 
 ![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Licence: CC BY-SA 4.0")
 
