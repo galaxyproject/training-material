@@ -142,7 +142,7 @@ The dataset is a FASTQ file.
 > {: .solution}
 {: .question}
 
-{% include _includes/cyoa-choices.html option1="No Illumina MiSeq data" option2="Existing Illumina MiSeq data" default="No Illumina MiSeq data" text="Have you associated Illumina MiSeq data?" disambiguation="miseq"%}
+{% include _includes/cyoa-choices.html option1="Without Illumina MiSeq data" option2="With Illumina MiSeq data" default="Without Illumina MiSeq data" text="Do you have associated Illumina MiSeq data?" disambiguation="miseq"%}
 
 <div class="Existing-Illumina-MiSeq-data" markdown="1">
 
