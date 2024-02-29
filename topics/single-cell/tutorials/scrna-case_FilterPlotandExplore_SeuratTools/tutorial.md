@@ -20,11 +20,6 @@ objectives:
 
 time_estimation: 3H
 
-key_points:
-- Being able to switch between Galaxy and RStudio when analyzing datasets can be useful when looking to adjust default parameters within Seurat's functions and workflow.
-- Seurat in RStudio gives more flexibility and specificity of analyses, but Galaxy offers great reproducibility and ease of analysis.
-- Beginning to learn the syntax and use of R will expand your
-
 requirements:
 -
     type: "internal"
@@ -103,7 +98,21 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 >
 {: .hands_on}
 
-INSERT TIP HERE AB SWAPPING TO A SEURAT OBJECT 
+><tip-title>AnnData to Seurat</tip-title>
+>If you have uploaded your data from Zenodo, and it came in AnnData format, we will need to convert this to a Seurat Object. This can be easily accomplished using the Seurat FilterCells tool.
+>Simply run the tool without any actual filtering thresholds and with the following parameters: 
+>
+>> <hands-on-title>Filter Cells</hands-on-title>
+>>
+>> Run{% tool [FilterCells](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0) %} with the following parameters:
+>> - *"Choose the format of the input"*: `AnnData`
+>> - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
+>> - *"Name of Parameter to filter on"*: `nCount_RNA`
+>> - *"Min value"*: `0`
+>> - *"Max value"*: `0`
+>> - *"Choose the format of the output"*: `RDS with a Seurat object`
+> {: .hands_on}
+{: .tip}
 
 # Generating a Seurat object
 You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
@@ -288,37 +297,81 @@ The removal of these genes is by no means necessary, but will speed up your anal
 
 # Processing
 Currently, we still have quite big data. We have two issues here
- 1. We already saw in our filtering plots that there are differences in how many transcripts and genes have been counted per cell. This technical variable could, and likely would, distract us from identifying true biological differences.
+ 1. We already saw in our filtering plots that there are differences in how many transcripts and genes have been counted per cell. This technical variable could, and likely will, distract us from identifying true biological differences.
  2. We like to plot things on 2-dimensional X/Y plots. So, for instance, Gapdh could be on one axis, and Actin could be on another, and then each cell is plotted onto that 2D axis based on how many of each transcript they possess.
 
 Although that would be fine, adding in a 3rd dimension (or, indeed, in our case, a dimension for each of the thousands of genes), is a bit trickier.
 
-So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize.
+So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize: this is commonly referred to as preprocessing of the data and a typical scRNA-seq preprocessing pipeline will include the following steps: 
 
-We will run SCTransform, a combinatorial function by Seurat that normalizes the data, finds variable features, and then scales the data. In their initial workflow, and in the Scanpy version of this tutorial, these steps are run individually. However, with the second version of SCTransform comes time efficiency and optimization for downstream analyses.
+1. Normalization 
 
-```r
-filtered_srt<- SCTransform(filtered_srt, vars.to.regress = c("perc.mt", "nFeature_RNA", "nCount_RNA"), verbose = TRUE, return.only.var.genes = FALSE, seed.use = 1448145)
-```
-><comment-title>What is Normalization?</comment-title>
-> Normalisation helps reduce the differences between gene and UMI counts by fitting total counts across cells in our data to be comparable to one another. SCTransform regularizes the gene expression profiles via a negative binomial regression while also controlling for overfitting of the data. This step can also be done using Seurat's NormalizeData() function, but would need to be followed by FindVariableFeatures() and ScaleData().
+What is Normalization?
+
+Normalisation helps reduce the differences between gene and UMI counts by fitting total counts across cells in our data to be comparable to one another. SCTransform regularizes the gene expression profiles via a negative binomial regression while also controlling for overfitting of the data. 
+
+> <hands-on-title>Normalize Data</hands-on-title>
 >
-{: .comment}
+> Run{% tool [NormaliseData](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_normalise_data/seurat_normalise_data/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat FilterCells on data 5: Seurat RDS`
+> - *"Normalisation method"*: `Log Normalise`
+{: .hands_on}
 
+2. Identifying Variable Genes
 
-We also have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses.
+What are variable genes? 
 
-The find variable features step within SCTransform (or Seurat's FindVariableFeatures() function) will flag genes that do vary across cells to expedite future analyses and ensure that we, and Seurat, don't waste time looking for meaningful differences where they don't exist.
+The datasets have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses.
 
-Then, SCTransform (or Seurat's ScaleData() function) will scale the data so that all genes have the same variance and a zero mean.
+The find variable genes step flags genes that *do* vary across cells to expedite future analyses and ensure that we, and Seurat, don't waste time looking for meaningful differences where they don't exist.
 
-This is an important step to set up our data for further dimensionality reduction. It also helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable.
+> <hands-on-title>Find Vairable Genes</hands-on-title>
+>
+> Run{% tool [FindVariableGenes](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_variable_genes/seurat_find_variable_genes/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat NormaliseData in data 11: Seurat RDS`
+> - *"Choose the format of the output"*: `RDS with a Seurat object`
+{: .hands_on}
+
+This tool will output two new pieces of data into our Galaxy history: a new Seurat object with variable features identified and flagged, and a tabular file with a list of these variable genes. 
+
+This gene list may be used as a sneak peak into understanding what the dataset will look like! We can begin to understand which genes are going to be driving downstream clustering of our cells and maybe even make some decisions about whether we are happy with our filtering based on this list. 
+
+3. Scale Data 
+
+Now we will scale the data.
+
+What is scaling?
+
+This is an important step to set up our data for further dimensionality reduction. It will transform the dataset such that all genes have the same variance and a zero mean. It helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable.
 
 ><comment-title>Don't Worry!</comment-title>
 > Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a ‘0’ when you calculate gene differences between clusters.
 >
 {: .comment}
 
+> <hands-on-title>Scale Data </hands-on-title>
+>
+> Run{% tool [ScaleData](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_scale_data/seurat_scale_data/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat FindVariableGenes on data 12: Seurat RDS`
+> - *"Choose the format of the output"*: `RDS with a Seurat object`
+> - *"Genes to use"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
+> - *"Vars to regress"*: `nCount_RNA`
+> - *"Statistical model"*: `Linear model`
+{: .hands_on}
+
+You now have a preprocessed Seurat object! 
+
+><comment-title>Regressing Variables</comment-title>
+> Take note of the "Vars to regress" argument in the above tool. This function allow us to mitigate the effects of confounding factors in our dataset.
+> In true research practice, I often regress out multiple variables including but not limited to perc.mt, cell cycle scoring, and feature count. 
+> As currently written, this tool only allows us to regress out a single variable: so feel free to pick another to regress and see how it changes the downstream analyses!
+{: .comment}
+
+
+# Dimensionality Reduction 
 Although we've made our expression values comparable to one another and our overall dataset less computationally demanding, we still have way too many dimensions (n cells x n genes!).
 
 Transcript changes are not usually singular--which is to say, genes function and exist in pathways and groups. It would be easier to analyse our data if we could group these differences. To address this we will run principal component analysis (PCA).
