@@ -29,7 +29,7 @@ Consisting of a renowned collective of critical theorists such as Max Horkheimer
 
 ![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Photo taken in Heidelberg in April 1964 at the Max Weber Institute of Sociology. In front: Max Horkheimer and Theodor W. Adorno. Licence: CC BY-SA 4.0")
 
-In the realm of education, the **Critical Learning Theory** aligns with the Frankfurt School's tradition, emphasizing a critical analysis of education as a social institution. It represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of **critical thinking** ({% cite Giroux2018 %}). A leading figure of this school of thought is  prominent American-Canadian critical pedagogue Henry Giroux.
+In the realm of education, the **Critical Learning Theory** aligns with the Frankfurt School's tradition, emphasizing a critical analysis of educative systems as social institutions. It represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of **critical thinking** ({% cite Giroux2018 %}). A leading figure of this school of thought is  prominent American-Canadian critical pedagogue Henry Giroux.
 
 Within the realm of **Critical Learning Theory**, the concept of **Hidden Curriculum**, extensively explored by Giroux, refers to the implicit messages, values, and norms transmitted to students through the informal aspects of the educational system, distinct from the explicit and planned syllabus ({% cite Giroux1988 %}).
 
