@@ -25,10 +25,15 @@ description: This page will redirect you to a specific page in your preferred Ga
 			<details id="set-preferred" open>
 				<summary>Select your Preferred Galaxy Server</summary>
 				<p class="card-text">
+					<span>
 					{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 					{% for server in servers %}
-					<a class="clickthrough btn btn-primary" href="{{ server.url }}">{{ server.human }} ({{ server.id | upcase }})</a>
+					<a id="{{server.id}}" class="clickthrough btn btn-primary" href="{{ server.url }}">
+						<img src="{{ server.url }}/static/favicon.svg" style="height: 1em; margin-right: 0.5em" onload="doneLoading('{{ server.id }}')"/>
+						{{ server.human }}
+					</a>
 					{% endfor %}
+					</span>
 					<button id="set-other" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Other</button>
 				</p>
 			</details>
@@ -69,6 +74,27 @@ description: This page will redirect you to a specific page in your preferred Ga
 <script>
 let path = params.get('path') || '/';
 var preferred_server = localStorage.getItem('gxy-url');
+
+
+var startTime = new Date().getTime();
+let serverLoadTimes = {};
+function doneLoading(server) {
+	var loadtime = new Date().getTime() - startTime;
+	serverLoadTimes[server] = loadtime;
+	console.log(`${server} image took ${loadtime} ms to load`);
+	reorderServers();
+};
+
+function reorderServers() {
+	var servers = document.querySelectorAll('.clickthrough');
+	var serverArray = Array.from(servers);
+	serverArray.sort(function(a, b) {
+		return serverLoadTimes[a.id] - serverLoadTimes[b.id];
+	});
+	serverArray.forEach(function(el) {
+		document.getElementById(el.id).parentElement.appendChild(el);
+	});
+}
 
 document.getElementById('path').innerHTML = path;
 
@@ -123,3 +149,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	});
 });
 </script>
+
+<style>
+.clickthrough {
+	margin: 0.1em;
+}
+</style>
