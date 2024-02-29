@@ -326,7 +326,7 @@ The datasets have loads of genes, but not all of them vary in expression from ce
 
 The find variable genes step flags genes that *do* vary across cells to expedite future analyses and ensure that we, and Seurat, don't waste time looking for meaningful differences where they don't exist.
 
-> <hands-on-title>Find Vairable Genes</hands-on-title>
+> <hands-on-title>Find Variable Genes</hands-on-title>
 >
 > Run{% tool [FindVariableGenes](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_variable_genes/seurat_find_variable_genes/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
@@ -386,24 +386,31 @@ We can calculate the first handful of principal components in our data to drasti
 >You'll notice that the RunPCA() function is run using the variable features from the previous step. This signficantly decreases the number of genes, and their expression changes, that must be grouped into principal components by this step.
 {: .tip}
 
-```r
-filtered_srt <- RunPCA(filtered_srt, features = VariableFeatures(object = filtered_srt))
-```
+> <hands-on-title>Run PCA </hands-on-title>
+>
+> Run{% tool [RunPCA](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_pca/seurat_run_pca/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat ScaleData on data 14 and data 13: Seurat RDS`
+> - *"Choose the format of the output"*: `RDS with a Seurat object`
+> - *"Genes to scale"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
+{: .hands_on}
 
-To visualize how our principal components (PCs) represent our data, let's create an elbow plot:
+This tool will output you with four new datasets into your history: 
+  1. Seurat RDS which includes all of the following PCA metadata
+  2. Embeddings: Principal component values for each of the cells in your dataset
+  3. Loadings: Prinicial component values for each of the genes in your dataset  
+  4. Standard deviations of each principal component coordinates 
 
-```r
-ElbowPlot(filtered_srt, ndims = 50)
-```
-![PC Elbow Plot](../../images/scrna-SeuratRStudio/plot9.png "Elbow Plot: Varianvce Explained x PC.")
+><tip-title>Visualizing PCA</tip-title>
+>In order to use the PCA information which was just calculated, we must visualize it. The currently available tools unfortunately do not [YET] carry the capacity to do so, but I will provide the plot so that we may make an informed decision together: 
+>
+>INSERT PLOT 
+>
+>We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 15 PCs to be conservative.
+>You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs.
+{: .tip}
 
-><comment-title>Interpretations</comment-title>
->We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 10 PCs.
-{: .comment}
-
-You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs.
-
-We’re still looking at around 10 dimensions at this point--likely not the easiest to visualize. To make our lives easier, we need to identify how similar a cell is to another cell, across every cell across each of these dimensions.
+We’re still looking at around 15 dimensions at this point--likely not the easiest to visualize. To make our lives easier, we need to identify how similar a cell is to another cell, across every cell across each of these dimensions.
 
 For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not.
 
@@ -413,24 +420,35 @@ The kNN graph plots connections between cells if their distance (when plotted in
 >“Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.
 {: .comment}
 
-Let's now use the 10 PC threshold we chose from the Elbowplot and apply it to find neighbors:
+Let's now use the 15 PC threshold we chose from the Elbowplot and apply it to find neighbors:
 
-```r
-filtered_srt <- FindNeighbors(filtered_srt, dims = 1:10)
-```
+> <hands-on-title>Find Neighbors </hands-on-title>
+>
+> Run{% tool [FindNeighbours](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_neighbours/seurat_find_neighbours/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat RunPCA on data 14 and data 15: Seurat RDS`
+> - *"Reduction"*: `pca`
+> - *"Dimensions"*: `1,2,3,4,5,6,7,8,9,10,11,12,13,14,15`
+> - *"Assay"*: `RNA`
+{: .hands_on}
 
-Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another.
+Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another: we can identify and label clusters: 
 
-```r
-filtered_srt <- FindClusters(filtered_srt, resolution = 0.5)
-```
+> <hands-on-title>Find Clusters </hands-on-title>
+>
+> Run{% tool [FindClusters](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat FindNeighbours on data 16: Seurat RDS`
+{: .hands_on}
+
+This tool will output two new datasets: as usual, a new Seurat object which includes a metadata column denoting which cluster each of the cells was assigned to, and a csv file of the same information. 
 
 Unfortunately, identifying clusters is not as majestic as biologists often think - the math doesn’t necessarily identify true cell clusters. Every algorithm for identifying cell clusters falls short of a biologist knowing their data, knowing what cells should be there, and proving it in the lab.
 
 So, we’re going to make the best of it as a starting point and see what happens! We will define clusters from the kNN graph, based on how many connections cells have with one another. Roughly, this will depend on a resolution parameter for how granular you want to be.
 
 ><tip-title>On Clustering Resolution</tip-title>
->The resolution parameter available in the FindClusters() function allows for you, the bioinformatician, to dictate the granularity of the clusters.
+>The resolution parameter available in the advanced options of this tool allows for you, the bioinformatician, to dictate the granularity of the clusters.
 >
 >For example, a higher clustering resolution dictates increased granularity, and more stringent clusters. That is--cells must more closely resemble one another in order to be grouped into the same cluster than at a lower clustering resolution.
 >
@@ -444,9 +462,16 @@ Now that we have made note within our object of which cells cluster together, we
 >
 {: .tip}
 
-```r
-filtered_srt <- RunUMAP(filtered_srt, dims = 1:10, seed.use = 1323)
-```
+> <hands-on-title>Run UMAP </hands-on-title>
+>
+> Run{% tool [RunUMAP](testtoolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `RDS with a Seurat object`
+> - *"RDS file"*: `Seurat FindClusters on data 20: Seurat RDS`
+> - *"Choose the format of the output"*: `RDS with a Seurat object`
+> - *"Dims"*: `1:15`
+{: .hands_on}
+
+You now have a completely preprocessed and ready to be analyzed Seurat object--congratulations!
 
 # Let's Take a Look
 Now that we have run dimensionality reduction on our dataset, it is ready for visualization. Let's take a look at what our cells look like in a UMAP projection:
