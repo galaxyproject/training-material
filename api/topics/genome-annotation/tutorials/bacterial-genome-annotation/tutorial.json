@@ -103,7 +103,7 @@
       "name": "Bacterial Genome Annotation",
       "title": "Bacterial Genome Annotation",
       "test_results": null,
-      "modified": "2024-03-01 00:07:02 +0000",
+      "modified": "2024-03-02 00:04:53 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ISEScan\"];\n  0 -->|output| 1;\n  2bb672cb-4536-46b0-8a22-8590a0ca36c7[\"Output\\nisescan_results\"];\n  1 --> 2bb672cb-4536-46b0-8a22-8590a0ca36c7;\n  style 2bb672cb-4536-46b0-8a22-8590a0ca36c7 stroke:#2c3143,stroke-width:4px;\n  2[\"PlasmidFinder\"];\n  0 -->|output| 2;\n  614064e6-4b0f-4e38-b04e-e3f61ba41b46[\"Output\\nplasmidfinder_results\"];\n  2 --> 614064e6-4b0f-4e38-b04e-e3f61ba41b46;\n  style 614064e6-4b0f-4e38-b04e-e3f61ba41b46 stroke:#2c3143,stroke-width:4px;\n  3[\"Integron Finder\"];\n  0 -->|output| 3;\n  d26788cf-2441-4f29-ac39-b6be96f192eb[\"Output\\nintegronfinder_summary\"];\n  3 --> d26788cf-2441-4f29-ac39-b6be96f192eb;\n  style d26788cf-2441-4f29-ac39-b6be96f192eb stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  d3a40a8b-1bd1-42b6-a91e-756379b86d94[\"Output\\nbakta_summary\"];\n  4 --> d3a40a8b-1bd1-42b6-a91e-756379b86d94;\n  style d3a40a8b-1bd1-42b6-a91e-756379b86d94 stroke:#2c3143,stroke-width:4px;\n  5[\"Group\"];\n  1 -->|all_results| 5;\n  6[\"Group\"];\n  1 -->|all_results| 6;\n  7[\"Replace Text\"];\n  2 -->|result_file| 7;\n  8[\"Select last\"];\n  7 -->|outfile| 8;\n  9[\"Table to GFF3\"];\n  8 -->|outfile| 9;\n  10[\"JBrowse\"];\n  0 -->|output| 10;\n  4 -->|annotation_gff3| 10;\n  9 -->|output| 10;\n  1 -->|annotation| 10;"
     }
   ],
