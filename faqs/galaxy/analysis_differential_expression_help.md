@@ -23,6 +23,7 @@ The error and usage help in this FAQ applies to most if not all Bioconductor too
 - Sailfish
 - DEXSeq
 - DEXSeq-count
+- IsoformSwitchAnalyzeR
 
 {% icon galaxy-info %}  Review your error messages and you'll find some clues about what may be going wrong and what needs to be adjusted in your rerun. If you are getting a message from `R`, that usually means the underlying tool could not read in or understand your inputs. This can be a labeling problem (what was typed on the form) or a content problem (data within the files).
 
