@@ -26,11 +26,14 @@ tags:
   - Biodiversity
   - FAIR
   - Data Paper
+draft: true
 contributions:
     authorship:
         - yvanlebras
+        - ThibaudGlinez
     editing:
         - yvanlebras
+        - ThibaudGlinez
         - hexylena
     funding:
         - fnso2019
