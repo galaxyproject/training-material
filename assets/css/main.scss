@@ -288,6 +288,21 @@ body {
 		display: none;
 	}
 
+	// Don't break over a page boundary if possible
+	h2,h3,h4,h5,h6,h7,h8 {break-after: avoid-page;}
+	img, svg, table, canvas {break-inside: avoid;}
+
+	// Fun fact: paper is not clickable.
+	// This is mostly applicable for folks printing tutorials which they
+	// probably shouldn't be doing anyway but just in case.
+	section#tutorial-content {
+		a::after {content: " (" attr(href) ")";}
+
+		blockquote.agenda {
+			a::after {content: unset;}
+		}
+	}
+
 	// Save ink.
 	pre.highlight {
 		background: none !important;
