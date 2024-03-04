@@ -1,22 +1,19 @@
 {
   "layout": "tutorial_hands_on",
-  "title": "Genome Assembly of MRSA using Oxford Nanopore MinION Data",
+  "title": "Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)",
   "zenodo_link": "https://zenodo.org/record/10669812",
   "questions": [
-    "How to check the quality of the MinION data?",
-    "How to perform an assembly with MinION data?",
-    "What species do I have and what is its sequence type?",
-    "Which resistance genes are on my genome?",
-    "Where are the genes located on my genome?"
+    "How to check the quality of the MinION data (together with Illumina data)?",
+    "How to perform an assembly of a bacterial genome with MinION data?",
+    "How to check the quality of an assembly?"
   ],
   "objectives": [
-    "Assess your data on quality and quantity",
-    "Assemble a genome",
-    "Assess your assembly quality",
-    "Assess presence of antimicrobial resistance genes",
-    "Perform a species identification and MLST typing",
-    "Search for resistance genes on the assembly",
-    "Find a gene on your genome using Prokka + JBrowse"
+    "Run tools to evaluate sequencing data on quality and quantity",
+    "Process the output of quality control tools",
+    "Improve the quality of sequencing data",
+    "Run a tool to assemble a bacterial genome using short reads",
+    "Run tools to assess the quality of an assembly",
+    "Understand the outputs of tools to assess the quality of an assembly"
   ],
   "time_estimation": "2h",
   "key_points": [
@@ -28,11 +25,14 @@
     "assembly",
     "amr",
     "gmod",
-    "jbrowse1"
+    "jbrowse1",
+    "microgalaxy"
   ],
+  "level": "Introductory",
   "contributions": {
     "authorship": [
-      "bazante1"
+      "bazante1",
+      "bebatut"
     ],
     "editing": [
       "hexylena",
@@ -41,15 +41,16 @@
       "miaomiaozhou88"
     ],
     "funding": [
-      "avans-atgm"
+      "avans-atgm",
+      "abromics"
     ]
   },
   "follow_up_training": [
     {
       "type": "internal",
-      "topic_name": "visualisation",
+      "topic_name": "genome-annotation",
       "tutorials": [
-        "jbrowse"
+        "amr-gene-detection"
       ]
     },
     {
@@ -63,7 +64,7 @@
   "abbreviations": {
     "SVs": "Structural Variations"
   },
-  "mathjax": 6960,
+  "mathjax": 11271,
   "short_id": "T00037",
   "url": "/topics/assembly/tutorials/mrsa-nanopore/tutorial.html",
   "topic_name": "assembly",
@@ -80,61 +81,52 @@
   },
   "hands_on": true,
   "slides": false,
-  "mod_date": "2024-02-29 12:49:27 +0000",
+  "mod_date": "2024-02-29 13:14:47 +0000",
   "pub_date": "2021-03-24 18:30:46 +0000",
-  "version": 30,
+  "version": 33,
   "workflows": [
     {
-      "workflow": "main_workflow.ga",
-      "tests": false,
-      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/workflows/main_workflow.ga",
-      "path": "topics/assembly/tutorials/mrsa-nanopore/workflows/main_workflow.ga",
+      "workflow": "main-workflow.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/workflows/main-workflow.ga",
+      "path": "topics/assembly/tutorials/mrsa-nanopore/workflows/main-workflow.ga",
       "wfid": "assembly-mrsa-nanopore",
-      "wfname": "main_workflow",
-      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main_workflow",
-      "license": "AGPL-3.0-or-later",
+      "wfname": "main-workflow",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow",
+      "license": "MIT",
       "creators": [
         {
-          "class": "Organization",
-          "name": "Avans Hogeschool",
-          "url": "https://www.avans.nl"
+          "class": "Person",
+          "identifier": "https://orcid.org/0000-0003-2255-1631",
+          "name": "Bazante Sanders"
         },
         {
           "class": "Person",
-          "identifier": "0000-0001-9760-8992",
-          "jobTitle": "Docent HBO",
-          "name": "Helena Rasche",
-          "url": "https://github.com/hexylena"
-        },
-        {
-          "class": "Person",
-          "identifier": "",
-          "name": "Miaomiao Zhou"
+          "identifier": "https://orcid.org/0000-0001-9852-1987",
+          "name": "Bérénice Batut"
         }
       ],
-      "name": "Genome Assembly of MRSA using Oxford Nanopore MinION Data (imported from uploaded file)",
-      "title": "Genome Assembly of MRSA using Oxford Nanopore MinION Data (imported from uploaded file)",
+      "name": "Genome Assembly of MRSA using Oxford Nanopore MinION (and Illumina data if available)",
+      "title": "Genome Assembly of MRSA using Oxford Nanopore MinION (and Illumina data if available)",
       "test_results": null,
-      "modified": "2024-03-04 11:08:14 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNanopore fastq.bz2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert compressed file to uncompressed.\"];\n  0 -->|output| 1;\n  2[\"filtlong\"];\n  1 -->|output1| 2;\n  3[\"NanoPlot\"];\n  1 -->|output1| 3;\n  4[\"NanoPlot\"];\n  2 -->|outfile| 4;\n  5[\"Flye assembly\"];\n  2 -->|outfile| 5;\n  6[\"Bandage Image\"];\n  5 -->|assembly_gfa| 6;\n  799bd26b-b2da-45d4-9a79-8a880d608307[\"Output\\nBandage Image on input dataset(s): Assembly Graph Image\"];\n  6 --> 799bd26b-b2da-45d4-9a79-8a880d608307;\n  style 799bd26b-b2da-45d4-9a79-8a880d608307 stroke:#2c3143,stroke-width:4px;\n  7[\"Quast\"];\n  5 -->|consensus| 7;\n  8[\"staramr\"];\n  5 -->|consensus| 8;\n  9[\"Prokka\"];\n  5 -->|consensus| 9;\n  10[\"Select\"];\n  8 -->|detailed_summary| 10;\n  11[\"Table to GFF3\"];\n  10 -->|out_file1| 11;\n  12[\"JBrowse\"];\n  5 -->|consensus| 12;\n  9 -->|out_gff| 12;\n  11 -->|output| 12;"
+      "modified": "2024-03-04 11:15:00 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNanopore raw reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nIllumina forward raw reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nIllumina reverse raw reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Convert compressed file to uncompressed.\"];\n  0 -->|output| 3;\n  4[\"FastQC\"];\n  0 -->|output| 4;\n  5[\"fastp\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  6[\"NanoPlot\"];\n  3 -->|output1| 6;\n  a97e6f33-8182-4a33-86dd-6cfbb83a842d[\"Output\\nnanoplot_before_filtering\"];\n  6 --> a97e6f33-8182-4a33-86dd-6cfbb83a842d;\n  style a97e6f33-8182-4a33-86dd-6cfbb83a842d stroke:#2c3143,stroke-width:4px;\n  7[\"filtlong\"];\n  5 -->|out1| 7;\n  5 -->|out2| 7;\n  0 -->|output| 7;\n  8[\"Flye\"];\n  7 -->|outfile| 8;\n  f12e718f-1bd5-490d-bd41-f0747aaa41a6[\"Output\\nflye_assembly_info\"];\n  8 --> f12e718f-1bd5-490d-bd41-f0747aaa41a6;\n  style f12e718f-1bd5-490d-bd41-f0747aaa41a6 stroke:#2c3143,stroke-width:4px;\n  9[\"NanoPlot\"];\n  7 -->|outfile| 9;\n  89524090-f590-434d-89e2-66f0b1a23c7c[\"Output\\nnanoplot_after_filtering\"];\n  9 --> 89524090-f590-434d-89e2-66f0b1a23c7c;\n  style 89524090-f590-434d-89e2-66f0b1a23c7c stroke:#2c3143,stroke-width:4px;\n  10[\"Bandage Image\"];\n  8 -->|assembly_gfa| 10;\n  11[\"BWA-MEM2\"];\n  5 -->|out2| 11;\n  8 -->|consensus| 11;\n  12[\"Quast\"];\n  8 -->|consensus| 12;\n  dabfb8fd-8791-4959-a9dc-9b3c1e57a69c[\"Output\\nquast_report_before_polishing\"];\n  12 --> dabfb8fd-8791-4959-a9dc-9b3c1e57a69c;\n  style dabfb8fd-8791-4959-a9dc-9b3c1e57a69c stroke:#2c3143,stroke-width:4px;\n  13[\"BWA-MEM2\"];\n  5 -->|out1| 13;\n  8 -->|consensus| 13;\n  14[\"Polypolish\"];\n  8 -->|consensus| 14;\n  13 -->|bam_output| 14;\n  11 -->|bam_output| 14;\n  15[\"Quast\"];\n  14 -->|polished_fasta| 15;\n  8 -->|consensus| 15;\n  4e465b51-68bf-4203-9a7c-897f46c70277[\"Output\\nquast_report_after_polishing\"];\n  15 --> 4e465b51-68bf-4203-9a7c-897f46c70277;\n  style 4e465b51-68bf-4203-9a7c-897f46c70277 stroke:#2c3143,stroke-width:4px;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/mrsa-nanopore/tutorial.json",
   "tools": [
     "CONVERTER_bz2_to_uncompressed",
-    "Grep1",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6",
-    "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
-    "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0",
     "toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0",
-    "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0",
-    "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2",
-    "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/polypolish/polypolish/0.5.0+galaxy2",
     "toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3",
-    "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
-    "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.1",
-    "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
-    "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1",
     "upload1"
   ],
   "supported_servers": {
@@ -158,22 +150,36 @@
       {
         "name": "flye",
         "owner": "bgruening",
-        "revisions": "3ee0ef312022",
+        "revisions": "cb8dfd28c16f",
         "tool_panel_section_label": "Assembly",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
-        "name": "prokka",
-        "owner": "crs4",
-        "revisions": "111884f0d912",
-        "tool_panel_section_label": "Annotation",
+        "name": "fastqc",
+        "owner": "devteam",
+        "revisions": "5ec9f6bceaee",
+        "tool_panel_section_label": "FASTA/FASTQ",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "bandage",
         "owner": "iuc",
-        "revisions": "b2860df42e16",
+        "revisions": "ddddce450736",
         "tool_panel_section_label": "Graph/Display Data",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "bwa_mem2",
+        "owner": "iuc",
+        "revisions": "bfaa0d22c2e4",
+        "tool_panel_section_label": "Mapping",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "fastp",
+        "owner": "iuc",
+        "revisions": "65b93b623c77",
+        "tool_panel_section_label": "FASTA/FASTQ",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
@@ -184,24 +190,24 @@
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
-        "name": "jbrowse",
+        "name": "filtlong",
         "owner": "iuc",
-        "revisions": "17359b808b01",
-        "tool_panel_section_label": "Graph/Display Data",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "minimap2",
-        "owner": "iuc",
-        "revisions": "8c6cd2650d1f",
-        "tool_panel_section_label": "Mapping",
+        "revisions": "1f296803dfa3",
+        "tool_panel_section_label": "FASTA/FASTQ",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "nanoplot",
         "owner": "iuc",
-        "revisions": "edbb6c5028f5",
+        "revisions": "0f1c34698076",
         "tool_panel_section_label": "Nanopore",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "polypolish",
+        "owner": "iuc",
+        "revisions": "f355085dd2aa",
+        "tool_panel_section_label": "Metagenomic Analysis",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
@@ -214,34 +220,13 @@
       {
         "name": "quast",
         "owner": "iuc",
-        "revisions": "ebb0dcdb621a",
+        "revisions": "72472698a2df",
         "tool_panel_section_label": "Assembly",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "tbl2gff3",
-        "owner": "iuc",
-        "revisions": "965674d88d34",
-        "tool_panel_section_label": "Annotation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "tbl2gff3",
-        "owner": "iuc",
-        "revisions": "4a7f4b0cc0a3",
-        "tool_panel_section_label": "Annotation",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "staramr",
-        "owner": "nml",
-        "revisions": "2fd4d4c9c5c2",
-        "tool_panel_section_label": "Metagenomic Analysis",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: flye\n  owner: bgruening\n  revisions: 3ee0ef312022\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: prokka\n  owner: crs4\n  revisions: 111884f0d912\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bandage\n  owner: iuc\n  revisions: b2860df42e16\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: filtlong\n  owner: iuc\n  revisions: 8880fb74ef56\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jbrowse\n  owner: iuc\n  revisions: 17359b808b01\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: minimap2\n  owner: iuc\n  revisions: 8c6cd2650d1f\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nanoplot\n  owner: iuc\n  revisions: edbb6c5028f5\n  tool_panel_section_label: Nanopore\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: porechop\n  owner: iuc\n  revisions: 93d623d9979c\n  tool_panel_section_label: Nanopore\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: quast\n  owner: iuc\n  revisions: ebb0dcdb621a\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tbl2gff3\n  owner: iuc\n  revisions: 965674d88d34\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tbl2gff3\n  owner: iuc\n  revisions: 4a7f4b0cc0a3\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: staramr\n  owner: nml\n  revisions: 2fd4d4c9c5c2\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: flye\n  owner: bgruening\n  revisions: cb8dfd28c16f\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 5ec9f6bceaee\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bandage\n  owner: iuc\n  revisions: ddddce450736\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa_mem2\n  owner: iuc\n  revisions: bfaa0d22c2e4\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: 65b93b623c77\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: filtlong\n  owner: iuc\n  revisions: 8880fb74ef56\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: filtlong\n  owner: iuc\n  revisions: 1f296803dfa3\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nanoplot\n  owner: iuc\n  revisions: 0f1c34698076\n  tool_panel_section_label: Nanopore\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: polypolish\n  owner: iuc\n  revisions: f355085dd2aa\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: porechop\n  owner: iuc\n  revisions: 93d623d9979c\n  tool_panel_section_label: Nanopore\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: quast\n  owner: iuc\n  revisions: 72472698a2df\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
@@ -265,6 +250,31 @@
       "id": "bazante1",
       "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json",
       "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/"
+    },
+    {
+      "name": "Bérénice Batut",
+      "email": "berenice.batut@gmail.com",
+      "twitter": "bebatut",
+      "linkedin": "berenicebatut",
+      "matrix": "bebatut:matrix.org",
+      "orcid": "0000-0001-9852-1987",
+      "joined": "2017-09",
+      "elixir_node": "fr",
+      "contact_for_training": true,
+      "location": {
+        "country": "FR",
+        "lat": 45.77,
+        "lon": 3.08
+      },
+      "fediverse": "https://piaille.fr/@bebatut",
+      "fediverse_flavor": "mastodon",
+      "affiliations": [
+        "gallantries",
+        "ifb"
+      ],
+      "id": "bebatut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
     },
     {
       "name": "Helena Rasche",
@@ -359,6 +369,16 @@
       ],
       "id": "avans-atgm",
       "page": "https://training.galaxyproject.org/training-material/hall-of-fame/avans-atgm/"
+    },
+    {
+      "name": "ABRomics",
+      "github": false,
+      "joined": "2024-01",
+      "avatar": "/training-material/assets/images/abromics.png",
+      "url": "https://training.galaxyproject.org/training-material/api/funders/abromics.json",
+      "funder": true,
+      "id": "abromics",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abromics/"
     }
   ]
 }

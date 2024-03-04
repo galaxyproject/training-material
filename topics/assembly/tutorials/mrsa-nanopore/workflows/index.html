@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Workflows / Genome Assembly of MRSA using Oxford Nanopore MinION Data / Assembly</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Workflows / Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data) / Assembly</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f0a8a803a2e04e6d0f4daff61375e537ab138cc4",
+		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550494' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550494' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -69,12 +69,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="2021-03-19 14:46:28 +0000"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Assembly / Genome Assembly of MRSA using Oxford Nanopore MinION Data / Workflows">
+	<meta property="og:title" content="Assembly / Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data) / Workflows">
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550494'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -219,7 +219,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <section class="tutorial">
     <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Genome Assembly of MRSA using Oxford Nanopore MinION Data</a></p>
+    <p>These workflows are associated with <a href="../tutorial.html">Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
 
@@ -228,32 +228,30 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<div class="col-md-6">
 		<div class="card">
 		<div class="card-body">
-			<h5 class="card-title">Genome Assembly of MRSA using Oxford Nanopore MinION Data (imported from uploaded file)</h5>
+			<h5 class="card-title">Genome Assembly of MRSA using Oxford Nanopore MinION (and Illumina data if available)</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
 				
-				Avans Hogeschool, 
+				Bazante Sanders, 
 				
-				Helena Rasche, 
-				
-				Miaomiao Zhou
+				Bérénice Batut
 				
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated Sep 9, 2021</small>
+				<small class="text-muted">Last updated Feb 29, 2024</small>
 			</p>
 			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main_workflow">Launch in Tutorial Mode</span>
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow">Launch in Tutorial Mode</span>
 			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
 			<br/>
 
 
 			License: 
 				
-				<a href="https://spdx.org/licenses/AGPL-3.0-or-later">AGPL-3.0-or-later</a>
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
 				<br/>
-			Tests: ❌
+			Tests: ✅
 			Results: Not yet automated
 			</p>
 <div class="dropdown">
@@ -261,54 +259,78 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     Import or Download
   </button>
   <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
+			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/workflows/main-workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main_workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main_workflow"
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
   </div>
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nNanopore fastq.bz2"];
+  0["ℹ️ Input Dataset\nNanopore raw reads"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["Convert compressed file to uncompressed."];
-  0 -->|output| 1;
-  2["filtlong"];
-  1 -->|output1| 2;
-  3["NanoPlot"];
-  1 -->|output1| 3;
-  4["NanoPlot"];
-  2 -->|outfile| 4;
-  5["Flye assembly"];
-  2 -->|outfile| 5;
-  6["Bandage Image"];
-  5 -->|assembly_gfa| 6;
-  799bd26b-b2da-45d4-9a79-8a880d608307["Output\nBandage Image on input dataset(s): Assembly Graph Image"];
-  6 --> 799bd26b-b2da-45d4-9a79-8a880d608307;
-  style 799bd26b-b2da-45d4-9a79-8a880d608307 stroke:#2c3143,stroke-width:4px;
-  7["Quast"];
-  5 -->|consensus| 7;
-  8["staramr"];
-  5 -->|consensus| 8;
-  9["Prokka"];
-  5 -->|consensus| 9;
-  10["Select"];
-  8 -->|detailed_summary| 10;
-  11["Table to GFF3"];
-  10 -->|out_file1| 11;
-  12["JBrowse"];
-  5 -->|consensus| 12;
-  9 -->|out_gff| 12;
-  11 -->|output| 12;
+  1["ℹ️ Input Dataset\nIllumina forward raw reads"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nIllumina reverse raw reads"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["Convert compressed file to uncompressed."];
+  0 -->|output| 3;
+  4["FastQC"];
+  0 -->|output| 4;
+  5["fastp"];
+  1 -->|output| 5;
+  2 -->|output| 5;
+  6["NanoPlot"];
+  3 -->|output1| 6;
+  a97e6f33-8182-4a33-86dd-6cfbb83a842d["Output\nnanoplot_before_filtering"];
+  6 --> a97e6f33-8182-4a33-86dd-6cfbb83a842d;
+  style a97e6f33-8182-4a33-86dd-6cfbb83a842d stroke:#2c3143,stroke-width:4px;
+  7["filtlong"];
+  5 -->|out1| 7;
+  5 -->|out2| 7;
+  0 -->|output| 7;
+  8["Flye"];
+  7 -->|outfile| 8;
+  f12e718f-1bd5-490d-bd41-f0747aaa41a6["Output\nflye_assembly_info"];
+  8 --> f12e718f-1bd5-490d-bd41-f0747aaa41a6;
+  style f12e718f-1bd5-490d-bd41-f0747aaa41a6 stroke:#2c3143,stroke-width:4px;
+  9["NanoPlot"];
+  7 -->|outfile| 9;
+  89524090-f590-434d-89e2-66f0b1a23c7c["Output\nnanoplot_after_filtering"];
+  9 --> 89524090-f590-434d-89e2-66f0b1a23c7c;
+  style 89524090-f590-434d-89e2-66f0b1a23c7c stroke:#2c3143,stroke-width:4px;
+  10["Bandage Image"];
+  8 -->|assembly_gfa| 10;
+  11["BWA-MEM2"];
+  5 -->|out2| 11;
+  8 -->|consensus| 11;
+  12["Quast"];
+  8 -->|consensus| 12;
+  dabfb8fd-8791-4959-a9dc-9b3c1e57a69c["Output\nquast_report_before_polishing"];
+  12 --> dabfb8fd-8791-4959-a9dc-9b3c1e57a69c;
+  style dabfb8fd-8791-4959-a9dc-9b3c1e57a69c stroke:#2c3143,stroke-width:4px;
+  13["BWA-MEM2"];
+  5 -->|out1| 13;
+  8 -->|consensus| 13;
+  14["Polypolish"];
+  8 -->|consensus| 14;
+  13 -->|bam_output| 14;
+  11 -->|bam_output| 14;
+  15["Quast"];
+  14 -->|polished_fasta| 15;
+  8 -->|consensus| 15;
+  4e465b51-68bf-4203-9a7c-897f46c70277["Output\nquast_report_after_polishing"];
+  15 --> 4e465b51-68bf-4203-9a7c-897f46c70277;
+  style 4e465b51-68bf-4203-9a7c-897f46c70277 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -338,7 +360,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/f0a8a803a2e04e6d0f4daff61375e537ab138cc4">f0a8a80</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -362,7 +384,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550494'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
         
     </body>
 </html>

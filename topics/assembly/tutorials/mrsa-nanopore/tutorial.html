@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Genome Assembly of MRSA using Oxford Nanopore MinION Data / Assembly</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data) / Assembly</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f0a8a803a2e04e6d0f4daff61375e537ab138cc4",
+		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550494' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550494' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,12 +67,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Hands-on: Hands-on: Genome Assembly of MRSA using Oxford Nanopore MinION Data">
+<meta name="DC.title" content="Hands-on: Hands-on: Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-29 12:49:27 +0000">
-<meta name="DC.creator" content="Bazante Sanders"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
+<meta name="DC.date" content="2024-02-29 13:14:47 +0000">
+<meta name="DC.creator" content="Bazante Sanders">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Assembly / Hands-on: Genome Assembly of MRSA using Oxford Nanopore MinION Data">
+	<meta property="og:title" content="Assembly / Hands-on: Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)">
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
@@ -119,10 +120,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-02-29 12:49:27 +0000",
+  "dateModified": "2024-02-29 13:14:47 +0000",
   "datePublished": "2021-03-24 18:30:46 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Hands-on: Hands-on: Genome Assembly of MRSA using Oxford Nanopore MinION Data",
+  "headline": "Hands-on: Hands-on: Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -231,20 +232,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on: Hands-on: Genome Assembly of MRSA using Oxford Nanopore MinION Data",
+  "name": "Hands-on: Hands-on: Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/tutorial.html",
-  "version": 30,
+  "version": 33,
   "timeRequired": "PT2H",
-  "teaches": "Assess your data on quality and quantity\n - Assemble a genome\n - Assess your assembly quality\n - Assess presence of antimicrobial resistance genes\n - Perform a species identification and MLST typing\n - Search for resistance genes on the assembly\n - Find a gene on your genome using Prokka + JBrowse",
+  "teaches": "Run tools to evaluate sequencing data on quality and quantity\n - Process the output of quality control tools\n - Improve the quality of sequencing data\n - Run a tool to assemble a bacterial genome using short reads\n - Run tools to assess the quality of an assembly\n - Understand the outputs of tools to assess the quality of an assembly",
   "keywords": [
     "Assembly",
     "nanopore",
     "assembly",
     "amr",
     "gmod",
-    "jbrowse1"
+    "jbrowse1",
+    "microgalaxy"
   ],
-  "description": "The questions this  addresses are:\n - How to check the quality of the MinION data?\n - How to perform an assembly with MinION data?\n - What species do I have and what is its sequence type?\n - Which resistance genes are on my genome?\n - Where are the genes located on my genome?\n\n\nThe objectives are:\n - Assess your data on quality and quantity\n - Assemble a genome\n - Assess your assembly quality\n - Assess presence of antimicrobial resistance genes\n - Perform a species identification and MLST typing\n - Search for resistance genes on the assembly\n - Find a gene on your genome using Prokka + JBrowse\n\n",
+  "description": "The questions this  addresses are:\n - How to check the quality of the MinION data (together with Illumina data)?\n - How to perform an assembly of a bacterial genome with MinION data?\n - How to check the quality of an assembly?\n\n\nThe objectives are:\n - Run tools to evaluate sequencing data on quality and quantity\n - Process the output of quality control tools\n - Improve the quality of sequencing data\n - Run a tool to assemble a bacterial genome using short reads\n - Run tools to assess the quality of an assembly\n - Understand the outputs of tools to assess the quality of an assembly\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -392,6 +394,48 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           "type": "project"
         }
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
     }
   ],
   "contributor": [
@@ -577,7 +621,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0196"
     }
   ],
-  "educationalLevel": "Introductory",
+  "educationalLevel": "Beginner",
   "mentions": [
     {
       "@type": "Thing",
@@ -598,12 +642,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     {
       "@type": "Thing",
       "name": "jbrowse1"
+    },
+    {
+      "@type": "Thing",
+      "name": "microgalaxy"
     }
   ],
-  "abstract": "In this training you're going to make an assembly of data produced by"
+  "abstract": "Sequencing (determining of DNA/RNA nucleotide sequence) is used all over"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550494'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -771,7 +819,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 <article class="tutorial topic-assembly">
-    <h1 data-toc-skip>Genome Assembly of MRSA using Oxford Nanopore MinION Data</h1>
+    <h1 data-toc-skip>Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)</h1>
     
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
@@ -785,7 +833,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
 		<td>
 			<a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=36" alt="Bazante Sanders avatar" width="36" class="avatar" />
-    Bazante Sanders</a>
+    Bazante Sanders</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
 		</td>
 	</tr>
 	
@@ -826,19 +875,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
         
-        <li><p>How to check the quality of the MinION data?</p>
+        <li><p>How to check the quality of the MinION data (together with Illumina data)?</p>
 </li>
         
-        <li><p>How to perform an assembly with MinION data?</p>
+        <li><p>How to perform an assembly of a bacterial genome with MinION data?</p>
 </li>
         
-        <li><p>What species do I have and what is its sequence type?</p>
-</li>
-        
-        <li><p>Which resistance genes are on my genome?</p>
-</li>
-        
-        <li><p>Where are the genes located on my genome?</p>
+        <li><p>How to check the quality of an assembly?</p>
 </li>
         
         </ul>
@@ -846,25 +889,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
         <ul>
         
-        <li><p>Assess your data on quality and quantity</p>
+        <li><p>Run tools to evaluate sequencing data on quality and quantity</p>
 </li>
         
-        <li><p>Assemble a genome</p>
+        <li><p>Process the output of quality control tools</p>
 </li>
         
-        <li><p>Assess your assembly quality</p>
+        <li><p>Improve the quality of sequencing data</p>
 </li>
         
-        <li><p>Assess presence of antimicrobial resistance genes</p>
+        <li><p>Run a tool to assemble a bacterial genome using short reads</p>
 </li>
         
-        <li><p>Perform a species identification and MLST typing</p>
+        <li><p>Run tools to assess the quality of an assembly</p>
 </li>
         
-        <li><p>Search for resistance genes on the assembly</p>
-</li>
-        
-        <li><p>Find a gene on your genome using Prokka + JBrowse</p>
+        <li><p>Understand the outputs of tools to assess the quality of an assembly</p>
 </li>
         
         </ul>
@@ -931,6 +971,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
 
         
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
 
         
 
@@ -955,7 +1006,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/assembly/tutorials/mrsa-nanopore/workflows/" title="Genome Assembly of MRSA using Oxford Nanopore MinION Data workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/assembly/tutorials/mrsa-nanopore/workflows/" title="Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data) workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -1063,7 +1114,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 2 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 30 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 33 </div>
 
     </blockquote>
     </section>
@@ -1078,10 +1129,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <p>In this training you’re going to make an assembly of data produced by
+                <p>Sequencing (determining of DNA/RNA nucleotide sequence) is used all over
+the world for all kinds of analysis. The product of these sequencers are
+reads, which are sequences of detected nucleotides. Depending on the
+technique these have specific lengths (30-500bp) or using Oxford
+Nanopore Technologies sequencing have much longer variable lengths.</p>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-nanopore-sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/microbiome/images/plasmid-metagenomics-nanopore/nanopore_sequencing.png" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://doi.org/10.7875/togopic.2020.01&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced DNA strand will be basecalled and this will form one read. Multiple reads will be stored in a fastq file.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>In this training we will build an assembly of a bacterial genome, from data produced in
 “Complete Genome Sequences of Eight Methicillin-Resistant
 <em>Staphylococcus aureus</em> Strains Isolated from Patients in
-Japan” from <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span> which describes:</p>
+Japan” <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>:</p>
 
 <blockquote class="quote" cite="https://doi.org/10.1128%2Fmra.01212-19">
   <p>Methicillin-resistant <em>Staphylococcus aureus</em> (MRSA) is a major pathogen
@@ -1097,15 +1158,11 @@ genome sequences of eight MRSA strains isolated from patients in Japan.</p>
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#background" id="markdown-toc-background">Background</a></li>
+  <li><a href="#galaxy-and-data-preparation" id="markdown-toc-galaxy-and-data-preparation">Galaxy and data preparation</a></li>
   <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a></li>
   <li><a href="#assembly" id="markdown-toc-assembly">Assembly</a>    <ol>
-      <li><a href="#qc" id="markdown-toc-qc">QC</a></li>
-    </ol>
-  </li>
-  <li><a href="#identification-of-amr-genes" id="markdown-toc-identification-of-amr-genes">Identification of AMR Genes</a>    <ol>
-      <li><a href="#card-database" id="markdown-toc-card-database">CARD database</a></li>
-      <li><a href="#gene-annotation-using-prokka" id="markdown-toc-gene-annotation-using-prokka">Gene annotation using Prokka</a></li>
+      <li><a href="#assembly-evaluation" id="markdown-toc-assembly-evaluation">Assembly Evaluation</a></li>
+      <li><a href="#assembly-polishing" id="markdown-toc-assembly-polishing">Assembly Polishing</a></li>
     </ol>
   </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -1113,23 +1170,37 @@ genome sequences of eight MRSA strains isolated from patients in Japan.</p>
 
 </blockquote>
 
-<h1 id="background">Background</h1>
+<h1 id="galaxy-and-data-preparation">Galaxy and data preparation</h1>
 
-<p>Sequencing (determining of DNA/RNA nucleotide sequence) is used all over
-the world for all kinds of analysis. The product of these sequencers are
-reads, which are sequences of detected nucleotides. Depending on the
-technique these have specific lengths (30-500bp) or using Oxford
-Nanopore Technologies sequencing have much longer variable lengths.</p>
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one and get the data into it.</p>
 
-<!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-nanopore-sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/microbiome/images/plasmid-metagenomics-nanopore/nanopore_sequencing.png" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://doi.org/10.7875/togopic.2020.01&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced DNA strand will be basecalled and this will form one read. Multiple reads will be stored in a fastq file.</p> </blockquote>
-<p><!--END_SNIPPET--></p>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-history-creation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: History creation</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now, we need to import the data: 1 FASTQ file containing the reads from the sequencer.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
-
   <ol>
-    <li>Create a new history for this tutorial</li>
     <li>
       <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> the files from <a href="https://zenodo.org/record/10669812">Zenodo</a> or from the shared data library</p>
 
@@ -1145,14 +1216,7 @@ Nanopore Technologies sequencing have much longer variable lengths.</p>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Convert the datatype of this output to uncompress it</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Converting the file format</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert compressed to uncompressed</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-    <li>
-      <p>Rename the dataset to just the sequence run ID: <code class="language-plaintext highlighter-rouge">DRR187567</code></p>
+      <p>Rename the dataset to keep only the sequence run ID (<code class="language-plaintext highlighter-rouge">DRR187567</code>)</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">DRR187567</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
@@ -1167,102 +1231,255 @@ Nanopore Technologies sequencing have much longer variable lengths.</p>
     </li>
     <li>
       <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the renamed file</p>
-
-      <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-        <ol>
-          <li>What are the 4 main features of each read in a fastq file.</li>
-          <li>What is the name of your first read?</li>
-        </ol>
-
-        <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-          <ol>
-            <li>
-              <p>The following:</p>
-
-              <ul>
-                <li>A <code class="language-plaintext highlighter-rouge">@</code> followed by a name and sometimes information of the read</li>
-                <li>A nucleotide sequence</li>
-                <li>A <code class="language-plaintext highlighter-rouge">+</code> (optional followed by the name)</li>
-                <li>The quality score per base of nucleotide sequence (Each symbol
-represents a quality score, which will be explained later)</li>
-              </ul>
-            </li>
-            <li>
-              <p><code class="language-plaintext highlighter-rouge">DRR187567.1</code></p>
-            </li>
-          </ol>
-        </blockquote>
-      </blockquote>
     </li>
   </ol>
+
 </blockquote>
+
+<p>The dataset is a FASTQ file.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What are the 4 main features of each read in a fastq file.</li>
+    <li>What is the name of your first read?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>
+        <p>The following:</p>
+
+        <ul>
+          <li>A <code class="language-plaintext highlighter-rouge">@</code> followed by a name and sometimes information of the read</li>
+          <li>A nucleotide sequence</li>
+          <li>A <code class="language-plaintext highlighter-rouge">+</code> (optional followed by the name)</li>
+          <li>The quality score per base of nucleotide sequence (Each symbol
+represents a quality score, which will be explained later)</li>
+        </ul>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">DRR187567.1</code></p>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoamiseq">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Do you have associated Illumina MiSeq data?
+	</p>
+	
+	
+		<input id="cyoa-opt1miseq" type="radio" name="cyoamiseq" value="Without-Illumina-MiSeq-data" onclick="cyoaChoice('Without-Illumina-MiSeq-data', 'gtn-cyoamiseq')" />
+		<label for="cyoa-opt1miseq" class="select btn btn-secondary">Without Illumina MiSeq data</label>
+	
+	
+		<input id="cyoa-opt2miseq" type="radio" name="cyoamiseq" value="With-Illumina-MiSeq-data" onclick="cyoaChoice('With-Illumina-MiSeq-data', 'gtn-cyoamiseq')" />
+		<label for="cyoa-opt2miseq" class="select btn btn-secondary">With Illumina MiSeq data</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Without-Illumina-MiSeq-data", "gtn-cyoamiseq");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Existing-Illumina-MiSeq-data">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-illumina-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Illumina Data upload</div>
+    <ol>
+      <li>
+        <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> the files from <a href="https://zenodo.org/record/10669812">Zenodo</a> or from the shared data library</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/10669812/files/DRR187559_1.fastqsanger.bz2
+https://zenodo.org/record/10669812/files/DRR187559_2.fastqsanger.bz2
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Rename the datasets to remove <code class="language-plaintext highlighter-rouge">.fastqsanger.bz2</code> and keep only the sequence run ID (<code class="language-plaintext highlighter-rouge">DRR187559_1</code> and <code class="language-plaintext highlighter-rouge">DRR187559_2</code>)</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">DRR187567</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
 
 <h1 id="quality-control">Quality Control</h1>
 
-<p>When assessing the fastq files all bases had their own quality (or Phred score)
-represented by symbols. You can read more in our dedicated <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control
-Tutorial</a>.</p>
+<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. <strong>Sequence quality control is therefore an essential first step in any analysis.</strong></p>
 
-<p>To assess the quality by hand would be too much work. That’s why tools like
-<a href="https://github.com/wdecoster/NanoPlot">NanoPlot</a> or
-<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> are made,
-which will generate a summary and plots of the data statistics. NanoPlot is
-mainly used for long-read data, like ONT and PACBIO and FastQC for short read,
-like Illumina and Sanger.</p>
+<p>When assessing the fastq files all bases had their own quality (or Phred score) represented by symbols. You can read more in our dedicated <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control Tutorial</a>.</p>
 
-<p>Depending on the analysis it could be possible that a certain quality or length
-is needed. The reads can be filtered using the tool
-<a href="https://github.com/rrwick/Filtlong">Filtlong</a>. In this training all reads
-below 1000bp will be filtered.</p>
-
-<p>Before doing any assembly, the first questions you should ask about your input
-reads include:</p>
-
-<ul>
-  <li>What is the coverage of my genome?</li>
-  <li>How good are my reads?</li>
-  <li>Do I need to ask/perform for a new sequencing run?</li>
-  <li>Is it suitable for the analysis I need to do?</li>
-</ul>
+<p>To assess the quality by hand would be too much work. That’s why tools like <a href="https://github.com/wdecoster/NanoPlot">NanoPlot</a> or
+<a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> are made, which will generate a summary and plots of the data statistics. NanoPlot is mainly used for long-read data, like ONT and PACBIO and FastQC for any read.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-qc-amp-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: QC &amp; Filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0" title="filtlong tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffiltlong%2Ffiltlong%2F0.2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>filtlong</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</a> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.74%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.74+galaxy0)</a> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ”</em>: <code class="language-plaintext highlighter-rouge">DRR187567</code> (output of <strong>Convert compressed file to uncompressed.</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">DRR187567</code></li>
+      </ul>
+    </li>
+    <li>Inspect the webpage output</li>
+  </ol>
+
+</blockquote>
+
+<p>FastQC combines quality statistics from all separate reads and combines them in plots. An important plot is the Per base sequence quality.</p>
+
+<p><a href="./images/fastqc.png" rel="noopener noreferrer"><img src="./images/fastqc.png" alt="FastQC plot showing reads that mostly stay in the read. " width="1660" height="1174" loading="lazy" /></a></p>
+
+<div class="Existing-Illumina-MiSeq-data">
+
+  <p>Here, we are going to trim the Illumina data using <strong>fastp</strong> (<span class="citation"><a href="#Chen2018">Chen <i>et al.</i> 2018</a></span>):</p>
+
+  <ul>
+    <li>Trim the start and end of the reads if those fall below a quality score of 20</li>
+    <li>Filter for reads to keep only reads with at least 30 bases: Anything shorter will complicate the assembly</li>
+  </ul>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-quality-improvement-of-the-illumina-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality improvement of the Illumina reads</div>
+
+    <ol>
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffastp%2Ffastp%2F0.23.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.2+galaxy0)</a> with the following parameters:
+        <ul>
+          <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input 1”</em>: <code class="language-plaintext highlighter-rouge">DRR187559_1</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input 2”</em>: <code class="language-plaintext highlighter-rouge">DRR187559_2</code></li>
+            </ul>
+          </li>
+          <li>In <em>“Filter Options”</em>:
+            <ul>
+              <li>In <em>“Length filtering Options”</em>:
+                <ul>
+                  <li><em>Length required</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>In <em>“Read Modification Options”</em>:
+            <ul>
+              <li>In <em>“Per read cuitting by quality options”</em>:
+                <ul>
+                  <li><em>Cut by quality in front (5’)</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                  <li><em>Cut by quality in front (3’)</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                  <li><em>Cutting window size</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+                  <li><em>Cutting mean quality</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>In <em>“Output Options”</em>:
+            <ul>
+              <li><em>“Output JSON report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<p>Depending on the analysis it could be possible that a certain quality or length is needed. The reads can be filtered using the <a href="https://github.com/rrwick/Filtlong">Filtlong</a> tool. In this training all reads below 1000bp will be filtered.</p>
+
+<div class="Existing-Illumina-MiSeq-data">
+
+  <p>When Illumina reads are available, we can use them <strong>if they are good Illumina reads (high depth and complete coverage)</strong>  as external reference. In this case, Filtlong ignores the Phred quality scores and instead judges read quality using k-mer matches to the reference (a more accurate gauge of quality).</p>
+
+</div>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering</div>
+  <ol>
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.1+galaxy0" title="filtlong tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffiltlong%2Ffiltlong%2F0.2.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>filtlong</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.1+galaxy0)</a> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ”</em>: <code class="language-plaintext highlighter-rouge">DRR187567</code></li>
         <li>In <em>“Output thresholds”</em>:
           <ul>
             <li><em>“Min. length”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
           </ul>
         </li>
       </ul>
+
+      <div class="Existing-Illumina-MiSeq-data">
+        <ul>
+          <li>In <em>“External references”</em>:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference Illumina read”</em>: <strong>fastp</strong> <code class="language-plaintext highlighter-rouge">Read 1 output</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference Illumina read”</em>: <strong>fastp</strong> <code class="language-plaintext highlighter-rouge">Read 2 output</code></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </li>
     <li>
       <p>Rename the dataset to <code class="language-plaintext highlighter-rouge">DRR187567-filtered</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">DRR187567-filtered</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">DRR187567-filtered</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output can be evaluated using <strong>NanoPlot</strong> for plotting long read sequencing data and alignments</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filtering-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering</div>
+  <ol>
+    <li>
+      <p>Convert the datatype of <code class="language-plaintext highlighter-rouge">DRR187567</code> to uncompress it</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Converting the file format</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert compressed to uncompressed</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Tag the dataset <code class="language-plaintext highlighter-rouge">#filtered</code></p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Nanoplot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fnanoplot%2Fnanoplot%2F1.28.2%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Nanoplot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.28.2+galaxy1)</a> with the following parameters:
+      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0" title="NanoPlot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fnanoplot%2Fnanoplot%2F1.41.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NanoPlot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.41.0+galaxy0)</a> with the following parameters:</p>
       <ul>
         <li><em>“Select multifile mode”</em>: <code class="language-plaintext highlighter-rouge">batch</code>
           <ul>
             <li><em>“Type of the file(s) to work on”</em>: <code class="language-plaintext highlighter-rouge">fastq</code>
               <ul>
-                <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“files”</em>: <strong>both</strong> <code class="language-plaintext highlighter-rouge">DRR187567</code> and <code class="language-plaintext highlighter-rouge">DRR187567-filtered</code></li>
+                <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“files”</em>: <strong>both</strong> <code class="language-plaintext highlighter-rouge">DRR187567 uncompressed</code> and <code class="language-plaintext highlighter-rouge">DRR187567-filtered</code></li>
               </ul>
             </li>
           </ul>
@@ -1278,119 +1495,132 @@ reads include:</p>
 
 </blockquote>
 
-<p>In principle we just ran the NanoPlot 2 times. For this reason, we have two
-reports we want to view and compare!</p>
+<p>We ran the <strong>NanoPlot</strong> two times: one for the raw reads (<code class="language-plaintext highlighter-rouge">DRR187567</code>) and one for the reads after filtering (<code class="language-plaintext highlighter-rouge">DRR187567-filtered</code>).</p>
 
-<p>Comparing different output files is easier if we can view more than one dataset
-simultaneously. The Scratchbook function allows us to build up a collection of
-datasets that will be shown on the screen together.</p>
+<p>For each run, <strong>NanoPlot</strong> generates 5 outputs:</p>
 
-<!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-the-scratchbook-to-view-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-the-scratchbook-to-view-multiple-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Using the Scratchbook to view multiple datasets</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you would like to view two or more datasets at once, you can use the <strong>Scratchbook</strong> feature in Galaxy:</p>   <ol>   <li><strong>Click</strong> on the <em>Scratchbook</em> icon <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> on the top menu bar.     <ul>       <li>You should see a little checkmark on the icon now</li>     </ul>   </li>   <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> a dataset by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> to view the output     <ul>       <li>You should see the output in a window overlayed over Galaxy</li>       <li>You can resize this window by dragging the bottom-right corner</li>     </ul>   </li>   <li><strong>Click</strong> outside the file to exit the Scratchbook</li>   <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> a second dataset from your history     <ul>       <li>You should now see a second window with the new dataset</li>       <li>This makes it easier to compare the two outputs</li>     </ul>   </li>   <li>Repeat this for as many files as you would like to compare</li>   <li>You can turn off the <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> by clicking on the icon again</li> </ol> </blockquote>
-<p><!--END_SNIPPET--></p>
+<ul>
+  <li>2 plots:
+    <ul>
+      <li>Histogram Read Length</li>
+      <li>
+        <p>Histogram Read Length after log transformation</p>
 
-<p>Open both NanoPlot HTML Reports and check the <strong>General summary</strong> section of each to compare the results:</p>
+        <figure id="figure-1" style="max-width: 90%;"><img src="./images/nanoplot_before.png" alt="before filtering, showing a large mostly gaussian curve. " width="700" height="500" loading="lazy" /><a target="_blank" href="./images/nanoplot_before.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Before filtering</figcaption></figure>
 
-<table>
-  <thead>
-    <tr>
-      <th>General summary</th>
-      <th>Not Filtered</th>
-      <th>Filtered (Filtlong)</th>
-      <th>Change (%)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Mean read length</td>
-      <td>6,813.0</td>
-      <td>8,721.1</td>
-      <td>28.0%</td>
-    </tr>
-    <tr>
-      <td>Mean read quality</td>
-      <td>9</td>
-      <td>9</td>
-      <td>0.0%</td>
-    </tr>
-    <tr>
-      <td>Median read length</td>
-      <td>3,400.0</td>
-      <td>5,451.0</td>
-      <td>60.3%</td>
-    </tr>
-    <tr>
-      <td>Median read quality</td>
-      <td>8.9</td>
-      <td>9.0</td>
-      <td>-1.1%</td>
-    </tr>
-    <tr>
-      <td>Number of reads</td>
-      <td>91,288.0</td>
-      <td>69,906.0</td>
-      <td>-23.4%</td>
-    </tr>
-    <tr>
-      <td>Read length N50</td>
-      <td>14,810.0</td>
-      <td>15,102.0</td>
-      <td>2.0%</td>
-    </tr>
-    <tr>
-      <td>Total bases</td>
-      <td>621,945,741.0</td>
-      <td>609,657,642.0</td>
-      <td>-2.0%</td>
-    </tr>
-  </tbody>
-</table>
+        <figure id="figure-2" style="max-width: 90%;"><img src="./images/nanoplot_after.png" alt="after filtering, same curve as before but everything below 1000bp is gone. " width="700" height="500" loading="lazy" /><a target="_blank" href="./images/nanoplot_after.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> After filtering</figcaption></figure>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>2 tabular files with statistics: one general and one after filtering.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Before</th>
-      <th>After</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="../../images/mrsa/before.png" rel="noopener noreferrer"><img src="../../images/mrsa/before.png" alt="before filtering, showing a large mostly gaussian curve. " width="606" height="458" loading="lazy" /></a></td>
-      <td><a href="../../images/mrsa/after.png" rel="noopener noreferrer"><img src="../../images/mrsa/after.png" alt="after filtering, same curve as before but everything below 1000bp is gone. " width="610" height="458" loading="lazy" /></a></td>
-    </tr>
-  </tbody>
-</table>
+    <p>The second one is empty because we did not used <strong>NanoPlot</strong> filtering options.</p>
+  </li>
+  <li>
+    <p>A HTML report summarizing above information</p>
 
-<blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+    <p>We can compare the two generated reports. Galaxy allows to view several datasets side-by-side using the Window Manager function</p>
 
-  <ol>
-    <li>What is the increase of your median read length?</li>
-    <li>What is the decrease in total bases?</li>
-    <li>What is coverage?</li>
-    <li>What would be the coverage before and after trimming, based on a genome size of 2.9 Mbp?</li>
-  </ol>
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-inspect-nanoplot-reports"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect NanoPlot reports</div>
 
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <ol>
-      <li>3,400.0 to 5,451.0, a 60.3% increase</li>
-      <li>-2.0% decrease, not a very significant decrease so our data was quite good to start with and didn’t have many short reads which were removed.</li>
-      <li>Coverage is a measure of, on average, how many reads ‘cover’ a single base in the genome. If you divide the total reads, by the genome size, you will get a number how many times your genomes could theoretically be ‘covered’ by reads.</li>
-      <li>Before \(\frac{621,945,741}{2,900,000} = 214.4\) and after \(\frac{609,657,642}{2,900,000} = 210.2\). This is <em>not</em> a very big decrease in coverage, so no cause for concern. Generally in sequencing experiments you have some minimum coverage you expect to see based on how much of your sample you sequenced. If it falls below that threshold it might be cause for concern.</li>
-    </ol>
+      <ol>
+        <li>
+          <p>Enable Window Manager</p>
 
-    <p>Additionally many people do not do any filtering or QC steps with their NanoPore data, it is expected that the quality is low, and often the focus is on assembling large Structural Variations (SVs) rather than having high quality reads and base-level variation analyses.</p>
-  </blockquote>
-</blockquote>
+          <!--SNIPPET-->
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-using-the-window-manager-to-view-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-the-window-manager-to-view-multiple-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Using the Window Manager to view multiple datasets</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you would like to view two or more datasets at once, you can use the <strong>Window Manager</strong> feature in Galaxy:</p>   <ol>   <li><strong>Click</strong> on the <em>Window Manager</em> icon <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> on the top menu bar.     <ul>       <li>You should see a little checkmark on the icon now</li>     </ul>   </li>   <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> a dataset by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> to view the output     <ul>       <li>You should see the output in a window overlayed over Galaxy</li>       <li>You can resize this window by dragging the bottom-right corner</li>     </ul>   </li>   <li><strong>Click</strong> outside the file to exit the Window Manager</li>   <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> a second dataset from your history     <ul>       <li>You should now see a second window with the new dataset</li>       <li>This makes it easier to compare the two outputs</li>     </ul>   </li>   <li>Repeat this for as many files as you would like to compare</li>   <li>You can turn off the <strong>Window Manager</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> by clicking on the icon again</li> </ol> </blockquote>
+          <p><!--END_SNIPPET--></p>
+        </li>
+        <li>Open both NanoPlot HTML Reports</li>
+        <li>Check the <strong>Summary statistics</strong> section of each to compare the results</li>
+      </ol>
 
-<p>While there is currently no community consensus over
-the best trimming or filtering practices with long read data, there are still
-some steps that can be beneficial to do for the assembly process.
-<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3" title="Porechop tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fporechop%2Fporechop%2F0.2.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Porechop</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.3)</a>
-is a commonly used tool for removing adapter sequences, and we used
-<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0" title="filtlong tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffiltlong%2Ffiltlong%2F0.2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>filtlong</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</a>
-for removing shorter reads which might make the assembly process more difficult.</p>
+    </blockquote>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Summary statistics</th>
+          <th>Not Filtered</th>
+          <th>Filtered (Filtlong)</th>
+          <th>Change (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Number of reads</td>
+          <td>91,288</td>
+          <td>69,906</td>
+          <td>-23.4%</td>
+        </tr>
+        <tr>
+          <td>Number of bases</td>
+          <td>621,945,741.0</td>
+          <td>609,657,642.0</td>
+          <td>-2.0%</td>
+        </tr>
+        <tr>
+          <td>Median read length</td>
+          <td>3,400.0</td>
+          <td>5,451.0</td>
+          <td>60.3%</td>
+        </tr>
+        <tr>
+          <td>Mean read length</td>
+          <td>6,813.0</td>
+          <td>8,721.1</td>
+          <td>28.0%</td>
+        </tr>
+        <tr>
+          <td>Read length N50</td>
+          <td>14,810.0</td>
+          <td>15,102.0</td>
+          <td>2.0%</td>
+        </tr>
+        <tr>
+          <td>Mean read quality</td>
+          <td>9</td>
+          <td>9</td>
+          <td>0.0%</td>
+        </tr>
+        <tr>
+          <td>Median read quality</td>
+          <td>8.9</td>
+          <td>9.0</td>
+          <td>1.1%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <ol>
+        <li>What is the increase of your median read length?</li>
+        <li>What is the decrease in the number of bases?</li>
+        <li>What is coverage?</li>
+        <li>What would be the coverage before and after trimming, based on a genome size of 2.9 Mbp?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <ol>
+          <li>3,400 bp to 5,451 bp, a 60.3% increase</li>
+          <li>A -2.0% decrease is not a very significant decrease. Our data was quite good to start with and didn’t have many short reads which were removed (23.4%)</li>
+          <li>The coverage is a measure of how many reads ‘cover’ on average a single base in the genome. If you divide the total reads by the genome size, you will get a number how many times your genomes could theoretically be “covered” by reads.</li>
+          <li>Before \(\frac{621,945,741}{2,900,000} = 214.4\) and after \(\frac{609,657,642}{2,900,000} = 210.2\). This is <em>not</em> a very big decrease in coverage, so no cause for concern. Generally in sequencing experiments you have some minimum coverage you expect to see based on how much of your sample you sequenced. If it falls below that threshold it might be cause for concern.</li>
+        </ol>
+
+      </blockquote>
+    </blockquote>
+  </li>
+</ul>
+
+<p>While there is currently no community consensus over the best trimming or filtering practices with long read data, there are still some steps that can be beneficial to do for the assembly process. <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3" title="Porechop tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fporechop%2Fporechop%2F0.2.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Porechop</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.3)</a> is a commonly used tool for removing adapter sequences, and we used <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0" title="filtlong tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffiltlong%2Ffiltlong%2F0.2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>filtlong</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</a> for removing shorter reads which might make the assembly process more difficult.</p>
+
+<p>Many people do not do any trimming of their NanoPore data based on the quality as it is expected that the quality is low, and often the focus is on assembling large Structural Variations (SVs) rather than having high quality reads and base-level variation analyses.</p>
 
 <h1 id="assembly">Assembly</h1>
 
@@ -1398,13 +1628,8 @@ for removing shorter reads which might make the assembly process more difficult.
 did with filtlong) and/or trimmed (like is more often done with short read data)
 an assembly can be made.</p>
 
-<p>There are many tools that create assembly for long-read data, but in this
-tutorial <a href="https://github.com/fenderglass/Flye">Flye</a> will be used. Flye is a de
-novo assembler for single molecule sequencing reads. It can be used from
-bacteria to human assemblies. The Flye assembly is based on finding overlapping
-reads with variable length with high error tolerance. Flye will output the
-assembly in a .fasta file, which looks like a .fastq file without the 3rd and
-4th line for the “+” sign and the quality score.</p>
+<p>There are many tools that create assembly for long-read data, e.g. Canu (<span class="citation"><a href="#koren2017canu">Koren <i>et al.</i> 2017</a></span>), Raven (<span class="citation"><a href="#vaser2021time">Vaser and Šikić 2021</a></span>), Miniasm  (<span class="citation"><a href="#Li_2016">Li 2016</a></span>). In this tutorial, we use <a href="https://github.com/fenderglass/Flye"><strong>Flye</strong></a> (<span class="citation"><a href="#lin2016assembly">Lin <i>et al.</i> 2016</a></span>). <strong>Flye</strong> is a de
+novo assembler for single molecule sequencing reads. It can be used from bacteria to human assemblies. The Flye assembly is based on finding overlapping reads with variable length with high error tolerance.</p>
 
 <!--SNIPPET-->
 <blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
@@ -1414,471 +1639,324 @@ assembly in a .fasta file, which looks like a .fastq file without the 3rd and
   <div class="box-title hands-on-title" id="hands-on-assembly-using-flye"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly using Flye</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6" title="Flye assembly tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fflye%2Fflye%2F2.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flye assembly</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6)</a> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.1+galaxy0" title="Flye assembly tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fflye%2Fflye%2F2.9.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flye assembly</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.9.1+galaxy0)</a> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads”</em>: <code class="language-plaintext highlighter-rouge">DRR187567-filtered</code> (output of <strong>filtlong</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“estimated genome size (for example, 5m or 2.6g)”</em>: <code class="language-plaintext highlighter-rouge">2.8m</code> or <code class="language-plaintext highlighter-rouge">2800000</code> (average genome size of MRSA)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Nanopore corrected (--nano-corr)</code></li>
+        <li><em>“Reduced contig assembly coverage”</em>: <code class="language-plaintext highlighter-rouge">Disable reduced coverage for initial disjointing assembly</code></li>
       </ul>
     </li>
-    <li>
-      <p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="language-plaintext highlighter-rouge">assembly_info</code> output and check the <em>General summary</em> table in the assembly info file, and compare the results.</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>#seq_name</th>
-            <th>length</th>
-            <th>cov.</th>
-            <th>circ.</th>
-            <th>repeat</th>
-            <th>mult.</th>
-            <th>graph_path</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>contig_1</td>
-            <td>60303</td>
-            <td>1504</td>
-            <td>+</td>
-            <td>+</td>
-            <td>6</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>contig_2</td>
-            <td>2927029</td>
-            <td>181</td>
-            <td>+</td>
-            <td>-</td>
-            <td>1</td>
-            <td>2</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><em>NOTE: The results can differ from this example, because Flye can differ a bit per assembly</em></p>
-    </li>
-    <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2" title="Bandage Image tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbandage%2Fbandage_image%2F0.8.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.1+galaxy2)</a> with the following parameters:</p>
-
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Graphical Fragment Assembly”</em>: <code class="language-plaintext highlighter-rouge">Flye assembly on data .. (Graphical Fragment Assembly)</code></li>
-      </ul>
-    </li>
-    <li>
-      <p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the assembly graph image</p>
-
-      <p><a href="../../images/mrsa/bandage.png" rel="noopener noreferrer"><img src="../../images/mrsa/bandage.png" alt="Bandage output showing two contigs, one big, one tiny. " width="1152" height="1000" loading="lazy" /></a></p>
-    </li>
-  </ol>
-</blockquote>
-
-<blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>How many contigs do you have?</li>
-    <li>What is the coverage of your longest contig?</li>
-    <li>What is the length of your longest contig?</li>
-    <li>Does this feel like potentially a MRSA genome?</li>
   </ol>
 
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>While results may vary due to randomness in the assembly process, in our case we had:</p>
-
-    <ol>
-      <li>2</li>
-      <li>181</li>
-      <li>2.9mb</li>
-      <li>Yes, you’ve got one 2.9Mb genome which is approximately the size of a MRSA genome, and one small potential plasmid genome.</li>
-    </ol>
-  </blockquote>
 </blockquote>
 
-<h2 id="qc">QC</h2>
+<p><strong>Flye</strong> generates 4 outputs:</p>
 
-<p><a href="http://quast.bioinf.spbau.ru/">Quast</a> (<span class="citation"><a href="#Gurevich2013">Gurevich <i>et al.</i> 2013</a></span>)
-is a tool providing quality metrics for assemblies, and can also be used
-to compare multiple assemblies. The tool can also take an optional
-reference file as input, and will provide complementary metrics. QUAST
-stands for QUality ASsessment Tool. With later updates gene annotation
-also possible with QUAST.</p>
+<ul>
+  <li>
+    <p>A FASTA file called <code class="language-plaintext highlighter-rouge">consensus</code> with contigs, i.e. the contiguous sequences made by combining separate reads in the assembly, and possibly scaffolds built by <strong>Flye</strong></p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <p>How many contigs are there?</p>
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>There are 2 sequences in the <code class="language-plaintext highlighter-rouge">consensus</code> dataset</p>
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p>2 assembly graph files: <code class="language-plaintext highlighter-rouge">assembly graph</code> and <code class="language-plaintext highlighter-rouge">graphical fragment assembly</code></p>
+
+    <p>We can visualize the assembly graph using the <code class="language-plaintext highlighter-rouge">graphical fragment assembly</code> with <strong>Bandage</strong> (<span class="citation"><a href="#wick2015bandage">Wick <i>et al.</i> 2015</a></span>), a package for exploring assembly graphs through summary reports and visualizations of their contents.</p>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-assembly-inspection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly inspection</div>
+      <ol>
+        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4" title="Bandage Image tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbandage%2Fbandage_image%2F2022.09%2Bgalaxy4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bandage Image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2022.09+galaxy4)</a> with the following parameters:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Graphical Fragment Assembly”</em>: <code class="language-plaintext highlighter-rouge">graphical fragment assembly</code> (output of <strong>Flye</strong>)</li>
+          </ul>
+        </li>
+      </ol>
+
+    </blockquote>
+
+    <p><a href="./images/bandage_before_polishing.jpg" rel="noopener noreferrer"><img src="./images/bandage_before_polishing.jpg" alt="Bandage output showing 2 contigs. " width="1363" height="1000" loading="lazy" /></a></p>
+  </li>
+  <li>
+    <p>A table <code class="language-plaintext highlighter-rouge">assembly info</code> with assembly information</p>
+
+    <p>It should be something similar but probably sligtly different because Flye can differ a bit per assembly:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#seq_name</th>
+          <th>length</th>
+          <th>cov.</th>
+          <th>circ.</th>
+          <th>repeat</th>
+          <th>mult.</th>
+          <th>alt_group</th>
+          <th>graph_path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>contig_1</td>
+          <td>2927029</td>
+          <td>183</td>
+          <td>Y</td>
+          <td>N</td>
+          <td>2</td>
+          <td>*</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>contig_2</td>
+          <td>60115</td>
+          <td>379</td>
+          <td>Y</td>
+          <td>Y</td>
+          <td>2</td>
+          <td>*</td>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+      <ol>
+        <li>What is the coverage of your longest contig?</li>
+        <li>What is the length of your longest contig?</li>
+        <li>Could this contig potentially be a MRSA genome?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>While results may vary due to randomness in the assembly process, in our case we had:</p>
+        <ol>
+          <li>183</li>
+          <li>2.9Mb</li>
+          <li>2.9Mb is approximately the size of a MRSA genome. So contig 1 could be the genome. Contig 2 could be one small potential plasmid genome.</li>
+        </ol>
+      </blockquote>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="assembly-evaluation">Assembly Evaluation</h2>
+
+<p>To evaluate the assembly, we use also <a href="http://quast.bioinf.spbau.ru/">Quast</a> (<span class="citation"><a href="#Gurevich2013">Gurevich <i>et al.</i> 2013</a></span>) (QUality ASsessment Tool), a tool providing quality metrics for assemblies. This tool can be used to compare multiple assemblies, can take an optional reference file as input to provide complementary metrics, etc</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-quality-control-of-assembly-using-quast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control of assembly using Quast</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Quast tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fquast%2Fquast%2F5.0.2%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.2+galaxy1)</a> with the following parameters:
+    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fquast%2Fquast%2F5.2.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy1)</a> with the following parameters:
       <ul>
-        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+        <li><em>Assembly mode?</em>: <code class="language-plaintext highlighter-rouge">Co-assembly</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> output of <strong>Flye</strong></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>
-      <p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the HTML report from QUAST</p>
-
-      <p>The Quast tool outputs assembly metrics as an html file with metrics and
-graphs. The image below looks exceptionally boring. This is a good
-thing, because each corner means one contig. A contig is the contiguous
-sequence made by combining all separate reads in the assembly</p>
-
-      <p><a href="../../images/mrsa/quast.png" rel="noopener noreferrer"><img src="../../images/mrsa/quast.png" alt="Image showing the HTML output of quast including a table over conting information and a cumulative length graph with the contigs." width="973" height="1163" loading="lazy" /></a></p>
-    </li>
   </ol>
 
 </blockquote>
 
-<p>One can see that there are two contigs. The largest contig is 2,927,008
-bp (for comparison <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/">MRSA Isolate HC1335
-Strain</a> genome
-length was 2,976,370 bp) and the smallest is 2,987,958 (total length) -
-2,927,008 (length of the largest) = 60,950 bp. sequencing. The length of
-the largest contig can mean that it is the total chromosomal DNA of the <em>S. aureus</em>.</p>
-
-<blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>What is you GC content?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <ol>
-      <li>The GC content for our assembly was 32.73% (for comparison <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/">MRSA Isolate HC1335 Strain</a> GC% is 32.89%). This means the length and GC% of the assembly could be good!</li>
-    </ol>
-
-  </blockquote>
-</blockquote>
-
-<h1 id="identification-of-amr-genes">Identification of AMR Genes</h1>
-
-<p>Because we are working with a MRSA we are curious to see which resistance genes are located on the genome or on the plasmid. To determine whether the contigs contain antimicrobial resistance (AMR) genes <a href="https://github.com/phac-nml/staramr">staramr</a> can be used  <strong>Staramr</strong> scans bacterial genome contigs against both the <strong>ResFinder</strong> (<span class="citation"><a href="#Zankari2012">Zankari <i>et al.</i> 2012</a></span>), <strong>PointFinder</strong> (<span class="citation"><a href="#Zankari2017">Zankari <i>et al.</i> 2017</a></span>), and <strong>PlasmidFinder</strong> (<span class="citation"><a href="#Carattoli2014">Carattoli <i>et al.</i> 2014</a></span>) databases (used by the ResFinder webservice) and compiles a summary report of detected antimicrobial resistance genes.</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-staramr"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run staramr</div>
-
-  <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2" title="staramr tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fstaramr%2Fstaramr_search%2F0.7.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>staramr</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.1+galaxy2)</a> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“genomes”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-      </ul>
-
-      <p>There are 7 different output files produced by <strong>staramr</strong> tool:</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>File</th>
-            <th>Contents</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>summary.tsv</td>
-            <td>A summary of all detected AMR genes/mutations in each genome, one genome per line.</td>
-          </tr>
-          <tr>
-            <td>detailed_summary.tsv</td>
-            <td>A detailed summary of all detected AMR genes/mutations of each genome, one line per feature and multiple lines per genome.</td>
-          </tr>
-          <tr>
-            <td>resfinder.tsv</td>
-            <td>A tabular file of each AMR gene and additional BLAST information from the <strong>ResFinder</strong> database, one gene per line.</td>
-          </tr>
-          <tr>
-            <td>Plasmidfinder.tsv</td>
-            <td>A tabular file of each plastid sequences with additional BLAST information from the <strong>PlasmidFinder</strong> database, one sequence per line.</td>
-          </tr>
-          <tr>
-            <td>settings.txt</td>
-            <td>The command-line, database versions, and other settings used to run staramr.</td>
-          </tr>
-          <tr>
-            <td>mlst.tsv</td>
-            <td>A tabular file of the found loci per genome with its specified MLST scheme.</td>
-          </tr>
-          <tr>
-            <td>results.xlsx</td>
-            <td>An Excel spreadsheet containing the previous 4 files as separate worksheets.</td>
-          </tr>
-        </tbody>
-      </table>
-    </li>
-    <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the detailed_summary.tsv file
-      <ul>
-        <li>In this example the ST-typing could not be obtained. Multi-locus sequence type (MLST) is based on specific locus/alleles, which is sometimes hard to determine with error rich sequence data (like NanoPore).</li>
-        <li>For the plasmid and resistance results the identity, overlap, length and the location on the contig can be found here.</li>
-        <li>Multiple rep sequences are located on the second contig. (See “plasmid typing for gram-positive bacteria” <span class="citation"><a href="#Lozano_2012">Lozano <i>et al.</i> 2012</a></span> for more information)</li>
-        <li>Multiple resistance genes can be found on both contig 1 and contig 2.</li>
-        <li>In the last column there are “Accession” numbers. These are references to NCBI, and you can search for these numbers there. E.g. <a href="https://www.ncbi.nlm.nih.gov/nuccore/M13771">M13771</a></li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h2 id="card-database">CARD database</h2>
-
-<p>To get more information about these antibiotic resistant genes, you can check the <a href="https://card.mcmaster.ca">CARD database</a> (<strong>C</strong>omprehensive <strong>A</strong>ntibiotic <strong>R</strong>esistance <strong>D</strong>atabase) (<span class="citation"><a href="#Jia2016">Jia <i>et al.</i> 2016</a></span>)</p>
-
-<figure id="figure-1" style="max-width: 90%;"><img src="../../images/mrsa/card.png" alt="Screenshot of mecA sequence in CARD database with lots of metadata. " width="1186" height="1061" loading="lazy" /><a target="_blank" href="../../images/mrsa/card.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.</figcaption></figure>
-
-<p>CARD can be very helpful to check all the resistance genes and check if
-it is logical to find the resistance gene in a specific bacteria.</p>
+<p>QUAST outputs assembly metrics as an HTML file with metrics and graphs.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
-    <li>To what family does <a href="https://card.mcmaster.ca/ontology/36911">mecA</a> belong?</li>
-    <li>Do you expect to find this gene in this MRSA strain and why?</li>
-    <li>Is the accession number of the entry related to the accession reported by staramr?</li>
+    <li>How many contigs is there?</li>
+    <li>How long is the largest contig?</li>
+    <li>What is the total length of all contigs?</li>
+    <li>What is you GC content?</li>
+    <li>How does it compare to results for KUN1163 in <a href="https://journals.asm.org/doi/10.1128/mra.01212-19#tab1">Table 1</a> in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li><a href="https://card.mcmaster.ca/ontology/37589">Methicillin resistant PBP2</a></li>
-      <li>The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As <code class="language-plaintext highlighter-rouge">mecA</code> has a perfect resistome mach with <em>S. aureus</em>, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.</li>
-      <li>No, these are completely unrelated. Unfortunately this is a <strong>very</strong> common issue in bioinformatics. Everyone builds their own numbering system for entries in their database (usually calling them ‘accessions’), and then someone else needs to build a service to link these databases.</li>
+      <li>2 contigs</li>
+      <li>The largest contig is 2,907,099 bp.</li>
+      <li>2,967,214 (<em>Total length (&gt;= 0 bp)</em>).</li>
+      <li>The GC content for our assembly is 32.91%.</li>
+      <li>KUN1163 has a genome size of 2,914,567 bp (not far from the length of the largest contig), with a GC content of 32.91% (as in our assembly)</li>
     </ol>
 
   </blockquote>
 </blockquote>
 
-<h2 id="gene-annotation-using-prokka">Gene annotation using Prokka</h2>
+<div class="Existing-Illumina-MiSeq-data">
 
-<p><a href="https://github.com/tseemann/prokka/blob/master/README.md">Prokka</a> is a
-tool software tool to rapidly annotate bacterial, archaeal and viral
-genomes. Prokka will be used on your own made genome (assembly). Prokka
-will try to annotate the bacteria based on related species and starting
-codons can be chosen or default of the species can be used.</p>
+  <h2 id="assembly-polishing">Assembly Polishing</h2>
 
-<p><a href="https://jbrowse.org/docs/tutorial.html">JBrowse</a> is used to visualize
-your genome file and merge multiple outputs.<br />
-In this case you will use your assembly as your reference and the output
-from prokka as an information track.</p>
+  <p>We can now polish the assembly using both the short reads and/or long reads. This process aligns the reads to the assembly contigs, and makes corrections to the contigs where warranted.</p>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotating-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotating the Genome</div>
+  <p>Several tools exist for polishing, e.g. Racon (<span class="citation"><a href="#Vaser_2017">Vaser <i>et al.</i> 2017</a></span>). Here we will use <strong>Polypolish</strong> (<span class="citation"><a href="#Wick_2022">Wick and Holt 2022</a></span>), a tool for polishing genome assemblies with short reads.</p>
 
-  <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0" title="Prokka tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fcrs4%2Fprokka%2Fprokka%2F1.14.5%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Prokka</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.14.5+galaxy0)</a> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs to annotate”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Genus name (–genus)”</em>: <code class="language-plaintext highlighter-rouge">staphylococcus </code></li>
-        <li><em>“Species name (–species)”</em>: <code class="language-plaintext highlighter-rouge">aureus</code></li>
-        <li><em>“Kingdom (–kingdom)”</em>: <code class="language-plaintext highlighter-rouge">Bacteria</code></li>
-        <li><em>“Additional outputs”</em>: Select only the “Annotation in GFF3 format containing both sequences and annotations”</li>
-      </ul>
-    </li>
-    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">staramr on data .. detailed_summary.tsv</code></li>
-        <li><em>“that”</em>: Matching</li>
-        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">[0-9]+\.[0-9]+\t</code></li>
-      </ul>
+  <p><strong>Polypolish</strong> needs as input the assembly but also SAM/BAM files where each read has been aligned to <em>all</em> possible locations (not just a single best location). Errors in repeats will be covered by short-read alignments, and <strong>Polypolish</strong> can therefore fix those errors.</p>
 
-      <p>This will select lines with a decimal value (###.##) followed by a tab character, the column separator in Galaxy. As a result, any lines without an identity value will be filtered out.</p>
-    </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2" title="Table to GFF3 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ftbl2gff3%2Ftbl2gff3%2F1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table to GFF3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2)</a>
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: the output of the above <strong>Select lines</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step.</li>
-        <li><em>“Record ID column or value”</em>: <code class="language-plaintext highlighter-rouge">8</code></li>
-        <li><em>“Feature start column or value”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
-        <li><em>“Feature end column or value”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
-        <li><em>“Feature score column or value”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
-        <li><em>“Feature source column or value”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
-        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
-          <ul>
-            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">Name</code></li>
-            <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-          </ul>
-        </li>
-        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
-          <ul>
-            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">phenotype</code></li>
-            <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
-          </ul>
-        </li>
-        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Qualifiers”</em>
-          <ul>
-            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">accession</code></li>
-            <li><em>“Qualifier value column or raw text”</em>: <code class="language-plaintext highlighter-rouge">11</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2" title="Map with minimap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fminimap2%2Fminimap2%2F2.17%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy2)</a> with the following parameters:
-      <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history and build index</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-          </ul>
-        </li>
-        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code></li>
-        <li><em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">DRR187567-filtered</code></li>
-        <li><em>“Select a profile of preset options”</em>: <code class="language-plaintext highlighter-rouge">Oxford Nanopore read to reference mapping. Slightly more sensitive for Oxford Nanopore to reference mapping (-k15). For PacBio reads, HPC minimizers consistently leads to faster performance and more sensitive results in comparison to normal minimizers. For Oxford Nanopore data, normal minimizers are better, though not much. The effectiveness of HPC is determined by the sequencing error mode. (map-ont)</code></li>
-      </ul>
-    </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="JBrowse tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fjbrowse%2Fjbrowse%2F1.16.9%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.9+galaxy0)</a> with the following parameters:
-      <ul>
-        <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
-          <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-          </ul>
-        </li>
-        <li><em>“Genetic Code”</em>: <code class="language-plaintext highlighter-rouge">11. The Bacterial, Archaeal and Plant Plastid Code</code></li>
-        <li>In <em>“Track Group”</em>:
-          <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
-              <ul>
-                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Prokka</code></li>
-                <li>In <em>“Annotation Track”</em>:
-                  <ul>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
-                      <ul>
-                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
-                          <ul>
-                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="language-plaintext highlighter-rouge">out_gff</code> (output of <strong>Prokka</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-                            <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="language-plaintext highlighter-rouge">Neat Canvas Features</code></li>
-                            <li><em>“Track Visibility”</em>: <code class="language-plaintext highlighter-rouge">On for new users</code></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
-              <ul>
-                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">AMR</code></li>
-                <li>In <em>“Annotation Track”</em>:
-                  <ul>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
-                      <ul>
-                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
-                          <ul>
-                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="language-plaintext highlighter-rouge">Table to GFF3 on ...</code>, the output of the table to gff3 step</li>
-                            <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="language-plaintext highlighter-rouge">Neat Canvas Features</code></li>
-                            <li><em>“Track Visibility”</em>: <code class="language-plaintext highlighter-rouge">On for new users</code></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
-              <ul>
-                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Sequencing</code></li>
-                <li>In <em>“Annotation Track”</em>:
-                  <ul>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
-                      <ul>
-                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">BAM Pileups</code>
-                          <ul>
-                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM Track Data”</em>: Minimap2’s output</li>
-                            <li><em>“Autogenerate SNP Track”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>View the output of JBrowse</li>
-  </ol>
+  <p>To get the SAM/BAM files, we need to map the short reads on the assembly. We will use <strong>BWA-MEM</strong> (<span class="citation"><a href="#Li_2009">Li and Durbin 2009</a></span>, <span class="citation"><a href="#Li_2010">Li and Durbin 2010</a></span>, <span class="citation"><a href="#Li2013Aligning">Li 2013</a></span>).</p>
 
-</blockquote>
+  <p>We need to set up <strong>BWA-MEM</strong> so it aligns each read to all possible locations, not just the best location. This option does not work with paired-end alignment. We will then need to align forward and reverse read files separately, instead of aligning both read files with a single BWA-MEM run as usually recommended.</p>
 
-<p>If it takes too long to build the JBrowse instance, you can view an embedded one here. (<strong>Warning</strong>: feature name search will not work.)</p>
-
-<!--SNIPPET-->
-<iframe id="embedded_jbrowse" src="/training-material/assets/jbrowse/index.html?data=/training-material/topics/assembly/tutorials/mrsa-nanopore/data&amp;trackList=0" border="0" width="100%" height="500px"></iframe>
-<p><a href="/training-material/assets/jbrowse/index.html?data=/training-material/topics/assembly/tutorials/mrsa-nanopore/data" target="_blank" style="padding: 0.5rem 1rem; background-color: #dfe5f9;border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">Open JBrowse in a new tab</a></p>
-<p><!--END_SNIPPET--></p>
-
-<p>A useful option is the “search features” option</p>
-
-<ol>
-  <li>
-    <p>Under the <strong>View</strong> menu click on the <strong>Search Features</strong> option</p>
-
-    <p><a href="../../images/mrsa/search-features.png" rel="noopener noreferrer"><img src="../../images/mrsa/search-features.png" alt="Screenshot of jbrowse top menu with search features button. " width="299" height="162" loading="lazy" /></a></p>
-
-    <p>Now we are going to search for the aac(6’)-aph(2’’) gene (the resistance gene we found with the staramr (resfinder) results)</p>
-  </li>
-  <li>
-    <p>Type in the search bar: aac(6’)-aph(2’’)</p>
-
-    <p>You won’t find any results, because the names can be different for different database.</p>
-  </li>
-  <li>
-    <p>Now only type: <code class="language-plaintext highlighter-rouge">aac</code> and you’ll find multiple results.</p>
-
-    <p><a href="../../images/mrsa/search-results.png" rel="noopener noreferrer"><img src="../../images/mrsa/search-results.png" alt="Screenshot of search table showing multiple results. " width="885" height="554" loading="lazy" /></a></p>
-  </li>
-  <li>
-    <p>Now go back to the staramr (resfinder) results and check the starting position of the aac(6’)-aph(2’’) genes match the prokka results.</p>
-  </li>
-  <li>
-    <p>You can also use the location from the resfinder results by typing
-your coordinates, and you also can highlight specific
-parts.</p>
-
-    <p>For example if an aac(6’)-aph(2’’) region was found on contig_2 with start 39209 and end 37755, you could write <code class="language-plaintext highlighter-rouge">contig_2:39209..37755</code> in the search box to go directly to that region.</p>
-
-    <p><a href="../../images/mrsa/enter-loc.png" rel="noopener noreferrer"><img src="../../images/mrsa/enter-loc.png" alt="entering a location directly in jbrowse. " width="220" height="26" loading="lazy" /></a></p>
-  </li>
-  <li>
-    <p>After browsing to the region, under <strong>view</strong> press <strong>Set highlight</strong> and use the current region</p>
-
-    <p>Now you can easily see that the aac(6’)-aph(2’’) gene in
-resfinder is much bigger than the genes found by prokka.</p>
-
-    <p><a href="../../images/mrsa/highlight.png" rel="noopener noreferrer"><img src="../../images/mrsa/highlight.png" alt="highlighted region covering multiple genes in jbrowse. " width="1779" height="340" loading="lazy" /></a></p>
-
-    <p>So always know what you’re searching for and specify which tools
-were used with which databases!</p>
-  </li>
-</ol>
-
-<p>In this tutorial Jbrowse was only used for showing the locations of your
-found genes, but it can be used with many more inputs.</p>
-
-<blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>Did the location of the aac(6’)-aph(2’’) regions in staramr correspond with any of the found genes in the prokka/jbrowse output?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-align-short-reads-on-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Align short-reads on assembly</div>
     <ol>
-      <li>Yes, multiple aacA-aphD genes are found within the staramr annotated aac(6’)-aph(2’’) region</li>
+      <li>
+        <p>Change the datatype of both FASTQ outputs of <strong>fastp</strong> to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbwa_mem2%2Fbwa_mem2%2F2.2.1%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</a> with the following parameters:</p>
+        <ul>
+          <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> output of <strong>Flye</strong></li>
+            </ul>
+          </li>
+          <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+            <ul>
+              <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select fastq dataset”</em>: both outputs of <strong>fastp</strong></li>
+            </ul>
+          </li>
+          <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+          <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">5.Full list of options</code>
+            <ul>
+              <li><em>“Set algorithmic options?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+              <li><em>“Set scoring options?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+              <li><em>“Set input/output options”</em>: <code class="language-plaintext highlighter-rouge">Set</code>
+                <ul>
+                  <li><em>“Output all alignments for single-ends or unpaired paired-ends”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><em>“BAM sorting mode”</em>: <code class="language-plaintext highlighter-rouge">Not sorted (sorted as input)</code></li>
+        </ul>
+      </li>
     </ol>
+
   </blockquote>
-</blockquote>
+
+  <p>We can now run <strong>Polypolish</strong>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-polish-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Polish assembly</div>
+
+    <ol>
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/polypolish/polypolish/0.5.0+galaxy2" title="Polypolish tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpolypolish%2Fpolypolish%2F0.5.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Polypolish</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5.0+galaxy2)</a> with the following parameters:
+        <ul>
+          <li>In <em>“Input sequences”</em>:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a draft genome for polishing”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> output of <strong>Flye</strong></li>
+              <li><em>“Select aligned data to polish”</em>: <code class="language-plaintext highlighter-rouge">Paired SAM/BAM files</code>
+                <ul>
+                  <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select forward SAM/BAM file”</em>: output of <strong>BWA-MEM2</strong> on the <code class="language-plaintext highlighter-rouge">Read 1</code> output of <strong>fastp</strong></li>
+                  <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select reverse SAM/BAM file”</em>: output of <strong>BWA-MEM2</strong> on the <code class="language-plaintext highlighter-rouge">Read 2</code> output of <strong>fastp</strong></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>To check the impact of the polishing, let’s run <strong>QUAST</strong> on both <strong>Flye</strong> and <strong>Polypolish</strong> outputs.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-quality-control-of-polished-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control of polished assembly</div>
+
+    <ol>
+      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fquast%2Fquast%2F5.2.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy1)</a> with the following parameters:
+        <ul>
+          <li><em>Assembly mode?</em>: <code class="language-plaintext highlighter-rouge">Co-assembly</code>
+            <ul>
+              <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+                <ul>
+                  <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> output of <strong>Flye</strong> and output of <strong>Polypolish</strong></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>The HTML report generated by <strong>QUAST</strong> gives metrics for both assembly side-by-side</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Statistics</th>
+        <th><strong>Flye</strong> output</th>
+        <th><strong>Polypolish</strong> output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Number of contigs</td>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Largest contig</td>
+        <td>2,907,099</td>
+        <td>2,915,230</td>
+      </tr>
+      <tr>
+        <td>Total length (&gt;= 0 bp)</td>
+        <td>2,967,214</td>
+        <td>2,975,666</td>
+      </tr>
+      <tr>
+        <td>GC (%)</td>
+        <td>32.91</td>
+        <td>32.84</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>Is the assembly after polishing better than before given the results for KUN1163 in <a href="https://journals.asm.org/doi/10.1128/mra.01212-19#tab1">Table 1</a> in <span class="citation"><a href="#Hikichi_2019">Hikichi <i>et al.</i> 2019</a></span>?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>The largest contig after polishing has a length of 2,915,230 bp, which closr to the expected 2,914,567 bp. But the GC content (32.84% after polishing) is slightly worst given the  expected 32.91% also found in the assembly before polishing.</p>
+
+    </blockquote>
+  </blockquote>
+
+</div>
 
 <h1 id="conclusion">Conclusion</h1>
 
+<p>In this tutorial, we prepared long reads (using short reads if we had some) assembled them, inspect the produced assembly for its quality, and polished it (if short reads where provided). The assembly, even if uncomplete, is reasonable good to be used in downstream analysis, like <a href="/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html">AMR gene detection</a></p>
 
                 </section>
 
@@ -1910,13 +1988,19 @@ found genes, but it can be used with many more inputs.</p>
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li id="Lozano_2012">Lozano, C., Garcı́a-Migura Lourdes, C. Aspiroz, M. Zarazaga, C. Torres <i>et al.</i>, 2012 <b>Expansion of a Plasmid Classification System for Gram-Positive Bacteria and Determination of the Diversity of Plasmids in Staphylococcus aureus Strains of Human, Animal, and Food Origins</b>. Applied and Environmental Microbiology 78: 5948–5955. <a href="https://doi.org/10.1128/aem.00870-12">10.1128/aem.00870-12</a></li>
-<li id="Zankari2012">Zankari, E., H. Hasman, S. Cosentino, M. Vestergaard, S. Rasmussen <i>et al.</i>, 2012 <b>Identification of acquired antimicrobial resistance genes</b>. Journal of Antimicrobial Chemotherapy 67: 2640–2644. <a href="https://doi.org/10.1093/jac/dks261">10.1093/jac/dks261</a></li>
+                <ol class="bibliography"><li id="Li_2009">Li, H., and R. Durbin, 2009 <b>Fast and accurate short read alignment with Burrows-Wheeler transform</b>. Bioinformatics 25: 1754–1760. <a href="https://doi.org/10.1093/bioinformatics/btp324">10.1093/bioinformatics/btp324</a></li>
+<li id="Li_2010">Li, H., and R. Durbin, 2010 <b>Fast and accurate long-read alignment with Burrows–Wheeler transform</b>. Bioinformatics 26: 589–595. <a href="https://doi.org/10.1093/bioinformatics/btp698">10.1093/bioinformatics/btp698</a></li>
 <li id="Gurevich2013">Gurevich, A., V. Saveliev, N. Vyahhi, and G. Tesler, 2013 <b>QUAST: quality assessment tool for genome assemblies</b>. Bioinformatics 29: 1072–1075. <a href="https://doi.org/10.1093/bioinformatics/btt086">10.1093/bioinformatics/btt086</a></li>
-<li id="Carattoli2014">Carattoli, A., E. Zankari, Garcı́a-Fernández Aurora, M. V. Larsen, O. Lund <i>et al.</i>, 2014 <b>In SilicoDetection and Typing of Plasmids using PlasmidFinder and Plasmid Multilocus Sequence Typing</b>. Antimicrobial Agents and Chemotherapy 58: 3895–3903. <a href="https://doi.org/10.1128/aac.02412-14">10.1128/aac.02412-14</a></li>
-<li id="Jia2016">Jia, B., A. R. Raphenya, B. Alcock, N. Waglechner, P. Guo <i>et al.</i>, 2016 <b>CARD 2017: expansion and model-centric curation of the comprehensive antibiotic resistance database</b>. Nucleic Acids Research 45: D566–D573. <a href="https://doi.org/10.1093/nar/gkw1004">10.1093/nar/gkw1004</a></li>
-<li id="Zankari2017">Zankari, E., R. Allesøe, K. G. Joensen, L. M. Cavaco, O. Lund <i>et al.</i>, 2017 <b>PointFinder: a novel web tool for WGS-based detection of antimicrobial resistance associated with chromosomal point mutations in bacterial pathogens</b>. Journal of Antimicrobial Chemotherapy 72: 2764–2768. <a href="https://doi.org/10.1093/jac/dkx217">10.1093/jac/dkx217</a></li>
-<li id="Hikichi_2019">Hikichi, M., M. Nagao, K. Murase, C. Aikawa, T. Nozawa <i>et al.</i>, 2019 <b>Complete Genome Sequences of Eight Methicillin-Resistant Staphylococcus aureus Strains Isolated from Patients in Japan</b> (I. L. G. Newton, Ed.). Microbiology Resource Announcements 8: <a href="https://doi.org/10.1128/mra.01212-19">10.1128/mra.01212-19</a></li></ol>
+<li id="Li2013Aligning">Li, H., 2013 <b>Aligning sequence reads, clone sequences and assembly contigs with BWA-MEM</b>. <a href="https://doi.org/10.48550/arXiv.1303.3997">10.48550/arXiv.1303.3997</a></li>
+<li id="wick2015bandage">Wick, R. R., M. B. Schultz, J. Zobel, and K. E. Holt, 2015 <b>Bandage: interactive visualization of de novo genome assemblies</b>. Bioinformatics 31: 3350–3352. <a href="https://doi.org/10.1093/bioinformatics/btv383">10.1093/bioinformatics/btv383</a></li>
+<li id="Li_2016">Li, H., 2016 <b>Minimap and miniasm: fast mapping and de novo assembly for noisy long sequences</b>. Bioinformatics 32: 2103–2110. <a href="https://doi.org/10.1093/bioinformatics/btw152">10.1093/bioinformatics/btw152</a></li>
+<li id="lin2016assembly">Lin, Y., J. Yuan, M. Kolmogorov, M. W. Shen, M. Chaisson <i>et al.</i>, 2016 <b>Assembly of long error-prone reads using de Bruijn graphs</b>. Proceedings of the National Academy of Sciences 113: E8396–E8405. <a href="https://doi.org/10.1073/pnas.1604560113">10.1073/pnas.1604560113</a></li>
+<li id="koren2017canu">Koren, S., B. P. Walenz, K. Berlin, J. R. Miller, N. H. Bergman <i>et al.</i>, 2017 <b>Canu: scalable and accurate long-read assembly via adaptive k-mer weighting and repeat separation</b>. Genome research 27: 722–736. <a href="https://doi.org/10.1101/gr.215087.116">10.1101/gr.215087.116</a></li>
+<li id="Vaser_2017">Vaser, R., I. Sović, N. Nagarajan, and M. Šikić, 2017 <b>Fast and accurate de novo genome assembly from long uncorrected reads</b>. Genome Research 27: 737–746. <a href="https://doi.org/10.1101/gr.214270.116">10.1101/gr.214270.116</a></li>
+<li id="Chen2018">Chen, S., Y. Zhou, Y. Chen, and J. Gu, 2018 <b>fastp: an ultra-fast all-in-one FASTQ preprocessor</b>. <a href="https://doi.org/10.1093/bioinformatics/bty560">10.1093/bioinformatics/bty560</a></li>
+<li id="Hikichi_2019">Hikichi, M., M. Nagao, K. Murase, C. Aikawa, T. Nozawa <i>et al.</i>, 2019 <b>Complete Genome Sequences of Eight Methicillin-Resistant Staphylococcus aureus Strains Isolated from Patients in Japan</b> (I. L. G. Newton, Ed.). Microbiology Resource Announcements 8: <a href="https://doi.org/10.1128/mra.01212-19">10.1128/mra.01212-19</a></li>
+<li id="vaser2021time">Vaser, R., and M. Šikić, 2021 <b>Time-and memory-efficient genome assembly with Raven</b>. Nature Computational Science 1: 332–336. <a href="https://doi.org/10.1038/s43588-021-00073-4">10.1038/s43588-021-00073-4</a></li>
+<li id="Wick_2022">Wick, R. R., and K. E. Holt, 2022 <b>Polypolish: Short-read polishing of long-read bacterial genome assemblies</b> (D. Schneidman-Duhovny, Ed.). PLOS Computational Biology 18: e1009802. <a href="https://doi.org/10.1371/journal.pcbi.1009802">10.1371/journal.pcbi.1009802</a></li></ol>
                 
 
                 
@@ -1943,7 +2027,7 @@ found genes, but it can be used with many more inputs.</p>
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Bazante Sanders,  <b>Genome Assembly of MRSA using Oxford Nanopore MinION Data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/tutorial.html</a> Online; accessed TODAY
+                            Bazante Sanders, Bérénice Batut,  <b>Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
@@ -1969,8 +2053,8 @@ found genes, but it can be used with many more inputs.</p>
 
 
 <code id="citation-code">@misc{assembly-mrsa-nanopore,
-author = "Bazante Sanders",
-	title = "Genome Assembly of MRSA using Oxford Nanopore MinION Data (Galaxy Training Materials)",
+author = "Bazante Sanders and Bérénice Batut",
+	title = "Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data) (Galaxy Training Materials)",
 	year = "",
 	month = "",
 	day = ""
@@ -2015,6 +2099,17 @@ author = "Bazante Sanders",
 
 	</div>
 
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/abromics" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/abromics/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
 </div>
 </div>
 
@@ -2043,7 +2138,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
     
         
         
-        <a href="/training-material/topics/visualisation">Visualisation</a>
+        <a href="/training-material/topics/genome-annotation">Genome Annotation</a>
         
             <ul>
                 
@@ -2055,18 +2150,43 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                         
                     
                         
+                    
+                        
+                    
+                        
                             
-                            <li> Genomic Data Visualisation with JBrowse:
+                            <li> Identification of AMR genes in an assembled bacterial genome:
                             
-                                <a href="/training-material/topics/visualisation/tutorials/jbrowse/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                            
                                 
-                            
-                            
-                                
-                                    - <a href="/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                     <a href="/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -2172,38 +2292,48 @@ install_resolver_dependencies: true
 tools:
 - name: flye
   owner: bgruening
-  revisions: 3ee0ef312022
+  revisions: cb8dfd28c16f
   tool_panel_section_label: Assembly
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: prokka
-  owner: crs4
-  revisions: 111884f0d912
-  tool_panel_section_label: Annotation
+- name: fastqc
+  owner: devteam
+  revisions: 5ec9f6bceaee
+  tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bandage
   owner: iuc
-  revisions: b2860df42e16
+  revisions: ddddce450736
   tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bwa_mem2
+  owner: iuc
+  revisions: bfaa0d22c2e4
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastp
+  owner: iuc
+  revisions: 65b93b623c77
+  tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: filtlong
   owner: iuc
   revisions: 8880fb74ef56
   tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: jbrowse
+- name: filtlong
   owner: iuc
-  revisions: 17359b808b01
-  tool_panel_section_label: Graph/Display Data
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: minimap2
-  owner: iuc
-  revisions: 8c6cd2650d1f
-  tool_panel_section_label: Mapping
+  revisions: 1f296803dfa3
+  tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: nanoplot
   owner: iuc
-  revisions: edbb6c5028f5
+  revisions: 0f1c34698076
   tool_panel_section_label: Nanopore
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: polypolish
+  owner: iuc
+  revisions: f355085dd2aa
+  tool_panel_section_label: Metagenomic Analysis
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: porechop
   owner: iuc
@@ -2212,23 +2342,8 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: quast
   owner: iuc
-  revisions: ebb0dcdb621a
+  revisions: 72472698a2df
   tool_panel_section_label: Assembly
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: tbl2gff3
-  owner: iuc
-  revisions: 965674d88d34
-  tool_panel_section_label: Annotation
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: tbl2gff3
-  owner: iuc
-  revisions: 4a7f4b0cc0a3
-  tool_panel_section_label: Annotation
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: staramr
-  owner: nml
-  revisions: 2fd4d4c9c5c2
-  tool_panel_section_label: Metagenomic Analysis
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
                 </blockquote>
@@ -2300,7 +2415,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/f0a8a803a2e04e6d0f4daff61375e537ab138cc4">f0a8a80</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2328,7 +2443,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550494'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         
