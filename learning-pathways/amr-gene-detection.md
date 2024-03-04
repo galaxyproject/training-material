@@ -32,10 +32,8 @@ pathway:
     tutorials:
       - name: mrsa-illumina
         topic: assembly
-#      - name: mrsa-nanopore
-#        topic: assembly
-#      - name: hybrid-assembly
-#        topic: assembly
+      - name: mrsa-nanopore
+        topic: assembly
 
   - section: "Module: Genome annotation"
     description: |
