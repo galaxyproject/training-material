@@ -13,4 +13,12 @@
 >       3. Add EDAM format term
 >          1. Click on **Add data format**
 >          2. Search for data format in the filter or in the hierarchy
->       4. Repeat to add as inputs as needed
+>    5. (Optional) Add output
+>       1. Click on **Add output** 
+>       2. Add EDAM data term
+>          1. Click on **Add data type**
+>          2. Search for data type in the filter or in the hierarchy
+>       3. Add EDAM format term
+>          1. Click on **Add data format**
+>          2. Search for data format in the filter or in the hierarchy
+>       6. Repeat to add as many inputs and outputs as needed

@@ -24,7 +24,8 @@ contributions:
   authorship:
     - bebatut
     - supernord
-
+    - paulzierep
+    
 ---
 
 Galaxy offers thousands of tools. Many of these tools either have incomplete metadata or are not yet linked to sources of high-quality metadata such as [bio.tools](https://bio.tools/).
@@ -42,7 +43,7 @@ This prevents filtering for all tools in a specific research community or domain
 
 The ontology can be navigated using [EDAM Browser](https://edamontology.github.io/edam-browser/):
 
-<iframe id="edam" src="https://edamontology.github.io/edam-browser/#operation_0291" frameBorder="0" width="80%" height="600px"> ![EDAM ontology browser](./images/edam_browser.png) </iframe>
+<iframe id="edam" src="https://edamontology.github.io/edam-browser/#operation_0291" frameBorder="1" width="80%" height="600px"> ![EDAM ontology browser](./images/edam_browser.png) </iframe>
 
 A tool or software can then be characterized by different EDAM terms:
 - A topic term, *e.g.*  [`Proteomics`](https://edamontology.github.io/edam-browser/#topic_0121),
@@ -91,6 +92,7 @@ Now let's search for our selected tool on bio.tools.
 >
 > 1. Open [bio.tools](https://bio.tools/)
 > 2. Type the name of your tool in the "Search bio.tools" bar on the top
+> 3. Try also other naming possibilities of your tool, e.g. sometimes the galaxy tool name is not identical to the name of the tool in the publication.
 >
 {: .hands_on}
 
@@ -100,7 +102,7 @@ Now let's search for our selected tool on bio.tools.
 
 # Create a bio.tools entry for a tool
 
-If the tool is not on bio.tools, we need to create a new entry populate it with metadata.
+If the tool is not on bio.tools, we need to create a new entry and populate it with metadata. 
 
 > <hands-on-title> Create a bio.tools entry with minimum metadata </hands-on-title>
 >
@@ -195,7 +197,7 @@ Now we have the wrapper, and can add the bio.tools entry.
 >    </xrefs>
 >    ```
 >
->    It should appear below the `macros` section and before the `requirements` section
+>    It should appear below the `macros` section and before the `requirements` section. If the tools already defines `xrefs` in the `macro.xml` file. The snipped should be placed there.
 >
 > 3. Replace `biotool-id` in the example snippet above with the bio.tools ID for your tool
 > 4. Commit the change on a new branch
