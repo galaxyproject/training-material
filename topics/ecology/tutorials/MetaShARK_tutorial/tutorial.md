@@ -92,7 +92,7 @@ Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiver
 
 # 3] MetaShARK 🦈 : Write an EML document 
 
-To deploy a MetaShARK app, you can go to the Galaxy tool [MetaShARK](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashark) and click "Execute". Then, you have to wait the launch of the app, and when ready to be used, you will see the message "There is an InteractiveTool result view available," with an hyperlink on the "Open" statement allowing you to reach the app clicking on it.
+To deploy a MetaShARK app, you can go to the Galaxy tool {% tool [MetaShARK](interactive_tool_metashark) %} and click "Execute". Then, you have to wait the launch of the app, and when ready to be used, you will see the message "There is an InteractiveTool result view available," with an hyperlink on the "Open" statement allowing you to reach the app clicking on it.
 
 > [!WARNING]
 > 🚧 Note that it is a beta version of MetaShARK R shiny app. You can thus encounter issues using it!
