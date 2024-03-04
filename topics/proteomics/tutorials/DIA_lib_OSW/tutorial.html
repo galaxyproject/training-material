@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -390,7 +390,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are in silico reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured MS2 spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT and DIA allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -892,7 +892,7 @@ https://zenodo.org/record/4293493/files/Sample5.raw
   <div class="box-title hands-on-title" id="hands-on-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: MaxQuant Analysis</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="MaxQuant tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmaxquant%2Fmaxquant%2F1.6.10.43%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MaxQuant</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.10.43+galaxy3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="MaxQuant tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MaxQuant</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.10.43+galaxy3)</span> with the following parameters:
       <ul>
         <li>In <em>“Input Options”</em>:
           <ul>
@@ -991,14 +991,14 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
   <div class="box-title hands-on-title" id="hands-on-filtering-the-b-maxquant-b-search-results-for-unique-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering the <b>MaxQuant</b> search results for unique peptides</div>
 
   <ol>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
     - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Infile”</em>: <code class="language-plaintext highlighter-rouge">MaxQuant_Evidence</code>
       <ul>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">len(c9.split(';')) &lt; 2</code></li>
         <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
     - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Infile”</em>: <code class="language-plaintext highlighter-rouge">MaxQuant_MSMS</code>
       <ul>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">len(c12.split(';')) &lt; 2</code></li>
@@ -1038,7 +1038,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
   <div class="box-title hands-on-title" id="hands-on-generation-of-a-spectral-library-using-the-unique-b-maxquant-b-search-results-and-indexed-retention-time-i-irt-i-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generation of a spectral library using the unique <b>MaxQuant</b> search results and indexed retention time <i>iRT</i> peptides</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0" title="diapysef library generation tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fdiapysef%2Fdiapysef%2F0.3.5.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>diapysef library generation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.5.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0" title="diapysef library generation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>diapysef library generation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.5.0)</span> with the following parameters:
       <ul>
         <li>In <em>“MaxQuant output file msms.txt</em>:
           <ul>
@@ -1092,7 +1092,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
   <div class="box-title hands-on-title" id="hands-on-spectral-library-optimization-and-refinement-using-b-openswathassaygenerator-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Spectral library optimization and refinement using <b>OpenSwathAssayGenerator</b></div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0" title="OpenSwathAssayGenerator tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_openswathassaygenerator%2FOpenSwathAssayGenerator%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OpenSwathAssayGenerator</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0" title="OpenSwathAssayGenerator tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OpenSwathAssayGenerator</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">tabular (tsv)</code></li>
         <li><em>“MZ threshold in Thomson for precursor ion selection”</em>: <code class="language-plaintext highlighter-rouge">0.015</code></li>
@@ -1133,7 +1133,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
   <div class="box-title hands-on-title" id="hands-on-adding-i-decoy-i-transitions-to-the-spectral-library"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding <i>decoy</i> transitions to the spectral library</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0" title="OpenSwathDecoyGenerator tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_openswathdecoygenerator%2FOpenSwathDecoyGenerator%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OpenSwathDecoyGenerator</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0" title="OpenSwathDecoyGenerator tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OpenSwathDecoyGenerator</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">tabular (tsv)</code></li>
         <li><em>“Advanced Options”</em>: <code class="language-plaintext highlighter-rouge">Show Advanced Options</code>
@@ -1177,7 +1177,7 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
   <div class="box-title hands-on-title" id="hands-on-converting-the-final-spectral-library-from-i-tsv-i-to-the-sqlite-i-pqp-i-format"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Converting the final spectral library from <i>.tsv</i> to the sqlite <i>.pqp</i> format</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0" title="TargetedFileConverter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_targetedfileconverter%2FTargetedFileConverter%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TargetedFileConverter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0" title="TargetedFileConverter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TargetedFileConverter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">pqp</code></li>
       </ul>
@@ -1474,7 +1474,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1502,7 +1502,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

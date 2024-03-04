@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -561,7 +561,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1221,7 +1221,7 @@ https://zenodo.org/record/7867921/files/alternate_annotation.gff3
   <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0" title="RNA STAR tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Frgrnastar%2Frna_star%2F2.7.8a%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RNA STAR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.8a+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0" title="RNA STAR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RNA STAR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.8a+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as individual datasets)</code>
           <ul>
@@ -1246,7 +1246,7 @@ https://zenodo.org/record/7867921/files/alternate_annotation.gff3
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-what-if-i-want-to-use-multiple-rnaseq-libraries"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What if I want to use multiple RNASeq libraries</div>
 
-  <p>To get the best possible annotation, it is adviced to use multiple RNASeq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per RNASeq library, and you can then easily merge them into a single BAM file by using the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="MergeSamFiles tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fpicard%2Fpicard_MergeSamFiles%2F2.18.2.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MergeSamFiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.1)</a> tool. This single BAM file can then be used by Funannotate like we do in the next steps.</p>
+  <p>To get the best possible annotation, it is adviced to use multiple RNASeq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per RNASeq library, and you can then easily merge them into a single BAM file by using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="MergeSamFiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MergeSamFiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.1)</span> tool. This single BAM file can then be used by Funannotate like we do in the next steps.</p>
 </blockquote>
 
 <p>Before we move on to the next step, we need to make sure that the mapping went well. Have a look at the <code class="language-plaintext highlighter-rouge">log</code> output of <code class="language-plaintext highlighter-rouge">RNA STAR</code>.</p>
@@ -1280,7 +1280,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
   <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.15+galaxy1" title="Funannotate predict annotation tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffunannotate_predict%2Ffunannotate_predict%2F1.8.15%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Funannotate predict annotation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.15+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.15+galaxy1" title="Funannotate predict annotation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Funannotate predict annotation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.15+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to annotate”</em>: <code class="language-plaintext highlighter-rouge">genome_masked.fasta</code> (Input dataset)</li>
         <li><em>“Funannotate database”</em>: select the latest version available</li>
@@ -1362,7 +1362,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
   <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3" title="eggNOG Mapper tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Feggnog_mapper%2Feggnog_mapper%2F2.1.8%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>eggNOG Mapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.8+galaxy3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3" title="eggNOG Mapper tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>eggNOG Mapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.8+galaxy3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fasta sequences to annotate”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)”</li>
         <li><em>“Version of eggNOG Database”</em>: select the latest version available</li>
@@ -1393,7 +1393,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
   <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3" title="InterProScan tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Finterproscan%2Finterproscan%2F5.59-91.0%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>InterProScan</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.59-91.0+galaxy3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3" title="InterProScan tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>InterProScan</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.59-91.0+galaxy3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein FASTA File”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)”</li>
         <li><em>“InterProScan database”</em>: select the latest version available</li>
@@ -1467,7 +1467,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
   <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.15+galaxy1" title="Funannotate functional tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffunannotate_annotate%2Ffunannotate_annotate%2F1.8.15%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Funannotate functional</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.15+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.15+galaxy1" title="Funannotate functional tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Funannotate functional</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.15+galaxy1)</span> with the following parameters:
       <ul>
         <li><em>“Input format”</em>: <code class="language-plaintext highlighter-rouge">GenBank (from 'Funannotate predict annotation' tool)</code>
           <ul>
@@ -1507,7 +1507,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
   <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.6+galaxy0" title="Busco tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbusco%2Fbusco%2F5.4.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.4.6+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.6+galaxy0" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.4.6+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">annotated gene sets (protein)</code></li>
@@ -1552,7 +1552,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
   <div class="box-title hands-on-title" id="hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fjbrowse%2Fjbrowse%2F1.16.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.11+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.11+galaxy1)</span> with the following parameters:
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
@@ -1628,7 +1628,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
   <div class="box-title hands-on-title" id="hands-on-7"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0" title="AEGeAn ParsEval tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Faegean_parseval%2Faegean_parseval%2F0.16.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AEGeAn ParsEval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.16.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0" title="AEGeAn ParsEval tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AEGeAn ParsEval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.16.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference GFF3 file”</em>: <code class="language-plaintext highlighter-rouge">gff3</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Prediction GFF3 file”</em>: <code class="language-plaintext highlighter-rouge">alternate_annotation.gff3</code> (Input dataset)</li>
@@ -1681,7 +1681,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
   <div class="box-title hands-on-title" id="hands-on-9"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.15+galaxy1" title="Funannotate compare tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffunannotate_compare%2Ffunannotate_compare%2F1.8.15%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Funannotate compare</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.15+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.15+galaxy1" title="Funannotate compare tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Funannotate compare</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.15+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Genome annotations in genbank format”</em>: <code class="language-plaintext highlighter-rouge">alternate_annotation.gbk</code> (Input dataset) and <code class="language-plaintext highlighter-rouge">gbk</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Funannotate database”</em>: select the latest version available</li>
@@ -2098,7 +2098,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2126,7 +2126,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

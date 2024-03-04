@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -558,7 +558,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %})."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1067,7 +1067,7 @@ https://zenodo.org/record/6628296/files/SBML_Model_iML1515.xml
   <div class="box-title hands-on-title" id="hands-on-calculating-the-flux-of-a-target-using-flux-balance-analysis-fba"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculating the flux of a target using Flux Balance Analysis (FBA)</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1" title="Flux balance analysis tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Frpfba%2Frpfba%2F5.12.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flux balance analysis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</a> with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1" title="Flux balance analysis tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flux balance analysis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Pathway (rpSBML)”</em>: Select <code class="language-plaintext highlighter-rouge">Heterologous pathways</code> (Input dataset collection) from your current history.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Model (SBML)”</em>: Select <code class="language-plaintext highlighter-rouge">SBML_Model_iML1515.xml</code> (Input dataset) from your current history.</li>
@@ -1133,7 +1133,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
   <div class="box-title hands-on-title" id="hands-on-compute-thermodynamics-values-for-each-pathway-using-rpthermo-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute thermodynamics values for each pathway using rpThermo tool</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1" title="Thermo tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Frpthermo%2Frpthermo%2F5.12.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Thermo</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1" title="Thermo tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Thermo</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input File”</em>: <code class="language-plaintext highlighter-rouge">pathway_with_fba</code> (output of <strong>Flux balance analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1174,7 +1174,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
   <div class="box-title hands-on-title" id="hands-on-compute-the-global-score-using-the-pathway-score-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute the global score using the _Pathway Score_ tool</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1" title="Score Pathway tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Frpscore%2Frpscore%2F5.12.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Score Pathway</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1" title="Score Pathway tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Score Pathway</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pathway (rpSBML)”</em>: <code class="language-plaintext highlighter-rouge">pathway_with_thermo</code> (output of <strong>Thermo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1215,7 +1215,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
   <div class="box-title hands-on-title" id="hands-on-rank-annotated-pathways-using-rpranker-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rank annotated pathways using rpRanker tool</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1" title="Rank Pathways tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Frpranker%2Frpranker%2F5.12.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Rank Pathways</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1" title="Rank Pathways tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Rank Pathways</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.12.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pathways”</em>: <code class="language-plaintext highlighter-rouge">scored_pathway</code> (output of <strong>Score Pathway</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1480,7 +1480,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1508,7 +1508,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

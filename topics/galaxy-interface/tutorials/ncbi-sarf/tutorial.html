@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -386,7 +386,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Traditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the workflow. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to Galaxy users from SRA in the Cloud."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -980,7 +980,7 @@ We hope to include that functionality in a future update.</p>
 
   <ol>
     <li>
-      <p>Go to your Galaxy instance of choice such as one of the <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a>, <a href="https://usegalaxy.org">UseGalaxy.org</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a> or any other.</p>
+      <p>Go to your Galaxy instance of choice such as one of the <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>, <a href="https://usegalaxy.org">UseGalaxy.org</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a> or any other.</p>
     </li>
     <li>
       <p>Create a new history</p>
@@ -1116,7 +1116,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       <p><strong>Once those download jobs have all turned green in the history list, we’ll concatenate these into a single file.</strong></p>
     </li>
     <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cat%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> tail to head (cat) files with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> tail to head (cat) files with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to Concatenate”</em>: <code class="language-plaintext highlighter-rouge">contigs.json</code> collection</li>
@@ -1131,7 +1131,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0" title="JQ tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fjq%2Fjq%2F1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0)</a> process JSON files with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0" title="JQ tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0)</span> process JSON files with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“JSON Input”</em>: <code class="language-plaintext highlighter-rouge">contigs.single.json</code></li>
@@ -1169,7 +1169,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
 
   <ol>
     <li>
-      <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Query Tabular using sqlite sql tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fquery_tabular%2Fquery_tabular%2F3.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular using sqlite sql</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.0)</a> with the following parameters:</p>
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Query Tabular using sqlite sql tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular using sqlite sql</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.0)</span> with the following parameters:</p>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-can-t-find-it"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-t-find-it" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Can't find it?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1272,7 +1272,7 @@ You can find full definitions for these columns here:</p>
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-download-fastq-with-quality-scores"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-download-fastq-with-quality-scores" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Download Fastq with Quality Scores</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>If you would like to dump the raw, underlying data in fastq format with the original quality scores, you can stop here and use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0" title="Faster Download and Extract Reads in FASTQ tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsra_tools%2Ffasterq_dump%2F2.11.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Faster Download and Extract Reads in FASTQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.0+galaxy0)</a> tool with the following parameters:</p>
+  <p>If you would like to dump the raw, underlying data in fastq format with the original quality scores, you can stop here and use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0" title="Faster Download and Extract Reads in FASTQ tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Faster Download and Extract Reads in FASTQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.0+galaxy0)</span> tool with the following parameters:</p>
 
   <ul>
     <li><em>“input type”</em>: <code class="language-plaintext highlighter-rouge">list of SRA accessions, one per line</code></li>
@@ -1353,7 +1353,7 @@ You can find full definitions for these columns here:</p>
     <li>
       <p><strong>Now we will use the SRA toolkit to retrieve the contigs in fasta format</strong></p>
 
-      <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+galaxy0" title="Download and Extract Reads in FASTA/Q format from NCBI SRA tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsra_tools%2Ffastq_dump%2F2.11.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Download and Extract Reads in FASTA/Q format from NCBI SRA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.0+galaxy0)</a> with the following parameters:</p>
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fastq_dump/2.11.0+galaxy0" title="Download and Extract Reads in FASTA/Q format from NCBI SRA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Download and Extract Reads in FASTA/Q format from NCBI SRA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.0+galaxy0)</span> with the following parameters:</p>
 
       <ul>
         <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">SRA Archive in current history</code></li>
@@ -1372,7 +1372,7 @@ You can find full definitions for these columns here:</p>
         <li>Rename this collection to <code class="language-plaintext highlighter-rouge">sarf_contigs</code></li>
       </ul>
 
-      <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5" title="Fastq to Fasta converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqtofasta%2Ffastq_to_fasta_python%2F1.1.5"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Fastq to Fasta converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</a></p>
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5" title="Fastq to Fasta converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Fastq to Fasta converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</span></p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span><em>“FASTQ file to convert”</em>: <code class="language-plaintext highlighter-rouge">sarf_contigs</code> (note: in the video this did not get renamed)</li>
@@ -1450,7 +1450,7 @@ You can find full definitions for these columns here:</p>
     <li>
       <p><strong>Use VCFs in Another Galaxy Tool</strong>. Once you have imported the VCF files, you can use them in your standard pipeline- here we will annotate them with SnpEff.</p>
 
-      <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19" title="SnpEff eff: annotate variants for SARS-CoV-2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpeff_sars_cov_2%2Fsnpeff_sars_cov_2%2F4.5covid19"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.5covid19)</a>  with the following parameters:</p>
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19" title="SnpEff eff: annotate variants for SARS-CoV-2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.5covid19)</span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequence changes (SNPs, MNPs, InDels)”</em>: the <code class="language-plaintext highlighter-rouge">VCFs</code> collection we just created</li>
@@ -1709,7 +1709,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1737,7 +1737,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

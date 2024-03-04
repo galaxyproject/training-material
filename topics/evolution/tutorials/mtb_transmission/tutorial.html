@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -549,7 +549,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1245,7 +1245,7 @@ https://zenodo.org/record/6010176/files/SRR998584.vcf
 
       <ol>
         <li>Copy the links above</li>
-        <li>Open the <a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> Manager</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> Manager</li>
         <li>In the top row of tabs select <strong>Rule-based</strong></li>
         <li>Set <strong>Upload data as</strong> to <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
         <li>Paste the copied links into the text field on the right</li>
@@ -1295,7 +1295,7 @@ https://zenodo.org/record/6010176/files/SRR998584.vcf
 Just click on the <strong>Close</strong> button of the information pop-up window if it is still open when you are ready to proceed.</p>
     </li>
     <li>
-      <p><a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> the reference genome that was used for SNP calling from:</p>
+      <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the reference genome that was used for SNP calling from:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta
 </code></pre></div>      </div>
@@ -1345,7 +1345,7 @@ they only contain <strong>fixed SNPs</strong>, which we (somewhat arbitrarily) d
   <div class="box-title hands-on-title" id="hands-on-filter-vcf-files-for-epidemiological-investigation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter VCF files for epidemiological investigation</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.6+galaxy0" title="TB Variant Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ftb_variant_filter%2Ftb_variant_filter%2F0.3.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB Variant Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.6+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.6+galaxy0" title="TB Variant Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB Variant Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.6+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“VCF file to be filter”</em>: <code class="language-plaintext highlighter-rouge">MTB variants per sample</code>; the uploaded collection of VCF datasets</li>
         <li><em>“Filters to apply”</em>: <code class="language-plaintext highlighter-rouge">Only accept SNVs</code>, <code class="language-plaintext highlighter-rouge">Filter variants by percentage alt allele</code></li>
@@ -1388,7 +1388,7 @@ given the reference genome and the VCF of the strain we want to reconstruct the 
   <div class="box-title hands-on-title" id="hands-on-reconstruct-the-complete-genome-of-each-sample"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Reconstruct the complete genome of each sample</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3" title="bcftools consensus tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbcftools_consensus%2Fbcftools_consensus%2F1.15.1%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bcftools consensus</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3" title="bcftools consensus tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bcftools consensus</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“VCF/BCF Data”</em>: the collection of filtered variants per sample; output of <strong>TB Variant Filter</strong></li>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history</code>
@@ -1466,7 +1466,7 @@ However we can do the same with a specific command that <em>concatenates</em> da
   <div class="box-title hands-on-title" id="hands-on-concatenate-genomes-to-build-a-msa"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Concatenate genomes to build a MSA</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tail-to-head (cat) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cat%2F0.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head (cat)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tail-to-head (cat) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head (cat)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to concatenate”</em>: the collection of consensus genomes; output of <strong>bcftools consensus</strong></li>
       </ul>
@@ -1529,7 +1529,7 @@ our file larger than necessary.</p>
   <div class="box-title hands-on-title" id="hands-on-removing-invariant-sites-from-a-msa"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Removing invariant sites from a MSA</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0" title="Finds SNP sites tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnp_sites%2Fsnp_sites%2F2.5.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Finds SNP sites</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.1+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0" title="Finds SNP sites tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Finds SNP sites</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.1+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: the concatenated consensus genomes; output of <strong>Concatenate datasets</strong></li>
         <li><em>“Output”</em>: <code class="language-plaintext highlighter-rouge">Sequence alignment / VCF</code>
@@ -1559,7 +1559,7 @@ easy. We will use <strong>SNP distance matrix</strong>, that will generate a mat
   <div class="box-title hands-on-title" id="hands-on-distance-matrix-from-snp-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Distance matrix from SNP alignment.</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.8.2+galaxy0" title="SNP distance matrix tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnp_dists%2Fsnp_dists%2F0.8.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SNP distance matrix</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.2+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.8.2+galaxy0" title="SNP distance matrix tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SNP distance matrix</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.8.2+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA multiple sequence alignment”</em>: the concatenated SNP sites-only sequences; output of <strong>Finds SNP sites</strong></li>
       </ul>
@@ -1793,7 +1793,7 @@ https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
 
       <ol>
         <li>Copy the links above</li>
-        <li>Open the <a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> Manager</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> Manager</li>
         <li>In the top row of tabs select <strong>Rule-based</strong></li>
         <li>Set <strong>Upload data as</strong> to <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
         <li>Paste the copied links into the text field on the right</li>
@@ -1922,7 +1922,7 @@ as output the complete line, for example <code class="language-plaintext highlig
   <div class="box-title hands-on-title" id="hands-on-keep-only-drug-resistance-lines-from-tb-profiler-reports"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Keep only `Drug-resistance:` lines from TB-profiler reports</div>
 
   <ol>
-    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: the uploaded collection of TB-profiler reports</li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1941,7 +1941,7 @@ one column of sample IDs and another one with the corresponding drug resistance 
   <div class="box-title hands-on-title" id="hands-on-prepend-the-sample-name-to-the-dr-profile"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepend the sample name to the DR profile</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F5.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.1.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.1.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: the collection of single-line drug-resistance reports; output of <strong>Select lines</strong></li>
         <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
@@ -1963,7 +1963,7 @@ one column of sample IDs and another one with the corresponding drug resistance 
   <div class="box-title hands-on-title" id="hands-on-removing-redundant-content"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Removing redundant content</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_line%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Single file</code> (output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Replacement”</em>:
@@ -2023,7 +2023,7 @@ If we have a look at the respective TB-profiler reports, we can see that these t
   <div class="box-title hands-on-title" id="hands-on-joining-tables"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Joining tables</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join two files tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_easyjoin_tool%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two files</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join two files tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two files</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: transmission clusters report; output of <strong>Rstudio</strong> session</li>
         <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -2627,7 +2627,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2655,7 +2655,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

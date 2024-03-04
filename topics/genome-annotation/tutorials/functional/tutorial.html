@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -350,7 +350,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "When performing the structural annotation of a genome sequence, you get the position of each gene, but you don't have information about their name of their function. That's the goal of **functional annotation**."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -851,7 +851,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
   <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3" title="eggNOG Mapper tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Feggnog_mapper%2Feggnog_mapper%2F2.1.8%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>eggNOG Mapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.8+galaxy3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3" title="eggNOG Mapper tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>eggNOG Mapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.8+galaxy3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fasta sequences to annotate”</em>: <code class="language-plaintext highlighter-rouge">proteins.fasta</code> (Input dataset)</li>
         <li><em>“Version of eggNOG Database”</em>: select the latest version available</li>
@@ -882,7 +882,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
   <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3" title="InterProScan tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Finterproscan%2Finterproscan%2F5.59-91.0%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>InterProScan</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.59-91.0+galaxy3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3" title="InterProScan tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>InterProScan</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.59-91.0+galaxy3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein FASTA File”</em>: <code class="language-plaintext highlighter-rouge">proteins.fasta</code> (Input dataset)</li>
         <li><em>“InterProScan database”</em>: select the latest version available</li>
@@ -927,7 +927,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
 <p>Congratulations for reaching the end of this tutorial! Now you know how to perform the functional annotation of a set of protein sequences, using EggNOG mapper and InterProScan.</p>
 
-<p>If you want to collect more functional annotation, you can try to run the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2" title="NCBI BLAST+ blastp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fncbi_blast_plus%2Fncbi_blastp_wrapper%2F2.10.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI BLAST+ blastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</a> or <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0" title="Diamond tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdiamond%2Fbg_diamond%2F2.0.15%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Diamond</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.15+galaxy0)</a> tools against the UniProt or NR databases (Diamond runs much faster on big datasets). These tools will search for similarities between your protein sequences and the ones already described in big international databases.</p>
+<p>If you want to collect more functional annotation, you can try to run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2" title="NCBI BLAST+ blastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI BLAST+ blastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</span> or <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0" title="Diamond tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Diamond</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.15+galaxy0)</span> tools against the UniProt or NR databases (Diamond runs much faster on big datasets). These tools will search for similarities between your protein sequences and the ones already described in big international databases.</p>
 
 <p>Also note that many other more specialised tools exist to collect even more functional annotation, in particular for certain species (prokaryotes forexample), or enzyme/protein families.</p>
 
@@ -1165,7 +1165,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1193,7 +1193,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

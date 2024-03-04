@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -375,7 +375,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "A lot of packages are available for the analysis of GC-MS or LC-MS data. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alternatives such as **XCMS** are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like **XCMS**, several other packages have been developed to use the functionality of **XCMS** for optimal performance in a particular context. Package **metaMS** does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals **metaMS** was to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments. "
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -955,12 +955,12 @@ https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
   <div class="box-title hands-on-title" id="hands-on-first-steps-using-a-standard-xcms-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: First steps using a standard XCMS workflow</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="MSnbase readMSData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Flecorguille%2Fmsnbase_readmsdata%2Fmsnbase_readmsdata%2F2.16.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSnbase readMSData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.16.1+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="MSnbase readMSData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSnbase readMSData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.16.1+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File(s) from your history containing your chromatograms”</em>: <code class="language-plaintext highlighter-rouge">mzData</code> (Input dataset collection)</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0" title="xcms findChromPeaks (xcmsSet) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Flecorguille%2Fxcms_xcmsset%2Fabims_xcms_xcmsSet%2F3.12.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms findChromPeaks (xcmsSet)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0" title="xcms findChromPeaks (xcmsSet) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms findChromPeaks (xcmsSet)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzData.raw.RData</code> (output of the <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
         <li><em>“Extraction method for peaks detection”</em>: <code class="language-plaintext highlighter-rouge">MatchedFilter - peak detection in chromatographic space</code>
@@ -984,7 +984,7 @@ https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
         <p>With GC-MS data in profile mode, we need to use the <em>MatchedFilter</em> algorithm instead of the <em>Centwave</em> one used in the LC-MS tutorial.</p>
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0" title="xcms findChromPeaks Merger tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Flecorguille%2Fxcms_merge%2Fxcms_merge%2F3.12.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms findChromPeaks Merger</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0" title="xcms findChromPeaks Merger tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms findChromPeaks Merger</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzData.raw.xset.RData</code> (output of the <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file “</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata.tsv</code> (One of the uploaded files from Zenodo)</li>
@@ -1047,7 +1047,7 @@ The two options are illustrated in this tutorial.</li>
   <div class="box-title hands-on-title" id="hands-on-example-of-end-of-extraction-when-using-the-standard-xcms-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Example of end of extraction when using the standard XCMS workflow</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="xcms groupChromPeaks (group) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Flecorguille%2Fxcms_group%2Fabims_xcms_group%2F3.12.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms groupChromPeaks (group)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="xcms groupChromPeaks (group) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms groupChromPeaks (group)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.RData</code> (output of the <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
         <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
@@ -1058,7 +1058,7 @@ The two options are illustrated in this tutorial.</li>
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0" title="xcms fillChromPeaks (fillPeaks) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Flecorguille%2Fxcms_fillpeaks%2Fabims_xcms_fillPeaks%2F3.12.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms fillChromPeaks (fillPeaks)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0" title="xcms fillChromPeaks (fillPeaks) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms fillChromPeaks (fillPeaks)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.RData</code> (output of the <strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> job)</li>
         <li>In <em>“Peak List”</em>:
@@ -1511,7 +1511,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1539,7 +1539,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

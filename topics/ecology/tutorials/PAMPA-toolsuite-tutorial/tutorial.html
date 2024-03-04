@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -495,7 +495,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "This tutorial aims to present the PAMPA Galaxy workflow, how to use it to compute common"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -983,24 +983,24 @@ Thus, in this tutorial, we’ll start by the Community analysis followed by the 
 <ul>
   <li><strong>A first tool</strong> to compute metrics:
     <ul>
-      <li>Community metrics (<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2" title="Calculate community metrics tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_communitymetrics%2Fpampa_communitymetrics%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate community metrics</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a>):
+      <li>Community metrics (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2" title="Calculate community metrics tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate community metrics</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span>):
 Total abundance, Species richness, Shannon index, Simpson index, Hill index and Pielou index</li>
-      <li>Population metrics (<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2" title="Calculate presence absence table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_presabs%2Fpampa_presabs%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate presence absence table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a>):
+      <li>Population metrics (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2" title="Calculate presence absence table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate presence absence table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span>):
 Abundance, Presence-absence</li>
     </ul>
   </li>
   <li><strong>A second tool</strong> to compute Generalized Linear (Mixed) Models, testing the effect of <code class="language-plaintext highlighter-rouge">'site'</code>, <code class="language-plaintext highlighter-rouge">'year'</code> and/or
 <code class="language-plaintext highlighter-rouge">'habitat'</code> on a metric selected by the user:
     <ul>
-      <li>Community analysis (<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Compute GLM on community data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_glmcomm%2Fpampa_glmcomm%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on community data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a>):
+      <li>Community analysis (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Compute GLM on community data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on community data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span>):
 The GLM(M) is computed on the whole dataset and, if a separation factor is selected by the user, GLM(M)s are computed on subsets
 of the dataset (example: one GLM(M) per ecoregion)</li>
-      <li>Population analysis (<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Compute GLM on population data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_glmsp%2Fpampa_glmsp%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on population data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a>):
+      <li>Population analysis (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Compute GLM on population data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on population data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span>):
 One GLM(M) is computed on each species separately</li>
     </ul>
   </li>
   <li><strong>A third tool</strong> common for Community and Population analyses with at least <code class="language-plaintext highlighter-rouge">'year'</code> as a fixed effect to
-create time-series plots from your GLM(M) results (<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Create a plot from GLM data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_plotglm%2Fpampa_plotglm%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a plot from GLM data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a>).
+create time-series plots from your GLM(M) results (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Create a plot from GLM data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a plot from GLM data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span>).
 Two plots will be created for each GLM(M): one from the <em>“Estimate”</em> values of the GLM(M) and one from raw values from metrics file.</li>
 </ul>
 
@@ -1201,7 +1201,7 @@ have a “observation.unit” field but only <code class="language-plaintext hig
   <p>If you already have your own nomenclature for the primary key linking your files, it will remain untouched by the tools but the
 output data table from the first tools to compute metrics won’t contain <code class="language-plaintext highlighter-rouge">'year'</code> and “location” fields.
 In this case and if you want to add such informations to your metrics data file, you can use the tool
-<a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_easyjoin_tool%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a>
+<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span>
 with the metrics data file and the observation unit data file.</p>
 
 </blockquote>
@@ -1224,7 +1224,7 @@ level you want to take into account in your statistical analysis.</p>
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tail-to-head (cat) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cat%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head (cat)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> select the three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tail-to-head (cat) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head (cat)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> select the three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code>
 datasets in <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Datasets to concatenate”</em></p>
 
       <!--SNIPPET-->
@@ -1238,7 +1238,7 @@ datasets in <i class="far fa-copy" aria-hidden="true"></i><span class="visually-
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Verify if the three header lines have been included in the concatenate with <a class="tool" data-tool="Count1" title="Count occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count occurrences of each record</strong></a>
+    <li>Verify if the three header lines have been included in the concatenate with <span class="tool" data-tool="Count1" title="Count occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count occurrences of each record</strong></span>
 and following parameters :
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Concatenated data file</li>
@@ -1247,7 +1247,7 @@ and following parameters :
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">With the rarest value first</code> so multiple occurences can be seen directly at first lines of the resulting file</li>
       </ul>
     </li>
-    <li>If the value <code class="language-plaintext highlighter-rouge">Survey</code> has more than <code class="language-plaintext highlighter-rouge">1</code> occurrence use <a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a>
+    <li>If the value <code class="language-plaintext highlighter-rouge">Survey</code> has more than <code class="language-plaintext highlighter-rouge">1</code> occurrence use <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span>
 with following parameters :
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Concatenated data file</li>
@@ -1259,7 +1259,7 @@ with following parameters :
         <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
         <p>How many header line(s) is left?</p>
 
-        <p>Use <a class="tool" data-tool="Count1" title="Count occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count occurrences of each record</strong></a> and following parameters :</p>
+        <p>Use <span class="tool" data-tool="Count1" title="Count occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count occurrences of each record</strong></span> and following parameters :</p>
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file</li>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -1267,7 +1267,7 @@ with following parameters :
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">With the rarest value first</code></li>
         </ul>
 
-        <p><strong>Tip:</strong> Hit the rerun button <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> on the output of the previous run of <a class="tool" data-tool="Count1" title="Count occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count occurrences of each record</strong></a>,
+        <p><strong>Tip:</strong> Hit the rerun button <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> on the output of the previous run of <span class="tool" data-tool="Count1" title="Count occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count occurrences of each record</strong></span>,
 and change the input dataset.</p>
 
         <blockquote class="solution">
@@ -1307,7 +1307,7 @@ the three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code
   <div class="box-title hands-on-title" id="hands-on-create-the-quot-location-quot-field"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create the &quot;location&quot; field</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Column Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> with following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file +
 three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> tabular data files</li>
@@ -1338,7 +1338,7 @@ properly columns “Area” and “Survey” with a separation.</p>
 
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2" title="Merge Columns tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fmerge_cols%2FmergeCols1%2F1.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Columns</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</a> with following parameters :
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2" title="Merge Columns tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Columns</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</span> with following parameters :
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select data”</em>: four <code class="language-plaintext highlighter-rouge">#Concatenate</code>, <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code>
 Column Regex Find And Replace data files</li>
@@ -1356,7 +1356,7 @@ separated with <code class="language-plaintext highlighter-rouge">-</code>.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-change-column-names"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Change column names</div>
 
-  <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0" title="Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2Fregex1%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> with following parameters :</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0" title="Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with following parameters :</p>
   <ul>
     <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: four <code class="language-plaintext highlighter-rouge">#Concatenate</code>, <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Merged data files</li>
     <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
@@ -1411,7 +1411,7 @@ and Population metrics. Then, we’ll be creating the observation unit file.</p>
   <div class="box-title hands-on-title" id="hands-on-compute-community-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute Community metrics</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2" title="Calculate community metrics tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_communitymetrics%2Fpampa_communitymetrics%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate community metrics</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2" title="Calculate community metrics tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate community metrics</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Regex Find And Replace data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the community metrics you want to compute”</em>: <code class="language-plaintext highlighter-rouge">All</code></li>
@@ -1428,7 +1428,7 @@ and Population metrics. Then, we’ll be creating the observation unit file.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-compute-population-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute Population metrics</div>
 
-  <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2" title="Calculate presence absence table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_presabs%2Fpampa_presabs%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate presence absence table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Regex Find And Replace data files</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2" title="Calculate presence absence table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate presence absence table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Regex Find And Replace data files</p>
 
   <p>Check if the outputs Population metrics data files has the following column names <code class="language-plaintext highlighter-rouge">"year","location",
 "species.code","number","presence_absence","observation.unit"</code>.</p>
@@ -1447,7 +1447,7 @@ nomenclature for the “observation.unit” fields, namely:</p>
   <div class="box-title hands-on-title" id="hands-on-create-the-observation-unit-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create the observation unit file</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Column Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> with following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Regex Find And Replace data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
@@ -1459,7 +1459,7 @@ nomenclature for the “observation.unit” fields, namely:</p>
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2" title="Merge Columns tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fmerge_cols%2FmergeCols1%2F1.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Columns</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</a> with following parameters :
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2" title="Merge Columns tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Columns</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</span> with following parameters :
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Column Regex Find And Replace data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
@@ -1469,7 +1469,7 @@ nomenclature for the “observation.unit” fields, namely:</p>
       <p>Check if the output data file has a supplementary column called “yearlocation” and values with the <code class="language-plaintext highlighter-rouge">'year'</code> and “location” ID
 separated with <code class="language-plaintext highlighter-rouge">_</code>.</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Column Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> with following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Merge Columns data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
@@ -1494,7 +1494,7 @@ separated with <code class="language-plaintext highlighter-rouge">_</code>.</p>
 
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Cut columns from a table (cut) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table (cut)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Cut columns from a table (cut) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table (cut)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span>
 with following parameters :
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Column Regex Find And Replace data file</li>
@@ -1510,7 +1510,7 @@ with following parameters :
       <p>Check if the output <code class="language-plaintext highlighter-rouge">#Concatenate</code> Advanced Cut data file has the following column names <code class="language-plaintext highlighter-rouge">"Survey","year","Quarter",
 "Area","location","yearlocation"</code>.</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span>
  with following parameters :
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Advanced Cut data file</li>
@@ -1528,7 +1528,7 @@ with following parameters :
 
       <p>The output <code class="language-plaintext highlighter-rouge">#Concatenate</code> Sort data file must have fewer lines than the <code class="language-plaintext highlighter-rouge">#Concatenate</code> Advanced Cut data file.</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0" title="Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2Fregex1%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> with following parameters :
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0" title="Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with following parameters :
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Sort data file</li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
@@ -1560,8 +1560,8 @@ with following parameters :
 <h1 id="glmms-and-plots-on-community-and-population-metrics">GLMMs and plots on Community and Population metrics</h1>
 
 <p>Now that we have all our input files for GLM(M) tools ready, we can start computing statistical models to make
-conclusions on our surveys. But before starting to use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Compute GLM on community data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_glmcomm%2Fpampa_glmcomm%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on community data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a>
-and the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Compute GLM on population data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_glmsp%2Fpampa_glmsp%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on population data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> tools, we have to think about the model we want to compute.
+conclusions on our surveys. But before starting to use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Compute GLM on community data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on community data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span>
+and the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Compute GLM on population data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on population data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> tools, we have to think about the model we want to compute.
 The tools allows to test the effects <code class="language-plaintext highlighter-rouge">Year'</code>, <code class="language-plaintext highlighter-rouge">Site</code> and/or <code class="language-plaintext highlighter-rouge">Habitat</code> on one interest variable at a time.
 As we don’t have data about the <code class="language-plaintext highlighter-rouge">Habitat</code> we can’t test its effect. It is always better to take a temporal and a
 geographical variable into account in an ecological model so we’ll test the effect of <code class="language-plaintext highlighter-rouge">Year</code> and <code class="language-plaintext highlighter-rouge">Site</code> with
@@ -1594,7 +1594,7 @@ the metrics cited above.</p>
   <div class="box-title hands-on-title" id="hands-on-compute-glmm-on-community-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute GLMM on Community metrics</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Compute GLM on community data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_glmcomm%2Fpampa_glmcomm%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on community data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Compute GLM on community data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on community data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input metrics file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #Community</code> metrics data file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Unitobs informations file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #unitobs</code> data file</li>
@@ -1615,7 +1615,7 @@ rather than files with a lot of columns. So, if your file doesn’t display prop
 to do the following optional step.</p>
 
   <ol>
-    <li>(optional) <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Transpose rows/columns in a tabular file tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_transpose%2Fdatamash_transpose%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose rows/columns in a tabular file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with <code class="language-plaintext highlighter-rouge">#Concatenate #Community #unitobs</code> ‘GLM - results from your community analysis’ data file</li>
+    <li>(optional) <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Transpose rows/columns in a tabular file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose rows/columns in a tabular file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with <code class="language-plaintext highlighter-rouge">#Concatenate #Community #unitobs</code> ‘GLM - results from your community analysis’ data file</li>
   </ol>
 
 </blockquote>
@@ -1821,7 +1821,7 @@ Here, for these models, we know these plots won’t be trust-worthy but it can s
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-plots-from-community-metrics-file-and-glmm-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create plots from Community metrics file and GLMM results</div>
 
-  <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Create a plot from GLM data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_plotglm%2Fpampa_plotglm%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a plot from GLM data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Create a plot from GLM data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a plot from GLM data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input glm results file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #Community #unitobs</code> ‘GLM - results
 from your community analysis’ data file</li>
@@ -1872,7 +1872,7 @@ files.</p>
   <div class="box-title hands-on-title" id="hands-on-compute-glmm-on-population-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute GLMM on Population metrics</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Compute GLM on population data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_glmsp%2Fpampa_glmsp%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on population data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Compute GLM on population data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute GLM on population data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input metrics file”</em>: <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> metrics (here presence absence) data files</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Unitobs informations file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #unitobs</code> data file</li>
@@ -1890,7 +1890,7 @@ However, this format is often not suited to read directly the results on Galaxy 
 files with a lot of lines rather than files with a lot of columns. So, if your files doesn’t display properly
 on Galaxy as a data table, we advise to do the following optional step.</p>
     </li>
-    <li>(optional) <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Transpose rows/columns in a tabular file tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_transpose%2Fdatamash_transpose%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose rows/columns in a tabular file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a>
+    <li>(optional) <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Transpose rows/columns in a tabular file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose rows/columns in a tabular file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span>
 with <code class="language-plaintext highlighter-rouge">#Concatenate #EVHOE #unitobs</code> <code class="language-plaintext highlighter-rouge">#BITS #Concatenate #unitobs</code> <code class="language-plaintext highlighter-rouge">#Concatenate #SWCIBTS #unitobs</code>
 ‘GLM - results from your population analysis’ data files</li>
   </ol>
@@ -1999,7 +1999,7 @@ Hence, more interesting to look at.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-plots-from-population-metrics-file-and-glmm-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create plots from Population metrics file and GLMM results</div>
 
-  <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Create a plot from GLM data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fecology%2Fpampa_plotglm%2Fpampa_plotglm%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a plot from GLM data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Create a plot from GLM data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a plot from GLM data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with following parameters:</p>
   <ul>
     <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input glm results file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #EVHOE #unitobs</code> <code class="language-plaintext highlighter-rouge">#BITS #Concatenate #unitobs</code>
 <code class="language-plaintext highlighter-rouge">#Concatenate #SWCIBTS #unitobs</code> ‘GLM - results from your population analysis’ data files</li>
@@ -2029,7 +2029,7 @@ typing mistake in the dataset.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>To see if there is an abnormal value in the <code class="language-plaintext highlighter-rouge">'number'</code> field representing the CPUE abundance we’ll use
-the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a>
+the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span>
 tool in the “Text Manipulation” tool collection with following parameters :</p>
     <ul>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">#BITS</code> ‘Calculate presence absence table’ data file</li>
@@ -2390,7 +2390,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2418,7 +2418,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

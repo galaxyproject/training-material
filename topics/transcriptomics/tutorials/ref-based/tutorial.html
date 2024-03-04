@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -941,7 +941,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "In recent years, RNA sequencing (in short RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-Seq is the profiling of gene expression by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational workflow for the detection of DE genes and pathways from RNA-Seq data by providing a complete analysis of an RNA-Seq experiment profiling *Drosophila* cells after the depletion of a regulatory gene."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1687,12 +1687,12 @@ We will first need to transform our the list of pairs to a simple list.</p>
   <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control</div>
 
   <ol>
-    <li><a class="tool" data-tool="__FLATTEN__" title="Flatten collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__FLATTEN__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flatten collection</strong></a> with the following parameters convert the list of pairs into a simple list:
+    <li><span class="tool" data-tool="__FLATTEN__" title="Flatten collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flatten collection</strong></span> with the following parameters convert the list of pairs into a simple list:
       <ul>
         <li><em>“Input Collection”</em>: <code class="language-plaintext highlighter-rouge">2 PE fastqs</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.73%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: Output of <strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> selected as <strong>Dataset collection</strong></li>
       </ul>
@@ -1718,9 +1718,9 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
       </blockquote>
 
-      <p>As it is tedious to inspect all these reports individually we will combine them with <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a>.</p>
+      <p>As it is tedious to inspect all these reports individually we will combine them with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span>.</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the FastQC reports with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the FastQC reports with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
@@ -1848,7 +1848,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   <div class="box-title hands-on-title" id="hands-on-trimming-fastqs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Trimming FASTQs</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1" title="Cutadapt tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Flparsons%2Fcutadapt%2Fcutadapt%2F4.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0+galaxy1)</a> with the following parameters to trim low quality sequences:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1" title="Cutadapt tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0+galaxy1)</span> with the following parameters to trim low quality sequences:
       <ul>
         <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Collection</code>
           <ul>
@@ -1886,7 +1886,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the Cutadapt reports with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the Cutadapt reports with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
@@ -2022,7 +2022,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Frgrnastar%2Frna_star%2F2.7.10b%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RNA STAR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.10b+galaxy3)</a> with the following parameters to map your reads on the reference genome:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RNA STAR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.10b+galaxy3)</span> with the following parameters to map your reads on the reference genome:
       <ul>
         <li><em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>
           <ul>
@@ -2052,7 +2052,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the STAR logs with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the STAR logs with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
@@ -2344,12 +2344,12 @@ installed on your machine. However, the questions in this section can also be an
     <div class="box-title hands-on-title" id="hands-on-check-duplicate-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check duplicate reads</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4" title="MarkDuplicates tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fpicard%2Fpicard_MarkDuplicates%2F2.18.2.4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MarkDuplicates</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.4)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4" title="MarkDuplicates tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MarkDuplicates</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.4)</span> with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the MarkDuplicates logs with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the MarkDuplicates logs with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
@@ -2400,12 +2400,12 @@ installed on your machine. However, the questions in this section can also be an
     <div class="box-title hands-on-title" id="hands-on-check-the-number-of-reads-mapped-to-each-chromosome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check the number of reads mapped to each chromosome</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4" title="Samtools idxstats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_idxstats%2Fsamtools_idxstats%2F2.0.4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools idxstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.4)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4" title="Samtools idxstats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools idxstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.4)</span> with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the idxstats logs with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the idxstats logs with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
@@ -2471,7 +2471,7 @@ installed on your machine. However, the questions in this section can also be an
     <div class="box-title hands-on-title" id="hands-on-check-gene-body-coverage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check gene body coverage</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_view%2Fsamtools_view%2F1.15.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“SAM/BAM/CRAM data set”</em>: <code class="language-plaintext highlighter-rouge">mapped_reads</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code>
@@ -2496,12 +2496,12 @@ installed on your machine. However, the questions in this section can also be an
           <li><em>“Use a reference sequence”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgtftobed12%2Fgtftobed12%2F357"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert GTF to BED12</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 357)</a> to convert the GTF file to BED:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert GTF to BED12</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 357)</span> to convert the GTF file to BED:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109.gtf.gz</code></li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2" title="Gene Body Coverage (BAM) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnilesh%2Frseqc%2Frseqc_geneBody_coverage%2F5.0.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene Body Coverage (BAM)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2" title="Gene Body Coverage (BAM) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene Body Coverage (BAM)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy2)</span> with the following parameters:
         <ul>
           <li><em>“Run each sample separately, or combine mutiple samples into one plot”</em>: <code class="language-plaintext highlighter-rouge">Run each sample separately</code>
             <ul>
@@ -2511,7 +2511,7 @@ installed on your machine. However, the questions in this section can also be an
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">Convert GTF to BED12 on data N: BED12</code> (output of <strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the RSeQC results with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the RSeQC results with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
@@ -2567,13 +2567,13 @@ installed on your machine. However, the questions in this section can also be an
     <div class="box-title hands-on-title" id="hands-on-check-the-number-of-reads-mapped-to-each-chromosome-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check the number of reads mapped to each chromosome</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2" title="Read Distribution tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnilesh%2Frseqc%2Frseqc_read_distribution%2F5.0.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Read Distribution</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2" title="Read Distribution tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Read Distribution</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam/.sam file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: BED12 file (output of <strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the Read Distribution results with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the Read Distribution results with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
@@ -2802,7 +2802,7 @@ installed on your machine. However, the questions in this section can also be an
       <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-pygenometracks-from-star-coverage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Estimate strandness with pyGenometracks from STAR coverage</div>
 
       <ol>
-        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1" title="pyGenomeTracks tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpygenometracks%2FpygenomeTracks%2F3.8%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>pyGenomeTracks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.8+galaxy1)</a>:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1" title="pyGenomeTracks tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>pyGenomeTracks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.8+galaxy1)</span>:
           <ul>
             <li><em>“Region of the genome to limit the operation”</em>: <code class="language-plaintext highlighter-rouge">chr4:540,000-560,000</code></li>
             <li>In <em>“Include tracks in your plot”</em>:
@@ -2892,7 +2892,7 @@ On the contrary for unstranded_PE the scale is comparable for both strand.</p>
       <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-star-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Estimate strandness with STAR counts</div>
 
       <ol>
-        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the STAR counts with the following parameters:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the STAR counts with the following parameters:
           <ul>
             <li>In <em>“Results”</em>:
               <ul>
@@ -2967,14 +2967,14 @@ The numbers are comparable between unstranded and reverse stranded because reall
       <div class="box-title hands-on-title" id="hands-on-determining-the-library-strandness-using-infer-experiment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Determining the library strandness using Infer Experiment</div>
 
       <ol>
-        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgtftobed12%2Fgtftobed12%2F357"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert GTF to BED12</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 357)</a> to convert the GTF file to BED:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert GTF to BED12</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 357)</span> to convert the GTF file to BED:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code></li>
           </ul>
 
           <p>You may already have converted this <code class="language-plaintext highlighter-rouge">BED12</code> file from the <code class="language-plaintext highlighter-rouge">Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</code> dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time</p>
         </li>
-        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2" title="Infer Experiment tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnilesh%2Frseqc%2Frseqc_infer_experiment%2F5.0.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infer Experiment</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy2)</a> to determine the library strandness with the following parameters:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2" title="Infer Experiment tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infer Experiment</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy2)</span> to determine the library strandness with the following parameters:
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: BED12 file (output of <strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -2984,7 +2984,7 @@ The numbers are comparable between unstranded and reverse stranded because reall
       </ol>
     </blockquote>
 
-    <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1" title="Infer Experiment tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnilesh%2Frseqc%2Frseqc_infer_experiment%2F2.6.4.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infer Experiment</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6.4.1)</a> tool generates one file with information on:</p>
+    <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1" title="Infer Experiment tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infer Experiment</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6.4.1)</span> tool generates one file with information on:</p>
     <ul>
       <li>Paired-end or single-end library</li>
       <li>Fraction of reads failed to determine</li>
@@ -3170,7 +3170,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
     <div class="box-title hands-on-title" id="hands-on-counting-the-number-of-reads-per-annotated-gene"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Counting the number of reads per annotated gene</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1" title="featureCounts tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffeaturecounts%2Ffeaturecounts%2F2.0.3%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>featureCounts</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.3+galaxy1)</a> with the following parameters to count the number of reads per gene:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1" title="featureCounts tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>featureCounts</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.3+galaxy1)</span> with the following parameters to count the number of reads per gene:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignment file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Unstranded</code></li>
@@ -3191,7 +3191,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
           </li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmultiqc%2Fmultiqc%2F1.11%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</a> to aggregate the reports with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the reports with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
@@ -3293,14 +3293,14 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
     <div class="box-title hands-on-title" id="hands-on-reformatting-star-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Reformatting STAR output</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_tail_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> lines from a dataset (tail) to remove the first 4 lines with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> lines from a dataset (tail) to remove the first 4 lines with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Text file”</em>: <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: reads per gene</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep everything from this line on</code></li>
           <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table with the following parameters:
+      <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters:
         <ul>
           <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2</code></li>
           <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -3317,7 +3317,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
     <div class="box-title hands-on-title" id="hands-on-getting-gene-length"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Getting gene length</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2" title="Gene length and GC content tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Flength_and_gc_content%2Flength_and_gc_content%2F0.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene length and GC content</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2" title="Gene length and GC content tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene length and GC content</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.2)</span> with the following parameters:
         <ul>
           <li><em>“Select a built-in GTF file or one from your history”</em>: <code class="language-plaintext highlighter-rouge">Use a GTF from history</code>
             <ul>
@@ -3354,7 +3354,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
     <p>To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the following:</p>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sort Query”</em>: <span class="featureCounts"><code class="language-plaintext highlighter-rouge">featureCounts on collection N: Counts</code> (output of <strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</span><span class="STAR">Use the collection <code class="language-plaintext highlighter-rouge">FeatureCount-like files</code></span></li>
           <li><em>“Number of header”</em>: <span class="featureCounts"><code class="language-plaintext highlighter-rouge">1</code></span><span class="STAR"><code class="language-plaintext highlighter-rouge">0</code></span></li>
@@ -4324,14 +4324,14 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
   <div class="box-title hands-on-title" id="hands-on-add-tags-to-your-collection-for-each-of-these-factors"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add tags to your collection for each of these factors</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcollection_element_identifiers%2Fcollection_element_identifiers%2F0.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract element identifiers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract element identifiers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">all counts</code></li>
       </ul>
 
       <p>We will now extract from the names the factors:</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_line%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Extract element identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>In <em>“Replacement”</em>:
@@ -4346,7 +4346,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
         </li>
       </ul>
 
-      <p>This step creates 2 additional columns with the type of treatment and sequencing that can be used with the <a class="tool" data-tool="__TAG_FROM_FILE__" title="Tag elements from file tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__TAG_FROM_FILE__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tag elements from file</strong></a> tool</p>
+      <p>This step creates 2 additional columns with the type of treatment and sequencing that can be used with the <span class="tool" data-tool="__TAG_FROM_FILE__" title="Tag elements from file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tag elements from file</strong></span> tool</p>
     </li>
     <li>
       <p>Change the datatype to <code class="language-plaintext highlighter-rouge">tabular</code></p>
@@ -4355,7 +4355,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><a class="tool" data-tool="__TAG_FROM_FILE__" title="Tag elements tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__TAG_FROM_FILE__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tag elements</strong></a>
+    <li><span class="tool" data-tool="__TAG_FROM_FILE__" title="Tag elements tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tag elements</strong></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Collection”</em>: <code class="language-plaintext highlighter-rouge">all counts</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tag collection elements according to this file”</em>: output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -4381,7 +4381,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
   <div class="box-title hands-on-title" id="hands-on-determine-differentially-expressed-features"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Determine differentially expressed features</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2" title="DESeq2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdeseq2%2Fdeseq2%2F2.11.40.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DESeq2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.40.7+galaxy2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2" title="DESeq2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DESeq2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.11.40.7+galaxy2)</span> with the following parameters:
       <ul>
         <li><em>“how”</em>: <code class="language-plaintext highlighter-rouge">Select group tags corresponding to levels</code>
           <ul>
@@ -4580,7 +4580,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
       <li>
         <p>FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value (\(2.8 \cdot 10^{-171} &lt;&lt; 0.05\)). It is less expressed (<code class="language-plaintext highlighter-rouge">-</code> in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 (\(2^{log2FC} = 2^{2.99542318410271}\)).</p>
       </li>
-      <li>You can manually check for the <code class="language-plaintext highlighter-rouge">FBgn0261552</code> in the first column or run <a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a>
+      <li>You can manually check for the <code class="language-plaintext highlighter-rouge">FBgn0261552</code> in the first column or run <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span>
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: the <code class="language-plaintext highlighter-rouge">DESeq2 result file</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1 == "FBgn0261552"</code></li>
@@ -4620,7 +4620,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 </code></pre></div>      </div>
     </li>
     <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0" title="Annotate DESeq2/DEXSeq output tables tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdeg_annotate%2Fdeg_annotate%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Annotate DESeq2/DEXSeq output tables</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deg_annotate/deg_annotate/1.1.0" title="Annotate DESeq2/DEXSeq output tables tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Annotate DESeq2/DEXSeq output tables</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with:</p>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular output of DESeq2/edgeR/limma/DEXSeq”</em>: the <code class="language-plaintext highlighter-rouge">DESeq2 result file</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Input file type”</em>: <code class="language-plaintext highlighter-rouge">DESeq2/edgeR/limma</code></li>
@@ -4685,7 +4685,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new file</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong> at the bottom</li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>Change the dataset name from “New File” to <code class="language-plaintext highlighter-rouge">header</code></li>   <li>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code>* Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><a class="tool" data-tool="cat1" title="Concatenate datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dcat1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></a> to add this header line to the <strong>Annotate</strong> output:
+    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></span> to add this header line to the <strong>Annotate</strong> output:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: the <code class="language-plaintext highlighter-rouge">header</code> dataset</li>
         <li><em>“Dataset”</em>
@@ -4711,7 +4711,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <div class="box-title hands-on-title" id="hands-on-extract-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the most differentially expressed genes</div>
 
   <ol>
-    <li><a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples:
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Annotated DESeq2 results</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
@@ -4742,7 +4742,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
       <p>We will now select only the genes with a fold change (FC) &gt; 2 or FC &lt; 0.5. Note that the DESeq2 output file contains \(log_{2} FC\), rather than FC itself, so we filter for \(abs(log_{2} FC) &gt; 1\) (which implies FC &gt; 2 or FC &lt; 0.5).</p>
     </li>
-    <li><a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a> to extract genes with an \(abs(log_{2} FC) &gt; 1\):
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> to extract genes with an \(abs(log_{2} FC) &gt; 1\):
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">abs(c3)&gt;1</code></li>
@@ -4765,7 +4765,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
           <ol>
             <li>We get 113 genes (114 lines including a header), or 11.79% of the significantly differentially expressed genes.</li>
-            <li>The <em>Pasilla</em> gene can be found with a quick Search (or even using  <a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a> )</li>
+            <li>The <em>Pasilla</em> gene can be found with a quick Search (or even using  <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> )</li>
           </ol>
         </blockquote>
       </blockquote>
@@ -4807,7 +4807,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <div class="box-title hands-on-title" id="hands-on-extract-the-normalized-counts-of-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the normalized counts of the most differentially expressed genes</div>
 
   <ol>
-    <li><a class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Djoin1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets side by side on a specified field</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets side by side on a specified field</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: the <code class="language-plaintext highlighter-rouge">Normalized counts</code> file (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -4819,7 +4819,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
       <p>The generated file has more columns than we need for the heatmap: mean normalized counts, \(log_{2} FC\) and other annotation information. We need to remove the extra columns.</p>
     </li>
-    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table with the following parameters to extract the columns with the gene IDs and normalized counts:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters to extract the columns with the gene IDs and normalized counts:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1-c8</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -4837,7 +4837,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <div class="box-title hands-on-title" id="hands-on-plot-the-heatmap-of-the-normalized-counts-of-these-genes-for-the-samples"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the heatmap of the normalized counts of these genes for the samples</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0" title="heatmap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fggplot2_heatmap2%2Fggplot2_heatmap2%2F3.1.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>heatmap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.3+galaxy0)</a> to plot the heatmap:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0" title="heatmap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>heatmap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.3+galaxy0)</span> to plot the heatmap:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers”</em>: <code class="language-plaintext highlighter-rouge">Normalized counts for the most differentially expressed genes</code></li>
         <li><em>“Data transformation”</em>: <code class="language-plaintext highlighter-rouge">Log2(value+1) transform my data</code></li>
@@ -4900,7 +4900,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <div class="box-title hands-on-title" id="hands-on-compute-the-z-score-of-all-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute the Z-score of all genes</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0" title="Table Compute tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ftable_compute%2Ftable_compute%2F1.2.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.4+galaxy0)</a> with the following parameters to &gt;  first substract the mean values per row
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0" title="Table Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.4+galaxy0)</span> with the following parameters to &gt;  first substract the mean values per row
         <ul>
           <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Single Table</code>
             <ul>
@@ -4922,7 +4922,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
           </li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0" title="Table Compute tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ftable_compute%2Ftable_compute%2F1.2.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.4+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0" title="Table Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.4+galaxy0)</span> with the following parameters:
         <ul>
           <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Multiple Table</code>
             <ul>
@@ -4995,7 +4995,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <div class="box-title hands-on-title" id="hands-on-plot-the-z-score-of-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the Z-score of the most differentially expressed genes</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0" title="heatmap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fggplot2_heatmap2%2Fggplot2_heatmap2%2F3.1.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>heatmap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.3+galaxy0)</a> to plot the heatmap:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0" title="heatmap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>heatmap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.3+galaxy0)</span> to plot the heatmap:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers”</em>: <code class="language-plaintext highlighter-rouge">Normalized counts for the most differentially expressed genes</code></li>
         <li><em>“Data transformation”</em>: <code class="language-plaintext highlighter-rouge">Plot the data as it is</code></li>
@@ -5034,7 +5034,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <div class="box-title hands-on-title" id="hands-on-prepare-the-first-dataset-for-goseq"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the first dataset for goseq</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a> on rows with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span> on rows with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: the <code class="language-plaintext highlighter-rouge">DESeq2 result file</code> (output of <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Expressions”</em>:
@@ -5052,14 +5052,14 @@ correction for the variability due to the 2nd factor. In our current case, treat
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c8</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the output of the <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="ChangeCase" title="Change Case tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DChangeCase"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Change Case</strong></a> with
+    <li><span class="tool" data-tool="ChangeCase" title="Change Case tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Change Case</strong></span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the output of the previous <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Change case of columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
@@ -5086,7 +5086,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
         <p><!--END_SNIPPET--></p>
       </li>
       <li>
-        <p><a class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__EXTRACT_DATASET__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></a> with:</p>
+        <p><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span> with:</p>
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input List”</em>: <code class="language-plaintext highlighter-rouge">featureCounts on collection N: Feature lengths</code></li>
           <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">The first dataset</code></li>
@@ -5110,7 +5110,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="ChangeCase" title="Change Case tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DChangeCase"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Change Case</strong></a> with the following parameters:</p>
+      <p><span class="tool" data-tool="ChangeCase" title="Change Case tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Change Case</strong></span> with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <span class="featureCounts"><code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> (output of <strong>Extract Dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</span><span class="STAR"><code class="language-plaintext highlighter-rouge">Gene length</code></span></li>
@@ -5131,7 +5131,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <div class="box-title hands-on-title" id="hands-on-perform-go-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Perform GO analysis</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0" title="goseq tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgoseq%2Fgoseq%2F1.44.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>goseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.44.0+galaxy0)</a> with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0" title="goseq tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>goseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.44.0+galaxy0)</span> with
       <ul>
         <li><em>“Differentially expressed genes file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and differential expression</code></li>
         <li><em>“Gene lengths file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and length</code></li>
@@ -5189,12 +5189,12 @@ correction for the variability due to the 2nd factor. In our current case, treat
           <li>
             <p>60 GO terms (0.50%) are over-represented and 7 (0.07%) under-represented.</p>
 
-            <p><a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a> on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)</p>
+            <p><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)</p>
           </li>
           <li>
             <p>For over-represented, 50 BP, 5 CC and 5 MF and for under-represented, 5 BP, 2 CC and 0 MF</p>
 
-            <p><a class="tool" data-tool="Grouping1" title="Group data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrouping1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data</strong></a> on column 7 (category) and count on column 1 (IDs)</p>
+            <p><span class="tool" data-tool="Grouping1" title="Group data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group data</strong></span> on column 7 (category) and count on column 1 (IDs)</p>
           </li>
         </ol>
 
@@ -5242,7 +5242,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <div class="box-title hands-on-title" id="hands-on-perform-kegg-pathway-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Perform KEGG pathway analysis</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0" title="goseq tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgoseq%2Fgoseq%2F1.44.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>goseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.44.0+galaxy0)</a> with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0" title="goseq tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>goseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.44.0+galaxy0)</span> with
       <ul>
         <li><em>“Differentially expressed genes file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and differential expression</code></li>
         <li><em>“Gene lengths file”</em>: <code class="language-plaintext highlighter-rouge">Gene IDs and length</code></li>
@@ -5286,9 +5286,9 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
         <ol>
           <li>The file has 128 lines including an header, so 127 KEGG pathways have been identified.</li>
-          <li>2 KEGG pathways (2.34%) are over-represented, using <a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a> on c6 (adjusted p-value for over-represented KEGG pathways)</li>
+          <li>2 KEGG pathways (2.34%) are over-represented, using <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> on c6 (adjusted p-value for over-represented KEGG pathways)</li>
           <li>The 2 KEGG pathways over-represented are <code class="language-plaintext highlighter-rouge">01100</code> and <code class="language-plaintext highlighter-rouge">00010</code>. By searching on the <a href="https://www.genome.jp/kegg/kegg2.html">KEGG database</a> for them, we can find more information about these pathways: <code class="language-plaintext highlighter-rouge">01100</code> corresponds to all metabolic pathways and <code class="language-plaintext highlighter-rouge">00010</code> to pathway for Glycolysis / Gluconeogenesis.</li>
-          <li>No KEGG pathway is under-represented, using <a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a> on c7 (adjusted p-value for under-represented KEGG pathways)</li>
+          <li>No KEGG pathway is under-represented, using <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> on c7 (adjusted p-value for under-represented KEGG pathways)</li>
         </ol>
       </blockquote>
     </blockquote>
@@ -5322,7 +5322,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <div class="box-title hands-on-title" id="hands-on-overlay-log2fc-on-kegg-pathway"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Overlay log2FC on KEGG pathway</div>
 
   <ol>
-    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c3</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -5341,7 +5341,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 03040
 </code></pre></div>      </div>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.34.0+galaxy0" title="Pathview tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpathview%2Fpathview%2F1.34.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pathview</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.34.0+galaxy0)</a> with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.34.0+galaxy0" title="Pathview tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pathview</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.34.0+galaxy0)</span> with
       <ul>
         <li><em>“Number of pathways to plot”</em>: <code class="language-plaintext highlighter-rouge">Multiple</code>
           <ul>
@@ -6168,7 +6168,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -6196,7 +6196,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

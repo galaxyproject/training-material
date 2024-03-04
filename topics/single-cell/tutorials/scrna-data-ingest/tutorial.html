@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -555,7 +555,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "You finally decided to analyse some single cell data, you got your files either from the lab or publicly available sources, you opened the first tutorial available on Galaxy Training Network and... you hit the wall! The format of your files is not compatible with the one used in tutorial! Have you been there? "
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1052,7 +1052,7 @@ include images showing the structure of those files
 Obviously, before any format conversion, we need to import the data. In our tutorials we often use <a href="https://zenodo.org/">Zenodo</a> links, but you can also upload the files directly from your computer. There are also publicly available resources which you can easily access through public atlases, such as <a href="https://www.ebi.ac.uk/gxa/sc/home">Single Cell Expression Atlas</a> or <a href="https://data.humancellatlas.org/">Human Cell Atlas data portal</a>. We created a <a href="/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">dedicated tutorial</a> to show how to use those atlases to retrieve data. But today we’re here to focus on data conversion!</p>
 
 <h1 id="sceasy-tool">SCEasy Tool</h1>
-<p>In Galaxy Toolshed there is a wonderful tool called <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsceasy_convert%2Fsceasy_convert%2F0.0.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</a> which allows you to convert between common single cell formats, such as:</p>
+<p>In Galaxy Toolshed there is a wonderful tool called <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> which allows you to convert between common single cell formats, such as:</p>
 <ul>
   <li>AnnData to CellDataSet (CDS)</li>
   <li>AnnData to Seurat</li>
@@ -1067,14 +1067,14 @@ Obviously, before any format conversion, we need to import the data. In our tuto
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-two-sceasy-tools"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Two SCEasy tools</div>
 
-  <p>As of the writing of this tutorial, the updated SCEasy tool is called <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsceasy_convert%2Fsceasy_convert%2F0.0.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</a> and it’s only available on <em>usegalaxy.eu</em>. The second tool is called <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fsceasy_convert%2Fsceasy_convert%2F0.0.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</a> and it works on <em>usegalaxy.org</em>, however has limited conversion options. Both tools should be visible on <em>singlecell.usegalaxy.eu</em> if you try to find them in the search box.</p>
+  <p>As of the writing of this tutorial, the updated SCEasy tool is called <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> and it’s only available on <em>usegalaxy.eu</em>. The second tool is called <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</span> and it works on <em>usegalaxy.org</em>, however has limited conversion options. Both tools should be visible on <em>singlecell.usegalaxy.eu</em> if you try to find them in the search box.</p>
 
 </blockquote>
 
 <p>In this tutorial you will see multiple examples of SCEasy Tool in action. However, sometimes it is useful to know how to do this conversion manually or at least to know how it all works and better understand the structure of the files. Therefore, we also have examples showing how to convert objects manually or prepare the input files for some of our single cell tutorials and workflows.</p>
 
 <h1 id="seurat---anndata">Seurat -&gt; AnnData</h1>
-<p>As mentioned above, there are two SCEasy tools currently available. When we speak about conversion to AnnData, the latest tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsceasy_convert%2Fsceasy_convert%2F0.0.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</a> converts Seurat into the latest version of AnnData object. However, currently it is not possible to use that output with downstream EBI single-cell tools because they only support older versions of the AnnData. If you need to use those tools, the solution is to take advantage of the second SCEasy tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fsceasy_convert%2Fsceasy_convert%2F0.0.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</a> which has limited conversion options but can generate AnnData files compatible with the EBI single-cell tools that we are going to use next in the workflow. 
+<p>As mentioned above, there are two SCEasy tools currently available. When we speak about conversion to AnnData, the latest tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> converts Seurat into the latest version of AnnData object. However, currently it is not possible to use that output with downstream EBI single-cell tools because they only support older versions of the AnnData. If you need to use those tools, the solution is to take advantage of the second SCEasy tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</span> which has limited conversion options but can generate AnnData files compatible with the EBI single-cell tools that we are going to use next in the workflow. 
 Our Seurat starting file was generated by pulling data from <a href="https://www.ebi.ac.uk/gxa/sc/home">Single Cell Expression Atlas</a> and transforming it into the desired format, what was shown in the <a href="/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">data import tutorial</a>. It will be our toy dataset.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1154,7 +1154,7 @@ Our Seurat starting file was generated by pulling data from <a href="https://www
     <div class="box-title hands-on-title" id="hands-on-sceasy-converter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  SCEasy Converter</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsceasy_convert%2Fsceasy_convert%2F0.0.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
         <ul>
           <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">Seurat to AnnData</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in rds,rdata format”</em>: <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
@@ -1179,7 +1179,7 @@ Our Seurat starting file was generated by pulling data from <a href="https://www
     <div class="box-title hands-on-title" id="hands-on-seurat-to-anndata-with-sceasy-convert"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Seurat to AnnData with SCEasy convert</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fsceasy_convert%2Fsceasy_convert%2F0.0.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</span> with the following parameters:
         <ul>
           <li><em>“Direction of conversion”</em>: <code class="language-plaintext highlighter-rouge">Seurat to AnnData</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in Seurat RDS format”</em>: <code class="language-plaintext highlighter-rouge">Seurat object</code>
@@ -1208,7 +1208,7 @@ Our Seurat starting file was generated by pulling data from <a href="https://www
     <div class="box-title hands-on-title" id="hands-on-modify-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Modify AnnData object</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92" title="AnnData Operations tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fanndata_ops%2Fanndata_ops%2F1.8.1%2Bgalaxy92"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy92)</a></li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy92)</span></li>
       <li>Make sure you are using version <strong>1.8.1+galaxy92</strong> of the tool (change by clicking on <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> Versions button)</li>
       <li>Set the following parameters:
         <ul>
@@ -1326,7 +1326,7 @@ Our Seurat starting file was generated by pulling data from <a href="https://www
     <div class="box-title hands-on-title" id="hands-on-sceasy-converter-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  SCEasy Converter</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsceasy_convert%2Fsceasy_convert%2F0.0.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
         <ul>
           <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">AnnData to Seurat</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in h5ad,h5 format”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
@@ -1350,7 +1350,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-inspect-anndata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Inspect AnnData</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
@@ -1359,7 +1359,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
       <li>
         <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Observations</code>.</p>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
@@ -1390,7 +1390,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-transpose-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Transpose the matrix</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0" title="Transpose tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_transpose%2Fdatamash_transpose%2F1.8%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">Matrix</code></li>
         </ul>
@@ -1405,7 +1405,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-dropletutils"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  DropletUtils</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2" title="DropletUtils tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdropletutils%2Fdropletutils%2F1.10.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.10.0+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2" title="DropletUtils tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.10.0+galaxy2)</span> with the following parameters:
         <ul>
           <li><em>“Format for the input matrix”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1434,7 +1434,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-create-seurat-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create Seurat object</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0" title="Seurat Read10x tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fseurat_read10x%2Fseurat_read10x%2F3.2.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.2.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0" title="Seurat Read10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.2.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><em>“Choose the format of the input”</em>: <code class="language-plaintext highlighter-rouge">10X-type MTX</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Matrices</code></li>
@@ -1518,14 +1518,14 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-sceasy-converter-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  SCEasy Converter</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsceasy_convert%2Fsceasy_convert%2F0.0.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
         <ul>
           <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">AnnData to Seurat</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in h5ad,h5 format”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
         </ul>
       </li>
       <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
-      <li>We will use SCEasy again! <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsceasy_convert%2Fsceasy_convert%2F0.0.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</a> with the following parameters:
+      <li>We will use SCEasy again! <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
         <ul>
           <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">Seurat to SingleCellexperiment</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in rds,rdata format”</em>: <code class="language-plaintext highlighter-rouge">Seurat object</code></li>
@@ -1554,7 +1554,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-inspect-anndata-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Inspect AnnData</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
@@ -1563,7 +1563,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
       <li>
         <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Observations</code>.</p>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
@@ -1594,7 +1594,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-transpose-the-matrix-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Transpose the matrix</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0" title="Transpose tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_transpose%2Fdatamash_transpose%2F1.8%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">Matrix</code></li>
         </ul>
@@ -1609,7 +1609,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-dropletutils-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  DropletUtils</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2" title="DropletUtils tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdropletutils%2Fdropletutils%2F1.10.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.10.0+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2" title="DropletUtils tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.10.0+galaxy2)</span> with the following parameters:
         <ul>
           <li><em>“Format for the input matrix”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1638,7 +1638,7 @@ First, we will extract observations (cell metadata) and the full matrix from our
     <div class="box-title hands-on-title" id="hands-on-create-sce-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create SCE object</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0" title="DropletUtils Read10x tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0" title="DropletUtils Read10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Matrices</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene table”</em>: <code class="language-plaintext highlighter-rouge">DropletUtils 10X Genes</code></li>
@@ -1770,7 +1770,7 @@ https://zenodo.org/records/7078524/files/Annotated_AnnData.h5ad
     <div class="box-title hands-on-title" id="hands-on-extracting-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extracting annotations</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Annotated_AnnData</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
@@ -1779,7 +1779,7 @@ https://zenodo.org/records/7078524/files/Annotated_AnnData.h5ad
       <li>
         <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the observations annotation <code class="language-plaintext highlighter-rouge">Extracted cell annotations (obs)</code></p>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Annotated_AnnData</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -1823,7 +1823,7 @@ https://zenodo.org/records/7078524/files/Annotated_AnnData.h5ad
     <div class="box-title hands-on-title" id="hands-on-filter-out-macrophages"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter out macrophages</div>
 
     <ol>
-      <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> with the following parameters:
+      <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Extracted cell annotations (obs)</code></li>
           <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c22!='Macrophages'</code></li>
@@ -1882,7 +1882,7 @@ https://zenodo.org/records/7078524/files/Annotated_AnnData.h5ad
     <div class="box-title hands-on-title" id="hands-on-changing-the-column-name"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Changing the column name</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2" title="Column Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">Extracted gene annotations (var)</code></li>
           <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c3</code> or <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
@@ -1946,7 +1946,7 @@ So how do we do that?</p>
     <div class="box-title hands-on-title" id="hands-on-extracting-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extracting matrix</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">AnnData_before_processing</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
@@ -1963,14 +1963,14 @@ So how do we do that?</p>
     <div class="box-title hands-on-title" id="hands-on-cutting-out-the-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cutting out the columns</div>
 
     <ol>
-      <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> with the following parameters:
+      <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
         <ul>
           <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code></li>
         </ul>
       </li>
       <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Cells IDs</code></li>
-      <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> with the following parameters:
+      <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
         <ul>
           <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code></li>
@@ -1985,7 +1985,7 @@ So how do we do that?</p>
     <div class="box-title hands-on-title" id="hands-on-filter-matrix-values-by-cell-barcodes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Filter matrix values by cell barcodes</div>
 
     <ol>
-      <li><a class="tool" data-tool="join1" title="Join two Datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Djoin1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></a> with the following parameters:
+      <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <code class="language-plaintext highlighter-rouge">Cells IDs</code></li>
           <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code>or <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -2008,7 +2008,7 @@ So how do we do that?</p>
     <div class="box-title hands-on-title" id="hands-on-remove-duplicate-column-cells-ids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicate column (cells IDs)</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Pre-filtered matrix (by cells)</code></li>
           <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
@@ -2030,13 +2030,13 @@ So how do we do that?</p>
     <div class="box-title hands-on-title" id="hands-on-filter-matrix-by-gene-ids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter matrix by gene IDs</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2" title="Transpose tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_transpose%2Fdatamash_transpose%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">Filtered matrix (by cells)</code></li>
           <li>The matrix is now ready to be filtered by gene IDs!</li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="join1" title="Join two Datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Djoin1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></a> with the following parameters:
+      <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <code class="language-plaintext highlighter-rouge">Genes IDs</code></li>
           <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code> or <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -2048,7 +2048,7 @@ So how do we do that?</p>
           <li><em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: output of <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
@@ -2091,7 +2091,7 @@ So how do we do that?</p>
       <p>You can provide expression matrix as TSV, CSV, MTX or RDS file, while genes and cells metadata as TSV, CSV or RDS files. In our case all three files are tabular, so we will set the format to TSV.</p>
     </blockquote>
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2" title="Monocle3 create tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_create%2Fmonocle3_create%2F0.1.4%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 create</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2" title="Monocle3 create tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 create</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix, genes as rows, cells as columns. Required input. Provide as TSV, CSV or RDS.”</em>: <code class="language-plaintext highlighter-rouge">Expression matrix for Monocle3</code></li>
           <li><em>“Format of expression matrix”</em>: <code class="language-plaintext highlighter-rouge">TSV</code></li>
@@ -2113,9 +2113,9 @@ So how do we do that?</p>
     <p>Generally in coding you can use different ways to achieve the same result. Similarly, in Galaxy you can use different tools but the outcome will be the same.
 For example, we could have used some tools on our starting AnnData object to remove macrophages and rename the column header, and afterwards extract observations and variables. It is a good practice to use methods from the libraries (such as Scanpy below) rather than dealing with text files rows and columns. The shown approach works well, but it might be problematic with much bigger datasets sizes. Then, you can use the following route:</p>
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy93" title="Scanpy FilterCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fscanpy_filter_cells%2Fscanpy_filter_cells%2F1.8.1%2Bgalaxy93"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy93)</a> on annotated Anndata to remove macrophages.</li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92" title="AnnData Operations tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fanndata_ops%2Fanndata_ops%2F1.8.1%2Bgalaxy92"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy92)</a> to change the genes name from <em>Symbol</em> to <em>gene_short_name</em>.</li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> to extract genes and cells (to be used for Monocle).</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy93" title="Scanpy FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy93)</span> on annotated Anndata to remove macrophages.</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy92)</span> to change the genes name from <em>Symbol</em> to <em>gene_short_name</em>.</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> to extract genes and cells (to be used for Monocle).</li>
       <li>Follow further steps to filter unprocessed matrix.</li>
     </ol>
 
@@ -2141,7 +2141,7 @@ And now you have your input file ready to start the <a href="/training-material/
       <div class="box-title hands-on-title" id="hands-on-sceasy-converter-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  SCEasy Converter</div>
 
       <ol>
-        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsceasy_convert%2Fsceasy_convert%2F0.0.7%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</a> with the following parameters:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2" title="SCEasy Converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy Converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.7+galaxy2)</span> with the following parameters:
           <ul>
             <li><em>“Convert From / To”</em>: <code class="language-plaintext highlighter-rouge">AnnData to CellDataSet</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in h5ad,h5 format”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
@@ -2197,7 +2197,7 @@ We will continue working on previously used dataset, so you can copy it from you
     <div class="box-title hands-on-title" id="hands-on-inspect-anndata-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Inspect AnnData</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
@@ -2208,7 +2208,7 @@ We will continue working on previously used dataset, so you can copy it from you
     <p><strong>Rename</strong>  <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Cell barcodes (obs)</code>.</p>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Downsampled AnnData object</code></li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -2219,7 +2219,7 @@ We will continue working on previously used dataset, so you can copy it from you
     <p><strong>Rename</strong>  <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output <code class="language-plaintext highlighter-rouge">Genes (var)</code>.</p>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fanndata_inspect%2Fanndata_inspect%2F0.10.3%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
           <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">The full data matrix</code></li>
@@ -2237,7 +2237,7 @@ We will continue working on previously used dataset, so you can copy it from you
     <div class="box-title hands-on-title" id="hands-on-changing-the-column-name-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Changing the column name</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2" title="Column Regex Find And Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">Genes</code></li>
           <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c3</code> or <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
@@ -2271,7 +2271,7 @@ We will continue working on previously used dataset, so you can copy it from you
     <div class="box-title hands-on-title" id="hands-on-transpose-the-matrix-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Transpose the matrix</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1" title="Transpose tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_transpose%2Fdatamash_transpose%2F1.8%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy1)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">Expression matrix</code></li>
         </ul>
@@ -2285,7 +2285,7 @@ We will continue working on previously used dataset, so you can copy it from you
     <div class="box-title hands-on-title" id="hands-on-create-cell-data-set"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create Cell Data Set</div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2" title="Monocle3 create tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_create%2Fmonocle3_create%2F0.1.4%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 create</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2" title="Monocle3 create tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 create</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix, genes as rows, cells as columns. Required input. Provide as TSV, CSV or RDS.”</em>: output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“Format of expression matrix”</em>: <code class="language-plaintext highlighter-rouge">TSV</code></li>
@@ -2354,7 +2354,7 @@ Quickly check which file contains barcodes and which file contains transcripts. 
   <div class="box-title hands-on-title" id="hands-on-fastq-to-tabular"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  FASTQ to tabular</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5" title="FASTQ to Tabular tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastq_to_tabular%2Ffastq_to_tabular%2F1.1.5"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ to Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_tabular/fastq_to_tabular/1.1.5" title="FASTQ to Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTQ to Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ file to convert”</em>: <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> Select multiple files: <code class="language-plaintext highlighter-rouge">Barcodes</code> and <code class="language-plaintext highlighter-rouge">Transcripts</code></li>
       </ul>
@@ -2370,7 +2370,7 @@ Quickly check which file contains barcodes and which file contains transcripts. 
   <div class="box-title hands-on-title" id="hands-on-downsampling"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Downsampling</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_tail_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> Select multiple files:   <code class="language-plaintext highlighter-rouge">Barcodes tabular</code> and <code class="language-plaintext highlighter-rouge">Transcripts tabular</code></li>
         <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep last lines</code></li>
@@ -2388,7 +2388,7 @@ Quickly check which file contains barcodes and which file contains transcripts. 
   <div class="box-title hands-on-title" id="hands-on-tabular-to-fastq"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Tabular to FASTQ</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fastq/tabular_to_fastq/1.1.5" title="Tabular to FASTQ tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ftabular_to_fastq%2Ftabular_to_fastq%2F1.1.5"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular to FASTQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fastq/tabular_to_fastq/1.1.5" title="Tabular to FASTQ tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular to FASTQ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.5)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file to convert”</em>: <code class="language-plaintext highlighter-rouge">Barcodes cut</code> (output of <strong>Select last</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Identifier column”</em>: <code class="language-plaintext highlighter-rouge">c1</code> or <code class="language-plaintext highlighter-rouge">Column 1</code></li>
@@ -2720,7 +2720,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2748,7 +2748,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -424,7 +424,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Modern mass spectrometry-based proteomics enables the identification and quantification of thousands of proteins. Therefore, quantitative mass spectrometry represents an indispensable technology for biological and clinical research. Statistical analyses are required for the unbiased answering of scientific questions and to uncover all important information in the proteomic data. Classical statistical approaches and methods from other omics technologies are not ideal because they do not take into account the speciality of mass spectrometry data that include several thousands of proteins but often only a few dozens of samples (referred to as ‘curse of dimensionality’) and stochastic data properties that reflect sample preparation and spectral acquisition (Choi 2014)."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1065,7 +1065,7 @@ ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment115_RDEB_cSC
   <div class="box-title hands-on-title" id="hands-on-optional-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Optional: MaxQuant analysis</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="MaxQuant tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmaxquant%2Fmaxquant%2F1.6.10.43%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MaxQuant</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.10.43+galaxy3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="MaxQuant tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MaxQuant</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.10.43+galaxy3)</span> with the following parameters:
       <ul>
         <li>In <em>“Input Options”</em>:
           <ul>
@@ -1141,19 +1141,19 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
   <div class="box-title hands-on-title" id="hands-on-msstats-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: MSstats Analysis</div>
 
   <ol>
-    <li><a class="tool" data-tool="Grep1" title="Select tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">Protein Groups</code> (output of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">(HUMAN)|(Majority)</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Grep1" title="Select tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">Evidence</code> (output of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">(HUMAN)|(Sequence)</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_column%2F1.1.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">select protein groups</code> (output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Replacement”</em>:
@@ -1162,7 +1162,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
         <li>Once finished, rename the file into <code class="language-plaintext highlighter-rouge">protein groups input for MSstats</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_column%2F1.1.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">select evidence</code> (output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Replacement”</em>:
@@ -1171,7 +1171,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
         <li>Once finished, rename the file into <code class="language-plaintext highlighter-rouge">evidence input for MSstats</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/4.0.0.0" title="MSstats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsstats%2Fmsstats%2F4.0.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.0.0)</a>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/4.0.0.0" title="MSstats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.0.0)</span>  with the following parameters:
       <ul>
         <li><em>“input source”</em>: <code class="language-plaintext highlighter-rouge">MaxQuant</code>
           <ul>
@@ -1310,13 +1310,13 @@ We’ll count and visualize the number of features per run and calculate the dis
   <div class="box-title hands-on-title" id="hands-on-follow-up-on-msstats-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Follow up on MSstats results</div>
 
   <ol>
-    <li><a class="tool" data-tool="Summary_Statistics1" title="Summary Statistics tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DSummary_Statistics1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Summary Statistics</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Summary_Statistics1" title="Summary Statistics tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Summary Statistics</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Summary statistics on”</em>: <code class="language-plaintext highlighter-rouge">ProteinLevelData</code> (output of <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Column or expression”</em>: <code class="language-plaintext highlighter-rouge">c8</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2Fdatamash_ops%2F1.0.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.6)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.6)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">ProteinLevelData</code> (output of <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
@@ -1382,7 +1382,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
   <div class="box-title hands-on-title" id="hands-on-filtering-msstats-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering MSstats results</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_column%2F1.1.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Comparison Result</code> (output of <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Replacement”</em>:
@@ -1399,7 +1399,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">replaced comparison result</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&lt;0.05</code></li>
@@ -1407,7 +1407,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
         <li>Once finished, rename the file into <code class="language-plaintext highlighter-rouge">significant proteins</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">significant proteins</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&gt;0.58</code></li>
@@ -1421,7 +1421,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">significant proteins</code> (output of the first <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&lt;-0.58</code></li>
@@ -1461,7 +1461,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
   <div class="box-title hands-on-title" id="hands-on-filter-differentially-abundant-proteins"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: filter differentially abundant proteins</div>
 
   <ol>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">metastasized filtered</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&gt;0</code></li>
@@ -1469,13 +1469,13 @@ In order to make its IDs compatible with the ones from the comparison result at 
         <li>Rename the file into <code class="language-plaintext highlighter-rouge">significant metastasized</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">significant metastasized </code> (output of last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">rdeb filtered</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&gt;0</code></li>
@@ -1483,13 +1483,13 @@ In order to make its IDs compatible with the ones from the comparison result at 
         <li>Rename the file into <code class="language-plaintext highlighter-rouge">significant rdeb</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">significant rdeb</code> (output of last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_column%2F1.1.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Sample Quantification Matrix Table</code> (output of <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Replacement”</em>:
@@ -1506,7 +1506,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_easyjoin_tool%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">replaced sample quantification matrix</code> (output of <strong>Replace text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
@@ -1515,7 +1515,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
         <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_easyjoin_tool%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">replaced sample quantification matrix</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
@@ -1524,7 +1524,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
         <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1" title="Heatmap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fggplot2_heatmap2%2Fggplot2_heatmap2%2F3.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Heatmap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1" title="Heatmap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Heatmap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers - these will be the columns that are plotted”</em>: <code class="language-plaintext highlighter-rouge">metastasized join</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Upregulated proteins in metastasized cSCC</code></li>
@@ -1532,7 +1532,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
         <li><em>“Data scaling”</em>: <code class="language-plaintext highlighter-rouge">Scale my data by row</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1" title="Heatmap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fggplot2_heatmap2%2Fggplot2_heatmap2%2F3.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Heatmap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1" title="Heatmap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Heatmap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers - these will be the columns that are plotted”</em>: <code class="language-plaintext highlighter-rouge">rdeb join</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Upregulated proteins in RDEB cSCC</code></li>
@@ -1570,27 +1570,27 @@ In order to make its IDs compatible with the ones from the comparison result at 
   <div class="box-title hands-on-title" id="hands-on-msstats-visualizations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: MSstats visualizations</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2" title="UniProt ID mapping and retrieval tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Funiprot_rest_interface%2Funiprot%2F0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>UniProt ID mapping and retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2" title="UniProt ID mapping and retrieval tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>UniProt ID mapping and retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with IDs”</em>: <code class="language-plaintext highlighter-rouge">metastasized join</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“ID column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Do you want to map IDs or retrieve data from UniProt”</em>: <code class="language-plaintext highlighter-rouge">Retrieve: request entries by uniprot accession using batch retrieval</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2" title="UniProt ID mapping and retrieval tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Funiprot_rest_interface%2Funiprot%2F0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>UniProt ID mapping and retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2" title="UniProt ID mapping and retrieval tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>UniProt ID mapping and retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with IDs”</em>: <code class="language-plaintext highlighter-rouge">rdeb join</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“ID column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Do you want to map IDs or retrieve data from UniProt”</em>: <code class="language-plaintext highlighter-rouge">Retrieve: request entries by uniprot accession using batch retrieval</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_to_tabular%2Ffasta2tab%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA-to-Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA-to-Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">metastasized uniprot</code> (output of <strong>UniProt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“How many columns to divide title string into?”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_to_tabular%2Ffasta2tab%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA-to-Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA-to-Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">rdeb uniprot</code> (output of <strong>UniProt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“How many columns to divide title string into?”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
@@ -1886,7 +1886,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1914,7 +1914,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -506,7 +506,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1240,7 +1240,7 @@ Numbers may slightly vary depending on the versions of the tools and the used FA
   <div class="box-title hands-on-title" id="hands-on-ms1-feature-detection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: MS1 Feature Detection</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.6+galaxy0" title="FeatureFinderMultiplex tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_featurefindermultiplex%2FFeatureFinderMultiplex%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FeatureFinderMultiplex</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.6+galaxy0" title="FeatureFinderMultiplex tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FeatureFinderMultiplex</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“LC-MS dataset in centroid or profile mode”</em>: mzML file</li>
         <li>In <em>“algorithmic parameters”</em>
@@ -1280,7 +1280,7 @@ Another refinement of the quantitative result is obtained by removing falsely ma
   <div class="box-title hands-on-title" id="hands-on-quant-to-id-matching"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quant to ID matching</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.6+galaxy0" title="IDMapper tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idmapper%2FIDMapper%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDMapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.6+galaxy0" title="IDMapper tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDMapper</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein/peptide identifications file”</em>: output of <strong>FalseDiscoveryRate</strong></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Feature map/consensus map file”</em>: output of <strong>FeatureFinderMultiplex</strong></li>
@@ -1294,19 +1294,19 @@ Another refinement of the quantitative result is obtained by removing falsely ma
         </li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.6+galaxy0" title="IDConflictResolver tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idconflictresolver%2FIDConflictResolver%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDConflictResolver</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.6+galaxy0" title="IDConflictResolver tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDConflictResolver</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: output of <strong>IDMapper</strong></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_multiplexresolver/MultiplexResolver/2.5+galaxy0" title="MultiplexResolver tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_multiplexresolver%2FMultiplexResolver%2F2.5%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiplexResolver</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5+galaxy0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_multiplexresolver/MultiplexResolver/2.5+galaxy0" title="MultiplexResolver tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiplexResolver</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5+galaxy0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Peptide multiplets with assigned sequence information”</em>: output of <strong>IDConflictResolver</strong></li>
         <li><em>“Labels used for labelling the samples”</em>: <code class="language-plaintext highlighter-rouge">[ ][Arg6,Lys6]</code></li>
         <li><em>“Maximum number of missed cleavages due to incomplete digestion”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.6+galaxy0" title="ProteinQuantifier tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_proteinquantifier%2FProteinQuantifier%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ProteinQuantifier</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.6+galaxy0" title="ProteinQuantifier tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ProteinQuantifier</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: first output of <strong>MultiplexResolver</strong></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein inference results”</em>: output of <strong>FalseDiscoveryRate</strong></li>
@@ -1338,20 +1338,20 @@ Comment lines in the beginning of a <code class="language-plaintext highlighter-
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-descriptive-statistics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Descriptive Statistics</div>
   <ol>
-    <li>Run <a class="tool" data-tool="Summary_Statistics1" title="Summary Statistics tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DSummary_Statistics1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Summary Statistics</strong></a> with
+    <li>Run <span class="tool" data-tool="Summary_Statistics1" title="Summary Statistics tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Summary Statistics</strong></span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Summary statistics on”</em>: protein table output (first file) of <strong>ProteinQuantifier</strong></li>
         <li><em>“Column or expression”</em>: <code class="language-plaintext highlighter-rouge">c8</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last lines from a dataset (tail) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_tail_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last lines from a dataset (tail)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last lines from a dataset (tail) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select last lines from a dataset (tail)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: protein table output (first file) of <strong>ProteinQuantifier</strong></li>
         <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep everything from this line on</code></li>
         <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4" title="Histogram tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fhistogram%2Fhistogram_rpy%2F1.0.4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4" title="Histogram tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Histogram</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset”</em>: output of <strong>Select last</strong></li>
         <li><em>“Numerical column for x axis”</em>: <code class="language-plaintext highlighter-rouge">Column: 8</code></li>
@@ -1927,7 +1927,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1955,7 +1955,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

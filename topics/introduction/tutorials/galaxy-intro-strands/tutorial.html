@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -345,7 +345,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1226,11 +1226,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <li>Try the <strong>tools search box</strong>.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.</li>
     <li>If you haven’t already searched with it, <em>enter</em> <code class="language-plaintext highlighter-rouge">filter</code> in the <strong>tool search box</strong>.  Among the results you should see
       <ul>
-        <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> data on any column using simple expressions.</li>
+        <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions.</li>
         <li>That might work.</li>
       </ul>
     </li>
-    <li><em>Click</em> on <a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> to open the Filter tool in the central panel.</li>
+    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> to open the Filter tool in the central panel.</li>
     <li>Take a look at the <strong>Syntax</strong> and <strong>Example</strong> sections to understand what the tool does.</li>
   </ol>
 
@@ -1278,7 +1278,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <ol>
     <li>Open the dataset preview by <em>clicking</em> on the name of the <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> dataset.  This shows an icon than the uploaded <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset did not: a looping arrow.</li>
     <li><em>Click</em> the <strong>looping arrow</strong> (“Run this job again”) icon.  This won’t actually run the job again.  What it will do is bring up the Filter tool form with <em>the exact same settings that were used to produce this dataset.</em></li>
-    <li>Rerun <a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> but with
+    <li>Rerun <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> but with
       <ul>
         <li><em>“Condition”</em>:  <code class="language-plaintext highlighter-rouge">c6 == "-" </code></li>
       </ul>
@@ -1288,7 +1288,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <p><strong>Method 2</strong></p>
   <ol>
-    <li><em>Click</em> on <a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> in the tool panel to open the Filter tool in the central panel.</li>
+    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> in the tool panel to open the Filter tool in the central panel.</li>
     <li><em>Fill</em> the form as before, <em>except</em>:
       <ul>
         <li>Make sure the <strong>Dataset</strong> pulldown is set to the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</li>
@@ -1354,7 +1354,7 @@ In Galaxy, a <em>genomic interval</em> is a something that spans part of a chrom
   <div class="box-title hands-on-title" id="hands-on-genomic-interval-tools-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Genomic Interval Tools</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0" title="Intersect tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fintersect%2Fgops_intersect_1%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intersect</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0" title="Intersect tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intersect</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with the following parameters:
       <ul>
         <li><em>“Return”</em>:  <code class="language-plaintext highlighter-rouge">Overlapping Intervals</code>.
 This looks like it might return whole genes, while <code class="language-plaintext highlighter-rouge">Overlapping pieces</code> may return only the parts that overlap.  We suspect that whole genes might be more useful.</li>
@@ -1400,7 +1400,7 @@ This looks like it might return whole genes, while <code class="language-plainte
   <ol>
     <li><em>Open</em> the <strong>Text Manipulation</strong> toolbox.</li>
     <li>Near the top of the toolbox is <strong>Concatenate datasets tail-to-head</strong>. <em>Click</em> on it.  Lets try that tool.</li>
-    <li><a class="tool" data-tool="cat1" title="Concatenate tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dcat1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="cat1" title="Concatenate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Overlapping reverse genes</code>.</li>
         <li><em>“Dataset</em>”</li>
@@ -1565,7 +1565,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
   <div class="box-title hands-on-title" id="hands-on-get-the-exon-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the exon data</div>
 
   <ol>
-    <li>Get the exon information, either by revisiting UCSC, or by using the <a class="tool" data-tool="gene2exon1" title="Gene BED To Exon/Intron/Codon BED expander tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dgene2exon1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene BED To Exon/Intron/Codon BED expander</strong></a> tool.  If you use the expander tool select <strong>Coding Exons only</strong> from the <strong>Extract</strong> pull-down.</li>
+    <li>Get the exon information, either by revisiting UCSC, or by using the <span class="tool" data-tool="gene2exon1" title="Gene BED To Exon/Intron/Codon BED expander tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene BED To Exon/Intron/Codon BED expander</strong></span> tool.  If you use the expander tool select <strong>Coding Exons only</strong> from the <strong>Extract</strong> pull-down.</li>
     <li>Give the resulting dataset a meaningful name.</li>
   </ol>
 </blockquote>
@@ -1999,7 +1999,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2027,7 +2027,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

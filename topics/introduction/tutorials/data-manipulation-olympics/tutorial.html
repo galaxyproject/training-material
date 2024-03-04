@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -352,7 +352,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Scientific analyses often consist of a number of tools that run one after the other, in order to go from the raw data to scientific insight. Between these specialized tools, simple data manipulation steps are often needed as a kind of \"glue\" between tools. For example, the output of tool A may produce a file that contains all the information needed as input for tool B, but tool B expects the columns in a different order. Or in genomic data analysis, some tools expect chromosome X to be listed as `chrX`, while others simply expect `X`. In these situations, extra data manipulation steps are needed to prepare files for input to analysis tools."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -839,87 +839,87 @@ Also make sure to include many exercises (with answers) for your section!
     <tr>
       <td>Word count</td>
       <td>Count the number of lines, words and characters in a file</td>
-      <td><a class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dwc_gnu"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></a></td>
+      <td><span class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></span></td>
     </tr>
     <tr>
       <td>Sort on a column</td>
       <td>Change the order of the rows based on values in one or more columns</td>
-      <td><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a></td>
+      <td><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span></td>
     </tr>
     <tr>
       <td>Filter</td>
       <td>Remove rows based on values in one or more columns</td>
-      <td><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a></td>
+      <td><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span></td>
     </tr>
     <tr>
       <td>Counting</td>
       <td>Count occurrences of values in a column</td>
-      <td><a class="tool" data-tool="Count1" title="Count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count</strong></a> , <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a></td>
+      <td><span class="tool" data-tool="Count1" title="Count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count</strong></span> , <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span></td>
     </tr>
     <tr>
       <td>Group on a column</td>
       <td>And perform simple operations (count, mean, min, max etc)</td>
-      <td><a class="tool" data-tool="Grouping1" title="Group tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrouping1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group</strong></a> , <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a></td>
+      <td><span class="tool" data-tool="Grouping1" title="Group tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group</strong></span> , <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span></td>
     </tr>
     <tr>
       <td>Compute on rows</td>
       <td>to derive new column values from existing ones</td>
-      <td><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a></td>
+      <td><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span></td>
     </tr>
     <tr>
       <td>Find and Replace</td>
       <td>in a specific column</td>
-      <td><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a></td>
+      <td><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span></td>
     </tr>
     <tr>
       <td>Find and Replace</td>
       <td>on every line</td>
-      <td><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2Fregex1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a></td>
+      <td><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span></td>
     </tr>
     <tr>
       <td>Join two Datasets</td>
       <td>side by side on a specified field</td>
-      <td><a class="tool" data-tool="join1" title="Join two Datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Djoin1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></a></td>
+      <td><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span></td>
     </tr>
     <tr>
       <td>Concatenate datasets</td>
       <td>one after the other</td>
-      <td><a class="tool" data-tool="cat1" title="Concatenate datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dcat1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></a></td>
+      <td><span class="tool" data-tool="cat1" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></span></td>
     </tr>
     <tr>
       <td>Remove Beginning</td>
       <td>Good for removing header lines</td>
-      <td><a class="tool" data-tool="Remove beginning1" title="Remove beginning of a file tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DRemove+beginning1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning of a file</strong></a></td>
+      <td><span class="tool" data-tool="Remove beginning1" title="Remove beginning of a file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning of a file</strong></span></td>
     </tr>
     <tr>
       <td>Select First lines</td>
       <td>Good for finding top 10s or saving header lines</td>
-      <td><a class="tool" data-tool="Show beginning1" title="Select first lines tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DShow+beginning1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select first lines</strong></a></td>
+      <td><span class="tool" data-tool="Show beginning1" title="Select first lines tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select first lines</strong></span></td>
     </tr>
     <tr>
       <td>Cut Columns</td>
       <td>By header name</td>
-      <td><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcolumn_remove_by_header%2Fcolumn_remove_by_header%2F0.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</a></td>
+      <td><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span></td>
     </tr>
     <tr>
       <td>Cut Columns</td>
       <td>By column number</td>
-      <td><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a>, <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut columns from a table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a></td>
+      <td><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span>, <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut columns from a table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span></td>
     </tr>
     <tr>
       <td>Paste</td>
       <td>Two files side by side</td>
-      <td><a class="tool" data-tool="Paste1" title="Paste tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DPaste1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></a></td>
+      <td><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span></td>
     </tr>
     <tr>
       <td>Split file</td>
       <td>Based on values of a column</td>
-      <td><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsplit_file_on_column%2Ftp_split_on_column%2F0.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6)</a></td>
+      <td><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6)</span></td>
     </tr>
     <tr>
       <td>Unique</td>
       <td>Remove duplicate rows</td>
-      <td><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" title="Unique tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sorted_uniq%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unique</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a></td>
+      <td><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" title="Unique tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unique</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span></td>
     </tr>
   </tbody>
 </table>
@@ -949,7 +949,7 @@ Also make sure to include many exercises (with answers) for your section!
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> the file <code class="language-plaintext highlighter-rouge">olympics.tsv</code> via link</p>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the file <code class="language-plaintext highlighter-rouge">olympics.tsv</code> via link</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6803028/files/olympics.tsv
 </code></pre></div>      </div>
@@ -970,7 +970,7 @@ Also make sure to include many exercises (with answers) for your section!
         <ol>
           <li>What is the format of the file?</li>
           <li>What does each row represent?</li>
-          <li>How many lines are in the file? (Hint: <a class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dwc_gnu"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></a>)</li>
+          <li>How many lines are in the file? (Hint: <span class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></span>)</li>
           <li>How many columns?</li>
         </ol>
 
@@ -980,7 +980,7 @@ Also make sure to include many exercises (with answers) for your section!
           <ol>
             <li>When you expand the <code class="language-plaintext highlighter-rouge">olympics.tsv</code> dataset in your history (see also screenshot below), you will see <code class="language-plaintext highlighter-rouge">format: tabular</code>, this is another term for a tab-separated (<code class="language-plaintext highlighter-rouge">tsv</code>) file.</li>
             <li>Each row represents an athlete’s participation in an event. If an athlete competes in multiple events, there is a line for each event.</li>
-            <li>234,523. Look at the expanded view in your history, this tells us there are ~250,000 rows in the dataset. We can get the exact number using the  <a class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dwc_gnu"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></a> tool.</li>
+            <li>234,523. Look at the expanded view in your history, this tells us there are ~250,000 rows in the dataset. We can get the exact number using the  <span class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></span> tool.</li>
             <li>There are 17 columns in this file. There are multiple ways to find this answer:
               <ul>
                 <li>Count the columns manually (only doable for small files)</li>
@@ -1171,13 +1171,13 @@ it displays the data as-is, no longer arranging the view into neat columns.</p>
         </blockquote>
       </blockquote>
     </li>
-    <li>Open the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> tool
+    <li>Open the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> tool
       <ul>
         <li>Read the help text at the bottom of the tool form</li>
         <li>Which settings do you think we need to use?</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code>`</li>
@@ -1340,7 +1340,7 @@ and because we want the tallest on top, we will need to sort in <em>descending</
     <div class="box-title solution-title" id="solution-full-solutions"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solutions" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Full Solutions</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code>`</li>
@@ -1352,7 +1352,7 @@ and because we want the tallest on top, we will need to sort in <em>descending</
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort</code></li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code>`</li>
@@ -1364,7 +1364,7 @@ and because we want the tallest on top, we will need to sort in <em>descending</
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort</code></li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code>`</li>
@@ -1418,7 +1418,7 @@ and because we want the tallest on top, we will need to sort in <em>descending</
         </blockquote>
       </blockquote>
     </li>
-    <li>Open the tool <a class="tool" data-tool="Filter1" title="**Filter** data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Filter</strong> data on any column using simple expressions</strong></a>
+    <li>Open the tool <span class="tool" data-tool="Filter1" title="**Filter** data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Filter</strong> data on any column using simple expressions</strong></span>
       <ul>
         <li>read the help text at the bottom of the tool carefully</li>
         <li>get familiar with how to indicate columns and write expressions for filtering</li>
@@ -1472,7 +1472,7 @@ How would you write expressions for the following filtering conditions:
 
       <p>Ok, great, now that you’ve got the hang of writing expressions for this tool, let’s create a file with only Winter Olympics:</p>
     </li>
-    <li><a class="tool" data-tool="Filter1" title="**Filter** data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Filter</strong> data on any column using simple expressions</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="**Filter** data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Filter</strong> data on any column using simple expressions</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With the following condition”</em>: <code class="language-plaintext highlighter-rouge">c13=='Winter'</code></li>
@@ -1485,7 +1485,7 @@ How would you write expressions for the following filtering conditions:
       <blockquote class="question">
         <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <p>How many lines are in this file? (Hint: expand the dataset in your history or use <a class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dwc_gnu"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></a> )</p>
+        <p>How many lines are in this file? (Hint: expand the dataset in your history or use <span class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></span> )</p>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1510,7 +1510,7 @@ How would you write expressions for the following filtering conditions:
           <div class="box-title solution-title" id="solution-hints-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-hints-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Hints</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
-            <li>Use the <a class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dwc_gnu"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></a> to find the number of lines in the <code class="language-plaintext highlighter-rouge">olympics.tsv</code> file and subtract the number of rows in the Winter Olympics file</li>
+            <li>Use the <span class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></span> to find the number of lines in the <code class="language-plaintext highlighter-rouge">olympics.tsv</code> file and subtract the number of rows in the Winter Olympics file</li>
             <li>Be careful to consider whether these counts include the header line of the file or not</li>
           </ol>
 
@@ -1540,7 +1540,7 @@ It is always useful to take a moment to think about the expected outcome, this m
 
 <h2 id="exercises-1">Exercises</h2>
 
-<p>Ok, time to train! let’s see if you can use the <a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> tool to answer the following questions:</p>
+<p>Ok, time to train! let’s see if you can use the <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> tool to answer the following questions:</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-exercise-medal-winners"><i class="far fa-question-circle" aria-hidden="true"></i> Exercise: Medal winners</div>
@@ -1559,7 +1559,7 @@ It is always useful to take a moment to think about the expected outcome, this m
     <ul>
       <li>Column 17 contains information about medals</li>
       <li>The possible values are <code class="language-plaintext highlighter-rouge">Gold</code>, <code class="language-plaintext highlighter-rouge">Silver</code>, <code class="language-plaintext highlighter-rouge">Bronze</code>, and `` (empty).</li>
-      <li>Expand the output or use the tool <a class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dwc_gnu"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></a> to see the number of lines in the file</li>
+      <li>Expand the output or use the tool <span class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></span> to see the number of lines in the file</li>
       <li>Don’t forget that the output (and line count) may include the header line</li>
       <li>Do not use quotes on number columns (e.g. year)</li>
       <li>You may need parentheses for complex conditions</li>
@@ -1585,7 +1585,7 @@ It is always useful to take a moment to think about the expected outcome, this m
 
 <h1 id="counting">Counting</h1>
 
-<p>A common operation we might want to perform on tables of data, is simple counting. How many times does a certain value appear? For our dataset for instance, we might want to know how many countries participated in each Olympics, how many women, etc; any column that has categorical data that we can count. The tool <a class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></a> does exactly this.</p>
+<p>A common operation we might want to perform on tables of data, is simple counting. How many times does a certain value appear? For our dataset for instance, we might want to know how many countries participated in each Olympics, how many women, etc; any column that has categorical data that we can count. The tool <span class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></span> does exactly this.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-count-occurrences-of-values-in-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Count occurrences of values in columns</div>
@@ -1593,7 +1593,7 @@ It is always useful to take a moment to think about the expected outcome, this m
   <p>Let’s start by simply counting how many different Olympic Games we have in our dataset, and how many times it appears (so how many participations there were each year)</p>
 
   <ol>
-    <li><a class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></a> with the following parameters
+    <li><span class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></span> with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column 11</code></li>
@@ -1642,7 +1642,7 @@ It is always useful to take a moment to think about the expected outcome, this m
       <p>You may have noticed that we could have selected multiple columns in this tool. This lets us count on combinations of columns.
 Let’s try counting the number of men and women in each olympic games.</p>
     </li>
-    <li><a class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></a> with the following parameters
+    <li><span class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></span> with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column 11, Column 3</code></li>
@@ -1692,7 +1692,7 @@ The file looks something like this:
 
 <p>Let’s say we wanted to know how many different sports there were in each Olympics. If we used the counting tool above, we would get a results file for each combination of sport and olympics, with the number of lines (participations) of each. But we don’t really care about the number of lines that have this combination, just the total number of unique sports in each games.</p>
 
-<p>To answer these types of questions we can use a slightly more advanced tool, called <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a>. This tool can do a lot more than counting, but here we will show you how to use it to count in this way.</p>
+<p>To answer these types of questions we can use a slightly more advanced tool, called <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span>. This tool can do a lot more than counting, but here we will show you how to use it to count in this way.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-counting-number-of-different-sports-per-olympic-games"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Counting number of different sports per Olympic Games</div>
@@ -1700,7 +1700,7 @@ The file looks something like this:
   <p>We will now determine how many different sport there were in each of the different Olympics</p>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">11</code> (the <code class="language-plaintext highlighter-rouge">games</code> column)</li>
@@ -1764,8 +1764,8 @@ tool will perform the sorting step before its calculation.</li>
     <div class="box-title solution-title" id="solution-hints-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-hints-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Hints</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>Since we are counting participations (rows), we can use the simple <a class="tool" data-tool="Count1" title="Count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count</strong></a> tool</li>
-      <li>Since we are counting a bit more complex question, we need the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> tool</li>
+      <li>Since we are counting participations (rows), we can use the simple <span class="tool" data-tool="Count1" title="Count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count</strong></span> tool</li>
+      <li>Since we are counting a bit more complex question, we need the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> tool</li>
     </ol>
 
   </blockquote>
@@ -1784,7 +1784,7 @@ tool will perform the sorting step before its calculation.</li>
     <div class="box-title solution-title" id="solution-full-solutions-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solutions-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Full Solutions</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li><a class="tool" data-tool="Count1" title="Count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count</strong></a> with the following parameters:
+      <li><span class="tool" data-tool="Count1" title="Count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Count</strong></span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column 9</code> (the <code class="language-plaintext highlighter-rouge">team</code> column)</li>
@@ -1799,7 +1799,7 @@ tool will perform the sorting step before its calculation.</li>
 7988	Canada
 </code></pre></div>        </div>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">11</code> (the <code class="language-plaintext highlighter-rouge">games</code> column)</li>
@@ -1833,7 +1833,7 @@ tool will perform the sorting step before its calculation.</li>
 
 <p>In the <a href="#counting">counting</a> section of this tutorial we show how to get answers that require a count (e.g. number of medals won), but sometimes we want to do something more complex, like calculating the average height of athletes in a group, say per country or per sport. This section will show some example of these types of questions.</p>
 
-<p>We can use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> tool for this purpose.</p>
+<p>We can use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> tool for this purpose.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-tallest-athlete-per-sport"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Tallest athlete per sport</div>
@@ -1842,7 +1842,7 @@ tool will perform the sorting step before its calculation.</li>
 
   <ol>
     <li>
-      <p>Open the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> tool and read the help section at the bottom</p>
+      <p>Open the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> tool and read the help section at the bottom</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1863,7 +1863,7 @@ tool will perform the sorting step before its calculation.</li>
         </blockquote>
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
@@ -1913,13 +1913,13 @@ tool will perform the sorting step before its calculation.</li>
   <p>The question we would like to answer here, is what is the average height for men and women per sport?</p>
 
   <ol>
-    <li>Open the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> tool
+    <li>Open the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> tool
       <ul>
         <li>Which parameters do you think we need?</li>
         <li>Refer to the help section at the bottom of the tool page if you need more information</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">15,3</code> (The sports column, and the sex column)</li>
@@ -2025,7 +2025,7 @@ range by its upper or lower value. We will do this in the <a href="#exercises-pu
     <div class="box-title solution-title" id="solution-full-solutions-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solutions-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Full Solutions</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">17,15,3</code> (The medal, sports, and the sex columns)</li>
@@ -2054,7 +2054,7 @@ Bronze	Artistic Gymnastics	F	136
 ...
 </code></pre></div>        </div>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">12,9</code> (year and team columns)</li>
@@ -2106,7 +2106,7 @@ be found in <a href="/training-material/faqs/galaxy/analysis_troubleshooting.htm
 
 <h1 id="computing">Computing</h1>
 
-<p>Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columns), or their age at time of participation (from year of birth and year of the Olymics). By adding these computed values as a new colum to our datset, we can more easily query the dataset for these values. We can do these types of operations using the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a> tool.</p>
+<p>Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columns), or their age at time of participation (from year of birth and year of the Olymics). By adding these computed values as a new colum to our datset, we can more easily query the dataset for these values. We can do these types of operations using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span> tool.</p>
 
 <p>As an example, let’s calculate the age of each athlete at the time of participation, and add this as a new column to our dataset.</p>
 
@@ -2114,13 +2114,13 @@ be found in <a href="/training-material/faqs/galaxy/analysis_troubleshooting.htm
   <div class="box-title hands-on-title" id="hands-on-compute-age-of-athletes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute age of athletes</div>
 
   <ol>
-    <li>Open the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a> tool.
+    <li>Open the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span> tool.
       <ul>
         <li>read the help text at the bottom of the tool</li>
         <li>what parameters do you think we need to use?</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a> with the following parameters:.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span> with the following parameters:.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>“Input has a header line with column names?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2211,7 +2211,7 @@ In his defense, he did argue it should not be used at individual levels, however
   <p>However as it is an easy to calculate metric, we include the calculation here.</p>
 </blockquote>
 
-<p>Let’s use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a> tool to compute this data for all athletes and add it as a new column directly after the existing height and weight columns.</p>
+<p>Let’s use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span> tool to compute this data for all athletes and add it as a new column directly after the existing height and weight columns.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-exercise-calculating-bmi"><i class="far fa-question-circle" aria-hidden="true"></i> Exercise: Calculating BMI</div>
@@ -2262,7 +2262,7 @@ In his defense, he did argue it should not be used at individual levels, however
     <div class="box-title solution-title" id="solution-full-solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Full solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>“Input has a header line with column names?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2293,7 +2293,7 @@ In his defense, he did argue it should not be used at individual levels, however
 
 <p>Often you may need to change the contents of a file a bit to fit the expectations of an analysis tool. For instance, our file uses <code class="language-plaintext highlighter-rouge">NA</code> for missing values, but other conventions included leaving the cell empty, or using <code class="language-plaintext highlighter-rouge">NaN</code> (not a number) instead. Or, when working with chromosomal data, you may need to add or remove the <code class="language-plaintext highlighter-rouge">chr</code> prefix from a column before using it as input to a certain tool. In such situations, we can find all occurrences of a certain pattern in our file, and replace it with another value.</p>
 
-<p>If we want to perform such a replacement on a single column in our data, we can use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a> tool, or if we want to do a replacement on a line by line basis (e.g. if our data isn’t tabular and therefore doesn’t have columns), we can use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2Fregex1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a> tool. Both of these tools are similar, in that they use <em>regular expressions</em> (or <em>regex</em>) to define a pattern to search for. Regular expressions are a standardized way to describe patterns, and while they can seem quite complex at first, with just a few of the basics and a bit of practice, you can perform powerful operations on large datasets with ease.</p>
+<p>If we want to perform such a replacement on a single column in our data, we can use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> tool, or if we want to do a replacement on a line by line basis (e.g. if our data isn’t tabular and therefore doesn’t have columns), we can use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> tool. Both of these tools are similar, in that they use <em>regular expressions</em> (or <em>regex</em>) to define a pattern to search for. Regular expressions are a standardized way to describe patterns, and while they can seem quite complex at first, with just a few of the basics and a bit of practice, you can perform powerful operations on large datasets with ease.</p>
 
 <p>A few of the basics of regular expression, plus some links to further resources are given in the box below:</p>
 
@@ -2310,7 +2310,7 @@ In his defense, he did argue it should not be used at individual levels, however
 Let’s standardize this by replacing occurrences of <code class="language-plaintext highlighter-rouge">Athina</code> with <code class="language-plaintext highlighter-rouge">Athens</code>.</p>
 
   <ol>
-    <li>Open <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a>
+    <li>Open <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span>
       <ul>
         <li>Read the help text at the bottom, what settings do you think we need to use?</li>
         <li>
@@ -2322,7 +2322,7 @@ Let’s standardize this by replacing occurrences of <code class="language-plain
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column 14</code></li>
@@ -2371,7 +2371,7 @@ If we had used the line replace tool, it would have replaced all occurrences of 
   <p>We will now replace empty cells in the <code class="language-plaintext highlighter-rouge">birth_place</code> column, to use <code class="language-plaintext highlighter-rouge">NA</code> instead</p>
 
   <ol>
-    <li>Open <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a>
+    <li>Open <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span>
       <ul>
         <li>Read the help text at the bottom, what settings do you think we need to use?</li>
         <li>
@@ -2402,7 +2402,7 @@ If we had used the line replace tool, it would have replaced all occurrences of 
         </blockquote>
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column 6</code></li>
@@ -2433,7 +2433,7 @@ If we had used the line replace tool, it would have replaced all occurrences of 
   <p>We will now change the format in birthday column from <code class="language-plaintext highlighter-rouge">day month</code> to <code class="language-plaintext highlighter-rouge">month day</code></p>
 
   <ol>
-    <li>Open <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a>
+    <li>Open <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span>
       <ul>
         <li>Read the help text at the bottom, what settings do you think we need to use?</li>
         <li>
@@ -2487,7 +2487,7 @@ It all depends on your data and use case.</p>
         </blockquote>
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Finda and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Finda and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Finda and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Finda and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column 5</code></li>
@@ -2511,9 +2511,9 @@ and tweak your expression until it works.</li>
 
 <h1 id="removing-columns">Removing Columns</h1>
 
-<p>We can remove columns from a table using either <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcolumn_remove_by_header%2Fcolumn_remove_by_header%2F0.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</a> if your table has a header line, or <a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> if it does not (in this case we just indicate columns by their number). These tools can also be used to change the order of columns in your file. There is also the tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut columns from a table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> that offers a few more options.</p>
+<p>We can remove columns from a table using either <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> if your table has a header line, or <span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> if it does not (in this case we just indicate columns by their number). These tools can also be used to change the order of columns in your file. There is also the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut columns from a table</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> that offers a few more options.</p>
 
-<p>To do the reverse, adding one or more columns, we can use the <a class="tool" data-tool="Paste1" title="Paste tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DPaste1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></a> tool. This assumes we have the same number of rows in both files, already in the correct order. It is a very “dumb” tool that simple combines the two files next to each other.</p>
+<p>To do the reverse, adding one or more columns, we can use the <span class="tool" data-tool="Paste1" title="Paste tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paste</strong></span> tool. This assumes we have the same number of rows in both files, already in the correct order. It is a very “dumb” tool that simple combines the two files next to each other.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove columns</div>
@@ -2521,12 +2521,12 @@ and tweak your expression until it works.</li>
   <p>Suppose we want to simplify our file a bit. All we want is file with 4 columns: athlete name, sport, olympic games, and medals.</p>
 
   <ol>
-    <li>Open the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcolumn_remove_by_header%2Fcolumn_remove_by_header%2F0.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</a> tool and read the help text at the bottom.
+    <li>Open the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> tool and read the help text at the bottom.
       <ul>
         <li>Which settings do you think we need?</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcolumn_remove_by_header%2Fcolumn_remove_by_header%2F0.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular File”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Header name”</em>: <code class="language-plaintext highlighter-rouge">name</code></li>
@@ -2568,7 +2568,7 @@ and tweak your expression until it works.</li>
   <div class="box-title question-title" id="question-exercise-removing-columns"><i class="far fa-question-circle" aria-hidden="true"></i> Exercise: Removing Columns</div>
 
   <ol>
-    <li>Create a file with 4 columns: name, sport, games, medal (same task as the previous hands-on), but use the <a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> tool instead.</li>
+    <li>Create a file with 4 columns: name, sport, games, medal (same task as the previous hands-on), but use the <span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> tool instead.</li>
     <li>Create a file that is similar to <code class="language-plaintext highlighter-rouge">olympics.tsv</code>, but without the first column (athlete_id column)</li>
     <li>You want to keep all the columns of <code class="language-plaintext highlighter-rouge">olympics.tsv</code>, but change the order so that <code class="language-plaintext highlighter-rouge">sport</code> and <code class="language-plaintext highlighter-rouge">event</code> come right after the athlete’s name.</li>
   </ol>
@@ -2588,14 +2588,14 @@ and tweak your expression until it works.</li>
     <div class="box-title solution-title" id="solution-full-solutions-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solutions-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Full Solutions</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> using the following parameters:
+      <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> using the following parameters:
         <ul>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut Columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c15,c11,c17</code></li>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited By”</em>: <code class="language-plaintext highlighter-rouge">TAB</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         </ul>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcolumn_remove_by_header%2Fcolumn_remove_by_header%2F0.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular File”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Header name”</em>: <code class="language-plaintext highlighter-rouge">athlete_id</code></li>
@@ -2606,14 +2606,14 @@ and tweak your expression until it works.</li>
 You could have obtained the same result by supplying all column names except the first one, and selecting
 <em>“Keep named columns”</em>: <code class="language-plaintext highlighter-rouge">No</code>, but that would have been a lot more work.</p>
       </li>
-      <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> using the following parameters:
+      <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> using the following parameters:
         <ul>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut Columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2,c15,c16,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c17</code></li>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span><em>“Delimited By”</em>: <code class="language-plaintext highlighter-rouge">TAB</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         </ul>
 
-        <p><strong>Note:</strong> you can also use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcolumn_remove_by_header%2Fcolumn_remove_by_header%2F0.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</a>, it just requires a bit more typing,
+        <p><strong>Note:</strong> you can also use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" title="Remove columns by heading tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove columns by heading</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span>, it just requires a bit more typing,
 but on the other hand it is also a bit less error-prone (i.e. it is easier to mix up column numbers than column names).</p>
       </li>
     </ol>
@@ -2624,7 +2624,7 @@ but on the other hand it is also a bit less error-prone (i.e. it is easier to mi
 
 <h1 id="unique">Unique</h1>
 
-<p>Sometimes, in the course of our data manipulations, we may end up with a file that has duplicate rows. In order to filter these out, we can use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" title="Unique occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sorted_uniq%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unique occurrences of each record</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> tool.</p>
+<p>Sometimes, in the course of our data manipulations, we may end up with a file that has duplicate rows. In order to filter these out, we can use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" title="Unique occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unique occurrences of each record</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> tool.</p>
 
 <p>Let’s say we would like to create a list of all unique athletes (id and name).</p>
 
@@ -2635,7 +2635,7 @@ but on the other hand it is also a bit less error-prone (i.e. it is easier to mi
 (please see the <a href="#removing-columns">Removing Columns</a> section for more info on this step)</p>
 
   <ol>
-    <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> using the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> using the following parameters:
       <ul>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut Columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited By”</em>: <code class="language-plaintext highlighter-rouge">TAB</code></li>
@@ -2662,7 +2662,7 @@ but on the other hand it is also a bit less error-prone (i.e. it is easier to mi
         </blockquote>
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" title="Unique - occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sorted_uniq%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unique - occurrences of each record</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" title="Unique - occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unique - occurrences of each record</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to scan for unique values”</em>: <code class="language-plaintext highlighter-rouge">output from the first step</code></li>
       </ul>
@@ -2711,7 +2711,7 @@ but on the other hand it is also a bit less error-prone (i.e. it is easier to mi
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> the file <code class="language-plaintext highlighter-rouge">country-information.tsv</code> via link</p>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the file <code class="language-plaintext highlighter-rouge">country-information.tsv</code> via link</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6803028/files/country-information.tsv
 </code></pre></div>      </div>
@@ -2752,12 +2752,12 @@ but on the other hand it is also a bit less error-prone (i.e. it is easier to mi
   <div class="box-title hands-on-title" id="hands-on-joining-country-information-to-the-olympics-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Joining country information to the Olympics data.</div>
 
   <ol>
-    <li>Open <a class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Djoin1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets side by side on a specified field</strong></a>, and read the help text at the bottom
+    <li>Open <span class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets side by side on a specified field</strong></span>, and read the help text at the bottom
       <ul>
         <li>Which settings do you think we need to use?</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Djoin1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets side by side on a specified field</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets side by side on a specified field</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column 10</code> (the <code class="language-plaintext highlighter-rouge">noc</code> column)</li>
@@ -2808,7 +2808,7 @@ If you do not need all these columns, it could save you a lot of space to remove
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> the file <code class="language-plaintext highlighter-rouge">olympics_2022.tsv</code> via link</p>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the file <code class="language-plaintext highlighter-rouge">olympics_2022.tsv</code> via link</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6803028/files/olympics_2022.tsv
 </code></pre></div>      </div>
@@ -2851,7 +2851,7 @@ If you do not need all these columns, it could save you a lot of space to remove
   <p>First we need to remove the header line from the 2022 file (since these lines will be added to the end of our olympic dataset, we don’t want to have a second header line floating around in our file)</p>
 
   <ol>
-    <li><a class="tool" data-tool="Remove beginning1" title="Remove beginning of a file tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DRemove+beginning1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning of a file</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning of a file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning of a file</strong></span> with the following parameters:
       <ul>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">olympics_2022.tsv</code></li>
@@ -2859,7 +2859,7 @@ If you do not need all these columns, it could save you a lot of space to remove
 
       <p>Now we can perform the concatenation:</p>
     </li>
-    <li><a class="tool" data-tool="cat1" title="Concatenate datasets tail-to-head tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dcat1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tail-to-head tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Datasets”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code> (this file will be first)</li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>:
@@ -2876,7 +2876,7 @@ If you do not need all these columns, it could save you a lot of space to remove
         <div class="box-title question-title" id="question-27"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
-          <li>How many lines do you expect in the new file? Were you correct? (Hint: use <a class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dwc_gnu"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></a> to count lines)</li>
+          <li>How many lines do you expect in the new file? Were you correct? (Hint: use <span class="tool" data-tool="wc_gnu" title="Line/Word/Character count tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Line/Word/Character count</strong></span> to count lines)</li>
           <li>Where are the lines of the 2022 Olympics?</li>
         </ol>
 
@@ -2898,7 +2898,7 @@ If you do not need all these columns, it could save you a lot of space to remove
 
 <h1 id="splitting-files">Splitting Files</h1>
 
-<p>This dataset contains a lot of data, we might want to split the data into one file per Olympic games, or have one file for all the winter games, and another file for all the summer games. In these situtations, where we want to create new, smaller files, based on the values in a column, we can use the tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split file according to the values of a column tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsplit_file_on_column%2Ftp_split_on_column%2F0.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split file according to the values of a column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6)</a>.</p>
+<p>This dataset contains a lot of data, we might want to split the data into one file per Olympic games, or have one file for all the winter games, and another file for all the summer games. In these situtations, where we want to create new, smaller files, based on the values in a column, we can use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split file according to the values of a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split file according to the values of a column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6)</span>.</p>
 
 <p>Tip: use this tool only if you want a separate file for <strong>all values</strong> in a column. For example, if you want a file for each Olympic games, use the split tool, but if you just want a file for one particular Olympics (say Tokyo 2020), you could simply use the <a href="#filtering">Filter</a> tools to extract the data from the full dataset, without making files for all the other Olympics as well.</p>
 
@@ -2908,12 +2908,12 @@ If you do not need all these columns, it could save you a lot of space to remove
   <p>We would like to create a separate file for each Olympic event.</p>
 
   <ol>
-    <li>Open the tool <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split file according to the values of a column tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsplit_file_on_column%2Ftp_split_on_column%2F0.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split file according to the values of a column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6)</a>, and read the help text at the bottom
+    <li>Open the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split file according to the values of a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split file according to the values of a column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6)</span>, and read the help text at the bottom
       <ul>
         <li>which settings do you think we need to use?</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split file according to the values of a column tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fsplit_file_on_column%2Ftp_split_on_column%2F0.6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split file according to the values of a column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" title="Split file according to the values of a column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split file according to the values of a column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.6)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to select”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column 11</code> (the <code class="language-plaintext highlighter-rouge">games</code> column)</li>
@@ -3033,7 +3033,7 @@ perform our sort, so that our answer is on top.</p>
       <li>
         <p>First we filter out the NA values from the height column:</p>
 
-        <p><a class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></a> with the following parameters:</p>
+        <p><span class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></span> with the following parameters:</p>
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following expression”</em>: <code class="language-plaintext highlighter-rouge">c7!='NA'</code></li>
@@ -3042,7 +3042,7 @@ perform our sort, so that our answer is on top.</p>
 
         <p>Then we can sort by height, in ascending order to get the shortest athletes on top:</p>
 
-        <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:</p>
+        <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:</p>
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">output from the previous step (filter)</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code>`</li>
@@ -3058,7 +3058,7 @@ perform our sort, so that our answer is on top.</p>
       <li>
         <p>We can take the output from the first exercise, and filter for only Winter Olympics:</p>
 
-        <p><a class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></a> with the following parameters:</p>
+        <p><span class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></span> with the following parameters:</p>
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>:  <code class="language-plaintext highlighter-rouge">output from previous exercise</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following expression”</em>: <code class="language-plaintext highlighter-rouge">c13='Winter'</code></li>
@@ -3068,7 +3068,7 @@ perform our sort, so that our answer is on top.</p>
       <li>
         <p>First we filter out the NA values from the weight column:</p>
 
-        <p><a class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></a> with the following parameters:</p>
+        <p><span class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></span> with the following parameters:</p>
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following expression”</em>: <code class="language-plaintext highlighter-rouge">c8!='NA'</code></li>
@@ -3077,7 +3077,7 @@ perform our sort, so that our answer is on top.</p>
 
         <p>Then we can filter out only Summer Olympics:</p>
 
-        <p><a class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></a> with the following parameters:</p>
+        <p><span class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></span> with the following parameters:</p>
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>:  <code class="language-plaintext highlighter-rouge">output from previous step</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following expression”</em>: <code class="language-plaintext highlighter-rouge">c13='Summer'</code></li>
@@ -3086,7 +3086,7 @@ perform our sort, so that our answer is on top.</p>
 
         <p>Then we can sort by weigth, in ascending order to get the shortest athletes on top:</p>
 
-        <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:</p>
+        <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort - data in ascending or descending order tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort - data in ascending or descending order</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:</p>
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">output from the previous step</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code>`</li>
@@ -3117,7 +3117,7 @@ so it is usually faster to filter first, then do the sorting on a smaller file. 
 </blockquote>
 
 <p>Ok, let’s try another exercise! If you have done the exercises in the <a href="#grouping">Grouping</a> section, you will have noticed that we were not able
-to perform computation on the weight column, because some of the values were weight classes, e.g. <code class="language-plaintext highlighter-rouge">63-78</code> (kg), and the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a>
+to perform computation on the weight column, because some of the values were weight classes, e.g. <code class="language-plaintext highlighter-rouge">63-78</code> (kg), and the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span>
 tool could not handle such values. In this exercise, we will first clean up this weight column to avoid ranges (by taking the lower number in the range for every
 row a weight range is used), and then answering the question a couple of questions around the weight of athletes.</p>
 
@@ -3134,11 +3134,11 @@ row a weight range is used), and then answering the question a couple of questio
     <div class="box-title solution-title" id="solution-hints-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-hints-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Hints</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>You can use the <a class="tool" data-tool="Count1" title="**Count** tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong></strong></a> tool to get a list of all the different values that appear in Column 8</li>
-      <li>You can use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a> tool to clean up the weight column.
+      <li>You can use the <span class="tool" data-tool="Count1" title="**Count** tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong></strong></span> tool to get a list of all the different values that appear in Column 8</li>
+      <li>You can use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> tool to clean up the weight column.
 This tool is a bit complex, if you haven’t done so yet, we strongly recommend you work through the <a href="#find-and-replace">Find and Replace section</a> first.
-To check if your cleaning worked, re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the <a class="tool" data-tool="Count1" title="**Count** tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong></strong></a> tool from step 1.</li>
-      <li>Use the <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> tool to answer this question, make sure you use the cleaned up datset as input! Find the row
+To check if your cleaning worked, re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the <span class="tool" data-tool="Count1" title="**Count** tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong></strong></span> tool from step 1.</li>
+      <li>Use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> tool to answer this question, make sure you use the cleaned up datset as input! Find the row
 showing Biathlon.</li>
     </ol>
 
@@ -3155,7 +3155,7 @@ clean the column (taking the upper or median value would be equally valid,  but 
       </li>
       <li>
         <p>There are many possible regular expression that will clean this column. You can use a single check to catch all the exceptions, or use multiple, there is no one right answer.
-Check if your cleaning is successful using the <a class="tool" data-tool="Count1" title="**Count** tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong></strong></a> tool again. Make sure you only have single number values in the weight column before
+Check if your cleaning is successful using the <span class="tool" data-tool="Count1" title="**Count** tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong></strong></span> tool again. Make sure you only have single number values in the weight column before
 proceeding to question 3 in this exercise. Also make sure the weights you have make sense (e.g. if you end up with columns having a weight of <code class="language-plaintext highlighter-rouge">0</code>, something went wrong somewhere!)</p>
       </li>
       <li>
@@ -3169,7 +3169,7 @@ proceeding to question 3 in this exercise. Also make sure the weights you have m
     <div class="box-title solution-title" id="solution-full-solutions-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solutions-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> <span>Full Solutions</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li><a class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></a> with the following parameters
+      <li><span class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></span> with the following parameters
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column 8</code></li>
@@ -3197,7 +3197,7 @@ proceeding to question 3 in this exercise. Also make sure the weights you have m
 
         <p>We will want to change weight ranges to single numbers in the next step</p>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fregex_find_replace%2FregexColumn1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find and Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find and Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">olympics.tsv</code></li>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column 14</code></li>
@@ -3207,11 +3207,11 @@ proceeding to question 3 in this exercise. Also make sure the weights you have m
         </ul>
 
         <p><strong>NOTE:</strong> there will be a lot of valid answers here, you could do it all in one check like the solution above, or in multiple checks (e.g. one for each different kind of way to
-denote a weight range you found in step 1). As long as a re-run of the <a class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCount1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></a> tool shows only single numbers in the
+denote a weight range you found in step 1). As long as a re-run of the <span class="tool" data-tool="Count1" title="**Count** occurrences of each record tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong><strong>Count</strong> occurrences of each record</strong></span> tool shows only single numbers in the
 column after your find &amp; replace step, then your answer was correct! Also make sure the weights make sense (e.g. if your resulting column has weights of <code class="language-plaintext highlighter-rouge">0</code> or other small numbers, this
 doesn’t make sense and you will have to tweak your expression. Don’t feel bad if this takes a bit of trial and error, that is expected!</p>
       </li>
-      <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</a> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">olympics-cleaned.tsv</code> (output from your cleaning step)</li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">15,3</code></li>
@@ -3536,7 +3536,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3564,7 +3564,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

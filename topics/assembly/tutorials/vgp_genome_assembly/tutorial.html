@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -761,7 +761,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as next generation sequencing (NGS)) produced highly accurate but short (up to 800bp) reads. Those read extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called third-generation sequencing (TGS) technologies, usually known as single-molecule real-time (SMRT) sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced high fidelity (HiFi) sequencing, which produces reads 10-25 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1499,7 +1499,7 @@ the workflow we will be using for the analysis of our data takes collection as i
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-primer-removal-with-cutadapt"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Primer removal with Cutadapt</div>
 
-  <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.4+galaxy0" title="Cutadapt tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Flparsons%2Fcutadapt%2Fcutadapt%2F4.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.4+galaxy0)</a> with the following parameters:</p>
+  <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.4+galaxy0" title="Cutadapt tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.4+galaxy0)</span> with the following parameters:</p>
   <ol>
     <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code></li>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: <code class="language-plaintext highlighter-rouge">HiFi_collection</code></li>
@@ -1630,7 +1630,7 @@ the workflow we will be using for the analysis of our data takes collection as i
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generate-i-k-i-mers-count-distribution"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate <i>k</i>-mers count distribution</div>
 
-  <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmeryl%2Fmeryl%2F1.3%2Bgalaxy6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Meryl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy6)</a> with the following parameters:</p>
+  <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Meryl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy6)</span> with the following parameters:</p>
   <ol>
     <li><em>“Operation type selector”</em>: <code class="language-plaintext highlighter-rouge">Count operations</code></li>
     <li><em>“Count operations”</em>: <code class="language-plaintext highlighter-rouge">Count: count the occurrences of canonical k-mers</code></li>
@@ -1647,7 +1647,7 @@ the workflow we will be using for the analysis of our data takes collection as i
   <p><br />
 <strong>Step 2</strong>: Rename output as <code class="language-plaintext highlighter-rouge">meryldb</code></p>
 
-  <p><strong>Step 3</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmeryl%2Fmeryl%2F1.3%2Bgalaxy6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Meryl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy6)</a> again with the following parameters:</p>
+  <p><strong>Step 3</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Meryl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy6)</span> again with the following parameters:</p>
   <ol>
     <li><em>“Operation type selector”</em>: <code class="language-plaintext highlighter-rouge">Operations on sets of *k*-mers</code></li>
     <li><em>“Operations on sets of k-mers”</em>: <code class="language-plaintext highlighter-rouge">Union-sum: return k-mers that occur in any input, set the count to the sum of the counts</code></li>
@@ -1656,7 +1656,7 @@ the workflow we will be using for the analysis of our data takes collection as i
 
   <p><strong>Step 4</strong>: Rename it as <code class="language-plaintext highlighter-rouge">Merged meryldb</code></p>
 
-  <p><strong>Step 5</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmeryl%2Fmeryl%2F1.3%2Bgalaxy6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Meryl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy6)</a> for the third time with the following parameters:</p>
+  <p><strong>Step 5</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Meryl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy6)</span> for the third time with the following parameters:</p>
   <ul>
     <li><em>“Operation type selector”</em>: <code class="language-plaintext highlighter-rouge">Generate histogram dataset</code>
       <ul>
@@ -1676,7 +1676,7 @@ the workflow we will be using for the analysis of our data takes collection as i
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-estimate-genome-properties"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Estimate genome properties</div>
 
-  <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2" title="GenomeScope tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgenomescope%2Fgenomescope%2F2.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GenomeScope</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0+galaxy2)</a> with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2" title="GenomeScope tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GenomeScope</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0+galaxy2)</span> with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input histogram file”</em>: <code class="language-plaintext highlighter-rouge">meryldb histogram</code></li>
     <li><em>Ploidy for model to use</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
@@ -1832,7 +1832,7 @@ the workflow we will be using for the analysis of our data takes collection as i
 
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-hi-c-phased-assembly-with-b-hifiasm-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hi-C-phased assembly with <b>hifiasm</b></div>
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0" title="Hifiasm tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhifiasm%2Fhifiasm%2F0.19.8%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Hifiasm</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.19.8+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0" title="Hifiasm tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Hifiasm</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.19.8+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Assembly mode”</em>: <code class="language-plaintext highlighter-rouge">Standard</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads”</em>: <code class="language-plaintext highlighter-rouge">HiFi_collection (trim)</code> (output of <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1857,7 +1857,7 @@ the workflow we will be using for the analysis of our data takes collection as i
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-gfa-to-fasta-conversion-for-hifiasm-hi-c-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: GFA to FASTA conversion for hifiasm Hi-C assembly</div>
 
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fgfastats%2Fgfastats%2F1.3.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input GFA file”</em>: select <code class="language-plaintext highlighter-rouge">Hap1 contigs graph</code> and the <code class="language-plaintext highlighter-rouge">Hap2 contigs graph</code> datasets</li>
     </ol>
@@ -1901,7 +1901,7 @@ the workflow we will be using for the analysis of our data takes collection as i
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-assembly-evaluation-with-gfastats"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly evaluation with gfastats</div>
 
-    <p><strong>Step 1</strong>: Run assembly statistics generation with <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fgfastats%2Fgfastats%2F1.3.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</a> using the following parameters:</p>
+    <p><strong>Step 1</strong>: Run assembly statistics generation with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</span> using the following parameters:</p>
 
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">Hap1 contigs graph</code> and the <code class="language-plaintext highlighter-rouge">Hap2 contigs graph</code> datasets</li>
@@ -1928,7 +1928,7 @@ Scaffold auN                0.00
 
     <p><br /></p>
 
-    <p><strong>Step 3</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcollection_column_join%2Fcollection_column_join%2F0.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</a> with the following parameters:</p>
+    <p><strong>Step 3</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</span> with the following parameters:</p>
 
     <p><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">Hap1 stats</code> and the <code class="language-plaintext highlighter-rouge">Hap2 stats</code> datasets. Keep all other settings as they are.</p>
 
@@ -1948,7 +1948,7 @@ Scaffold auN                0.00
 
     <p><br /></p>
 
-    <p><strong>Step 5</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_grep_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:</p>
+    <p><strong>Step 5</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">gfastats on hap1 and hap2 (full)</code></li>
       <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Don't Match</code></li>
@@ -1998,7 +1998,7 @@ Scaffold auN                0.00
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-assessing-assembly-completeness-with-busco"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing assembly completeness with BUSCO</div>
 
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0" title="Busco tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbusco%2Fbusco%2F5.5.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.5.0+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.5.0+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequences to analyze”</em>: <code class="language-plaintext highlighter-rouge">Hap1 contigs FASTA</code> and <code class="language-plaintext highlighter-rouge">Hap2 contigs FASTA</code></li>
       <li><em>“Lineage data source”</em>: <code class="language-plaintext highlighter-rouge">Use cached lineage data</code></li>
@@ -2050,7 +2050,7 @@ Scaffold auN                0.00
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-i-k-i-mer-based-evaluation-with-merqury"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <i>k</i>-mer based evaluation with Merqury</div>
 
-    <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3" title="Merqury tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmerqury%2Fmerqury%2F1.3%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merqury</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy3)</a> with the following parameters:</p>
+    <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3" title="Merqury tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merqury</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy3)</span> with the following parameters:</p>
 
     <ol>
       <li><em>“Evaluation mode”</em>: <code class="language-plaintext highlighter-rouge">Default mode</code></li>
@@ -2091,7 +2091,7 @@ Scaffold auN                0.00
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-pseudohaplotype-assembly-with-b-hifiasm-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Pseudohaplotype assembly with <b>hifiasm</b></div>
 
-    <p><strong>Step 1</strong>: Run  <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0" title="Hifiasm tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fhifiasm%2Fhifiasm%2F0.19.8%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Hifiasm</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.19.8+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run  <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0" title="Hifiasm tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Hifiasm</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.19.8+galaxy0)</span> with the following parameters:</p>
 
     <ol>
       <li><em>“Assembly mode”</em>: <code class="language-plaintext highlighter-rouge">Standard</code></li>
@@ -2135,7 +2135,7 @@ Scaffold auN                0.00
 
     <p><br /></p>
 
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fgfastats%2Fgfastats%2F1.3.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input GFA file”</em>: select <code class="language-plaintext highlighter-rouge">Primary contigs graph</code> and the <code class="language-plaintext highlighter-rouge">Alternate contigs graph</code> datasets</li>
       <li><em>“Tool mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assembly manipulation</code></li>
@@ -2168,7 +2168,7 @@ Scaffold auN                0.00
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-assembly-evaluation-with-gfastats-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly evaluation with gfastats</div>
 
-    <p><strong>Step 1</strong>: Run assembly statistics generation with <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fgfastats%2Fgfastats%2F1.3.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</a> using the following parameters:</p>
+    <p><strong>Step 1</strong>: Run assembly statistics generation with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</span> using the following parameters:</p>
 
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">Primary contigs graph</code> and the <code class="language-plaintext highlighter-rouge">Alternate contigs graph</code> datasets</li>
@@ -2196,7 +2196,7 @@ Scaffold auN               913050.77
 
     <p><br /></p>
 
-    <p><strong>Step 3</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcollection_column_join%2Fcollection_column_join%2F0.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</a> with the following parameters:</p>
+    <p><strong>Step 3</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</span> with the following parameters:</p>
 
     <p><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">Primary stats</code> and the <code class="language-plaintext highlighter-rouge">Alternate stats</code> datasets (these are from <strong>Step 2</strong> above). Keep all other setting as they are.</p>
 
@@ -2217,7 +2217,7 @@ Scaffold auN               913050.77
 
     <p><br /></p>
 
-    <p><strong>Step 5</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_grep_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:</p>
+    <p><strong>Step 5</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">gfastats on Pri and Alt (full)</code></li>
       <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Don't Match</code></li>
@@ -2267,7 +2267,7 @@ Scaffold auN               913050.77
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-assessing-assembly-completeness-with-busco-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing assembly completeness with BUSCO</div>
 
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0" title="Busco tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbusco%2Fbusco%2F5.5.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.5.0+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.5.0+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequences to analyze”</em>: <code class="language-plaintext highlighter-rouge">Primary contigs FASTA</code> and <code class="language-plaintext highlighter-rouge">Alternate contigs FASTA</code></li>
       <li><em>“Lineage data source”</em>: <code class="language-plaintext highlighter-rouge">Use cached lineage data</code></li>
@@ -2324,7 +2324,7 @@ Scaffold auN               913050.77
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-i-k-i-mer-based-evaluation-with-merqury-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <i>k</i>-mer based evaluation with Merqury</div>
 
-    <p>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3" title="Merqury tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmerqury%2Fmerqury%2F1.3%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merqury</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy3)</a> with the following parameters:</p>
+    <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3" title="Merqury tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merqury</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy3)</span> with the following parameters:</p>
 
     <ol>
       <li><em>“Evaluation mode”</em>: <code class="language-plaintext highlighter-rouge">Default mode</code></li>
@@ -2371,7 +2371,7 @@ Scaffold auN               913050.77
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-get-estimated-genome-size"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get estimated genome size</div>
 
-    <p><strong>Step 1</strong>: Open <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace parts of text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_find_and_replace%2F1.1.4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace parts of text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.4)</a>
+    <p><strong>Step 1</strong>: Open <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace parts of text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace parts of text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.4)</span>
 <br />
 <strong>Step 2</strong>: Scroll down to find <em>”+ Insert Find and Replace”</em> button and click it.
 <br />
@@ -2437,7 +2437,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-get-maximum-read-depth"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get maximum read depth</div>
 
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">model_params</code> (output of <strong>GenomeScope</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       <li>For “<em>1: Expressions</em>”:
@@ -2457,7 +2457,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 2</strong>: Rename it as <code class="language-plaintext highlighter-rouge">Parsing purge parameters</code></p>
 
-    <p><strong>Step 3</strong>: Run  <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with the following parameters:</p>
+    <p><strong>Step 3</strong>: Run  <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Parsing purge parameters</code></li>
       <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code></li>
@@ -2488,7 +2488,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p>Now let’s get the transition parameter.</p>
 
-    <p><strong>Step 5</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> with the following parameters:</p>
+    <p><strong>Step 5</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Parsing purge parameters</code></li>
       <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code></li>
@@ -2528,7 +2528,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-collapse-the-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Collapse the collection</div>
 
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</span> with the following parameters:</p>
     <ul>
       <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>:<code class="language-plaintext highlighter-rouge">HiFi_collection (trim)</code></li>
     </ul>
@@ -2541,7 +2541,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-map-the-reads-to-contigs-with-b-minimap2-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Map the reads to contigs with <b>Minimap2</b></div>
 
-    <p><em>*Step 1</em>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Map with minimap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fminimap2%2Fminimap2%2F2.17%2Bgalaxy4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy4)</a> with the following parameters:</p>
+    <p><em>*Step 1</em>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Map with minimap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy4)</span> with the following parameters:</p>
     <ol>
       <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Primary contigs FASTA</code></li>
@@ -2558,7 +2558,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-read-depth-analisys"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read-depth analisys</div>
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpurge_dups%2Fpurge_dups%2F1.2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Function mode”</em>: <code class="language-plaintext highlighter-rouge">Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PAF input file”</em>: <code class="language-plaintext highlighter-rouge">Reads mapped to contigs</code></li>
@@ -2588,7 +2588,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-purge-dups-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: purge_dups pipeline</div>
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpurge_dups%2Fpurge_dups%2F1.2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Function mode”</em>: <code class="language-plaintext highlighter-rouge">split assembly FASTA file by 'N's (split_fa)</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Primary contigs FASTA</code></li>
@@ -2596,7 +2596,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 2</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">Split FASTA</code></p>
 
-    <p><strong>Step 3</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Map with minimap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fminimap2%2Fminimap2%2F2.17%2Bgalaxy4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy4)</a> with the following parameters:</p>
+    <p><strong>Step 3</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Map with minimap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy4)</span> with the following parameters:</p>
     <ol>
       <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Split FASTA</code></li>
@@ -2641,7 +2641,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-resolution-of-haplotigs-and-overlaps"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Resolution of haplotigs and overlaps</div>
 
-    <p><strong>Step 1</strong>: <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpurge_dups%2Fpurge_dups%2F1.2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Purge haplotigs and overlaps for an assembly (purge_dups)</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PAF input file”</em>: <code class="language-plaintext highlighter-rouge">Self-homology map primary</code></li>
@@ -2651,7 +2651,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 2</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">purge_dups BED</code></p>
 
-    <p><strong>Step 3</strong>: <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpurge_dups%2Fpurge_dups%2F1.2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 3</strong>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Obtain sequences after purging (get_seqs)</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Primary contigs FASTA</code></li>
@@ -2669,7 +2669,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-merge-the-purged-sequences-and-the-alternate-contigs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Merge the purged sequences and the Alternate contigs</div>
 
-    <p><strong>Step 1</strong>: <a class="tool" data-tool="cat1" title="Concatenate datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dcat1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: <span class="tool" data-tool="cat1" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Alternate contigs FASTA</code></li>
       <li>In <em>“Dataset”</em>:</li>
@@ -2692,7 +2692,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-process-the-alternate-assembly-with-i-purge-dups-i"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Process the alternate assembly with <i>purge_dups</i></div>
 
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Map with minimap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fminimap2%2Fminimap2%2F2.17%2Bgalaxy4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy4)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Map with minimap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy4)</span> with the following parameters:</p>
     <ol>
       <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Alternate contigs full</code></li>
@@ -2704,7 +2704,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 2</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">Reads mapped to contigs alternate</code></p>
 
-    <p><strong>Step 3</strong>: <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpurge_dups%2Fpurge_dups%2F1.2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 3</strong>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Function mode”</em>: <code class="language-plaintext highlighter-rouge">Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PAF input file”</em>: <code class="language-plaintext highlighter-rouge">Reads mapped to contigs alternate</code></li>
@@ -2715,7 +2715,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 4</strong>: Rename the outputs as <code class="language-plaintext highlighter-rouge">PBCSTAT base coverage alternate</code>, <code class="language-plaintext highlighter-rouge">Histogram plot alternate</code> and <code class="language-plaintext highlighter-rouge">Calcuts cutoff alternate</code>.</p>
 
-    <p><strong>Step 5</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpurge_dups%2Fpurge_dups%2F1.2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 5</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Function mode”</em>: <code class="language-plaintext highlighter-rouge">split assembly FASTA file by 'N's (split_fa)</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Alternate contigs full</code></li>
@@ -2723,7 +2723,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 5</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">Split FASTA alternate</code></p>
 
-    <p><strong>Step 6</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Map with minimap2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fminimap2%2Fminimap2%2F2.17%2Bgalaxy4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy4)</a> with the following parameters:</p>
+    <p><strong>Step 6</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4" title="Map with minimap2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with minimap2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.17+galaxy4)</span> with the following parameters:</p>
     <ol>
       <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Split FASTA alternate</code></li>
@@ -2735,7 +2735,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 7</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">Self-homology map alternate</code></p>
 
-    <p><strong>Step 8</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpurge_dups%2Fpurge_dups%2F1.2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 8</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Purge haplotigs and overlaps for an assembly (purge_dups)</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PAF input file”</em>: <code class="language-plaintext highlighter-rouge">Self-homology map alternate</code></li>
@@ -2745,7 +2745,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 9</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">purge_dups BED alternate</code></p>
 
-    <p><strong>Step 10</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpurge_dups%2Fpurge_dups%2F1.2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 10</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0" title="Purge overlaps tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Purge overlaps</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><em>“Select the purge_dups function”</em>: <code class="language-plaintext highlighter-rouge">Obtain sequences after purging (get_seqs)</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Alternate contigs full</code></li>
@@ -2763,7 +2763,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-evaluating-the-purged-assemblies"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Evaluating the purged assemblies</div>
 
-    <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fgfastats%2Fgfastats%2F1.3.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">Primary contigs purged</code> and the <code class="language-plaintext highlighter-rouge">Alternate contigs purged</code> datasets</li>
       <li><em>“Expected genome size”</em>: <code class="language-plaintext highlighter-rouge">11747160</code> (remember we calculated this value earlier, so it should be in your history!)</li>
@@ -2771,14 +2771,14 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 2</strong>:. Rename the outputs as <code class="language-plaintext highlighter-rouge">Primary purged stats</code> and <code class="language-plaintext highlighter-rouge">Alternate purged stats</code></p>
 
-    <p><strong>Step 3</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcollection_column_join%2Fcollection_column_join%2F0.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</a> with the following parameters:</p>
+    <p><strong>Step 3</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Column join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3)</span> with the following parameters:</p>
     <ul>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">Primary purged stats</code> and the <code class="language-plaintext highlighter-rouge">Alternate purged stats</code> datasets</li>
     </ul>
 
     <p><strong>Step 4</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">gfastats on purged pri and alt (full)</code></p>
 
-    <p><strong>Step 5</strong>: <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_grep_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> with the following parameters:</p>
+    <p><strong>Step 5</strong>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">gfastats on purged pri and alt (full)</code></li>
       <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Don't Match</code></li>
@@ -2788,7 +2788,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
     <p><strong>Step 6</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">gfastats on purged pri and alt contigs</code></p>
 
-    <p><strong>Step 7</strong>: <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0" title="Busco tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbusco%2Fbusco%2F5.5.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.5.0+galaxy0)</a> with the following parameters:</p>
+    <p><strong>Step 7</strong>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.5.0+galaxy0)</span> with the following parameters:</p>
     <ol>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequences to analyze”</em>: <code class="language-plaintext highlighter-rouge">Primary contigs purged</code></li>
       <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (DNA)</code></li>
@@ -2798,7 +2798,7 @@ Read Error Rate               0.000943206%      0.000943206%
       <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">short summary text</code> and <code class="language-plaintext highlighter-rouge">summary image</code></li>
     </ol>
 
-    <p><strong>Step 8</strong>: <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3" title="Merqury tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmerqury%2Fmerqury%2F1.3%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merqury</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy3)</a> with the following parameters:</p>
+    <p><strong>Step 8</strong>: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3" title="Merqury tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merqury</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy3)</span> with the following parameters:</p>
     <ol>
       <li><em>“Evaluation mode”</em>: <code class="language-plaintext highlighter-rouge">Default mode</code></li>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“k-mer counts database”</em>: <code class="language-plaintext highlighter-rouge">Merged meryldb</code></li>
@@ -2891,7 +2891,7 @@ Read Error Rate               0.000943206%      0.000943206%
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-bionano-hybrid-scaffolding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Bionano hybrid scaffolding</div>
 
-  <p><strong>Step1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.7.0+galaxy3" title="Bionano Hybrid Scaffold tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fbionano_scaffold%2Fbionano_scaffold%2F3.7.0%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bionano Hybrid Scaffold</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7.0+galaxy3)</a> with the following parameters:</p>
+  <p><strong>Step1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.7.0+galaxy3" title="Bionano Hybrid Scaffold tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bionano Hybrid Scaffold</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.7.0+galaxy3)</span> with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“NGS FASTA”</em>: <code class="language-plaintext highlighter-rouge">Hap1 contigs FASTA</code> generated during <a href="#hic-phased-assembly-with-hifiasm">hifiasm contigging</a>.</li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BioNano CMAP”</em>: <code class="language-plaintext highlighter-rouge">Bionano_dataset</code> we just uploaded</li>
@@ -2906,7 +2906,7 @@ Read Error Rate               0.000943206%      0.000943206%
     <p>If your data are not associated with VGP, make sure that the configuration mode fits with your samples.</p>
   </blockquote>
 
-  <p><strong>Step 2</strong>: Run <a class="tool" data-tool="cat1" title="Concatenate datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dcat1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></a> with the following parameters:</p>
+  <p><strong>Step 2</strong>: Run <span class="tool" data-tool="cat1" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></span> with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">NGScontigs scaffold NCBI trimmed</code> (output of <strong>Bionano Hybrid Scaffold</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em></li>
@@ -2924,7 +2924,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <div class="box-title hands-on-title" id="hands-on-bionano-assembly-evaluation-gfastats"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Bionano assembly evaluation gfastats</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fgfastats%2Fgfastats%2F1.3.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gfastats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.6+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: select <code class="language-plaintext highlighter-rouge">Primary assembly bionano</code></li>
         <li><em>“Expected genome size”</em>: <code class="language-plaintext highlighter-rouge">11747160</code> (remember we calculated this value earlier, so it should be in your history!)</li>
@@ -2978,7 +2978,7 @@ Read Error Rate               0.000943206%      0.000943206%
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-mapping-hi-c-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mapping Hi-C reads</div>
 
-  <p><strong>Step 1</strong>: Run <a class="tool" data-tool="ttoolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dttoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbwa_mem2%2Fbwa_mem2%2F2.2.1%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</a> with the following parameters:</p>
+  <p><strong>Step 1</strong>: Run <span class="tool" data-tool="ttoolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> with the following parameters:</p>
   <ol>
     <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Hap1 assembly bionano</code></li>
@@ -2993,7 +2993,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
   <p>Now let’s do the same for reverse Hi-C reads:</p>
 
-  <p><strong>Step 3</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbwa_mem2%2Fbwa_mem2%2F2.2.1%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</a> with the following parameters:</p>
+  <p><strong>Step 3</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> with the following parameters:</p>
   <ol>
     <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Hap1 assembly bionano</code></li>
@@ -3007,7 +3007,7 @@ Read Error Rate               0.000943206%      0.000943206%
   <p><strong>Step 4</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">BAM reverse</code></p>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1" title="Filter and merge tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbellerophon%2Fbellerophon%2F1.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter and merge</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0+galaxy1)</a> chimeric reads from Arima Genomics with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1" title="Filter and merge tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter and merge</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0+galaxy1)</span> chimeric reads from Arima Genomics with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First set of reads”</em>: <code class="language-plaintext highlighter-rouge">BAM forward</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of reads”</em>: <code class="language-plaintext highlighter-rouge">BAM  reverse</code></li>
@@ -3037,7 +3037,7 @@ Read Error Rate               0.000943206%      0.000943206%
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generate-a-contact-map-with-b-pretextmap-b-and-b-pretext-snapshot-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate a contact map with <b>PretextMap</b> and <b>Pretext Snapshot</b></div>
 
-  <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0" title="PretextMap tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpretext_map%2Fpretext_map%2F0.1.9%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PretextMap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9+galaxy0)</a> with the following parameters:</p>
+  <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0" title="PretextMap tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PretextMap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9+galaxy0)</span> with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">BAM Hi-C reads</code></li>
     <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
@@ -3045,7 +3045,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
   <p><strong>Step 2</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">PretextMap output</code></p>
 
-  <p><strong>Step 3</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1" title="Pretext Snapshot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpretext_snapshot%2Fpretext_snapshot%2F0.0.3%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pretext Snapshot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3+galaxy1)</a> with the following parameters:</p>
+  <p><strong>Step 3</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1" title="Pretext Snapshot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pretext Snapshot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3+galaxy1)</span> with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">PretextMap output</code></li>
     <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
@@ -3085,7 +3085,7 @@ Read Error Rate               0.000943206%      0.000943206%
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-yahs-scaffolding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: YaHS scaffolding</div>
 
-  <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/yahs/yahs/1.2a.2+galaxy1" title="YaHS tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fyahs%2Fyahs%2F1.2a.2%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>YaHS</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2a.2+galaxy1)</a> with the following parameters:</p>
+  <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/yahs/yahs/1.2a.2+galaxy1" title="YaHS tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>YaHS</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2a.2+galaxy1)</span> with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input contig sequences”</em>: <code class="language-plaintext highlighter-rouge">Hap1 assembly bionano</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file of Hi-C reads to contigs</em>“*: <code class="language-plaintext highlighter-rouge">BAM Hi-C reads</code></li>
@@ -3104,7 +3104,7 @@ Read Error Rate               0.000943206%      0.000943206%
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-mapping-reads-against-the-scaffold"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mapping reads against the scaffold</div>
 
-  <p><strong>Step 1</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbwa_mem2%2Fbwa_mem2%2F2.2.1%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</a> with the following parameters:</p>
+  <p><strong>Step 1</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> with the following parameters:</p>
   <ol>
     <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">YaHS Scaffolds FASTA</code></li>
@@ -3117,7 +3117,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
   <p><strong>Step 2</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">BAM forward YaHS</code></p>
 
-  <p><strong>Step 3</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbwa_mem2%2Fbwa_mem2%2F2.2.1%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</a> with the following parameters:</p>
+  <p><strong>Step 3</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1" title="BWA-MEM2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BWA-MEM2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> with the following parameters:</p>
   <ol>
     <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">YaHS Scaffolds FASTA</code></li>
@@ -3130,7 +3130,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
   <p><strong>Step 4</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">BAM reverse YaHS</code></p>
 
-  <p><strong>Step 5</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1" title="Filter and merge tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbellerophon%2Fbellerophon%2F1.0%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter and merge</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0+galaxy1)</a> chimeric reads from Arima Genomics with the following parameters:</p>
+  <p><strong>Step 5</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1" title="Filter and merge tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter and merge</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0+galaxy1)</span> chimeric reads from Arima Genomics with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First set of reads”</em>: <code class="language-plaintext highlighter-rouge">BAM forward YaHS</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of reads”</em>: <code class="language-plaintext highlighter-rouge">BAM reverse YaHS</code></li>
@@ -3138,7 +3138,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
   <p><strong>Step 6</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">BAM Hi-C reads SALSA2</code></p>
 
-  <p><strong>Step 7</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0" title="PretextMap tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpretext_map%2Fpretext_map%2F0.1.9%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PretextMap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9+galaxy0)</a> with the following parameters:</p>
+  <p><strong>Step 7</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0" title="PretextMap tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PretextMap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.9+galaxy0)</span> with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">BAM Hi-C reads YaHS</code></li>
     <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
@@ -3146,7 +3146,7 @@ Read Error Rate               0.000943206%      0.000943206%
 
   <p><strong>Step 8</strong>: Rename the output as <code class="language-plaintext highlighter-rouge">PretextMap output YaHS</code></p>
 
-  <p><strong>Step 9</strong>: Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1" title="Pretext Snapshot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fpretext_snapshot%2Fpretext_snapshot%2F0.0.3%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pretext Snapshot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3+galaxy1)</a> with the following parameters:</p>
+  <p><strong>Step 9</strong>: Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1" title="Pretext Snapshot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pretext Snapshot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3+galaxy1)</span> with the following parameters:</p>
   <ol>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">PretextMap output YaHS</code></li>
     <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">png</code></li>
@@ -3654,7 +3654,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3682,7 +3682,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         

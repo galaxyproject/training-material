@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -602,7 +602,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Pox viruses (*Poxviridae*) are a large family of viruses, and members of it have various vertebrate and arthropod species as their natural hosts. The most widely known species in the family are the now extinct variola virus from the genus *orthopoxvirus* as the cause of smallpox, and vaccinia virus, a related, likely horsepox virus, which served as the source for the smallpox vaccine that allowed eradication of that disease."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1399,7 +1399,7 @@ This gives us the opportunity to evaluate the correctness of our analysis by com
 
       <ol>
         <li>Copy the links above</li>
-        <li>Open the <a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> Manager</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> Manager</li>
         <li>In the top row of tabs select <strong>Rule-based</strong></li>
         <li>Set <strong>Upload data as</strong> to <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
         <li>Paste the copied links into the text field on the right</li>
@@ -1446,7 +1446,7 @@ This gives us the opportunity to evaluate the correctness of our analysis by com
 Just click on the <strong>Close</strong> button of the information pop-up window if it is still open when you are ready to proceed.</p>
     </li>
     <li>
-      <p><a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> the <strong>pool2</strong> sequenced reads files of the same samples using the corresponding metadata:</p>
+      <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the <strong>pool2</strong> sequenced reads files of the same samples using the corresponding metadata:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20L81    ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR151/073/SRR15145273/SRR15145273_1.fastq.gz
 20L81    ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR151/073/SRR15145273/SRR15145273_2.fastq.gz
@@ -1490,13 +1490,13 @@ These are tags starting with <code class="language-plaintext highlighter-rouge">
 
       <ol>
         <li>
-          <p><a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> the reference to your history via the link above and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
+          <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the reference to your history via the link above and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
 
           <!--SNIPPET-->
           <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
           <p><!--END_SNIPPET--></p>
         </li>
-        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_line%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> to simplify the reference sequence name
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> to simplify the reference sequence name
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: the uploaded reference sequence from the ENA</li>
             <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1. Replacement”</em>:
@@ -1517,7 +1517,7 @@ These are tags starting with <code class="language-plaintext highlighter-rouge">
       </ol>
     </li>
     <li>
-      <p><a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> the primer scheme information in <a href="http://www.genome.ucsc.edu/FAQ/FAQformat.html#format1">BED</a> format</p>
+      <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the primer scheme information in <a href="http://www.genome.ucsc.edu/FAQ/FAQformat.html#format1">BED</a> format</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NC_003027.1    235       264       CaPV-V1_1_LEFT      pool1a    +
 NC_003027.1    6789      6819      CaPV-V1_2_LEFT      pool1b    +
@@ -1634,7 +1634,7 @@ Likewise, for the “pool2” read mapping, we would like to use a reference ver
 
       <p>You can <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> inspect the two masked reference datasets by eye, which quickly reveals that one sequence has its beginning N-masked, while for the other it is the end, but it is hard to find out whether the regions are exactly right this way. Luckily, we can use a tool to determine the exact extent of Ns for each dataset:</p>
       <ol>
-        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0" title="Fasta regular expression finder tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fmbernt%2Ffasta_regex_finder%2Ffasta_regex_finder%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Fasta regular expression finder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0" title="Fasta regular expression finder tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Fasta regular expression finder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span>
           <ul>
             <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input”</em>: select the two masked reference datasets; output of the masking workflow run</li>
             <li>
@@ -1699,7 +1699,7 @@ Also note that amplicon 12 is contained in both pools and the masking takes this
   <div class="box-title hands-on-title" id="hands-on-qc-and-read-trimming-filtering-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: QC and read trimming/filtering with fastp</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffastp%2Ffastp%2F0.23.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.2+galaxy0)</a> on the collection of <strong>pool1</strong> reads
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.2+galaxy0)</span> on the collection of <strong>pool1</strong> reads
       <ul>
         <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code></li>
         <li><em>“Select paired collection(s)”</em>: the uploaded collection of <strong>pool1</strong> reads</li>
@@ -1761,7 +1761,7 @@ quality standards that are good enough for many (including training) purposes.</
     <li>
       <p>Now repeat the steps above for the collection of pool 2 reads.</p>
 
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffastp%2Ffastp%2F0.23.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.2+galaxy0)</a> on the collection of <strong>pool2</strong> reads</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.2+galaxy0)</span> on the collection of <strong>pool2</strong> reads</p>
       <ul>
         <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code></li>
         <li><em>“Select paired collection(s)”</em>: the uploaded collection of <strong>pool2</strong> reads</li>
@@ -1806,7 +1806,7 @@ quality standards that are good enough for many (including training) purposes.</
   <div class="box-title hands-on-title" id="hands-on-read-mapping-and-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read mapping and quality control</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</a> for <strong>pool1</strong> data
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</span> for <strong>pool1</strong> data
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
           <ul>
@@ -1835,7 +1835,7 @@ quality standards that are good enough for many (including training) purposes.</
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</a> for <strong>pool2</strong> data
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.2)</span> for <strong>pool2</strong> data
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
           <ul>
@@ -1879,7 +1879,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
   <div class="box-title hands-on-title" id="hands-on-reorganize-the-data-and-merge-across-pools-within-samples"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Reorganize the data and merge across pools within samples</div>
 
   <ol>
-    <li><a class="tool" data-tool="__ZIP_COLLECTION__" title="Zip collections tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__ZIP_COLLECTION__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Zip collections</strong></a> with the following parameters
+    <li><span class="tool" data-tool="__ZIP_COLLECTION__" title="Zip collections tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Zip collections</strong></span> with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input 1”</em>: mapped reads <code class="language-plaintext highlighter-rouge">#pool1</code>; output of <strong>BWA-MEM</strong> run on the pool1 data</li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input 2”</em>: mapped reads <code class="language-plaintext highlighter-rouge">#pool2</code>; output of <strong>BWA-MEM</strong> run on the pool2 data</li>
@@ -1887,7 +1887,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
 
       <p>This combines the two separate collections into one nested structure, but, unfortunately, that structure is not organized the way we want it because <strong>Zip collections</strong> creates lists of pairs, i.e. list collections that hold paired collections inside. Now we still need to turn the list of pairs into a list of lists.</p>
     </li>
-    <li><a class="tool" data-tool="__APPLY_RULES__" title="Apply rules tool" href="https://my.galaxy.training/?path=%3Ftool_id%3D__APPLY_RULES__"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Apply rules</strong></a> with the following parameters
+    <li><span class="tool" data-tool="__APPLY_RULES__" title="Apply rules tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Apply rules</strong></span> with the following parameters
       <ul>
         <li><em>“Input Collection”</em>: zipped collection of mapped reads from both pools</li>
         <li>Under <em>“Rules”</em>
@@ -1934,7 +1934,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
 
       <p>This will reorganize the data once more, this time into the desired structure, which will give us the correct merge result.</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_merge/samtools_merge/1.15.1+galaxy0" title="Samtools merge tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_merge%2Fsamtools_merge%2F1.15.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools merge</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_merge/samtools_merge/1.15.1+galaxy0" title="Samtools merge tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools merge</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignments in BAM format”</em>: the reorganized collection; output of <strong>Apply rules</strong></li>
         <li><em>“Make @RG headers unique”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -2004,7 +2004,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
   <div class="box-title hands-on-title" id="hands-on-mapped-reads-filtering-and-trimming-and-quality-control-for-mappings"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mapped reads filtering and trimming and quality control for mappings</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_view%2Fsamtools_view%2F1.15.1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</a> for filtering the mapped reads
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools view</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.15.1+galaxy0)</span> for filtering the mapped reads
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“SAM/BAM/CRAM data set”</em>: collection of merged mapped reads; output of <strong>Samtools merge</strong></li>
         <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code></li>
@@ -2017,7 +2017,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_trim/ivar_trim/1.4.2+galaxy0" title="ivar trim tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fivar_trim%2Fivar_trim%2F1.4.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ivar trim</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.4.2+galaxy0)</a> for trimming of amplicon primers from mapped reads
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_trim/ivar_trim/1.4.2+galaxy0" title="ivar trim tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ivar trim</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.4.2+galaxy0)</span> for trimming of amplicon primers from mapped reads
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: collection of filtered mapped reads BAM dataset; output of <strong>Samtools view</strong></li>
         <li><em>“Source of primer information”</em>: <code class="language-plaintext highlighter-rouge">History</code>
@@ -2034,7 +2034,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3" title="QualiMap BamQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fqualimap_bamqc%2Fqualimap_bamqc%2F2.2.2d%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>QualiMap BamQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.2d+galaxy3)</a> for mapped reads quality control
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3" title="QualiMap BamQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>QualiMap BamQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.2d+galaxy3)</span> for mapped reads quality control
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Mapped reads input dataset”</em>: filtered and trimmed mapped reads BAM dataset; output of <strong>ivar trim</strong></li>
         <li><em>“Skip duplicate reads”</em>: <code class="language-plaintext highlighter-rouge">Deselect all</code></li>
@@ -2102,7 +2102,7 @@ The “Coverage Histogram” plot also reveals that the coverage distribution fo
   <div class="box-title hands-on-title" id="hands-on-consensus-building"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Consensus building</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0" title="ivar consensus tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fivar_consensus%2Fivar_consensus%2F1.4.2%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ivar consensus</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.4.2+galaxy0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0" title="ivar consensus tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ivar consensus</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.4.2+galaxy0)</span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: collection of trimmed mapped reads BAM dataset; output of <strong>ivar trim</strong></li>
         <li><em>“Minimum frequency threshold”</em>: <code class="language-plaintext highlighter-rouge">0.7</code></li>
@@ -2146,7 +2146,7 @@ The “Coverage Histogram” plot also reveals that the coverage distribution fo
   <div class="box-title hands-on-title" id="hands-on-check-consensus-sequences-for-unresolved-bases"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check consensus sequences for unresolved bases</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0" title="Fasta regular expression finder tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fmbernt%2Ffasta_regex_finder%2Ffasta_regex_finder%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Fasta regular expression finder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0" title="Fasta regular expression finder tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Fasta regular expression finder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: collection of consensus sequences; output of <strong>ivar consensus</strong></li>
         <li>
@@ -2184,7 +2184,7 @@ Hmm, these values are surrounding the binding site of the last primer in the pri
 
           <p>It is possible that the consensus sequences incorporate deletions, i.e. it could be that they are shorter than the reference we have used for mapping. So obviously the <strong>consensus sequences have a length of 150,721 bases</strong>, but what is the length of the reference?</p>
 
-          <p>There are Galaxy tools for determining the length of a FASTA sequence. For example, you could use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.3" title="Compute sequence length tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_compute_length%2Ffasta_compute_length%2F1.0.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute sequence length</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</a> on the <code class="language-plaintext highlighter-rouge">LSDV reference</code> dataset, but we have obtained the value before when we used the <strong>Fasta regular expression finder</strong> on the reference masked for pool 1 mapping. So lets try to find that output in the history and see what it says:</p>
+          <p>There are Galaxy tools for determining the length of a FASTA sequence. For example, you could use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.3" title="Compute sequence length tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute sequence length</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> on the <code class="language-plaintext highlighter-rouge">LSDV reference</code> dataset, but we have obtained the value before when we used the <strong>Fasta regular expression finder</strong> on the reference masked for pool 1 mapping. So lets try to find that output in the history and see what it says:</p>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Chrom         Start    End       Name                           Score    Strand    ThickStart
 AF325528.1    80201    150773    AF325528.1_80201_150773_for    70572    +         N[1,70572]
@@ -2232,13 +2232,13 @@ and on these shorter sequences the binding site of the 3’-most primer would be
 
       <ol>
         <li>
-          <p><a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> the reference to your history via the link above and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
+          <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the reference to your history via the link above and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
 
           <!--SNIPPET-->
           <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
           <p><!--END_SNIPPET--></p>
         </li>
-        <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_line%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> to simplify the reference sequence name
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> to simplify the reference sequence name
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: the uploaded reference sequence from the ENA</li>
             <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1. Replacement”</em>:
@@ -2258,7 +2258,7 @@ and on these shorter sequences the binding site of the 3’-most primer would be
         </li>
       </ol>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tail-to-head (cat) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cat%2F0.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head (cat)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.1)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tail-to-head (cat) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head (cat)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.1)</span>
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Datasets to concatenate”</em>: the <code class="language-plaintext highlighter-rouge">Herbivac sequence</code>; renamed output of <strong>Replace</strong></li>
         <li>In <em>“Dataset”</em>:
@@ -2281,7 +2281,7 @@ and on these shorter sequences the binding site of the 3’-most primer would be
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-pick-the-right-concatenate-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-pick-the-right-concatenate-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Pick the right Concatenate tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>On most Galaxy servers you will find two <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Concatenate datasets</strong> tools installed:</p>   <ol>   <li><strong>Concatenate datasets</strong> tail-to-head</li>   <li><strong>Concatenate datasets</strong> tail-to-head (cat)</li> </ol>   <p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> The tool you want to use at this step is <code class="language-plaintext highlighter-rouge">#2</code>, but if you are interested in the details, here is why:</p>   <p>The two tools have nearly identical interfaces, but behave differently in certain situations, specifically:</p>   <ul>   <li>     <p>The second tool, the one with “(cat)” in its name, simply concatenates everything you give to it into a single output dataset.</p>     <p>Whether you give it multiple datasets or a collection as the first parameter, or some datasets as the first and some others as the second parameter, it will always concatenate them all. In fact, the only reason for having multiple parameters for this tool is that by providing inputs through multiple parameters, you can make sure they are concatenated in the order you pass them in.</p>   </li>   <li>     <p>The first tool, on the other hand, will only ever concatenate inputs provided through <em>different</em> parameters.</p>     <p>This tool allows you to specify an arbitrary number of <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> single datasets, but if you also want to use <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> multiple datasets or <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> a collection for some of the Dataset parameters, then all of these need to be of the same type (multiple datasets <em>or</em> collections) and have the same number of inputs.</p>     <p>Now depending on the inputs, one of the following behaviors will occur:</p>     <ul>       <li>If all the different inputs are <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> single datasets, the tool will concatenate them all and produce a single output dataset.</li>       <li>If all the different inputs are specified <em>either</em> as <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> multiple datasets <em>or</em> as <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span>, and all have the same number of datasets, then the tool will concatenate the first datasets of each input parameter, the second datasets of each input parameter, the third, etc., and produce an output collection with as many elements as there are inputs per Dataset parameter.</li>       <li>In extension of the above, if <em>some</em> additional inputs are provided as <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> single datasets, the content of these will be recycled and be reused in the concatenation of all the nth elements of the other parameters.</li>     </ul>   </li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0" title="MAFFT tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Frnateam%2Fmafft%2Frbc_mafft%2F7.508%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.508+galaxy0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0" title="MAFFT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.508+galaxy0)</span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to align”</em>: Multi-fasta dataset with four sequences; output of <strong>Concatenate</strong></li>
         <li><em>“Data type”</em>: <code class="language-plaintext highlighter-rouge">Nucleic acids</code></li>
@@ -2327,7 +2327,7 @@ and on these shorter sequences the binding site of the 3’-most primer would be
   <div class="box-title hands-on-title" id="hands-on-generate-list-of-snvs-between-aligned-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate list of SNVs between aligned sequences</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ucsc_fatovcf/fatovcf/426+galaxy0" title="faToVcf tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fucsc_fatovcf%2Ffatovcf%2F426%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>faToVcf</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 426+galaxy0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ucsc_fatovcf/fatovcf/426+galaxy0" title="faToVcf tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>faToVcf</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 426+galaxy0)</span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA Alignment”</em>: multiple-sequence alignment; output of <strong>MAFFT</strong></li>
         <li><em>“Include positions without defined ALT allele”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2426,7 +2426,7 @@ The MZ577076.1 Genbank sequence is reported to have a length of 150,664 bases so
   <div class="box-title hands-on-title" id="hands-on-checking-two-sequences-for-identity"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Checking two sequences for identity</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_info/0.1.8_1" title="MiModD File Information tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fwolma%2Fmimodd_main%2Fmimodd_info%2F0.1.8_1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MiModD File Information</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.8_1)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_info/0.1.8_1" title="MiModD File Information tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MiModD File Information</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.8_1)</span>
       <ul>
         <li><em>“Input is a”</em>: <code class="language-plaintext highlighter-rouge">Dataset in history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input dataset”</em>: collection of consensus sequences; output of <strong>ivar consensus</strong></li>
@@ -2792,7 +2792,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2820,7 +2820,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

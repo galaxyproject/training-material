@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -558,7 +558,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Synthetic biology is a novel engineering discipline which requires computational tools for the design of metabolic pathways for the production of chemicals such as SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}). "
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1041,7 +1041,7 @@ The tool provides several scores that can be combined in order to define an over
   <div class="box-title hands-on-title" id="hands-on-annotate-enzymes-with-uniprot-ids-from-a-sbml-pathway"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotate enzymes with Uniprot IDs from a SBML pathway</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0" title="Selenzyme tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Fselenzy%2Fselenzy-wrapper%2F0.2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Selenzyme</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</a> with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0" title="Selenzyme tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Selenzyme</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pathway (SBML)”</em>: Select <code class="language-plaintext highlighter-rouge">pathway.xml</code> from your current history</li>
         <li>In <em>“Advanced Options”</em>:
@@ -1097,7 +1097,7 @@ The tool provides several scores that can be combined in order to define an over
   <div class="box-title hands-on-title" id="hands-on-generate-genetic-constructs-from-the-previously-annotated-sbml-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate genetic constructs from the previously annotated SBML file</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4" title="BasicDesign tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Frpbasicdesign%2Frpbasicdesign%2F0.3.4"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BasicDesign</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.4)</a> with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4" title="BasicDesign tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BasicDesign</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.4)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“rpSBML file”: <code class="language-plaintext highlighter-rouge">uniprot_ids</code> (output of <strong>Selenzyme</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in xml format)</em></li>
         <li>In <em>“Advanced Options”</em>:
@@ -1143,7 +1143,7 @@ The tool provides several scores that can be combined in order to define an over
   <div class="box-title hands-on-title" id="hands-on-generate-dna-bot-python-scripts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate DNA Bot python scripts</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0" title="DNA-Bot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Ftduigou%2Fdnabot%2Fdnabot%2F3.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DNA-Bot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.0)</a> with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0" title="DNA-Bot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DNA-Bot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source Construct”</em>: <code class="language-plaintext highlighter-rouge">Constructs</code> (output of <strong>BasicDesign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Plate files”</em>: Select these two files: <code class="language-plaintext highlighter-rouge">User parts plate</code> (output of <strong>BasicDesign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">Biolegio plate</code> (output of <strong>BasicDesign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) with <strong>Multiple datasets</strong>.</li>
@@ -1427,7 +1427,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1455,7 +1455,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

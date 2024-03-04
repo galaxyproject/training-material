@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -529,7 +529,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant's chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes ({% cite Rebolledo-Jaramillo2014 %}, {% cite Li2015 %})."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1104,7 +1104,7 @@ https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
   <div class="box-title hands-on-title" id="hands-on-assess-quality-of-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assess quality of data</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</a> on each of the four FASTQ datasets with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span> on each of the four FASTQ datasets with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: all 4 FASTQ datasets selected with <strong>Multiple datasets</strong></li>
       </ul>
@@ -1129,7 +1129,7 @@ https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
   <div class="box-title hands-on-title" id="hands-on-map-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Map reads</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.1)</a> to map the reads to the reference genome with the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.17.1)</span> to map the reads to the reference genome with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
@@ -1173,7 +1173,7 @@ By setting <strong>Set read groups information</strong> to <code class="language
   <div class="box-title hands-on-title" id="hands-on-merge-multiple-datasets-into-one"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Merge multiple datasets into one</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="MergeSAMFiles tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fpicard%2Fpicard_MergeSamFiles%2F2.18.2.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MergeSAMFiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.1)</a> to merge the BAM datasets with the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="MergeSAMFiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MergeSAMFiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.1)</span> to merge the BAM datasets with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: select both BAM datasets produced by <strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Select validation stringency”</em>: <code class="language-plaintext highlighter-rouge">Lenient</code></li>
@@ -1201,7 +1201,7 @@ By setting <strong>Set read groups information</strong> to <code class="language
   <div class="box-title hands-on-title" id="hands-on-de-duplicate-mapped-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: De-duplicate mapped data</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="MarkDuplicates tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fpicard%2Fpicard_MarkDuplicates%2F2.18.2.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MarkDuplicates</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.2)</a> to de-duplicate the merged BAM datasets with the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="MarkDuplicates tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MarkDuplicates</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.2)</span> to de-duplicate the merged BAM datasets with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: select the merged BAM dataset produced by <strong>MergeSAMFiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The scoring strategy for choosing the non-duplicate among candidates”</em>: <code class="language-plaintext highlighter-rouge">SUM_OF_BASE_QUALITIES</code></li>
@@ -1279,7 +1279,7 @@ GGG--CACACAGGG            Alt: G
   <div class="box-title hands-on-title" id="hands-on-left-align-indels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Left-align indels</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1" title="BamLeftAlign tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffreebayes%2Fbamleftalign%2F1.3.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BamLeftAlign</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</a> to perform left alignment with the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1" title="BamLeftAlign tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BamLeftAlign</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</span> to perform left alignment with the following parameters:
       <ul>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select alignment file in BAM format”</em>: select the BAM dataset produced by <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1299,7 +1299,7 @@ GGG--CACACAGGG            Alt: G
   <div class="box-title hands-on-title" id="hands-on-filter-bam-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter BAM data</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Filter BAM datasets on a variety of attributes tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbamtools_filter%2FbamFilter%2F2.4.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter BAM datasets on a variety of attributes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.1)</a> with the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Filter BAM datasets on a variety of attributes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter BAM datasets on a variety of attributes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM dataset(s) to filter”</em>: select the BAM dataset produced by <strong>BamLeftAlign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>In <em>“Condition”</em>:
@@ -1364,7 +1364,7 @@ GGG--CACACAGGG            Alt: G
   <div class="box-title hands-on-title" id="hands-on-calling-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calling variants</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.1" title="FreeBayes tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffreebayes%2Ffreebayes%2F1.3.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FreeBayes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</a> to call variants with the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.1" title="FreeBayes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FreeBayes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.1)</span> to call variants with the following parameters:
       <ul>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code></li>
         <li><em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Run individually</code></li>
@@ -1482,7 +1482,7 @@ chrM	15326	.	A	G	73749.6	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=2200;CIGAR=1X;DP=2201;DP
   <div class="box-title hands-on-title" id="hands-on-filtering-vcf-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering VCF data</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+galaxy3" title="VCFfilter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fvcffilter%2Fvcffilter2%2F1.0.0_rc1%2Bgalaxy3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>VCFfilter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0_rc1+galaxy3)</a> to filter the variants with the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+galaxy3" title="VCFfilter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>VCFfilter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0_rc1+galaxy3)</span> to filter the variants with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF dataset to filter”</em>: select the VCF dataset produced by <strong>FreeBayes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>In <em>“more filters”</em>:
@@ -1595,7 +1595,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
   <div class="box-title hands-on-title" id="hands-on-convert-vcf-to-tab-delimited-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert VCF to tab-delimited data</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0" title="VCFtoTab-delimited tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fvcf2tsv%2Fvcf2tsv%2F1.0.0_rc1%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>VCFtoTab-delimited</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0_rc1+galaxy0)</a> to filter the variants with the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0" title="VCFtoTab-delimited tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>VCFtoTab-delimited</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0_rc1+galaxy0)</span> to filter the variants with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select VCF dataset to convert”</em>: select the VCF dataset produced by <strong>VCFfilter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Report data per sample”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1641,7 +1641,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
   <div class="box-title hands-on-title" id="hands-on-cut-columns-from-a-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cut columns from a file</div>
 
   <ol>
-    <li>Use <a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> to select specific columns with the following parameters:
+    <li>Use <span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> to select specific columns with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c4,c5,c52,c54,c55</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1970,7 +1970,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1998,7 +1998,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

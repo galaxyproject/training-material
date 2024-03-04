@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -604,7 +604,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "This tutorial is a follow-up to the ['Single-cell RNA-seq: Case Study']({% link topics/single-cell/index.md %}). We will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to [prepare a single cell matrix]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}), [combine datasets]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) and [filter, plot and process scRNA-seq data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) to get the data in the form we’ll be working on today."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1574,7 +1574,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
   <div class="box-title hands-on-title" id="hands-on-pre-processing"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Pre-processing</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+galaxy0" title="Monocle3 preprocess tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_preprocess%2Fmonocle3_preprocess%2F0.1.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 preprocess</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+galaxy0" title="Monocle3 preprocess tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 preprocess</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 create</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The dimensionality of the reduced space.”</em>: <code class="language-plaintext highlighter-rouge">250</code></li>
@@ -1594,7 +1594,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
   <div class="box-title hands-on-title" id="hands-on-dimensionality-reduction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Dimensionality reduction</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+galaxy0" title="Monocle3 reduceDim tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_reducedim%2Fmonocle3_reduceDim%2F0.1.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 reduceDim</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+galaxy0" title="Monocle3 reduceDim tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 reduceDim</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 preprocess</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1613,7 +1613,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
   <div class="box-title hands-on-title" id="hands-on-plotting"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plotting</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
@@ -1623,7 +1623,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
     <li>
       <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Cell type plot</code></p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">genotype</code></li>
@@ -1633,7 +1633,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
     <li>
       <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Genotype plot</code></p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
@@ -1643,7 +1643,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
     <li>
       <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Batch plot</code></p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">sex</code></li>
@@ -1712,7 +1712,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
   <div class="box-title hands-on-title" id="hands-on-clustering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clustering</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+galaxy0" title="Monocle3 partition tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_partition%2Fmonocle3_partition%2F0.1.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 partition</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+galaxy0" title="Monocle3 partition tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 partition</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Resolution of clustering result, specifying the granularity of clusters. Not used by default and the standard igraph louvain clustering algorithm will be used.”</em>: <code class="language-plaintext highlighter-rouge">0.00015</code></li>
@@ -1720,7 +1720,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
         <li>The clusters and partitions are now stored in your CDS file. To see them, just plot the output, coloring the cells with the corresponding attributes.</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 partition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">partition</code></li>
@@ -1729,7 +1729,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
     <li>
       <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Partition plot</code></p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 partition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">cluster</code></li>
@@ -1807,7 +1807,7 @@ Below is the table that we used in the previous tutorial to identify the cell ty
   <div class="box-title hands-on-title" id="hands-on-gene-expression"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Gene expression</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 partition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
@@ -1870,7 +1870,7 @@ Below is the table that we used in the previous tutorial to identify the cell ty
   <div class="box-title hands-on-title" id="hands-on-top-marker-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Top marker genes</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+galaxy0" title="Monocle3 top markers tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_topmarkers%2Fmonocle3_topmarkers%2F0.1.5%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 top markers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+galaxy0" title="Monocle3 top markers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 top markers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Object”</em>: output of <strong>Monocle3 partition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Group cell by”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
@@ -1910,13 +1910,13 @@ The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf
   <div class="box-title hands-on-title" id="hands-on-learn-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Learn graph</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+galaxy0" title="Monocle3 learnGraph tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_learngraph%2Fmonocle3_learnGraph%2F0.1.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 learnGraph</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+galaxy0" title="Monocle3 learnGraph tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 learnGraph</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 partition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>Again, the graph is now stored in your CDS file. To see it, just plot the output, you can color the cells by any attribute that you want. We’ll use cell types to see how they are connected.</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 learnGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell attribute (e.g. the column of pData(cds)) to map to each cell’s color, or one of {cluster, partition, pseudotime}.”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
@@ -1955,7 +1955,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
   <div class="box-title hands-on-title" id="hands-on-ordering-the-cells-along-trajectory"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Ordering the cells along trajectory</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+galaxy0" title="Monocle3 orderCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_ordercells%2Fmonocle3_orderCells%2F0.1.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 orderCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+galaxy0" title="Monocle3 orderCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 orderCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 learnGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“The cell phenotype (column in pdata) used to identify root principal nodes.”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
@@ -1963,7 +1963,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
         <li>Alright - we were waiting for this plot the whole tutorial: once we have the cells ordered, we can finally color them by pseudotime!</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_plotcells%2Fmonocle3_plotCells%2F0.1.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Monocle3 plotCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 plotCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 orderCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -2005,7 +2005,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
   <div class="box-title hands-on-title" id="hands-on-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Differentially expressed genes</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+galaxy1" title="Monocle3 diffExp tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fmonocle3_diffexp%2Fmonocle3_diffExp%2F0.1.4%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 diffExp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+galaxy1" title="Monocle3 diffExp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Monocle3 diffExp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.4+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in RDS format”</em>: output of <strong>Monocle3 orderCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -2313,7 +2313,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2341,7 +2341,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

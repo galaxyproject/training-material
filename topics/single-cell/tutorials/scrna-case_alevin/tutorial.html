@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -538,7 +538,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each with 4 lines of text. Later on in analysis, this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1304,7 +1304,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-generate-a-filtered-fasta-and-transcript-gene-map"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate a filtered FASTA and transcript-gene map</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="GTF2GeneList tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fgtf2gene_list%2F_ensembl_gtf2gene_list%2F1.52.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GTF2GeneList</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.52.0+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="GTF2GeneList tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GTF2GeneList</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.52.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ensembl GTF file”</em>: <code class="language-plaintext highlighter-rouge">GTF file in the history</code> <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-history</span></li>
         <li><em>“Feature type for which to derive annotation”</em>: <code class="language-plaintext highlighter-rouge">transcript</code> (Your sequences are transcript sequencing, so this is your starting point)</li>
@@ -1353,7 +1353,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2" title="Alevin tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Falevin%2Falevin%2F1.9.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Alevin</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.0+galaxy2)</a></p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2" title="Alevin tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Alevin</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.0+galaxy2)</span></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1458,7 +1458,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-generate-a-raw-barcode-qc-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate a raw barcode QC plot</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Droplet barcode rank plot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdroplet_barcode_plot%2F_dropletBarcodePlot%2F1.6.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Droplet barcode rank plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.1+galaxy2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Droplet barcode rank plot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Droplet barcode rank plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.1+galaxy2)</span> with the following parameters:
       <ul>
         <li><em>“Input MTX-format matrix?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A two-column tab-delimited file, with barcodes in the first column and frequencies in the second”</em>: Output of Alevin <code class="language-plaintext highlighter-rouge">raw CB classification frequencies</code></li>
@@ -1487,7 +1487,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-generate-alevin-s-barcode-qc-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate Alevin's barcode QC plot</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Droplet barcode rank plot tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdroplet_barcode_plot%2F_dropletBarcodePlot%2F1.6.1%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Droplet barcode rank plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.1+galaxy2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Droplet barcode rank plot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Droplet barcode rank plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.1+galaxy2)</span> with the following parameters:
       <ul>
         <li><em>“Input MTX-format matrix?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Matrix-market format matrix file, with cells by column (overrides –barcode-frequencies if supplied)”</em>: <code class="language-plaintext highlighter-rouge">per-cell gene-count matrix (MTX)</code></li>
@@ -1520,7 +1520,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-stopping-alevin-from-thresholding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Stopping Alevin from thresholding</div>
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2" title="Alevin tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Falevin%2Falevin%2F1.9.0%2Bgalaxy2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Alevin</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.0+galaxy2)</a> (Click re-run on the last Alevin output)
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2" title="Alevin tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Alevin</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.0+galaxy2)</span> (Click re-run on the last Alevin output)
       <ul>
         <li><em>“Advanced options”</em></li>
         <li><em>“Fraction of cellular barcodes to keep”</em>: ‘1’ - i.e. keep them all!</li>
@@ -1561,7 +1561,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-transform-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Transform matrix</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6" title="salmonKallistoMtxTo10x tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fsalmon_kallisto_mtx_to_10x%2F_salmon_kallisto_mtx_to_10x%2F0.0.1%2Bgalaxy6"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>salmonKallistoMtxTo10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1+galaxy6)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6" title="salmonKallistoMtxTo10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>salmonKallistoMtxTo10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1+galaxy6)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“.mtx-format matrix”</em>: <code class="language-plaintext highlighter-rouge">per-cell gene-count matrix (MTX)</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited genes file”</em>: <code class="language-plaintext highlighter-rouge">column headers (gene-ids)</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1612,7 +1612,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-generate-gene-information"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate gene information</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="GTF2GeneList tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fgtf2gene_list%2F_ensembl_gtf2gene_list%2F1.52.0%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GTF2GeneList</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.52.0+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="GTF2GeneList tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GTF2GeneList</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.52.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Feature type for which to derive annotation”</em>: <code class="language-plaintext highlighter-rouge">gene</code></li>
         <li><em>“Field to place first in output table”</em>: <code class="language-plaintext highlighter-rouge">gene_id</code></li>
@@ -1634,7 +1634,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-combine-mtx-gene-table-with-gene-information"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combine MTX Gene Table with Gene Information</div>
 
   <ol>
-    <li><a class="tool" data-tool="join1" title="Join two Datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Djoin1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
       <ul>
         <li><em>“Join”</em>: <code class="language-plaintext highlighter-rouge">Gene Table</code></li>
         <li><em>“Using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -1648,7 +1648,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
       <p>If you inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the object, you’ll see we have joined these tables and now have quite a few gene_id repeats. Let’s take those out, while keeping the order of the original ‘Gene Table’.</p>
     </li>
-    <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c4,c5</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1669,7 +1669,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-converting-to-singlecellexperiment-format"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Converting to SingleCellExperiment format</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0" title="DropletUtils Read10x tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_read_10x%2Fdropletutils_read_10x%2F1.0.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0" title="DropletUtils Read10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">Matrix table</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Table”</em>: <code class="language-plaintext highlighter-rouge">Annotated Gene Table</code></li>
@@ -1687,7 +1687,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-emptydrops"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Emptydrops</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0" title="DropletUtils emptyDrops tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fdropletutils_empty_drops%2Fdropletutils_empty_drops%2F1.0.4%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils emptyDrops</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4+galaxy0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0" title="DropletUtils emptyDrops tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DropletUtils emptyDrops</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SingleCellExperiment rdata object”</em>: <code class="language-plaintext highlighter-rouge">SCE Object</code></li>
         <li><em>“Should barcodes estimated to have no cells be removed from the output object?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1726,7 +1726,7 @@ Consider…is this a complete set of data?</p>
   <div class="box-title hands-on-title" id="hands-on-converting-to-anndata-format"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Converting to AnnData format</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Febi-gxa%2Fsceasy_convert%2Fsceasy_convert%2F0.0.5%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="SCEasy convert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SCEasy convert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5+galaxy1)</span> with the following parameters:
       <ul>
         <li><em>“Direction of conversion”</em>: <code class="language-plaintext highlighter-rouge">SingleCellExperiment to AnnData</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in SingleCellExperiment RDS format”</em>: <code class="language-plaintext highlighter-rouge">Emptied-Object</code></li>
@@ -2150,7 +2150,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2178,7 +2178,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

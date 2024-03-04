@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -582,7 +582,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of this species."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1179,7 +1179,7 @@ to be altered (e.g. column numbers) when using data directly from NCBI.</p>
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a>   columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span>   columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c20</code></li>
@@ -1309,7 +1309,7 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
   <div class="box-title hands-on-title" id="hands-on-uploading-i-e-coli-i-assembly-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Uploading <i>E. coli</i> assembly into Galaxy</div>
 
   <ol>
-    <li><a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a>  :
+    <li><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span>  :
       <ul>
         <li>Click <strong>Paste/Fetch data</strong> button (Bottom of the interface box)</li>
         <li><strong>Paste</strong> <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code> into the box.</li>
@@ -1341,13 +1341,13 @@ GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003
   <div class="box-title hands-on-title" id="hands-on-fixing-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Fixing assembly</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2" title="Filter sequences by length tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_filter_by_length%2Ffasta_filter_by_length%2F1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter sequences by length</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2" title="Filter sequences by length tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter sequences by length</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2)</span> with the following parameters:
       <ul>
         <li><em>“Fasta file”</em>: the dataset you’ve just uploaded. (<code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code>).</li>
         <li><em>“Minimal length”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_line%2F1.1.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</a> in entire line:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> in entire line:
       <ul>
         <li><em>“File to process”</em>: the output of the Filter sequences by length <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“1: Replacement”</em>
@@ -1409,7 +1409,7 @@ Detailed description of regular expressions is outside of the scope of this tuto
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-running-lastz"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Running LASTZ</div>
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Flastz%2Flastz_wrapper_2%2F1.3.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>LASTZ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>LASTZ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.2)</span> with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: the “Complete genomes” collection we uploaded earlier</li>
@@ -1480,7 +1480,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-combining-collection-into-a-single-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combining collection into a single dataset</div>
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</span> with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of <strong>LASTZ</strong> (collecion input)</li>
       </ul>
@@ -1497,7 +1497,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-selecting-random-subset-of-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Selecting random subset of data</div>
   <ol>
-    <li><a class="tool" data-tool="random_lines1" title="Select random lines from a file tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Drandom_lines1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select random lines from a file</strong></a>   with the following parameters:
+    <li><span class="tool" data-tool="random_lines1" title="Select random lines from a file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select random lines from a file</strong></span>   with the following parameters:
       <ul>
         <li><em>“Randomly select”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
         <li><em>“from”</em>: the output from <code class="language-plaintext highlighter-rouge">Collapse Collection</code></li>
@@ -1530,7 +1530,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filtering-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering data</div>
   <ol>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a> data on any column using simple expressions:
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions:
       <ul>
         <li><em>“Filter”</em>: the full dataset, from the output of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3 &gt;= 90 and c4 &gt;= 10000</code> (here <code class="language-plaintext highlighter-rouge">c</code> stands for <em>column</em>).</li>
@@ -1555,7 +1555,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-aggregating-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Aggregating the data</div>
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Datamash (operations on tabular data) tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash (operations on tabular data)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Datamash (operations on tabular data) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash (operations on tabular data)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span>   with the following parameters:
       <ul>
         <li><em>“Input tabular dataset”</em>: output of the previous <code class="language-plaintext highlighter-rouge">Filter</code> step.</li>
         <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">2</code>. (column 1 contains name of the <em>E. coli</em> genome we mapped against)</li>
@@ -1625,7 +1625,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extracting-into-about-best-hits"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extracting into about best hits</div>
   <ol>
-    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: to the output from <code class="language-plaintext highlighter-rouge">Datamash</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">LT906474|CP024090|CP020543</code>. (Here <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>).</li>
@@ -1672,7 +1672,7 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
   <p>Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.</p>
 
   <ol>
-    <li><a class="tool" data-tool="upload1" title="Upload tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></a> the <em>E. coli</em> C genome if you have not done so already:
+    <li><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the <em>E. coli</em> C genome if you have not done so already:
       <ul>
         <li>Click <strong>Paste/Fetch data</strong> button (Bottom of the interface box)</li>
         <li><strong>Paste</strong> <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code> into the box.</li>
@@ -1680,14 +1680,14 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
         <li>Click <strong>Start</strong></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: the <code class="language-plaintext highlighter-rouge">genomes.tsv</code> you uploaded earlier</li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">LT906474|CP024090|CP020543</code></li>
       </ul>
     </li>
     <li>
-      <p><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c20</code></li>
@@ -1851,7 +1851,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
   <div class="box-title hands-on-title" id="hands-on-aligning-again"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Aligning again</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Flastz%2Flastz_wrapper_2%2F1.3.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>LASTZ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>LASTZ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.2)</span> with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: <code class="language-plaintext highlighter-rouge">DNA</code>, the <em>E. coli</em> genomes we uploaded earlier</li>
@@ -1935,7 +1935,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0)</a></p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0)</span></p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse”</em> the three genomes (collection) named <code class="language-plaintext highlighter-rouge">DNA</code></li>
@@ -1948,7 +1948,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Converting the file format</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the upper part <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong>, select <code class="language-plaintext highlighter-rouge">Convert compressed to uncompressed</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cat%2F0.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</a> tail-to-head (cat):
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> tail-to-head (cat):
       <ul>
         <li><em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">Collapse collection ... uncompressed</code>, the output from the uncompression step.</li>
         <li>Click <strong>Insert Dataset</strong> button
@@ -2072,7 +2072,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
   <div class="box-title hands-on-title" id="hands-on-convert-lastz-output-to-bed"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert LASTZ output to BED</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.1.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</a> in a specific column:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span> in a specific column:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: output of LASTZ (<code class="language-plaintext highlighter-rouge">LASTZ Alignments</code>)</li>
         <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column 12</code></li>
@@ -2080,7 +2080,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
         <li><em>“Replace with”</em>: leave empty</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1" title="Merge Columns together tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fmerge_cols%2FmergeCols1%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Columns together</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1" title="Merge Columns together tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Columns together</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select data”</em>: the output of the previous step, <code class="language-plaintext highlighter-rouge">Replace Text on collection ...</code></li>
         <li><em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code> (this is the Target sequence name)</li>
@@ -2092,7 +2092,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
         <p>The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, <code class="language-plaintext highlighter-rouge">CP020543.1</code> and <code class="language-plaintext highlighter-rouge">LT906474.1</code> because they will have accessions embedded within alignment block IDs. For example, the first alignment between <code class="language-plaintext highlighter-rouge">CP020543.1</code> and our assembly <code class="language-plaintext highlighter-rouge">Ecoli_C</code> will have alignment block id <code class="language-plaintext highlighter-rouge">CP020543.11</code>, while the 225th alignment between <code class="language-plaintext highlighter-rouge">LT906474.1</code> and <code class="language-plaintext highlighter-rouge">Ecoli_C</code> will have ID <code class="language-plaintext highlighter-rouge">LT906474.1225</code>. Because of this we can collapse the entire collection of alignments into a single dataset:</p>
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse”</em>: the output of the previous step, <code class="language-plaintext highlighter-rouge">Merge Columns on collection...</code></li>
       </ul>
@@ -2107,7 +2107,7 @@ GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_90018
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table:</p>
 
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c4,c5,c14,c12,c8</code></li>
@@ -2254,7 +2254,7 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Target Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> with the following parameters
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with the following parameters
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c7,c9,c10,c14,c12,c8</code> (look at the data shown above and the definition of BED to see why we make these choices.)</li>
         <li><em>“From”</em>: <code class="language-plaintext highlighter-rouge">Unprocessed alignments</code>, the output of <strong>collection collapse</strong></li>
@@ -2267,7 +2267,7 @@ In the second BED, column 1 will contain name of our assembly: <code class="lang
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Query Alignments</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><a class="tool" data-tool="cat1" title="Concatenate datasets tail-to-head tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dcat1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head</strong></a>
+    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tail-to-head tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets tail-to-head</strong></span>
       <ul>
         <li><em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Query Alignments</code></li>
         <li>Click “Insert Dataset” button</li>
@@ -2441,7 +2441,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extract-cdss-from-annotation-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract CDSs from annotation datasets</div>
   <ol>
-    <li><a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: the collection containing annotations, <code class="language-plaintext highlighter-rouge">Genes</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">^CDS</code></li>
@@ -2449,7 +2449,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
       <p>This is because we want to retain all lines that begin (<code class="language-plaintext highlighter-rouge">^</code>) with <code class="language-plaintext highlighter-rouge">CDS</code>.</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Add column to an existing dataset tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fadd_value%2FaddValue%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Add column to an existing dataset</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Add column to an existing dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Add column to an existing dataset</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span>   with the following parameters:
       <ul>
         <li><em>“Add this value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“to Dataset”</em>: the collection produced by the previous step (<code class="language-plaintext highlighter-rouge">Select on collection...</code>)</li>
@@ -2458,7 +2458,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       <p>This will be used for the “score” field of the BED file since we do not have a proper “score”</p>
     </li>
     <li>
-      <p><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> with the following parameters:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with the following parameters:</p>
 
       <p>We will produce two BED files, one using the product name (e.g. “chromosomal replication initiator protein DnaA”) and one using the symbol (e.g. “thrA”). The product name is much more interesting to see in visualisations, but the symbol is more often used in other analyses and we will use that file later. We will start with the product name:</p>
 
@@ -2506,7 +2506,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
       <p>As we mentioned above these datasets lack genome IDs such as <code class="language-plaintext highlighter-rouge">CP020543.1</code>. However, the individual elements in the collection we’ve created already have genome IDs. We will leverage this when collapsing this collection into a single dataset:</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</a>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</span>   with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Cut on collection...</code>)</li>
         <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2514,7 +2514,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
       </ul>
     </li>
     <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_column%2F1.1.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</a> in a specific column</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> in a specific column</p>
 
       <p>Many bed parsers do not like whitespace in the <code class="language-plaintext highlighter-rouge">Name</code> column, so we will replace that</p>
 
@@ -2593,7 +2593,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="Cut1" title="Cut columns from a table tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></a> with the following parameters:</p>
+      <p><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with the following parameters:</p>
 
       <p>We will produce two BED files, one using the product name (e.g. “chromosomal replication initiator protein DnaA”) and one using the symbol (e.g. “thrA”). The product name is much more interesting to see in visualisations, but the symbol is more often used in other analyses and we will use that file later. We will start with the product name:</p>
 
@@ -2639,7 +2639,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </tbody>
       </table>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0)</span> with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Cut on collection...</code>)</li>
         <li><em>“Append File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2671,13 +2671,13 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-creating-a-genome-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating a genome file</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1" title="Compute sequence length tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_compute_length%2Ffasta_compute_length%2F1.0.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute sequence length</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</a>:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1" title="Compute sequence length tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute sequence length</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span>:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Compute length for these sequences”</em>: <code class="language-plaintext highlighter-rouge">DNA (E. coli + Relatives)</code>, the FASTA dataset we generated from <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Strip fasta description from header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> data in ascending or descending order:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> data in ascending or descending order:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Compute sequence length on ...</code>)</li>
         <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -2722,13 +2722,13 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </blockquote>
       </blockquote>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0" title="SortBED order the intervals tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_sortbed%2F2.27.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SortBED order the intervals</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.27.0.0)</a> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0" title="SortBED order the intervals tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SortBED order the intervals</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.27.0.0)</span> with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the following BED file”</em>: <code class="language-plaintext highlighter-rouge">Target &amp; Query Alignments</code></li>
         <li><em>“Sort by”</em> on its default setting (<code class="language-plaintext highlighter-rouge">chromosome, then by start position (asc)</code>)</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0" title="ComplementBed Extract intervals not represented by an interval file tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_complementbed%2F2.27.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ComplementBed Extract intervals not represented by an interval file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.27.0.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0" title="ComplementBed Extract intervals not represented by an interval file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ComplementBed Extract intervals not represented by an interval file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.27.0.0)</span> with the following parameters:
       <ul>
         <li><em>“BED/VCF/GFF file”</em>: output of the <strong>SortBED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the previous step</li>
         <li><em>“Genome file”</em>: <code class="language-plaintext highlighter-rouge">Genome file from your history</code>
@@ -2738,7 +2738,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Filter1" title="Filter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></a>  data on any column using simple expressions
+    <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span>  data on any column using simple expressions
       <ul>
         <li><em>“Filter”</em>: dataset from the last step (<code class="language-plaintext highlighter-rouge">Complement of SortBed on ...</code>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3-c2&gt;=10000</code></li>
@@ -2812,7 +2812,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-restricting-list-of-deleted-regions-to-the-i-common-i-deletion"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Restricting list of deleted regions to the <i>common</i> deletion</div>
 
   <ol>
-    <li><a class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DFilter1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:
       <ul>
         <li><em>“Filter”</em>: dataset from the last step (<code class="language-plaintext highlighter-rouge">Filter on data...</code>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c2 &gt; 2000000</code>.</li>
@@ -2884,7 +2884,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-view-genomes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: View genomes</div>
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1" title="JBrowse tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fjbrowse%2Fjbrowse%2F1.16.8%2Bgalaxy1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.8+galaxy1)</a> genome browser:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1" title="JBrowse tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.8+galaxy1)</span> genome browser:
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
@@ -2955,7 +2955,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-circos"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Circos</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Flastz%2Flastz_wrapper_2%2F1.3.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>LASTZ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2" title="LASTZ tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>LASTZ</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.2)</span> with the following parameters:
       <ul>
         <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a reference dataset”</em>: <code class="language-plaintext highlighter-rouge">DNA</code>, the <em>E. coli</em> genomes we uploaded earlier</li>
@@ -2972,23 +2972,23 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
         </li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</span> with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse”</em>: the MAF output of <strong>LASTZ</strong> (collecion input)</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7" title="Circos: Alignemnts to Links tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcircos%2Fcircos_aln_to_links%2F0.69.8%2Bgalaxy7"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos: Alignemnts to Links</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy7)</a> reformats alignment files to prepare for Circos:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7" title="Circos: Alignemnts to Links tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos: Alignemnts to Links</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy7)</span> reformats alignment files to prepare for Circos:
       <ul>
         <li><em>“Alignment file”</em>: the output of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step</li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7" title="Circos: Interval to Tiles tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcircos%2Fcircos_interval_to_tiles%2F0.69.8%2Bgalaxy7"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos: Interval to Tiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy7)</a> reformats interval files for Circos’ use:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7" title="Circos: Interval to Tiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos: Interval to Tiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy7)</span> reformats interval files for Circos’ use:
       <ul>
         <li><em>“BED File”</em>: <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives)</code></li>
       </ul>
     </li>
     <li>
-      <p><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Circos tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcircos%2Fcircos%2F0.69.8%2Bgalaxy7"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy7)</a> genome browser:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Circos tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy7)</span> genome browser:</p>
 
       <ul>
         <li>In the section <em>“Karyoytype”</em>
@@ -3092,7 +3092,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-finding-genes-deleted-in-our-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Finding genes deleted in our assembly</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2" title="Intersect intervals find overlapping intervals in various ways tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_intersectbed%2F2.27.0.2"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intersect intervals find overlapping intervals in various ways</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.27.0.2)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2" title="Intersect intervals find overlapping intervals in various ways tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intersect intervals find overlapping intervals in various ways</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.27.0.2)</span> with the following parameters:
       <ul>
         <li><em>“File A to intersect with B”</em>: <code class="language-plaintext highlighter-rouge">Gaps</code></li>
         <li><em>“File(s) B to intersect with A”</em>: <code class="language-plaintext highlighter-rouge">Genes (E. coli Relatives) with Symbol Name</code></li>
@@ -3264,7 +3264,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
   <div class="box-title hands-on-title" id="hands-on-are-there-essential-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Are there essential genes?</div>
 
   <ol>
-    <li><a class="tool" data-tool="join1" title="Join two Datasets tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Djoin1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></a> side by side on a specified field:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> side by side on a specified field:
       <ul>
         <li><em>“Join”</em>: the results of the <a href="#hands-on-finding-genes-deleted-in-our-assembly">intersect operation</a>(<code class="language-plaintext highlighter-rouge">Intersect intervals on data...</code>)</li>
         <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 7</code> (because it contains gene names. If it is not a drop down enter <code class="language-plaintext highlighter-rouge">7</code>.)</li>
@@ -4114,7 +4114,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -4142,7 +4142,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

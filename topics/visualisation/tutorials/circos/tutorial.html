@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -395,7 +395,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Circos ({% cite krzywinski2009circos %}) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1109,7 +1109,7 @@ of tutorials available from the <a href="http://circos.ca">Circos website</a></p
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p><a class="tool" data-tool="upload1" title="Import Data tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import Data</strong></a></p>
+      <p><span class="tool" data-tool="upload1" title="Import Data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import Data</strong></span></p>
       <ul>
         <li>Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:</li>
       </ul>
@@ -1140,7 +1140,7 @@ https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.txt
   <div class="box-title hands-on-title" id="hands-on-set-ideogram-configuration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Set ideogram configuration</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcircos%2Fcircos%2F0.69.8%2Bgalaxy12"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy12)</a> visualizes data in a circular layout with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy12)</span> visualizes data in a circular layout with the following parameters:
       <ul>
         <li>In <em>“Karyotype”</em>:
           <ul>
@@ -1316,14 +1316,14 @@ The full definition of <code class="language-plaintext highlighter-rouge">hg18</
   <div class="box-title hands-on-title" id="hands-on-prepare-input-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare input data</div>
 
   <ol>
-    <li><a class="tool" data-tool="Grep1" title="Select tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></a> lines that match an expression with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select</strong></span> lines that match an expression with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">VCaP highConfidenceJunctions.tsv</code></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">NOT Matching</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">^[#&gt;&lt;]</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c3,c3,c6,c7,c7</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1562,19 +1562,19 @@ chr1	72017	72017	-0.1353417	0
   <div class="box-title hands-on-title" id="hands-on-prepare-cnv-input-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare CNV input file</div>
 
   <ol>
-    <li><a class="tool" data-tool="Remove beginning1" title="Remove beginning tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DRemove+beginning1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></a> of a file with the following parameters:
+    <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></span> of a file with the following parameters:
       <ul>
         <li><em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">VCaP copy number.tsv</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table  with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table  with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2,c3,c4</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="random_lines1" title="Select random lines tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Drandom_lines1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select random lines</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="random_lines1" title="Select random lines tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select random lines</strong></span> with the following parameters:
       <ul>
         <li><em>“Randomly select”</em>: <code class="language-plaintext highlighter-rouge">25000</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1854,13 +1854,13 @@ chr1	110905	110905	0.9918569
   <div class="box-title hands-on-title" id="hands-on-prepare-the-b-allele-frequency-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the B-allele frequency table</div>
 
   <ol>
-    <li><a class="tool" data-tool="Remove beginning1" title="Remove beginning tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DRemove+beginning1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></span> with the following parameters:
       <ul>
         <li><em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">VCaP_B-allele frequence.tsv</code></li>
       </ul>
     </li>
-    <li><a class="tool" data-tool="random_lines1" title="Select random lines tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Drandom_lines1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select random lines</strong></a> with the following parameters:
+    <li><span class="tool" data-tool="random_lines1" title="Select random lines tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select random lines</strong></span> with the following parameters:
       <ul>
         <li><em>“Randomly select”</em>: <code class="language-plaintext highlighter-rouge">25000</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of <strong>Remove</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2235,7 +2235,7 @@ The last column indicates the party of each candidate (democratic or republican)
   <div class="box-title hands-on-title" id="hands-on-set-ideogram-configuration-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Set ideogram configuration</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcircos%2Fcircos%2F0.69.8%2Bgalaxy12"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy12)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy12)</span> with the following parameters:
       <ul>
         <li>In <em>“Karyotype”</em>:
           <ul>
@@ -2540,7 +2540,7 @@ https://zenodo.org/record/4494146/files/highlights.tab
   <div class="box-title hands-on-title" id="hands-on-circos"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Circos</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fcircos%2Fcircos%2F0.69.8%2Bgalaxy12"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy12)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy12)</span> with the following parameters:
       <ul>
         <li>In <em>“Karyotype”</em>:
           <ul>
@@ -3114,7 +3114,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3142,7 +3142,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

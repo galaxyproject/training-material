@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -427,7 +427,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides prior to LC-MS/MS analysis. In this so-called \"bottom-up\" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -999,14 +999,14 @@ https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
     <li>
       <p>Rename the dataset to something meaningful</p>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1" title="msconvert tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert%2Fmsconvert%2F3.0.19052.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>msconvert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.19052.1)</a> on the training <code class="language-plaintext highlighter-rouge">raw</code> file to convert to the <code class="language-plaintext highlighter-rouge">mzML</code> format
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1" title="msconvert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>msconvert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.19052.1)</span> on the training <code class="language-plaintext highlighter-rouge">raw</code> file to convert to the <code class="language-plaintext highlighter-rouge">mzML</code> format
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input unrefined MS data”</em>: imported <code class="language-plaintext highlighter-rouge">raw</code> file</li>
         <li><em>“Do you agree to the vendor licenses”</em>: set to <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Output Type”</em>: set to <code class="language-plaintext highlighter-rouge">mzML</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peakpickerhires/PeakPickerHiRes/2.3.0" title="PeakPickerHiRes tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_peakpickerhires%2FPeakPickerHiRes%2F2.3.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PeakPickerHiRes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.0)</a> on the resulting file
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peakpickerhires/PeakPickerHiRes/2.3.0" title="PeakPickerHiRes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PeakPickerHiRes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.0)</span> on the resulting file
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *“input profile data file”: output of <strong>msconvert</strong> or <code class="language-plaintext highlighter-rouge">mzML</code> file</li>
         <li>In <em>“param_algorithm_ms_levels”</em>
@@ -1062,7 +1062,7 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
   </blockquote>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0" title="XTandemAdapter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_xtandemadapter%2FXTandemAdapter%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>XTandemAdapter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0" title="XTandemAdapter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>XTandemAdapter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file containing MS2 spectra”</em>: MS2-centroided mzML file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: FASTA protein database</li>
@@ -1071,7 +1071,7 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
         <li><em>“Optional Outputs”</em> select <code class="language-plaintext highlighter-rouge">out (Output file containing search results)</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="FileInfo tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fileinfo%2FFileInfo%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FileInfo</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="FileInfo tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FileInfo</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>XTandem</strong> output</li>
       </ul>
@@ -1105,7 +1105,7 @@ The false discovery rate is therefore defined as the number of false discoveries
   <div class="box-title hands-on-title" id="hands-on-peptide-fdr-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Peptide FDR filtering</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0" title="PeptideIndexer tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_peptideindexer%2FPeptideIndexer%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PeptideIndexer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0" title="PeptideIndexer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PeptideIndexer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input idXML file containing the identifications”</em>: output of <strong>XTandemAdapter</strong></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequence database in FASTA format”</em>: FASTA protein database</li>
@@ -1114,13 +1114,13 @@ The false discovery rate is therefore defined as the number of false discoveries
         <li>In the <em>“enzyme”</em> section set <em>“Specificity of the enzyme”</em>: <code class="language-plaintext highlighter-rouge">none</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy" title="IDPosteriorErrorProbability tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idposteriorerrorprobability%2FIDPosteriorErrorProbability%2F2.6%2Bgalaxy"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDPosteriorErrorProbability</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy" title="IDPosteriorErrorProbability tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDPosteriorErrorProbability</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>PeptideIndexer</strong> output</li>
         <li><em>“If set scores will be calculated as ‘1 - ErrorProbabilities’ and can be interpreted as probabilities for correct identifications”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0" title="FalseDiscoveryRate tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_falsediscoveryrate%2FFalseDiscoveryRate%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FalseDiscoveryRate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0" title="FalseDiscoveryRate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FalseDiscoveryRate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Identifications from searching a target-decoy database”</em>: output of <strong>IDPosteriorErrorProbability</strong></li>
         <li><em>“Perform FDR calculation on protein level”</em>: <code class="language-plaintext highlighter-rouge">false</code></li>
@@ -1128,14 +1128,14 @@ The false discovery rate is therefore defined as the number of false discoveries
         <li>In the “Parameter section for the FDR calculation algorithm”* section select <em>“If ‘true’ decoy peptides will be written to output file, too”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0" title="IDScoreSwitcher tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_idscoreswitcher%2FIDScoreSwitcher%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDScoreSwitcher</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0" title="IDScoreSwitcher tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDScoreSwitcher</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: output of <strong>FalseDiscoveryRate</strong></li>
         <li><em>“Name of the meta value to use as the new score”</em>: <code class="language-plaintext highlighter-rouge">Posterior Probability_score</code></li>
         <li><em>“Orientation of the new score”</em>: <code class="language-plaintext highlighter-rouge">higher_better</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="FileInfo tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fileinfo%2FFileInfo%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FileInfo</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> to get basic information about the identified peptides
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="FileInfo tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FileInfo</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> to get basic information about the identified peptides
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>IDScoreSwitcher</strong> output</li>
       </ul>
@@ -1169,20 +1169,20 @@ The OpenMS suite implemented the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20
   <div class="box-title hands-on-title" id="hands-on-protein-inference"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Protein inference</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0" title="FidoAdapter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fidoadapter%2FFidoAdapter%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FidoAdapter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0" title="FidoAdapter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FidoAdapter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input: identification results”</em>: output of <strong>IDScoreSwitcher</strong></li>
         <li><em>“Post-process Fido output with greedy resolution of shared peptides based on the protein probabilities”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0" title="FalseDiscoveryRate tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_falsediscoveryrate%2FFalseDiscoveryRate%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FalseDiscoveryRate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0" title="FalseDiscoveryRate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FalseDiscoveryRate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Identifications from searching a target-decoy database”</em>: output of <strong>FidoAdapter</strong></li>
         <li><em>“Perform FDR calculation on PSM level”</em>: <code class="language-plaintext highlighter-rouge">false</code></li>
         <li>In the <em>“FDR control”</em> section select <em>“Filter proteins based on q-value”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="FileInfo tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fileinfo%2FFileInfo%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FileInfo</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> to get basic information about the identified proteins
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="FileInfo tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FileInfo</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> to get basic information about the identified proteins
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: output of <strong>FalseDiscoveryRate</strong></li>
       </ul>
@@ -1217,19 +1217,19 @@ It also enables you to check for contaminations in your samples.</p>
   <div class="box-title hands-on-title" id="hands-on-analysis-of-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Analysis of Contaminants</div>
 
   <ol>
-    <li>Run <a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0" title="TextExporter tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_textexporter%2FTextExporter%2F2.6%2Bgalaxy0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TextExporter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</a> to convert the idXML output to a human-readable tabular file.
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0" title="TextExporter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TextExporter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.6+galaxy0)</span> to convert the idXML output to a human-readable tabular file.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <strong>FalseDiscoveryRate</strong> output</li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a>
+    <li>Run <span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <strong>TextExporter</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">CONTAMINANT</code></li>
       </ul>
     </li>
-    <li>Run <a class="tool" data-tool="Grep1" title="Select lines that match an expression tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrep1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></a> to remove all non human proteins (e.g. bovine)
+    <li>Run <span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> to remove all non human proteins (e.g. bovine)
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <strong>TextExporter</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1814,7 +1814,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1842,7 +1842,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

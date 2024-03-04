@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -597,7 +597,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "We stumbled upon a paper ({% cite Li2012 %}) called *\"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network\"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268)."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1434,7 +1434,7 @@ As we can see, the peak file lacks <code class="language-plaintext highlighter-r
   <div class="box-title hands-on-title" id="hands-on-adjust-chromosome-names"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adjust chromosome names</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_column%2F1.1.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</a> in a specific column with the following settings:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> in a specific column with the following settings:
       <ul>
         <li><em>“File to process”</em>: our peak file <code class="language-plaintext highlighter-rouge">GSE37268_mof3.out.hpeak.txt.gz</code></li>
         <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
@@ -1453,7 +1453,7 @@ As we can see, the peak file lacks <code class="language-plaintext highlighter-r
     <li>
       <p>Rename your output file <code class="language-plaintext highlighter-rouge">chr prefix added</code>.</p>
     </li>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_replace_in_column%2F1.1.3"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</a>  : Let’s rerun the tool with two more replacements
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span>  : Let’s rerun the tool with two more replacements
       <ul>
         <li><em>“File to process”</em>: the output from the last run, <code class="language-plaintext highlighter-rouge">chr prefix added</code></li>
         <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
@@ -1514,7 +1514,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
   <div class="box-title hands-on-title" id="hands-on-add-promoter-region-to-gene-records"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add promoter region to gene records</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/get_flanks/get_flanks1/1.0.0" title="Get Flanks tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fget_flanks%2Fget_flanks1%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Get Flanks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> returns flanking region/s for every gene, with the following settings:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/get_flanks/get_flanks1/1.0.0" title="Get Flanks tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Get Flanks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> returns flanking region/s for every gene, with the following settings:
       <ul>
         <li><em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">Genes</code> file from UCSC</li>
         <li><em>“Region”</em>: <code class="language-plaintext highlighter-rouge">Around Start</code></li>
@@ -1573,7 +1573,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
   <div class="box-title hands-on-title" id="hands-on-find-overlaps"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find Overlaps</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0" title="Intersect tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fintersect%2Fgops_intersect_1%2F1.0.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intersect</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</a> the intervals of two datasets, with the following settings:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0" title="Intersect tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intersect</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> the intervals of two datasets, with the following settings:
       <ul>
         <li><em>“Return”</em>: <code class="language-plaintext highlighter-rouge">Overlapping Intervals</code></li>
         <li><em>“of”</em>: the UCSC file with promoter regions (<code class="language-plaintext highlighter-rouge">Promoter regions</code>)</li>
@@ -1599,7 +1599,7 @@ We will group the table by chromosome and count the number of genes with peaks o
   <div class="box-title hands-on-title" id="hands-on-count-genes-on-different-chromosomes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Count genes on different chromosomes</div>
 
   <ol>
-    <li><a class="tool" data-tool="Grouping1" title="Group tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DGrouping1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group</strong></a> data by a column and perform aggregate operation on other columns, with the following settings:
+    <li><span class="tool" data-tool="Grouping1" title="Group tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Group</strong></span> data by a column and perform aggregate operation on other columns, with the following settings:
       <ul>
         <li><em>“Select data”</em> to the result of the intersection</li>
         <li><em>“Group by column”</em>:<code class="language-plaintext highlighter-rouge">Column 1</code></li>
@@ -1644,7 +1644,7 @@ alphabetically).</p>
   <div class="box-title hands-on-title" id="hands-on-fix-sort-order-of-gene-counts-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Fix sort order of gene counts table</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sort_header_tool%2F1.1.1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</a> data in ascending or descending order, with the following settings:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> data in ascending or descending order, with the following settings:
       <ul>
         <li><em>“Sort Query”</em>: result of running the Group tool</li>
         <li>in <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Column selections”</em>
@@ -1807,7 +1807,7 @@ Wouldn’t it be nice to just convert this history into a workflow that we’ll 
   <div class="box-title hands-on-title" id="hands-on-create-peak-summit-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create peak summit file</div>
 
   <ol>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcolumn_maker%2FAdd_a_column1%2F2.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</a> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute on rows tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute on rows</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0)</span> with the following parameters:
       <ul>
         <li><em>“Input file”</em>: our peak file <code class="language-plaintext highlighter-rouge">Peak regions</code> (the interval format file)</li>
         <li>*“Input has a header line with column names?”: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1843,7 +1843,7 @@ Wouldn’t it be nice to just convert this history into a workflow that we’ll 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-cut-out-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cut out columns</div>
   <ol>
-    <li><a class="tool" data-tool="Cut1" title="Cut tool" href="https://my.galaxy.training/?path=%3Ftool_id%3DCut1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></a> columns from a table with the following settings:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following settings:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c8,c9</code></li>
         <li><em>“Delimited by Tab”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1880,7 +1880,7 @@ Wouldn’t it be nice to just convert this history into a workflow that we’ll 
 
   <ol>
     <li>
-      <p><a class="tool" data-tool="upload1" title="Import tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dupload1"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></a> <code class="language-plaintext highlighter-rouge">mm9.RefSeq_genes_from_UCSC.bed</code> from <a href="https://zenodo.org/record/1025586">Zenodo</a> or from the data library:</p>
+      <p><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> <code class="language-plaintext highlighter-rouge">mm9.RefSeq_genes_from_UCSC.bed</code> from <a href="https://zenodo.org/record/1025586">Zenodo</a> or from the data library:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
 </code></pre></div>      </div>
@@ -2449,7 +2449,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2477,7 +2477,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
     </body>
 </html>

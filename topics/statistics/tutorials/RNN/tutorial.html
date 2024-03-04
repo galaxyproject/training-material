@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d0397c8af7cff3fe80bd179027c0452d72be85e6",
+		release: "galaxy-training-network@603273c9469e92c00c5436293ceb177f164ae391",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,8 +58,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709550900' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709561845' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -445,7 +445,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709561845'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1265,7 +1265,7 @@ and plot the confusion matrix.</p>
   <div class="box-title hands-on-title" id="hands-on-model-config"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Model config</div>
 
   <ul>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/1.0.10.0" title="Create a deep learning model architecture tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fkeras_model_config%2Fkeras_model_config%2F1.0.10.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a deep learning model architecture</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/1.0.10.0" title="Create a deep learning model architecture tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create a deep learning model architecture</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</span>
       <ul>
         <li><em>“Select keras model type”</em>: <code class="language-plaintext highlighter-rouge">sequential</code></li>
         <li><em>“input_shape”</em>: <code class="language-plaintext highlighter-rouge">(500,)</code></li>
@@ -1321,7 +1321,7 @@ and anything less than 0.5 a negative one. The model config can be downloaded as
   <div class="box-title hands-on-title" id="hands-on-model-builder-optimizer-loss-function-and-fit-parameters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Model builder (Optimizer, loss function, and fit parameters)</div>
 
   <ul>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/1.0.10.0" title="Create deep learning model tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fkeras_model_builder%2Fkeras_model_builder%2F1.0.10.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create deep learning model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/1.0.10.0" title="Create deep learning model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Create deep learning model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</span>
       <ul>
         <li><em>“Choose a building mode”</em>: <code class="language-plaintext highlighter-rouge">Build a training model</code></li>
         <li><em>“Select the dataset containing model configuration”</em>: Select the <em>Keras Model Config</em> from the previous step.</li>
@@ -1358,7 +1358,7 @@ The model builder can be downloaded as a zip file.</p>
   <div class="box-title hands-on-title" id="hands-on-training-the-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Training the model</div>
 
   <ul>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.10.0" title="Deep learning training and evaluation tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fkeras_train_and_eval%2Fkeras_train_and_eval%2F1.0.10.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Deep learning training and evaluation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.10.0" title="Deep learning training and evaluation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Deep learning training and evaluation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</span>
       <ul>
         <li><em>“Select a scheme”</em>: <code class="language-plaintext highlighter-rouge">Train and Validate</code></li>
         <li><em>“Choose the dataset containing pipeline/estimator object”</em>: Select the <em>Keras Model Builder</em> from the previous step.</li>
@@ -1385,7 +1385,7 @@ The model builder can be downloaded as a zip file.</p>
   <div class="box-title hands-on-title" id="hands-on-testing-the-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Testing the model</div>
 
   <ul>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.10.0" title="Model Prediction tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fmodel_prediction%2Fmodel_prediction%2F1.0.10.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Model Prediction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.10.0" title="Model Prediction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Model Prediction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</span>
       <ul>
         <li><em>“Choose the dataset containing pipeline/estimator object”</em> : Select the trained model from the previous step.</li>
         <li><em>“Select invocation method”</em>: <code class="language-plaintext highlighter-rouge">predict</code></li>
@@ -1408,7 +1408,7 @@ the test dataset.</p>
   <div class="box-title hands-on-title" id="hands-on-creating-the-confusion-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating the confusion matrix</div>
 
   <ul>
-    <li><a class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.10.0" title="Machine Learning Visualization Extension tool" href="https://my.galaxy.training/?path=%3Ftool_id%3Dtoolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fml_visualization_ex%2Fml_visualization_ex%2F1.0.10.0"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Machine Learning Visualization Extension</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</a>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.10.0" title="Machine Learning Visualization Extension tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Machine Learning Visualization Extension</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.10.0)</span>
       <ul>
         <li><em>“Select a plotting type”</em>: <code class="language-plaintext highlighter-rouge">Confusion matrix for classes</code></li>
         <li><em>“Select dataset containing the true labels”</em>”: <code class="language-plaintext highlighter-rouge">y_test</code></li>
@@ -1768,7 +1768,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d0397c8af7cff3fe80bd179027c0452d72be85e6">d0397c8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/603273c9469e92c00c5436293ceb177f164ae391">603273c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1796,7 +1796,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709550900'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709561845'></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         
