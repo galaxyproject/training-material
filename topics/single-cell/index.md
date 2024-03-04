@@ -16,3 +16,4 @@ If you want to help us behind the scenes, from testing workflows and tutorials t
  - {% icon point-right %}  [Community of Practice](https://galaxyproject.org/projects/singlecell/)
  - {% icon feedback %}  [Matrix Chat Forum](https://matrix.to/#/#usegalaxy-eu_single-cell-workflows:gitter.im)
  - {% icon email %}  [Mailing List](https://lists.galaxyproject.org/lists/single-cell-cop.lists.galaxyproject.org/)
+
