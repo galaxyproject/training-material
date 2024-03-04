@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0b820e82919364111d39567aa92abcb3c55a3643",
+		release: "galaxy-training-network@f3a615fcaf39a8cc1923a7f96d5cb309a121da36",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,8 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709565541' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709565541' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709569591' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.80a5488c.js?v=1709569591' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Creating metadata using Ecological Metadata Language (EML) standard with EML Assembly Line functionalities">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-04 14:51:36 +0000">
+<meta name="DC.date" content="2024-03-04 16:17:08 +0000">
 <meta name="DC.creator" content="Yvan Le Bras">
 <meta name="DC.creator" content="Glinez Thibaud"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -118,7 +118,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-03-04 14:51:36 +0000",
+  "dateModified": "2024-03-04 16:17:08 +0000",
   "datePublished": "2024-03-04 15:18:02 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Creating metadata using Ecological Metadata Language (EML) standard with EML Assembly Line functionalities",
@@ -232,7 +232,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Creating metadata using Ecological Metadata Language (EML) standard with EML Assembly Line functionalities",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/MetaShARK_tutorial/tutorial.html",
-  "version": 37,
+  "version": 38,
   "timeRequired": "PT30M",
   "teaches": "Explain the necessity of using such tools when producing ecological metadata\n - Learn how to use the interactive tool MetaShARK\n - Understand the challenges MetaShARK is trying to respond to\n - Learn how to create rich metadata using Ecological Metadata Language (EML) standard\n - Learn how to update EML metadata",
   "keywords": [
@@ -548,7 +548,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "abstract": "<p align=\"justify\">This tutorial aims to teach <b>how to use functionalities of the EML Assembly Line R package to produce rich metadata</b> using the Ecological Metadata Language (EML) international metadata standard. Here, we will notably propose a concrete example on how to use <b>Galaxy Ecology tools to create, evaluate and modify EML metadata</b> content using both EML Assemby Line metadata template tabular files, easily readable and editable by humans, and XML file, devoted to machine.</p>"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709565541'></script>
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709569591'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -950,7 +950,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 37 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 38 </div>
 
     </blockquote>
     </section>
@@ -1022,10 +1022,10 @@ https://zenodo.org/records/10663465/files/datafile_2.tsv
 https://zenodo.org/records/10663465/files/LakeGeneva_phytoplankton_1974-2004.nc
 https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
 </code></pre></div>      </div>
-      <p>&lt;img src=”./Images/0_Upload_datafiles.png” width=100%&gt;</p>
+      <p><a href="./Images/0_Upload_datafiles.png" rel="noopener noreferrer"><img src="./Images/0_Upload_datafiles.png" alt="Upload datafiles. " width="1916" height="1080" loading="lazy" /></a></p>
     </li>
     <li>Import shapefile related files into Galaxy using the Galaxy upload tool, then on the “composite” tab, specifying “shp” composite type, then uploading .dbf, .shp and .shx files on the dedicated spaces.
-&lt;img src=”./Images/1_upload_shapefile.png” width=100%&gt;</li>
+<a href="./Images/1_upload_shapefile.png" rel="noopener noreferrer"><img src="./Images/1_upload_shapefile.png" alt="Upload shapefile. " width="1437" height="652" loading="lazy" /></a></li>
   </ol>
 </blockquote>
 
@@ -1044,7 +1044,7 @@ https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
 
 <p>To start creating metadata, you need to reach the <strong>Fill in EML</strong> module, then specify or complete the automatic <code class="language-plaintext highlighter-rouge">Data package name</code> and mention the <code class="language-plaintext highlighter-rouge">Dataset title</code>. Here a title can be “Manage heterogeneous data files through EML”. Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on “Create”.</p>
 
-<p>&lt;img src=”./Images/3_MetaShARK_create.png” width=100%&gt;</p>
+<p><a href="./Images/3_MetaShARK_create.png" rel="noopener noreferrer"><img src="./Images/3_MetaShARK_create.png" alt="Create EML Assembly Line &quot;data package&quot;. " width="1922" height="809" loading="lazy" /></a></p>
 
 <p>Then you can upload datafiles. Here, you can import these files from the downloaded Zenodo archive (link : https://zenodo.org/api/records/10663465/files-archive):</p>
 
@@ -1064,31 +1064,31 @@ https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
   <p>The folder contains many files with different extensions, which is no problem for MetaShark, which is able to recognise several types of file extension!</p>
 </blockquote>
 
-<p>&lt;img src=”./Images/4_MetaShARK_upload.png” width=100%&gt;</p>
+<p><a href="./Images/4_MetaShARK_upload.png" rel="noopener noreferrer"><img src="./Images/4_MetaShARK_upload.png" alt="Upload datafiles on MetaShARK. " width="1915" height="1079" loading="lazy" /></a></p>
 
 <p align="justify">MetaShARK will normally guess that the three `02_Ref` files are representing a uniq shapefile. MetaShARK will normally guess each data type and infer list of attributes for each file but the geotiff `Present.Surface.pH.tif` one. So now you need to select this datafile and upload the `attributes_Present.Surface.pH.txt` metadata template file so MetaShARK can fill attributes of this file (here the attribute is named "Present.Surface.pH").</p>
 
-<p>&lt;img src=”./Images/5_MetaShARK_geotiffattributes.png” width=100%&gt;</p>
+<p><a href="./Images/5_MetaShARK_geotiffattributes.png" rel="noopener noreferrer"><img src="./Images/5_MetaShARK_geotiffattributes.png" alt="Upload metadata template for geotiff attributes. " width="1894" height="1019" loading="lazy" /></a></p>
 
 <p align="justify">Then you can provide a description for this attribute, for example "Present surface pH", then look at each attribute information of each data file so you can click on the "Next" button and go to the next step, to give informations on categorical variables!</p>
 
-<p>&lt;img src=”./Images/6_MetaShARK_catvars.png” width=100%&gt;</p>
+<p><a href="./Images/6_MetaShARK_catvars.png" rel="noopener noreferrer"><img src="./Images/6_MetaShARK_catvars.png" alt="Categorical variables. " width="1920" height="1080" loading="lazy" /></a></p>
 
 <p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
 
-<p>&lt;img src=”./Images/7_MetaShARK_spatialinfo.png” width=100%&gt;</p>
+<p><a href="./Images/7_MetaShARK_spatialinfo.png" rel="noopener noreferrer"><img src="./Images/7_MetaShARK_spatialinfo.png" alt="Spatial information. " width="1922" height="1051" loading="lazy" /></a></p>
 
 <p align="justify">Next step is devoted to specifying geographic coverage.<br /><br /> You can use a method between "columns" or "custom". "Custom" allows you to create one to several geographical sites using a map widget where you can draw limits of each site or enter directly latitude and longitude coordinates. "Columns" method, used here, allows you to specify an attribute containing site names then associated latitude and longitudes attributes.</p>
 
-<p>&lt;img src=”./Images/8_MetaShARK_geocov.png” width=100%&gt;</p>
+<p><a href="./Images/8_MetaShARK_geocov.png" rel="noopener noreferrer"><img src="./Images/8_MetaShARK_geocov.png" alt="Geographic coverage. " width="1917" height="1074" loading="lazy" /></a></p>
 
 <p align="justify">Now geographic coverage is set, one can specific taxonomic coverage.<br /><br /> To do so, you can select a data attribute containing taxonomic information then select kind of notation you want to have and finally on which taxonomic authority (or authorities) information will be compared. Note that this can take a while if you have a lot of taxons and time is duplicated for each selected additional authority.</p>
 
-<p>&lt;img src=”./Images/9_MetaShARK_taxcov.png” width=100%&gt;</p>
+<p><a href="./Images/9_MetaShARK_taxcov.png" rel="noopener noreferrer"><img src="./Images/9_MetaShARK_taxcov.png" alt="Taxonomic coverage. " width="1918" height="953" loading="lazy" /></a></p>
 
 <p align="justify">Now we can fill personal informations.<br /><br /> To do so, the easiest way is to provide ORCID identifiers for each individual person involved as creator, contact and/or PI. Depending on the information filled in ORCID by each individual and on the level of accessibility of each, all field can be automatically filled. If "PI" is selected, you can specify a project name, funder name and related funding number.</p>
 
-<p>&lt;img src=”./Images/10_MetaShARK_personal.png” width=100%&gt;</p>
+<p><a href="./Images/10_MetaShARK_personal.png" rel="noopener noreferrer"><img src="./Images/10_MetaShARK_personal.png" alt="Personal informations. " width="1920" height="887" loading="lazy" /></a></p>
 
 <p>Then you can add final elements as:</p>
 
@@ -1096,19 +1096,19 @@ https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
   <li>An abstract (writing directly on the dedicated field or uploading a text file containing the abstract)</li>
 </ul>
 
-<p>&lt;img src=”./Images/11_MetaShARK_abstract.png” width=100%&gt;</p>
+<p><a href="./Images/11_MetaShARK_abstract.png" rel="noopener noreferrer"><img src="./Images/11_MetaShARK_abstract.png" alt="Abstract. " width="1893" height="1075" loading="lazy" /></a></p>
 
 <ul>
   <li>Methods (writing directly on the dedicated field or uploading a text file, can be in markdown, containing details of the methods used to create data files)</li>
 </ul>
 
-<p>&lt;img src=”./Images/12_MetaShARK_methods.png” width=100%&gt;</p>
+<p><a href="./Images/12_MetaShARK_methods.png" rel="noopener noreferrer"><img src="./Images/12_MetaShARK_methods.png" alt="Methods. " width="1891" height="1049" loading="lazy" /></a></p>
 
 <ul>
   <li>Keywords, who can be linked to keyword thesaurus. This allows you to create “group” of keywords and/or refer to existing terms classifications as we can find in terminological resources such as ontologies or thesaurus.</li>
 </ul>
 
-<p>&lt;img src=”./Images/13_MetaShARK_keywords.png” width=100%&gt;</p>
+<p><a href="./Images/13_MetaShARK_keywords.png" rel="noopener noreferrer"><img src="./Images/13_MetaShARK_keywords.png" alt="Keywords. " width="1888" height="1078" loading="lazy" /></a></p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-tip"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: TIP</div>
@@ -1122,15 +1122,15 @@ https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
 
   <p align="justify">You then can  use the `+` button on the keyword space to **Add keyword with dataset annotation**. You will have to choose a "predicate", from IAO ontology, then an "object" from ontologies coming from Bioportal to add information concerning a "subject", the ‘thing’ being annotated, here, regarding keyword, "dataset", but you can also apply the same to datafiles "attributes".</p>
 
-  <p>&lt;img src=”./Images/17_MetaShARK_annotations_predicate.png” width=100%&gt;</p>
+  <p><a href="./Images/17_MetaShARK_annotations_predicate.png" rel="noopener noreferrer"><img src="./Images/17_MetaShARK_annotations_predicate.png" alt="Add semantic annotation predicate. " width="1874" height="1063" loading="lazy" /></a></p>
 
-  <p>&lt;img src=”./Images/18_MetaShARK_annotations_object.png” width=100%&gt;</p>
+  <p><a href="./Images/18_MetaShARK_annotations_object.png" rel="noopener noreferrer"><img src="./Images/18_MetaShARK_annotations_object.png" alt="Add semantic annotation object. " width="1836" height="1062" loading="lazy" /></a></p>
 
 </blockquote>
 
 <p align="justify">Finally, you can specify a temporal coverage and go to the last step of this MetaShARK workflow: Generat an EML metadata file! If everything is ok, you will have creation of an EML metadata file.</p>
 
-<p>&lt;img src=”./Images/14_MetaShARK_makeeml.png” width=100%&gt;</p>
+<p><a href="./Images/14_MetaShARK_makeeml.png" rel="noopener noreferrer"><img src="./Images/14_MetaShARK_makeeml.png" alt="Produce EML metadata file. " width="1920" height="1080" loading="lazy" /></a></p>
 
 <p align="justify">Once EML written, you can <b>download the data package through the button</b> "Download Data Package". This will allow you to <b>download a zip archive</b> you can unzip on your local computer. Resulting files are organized through 2 main folders : </p>
 
@@ -1166,11 +1166,11 @@ the data package you created and click <strong>Load</strong>.</p>
 
 <p>To evaluate and modify metadata elements you have created, you can upload the EML xml file on the Galaxy history you created and all MetaShARK metadata templates files.</p>
 
-<p>&lt;img src=”./Images/15_MetaShRIMPS.png” width=100%&gt;</p>
+<p><a href="./Images/15_MetaShRIMPS.png" rel="noopener noreferrer"><img src="./Images/15_MetaShRIMPS.png" alt="Use MetaShRIMPS. " width="1919" height="1080" loading="lazy" /></a></p>
 
 <p>Open the <a href="https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps">MetaShRIMPS interactive tool form</a> and select the EML xml file you just generate with MetaShARK. Clicking on Execute will launch the MetaShRIMPS R Shiny app, the message <code class="language-plaintext highlighter-rouge">There is an InteractiveTool result view available, waiting for view to become active... </code> is displayed until the app will be ready to use. After some time, the message <code class="language-plaintext highlighter-rouge">There is an InteractiveTool result view available</code> confirm the app is deployed and you can access it clicking on <strong>Open</strong>. You will then have an interface looking like this:</p>
 
-<p>&lt;img src=”./Images/upload_1.png” width=100%&gt;</p>
+<p><a href="./Images/upload_1.png" rel="noopener noreferrer"><img src="./Images/upload_1.png" alt="MetaShRIMPS use. " width="1110" height="521" loading="lazy" /></a></p>
 
 <p>Click on the <strong>Execute</strong> Button, 2 new tabs called “Draft of Data Paper” and “Fair Assessment”  will appear.
 You can access all of the tool outputs by clicking on each tab (it can take a little time for your results to be displayed).</p>
@@ -1183,13 +1183,13 @@ You can access all of the tool outputs by clicking on each tab (it can take a li
   <li>You can at the top of the page <strong>download the draft</strong> in either an <em>HTML format</em> …. :</li>
 </ul>
 
-<p>&lt;img src=”./Images/Download_HTML.png” width=50%&gt;</p>
+<p><a href="./Images/Download_HTML.png" rel="noopener noreferrer"><img src="./Images/Download_HTML.png" alt="MetaShRIMPS data paper download in HTLM format. " width="1920" height="1080" loading="lazy" /></a></p>
 
 <ul>
   <li>…. or an editable <em>docx format</em> :</li>
 </ul>
 
-<p>&lt;img src=”./Images/Download_docx.png” width=50%&gt;</p>
+<p><a href="./Images/Download_docx.png" rel="noopener noreferrer"><img src="./Images/Download_docx.png" alt="MetaShRIMPS editable data paper download in docx format. " width="1267" height="989" loading="lazy" /></a></p>
 
 <hr />
 
@@ -1201,7 +1201,7 @@ You can access all of the tool outputs by clicking on each tab (it can take a li
 <p><a href="https://www.go-fair.org/fair-principles/">FAIR</a> stand for <strong>Findable, Accessible, Interoperable, Reusable</strong>. 
 <br /> <br /></p>
 
-<p>&lt;img src=”./Images/FAIR_data_principles.jpg” width=65%&gt;</p>
+<p><a href="./Images/FAIR_data_principles.jpg" rel="noopener noreferrer"><img src="./Images/FAIR_data_principles.jpg" alt="FAIR principles. " width="1200" height="407" loading="lazy" /></a></p>
 
 <p><br /></p>
 
@@ -1492,7 +1492,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/0b820e82919364111d39567aa92abcb3c55a3643">0b820e8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/f3a615fcaf39a8cc1923a7f96d5cb309a121da36">f3a615f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1516,7 +1516,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709565541'></script>
+        <script src='/training-material/assets/js/bundle.80a5488c.js?v=1709569591'></script>
         
     </body>
 </html>
