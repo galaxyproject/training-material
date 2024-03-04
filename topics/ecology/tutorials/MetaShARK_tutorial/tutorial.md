@@ -89,9 +89,9 @@ Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiver
 >    https://zenodo.org/records/10663465/files/LakeGeneva_phytoplankton_1974-2004.nc
 >    https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
 >    ```
->    <img src="./Images/0_Upload_datafiles.png" width=100%>
+>    ![Upload datafiles](./Images/0_Upload_datafiles.png)
 > 6. Import shapefile related files into Galaxy using the Galaxy upload tool, then on the "composite" tab, specifying "shp" composite type, then uploading .dbf, .shp and .shx files on the dedicated spaces.
->    <img src="./Images/1_upload_shapefile.png" width=100%>
+>    ![Upload shapefile](./Images/1_upload_shapefile.png)
 {: .hands_on}
 
 # 3] MetaShARK 🦈 : Write an EML document 
@@ -108,7 +108,7 @@ When oppening MetaShARK, you will have an interface looking like this :
 
 To start creating metadata, you need to reach the **Fill in EML** module, then specify or complete the automatic `Data package name` and mention the `Dataset title`. Here a title can be "Manage heterogeneous data files through EML". Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on "Create". 
 
-<img src="./Images/3_MetaShARK_create.png" width=100%>
+![Create EML Assembly Line "data package"](./Images/3_MetaShARK_create.png)
 
 Then you can upload datafiles. Here, you can import these files from the downloaded Zenodo archive (link : https://zenodo.org/api/records/10663465/files-archive):
 
@@ -125,45 +125,45 @@ Then you can upload datafiles. Here, you can import these files from the downloa
 > The folder contains many files with different extensions, which is no problem for MetaShark, which is able to recognise several types of file extension!
 {: .comment}
 
-<img src="./Images/4_MetaShARK_upload.png" width=100%>
+![Upload datafiles on MetaShARK](./Images/4_MetaShARK_upload.png)
 
 <p align="justify">MetaShARK will normally guess that the three `02_Ref` files are representing a uniq shapefile. MetaShARK will normally guess each data type and infer list of attributes for each file but the geotiff `Present.Surface.pH.tif` one. So now you need to select this datafile and upload the `attributes_Present.Surface.pH.txt` metadata template file so MetaShARK can fill attributes of this file (here the attribute is named "Present.Surface.pH").</p>
 
-<img src="./Images/5_MetaShARK_geotiffattributes.png" width=100%>
+![Upload metadata template for geotiff attributes](./Images/5_MetaShARK_geotiffattributes.png)
 
 <p align="justify">Then you can provide a description for this attribute, for example "Present surface pH", then look at each attribute information of each data file so you can click on the "Next" button and go to the next step, to give informations on categorical variables!</p>
 
-<img src="./Images/6_MetaShARK_catvars.png" width=100%>
+![Categorical variables](./Images/6_MetaShARK_catvars.png)
 
 <p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
 
-<img src="./Images/7_MetaShARK_spatialinfo.png" width=100%>
+![Spatial information](./Images/7_MetaShARK_spatialinfo.png)
 
 <p align="justify">Next step is devoted to specifying geographic coverage.<br><br> You can use a method between "columns" or "custom". "Custom" allows you to create one to several geographical sites using a map widget where you can draw limits of each site or enter directly latitude and longitude coordinates. "Columns" method, used here, allows you to specify an attribute containing site names then associated latitude and longitudes attributes.</p>
 
-<img src="./Images/8_MetaShARK_geocov.png" width=100%>
+![Geographic coverage](./Images/8_MetaShARK_geocov.png)
 
 <p align="justify">Now geographic coverage is set, one can specific taxonomic coverage.<br><br> To do so, you can select a data attribute containing taxonomic information then select kind of notation you want to have and finally on which taxonomic authority (or authorities) information will be compared. Note that this can take a while if you have a lot of taxons and time is duplicated for each selected additional authority.</p>
 
-<img src="./Images/9_MetaShARK_taxcov.png" width=100%>
+![Taxonomic coverage](./Images/9_MetaShARK_taxcov.png)
 
 <p align="justify">Now we can fill personal informations.<br><br> To do so, the easiest way is to provide ORCID identifiers for each individual person involved as creator, contact and/or PI. Depending on the information filled in ORCID by each individual and on the level of accessibility of each, all field can be automatically filled. If "PI" is selected, you can specify a project name, funder name and related funding number.</p>
 
-<img src="./Images/10_MetaShARK_personal.png" width=100%>
+![Personal informations](./Images/10_MetaShARK_personal.png)
 
 Then you can add final elements as:
 
 - An abstract (writing directly on the dedicated field or uploading a text file containing the abstract)
 
-<img src="./Images/11_MetaShARK_abstract.png" width=100%>
+![Abstract](./Images/11_MetaShARK_abstract.png)
 
 - Methods (writing directly on the dedicated field or uploading a text file, can be in markdown, containing details of the methods used to create data files)
 
-<img src="./Images/12_MetaShARK_methods.png" width=100%>
+![Methods](./Images/12_MetaShARK_methods.png)
 
 - Keywords, who can be linked to keyword thesaurus. This allows you to create "group" of keywords and/or refer to existing terms classifications as we can find in terminological resources such as ontologies or thesaurus.
 
-<img src="./Images/13_MetaShARK_keywords.png" width=100%>
+![Keywords](./Images/13_MetaShARK_keywords.png)
 
 > <comment-title>TIP</comment-title>
 > **You can add [semantic annotations](https://eml.ecoinformatics.org/semantic-annotation-primer)!**
@@ -178,15 +178,15 @@ Then you can add final elements as:
 > 
 > <p align="justify">You then can  use the `+` button on the keyword space to **Add keyword with dataset annotation**. You will have to choose a "predicate", from IAO ontology, then an "object" from ontologies coming from Bioportal to add information concerning a "subject", the ‘thing’ being annotated, here, regarding keyword, "dataset", but you can also apply the same to datafiles "attributes".</p>
 > 
-> <img src="./Images/17_MetaShARK_annotations_predicate.png" width=100%>
+> ![Add semantic annotation predicate](./Images/17_MetaShARK_annotations_predicate.png)
 > 
-> <img src="./Images/18_MetaShARK_annotations_object.png" width=100%>
+> ![Add semantic annotation object](./Images/18_MetaShARK_annotations_object.png)
 > 
 {: .comment}
 
 <p align="justify">Finally, you can specify a temporal coverage and go to the last step of this MetaShARK workflow: Generat an EML metadata file! If everything is ok, you will have creation of an EML metadata file.</p>
 
-<img src="./Images/14_MetaShARK_makeeml.png" width=100%>
+![Produce EML metadata file](./Images/14_MetaShARK_makeeml.png)
 
 <p align="justify">Once EML written, you can <b>download the data package through the button</b> "Download Data Package". This will allow you to <b>download a zip archive</b> you can unzip on your local computer. Resulting files are organized through 2 main folders : </p>
 
@@ -217,11 +217,11 @@ Then you can add final elements as:
 
 To evaluate and modify metadata elements you have created, you can upload the EML xml file on the Galaxy history you created and all MetaShARK metadata templates files.
 
-<img src="./Images/15_MetaShRIMPS.png" width=100%>
+![Use MetaShRIMPS](./Images/15_MetaShRIMPS.png)
 
 Open the [MetaShRIMPS interactive tool form](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_metashrimps) and select the EML xml file you just generate with MetaShARK. Clicking on Execute will launch the MetaShRIMPS R Shiny app, the message `There is an InteractiveTool result view available, waiting for view to become active... ` is displayed until the app will be ready to use. After some time, the message `There is an InteractiveTool result view available` confirm the app is deployed and you can access it clicking on **Open**. You will then have an interface looking like this:
 
-<img src="./Images/upload_1.png" width=100%>
+![MetaShRIMPS use](./Images/upload_1.png)
 
 Click on the **Execute** Button, 2 new tabs called "Draft of Data Paper" and "Fair Assessment"  will appear.
 You can access all of the tool outputs by clicking on each tab (it can take a little time for your results to be displayed).
@@ -232,11 +232,11 @@ You can access all of the tool outputs by clicking on each tab (it can take a li
 
 - You can at the top of the page **download the draft** in either an _HTML format_ .... :
 
-<img src="./Images/Download_HTML.png" width=50%>
+![MetaShRIMPS data paper download in HTLM format](./Images/Download_HTML.png)
 
 - .... or an editable _docx format_ :
 
-<img src="./Images/Download_docx.png" width=50%>
+![MetaShRIMPS editable data paper download in docx format](./Images/Download_docx.png)
 
 <hr>
 Voir comment mettre les deux photos côtés à côtes ou un truc mieux
@@ -247,7 +247,7 @@ Voir comment mettre les deux photos côtés à côtes ou un truc mieux
 [FAIR](https://www.go-fair.org/fair-principles/) stand for **Findable, Accessible, Interoperable, Reusable**. 
 <br> <br>
 
-<img src="./Images/FAIR_data_principles.jpg" width=65%>
+![FAIR principles](./Images/FAIR_data_principles.jpg)
 
  <br>
 
