@@ -90,7 +90,7 @@
       "name": "Long non-coding RNAs (lncRNAs) annotation with FEELnc",
       "title": "Long non-coding RNAs (lncRNAs) annotation with FEELnc",
       "test_results": null,
-      "modified": "2024-03-03 00:05:33 +0000",
+      "modified": "2024-03-04 00:05:07 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmapped_RNASeq.bam\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\ngenome_annotation.gff3\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\ngenome_assembly.fasta\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"StringTie\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  4[\"gffread\"];\n  1 -->|output| 4;\n  5[\"FEELnc\"];\n  3 -->|output_gtf| 5;\n  2 -->|output| 5;\n  4 -->|output_gtf| 5;\n  4055b259-173c-492d-86a4-5e662b663421[\"Output\\nmRNAs\"];\n  5 --> 4055b259-173c-492d-86a4-5e662b663421;\n  style 4055b259-173c-492d-86a4-5e662b663421 stroke:#2c3143,stroke-width:4px;\n  abc029ba-b7ba-4586-88b4-5e5d758c2f39[\"Output\\nlncRNAs\"];\n  5 --> abc029ba-b7ba-4586-88b4-5e5d758c2f39;\n  style abc029ba-b7ba-4586-88b4-5e5d758c2f39 stroke:#2c3143,stroke-width:4px;\n  93ff3464-d1bb-4059-86af-3e703da3e542[\"Output\\nClassifier output\"];\n  5 --> 93ff3464-d1bb-4059-86af-3e703da3e542;\n  style 93ff3464-d1bb-4059-86af-3e703da3e542 stroke:#2c3143,stroke-width:4px;\n  6[\"Concatenate datasets\"];\n  4 -->|output_gtf| 6;\n  5 -->|candidate_lncRNA| 6;\n  7b91b6a4-ef67-4359-9c93-eabcc021b0fc[\"Output\\nfinal_annotation\"];\n  6 --> 7b91b6a4-ef67-4359-9c93-eabcc021b0fc;\n  style 7b91b6a4-ef67-4359-9c93-eabcc021b0fc stroke:#2c3143,stroke-width:4px;"
     }
   ],
