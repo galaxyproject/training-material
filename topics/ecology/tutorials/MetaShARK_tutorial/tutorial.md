@@ -41,12 +41,14 @@ contributions:
 
 <p align="justify">This tutorial aims to teach <b>how to use functionalities of the EML Assembly Line R package to produce rich metadata</b> using the Ecological Metadata Language (EML) international metadata standard. Here, we will notably propose a concrete example on how to use <b>Galaxy Ecology tools to create, evaluate and modify EML metadata</b> content using both EML Assemby Line metadata template tabular files, easily readable and editable by humans, and XML file, devoted to machine.</p>
 
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
-> TOC TABLE OF CONTENT
-
-
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # 1] How can EML Assembly Line functionalities help producing rich metadata easily?
 
