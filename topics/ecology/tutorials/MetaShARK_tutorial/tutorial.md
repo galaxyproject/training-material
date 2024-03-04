@@ -99,7 +99,7 @@ To deploy a MetaShARK app, you can go to the Galaxy tool {% tool [MetaShARK](int
 
 When oppening MetaShARK, you will have an interface looking like this :
 
-<img src="./Images/2_MetaShARK.png" width=100%>
+![](./Images/2_MetaShARK.png)
 
 To start creating metadata, you need to reach the **Fill in EML** module, then specify or complete the automatic `Data package name` and mention the `Dataset title`. Here a title can be "Manage heterogeneous data files through EML". Finally, you can choose an open licence between CC-BY-4.0, default, or CC0 then click on "Create". 
 
