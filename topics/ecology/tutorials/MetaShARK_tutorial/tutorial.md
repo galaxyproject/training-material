@@ -66,11 +66,13 @@ Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiver
 
 <br>
 
-> [!NOTE]
-> What is a **Data Paper**?
+> <comment-title>What is a **Data Paper**?</comment-title>
 > <p align="justify"> According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
 > A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
 > Data papers provide recognition for this effort by means of a scholarly article.</p>
+>    {: .comment}
+
+
 
 # 2] Get data to describe 💾📂
 
