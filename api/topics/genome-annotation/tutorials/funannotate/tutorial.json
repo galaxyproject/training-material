@@ -147,7 +147,7 @@
       "name": "Funannotate",
       "title": "Funannotate",
       "test_results": null,
-      "modified": "2024-03-04 09:17:24 +0000",
+      "modified": "2024-03-04 09:39:33 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nGenome assembly\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nRNASeq reads forward\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nRNASeq reads reverse\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nProtein evidence sequences\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nNCBI submission template\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nAlternate annotation gbk\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nAlternate annotation gff3\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"RNA STAR\"];\n  0 -->|output| 7;\n  1 -->|output| 7;\n  2 -->|output| 7;\n  79cf59ea-3aef-4cb8-9c70-5b42e03a5da9[\"Output\\nMapped RNASeq\"];\n  7 --> 79cf59ea-3aef-4cb8-9c70-5b42e03a5da9;\n  style 79cf59ea-3aef-4cb8-9c70-5b42e03a5da9 stroke:#2c3143,stroke-width:4px;\n  8[\"Funannotate predict annotation\"];\n  3 -->|output| 8;\n  7 -->|mapped_reads| 8;\n  0 -->|output| 8;\n  9[\"eggNOG Mapper\"];\n  8 -->|fasta_proteins| 9;\n  10[\"InterProScan\"];\n  8 -->|fasta_proteins| 10;\n  11[\"Funannotate functional\"];\n  9 -->|annotations| 11;\n  8 -->|annot_gbk| 11;\n  10 -->|outfile_xml| 11;\n  4 -->|output| 11;\n  d0694cd1-6d81-4d72-83b9-94cb57dc1502[\"Output\\nFinal annotation (genbank)\"];\n  11 --> d0694cd1-6d81-4d72-83b9-94cb57dc1502;\n  style d0694cd1-6d81-4d72-83b9-94cb57dc1502 stroke:#2c3143,stroke-width:4px;\n  9a1e7b70-1090-41ed-8637-65b7372a9f6c[\"Output\\nFinal annotation (CDS sequences)\"];\n  11 --> 9a1e7b70-1090-41ed-8637-65b7372a9f6c;\n  style 9a1e7b70-1090-41ed-8637-65b7372a9f6c stroke:#2c3143,stroke-width:4px;\n  99fffa40-2196-491d-9a66-559ebf2d9561[\"Output\\nFinal annotation (mRNA sequences)\"];\n  11 --> 99fffa40-2196-491d-9a66-559ebf2d9561;\n  style 99fffa40-2196-491d-9a66-559ebf2d9561 stroke:#2c3143,stroke-width:4px;\n  17b03b77-0485-4176-b2b3-03bfa2d3bcb0[\"Output\\nFinal annotation (protein sequences)\"];\n  11 --> 17b03b77-0485-4176-b2b3-03bfa2d3bcb0;\n  style 17b03b77-0485-4176-b2b3-03bfa2d3bcb0 stroke:#2c3143,stroke-width:4px;\n  4a0602fc-e6d2-43fc-9957-344707c22c05[\"Output\\nFinal annotation (GFF3)\"];\n  11 --> 4a0602fc-e6d2-43fc-9957-344707c22c05;\n  style 4a0602fc-e6d2-43fc-9957-344707c22c05 stroke:#2c3143,stroke-width:4px;\n  12[\"JBrowse\"];\n  0 -->|output| 12;\n  11 -->|gff3| 12;\n  7 -->|mapped_reads| 12;\n  ac4d8805-f123-44d2-b30f-8ac906cc471f[\"Output\\nJBrowse\"];\n  12 --> ac4d8805-f123-44d2-b30f-8ac906cc471f;\n  style ac4d8805-f123-44d2-b30f-8ac906cc471f stroke:#2c3143,stroke-width:4px;\n  13[\"Funannotate compare\"];\n  5 -->|output| 13;\n  11 -->|gbk| 13;\n  e531c81f-f6b7-4c82-a712-c562873ff714[\"Output\\nFunannotate compare report\"];\n  13 --> e531c81f-f6b7-4c82-a712-c562873ff714;\n  style e531c81f-f6b7-4c82-a712-c562873ff714 stroke:#2c3143,stroke-width:4px;\n  14[\"AEGeAn ParsEval\"];\n  6 -->|output| 14;\n  11 -->|gff3| 14;\n  0d776b46-2c1c-4083-9f9d-a213fa62eb81[\"Output\\nAEGeAN report\"];\n  14 --> 0d776b46-2c1c-4083-9f9d-a213fa62eb81;\n  style 0d776b46-2c1c-4083-9f9d-a213fa62eb81 stroke:#2c3143,stroke-width:4px;\n  15[\"Busco\"];\n  11 -->|fa_proteins| 15;\n  57a619f5-b331-4ca6-8e6e-72eb61860032[\"Output\\nBusco summary\"];\n  15 --> 57a619f5-b331-4ca6-8e6e-72eb61860032;\n  style 57a619f5-b331-4ca6-8e6e-72eb61860032 stroke:#2c3143,stroke-width:4px;\n  97d23764-ad4a-4d69-948c-c81afb76fbaf[\"Output\\nBusco image\"];\n  15 --> 97d23764-ad4a-4d69-948c-c81afb76fbaf;\n  style 97d23764-ad4a-4d69-948c-c81afb76fbaf stroke:#2c3143,stroke-width:4px;"
     }
   ],
@@ -187,11 +187,6 @@
       }
     ],
     "inexact": [
-      {
-        "url": "https://usegalaxy.be/",
-        "name": "UseGalaxy.be",
-        "usegalaxy": false
-      },
       {
         "url": "https://usegalaxy.org.au",
         "name": "UseGalaxy.org.au",

@@ -113,7 +113,7 @@
           
 
           <div class="method-source-code" id="cached_command-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 155</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cached_command</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">command</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">discover_caches</span>.<span class="ruby-identifier">nil?</span>
 
@@ -141,7 +141,7 @@
           
 
           <div class="method-source-code" id="chase_rename-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 102</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">chase_rename</span>(<span class="ruby-identifier">renames</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">renames</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">path</span>
     <span class="ruby-identifier">chase_rename</span>(<span class="ruby-identifier">renames</span>, <span class="ruby-identifier">renames</span>[<span class="ruby-identifier">path</span>])
@@ -166,7 +166,7 @@
           
 
           <div class="method-source-code" id="command-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 166</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">command</span>
   <span class="ruby-string">`git log --first-parent --name-status --diff-filter=AR --pretty=&#39;GTN_GTN:%ct&#39; `</span>
 <span class="ruby-keyword">end</span></pre>
@@ -187,7 +187,7 @@
           
 
           <div class="method-source-code" id="discover_caches-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 137</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">discover_caches</span>
   <span class="ruby-comment"># Really there should only be one, but maybe someone&#39;s been silly so</span>
   <span class="ruby-comment"># we&#39;ll just take the first one we find.</span>
@@ -210,7 +210,7 @@
           
 
           <div class="method-source-code" id="generate_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 143</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_cache</span>
   <span class="ruby-identifier">rev</span> = <span class="ruby-string">`git rev-list -n 1 main`</span>.<span class="ruby-identifier">strip</span>
 
@@ -218,8 +218,9 @@
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-node">&quot;metadata/git-pub-#{rev}.txt&quot;</span>, <span class="ruby-identifier">command</span>)
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">prev</span> = <span class="ruby-identifier">discover_caches</span>
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-node">&quot;metadata/git-pub-#{rev}.txt&quot;</span>, <span class="ruby-identifier">cached_command</span>)
+    <span class="ruby-identifier">results</span> = <span class="ruby-identifier">cached_command</span>
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">prev</span>)
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-node">&quot;metadata/git-pub-#{rev}.txt&quot;</span>, <span class="ruby-identifier">results</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -239,7 +240,7 @@
           
 
           <div class="method-source-code" id="init_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 110</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">init_cache</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">nil?</span>
 
@@ -283,7 +284,7 @@
           
 
           <div class="method-source-code" id="obtain_time-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 174</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">obtain_time</span>(<span class="ruby-identifier">f</span>)
   <span class="ruby-identifier">init_cache</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">f</span>
@@ -316,7 +317,7 @@
           
 
           <div class="method-source-code" id="time_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 170</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">time_cache</span>
   <span class="ruby-identifier">@@TIME_CACHE</span>
 <span class="ruby-keyword">end</span></pre>
