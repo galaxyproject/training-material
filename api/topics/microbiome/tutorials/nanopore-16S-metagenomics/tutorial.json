@@ -76,7 +76,7 @@
       "name": "Training: 16S rRNA Analysis with Nanopore Sequencing Reads",
       "title": "Training: 16S rRNA Analysis with Nanopore Sequencing Reads",
       "test_results": null,
-      "modified": "2024-03-04 17:53:11 +0000",
+      "modified": "2024-03-04 23:15:40 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"MultiQC\"];\n  1 -->|text_file| 3;\n  4[\"fastp\"];\n  2 -->|outfile| 4;\n  5[\"FastQC\"];\n  4 -->|out1| 5;\n  6[\"Kraken2\"];\n  4 -->|out1| 6;\n  7[\"MultiQC\"];\n  5 -->|text_file| 7;\n  8[\"Reverse\"];\n  6 -->|report_output| 8;\n  9[\"Replace Text\"];\n  8 -->|out_file| 9;\n  10[\"Remove beginning\"];\n  9 -->|outfile| 10;\n  11[\"Krona pie chart\"];\n  10 -->|out_file1| 11;"
     }
   ],
