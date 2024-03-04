@@ -10,8 +10,6 @@ questions:
 - How to update metadata informations ?
 objectives:
 - Explain the necessity of using such tools when producing ecological metadata
-- Learn how to use the interactive tool MetaShARK
-- Understand the challenges MetaShARK is trying to respond to
 - Learn how to create rich metadata using Ecological Metadata Language (EML) standard
 - Learn how to update EML metadata
 time_estimation: 30M
