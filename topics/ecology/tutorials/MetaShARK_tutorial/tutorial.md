@@ -167,20 +167,22 @@ Then you can add final elements as:
 
 > <comment-title>TIP</comment-title>
 > **You can add [semantic annotations](https://eml.ecoinformatics.org/semantic-annotation-primer)!**
+> 
+>  
+> <p align="justify"> To do so, you need to reach the MetaShARK parameters (upper right icon) then enter your CEDAR token. To create a CEDAR account, you can 1/ register here http://cedar.metadatacenter.org/ then 2/ go on the "profile" on http://cedar.metadatacenter.org/ and there 3/ you can find the API key.</p>
+> 
+>  API key format to enter is something like: 
+> ```
+> api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63
+> ```
+> 
+> <p align="justify">You then can  use the `+` button on the keyword space to **Add keyword with dataset annotation**. You will have to choose a "predicate", from IAO ontology, then an "object" from ontologies coming from Bioportal to add information concerning a "subject", the ‘thing’ being annotated, here, regarding keyword, "dataset", but you can also apply the same to datafiles "attributes".</p>
+> 
+> <img src="./Images/17_MetaShARK_annotations_predicate.png" width=100%>
+> 
+> <img src="./Images/18_MetaShARK_annotations_object.png" width=100%>
+> 
 {: .comment}
- 
-<p align="justify"> To do so, you need to reach the MetaShARK parameters (upper right icon) then enter your CEDAR token. To create a CEDAR account, you can register here http://cedar.metadatacenter.org/.</p>
-
- API key format to enter is something like: 
-```
-api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63
-```
-
-<p align="justify">You then can  use the `+` button on the keyword space to **Add keyword with dataset annotation**. You will have to choose a "predicate", from IAO ontology, then an "object" from ontologies coming from Bioportal to add information concerning a "subject", the ‘thing’ being annotated, here, regarding keyword, "dataset", but you can also apply the same to datafiles "attributes".</p>
-
-<img src="./Images/17_MetaShARK_annotations_predicate.png" width=100%>
-
-<img src="./Images/18_MetaShARK_annotations_object.png" width=100%>
 
 <p align="justify">Finally, you can specify a temporal coverage and go to the last step of this MetaShARK workflow: Generat an EML metadata file! If everything is ok, you will have creation of an EML metadata file.</p>
 
