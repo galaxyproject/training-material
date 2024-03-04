@@ -70,7 +70,7 @@ Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiver
 > <p align="justify"> According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
 > A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
 > Data papers provide recognition for this effort by means of a scholarly article.</p>
->    {: .comment}
+{: .comment}
 
 
 
@@ -92,14 +92,15 @@ Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiver
 >    <img src="./Images/0_Upload_datafiles.png" width=100%>
 > 6. Import shapefile related files into Galaxy using the Galaxy upload tool, then on the "composite" tab, specifying "shp" composite type, then uploading .dbf, .shp and .shx files on the dedicated spaces.
 >    <img src="./Images/1_upload_shapefile.png" width=100%>
-
+{: .hands_on}
 
 # 3] MetaShARK 🦈 : Write an EML document 
 
 To deploy a MetaShARK app, you can go to the Galaxy tool {% tool [MetaShARK](interactive_tool_metashark) %} and click "Execute". Then, you have to wait the launch of the app, and when ready to be used, you will see the message "There is an InteractiveTool result view available," with an hyperlink on the "Open" statement allowing you to reach the app clicking on it.
 
-> [!WARNING]
+> <comment-title>WARNING</comment-title>
 > 🚧 Note that it is a beta version of MetaShARK R shiny app. You can thus encounter issues using it!
+{: .comment}
 
 When oppening MetaShARK, you will have an interface looking like this :
 
@@ -120,9 +121,9 @@ Then you can upload datafiles. Here, you can import these files from the downloa
  - 02_Ref.**shx**
  - 02_Ref.**dbf**
 
-> [!NOTE]
+> <comment-title>NOTE</comment-title>
 > The folder contains many files with different extensions, which is no problem for MetaShark, which is able to recognise several types of file extension!
-
+{: .comment}
 
 <img src="./Images/4_MetaShARK_upload.png" width=100%>
 
@@ -164,8 +165,9 @@ Then you can add final elements as:
 
 <img src="./Images/13_MetaShARK_keywords.png" width=100%>
 
-> [!TIP]
+> <comment-title>TIP</comment-title>
 > **You can add [semantic annotations](https://eml.ecoinformatics.org/semantic-annotation-primer)!**
+{: .comment}
  
 <p align="justify"> To do so, you need to reach the MetaShARK parameters (upper right icon) then enter your CEDAR token. To create a CEDAR account, you can register here http://cedar.metadatacenter.org/.</p>
 
@@ -197,8 +199,7 @@ api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63
 <p align="center"><b>👏 Congratulations! You've just produced your first EML yourself!👏</b></p>
 <hr>
 
-
-> [!CAUTION]
+> <comment-title>CAUTION</comment-title>
 > **At this final stage, MetaShARK can freeze and show like a "front grey filter"**
 > 
 > If this is the case, you can refresh MetaShARK app pressing F5 button of your keyboard for example. To dowload the resutling data package, you can go to the "Fill In" module, select the data package you created and click on "Download.zip".
@@ -207,7 +208,7 @@ api 205b1e521f2eaf0ad4a361c438b63205b1e521f2eaf0ad4a361c438b63c438b63
 > If you close MetaShARK navigator window, you can reopen it clicking on Menu > User > Active InteractiveTools.
 > You can here click on "metashark visualization" hyperlink. You can then go on the Fill In module, select 
 > the data package you created and click **Load**.
->
+{: .comment}
 
 
 # 4] MetaShRIMPS 🦐 : Modify created metadata element
@@ -252,8 +253,9 @@ Voir comment mettre les deux photos côtés à côtes ou un truc mieux
   
 There are several ways of computing the FAIR index, for each letter of the word is associated with a degree of FAIRitude of the data.</p>
 
-> [!NOTE]
+> <comment-title>NOTE</comment-title>
 > The aim is to propose a metadata quality index and to see how it is possible to improve, not to punish the user 👍
+{: .comment}
 
 By clicking on the `Fair Assessment` tab, you will access the FAIR Quality report of the metadata uploaded. 
 
@@ -270,15 +272,16 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 Image un peu laide, je l'a modifierai un peu sur Paint pour optimiser sa taille vis à vis du vide/blanc occupé par certaines parties
 <hr>
 
-> [!TIP]
+> <comment-title>TIP</comment-title>
 > **How you can improve your FAIR score?** 
 > 
 > You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. Two WARNING 
 > status lines  are related to an abstract content too short and an attribute definition too small.
 > 
 > ![Warning status lines](./Images/WARNING.png "Overall FAIR score") 
+{: .comment}
 
-> [!NOTE]
+> <comment-title>NOTE</comment-title>
 > **Update metadata content to elevate FAIR score**
 >
 > 1. Search "abstract" and "attributes_Present.Surface.pH.txt" metadarta files on your history
@@ -293,7 +296,7 @@ Image un peu laide, je l'a modifierai un peu sur Paint pour optimiser sa taille 
 >
 > 5. You can recreate an EML metadata file with [**Make EML**](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1) EAL tool and then redeploy a metashrimps tool on the new EML.
 >
-
+{: .comment}
 
 # 7] Conclusion
 
