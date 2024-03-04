@@ -39,8 +39,9 @@ module Gtn
         File.write("metadata/git-mod-#{rev}.txt", command)
       else
         prev = discover_caches
-        File.write("metadata/git-mod-#{rev}.txt", cached_command)
+        results = cached_command
         File.delete(prev)
+        File.write("metadata/git-mod-#{rev}.txt", results)
       end
     end
 
@@ -147,8 +148,9 @@ module Gtn
         File.write("metadata/git-pub-#{rev}.txt", command)
       else
         prev = discover_caches
-        File.write("metadata/git-pub-#{rev}.txt", cached_command)
+        results = cached_command
         File.delete(prev)
+        File.write("metadata/git-pub-#{rev}.txt", results)
       end
     end
 
