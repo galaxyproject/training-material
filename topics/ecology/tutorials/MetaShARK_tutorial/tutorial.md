@@ -253,10 +253,6 @@ There are several ways of computing the FAIR index, for each letter of the word 
 > [!NOTE]
 > The aim is to propose a metadata quality index and to see how it is possible to improve, not to punish the user 👍
 
-<hr>
-> Mettre une photo avec encadré rouge pour montrer où cliquer!!!⚠️
-<hr>
-
 By clicking on the `Fair Assessment` tab, you will access the FAIR Quality report of the metadata uploaded. 
 
 You will have access to different figures such as a **table displaying the results of all checks tested for your metadata**:
@@ -300,12 +296,5 @@ Image un peu laide, je l'a modifierai un peu sur Paint pour optimiser sa taille 
 # 7] Conclusion
 
 Here is the end of this short tutorial aiming in explaining the purpose of MetaShARK and how to use it.
-
-Resumé rapide de ce qui a été vu 
-
-1. _lorem ipsum_
-2. _lorem ipsum_
-3. _lorem ipsum_
-4. _lorem ipsum_
 
 Don't hesitate to contact us if you have any questions ☺️
