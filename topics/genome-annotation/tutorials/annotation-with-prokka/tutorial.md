@@ -4,8 +4,10 @@ layout: tutorial_hands_on
 title: "Genome annotation with Prokka"
 zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
 tags:
+  - gmod
   - prokaryote
   - microgalaxy
+  - jbrowse1
 questions:
   - "How can we annotate a bacterial genome?"
   - "How can we visualize annotated genomic features?"
@@ -23,6 +25,11 @@ contributors:
   - tseemann
   - slugger70
 subtopic: prokaryote
+follow_up_training:
+  - type: "internal"
+    topic_name: genome-annotation
+    tutorials:
+      - apollo
 ---
 
 In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.

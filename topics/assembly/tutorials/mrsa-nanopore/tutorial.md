@@ -22,6 +22,8 @@ tags:
 - nanopore
 - assembly
 - amr
+- gmod
+- jbrowse1
 - microgalaxy
 level: Introductory
 

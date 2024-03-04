@@ -16,7 +16,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          # Avg commits between successive monday:
+          #  Min.   :  2.0
+          #  1st Qu.: 25.0
+          #  Median : 54.5
+          #  Mean   : 65.2
+          #  3rd Qu.: 94.0
+          #  Max.   :282.0
+          fetch-depth: 400
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v2

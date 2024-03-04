@@ -15,9 +15,11 @@ key_points:
 - staramr is a powerful tool to predict ARGs and plasmid genes
 - Visualization of the ARGs and plasmid genes in their genomic context helps to make sense of the data
 tags:
+- gmod
 - illumina
 - amr
 - one-health
+- jbrowse1
 subtopic: prokaryote
 level: Introductory
 

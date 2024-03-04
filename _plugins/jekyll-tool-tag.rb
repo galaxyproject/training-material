@@ -23,21 +23,24 @@ module Jekyll
         # check if a variable was provided for the tool id
         tool = context[m[2].tr('{}', '')] || m[2]
         version = tool.split('/').last
+        # url encode
+        q = URI.encode_www_form_component("?tool_id=#{tool}")
+        tool_redirect = "https://my.galaxy.training/?path=#{q}"
 
         if tool.count('/').zero?
-          "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"button\">" \
+          "<a class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" href=\"#{tool_redirect}\">" \
             '<i class="fas fa-wrench" aria-hidden="true"></i> ' \
             "<strong>#{m[1]}</strong>" \
-            '</span>'
+            '</a>'
         else
-          "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"button\">" \
+          "<a class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" href=\"#{tool_redirect}\">" \
             '<i class="fas fa-wrench" aria-hidden="true"></i> ' \
             "<strong>#{m[1]}</strong> " \
             '(' \
             '<i class="fas fa-cubes" aria-hidden="true"></i> ' \
             "Galaxy version #{version}" \
             ')' \
-            '</span>'
+            '</a>'
         end
       else
         %(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>)
