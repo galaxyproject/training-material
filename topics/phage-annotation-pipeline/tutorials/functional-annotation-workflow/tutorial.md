@@ -10,26 +10,27 @@ This tutorial is used to run analyses for gene function prediction after the gen
 
 > ### Agenda
 >
-> 1. Workflow
-> 2. Completion
+> 1. Data retrieval from Apollo
+> 2. Running the workflow
 >
 {: .agenda}
 
-# Workflow
+# Data retrieval from Apollo
 
-To begin the analysis in Galaxy, the genome data must be retrieved from its Apollo record. Start by accessing Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy/)). It is recommended to create and name a new history. Once in the appropriate history, navigate to the [Retrieve Data tool](https://cpt.tamu.edu/galaxy-pub/tool_runner?tool_id=export) (use this [tool link](https://cpt.tamu.edu/galaxy-pub/tool_runner?tool_id=export) if you are CPT internal user) using the search bar at the top of the Tool panel on the left. Open the tool by clicking on the hyperlink of the same name underneath CPT: Get Data, and the parameters to adjust will load in the center pane. 
+To begin the analysis in Galaxy, the genome data must be retrieved from its Apollo record so that exists as datasets in your Galaxy history. This step will import the data contained in to top *User Annotation* track for the organism in Apollo. Once in the desired history, find the ***Retrieve Data*** *from Apollo into Galaxy* tool using the search bar at the top of the Tool panel on the left. Open the tool and the parameters will load in the center pane. 
 
-![](../../images/functional-annotation-workflow-screenshots/1_retrieve_data_tool.png)
+With the *Organism Common Name Source* field set at *Select*, use the *Organism* drop-down menu to select the name of the organism you wish to import, then click *Run Tool*. Note that by default the tool will retieve the GFF annotations and source DNA sequence as separate files. You have the option to import a combination GFF3 + DNA sequence file by setting the switch *Include fasta in the GFF3 file*.  The pipeline is currently designed to work with the GFF3 and DNA sequence as separate files.  The retrieval step will generate multiple datasets in your history. the datasets *Annotations from Apollo*, *Peptide sequences from Apollo* and *Metadata from Apollo* will be used for the functional workflow.
 
-Using the *Organism* drop-down menu, select the name of your phage, then click “Execute.”  *Note that by default the tool retrieves the "GFF annotations + whole genome".  You have the option to select other files (such as peptide/CDS sequences), which are not usually needed in our annotation pipeline.*   A message in a green box will appear when the retrieval has begun. Note that the following steps can be started as soon as the retrieval datasets appear in the history list (even before they turn green). The retrieval step will generate two files, "Annotation and Sequence from Apollo" and "Metadata from Apollo".  These data will serve as the input for the functional annotation workflow. 
+> ### {% icon tip %} Note that…
+> You will need the following datasets in your history to continue to running the functional workflow:
+> - *Annotations from Apollo*
+> - *Peptide sequences from Apollo*
+> - *Metadata from Apollo*
+> - The original FASTA DNA sequence file used to generate the organism during the [structural annotation]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/structural-annotation-workflow/tutorial.html) step.
+{: .tip}
 
-To import the functional workflow, click on the “Shared Data” drop-down list and select “Workflows”.
 
-![](../../images/functional-annotation-workflow-screenshots/3_shared_data_workflow.png)
-
-The next [page](https://cpt.tamu.edu/galaxy/workflows/list_published) will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available here. Look for the most recent Functional Annotation Workflow version labelled with the year and a version number, “PAP 202# Functional (v #.#)”. Click on the drop-down menu arrow for that most recent functional workflow, and select “Import”.
-
-![](../../images/functional-annotation-workflow-screenshots/functional_flow.PNG)
+To import the functional workflow, click on the “Shared Data” drop-down list and select “Workflows”.  The next page will list all the public workflows on the Galaxy instance. Find the functional workflow by using the top search bar; it will be named *CPT Phage Functional Workflow v[year]#*, and is also tagged with the terms "CPT" "phage" and "Apollo". Look for the most recent functional annotation workflow version labelled with the year and a version number. Click on the workflow name for the most recent functional workflow, and select “Import”.
 
 > ### {% icon tip %} Note that…
 > The screenshots displayed here may not precisely reflect what you see on your screen. As these are regularly updated, it is likely that the current version year or number is different. Just look for the most recent one.
