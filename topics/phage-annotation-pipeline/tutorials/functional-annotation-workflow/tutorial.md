@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 topic_name: phage-annotation-pipeline
 tutorial_name: functional-annotation-workflow
 ---
+Last updated: March 4, 2024
 
 # Functional Annotation Workflow
 
