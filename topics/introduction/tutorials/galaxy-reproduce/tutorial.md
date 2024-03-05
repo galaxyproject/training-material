@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "How to reproduce published Galaxy analyses"
-zenodo_link: https://zenodo.org/record/1319069/files/iris.csv
+zenodo_link: https://zenodo.org/record/1319069
 level: Introductory
 questions:
   - "How to reproduce published Galaxy results (workflows and histories)"
@@ -91,7 +91,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 
 > <hands-on-title>Data upload</hands-on-title>
 >
-> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1319069/files/iris.csv

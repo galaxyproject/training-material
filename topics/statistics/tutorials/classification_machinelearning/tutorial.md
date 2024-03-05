@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Classification in Machine Learning'
-zenodo_link: https://zenodo.org/record/3738729#.XoZyHXUzaV4
+zenodo_link: https://zenodo.org/record/3738729
 questions:
 - What is classification and how we can use classification techniques?
 objectives:
@@ -76,7 +76,7 @@ Let's begin by uploading the necessary datasets.
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/3738729#.Xs1EeHUzY5k)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/3738729/files/train_rows.csv
