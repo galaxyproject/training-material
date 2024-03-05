@@ -118,7 +118,7 @@ It is in the assessment system that the nature of the hidden curriculum is most 
 
 An illustrative example is provided by the research of Bowles and Gintis, who pointed out that students who are best suited to the social ordering of the education system also had significantly below average scores on measures of mental creativity and flexibility (Bowles and Gintis, Schooling in Capitalist America).
 
-Group evaluation can be considered as a pedagogical instrument for overcoming the traditional individualistic nature of the evaluation system, providing students with social contexts that emphasise social responsibility and group solidarity. According Giroux, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence ({% cite Giroux1988 %}).
+Group evaluation can be considered as an adequate pedagogical instrument for overcoming the drawbacks associated to the evaluation system, providing students with social contexts that emphasise social responsibility and group solidarity. According Giroux, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence ({% cite Giroux1988 %}).
 
 ## Technological infraestructure
 
