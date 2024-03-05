@@ -64,10 +64,10 @@ Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiver
 
 <br>
 
-> <comment-title>What is a **Data Paper**?</comment-title>
-> <p align="justify"> According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
+> <comment-title>What is a <b>Data Paper</b> ?</comment-title>
+> According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
 > A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
-> Data papers provide recognition for this effort by means of a scholarly article.</p>
+> Data papers provide recognition for this effort by means of a scholarly article.
 {: .comment}
 
 
@@ -163,7 +163,7 @@ Then you can add final elements as:
 
 ![Keywords](./Images/13_MetaShARK_keywords.png)
 
-> <comment-title>TIP</comment-title>
+> <comment-title>You can add Semantic Annotations</comment-title>
 > **You can add [semantic annotations](https://eml.ecoinformatics.org/semantic-annotation-primer)!**
 > 
 >  
@@ -199,16 +199,17 @@ Then you can add final elements as:
 <p align="center"><b>👏 Congratulations! You've just produced your first EML yourself!👏</b></p>
 <hr>
 
-> <comment-title>CAUTION</comment-title>
+> <warning-title>MetaShARK can Freeze</warning-title>
 > **At this final stage, MetaShARK can freeze and show like a "front grey filter"**
 > 
 > If this is the case, you can refresh MetaShARK app pressing F5 button of your keyboard for example. To dowload the resutling data package, you can go to the "Fill In" module, select the data package you created and click on "Download.zip".
->
-> Returning on your MetaShARK instance</tip-title>
+{: .warning}
+
+> <tip-title>Returning on your MetaShARK instance</tip-title>
 > If you close MetaShARK navigator window, you can reopen it clicking on Menu > User > Active InteractiveTools.
 > You can here click on "metashark visualization" hyperlink. You can then go on the Fill In module, select 
 > the data package you created and click **Load**.
-{: .comment}
+{: .tip}
 
 
 # 4] MetaShRIMPS 🦐 : Modify created metadata element
@@ -253,7 +254,7 @@ Voir comment mettre les deux photos côtés à côtes ou un truc mieux
   
 There are several ways of computing the FAIR index, for each letter of the word is associated with a degree of FAIRitude of the data.</p>
 
-> <comment-title>NOTE</comment-title>
+> <comment-title>Metadata Quality</comment-title>
 > The aim is to propose a metadata quality index and to see how it is possible to improve, not to punish the user 👍
 {: .comment}
 
@@ -272,8 +273,7 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 Image un peu laide, je l'a modifierai un peu sur Paint pour optimiser sa taille vis à vis du vide/blanc occupé par certaines parties
 <hr>
 
-> <comment-title>TIP</comment-title>
-> **How you can improve your FAIR score?** 
+> <comment-title>How you can improve your FAIR score?</comment-title>
 > 
 > You can look at the lines of the table for FAILURE (red) and WARNING (yellow) status. Two WARNING 
 > status lines  are related to an abstract content too short and an attribute definition too small.
@@ -281,8 +281,7 @@ Image un peu laide, je l'a modifierai un peu sur Paint pour optimiser sa taille 
 > ![Warning status lines](./Images/WARNING.png "Overall FAIR score") 
 {: .comment}
 
-> <comment-title>NOTE</comment-title>
-> **Update metadata content to elevate FAIR score**
+> <comment-title>Update metadata content to elevate FAIR score</comment-title>
 >
 > 1. Search "abstract" and "attributes_Present.Surface.pH.txt" metadarta files on your history
 >
