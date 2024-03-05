@@ -3,6 +3,8 @@ title: How does one compare metaproteomics measurements from two experimental co
 box_type: tip
 layout: faq
 contributors: [millen2223]
+redirect_from:
+ - /topics/proteomics/faqs/comparing_measurement
 ---
 
 For comparing taxonomy composition or functional content of two conditions in metaproteomics or metatranscriptomics studies, users are recommended to use metaQuantome. GTN tutorials for metaQuantome are available [in the proteomics topic.]({% link topics/proteomics/index.md %})
