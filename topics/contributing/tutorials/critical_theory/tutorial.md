@@ -106,7 +106,7 @@ could ask ourselves: does this aspiration impact in any way on the objectives of
 
 According Marcuse, the education system is political, so aspiring to its politicisation does not imply an inference in its functions ({% cite Marcuse1964 %}). La pretensión de apropiarse de aquellos conceptos que son espontáneamente experimentados como apoliticos representaría un claro ataque al pensamiento crítico, derived from the struggle for ideological-political hegemony(Zizek 2007). In the words of Giroux, when students have little room left to generate their own meanings, learning degenerates into a euphemism for a strategy of control ({% cite Giroux1988 %}).
 
-According the argentininan philosopher Dario Sztajnzrajbe, if there were really an interest in fostering critical thinking, the discursive mode that should dominate in the classroom should be the interrogative one. Questioning is a way of thinking, and that is why thinking is not only deriving conclusions, but often consists of the opposite: starting from the accepted conclusions of a community and turning them upside down (Sztajnzrajber, 2013). 
+Dario Sztajnzrajbe, an prominent argentine philosopher, essayist and teacher, considers that if there were really an interest in fostering critical thinking, the discursive mode that should dominate in the classroom should be the interrogative one. Accordign him, *questioning is a way of thinking, and that is why thinking is not only deriving conclusions, but often consists of the opposite: starting from the accepted conclusions of a community and turning them upside down* ({% cite Sztajnszrajber2013 %}). 
 
 ## Evaluation system
 
