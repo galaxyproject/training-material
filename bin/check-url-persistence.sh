@@ -27,5 +27,6 @@ done < /tmp/gtn-files.txt
 if (( $count > 0 )); then
 	echo "Files in previous versions that are not currently redirected: $count"
 	echo "Please ensure you add redirect_from: entries to each page"
+	echo "If this file is intentionally deleted, with no replacement, please update this script with some exclusions."
 	exit 1
 fi
