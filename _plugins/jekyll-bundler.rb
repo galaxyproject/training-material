@@ -89,8 +89,12 @@ module Jekyll
 
       baseurl = @context.registers[:site].config['baseurl']
 
+      attrs = ""
+      attrs += " async" if bundle['async']
+      attrs += " defer" if bundle['defer']
+
       bundle['resources'].map do |f|
-        "<script src='#{baseurl}/#{f}'></script>"
+        "<script #{attrs} src='#{baseurl}/#{f}'></script>"
       end.join("\n")
     end
 
@@ -99,8 +103,11 @@ module Jekyll
       raise "Bundle #{name} not found in site config" if bundle.nil?
 
       baseurl = @context.registers[:site].config['baseurl']
+      attrs = ""
+      attrs += " async" if bundle['async']
+      attrs += " defer" if bundle['defer']
       bundle_path = "#{baseurl}#{bundle['path']}?v=#{bundle['timestamp']}"
-      "<script src='#{bundle_path}'></script>"
+      "<script #{attrs} src='#{bundle_path}'></script>"
     end
   end
 end
