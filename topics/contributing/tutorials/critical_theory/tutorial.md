@@ -67,7 +67,7 @@ In the face of the conservative claim that educative systems transmit objective 
 
 Before going deeper, it is inportant to accurately define **critical thinking**, since it is usually concived as a nebulose concepts whose applications appears limitated to specific situations.
 
-The most common definition proviene de la tradición positivista en las ciencias aplicadas; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). Is it enought?
+The most common definition comes from the **positivist tradition** in the applied sciences; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). Is it enought?
 
 In his famous work *Dialectics of Ideology and Technology*, the American sociologist Alvin Gouldner  pointed out that, in contrast to this superficial and clearly insufficient conception, **critical thinking must be capable of questioning even the logic of reasoning itself**, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool ({% cite Gouldner1976 %}).
 
