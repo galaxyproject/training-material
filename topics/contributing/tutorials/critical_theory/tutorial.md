@@ -128,7 +128,7 @@ Group evaluation can be considered as an adequate pedagogical instrument for ove
 
 ## Technological system
 
-The technological system can be defined as a set of interconnected components that has been designed to fulfil a particular function without further human design input. According the philospher Günther Anders, the design of technological tools goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Gallardo2021 %}).
+The technological system can be defined as a set of interconnected components that has been designed to fulfil a particular function without further human design input. According the philospher Günther Anders, the design of technological systems goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Gallardo2021 %}).
 
 > <comment-title>Notes on Günther Anders</comment-title>
 >
