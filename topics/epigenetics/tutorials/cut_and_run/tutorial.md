@@ -53,9 +53,9 @@ In this tutorial, we will use data from the study of {% cite Zhu2019 %}. The art
 a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from a CUT&RUN experiment for the aforementioned TF GATA1 in humans.
 We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment {% cite Canver2017 %}.
 
-### When working with real data
-The workflow for this training material can be found [here](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your data we suggest using [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong)
-which includes additional steps for your data analysis. Both workflows do not support a peak calling with controls as CUT&RUN has a low background.
+## When working with real data
+The workflow for this training material can be found [at the European Galaxy instance](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your data we suggest using [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong)
+which includes additional steps for your data analysis. Both workflows do not support peak calling with controls as CUT&RUN has a low background.
 It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to consider them.    
 
 > <agenda-title></agenda-title>
@@ -94,21 +94,22 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Add a tag called `#rep1` to the Rep1 files and a tag called `#rep2` to the Rep2 files.
+> 4. Add a tag called `#rep1` to the Rep1 files and a tag called `#rep2` to the Rep2 files.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-> 4. Check that the datatype of the 4 FASTQ files is `fastqsanger` and the peak file (chip_seq_peaks.bed) is `bed`. If they are not then change the datatype as described below.
+> 5. Check that the datatype of the 4 FASTQ files is `fastqsanger` and the peak file (chip_seq_peaks.bed) is `bed`. If they are not then change the datatype as described below.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Create a paired collection named `2 PE fastqs`, and rename your pairs with the sample name followed by the attributes: `Rep1` and `Rep2`.
+> 6. Create a paired collection named `2 PE fastqs`, and rename your pairs with the sample name followed by the attributes: `Rep1` and `Rep2`.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
-> 6. Rename the bed file `GATA1 ChIP-Seq peaks`.
+> 7. Rename the bed file `GATA1 ChIP-Seq peaks`.
 >
 {: .hands_on}
 
@@ -325,7 +326,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
->    > <comment-title>Comment: Default of  **MarkDuplicates** {% icon tool %}</comment-title>
+>    > <comment-title>Default of  **MarkDuplicates** {% icon tool %}</comment-title>
 >    >
 >    > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
 >    {: .comment}
@@ -338,7 +339,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 > ![Metrics of MarkDuplicates](../../images/cut_and_run/mark_duplicates_screen.png "Metrics of MarkDuplicates")
 {: .comment}
 
-> <tip-title>Tip: Formatting the MarkDuplicate metrics for readability</tip-title>
+> <tip-title>Formatting the MarkDuplicate metrics for readability</tip-title>
 >
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >    - {% icon param-collection %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
@@ -523,10 +524,10 @@ We can remove such peaks if we simply overlap the two peak files and consequentl
 >
 > > <question-title></question-title>
 > >
-> > > How many potential true positives do we obtain?
-> > > How many potential false positives have we removed?
-> > > Why have we set specified an overlap fraction of A with `0.5`?
-> > > Why have we set **"Require that the fraction of overlap be reciprocal for A and B"**?
+> > How many potential true positives do we obtain?
+> > How many potential false positives have we removed?
+> > Why have we set specified an overlap fraction of A with `0.5`?
+> > Why have we set **"Require that the fraction of overlap be reciprocal for A and B"**?
 > >
 > > > <solution-title></solution-title>
 > > >
@@ -562,9 +563,9 @@ We can further remove some noise with a positive control, that is why we have do
 >
 > > <question-title></question-title>
 > >
-> > > How many potential true positives do we gain?
-> > > How many potential false positives have we removed?
-> > > What is the precision of our analysis at this point? (Precision = True Positive / True Positive + False Positive)
+> > How many potential true positives do we gain?
+> > How many potential false positives have we removed?
+> > What is the precision of our analysis at this point? (Precision = True Positive / True Positive + False Positive)
 > >
 > > > <solution-title></solution-title>
 > > >
@@ -614,8 +615,8 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 >
 > > <question-title></question-title>
 > >
-> > > How many peaks support the main motif GATA?
-> > > What is the E-value of the main motif?
+> > How many peaks support the main motif GATA?
+> > What is the E-value of the main motif?
 > >
 > > > <solution-title></solution-title>
 > > >
