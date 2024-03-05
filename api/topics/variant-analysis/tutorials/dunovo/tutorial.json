@@ -71,7 +71,7 @@
       "name": "Du Novo GTN Tutorial - Make Consensus Sequences",
       "title": "Du Novo GTN Tutorial - Make Consensus Sequences",
       "test_results": null,
-      "modified": "2024-03-05 10:54:22 +0000",
+      "modified": "2024-03-05 13:31:26 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSRR1799908_forward\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRR1799908_reverse\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Du Novo: Make families\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Du Novo: Correct barcodes\"];\n  2 -->|output| 3;\n  4[\"Du Novo: Align families\"];\n  3 -->|output| 4;\n  5[\"Du Novo: Make consensus reads\"];\n  4 -->|output| 5;\n  6[\"DCS: Sequence Content Trimmer\"];\n  5 -->|dcs1| 6;\n  5 -->|dcs2| 6;\n  7[\"SSCS: Sequence Content Trimmer\"];\n  5 -->|sscs1| 7;\n  5 -->|sscs2| 7;\n  75dfe52d-711e-4826-ba9b-b4feed30f5bf[\"Output\\n\"];\n  7 --> 75dfe52d-711e-4826-ba9b-b4feed30f5bf;\n  style 75dfe52d-711e-4826-ba9b-b4feed30f5bf stroke:#2c3143,stroke-width:4px;"
     },
     {
@@ -89,7 +89,7 @@
       "name": "Du Novo GTN Tutorial - Variant Calling",
       "title": "Du Novo GTN Tutorial - Variant Calling",
       "test_results": null,
-      "modified": "2024-03-05 10:54:22 +0000",
+      "modified": "2024-03-05 13:31:26 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nTrimmed reads mate 1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nTrimmed reads mate 2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Map with BWA-MEM\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"BamLeftAlign\"];\n  2 -->|bam_output| 3;\n  4[\"Naive Variant Caller NVC\"];\n  3 -->|output_bam| 4;\n  5[\"Variant Annotator\"];\n  4 -->|output_vcf| 5;\n  6[\"Filter\"];\n  5 -->|output| 6;"
     }
   ],

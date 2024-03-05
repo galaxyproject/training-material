@@ -20222,6 +20222,18 @@ body h2::after {
   .hide-when-printing {
     display: none;
   }
+  h2, h3, h4, h5, h6, h7, h8 {
+    break-after: avoid-page;
+  }
+  img, svg, table, canvas {
+    break-inside: avoid;
+  }
+  section#tutorial-content a::after {
+    content: " (" attr(href) ")";
+  }
+  section#tutorial-content blockquote.agenda a::after {
+    content: unset;
+  }
   pre.highlight {
     background: none !important;
     color: var(--text-color) !important;
@@ -21739,6 +21751,29 @@ a.btn div {
   padding: 5px;
   font-size: 1.5rem;
   margin: 5px;
+}
+
+.home-cta-button {
+  width: 45%;
+  flex-direction: column;
+  padding: 5px;
+  font-size: 1.25rem;
+  margin: 5px;
+  color: var(--text-color);
+  border: 1px solid var(--border-light);
+}
+.home-cta-button div {
+  font-size: 1.3rem !important;
+}
+.home-cta-button:hover {
+  box-shadow: 2px 2px 4px var(--text-color);
+}
+
+.button-group {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .btn-primary {
