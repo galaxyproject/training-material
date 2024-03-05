@@ -118,7 +118,7 @@ Group evaluation can be considered as a pedagogical instrument for overcoming th
 
 ## Technological infraestructure
 
-The design of technological tools goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Murphy1986 %}, {% cite Gallardo2021 %}).
+According the philospher Günther Anders, the design of technological tools goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Murphy1986 %}, {% cite Gallardo2021 %}).
 
 > <comment-title>Notes on Günther Anders</comment-title>
 >
