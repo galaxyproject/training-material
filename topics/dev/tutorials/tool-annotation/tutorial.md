@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Annotation of a tool with EDAM ontology terms using bio.tools
+title: Adding and updating best practice metadata for Galaxy tools using the bio.tools registry
 level: Introductory
 subtopic: tooldev
 questions:
