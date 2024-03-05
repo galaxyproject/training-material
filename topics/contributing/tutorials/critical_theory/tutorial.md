@@ -47,7 +47,7 @@ Education is the result of multiple contextual variables that have an effect on 
 
 The **Information Society** is characterised by interrelationships that link individuals through access to and provision of information for the purpose of generating knowledge. According Manuel Esteve, a renowned Spanish pedagogue with great influence on official teacher training, **Information Society** needs to increase the number of citizens with high levels of scientific and technical training capable of maintaining the current technological development ({% cite Esteve2009 %}). But is this true? 
 
-Morgenstern (2005) indicates that **Information Society** can function with very few, highly qualified and highly paid employees who constitute the decisive core of the companies' activity; the remaining skills are outsourced to other companies, leaving at the bottom a mass of precarious workers whose required competences are often embodied in demands for punctuality, organisational skills, non-conflict and submission to authority (Morgenstern and Finkel, 2005).
+Contrary to Esteve's assertion, the argentinian sociologists Sara Morgenstern and Lucia Finkel indicate that **Information Society** can function with very few, highly qualified and highly paid employees who constitute the decisive core of the companies' activity; the remaining skills are outsourced to other companies, leaving at the bottom a mass of precarious workers whose required competences are often embodied in demands for punctuality, organisational skills, non-conflict and submission to authority ({% cite Morgestern2005 %}). Their assertion seems to be confirmed by the recent words of Kristalina Georgieva, managing director of the International Monetary Fund, who recenly declared, that *almost 40 percent of global employment is exposed to AI. Historically, automation and information technology have tended to affect routine tasks, but one of the things that sets AI apart is its ability to impact high-skilled jobs* ({% cite Georgeva2024 %}).
 
 ## Educative systems
 
@@ -69,15 +69,13 @@ Before going deeper, it is inportant to accurately define **critical thinking**,
 
 The most common definition proviene de la tradición positivista en las ciencias aplicadas; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). Is it enought?
 
-In his famous work "Dialectics of Ideology and Technology", the American sociologist Alvin Gouldner  pointed out that, in contrast to this superficial and clearly insufficient conception, *critical thinking must be capable of questioning even the logic of reasoning itself*, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool ({% cite Gouldner1976 %}).
+In his famous work *Dialectics of Ideology and Technology*, the American sociologist Alvin Gouldner  pointed out that, in contrast to this superficial and clearly insufficient conception, **critical thinking must be capable of questioning even the logic of reasoning itself**, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool ({% cite Gouldner1976 %}).
 
 > <comment-title>Frankfurt School and Critical Thinking </comment-title>
 >
-> *Some critical theorists of the first generation, including Max Horkheimer, Theodor Adorno and Walter Benjamin, argue that in Western democracies the capacity for critical reasoning is rapidly being eclipsed.*
+> Some critical theorists of the first generation, including Max Horkheimer, Theodor Adorno and Walter Benjamin, argue that in Western democracies the capacity for critical reasoning is rapidly being eclipsed.
 >
-> *Pointing to developments such as the intrusion of the state, the culture industry and the concentration of wealth in fewer and fewer people, these thinkers fear that the ideological and material conditions that make public interaction and critical thinking possible are being undermined by the increasing standardisation, fragmentation and commercialisation of everyday life.*
->
-> Teacher as intellectuals: towards a critical pedagogy of learning. Henry Giroux.
+> Pointing to developments such as the intrusion of the state, the culture industry and the concentration of wealth in fewer and fewer people, these thinkers fear that the ideological and material conditions that make public interaction and critical thinking possible are being undermined by the increasing standardisation, fragmentation and commercialisation of everyday life.
 >
 {: .comment}
 
@@ -91,8 +89,7 @@ From the assumption of this conception of critical thinking a new question arise
 >
 {: .quote}
 
-Unlike the official curriculum, with its explicitly stated cognitive and affective objectives, the hidden curriculum relies
-on those organisational aspects of classroom life, such as the communicative systems, whose effects on the learning process are generally not consciously perceived by students ({% cite Olivo2005 %}). On the light of this definition, a new question emerges: which impact has the hidden curriculum on the learning process?
+Unlike the official curriculum, with its explicitly stated cognitive and affective objectives, **the hidden curriculum relies on those organisational aspects, such as the communicative systems, whose effects on the learning process are generally not consciously perceived by students** ({% cite Olivo2005 %}). On the light of this definition, a new question emerges: which impact has the hidden curriculum on the learning process?
 
 According the **Critical Learning Theory**, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in the four communicative systems: the curricular system, the system of pedagogical styles of classroom control, the evaluative system, and the technological infraestructure ({% cite Giroux1988 %}, {% cite Anders1980 %}).
 
