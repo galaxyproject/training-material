@@ -59,9 +59,6 @@ Contrary to Esteve's assertion, the argentinian sociologists Sara Morgenstern an
 >
 {: .quote}
 
-
-, recently declared that ** ({% cite Georgeva2024 %}).
-
 ## Educative systems
 
 According the **Critical Theory**, educative systems are agents of ideological control linked to the principles and processes that govern the workplace; the dominant culture in educative systems is characterised by selectively ordering and legitimising privileged forms of language, social relations, life experiences and modes of reasoning ({% cite Marcuse1964 %}).
