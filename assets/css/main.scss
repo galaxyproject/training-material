@@ -288,6 +288,21 @@ body {
 		display: none;
 	}
 
+	// Don't break over a page boundary if possible
+	h2,h3,h4,h5,h6,h7,h8 {break-after: avoid-page;}
+	img, svg, table, canvas {break-inside: avoid;}
+
+	// Fun fact: paper is not clickable.
+	// This is mostly applicable for folks printing tutorials which they
+	// probably shouldn't be doing anyway but just in case.
+	section#tutorial-content {
+		a::after {content: " (" attr(href) ")";}
+
+		blockquote.agenda {
+			a::after {content: unset;}
+		}
+	}
+
 	// Save ink.
 	pre.highlight {
 		background: none !important;
@@ -1515,6 +1530,31 @@ $btn-pink: var(--keypoints-color);
   padding: 5px;
   font-size:1.5rem;
   margin: 5px;
+}
+
+.home-cta-button {
+	width: 45%;
+	flex-direction: column;
+	padding: 5px;
+	font-size:1.25rem;
+	margin: 5px;
+	color: var(--text-color); // don't need to distinguish for wcag.
+	border: 1px solid var(--border-light);
+
+	div {
+		font-size: 1.3rem !important;
+	}
+
+	&:hover {
+		box-shadow: 2px 2px 4px var(--text-color);
+	}
+}
+
+.button-group {
+	display: flex;
+	align-items: stretch;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 .btn-primary {
