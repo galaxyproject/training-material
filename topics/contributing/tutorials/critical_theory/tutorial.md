@@ -118,7 +118,19 @@ Group evaluation can be considered as a pedagogical instrument for overcoming th
 
 ## Technological infraestructure
 
+The design of technological tools goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Murphy1986 %}, {% cite Gallardo2021 %}).
 
+> <comment-title>Notes on Günther Anders</comment-title>
+>
+> Günther Anders (12 July 1902 - 17 December 1992), a German-born philosopher, journalist and critical theorist, stands as a prominent figure known for his insightful reflections on technology, existentialism, and the human condition. Although Anders did not become a formal member of the Frankfurt School, he is considered to have exerted an important influence on some of its members, with whom he maintained a close relationship throughout his life.
+>
+> ![Anders picture](../../images/critical_theory/anders.png "Günther Anders. Source: soziologie.uni-freiburg.de/forschung/gaf")
+>
+> Anders' main contribution to pedagogy lies in his insightful exploration of technology's influence on education. He argued that technological tools, far from being neutral conduits of information, actively shape values and habits of thought. This perspective underscores the need for educators to critically assess the implications of integrating technology into learning environments. 
+>
+> On 1 August 2023, the University of Freiburg established a research position at the Institute of Sociology in his honour.
+>
+{: .comment}
 
 # Conclusion
 
