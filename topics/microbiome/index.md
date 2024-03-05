@@ -2,5 +2,5 @@
 layout: topic
 topic_name: microbiome
 redirect_from:
-- /topics/metagenomics
+- /topics/metagenomics/index
 ---

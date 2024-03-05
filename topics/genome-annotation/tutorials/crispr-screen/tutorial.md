@@ -39,6 +39,8 @@ abbreviations:
   MAGeCK: Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout
 subtopic: eukaryote
 priority: 8
+redirect_from:
+ - /topics/genome-editing/tutorials/crispr-screen/tutorial
 ---
 
 

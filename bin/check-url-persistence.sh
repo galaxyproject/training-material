@@ -8,7 +8,13 @@ if [[ ! -f /tmp/2024.txt ]]; then
 fi
 
 # No guarantees of API or data-file persistence
-cat /tmp/202*.txt | grep -v '/api/' | grep -v '/by-tool/'  | grep -v '/hall-of-fame/' | grep -v 'training-material/tags/' | grep -v 'data-library'| sed 's|/$|/index.html|'  | grep '.html$' | sort -u | sed 's|https://training.galaxyproject.org|_site|' > /tmp/gtn-files.txt
+# 1fe4d7d92e5ea5a5794cbe741eadb96a74511261
+cat /tmp/202*.txt | grep -v '/api/' | grep -v '/by-tool/'  | grep -v '/hall-of-fame/' | \
+	grep -v '/badges/' | \
+	grep -v '/transcriptomics/tutorials/ref-based/faqs/rnaseq_data.html' | \
+	grep -v '/topics/data-management/' | \
+	grep -v 'training-material/tags/' | grep -v 'data-library'| \
+	sed 's|/$|/index.html|'  | grep '.html$' | sort -u | sed 's|https://training.galaxyproject.org|_site|' > /tmp/gtn-files.txt
 
 count=0
 while read line; do
