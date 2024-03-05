@@ -101,7 +101,7 @@ From the assumption of this conception of critical thinking a new question arise
 
 Unlike the official curriculum, with its explicitly stated cognitive and affective objectives, **the hidden curriculum relies on those organisational aspects, such as the communicative systems, whose effects on the learning process are generally not consciously perceived by students** ({% cite Olivo2005 %}). On the light of this definition, a new question emerges: which impact has the hidden curriculum on the learning process?
 
-According the **Critical Learning Theory**, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in the four communicative systems: the curricular system, the system of pedagogical styles of classroom control, the evaluative system, and the technological infraestructure ({% cite Giroux1988 %}, {% cite Anders1980 %}).
+According the **Critical Learning Theory**, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in communicative systems ({% cite Giroux1988 %}, {% cite Anders1980 %}). In this training, we will focus in four of them: the curricular system, the system of pedagogical styles of classroom control, the evaluative system, and the technological system .
 
 ## Curricular system
 
@@ -126,9 +126,9 @@ An illustrative example is provided by the research of Samuel Bowles and Herbert
 
 Group evaluation can be considered as an adequate pedagogical instrument for overcoming the drawbacks associated to the evaluation system, providing students with social contexts that emphasise social responsibility and group solidarity. According Giroux, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence ({% cite Giroux1988 %}).
 
-## Technological infraestructure
+## Technological system
 
-According the philospher Günther Anders, the design of technological tools goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Gallardo2021 %}).
+The technological system can be defined as a set of interconnected components that has been designed to fulfil a particular function without further human design input. According the philospher Günther Anders, the design of technological tools goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Gallardo2021 %}).
 
 > <comment-title>Notes on Günther Anders</comment-title>
 >
