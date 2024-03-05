@@ -33,18 +33,32 @@ abbreviations:
 ---
 
 # Introduction
-In many organism, {TF} play an important tole in the regulation of the gene expression. In human, we have up to 2,800 proteins and more than 1,600 are TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer. Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
+In many organism, {TF} play an important tole in the regulation of the gene expression. In human, we have up to 2,800 proteins and more than 1,600 are
+TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer.
+Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain
+the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
 
 ![CUT_and_RUN](../../images/cut_and_run/cut_and_run.png "Skene and Henikoff 2017 eLIFE")
 
-{CUT&RUN} {% cite Skene2017 %} became the new and advanced method to analyse DNA-associated proteins. CUT&RUN uses an antibody just as [ChIP-Seq](https://en.wikipedia.org/wiki/ChIP_sequencing) to select the {POI}. The big difference, CUT&RUN couples the usage of an antibody with the usage of a pA-MNase, which you can see in **Figure 1**. In the revised version of the protocol {% cite Meers2019 %}, the pA-MNase has been replaced by a {pA(G)-MNase} to expand this technology to mouse primary antibodies. The [enzyme](https://en.wikipedia.org/wiki/Micrococcal_nuclease) fused to the protein A/G is an endo-exonuclease that cleaves and shortens DNA. The fusion will ensure that the MNase comes in close proximity with the POI and thus cleaves DNA *in-situ*, close to POI binding sites. CUT&RUN allows to fragment the DNA in unfixed cells and thus allows to study protein-DNA interactions in a more natural state. The added pA(G)-MNase thus creates shorted fragments that lead to a higher resolution for the mapping in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) permeabilize the nuclei or cells coated on beads, (2) incubate with selective antibody of the POI, (3) add the pA(G)-MNase and activate the enzyme for a small period of time, (4) release CUT&RUN fragments and collect the DNA from the supernatant. Afterwards, the DNA can be purified, PCR amplified and prepared for sequencing. You can find the CUT&RUN protocol [here](https://www.protocols.io/view/cut-amp-run-targeted-in-situ-genome-wide-profiling-14egnr4ql5dy/v3).
+{CUT&RUN} {% cite Skene2017 %} became the new and advanced method to analyse DNA-associated proteins. CUT&RUN uses an antibody just as [ChIP-Seq](https://en.wikipedia.org/wiki/ChIP_sequencing) to select the {POI}.
+The big difference, CUT&RUN couples the usage of an antibody with the usage of a pA-MNase, which you can see in **Figure 1**. In the revised version of the protocol {% cite Meers2019 %},
+the pA-MNase has been replaced by a {pA(G)-MNase} to expand this technology to mouse primary antibodies. The [enzyme](https://en.wikipedia.org/wiki/Micrococcal_nuclease) fused to the protein A/G is an
+endo-exonuclease that cleaves and shortens DNA. The fusion will ensure that the MNase comes in close proximity with the POI and thus cleaves DNA *in-situ*, close to POI binding sites. CUT&RUN allows to
+fragment the DNA in unfixed cells and thus allows to study protein-DNA interactions in a more natural state. The added pA(G)-MNase thus creates shorted fragments that lead to a higher resolution for the mapping
+in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) permeabilize the nuclei or cells coated on beads, (2) incubate with the selective antibody of the POI, (3)
+add the pA(G)-MNase and activate the enzyme for a small period of time, (4) release CUT&RUN fragments and collect the DNA from the supernatant. Afterward, the DNA can be purified, PCR amplified and
+prepared for sequencing. You can find the CUT&RUN protocol [here](https://www.protocols.io/view/cut-amp-run-targeted-in-situ-genome-wide-profiling-14egnr4ql5dy/v3).
 
-In this tutorial, we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we will **not** completely follow. It is important to note at this point that a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from an CUT&RUN experiment for the aforementioned TF GATA1 in human. We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment {% cite Canver2017 %}.
+In this tutorial, we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we will **not** completely follow. It is important to note at this point that
+a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from a CUT&RUN experiment for the aforementioned TF GATA1 in humans.
+We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment {% cite Canver2017 %}.
 
 ### When working with real data
-The workflow for this training material can be found [here](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your data we suggest using [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong) which includes additional steps for your data analysis. Both worklfows do not support a peak calling with controls as CUT&RUN has a low background. It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to take them into consideration.    
+The workflow for this training material can be found [here](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your data we suggest using [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong)
+which includes additional steps for your data analysis. Both workflows do not support a peak calling with controls as CUT&RUN has a low background.
+It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to consider them.    
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -90,7 +104,7 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `Rep1` and `Rep2`.
+> 5. Create a paired collection named `2 PE fastqs`, and rename your pairs with the sample name followed by the attributes: `Rep1` and `Rep2`.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
@@ -119,12 +133,12 @@ We first have to check if our data contains adapter sequences that we have to re
 >       - *"Short read data from your current history"*: Choose the output of **Flatten collection** {% icon tool %}selected as **Dataset collection**.
 > 3. Inspect the web page output of **FastQC** {% icon tool %} for the `Rep1_forward` sample. Check what adapters are found at the end of the reads.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > 1. How many reads are in the FASTQ?
 > > 2. Which sections have a warning or an error?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > 1. There are 300,000 reads.
 > > > 2. The 4 steps below have warnings:
@@ -140,11 +154,11 @@ We first have to check if our data contains adapter sequences that we have to re
 > > >
 > > >    3. **Overrepresented sequences**
 > > >
-> > >       Our data contains TruSeq adapter, Illumina PCR Primer and a read from the mitochondrial chromosome.
+> > >       Our data contains TruSeq adapter, Illumina PCR Primer, and a read from the mitochondrial chromosome.
 > > >
 > > >    4. **Adapter Content**
 > > >
-> > >       Our data contains adapter that we still have to remove.
+> > >       Our data contains an adapter that we still have to remove.
 > > >
 > > {: .solution}
 > >
@@ -176,12 +190,12 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the report for `Rep1` and read the first lines.
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What percentage of reads contain adapters?
 > 2. What percentage of reads are still longer than 15bp after the trimming?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. ~55% and ~57%
 > > 2. 100%
@@ -194,15 +208,15 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because
-we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run.
+Next, we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because
+we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chances to get the best match even if it takes a bit longer to run.
 We will run the **end-to-end** mode because we trimmed the adapters, so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose.
-The hg38 version of the human genome contains [alternate loci](https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE). This means that some region of the genome
+The hg38 version of the human genome contains [alternate loci](https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE). This means that some regions of the genome
 are present both in the canonical chromosome and on its alternate loci. The reads that map to these regions would map twice. To be able to filter reads falling into
 repetitive regions but keep reads falling into regions present in alternate loci, we will map on the Canonical version of hg38 (only the chromosome with numbers, chrX, chrY, and chrM).
 
 > <comment-title>Dovetailing</comment-title>
-> We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence,so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. This occurs especially for CUT&RUN because the read length is quite short. Bowtie thus discards reads such as:
+> We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. This occurs especially for CUT&RUN because the read length is quite short. Bowtie thus discards reads such as:
 > ```
 > ---------------------Mate 1--------------------------------->
 > <---------------------Mate 2----------------------
@@ -243,11 +257,11 @@ repetitive regions but keep reads falling into regions present in alternate loci
 > ![Mapping statistics of bowtie2](../../images/cut_and_run/mapping_stats.png "Mapping statistics of bowtie2")
 {: .comment}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What percentage of read pairs mapped concordantly?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 41.46+57.51=98.97%
 > >
@@ -259,8 +273,8 @@ repetitive regions but keep reads falling into regions present in alternate loci
 
 ## Filter Uninformative Reads
 
-We apply some filters to the reads after the mapping. CUT&RUN datasets can have many reads that map to the mitchondrial genome because it is nucleosome-free and thus very accessible
-to the pA(G)-MNase. CUT&RUN inserts adapter more easily in open chromatin regions due to the pA(G)-MNase activity. The mitchondrial genome is uninteresting for CUT&RUN,
+We apply some filters to the reads after the mapping. CUT&RUN datasets can have many reads that map to the mitochondrial genome because it is nucleosome-free and thus very accessible
+to the pA(G)-MNase. CUT&RUN inserts adapter more easily in open chromatin regions due to the pA(G)-MNase activity. The mitochondrial genome is uninteresting for CUT&RUN,
 so we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.
 
 > <hands-on-title>Hands-on: Filtering of uninformative reads</hands-on-title>
@@ -286,12 +300,12 @@ so we remove these reads. We also remove reads with low mapping quality and read
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Based on the file size, what proportion of alignments was removed (approximately)?
 > 2. Which parameter should be modified if you are interested in repetitive regions?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The original BAM files are 14-15 MB, the filtered ones are 5.6 and 6.8 MB. Approximately half of the alignments were removed.
 > >
@@ -320,11 +334,11 @@ Because of the PCR amplification, there might be read duplicates (different read
 {: .hands_on}
 
 > <comment-title>MarkDuplicates Results</comment-title>
-> You should get similar output to this from MarkDuplicates:
+> You should get a similar output to this from MarkDuplicates:
 > ![Metrics of MarkDuplicates](../../images/cut_and_run/mark_duplicates_screen.png "Metrics of MarkDuplicates")
 {: .comment}
 
-> ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
+> <tip-title>Tip: Formatting the MarkDuplicate metrics for readability</tip-title>
 >
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >    - {% icon param-collection %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
@@ -339,12 +353,12 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 {: .tip}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many pairs were in the input?
 > 2. How many pairs are duplicates?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 81466
 > > 2. 983
@@ -393,13 +407,13 @@ We will check the insert sizes with **Paired-end histogram** of insert size freq
 > ![Fragment size distribution](../../images/cut_and_run/insert_size.png "Fragment size distribution")
 {: .comment}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Could you guess what the peaks at approximately 30bp correspond to?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > The first peak (30bp) corresponds to where the cleavage around our POI. Nevertheless, the cutting of our pA(G)-MNase-antibody-protein complex is not perfect. The arms can actually cut further away from the protein. Little bumps in the distribution are an indication for another protein(complex), such as a nucelosome that is located between the two cleavage sites.
+> > The first peak (30bp) corresponds to where the cleavage around our POI. Nevertheless, the cutting of our pA(G)-MNase-antibody-protein complex is not perfect. The arms can actually cut further away from the protein. Little bumps in the distribution are an indication of another protein(complex), such as a nucleosome that is located between the two cleavage sites.
 > >
 > {: .solution}
 >
@@ -415,9 +429,12 @@ This fragment size distribution is a good indication if your experiment worked o
 
 We have now finished the data preprocessing. Next, to find regions corresponding to potential binding sites, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. [MACS2](https://github.com/taoliu/MACS) is widely used for CUT&RUN.
 
-At this step, two approaches exists: Like in ATAC-Seq, we have to take a few things into account. The pA(G)-MNase does not need to bind the protein it can create fragments unpsecifically a few bases downtream and upstream away from the true binding site. This is to the *"long"* arms of the proteins. A big jump can happen if a nucelosome is between the protein binding site and the cutting site.
+At this step, two approaches exist: Like in ATAC-Seq, we have to take a few things into account. The pA(G)-MNase does not need to bind the protein it can create fragments unspecifically a
+few bases downstream and upstream away from the true binding site. This is to the *"long"* arms of the proteins. A big jump can happen if a nucleosome is between the protein binding site and the cutting site.
 
-It is critical to re-center the signal since the pA(G)-MNase cuts in different distances. Since some read pairs are not symmetric (i.e., the first mate might be further away from the binding site than the second mate) we will turn off the shifting mode of MACS2 and apply a direct shift. If we only assess the coverage of the 5' extremity of the reads, the data would be too sparse, and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage.
+It is critical to re-center the signal since the pA(G)-MNase cuts in different distances. Since some read pairs are not symmetric (i.e., the first mate might be further away from the
+binding site than the second mate) we will turn off the shifting mode of MACS2 and apply a direct shift. If we only assess the coverage of the 5' extremity of the reads, the data would be too sparse,
+and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage.
 
 ### Using MACS2
 
@@ -467,7 +484,7 @@ We call peaks with MACS2. To get the coverage centered on the 5' extended 100bp 
 
 ### Extracting individual replicates from your dataset collection
 
-In the following step we want to apply a tool to identify robust peaks between our two replicates. However, we still have one dataset collection, holding both replicates, which we have to split.
+In the following step, we want to apply a tool to identify robust peaks between our two replicates. However, we still have one dataset collection, holding both replicates, which we have to split.
 
 > <hands-on-title>Hands-on: Extract replicates from a dataset collection:</hands-on-title>
 >
@@ -485,7 +502,7 @@ In the following step we want to apply a tool to identify robust peaks between o
 {: .hands_on}
 
 ### Extract Robust Peaks
-MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set will contain false positives because of technical and biological noise.
+MACS helped us to identify potential binding sites for GATA1. Yet, our peak set will contain false positives because of technical and biological noise.
 We can first try to reduce some noise using the results for our two biological replicates. Since we applied MACS we have created two peak files.
 Yet, both replicates have peaks that are only present in one replicate and thus might be a potential false positive due to noise.
 We can remove such peaks if we simply overlap the two peak files and consequently search for peaks that appear in both replicates.
@@ -504,27 +521,27 @@ We can remove such peaks if we simply overlap the two peak files and consequentl
 >
 > 2. Rename the datasets `Robust GATA1 CUT and RUN peaks`.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
-> > > How many potential true positives do we obtained?
+> > > How many potential true positives do we obtain?
 > > > How many potential false positives have we removed?
 > > > Why have we set specified an overlap fraction of A with `0.5`?
 > > > Why have we set **"Require that the fraction of overlap be reciprocal for A and B"**?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > 1. 2,863 peaks
 > > > 2. We started with 6,314 and 7,683 peaks. Thus, we could remove 3,410 and 4765 peaks.
-> > > 3. Finding robust peaks is a tricky process and not as simple as you think. Our approach defines a robust peak as an entity that is covered by two similar peaks in either one of the peak files of our two replicates. Our measurement for similarity is simply the amount of bases the peaks overlap. Yet, ask yourself, how much overlap do you need to state that they are similar? Is 1 base enough or maybe 10? The answer is not true or false and like so often needs more investigation. We define the overlap by a 50% fraction of each of the peak files. That means, if our peak in A is 100 bases then A have to overlap with 50 bases with the peak in file B.
+> > > 3. Finding robust peaks is a tricky process and not as simple as you think. Our approach defines a robust peak as an entity that is covered by two similar peaks in either one of the peak files of our two replicates. Our measurement for similarity is simply the amount of bases the peaks overlap. Yet, ask yourself, how much overlap do you need to state that they are similar? Is 1 base enough or maybe 10? The answer is not true or false and like so often needs more investigation. We define the overlap by a 50% fraction of each of the peak files. That means, if our peak in A is 100 bases then A has to overlap with 50 bases with the peak in file B.
 > > > 4. **"Require that the fraction of overlap be reciprocal for A and B"** means that 50% of the peak in file A overlaps with the peak in file B and also 50% of the peak in file B overlaps with the peak in file A. We set this to make our filtering very conservative and filter for peaks that we can be sure are true positives. For example, A has a 10 bp peak that overlaps a peak in B with 100 bp. **Viewpoint of file A:** An overlap-fraction of 0.5 for A means that we accept peak A if it overlaps with 5 bp with the peak in B. This is very likely because the peak in B is 100 bp long. **Viewpoint of file B**: An overlap-fraction of 0.5 for B means that we reject A no matter what, even if A completely overlaps B because 10 bp are not enough to cover 50% of B. That is to say the option **"Require that the fraction of overlap be reciprocal for A and B"** takes care that we trust peaks that have in file A **and** in file B a fair overlap.
 > > {: .solution}
 > >
 > {: .question}
 {: .hands_on}
 
-Note, this is one way to define robust peaks. Yet, there are more sophisticated algorithms in Galaxy, such as
+Note, that this is one way to define robust peaks. Yet, there are more sophisticated algorithms in Galaxy, such as
 {% tool [IDR compare ranked list of identifications ](toolshed.g2.bx.psu.edu/view/iuc/idr/de7795890bc5) %}, and other methods that can help to define a robust peak.
-The tool **IDR** was not tested so far for CUT and RUN.
+The tool **IDR** has not been tested so far for CUT and RUN.
 
 ### Extract Positive Peaks
 
@@ -543,13 +560,13 @@ We can further remove some noise with a positive control, that is why we have do
 >
 > 3. Rename the datasets `True GATA1 CUT and RUN peaks`.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > > How many potential true positives do we gain?
 > > > How many potential false positives have we removed?
 > > > What is the precision of our analysis at this point? (Precision = True Positive / True Positive + False Positive)
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > 1. 2,409 peaks
 > > > 2. 454 peaks
@@ -586,7 +603,7 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 >        - *"Should subsampling be random?"*: `Yes`
 >            - *"Seed for the randomized selection of sequences"*: `123`
 >        - *"E-value threshold for including motifs"*: `0.05`
->        - *"What is the expected motif site distribution?"*: `Zero or one occurrences per sequence`
+>        - *"What is the expected motif site distribution?"*: `Zero or one occurrence per sequence`
 >        - *"Minimum motif width"*: `5`
 >        - *"Maximum motif width"*: `20`
 >        - *"Maximum number of motifs to find"*: `5`
@@ -595,12 +612,12 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 > 2. View the **MEME-ChIP** HTML.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > > How many peaks support the main motif GATA?
 > > > What is the E-value of the main motif?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > 1. !!!!  Where is this info? !!!
 > > > 2. E-value = 5.0e-383
@@ -613,13 +630,13 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 
 Let us first investigate the result of MEME-ChIP. **First column:** The x-axis of the sequence plots represents the nucleotide position of the motif.
 The y-axis stands for the total information (uncertainty) and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A).
-Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo). **Second column:** Defines the algorithm that found the sequence motif.
-MEME-ChIP uses two different approaches called MEME and DREME, which can find more complex or simpler motifs. More information about these tools can be found [here](http://meme-suite.org/).
+Bigger letters stand for a higher probability. For more information please read [the corresponding Wikipedia page](https://en.wikipedia.org/wiki/Sequence_logo). **Second column:** Defines the algorithm that found the sequence motif.
+MEME-ChIP uses two different approaches called MEME and DREME, which can find more complex or simpler motifs. More information about these tools can be found [in the Meme documentation](http://meme-suite.org/).
 **Third column:** Defines the E-value, which represents the expected number of times we would find our sequence motif in a database (peak file), just by chance.
 This means, that a small E-value corresponds to a very significant motif because the expected number we would find that motif in our peak file just by chance is very low.
 Other sequences like repeats will have a high E-value on the other hand. **Fourth column:** This graph is the result of CentriMo, a tool that shows the distribution of
 the best matches for that particular motif. The vertical line is the center of the motif. Therefore, if you have a long sequence motif CentriMo helps you to pinpoint a smaller sub-motif.
-You can find more information on CentriMo [here](https://meme-suite.org/meme/doc/centrimo.html).
+You can find more information on CentriMo [in the Meme documentation](https://meme-suite.org/meme/doc/centrimo.html).
 
 The results of MEME-ChIP endorse the findings about the DNA binding motif (T/A)GATA(A/G) {% cite Hasegawa2017 %}. We also found other motifs, that might be secondary sequence motifs.
 This, we could test with a deeper analysis.
