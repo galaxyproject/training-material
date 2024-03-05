@@ -124,7 +124,7 @@ According the philospher Günther Anders, the design of technological tools goes
 >
 > Günther Anders (12 July 1902 - 17 December 1992), a German-born philosopher, journalist and critical theorist, stands as a prominent figure known for his insightful reflections on technology, existentialism, and the human condition. Although Anders did not become a formal member of the **Frankfurt School**, he is considered to have exerted an important influence on some of its members, with whom he maintained a close relationship throughout his life.
 >
-> In 1923, Gunther Anders obtained his Ph.D. in philosophy from the University of Freiburg, having studied under the esteemed philosopher Martin Heidegger. Edmund Husserl played a crucial role as his dissertation advisor.
+> In 1923, Gunther Anders obtained his Ph.D. in philosophy from the University of Freiburg, having studied under the esteemed philosophers Martin Heidegger and Edmund Husserl.
 >
 > ![Anders picture](../../images/critical_theory/anders.png "Günther Anders. Source: soziologie.uni-freiburg.de/forschung/gaf")
 >
