@@ -182,6 +182,13 @@ To link a Galaxy tool to its corresponding bio.tools entry, we need to first fin
 > 3. Select **See in Tool Shed**
 > 4. Once in the Tool Shed, click on the link to the development repository
 > 5. Fork the repository
+>
+> If the link to the development repository is not correct the column `Galaxy wrapper parsed folder` from the **Galaxy Tool Metadata Extractor** will also show you the location of the wrapper.
+> 1. Open [Galaxy Tool Metadata Extractor](https://galaxyproject.github.io/galaxy_tool_metadata_extractor)
+> 2. Search your tool
+> 3. Expand the row
+> 4. Open the link shown in the `Galaxy wrapper parsed folder` column
+
 {: .hands_on}
 
 Now we have the wrapper, and can add the bio.tools entry.
