@@ -53,7 +53,7 @@ Contrary to Esteve's assertion, the argentinian sociologists Sara Morgenstern an
 
 According the **Critical Theory**, educative systems are agents of ideological control linked to the principles and processes that govern the workplace; the dominant culture in educative systems is characterised by selectively ordering and legitimising privileged forms of language, social relations, life experiences and modes of reasoning ({% cite Marcuse1964 %}).
 
-According García Olivo, the criterion governing Western educative systems, in line with OECD recommendations, is none other than that of favouring the adaptation of students to the requirements of the established productive and political apparatus, which requires their psychological and cultural homogenisation ({% cite Olivo2005 %}).
+The philospher Pedro García Olivo affirms that the criterion governing Western educative systems, in line with OECD recommendations, is none other than that of favouring the adaptation of students to the requirements of the established productive and political apparatus, which requires their psychological and cultural homogenisation ({% cite Olivo2005 %}).
 
 In the face of the conservative claim that educative systems transmit objective knowledge, **Critical Learning Theory** concives knowledge as a particular representation of the dominant culture that structure the hegemonic cosmovision throught a selective process of emphasis and exclusions ({% cite Giroux1988 %}).
 
