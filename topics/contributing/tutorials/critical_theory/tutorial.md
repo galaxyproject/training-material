@@ -51,7 +51,16 @@ Education is the result of multiple contextual variables that have an effect on 
 
 The **information society** can be characterised by the interrelationships that link individuals through access to and provision of information for the purpose of generating knowledge. According Manuel Esteve, a renowned Spanish pedagogue with great influence on official teacher training, the **information society** needs to increase the number of citizens with high levels of scientific and technical training capable of maintaining the current technological development ({% cite Esteve2009 %}). But is this true? 
 
-Contrary to Esteve's assertion, the argentinian sociologists Sara Morgenstern and Lucia Finkel indicate that the **information society** can function with very few, highly qualified and highly paid employees who constitute the decisive core of the companies' activity; the remaining skills are outsourced to other companies, leaving at the bottom a mass of precarious workers whose required competences are often embodied in demands for punctuality, organisational skills, non-conflict and submission to authority ({% cite Morgenstern2005 %}). Their assertion seems to be confirmed by current technological development. Kristalina Georgieva, managing director of the International Monetary Fund, recently declared that *almost 40 percent of global employment is exposed to AI. Historically, automation and information technology have tended to affect routine tasks, but one of the things that sets AI apart is its ability to impact high-skilled jobs* ({% cite Georgeva2024 %}).
+Contrary to Esteve's assertion, the argentinian sociologists Sara Morgenstern and Lucia Finkel indicate that the **information society** can function with very few, highly qualified and highly paid employees who constitute the decisive core of the companies' activity; the remaining skills are outsourced to other companies, leaving at the bottom a mass of precarious workers whose required competences are often embodied in demands for punctuality, organisational skills, non-conflict and submission to authority ({% cite Morgenstern2005 %}). Their assertion seems to be confirmed by current technological development ({% cite Georgeva2024 %}).
+
+> *The findings are striking: almost 40 percent of global employment is exposed to AI. Historically, automation and information technology have tended to affect routine tasks, but one of the things that sets AI apart is its ability to impact high-skilled jobs.*
+>
+> Kristalina Georgieva, managing director of the International Monetary Fund.
+>
+{: .quote}
+
+
+, recently declared that ** ({% cite Georgeva2024 %}).
 
 ## Educative systems
 
@@ -116,7 +125,7 @@ Darío Sztajnszrajber, a prominent argentine philosopher, essayist and teacher, 
 
 It is in the assessment system that the nature of the hidden curriculum is most clearly revealed. The potential effect of assessment is clearly perceived when it is recognised that both academic and non-academic aspects are taught and assessed, the latter including institutional adaptation and specific personal qualities ({% cite Giroux1988 %}). 
 
-An illustrative example is provided by the research of the American economists Samuel Bowles and Herbert Gintis, who pointed out that students who are best suited to the social ordering of the education system also had significantly below average scores on measures of mental creativity and flexibility ({% cite Bowles2011 %}).
+An illustrative example is provided by the research of Samuel Bowles and Herbert Gintis, who pointed out that students who are best suited to the social ordering of the education system also had significantly below average scores on measures of mental creativity and flexibility ({% cite Bowles2011 %}).
 
 Group evaluation can be considered as an adequate pedagogical instrument for overcoming the drawbacks associated to the evaluation system, providing students with social contexts that emphasise social responsibility and group solidarity. According Giroux, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence ({% cite Giroux1988 %}).
 
