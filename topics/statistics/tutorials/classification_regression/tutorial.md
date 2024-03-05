@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Machine learning: classification and regression'
-zenodo_link: https://zenodo.org/record/2579649#.XHep39F7mL4
+zenodo_link: https://zenodo.org/record/2579649
 questions:
 - what are classification and regression techniques?
 - How they can be used for prediction?

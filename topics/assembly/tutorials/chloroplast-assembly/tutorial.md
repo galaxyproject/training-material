@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Chloroplast genome assembly"
-zenodo_link: "http://doi.org/10.5281/zenodo.3567224"
+zenodo_link: "https://doi.org/10.5281/zenodo.3567224"
 tags:
   - plants
   - nanopore

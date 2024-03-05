@@ -4,7 +4,7 @@ redirect_from:
   - /topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial
 
 title: "Use Jupyter notebooks in Galaxy"
-zenodo_link: "https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts"
+zenodo_link: "https://zenodo.org/record/1185122"
 questions:
   - "How to use a Jupyter Notebook in Galaxy"
 objectives:
@@ -23,7 +23,7 @@ subtopic: analyse
 
 
 In this tutorial we are going to explore the basics of using Jupyter in Galaxy. We will use a RNA seq count file as a test set to get a hang of the Jupyter notebooks.
-The file is available in [Zenodo](https://zenodo.org/record/1185122#.WzlCQNhKgWo) or in the *Tutorial* section of *Data Libraries*.
+The file is available in [Zenodo](https://zenodo.org/record/1185122) or in the *Tutorial* section of *Data Libraries*.
 Select a file ending with `.counts` and upload it in your history (If you want to know how to upload data in galaxy, see [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}) tutorial)
 
 > <agenda-title></agenda-title>
