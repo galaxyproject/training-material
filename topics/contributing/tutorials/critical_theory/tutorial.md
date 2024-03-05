@@ -89,7 +89,7 @@ In his famous work *Dialectics of Ideology and Technology*, the American sociolo
 >
 {: .comment}
 
-From the assumption of this conception of critical thinking a new question arises: is it really in the interest of the current Education System to encourage critical thinking? One element that can help to answer this question is the hidden curriculum.
+From the assumption of this conception of critical thinking a new question arises: is it really in the interest of education system to encourage critical thinking? One element that can help to answer this question is the hidden curriculum.
 
 # The hidden curriculum
 
