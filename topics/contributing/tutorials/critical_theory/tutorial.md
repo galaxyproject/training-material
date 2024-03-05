@@ -126,11 +126,11 @@ According the philospher Günther Anders, the design of technological tools goes
 >
 > In 1923, Gunther Anders obtained his Ph.D. in philosophy from the University of Freiburg, having studied under the esteemed philosophers Martin Heidegger and Edmund Husserl.
 >
-> ![Anders picture](../../images/critical_theory/anders.png "Günther Anders. Source: soziologie.uni-freiburg.de/forschung/gaf")
+> ![Anders picture](../../images/critical_theory/anders.png "Günther Anders. Source: soziologie.uni-freiburg.de")
 >
 > Anders' main contribution to pedagogy lies in his insightful exploration of technology's influence on education. He argued that technological tools, far from being neutral conduits of information, actively shape values and habits of thought. This perspective underscores the need for educators to critically assess the implications of integrating technology into learning environments. 
 >
-> On 1 August 2023, the University of Freiburg established a research position at the Institute of Sociology in his honour.
+> On 1 August 2023, the University of Freiburg established a research position at the [Institute of Sociology](https://www.soziologie.uni-freiburg.de/forschung/gaf) in his honour.
 >
 {: .comment}
 
