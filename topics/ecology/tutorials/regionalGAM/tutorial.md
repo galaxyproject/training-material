@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Regional GAM
-zenodo_link: "https://zenodo.org/record/1324204#.W2BmRn7fNE4"
+zenodo_link: "https://zenodo.org/record/1324204"
 edam_ontology: ["topic_0610"]
 questions:
     - "What are abundance and trends of a butterfly species?"
