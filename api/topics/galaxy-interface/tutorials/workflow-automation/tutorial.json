@@ -136,7 +136,7 @@
       "name": "vcf2lineage",
       "title": "vcf2lineage",
       "test_results": null,
-      "modified": "2024-03-04 23:15:40 +0000",
+      "modified": "2024-03-05 04:09:23 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nVariant calls\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nmin-AF for consensus variant\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nReference genome\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Compose text parameter value\"];\n  1 -->|output| 3;\n  4[\"SnpSift Filter\"];\n  3 -->|out1| 4;\n  0 -->|output| 4;\n  ee67c5ed-ff7c-404b-ad20-19259edbc671[\"Output\\nconsensus_variants\"];\n  4 --> ee67c5ed-ff7c-404b-ad20-19259edbc671;\n  style ee67c5ed-ff7c-404b-ad20-19259edbc671 stroke:#2c3143,stroke-width:4px;\n  5[\"bcftools consensus\"];\n  4 -->|output| 5;\n  2 -->|output| 5;\n  9028f80e-4112-40d8-9a49-f671677d304f[\"Output\\nconsensus\"];\n  5 --> 9028f80e-4112-40d8-9a49-f671677d304f;\n  style 9028f80e-4112-40d8-9a49-f671677d304f stroke:#2c3143,stroke-width:4px;\n  6[\"Collapse Collection\"];\n  5 -->|output_file| 6;\n  1dd7978e-b907-42d6-8fc4-f6fadeefcad1[\"Output\\nmultisample_consensus_fasta\"];\n  6 --> 1dd7978e-b907-42d6-8fc4-f6fadeefcad1;\n  style 1dd7978e-b907-42d6-8fc4-f6fadeefcad1 stroke:#2c3143,stroke-width:4px;\n  7[\"Pangolin\"];\n  6 -->|output| 7;\n  e02d2cfb-9842-4069-957c-6cf4ec197056[\"Output\\npangolin_results\"];\n  7 --> e02d2cfb-9842-4069-957c-6cf4ec197056;\n  style e02d2cfb-9842-4069-957c-6cf4ec197056 stroke:#2c3143,stroke-width:4px;"
     }
   ],
