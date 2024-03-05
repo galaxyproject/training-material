@@ -75,7 +75,7 @@ It is often recommended to use a positive or negative control as a comparison. S
 
 We first need to download the sequenced reads (FASTQs) as well as other annotation files. Then, to increase the number of reads that will map to the reference genome (here human genome version 38, GRCh38/hg38), we need to preprocess the reads.
 
-> <hands-on-title>Hands-on: Data upload</hands-on-title>
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -124,7 +124,7 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 
 We first have to check if our data contains adapter sequences that we have to remove. A typical CUT&RUN experiment has a read length of 30-80 nt. We can check the raw data quality with **FastQC**.
 
-> <hands-on-title>Hands-on: Quality Control</hands-on-title>
+> <hands-on-title>Quality Control</hands-on-title>
 >
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >     - *"Input Collection"*: `2 PE fastqs`
@@ -176,7 +176,7 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 
 **Trim Galore!** is a handy tool that can automatically detect and trim standard Illumina adapters.
 
-> <hands-on-title>Hands-on: Task description</hands-on-title>
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Trim Galore!]( https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/cd7e644cae1d) %} with the following parameters:
 >    - *"Is this library paired- or single-end?"*: `Paired Collection`
@@ -233,7 +233,7 @@ repetitive regions but keep reads falling into regions present in alternate loci
 {: .comment}
 
 
-> <hands-on-title>Hands-on: Mapping reads to reference genome</hands-on-title>
+> <hands-on-title>Mapping reads to reference genome</hands-on-title>
 >
 > 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.5+galaxy1) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end Dataset Collection`
@@ -277,7 +277,7 @@ We apply some filters to the reads after the mapping. CUT&RUN datasets can have 
 to the pA(G)-MNase. CUT&RUN inserts adapter more easily in open chromatin regions due to the pA(G)-MNase activity. The mitochondrial genome is uninteresting for CUT&RUN,
 so we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.
 
-> <hands-on-title>Hands-on: Filtering of uninformative reads</hands-on-title>
+> <hands-on-title>Filtering of uninformative reads</hands-on-title>
 >
 > 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
@@ -319,7 +319,7 @@ so we remove these reads. We also remove reads with low mapping quality and read
 
 Because of the PCR amplification, there might be read duplicates (different reads mapping to the same genomic region) from over amplification of some regions. We will remove them with **Picard MarkDuplicates**.
 
-> <hands-on-title>Hands-on: Remove duplicates</hands-on-title>
+> <hands-on-title>Remove duplicates</hands-on-title>
 >
 > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
 >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
@@ -372,7 +372,7 @@ too much compared to the diversity of the library you generated. Consequently, l
 
 ## Check Deduplication and Adapter Removal
 
-> <hands-on-title>Hands-on: Check Adapter Removal with FastQC</hands-on-title>
+> <hands-on-title>Check Adapter Removal with FastQC</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >       - {% icon param-collection %} *"Short read data from your current history"*: select the output of **MarkDuplicates** .
@@ -392,7 +392,7 @@ too much compared to the diversity of the library you generated. Consequently, l
 
 We will check the insert sizes with **Paired-end histogram** of insert size frequency. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives an excellent indication of the quality of the CUT and RUN experiment.
 
-> <hands-on-title>Hands-on: Plot the distribution of fragment sizes</hands-on-title>
+> <hands-on-title>Plot the distribution of fragment sizes</hands-on-title>
 >
 > 1. {% tool [Paired-end histogram](toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM file"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
@@ -440,7 +440,7 @@ and it would be impossible to call peaks. Thus, we will extend the start sites o
 
 We convert the BAM file to BED format because when we set the extension size in MACS2, it will only consider one read of the pair while here we would like to use the information from both.
 
-> <hands-on-title>Hands-on: Convert the BAM to BED</hands-on-title>
+> <hands-on-title>Convert the BAM to BED</hands-on-title>
 >
 > 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %} BAM output
@@ -450,7 +450,7 @@ We convert the BAM file to BED format because when we set the extension size in 
 We call peaks with MACS2. To get the coverage centered on the 5' extended 100bp each side we will use `--shift -100` and `--extend 200`:
 ![MACS2 options to get 100bp each side](../../images/atac-seq/macs2Options.jpg "MACS2 options to get 100bp each side")
 
-> <hands-on-title>Hands-on: Call peaks with MACS2</hands-on-title>
+> <hands-on-title>Call peaks with MACS2</hands-on-title>
 >
 > 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0) %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
@@ -486,7 +486,7 @@ We call peaks with MACS2. To get the coverage centered on the 5' extended 100bp 
 
 In the following step, we want to apply a tool to identify robust peaks between our two replicates. However, we still have one dataset collection, holding both replicates, which we have to split.
 
-> <hands-on-title>Hands-on: Extract replicates from a dataset collection:</hands-on-title>
+> <hands-on-title>Extract replicates from a dataset collection:</hands-on-title>
 >
 > 1. {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
 >    - {% icon param-collection %} *"Input List"*: `MACS2 callpeak on collection N (narrow Peaks)`
@@ -507,7 +507,7 @@ We can first try to reduce some noise using the results for our two biological r
 Yet, both replicates have peaks that are only present in one replicate and thus might be a potential false positive due to noise.
 We can remove such peaks if we simply overlap the two peak files and consequently search for peaks that appear in both replicates.
 
-> <hands-on-title>Hands-on: Select robust GATA1 peaks:</hands-on-title>
+> <hands-on-title>Select robust GATA1 peaks:</hands-on-title>
 >
 > 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File A to intersect with B"*: Select `Rep1`
@@ -540,14 +540,14 @@ We can remove such peaks if we simply overlap the two peak files and consequentl
 {: .hands_on}
 
 Note, that this is one way to define robust peaks. Yet, there are more sophisticated algorithms in Galaxy, such as
-{% tool [IDR compare ranked list of identifications ](toolshed.g2.bx.psu.edu/view/iuc/idr/de7795890bc5) %}, and other methods that can help to define a robust peak.
+{% tool [IDR compare ranked list of identifications](toolshed.g2.bx.psu.edu/repos/iuc/idr/idr/2.0.3) %}, and other methods that can help to define a robust peak.
 The tool **IDR** has not been tested so far for CUT and RUN.
 
 ### Extract Positive Peaks
 
 We can further remove some noise with a positive control, that is why we have downloaded a peak set from a ChIP experiment of GATA1.
 
-> <hands-on-title>Hands-on: Select GATA1 peaks from ChIP-Seq data:</hands-on-title>
+> <hands-on-title>Select GATA1 peaks from ChIP-Seq data:</hands-on-title>
 >
 > 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File A to intersect with B"*: Select **Robust GATA1 CUT and RUN peaks**
@@ -578,7 +578,7 @@ We can further remove some noise with a positive control, that is why we have do
 
 ### Extract DNA sequence
 
-> <hands-on-title>Hands-on: Obtain DNA sequences from a BED file</hands-on-title>
+> <hands-on-title>Obtain DNA sequences from a BED file</hands-on-title>
 >
 > 1. {% tool [Extract Genomic DNA using coordinates from assembled/unassembled genomes](toolshed.g2.bx.psu.edu/repos/iuc/extract_genomic_dna/Extract genomic DNA 1/3.0.3+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Fetch sequences for intervals in"*: Select **True GATA1 CUT and RUN peaks**
@@ -594,7 +594,7 @@ We can further remove some noise with a positive control, that is why we have do
 
 Let's find out the sequence motifs of the TF GATA1. Studies have revealed that GATA1 has the DNA binding motif (T/A)GATA(A/G) {% cite Hasegawa2017 %}. In this last task we search for this motif in our data.
 
-> <hands-on-title>Hands-on: Motif detection</hands-on-title>
+> <hands-on-title>Motif detection</hands-on-title>
 >
 > 1.  {% tool [MEME-ChIP](toolshed.g2.bx.psu.edu/repos/iuc/meme_chip/meme_chip/4.11.2+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Primary sequences"*: Select the output of **Extract Genomic DNA** using coordinates from assembled/unassembled genomes {% icon tool %})
