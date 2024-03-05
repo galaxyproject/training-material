@@ -106,11 +106,7 @@ could ask ourselves: does this aspiration impact in any way on the objectives of
 
 According Marcuse, the education system is political, so aspiring to its politicisation does not imply an inference in its functions ({% cite Marcuse1964 %}). The attempt to appropriate concepts that are spontaneously experienced as apolitical would represent a clear attack on critical thinking, derived from the struggle for ideological-political hegemony ({% cite Zizek2009 %}). In words of Giroux, *when students have little room left to generate their own meanings, learning degenerates into a euphemism for a strategy of control* ({% cite Giroux1988 %}).
 
-Darío Sztajnszrajber, a prominent argentine philosopher, essayist and teacher, considers that if there were really an interest in fostering critical thinking, the discursive mode that should dominate in the classroom should be the interrogative one. 
-
-
-
-According him, *questioning is a way of thinking, and that is why thinking is not only deriving conclusions, but often consists of the opposite: starting from the accepted conclusions of a community and turning them upside down* ({% cite Sztajnszrajber2013 %}). 
+Darío Sztajnszrajber, a prominent argentine philosopher, essayist and teacher, considers that if there were really an interest in fostering critical thinking, the discursive mode that should dominate in the classroom should be the interrogative one. According him, *questioning is a way of thinking, and that is why thinking is not only deriving conclusions, but often consists of the opposite: starting from the accepted conclusions of a community and turning them upside down* ({% cite Sztajnszrajber2013 %}). 
 
 ## Evaluation system
 
