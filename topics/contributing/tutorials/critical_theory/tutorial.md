@@ -45,9 +45,9 @@ This training aspires to be a introduction on the **Critical Learning Theory** a
 
 Education is the result of multiple contextual variables that have an effect on behaviour, ideology and professional development, so it could be said that human beings, as social beings, are educated and transformed by their context ({% cite Careaga2007 %}). In this line, John Dewey, a distinguished American philosopher and advocate for educational reform, beautifully articulated that the education proposed by society has its roots in society itself ({% cite Perez2018 %}). Thus, in order to contextualise current educational practices, we can start by analyzing the current stage of society, the so-called **Information Society**.
 
-The **Information Society** is characterised by interrelationships that link individuals through access to and provision of information for the purpose of generating knowledge. According to Esteve in Aprendizaje y Desarrollo Profesional Docente (2009), the **Information Society** needs to increase the number of citizens with high levels of scientific and technical training capable of maintaining the current technological development. But is this true? 
+The **Information Society** is characterised by interrelationships that link individuals through access to and provision of information for the purpose of generating knowledge. According to a Manuel Esteve, a renowned Spanish pedagogue with great influence on teacher training, **Information Society** needs to increase the number of citizens with high levels of scientific and technical training capable of maintaining the current technological development ({% cite Esteve2009 %}). But is this true? 
 
-Morgenstern (2005) indicates that the **Information Society** can function with very few, highly qualified and highly paid employees who constitute the decisive core of the companies' activity; the remaining skills are outsourced to other companies, leaving at the bottom a mass of precarious workers whose required competences are often embodied in demands for punctuality, organisational skills, non-conflict and submission to authority (Morgenstern and Finkel, 2005).
+Morgenstern (2005) indicates that **Information Society** can function with very few, highly qualified and highly paid employees who constitute the decisive core of the companies' activity; the remaining skills are outsourced to other companies, leaving at the bottom a mass of precarious workers whose required competences are often embodied in demands for punctuality, organisational skills, non-conflict and submission to authority (Morgenstern and Finkel, 2005).
 
 ## Educative systems
 
@@ -59,21 +59,25 @@ In the face of the conservative claim that educative systems transmit objective 
 
 # Critical thinking
 
-> *Toda pedagogía que se interese por el pensamiento crítico se han de considerar la forma y el contenido de las relaciones sociales del aula.*
+> *Any pedagogy concerned with critical thinking has to consider the form and content of social relations in the classroom..*
 >
-> Teacher as intellectuals. Henry Giroux
+> Teacher as intellectuals: towards a critical pedagogy of learning. Henry Giroux.
 >
 {: .quote}
 
 Before going deeper, it is inportant to accurately define **critical thinking**, since it is usually concived as a nebulose concepts whose applications appears limitated to specific situations.
 
-The most common definition proviene de la tradición positivista en las ciencias aplicadas; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). 
-In contrast to this superficial and clearly insufficient conception, Gouldner points out that *critical thinking must be capable of questioning even the logic of reasoning itself*, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool (Gouldner, Dialectic of Ideology and technology, 1978).
+The most common definition proviene de la tradición positivista en las ciencias aplicadas; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). Is it enought?
+
+In his famous work "Dialectics of Ideology and Technology", the American sociologist Alvin Gouldner  pointed out that, in contrast to this superficial and clearly insufficient conception, *critical thinking must be capable of questioning even the logic of reasoning itself*, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool ({% cite Gouldner1976 %}).
 
 > <comment-title>Frankfurt School and Critical Thinking </comment-title>
 >
-> Algunos teóricos críticos de la primera generación, entre los que habría que mencionar a Max Horkheimer, Theodor Adorno y Walter Benjamín, sostienen que en las democracias occidentales la capacidad del razonamiento crítico se va eclipsando rápidamente. 
-> Señalando hechos como la intrusión del Estado, la industria de la cultura y la concentración de la riqueza en cada vez menos personas, estos pensadores temen que las condiciones ideológicas y materiales que posibilitan la interacción pública y el pensamiento crítico estén siendo socavadas por el creciente proceso de estandarización, fragmentación y comercialización de la vida cotidiana.
+> *Some critical theorists of the first generation, including Max Horkheimer, Theodor Adorno and Walter Benjamin, argue that in Western democracies the capacity for critical reasoning is rapidly being eclipsed.*
+>
+> *Pointing to developments such as the intrusion of the state, the culture industry and the concentration of wealth in fewer and fewer people, these thinkers fear that the ideological and material conditions that make public interaction and critical thinking possible are being undermined by the increasing standardisation, fragmentation and commercialisation of everyday life.*
+>
+> Teacher as intellectuals: towards a critical pedagogy of learning. Henry Giroux.
 >
 {: .comment}
 
