@@ -4,6 +4,10 @@ layout: tutorial_hands_on
 title: "On Critical Learning Theory: the Hidden Curriculum"
 level: Advanced
 subtopic: pedagogy
+tags:
+    - critical learning theory
+    - pedagogy
+    - philosophy
 time_estimation: 2h
 questions:
 - What is Critical Learning Theory about?
