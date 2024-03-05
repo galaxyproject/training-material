@@ -47,7 +47,7 @@ endo-exonuclease that cleaves and shortens DNA. The fusion will ensure that the 
 fragment the DNA in unfixed cells and thus allows to study protein-DNA interactions in a more natural state. The added pA(G)-MNase thus creates shorted fragments that lead to a higher resolution for the mapping
 in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) permeabilize the nuclei or cells coated on beads, (2) incubate with the selective antibody of the POI, (3)
 add the pA(G)-MNase and activate the enzyme for a small period of time, (4) release CUT&RUN fragments and collect the DNA from the supernatant. Afterward, the DNA can be purified, PCR amplified and
-prepared for sequencing. You can find the CUT&RUN protocol [here](https://www.protocols.io/view/cut-amp-run-targeted-in-situ-genome-wide-profiling-14egnr4ql5dy/v3).
+prepared for sequencing. You can find the CUT&RUN protocol at [protocols.io](https://www.protocols.io/view/cut-amp-run-targeted-in-situ-genome-wide-profiling-14egnr4ql5dy/v3).
 
 In this tutorial, we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we will **not** completely follow. It is important to note at this point that
 a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from a CUT&RUN experiment for the aforementioned TF GATA1 in humans.
