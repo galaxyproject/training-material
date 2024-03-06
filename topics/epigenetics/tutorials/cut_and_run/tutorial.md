@@ -36,7 +36,7 @@ abbreviations:
 In many organism, {TF} play an important tole in the regulation of the gene expression. In human, we have up to 2,800 proteins and more than 1,600 are
 TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer.
 Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain
-the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
+the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.
 
 ![CUT_and_RUN](../../images/cut_and_run/cut_and_run.png "Skene and Henikoff 2017 eLIFE")
 
@@ -56,7 +56,7 @@ We downsampled the data to speed up the run times in this tutorial. Our results 
 ## When working with real data
 The workflow for this training material can be found [at the European Galaxy instance](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your data we suggest using [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong)
 which includes additional steps for your data analysis. Both workflows do not support peak calling with controls as CUT&RUN has a low background.
-It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to consider them.    
+It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to consider them.
 
 > <agenda-title></agenda-title>
 >
@@ -94,7 +94,7 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->    
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 4. Add a tag called `#rep1` to the Rep1 files and a tag called `#rep2` to the Rep2 files.
@@ -183,7 +183,7 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 >    - *"Is this library paired- or single-end?"*: `Paired Collection`
 >        - *"Select a paired collection"*: select `2 PE fastqs`
 >    - In *"Adapter sequence to be trimmed"*: `Illumina universal`
->    - *Avanced settings*: `Full parameter list` 
+>    - *Avanced settings*: `Full parameter list`
 >    - In *"Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)"*: `30`
 >    - In *"Discard reads that became shorter than length N"*: `15`
 >    - In *"Generate a report file"*:   `Yes`
@@ -346,7 +346,9 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - *"that*: `Matching`
 >    - *"the pattern*: `(Library|LIBRARY)`
 > 2. Check that the datatype is tabular. If not, change it.
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
 > 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
 >    - {% icon param-collection %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
@@ -494,7 +496,7 @@ In the following step, we want to apply a tool to identify robust peaks between 
 >    - *"How should a dataset be selected?"*: `Select by index`
 >    - *"Element index:"*: `0`
 >
-> You can use the arrow to rerun the same tool just changing the last parameter:  
+> You can use the arrow to rerun the same tool just changing the last parameter:
 >
 > 2. {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
 >    - {% icon param-collection %} *"Input List"*: `MACS2 callpeak on collection N (narrow Peaks)`
