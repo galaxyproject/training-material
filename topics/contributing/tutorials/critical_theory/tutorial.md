@@ -69,13 +69,13 @@ In the face of the conservative claim that educative systems transmit objective 
 
 # Critical thinking
 
-> *Any pedagogy concerned with critical thinking has to consider the form and content of social relations in the classroom..*
+> *Questioning is an exercise in dismantling those certainties that are installed as layers of truths imposing the tyranny of the obvious.*
 >
-> Teacher as intellectuals: towards a critical pedagogy of learning. Henry Giroux.
+> ¿Para qué sirve la filosofía?. Dario Sztajnzrajbe
 >
 {: .quote}
 
-Before going deeper, it is inportant to accurately define **critical thinking**, since it is usually concived as a nebulose concepts whose applications appears limitated to specific situations.
+Before going deeper, it is inportant to accurately define **critical thinking**, since it is usually concived as a nebulose concept whose applications appears to be limitated to specific situations.
 
 The most common definition comes from the **positivist tradition** in the applied sciences; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). Is it enought?
 
@@ -93,7 +93,7 @@ In his famous work *Dialectics of Ideology and Technology*, the American sociolo
 
 > <comment-title>Frankfurt School and critical thinking </comment-title>
 >
-> Some critical theorists of the first generation, including Max Horkheimer, Theodor Adorno and Walter Benjamin, argue that in Western democracies the capacity for critical reasoning is rapidly being eclipsed.
+> Some critical theorists of the first generation, including Max Horkheimer, Theodor Adorno and Walter Benjamin, argued that in Western democracies the capacity for critical reasoning is rapidly being eclipsed.
 >
 > Pointing to developments such as the intrusion of the state, the culture industry and the concentration of wealth in fewer and fewer people, these thinkers fear that the ideological and material conditions that make public interaction and critical thinking possible are being undermined by the increasing standardisation, fragmentation and commercialisation of everyday life.
 >
@@ -101,17 +101,70 @@ In his famous work *Dialectics of Ideology and Technology*, the American sociolo
 
 From the assumption of this conception of critical thinking a new question arises: is it really in the interest of education system to encourage critical thinking? One element that can help to answer this question is the hidden curriculum.
 
+> <question-title>Critical thinking quiz</question-title>
+>
+> 1. **How does critical thinking align with the principles of both Critical Theory and Critical Learning Theory?**
+> > a. By avoiding critical examination of societal issues. <br>
+> > b. By promoting conformity to existing structures. <br>
+> > c. By fostering a reflective approach to learning and encouraging critical analysis. <br>
+> > d. By discouraging diverse perspectives.
+> 2. **According to the Frankfurt School thinkers, what did critical thinking in education aim to achieve?**
+> > a. To maintain the status quo. <br>
+> > b. To encourage blind acceptance of authority. <br>
+> > c. To develop individuals who conform to norms. <br>
+> > d. To empower individuals to question and transform social structures. <br>
+> 3. **When dealing with diverse cultural perspectives, why might the positivist conception of critical thinking face limitations?**
+> > a. It fails to acknowledge cultural biases. <br>
+> > b. It prioritizes subjective experiences. <br>
+> > c. Cultural perspectives are irrelevant to objective analysis. <br>
+> > d. It encourages emotional responses. <br>
+> 4. **In the Frankfurt School's view, how does critical thinking contribute to the development of individuals within an educational context?**
+> > a. By discouraging any form of dissent. <br>
+> > b. By promoting uncritical acceptance of information. <br>
+> > c. By fostering independent thought. <br>
+> > d. By reinforcing conformity to existing power structures.
+>
+> > <solution-title></solution-title>
+> > 1. By fostering a reflective approach to learning and encouraging critical analysis.
+> > 2. To empower individuals to question and transform social structures.
+> > 3. It fails to acknowledge cultural biases.
+> > 4. By fostering independent thought.
+> {: .solution}
+{: .question}
+
 # The hidden curriculum
 
-> *Questioning is an exercise in dismantling those certainties that are installed as layers of truths imposing the tyranny of the obvious.*
+> *Any pedagogy concerned with critical thinking has to consider the form and content of social relations in the classroom..*
 >
-> ¿Para qué sirve la filosofía?, Dario Sztajnzrajbe
+> Teacher as intellectuals: towards a critical pedagogy of learning. Henry Giroux.
 >
 {: .quote}
 
 Unlike the official curriculum, with its explicitly stated cognitive and affective objectives, **the hidden curriculum relies on those organisational aspects, such as the communicative systems, whose effects on the learning process are generally not consciously perceived by students** ({% cite Olivo2005 %}). On the light of this definition, a new question emerges: which impact has the hidden curriculum on the learning process?
 
 According the **Critical Learning Theory**, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in communicative systems ({% cite Giroux1988 %}, {% cite Anders1980 %}). In this training, we will focus in four of them: the curricular system, the system of pedagogical styles of classroom control, the evaluative system, and the technological system.
+
+> <question-title>Hidden Curriculum quiz</question-title>
+>
+> 1. **What is the hidden curriculum?**
+> > a. The formal curriculum taught in schools. <br>
+> > b. Implicit values, behaviors, and expectations transmitted through the educational or social system. <br>
+> > c. Extracurricular activities in schools. <br>
+> 2. **How is the hidden curriculum transmitted?**
+> > a. Through explicit teaching and textbooks. <br>
+> > b. Through unspoken or implicit messages in the educational or social environment. <br>
+> > c. Through standardized tests. <br>
+> 3. **How does the hidden curriculum influence individuals?**
+> > a. It has no impact on individuals' beliefs and attitudes. <br>
+> > b. It shapes subconscious beliefs and attitudes through implicit messages.<br>
+> > c. It directly dictates conscious decision-making.
+>
+> > <solution-title></solution-title>
+> > 1. Implicit values, behaviors, and expectations transmitted through the educational or social system.
+> > 2. Through unspoken or implicit messages in the educational or social environment.
+> > 3. It shapes subconscious beliefs and attitudes through implicit messages.
+> {: .solution}
+{: .question}
 
 ## Curricular system
 
@@ -153,6 +206,8 @@ The technological system can be defined as a set of interconnected components th
 > On August 2023, the University of Freiburg established a research position at the [Institute of Sociology](https://www.soziologie.uni-freiburg.de/forschung/gaf) in his honour.
 >
 {: .comment}
+
+Anders challenged the assumption that technology might solely enhance educational processes, encouraging to transcend the temptation to view technology as a complete replacement for traditional, face-to-face engagement ({% cite Anders1980 %}, {% cite Anders2002 %}).
 
 # Conclusion
 
