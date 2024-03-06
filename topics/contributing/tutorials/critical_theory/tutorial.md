@@ -81,15 +81,17 @@ The most common definition comes from the **positivist tradition** in the applie
 
 > <comment-title>On positivism</comment-title>
 >
-> Positivism, originating in the 19th century under the guidance of figures like Auguste Comte, is a philosophical and scientific stance that emphasizes the importance of empirical observation and the application of the scientific method in gaining knowledge about the world. Central to positivism is the idea that valid knowledge is derived from observable and measurable phenomena. In other words, if you can't see it or measure it, according to positivism, it doesn't count as reliable knowledge.
+> Positivism, originating in the 19th century under the guidance of figures like Auguste Comte, is a philosophical and scientific stance that emphasizes the importance of empirical observation and the application of the scientific method in gaining knowledge about the world. Central to positivism is the idea that valid knowledge is derived from observable and measurable phenomena.
 >
-> Positivists stress the need for objectivity in the pursuit of knowledge, advocating for the exclusion of personal biases and subjective interpretations. They argue for a systematic and rigorous adherence to scientific methodologies, favoring concrete evidence over speculative reasoning. While positivism has significantly influenced the natural sciences, it has also faced criticism for its limitations in addressing subjective experiences, moral values, and aspects of reality that aren't easily quantifiable. Despite these critiques, positivism continues to be a major perspective in the philosophy of science, shaping how we approach and validate knowledge.
+> Positivists stress the need for objectivity in the pursuit of knowledge, advocating for the exclusion of personal biases and subjective interpretations. They argue for a systematic and rigorous adherence to scientific methodologies, favoring concrete evidence over speculative reasoning. While positivism has significantly influenced the natural sciences, it has also faced criticism for its limitations in addressing subjective experiences, moral values, and aspects of reality that aren't easily quantifiable. Despite these critiques, positivism continues to be a major perspective in the philosophy of science.
+>
+> Max Horkheimer argued that positivism misrepresent human social action by ignoring the influence of socially and historically mediated human consciousness on social facts. Positivism failed to acknowledge that these social facts are not objective entities but are shaped by observers and the broader social context, leading to a distorted view of reality. Secondly, Horkheimer contended that positivism construction of social reality was politically conservative, maintaining the existing status quo rather than challenging it.
 >
 {: .comment}
 
 In his famous work *Dialectics of Ideology and Technology*, the American sociologist Alvin Gouldner pointed out that, in contrast to this superficial and clearly insufficient conception, **critical thinking must be capable of questioning even the logic of reasoning itself**, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool ({% cite Gouldner1976 %}).
 
-> <comment-title>Frankfurt School and Critical Thinking </comment-title>
+> <comment-title>Frankfurt School and critical thinking </comment-title>
 >
 > Some critical theorists of the first generation, including Max Horkheimer, Theodor Adorno and Walter Benjamin, argue that in Western democracies the capacity for critical reasoning is rapidly being eclipsed.
 >
