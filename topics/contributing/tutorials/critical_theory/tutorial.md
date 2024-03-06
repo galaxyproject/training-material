@@ -211,7 +211,7 @@ The principle of maximum performance extends to educational technologies, where 
 
 > *[...] to think is, whether you want or not, to exaggerate. If you prefer not to exaggerate, you must remain silent; or, rather, you must paralyse your intellect and find some way of becoming an idiot.*
 >
-> — José Ortega y Gasset, The Revolt of the Masses
+> — José Ortega y Gasset, The revolt of the masses.
 {: .quote}
 
 The following conclusions are drawn from the training content.
