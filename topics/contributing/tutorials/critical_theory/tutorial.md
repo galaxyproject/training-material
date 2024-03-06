@@ -199,9 +199,10 @@ The technological system is a complex arrangement of interconnected components, 
 >
 {: .comment}
 
-Anders challenged the assumption that technology might solely enhance educational processes, encouraging to transcend the temptation to view technology as a complete replacement for traditional, face-to-face engagement ({% cite Anders1980 %}, {% cite Anders2002 %}). According to him, the most pernicious element of technological devices is their normative power, and particulally the inextricable link between technology and **the principle of maximum performance**. ({% cite Bischof2014 %}). From this insight we can ask, how does this impact on education?
+Anders challenged the assumption that technology might solely enhance educational processes, encouraging to transcend the temptation to view technology as a complete replacement for traditional, face-to-face engagement ({% cite Anders1980 %}, {% cite Anders2002 %}). According to him, the most pernicious element of technological devices is their normative power, and particulally the inextricable link between technology and **the principle of maximum performance** ({% cite Bischof2014 %}). From this insight we could ask ourselves, how does this impact on education?
 
-The principle of maximum performance extends to educational technologies, where software and applications are expected to deliver optimal results in terms of student engagement, academic achievement, and preparation for a technologically advanced workforce. This normative influence can inadvertently shape the educational experience, **emphasizing quantitative measures of success over qualitative aspects of learning, such as critical thinking, creativity, and collaboration** ({% cite Anders1980 %}, {% cite Anders2002 %}).
+The principle of maximum performance extends to educational technologies, where software and applications are expected to deliver optimal results in terms of student engagement and academic achievement, and preparation for a technologically advanced workforce. This normative influence can inadvertently shape the educational experience, **emphasizing quantitative measures of success over qualitative aspects of learning, such as critical thinking, creativity, and collaboration** ({% cite Anders1980 %}, {% cite Anders2002 %}).
+
 
 # Conclusion
 
