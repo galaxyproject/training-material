@@ -41,9 +41,9 @@ This training aspires to be a introduction on the **Critical Learning Theory** a
 
 # Contextualising framework
 
-> *Questioning is an exercise in dismantling those certainties that are installed as layers of truths imposing the tyranny of the obvious.*
+> *Critical thinking aims to define the irrational character of the established rationality.*
 >
-> ¿Para qué sirve la filosofía?. Dario Sztajnzrajbe
+> One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society. Herbert Marcuse
 >
 {: .quote}
 
@@ -69,9 +69,9 @@ In the face of the conservative claim that educative systems transmit objective 
 
 # Critical thinking
 
-> *Critical thinking aims to define the irrational character of the established rationality.*
+> *Questioning is an exercise in dismantling those certainties that are installed as layers of truths imposing the tyranny of the obvious.*
 >
-> One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society. Herbert Marcuse
+> ¿Para qué sirve la filosofía?. Dario Sztajnzrajbe
 >
 {: .quote}
 
@@ -199,7 +199,9 @@ The technological system is a complex arrangement of interconnected components, 
 >
 {: .comment}
 
-Anders challenged the assumption that technology might solely enhance educational processes, encouraging to transcend the temptation to view technology as a complete replacement for traditional, face-to-face engagement ({% cite Anders1980 %}, {% cite Anders2002 %}).
+Anders challenged the assumption that technology might solely enhance educational processes, encouraging to transcend the temptation to view technology as a complete replacement for traditional, face-to-face engagement ({% cite Anders1980 %}, {% cite Anders2002 %}). According to him, the most pernicious element of technological devices is their normative power, and particulally the inextricable link between technology and **the principle of maximum performance**. ({% cite Bischof2014 %}). From this insight we can ask, how does this impact on education?
+
+The principle of maximum performance extends to educational technologies, where software and applications are expected to deliver optimal results in terms of student engagement, academic achievement, and preparation for a technologically advanced workforce. This normative influence can inadvertently shape the educational experience, **emphasizing quantitative measures of success over qualitative aspects of learning, such as critical thinking, creativity, and collaboration** ({% cite Anders1980 %}, {% cite Anders2002 %}).
 
 # Conclusion
 
