@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: CUT&RUN data analysis / Epigenetics</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@4bbfcae7e78a1c06ade3bf13d704a150839b284b",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709712195' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.14ccc527.js?v=1709712195' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: CUT&RUN data analysis">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-03-06 07:51:26 +0000">
+<meta name="DC.creator" content="Florian Heyl"><meta name="description" content="DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Epigenetics / Hands-on: CUT&RUN data analysis">
+        <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-03-06 07:51:26 +0000",
+  "datePublished": "2024-03-06 07:59:37 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: CUT&RUN data analysis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Draft",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Epigenetics",
+    "description": "DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.",
+    "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: CUT&RUN data analysis",
+  "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html",
+  "version": 20,
+  "timeRequired": "PT3H",
+  "teaches": "Apply appropriate analysis and quality control steps for CUT&RUN\n - Apply an enrichment analysis and a robust peak detection\n - Find protein binding motifs",
+  "keywords": [
+    "Epigenetics"
+  ],
+  "description": "The questions this  addresses are:\n - Which binding motif has the transcription factor GATA1?\n - What kind of quality control do I have to do?\n - How to analyse and visualise CUT&RUN data?\n\n\nThe objectives are:\n - Apply appropriate analysis and quality control steps for CUT&RUN\n - Apply an enrichment analysis and a robust peak detection\n - Find protein binding motifs\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/heylf/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/heylf/",
+      "name": "Florian Heyl",
+      "image": "https://avatars.githubusercontent.com/heylf",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3651-5685",
+      "orcid": "https://orcid.org/0000-0002-3651-5685"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/",
+      "name": "Lucille Delisle",
+      "image": "https://avatars.githubusercontent.com/lldelisle",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-1964-4960",
+      "orcid": "https://orcid.org/0000-0002-1964-4960"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Epigenetics",
+      "description": "DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.",
+      "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3173",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3173",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3173"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "# Introduction"
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709712195'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/epigenetics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Epigenetics
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/epigenetics/faqs/" title="Check our FAQs for the Epigenetics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/epigenetics/tutorials/cut_and_run/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-epigenetics">
+    <h1 data-toc-skip>CUT&RUN data analysis</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/heylf/" class="contributor-badge contributor-heylf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/heylf?s=36" alt="Florian Heyl avatar" width="36" class="avatar" />
+    Florian Heyl</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge contributor-lldelisle"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lldelisle?s=36" alt="Lucille Delisle avatar" width="36" class="avatar" />
+    Lucille Delisle</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Which binding motif has the transcription factor GATA1?</p>
+</li>
+        
+        <li><p>What kind of quality control do I have to do?</p>
+</li>
+        
+        <li><p>How to analyse and visualise CUT&amp;RUN data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Apply appropriate analysis and quality control steps for CUT&amp;RUN</p>
+</li>
+        
+        <li><p>Apply an enrichment analysis and a robust peak detection</p>
+</li>
+        
+        <li><p>Find protein binding motifs</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/3862793">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/epigenetics/tutorials/cut_and_run/workflows/" title="CUT&RUN data analysis workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/epigenetics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 6, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 6, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 20 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="introduction">Introduction</h1>
+<p>In many organism, transcription factors (TF) play an important tole in the regulation of the gene expression. In human, we have up to 2,800 proteins and more than 1,600 are
+TF (<a href="https://en.wikipedia.org/wiki/List_of_human_transcription_factors">list of transcription factors</a>), although the number might change over timer.
+Investigating the role of TFs, such as <a href="https://en.wikipedia.org/wiki/GATA1">GATA1</a>, is a very important task to understand the regulatory mechanisms in the cell and thus ascertain
+the source of a disease, such as <a href="https://en.wikipedia.org/wiki/Primary_myelofibrosis">myelofibrosis</a> a type of blood cancer.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/cut_and_run/cut_and_run.png" alt="CUT_and_RUN. " width="4240" height="3282" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/cut_and_run.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Skene and Henikoff 2017 eLIFE</figcaption></figure>
+
+<p>Cleavage Under Targets and Release Using Nuclease (CUT&amp;RUN) <span class="citation"><a href="#Skene2017">Skene and Henikoff 2017</a></span> became the new and advanced method to analyse DNA-associated proteins. CUT&amp;RUN uses an antibody just as <a href="https://en.wikipedia.org/wiki/ChIP_sequencing">ChIP-Seq</a> to select the protein of interest (POI).
+The big difference, CUT&amp;RUN couples the usage of an antibody with the usage of a pA-MNase, which you can see in <strong>Figure 1</strong>. In the revised version of the protocol <span class="citation"><a href="#Meers2019">Meers <i>et al.</i> 2019</a></span>,
+the pA-MNase has been replaced by a {pA(G)-MNase} to expand this technology to mouse primary antibodies. The <a href="https://en.wikipedia.org/wiki/Micrococcal_nuclease">enzyme</a> fused to the protein A/G is an
+endo-exonuclease that cleaves and shortens DNA. The fusion will ensure that the MNase comes in close proximity with the POI and thus cleaves DNA <em>in-situ</em>, close to POI binding sites. CUT&amp;RUN allows to
+fragment the DNA in unfixed cells and thus allows to study protein-DNA interactions in a more natural state. The added pA(G)-MNase thus creates shorted fragments that lead to a higher resolution for the mapping
+in comparison to your standard ChIP-Seq protocol. CUT&amp;RUN follows four fundamental steps: (1) permeabilize the nuclei or cells coated on beads, (2) incubate with the selective antibody of the POI, (3)
+add the pA(G)-MNase and activate the enzyme for a small period of time, (4) release CUT&amp;RUN fragments and collect the DNA from the supernatant. Afterward, the DNA can be purified, PCR amplified and
+prepared for sequencing. You can find the CUT&amp;RUN protocol at <a href="https://www.protocols.io/view/cut-amp-run-targeted-in-situ-genome-wide-profiling-14egnr4ql5dy/v3">protocols.io</a>.</p>
+
+<p>In this tutorial, we will use data from the study of <span class="citation"><a href="#Zhu2019">Zhu <i>et al.</i> 2019</a></span>. The article introduces a CUT&amp;RUN pipeline that we will <strong>not</strong> completely follow. It is important to note at this point that
+a CUT&amp;RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from a CUT&amp;RUN experiment for the aforementioned TF GATA1 in humans.
+We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment <span class="citation"><a href="#Canver2017">Canver <i>et al.</i> 2017</a></span>.</p>
+
+<h2 id="when-working-with-real-data">When working with real data</h2>
+<p>The workflow for this training material can be found <a href="https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong">at the European Galaxy instance</a>. When you use your data we suggest using <a href="https://usegalaxy.eu/u/heylf/w/cutandrunlong">this workflow</a>
+which includes additional steps for your data analysis. Both workflows do not support peak calling with controls as CUT&amp;RUN has a low background.
+It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&amp;RUN but need then additional steps in the provided workflows to consider them.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#when-working-with-real-data" id="markdown-toc-when-working-with-real-data">When working with real data</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-1-preprocessing" id="markdown-toc-step-1-preprocessing">Step 1: Preprocessing</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a></li>
+      <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a></li>
+      <li><a href="#trimming-reads" id="markdown-toc-trimming-reads">Trimming Reads</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-2-mapping" id="markdown-toc-step-2-mapping">Step 2: Mapping</a>    <ol>
+      <li><a href="#mapping-reads-to-reference-genome" id="markdown-toc-mapping-reads-to-reference-genome">Mapping Reads to Reference Genome</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-3-filtering-mapped-reads-and-second-level-quality-control" id="markdown-toc-step-3-filtering-mapped-reads-and-second-level-quality-control">Step 3: Filtering Mapped Reads and second level Quality Control</a>    <ol>
+      <li><a href="#filter-uninformative-reads" id="markdown-toc-filter-uninformative-reads">Filter Uninformative Reads</a></li>
+      <li><a href="#filter-duplicate-reads" id="markdown-toc-filter-duplicate-reads">Filter Duplicate Reads</a></li>
+      <li><a href="#check-deduplication-and-adapter-removal" id="markdown-toc-check-deduplication-and-adapter-removal">Check Deduplication and Adapter Removal</a></li>
+      <li><a href="#check-insert-sizes" id="markdown-toc-check-insert-sizes">Check Insert Sizes</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-4-peak-calling" id="markdown-toc-step-4-peak-calling">Step 4: Peak calling</a>    <ol>
+      <li><a href="#call-peaks" id="markdown-toc-call-peaks">Call Peaks</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-5-identifying-binding-motifs" id="markdown-toc-step-5-identifying-binding-motifs">Step 5: Identifying Binding Motifs</a>    <ol>
+      <li><a href="#prepare-the-datasets" id="markdown-toc-prepare-the-datasets">Prepare the Datasets</a></li>
+      <li><a href="#motif-detection-with-meme-chip" id="markdown-toc-motif-detection-with-meme-chip">Motif detection with MEME-ChIP</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<!--SNIPPET-->
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<h1 id="step-1-preprocessing">Step 1: Preprocessing</h1>
+
+<h2 id="get-data">Get Data</h2>
+
+<p>We first need to download the sequenced reads (FASTQs) as well as other annotation files. Then, to increase the number of reads that will map to the reference genome (here human genome version 38, GRCh38/hg38), we need to preprocess the reads.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the files from <a href="https://doi.org/10.5281/zenodo.3862792">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">epigenetics</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">CUT&amp;RUN data analysis</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6823059/files/chip_seq_peaks.bed
+https://zenodo.org/record/6823059/files/Rep1_R1.fastq
+https://zenodo.org/record/6823059/files/Rep1_R2.fastq
+https://zenodo.org/record/6823059/files/Rep2_R1.fastq
+https://zenodo.org/record/6823059/files/Rep2_R2.fastq
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Add a tag called <code class="language-plaintext highlighter-rouge">#rep1</code> to the Rep1 files and a tag called <code class="language-plaintext highlighter-rouge">#rep2</code> to the Rep2 files.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the datatype of the 4 FASTQ files is <code class="language-plaintext highlighter-rouge">fastqsanger</code> and the peak file (chip_seq_peaks.bed) is <code class="language-plaintext highlighter-rouge">bed</code>. If they are not then change the datatype as described below.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Create a paired collection named <code class="language-plaintext highlighter-rouge">2 PE fastqs</code>, and rename your pairs with the sample name followed by the attributes: <code class="language-plaintext highlighter-rouge">Rep1</code> and <code class="language-plaintext highlighter-rouge">Rep2</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a paired collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the bed file <code class="language-plaintext highlighter-rouge">GATA1 ChIP-Seq peaks</code>.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-fastq-format"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: FASTQ format</div>
+  <p>If you are not familiar with FASTQ format, see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a></p>
+</blockquote>
+<blockquote class="comment">
+
+  <div class="box-title comment-title" id="comment-bed-encode-narrowpeak-format"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: BED / encode narrowPeak format</div>
+  <p>If you are not familiar with BED format or encode narrowPeak format, see the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html">BED Format</a></p>
+</blockquote>
+
+<h2 id="quality-control">Quality Control</h2>
+
+<p>We first have to check if our data contains adapter sequences that we have to remove. A typical CUT&amp;RUN experiment has a read length of 30-80 nt. We can check the raw data quality with <strong>FastQC</strong>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__FLATTEN__" title="Flatten collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flatten collection</strong></span> with the following parameters convert the list of pairs into a simple list:
+      <ul>
+        <li><em>“Input Collection”</em>: <code class="language-plaintext highlighter-rouge">2 PE fastqs</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Short read data from your current history”</em>: Choose the output of <strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>selected as <strong>Dataset collection</strong>.</li>
+      </ul>
+    </li>
+    <li>Inspect the web page output of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="language-plaintext highlighter-rouge">Rep1_forward</code> sample. Check what adapters are found at the end of the reads.</li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many reads are in the FASTQ?</li>
+      <li>Which sections have a warning or an error?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>There are 300,000 reads.</li>
+        <li>
+          <p>The 4 steps below have warnings:</p>
+
+          <ol>
+            <li>
+              <p><strong>Per base sequence content</strong></p>
+
+              <p>CUT&amp;RUN has sometimes base biases like ChIP-Seq.</p>
+            </li>
+            <li>
+              <p><strong>Sequence Duplication Levels</strong></p>
+
+              <p>The read library quite often has PCR duplicates that are introduced
+simply by the PCR itself. We will remove these duplicates later on.</p>
+            </li>
+            <li>
+              <p><strong>Overrepresented sequences</strong></p>
+
+              <p>Our data contains TruSeq adapter, Illumina PCR Primer, and a read from the mitochondrial chromosome.</p>
+            </li>
+            <li>
+              <p><strong>Adapter Content</strong></p>
+
+              <p>Our data contains an adapter that we still have to remove.</p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-fastqc-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: FastQC Results</div>
+  <p>This is what you should expect from the <strong>Adapter Content</strong> section:</p>
+  <figure id="figure-2" style="max-width: 90%;"><img src="../../images/cut_and_run/adapter_content_pre.png" alt="FastQC screenshot of the Adapter Content section. " width="821" height="585" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/adapter_content_pre.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> FastQC screenshot on the Adapter Content section</figcaption></figure>
+</blockquote>
+
+<p>The FastQC report pointed out that we have in our data some standard Illumina adapter sequences, which we will remove with Trim Galore!.</p>
+
+<h2 id="trimming-reads">Trimming Reads</h2>
+
+<p><strong>Trim Galore!</strong> is a handy tool that can automatically detect and trim standard Illumina adapters.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool=" https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/cd7e644cae1d" title="Trim Galore! tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trim Galore!</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version cd7e644cae1d)</span> with the following parameters:
+      <ul>
+        <li><em>“Is this library paired- or single-end?”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
+          <ul>
+            <li><em>“Select a paired collection”</em>: select <code class="language-plaintext highlighter-rouge">2 PE fastqs</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Adapter sequence to be trimmed”</em>: <code class="language-plaintext highlighter-rouge">Illumina universal</code></li>
+        <li><em>Avanced settings</em>: <code class="language-plaintext highlighter-rouge">Full parameter list</code></li>
+        <li>In <em>“Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+        <li>In <em>“Discard reads that became shorter than length N”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
+        <li>In <em>“Generate a report file”</em>:   <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the report for <code class="language-plaintext highlighter-rouge">Rep1</code> and read the first lines.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What percentage of reads contain adapters?</li>
+    <li>What percentage of reads are still longer than 15bp after the trimming?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>~55% and ~57%</li>
+      <li>100%</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="step-2-mapping">Step 2: Mapping</h1>
+
+<h2 id="mapping-reads-to-reference-genome">Mapping Reads to Reference Genome</h2>
+
+<p>Next, we map the trimmed reads to the human reference genome. Here we will use <strong>Bowtie2</strong>. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because
+we know some valid read pairs are from this fragment length. We will use the <code class="language-plaintext highlighter-rouge">--very-sensitive</code> parameter to have more chances to get the best match even if it takes a bit longer to run.
+We will run the <strong>end-to-end</strong> mode because we trimmed the adapters, so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose.
+The hg38 version of the human genome contains <a href="https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE">alternate loci</a>. This means that some regions of the genome
+are present both in the canonical chromosome and on its alternate loci. The reads that map to these regions would map twice. To be able to filter reads falling into
+repetitive regions but keep reads falling into regions present in alternate loci, we will map on the Canonical version of hg38 (only the chromosome with numbers, chrX, chrY, and chrM).</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-dovetailing"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Dovetailing</div>
+  <p>We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it’s mate start site. This occurs especially for CUT&amp;RUN because the read length is quite short. Bowtie thus discards reads such as:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------Mate 1---------------------------------&gt;
+&lt;---------------------Mate 2----------------------
+</code></pre></div>  </div>
+
+  <p>or</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---------------------Mate 1---------------------------------&gt;
+&lt;---------------------Mate 2---------------------------------
+</code></pre></div>  </div>
+
+  <p>This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-mapping-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mapping reads to reference genome</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.5+galaxy1" title="Bowtie2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bowtie2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.5+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Dataset Collection</code>
+          <ul>
+            <li><em>“FASTQ Paired Dataset</em>: select the output of <strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“paired reads”</em></li>
+            <li><em>“Do you want to set paired-end options?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“Set the maximum fragment length for valid paired-end alignments”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+                <li><em>“Allow mate dovetailing”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
+          <ul>
+            <li><em>“Select reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens): hg38 Canonical</code></li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1: Default setting only</code>
+          <ul>
+            <li><em>“Do you want to use presets?”</em>: <code class="language-plaintext highlighter-rouge">Very sensitive end-to-end (--very-sensitive)</code></li>
+          </ul>
+        </li>
+        <li><em>“Do you want to tweak SAM/BAM Options?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Save the bowtie2 mapping statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the mapping stats <code class="language-plaintext highlighter-rouge">Rep1</code>.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-bowtie2-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Bowtie2 Results</div>
+  <p>You should get similar results to this from Bowtie2:</p>
+  <figure id="figure-3" style="max-width: 90%;"><img src="../../images/cut_and_run/mapping_stats.png" alt="Mapping statistics of bowtie2. " width="511" height="269" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/mapping_stats.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Mapping statistics of bowtie2</figcaption></figure>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What percentage of read pairs mapped concordantly?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>41.46+57.51=98.97%</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="step-3-filtering-mapped-reads-and-second-level-quality-control">Step 3: Filtering Mapped Reads and second level Quality Control</h1>
+
+<h2 id="filter-uninformative-reads">Filter Uninformative Reads</h2>
+
+<p>We apply some filters to the reads after the mapping. CUT&amp;RUN datasets can have many reads that map to the mitochondrial genome because it is nucleosome-free and thus very accessible
+to the pA(G)-MNase. CUT&amp;RUN inserts adapter more easily in open chromatin regions due to the pA(G)-MNase activity. The mitochondrial genome is uninteresting for CUT&amp;RUN,
+so we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filtering-of-uninformative-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering of uninformative reads</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.1+galaxy0" title="Filter BAM datasets on a variety of attributes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter BAM datasets on a variety of attributes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.1+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM dataset(s) to filter”</em>: Select the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em></li>
+        <li>In <em>“Condition”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Condition”</em>
+              <ul>
+                <li>In <em>“Filter”</em>:
+                  <ul>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter”</em>
+                      <ul>
+                        <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">mapQuality</code>
+                          <ul>
+                            <li><em>“Filter on read mapping quality (phred scale)”</em>: <code class="language-plaintext highlighter-rouge">&gt;=30</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter”</em>
+                      <ul>
+                        <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">Proper Pair</code>
+                          <ul>
+                            <li><em>“Select properly paired reads”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter”</em>
+                      <ul>
+                        <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">Reference name of the read</code>
+                          <ul>
+                            <li><em>“Filter on the reference name for the read”</em>: <code class="language-plaintext highlighter-rouge">!chrM</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Would you like to set rules?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+    <li>Click on the input and the output BAM files of the filtering step. Check the size of the files.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Based on the file size, what proportion of alignments was removed (approximately)?</li>
+    <li>Which parameter should be modified if you are interested in repetitive regions?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p>The original BAM files are 14-15 MB, the filtered ones are 5.6 and 6.8 MB. Approximately half of the alignments were removed.</p>
+      </li>
+      <li>
+        <p>You should modify the mapQuality criteria and decrease the threshold.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="filter-duplicate-reads">Filter Duplicate Reads</h2>
+
+<p>Because of the PCR amplification, there might be read duplicates (different reads mapping to the same genomic region) from over amplification of some regions. We will remove them with <strong>Picard MarkDuplicates</strong>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicates</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3" title="MarkDuplicates tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MarkDuplicates</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: Select the output of  <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“BAM”</em></li>
+        <li><em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-default-of-markduplicates-i-class-quot-fas-fa-wrench-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-tool-span"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Default of  **MarkDuplicates** <i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>tool</span></div>
+
+        <p>By default, the tool will only “Mark” the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter <em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em> to directly remove the duplicates.</p>
+      </blockquote>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the MarkDuplicate metrics.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-markduplicates-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: MarkDuplicates Results</div>
+  <p>You should get a similar output to this from MarkDuplicates:</p>
+  <figure id="figure-4" style="max-width: 90%;"><img src="../../images/cut_and_run/mark_duplicates_screen.png" alt="Metrics of MarkDuplicates. " width="947" height="497" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/mark_duplicates_screen.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Metrics of MarkDuplicates</figcaption></figure>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-formatting-the-markduplicate-metrics-for-readability"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-formatting-the-markduplicate-metrics-for-readability" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Formatting the MarkDuplicate metrics for readability</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <ol>
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“that</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
+        <li><em>“the pattern</em>: <code class="language-plaintext highlighter-rouge">(Library|LIBRARY)</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Check that the datatype is tabular. If not, change it.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Transpose rows/columns in a tabular file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose rows/columns in a tabular file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span>:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: Select the output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+
+  <figure id="figure-5" style="max-width: 90%;"><img src="../../images/cut_and_run/mark_duplicates_transpose.png" alt="Metrics of MarkDuplicates. " width="435" height="260" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/mark_duplicates_transpose.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Metrics of MarkDuplicates</figcaption></figure>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many pairs were in the input?</li>
+    <li>How many pairs are duplicates?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>81466</li>
+      <li>983</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Once again, if you have a high number of duplicates it does not mean that your data are not good, it just means that you sequenced
+too much compared to the diversity of the library you generated. Consequently, libraries with a high portion of duplicates should not be re-sequenced as this would not increase the amount of data.</p>
+
+<h2 id="check-deduplication-and-adapter-removal">Check Deduplication and Adapter Removal</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-check-adapter-removal-with-fastqc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check Adapter Removal with FastQC</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: select the output of <strong>MarkDuplicates</strong> .</li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the report and read the first lines.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-fastqc-results-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: FastQC Results</div>
+  <p>Now, you should see under <strong>Overrepresented sequences</strong> that there is no more overrepresented sequences and under <strong>Adapter Content</strong> that the Illumina adapters are no longer present.</p>
+  <figure id="figure-6" style="max-width: 90%;"><img src="../../images/cut_and_run/adapter_content_post.png" alt="FastQC screenshot on the adapter content section after Trim Galore!" width="824" height="584" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/adapter_content_post.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> FastQC screenshot on the adapter content section after Trim Galore!</figcaption></figure>
+  <p>However, you may have noticed that you have a new section with warning: <strong>Sequence Length Distribution</strong>. This is expected as you trimmed part of the reads.
+Furthermore, you will notice under <strong>Sequence Duplication Levels</strong> that we removed nearly all PCR duplicates.</p>
+  <figure id="figure-7" style="max-width: 90%;"><img src="../../images/cut_and_run/duplication_level.png" alt="FastQC screenshot on the duplication level after MarkDuplicates. " width="824" height="592" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/duplication_level.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> FastQC screenshot on the duplication level after MarkDuplicates</figcaption></figure>
+</blockquote>
+
+<h2 id="check-insert-sizes">Check Insert Sizes</h2>
+
+<p>We will check the insert sizes with <strong>Paired-end histogram</strong> of insert size frequency. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives an excellent indication of the quality of the CUT and RUN experiment.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-the-distribution-of-fragment-sizes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the distribution of fragment sizes</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1" title="Paired-end histogram tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paired-end histogram</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“BAM output”</em></li>
+        <li><em>“Lower bp limit (optional)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+        <li><em>“Upper bp limit (optional)”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the lower one of the 2 outputs (the png file).</li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-paired-end-histogram-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Paired-end histogram Results</div>
+  <p>This is what you get from Paired-end histogram:</p>
+  <figure id="figure-8" style="max-width: 90%;"><img src="../../images/cut_and_run/insert_size.png" alt="Fragment size distribution. " width="794" height="543" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/insert_size.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Fragment size distribution</figcaption></figure>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Could you guess what the peaks at approximately 30bp correspond to?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The first peak (30bp) corresponds to where the cleavage around our POI. Nevertheless, the cutting of our pA(G)-MNase-antibody-protein complex is not perfect. The arms can actually cut further away from the protein. Little bumps in the distribution are an indication of another protein(complex), such as a nucleosome that is located between the two cleavage sites.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>This fragment size distribution is a good indication if your experiment worked or not. The CUT&amp;RUN yield can gradually increase over the digestion time <span class="citation"><a href="#Skene2017">Skene and Henikoff 2017</a></span>, which of course depends on the enzyme used for the cleavage of the DNA.</p>
+
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/cut_and_run/cut_and_run_yield.png" alt="CUT and RUN yield. " width="1440" height="816" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/cut_and_run_yield.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Fragment length distributions of a CUT&amp;RUN experiment with uniform digestion over time. No anti-FLAG primary antibody (No Ab). The track with No_Ab is the control experiment. Data is from two biological replicates. The studied protein showed fragments of size ≤120 bp corresponding to the binding sites, as seen on the left, whereas reads with ≥150 bp fragment size are randomly distributed in the local vicinity. The yield in the example increases from 5s to 10 minutes, which can be seen in the mapped profiles in the right. (Skene and Henikoff 2017 eLife)</figcaption></figure>
+
+<h1 id="step-4-peak-calling">Step 4: Peak calling</h1>
+
+<h2 id="call-peaks">Call Peaks</h2>
+
+<p>We have now finished the data preprocessing. Next, to find regions corresponding to potential binding sites, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. <a href="https://github.com/taoliu/MACS">MACS2</a> is widely used for CUT&amp;RUN.</p>
+
+<p>At this step, two approaches exist: Like in ATAC-Seq, we have to take a few things into account. The pA(G)-MNase does not need to bind the protein it can create fragments unspecifically a
+few bases downstream and upstream away from the true binding site. This is to the <em>“long”</em> arms of the proteins. A big jump can happen if a nucleosome is between the protein binding site and the cutting site.</p>
+
+<p>It is critical to re-center the signal since the pA(G)-MNase cuts in different distances. Since some read pairs are not symmetric (i.e., the first mate might be further away from the
+binding site than the second mate) we will turn off the shifting mode of MACS2 and apply a direct shift. If we only assess the coverage of the 5’ extremity of the reads, the data would be too sparse,
+and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage.</p>
+
+<h3 id="using-macs2">Using MACS2</h3>
+
+<p>We convert the BAM file to BED format because when we set the extension size in MACS2, it will only consider one read of the pair while here we would like to use the information from both.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-convert-the-bam-to-bed"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert the BAM to BED</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy2" title="bedtools BAM to BED converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools BAM to BED converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.30.0+galaxy2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Convert the following BAM file to BED”</em>: Select the output of <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> BAM output</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We call peaks with MACS2. To get the coverage centered on the 5’ extended 100bp each side we will use <code class="language-plaintext highlighter-rouge">--shift -100</code> and <code class="language-plaintext highlighter-rouge">--extend 200</code>:</p>
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/atac-seq/macs2Options.jpg" alt="MACS2 options to get 100bp each side. " width="643" height="113" loading="lazy" /><a target="_blank" href="../../images/atac-seq/macs2Options.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> MACS2 options to get 100bp each side</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-call-peaks-with-macs2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Call peaks with MACS2</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0" title="MACS2 callpeak tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MACS2 callpeak</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.7.1+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Are you pooling Treatment Files?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> Select the output of <strong>bedtools BAM to BED</strong> converter <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+        <li><em>“Do you have a Control File?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Format of Input Files”</em>: <code class="language-plaintext highlighter-rouge">Single-end BED</code></li>
+        <li><em>“Effective genome size”</em>: <code class="language-plaintext highlighter-rouge">H. sapiens (2.7e9)</code></li>
+        <li><em>“Build Model”</em>: <code class="language-plaintext highlighter-rouge">Do not build the shifting model (--nomodel)</code>
+          <ul>
+            <li><em>“Set extension size”</em>: <code class="language-plaintext highlighter-rouge">200</code></li>
+            <li><em>“Set shift size”</em>: <code class="language-plaintext highlighter-rouge">-100</code>. It needs to be - half the extension size to be centered on the 5’.</li>
+          </ul>
+        </li>
+        <li><em>“Additional Outputs”</em>:
+          <ul>
+            <li>Check <code class="language-plaintext highlighter-rouge">Peaks as tabular file (compatible with MultiQC)</code></li>
+            <li>Check <code class="language-plaintext highlighter-rouge">Peak summits</code></li>
+            <li>Check <code class="language-plaintext highlighter-rouge">Scores in bedGraph files</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Composite broad regions”</em>: <code class="language-plaintext highlighter-rouge">No broad regions</code>
+              <ul>
+                <li><em>“Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
+            <li><em>“How many duplicate tags at the exact same location are allowed?”</em>: <code class="language-plaintext highlighter-rouge">all</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-why-keeping-all-duplicates-is-important"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why keeping all duplicates is important</div>
+
+        <p>We previously removed duplicates using <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to BED we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-5-identifying-binding-motifs">Step 5: Identifying Binding Motifs</h1>
+
+<h2 id="prepare-the-datasets">Prepare the Datasets</h2>
+
+<h3 id="extracting-individual-replicates-from-your-dataset-collection">Extracting individual replicates from your dataset collection</h3>
+
+<p>In the following step, we want to apply a tool to identify robust peaks between our two replicates. However, we still have one dataset collection, holding both replicates, which we have to split.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-replicates-from-a-dataset-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract replicates from a dataset collection:</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span> with:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input List”</em>: <code class="language-plaintext highlighter-rouge">MACS2 callpeak on collection N (narrow Peaks)</code></li>
+        <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by index</code></li>
+        <li><em>“Element index:”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>You can use the arrow to rerun the same tool just changing the last parameter:</p>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span> with:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input List”</em>: <code class="language-plaintext highlighter-rouge">MACS2 callpeak on collection N (narrow Peaks)</code></li>
+        <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by index</code></li>
+        <li><em>“Element index:”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h3 id="extract-robust-peaks">Extract Robust Peaks</h3>
+<p>MACS helped us to identify potential binding sites for GATA1. Yet, our peak set will contain false positives because of technical and biological noise.
+We can first try to reduce some noise using the results for our two biological replicates. Since we applied MACS we have created two peak files.
+Yet, both replicates have peaks that are only present in one replicate and thus might be a potential false positive due to noise.
+We can remove such peaks if we simply overlap the two peak files and consequently search for peaks that appear in both replicates.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-select-robust-gata1-peaks"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Select robust GATA1 peaks:</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1" title="bedtools Intersect intervals find overlapping intervals in various ways tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals find overlapping intervals in various ways</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.30.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select <code class="language-plaintext highlighter-rouge">Rep1</code></li>
+        <li><em>“Combined or separate output files”</em>: <code class="language-plaintext highlighter-rouge">One output file per 'input B' file</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>:  Select <code class="language-plaintext highlighter-rouge">Rep2</code></li>
+          </ul>
+        </li>
+        <li><em>“Calculation based on strandedness?”</em>: <code class="language-plaintext highlighter-rouge">Overlaps occurring on either strand</code></li>
+        <li><em>“Required overlap”</em>: <code class="language-plaintext highlighter-rouge">Specify minimum overlap(s)</code>
+          <ul>
+            <li><em>“Minimum overlap required as a fraction of A”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+            <li><em>“Require that the fraction of overlap be reciprocal for A and B”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>*“Write the original A entry <em>once</em> if <em>any</em> overlaps found in B.”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Rename the datasets <code class="language-plaintext highlighter-rouge">Robust GATA1 CUT and RUN peaks</code>.</li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How many potential true positives do we obtain?
+How many potential false positives have we removed?
+Why have we set specified an overlap fraction of A with <code class="language-plaintext highlighter-rouge">0.5</code>?
+Why have we set <strong>“Require that the fraction of overlap be reciprocal for A and B”</strong>?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>2,863 peaks</li>
+        <li>We started with 6,314 and 7,683 peaks. Thus, we could remove 3,410 and 4765 peaks.</li>
+        <li>Finding robust peaks is a tricky process and not as simple as you think. Our approach defines a robust peak as an entity that is covered by two similar peaks in either one of the peak files of our two replicates. Our measurement for similarity is simply the amount of bases the peaks overlap. Yet, ask yourself, how much overlap do you need to state that they are similar? Is 1 base enough or maybe 10? The answer is not true or false and like so often needs more investigation. We define the overlap by a 50% fraction of each of the peak files. That means, if our peak in A is 100 bases then A has to overlap with 50 bases with the peak in file B.</li>
+        <li><strong>“Require that the fraction of overlap be reciprocal for A and B”</strong> means that 50% of the peak in file A overlaps with the peak in file B and also 50% of the peak in file B overlaps with the peak in file A. We set this to make our filtering very conservative and filter for peaks that we can be sure are true positives. For example, A has a 10 bp peak that overlaps a peak in B with 100 bp. <strong>Viewpoint of file A:</strong> An overlap-fraction of 0.5 for A means that we accept peak A if it overlaps with 5 bp with the peak in B. This is very likely because the peak in B is 100 bp long. <strong>Viewpoint of file B</strong>: An overlap-fraction of 0.5 for B means that we reject A no matter what, even if A completely overlaps B because 10 bp are not enough to cover 50% of B. That is to say the option <strong>“Require that the fraction of overlap be reciprocal for A and B”</strong> takes care that we trust peaks that have in file A <strong>and</strong> in file B a fair overlap.</li>
+      </ol>
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<p>Note, that this is one way to define robust peaks. Yet, there are more sophisticated algorithms in Galaxy, such as
+<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/idr/idr/2.0.3" title="IDR compare ranked list of identifications tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDR compare ranked list of identifications</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.3)</span>, and other methods that can help to define a robust peak.
+The tool <strong>IDR</strong> has not been tested so far for CUT and RUN.</p>
+
+<h3 id="extract-positive-peaks">Extract Positive Peaks</h3>
+
+<p>We can further remove some noise with a positive control, that is why we have downloaded a peak set from a ChIP experiment of GATA1.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-select-gata1-peaks-from-chip-seq-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Select GATA1 peaks from ChIP-Seq data:</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1" title="bedtools Intersect intervals find overlapping intervals in various ways tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals find overlapping intervals in various ways</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.30.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select <strong>Robust GATA1 CUT and RUN peaks</strong></li>
+        <li><em>“Combined or separate output files”</em>: <code class="language-plaintext highlighter-rouge">One output file per 'input B' file</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>:  Select the dataset <code class="language-plaintext highlighter-rouge">GATA1 ChIP-Seq peaks</code></li>
+          </ul>
+        </li>
+        <li><em>“Calculation based on strandedness?”</em>: <code class="language-plaintext highlighter-rouge">Overlaps occurring on either strand</code></li>
+        <li><em>“Required overlap”</em>: <code class="language-plaintext highlighter-rouge">Specify minimum overlap(s)</code>
+          <ul>
+            <li><em>“Minimum overlap required as a fraction of A”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+          </ul>
+        </li>
+        <li>*“Write the original A entry <em>once</em> if <em>any</em> overlaps found in B.”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Rename the datasets <code class="language-plaintext highlighter-rouge">True GATA1 CUT and RUN peaks</code>.</li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How many potential true positives do we gain?
+How many potential false positives have we removed?
+What is the precision of our analysis at this point? (Precision = True Positive / True Positive + False Positive)</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>2,409 peaks</li>
+        <li>454 peaks</li>
+        <li>Our precision is ~ 84%. A high precision is an indicator that we can predict true binding regions with high confidence.</li>
+      </ol>
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<h3 id="extract-dna-sequence">Extract DNA sequence</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-obtain-dna-sequences-from-a-bed-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtain DNA sequences from a BED file</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/extract_genomic_dna/Extract genomic DNA 1/3.0.3+galaxy2" title="Extract Genomic DNA using coordinates from assembled/unassembled genomes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Genomic DNA using coordinates from assembled/unassembled genomes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.3+galaxy2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fetch sequences for intervals in”</em>: Select <strong>True GATA1 CUT and RUN peaks</strong></li>
+        <li><em>“Interpret features when possible”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li>*“Choose the source for the reference genome”: <code class="language-plaintext highlighter-rouge">locally cached</code></li>
+        <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">hg38</code></li>
+        <li><em>“Select output format”</em>: <code class="language-plaintext highlighter-rouge">fasta</code></li>
+        <li><em>“Select fasta header format”</em>: <code class="language-plaintext highlighter-rouge">bedtools getfasta default</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="motif-detection-with-meme-chip">Motif detection with MEME-ChIP</h2>
+
+<p>Let’s find out the sequence motifs of the TF GATA1. Studies have revealed that GATA1 has the DNA binding motif (T/A)GATA(A/G) <span class="citation"><a href="#Hasegawa2017">Hasegawa and Shimizu 2017</a></span>. In this last task we search for this motif in our data.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-motif-detection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Motif detection</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meme_chip/meme_chip/4.11.2+galaxy1" title="MEME-ChIP tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MEME-ChIP</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.11.2+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Primary sequences”</em>: Select the output of <strong>Extract Genomic DNA</strong> using coordinates from assembled/unassembled genomes <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Sequence alphabet”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
+        <li><em>“Options Configuration”</em>: <code class="language-plaintext highlighter-rouge">Advanced</code></li>
+      </ul>
+      <ul>
+        <li><em>“Should subsampling be random?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Seed for the randomized selection of sequences”</em>: <code class="language-plaintext highlighter-rouge">123</code></li>
+          </ul>
+        </li>
+        <li><em>“E-value threshold for including motifs”</em>: <code class="language-plaintext highlighter-rouge">0.05</code></li>
+        <li><em>“What is the expected motif site distribution?”</em>: <code class="language-plaintext highlighter-rouge">Zero or one occurrence per sequence</code></li>
+        <li><em>“Minimum motif width”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><em>“Maximum motif width”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+        <li><em>“Maximum number of motifs to find”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><em>“Stop DREME searching after reaching this E-value threshold”</em>: <code class="language-plaintext highlighter-rouge">0.05</code></li>
+        <li><em>“Stop DREME searching after finding this many motifs”</em>: <code class="language-plaintext highlighter-rouge">5</code>
+      - <em>“I certify that I am not using this tool for commercial purposes.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>View the <strong>MEME-ChIP</strong> HTML.</li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>How many peaks support the main motif GATA?
+What is the E-value of the main motif?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>!!!!  Where is this info? !!!</li>
+        <li>E-value = 5.0e-383</li>
+      </ol>
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/cut_and_run/GATA_motif.png" alt="MEME-ChiP motifs for GATA1. " width="920" height="761" loading="lazy" /><a target="_blank" href="../../images/cut_and_run/GATA_motif.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Plot of the first five sequence motifs of MEME-ChIP.</figcaption></figure>
+
+<p>Let us first investigate the result of MEME-ChIP. <strong>First column:</strong> The x-axis of the sequence plots represents the nucleotide position of the motif.
+The y-axis stands for the total information (uncertainty) and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A).
+Bigger letters stand for a higher probability. For more information please read <a href="https://en.wikipedia.org/wiki/Sequence_logo">the corresponding Wikipedia page</a>. <strong>Second column:</strong> Defines the algorithm that found the sequence motif.
+MEME-ChIP uses two different approaches called MEME and DREME, which can find more complex or simpler motifs. More information about these tools can be found <a href="http://meme-suite.org/">in the Meme documentation</a>.
+<strong>Third column:</strong> Defines the E-value, which represents the expected number of times we would find our sequence motif in a database (peak file), just by chance.
+This means, that a small E-value corresponds to a very significant motif because the expected number we would find that motif in our peak file just by chance is very low.
+Other sequences like repeats will have a high E-value on the other hand. <strong>Fourth column:</strong> This graph is the result of CentriMo, a tool that shows the distribution of
+the best matches for that particular motif. The vertical line is the center of the motif. Therefore, if you have a long sequence motif CentriMo helps you to pinpoint a smaller sub-motif.
+You can find more information on CentriMo <a href="https://meme-suite.org/meme/doc/centrimo.html">in the Meme documentation</a>.</p>
+
+<p>The results of MEME-ChIP endorse the findings about the DNA binding motif (T/A)GATA(A/G) <span class="citation"><a href="#Hasegawa2017">Hasegawa and Shimizu 2017</a></span>. We also found other motifs, that might be secondary sequence motifs.
+This, we could test with a deeper analysis.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this training, you have learned the general principles of CUT&amp;RUN data analysis. CUT&amp;RUN is a method to analyse DNA-associated proteins. In contrast to ChIP-seq, CUT&amp;RUN couples the
+antibody with a pA(G)-MNase to reduce the size of the obtained sequences to increase the accuracy for the detection of the protein interaction. Based on this training material,
+you gained some insights into the quality control of the data. You should know some pitfalls of CUT&amp;RUN and look for adapter contamination and PCR duplicates, which disrupt the later enrichment analysis.
+You learned about <strong>Bowtie2</strong> to do the alignment, and how to filter for properly paired, good-quality and reads that do not map to the mitochondrial genome. Furthermore, you learned that
+an indicator for a good CUT&amp;RUN experiment is the fragment size plot and that you optimize your protocol based on this parameter. With <strong>MACS2</strong> we identified enriched regions, but
+we had to remove some noise. We performed some robust peak analysis with <strong>bedtools intersect</strong> and performed a check with a ChIP-Seq experiment to remove some false positives.
+Finally, we used <strong>MEME-ChIP</strong> to identify our binding motifs.</p>
+
+<p><a href="../../images/cut_and_run/cut_and_run_mindmap.png" rel="noopener noreferrer"><img src="../../images/cut_and_run/cut_and_run_mindmap.png" alt="CUT&amp;RUN workflow. " width="511" height="813" loading="lazy" /></a></p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>CUT&amp;RUN can be used to identify binding regions for DNA binding proteins.</p>
+</li>
+                        
+                        <li><p>Several filters are applied to the reads, such as removing those mapped to mitochondria</p>
+</li>
+                        
+                        <li><p>Fragment distribution can help determine whether an CUT&amp;RUN experiment has worked well</p>
+</li>
+                        
+                        <li><p>A robust peak detection removes noise from the data</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/epigenetics/faqs/">FAQ page for the Epigenetics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Canver2017">Canver, M. C., S. Lessard, L. Pinello, Y. Wu, Y. Ilboudo <i>et al.</i>, 2017 <b>Variant-aware saturating mutagenesis using multiple Cas9 nucleases identifies regulatory elements at trait-associated loci</b>. Nature Genetics 49: 625–634. <a href="https://doi.org/10.1038/ng.3793">10.1038/ng.3793</a></li>
+<li id="Hasegawa2017">Hasegawa, A., and R. Shimizu, 2017 <b>GATA1 Activity Governed by Configurations of cis-Acting Elements</b>. Frontiers in Oncology 6: <a href="https://doi.org/10.3389/fonc.2016.00269">10.3389/fonc.2016.00269</a> <a href="https://www.frontiersin.org/article/10.3389/fonc.2016.00269">https://www.frontiersin.org/article/10.3389/fonc.2016.00269</a></li>
+<li id="Skene2017">Skene, P. J., and S. Henikoff, 2017 <b>An efficient targeted nuclease strategy for high-resolution mapping of DNA binding sites</b> (D. Reinberg, Ed.). eLife 6: e21856. <a href="https://doi.org/10.7554/eLife.21856">10.7554/eLife.21856</a></li>
+<li id="Meers2019">Meers, M. P., T. D. Bryson, J. G. Henikoff, and S. Henikoff, 2019 <b>Improved CUT&RUN chromatin profiling tools</b> (S. Parker &amp; D. Weigel, Eds.). eLife 8: e46314. <a href="https://doi.org/10.7554/eLife.46314">10.7554/eLife.46314</a></li>
+<li id="Zhu2019">Zhu, Q., N. Liu, S. H. Orkin, and G.-C. Yuan, 2019 <b>CUT&RUNTools: a flexible pipeline for CUT&RUN processing and footprint analysis</b>. Genome Biology 20: 192. <a href="https://doi.org/10.1186/s13059-019-1802-4">10.1186/s13059-019-1802-4</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>CUT&RUN</dt>
+                    <dd>Cleavage Under Targets and Release Using Nuclease</dd>
+                    
+                    <dt>POI</dt>
+                    <dd>protein of interest</dd>
+                    
+                    <dt>TF</dt>
+                    <dd>transcription factors</dd>
+                    
+                    <dt>pA(G)-MNase</dt>
+                    <dd>protein A(-protein G hybrid)-micrococcal nuclease</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=epigenetics/cut_and_run" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Florian Heyl,  <b>CUT&RUN data analysis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html">https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{epigenetics-cut_and_run,
+author = "Florian Heyl",
+	title = "CUT&RUN data analysis (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/cut_and_run/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: deeptools_compute_matrix
+  owner: bgruening
+  revisions: 514fa53b5efb
+  tool_panel_section_label: deepTools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: deeptools_plot_heatmap
+  owner: bgruening
+  revisions: a4dfb122e52b
+  tool_panel_section_label: deepTools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bamtools_filter
+  owner: devteam
+  revisions: cb20f99fd45b
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bamtools_filter
+  owner: devteam
+  revisions: 1dfd95ee241e
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bowtie2
+  owner: devteam
+  revisions: a6d65b0c67af
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bowtie2
+  owner: devteam
+  revisions: f6877ad76b00
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastqc
+  owner: devteam
+  revisions: e7b2202befea
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastqc
+  owner: devteam
+  revisions: 3d0c7bdf12f5
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: picard
+  owner: devteam
+  revisions: a1f0b3f4b781
+  tool_panel_section_label: Picard
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: picard
+  owner: devteam
+  revisions: b502c227b5e6
+  tool_panel_section_label: Picard
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bedtools
+  owner: iuc
+  revisions: ce3c7f062223
+  tool_panel_section_label: BED
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bedtools
+  owner: iuc
+  revisions: a1a923cd89e8
+  tool_panel_section_label: BED
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bedtools
+  owner: iuc
+  revisions: a68aa6c1204a
+  tool_panel_section_label: BED
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bedtools
+  owner: iuc
+  revisions: a1a923cd89e8
+  tool_panel_section_label: BED
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: extract_genomic_dna
+  owner: iuc
+  revisions: 5cc8e93ee98f
+  tool_panel_section_label: Fetch Sequences/Alignments
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: idr
+  owner: iuc
+  revisions: de7795890bc5
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: macs2
+  owner: iuc
+  revisions: 424aefbd7777
+  tool_panel_section_label: Peak Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: macs2
+  owner: iuc
+  revisions: 640d3af5d833
+  tool_panel_section_label: Peak Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: meme_chip
+  owner: iuc
+  revisions: cc100e0f61f4
+  tool_panel_section_label: Motif Tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: pe_histogram
+  owner: iuc
+  revisions: bd1416eea1f0
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: pygenometracks
+  owner: iuc
+  revisions: 2824d77cd8f8
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cutadapt
+  owner: lparsons
+  revisions: 49370cb85f0f
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/4bbfcae7e78a1c06ade3bf13d704a150839b284b">4bbfcae</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/epigenetics/tutorials/cut_and_run/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.14ccc527.js?v=1709712195'></script>
+        
+    </body>
+</html>
