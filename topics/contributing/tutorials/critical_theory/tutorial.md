@@ -43,7 +43,7 @@ This training aspires to be a introduction on the **Critical Learning Theory** a
 
 > *Critical thinking aims to define the irrational character of the established rationality.*
 >
-> One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society. Herbert Marcuse
+> — Herbert Marcuse, One-dimensional man: Studies in the ideology of advanced industrial society. 
 >
 {: .quote}
 
@@ -55,7 +55,7 @@ Contrary to Esteve's assertion, the argentinian sociologists Sara Morgenstern an
 
 > *The findings are striking: almost 40 percent of global employment is exposed to AI. Historically, automation and information technology have tended to affect routine tasks, but one of the things that sets AI apart is its ability to impact high-skilled jobs.*
 >
-> Kristalina Georgieva, managing director of the International Monetary Fund.
+> — Kristalina Georgieva, managing director of the International Monetary Fund.
 >
 {: .quote}
 
@@ -71,8 +71,7 @@ In the face of the conservative claim that educative systems transmit objective 
 
 > *Questioning is an exercise in dismantling those certainties that are installed as layers of truths imposing the tyranny of the obvious.*
 >
-> ¿Para qué sirve la filosofía?. Dario Sztajnzrajbe
->
+> — Dario Sztajnzrajbe, ¿Para qué sirve la filosofía?
 {: .quote}
 
 Before going deeper, it is inportant to accurately define **critical thinking**, since it is usually concived as a nebulose concept whose applications appears to be limitated to specific situations.
@@ -130,9 +129,9 @@ From the assumption of this conception of critical thinking a new question arise
 
 # The hidden curriculum
 
-> *Any pedagogy concerned with critical thinking has to consider the form and content of social relations in the classroom..*
+> *Any pedagogy concerned with critical thinking has to consider the form and content of social relations in the classroom.*
 >
-> Teacher as intellectuals: towards a critical pedagogy of learning. Henry Giroux.
+> — Henry Giroux, Teacher as intellectuals: towards a critical pedagogy of learning.
 >
 {: .quote}
 
@@ -209,6 +208,11 @@ The principle of maximum performance extends to educational technologies, where 
 
 
 # Conclusion
+
+> *[...] to think is, whether you want or not, to exaggerate. If you prefer not to exaggerate, you must remain silent; or, rather, you must paralyse your intellect and find some way of becoming an idiot.*
+>
+> — José Ortega y Gasset, The Revolt of the Masses
+{: .quote}
 
 The following conclusions are drawn both from the contents of the training.
 
