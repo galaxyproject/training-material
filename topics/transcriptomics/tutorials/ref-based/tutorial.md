@@ -675,7 +675,7 @@ In principle, the counting of reads overlapping with genomic features is a fairl
 
 RNAs that are typically targeted in RNA-Seq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct). During a typical RNA-Seq experiment the information about strandness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step, especially for reads located on the overlap of 2 genes that are on different strands.
 
-![Why strandness?](../../images/ref-based/strandness_why.png "If strandess information was lost during library preparation, Read1 will be assigned to gene1 located on the forward strand but Read2 will be 'ambiguous' as it can be assigned to gene1 (forward strand) or gene2 (reverse strand).")
+![Why strandness?](../../images/ref-based/strandness_why.png "If strandness information was lost during library preparation, Read1 will be assigned to gene1 located on the forward strand but Read2 will be 'ambiguous' as it can be assigned to gene1 (forward strand) or gene2 (reverse strand).")
 
 Some library preparation protocols create so-called *stranded* RNA-Seq libraries that preserve the strand information ({% cite levin2010comprehensive %} provides an excellent overview). In practice, with Illumina RNA-Seq protocols you are unlikely to encounter all of the possibilities described in this article. You will most likely deal with either:
 
@@ -697,7 +697,7 @@ Some library preparation protocols create so-called *stranded* RNA-Seq libraries
 
 This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.
 
-![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.")
+![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene (Example for single-end read library).")
 
 There are 4 ways to estimate strandness from **STAR** results (choose the one you prefer)
 
@@ -720,7 +720,7 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >
     > 2. **IGV** {% icon tool %}
     >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 4 between 540 kb to 560 kb), on the `mapped.bam` track
-    >    2. Right click and then select `Group Aligments by` -> `first-in-pair strand`
+    >    2. Right click and then select `Color Aligments by` -> `first-in-pair strand`
     >    3. Right click and select `Squished`
     >
     {: .hands_on}
