@@ -21,7 +21,10 @@ contributors:
 
 subtopic: post-process
 tags: [human]
+draft: true
 ---
+
+<!-- Moved to draft due to lack of agenda, not using citation mechanism, not including any hands-on boxes, not using a workflow step despite that being the focus -->
 
 # Secretome Prediction using GO annotations and localization prediction
 
@@ -46,20 +49,20 @@ The workflow needs three input files:
 
   1. A tabular file, the first column containing uniprot accession numbers of the proteins of interest. [Test data](https://doi.org/10.5281/zenodo.519260)
 
-		> ### {% icon comment %} Comment: Test data
+		> <comment-title>Test data</comment-title>
 		> The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. The dataset was originally published in [(Sigloch et al., BBA, 2016)](https://www.ncbi.nlm.nih.gov/pubmed/27526672).
 		{: .comment}
 
   2. The complete uniprot GO database for the organism of interest, available [via FTP](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/). To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: 'ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz'
 
-		> ### {% icon comment %} Comment: Uniprot Gene Ontology Association (GOA) files
+		> <comment-title>Uniprot Gene Ontology Association (GOA) files</comment-title>
 		> - Information about different GOA file types can be found [here](https://www.ebi.ac.uk/GOA/downloads).
 		> - Information about the structure of the files can be found [here](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README).
 	  {: .comment}
 
   3. The complete GO Open Biomedical Ontology (OBO), i.e. "GO term tree", accessible at http://purl.obolibrary.org/obo/go/go.obo
 
-> ### {% icon comment %} Comment: Customizing the Workflow
+> <comment-title>Customizing the Workflow</comment-title>
 > This workflow was designed for sensitivity, not for specificity. If you need to increase the specificity, you have the following possibilities, with decreasing efficiency:
 > 1. Switch the setting `Output lines appearing in` of the last **Join** {% icon tool %} (last tool before the final **Unique** {% icon tool %} from `All lines [-a 1 -a 2]` to `Both 1st & 2nd file`. Thus, your output will contain only those proteins that are equally predicted by both methods used.
 > 2. (Only after doing 1.) Adding another way of localization prediction, i.e. another database or another prediction algorithm.

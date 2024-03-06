@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``client/src/components/User/FavoriteExtensions/List.test.js``
+> <solution-title>``client/src/components/User/FavoriteExtensions/List.test.js``</solution-title>
 > 
 > Possible changes to file ``client/src/components/User/FavoriteExtensions/List.test.js``:
 > 

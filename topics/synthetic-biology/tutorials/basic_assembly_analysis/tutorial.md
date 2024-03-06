@@ -27,9 +27,6 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
-
 Synthetic biology is a novel engineering discipline which requires computational tools for the design of metabolic pathways for the production of chemicals such as SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}). 
 
 In this tutorial, we will use a set of tools from the **Genetic Design - BASIC Assembly Workflow** (https://galaxy-synbiocad.org) which will enable you to design plasmids implementing metabolic pathways for the bioproduction of lycopene in _E.coli_ (one of the preferred host cell for microbial biochemicals production).
@@ -44,7 +41,7 @@ The workflow scheme we will use is shown below. First, we will run the steps of 
 
 ![Genetic Design - BASIC Assembly Workflow](../../images/basic_assembly_workflow.png)
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -65,16 +62,16 @@ First we need to upload and prepare the following inputs to analyze:
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial named *Genetic Design - BASIC Assembly Analysis*.
 > 2. Import the input files from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
->    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/dnabot_london_settings.yaml
->    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/dnabot_paris_settings.yaml
->    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/parts_for_lycopene.csv
->    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/rp_002_0011.xml
+>    https://zenodo.org/record/6123887/files/dnabot_london_settings.yaml
+>    https://zenodo.org/record/6123887/files/dnabot_paris_settings.yaml
+>    https://zenodo.org/record/6123887/files/parts_for_lycopene.csv
+>    https://zenodo.org/record/6123887/files/rp_002_0011.xml
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -93,7 +90,7 @@ The tool provides several scores that can be combined in order to define an over
 
 ![Selenzyme Results](../../images/selenzy_tool.png)
 
-> ### {% icon hands_on %} Hands-on: Annotate enzymes with Uniprot IDs from a SBML pathway
+> <hands-on-title>Annotate enzymes with Uniprot IDs from a SBML pathway</hands-on-title>
 >
 > 1. Run {% tool [Selenzyme](toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0) %} with the following parameters:
 >    - {% icon param-file %} *"Pathway (SBML)"*: Select `pathway.xml` from your current history
@@ -101,18 +98,18 @@ The tool provides several scores that can be combined in order to define an over
 >        - *"Host taxon ID"*: Leave the default value `83333`. This stands for using E. coli as the chassis host.
 >        - *"Comma separated taxon IDs of output enzyme sequences"*: *enter `553` which is the taxon ID of the Pantoea ananatis strain from which we want to extact enzymes*
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This tool will produce annotated pathway with UniProt IDs in XML and CSV format.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How are identified the enzyme in the SBML file?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Enzyme are identified by their UniProt ID
 > >
@@ -133,25 +130,25 @@ For **linkers**, the type annotation should be one of *neutral linker*, *methyla
 
 BasicDesign converts the SBML file into CSV files describing the DNA-parts to be included into each construct (in an operon format, i.e. with only one promoter) and enumerate possible combinations of promoters, RBSs and enzymes into constructs. Depending on the numbers of enzymes per reaction, of RBSs and promoters available, and whether or not to perform CDS permutation within the operon, the number of constructs may vary.
 
-> ### {% icon hands_on %} Hands-on: Generate genetic constructs from the previously annotated SBML file
+> <hands-on-title>Generate genetic constructs from the previously annotated SBML file</hands-on-title>
 >
 > 1. Run {% tool [BasicDesign](toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4) %} with the following parameters:
 >    - {% icon param-file %} *"rpSBML file": `uniprot_ids` (output of **Selenzyme** {% icon tool %} in xml format)*
 >    - In *"Advanced Options"*:
 >        - {% icon param-file %} *"Linkers and user parts": Select `parts_for_lycopene.csv` from your current history in csv format*
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This tool will output a CSV constructs file (listing the constructs to be built), where each row corresponds to one construct and consists of a sequence of BASIC linker and DNA part IDs. The two other outputted CSV files provide the plate coordinates of (i) the BASIC linkers and (ii) the DNA-parts that the user will need to provide. Additionally, one SBOL (Synthetic Biology Open Language) file is produced for each construct generated. These files can be downloaded and visualized using online tools such as [VisBOL](https://visbol.org/).
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many constructs did you get ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 88 construct designs were generated in CSV and SBOL format.
 > >
@@ -163,7 +160,7 @@ BasicDesign converts the SBML file into CSV files describing the DNA-parts to be
 
  In the last step, the DNA-Bot tool ({% cite Storch2020 %}) reads the list of constructs (previously produced by BasicDesign) and the DNA-parts position on the source plates and generates a set of python scripts to drive an Opentrons liquid handling robot for building the the plasmids. Optional parameters can be set by the user to define the plastic labwares to be used, and set protocol parameters such as washing or incubation times for purification step (`dnabot_paris_settings.yaml`).
 
-> ### {% icon hands_on %} Hands-on: Generate DNA Bot python scripts
+> <hands-on-title>Generate DNA Bot python scripts</hands-on-title>
 >
 > 1. Run {% tool [DNA-Bot](toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Source Construct"*: `Constructs` (output of **BasicDesign** {% icon tool %})
@@ -173,7 +170,7 @@ BasicDesign converts the SBML file into CSV files describing the DNA-parts to be
 >
 >{% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This tool will output DNA-Bot scripts in tar format. You need to download it and decompress the archive. After downloading these scripts onto a computer connected to an Opentrons, one can perform the automated construction of the plasmids at the bench. Additional metadata meaningful to keep track of parameters are also outputted by the tool.
 >    > ![Dnabot Outputs](../../images/dnabot_outputs.png)
@@ -181,11 +178,11 @@ BasicDesign converts the SBML file into CSV files describing the DNA-parts to be
 >    {: .comment}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Looking at the scripts names, can you figure out the main steps of DNA-Bot ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. DNA-Bot outputs python scripts that implement the 4 assembly steps: clip reactions, purification, assembly and strain transformation. In short, the **Clip reactions** step prepares the mixes for the ligation of the individual DNA parts with the linkers; the **Purification** step purifies the linker-ligated DNA parts using magnetic beads and the Opentrons magnetic module; the **Assembly** step mixes the DNA purified parts to build the final constructs; while the **Transformation** step transforms the chassis micro-organism with the plasmid and inoculates onto agar.
 > >
@@ -197,11 +194,11 @@ BasicDesign converts the SBML file into CSV files describing the DNA-parts to be
 
 In this section, you can run the Genetic Design - BASIC Assembly Workflow more easily and fastly following these instructions:
 
-> ### {% icon hands_on %} Hands-on: Execute the entire workflow in one go.
+> <hands-on-title>Execute the entire workflow in one go.</hands-on-title>
 >
-> 1. Import your **Genetic Design - Basic Assembly Workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga).
+> 1. Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga" title="Genetic Design - Basic Assembly Workflow" %}
 >
 > 2. Click on *Workflow* on the top menu bar of Galaxy. You will see **Genetic Design - Basic Assembly Workflow**
 > 3. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow
@@ -212,10 +209,10 @@ In this section, you can run the Genetic Design - BASIC Assembly Workflow more e
 >    - {% icon param-file %} *"Linkers and user parts": Select `parts_for_lycopene.csv` from your current history in csv format*
 >    - {% icon param-file %} *"DNA-Bot settings (Optionally)"*: Select either `dnabot_paris_settings.yaml` or `dnabot_london_settings.yaml` from your history)
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > All the outputs will be automatically generated and identical to the previous ones. 
 >    {: .comment}
 {: .hands_on}
 
-{:.no_toc}
+

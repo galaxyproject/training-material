@@ -1,0 +1,16 @@
+---
+- doc: Test the workflow
+  job:
+      Interlaced non-rRNA reads:
+      class: File
+      location: https://zenodo.org/record/7940872/files/T1A_Interlaced_non-rRNA_reads.fastq
+      filetype: fastqsanger
+      Predicted taxon relative abundances:
+      class: File
+      location: https://zenodo.org/record/4776250/files/T1A_MetaPhlAn_Predicted_taxon_relative_abundances.tabular
+      filetype: fastqsanger
+  outputs:
+    Combined MetaPhlAn and HUMAnN output:
+        asserts:
+          has_text:
+            text: "Acetivibrio"

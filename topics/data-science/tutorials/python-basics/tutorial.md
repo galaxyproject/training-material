@@ -27,7 +27,7 @@ contributors:
   - mcmaniou
   - fpsom
   - carpentries
-  - erasmusplus
+  - gallantries
 
 priority: 1
 notebook:
@@ -37,13 +37,13 @@ notebook:
 
 In this lesson, we will be using Python 3 with some of its most popular scientific libraries. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/) and [Plotting and Programming in Python](https://swcarpentry.github.io/python-novice-gapminder/), which is licensed CC-BY 4.0.
 >
 > Adaptations have been made to make this work better in a GTN/Galaxy environment.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -75,7 +75,7 @@ Features of Python language:
 8. **Automatic memory management**: Python supports automatic memory management which means the memory is cleared and freed automatically. You do not have to bother clearing the memory.
 
 
-> ### {% icon tip %} Why Jupyter?
+> <tip-title>Why Jupyter?</tip-title>
 >
 > JupyterLab is a User Interface including notebooks. A user can open several notebooks or files as tabs in the same window, like an IDE. JupyterNotebook is a web-based interactive computational environment for creating Jupyter notebook documents. It supports several languages like Python (IPython), Julia, R etc. and is largely used for data analysis, data visualization and further interactive, exploratory computing.
 >
@@ -167,7 +167,7 @@ myval = 1
 If you execute this in order, the first cell will give an error. However, if you run the first cell after the second cell, it will print out 1. To prevent confusion, it can be helpful to use the Kernel -> Restart & Run All option which clears the interpreter and runs everything from a clean slate going top to bottom.
 
 
-> ### {% icon question %} Question: Variables and values
+> <question-title>Variables and values</question-title>
 >
 > What values do the variables `mass` and `age` have after each of the following statements? Test your answer by executing the lines.
 > ```
@@ -177,7 +177,7 @@ If you execute this in order, the first cell will give an error. However, if you
 > age = age - 20
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > `mass` holds a value of 47.5, `age` does not exist
 > > `mass` still holds a value of 47.5, `age` holds a value of 122
@@ -188,7 +188,7 @@ If you execute this in order, the first cell will give an error. However, if you
 {: .question}
 
 
-> ### {% icon question %} Question: Variables
+> <question-title>Variables</question-title>
 >
 > Python allows you to assign multiple values to multiple variables in one line by separating the variables and values with commas. What does the following program print out?
 > ```
@@ -197,7 +197,7 @@ If you execute this in order, the first cell will give an error. However, if you
 > print(third, fourth)
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Hopper Grace
 > >
@@ -205,7 +205,7 @@ If you execute this in order, the first cell will give an error. However, if you
 {: .question}
 
 
-> ### {% icon question %} Question: Variables and data types
+> <question-title>Variables and data types</question-title>
 >
 > What are the data types of the following variables?
 >
@@ -215,7 +215,7 @@ If you execute this in order, the first cell will give an error. However, if you
 > distance = 10.5
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > type(planet)
@@ -354,7 +354,7 @@ print('last:', last)
 ```
 
 
-> ### {% icon question %} Question: Negative indices
+> <question-title>Negative indices</question-title>
 >
 > Use slicing to access only the last four characters of a string or entries of a list.
 >
@@ -369,7 +369,7 @@ print('last:', last)
 > Would your solution work regardless of whether you knew beforehand the length of the string or list (e.g. if you wanted to apply the solution to a set of lists of different lengths)? If not, try to change your approach to make it more robust.
 > Hint: Remember that indices can be negative as well as positive.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Use negative indices to count elements from the end of a container (such as list or string):
 > > ```
@@ -381,7 +381,7 @@ print('last:', last)
 {: .question}
 
 
-> ### {% icon question %} Question: Slicing
+> <question-title>Slicing</question-title>
 >
 > So far we’ve seen how to use slicing to take single blocks of successive entries from a sequence. But what if we want to take a subset of entries that aren’t next to each other in the sequence?
 >
@@ -395,7 +395,7 @@ print('last:', last)
 >
 > Notice that the slice taken begins with the first entry in the range, followed by entries taken at equally-spaced intervals (the steps) thereafter. What if you wanted to begin the subset with the third entry? Use the previous example to write your solution that gives the following output.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > You would need to specify that as the starting point of the sliced range:
 > >
@@ -436,7 +436,7 @@ print(len('helium'))
 
 Nested functions are evaluated from the inside out, like in mathematics.
 
-> ### {% icon question %} Question: Slicing
+> <question-title>Slicing</question-title>
 >
 > Use what you have learnt in this tutorial to answer the following questions:
 > a. What does the following program print?
@@ -451,7 +451,7 @@ Nested functions are evaluated from the inside out, like in mathematics.
 > f. What does `thing[number:some-negative-number]` do?
 > g. What happens when you choose a high value which is out of range? (i.e., try `atom_name[0:15]`)
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > a. `atom_name[1:3] is: ar`
 > > b. `thing[low:high]` returns a slice from low to the value before high
@@ -527,21 +527,21 @@ print(1 + int('2'))
 print(str(1) + '2')
 ```
 
-> ### {% icon question %} Question: Data types
+> <question-title>Data types</question-title>
 >
 > What type of value is 3.25 + 4?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > It is a float: integers are automatically converted to floats as necessary.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question: Division
+> <question-title>Division</question-title>
 >
 > In Python 3, the `//` operator performs integer (whole-number) floor division, the `/` operator performs floating-point division, and the `%` (or *modulo*) operator calculates and returns the remainder from integer division:
 >
-> > ### {% icon code-in %} Python
+> > <code-in-title>Python</code-in-title>
 > > ```
 > > print('5 // 3:', 5 // 3)
 > > print('5 / 3:', 5 / 3)
@@ -549,7 +549,7 @@ print(str(1) + '2')
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > 5 // 3: 1
 > > 5 / 3: 1.6666666666666667
@@ -559,7 +559,7 @@ print(str(1) + '2')
 >
 > If `num_subjects` is the number of subjects taking part in a study, and `num_per_survey` is the number that can take part in a single survey, write an expression that calculates the number of surveys needed to reach everyone once.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > We want the minimum number of surveys that reaches everyone once, which is the rounded up value of `num_subjects/ num_per_survey`. This is equivalent to performing a floor division with `//` and adding 1. Before the division we need to subtract 1 from the number of subjects to deal with the case where `num_subjects` is evenly divisible by `num_per_survey`.
 > >
@@ -575,18 +575,18 @@ print(str(1) + '2')
 {: .question}
 
 
-> ### {% icon question %} Question: Typecasting
+> <question-title>Typecasting</question-title>
 >
 > Where reasonable, `float()` will convert a string to a floating point number, and `int()` will convert a floating point number to an integer:
 >
-> > ### {% icon code-in %} Python
+> > <code-in-title>Python</code-in-title>
 > > ```
 > > print("string to float:", float("3.4"))
 > > print("float to int:", int(3.4))
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > string to float: 3.4
 > > float to int: 3
@@ -599,7 +599,7 @@ print(str(1) + '2')
 > print("fractional string to int:", int("3.4"))
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Python 3 throws an error. If you ask Python to perform two consecutive typecasts, you must convert it explicitly in code.
 > >
@@ -610,7 +610,7 @@ print(str(1) + '2')
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question: Typecasting
+> <question-title>Typecasting</question-title>
 >
 > Which of the following will return the floating point number `2.0`? Note: there may be more than one right answer.
 > ```
@@ -626,14 +626,14 @@ print(str(1) + '2')
 > 5. `int(first) + int(float(third))`
 > 6. `2.0 * second`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Answer: 1 and 4
 > {: .solution}
 {: .question}
 
 
-> ### {% icon question %} Question: Imaginary numbers
+> <question-title>Imaginary numbers</question-title>
 >
 > Python provides complex numbers, which are written as `1.0+2.0j`. If `val` is a complex number, its real and imaginary parts can be accessed using dot notation as `val.real` and `val.imag`.
 >
@@ -651,7 +651,7 @@ print(str(1) + '2')
 > 2. What do you expect `1+2j + 3` to produce?
 > 3. What do you expect `4j` to be? What about `4 j` or `4 + j`?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > >1. Standard mathematics treatments typically use i to denote an imaginary number. However, from media reports it was an early convention established from electrical engineering that now presents a technically expensive area to change.
 > >2. `(4+2j)`
@@ -842,7 +842,7 @@ if (1 < 0) or (1 >= 0):
 `True` and `False` are special words in Python called booleans, which represent truth values. A statement such as `1 < 0` returns the value `False`, while `-1 < 0` returns the value `True`.
 
 
-> ### {% icon question %} Question: Conditionals
+> <question-title>Conditionals</question-title>
 >
 > What does this program print?
 >
@@ -855,19 +855,19 @@ if (1 < 0) or (1 >= 0):
 > print(pressure)
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 25
 > {: .solution}
 {: .question}
 
 
-> ### {% icon question %} Question: Conditionals
+> <question-title>Conditionals</question-title>
 >
 > Write some conditions that print `True` if the variable `a` is within 10% of the variable `b` and `False` otherwise. Compare your implementation with your partner’s: do you get the same answer for all possible pairs of numbers?
 > Hint: There is a built-in function `abs()` that returns the absolute value of a number.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > a = 5
@@ -955,7 +955,7 @@ It is worth tracing the execution of this little program step by step. Since the
 Note that a loop variable is a variable that is being used to record progress in a loop. It still exists after the loop is over, stores the value assigned to it last, and we can re-use variables previously defined as loop variables as well.
 
 
-> ### {% icon question %} Question: range of numbers
+> <question-title>range of numbers</question-title>
 >
 > Python has a built-in function called `range()` that generates a sequence of numbers. `range` can accept 1, 2, or 3 parameters.
 > If one parameter is given, `range` generates a sequence of that length, starting at zero and incrementing by 1. For example, `range(3)` produces the numbers `0, 1, 2`.
@@ -968,7 +968,7 @@ Note that a loop variable is a variable that is being used to record progress in
 > 3
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > >  ```
 > >  for i in range(1, 4):
@@ -978,7 +978,7 @@ Note that a loop variable is a variable that is being used to record progress in
 {: .question}
 
 
-> ### {% icon question %} Question: Number of iterations
+> <question-title>Number of iterations</question-title>
 >
 > Given the following loop:
 > ```
@@ -988,14 +988,14 @@ Note that a loop variable is a variable that is being used to record progress in
 > ```
 > How many times is the for loop executed?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The body of the loop is executed 6 times.
 > {: .solution}
 {: .question}
 
 
-> ### {% icon question %} Question: Exponentiation
+> <question-title>Exponentiation</question-title>
 >
 > Exponentiation is built into Python:
 >
@@ -1008,7 +1008,7 @@ Note that a loop variable is a variable that is being used to record progress in
 >
 > Write a loop that calculates the same result as `5 ** 3` using multiplication (and without exponentiation).
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > result = 1
@@ -1020,11 +1020,11 @@ Note that a loop variable is a variable that is being used to record progress in
 {: .question}
 
 
-> ### {% icon question %} Question: Iterations over a list
+> <question-title>Iterations over a list</question-title>
 >
 > Write a loop that calculates the sum of elements in a list by adding each element and printing the final value, so `[124, 402, 36]` prints `562`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > numbers = [124, 402, 36]
@@ -1038,7 +1038,7 @@ Note that a loop variable is a variable that is being used to record progress in
 {: .question}
 
 
-> ### {% icon question %} Question: Polynomial
+> <question-title>Polynomial</question-title>
 >
 > Suppose you have encoded a polynomial as a list of coefficients in the following way: the first element is the constant term, the second element is the coefficient of the linear term, the third is the coefficient of the quadratic term, etc.
 >
@@ -1054,7 +1054,7 @@ Note that a loop variable is a variable that is being used to record progress in
 >
 > Write a loop using `enumerate(coefs)` which computes the value `y` of any polynomial, given `x` and `coefs`.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > y = 0
@@ -1066,7 +1066,7 @@ Note that a loop variable is a variable that is being used to record progress in
 {: .question}
 
 
-> ### {% icon question %} Question: For loops and conditionals
+> <question-title>For loops and conditionals</question-title>
 >
 > Fill in the blanks so that this program creates a new list containing zeroes where the original list’s values were negative and ones where the original list’s values were positive.
 > ```
@@ -1083,7 +1083,7 @@ Note that a loop variable is a variable that is being used to record progress in
 > Output:
 > [0, 1, 1, 1, 0, 1]
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > original = [-1.5, 0.2, 0.4, 0.0, -1.3, 0.4]
@@ -1243,7 +1243,7 @@ print('only setting the value of c')
 display(c=77)
 ```
 
-> ### {% icon question %} Question: Variable scope
+> <question-title>Variable scope</question-title>
 >
 > What does the following piece of code display when run — and why?
 >
@@ -1253,7 +1253,7 @@ display(c=77)
 >
 > def f2k(f):
 >     k = ((f - 32) * (5.0 / 9.0)) + 273.15
-> return k
+>     return k
 >
 > print(f2k(8))
 > print(f2k(41))
@@ -1261,7 +1261,7 @@ display(c=77)
 > print(k)
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Output:
 > > 259.81666666666666

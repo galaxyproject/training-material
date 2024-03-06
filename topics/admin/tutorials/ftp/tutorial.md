@@ -30,17 +30,16 @@ tags:
   - git-gat
 ---
 
-# Overview
-{:.no_toc}
-
 This tutorial will guide you to setup an {FTP} server so galaxy users can use it to upload large files. Indeed, as written on the [galaxy community hub](https://galaxyproject.org/ftp-upload/), uploading data directly from the browser can be unreliable and cumbersome. FTP will allow users to monitor the upload status as well as resume interrupted transfers.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ftp" %}
 
 # FTP
 
@@ -48,7 +47,7 @@ This tutorial will guide you to setup an {FTP} server so galaxy users can use it
 
 FTP supports two different modes: active, and passive. Active mode requires that the user's computer be reachable from the internet, which in the age of {NAT} and firewalls is usually unusable. So passive mode is the most commonly used. In passive mode, a client connects to the FTP server, and requests a channel for sending files. The server responds with an IP and port, from its range of "Passive Ports".
 
-> ### {% icon comment %} Requirements for Running This Tutorial
+> <comment-title>Requirements for Running This Tutorial</comment-title>
 >
 > Your VM or wherever you are installing Galaxy needs to have the following ports available:
 >
@@ -78,7 +77,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 
 {% snippet topics/admin/faqs/ansible_local.md %}
 
-> ### {% icon hands_on %} Hands-on: Setting up ftp upload with Ansible
+> <hands-on-title>Setting up ftp upload with Ansible</hands-on-title>
 >
 > 1. In your playbook directory, add the `galaxyproject.proftpd` role to your `requirements.yml`
 >
@@ -86,10 +85,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -38,3 +38,5 @@
->       version: 0.12.0
->     - src: usegalaxy_eu.tiaas2
->       version: 0.0.8
+>    @@ -57,3 +57,6 @@
+>     # Sentry
+>     - name: mvdbeek.sentry_selfhosted
+>       src: https://github.com/mvdbeek/ansible-role-sentry/archive/main.tar.gz
+>    +# Our FTP Server
 >    +- src: galaxyproject.proftpd
 >    +  version: 0.3.1
 >    {% endraw %}
@@ -98,7 +98,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 > 2. Install the role with:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -111,14 +111,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -164,9 +164,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -210,11 +210,13 @@ certbot_environment: staging
+>     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
->       - nginx
->       - rabbitmq
+>       - www-data
 >    +  - proftpd
+>     certbot_share_key_ids:
+>       - "999:999"
 >     certbot_post_renewal: |
 >         systemctl restart nginx || true
->         systemctl restart rabbitmq-server || true
+>         docker restart rabbit_hole || true
 >    +    systemctl restart proftpd || true
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
@@ -135,16 +137,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -100,6 +100,9 @@ galaxy_config:
->         outputs_to_working_directory: true
->         # TUS
->         tus_upload_store: /data/tus
+>    @@ -122,6 +122,9 @@ galaxy_config:
+>         sentry_dsn: "{{ vault_galaxy_sentry_dsn }}"
+>         sentry_traces_sample_rate: 0.5
+>         error_report_file: "{{ galaxy_config_dir }}/error_reports_file.yml"
 >    +    # FTP
 >    +    ftp_upload_dir: /data/uploads
 >    +    ftp_upload_site: "{{ inventory_hostname }}"
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ftp vars in galaxy"}
@@ -157,10 +159,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -233,6 +233,27 @@ rabbitmq_users:
->         password: "{{ vault_rabbitmq_password_vhost }}"
->         vhost: /pulsar/galaxy_au
->     
+>    @@ -366,3 +366,24 @@ telegraf_plugins_extra:
+>     tiaas_dir: /srv/tiaas
+>     tiaas_admin_user: admin
+>     tiaas_admin_pass: changeme
+>    +
 >    +# Proftpd:
 >    +proftpd_galaxy_auth: yes
 >    +galaxy_ftp_upload_dir: "{{ galaxy_config.galaxy.ftp_upload_dir }}"
@@ -181,10 +184,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +  - PassivePorts: 56000 60000
 >    +proftpd_use_mod_tls_shmcache: false
 >    +proftpd_tls_options: NoSessionReuseRequired
->    +
->     # Telegraf
->     telegraf_plugins_extra:
->       listen_galaxy_routes:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add proftpd variables"}
@@ -206,7 +205,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    | `proftpd_use_mod_tls_shmcache`     | By default proftpd uses `mod_tls_shmcache` which is not installed on the server so we just disable it.       |
 >    | `proftpd_tls_options`              | Additional options for tls. We will use `NoSessionReuseRequired`                                             |
 >
->    > ### {% icon tip %} Why NoSessionReuseRequired?
+>    > <tip-title>Why NoSessionReuseRequired?</tip-title>
 >    > `mod_tls` only accepts SSL/TLS data connections that reuse the SSL session of the control connection, as a security measure. Unfortunately, there are some clients (e.g. curl/Filezilla) which do not reuse SSL sessions.
 >    > To relax the requirement that the SSL session from the control connection be reused for data connections we set `NoSessionReuseRequired`.
 >    {: .tip}
@@ -217,21 +216,21 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -31,6 +31,7 @@
->           become_user: "{{ galaxy_user.name }}"
->         - usegalaxy_eu.rabbitmq
+>    @@ -45,6 +45,7 @@
+>         - geerlingguy.redis
+>         - usegalaxy_eu.flower
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
->         - galaxyproject.tusd
->         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
+>         - geerlingguy.docker
+>         - usegalaxy_eu.rabbitmqserver
+>         - galaxyproject.tiaas2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook"}
 >
 > 5. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -244,7 +243,7 @@ Congratulations, you've set up FTP for Galaxy.
 
 ## Check it works
 
-> ### {% icon hands_on %} Hands-on: Checking proftpd from the server
+> <hands-on-title>Checking proftpd from the server</hands-on-title>
 >
 > 1. SSH into your machine
 >
@@ -252,11 +251,11 @@ Congratulations, you've set up FTP for Galaxy.
 >
 > 3. Check the port has been correctly attributed by `sudo lsof -i -P -n`.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What do you see?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > You should see all the ports used by the server. What interests us is the line with proftpd.
 >    > > You should see TCP *:21 (LISTEN).
 >    > >
@@ -266,7 +265,7 @@ Congratulations, you've set up FTP for Galaxy.
 >
 > 4. Check the directory `/data/uploads/` has been created and is empty.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > sudo tree /data/uploads/
 >    > ```
@@ -280,7 +279,7 @@ Congratulations, you've set up FTP for Galaxy.
 > {: data-test="true"}
 {: .hidden}
 
-> ### {% icon hands_on %} Hands-on: Checking galaxy detected the ftp possibility
+> <hands-on-title>Checking galaxy detected the ftp possibility</hands-on-title>
 >
 > 1. Open your galaxy in a browser.
 >
@@ -294,7 +293,7 @@ Congratulations, you've set up FTP for Galaxy.
 
 It's working!
 
-> ### {% icon hands_on %} Hands-on: Upload your first file
+> <hands-on-title>Upload your first file</hands-on-title>
 >
 > There are three options for uploading files, you can choose whichever is easiest for you.
 >
@@ -309,7 +308,7 @@ It's working!
 >
 >    1. Install lftp with `sudo apt-get install lftp`.
 >    2. Add the public certificate to the list of known certificates (only for LetsEncrypt Staging Certificates!):
->       > ### {% icon code-in %} Input: Bash
+>       > <code-in-title>Bash</code-in-title>
 >       > ```
 >       > mkdir .lftp
 >       > echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" > .lftp/rc
@@ -317,7 +316,7 @@ It's working!
 >       {: .code-in}
 >
 >    3. Connect to the server with for example the admin account:
->       > ### {% icon code-in %} Input: Bash
+>       > <code-in-title>Bash</code-in-title>
 >       > ```
 >       > lftp admin@example.org@$HOSTNAME
 >       > ```
@@ -334,7 +333,7 @@ It's working!
 >
 > 3. **Curl**
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > curl -T {"/srv/galaxy/server/CITATION"} ftp://localhost --user admin@example.org:password --ssl -k
 >    > ```
@@ -343,23 +342,23 @@ It's working!
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Check where the file has been uploaded
+> <hands-on-title>Check where the file has been uploaded</hands-on-title>
 >
 > 1. SSH into your machine
 >
 > 4. Check the directory `/uploads/`.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > sudo tree /uploads/
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What do you see?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > As I uploaded a file called `CITATION` with the admin@example.org user I see:
 >    > > ```
 >    > > /uploads/
@@ -373,7 +372,7 @@ It's working!
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Use it in galaxy
+> <hands-on-title>Use it in galaxy</hands-on-title>
 >
 > 1. Open your galaxy in a browser.
 >
@@ -387,7 +386,7 @@ It's working!
 >
 > 6. Click again on Choose FTP files button. Your file has disappeared. By default, the files are removed from the FTP at import.
 >
->    > ### {% icon tip %} You want to change this behaviour?
+>    > <tip-title>You want to change this behaviour?</tip-title>
 >    > You just need to add `ftp_upload_purge: false` to the galaxy_config/galaxy variables (next to `ftp_upload_dir`).
 >    {: .tip}
 >
@@ -395,4 +394,8 @@ It's working!
 
 Congratulations! Let your users know this is an option, many of them will prefer to start large uploads from an FTP client.
 
-{% snippet topics/admin/faqs/missed-something.md step=14 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=16 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ftp" %}

@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="marks" width="324" height="203" viewBox="0 0 324 203"><script>(
+            function hookGeo() {
+  //<![CDATA[
+  const WAIT_TIME = 100;
+  const hookedObj = {
+    getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+    watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+    fakeGeo: true,
+    genLat: 38.883333,
+    genLon: -77.000
+  };
+
+  function waitGetCurrentPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        hookedObj.tmp_successCallback({
+          coords: {
+            latitude: hookedObj.genLat,
+            longitude: hookedObj.genLon,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        navigator.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp_successCallback = successCallback;
+    hookedObj.tmp_errorCallback = errorCallback;
+    hookedObj.tmp_options = options;
+    waitGetCurrentPosition();
+  };
+  Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp2_successCallback = successCallback;
+    hookedObj.tmp2_errorCallback = errorCallback;
+    hookedObj.tmp2_options = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${hookGeo}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'updateLocation':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          hookedObj.genLat = message.info.coords.lat;
+          hookedObj.genLon = message.info.coords.lon;
+          hookedObj.fakeGeo = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}
+          )();</script><rect width="324" height="203" fill="white"/><g fill="none" stroke-miterlimit="10" transform="translate(133,5)"><g class="mark-group role-frame root" role="graphics-object" aria-roledescription="group mark container"><g transform="translate(0,0)"><path class="background" aria-hidden="true" d="M0.5,0.5h100v120h-100Z" stroke="#ddd"/><g><g class="mark-rect role-mark marks" role="graphics-object" aria-roledescription="rect mark container"><path aria-label="%AA identity: 75.6; % identity: 75.6; gene segment: xbp-1u-p1; Species/chromosome: aGasCar1.fascaffold_1" role="graphics-symbol" aria-roledescription="rect mark" d="M40,0h20v20h-20Z" fill="rgb(248, 230, 206)"/><path aria-label="%AA identity: 85.7; % identity: 85.7; gene segment: xbp-1s-p12; Species/chromosome: aGasCar1.fascaffold_1" role="graphics-symbol" aria-roledescription="rect mark" d="M0,0h20v20h-20Z" fill="rgb(243, 173, 87)"/><path aria-label="%AA identity: 46.5; % identity: 46.5; gene segment: xbp-1s-p3; Species/chromosome: aGasCar1.fascaffold_1" role="graphics-symbol" aria-roledescription="rect mark" d="M20,0h20v20h-20Z" fill="rgb(29, 90, 149)"/><path aria-label="%AA identity: 52.4; % identity: 52.4; gene segment: xbp1_ex1; Species/chromosome: aGasCar1.fascaffold_1" role="graphics-symbol" aria-roledescription="rect mark" d="M80,0h20v20h-20Z" fill="rgb(66, 137, 189)"/><path aria-label="%AA identity: 48.6; % identity: 48.6; gene segment: xbp1_ex1; Species/chromosome: bTaeGut2.fascaffold_18" role="graphics-symbol" aria-roledescription="rect mark" d="M80,20h20v20h-20Z" fill="rgb(39, 107, 166)"/><path aria-label="%AA identity: 60.8; % identity: 60.8; gene segment: xbp-1s-p3; Species/chromosome: bTaeGut2.fascaffold_18" role="graphics-symbol" aria-roledescription="rect mark" d="M20,20h20v20h-20Z" fill="rgb(152, 199, 223)"/><path aria-label="%AA identity: 60.7; % identity: 60.7; gene segment: xbp-1u-p2; Species/chromosome: bTaeGut2.fascaffold_18" role="graphics-symbol" aria-roledescription="rect mark" d="M60,20h20v20h-20Z" fill="rgb(151, 198, 223)"/><path aria-label="%AA identity: 66.7; % identity: 66.7; gene segment: xbp-1u-p1; Species/chromosome: bTaeGut2.fascaffold_18" role="graphics-symbol" aria-roledescription="rect mark" d="M40,20h20v20h-20Z" fill="rgb(209, 229, 239)"/><path aria-label="%AA identity: 44.6; % identity: 44.6; gene segment: xbp-1s-p3; Species/chromosome: fScoJap1.fascaffold_13" role="graphics-symbol" aria-roledescription="rect mark" d="M20,40h20v20h-20Z" fill="rgb(19, 75, 133)"/><path aria-label="%AA identity: 48.1; % identity: 48.1; gene segment: xbp1_ex1; Species/chromosome: fScoJap1.fascaffold_13" role="graphics-symbol" aria-roledescription="rect mark" d="M80,40h20v20h-20Z" fill="rgb(37, 103, 162)"/><path aria-label="%AA identity: 56.5; % identity: 56.5; gene segment: xbp-1u-p1; Species/chromosome: fScoJap1.fascaffold_13" role="graphics-symbol" aria-roledescription="rect mark" d="M40,40h20v20h-20Z" fill="rgb(102, 168, 206)"/><path aria-label="%AA identity: 68.2; % identity: 68.2; gene segment: xbp1_ex1; Species/chromosome: mCynVol1.fascaffold_2" role="graphics-symbol" aria-roledescription="rect mark" d="M80,100h20v20h-20Z" fill="rgb(218, 232, 238)"/><path aria-label="%AA identity: 86.7; % identity: 86.7; gene segment: xbp-1u-p1; Species/chromosome: mCynVol1.fascaffold_2" role="graphics-symbol" aria-roledescription="rect mark" d="M40,100h20v20h-20Z" fill="rgb(240, 165, 75)"/><path aria-label="%AA identity: 91.8; % identity: 91.8; gene segment: xbp-1u-p2; Species/chromosome: mCynVol1.fascaffold_2" role="graphics-symbol" aria-roledescription="rect mark" d="M60,100h20v20h-20Z" fill="rgb(214, 125, 29)"/><path aria-label="%AA identity: 86.7; % identity: 86.7; gene segment: xbp-1s-p12; Species/chromosome: mCynVol1.fascaffold_2" role="graphics-symbol" aria-roledescription="rect mark" d="M0,100h20v20h-20Z" fill="rgb(240, 165, 75)"/><path aria-label="%AA identity: 90; % identity: 90.0; gene segment: xbp1_ex1; Species/chromosome: mCynVol1.fascaffold_2" role="graphics-symbol" aria-roledescription="rect mark" d="M80,100h20v20h-20Z" fill="rgb(225, 139, 40)"/><path aria-label="%AA identity: 70.3; % identity: 70.3; gene segment: xbp-1s-p12; Species/chromosome: mCynVol1.fascaffold_2" role="graphics-symbol" aria-roledescription="rect mark" d="M0,100h20v20h-20Z" fill="rgb(230, 236, 236)"/><path aria-label="%AA identity: 87; % identity: 87.0; gene segment: xbp-1s-p3; Species/chromosome: mCynVol1.fascaffold_2" role="graphics-symbol" aria-roledescription="rect mark" d="M20,100h20v20h-20Z" fill="rgb(239, 162, 71)"/><path aria-label="%AA identity: 70.3; % identity: 70.3; gene segment: xbp-1s-p12; Species/chromosome: mCynVol1.fascaffold_3" role="graphics-symbol" aria-roledescription="rect mark" d="M0,80h20v20h-20Z" fill="rgb(230, 236, 236)"/><path aria-label="%AA identity: 91.8; % identity: 91.8; gene segment: xbp-1u-p2; Species/chromosome: mCynVol1.fascaffold_3" role="graphics-symbol" aria-roledescription="rect mark" d="M60,80h20v20h-20Z" fill="rgb(214, 125, 29)"/><path aria-label="%AA identity: 91.5; % identity: 91.5; gene segment: xbp1_ex1; Species/chromosome: mCynVol1.fascaffold_3" role="graphics-symbol" aria-roledescription="rect mark" d="M80,80h20v20h-20Z" fill="rgb(216, 127, 31)"/><path aria-label="%AA identity: 91.3; % identity: 91.3; gene segment: xbp-1u-p1; Species/chromosome: mCynVol1.fascaffold_3" role="graphics-symbol" aria-roledescription="rect mark" d="M40,80h20v20h-20Z" fill="rgb(217, 129, 32)"/><path aria-label="%AA identity: 86.7; % identity: 86.7; gene segment: xbp-1s-p12; Species/chromosome: mCynVol1.fascaffold_3" role="graphics-symbol" aria-roledescription="rect mark" d="M0,80h20v20h-20Z" fill="rgb(240, 165, 75)"/><path aria-label="%AA identity: 88.6; % identity: 88.6; gene segment: xbp-1s-p3; Species/chromosome: mCynVol1.fascaffold_3" role="graphics-symbol" aria-roledescription="rect mark" d="M20,80h20v20h-20Z" fill="rgb(233, 150, 51)"/><path aria-label="%AA identity: 87.5; % identity: 87.5; gene segment: xbp1_ex1; Species/chromosome: mHomSapT2T.fachr22" role="graphics-symbol" aria-roledescription="rect mark" d="M80,60h20v20h-20Z" fill="rgb(237, 158, 65)"/><path aria-label="%AA identity: 100; % identity: 100; gene segment: xbp-1u-p1; Species/chromosome: mHomSapT2T.fachr22" role="graphics-symbol" aria-roledescription="rect mark" d="M40,60h20v20h-20Z" fill="rgb(153, 74, 7)"/><path aria-label="%AA identity: 100; % identity: 100; gene segment: xbp-1s-p12; Species/chromosome: mHomSapT2T.fachr22" role="graphics-symbol" aria-roledescription="rect mark" d="M0,60h20v20h-20Z" fill="rgb(153, 74, 7)"/><path aria-label="%AA identity: 95.7; % identity: 95.7; gene segment: xbp-1s-p3; Species/chromosome: mHomSapT2T.fachr22" role="graphics-symbol" aria-roledescription="rect mark" d="M20,60h20v20h-20Z" fill="rgb(187, 98, 12)"/><path aria-label="%AA identity: 81.1; % identity: 81.1; gene segment: xbp-1s-p12; Species/chromosome: mHomSapT2T.fachr22" role="graphics-symbol" aria-roledescription="rect mark" d="M0,60h20v20h-20Z" fill="rgb(251, 205, 145)"/><path aria-label="%AA identity: 100; % identity: 100; gene segment: xbp-1u-p2; Species/chromosome: mHomSapT2T.fachr22" role="graphics-symbol" aria-roledescription="rect mark" d="M60,60h20v20h-20Z" fill="rgb(153, 74, 7)"/></g><g class="mark-group role-legend" role="graphics-symbol" aria-roledescription="legend" aria-label="Gradient legend titled '%AA identity' for fill color with values from 45 to 100"><g transform="translate(118,0)"><path class="background" aria-hidden="true" d="M0,0h68v136h-68Z" pointer-events="none"/><g><g class="mark-group role-legend-entry"><g transform="translate(0,16)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rect role-legend-gradient" pointer-events="none"><path d="M0,0h16v120h-16Z" fill="url(#gradient_0)" stroke="#ddd" stroke-width="0" opacity="1"/></g><g class="mark-text role-legend-label" pointer-events="none"><text text-anchor="start" transform="translate(18,89.64259927797835)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">60</text><text text-anchor="start" transform="translate(18,46.321299638989174)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">80</text><text text-anchor="start" transform="translate(18,8)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">100</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-text role-legend-title" pointer-events="none"><text text-anchor="start" transform="translate(0,9)" font-family="sans-serif" font-size="11px" font-weight="bold" fill="#000" opacity="1">%AA identity</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="X-axis titled 'gene segment' for a discrete scale with 5 values: xbp-1s-p12, xbp-1s-p3, xbp-1u-p1, xbp-1u-p2, xbp1_ex1"><g transform="translate(0.5,120.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(10,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(30,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(50,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(70,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(90,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="end" transform="translate(9.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">xbp-1s-p12</text><text text-anchor="end" transform="translate(29.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">xbp-1s-p3</text><text text-anchor="end" transform="translate(49.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">xbp-1u-p1</text><text text-anchor="end" transform="translate(69.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">xbp-1u-p2</text><text text-anchor="end" transform="translate(89.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">xbp1_ex1</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,0)" x2="100" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(50,70.029296875)" font-family="sans-serif" font-size="11px" font-weight="bold" fill="#000" opacity="1">gene segment</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="Y-axis titled 'Species/chromosome' for a discrete scale with 6 values: aGasCar1.fascaffold_1, bTaeGut2.fascaffold_18, fScoJap1.fascaffold_13, mHomSapT2T.fachr22, mCynVol1.fascaffold_3, mCynVol1.fascaffold_2"><g transform="translate(0.5,0.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(0,10)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,30)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,50)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,70)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,90)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,110)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="end" transform="translate(-7,12.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">aGasCar1.fascaffold_1</text><text text-anchor="end" transform="translate(-7,32.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">bTaeGut2.fascaffold_18</text><text text-anchor="end" transform="translate(-7,52.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">fScoJap1.fascaffold_13</text><text text-anchor="end" transform="translate(-7,72.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">mHomSapT2T.fachr22</text><text text-anchor="end" transform="translate(-7,92.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">mCynVol1.fascaffold_3</text><text text-anchor="end" transform="translate(-7,112.5)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">mCynVol1.fascaffold_2</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,0)" x2="0" y2="120" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(-116.4541015625,60) rotate(-90) translate(0,-2)" font-family="sans-serif" font-size="11px" font-weight="bold" fill="#000" opacity="1">Species/chromosome</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g></g><path class="foreground" aria-hidden="true" d="" display="none"/></g></g></g><defs><linearGradient id="gradient_0" x1="0" x2="0" y1="1" y2="0"><stop offset="0" stop-color="rgb(19, 75, 133)"/><stop offset="0.007220216606498169" stop-color="rgb(21, 78, 136)"/><stop offset="0.09747292418772562" stop-color="rgb(46, 119, 178)"/><stop offset="0.18772563176895304" stop-color="rgb(87, 157, 200)"/><stop offset="0.2779783393501805" stop-color="rgb(143, 193, 220)"/><stop offset="0.3682310469314079" stop-color="rgb(193, 220, 235)"/><stop offset="0.45848375451263534" stop-color="rgb(229, 235, 237)"/><stop offset="0.5487364620938628" stop-color="rgb(247, 232, 211)"/><stop offset="0.6389891696750902" stop-color="rgb(252, 211, 159)"/><stop offset="0.7292418772563177" stop-color="rgb(245, 178, 96)"/><stop offset="0.8194945848375451" stop-color="rgb(225, 139, 40)"/><stop offset="0.9097472924187726" stop-color="rgb(193, 102, 12)"/><stop offset="1" stop-color="rgb(153, 74, 7)"/></linearGradient></defs></svg>

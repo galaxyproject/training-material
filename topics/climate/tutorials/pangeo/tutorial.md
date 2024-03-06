@@ -31,11 +31,6 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
-
 [Pangeo](https://pangeo.io/) is a project that effectively began in 2016 with a workshop at Columbia University. The mission for Pangeo developed at that workshop is still valid nowadays:
 
 *Our mission is to cultivate an ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere and climate science can be developed, distributed, and sustained. These tools must be scalable in order to meet the current and future challenges of big data, and these solutions should leverage the existing expertise outside of the geoscience community.*
@@ -43,7 +38,7 @@ contributors:
 In this tutorial, you will learn how to manipulate [netCDF](https://en.wikipedia.org/wiki/NetCDF) data files using [Xarray](https://xarray.pydata.org/en/stable/) Galaxy Tools.  NetCDF stands for **network Common Data Form** and is one of the most popular file format in climate science. It is used for storing multidimensional scientific data variables such as temperature or humidity, and metadata can be added to facilitate sharing of netCDF data. netCDF is widely used outside the Climate Science community and each community has its own set of conventions, especially for metadata. The [Climate and Forecast metadata convention](https://cfconventions.org/), also called CF-convention is used by the Climate community and is designed to promote the processing and sharing of netCDF files.
 
 
-> ### {% icon comment %} Xarray and Earth Science
+> <comment-title>Xarray and Earth Science</comment-title>
 > Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. In this training material, we focus on the usage of Xarray for Earth Science data following the [CF-Convention](https://cfconventions.org/). However, some Galaxy Tools also work for non Earth Science datasets, and if needed current Xarray Galaxy Tools could be extended to accommodate new usage.
 {: .comment}
 
@@ -56,7 +51,7 @@ Several variables are generated and we will be using PM2.5 ([Particle Matter < 2
 The dataset we will be using in this tutorial is very small and there is no need to parallelize our data analysis. Parallel data analysis with Pangeo is not covered in this tutorial. 
 
  
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -67,7 +62,7 @@ The dataset we will be using in this tutorial is very small and there is no need
 
 # Create a history
 
-> ### {% icon hands_on %} Hands-on: Create history
+> <hands-on-title>Create history</hands-on-title>
 >
 > 1. Make sure you start from an empty analysis history.
 >
@@ -82,7 +77,7 @@ The dataset we will be using in this tutorial is very small and there is no need
 
 ##  Upload CAMS PM2.5 data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
@@ -112,7 +107,7 @@ The dataset we will be using in this tutorial is very small and there is no need
 # Understanding our dataset
 
 
-> ### {% icon details %} More information about CAMS PM2.5 forecast datasets
+> <details-title>More information about CAMS PM2.5 forecast datasets</details-title>
 >
 > Our CAMS PM2.5 forecast dataset is in [netCDF](https://en.wikipedia.org/wiki/NetCDF) format. You could find the same dataset in different formats such as [GRIdded Binary or General Regularly-distributed Information in Binary form (GRIB)](https://en.wikipedia.org/wiki/GRIB) or [geoTIFF](https://en.wikipedia.org/wiki/GeoTIFF). The same Xarray Tools can be used with these other data formats. More information about this particular data set can be found on the [CAMS European air quality forecast webpage](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-europe-air-quality-forecasts?tab=overview). As mentioned earlier, we use netCDF data format because it is the most popular among climate scientists.
 {: .details}
@@ -125,7 +120,7 @@ To understand what is contained in our dataset, we will first use Xarray metadat
 
 ### Global metadata information
 
-> ### {% icon hands_on %} Hands-on: netCDF dataset with Xarray metadata Galaxy Tool
+> <hands-on-title>netCDF dataset with Xarray metadata Galaxy Tool</hands-on-title>
 >
 > 1. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
 >
@@ -142,17 +137,17 @@ In `info file` output file, we can identify 4 different sections:
 4. **Global Attributes**: at this level, we get the global attributes of the dataset. Each attribute has a name and a value. 
 
 
-> ### {% icon question %} Questions CAM PM2.5 Dataset
+> <question-title>CAM PM2.5 Dataset</question-title>
 >
 > What is the name of the variable for Particle matter < 2.5 μm and its physical units?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Information about variable names and units can be found in **info file** that was generated by Xarray metadata Galaxy Tool. 
 > >      - Variable name: `mass_concentration_of_pm2p5_ambient_aerosol_in_air`
 > >      - Units: `µg/m3`
 > >
 > > 
-> > > ### {% icon code-out %} Output
+> > > <code-out-title></code-out-title>
 > > > ```bash
 > > > xarray.Dataset {
 > > > dimensions:
@@ -195,7 +190,7 @@ In `info file` output file, we can identify 4 different sections:
 
 ### Coordinates information
 
-> ### {% icon hands_on %} Hands-on: Get Coordinate information with Xarray Coordinate
+> <hands-on-title>Get Coordinate information with Xarray Coordinate</hands-on-title>
 >
 > 1. {% tool [NetCDF xarray Coordinate Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222.netcdf`
@@ -207,7 +202,7 @@ In `info file` output file, we can identify 4 different sections:
 >    - `time`: this tabular file contains all the forecast times. In our case, these are relative to December 22, 2021;
 >    - `version`: this is a text file returning the Xarray package version. It is useful when publishing your Galaxy workflow.
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This tool returns as many tabular files as the number of coordinate variables present in your input file. The values are decoded from the netCDF input file and no further processing is done. So units for instance for latitudes, longitudes, level and time may vary from one file to another depending on how it was coded in the original input file.
 >    {: .comment}
@@ -215,16 +210,16 @@ In `info file` output file, we can identify 4 different sections:
 {: .hands_on}
 
 
-> ### {% icon question %} Understanding PM2.5 forecast coordinates
+> <question-title>Understanding PM2.5 forecast coordinates</question-title>
 >
 >  1. What is the unit of the `time` coordinate?
 >  2. What is the frequency of PM2.5 forecasts? 
 >  3. What is the range of values for latitudes and longitudes?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. `info file` tells us that `time` is coded as `timedelta64[ns]` e.g. as differences in times (here in nanoseconds). Here the reference time is December 22, 2021. If we look at the tabular file named `time` (generated by `NetCDF xarray Coordinate Info`), we see that these times are automatically converted to human readable time format when printed:
 > >
-> > > ### {% icon code-out %} Output
+> > > <code-out-title></code-out-title>
 > > > ```bash
 > > > 0	0 days 00:00:00
 > > > 1	0 days 01:00:00
@@ -239,7 +234,7 @@ In `info file` output file, we can identify 4 different sections:
 
 # Plotting our dataset on a geographical map
 
-> ### {% icon hands_on %} Hands-on: Map plot
+> <hands-on-title>Map plot</hands-on-title>
 >  We will use Xarray mapplot Galaxy Tool to plot PM2.5 on December 22, 2021.
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
@@ -260,7 +255,7 @@ In `info file` output file, we can identify 4 different sections:
 >
 >   ![CAMS PM2.5 December, 22th 2021 at 00:00 UTC](../../images/PM2_5_galaxy_20211222-00UTC.png)
 >
->    > ### {% icon comment %} Why shifting longitudes?
+>    > <comment-title>Why shifting longitudes?</comment-title>
 >    >
 >    > Longitudes are coded from 0 to 360 degrees. As we do not have global data but only covering Europe, we need to shift longitudes so that `NetCDF xarray map plotting` can plot properly our dataset. 
 >    {: .comment}
@@ -269,11 +264,11 @@ In `info file` output file, we can identify 4 different sections:
 {: .hands_on}
 
 
-> ### {% icon question %} Visualize and Compare
+> <question-title>Visualize and Compare</question-title>
 >
 > Make a plot to Visualize the forecast for December, 24th 2021 at 12:00 UTC. Do you see any obvious differences with the plot from December 22, 2021 at 00:00 UTC?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 
 > > Data starts on December, 22nd 2021 at 00:00 UTC so we need to add 2 days and 12 hours to select the correct time index. We reuse the same `NetCDF xarray map plotting` with a different selection for time:
 > >
@@ -299,7 +294,7 @@ In `info file` output file, we can identify 4 different sections:
 # Select / Subset from coordinates
 
 
-> ### {% icon hands_on %} Hands-on: NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF
+> <hands-on-title>NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF</hands-on-title>
 >
 > 1. {% tool [NetCDF xarray operations](toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222.netcdf`
@@ -317,7 +312,7 @@ In `info file` output file, we can identify 4 different sections:
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc0-23h.netcdf`
 > 5. Check the generated outputs and in particular `time`. We see that the tabular file `time` only contains **24** lines with times from `0 days 00:00:00` to `0 days 23:00:00`
 >
->    > ### {% icon comment %} slice *threshold2* not included in selection
+>    > <comment-title>slice <i>threshold2</i> not included in selection</comment-title>
 >    >
 >    > You may have noticed already but when selecting a range with `slice` the upper limit (here `1 days 00:00:00`) is not included.
 >    {: .comment}
@@ -326,11 +321,11 @@ In `info file` output file, we can identify 4 different sections:
 {: .hands_on}
 
 
-> ### {% icon question %} PM2.5 over Italy region
+> <question-title>PM2.5 over Italy region</question-title>
 >
 > Using a selection and making plots of PM2.5 over Italy (latitudes: 43.N, 40.N and longitudes: 11.E,15.E), can you tell us if the forecasted PM2.5 will increase or decrease during the next 24 hours between 10:00 UTC and 17:00 UTC? Over which town in Italy do you see high values?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. {% tool [NetCDF xarray operations](toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0) %} with the following parameters:
 > >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222.netcdf`
 > >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222.netcdf`
@@ -382,7 +377,7 @@ In `info file` output file, we can identify 4 different sections:
 > {: .solution }
 {: .question }
 
-> ### {% icon comment %}  `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`
+> <comment-title> `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`</comment-title>
 > Why did we slice latitudes with `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`?
 > - because when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
 > decreasing order for CAMS.
@@ -394,7 +389,7 @@ In `info file` output file, we can identify 4 different sections:
 - Sometimes we may want to make more complex selections with criteria on the values of a given variable and not only on its coordinates. For this we use `where`.
 - For instance, we may want to only keep PM2.5 if values are greater than a chosen threshold.
 
-> ### {% icon hands_on %} Hands-on: Plot where PM2.5 is greater than 30 μm.m<sup>-3</sup>
+> <hands-on-title>Plot where PM2.5 is greater than 30 μm.m<sup>-3</sup></hands-on-title>
 > 1.  {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
 >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
@@ -418,13 +413,13 @@ In `info file` output file, we can identify 4 different sections:
 
 
 
-> ### {% icon question %} PM2.5 over Italy over 30 μm.m<sup>-3</sup>
+> <question-title>PM2.5 over Italy over 30 μm.m<sup>-3</sup></question-title>
 >
 > Using the same geographical region over Italy, can you tell us if the forecasted PM2.5 will exceed
 > 30 μm.m<sup>-3</sup> 
 > between 10:00 UTC and 17:00 UTC on december 22, 2021? 
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1.  {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0) %} with the following parameters:
 > >   - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
 > >   - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from CAMS-PM2_5-20211222_fc10-17h_Italy.netcdf`
@@ -453,7 +448,7 @@ In `info file` output file, we can identify 4 different sections:
 
 # From Xarray to Tabular Data
 
-> ### {% icon hands_on %} Hands-on: Xarray selection
+> <hands-on-title>Xarray selection</hands-on-title>
 > 
 > We will select a single location: Naples (40.8518° N, 14.2681° E) and select the grid point that is closest to Naples.
 > 1. {% tool [NetCDF xarray operations](toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0) %} with the following parameters:
@@ -484,7 +479,7 @@ In `info file` output file, we can identify 4 different sections:
 > 5. Rename the output dataset to `CAMS-PM2_5-20211222_Naples.tabular`
 > 6. View {% icon galaxy-eye%} the generated file. It is a tabular with timeseries of PM2.4 concentrations over Naples. The total number of lines is 97 but we only print the first 5 lines.
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```bash
 >    > 	time	level	latitude	longitude	pm2p5_conc
 >    > 	0	0 days 00:00:00.000000000	0.0	40.95000076293945	14.25	24.00212
@@ -499,11 +494,11 @@ In `info file` output file, we can identify 4 different sections:
 
 
 
-> ### {% icon question %} PM2.5 at Naples over the 4 forecasted days
+> <question-title>PM2.5 at Naples over the 4 forecasted days</question-title>
 >
 > From a qualitative point of view, can you say if PM2.5 may increase or decrease over the 4 forecasted days?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >  We can make a simple plot using Scatterplot with ggplot2 ot climate stripes:
 > > 1. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2) %} with the following parameters:
 > >   - {% icon param-file %} *Input in tabular format"*: `CAMS-PM2_5-20211222_Naples.tabular`
@@ -556,6 +551,6 @@ In `info file` output file, we can identify 4 different sections:
 
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} Well done! In this tutorial, Xarray Galaxy Tools have been introduced and we learned to use these tools on a real dataset from Copernicus Atmosphere Monitoring Service. We encourage you to try with your own datasets. 

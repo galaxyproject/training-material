@@ -33,21 +33,22 @@ requirements:
       - ansible
       - ansible-galaxy
       - gxadmin
+abbreviations:
+    TSDB: Time Series Database
 ---
 
-
-# Overview
-{:.no_toc}
 
 Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="monitoring" %}
 
 This tutorial explicitly assumes you are starting with a setup like that created in the *Galaxy installation with Ansible* tutorial
 
@@ -66,11 +67,11 @@ Setting up the infrastructure is quite simple thanks to the automation provided 
 
 ## InfluxDB
 
-[InfluxDB](https://www.influxdata.com/) provides the data storage for monitoring. It is a <abbr title="Time Series Database">TSDB</abbr>, so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as "retention policies". Outside of this feature, it is a [relatively normal database](https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/).
+[InfluxDB](https://www.influxdata.com/) provides the data storage for monitoring. It is a {TSDB}, so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as "retention policies". Outside of this feature, it is a [relatively normal database](https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/).
 
 The available Ansible roles for InfluxDB unfortunately do not support configuring databases or users or retention policies. Ansible itself contains [several modules](https://docs.ansible.com/ansible/2.9/modules/list_of_database_modules.html#influxdb) you can use to write your own roles, but nothing generic. UseGalaxy.eu wrote [their own role](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/roles/hxr.influxdb/tasks/main.yml) for setting up their InfluxDB database, but it is not reusable enough for it to be used here yet. If you plan to automate your entire setup, this tutorial can perhaps provide inspiration for writing your own Ansible role. However, in this case it is sufficient to manually create your users and retention policies as a one-off task.
 
-> ### {% icon hands_on %} Hands-on: Setting up InfluxDB
+> <hands-on-title>Setting up InfluxDB</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
@@ -78,10 +79,10 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -30,3 +30,5 @@
->       version: 1.0.8
->     - src: galaxyproject.gxadmin
->       version: 0.0.8
+>    @@ -43,3 +43,5 @@
+>       version: 1.8.0
+>     - name: usegalaxy_eu.flower
+>       version: 1.0.2
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -92,7 +93,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >
 > 2. Install the role
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -114,7 +115,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```
 >    {: data-commit="Setup the monitoring playbook"}
 >
->    During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB) on a separate host.
+>    During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB, Sentry) on a separate host.
 >
 > 4. Edit the inventory file (`hosts`) an add a group for monitoring like:
 >
@@ -122,12 +123,12 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```diff
 >    --- a/hosts
 >    +++ b/hosts
->    @@ -2,3 +2,5 @@
->     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    @@ -4,3 +4,5 @@ gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
+>     galaxyservers
 >     [pulsarservers]
->     gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
+>     gat-0.oz.galaxy.training ansible_user=ubuntu
 >    +[monitoring]
->    +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    +gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the monitoring host"}
@@ -136,7 +137,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >
 > 4. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook monitoring.yml
 >    > ```
@@ -185,136 +186,6 @@ write
 ```
 
 The `influx` command provides command line access to InfluxDB in a similar fashion to `psql` for Postgresql. It provides commands like `show databases` and others, but we will not use this interface very often. Telegraf will automatically try to create any database needed, and no interaction is required to setup Grafana to talk to the database.
-
-## Grafana
-
-[Grafana](https://grafana.com/) provides a visual interface to our metrics. It includes a nice query builder that provides a uniform experience across multiple backend databases, along with many attractive graphing and other visualization options. Each page in the Grafana webserver display is called a "dashboard." Dashboards can each have multiple visualizations and graphs, all responding to the data collected by InfluxDB. Another benefit of using Grafana is that many of the UseGalaxy.\* servers share their dashboards publicly, and you can easily copy these and use them on your own server.
-
-There are some nice examples of dashboards available from the public Galaxies, we recommend that you peruse them to get an idea of the possibilities:
-
-- [UseGalaxy.eu](https://stats.galaxyproject.eu/)
-- [UseGalaxy.org.au](https://stats.genome.edu.au/)
-
-> ### {% icon hands_on %} Hands-on: Setting up Grafana
->
-> 1. Edit your `requirements.yml` and add the following:
->
->    {% raw %}
->    ```diff
->    --- a/requirements.yml
->    +++ b/requirements.yml
->    @@ -32,3 +32,5 @@
->       version: 0.0.8
->     - src: usegalaxy_eu.influxdb
->       version: v6.0.7
->    +- src: cloudalchemy.grafana
->    +  version: 0.14.2
->    {% endraw %}
->    ```
->    {: data-commit="Add grafana requirement"}
->
-> 2. Install the role
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > ansible-galaxy install -p roles -r requirements.yml
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
->
-> 3. Add `cloudalchemy.grafana` to your `monitoring.yml` playbook:
->
->    {% raw %}
->    ```diff
->    --- a/monitoring.yml
->    +++ b/monitoring.yml
->    @@ -2,3 +2,4 @@
->       become: true
->       roles:
->         - usegalaxy_eu.influxdb
->    +    - cloudalchemy.grafana
->    {% endraw %}
->    ```
->    {: data-commit="Add grafana to monitoring playbook"}
->
-> 4. Edit the file `group_vars/monitoring.yml` and set the following variables:
->
->    {% raw %}
->    ```diff
->    --- /dev/null
->    +++ b/group_vars/monitoring.yml
->    @@ -0,0 +1,17 @@
->    +grafana_url: "https://{{ inventory_hostname }}/grafana/"
->    +
->    +grafana_security:
->    +    # Please change at least the password to something more suitable
->    +    admin_user: admin
->    +    admin_password: password
->    +
->    +# These datasources will be automatically included into Grafana
->    +grafana_datasources:
->    + - name: Galaxy
->    +   type: influxdb
->    +   access: proxy
->    +   url: http://127.0.0.1:8086
->    +   isDefault: true
->    +   version: 1
->    +   editable: false
->    +   database: telegraf
->    {% endraw %}
->    ```
->    {: data-commit="Configure Grafana"}
->
-> 5. Run the monitoring playbook:
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > ansible-playbook monitoring.yml
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
->
-> 5. Update the nginx configuration in `templates/nginx/galaxy.j2` to include the following at the end, before the last curly brace
->
->    {% raw %}
->    ```diff
->    --- a/templates/nginx/galaxy.j2
->    +++ b/templates/nginx/galaxy.j2
->    @@ -72,4 +72,10 @@ server {
->         location /training-material/ {
->             proxy_pass https://training.galaxyproject.org/training-material/;
->         }
->    +
->    +    location /grafana/ {
->    +        proxy_pass http://127.0.0.1:3000/;
->    +        proxy_set_header Host $http_host;
->    +    }
->    +
->     }
->    {% endraw %}
->    ```
->    {: data-commit="Setup nginx location for grafana"}
->
->    Since we will setup everything on the same host, we will re-use the Nginx server we setup for Galaxy. If you had planned to run the Grafana and InfluxDB servers on a separate host, you would need to setup Nginx for this host separately.
->
-> 5. Run the Galaxy playbook which includes Nginx:
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > ansible-playbook galaxy.yml
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
->
-{: .hands_on}
-
-This has now deployed Grafana on your domain under `/grafana/`, with the username and password you set. The datasource, from which Grafana obtains data, is preconfigured. The Grafana web application will now be available, but currently there is no data available to it. We will return to Grafana shortly in the tutorial to configure dashboards once data is present.
-
-> ```bash
-> 2.sh
-> ```
-> {: data-test="true"}
-{: .hidden}
 
 ## Telegraf
 
@@ -406,7 +277,7 @@ We capture information about what tool is running, the job state, and where it i
 Setting up Telegraf is again very simple. We just add a single role to our playbook and set some variables.
 
 
-> ### {% icon hands_on %} Hands-on: Dependencies
+> <hands-on-title>Dependencies</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
@@ -414,19 +285,21 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -34,3 +34,5 @@
+>    @@ -45,3 +45,7 @@
+>       version: 1.0.2
+>     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
->     - src: cloudalchemy.grafana
->       version: 0.14.2
->    +- src: dj-wasabi.telegraf
->    +  version: 0.12.0
+>    +# Monitoring
+>    +- name: dj-wasabi.telegraf
+>    +  src: https://github.com/dj-wasabi/ansible-telegraf
+>    +  version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add Telegraf requirement"}
 >
 > 2. Install the requirements
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -439,11 +312,14 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -34,3 +34,4 @@
->         - galaxyproject.tusd
->         - galaxyproject.cvmfs
+>    @@ -49,6 +49,7 @@
+>         - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.gxadmin
+>         - galaxyproject.cvmfs
 >    +    - dj-wasabi.telegraf
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add telegraf to the monitoring playbook"}
@@ -454,7 +330,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -12,3 +12,28 @@ galaxy_job_metrics_plugins:
+>    @@ -20,3 +20,28 @@ galaxy_job_metrics_plugins:
 >       - type: env
 >       - type: cgroup
 >       - type: hostname
@@ -499,10 +375,11 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -193,6 +193,15 @@ rabbitmq_users:
->         password: "{{ vault_rabbitmq_password_vhost }}"
->         vhost: /pulsar/galaxy_au
+>    @@ -330,3 +330,12 @@ flower_ui_users:
 >     
+>     flower_environment_variables:
+>       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
+>    +
 >    +# Telegraf
 >    +telegraf_plugins_extra:
 >    +  listen_galaxy_routes:
@@ -511,10 +388,6 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    +      - service_address = ":8125"
 >    +      - metric_separator = "."
 >    +      - allowed_pending_messages = 10000
->    +
->     # TUS
->     galaxy_tusd_port: 1080
->     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}
@@ -529,15 +402,16 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -116,6 +116,9 @@ galaxy_config:
+>         celery_conf:
+>           result_backend: "redis://localhost:6379/0"
+>         enable_celery_tasks: true
+>    +    # Monitoring
 >    +    statsd_host: localhost
 >    +    statsd_influxdb: true
->         job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
->         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
->         library_import_dir: /libraries/admin
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}
@@ -552,7 +426,138 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 > {: data-test="true"}
 {: .hidden}
 
+
+
 # Monitoring with Grafana
+
+## Grafana
+
+[Grafana](https://grafana.com/) provides a visual interface to our metrics. It includes a nice query builder that provides a uniform experience across multiple backend databases, along with many attractive graphing and other visualization options. Each page in the Grafana webserver display is called a "dashboard." Dashboards can each have multiple visualizations and graphs, all responding to the data collected by InfluxDB. Another benefit of using Grafana is that many of the UseGalaxy.\* servers share their dashboards publicly, and you can easily copy these and use them on your own server.
+
+There are some nice examples of dashboards available from the public Galaxies, we recommend that you peruse them to get an idea of the possibilities:
+
+- [UseGalaxy.eu](https://stats.galaxyproject.eu/)
+- [UseGalaxy.org.au](https://stats.genome.edu.au/)
+
+> <hands-on-title>Setting up Grafana</hands-on-title>
+>
+> 1. Edit your `requirements.yml` and add the following:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -49,3 +49,5 @@
+>     - name: dj-wasabi.telegraf
+>       src: https://github.com/dj-wasabi/ansible-telegraf
+>       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
+>    +- src: cloudalchemy.grafana
+>    +  version: 0.14.2
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add grafana requirement"}
+>
+> 2. Install the role
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 3. Add `cloudalchemy.grafana` to your `monitoring.yml` playbook:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/monitoring.yml
+>    +++ b/monitoring.yml
+>    @@ -2,3 +2,4 @@
+>       become: true
+>       roles:
+>         - usegalaxy_eu.influxdb
+>    +    - cloudalchemy.grafana
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add grafana to monitoring playbook"}
+>
+> 4. Edit the file `group_vars/monitoring.yml` and set the following variables:
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/group_vars/monitoring.yml
+>    @@ -0,0 +1,17 @@
+>    +grafana_url: "https://{{ inventory_hostname }}/grafana/"
+>    +
+>    +grafana_security:
+>    +    # Please change at least the password to something more suitable
+>    +    admin_user: admin
+>    +    admin_password: password
+>    +
+>    +# These datasources will be automatically included into Grafana
+>    +grafana_datasources:
+>    + - name: Galaxy
+>    +   type: influxdb
+>    +   access: proxy
+>    +   url: http://127.0.0.1:8086
+>    +   isDefault: true
+>    +   version: 1
+>    +   editable: false
+>    +   database: telegraf
+>    {% endraw %}
+>    ```
+>    {: data-commit="Configure Grafana"}
+>
+> 5. Run the monitoring playbook:
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook monitoring.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 5. Update the nginx configuration in `templates/nginx/galaxy.j2` to include the following at the end, before the last curly brace
+>
+>    {% raw %}
+>    ```diff
+>    --- a/templates/nginx/galaxy.j2
+>    +++ b/templates/nginx/galaxy.j2
+>    @@ -108,4 +108,9 @@ server {
+>     		proxy_pass http://{{ galaxy_config.gravity.reports.bind }}:/;
+>     	}
+>     
+>    +	location /grafana/ {
+>    +		proxy_pass http://127.0.0.1:3000/;
+>    +		proxy_set_header Host $http_host;
+>    +	}
+>    +
+>     }
+>    {% endraw %}
+>    ```
+>    {: data-commit="Setup nginx location for grafana"}
+>
+>    Since we will setup everything on the same host, we will re-use the Nginx server we setup for Galaxy. If you had planned to run the Grafana and InfluxDB servers on a separate host, you would need to setup Nginx for this host separately.
+>
+> 5. Run the Galaxy playbook which includes Nginx:
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+{: .hands_on}
+
+This has now deployed Grafana on your domain under `/grafana/`, with the username and password you set. The datasource, from which Grafana obtains data, is preconfigured. The Grafana web application will now be available, but currently there is no data available to it. We will return to Grafana shortly in the tutorial to configure dashboards once data is present.
+
+> ```bash
+> 2.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 The stats have been collecting in InfluxDB for a few minutes, so now we will now configure Grafana with dashboards and alerting rules.
 
@@ -560,7 +565,7 @@ The stats have been collecting in InfluxDB for a few minutes, so now we will now
 
 For any public Grafana dashboard, you can copy the dashboard for your own use. This is a nice feature of Grafana that has really helped it spread in the Galaxy community, any cool thing one of us builds, everyone else can copy and build upon.
 
-> ### {% icon hands_on %} Hands-on: Import a dashboard
+> <hands-on-title>Import a dashboard</hands-on-title>
 >
 > 1. [Visit UseGalaxy.eu's Node Detail dashboard](https://stats.galaxyproject.eu/d/000000023/node-detail-infrastructure?orgId=1)
 >
@@ -582,7 +587,7 @@ With this, your first dashboard should be live! You should see some data from yo
 
 Importing dashboards is a good start, but it's more interesting to create our own that's personalised to our needs.
 
-> ### {% icon hands_on %} Hands-on: Create a dashboard
+> <hands-on-title>Create a dashboard</hands-on-title>
 >
 > 1. Again find the `+` icon in Grafana and create a dashboard. This will bring you to a new screen
 >
@@ -612,7 +617,7 @@ Importing dashboards is a good start, but it's more interesting to create our ow
 
 This will track how long it takes the interface to respond on various web routes and API routes. The collection of individual points is a bit hard to interpret the "feeling" of, so it's common to add a query like the [95th percentile](https://en.wikipedia.org/wiki/Percentile) of requests. This is a value that is calculated from all of the data points collected. The 95th percentile means that 95% of requests are responded to more quickly than this value.
 
-> ### {% icon hands_on %} Hands-on: Add a second query to an existing graph
+> <hands-on-title>Add a second query to an existing graph</hands-on-title>
 >
 > 1. The top of the graph is probably labelled "Panel Title", unless you changed it. Click this to access a dropdown and click "Edit"
 >
@@ -646,7 +651,7 @@ There is a significant amount of visual styling that one can do to the graphs to
 
 We will update the panel we've added to highlight the important information and downplay less important facets, as well as configuring it to have a nicer title than "Panel Title"
 
-> ### {% icon hands_on %} Hands-on: Styling the graph
+> <hands-on-title>Styling the graph</hands-on-title>
 >
 > 1. Again edit the one graph we've added in our dashboard
 >
@@ -700,13 +705,13 @@ Collecting all of this data is interesting to visualise but as an administrator 
 
 Doing monitoring effectively, without causing undue burden to the administrators (extraneous alerts that are not actionable), or the users (unexpected/unnoticed downtime), is a very complex topic. Recommended reading here includes the [monitoring chapter](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/) of the Google SRE book {% cite Beyer:2016:SRE:3006357 %} which can provide some general guidance on the topic and what metrics may be interesting or annoying to alert upon.
 
-> ### {% icon comment %} No generic advice
+> <comment-title>No generic advice</comment-title>
 > We cannot easily provide generic and applicable recommendations, that work across every system and every scale. Some of these performance bounds or features you will need to discover yourself, either adding new metrics in support of this, or changing monitoring thresholds to match the values you need.
 {: .comment }
 
 We will add an example alert, to make you familiar with the process. This is not an alert that will probably be useful in production.
 
-> ### {% icon hands_on %} Hands-on: Add an alert to your graph
+> <hands-on-title>Add an alert to your graph</hands-on-title>
 >
 > 1. Again edit the `Galaxy Request Times` graph
 >
@@ -737,13 +742,13 @@ Via this setup using `systemd` we collect metrics about Galaxy request times. To
 
 It's simple to install gxadmin. Here's how you do it, if you haven't done it already:
 
-> ### {% icon hands_on %} Hands-on: Installing gxadmin and configuring Telegraf
+> <hands-on-title>Installing gxadmin and configuring Telegraf</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yml
 >    - src: galaxyproject.gxadmin
->      version: 0.0.8
+>      version: 0.0.12
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
@@ -756,30 +761,31 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 
 ## Configuring Telegraf for gxadmin
 
-> ### {% icon hands_on %} Hands-on: Configuring Telegraf
+> <hands-on-title>Configuring Telegraf</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml`, we need to add some additional permissions to permit Telegraf to run `gxadmin`:
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -7,9 +7,15 @@ pip_package: python3-pip                               # geerlingguy.pip
+>    --- a/group_vars/dbservers.yml
+>    +++ b/group_vars/dbservers.yml
+>    @@ -2,9 +2,16 @@
 >     # PostgreSQL
 >     postgresql_objects_users:
->       - name: galaxy
+>       - name: "{{ galaxy_user_name }}"
 >    +  - name: telegraf
 >     postgresql_objects_databases:
->       - name: galaxy
->         owner: galaxy
+>       - name: "{{ galaxy_db_name }}"
+>         owner: "{{ galaxy_user_name }}"
 >    +postgresql_objects_privileges:
 >    +  - database: galaxy
 >    +    roles: telegraf
 >    +    privs: SELECT
 >    +    objs: ALL_IN_SCHEMA
+>    +
+>     
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure database permissions for Telegraf"}
@@ -792,7 +798,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -209,6 +209,13 @@ telegraf_plugins_extra:
+>    @@ -342,3 +342,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000
@@ -803,9 +809,6 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    +      - timeout = "10s"
 >    +      - data_format = "influx"
 >    +      - interval = "15s"
->     
->     # TUS
->     galaxy_tusd_port: 1080
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}
@@ -825,7 +828,7 @@ With this, Telegraf will start monitoring the Galaxy queue by calling the query 
 
 We'll now create a graph for this, just like the one on [stats.galaxyproject.eu](https://stats.galaxyproject.eu)
 
-> ### {% icon hands_on %} Hands-on: Building the queue graph
+> <hands-on-title>Building the queue graph</hands-on-title>
 >
 > 1. Click the **new graph** button at the top of Grafana's interface, and *Add a Query*
 >
@@ -884,9 +887,13 @@ Run some tools in Galaxy, try to generate a large number of jobs. It is relative
 
 You can also import a [copy of the dashboard]({{ site.baseurl }}{{ page.dir }}dashboard.json).
 
-{% snippet topics/admin/faqs/missed-something.md step=11 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=13 %}
 
 # Conclusion
 
 Monitoring with Telegraf, InfluxDB, and Grafana can provide an easy solution to monitor your infrastructure. The UseGalaxy.\* servers use this stack and it has proven to be effective in production situations, with large Galaxy servers. The base monitoring done with Telegraf is easy to setup and extend on a per-site basis simply by adding scripts or commands to your servers which generate InfluxDB line protocol formatted output. Grafana provides an ideal visualisation solution as it encourages sharing, and allows you to import whatever dashboards have been developed by UseGalaxy.\*, and then to extend them to your own needs.
 
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="monitoring" %}

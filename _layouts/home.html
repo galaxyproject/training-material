@@ -4,16 +4,7 @@ layout: base
 
 {% assign contributors = site.data['contributors'] %}
 
-{% assign sorted_topics = "" | split: "," %}
-{% assign sorted_topics_pre = site.data | sort | order: "title" %}
-
-{% for topic in sorted_topics_pre %}
-    {% if topic[0] == "introduction" %}
-        {% assign sorted_topics = sorted_topics | unshift: topic %}
-    {% else %}
-        {% assign sorted_topics = sorted_topics | push: topic %}
-    {% endif %}
-{% endfor %}
+{% assign sorted_topics = site | list_topics_ids %}
 
 <section>
     <h1>Welcome to {{ site.title }}</h1>
@@ -21,23 +12,53 @@ layout: base
         Collection of tutorials developed and maintained by the worldwide Galaxy community
     </p>
 
+    {% if site.banner_image %}
+        {% if site.banner_image.link %}
+        <a href="{{ site.banner_image.link }}">
+        {% endif %}
+        <img alt="{{ site.banner_image.alt }}" src="{{ site.banner_image.source }}" style="margin: 0 0 1em 0;width: 100%;max-width: 100%;">
+        {% if site.banner_image.link %}
+        </a>
+        {% endif %}
+    {% endif %}
+
+    {% if site.announcement %}
+    <div role="alert" class="alert alert-{{ site.announcement.class }}">
+        <h2 class="alert-heading">{{ site.announcement.title }}</h2>
+        {{ site.announcement.text | markdownify }}
+    </div>
+    {% endif %}
+
     <div class="row">
         <div class="col-lg-7 col-md-7 col-sm-12">
             <h2>Galaxy for Scientists</h2>
-            <table class="table table-striped" role="presentation">
+	    <p>We have separated the tutorials into several categories based on field and technology. We are exploring other ways to organise the tutorials going forward!</p>
+
+	    <h3>Introduction</h3>
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th role="presentation">Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for topic in sorted_topics %}
-                    {% if topic[1].type == "use" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.name == "introduction" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
-                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td>{{ tutorial_number }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endif %}
+                    {% if topic.type == "basics" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
+                    <tr>
+                        {% assign tutorial_number = site | topic_filter:topic.name | topic_count %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -46,46 +67,64 @@ layout: base
                 </tbody>
             </table>
 
-            <h2>Galaxy Tips & Tricks</h2>
+            <div id="cta-lp" style="color: var(--brand-color-contrast);background: var(--brand-color);">
+              <div style="background: repeating-linear-gradient( 135deg, transparent, transparent 10px, #fff1 10px, #fff1 20px );padding: 1rem;">
+                <h3 style="margin: unset;">Not sure where to start?</h3>
+                <p style="display: flex;justify-content: space-between;align-items: center;vertical-align: bottom;margin-bottom: 0;">
+                  <span>Try the NGS Basics Learning Path! </span>
+                  <a href="{% link learning-pathways/intro-to-galaxy-and-genomics.md %}?utm_source=gtn&utm_medium=home&utm_campaign=home-cta-lp" class="btn btn-success">Start Learning</a>
+                </p>
+              </div>
+            </div>
+
+            <h3>Fields</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for topic in sorted_topics %}
-                    {% if topic[1].type == "basics" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.type == "use" %}
+                    {% if topic.name != "introduction" %}
+                    {% if topic.topic_type != "technology" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
-                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
+                    {% endif %}
                     {% endif %}
                     {% endif %}
                 {% endfor %}
                 </tbody>
             </table>
 
-            <h2>Data Science Survival Kit</h2>
+            <h3>Technologies</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for topic in sorted_topics %}
-                    {% if topic[1].type == "data-science" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.type == "use" %}
+                    {% if topic.topic_type == "technology" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
-                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
                     {% endif %}
                     {% endif %}
                 {% endfor %}
@@ -96,17 +135,18 @@ layout: base
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for topic in sorted_topics %}
-                    {% if topic[1].type == "admin-dev" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.type == "admin-dev" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
-                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        {% assign tutorial_number = site | topic_filter:topic.name | topic_count %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -127,17 +167,18 @@ layout: base
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for topic in sorted_topics %}
-                    {% if topic[1].type == "instructors" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.type == "instructors" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
-                        {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        {% assign tutorial_number = site | topic_filter:topic.name | topic_count %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -146,16 +187,46 @@ layout: base
                 </tbody>
             </table>
 
+           <!-- Our awesome Contributors -->
+            <h2>Contributor Hall of Fame</h2>
+
+            <p>
+             {% snippet faqs/gtn/gtn_stats.md compact=true %}
+			</p>
+            <p>
+			This project would not be possible without the many amazing community contributors!
+			</p>
+			<p>
+		<a class="btn btn-info" href="{{ site.baseurl }}/hall-of-fame">View the Hall of Fame</a>
+
+        <a class="btn btn-warning" href="{{ site.baseurl }}/stats">View all GTN stats</a>
+
+			</p>
+			<p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
+
         </div>
 
         <div class="col-lg-5 col-md-5 col-sm-12">
+
+		<h2>Quickstart</h2>
+
+		<div class="button-group">
+<a href="{% link learning-pathways/index.md %}" class="btn home-cta-button"><div>Learning Pathways</div><img alt="A scientist with a hair bun passes accepts a flask from a small grey creature" src="{% link assets/images/galaxy-for-scientists.svg %}" style="height: 5rem"></a>
+<a href="{% link topics/admin/index.md %}" class="btn home-cta-button"><div>Galaxy for SysAdmins</div><img alt="a person sits at a computer with baudot code in the backgorund" src="{% link assets/images/galaxy-for-admins.svg %}" style="height: 5rem"></a>
+<a href="{% link topics/dev/index.md %}" class="btn home-cta-button"><div>Galaxy for Developers</div><img alt="a small person leans against a large laptop" src="{% link assets/images/galaxy-for-developers.svg %}" style="height: 5rem"></a>
+<a href="{% link topics/teaching/index.md %}" class="btn home-cta-button"><div>Galaxy for Teachers</div><img alt="a person stands in front of a blackboard" src="{% link assets/images/galaxy-for-trainers.svg %}" style="height: 5rem"></a>
+</div>
+
+
             <!-- GTN video -->
+	    <!--
             <div class="col-12">
                 <h2> Welcome to the GTN!</h2>
                 <p> Find out more about Galaxy Training Network</p>
                 <iframe width="100%" height="314" src="https://www.youtube-nocookie.com/embed/lDqWxzWNk1k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="YouTube video highlighting GTN features. Video does not need audio."></iframe>
                 <p>Video created by Geert Bonamie.</p>
             </div>
+	    -->
                 <!-- GTN news  -->
             <div class="col-12" id="news">
                  <h2><a href="{% link news.md %}">The latest GTN news</a> <a class="float-right" href="{{ "/feed.xml" | prepend: site.baseurl }}">{% icon rss-feed %}</a></h2>
@@ -164,119 +235,80 @@ layout: base
                  <p><a href="{% link news.md %}">See all news</a>
             </div>
                 <!-- Galaxy community video  -->
+			<!--
                 <div class="col-12">
                 <h2>Meet & Join the Community!</h2>
                 <p> Find out how you can become part of the Galaxy community</p>
                 <iframe width="100%" height="314" src="https://www.youtube-nocookie.com/embed/-1MPdxmRs8U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="YouTube video highlighting the GTN Community. Video has english language audio and subtitles."></iframe>
                 <p>Video created by Beatriz Serrano-Solano</p>
            </div>
+		-->
                  <!-- GTN Tweets -->
           <div class="col-12">
-            <h2>GTN Tweets</h2>
-            <a class="twitter-timeline" data-height="500" href="https://twitter.com/gxytraining?ref_src=twsrc%5Etfw">Tweets by gxytraining</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <h2>GTN Toots</h2>
+
+<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/js/emfed/toots.css">
+		<script type="module" src="{{ site.baseurl }}/assets/js/emfed/emfed.js"></script>
+		<a rel="me" class="mastodon-feed"
+		href="https://mstdn.science/@gtn"
+		data-toot-limit="3"
+		>Follow us on the Mastodon/Fediverse</a>
           </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-7 col-md-7 col-sm-12">
-           <!-- Our awesome Contributors -->
-        <div class="col-12">
-            <h2>Contributor Hall of Fame</h2>
-            <p>
-                This project would not be possible without the many amazing
-                community contributors!
-            </p>
-
-                    {% assign ckeys = "" | split: ',' %}
-                    {% for x in contributors %}
-                         {% assign ckeys = ckeys | push: x[0] %}
-                    {% endfor %}
-                    {% assign ckeysN = ckeys | size %}
-                <div class="container-fluid contributors">
-                <span class="visually-hidden">The following element contains a carousel with the images of our {{ ckeysN }} contributors. This is more accessible via the hall of fame link which follows the carousel so we have hidden in from screenreaders so as to not annoy you.</span>
-                <div id="contributors-carousel" class="carousel slide" data-ride="carousel" data-interval="3000" aria-hidden="true">
-
-                    {% assign shuffled_contributors = ckeys | sample: ckeysN %}
-
-                    <div class="carousel-inner" role="listbox" title="Carousel">
-                        {% assign counter = 0 %}
-                        {% for username in shuffled_contributors %}
-                          {% assign contributor = contributors[username] %}
-                          {% unless contributor.halloffame == "no" %}
-                            {% capture modulo %}{{ counter | modulo:10 }}{% endcapture %}
-                              {% if modulo == '0' or counter == 0 %}
-                              {% if counter != 0 %}</div>{% endif %}
-
-                              <div class="carousel-item {% if counter == 0 %}active{% endif %}">
-                            {% endif %}
-                              {% assign fullname = contributor.name %}
-                              <div class="hall-of-fame-hero">
-                                  <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame/{{ username }}/">
-                                      <img class="img-fluid" src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="{{ fullname | default: username }}" {% if count > 8 %}loading="lazy"{% endif %} title="Click to see contributions"/>
-                                  </a>
-                                <p class="name">{{ fullname | default: username }}</p>
-                              </div>
-                            {% assign counter = counter | plus:1 %}
-                            {% endunless%}
-                            {% if forloop.last %}
-                            </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <p>
-                Check out the full <a href="{{ site.baseurl }}/hall-of-fame">Hall of Fame</a>.
-            </p>
-
-            <p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
-
-        </div>
-        </div>
-        <div class="col-lg-5 col-md-5 col-sm-12">
-          <div class="col-12">
-                        <h2>The Galaxy Training Network</h2>
-                        <a href="https://www.google.com/maps/d/u/0/viewer?mid=1r8LJy6la-JeIrg23aZjpwVNjJDE"><img alt="static screenshot of google maps showing trainer locations mostly across the northern hemisphere" src="{{ site.baseurl }}/assets/images/map.png" loading="lazy"/></a>
-
-            </div>
-          </div>
-        </div>
         <h2 id="acknowledgment-and-funding">Acknowledgment and Funding</h2>
     <p>
-            More information about this project can be found in our <a href="https://doi.org/10.1016/j.cels.2018.05.012">publication in Cell Systems</a>.
+            More information about this project can be found in our <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">publication in PLOS Computational Biology</a>.
             We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> to our Galaxy
             training materials, the Galaxy community for their constant support, and our funding sources:
     </p>
 
-    <p>
-            <a href="https://www.denbi.de/"><img loading="lazy" src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" alt="de.NBI" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.nih.gov"><img loading="lazy" src="{{ site.baseurl }}/shared/images/nih.png" alt="National Institutes of Health" width="7%" style="max-width:100%;"></a>
-            <a href="https://www.sfb992.uni-freiburg.de/"><img loading="lazy" src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" alt="Collaborative Research Centre 992" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.ie-freiburg.mpg.de"><img loading="lazy" src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" alt="Max Planck Institute of Immunology and Epigenetics" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.uni-freiburg.de/"><img loading="lazy" src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="University of Freiburg" width="15%" style="max-width:100%;"></a>
-            <a href="http://www.psu.edu"><img loading="lazy" src="{{ site.baseurl }}/shared/images/psu.png" alt="The Pennsylvania State University" width="5%" style="max-width:100%;"></a>
-            <img loading="lazy" src="{{ site.baseurl }}/shared/images/GTNLogo1000.png" alt="Galaxy Training Network" width="15%" style="max-width:100%;">
-            <a href="https://www.france-bioinformatique.fr/"><img loading="lazy" src="{{ site.baseurl }}/shared/images/ifb.png" alt="Institut Français de Bioinformatique" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.elixir-europe.org/"><img loading="lazy" src="{{ site.baseurl }}/shared/images/elixir.png" alt="Elixir" width="10%" style="max-width:100%;"></a>
-            <a href="https://www.elixir-europe.org/excelerate/"><img loading="lazy" src="{{ site.baseurl }}/shared/images/Excelerate_whitebackground.png" alt="Elixir Excelerate" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.nsf.gov"><img loading="lazy" src="{{ site.baseurl }}/shared/images/nsf.gif" alt="National Science Foundation" width="7%" style="max-width:100%;"></a>
-            <a href="https://www.erasmusmc.nl"><img loading="lazy" src="{{ site.baseurl }}/shared/images/logo-erasmusmc.png" alt="Erasmus Mecial Center" width="15%" style="max-width:100%;"></a>
-            <a href="https://cineca-project.eu"><img loading="lazy" src="{{ site.baseurl }}/shared/images/CINECA_logo.png" alt="CINECA project" width="15%" style="max-width:100%;"></a>
-            <a href="https://gallantries.github.io/"><img loading="lazy" src="{{ site.baseurl }}/shared/images/Gallantries_logo.png" alt="Gallantries Project" width="15%" style="max-width:100%;"></a>
-            <a href="https://ec.europa.eu/programmes/erasmus-plus/node_en"><img loading="lazy" src="{{ site.baseurl }}/shared/images/EU-logo-beneficaires-gallantries.jpg" alt="EU Erasmus+ programme" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.avans.nl"><img loading="lazy" src="{{ site.baseurl }}/shared/images/logo-avans.png" alt="Avans University of Applied Sciences" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.ebi.ac.uk"><img loading="lazy"  src="https://raw.githubusercontent.com/nomadscientist/scrnaseq_training/d0fccaa9dc8dc8615eb7146d6c5e96bd36f11f3a/EMBL_EBI_Logo_black.svg" alt="European Bioinformatics Institute" width="15%" style="max-width:100%;"></a>
-            <a href="https://mrc.ukri.org"><img loading="lazy"  src="https://raw.githubusercontent.com/nomadscientist/scrnaseq_training/master/logo.png" alt="UK Medical Research Council" width="15%" style="max-width:100%;"></a>
-     </p>
+    <div class="logosoup">
+	{% for entity in site.data['funders'] %}
+	<figure>
+		{% if entity[1].url %}
+			<a class="logo" href="{{ entity[1].url }}">
+				<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
+			</a>
+		{% else %}
+			<span class="logo">
+				<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
+			</span>
+		{% endif %}
+		<figcaption>
+			{% if entity[1].url %}
+			<a href="{{ entity[1].url }}">
+				{{ entity[1].short_name | default: entity[1].name }}
+			</a>
+			{% else %}
+				{{ entity[1].short_name | default: entity[1].name }}
+			{% endif %}
+		</figcaption>
+	</figure>
+	{% endfor %}
+	{% for entity in site.data['organisations'] %}
+	<figure>
+		{% if entity[1].url %}
+			<a class="logo" href="{{ entity[1].url }}">
+				<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
+			</a>
+		{% else %}
+			<span class="logo">
+				<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
+			</span>
+		{% endif %}
+		<figcaption>
+			{% if entity[1].url %}
+			<a href="{{ entity[1].url }}">
+				{{ entity[1].short_name | default: entity[1].name }}
+			</a>
+			{% else %}
+				{{ entity[1].short_name | default: entity[1].name }}
+			{% endif %}
+		</figcaption>
+	</figure>
+	{% endfor %}
+     </div>
     </div>
 </section>
-
-<!-- Gitter -->
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: '{{ site.gitter_url | remove: "https://gitter.im/" }}'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>

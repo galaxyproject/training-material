@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Biodiversity data exploration
-zenodo_link: https://zenodo.org/record/6107457/files/IMOS-National_Reef_Monitoring_Network_Sub-Facility-Global_reef_fish_abundance_and_biomass.csv?download=1
+zenodo_link: https://zenodo.org/record/6107457
 questions:
 - How to explore biodiversity data?
 - How to look at Homoscedasticity, normality or collinearity of presences-absence or abundance data?
@@ -13,23 +13,30 @@ objectives:
 time_estimation: 1H
 key_points:
 - Explore your data before diving into deep analysis
-contributors:
-- onorvez
-- Marie59
-- colineroyaux
-- yvanlebras
+tags:
+  - taxonomic data
+  - data quality
+contributions:
+  authorship:
+  - onorvez
+  - Marie59
+  - colineroyaux
+  - yvanlebras
+  funding:
+  - pndb
+  - gallantries
+  - pndb
+  - fnso2019
 
 ---
 
 
-# Introduction
-{:.no_toc}
 
 This tutorial will guide you on the exploration of biodiversity data having taxonomic, spatial and temporal informations.
 
 We'll be using Reef Life Survey (RLS) data extracted from the Australian Ocean Data Network (AODN) portal. We'll use a subset done directly on the AODN data portal (https://portal.aodn.org.au/) on this dataset "IMOS - National Reef Monitoring Network Sub-Facility - Global reef fish abundance and biomass". We decided to use data only on the Mollusca phylum from the east coast of Australia between 2008 and 2021. We'll explore this dataset in the view of making statistical analyses so we will check the homoscedasticity and normality of the variables, see if some variables are correlated, how the data is distributed through space and time, etc ... And finally, we'll explore Beta diversity through the computation of the SCBD and LCBD (Species and Local Contribution to Beta Diversity).
 
-> ### {% icon details %} Definitions of SCBD and LCBD
+> <details-title>Definitions of SCBD and LCBD</details-title>
 >
 > Species Contribution to Beta Diversity: degree of variation for individual species across the study area.
 >
@@ -37,7 +44,7 @@ We'll be using Reef Life Survey (RLS) data extracted from the Australian Ocean D
 >
 {: .details}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -52,7 +59,7 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a name (example: "RLS for biodiversity data exploration tutorial")
 >    for you to find it again later if needed.
@@ -81,7 +88,7 @@ First step is to download biodiversity data on your Galaxy history. Here we will
 
 In order to clean unnecessary informations from the table we will now cut a few columns and change the format of time information.
 
-> ### {% icon hands_on %} Hands-on: Clean your data
+> <hands-on-title>Clean your data</hands-on-title>
 >
 > 1. Use {% tool [Advanced cut columns from a table (cut)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
 >    with following parameters :
@@ -105,7 +112,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 ## Homoscedasticity and normality analysis
 
-> ### {% icon hands_on %} Hands-on: Here we will check homogeneity of variances (Levene test) for every species and represent it through multiple boxplots and the normal distribution (Kolmogorov-Smirnov test) represented by a distribution histogram and a Q-Q plot.
+> <hands-on-title>Here we will check homogeneity of variances (Levene test) for every species and represent it through multiple boxplots and the normal distribution (Kolmogorov-Smirnov test) represented by a distribution histogram and a Q-Q plot.</hands-on-title>
 >
 > 1. {% tool [Homoscedasticity and normality](toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: Column Regex Find and Replace data file
@@ -125,7 +132,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 ## Autocorrelation in your data
 
-> ### {% icon hands_on %} Hands-on: Autocorrelation
+> <hands-on-title>Autocorrelation</hands-on-title>
 >
 > 1. {% tool [Variables exploration](toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: Column Regex Find and Replace data file
@@ -144,7 +151,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 ## Check collinearity in your data
 
-> ### {% icon hands_on %} Hands-on: Collinearity between numerical variables
+> <hands-on-title>Collinearity between numerical variables</hands-on-title>
 >
 > 1. {% tool [Variables exploration](toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: formatted biodiversity data file
@@ -162,7 +169,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 # Data exploration
 ## Visualize abundance repartition through space
 
-> ### {% icon hands_on %} Hands-on: Abundance map in the environment
+> <hands-on-title>Abundance map in the environment</hands-on-title>
 >
 > 1. {% tool [Presence-absence and abundance](toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: formatted biodiversity data file
@@ -182,7 +189,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 ## Visualize the number of locations where each taxons are present
 
-> ### {% icon hands_on %} Hands-on: Presence count of taxons (barplot)
+> <hands-on-title>Presence count of taxons (barplot)</hands-on-title>
 >
 > 1. {% tool [Presence-absence and abundance](toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: formatted biodiversity data file
@@ -199,7 +206,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 ## Visualize the rarefaction curves of your species
 
-> ### {% icon hands_on %} Hands-on: Rarefaction curve of species
+> <hands-on-title>Rarefaction curve of species</hands-on-title>
 >
 > 1. {% tool [Presence-absence and abundance](toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: formatted biodiversity data file
@@ -219,7 +226,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 ## Visualize the dispersion of a numeric variable and the correlation between species absence
 
-> ### {% icon hands_on %} Hands-on: Boxplot of dispersion and correlation of absence
+> <hands-on-title>Boxplot of dispersion and correlation of absence</hands-on-title>
 >
 > 1. {% tool [Statistics on presence-absence](toolshed.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: formatted biodiversity data file
@@ -240,7 +247,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 # Beta diversity
 ## Local and Species Contribution to Beta Diversity (SCBD and LCBD)
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Local Contributions to Beta Diversity (LCBD)](toolshed.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: formatted biodiversity data file
@@ -266,7 +273,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 
 # Conclusion
-{:.no_toc}
+
 
 Here, you just explored your biodiversity dataframe properly and you know a lot more about your data. You can now peacefully make your statiscal analyses as most of the red flags you can get have been revealed by this toolsuite ! Enjoy !
 
@@ -276,7 +283,7 @@ A step of this tutorial could be to show you how you can simply apply spatial co
 
 ## Bonus! Spatial coordinates anonymization
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Spatial coordinates anonymization](toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input table"*: Column Regex Find and Replace data file

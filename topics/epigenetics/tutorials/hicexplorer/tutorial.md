@@ -19,8 +19,6 @@ contributors:
   - polkhe
 ---
 
-# Introduction
-{:.no_toc}
 
 In this HiCExplorer tutorial we will generate and plot a Hi-C contact matrix.
 For this the following steps are necessary to be performed:
@@ -36,7 +34,7 @@ For this the following steps are necessary to be performed:
 
 After a corrected Hi-C matrix is created other tools can be used to visualize it, call TADS or compare it with other matrices.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -47,7 +45,7 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 
 # Data upload
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history
 >
@@ -55,7 +53,7 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 >
 > 2. Import from [Zenodo](https://doi.org/10.5281/zenodo.1183661).
 >
->    > ### {% icon tip %} Tip: Importing data via links
+>    > <tip-title>Importing data via links</tip-title>
 >    >
 >    > 1. Copy the link location
 >    > 2. Open the Galaxy Upload Manager
@@ -75,7 +73,7 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 > 3. Rename the data set to something meaningful, e.g. `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2`.
 > By default, when data is imported via its link, Galaxy names it with its URL.
 >
-> > ### {% icon comment %} Get data from public sources
+> > <comment-title>Get data from public sources</comment-title>
 > > HiCExplorer needs as input the forward and reverse strand of a pair end read which are mapped independently. A usual start point for a typical analysis is the given GSE number of a publication, e.g. GSE63525 for Rao 2014. To get the actual data, go to [NCBI](https://www.ncbi.nlm.nih.gov/geo/) and search for the [GSE number](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525). In the section 'Samples' the GSM numbers of all samples are given. Select the correct one for you, and go to the [European Nucleotide Archive](https://www.ebi.ac.uk/ena) and enter the GSM number. Select a matching result e.g. [SRX764936](https://www.ebi.ac.uk/ena/data/view/SRX764936) and download the data given in the row 'FASTQ files (FTP)' the forward and reverse strand.
 > > It is important to have the forward and reverse strand individual as a FASTQ file and to map it individually, HiCExplorer can not work with interleaved files.
 > {: .comment}
@@ -91,7 +89,7 @@ We have used the HiCExplorer successfully with bwa, bowtie2 and hisat2. In this 
 - tune the aligner parameters to penalize deletions and insertions. This is important to avoid aligned reads with gaps if they happen to be chimeric.
 - If bowtie2 or hisat2 are used, `--reorder` option and as a file format `bam_native` needs to be used. Regular `bam` files are sorted by Galaxy and can not be used as an input for HiCExplorer.
 
-> ### {% icon hands_on %} Hands-on: Mapping reads
+> <hands-on-title>Mapping reads</hands-on-title>
 >
 > 1. **Map with Bowtie** {% icon tool %}: Run Bowtie on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
 >    - "Is this single or paired library" to `Single-end`
@@ -112,7 +110,7 @@ Once the reads have been mapped the Hi-C matrix can be built.
 
 For this step we will use [hicBuildMatrix](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicBuildMatrix.html#hicbuildmatrix) tool, which builds the matrix of read counts over the bins in the genome, considering the sites around the given restriction site.
 
-> ### {% icon hands_on %} Hands-on: hicBuildMatrix
+> <hands-on-title>hicBuildMatrix</hands-on-title>
 >
 > 1. **hicBuildMatrix** {% icon tool %}: Run hicBuildMatrix on the `R1.bam` and `R2.bam` from previous step with modifying the following parameters:
 >    - "1: Sam/Bam files to process" to `R1.bam`
@@ -121,12 +119,12 @@ For this step we will use [hicBuildMatrix](http://hicexplorer.readthedocs.io/en/
 >    - "Bin size in bp" to `10000`
 >    - "Sequence of the restriction site" to `GATC`
 >
->       > ### {% icon comment %} Comment
+>       > <comment-title></comment-title>
 >       >
 >       > *hicBuildMatrix* creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of reads near the restriction fragment sites. In the QC folder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the reads are valid and used to build the Hi-C matrix mostly because of the reads that are on repetitive regions that need to be discarded.
 >       {: .comment}
 >
->       > ### {% icon comment %} Comment
+>       > <comment-title></comment-title>
 >       >
 >       > Normally 25% of the total reads are selected. The output matrices have counts for the genomic regions. The extension of output matrix files is .h5.
 >       > A quality report is created in e.g. `hicMatrix/R1_10kb_QC`, have a look at the report hicQC.html.
@@ -142,7 +140,7 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 
 [hicMergeMatrixBins](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins) merges the bins into larger bins of given number (specified by –numBins). We will merge 100 bins in the original (uncorrected) matrix and then correct it. The new bin size is going to be 10.000 bp * 100 = 1.000.000 bp = 1 Mb
 
-> ### {% icon hands_on %} Hands-on: hicMergeMatrixBins
+> <hands-on-title>hicMergeMatrixBins</hands-on-title>
 >
 > 1. **hicMergeMatrixBins** {% icon tool %}: Run hicMergeMatrixBins on the output from previous step setting the following parameter:
 >    - "Number of bins to merge" to `100`
@@ -159,7 +157,7 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3R`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chrX`
 >
->    > ### {% icon tip %} Tip: log1p
+>    > <tip-title>log1p</tip-title>
 >    >
 >    > Because of the large differences in counts found in the matrix, it is better to plot the counts using the *–log1p* option.
 >    {: .tip}
@@ -177,7 +175,7 @@ The resulting plot of the 1 Mb contact matrix should look like:
 
 Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.
 
-> ### {% icon hands_on %} Hands-on: Matrix diagnostic
+> <hands-on-title>Matrix diagnostic</hands-on-title>
 >
 > 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from hicBuildMatrix `10 kb contact matrix` adjusting the parameters:
 >    - "Range restriction (in bp)" to `Diagnostic plot`
@@ -193,7 +191,7 @@ The output of the program prints a threshold suggestion that is usually accurate
 
 In our case the distribution describes the counts per bin of a genomic distance. To remove all bins with a z-score threshold less / more than X means to remove all bins which have less / more counts than X of mean of their specific distribution in units of the standard deviation. Looking at the distribution, we can select the value of -1.6 (lower end) and 1.8 (upper end) to remove. This is given by the –filterThreshold option in hicCorrectMatrix set to 'correct matrix' mode.
 
-> ### {% icon hands_on %} Hands-on: Matrix correction
+> <hands-on-title>Matrix correction</hands-on-title>
 >
 > 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the original matrix `10 kb contact matrix` adjusting the parameters:
 >    - "Range restriction (in bp)" to `Correct matrix`
@@ -223,7 +221,7 @@ This can be solved by a more stringent z-score values for the filter threshold o
 
 We can now plot chromosome 2L with the corrected matrix.
 
-> ### {% icon hands_on %} Hands-on: Plotting the corrected Hi-C matrix
+> <hands-on-title>Plotting the corrected Hi-C matrix</hands-on-title>
 >
 > 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `10 kb corrected contact matrix` adjusting the parameters:
 >    - "Plot title" to `Hi-C matrix for dm3`
@@ -246,7 +244,7 @@ TAD calling works in two steps: First HiCExplorer computes a TAD-separation scor
 
 [hicFindTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicFindTADs.html#hicfindtads) tries to identify sensible parameters but those can be change to identify more stringent set of boundaries.
 
-> ### {% icon hands_on %} Hands-on: Finding TADs
+> <hands-on-title>Finding TADs</hands-on-title>
 >
 > 1. **hicFindTADs** {% icon tool %}: Run hicFindTADs on `corrected contact matrix dm3 large` adjusting the parameters:
 >    - "Minimum window length (in bp) to be considered to the left and to the right of each Hi-C bin." to `30000`
@@ -262,7 +260,7 @@ As an output we get the boundaries, domains and scores separated files. We will 
 
 # A/B compartments computation
 
-> ### {% icon hands_on %} Hands-on: Computing A / B compartments
+> <hands-on-title>Computing A / B compartments</hands-on-title>
 >
 > 1. **hicPCA** {% icon tool %}: Run hicPCA adjusting the parameters:
 >    - "Matrix to compute on" to `corrected contact matrix dm3 large`
@@ -271,7 +269,7 @@ As an output we get the boundaries, domains and scores separated files. We will 
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Plotting the pearson matrix and PCA track
+> <hands-on-title>Plotting the pearson matrix and PCA track</hands-on-title>
 >
 > 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `pearson_matrix from PCA computation` adjusting the parameters:
 >    - "Plot title" to `Pearson matrix and PC1`
@@ -280,8 +278,6 @@ As an output we get the boundaries, domains and scores separated files. We will 
 >    - "Datatype of eigenvector file" to `bigwig`
 >    - "Eigenvector file" to `hicPCA on [...] PC1`
 >
-{: .hands_on}
-
 > 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `pearson_matrix from PCA computation` adjusting the parameters:
 >    - "Plot title" to `Pearson matrix and PC2`
 >    - "Chromosomes to include" to `chr2L`
@@ -305,7 +301,7 @@ We can plot the TADs for a given chromosomal region. For this we will use [pyGen
 
 For the next step we need additional data tracks. Please load `dm3_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
 
-> ### {% icon hands_on %} Hands-on: Plotting TADs
+> <hands-on-title>Plotting TADs</hands-on-title>
 >
 > 1. **pyGenomeTracks** {% icon tool %}: Run pyGenomeTracks adjusting the parameters:
 >    - "Region of the genome to limit the operation" to `chr2L:14500000-16500000`
@@ -387,7 +383,7 @@ To compute loops, we have to import a new data set from the shared library to ou
 
 This dataset is from the human cell GM12878, mapped to hg19 and of 10 kb resolution. We use a new file because to detect loop structures the read coverage is required to be in the hunderts of million; this was not the case for the previous used drosophila dataset.
 
-> ### {% icon hands_on %} Hands-on: Matrix information
+> <hands-on-title>Matrix information</hands-on-title>
 >
 > 1. **hicInfo** {% icon tool %}: Run hicInfo adjusting the parameters:
 >    - "Select" `Multiple datasets`
@@ -396,7 +392,7 @@ This dataset is from the human cell GM12878, mapped to hg19 and of 10 kb resolut
 
 We now investigate the result of hicInfo and see that the new imported file is having 1.2 billion non-zero elements, while the drosophila Hi-C interaction matrix has around 12 million non-zero elements.
 
-> ### {% icon hands_on %} Hands-on: Computing loops
+> <hands-on-title>Computing loops</hands-on-title>
 >
 > 1. **hicDetectLoops** {% icon tool %}: Run hicDetectLoops adjusting the parameters:
 >    - "Matrix to compute on" to `GM12878-MboI-allreps-filtered.10kb.cool`
@@ -415,7 +411,7 @@ As an output we get a loop file containing the positions of both anchor points o
 
 ![Loops computed_file](../../images/loops_result.png)
 
-> ### {% icon hands_on %} Hands-on: Plotting of loops
+> <hands-on-title>Plotting of loops</hands-on-title>
 >
 > 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix adjusting the parameters:
 >    - "Matrix to compute on" to `GM12878-MboI-allreps-filtered.10kb.cool`
@@ -430,7 +426,7 @@ As an output we get a loop file containing the positions of both anchor points o
 ![Loops result_plot](../../images/loops_plot.png)
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks. Moreover, we used a human Hi-C interaction matrix to compute loop structures.
 

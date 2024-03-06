@@ -19,7 +19,7 @@ objectives:
   - "How to analyse extracted features from an imaging screen in Galaxy."
 key_points:
 - Galaxy workflows can be used to scale image analysis pipelines to whole screens.
-- Segmented objects can be filtered using the **Filter segmentation** tool.
+- Segmented objects can be filtered using the **Filter label map by rules** tool.
 - Galaxy charts can be used to compare features extracted from screens showing cells with different treatments.
 requirements:
   -
@@ -36,11 +36,12 @@ follow_up_training:
 time_estimation: "1H"
 contributors:
   - thomaswollmann
+  - kostrykin
+tags:
+  - HeLa
 
 ---
 
-# Introduction
-{:.no_toc}
 
 This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3362976).
 
@@ -48,7 +49,7 @@ RNA interference (RNAi) is used in the example use case for silencing genes by w
 
 The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an early trigger for G2/M transition. PLK1 supports the functional maturation of the centrosome in late G2/early prophase and establishment of the bipolar spindle. PLK1 is being studied as a target for cancer drugs. Many colon and lung cancers are caused by K-RAS mutations. These cancers are dependent on PLK1.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -61,7 +62,7 @@ The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an
 
 The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. If you are logged in, create a new history for this tutorial
 >
@@ -78,7 +79,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. **Unzip file** {% icon tool %} with the following parameters:
+> 3. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `Single file`
 >    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
@@ -87,7 +88,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 5. **Unzip file** {% icon tool %} with the following parameters:
+> 5. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `All files`
 >
@@ -105,7 +106,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 8. **Unzip** {% icon tool %} to extract the zipped screen:
+> 8. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to extract the zipped screen:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `All files`
 >
@@ -128,21 +129,21 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 # Create feature extraction workflow
 First, we will create and test a workflow which extracts mean DAPI intensity, area, and major axis length of cell nuclei from an image.
 
-> ### {% icon hands_on %} Hands-on: Create feature extraction workflow
+> <hands-on-title>Create feature extraction workflow</hands-on-title>
 >
-> 1. **Filter Image** {% icon tool %} with the following parameters to smooth the image:
->    - *"Image type"*: `Gaussian Blur`
+> 1. {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %} with the following parameters to smooth the image:
+>    - *"Filter type"*: `Gaussian Blur`
 >    - *"Radius/Sigma"*: `3`
 >    - {% icon param-file %} *"Source file"*: `testinput.tif` file
-> 2. **Auto Threshold** {% icon tool %} with the following parameters to segment the image:
->    - {% icon param-file %} *"Source file"*: output of **Filter image** {% icon tool %}
+> 2. {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2) %} with the following parameters to segment the image:
+>    - {% icon param-file %} *"Source file"*: output of {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %}
 >    - *"Threshold Algorithm"*: `Otsu`
 >    - *"Dark Background"*: `Yes`
-> 3. **Split objects** {% icon tool %} with the following parameters to split touching objects:
->    - {% icon param-file %} *"Source file"*: output of **Auto Threshold** {% icon tool %}
+> 3. {% tool [Split binary image using watershed transformation](toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1-2) %} with the following parameters to split touching objects:
+>    - {% icon param-file %} *"Source file"*: output of {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2) %}
 >    - *"Minimum distance between two objects."*: `20`
-> 4. **2D Feature Extraction** {% icon tool %} with the following parameters to extract features from the segmented objects:
->    - {% icon param-file %} *"Label file"*: output of **Split objects** {% icon tool %}
+> 4. {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %} with the following parameters to extract features from the segmented objects:
+>    - {% icon param-file %} *"Label file"*: output of {% tool [Split binary image using watershed transformation](toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1-2) %}
 >    - *"Use original image to compute additional features."*: `No original image`
 >    - *"Select features to compute"*: `Select features`
 >    - *"Available features"*:
@@ -150,12 +151,12 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >        - {% icon param-check %} `Area`
 >        - {% icon param-check %} `Eccentricity`
 >        - {% icon param-check %} `Major Axis Length`
-> 5. **Filter segmentation** {% icon tool %} with the following parameters to filter the label map from 3. with the extracted features and a set of rules:
->    - {% icon param-file %} *"Source file"*: output of **Split objects** {% icon tool %}
->    - {% icon param-file %} *"Feature file"*: output of **2D Feature Extraction** {% icon tool %}
+> 5. {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1) %} with the following parameters to filter the label map from 3. with the extracted features and a set of rules:
+>    - {% icon param-file %} *"Source file"*: output of {% tool [Split binary image using watershed transformation](toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1-2) %}
+>    - {% icon param-file %} *"Feature file"*: output of {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %}
 >    - {% icon param-file %} *"Rules file"*: rules file
-> 6. **2D Feature Extraction** {% icon tool %} with the following parameters to extract features the final readout from the segmented objects:
->    - {% icon param-file %} *"Label file"*: output of **Filter segmentation** {% icon tool %}
+> 6. {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %} with the following parameters to extract features the final readout from the segmented objects:
+>    - {% icon param-file %} *"Label file"*: output of {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1) %}
 >    - *"Use original image to compute additional features."*: `Use original image`
 >    - {% icon param-file %} *"Original image file"*: `testinput.tif` file
 >    - *"Select features to compute"*: `Select features`
@@ -165,11 +166,14 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >      - {% icon param-check %} `Major Axis Length`
 > 7. Now we can extract the workflow for batch processing
 >    - Name it "feature_extraction".
+>    - Remember to exclude {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} by unchecking the tool.
+>    - Don't treat `B2.zip` and `B3.zip` as inputs (the workflow is supposed to be applied to the images directly).
 >
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
 > 8. Edit the workflow you just created
->    - Name the inputs `input image` and `filter rules`.
+>    - Add the tool {% tool Input dataset %} and name it `input image`.
+>    - Name the input for the rules file `filter rules`.
 >    - Mark the results of steps 5 and 6 as outputs (by clicking on the asterisk next to the output name).
 >
 {: .hands_on}
@@ -182,17 +186,17 @@ The resulting workflow should look something like this:
 
 Now we want to apply our extracted workflow to `original data` and merge the results. For this purpose, we create a workflow which uses the previously created workflow as subworkflow.
 
-> ### {% icon hands_on %} Hands-on: Create screen analysis workflow
+> <hands-on-title>Create screen analysis workflow</hands-on-title>
 >
 > 1. Create a new workflow in the workflow editor.
 >
 >    {% snippet faqs/galaxy/workflows_create_new.md %}
-> 2. Add a **Input dataset collection** node and name it `input images`
-> 3. Add a **Input dataset** node and name it `rules`
+> 2. Add a {% tool Input dataset collection %} node and name it `input images`
+> 3. Add a {% tool Input dataset %} node and name it `rules`
 > 4. Add the **feature_extraction** workflow as node.
->    - {% icon param-file %} *"input image"*: `input images` output of **Input dataset collection** {% icon tool %}
->    - {% icon param-file %} *"filter rules"*: `rules` output of **Input dataset** {% icon tool %}
-> 5. Add a **Collapse Collection** {% icon tool %} node.
+>    - {% icon param-file %} *"input image"*: `input images` output of {% tool Input dataset collection %}
+>    - {% icon param-file %} *"filter rules"*: `rules` output of {% tool Input dataset %}
+> 5. Add a {% tool Collapse Collection %} node.
 >    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: output of **feature_extraction** workflow
 >    - *"Keep one header line"*: `Yes`
 >    - *"Append File name"*: `No`
@@ -205,7 +209,7 @@ The resulting workflow should look something like this:
 ![screen analysis workflow](../../images/hela-screen-analysis/analyze_screen_workflow.png "Full screen analysis workflow.")
 
 
-> ### {% icon hands_on %} Hands-on: Run screen analysis workflow
+> <hands-on-title>Run screen analysis workflow</hands-on-title>
 >
 > 1. Run the screen analysis workflow {% icon workflow %} on the `control` screen and the `rules` file
 >
@@ -219,9 +223,9 @@ The resulting workflow should look something like this:
 
 Finally, we want to plot the results for better interpretation.
 
-> ### {% icon hands_on %} Hands-on: Plot feature extraction results
+> <hands-on-title>Plot feature extraction results</hands-on-title>
 >
-> 1. Click on the `Visualize this data` {% icon galaxy-barchart %} icon of the **Collapse Collection** {% icon tool %} results.
+> 1. Click on the `Visualize this data` {% icon galaxy-barchart %} icon of the {% tool Collapse Collection %} results.
 > 2. Run `Box plot` with the following parameters:
 >    - *"Provide a title"*: `Screen features`
 >    - *"X-Axis label"*:
@@ -236,11 +240,11 @@ Finally, we want to plot the results for better interpretation.
 >        - *"Provide a label"*: `Major axis length`
 >        - *"Observations"*: `Column 3`
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > Plot the feature distribution of PLK1 and control. What differences do you observe between the screens?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > The phenotype of PLK1 threated cells show a higher mean intensity and a shorter major axis in comparison to the control.
 >    > {: .solution }
 >    {: .question}
@@ -252,6 +256,6 @@ One of the resulting plots should look something like this:
 ![feature extraction results box plot](../../images/hela-screen-analysis/result_boxplot.png){: width="100%"}
 
 # Conclusion
-{:.no_toc}
+
 
 In this exercise you imported images into Galaxy, segmented cell nuclei, filtered segmentations by morphological features, extracted features from segmentations, scaled your workflow to a whole screen, and plotted the feature extraction results using Galaxy.

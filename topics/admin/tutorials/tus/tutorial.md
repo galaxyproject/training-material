@@ -25,12 +25,14 @@ requirements:
 
 Here you'll learn to setup [TUS](https://tus.io/) an open source resumable file upload server to process uploads for Galaxy. We use an external process here to offload the main Galaxy processes for more important work and not impact the entire system during periods of heavy uploading.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tus" %}
 
 # TUS and Galaxy
 
@@ -42,7 +44,7 @@ To allow your user to upload via TUS, you will need to:
 
 ## Installing and Configuring
 
-> ### {% icon hands_on %} Hands-on: Setting up ftp upload with Ansible
+> <hands-on-title>Setting up ftp upload with Ansible</hands-on-title>
 >
 > 1. In your playbook directory, add the `galaxyproject.tusd` role to your `requirements.yml`
 >
@@ -50,10 +52,11 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -12,3 +12,5 @@
->       version: 0.3.0
->     - src: usegalaxy_eu.certbot
->       version: 0.1.5
+>    @@ -14,3 +14,6 @@
+>     # gxadmin (used in cleanup, and later monitoring.)
+>     - src: galaxyproject.gxadmin
+>       version: 0.0.12
+>    +# TUS (uploads)
 >    +- name: galaxyproject.tusd
 >    +  version: 0.0.1
 >    {% endraw %}
@@ -64,7 +67,7 @@ To allow your user to upload via TUS, you will need to:
 >
 > 2. Install the role with:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -77,32 +80,35 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,6 +60,8 @@ galaxy_config:
->         allow_user_impersonation: true
+>    @@ -70,6 +70,9 @@ galaxy_config:
 >         # Tool security
 >         outputs_to_working_directory: true
+>         new_user_dataset_access_role_default_private: true # Make datasets private by default
 >    +    # TUS
->    +    tus_upload_store: /data/tus
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
->    @@ -122,3 +124,16 @@ nginx_conf_http:
+>    +    galaxy_infrastructure_url: "https://{{ inventory_hostname }}"
+>    +    tus_upload_store: "{{ galaxy_tus_upload_store }}"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
+>    @@ -90,6 +93,10 @@ galaxy_config:
+>         celery:
+>           concurrency: 2
+>           loglevel: DEBUG
+>    +    tusd:
+>    +      enable: true
+>    +      tusd_path: /usr/local/sbin/tusd
+>    +      upload_dir: "{{ galaxy_tus_upload_store }}"
+>         handlers:
+>           handler:
+>             processes: 2
+>    @@ -159,3 +166,7 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >    +
 >    +# TUS
 >    +galaxy_tusd_port: 1080
->    +tusd_instances:
->    +  - name: main
->    +    user: "{{ galaxy_user.name }}"
->    +    group: "galaxy"
->    +    args:
->    +      - "-host=localhost"
->    +      - "-port={{ galaxy_tusd_port }}"
->    +      - "-upload-dir={{ galaxy_config.galaxy.tus_upload_store }}"
->    +      - "-hooks-http=https://{{ inventory_hostname }}/api/upload/hooks"
->    +      - "-hooks-http-forward-headers=X-Api-Key,Cookie"
+>    +galaxy_tus_upload_store: /data/tus
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure TUS in your group variables"}
@@ -113,29 +119,29 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -16,6 +16,22 @@ server {
->             include uwsgi_params;
->         }
+>    @@ -28,6 +28,22 @@ server {
+>     		proxy_set_header Upgrade $http_upgrade;
+>     	}
 >     
->    +    location /api/upload/resumable_upload {
->    +        # Disable request and response buffering
->    +        proxy_request_buffering     off;
->    +        proxy_buffering             off;
->    +        proxy_http_version          1.1;
+>    +	location /api/upload/resumable_upload {
+>    +		# Disable request and response buffering
+>    +		proxy_request_buffering     off;
+>    +		proxy_buffering             off;
+>    +		proxy_http_version          1.1;
 >    +
->    +        # Add X-Forwarded-* headers
->    +        proxy_set_header X-Forwarded-Host   $host;
->    +        proxy_set_header X-Forwarded-Proto  $scheme;
+>    +		# Add X-Forwarded-* headers
+>    +		proxy_set_header X-Forwarded-Host   $host;
+>    +		proxy_set_header X-Forwarded-Proto  $scheme;
 >    +
->    +        proxy_set_header Upgrade            $http_upgrade;
->    +        proxy_set_header Connection         "upgrade";
->    +        client_max_body_size        0;
->    +        proxy_pass http://localhost:{{ galaxy_tusd_port }}/files;
->    +    }
+>    +		proxy_set_header Upgrade            $http_upgrade;
+>    +		proxy_set_header Connection         "upgrade";
+>    +		client_max_body_size        0;
+>    +		proxy_pass http://localhost:{{ galaxy_tusd_port }}/files;
+>    +	}
 >    +
->         # Static files can be more efficiently served by Nginx. Why send the
->         # request to uWSGI which should be spending its time doing more useful
->         # things like serving Galaxy!
+>     	# Static files can be more efficiently served by Nginx. Why send the
+>     	# request to Gunicorn which should be spending its time doing more useful
+>     	# things like serving Galaxy!
 >    {% endraw %}
 >    ```
 >    {: data-commit="Proxy it via NGINX"}
@@ -146,18 +152,21 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -19,3 +19,4 @@
->           become: true
->           become_user: "{{ galaxy_user.name }}"
->         - galaxyproject.nginx
+>    @@ -30,6 +30,7 @@
+>             name: ['tmpreaper']
+>           when: ansible_os_family == 'Debian'
+>       roles:
 >    +    - galaxyproject.tusd
+>         - galaxyproject.galaxy
+>         - role: galaxyproject.miniconda
+>           become: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the role to the playbook"}
 >
 > 6. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -170,17 +179,17 @@ Congratulations, you've set up TUS for Galaxy.
 
 ## Check it works
 
-> ### {% icon hands_on %} Hands-on: Check that it works.
+> <hands-on-title>Check that it works.</hands-on-title>
 >
 > 1. SSH into your machine
 >
-> 2. Check the active status of tusd by `systemctl status tusd-main`.
+> 2. Check the active status of tusd by `systemctl status galaxy-tusd`.
 >
 > 3. Upload a small file! (Pasted text will not pass via TUS)
 >
 > 4. Check the directory `/data/tus/` has been created and it's contents
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > sudo tree /data/tus/
 >    > ```
@@ -196,4 +205,8 @@ Congratulations, you've set up TUS for Galaxy.
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=2 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=4 %}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tus" %}

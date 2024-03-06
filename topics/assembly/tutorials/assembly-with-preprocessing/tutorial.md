@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads"
-zenodo_link: "https://doi.org/10.5281/zenodo.3732358"
+zenodo_link: 'https://zenodo.org/record/3732359'
 questions:
   - How can a genome of interest be assembled against a background of contaminating reads from other genomes?
   - How can sequencing data from public sources be turned into assembly-ready polished datasets?
@@ -40,8 +40,7 @@ contributors:
 
 ---
 
-# Introduction
-{:.no_toc}
+
 
 In some research or clinical contexts it is not possible, or very hard, to
 purify DNA/RNA for sequencing from just the specimen of interest.
@@ -59,7 +58,7 @@ signficantly with human sequenced reads, the goal is to enrich the data for
 SARS-CoV-2 reads by identifying and discarding reads of human origin before
 trying to assemble the viral genome sequence.
 
-> ### {% icon comment %} The usegalaxy.* COVID-19 analysis project
+> <comment-title>The usegalaxy.* COVID-19 analysis project</comment-title>
 > This tutorial uses the same data as, and recapitulates to a large extent, the
 > [Pre-processing](https://covid19.galaxyproject.org/genomics/1-PreProcessing/)
 > and [Assembly](https://covid19.galaxyproject.org/genomics/2-Assembly/) steps
@@ -68,7 +67,7 @@ trying to assemble the viral genome sequence.
 >
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -102,7 +101,7 @@ tutorial offers two ways to access the sequenced reads input data:
    used to download several datasets and to arrange them into easy to handle
    data structures at the same time.
 
-   > ### {% icon details %} Rule-based uploads
+   > <details-title>Rule-based uploads</details-title>
    > In this tutorial you will only use the features of Galaxy's rule-based
    > uploader that are required to get the input data ready for our analysis,
    > and we will not explain those features in much detail.
@@ -122,11 +121,12 @@ steps are independent of the data source you choose.
 
 ## Get data from NCBI SRA
 
-> ### {% icon hands_on %} Hands-on: Data upload to Galaxy from NCBI SRA
+> <hands-on-title>Data upload to Galaxy from NCBI SRA</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Create a new dataset listing the SRA accession numbers of the Illumina paired-end input data for this tutorial:
@@ -153,7 +153,7 @@ steps are independent of the data source you choose.
 >
 > 4. Add `#illumina`/`#nanopore` tags to the datasets
 >
->    > ### {% icon comment %} Name tags in the analysis
+>    > <comment-title>Name tags in the analysis</comment-title>
 >    > We are going to treat the Illumina- and the Nanopore-sequenced data
 >    > separately in this tutorial up to the actual genome assembly step.
 >    >
@@ -215,11 +215,12 @@ steps are independent of the data source you choose.
 
 ## Get data from Zenodo
 
-> ### {% icon hands_on %} Hands-on: Data upload to Galaxy from Zenodo
+> <hands-on-title>Data upload to Galaxy from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import Illumina-sequenced reads data from [Zenodo](https://zenodo.org/record/3732359)
@@ -263,7 +264,7 @@ steps are independent of the data source you choose.
 >        - *"Name"*: `Illumina PE data` (or similar)
 >        - *"Add nametag for name:"* {% icon param-check %}
 >
->          > ### {% icon comment %} Name tags in the analysis
+>          > <comment-title>Name tags in the analysis</comment-title>
 >          > We are going to treat the Illumina- and the Nanopore-sequenced data
 >          > separately in this tutorial up to the actual genome assembly step.
 >          >
@@ -347,7 +348,7 @@ The JSON-formatted report produced by the tool, can serve as input to
 **MultiQC** {% icon tool %} for a direct visual comparison of key quality
 metrics for all samples before and after preprocessing.
 
-> ### {% icon hands_on %} Hands-on: Reads preprocessing and quality reporting
+> <hands-on-title>Reads preprocessing and quality reporting</hands-on-title>
 > 1. **fastp** {% icon tool %} with the following parameters
 >    - *"Single-end or paired reads"*: `Paired Collection`
 >      - *"Select paired collection(s)"*: the collection of Illumina-sequenced
@@ -390,7 +391,7 @@ Illumina-sequenced reads are less useful for Nanopore-sequenced reads, too, for
 the same reasons. Here we restrict ourselves to a simple quality check with
 **NanoPlot** {% icon tool %}, a dedicated QC tool for Nanopore-sequenced reads.
 
-> ### {% icon hands_on %} Hands-on: Checking the quality of Nanopore reads with NanoPlot
+> <hands-on-title>Checking the quality of Nanopore reads with NanoPlot</hands-on-title>
 > 1. **NanoPlot** {% icon tool %} with the following parameters
 >    - *"Select multifile mode"*: `batch`
 >      - *"Type of the file(s) to work on"*: `fastq`
@@ -399,13 +400,13 @@ the same reasons. Here we restrict ourselves to a simple quality check with
 >    - in *"Options for filtering or transforming input prior to plotting"*
 >      - *"Logarithmic scaling of lengths in plots."*: `Yes`
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Looking at the three generated quality reports, which of the three
 >    >    samples seems to be of better quality overall than the other two,
 >    >    and what are some criteria that support this conclusion?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. Sample `SRR10948474` has the best overall quality.
 >    > >
 >    > >    It has both higher average read length and quality than the other
@@ -434,7 +435,7 @@ mapping the Nanopore-sequenced data in the next step, is supposed to outcompete
 of length > 100 nts, but we opt for the conservative approach of using a
 widely-used, well-tested tool here.
 
-> ### {% icon hands_on %} Hands-on: Mapping with Bowtie2
+> <hands-on-title>Mapping with Bowtie2</hands-on-title>
 > 1. **Bowtie2** {% icon tool %} with the following parameters
 >    - *"Is this single or paired library"*: `Paired-end Dataset Collection`
 >       - *"FASTQ Paired Dataset"*: the collection of preprocessed
@@ -450,7 +451,7 @@ widely-used, well-tested tool here.
 >       - *"Do you want to set paired-end options?"*: `No`
 >
 >     - *"Will you select a reference genome from your history or use a built-in index?"*:
-        `Use a built-in genome index`
+>       `Use a built-in genome index`
 >       - *"Select reference genome"*: `Human (Homo sapiens): hg38 Full`
 >     - *"Set read groups information?"*: `Do not set`
 >     - *"Select analysis mode"*: `Default setting only`
@@ -464,13 +465,13 @@ widely-used, well-tested tool here.
 >
 > 2. Inspect the `mapping stats` of each sample by clicking on the corresponding collection, then on the {% icon galaxy-eye %} (eye) icon of each individual sample data
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What percentage of reads of each sample has been aligned to the `hg38` reference genome?
 >    > 2. Which sample is the least contaminated with human reads?
 >    > 3. Which sample contains the highest amount of SARS-CoV2 reads?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The samples have between 13% and 21% of reads aligned to `hg38`.
 >    > >    The information can be found on the last line of output for each
 >    > >    sample.
@@ -491,7 +492,7 @@ widely-used, well-tested tool here.
 For the mapping of the Nanopore-sequenced data we are using the **Minimap2**
 aligner, which is particularly efficient for mapping long reads.
 
-> ### {% icon hands_on %} Hands-on: Nanopore reads mapping
+> <hands-on-title>Nanopore reads mapping</hands-on-title>
 >
 > 1. **Map with minimap2** {% icon tool %} with the following parameters
 >    - *"Will you select a reference genome from your history or use a built-in index?"*:
@@ -519,7 +520,7 @@ aligner, which is particularly efficient for mapping long reads.
 >          These simple summary stats correspond approximately to the
 >          statistics generated by **Bowtie2** and are enough for our purpose.
 >
->    > ### {% icon comment %} Mapping stats for Nanopore-sequenced long reads
+>    > <comment-title>Mapping stats for Nanopore-sequenced long reads</comment-title>
 >    >
 >    > Since, unlike Illumina-generated reads, Nanopore-sequenced reads can
 >    > have very different lengths, it makes limited sense to calculate a
@@ -544,7 +545,7 @@ Next, we are going to filter the data from both collections to retain only
 those reads that were *not* mapped to the human genome, *i.e* those of
 potential viral origin.
 
-> ### {% icon hands_on %} Hands-on: Mapped reads filtering
+> <hands-on-title>Mapped reads filtering</hands-on-title>
 >
 > 1. **Samtools view** {% icon tool %} to filter the Illumina-sequenced reads mapped with Bowtie2:
 >    - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: the collection of
@@ -571,7 +572,7 @@ potential viral origin.
 >
 > 3. (Optional) Remove the database `hg38` attribute from the output files
 >
->    > ### {% icon details %} Why do this?
+>    > <details-title>Why do this?</details-title>
 >    > When we ran the **Bowtie2** {% icon tool %} and **minimap2**
 >    > {% icon tool %} mappers before, these tools set the *database* attribute
 >    > on their outputs to `hg38` to indicate that the mapped reads in these
@@ -602,7 +603,7 @@ what we have after mapping and filtering is data in BAM format. Hence, we need
 to convert the retained Illumina- and Nanopore-sequenced reads back into their
 original format before proceeding to assembly.
 
-> ### {% icon hands_on %} Hands-on: BAM to fastq format conversion
+> <hands-on-title>BAM to fastq format conversion</hands-on-title>
 >
 > 1. **Samtools fastx** {% icon tool %} to convert the filtered Illumina-sequenced reads to fastq format
 >    - {% icon param-collection %} *"BAM or SAM file to convert"*: the collection of
@@ -632,7 +633,7 @@ for assembling the reads would not be able to handle the nested data correctly.
 
 Thus, the following just serves as an illustration and is entirely optional.
 
-> ### {% icon hands_on %} Hands-on: Arrange two list collections into a list of pairs
+> <hands-on-title>Arrange two list collections into a list of pairs</hands-on-title>
 >
 > 1. **Zip Collection** {% icon tool %} with the following parameters
 >    - {% icon param-collection %} *"Input Dataset (Forward)"*: the collection
@@ -655,7 +656,7 @@ reads data, respectively, across samples. Conveniently for us, the outputs of
 the earlier **Samtools fastx** {% icon tool %} runs have already returned the
 data structured into three corresponding collections for us.
 
-> ### {% icon hands_on %} Hands-on: Collapsing each collection into a single dataset
+> <hands-on-title>Collapsing each collection into a single dataset</hands-on-title>
 >
 > 1. **Collapse Collection** {% icon tool %} of Illumina-sequenced *forward* reads
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*:
@@ -693,13 +694,13 @@ If you do not have that much time, you should downsample the Illumina-sequenced
 combined reads now. Which will reduce the time required to finish the
 subsequent assembly step to approximately 1-2 hours.
 
-> ### {% icon comment %} If you are in a hurry
+> <comment-title>If you are in a hurry</comment-title>
 > The downsampling parameters below have been chosen to have minimal impact on
 > the assembly results. Further speed-ups are certainly possible, but will
 > likely lead to poor assembly outcomes.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Subsampling of paired-end short-reads data
+> <hands-on-title>Subsampling of paired-end short-reads data</hands-on-title>
 >
 > 1. **seqtk_sample** {% icon tool %} with the following parameters
 >    - {% icon param-files %} *"Input FASTA/Q file"*: The two datasets with the
@@ -712,7 +713,7 @@ subsequent assembly step to approximately 1-2 hours.
 
 ## Create assembly
 
-> ### {% icon hands_on %} Hands-on: Assembly of SARS-CoV2 genome
+> <hands-on-title>Assembly of SARS-CoV2 genome</hands-on-title>
 >
 > 1. **Create assemblies with Unicycler** {% icon tool %} with the following parameters
 >    - *"Paired or Single end data?"*: `Paired`
@@ -759,7 +760,7 @@ This issue can be alleviated through the use of **Bandage**, a package for
 exploring assembly graphs through summary reports and visualizations of their
 contents.
 
-> ### {% icon hands_on %} Hands-on: Assembly stats and visualization with Bandage
+> <hands-on-title>Assembly stats and visualization with Bandage</hands-on-title>
 >
 > 1. **Bandage Info** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Graphical Fragment Assembly"*: the assembly graph dataset produced by
@@ -817,7 +818,7 @@ separately assembled nodes are all longer than 1000 bp. We can extract those
 sequences based on the length threshold in Galaxy, then BLAST all retained
 sequences in one go.
 
-> ### {% icon hands_on %} Hands-on: Filter FASTA sequences by their length
+> <hands-on-title>Filter FASTA sequences by their length</hands-on-title>
 >
 > 1. **Filter sequences by length** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Fasta file"*: the FASTA output produced by
@@ -827,7 +828,7 @@ sequences in one go.
 >    This outputs a new FASTA datasets with only the sequences satisfying our
 >    length threshold.
 >
-> > ### {% icon tip %} Apply length filters after instead of during assembly
+> > <tip-title>Apply length filters after instead of during assembly</tip-title>
 > > You may have noted that in the **Unicycler** {% icon tool %} run we kept
 > > the tool's *"Exclude contigs from the FASTA file which are shorter than
 > > this length (bp)"* option at its default value of `100` instead of using
@@ -844,7 +845,7 @@ sequences in one go.
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: NCBI BLAST of multiple contigs
+> <hands-on-title>NCBI BLAST of multiple contigs</hands-on-title>
 >
 > 1. View the output of **Filter sequences by length** {% icon tool %} by
 >    clicking the {% icon galaxy-eye %} (eye) icon attached to that dataset.
@@ -867,7 +868,7 @@ assembled nodes. Pay attention, specifically, to the node with the longest
 sequence (node #1) and the circular node #2, but also investigate the results
 for a few others.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Which genome is represented by node #1?
 > 2. Which genome corresponds to node #2? Does this finding remind you of
@@ -875,7 +876,7 @@ for a few others.
 > 3. What do most other node sequences have in common? Do these additinal
 >    findings make sense?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. The sequence of node #1 is the assembled SARS-CoV-2 sequence we are
 > >    looking for. It is a perfect match to various SARS-CoV-2 genome
 > >    sequences found in Genbank over the entire assembled length, and we have
@@ -909,7 +910,7 @@ for a few others.
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 The power of modern genome assembly tools is remarkable, and so is their
 robustness in the face of data of metagenomic nature. Assembling reads derived

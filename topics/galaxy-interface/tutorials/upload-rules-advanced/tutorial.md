@@ -26,8 +26,7 @@ contributors:
 subtopic: upload
 ---
 
-# Introduction
-{:.no_toc}
+
 
 This builds on the previous Rule Based Uploader tutorial to cover even more advanced topics.
 
@@ -35,7 +34,7 @@ This builds on the previous Rule Based Uploader tutorial to cover even more adva
 > This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) tutorial.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will:
 >
@@ -54,7 +53,7 @@ For this multiomics example, we will start with a uniprot query and build URLs f
 
 In order to make this data useful for the Rule Builder, we need to turn these accessoin IDs into URLs.
 
-> ### {% icon hands_on %} Hands-on: Turn Uniprot Accession IDs into URLs
+> <hands-on-title>Turn Uniprot Accession IDs into URLs</hands-on-title>
 >
 > 1. Open [Uniprot](https://www.uniprot.org/uniprot/E7C0H6)
 > 1. **Click** on one of the entries in the table (e.g. `E7C0H6`)
@@ -68,13 +67,13 @@ In order to make this data useful for the Rule Builder, we need to turn these ac
 >    ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
 >
 > 5. We can deduce that the FASTA files for the other accession IDs will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
->
+> <!-- https://rest.uniprot.org/uniprotkb/search?format=fasta&includeIsoform=true&query=accession:E7C0H6  is also an option, for future editors. -->
 {: .hands_on}
 {:#example-3-metadata}
 
 We will use this information to build a collection of FASTA files from our query.
 
-> ### {% icon hands_on %} Hands-on: Build Collection from Uniprot Accession IDs
+> <hands-on-title>Build Collection from Uniprot Accession IDs</hands-on-title>
 >
 > 1. Open the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
@@ -123,7 +122,7 @@ We will use this information to build a collection of FASTA files from our query
 >
 >      ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_5_url.png)
 >
->    > ### {% icon comment %} Regular expression explained
+>    > <comment-title>Regular expression explained</comment-title>
 >    > In this regular expression, `.*` will capture the entire accession ID.
 >    >
 >    > In the replacement expression, `https://www.uniprot.org/uniprot/\0.fasta`, the `\0` will be replaced by the captured
@@ -142,10 +141,10 @@ We will use this information to build a collection of FASTA files from our query
 > 6. Finalize the collection:
 >     - *"Name"*: for example `UP000052092`
 >     - *"Type"*: `fasta`
->     - Click `Upload`
+>     - Click `Build`
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_7_mapping_extension_and_name.png)
 >
->    > ### {% icon comment %} JSON Rule Definitions
+>    > <comment-title>JSON Rule Definitions</comment-title>
 >    > This example is ready to go, but before clicking "Build" it may be interesting to check out the rules Galaxy is following to clean and import your data. Click the little Wrench icon at the top of the list of rules. The result is a bunch of JavaScript object notation (JSON) text that you should never need to worry about but that you can build or modify by hand if you find it useful. We will use it the next example to quickly restore the list builder back to this state.
 >    >
 >    > ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_8_source.png)
@@ -162,7 +161,7 @@ This example will demonstrate creating multiple collections at the same time. We
 
 For this example we will re-use the metadata from the [previous example](#example-3-metadata).
 
-> ### {% icon hands_on %} Hands-on: Build a matched collection
+> <hands-on-title>Build a matched collection</hands-on-title>
 >
 > 1. **Open** the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
@@ -185,7 +184,7 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >    You should now see the rules you created in the last example.
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_3_initial_rules.png)
 >
->    > ### {% icon comment %} JSON Editor
+>    > <comment-title>JSON Editor</comment-title>
 >    >
 >    > Another way to do this is to open the JSON Editor, by clicking the wrench icon {% icon tool %} to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you're working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error.
 >    {: .comment}
@@ -276,14 +275,14 @@ For this example, we will describe analyzing the metadata of the [SRA project PR
 So use either the SRA exporter tool or download the CSV file with fake URLs. If you download the data from the SRA exporter tool, select only the first 12 columns from the data (up to the column labeled "Library Name") and copy the resulting data to your clipboard.
 
 
-> ### {% icon hands_on %} Hands-on: Building Nested Lists
+> <hands-on-title>Building Nested Lists</hands-on-title>
 >
 > 1. Open the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
 >    - *"Load tabular data from"*: `Pasted Table`
 >    - Paste the table
 >
->    > ### {% icon solution %} Show Table
+>    > <solution-title>Show Table</solution-title>
 >    >
 >    > Below is the table with pre-downloaded example data mentioned above:
 >    >
@@ -386,7 +385,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >     - Set this `Column definition` for the URL target
 >     - Strip the header row
 >
->       > ### {% icon solution %} Solution
+>       > <solution-title></solution-title>
 >       > From **Filter** menu, select `First or Last N Rows`
 >       >   - Filter first Row
 >       >
@@ -408,7 +407,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >    The result looks like:
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_4_regex.png)
 >
->    > ### {% icon comment %} Regular expression explained
+>    > <comment-title>Regular expression explained</comment-title>
 >    > In this regular expression, `\d` means any digit, so `[^...]` means match anything that is not inside the brackets.
 >    > So together `[^\d]+` means match one or more, non digits at the start of the column and the `()` around that means capture
 >    > them into a group. We've add `\d+` at the end of the expression but it isn't grouped so we are effectively ignoring the
@@ -423,7 +422,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 >     - Click on `... Assign Another Column`
 >     - Select column `A`
 >
->        > ### {% icon comment %} Re-ordering columns
+>        > <comment-title>Re-ordering columns</comment-title>
 >        > If you make a mistake in the order you select columns in you can simple use the up and down arrows to re-arrange the list
 >        {: .comment}
 >
@@ -449,7 +448,7 @@ To start this example, we will first upload a simple, flat collection of data. T
 will be the same as those used by the [DESeq2 Vignette](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
 from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/release/data/experiment/html/pasilla.html).
 
-> ### {% icon hands_on %} Hands-on: Applying Rules to Existing Collections
+> <hands-on-title>Applying Rules to Existing Collections</hands-on-title>
 >
 > 1. Open the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
@@ -510,7 +509,7 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >    - *"Regular Expression"*: `(.*)_(.*)_.*`
 >    - *"Number of Groups"*: `2`
 >
->    > ### {% icon comment %} Regular expression explained
+>    > <comment-title>Regular expression explained</comment-title>
 >    >  Here ``.*`` means match any number of any character - so basically match anything.
 >    >  The parentheses around ``.*`` means form a "group" from whatever is matched.
 >    >  The ``_`` describes the literal ``_`` values in the identifier we are matching. The result is that

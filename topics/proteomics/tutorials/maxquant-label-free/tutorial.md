@@ -22,8 +22,6 @@ tags: [DDA, label-free]
 ---
 
 
-# Introduction
-{:.no_toc}
 
 The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are *in silico* reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.
 
@@ -39,7 +37,7 @@ This stand-alone tutorial introduces the data analysis from raw data files to pr
 For more advanced proteomics workflows, please consult the OpenMS [identification]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html), [quantification]({{site.baseurl}}/topics/proteomics/tutorials/protein-quant-sil/tutorial.html) as well as [SearchGUI/PeptideShaker]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html) tutorials.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -53,7 +51,7 @@ For more advanced proteomics workflows, please consult the OpenMS [identificatio
 The serum proteomic samples and the fasta file for this training were deposited at [Zenodo](https://zenodo.org/record/3774452). It is of course possible to use other fasta files that contain human proteome sequences, but to ensure that the results are compatible we recommend to use the provided fasta file. MaxQuant not only adds known contaminants to the fasta file, but also generates the "decoy" hits for false discovery rate estimation itself, therefore the fasta file is not allowed to have decoy entries. To learn more about fasta files, have a look at [Protein FASTA Database Handling]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html).
 
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
@@ -84,7 +82,7 @@ The serum proteomic samples and the fasta file for this training were deposited 
 The MaxQuant Galaxy implementation contains the most important MaxQuant parameters. As an alternative, **MaxQuant (using mqpar.xml)** {% icon tool %} can be used with a preconfigured mqpar.xml file. We will explain the parameters after starting the MaxQuant run which takes some time to finish.
 
 
-> ### {% icon hands_on %} Hands-on: MaxQuant analysis
+> <hands-on-title>MaxQuant analysis</hands-on-title>
 >
 > 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3) %} with the following parameters
 >    - In *"Input Options"*:
@@ -96,13 +94,13 @@ The MaxQuant Galaxy implementation contains the most important MaxQuant paramete
 >    - In *"Parameter Group"*:
 >        - {% icon param-files %} *"Infiles"*: `sample1`, `sample2`
 >        - *"missed cleavages"*: `1`
->        - *"variable modifications"*: `unselect all variable modifications`
+>        - *"enzyme"*: `Trypsin/P`
 >        - *"Quantitation Methods"*: `label free quantification`
 >    - *"Generate PTXQC (proteomics quality control pipeline) report?"*: `Yes`
 >    - In *"Output Options"*:
 >        - *"Select the desired outputs."*: `Protein Groups` `Peptides` `mqpar.xml`
 >
->    > ### {% icon comment %} Comment: Protein Groups
+>    > <comment-title>Protein Groups</comment-title>
 >    > Proteins that share all their peptides with other proteins cannot be unambiguously identified. Therefore, MaxQuant groups such proteins into one protein group and only one common quantification will be calculated. The different protein properties are separated by semicolon.
 >    {: .comment}
 {: .hands_on}
@@ -135,7 +133,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 MaxQuant automatically generates several output files. In the *"Output Options"* all or some of the output files can be selected. The protein information can be obtained by selecting `Protein Groups`, while the peptide information is obtained by choosing `Peptides`. The applied MaxQuant parameters are stored in the `mqpar.xml` This file can be re-used as an input file in the **MaxQuant (using mqpar.xml)** {% icon tool %}.
 
 
-> ### {% icon details %} More MaxQuant parameters
+> <details-title>More MaxQuant parameters</details-title>
 > - For pre-fractionated data an *"experimental design template"* has to be used. This has to be a tab-separated text file with a column for the fractions (e.g. 1-10) and a column for the experiment (sample1, sample2, sample3) and a column for post translational modifications (PTM). Examples are given in the help section of the MaxQuant tool.
 >
 > - *"Match between run"* allows to transfer identifications (peptide sequences) from one run to another. If the MS1 (full length peptide) signal is present in both runs, but was only selected for fragmentation in one of them, MaxQuant can transfer the resulting peptide sequence to the run where the MS1 peptide was not fragmented. The Information if a peptides was identified via fragmentation (MS/MS) or match between run (matching) can be found in the evidence output.
@@ -143,7 +141,7 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 > - MaxQuant allows to process different raw files with different parameters. In this tutorial we have loaded both files into the same *"parameter group"* in order to process them with the same parameters. To apply different parameters, new parameter groups can be added by clicking on the {% icon param-repeat %} *"insert parameter group"* button. In each *"parameter group"* one or several raw files can be specified and for them only the parameter specified within this parameter group section are applied.
 {: .details}
 
-> ### {% icon tip %} Tip: Continue with results from Zenodo
+> <tip-title>Continue with results from Zenodo</tip-title>
 >
 > In case the MaxQuant run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
 > 1. Import the files from [Zenodo](https://zenodo.org/record/3774452)
@@ -156,14 +154,14 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 >    ```
 {: .tip}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many proteins were found in total?
 > 2. How many peptides were found in total?
 > 3. How many proteins identified and quantified? (Tipp: There is a tool called "filter data on any column", select the LFQ column for both files and remove rows containing "0")
 >
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 271 protein (groups) were found in total.
 > > 2. 2387 peptides were found in total.
@@ -178,7 +176,7 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 
 To get a first overview of the MaxQuant results, the PTXQC report is helpful. Click on the {% icon galaxy-eye %} eye of the PTXQC pdf file to open it in Galaxy. Screening through the different plots might already give you a hint which of the samples was pure and which was depleted of abundant proteins. Both samples failed in some categories (see Figure 4 above), especially due to low peptide and protein numbers, which is expected in serum samples and therefore not a quality problem.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. In which sample were more contaminantes quantified?
 > 2. How good was the tryptic digestion (percentage of zero missed cleavages)?
@@ -186,7 +184,7 @@ To get a first overview of the MaxQuant results, the PTXQC report is helpful. Cl
 > 4. Do you already have a guess on which sample was depleted?
 >
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Sample 2 has more contaminants, especially serum albumin is high abundant. ![PTXQC_contaminants](../../images/maxquant_lfq_contaminants.png)
 > > 2. The digestion was not ideal but good enough to work with. The proportion of zero missed cleavages was 75% for sample1 and around 85% for sample2. ![PTXQC_missed](../../images/maxquant_lfq_missedcleavages.png)
@@ -201,7 +199,7 @@ To get a first overview of the MaxQuant results, the PTXQC report is helpful. Cl
 
 To explore the proteomic composition of the two serum samples some postprocessing steps on the Protein Groups file are necessary. The Protein Groups file contains all relevant information on the protein level. The best way to explore this vast table is by clicking on the  scratch book {% icon galaxy-scratchbook %} on the top menu. Clicking on the {% icon galaxy-eye %} eye icon opens the Protein Groups file. Galaxy does not work with the names of the columns but instead with their number. Find the column numbers for: Fasta headers (includes protein ID + name + species), LFQ intensities for each sample and reverse proteins. First we remove "decoy" proteins, which are named "reverse" in MaxQuant. Next, we remove contaminants. For non-human samples, we could just remove all proteins, that are marked with a "+" in the "potential contaminant" column. We have seen before that many human proteins were marked as contaminant and as we study a human sample we don't want to remove them. Therefore, we only remove non-human contaminant proteins. Then, we shrink the file to keep only columns that are interesting in the next steps: the fasta header and the columns with LFQ intensities for both files. To find the most abundant proteins per sample, the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.
 
-> ### {% icon hands_on %} Hands-on: Exploring serum composition
+> <hands-on-title>Exploring serum composition</hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `proteinGroups` (output of **MaxQuant** {% icon tool %})
@@ -249,16 +247,16 @@ To explore the proteomic composition of the two serum samples some postprocessin
 ![serum_composition](../../images/maxquant_lfq_serum_composition.png "Quantitative serum composition. In Galaxy one can hover over the graph to see the protein names")
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many decoy proteins were removed?
 > 2. What are the top 5 most abundant proteins in both files? Do they reflect typical serum proteins?
 > 3. Which sample was depleted for the top serum proteins?
 > 4. How much did the serum albumin abundance percentage decrease? Was the depletion overall succesful?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. 2 (272 lines (Protein Groups) minus 272 lines (Filter))
+> > 1. 2 (272 lines (Protein Groups) minus 270 lines (Filter))
 > > 2. Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins ([plasma proteins found by MS](https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms)).
 > > 3. Sample1 was depleted, sample2 was pure serum.
 > > 4. In the depleted sample1, there is a depletion in some of the most abundant proteins, especially Albumin, which proportion of the total sample intensities decreased by 58 percentage. Compared to the pure serum the depleted sample showed a duplication of identified and quantified proteins rendering it quite successful. However, there is still room for improvement as some of the most abundant proteins which should have been depleted did not change their abundance compared to the overall protein abundance.
@@ -272,7 +270,7 @@ To explore the proteomic composition of the two serum samples some postprocessin
 
 After analyzing the composition of each sample separately, the intensities between both samples are compared. For this, the intensity values are log2-transform and the normal distribution is visualized as boxplots, this requires cutting only the relevant columns before visualization. Next the log2 fold change is calculated and its distribution visualized as histogram. The log2 fold change helps to find proteins with abundances changes between the samples.
 
-> ### {% icon hands_on %} Hands-on: Quantitative Assessment
+> <hands-on-title>Quantitative Assessment</hands-on-title>
 >
 > 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} with the following parameters:
 >    - *"Add expression"*: `log(c2,2)`
@@ -310,13 +308,13 @@ After analyzing the composition of each sample separately, the intensities betwe
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Describe the distribution of the log2 intensities in the box plots.
 > 2. How much is the log2 fold change of serum albumin and what does it mean?
 > 3. What does the distribution of the log2 fold changes mean?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The log2 transformation leads to a close to normal intensity distribution for both samples. Intensities in the depleted sample are shifted towards higher values compared to the non-depleted samples. The big difference comes from artificially depleting (changing) protein intensities. ![boxplots](../../images/maxquant_lfq_boxplots.png)
 > > 2. The log2 fold change (depleted vs. not depleted samples) is about -2.91. This means that the abundance in the not depleted sample is about 2^2.91 = 7.52 times higher than in the depleted sample, showing again that a large proportion of serum albumin was successfully removed by the antibody columns.
@@ -327,13 +325,13 @@ After analyzing the composition of each sample separately, the intensities betwe
 {: .question}
 
 
-> ### {% icon tip %} Tip: Analyzing your own data
+> <tip-title>Analyzing your own data</tip-title>
 >
 > For this training we have chosen two small example files to keep analysis time minimal. Real proteomic projects comprise more samples leading to longer MaxQuant run times from many hours to several days (depending on input file size, number of input files and parameters). Real projects also require different follow up analysis. Here are some things to consider for your proteomic project:
 > 1. The columns in the MaxQuant output file change with the number of input files. Before using the cut tool, open the output file and check which columns contain the LFQ intensities - then adjust the cut tool to cut all those columns from the file.
 > 2. A necessary first step is to log2-transform the LFQ intensities.
 > 3. Even though LFQ intensities are already normalized, before statistical analysis it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization box plot medians should be very similar.
-> 4. Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as [LIMMA](https://www.doi.org/10.1093/nar/gkv007), [SAM](https://www.doi.org/10.1073/pnas.091062498) and [MSstats](https://doi.org/10.1093/bioinformatics/btu305) {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %}. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.
+> 4. Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as LIMMA ({% cite Ritchie2015 %}), SAM ({% cite Tusher2001 %}) and MSstats ({% cite Choi2014 %}) {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %}. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.
 >
 {: .tip}
 

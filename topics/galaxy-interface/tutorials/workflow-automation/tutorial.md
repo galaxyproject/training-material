@@ -30,8 +30,6 @@ contributors:
 subtopic: workflows
 ---
 
-# Introduction
-{:.no_toc}
 
 Galaxy is well-known as a web-based data analysis platform which provides a graphical interface for executing common bioinformatics tools in a reproducible manner. However, Galaxy is not just a user-friendly interface for executing one tool at a time. It provides two very useful features which allow scaling data analyses up to a high-throughput level: dataset collections and workflows.
 
@@ -52,7 +50,7 @@ All the functionality described so far is available through the graphical interf
 If you are encountering similar problems as these in your research with Galaxy, this tutorial is for you! We will explain how to trigger workflow execution via the command line using Planemo, and provide some tips on how to write scripts to automate the process. The result will be a bot which takes care of the the whole analysis process for you.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -63,10 +61,10 @@ If you are encountering similar problems as these in your research with Galaxy, 
 
 Workflows and data for this tutorial are hosted on [GitHub](https://github.com/usegalaxy-eu/workflow-automation-tutorial).
 
-> ### {% icon hands_on %} Hands-on: Download workflow and data
+> <hands-on-title>Download workflow and data</hands-on-title>
 > Download the workflows and data for this tutorial using `git clone`.
 >
-> > ### {% icon code-in %} Input: git clone
+> > <code-in-title>git clone</code-in-title>
 > > ```shell
 > > git clone https://github.com/usegalaxy-eu/workflow-automation-tutorial.git
 > > ```
@@ -74,14 +72,14 @@ Workflows and data for this tutorial are hosted on [GitHub](https://github.com/u
 >
 > Next, step into the cloned folder and take a look around.
 >
-> > ### {% icon code-in %} Input
+> > <code-in-title></code-in-title>
 > > ```shell
 > > cd workflow-automation-tutorial
 > > ls
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Folder contents
+> > <code-out-title>Folder contents</code-out-title>
 > > ```
 > > example  LICENSE  pangolin  README.md
 > > ```
@@ -97,7 +95,7 @@ Workflows and data for this tutorial are hosted on [GitHub](https://github.com/u
 
 The main tool we will use in this tutorial is [Planemo](https://planemo.readthedocs.io/en/latest/readme.html), a command-line tool with a very wide range of functionality. If you ever developed a Galaxy tool, you probably encountered the `planemo test`, `planemo serve` and `planemo lint` subcommands. In this tutorial we will be using a different subcommand: `planemo run`.
 
-> ### {% icon comment %} Note
+> <comment-title>Note</comment-title>
 > Planemo provides a more detailed tutorial on the `planemo run` functionality [here](https://planemo.readthedocs.io/en/latest/running.html). The pages on '[Best Practices for Maintaining Galaxy Workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html)' and '[Test Format](https://planemo.readthedocs.io/en/latest/test_format.html)' also contain a lot of useful information.
 {:.comment}
 
@@ -107,16 +105,16 @@ For the purposes of this tutorial, we assume you have a recent version of Planem
 
 For this section, we will use a very simple workflow consisting of two text manipulation tools chained together.
 
-> ### {% icon hands_on %} Hands-on: Step into and explore the example folder
+> <hands-on-title>Step into and explore the example folder</hands-on-title>
 >
-> > > ### {% icon code-in %} Input
+> > > <code-in-title></code-in-title>
 > > > ```shell
 > > > cd example
 > > > ls
 > > > ```
 > > {: .code-in}
 > >
-> > > ### {% icon code-out %} Folder contents
+> > > <code-out-title>Folder contents</code-out-title>
 > > > ```
 > > > tutorial.ga
 > > > ```
@@ -127,11 +125,11 @@ For this section, we will use a very simple workflow consisting of two text mani
 
 The `tutorial.ga` file defines the workflow in JSON format; if we are confident we have a functional workflow, we don't need to worry about its contents or modify it. However, we need a second file, the so-called 'job file', which specifies the particular dataset and parameter inputs which should be used to execute the workflow. We can create a template for this file using the `planemo workflow_job_init` subcommand.
 
-> ### {% icon hands_on %} Hands-on: Creating the job file
+> <hands-on-title>Creating the job file</hands-on-title>
 >
 > 1. Run the `planemo workflow_job_init` subcommand.
 >
->    > ### {% icon code-in %} Input: workflow_job_init
+>    > <code-in-title>workflow_job_init</code-in-title>
 >    > ```shell
 >    > planemo workflow_job_init tutorial.ga -o tutorial-init-job.yml
 >    > # Now let's view the contents
@@ -140,7 +138,7 @@ The `tutorial.ga` file defines the workflow in JSON format; if we are confident 
 >    > The `planemo workflow_job_init` command identifies the inputs of the workflow provided and creates a template job file with placeholder values for each.
 >    {:.code-in}
 >
->    > ### {% icon code-out %} Output: File contents
+>    > <code-out-title>File contents</code-out-title>
 >    > ```yaml
 >    > Dataset 1:
 >    >   class: File
@@ -156,7 +154,7 @@ The `tutorial.ga` file defines the workflow in JSON format; if we are confident 
 >
 > 2. Create two files which can be used as inputs:
 >
->    > ### {% icon code-in %} Input: Creating the input files
+>    > <code-in-title>Creating the input files</code-in-title>
 >    > ```shell
 >    > printf "hello\nworld" > dataset1.txt
 >    > printf "hello\nuniverse!" > dataset2.txt
@@ -165,7 +163,7 @@ The `tutorial.ga` file defines the workflow in JSON format; if we are confident 
 >    >
 >    {:.code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```shell
 >    > dataset1.txt  dataset2.txt  tutorial.ga  tutorial-init-job.yml
 >    > ```
@@ -173,15 +171,16 @@ The `tutorial.ga` file defines the workflow in JSON format; if we are confident 
 >
 > 3. Replace the placeholder values in the job file, so that it looks like the following:
 >
->    > ```yaml
->    > Dataset 1:
->    >   class: File
->    >   path: dataset1.txt
->    > Dataset 2:
->    >   class: File
->    >   path: dataset2.txt
->    > Number of lines: 3
->    > ```
+>    ```yaml
+>    Dataset 1:
+>      class: File
+>      path: dataset1.txt
+>    Dataset 2:
+>      class: File
+>      path: dataset2.txt
+>    Number of lines: 3
+>    ```
+>
 > Now we are ready to execute the workflow with our chosen parameters!
 {: .hands_on}
 
@@ -191,11 +190,11 @@ Now we have a simple workflow, we can run it using `planemo run`. At this point 
 
 {% snippet faqs/galaxy/preferences_admin_api_key.md %}
 
-> ### {% icon hands_on %} Hands-on: Running our workflow
+> <hands-on-title>Running our workflow</hands-on-title>
 >
 > 1. Run the `planemo run` subcommand.
 >
->    > ### {% icon code-in %} Input: planemo run
+>    > <code-in-title>planemo run</code-in-title>
 >    > ```shell
 >    > planemo run tutorial.ga tutorial-init-job.yml --galaxy_url <SERVER_URL> --galaxy_user_key <YOUR_API_KEY> --history_name "Test Planemo WF" --tags "planemo-tutorial"
 >    > ```
@@ -205,7 +204,7 @@ Now we have a simple workflow, we can run it using `planemo run`. At this point 
 > 2. Navigate to the web browser - you should be able to see a new history has been created with the chosen name and tag.<br>One potential disadvantage of the previous command is that it waits until the invoked workflow has fully completed. For our very small example, this doesn't matter, but for a workflow which takes hours or days to finish, it might be undesirable. Fortunately, `planemo run` provides a `--no_wait` flag which exits as soon as the workflow has been successfully scheduled.
 >
 > 3. Run the `planemo run` subcommand with the `--no_wait` flag.
->    > ### {% icon code-in %} Input: planemo run
+>    > <code-in-title>planemo run</code-in-title>
 >    > ```shell
 >    > planemo run tutorial.ga tutorial-init-job.yml --galaxy_url <SERVER_URL> --galaxy_user_key <YOUR_API_KEY> --history_name "Test Planemo WF with no_wait" --tags "planemo-tutorial" --no_wait
 >    > ```
@@ -219,30 +218,32 @@ We've now executed the same workflow twice. If you inspect your histories and wo
 
 Every object associated with Galaxy, including workflows, datasets and dataset collections, have hexadecimal IDs associated with them, which look something like `6b15dfc0393f172c`. Once the datasets and workflows we need have been uploaded to Galaxy once, we can use these IDs in our subsequent workflow invocations.
 
-> ### {% icon hands_on %} Hands-on: Running our workflow using dataset and workflow IDs
+> <hands-on-title>Running our workflow using dataset and workflow IDs</hands-on-title>
 >
 > 1. Navigate to one of the histories to get dataset IDs for the input datasets. For each one:
 >    1. Click on the {% icon galaxy-info %} *View details* icon on the dataset in the history.
 >    2. Under the heading `Dataset Information`, find the row `History Content API ID` and copy the hexadecimal ID next to it.
 > 2. Modify `tutorial-init-job.yml` to look like the following:
->    > ```yaml
->    > Dataset 1:
->    >   class: File
->    >   # path: dataset1.txt
->    >   galaxy_id: <ID OF DATASET 1>
->    > Dataset 2:
->    >   class: File
->    >   # path: dataset2.txt
->    >   galaxy_id: <ID OF DATASET 2>
->    > Number of lines: 3
->    > ```
+>
+>    ```yaml
+>    Dataset 1:
+>      class: File
+>      # path: dataset1.txt
+>      galaxy_id: <ID OF DATASET 1>
+>    Dataset 2:
+>      class: File
+>      # path: dataset2.txt
+>      galaxy_id: <ID OF DATASET 2>
+>    Number of lines: 3
+>    ```
+>
 > 3. Now we need to get the workflow ID:
 >    1. Go to the workflows panel in Galaxy and find one of the workflows that have just been uploaded.
 >    2. From the dropdown menu, select `Edit`, to take you to the workflow editing interface.
 >    3. The URL in your browser will look something like `https://usegalaxy.eu/workflow/editor?id=34d18f081b73cb15`. Copy the part after `?id=` - this is the workflow ID.
 > 4. Run the `planemo run` subcommand using the new workflow ID.
 >
->    > ### {% icon code-in %} Input: planemo run
+>    > <code-in-title>planemo run</code-in-title>
 >    > ```shell
 >    > planemo run <WORKFLOW ID> tutorial-init-job.yml --galaxy_url <SERVER_URL> --galaxy_user_key <YOUR_API_KEY> --history_name "Test Planemo WF with Planemo" --tags "planemo-tutorial" --no_wait
 >    > ```
@@ -253,23 +254,23 @@ Every object associated with Galaxy, including workflows, datasets and dataset c
 
 Planemo provides a useful profile feature which can help simplify long commands. The idea is that flags which need to be used multiple times in different invocations can be combined together and run as a single profile. Let's see how this works below.
 
-> ### {% icon hands_on %} Hands-on: Creating and using Planemo profiles
+> <hands-on-title>Creating and using Planemo profiles</hands-on-title>
 >
 > 1. Create a Planemo profile with the following command:
->    > ### {% icon code-in %} Input: planemo run
+>    > <code-in-title>planemo run</code-in-title>
 >    > ```shell
 >    > planemo profile_create planemo-tutorial --galaxy_url <SERVER_URL> --galaxy_user_key <YOUR_API_KEY>
 >    > ```
 >    {:.code-in}
 >
->    > ### {% icon code-out %} Output: Terminal
+>    > <code-out-title>Terminal</code-out-title>
 >    > ```shell
 >    > Profile [planemo-tutorial] created.
 >    > ```
 >    > You can view and delete existing profiles using the `profile_list` and `profile_delete` subcommands.
 >    {:.code-out}
 > 2. Now we can run our workflow yet again using the profile we have created:
->    > ### {% icon code-in %} Input: planemo run
+>    > <code-in-title>planemo run</code-in-title>
 >    > ```shell
 >    > planemo run <WORKFLOW ID> tutorial-init-job.yml --profile planemo-tutorial --history_name "Test Planemo WF with profile" --tags "planemo-tutorial"
 >    > ```
@@ -305,16 +306,16 @@ Every step along the way comes with solutions, which you can expand at any time,
 
 As a very first step, however, let's look at how the material for this part is arranged.
 
-> ### {% icon hands_on %} Hands-on: Step into and explore the pangolin folder
+> <hands-on-title>Step into and explore the pangolin folder</hands-on-title>
 >
-> > ### {% icon code-in %} Input
+> > <code-in-title></code-in-title>
 > > ```shell
 > > cd ../pangolin
 > > ls
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Folder contents
+> > <code-out-title>Folder contents</code-out-title>
 > > ```
 > > data  solutions  vcf2lineage.ga
 > > ```
@@ -326,12 +327,12 @@ The file `vcf2lineage.ga` defines the workflow just described, while the `data/`
 
 Now, as a start, let's get the workflow running on the first batch of files in the `data/batch1/` subfolder.
 
-> ### {% icon hands_on %} Hands-on: An initial workflow run
+> <hands-on-title>An initial workflow run</hands-on-title>
 >
 > 1. Create a template job file for the `vcf2lineage.ga` workflow.
->    > ### {% icon details %} Solution
+>    > <details-title>Solution</details-title>
 >    > We need to run `workflow_job_init` on the `vcf2lineage.ga` workflow.
->    > > ### {% icon code-in %} Input: workflow_job_init
+>    > > <code-in-title>workflow_job_init</code-in-title>
 >    > > ```shell
 >    > > planemo workflow_job_init vcf2lineage.ga -o vcf2lineage-job.yml
 >    > > # Now let's view the contents
@@ -339,7 +340,7 @@ Now, as a start, let's get the workflow running on the first batch of files in t
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output: File contents
+>    > > <code-out-title>File contents</code-out-title>
 >    > > ```yaml
 >    > > Reference genome:
 >    > >   class: File
@@ -360,7 +361,7 @@ Now, as a start, let's get the workflow running on the first batch of files in t
 >
 > 2. Replace the placeholder values: `Reference genome` should point to `data/NC_045512.2_reference_sequence.fasta`, `Variant calls` should contain all the VCF files in `data/batch1`, and `min-AF for consensus variant` should be set to `0.7`.
 >
->    > ### {% icon tip %} Hint: Creating the `Variant calls` collection
+>    > <tip-title>Hint: Creating the `Variant calls` collection</tip-title>
 >    > This is the trickiest part and you should consider writing a script to solve it. The entry in the job file should look something like this at the end:
 >    >
 >    > ```yaml
@@ -380,7 +381,7 @@ Now, as a start, let's get the workflow running on the first batch of files in t
 >    > There should be one entry under `elements` for each of the 312 files under `data/batch1`.
 >    {: .tip}
 >
->    > ### {% icon details %} Solution
+>    > <details-title>Solution</details-title>
 >    > Adding the `Reference genome` dataset and `min-AF for consensus variant` parameter is straightforward. Modify the `vcf2lineage-job.yml` file and save it:
 >    >
 >    > ```yaml
@@ -423,8 +424,8 @@ Now, as a start, let's get the workflow running on the first batch of files in t
 >    {: .details}
 >
 > 3. Now that we have a complete job file, let's run the workflow.
->    > ### {% icon details %} Solution
->    > > ### {% icon code-in %} Input: workflow_job_init
+>    > <details-title>Solution</details-title>
+>    > > <code-in-title>workflow_job_init</code-in-title>
 >    > > ```shell
 >    > > planemo run vcf2lineage.ga vcf2lineage-job.yml --profile planemo-tutorial --history_name "vcf2lineage test"
 >    > > ```
@@ -437,15 +438,15 @@ We have now performed a test invocation of the vcf2lineage workflow. It was alre
 
 The next step is to automate this process so we can run the workflow on each of the 10 `batch*/` directories in the `data/` folder. We can imagine that these are newly produced data released at regular intervals, which need to be analysed.
 
-> ### {% icon hands_on %} Hands-on: Automating vcf2lineage execution
+> <hands-on-title>Automating vcf2lineage execution</hands-on-title>
 >
 > 1. If we want to execute the workflow multiple times, we will once again encounter the issue that the datasets and workflow will be reuploaded each time. To avoid this, let's obtain the dataset ID for the `Reference genome` (which stays the same for each invocation) and the workflow ID for the `vcf2lineage.ga` workflow.
 >
 > 2. Now let's create a template job file `vcf2lineage-job-template.yml` which we can modify at each invocation as necessary. We can start with the output of `workflow_job_init` and add the `Reference genome` dataset ID and set `min-AF for consensus variant` to `0.7` again.
 >
->    > ### {% icon details %} Solution
+>    > <details-title>Solution</details-title>
 >    > We need to run `workflow_job_init` on the `vcf2lineage.ga` workflow.
->    > > ### {% icon code-in %} Input: Original output of workflow_job_init
+>    > > <code-in-title>Original output of workflow_job_init</code-in-title>
 >    > > ```yaml
 >    > > Reference genome:
 >    > >   class: File
@@ -461,7 +462,7 @@ The next step is to automate this process so we can run the workflow on each of 
 >    > > ```
 >    > {:.code-in}
 >    >
->    > > ### {% icon code-out %} Output: Prepared `vcf2lineage-job-template.yml` file contents
+>    > > <code-out-title>Prepared `vcf2lineage-job-template.yml` file contents</code-out-title>
 >    > > ```yaml
 >    > > Reference genome:
 >    > >   class: File
@@ -481,7 +482,7 @@ The next step is to automate this process so we can run the workflow on each of 
 >
 > 3. Write a shell script to iterate over all the batches, create a job file and invoke with `planemo run`. After execution, move the processed batch to `data/complete`.
 >
->    > ### {% icon details %} Solution
+>    > <details-title>Solution</details-title>
 >    > Once again, there is no single exact solution. Here is one possibility:
 >    >
 >    > ```shell
@@ -501,7 +502,7 @@ The next step is to automate this process so we can run the workflow on each of 
 >
 > 4. Run your script. Do you notice any issues? What could be improved?
 >
->    > ### {% icon tip %} Upload problems
+>    > <tip-title>Upload problems</tip-title>
 >    > Uploads can cause several issues:
 >    > * The default planemo behavior is to upload datasets one at a time, which ensures the server cannot be overloaded, but is slow. To upload all datasets simultaneously, you could use the `--simultaneous_uploads` flag.
 >    > * If one of the upload jobs fails, the workflow will by default not be invoked - Planemo will just upload the datasets and finish. To override this behavior and start a workflow even if one or more uploads fail, you can use the `--no_check_uploads_ok` flag.
@@ -520,6 +521,6 @@ The [Galaxy SARS-CoV-2 genome surveillance bot](https://github.com/usegalaxy-eu/
 
 
 # Conclusion
-{:.no_toc}
+
 
 You should now have a better idea about how to run Galaxy workflows from the command line and how to apply the ideas you have learnt to your own project.

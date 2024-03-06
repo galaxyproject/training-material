@@ -1,0 +1,66 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+
+Style/Next:
+  Enabled: false
+
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+# Unless is a struggle for some of us non-ruby folks
+Style/NegatedIf:
+  Enabled: false
+
+# No.
+Metrics:
+  Enabled: false
+
+# This one is nice but we have some non-ruby-ish things that cause it to freeze
+# empty hashes that are about to be modified.
+#
+# We don't want that. It breaks things.
+Style/MutableConstant:
+  Enabled: false
+
+# These could be fixed but we also just don't care.
+Naming/MethodName:
+  Enabled: false
+
+Naming/VariableName:
+  Enabled: false
+
+# Anti LLM (no I just like short variable names)
+Naming/MethodParameterName:
+  Enabled: false
+
+# no. I like my long chains of parsing.
+Style/MultilineBlockChain:
+  Enabled: false
+
+# We're mostly a collection of scripts for humans to use, not importable modules.
+Naming/FileName:
+  Enabled: false
+
+# % formatting is fine
+Style/FormatString:
+  Enabled: false
+
+# Like yeah it's fine when you want to but this takes way too much time to write.
+Style/FormatStringToken:
+  Enabled: false
+
+# doesn't play nice with jekyll caching
+Style/ClassVars:
+  Enabled: false
+
+# SOME of these were valid
+# The rest were there for clarity (e.g. parsing cases)
+# Where you want to be SURe you get every branch
+Lint/DuplicateBranch:
+  Enabled: false
+
+# We keep having bugs, so, disable this for now.
+Style/FrozenStringLiteralComment:
+  Enabled: false

@@ -37,11 +37,10 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 ---
 
-# Introduction
-{:.no_toc}
+This tutorial will show you how to visualise RNA Sequencing Counts with R
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
@@ -49,12 +48,12 @@ With RNA-Seq data analysis, we generated tables containing list of DE genes, the
 
 Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.
 
-> ### {% icon tip %} Prerequisites
+> <tip-title>Prerequisites</tip-title>
 > It is expected that you are already somewhat familiar with the R basics (how to create variables, create and access lists, etc.) If you are not yet comfortable with those topics, we recommend that you complete the requirements listed at the start of this tutorial first, before proceeding.
 >
 > If you are starting with this tutorial, you will need to import a dataset:
 >
-> > ### {% icon hands_on %} Hands-on: Using datasets from Galaxy
+> > <hands-on-title>Using datasets from Galaxy</hands-on-title>
 > >
 > > 1. Upload the following URL to Galaxy:
 > >    ```
@@ -72,7 +71,7 @@ Sometimes we want to have some customizations on visualization, some complex tab
 > >
 > {: .hands_on}
 >
-> > ### {% icon hands_on %} Hands-on: Using datasets without Galaxy
+> > <hands-on-title>Using datasets without Galaxy</hands-on-title>
 > > 1. Read the tabular file into an object called `annotatedDEgenes`:
 > >
 > >    ```R
@@ -86,7 +85,7 @@ Sometimes we want to have some customizations on visualization, some complex tab
 
 In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -116,7 +115,7 @@ Adding layers in this fashion allows for extensive flexibility and customization
 
 ## Volcano plot
 
-> ### {% icon hands_on %} Hands-on: First plot, step by step
+> <hands-on-title>First plot, step by step</hands-on-title>
 >
 > 1. Load `ggplot2`
 >
@@ -124,7 +123,7 @@ Adding layers in this fashion allows for extensive flexibility and customization
 >     library(ggplot2)
 >     ```
 >
->    > ### {% icon tip %} Tip: Didn't work?
+>    > <tip-title>Didn't work?</tip-title>
 >    > You might need to install ggplot2 first
 >    >
 >    > ```R
@@ -148,7 +147,7 @@ Adding layers in this fashion allows for extensive flexibility and customization
 >
 >     X-axis is now the log2 FC and and Y-axis the p-value
 >
->     > ### {% icon comment %} Data format
+>     > <comment-title>Data format</comment-title>
 >     >
 >     > Some `ggplot2` functions need data in the 'long' format:
 >     > - a column for every dimension
@@ -164,7 +163,7 @@ Adding layers in this fashion allows for extensive flexibility and customization
 >          geom_point()
 >    ```
 >
->    > ### {% icon comment %} Graphical representations of the data in the plot
+>    > <comment-title>Graphical representations of the data in the plot</comment-title>
 >    >
 >    > `ggplot2` offers many different `geoms`; we will use some common ones today, including:
 >    > - `geom_point()` for scatter plots, dot plots, etc.
@@ -181,7 +180,7 @@ This plot is called a volcano plot, a type of scatterplot that shows statistical
 
 The current version of the plot is not really informative, mostly due to the high number of p-values close to zero. In order to resolve this, we will apply `-log10()` to the y-axis values.
 
-> ### {% icon hands_on %} Hands-on: Volcano plot with log values on y-axis
+> <hands-on-title>Volcano plot with log values on y-axis</hands-on-title>
 >
 > 1. Create volcano plot with log values on the y-axis
 >
@@ -193,18 +192,18 @@ The current version of the plot is not really informative, mostly due to the hig
 
 ![Volcano Plot version 0](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png)
 
-> ### {% icon question %} Categorising expression levels
+> <question-title>Categorising expression levels</question-title>
 >
 > 1. Why are there no points with log2 FC between -1 and 1?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The input file we used are the 130 genes with a significant adjusted p-values (below < 0.05) and an absolute fold change higher than 2 (log2 FC < -1 or log 2 FC > 1).
 > >
 > {: .solution}
 {: .question}
 
-> ### {% icon comment %} The `+` sign
+> <comment-title>The `+` sign</comment-title>
 >
 > The `+` in the `ggplot2` package is particularly useful because it allows you to modify existing `ggplot` objects. This means you can easily set up plot templates and conveniently explore different types of plots, so the above plot can also be generated with code like this:
 >
@@ -230,7 +229,7 @@ The current version of the plot is not really informative, mostly due to the hig
 > ```
 {: .comment}
 
-> ### {% icon comment %} Some extra comments
+> <comment-title>Some extra comments</comment-title>
 >
 > Anything you put in the `ggplot()` function can be seen by any `geom` layers that you add (i.e., these are universal plot settings). This includes the `x-` and `y-axis` mapping you set up in `aes()`.
 >
@@ -239,7 +238,7 @@ The current version of the plot is not really informative, mostly due to the hig
 
 Building plots with `ggplot2` is typically an iterative process. We start by defining the dataset we'll use, lay out the axes, and choose a `geom`. We can now modify this plot to extract more information from it.
 
-> ### {% icon hands_on %} Hands-on: Format plot
+> <hands-on-title>Format plot</hands-on-title>
 >
 > 1. Add transparency (`alpha`) to avoid overplotting
 >
@@ -284,11 +283,11 @@ We have now a nice Volcano plot:
 
 ![Volcano Plot version 5](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v5.png)
 
-> ### {% icon question %} Standard error over the `-log10` of the adjusted `P-value`
+> <question-title>Standard error over the `-log10` of the adjusted `P-value`</question-title>
 >
 > Create a scatter plot of the standard error over the `-log10` of the adjusted `P-value` with the chromosomes showing in different colors. Make sure to give your plot relevant axis labels.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
@@ -305,7 +304,7 @@ We have now a nice Volcano plot:
 
 `ggplot2` has a special technique called faceting that allows us to split one plot into multiple plots based on a factor included in the dataset. We will use it to split our volcano plot into five panels, one for each chromosome.
 
-> ### {% icon hands_on %} Hands-on: Volcano plot by chromosomes
+> <hands-on-title>Volcano plot by chromosomes</hands-on-title>
 >
 > 1. Split volcano plot by chromosome using `facet_grid`
 >
@@ -344,7 +343,7 @@ We have now a nice Volcano plot:
 >      theme_bw()
 >    ```
 >
->    > ### {% icon details %} `ggplot2` themes
+>    > <details-title>`ggplot2` themes</details-title>
 >    >
 >    > In addition to `theme_bw()`, which changes the plot background to white, `ggplot2` comes with several other themes which can be useful to quickly change the look of your visualization.
 >    >
@@ -370,11 +369,11 @@ We have now a nice Volcano plot:
 
 ![Volcano Plot version 8](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v8.png)
 
-> ### {% icon question %} Standard error over the `-log10` of the adjusted `P-value`
+> <question-title>Standard error over the `-log10` of the adjusted `P-value`</question-title>
 >
 > Create a scatter plot of the standard error over the `-log10` of the adjusted `P-value` with the chromosomes showing in different colors and one facet per strand. Make sure to give your plot relevant axis labels.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
@@ -393,7 +392,7 @@ We have now a nice Volcano plot:
 
 We would like now to make a barplot showing the number of differentially expressed genes.
 
-> ### {% icon hands_on %} Hands-on: Barplot of the number of DE genes
+> <hands-on-title>Barplot of the number of DE genes</hands-on-title>
 >
 > 1. Create a barplot with `geom_bar` function of the number of DE genes for each feature with one plot per chromosome
 >
@@ -406,11 +405,11 @@ We would like now to make a barplot showing the number of differentially express
 
 ![Bar plot 1](../../images/rna-seq-counts-to-viz-in-r/barPlot_v1.png)
 
-> ### {% icon question %} Remove the legend
+> <question-title>Remove the legend</question-title>
 >
 > The chromosome is labeled on the individual plot facets so we don't need the legend. Use the help file for `geom_bar` and any other online resources to remove the legend from the plot.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > ggplot(data = annotatedDEgenes, aes(x = Feature, fill = Chromosome)) +
@@ -423,7 +422,7 @@ We would like now to make a barplot showing the number of differentially express
 {: .question}
 
 
-> ### {% icon question %} Create a R script with plots
+> <question-title>Create a R script with plots</question-title>
 >
 > Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the [RStudio `ggplot2` cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization-2.1.pdf) for inspiration).
 >
@@ -435,7 +434,7 @@ We would like now to make a barplot showing the number of differentially express
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 Data manipulation and visualization are important parts of any RNA-Seq analysis. Galaxy provides several tools for that as explained in several tutorials:
 

@@ -22,22 +22,21 @@ tags:
   - interactive-tools
 key_points:
 - How to work with JupyterLab interactively within Galaxy
-contributors:
+contributions:
+  authorship:
   - annefou
+  editing:
+  - hexylena
 subtopic: analyse
 ---
-
-
-# Introduction
-{:.no_toc}
-
-{% include topics/galaxy-interface/tutorials/jupyterlab/tutorial_origin.md %}
 
 [JupyterLab](https://jupyterlab.readthedocs.io/en/stable) is an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment).
 Like most IDEs, it provides a graphical interface for R/Python, making it more user-friendly, and providing dozens of useful features.
 We will introduce additional benefits of using JupyterLab as you cover the lessons.
 
-> ### Agenda
+{% include topics/galaxy-interface/tutorials/jupyterlab/tutorial_origin.md %}
+
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -65,7 +64,7 @@ As shown on the figure above, JupyterLab interface is made of 3 main areas:
 
 Now that we are ready to start exploring JupyterLab, we will want to keep a record of the commands we are using. To do this we can start a Notebook.
 
-> ### {% icon hands_on %} Hands-on: Start a notebook
+> <hands-on-title>Start a notebook</hands-on-title>
 >
 > 1. On the left side bar, in the **File Browser**, double-click on the file called **ipython_galaxy_notebook.ipynb**. This will open the
 > default notebook in the main work area.
@@ -74,7 +73,7 @@ Now that we are ready to start exploring JupyterLab, we will want to keep a reco
 
 A new notebook appears in the centre panel. Before we go any further, you should learn to save your script.
 
-> ### {% icon hands_on %} Hands-on: Save a Python notebook
+> <hands-on-title>Save a Python notebook</hands-on-title>
 >
 > 1. Click the **File** menu and select **Save Notebook As...
 >    Alternatively, you can also:
@@ -91,7 +90,7 @@ The new script `ipython_galaxy_notebook.ipynb` should appear in the **File Brows
 
 ![jupyterlab default notebook](../../images/jupyterlab_session_default_notebook.png)
 
-> ### {% icon comment %} Note: supported programming languages
+> <comment-title>Note: supported programming languages</comment-title>
 >
 > Depending on your JupyterLab instance, the list of supported programming languages may vary.
 > On [Live.useGalaxy.eu](https://live.usegalaxy.eu), the following programming languages are currently supported:
@@ -106,7 +105,7 @@ The new script `ipython_galaxy_notebook.ipynb` should appear in the **File Brows
 
 By default, a **Python notebook** is started. Don't worry if you are not familiar with *Python* programming language, it is not necessary for this tutorial. The same functionalities applies for any available programming languages.
 
-> ### {% icon comment %} Note: switching to another programming language
+> <comment-title>Note: switching to another programming language</comment-title>
 >
 > Once you have created a Notebook, you can switch to another available programming language (**Switch kernel**).
 > 1. On the top right of your running Notebook, click on **Python 3**. A new window pops up:
@@ -119,11 +118,16 @@ By default, a **Python notebook** is started. Don't worry if you are not familia
 > 3. A new notebook is created with the programming language of your choice.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Import Python libraries
+> <hands-on-title>Import Python libraries</hands-on-title>
 >
-> 1. Click on a cell of your notebook to edit it (verify that it is defined as a `Code` cell)
-> 2. Enter the following lines : `import numpy as np` and `import matplotlib.pyplot as plt`.
-> 3. `shift`+`return` to run the cell or click on the run cell button.
+> 1. Click on a cell of your notebook to edit it (verify that it is defined as a "Code" cell)
+> 2. Enter the following lines:
+>    ```python
+>    import numpy as np
+>    import matplotlib.pyplot as plt
+>    ```
+>
+> 3. <kbd>Shift+Return</kbd> to run the cell or click on the run cell button.
 >
 {: .hands_on}
 
@@ -131,14 +135,30 @@ By default, a **Python notebook** is started. Don't worry if you are not familia
 
 In this tutorial we are going to simply plot a simple graph using generated data.
 
-> ### {% icon hands_on %} Hands-on: Draw a simple plot
+> <hands-on-title>Draw a simple plot</hands-on-title>
 >
-> 1. Generate a simple dataset `x = np.linspace(0, 2, 100)` and `y = x**2`
-> 2. Create your figure with the command `fig, ax = plt.subplots( nrows=1, ncols=1 ,figsize=(15, 10) )`
->   -  `nrows=1, ncols=1` means you will have one plot in your figure (one row and one column)
->   -  `figsize` parameter determine the size of the figure
-> 3. Draw the plot with the command `plt.plot(x, y);` ![Simple plot in Jupyter](../../images/jupyterlab_plot.png)
+> 1. Generate a simple dataset
+>   
+>    ```python
+>    x = np.linspace(0, 2, 100)
+>    y = x**2
+>    ```
 >
+> 2. Create your figure with the command:
+>
+>    ```python
+>    fig, ax = plt.subplots( nrows=1, ncols=1 ,figsize=(15, 10) )
+>    ```
+>
+>    - `nrows=1, ncols=1` means you will have one plot in your figure (one row and one column)
+>    - `figsize` parameter determine the size of the figure
+> 3. Draw the plot with the command
+>
+>    ```python
+>    plt.plot(x, y);
+>    ```
+>
+>    ![Simple plot in Jupyter](../../images/jupyterlab_plot.png)
 {: .hands_on}
 
 # Interaction between JupyterLab and Galaxy
@@ -149,7 +169,7 @@ You can import data from Galaxy history using the `get(12)` command, with the nu
 
 If you want to save a file you generated in your notebook, use the `put("file_name")` command. That is what we are going to do with our distribution plot.
 
-> ### {% icon hands_on %} Hands-on: Save an Jupyter generated image into a Galaxy History
+> <hands-on-title>Save an Jupyter generated image into a Galaxy History</hands-on-title>
 >
 > 1. Create an image file with the figure you just draw with the command `fig.savefig('simpleplot.png')`
 > 2. Export your image into your history with the command  `put('simpleplot.png')`
@@ -163,13 +183,10 @@ Once you are done with you analysis or anytime during the editing process, you c
 
 This will create a new notebook `.pynb` file in your history every time you click on this icon.
 
-> ### {% icon hands_on %} Hands-on: Closing JupyterLab
+> <hands-on-title>Closing JupyterLab</hands-on-title>
 >
 > 1. Click **User**: **Active Interactive Tools**
 >
 > 2. Tick {% icon galaxy-selector %} the box of your Jupyter Interactive Tool, and click **Stop**
 >
 {: .hands_on}
-
-# Conclusion
-{:.no_toc}

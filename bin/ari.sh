@@ -45,7 +45,13 @@ cover="$output".png
 srcdir="$(dirname "$source")"
 
 # Metadata
-meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors | join(", ")' -r)"
+ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors | join(", ")' > /dev/null || ec=$?
+if (( ec == 0 )); then
+	meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors | join(", ")' -r)"
+else
+	meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributions.authorship | join(", ")' -r)"
+fi
+
 meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
 REVISION="$(git log -1 --format=%H)"
 
@@ -76,9 +82,9 @@ ruby bin/ari-prep-script.rb "${build_dir}" "${engine}"
 echo "  Extracting slides"
 convert "${slides}" -resize 1920x1080 "${build_dir}/slides.%03d.png"
 
-echo "  Building Video | $(npm bin)/editly --json ${build_dir}/editly.json5"
+echo "  Building Video | ./node_modules/.bin/editly --json ${build_dir}/editly.json5"
 $FFMPEG_PATH/ffmpeg -version
-$(npm bin)/editly --json "${build_dir}/editly.json5"
+./node_modules/.bin/editly --json "${build_dir}/editly.json5"
 
 # Mux it together
 echo "  Muxing"

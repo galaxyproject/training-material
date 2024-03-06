@@ -1,6 +1,6 @@
 ---
 title: Directly obtaining UCSC sourced *genome* identifiers
-area: datasets
+area: data upload
 box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]

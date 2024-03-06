@@ -18,7 +18,7 @@ key_points:
   - "Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL."
   - "One can retrieve NGS data from Sequence Read Archive"
   - "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
-subtopic: core
+subtopic: next-steps
 contributors:
   - nekrut
   - mvdbeek
@@ -28,11 +28,9 @@ contributors:
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.
 
-# Introduction to sequencing data
-
 ## FASTQ manipulation and quality control
 
-[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [here](https://en.wikipedia.org/wiki/FASTQ_format) (below you will find an explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [on the Wikipedia article for FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) (below you will find an explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
 
 The FASTQ format looks like this:
 
@@ -73,9 +71,9 @@ It is common to prepare pair-end and mate-pair sequencing libraries. This is hig
 
 Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two FASTQ files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:
 
-#### Two single files
+### Two single files
 
-**File 1**
+File 1
 
 ```
  @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
@@ -88,7 +86,7 @@ Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or
  ABC@CC77CFCEG;F9<F89<9--C,CE,--C-6C-,CE:++7:,CF
 ```
 
- **File 2**
+File 2
 
 ```
 @M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
@@ -101,11 +99,11 @@ CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
 -6AC,EE@::CF7CFF<<FFGGDFFF,@FGGGG?F7FEGGGDEFF>FF
 ```
 
-> ### {% icon comment %} Read order is important
+> <comment-title>Read order is important</comment-title>
 > Note that read IDs are **identical** in two files and they are listed in **the same** order. In some cases read IDs in the first and second file may be appended with `/1` and `/2` tags, respectively.
 {: .comment}
 
-#### Interleaved file
+### Interleaved file
 
 ```
 @1/1
@@ -128,7 +126,7 @@ HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 
 Here the first and the second reads are identified with `/1` and `/2` tags.
 
-> ### {% icon comment %} FASTQ format is a loose standard
+> <comment-title>FASTQ format is a loose standard</comment-title>
 > FASTQ format is not strictly defined and its variations will always cause headache for you. See [this page](https://www.ncbi.nlm.nih.gov/sra/docs/submitformats/) for more information.
 {: .comment}
 
@@ -141,7 +139,7 @@ As we've seen above, FASTQ datasets contain two types of information:
 
 The base qualities allow us to judge how trustworthy each base in a sequencing read is. The following excerpt from an excellent [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf) by Friederike D&uuml;ndar, Luce Skrabanek, Paul Zumbo explains what base qualities are:
 
-> ### {% icon comment %} From "Introduction to differential gene expression analysis using RNA-seq"
+> <comment-title>From "Introduction to differential gene expression analysis using RNA-seq"</comment-title>
 > Illumina sequencing is based on identifying the individual nucleotides by the fluorescence signal emitted upon their incorporation into the growing sequencing read. Once the fluorescence intensities are extracted and translated into the four letter code. The deduction of nucleotide sequences from the images acquired during sequencing is commonly referred to as base calling.
 ><br>
 > Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the DNA sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called [Phred score](http://www.phrap.com/phred/), $$Q$$, which is proportional to the probability $$p$$ that a base call is incorrect, where $$Q = −10lg(p)$$. For example, a Phred score of 10 corresponds to one error in every ten base calls ($$Q = −10lg(0.1)$$), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base.
@@ -404,7 +402,7 @@ Finally, datasets can be uploaded directly from NCBI's short read archive:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Q4t-beYZ-do" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > We will use this last approach, getting data from NCBI SRA, in this tutorial.
 >
@@ -420,11 +418,11 @@ SARS-CoV-2 is undoubtedly the most talked about biological system of the day. We
 
 First we need to find a good dataset to play with. The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  operated by the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies. Let's do that:
 
-> ### {% icon hands_on %} Hands-on: Get Metadata from NCBI SRA
+> <hands-on-title>Get Metadata from NCBI SRA</hands-on-title>
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
-> ![Find data](../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
+>    ![Find data](../../images/find_mgh_data.png) (Alternatively, you simply click on this [link directly to the data](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
 > 3. The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
 > 4. Download metadata describing these datasets by:
 >   - clicking on **Send to:** dropdown
@@ -438,7 +436,7 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 
 Now that we have downloaded this file we can go to a Galaxy instance and start processing it.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Note that the file we just downloaded is **not** sequencing data itself. Rather, it is *metadata* describing properties of sequencing reads. We will filter this list down to just a few accessions that will be used in the remainder of this tutorial.
 >
@@ -446,9 +444,9 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 
 ## Process and filter `SraRunInfo.csv` file in Galaxy
 
-> ### {% icon hands_on %} Hands-on: Upload `SraRunInfo.csv` file into Galaxy
+> <hands-on-title>Upload `SraRunInfo.csv` file into Galaxy</hands-on-title>
 >
-> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
+> 1. Go to your Galaxy instance of choice such as one of the [UseGalaxy.* instances](https://galaxyproject.org/usegalaxy/) or any other. (This tutorial uses usegalaxy.org).
 > 1. Click *Upload Data* button:
 > ![Data upload button](../../images/upload_button.png)
 > 1. In the dialog box that would appear click "*Choose local files*" button:
@@ -461,25 +459,23 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 
 Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets `SRR11954102` and `SRR12733957`. So, let's pull them out.
 
-> ### {% icon warning %} Beware of **Cut**s
-> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface.
-{: .warning}
+{% snippet faqs/galaxy/analysis_cut.md %}
 
-> ### {% icon hands_on %} Hands-on: Creating a subset of data
+> <hands-on-title>Creating a subset of data</hands-on-title>
 >
 > 1. Find {% tool [Select lines that match an expression](Grep1) %} tool in **Filter and Sort** section of the tool panel.
->    > ### {% icon tip %} Tip: Finding tools
+>    > <tip-title>Finding tools</tip-title>
 >    > Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.
 >    {: .tip}
 > 1. Make sure the `SraRunInfo.csv` dataset we just uploaded is listed in the {% icon param-file %} "*Select lines from*" field of the tool form.
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
-> 1. Click `Execute` button.
+> 1. Click the `Run Tool` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
-> 1. Cut the first column from the file using {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
+> 1. Cut the first column from the file using {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
 > 1. Change "*Delimited by*" to `Comma`
 > 1. In "*List of fields*" select `Column: 1`.
-> 1. Hit `Execute`
+> 1. Hit `Run Tool`
 > This will produce a text file with just two lines:
 > ```
 > SRR12733957
@@ -491,12 +487,12 @@ Now that we have identifiers of datasets we want we need to download the actual 
 
 ## Download sequencing data
 
-> ### {% icon hands_on %} Hands-on: Get data from SRA
+> <hands-on-title>Get data from SRA</hands-on-title>
 >
 > 1. Run {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0) %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
->        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
->    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to take a break.
+>        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Advanced Cut**" from the previous step.
+>    - **Click** the `Run Tool` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to take a break.
 >
 > 2. Several entries are created in your history panel when you submit this job:
 >    - **`Pair-end data (fasterq-dump)`**: Contains Paired-end datasets (if available)
@@ -505,7 +501,7 @@ Now that we have identifiers of datasets we want we need to download the actual 
 >    - **`fasterq-dump log`** Contains Information about the tool execution
 {: .hands_on}
 
-The first three items are actually *collections* of datasets. *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end reads, single reads, and *other*. See the [Collections tutorial](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) and watch [videos](https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) (with names beginning with "Dataset Collections") for more information.
+The first three items are actually *collections* of datasets. *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end reads, single reads, and *other*. See the [Collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) and watch [videos](https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) (with names beginning with "Dataset Collections") for more information.
 
 Explore the collections by first **clicking** on the collection name in the history panel. This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.
 
@@ -522,7 +518,7 @@ However, if you retrieved the datasets used in this tutorial's examples above, t
 
 In this part of the tutorial we will perform variant calling and basic analysis of the datasets downloaded above. We will start by downloading the Wuhan-Hu-1 SARS-CoV-2 reference sequence, then run adapter trimming, alignment and variant calling.
 
-> ### {% icon comment %} The usegalaxy.* COVID-19 analysis project
+> <comment-title>The usegalaxy.* COVID-19 analysis project</comment-title>
 > This tutorial uses a subset of the data and runs through the
 > [Variation Analysis](https://covid19.galaxyproject.org/genomics/4-variation/)
 > section of [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
@@ -534,9 +530,9 @@ In this part of the tutorial we will perform variant calling and basic analysis 
 
 The reference genome data for today is for SARS-CoV-2, "Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome", having the accession ID of NC_045512.2.
 
-This data is available from directly from GenBank using the following [link](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz).
+This data is [available from directly from GenBank](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz).
 
-> ### {% icon hands_on %} Hands-on: Get the reference genome data
+> <hands-on-title>Get the reference genome data</hands-on-title>
 >
 > 1. Import the following file into your history:
 >
@@ -552,7 +548,7 @@ This data is available from directly from GenBank using the following [link](htt
 
 Removing sequencing adapters improves alignments and variant calling. **fastp** {% icon tool %} can automatically detect widely used sequencing adapters.
 
-> ### {% icon hands_on %} Hands-on: Running `fastp`
+> <hands-on-title>Running `fastp`</hands-on-title>
 >
 > Run {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
@@ -564,11 +560,11 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 ## Alignment with  **Map with BWA-MEM**
 
-**BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
+**Map with BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
 
-> ### {% icon hands_on %} Hands-on: Map sequencing reads to reference genome
+> <hands-on-title>Map sequencing reads to reference genome</hands-on-title>
 >
-> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
+> Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
@@ -582,7 +578,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 **MarkDuplicates** {% icon tool %} removes duplicate sequences originating from library preparation artifacts and sequencing artifacts. It is important to remove these artefactual sequences to avoid artificial overrepresentation of single molecule.
 
-> ### {% icon hands_on %} Hands-on: Remove duplicates
+> <hands-on-title>Remove duplicates</hands-on-title>
 >
 > Run {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2)%} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
@@ -596,7 +592,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 After the duplicate marking step above we can generate statistic about the alignment we have generated.
 
-> ### {% icon hands_on %} Hands-on: Generate alignment statistics
+> <hands-on-title>Generate alignment statistics</hands-on-title>
 >
 > 1. **Samtools stats** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM file"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
@@ -613,7 +609,7 @@ After the duplicate marking step above we can generate statistic about the align
 
 **Realign reads** {% icon tool %} corrects misalignments around insertions and deletions. This is required in order to accurately detect variants.
 
-> ### {% icon hands_on %} Hands-on: Realign reads around indels
+> <hands-on-title>Realign reads around indels</hands-on-title>
 >
 > Run {% tool [Realign reads](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
@@ -627,7 +623,7 @@ After the duplicate marking step above we can generate statistic about the align
 
 This step adds indel qualities into our alignment file. This is necessary in order to call variants using **Call variants** with lofreq {% icon tool %}
 
-> ### {% icon hands_on %} Hands-on: Add indel qualities
+> <hands-on-title>Add indel qualities</hands-on-title>
 >
 > Run {% tool [Insert indel qualities](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
@@ -641,7 +637,7 @@ This step adds indel qualities into our alignment file. This is necessary in ord
 
 We are now ready to call variants.
 
-> ### {% icon hands_on %} Hands-on: Call variants
+> <hands-on-title>Call variants</hands-on-title>
 >
 > Run {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
@@ -662,13 +658,13 @@ We are now ready to call variants.
 
 The output of this step is a collection of VCF files that can be visualized in a genome browser.
 
-## Annotate variant effects with **SnpEff eff:**
+## Annotate variant effects with **SnpEff eff: annotate variants for SARS-CoV-2**
 
 We will now annotate the variants we called in the previous step with the effect they have on the SARS-CoV-2 genome.
 
-> ### {% icon hands_on %} Hands-on: Annotate variant effects
+> <hands-on-title>Annotate variant effects</hands-on-title>
 >
-> Run {% tool [SnpEff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
+> Run {% tool [SnpEff eff: annotate variants for SARS-CoV-2](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
 >    - *"Output format"*: `VCF (only if input is VCF)`
 >    - *"Create CSV report, useful for downstream analysis (-csvStats)"*: `Yes`
@@ -684,10 +680,10 @@ The output of this step is a VCF file with added variant effects.
 
 We will now select various effects from the VCF and create a tabular file that is easier to understand for humans.
 
-> ### {% icon hands_on %} Hands-on: Create table of variants
+> <hands-on-title>Create table of variants</hands-on-title>
 >
 > Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff: annotate variants for SARS-CoV-2** {% icon tool %})
 >    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON`
 >    - *"One effect per line"*: `Yes`
 >    - *"empty field text"*: `.`
@@ -703,7 +699,7 @@ Interesting variants include the C to T variant at position 14408 (14408C/T) in 
 
 We will now summarize our analysis with MultiQC, which generates a beautiful report for our data.
 
-> ### {% icon hands_on %} Hands-on: Summarize data
+> <hands-on-title>Summarize data</hands-on-title>
 >
 > Run {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
@@ -725,11 +721,9 @@ The above state allows us to judge the quality of the data. In this particular c
 
 ## Collapse data into a single dataset
 
-We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see this video:
+We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see [this video on collections](https://www.youtube.com/embed/ypuFZ1RKMIY).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-> ### {% icon hands_on %} Hands-on: Collapse a collection
+> <hands-on-title>Collapse a collection</hands-on-title>
 >
 > Run {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `snpsift extract fields` (output of **SnpSift Extract Fields** {% icon tool %})
@@ -740,7 +734,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 
 You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we have a collection as an input:
 
-> ### {% icon code-in %} Input: A collection with two items
+> <code-in-title>A collection with two items</code-in-title>
 > A collection element named `SRR11954102`
 >
 >```
@@ -758,7 +752,7 @@ You can see that this tool takes lines from all collection elements (in our case
 
 We will have a single dataset as the output:
 
-> ### {% icon code-out %} Output: A single dataset
+> <code-out-title>A single dataset</code-out-title>
 >
 >then the **Collapse Collection** {% icon tool %} will produce this:
 >
@@ -789,19 +783,21 @@ This is interesting because these datasets were collected well before B.1.1.7 be
 
 After a dataset is converted into an intermediary result (such as variant table generated during the previous step) by primary analysis, this intermediary data needs to be processed further to produce biological insight. IN Galaxy this can be done by starting a Jupyter notebook directly on history datasets. Here is a short demo.
 
-> ### {% icon warning %} Jupyter is in Beta
+> <warning-title>Jupyter is in Beta</warning-title>
 > Jupyter notebook functionality in Galaxy is currently in Beta. It means that we are still working on it and its implementation is constantly changing. Be aware of this fact.
 {: .warning}
 
-> ### {% icon hands_on %} Hands-on: Analyze data in Jupyter from Galaxy
+> <hands-on-title>Analyze data in Jupyter from Galaxy</hands-on-title>
 >
 > 1. Open {% icon tool %} **Interactive Jupyter Notebook** from section **Interactive Tools**
 > 1. *"Do you already have a notebook?"*: `Start with a fresh notebook`
 > 1. *"Include data into the environment"*: Select history dataset containing the output of the collection collapse step
-> 1. Click `Execute`
+> 1. Click `Run Tool`
 > 1. It will create a dataset in the history that will be permanently yellow (running)
 > 1. You will see the following banner:
-> ![Jupyter startup banner](../../images/jupyter_start.png)
+>
+>    ![Jupyter startup banner](../../images/jupyter_start.png)
+>
 > 1. Click on `User menu`. You may need to wait a bit (go get coffee quickly). In the end you will a `Jupyter Interactive Tool` link. Click on it.
 > 1. This will open a new tab with a fully functional Jupyter environment:
 > ![Jupyter running](../../images/jupyter_running.png)
@@ -809,25 +805,31 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. Type `!ls data/` in the first cell and you will see a file from Galaxy history.
 > 1. Upgrade [Pandas](https://pandas.pydata.org/) and [Seaborn](https://seaborn.pydata.org/index.html): `!pip install -U pandas seaborn`
 > 1. Read data into a dataframe:
->```
-> import pandas as pd
-> df = pd.read_csv('data/Collapsed_collection',sep='\t')
-> # Drop duplicates is required to get rid of SnpEff artifacts
-> df = df.drop_duplicates(ignore_index=True)
-```
-> {% icon warning %} Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+>
+>    ```
+>    import pandas as pd
+>    df = pd.read_csv('data/Collapsed_collection',sep='\t')
+>    # Drop duplicates is required to get rid of SnpEff artifacts
+>    df = df.drop_duplicates(ignore_index=True)
+>    ```
+>    {% icon warning %} Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+>
 > 1. Filter variants with intermediate frequencies between 20% and 80%:
->```
->df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
->```
+>
+>    ```
+>    df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
+>    ```
+>
 > 1. Plot relationship between variant position and alternative allele frequency:
->```
->import seaborn as sns
->%matplotlib inline
->sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
->```
-> This plot shows how variants are distributed across the SARS-CoV-2 genome:
-> ![Seaborn plot](../../images/sns_plot.png)
+>
+>    ```
+>    import seaborn as sns
+>    %matplotlib inline
+>    sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
+>    ```
+>
+>    This plot shows how variants are distributed across the SARS-CoV-2 genome:
+>    ![Seaborn plot](../../images/sns_plot.png)
 > 1. Play with it!
 {: .hands_on}
 
@@ -836,7 +838,7 @@ After a dataset is converted into an intermediary result (such as variant table 
 
 We can also import data directly into Google Colab:
 
-> ### {% icon hands_on %} Hands-on: Analyze data in Google Colab
+> <hands-on-title>Analyze data in Google Colab</hands-on-title>
 >
 > 1. Expand history dataset containing the output of the collection collapse step
 > 1. Right click on {% icon galaxy-save %} (disk) icon and copy link to clipboard
@@ -873,6 +875,8 @@ We can also import data directly into Google Colab:
 -->
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.
+
+<!-- GTN:IGNORE:002 -->

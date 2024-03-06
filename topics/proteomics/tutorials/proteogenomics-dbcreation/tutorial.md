@@ -30,21 +30,19 @@ subtopic: multi-omics
 tags: [proteogenomics]
 ---
 
-# Introduction
-{: .no_toc}
 
 **Proteogenomics** involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene expression. In the first section of the tutorial, we will create a protein database (FASTA) using RNA-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization
 
 ![Novel Peptides](../../images/potential_novel_publication.png)
 
 
-Proteogenomics integrates **RNA-Seq** data for generating customized protein sequence databases with mass spectrometry-based proteomics data, which are matched to these databases to identify protein sequence variants. (Cancer Res. (2017); 77(21):e43-e46. doi: <a target="_blank" href="https://doi.org/10.1158/0008-5472.CAN-17-0331">10.1158/0008-5472.CAN-17-0331</a>).
+Proteogenomics integrates **RNA-Seq** data for generating customized protein sequence databases with mass spectrometry-based proteomics data, which are matched to these databases to identify protein sequence variants. ({% cite Chambers_2017 %}).
 
 ![Proteogenomics](../../images/workflow_objective1.png)
 
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 > 1. TOC
@@ -53,7 +51,6 @@ Proteogenomics integrates **RNA-Seq** data for generating customized protein seq
 {: .agenda}
 
 # Overview
-{: .no_toc}
 
 This tutorial focuses on creating a **FASTA** database generated from RNA-seq data. There are two outputs from this workflow: (1) a **sequence database** consisting of variants and known reference sequences and (2) mapping files containing **genomic** and **variant** mapping data.
 
@@ -67,7 +64,7 @@ The first part of the tutorial deals with creating the FASTA file containing seq
 In this tutorial, protein and the total RNA sample was obtained from the early development of B-cells from mice. It was obtained at two developmental stages of B-cells: *Ebf1* -/- pre-pro-B and *Rag2* -/- pro-B. Please refer to the original study  [Heydarian, M. et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4276347/)for details.
 
 
-> ### {% icon hands_on %} Hands-on: data upload and organization
+> <hands-on-title>data upload and organization</hands-on-title>
 >
 > 1. Create a new history and name it something meaningful (e.g. *Proteogenomics DB creation*)
 >
@@ -75,7 +72,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 > 2. Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
->    https://zenodo.org/api/files/bf8c34bc-ed55-4b1c-9b69-edfe0926ea84/Trimmed_ref_5000_uniprot_cRAP.fasta
+>    https://zenodo.org/records/1489208/files/Trimmed_ref_5000_uniprot_cRAP.fasta
 >    https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger
 >    https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 >    ```
@@ -102,7 +99,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 
 UCSC prefaces chromosome names with chr while Ensembl does not. To perform this action, we use the Replace Text in a specific column - a [regular expression](https://docs.python.org/3/library/re.html) tool.
 
-> ### {% icon hands_on %} Hands-on: Replace Text in a specific column
+> <hands-on-title>Replace Text in a specific column</hands-on-title>
 >  1. **Replace Text in a specific column** {% icon tool %} with the following parameters:
 >  2. {% icon param-file %} *"File to process"*: `Mus_musculus.GRCm38.86.gtf`
 >  3. Change numbered chromosome names
@@ -117,11 +114,11 @@ UCSC prefaces chromosome names with chr while Ensembl does not. To perform this 
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
-
+>
 >  6. Rename the output to `Mus_musculus.GRCm38.86.fixed.gtf`
 >
 >
-> > ### {% icon comment %} Note on chromosome name changes
+> > <comment-title>Note on chromosome name changes</comment-title>
 > >  This step is necessary to help identify and correct errors due to inputs having non-identical chromosome identifiers and/or different chromosome sequence content. [Galaxy Support](https://galaxyproject.org/support/chrom-identifiers/)
 > {: .comment}
 {: .hands_on}
@@ -131,7 +128,7 @@ UCSC prefaces chromosome names with chr while Ensembl does not. To perform this 
 
 The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/hisat) alignment tool. It maps next-generation sequence (NGS) reads to the reference genome. This tool requires an RNA-seq file (.FASTQ) and a reference genome file in Gene transfer format (GTF). This .gtf file is obtained from the Ensembl database. When successful, this tool outputs a .bam file (binary version of a SAM: **S**equence **A**lignment/**M**ap).
 
-> ### {% icon hands_on %} Hands-on: Alignment with HISAT2
+> <hands-on-title>Alignment with HISAT2</hands-on-title>
 >
 >  1. **HISAT2** {% icon tool %} with the following parameters:
 >    - {% icon param-select %} *"Source for the reference genome"*: `Use a built-in genome`
@@ -142,7 +139,7 @@ The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/h
 > 2. Inspect {% icon galaxy-eye %} the resulting files
 > 3. Rename the output to `HISAT_Output.BAM`
 >
-> > ### {% icon comment %} Note on strandedness
+> > <comment-title>Note on strandedness</comment-title>
 > > Note that if your reads are from a stranded library, you need to choose the appropriate
 > > setting for "Specify strand information" mentioned above. For single-end reads, use `F` or `R`.
 > > `F` means that a read corresponds to a forward transcript. `R` means that a read corresponds to the reverse
@@ -173,7 +170,7 @@ FreeBayes is capable of calling variant haplotypes shorter than a read length wh
 FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in terms of observation frequency rather than called genotypes. To do so, use `--pooled-continuous` and set input filters to a suitable level. Allele observation counts will be described by AO and RO fields in the VCF output.
 
 
-> ### {% icon hands_on %} Hands-on: Variant Calling with FreeBayes
+> <hands-on-title>Variant Calling with FreeBayes</hands-on-title>
 >
 > 1. **FreeBayes** {% icon tool %} with the following parameters:
 >    - {% icon param-select %} *"Choose the source for the reference genome"*: `Locally cached file`
@@ -188,7 +185,7 @@ FreeBayes can act as a frequency-based pooled caller and can describe variants a
 > Note: FreeBayes may take some time...be patient!!!!
 {: .hands_on}
 
-> ### {% icon comment %} FreeBayes options
+> <comment-title>FreeBayes options</comment-title>
 >
 >    Galaxy allows five levels of control over FreeBayes options, provided by the Choose
 >    parameter selection level menu option. These are:
@@ -212,7 +209,7 @@ FreeBayes can act as a frequency-based pooled caller and can describe variants a
 
 ## Variant annotation and Genome Mapping
 
-[CustomProDB]( http://dx.doi.org/10.1093/bioinformatics/btt543) generates custom protein FASTA sequences files from exosome or transcriptome data. Once Freebayes creates the .vcf file, CustomProDB uses this file to generate a custom protein FASTA file from the transcriptome data. For this tool, we use Ensembl 89 mmusculus (GRm38.p5) (dbsnp142) as the genome annotation. We create three FASTA files from CustomProDB: (1) a variant FASTA file for short indels, (2) a Single Amino acid Variant (SAV) FASTA file, an SQLite database file (genome mapping and variant mapping) for mapping proteins to a genome and (3) an RData file for variant protein coding sequences.
+CustomProDB ({% cite Wang_2013 %}) generates custom protein FASTA sequences files from exosome or transcriptome data. Once Freebayes creates the .vcf file, CustomProDB uses this file to generate a custom protein FASTA file from the transcriptome data. For this tool, we use Ensembl 89 mmusculus (GRm38.p5) (dbsnp142) as the genome annotation. We create three FASTA files from CustomProDB: (1) a variant FASTA file for short indels, (2) a Single Amino acid Variant (SAV) FASTA file, an SQLite database file (genome mapping and variant mapping) for mapping proteins to a genome and (3) an RData file for variant protein coding sequences.
 The reference protein set can be filtered by transcript expression level (RPKM calculated from a BAM file), and variant protein forms can be predicted based on variant calls (SNPs and indels reported in a VCF file).
 
 Annotations CustomProDB depends on a set of annotation files (in RData format) to
@@ -222,7 +219,7 @@ data manager to create these annotations to make them available for users.
 ![customproDB](../../images/CustomProDB.png)
 
 
-> ### {% icon hands_on %} Hands-on: Generate protein FASTAs from exosome or transcriptome data
+> <hands-on-title>Generate protein FASTAs from exosome or transcriptome data</hands-on-title>
 >
 > 1. **CustomProDB** {% icon tool %} with the following parameters:
 >    - {% icon param-select %}  *"Will you select a genome annotation from your history or use a built-in annotation?"*: `Use built in genome annotation`
@@ -261,7 +258,7 @@ variant annotation file will be used to visualize the variants in the Multi-omic
 Its input can include not only the alignments of raw reads used by other transcript assemblers, but also alignments of longer sequences that have been assembled from those reads. To identify differentially expressed genes between experiments, StringTie's output can be processed by specialized software like Ballgown, Cuffdiff or other programs (DESeq2, edgeR, etc.).
 
 
-> ### {% icon hands_on %} Hands-on: Transcript assembly with StringTie
+> <hands-on-title>Transcript assembly with StringTie</hands-on-title>
 >
 > 1. **StringTie** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input mapped reads"*: `HISAT_Output.BAM`
@@ -286,7 +283,7 @@ Its input can include not only the alignments of raw reads used by other transcr
 StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be sorted by genomic location (coordinate position). This file contains spliced read alignments and can be produced directly by programs such as HISAT2. We recommend using HISAT2 as it is a fast and accurate alignment program. Every spliced read alignment (i.e. an alignment across at least one junction) in the input BAM file must contain the tag XS to indicate the genomic strand that produced the RNA from which the read was sequenced. Alignments produced by HISAT2 (when run with the `--dta` option) already include this tag, but if you use a different read mapper
 you should check that this XS tag is included for spliced alignments.
 
-> ### {% icon details %} Note about parameter settings
+> <details-title>Note about parameter settings</details-title>
 > Be sure to run HISAT2 with the `--dta` option for alignment (under 'Spliced alignment options'),
 > for the best results.
 >
@@ -317,7 +314,7 @@ you should check that this XS tag is included for spliced alignments.
 
 The original form of this program is also distributed as part of the Cufflinks suite, under the name [CuffCompare](http://cole-trapnell-lab.github.io/cufflinks/cuffcompare/). Most of the options and parameters of CuffCompare are supported by GffCompare, while new features will likely be added to GffCompare in the future.
 
-> ### {% icon hands_on %} Hands-on: compare assembled transcripts against a reference annotation
+> <hands-on-title>compare assembled transcripts against a reference annotation</hands-on-title>
 >
 > 1. **GffCompare** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_output.gtf`
@@ -334,7 +331,7 @@ The original form of this program is also distributed as part of the Cufflinks s
 >
 {: .hands_on}
 
-> ### {% icon details %} GffCompare vs CuffCompare
+> <details-title>GffCompare vs CuffCompare</details-title>
 > A notable difference between GffCompare and CuffCompare is that when a single query GTF/GFF file is
 > given as input along with a reference annotation (`-r` option), GFFCompare switches into "annotation mode"
 > and it generates a `.annotated.gtf` file instead of the `.merged.gtf` produced by CuffCompare with the same
@@ -353,7 +350,7 @@ The original form of this program is also distributed as part of the Cufflinks s
 
 ## Translate transcripts
 
-> ### {% icon hands_on %} Hands-on: Translate transcripts to protein sequence
+> <hands-on-title>Translate transcripts to protein sequence</hands-on-title>
 >
 > First, we must convert the GffCompare annotated GTF file to BED format.
 >
@@ -382,7 +379,7 @@ The original form of this program is also distributed as part of the Cufflinks s
 >
 {: .hands_on}
 
-> ### {% icon comment %} Note on data formats
+> <comment-title>Note on data formats</comment-title>
 > - The tabular output can be converted to a sqlite database using the Query_Tabular tool.
 > - The sqlite table should be named: feature_cds_map.
 > - The names for the columns should be: name, chrom, start, end, strand, cds_start, cds_end
@@ -398,7 +395,7 @@ In this section we will perform the following tasks:
 along with the UniProt and cRAP databases.
 - The **Regex Text Manipulation** tool is used to manipulate the FASTA file to make it SearchGUI-compatible.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}
 >   - Click {% icon param-repeat %} *"Insert Input FASTA File(s)"* twice so that there are a total of three *"Input FASTA File(s)"* blocks.
@@ -414,19 +411,19 @@ along with the UniProt and cRAP databases.
 >     - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
 >
 {: .hands_on}
-> ### {% icon comment %} Tool parameters explained
+> <comment-title>Tool parameters explained</comment-title>
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
 {: .comment}
 
-> ### {% icon comment %} CustomProDB generated protein Accession names need to be changed for PeptideShaker
+> <comment-title>CustomProDB generated protein Accession names need to be changed for PeptideShaker</comment-title>
 > PeptideShaker does not allow greaterthan sign, comma, or spaces in the protein accession name.
 > PeptideShaker also requires the FASTA ID to start with a source, e.g. *>sp|Q8C4J7|* for SwissProt entries.  Nonstandard entries must be prefixed *generic|*.
 > We will also need to similarily modify the accessions in the genomic mapping and and variant annotation outputs. For eg: ENSEMBL-PRO (output from CustomProDB) and STRG (from StringTie) are not standard format.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: FASTA to Tabular
+> <hands-on-title>FASTA to Tabular</hands-on-title>
 > 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
 >    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from (fasta)`
 >
@@ -449,7 +446,8 @@ along with the UniProt and cRAP databases.
 > - Rename it as **CustomProDB Merged Fasta**
 >
 {: .hands_on}
-> ### {% icon comment %} **FASTA-to-Tabular** and **Tabular-to-FASTA** versions
+
+> <comment-title><b>FASTA-to-Tabular</b> and <b>Tabular-to-FASTA</b> versions</comment-title>
 > Please make sure the tool version is 1.1.1
 > Also, while running the workflow, the Title column for **Tabular-to-FASTA** might come empty, so please make sure you select Title Column as "1".
 {: .comment}
@@ -465,7 +463,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 
 ## Genomic mapping database
 
-> ### {% icon hands_on %} Hands-on: Create Database for genomic mapping
+> <hands-on-title>Create Database for genomic mapping</hands-on-title>
 >
 > 1. **SQLite to tabular for SQL query** {% icon hands_on %} with the following parameters:
 >   - {% icon param-file %} *"SQLite Database"*: `genomic_mapping.sqlite` from CustomProDB
@@ -533,7 +531,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 
 We will repeat the process for the variant annotations (this file will be used as a input to the new updates that will be made on the Multiomics Visualization platform).  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database.
 
-> ### {% icon hands_on %} Hands-on: Create database for variant annotations
+> <hands-on-title>Create database for variant annotations</hands-on-title>
 >
 > 1. **SQLite to tabular** {% icon tool%} with the following parameters:
 >  - {% icon param-file %} *"SQLite Database"*: `variant_annotations.sqlite` from CustomProDB
@@ -586,7 +584,7 @@ Finally, we can create a database which can be used to search Mass spectrometry 
 
 To do so:
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
 >   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
@@ -598,7 +596,7 @@ To do so:
 >
 {: .hands_on}
 
-> ### {% icon comment %} Tool parameters explained
+> <comment-title>Tool parameters explained</comment-title>
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
@@ -608,7 +606,7 @@ To do so:
 
 Generate a list of Reference Proteins. Identify peptides that are contained in the reference proteins will be filtered out in the next tutorial.
 
-> ### {% icon hands_on %} Hands-on: FASTA to Tabular
+> <hands-on-title>FASTA to Tabular</hands-on-title>
 > 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
 >    - {% icon param-file %} *"Convert these sequences"*: `HISAT_Output.rpkm (fasta)`
 >
@@ -638,23 +636,18 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 >
 {: .hands_on}
 
-> ### {% icon comment %} **FASTA-to-Tabular** and **Tabular-to-FASTA** versions
+> <comment-title><b>FASTA-to-Tabular</b> and <b>Tabular-to-FASTA</b> versions</comment-title>
 > Please make sure the tool version is 1.1.1
 {: .comment}
 
-> ### {% icon comment %} Tool versions
+> <comment-title>Tool versions</comment-title>
 > - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
 {: .comment}
 
-
-# **Conclusion**
-{:.no_toc}
+# Conclusion
 
 This completes the walkthrough of the proteogenomics database creation workflow. This tutorial is a guide to have a database and mapping files ready for  Database searching and novel peptide analysis. Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
 
-
 {: .comment}
-
-

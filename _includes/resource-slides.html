@@ -1,14 +1,11 @@
-{% if include.material.type == 'introduction' %}
-  {% assign subfolder = 'slides' %}
-{% else %}
-  {% assign subfolder = 'tutorials' %}
-{% endif %}
+{% assign subfolder = 'tutorials' %}
 
 {% if include.material.slides %}
-    <span class="btn-group">
-	<a class="visually-hidden" href="{{ site.baseurl }}/topics/{{ include.topic }}/{{subfolder}}{% unless include.material.type == 'introduction' %}/{{ include.material.tutorial_name }}{% endunless %}/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
-    <span class="btn-group">
-        <a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/{{subfolder}}/{{ include.material.tutorial_name }}{% unless include.material.type == 'introduction' %}/slides{% endunless %}.html" title="Slides">
+<div class="btn-group">
+	<a class="visually-hidden" href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/{{subfolder}}/{{ include.material.tutorial_name }}/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/{{subfolder}}/{{ include.material.tutorial_name }}/slides.html" title="Slides">
             {% icon slides aria=false %}
         </a>
         <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
@@ -17,43 +14,49 @@
         <ul class="dropdown-menu">
         {% assign translations = include.material.translations.slides | size %}
         {% if translations > 0 %}
-          <div class="dropdown-item"><strong>Curated translations</strong></div>
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
            {% for lang in include.material.translations.slides %}
-            <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{ include.topic }}/{{subfolder}}/{{ include.material.tutorial_name }}/slides_{{lang | upcase }}.html" title="{{ lang }}">
+		   <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="{{ lang }}" href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/{{subfolder}}/{{ include.material.tutorial_name }}/slides_{{lang | upcase }}.html" title="{{ lang }}">
                 {{language[lang]}}
             </a>
+			</li>
            {% endfor %}
-            </hr>
         {% endif %}
 
-        <div class="dropdown-item"><strong>Automatic translations</strong></div>
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
         {% for lang in language %}{% unless lang[0] == 'en' %}
-            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2F{{subfolder}}%2F{{ include.material.tutorial_name }}{% unless include.material.type == 'introduction' %}%2Fslides{% endunless %}.html&edit-text=&act=url" title="{{ inst[0] }}">
+		<li class="dropdown-item">
+            <a class="dropdown-item" hreflang="{{ lang[0] }}" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.material.topic_name }}%2F{{subfolder}}%2F{{ include.material.tutorial_name }}%2Fslides.html&edit-text=&act=url" title="{{ inst[0] }}">
                 {{ lang[1] }}
             </a>
+		</li>
         {% endunless %}{% endfor %}
-        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2F{{subfolder}}%2F{{ include.material.tutorial_name }}%2Fslides.html&edit-text=&act=url" title="{{ inst[0] }}">
+		<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.material.topic_name }}%2F{{subfolder}}%2F{{ include.material.tutorial_name }}%2Fslides.html&edit-text=&act=url" title="{{ inst[0] }}">
             More Languages
         </a>
+		</li>
 
-	<a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ include.topic }}/{{subfolder}}/{% unless include.material.type == 'introduction' %}{{ include.material.tutorial_name }}/{% endunless %}slides-plain.html" aria-label="more accessible, plain text slides">
+	<li class="dropdown-item">
+	<a class="btn btn-default topic-icon" href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/{{subfolder}}/{{ include.material.tutorial_name }}/slides-plain.html" aria-label="more accessible, plain text slides">
 		{% icon text-document aria=false %} Plain text slides
 	</a>
+	</li>
     </ul>
-    {% endif %}
-    </span>
+</div>
+{% endif %}
 
 <!-- video slides -->
 {% if include.material.video %}
-<span class="btn-group">
+<div class="btn-group">
   <!-- add video button -->
-  <a class="btn btn-default topic-icon" href="{{ site.baseurl }}/videos/watch.html?v={{ include.topic }}/{{subfolder}}/{{ include.material.tutorial_name }}{% unless include.material.type == 'introduction' %}/slides{% endunless%}" title="Video Slides (text-to-speech)">
+  <a class="btn btn-default topic-icon" href="{{ site.baseurl }}/videos/watch.html?v={{ include.material.topic_name }}/{{subfolder}}/{{ include.material.tutorial_name }}/slides" title="Video Slides (text-to-speech)">
     {% icon video-slides aria=false %}
   </a>
 
-
-  <!-- add dropdown with links to different languages for the video-->
   {% if translations > 0 %}
+  <!-- add dropdown with links to different languages for the video-->
   <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="sr-only">Toggle Dropdown</span>
   </a>
@@ -61,15 +64,12 @@
 
     <div class="dropdown-item"><strong>Video Languages</strong></div>
       {% for lang in include.material.translations.slides %}
-      <a class="dropdown-item" href="{{ site.baseurl }}/videos/watch.html?v={{ include.topic }}/{{subfolder}}/{{ include.material.tutorial_name }}/slides_{{lang | upcase}}" title="{{ lang }}">
+      <a class="dropdown-item" href="{{ site.baseurl }}/videos/watch.html?v={{ include.material.topic_name }}/{{subfolder}}/{{ include.material.tutorial_name }}/slides_{{lang | upcase}}" title="{{ lang }}">
          {{language[lang]}}
       </a>
       {% endfor %}
-
   </ul>
   {% endif %}
 
+</div>
 {% endif %}
-
-</span>
-</span>

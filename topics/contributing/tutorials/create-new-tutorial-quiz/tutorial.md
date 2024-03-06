@@ -9,14 +9,13 @@ objectives:
 time_estimation: "15m"
 key_points:
   - "Quizzes are helpful for both self-directed learning, and ensuring that in synchronous classes, students are all following the material"
-subtopic: extras
 contributors:
   - hexylena
 ---
 
 Interactive quizzes can be used either alone, or with a classroom of students, to check student's knowledge.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >

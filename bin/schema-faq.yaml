@@ -43,8 +43,11 @@ mapping:
             - hands_on
             - question
             - comment
+            - warning
+            - details
+            - none
         description: |
-            The type of box that should be used when rendering this FAQ.
+            The type of box that should be used when rendering this FAQ. Use `none` if it should not be in a box, but just plain text.
     contributors:
         type: seq
         required: true
@@ -58,4 +61,13 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
+              - ORGANISATIONS
+    redirect_from:
+        type: seq
+        sequence:
+            - type: str
+        description: |
+            If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
+        examples:
+        - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
 ---

@@ -43,7 +43,7 @@ Here you will learn to write both Make and Snakemake workflows. We teach two wor
 
 This tutorial is aimed at students and Galaxy community members who might want to convert Snakemake workflows into Galaxy workflows, but need to understand how Snakemake workflows work.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -118,13 +118,13 @@ This may seem tedious, to annotate the inputs and outputs of each step, but beca
 
 ### Downloading Data
 
-> ### {% icon code-in %} Bash
+> <code-in-title>Bash</code-in-title>
 > <pre class="highlight"><code><span class="s2">wget https://.../GCA_000017985.1_ASM1798v1_genomic.fna.gz
 > wget https://.../SRR2584866_1.fq.gz</span>
 > </code></pre>
 > With bash we download each read file one by one
 {: .code-in}
-> ### {% icon code-out %} Make
+> <code-out-title>Make</code-out-title>
 > <pre class="highlight"><code><span class="nb">%.gz</span>:
 > 	<span class="s2">wget https://.../$@ -O $@</span>
 > </code></pre>
@@ -133,11 +133,11 @@ This may seem tedious, to annotate the inputs and outputs of each step, but beca
 
 ### FastQC
 
-> ### {% icon code-in %} Bash
+> <code-in-title>Bash</code-in-title>
 > <pre class="highlight"><code><span class="s2">fastqc *.fq</span></code></pre>
 > Generate ALL of the FastQC reports
 {: .code-in}
-> ### {% icon code-out %} Make
+> <code-out-title>Make</code-out-title>
 > <pre class="highlight"><code><span class="nb">%.fastqc.html</span>: <span class="kt">%.fq</span>
 > 	<span class="s2">fastqc $<</span>
 > </code></pre>
@@ -146,7 +146,7 @@ This may seem tedious, to annotate the inputs and outputs of each step, but beca
 
 ### Trimming Data
 
-> ### {% icon code-in %} Bash
+> <code-in-title>Bash</code-in-title>
 > <pre class="highlight"><code><span class="s2">trimmomatic PE</span> <span class="kt">SRR2589044_1.fq.gz SRR2589044_2.fq.gz</span> \
 >                <span class="nb">SRR2589044_1.trim.fq SRR2589044_1un.trim.fq \
 >                SRR2589044_2.trim.fq SRR2589044_2un.trim.fq</span> \
@@ -159,7 +159,7 @@ This may seem tedious, to annotate the inputs and outputs of each step, but beca
 > </code></pre>
 > Run these two individual trimmomatic commands with these hardcoded filenames. If you need to run a new file make sure to carefully change all of the uses of it!
 {: .code-in}
-> ### {% icon code-out %} Make
+> <code-out-title>Make</code-out-title>
 > <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq.gz %_2.fq.gz</span>
 > 	<span class="s2">trimmomatic PE $^ \
 > 		$(shell basename $(word 1,$^) .fq).trim.fq \
@@ -180,7 +180,7 @@ So when we translated from Bash to Make, every time
 - we annotated outputs
 - we made the command a 'template'
 
-> ### {% icon comment %} DO NOT REMEMBER THIS
+> <comment-title>DO NOT REMEMBER THIS</comment-title>
 > There is a lot of Make specific things going on in the above examples. You do not need to know it! We just wanted to provide working, correct examples. This tutorial is focused on Snakemake, so read these for context and understanding of why we use Snakemake, not reading them to learn Makefiles.
 {: .comment}
 
@@ -267,12 +267,12 @@ Make will read the above makefile like so:
 
 Notice that Make isn't running every task, it's reading the one task you asked for, and seeing what's required for that based on your annotations of inputs and outputs.
 
-> ### {% icon question %} Check your understanding
+> <question-title>Check your understanding</question-title>
 >
 > 1. If a file is not part of the final output, or not the requested task, will it be created?
 > 2. Do you spot any omissions in the above pipeline?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. No, Make only runs the tasks for files it needs, it won't run any of the other tasks. This is part of what makes `make` fast and easily parallelisable.
 > > 2. Yes! FastQC is missing, it won't be created unless we ask for it.
 > {: .solution}
@@ -288,8 +288,8 @@ This also how we can really easily parallelise workflows: because we know the de
 
 # Snakemake
 
-> The Snakemake workflow management system is a tool to create reproducible and scalable data analyses. Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid and cloud environments, without the need to modify the workflow definition. Finally, Snakemake workflows can entail a description of required software, which will be automatically deployed to any execution environment. [source](https://snakemake.readthedocs.io/en/stable/index.html)
-{: .quote}
+> The Snakemake workflow management system is a tool to create reproducible and scalable data analyses. Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid and cloud environments, without the need to modify the workflow definition. Finally, Snakemake workflows can entail a description of required software, which will be automatically deployed to any execution environment.
+{: .quote cite="https://snakemake.readthedocs.io/en/stable/index.html"}
 
 Snakemake addresses a lot of the issues with make for use in scientific contexts: clearer pipelines and dependencies. We did not talk about it in the previous section, but where did `bowtie2` and `bowtie2-build` come from? How did those get installed? What versions are they? None of that information is included in the Makefile
 
@@ -310,14 +310,14 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 
 ### Downloading Data
 
-> ### {% icon code-in %} Make
+> <code-in-title>Make</code-in-title>
 > <pre class="highlight"><code><span class="nb">%.fq.gz</span>:
 > 	<span class="s2">wget https://zenodo.org/record/5562251/files/$@</span>
 > </code></pre>
 >
 > Generic download rule, the <code>$@</code> and <code>%</code> used are a bit opaque, you need to know what they mean to understand how the rule works.
 {: .code-in}
-> ### {% icon code-out %} Snakemake
+> <code-out-title>Snakemake</code-out-title>
 > <pre class="highlight"><code>rule download:
 > 	<span class="nb">output:
 > 		"{sample}.fq.gz"</span>
@@ -330,14 +330,14 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 
 ### FastQC
 
-> ### {% icon code-in %} Mask
+> <code-in-title>Mask</code-in-title>
 > <pre class="highlight"><code><span class="nb">%.fastqc.html</span>: <span class="kt">%.fq</span>
 > 	<span class="s2">fastqc $<</span>
 > </code></pre>
 >
 > Here is a rule to generate a single FastQC report from a single FastQ file
 {: .code-in}
-> ### {% icon code-out %} Snakemake
+> <code-out-title>Snakemake</code-out-title>
 > <pre class="highlight"><code>rule fastqc:
 > 	<span class="kt">input:
 > 		"{sample}.fq.gz"</span>
@@ -354,7 +354,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 ### Trimming Data
 
 
-> ### {% icon code-in %} Make
+> <code-in-title>Make</code-in-title>
 > <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq.gz %_2.fq.gz</span>
 > 	<span class="s2">trimmomatic PE $^ \
 > 		$(shell basename $(word 1,$^) .fq).trim.fq \
@@ -367,7 +367,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 > Here we take our very complicated and hard to understand Make rule (shell? basename? word?) with ugly and potentially quite broken multiple output syntax
 >
 {: .code-in}
-> ### {% icon code-out %} Snakemake
+> <code-out-title>Snakemake</code-out-title>
 > <pre class="highlight"><code>rule trimmomatic:
 > 	<span class="kt">input:
 > 		r1="{sample}_1.fq.gz",
@@ -393,7 +393,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 
 Now that you have seen a few rules, let's write the rest.
 
-> ### {% icon hands_on %} Hands-on: Save this Snakefile to the filesystem
+> <hands-on-title>Save this Snakefile to the filesystem</hands-on-title>
 > From here on you are going to finish writing this Snakefile on your own! We'll give you the bits you have seen up until now, and future tasks will require you to add your own rules and get to actually test out the pipeline!
 >
 > ```Snakemake
@@ -436,7 +436,7 @@ Now that you have seen a few rules, let's write the rest.
 > ```
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Install Snakemake
+> <hands-on-title>Install Snakemake</hands-on-title>
 > We're about to start doing things really with snakemake, so, it's time to install it.
 > 1. [Install Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 > 2. Create an environment for Snakemake:
@@ -460,24 +460,24 @@ Now that you have seen a few rules, let's write the rest.
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Try running snakemake!
+> <hands-on-title>Try running snakemake!</hands-on-title>
 >
 > 1. Try running snakemake
 >
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > snakemake -c1
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon tip %} "specify the maximum number of jobs"
+>    > <tip-title>"specify the maximum number of jobs"</tip-title>
 >    > If you see an error like this it might be due to an outdated version of snakemake
 >    > ```
 >    > Error: you need to specify the maximum number of jobs to be queued or executed at the same time with --jobs.
 >    > ```
 >    {: .tip}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```
 >    > Building DAG of jobs...
 >    > WorkflowError:
@@ -489,13 +489,13 @@ Now that you have seen a few rules, let's write the rest.
 >
 > 2. Run snakemake to download `SRR2584866_1.fq.gz` and `SRR2584866_2.fq.gz`
 >
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > snakemake -c1 SRR2584866_1.fq.gz SRR2584866_2.fq.gz
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```
 >    > Building DAG of jobs...
 >    > Using shell: /usr/bin/bash
@@ -560,7 +560,7 @@ Now that you have seen a few rules, let's write the rest.
 
 Now that we've got our pipeline started, let's do some more with it!
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How would you write the following task in Snakemake?
 >
@@ -568,7 +568,7 @@ Now that we've got our pipeline started, let's do some more with it!
 > <pre class="highlight"><code><span class="s2">bwa index</span> <span class="kt">GCA_000017985.1_ASM1798v1_genomic.fna</span></code></pre>
 > and it creates `GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > <pre class="highlight"><code>rule indexgenome:
 > > 	<span class="kt">input:
@@ -581,7 +581,7 @@ Now that we've got our pipeline started, let's do some more with it!
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > The command is `bwa mem GCA_000017985.1_ASM1798v1_genomic.fna SRR2584866_1.trim.fq SRR2584866_2.trim.fq | samtools sort -O bam -o SRR2584866.bam`
 >
@@ -590,7 +590,7 @@ Now that we've got our pipeline started, let's do some more with it!
 > 3.  How would you write the following task in Snakemake?
 >
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt`, the index file (but beware it does not get passed in as-is, the indexing tool expects just the `GCA_000017985.1_ASM1798v1_genomic.fna` portion.)
 > >
@@ -619,7 +619,7 @@ Now that we've got our pipeline started, let's do some more with it!
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Add the above outputs to your Pipeline
+> <hands-on-title>Add the above outputs to your Pipeline</hands-on-title>
 > If you haven't already, add the above outputs to your Snakemake pipeline. You should now have a few rules:
 >
 > - download
@@ -637,7 +637,7 @@ But this was our very first attempt at a workflow, so what might a best practice
 
 If you're not already using conda, you should be! Much scientific software you might be interested in using is already in there, probably mostly provided by the [BioConda](https://anaconda.org/bioconda/repo) repository. Writing an environment file can be pretty simple, you just need a file like this, which we customarily put in a folder named `envs/`
 
-> ### {% icon code-in %} `envs/bwa.yaml`
+> <code-in-title>`envs/bwa.yaml`</code-in-title>
 > ```yaml
 > channels:
 >   - conda-forge
@@ -651,7 +651,7 @@ If you're not already using conda, you should be! Much scientific software you m
 
 In the above code sample you can see `bwa=0.7.17`, that's the version of the `bwa` mapper we want to use which was found on [the conda repository page](https://anaconda.org/bioconda/bwa). You'll notice that after it is `=h5bf99c6_8`, this is a specific revision of the package that has been 'pinned' (i.e. we want to ensure conda installs specifically the version we know works.) That step is not necessary, but if you really care about reproducibility it can be good in a pipeline
 
-> ### {% icon hands_on %} Hands-on: Add conda
+> <hands-on-title>Add conda</hands-on-title>
 > Now you should add Conda environments where appropriate. But where is appropriate? Unix built in tools (wget, curl, gzip, cat, head, tail) generally do not need to be in conda, because they're very standard across all unix environments.
 >
 > Bioinformatics tools on the other hand, these need conda envs.
@@ -672,7 +672,7 @@ In the above code sample you can see `bwa=0.7.17`, that's the version of the `bw
 > 2. You'll need to install both `bwa` and `samtools` into the environment for the alignment step.
 > 3. Create the `envs/` directory if it does not exist.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > `envs/bwa.yaml` should look like this:
 > >
@@ -709,7 +709,7 @@ In the above code sample you can see `bwa=0.7.17`, that's the version of the `bw
 > > ```
 > >
 > >
-> > > ### {% icon comment %} How to read diffs
+> > > <comment-title>How to read diffs</comment-title>
 > > > This is a 'diff', it shows you the difference between two versions of a text file. Everything added is highlighed in light blue. Anything deleted is shown in black with a strikethrough. Importantly it shows you the context, the bits that are not highlighted, and this helps you know where the changes should go.
 > > > The first line shows the original file, and the second line shows the new file. If the names are different, it means the file has been renamed.
 > > >
@@ -765,7 +765,7 @@ In the above code sample you can see `bwa=0.7.17`, that's the version of the `bw
 
 Saving log files is key to making sure that you have a complete log of the execution of sotware. If you don't save the log files, and you're running a pipeline with 100 samples, it can be very easy to get confused about what went wrong and where. Unfortunately this is not a completely automatic process, and you'll need to manually configure it:
 
-> ### {% icon code-in %} `Snakefile`
+> <code-in-title>`Snakefile`</code-in-title>
 > ```
 > rule indexgenome:
 > 	input:
@@ -792,11 +792,11 @@ But **don't just copy/paste** the above example because:
 - Sometimes you have multiple commands in a pipeline, these all should go to different log files or you will have more trouble figuring out where your error came from.
 
 
-> ### {% icon hands_on %} Hands-on: Add log files to every step
+> <hands-on-title>Add log files to every step</hands-on-title>
 >
 > Try and add log files everywhere (err and out where appropriate) to all of your rules. And use them in the `shell` sections as well. Also put your logs under the `logs/` folder!
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > This is again a diff, things in blue were added to the file named at the top, things with black highlight were deleted. Think "track changes" mode in Google Docs or Word, except harder to read.
 > >
@@ -895,10 +895,10 @@ But **don't just copy/paste** the above example because:
 
 You've seen a couple examples above but it's best to use folders to help keep your data organised. Separate individual pipeline steps into different folders so you can more easily keep track of e.g. whether you're working with trimmed or untrimmed data.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > What sort of folders would you establish for the example pipeline in this tutorial?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > One possible solution you could consider is:
 > >
@@ -913,10 +913,10 @@ You've seen a couple examples above but it's best to use folders to help keep yo
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Do it!
+> <hands-on-title>Do it!</hands-on-title>
 > Update your pipeline to have all of datasets stored nicely in folders.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```diff
 > > diff --git a/Snakefile b/Snakefile
@@ -1018,10 +1018,10 @@ Notice how while updating data location, we only had to update the input and out
 
 In the Makefile we had an `all` rule which was the first and default action to take. Let's reproduce that.
 
-> ### {% icon hands_on %} Hands-on: Add an all task
+> <hands-on-title>Add an all task</hands-on-title>
 > It should build `alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > We add this to the very top of our file.
 > > ```diff
 > > --- a/Snakefile
@@ -1036,7 +1036,7 @@ In the Makefile we had an `all` rule which was the first and default action to t
 > >  		"reads/{sample}.fq.gz"
 > > ```
 > >
-> > > ### {% icon tip %} Why Input and not Output?
+> > > <tip-title>Why Input and not Output?</tip-title>
 > > > Because rule all is taking in some other outputs as an input to it. If we used outputs, rule all would do nothing (it has no pre-requisite steps), and since it produces nothing by itself, snakemake would see that the outputs you expected have not been created and flag it as an error.
 > > {: .tip}
 > >
@@ -1050,12 +1050,12 @@ In the Makefile we had an `all` rule which was the first and default action to t
 This is starting to look like a pretty good workflow! Let's preview how it will run:
 
 
-> ### {% icon code-in %} Input
+> <code-in-title></code-in-title>
 > ```
 > $ snakemake -np
 > ```
 {: .code-in}
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > ```
 > Building DAG of jobs...
 > Job stats:
@@ -1154,13 +1154,13 @@ This is starting to look like a pretty good workflow! Let's preview how it will 
 
 Gosh that's a lot of output! Let's build the {DAG} to see a more concise representation of what is going to happen:
 
-> ### {% icon code-in %} Input
+> <code-in-title></code-in-title>
 > ```bash
 > snakemake --dag | dot -Tsvg > out.svg
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > ![Image of the snakemake dag. Conspicuously missing is FastQC jobs!](../../images/snakemake.dag.svg)
 {: .code-out}
 
@@ -1198,13 +1198,13 @@ So naturally when we request the final `bam` file, and none of the steps leading
 You can use this function in inputs and outputs to help you list all expected files, without having to write out or hardcode that list of files. Here we define a `sorted_reads/{sample}.bam` and then this is repeated for every value of samples
 
 
-> ### {% icon code-in %} Snakemake Code
+> <code-in-title>Snakemake Code</code-in-title>
 > ```
 > SAMPLES = ["a", "b", "c"]
 > expand("sorted_reads/{sample}.bam", sample=SAMPLES)
 > ```
 {: .code-in}
-> ### {% icon code-out %} Snakemake Output
+> <code-out-title>Snakemake Output</code-out-title>
 > ```
 > ["sorted_reads/a.bam", "sorted_reads/b.bam", "sorted_reads/c.bam"]
 > ```
@@ -1218,12 +1218,12 @@ expand("sorted_reads/{sample}.{replicate}.bam", sample=SAMPLES, replicate=[0, 1]
 
 We should use something exactly like this for our samples. We can have a `SAMPLES` variable representing our final output bam files we wish to generate, and then instead of `replicates` we'll have `_1` and `_2` or so. First let's make the change to use the `SAMPLES` and expand just for our final output.
 
-> ### {% icon hands_on %} Hands-on: Update `all` task to use expand
+> <hands-on-title>Update `all` task to use expand</hands-on-title>
 > And while you're at it, define `SAMPLES` to be a list (like in python) with two elements:
 > - `SRR2584863`
 > - `SRR2589044`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```diff
 > > --- a/Snakefile
@@ -1242,7 +1242,7 @@ We should use something exactly like this for our samples. We can have a `SAMPLE
 > {: .solution}
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Run the pipeline
+> <hands-on-title>Run the pipeline</hands-on-title>
 > Run `snakemake -c4 --use-conda`. Did it work?
 {: .hands_on}
 
@@ -1250,10 +1250,10 @@ We should use something exactly like this for our samples. We can have a `SAMPLE
 
 Now that you've done one expand, let's do a more complicated one. The expand function can take multiple variables which we can use to expand both our samples AND our expected extensions
 
-> ### {% icon hands_on %} Hands-on: Add FastQC outputs to `all`
+> <hands-on-title>Add FastQC outputs to `all`</hands-on-title>
 > Which file extensions do we expect to see? (e.g. `_1.fastqc`) Make a single expand that uses two variables, `{sample}` and `{ext}`? Add an expand that uses our previously defined `SAMPLES` and now also a list of the extensions we expect.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```diff
 > > --- a/Snakefile
@@ -1270,7 +1270,7 @@ Now that you've done one expand, let's do a more complicated one. The expand fun
 > >  	output:
 > > ```
 > >
-> > > ### {% icon tip %} Why not `_1.fastqc.html`?
+> > > <tip-title>Why not `_1.fastqc.html`?</tip-title>
 > > >
 > > > There's not always a good answer for this, some tools will mangle names in unexpected ways. The best way to discover this in a {SciWMS} like Snakemake is to just write what you expect, and run it, and see how it fails. Here the filenames were not as expected, so, we updated the `ext` to use `_1_fastqc.html` and everything works. This was done by `fastqc` so if we really wanted the other style of naming we could read the FastQC manual to maybe determine why.
 > > >
@@ -1292,7 +1292,7 @@ This rule only knows how to input files from the `reads` directory. We have some
 1. We can probably most easily solve this by simply replacing our `trimmed` folder with the `reads` folder and making them the same. This way all fastq files will be in the same place, but perhaps it will be less clear later which files we can delete if we need to clean up. Right now we know we can remove the `trimmed` folder if we need some space, and our pipeline can re-create the data. If we mixed them, it would be slightly more complicated.
 2. We could probably use `reads` as a wildcard (like our `{genome}` or `{sample}`), but here we'd have to have some additional complexity as a result, like the folder name would en up part of the `output` name, as is required by `Snakemake` to prevent accidental conflicts.
 
-    > ### {% icon tip %} How would this look?
+    > <tip-title>How would this look?</tip-title>
     > ```
     > --- a/Snakefile
     > +++ b/Snakefile
@@ -1322,10 +1322,10 @@ This rule only knows how to input files from the `reads` directory. We have some
 
 So with that said, let's go with option three, duplicate our fastqc rule to have a `fastqc-trimmed` version
 
-> ### {% icon hands_on %} Hands-on: Add FastQC outputs to `all`
+> <hands-on-title>Add FastQC outputs to `all`</hands-on-title>
 > Copy the rule and rename it appropriately, changing all of the variables where necessary to take in trimmed fastq files.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```diff
 > > --- a/Snakefile
@@ -1367,16 +1367,16 @@ So with that said, let's go with option three, duplicate our fastqc rule to have
 
 Ok! That's hopefully went successfully. Run your pipeline to check.
 
-> ### {% icon hands_on %} Hands-on:
+> <hands-on-title></hands-on-title>
 >
 > 1. Dry-run snakemake
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > snakemake -np
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```
 >    > Building DAG of jobs...
 >    > AmbiguousRuleException:
@@ -1392,7 +1392,7 @@ Ok! That's hopefully went successfully. Run your pipeline to check.
 >    > 	fastqc_trim: fastqc/SRR2584863_1_fastqc.html
 >    > 	fastqc: fastqc/SRR2584863_1_fastqc.html
 >    > ```
->    {: .code-in}
+>    {: .code-out}
 >
 > 2. Uhoh! There was an error. If we read the error message we see **Rules fastqc_trim and fastqc are ambiguous for the file fastqc/SRR2584863_1_fastq**, because both rules produce the same file. We should rename the folder, `fastqc-trimmed`.
 >
@@ -1412,13 +1412,13 @@ Ok! That's hopefully went successfully. Run your pipeline to check.
 >
 > 3. Re-run the dry-run.
 >
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > snakemake -np
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > ...
 >    > Job stats:
@@ -1438,16 +1438,16 @@ Ok! That's hopefully went successfully. Run your pipeline to check.
 
 Now that we've got a pipeline successfully completing the dry-run, let's try it again.
 
-> ### {% icon hands_on %} Hands-on: Run the pipeline!
+> <hands-on-title>Run the pipeline!</hands-on-title>
 > 4. Run the pipeline
 >
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > snakemake --use-conda -c4
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > Error in rule download:
 >    > Removing output files of failed job download since they might be corrupted:
@@ -1499,13 +1499,13 @@ Now that we've got a pipeline successfully completing the dry-run, let's try it 
 >
 > 3. And dry-run
 >
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > snakemake -np
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-in %} CLI
+>    > <code-out-title>CLI</code-out-title>
 >    > ```
 >    > Building DAG of jobs...
 >    > MissingInputException in line 55 of /tmp/snake.q5mqtdhfg6/Snakefile:
@@ -1532,13 +1532,13 @@ Now that we've got a pipeline successfully completing the dry-run, let's try it 
 >
 > 5. And finally? Success?
 >
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > snakemake --use-conda -c4
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-in %} CLI
+>    > <code-out-title>Output</code-out-title>
 >    > ```
 >    >    raise IOError(
 >    >OSError: Missing files after 5 seconds:
@@ -1566,18 +1566,18 @@ Now that we've got a pipeline successfully completing the dry-run, let's try it 
 >
 >    Shoot! No, ok. If we read this message it says **Job Missing files after 5 seconds** which means it couldn't find the file. Specifically it tells us it is missing `fastqc-trim/SRR2589044_1_fastqc.html` and that makes sense, since all of our output fastqc reports had the full input name, so those should have `trim` in them too.
 >
->    > ### {% icon tip %} Tip: Filesystem Latency?
+>    > <tip-title>Filesystem Latency?</tip-title>
 >    > On servers with shared directories using Network File Systems, it can happen that when you run a job on one machine, it may take time for the files to be visible on other machines, it isn't instantaneous. In our case this is **not** the issue.
 >    {: .tip}
 >
 > 5. Let's see what files are available, so we know how to fix the command.
->    > ### {% icon code-in %} CLI
+>    > <code-in-title>CLI</code-in-title>
 >    > ```
 >    > ls fastqc-trim
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-in %} CLI
+>    > <code-out-title>Output</code-out-title>
 >    > ```
 >    > SRR2584863_1.trim_fastqc.html    SRR2584863_2.trim_fastqc.html
 >    > SRR2589044_1.trim_fastqc.html    SRR2589044_2.trim_fastqc.html
@@ -1625,10 +1625,10 @@ This is why we always work with test datasets to confirm our pipeline works firs
 
 As a last step, we'll summarize all of the FastQC files. With all of the expands at the top, we're now receiving 4 trimmed FastQC reports plus 2 untrimmed FastQC reports per sample which is a lot of data to go through! So we can use MultiQC to aggregate all of these files and generate a single summary file which makes analysis much easier.
 
-> ### {% icon hands_on %} Hands-on: Add the MultiQC step
+> <hands-on-title>Add the MultiQC step</hands-on-title>
 > The command we need to run is: `multiqc --outdir multiqc *fastqc.zip`. You cannot use wildcards like that in Snakemake, so write this out as a proper rule that accepts all of the same inputs as you used in the `rule all`. It outputs a file named `multiqc/multiqc_report.html` (set by the `--outdir` flag)
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > You'll notice that we now need to replace our `.html` outputs from the FastQC rules with the `.zip` outputs which we need instead. We didn't have to update the command line, because the output file name was thankfully not part of it.
 > >
 > > ```diff
@@ -1701,19 +1701,19 @@ As a last step, we'll summarize all of the FastQC files. With all of the expands
 
 And with that, you should have a working pipeline! Test it out.
 
-> ### {% icon hands_on %} Hands-on: Run the pipeline
+> <hands-on-title>Run the pipeline</hands-on-title>
 > Run `snakemake -c4 --use-conda`
 {: .hands_on}
 
 Let's check our {DAG} again
 
-> ### {% icon code-in %} Input
+> <code-in-title></code-in-title>
 > ```bash
 > snakemake --dag | dot -Tsvg > out.svg
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > ![Image of the snakemake dag. FastQC and MultiQC are now there which add about 7 new boxes and a bunch of new arrows. This makes the graph very wide and quite hard to read.](../../images/snakemake.dag2.svg)
 {: .code-out}
 

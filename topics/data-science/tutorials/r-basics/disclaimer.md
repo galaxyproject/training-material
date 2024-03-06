@@ -1,5 +1,5 @@
 
-> ### {% icon comment %} On the content of the tutorial
+> <comment-title>On the content of the tutorial</comment-title>
 >
 > We believe that every learner can **achieve competency with R**. You have reached competency when you find that you are able to **use R to handle common analysis challenges in a reasonable amount of time** (which includes time needed to look at learning materials, search for answers online, and ask colleagues for help). As you spend more time using R (there is no substitute for regular use and practice) you will find yourself gaining competency and even expertise. The more familiar you get, the more complex the analyses you will be able to carry out, with less frustration, and in less time - the fantastic world of R awaits you!
 >
@@ -8,12 +8,12 @@
 > **Some R skills we will *not* cover in these lessons**
 >
 > - How to create and work with R matrices and R lists
-> - How to create and work with loops and conditional statements, and the "apply" of functions (which are super useful, read more [here](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/))
+> - How to create and work with loops and conditional statements, and the "apply" of functions (which are super useful, read more [on this blog about apply functions](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/))
 > - How to do basic string manipulations (e.g. finding patterns in text using grep, replacing text)
 > - How to plot using the default R graphic tools (we *will* cover plot creation, but will do so using the popular plotting package `ggplot2`)
 > - How to use advanced R statistical functions
 >
-> > ### {% icon tip %} Tip: Where to learn more
+> > <tip-title>Where to learn more</tip-title>
 > >
 > > The following are good resources for learning more about R. Some of them can be quite technical, but if you are a regular R user you may ultimately need this technical knowledge.
 > > - [R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf), by Emmanuel Paradis: a great starting point

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Metabarcoding/eDNA through Obitools
-zenodo_link: https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1
+zenodo_link: https://zenodo.org/record/5932108
 questions:
 - how to analyze DNA metabarcoding / eDNA data produced on Illumina sequencers using the OBITools?
 objectives:
@@ -11,18 +11,28 @@ objectives:
 time_estimation: 1H
 key_points:
 - From raw reads you can process, clean and filter data to obtain a list of species from environmental DNA (eDNA) samples.
-contributors:
-- colineroyaux
-- onorvez
-- ecoissac
-- fboyer
-- yvanlebras
+tags:
+  - Genetic composition EBV class
+  - Community composition EBV class
+  - EBV dataset
+  - EBV workflow
+  - eDNA
+  - Metabarcoding
+contributions:
+  authorship:
+  - colineroyaux
+  - onorvez
+  - ecoissac
+  - fboyer
+  - yvanlebras
+  funding:
+  - gallantries
+  - pndb
 
 ---
 
 
-# Introduction
-{:.no_toc}
+
 
 Based on this [OBITools official tutorial](https://pythonhosted.org/OBITools/wolves.html), you will learn here how to analyze DNA metabarcoding data produced on Illumina sequencers using:
  * the OBITools on Galaxy
@@ -45,7 +55,7 @@ Most of the OBITools commands read sequence records from a file or from the stdi
 
 ![OBITools attributes records](../../images/Obitools/fig-Record.png)
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -68,10 +78,10 @@ The data needed to run the tutorial are the following:
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the zip archive containing input files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1)
+> 2. Import the zip archive containing input files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip)
 >
 >    ```
 >    https://zenodo.org/record/5932108/files/wolf_tutorial.zip
@@ -90,12 +100,12 @@ The data needed to run the tutorial are the following:
 
 ## **Unzip** the downloaded archive
 
-> ### {% icon hands_on %} Hands-on: Unzip the downladed .zip archive and prepare unzipped files to be used by OBITools
+> <hands-on-title>Unzip the downladed .zip archive and prepare unzipped files to be used by OBITools</hands-on-title>
 >
 > 1. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2) %} with the following parameters:
 >    - *"Extract single file"*: `All files`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > To work properly, this unzip Galaxy tool is waiting "simple" archive as input, this means without sub directory.
 >    {: .comment}
@@ -110,11 +120,11 @@ The data needed to run the tutorial are the following:
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why do we need to unhide manually datasets from the data collection?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Data collection is a functionality often used to deal with multiple datasets on the same format who can be analysed in batch mode. Here, the data collection is populated with heterogenous datafiles, coming from an archive. We thus need to treat separately each dataset of the collection, and to do so, we need to unhide corresponding datasets from the history, as datasets inside collections are just like "symbolic link" to "classical" history datasets hidden by default.
 > >
@@ -138,14 +148,14 @@ When using the result of a paired-end sequencing assay with supposedly overlappi
 
 The forward and reverse reads of the same fragment are at the same line position in the two FASTQ files obtained after sequencing. Based on these two files, the assembly of the forward and reverse reads is done with the **illuminapairedend** utility that aligns the two reads and returns the reconstructed sequence.
 
-> ### {% icon hands_on %} Hands-on: Recover consensus sequences from overlapping forward and reverse reads.
+> <hands-on-title>Recover consensus sequences from overlapping forward and reverse reads.</hands-on-title>
 >
 > 1. {% tool [illuminapairedend](toolshed.g2.bx.psu.edu/repos/iuc/obi_illumina_pairend/obi_illumina_pairend/1.2.13) %} with the following parameters:
 >    - *"Read from file"*: `wolf_F` for the 3p file
 >    - *"Read from file"*: `wolf_R` for the 5p file
 >    - *"minimum score for keeping aligment"*: `40.0`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Sequence records corresponding to the same read pair must be in the same order in the two files !
 >    >
@@ -161,7 +171,7 @@ The forward and reverse reads of the same fragment are at the same line position
 
 In this step we are going to use the value of the mode attribute in the sequence header of the illuminapairedend output file to discard sequences indicated as "joined", so not assembled ("alignment") (see explanation about this mode on the previous step)
 
-> ### {% icon hands_on %} Hands-on: Remove unaligned sequence records
+> <hands-on-title>Remove unaligned sequence records</hands-on-title>
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `ilumimnapairedend fastq groomer output file`
@@ -169,13 +179,13 @@ In this step we are going to use the value of the mode attribute in the sequence
 >        - *"Python boolean expression to be evaluated for each sequence record."*: `mode!="joined"`
 >
 >
->    > ### {% icon tip %} Tip: Verifying FastQ format and converting it
+>    > <tip-title>Verifying FastQ format and converting it</tip-title>
 >    >
 >    > * You can use {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} to look at the format of the sequencing encoding score then {% tool [FASTQ GROOMER](toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5) %} to specify the guessed sequencing encoding score and create a fastqsanger file.
 >    >
 >    {: .tip}
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > The obigrep command is in some way analog to the standard Unix grep command. It selects a subset of sequence records from a sequence file.
 >    >
@@ -189,12 +199,12 @@ In this step we are going to use the value of the mode attribute in the sequence
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How do you verify the operation is successful?
 > 2. How many sequences are kept? Discarded?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. you can search in the input file content the presence of `mode=joined` and same on the output file (just clicking the eye to visualize the content of each file and typing CTRL+C for example to search `mode=joined` in the file, or using a regex Galaxy tool for example). You can also at least look at the size of the output file, if smaller than input file, this is a first good indication.
 > > 2. You can use a Galaxy tool like `Line/Word/Character count of a dataset` to count the number of lines of each dataset (input and output of obigrep) and divided by 4 (as in a FastQ file, each sequence is represented by a block of 4 lines). 45 276 sequences for input file. 44 717 for output file. Thus 559 sequences discarded.
@@ -205,10 +215,10 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 ## Assign each sequence record to the corresponding sample/marker combination with **NGSfilter**
 
-> ### {% icon hands_on %} Hands-on: Assigns sequence records to the corresponding experiment/sample based on DNA tags and primers
+> <hands-on-title>Assigns sequence records to the corresponding experiment/sample based on DNA tags and primers</hands-on-title>
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Each sequence record is assigned to its corresponding sample and marker using the data provided in a text file (here wolf_diet_ngsfilter.txt). This text file contains one line per sample, with the name of the experiment (several experiments can be included in the same file), the name of the tags (for example: aattaac if the same tag has been used on each extremity of the PCR products, or aattaac:gaagtag if the tags were different), the sequence of the forward primer, the sequence of the reverse primer, the letter T or F for sample identification using the forward primer and tag only or using both primers and both tags, respectively.
 >    {: .comment}
@@ -220,7 +230,7 @@ In this step we are going to use the value of the mode attribute in the sequence
 >    - *"Output data type"*: `fastq`
 >
 >
->    > ### {% icon tip %} Tip: Be sure the text file is in tabular datatype
+>    > <tip-title>Be sure the text file is in tabular datatype</tip-title>
 >    >
 >    > * If you are sure the format is compatible with a tabular datatype, as this is the case here ;), you can manually change it, clicking on the eye of the "wolf_diet_ngsfilter.txt" dataset, then selecting the "Datatypes" section then affecting manually tabular and saving the operation
 >    >
@@ -228,11 +238,11 @@ In this step we are going to use the value of the mode attribute in the sequence
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many sequences are not assigned?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 1391
 > >
@@ -242,10 +252,10 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 ## Dereplicate reads into uniq sequences with **obiuniq**
 
-> ### {% icon hands_on %} Hands-on: Groups together sequence records
+> <hands-on-title>Groups together sequence records</hands-on-title>
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > The same DNA molecule can be sequenced several times. In order to reduce both file size and computations time, and to get easier interpretable results, it is convenient to work with unique sequences instead of reads. To dereplicate such reads into unique sequences, we use the obiuniq command.
 >    > Definition: Dereplicate reads into unique sequences
@@ -262,11 +272,11 @@ In this step we are going to use the value of the mode attribute in the sequence
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many sequences you had and how many you finally obtain?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. From 43 326 to 3 962
 > >
@@ -277,9 +287,9 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 ## Limit number of informations with **obiannotate**
 
-> ### {% icon hands_on %} Hands-on: Adds/Edits sequence record annotations
+> <hands-on-title>Adds/Edits sequence record annotations</hands-on-title>
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > obiannotate is the command that allows adding/modifying/removing annotation attributes attached to sequence records.
 >    > Once such attributes are added, they can be used by the other OBITools commands for filtering purposes or for statistics computing.
@@ -298,10 +308,10 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 ## Computes basic statistics for attribute values with **obistat**
 
-> ### {% icon hands_on %} Hands-on: Computes basic statistics for attribute values
+> <hands-on-title>Computes basic statistics for attribute values</hands-on-title>
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > stats computes basic statistics for attribute values of sequence records. The sequence records can be categorized or not using one or several -c options. By default, only the number of sequence records and the total count are computed for each category. Additional statistics can be computed for attribute values in each category, like:
 >    > * minimum value (-m option)
@@ -324,11 +334,11 @@ In this step we are going to use the value of the mode attribute in the sequence
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Can you use this result to say how many sequences occuring only once? You would need to use Galaxy tools like `Sort data in ascending or descending order` and ` Select first lines from a dataset` to answer the question
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 3131 sequences are occuring once.
 > >
@@ -340,7 +350,7 @@ In this step we are going to use the value of the mode attribute in the sequence
 
 In this step, we are going to use *obigrep* in order to keep only the sequences having a count greater or equal to 10 and a length shorter than 80 bp.
 
-> ### {% icon hands_on %} Hands-on: filter sequences with **obigrep**
+> <hands-on-title>filter sequences with <b>obigrep</b></hands-on-title>
 >
 > 1. {% tool [obigrep](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `obiannotate output file`
@@ -352,19 +362,19 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >    - *"Choose the sequence record selection option"*: `lmin`
 >        - *"lmin"*: `80`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    > Based on the previous observation, we set the cut-off for keeping sequences for further analysis to a count of 10
 >    > Based on previous knowledge we also remove sequences with a length shorter than 80 bp (option -l) as we know that the amplified 12S-V5 barcode for vertebrates must have a length around 100bp
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many sequences are kept following the "count" filter?
 > 2. How many sequences are kept following the "length" filter?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 178
 > > 2. 175
@@ -375,7 +385,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 ## Clean the sequences for PCR/sequencing errors (sequence variants) with **obiclean**
 
-> ### {% icon hands_on %} Hands-on: Clean the sequences for PCR/sequencing errors (sequence variants)
+> <hands-on-title>Clean the sequences for PCR/sequencing errors (sequence variants)</hands-on-title>
 >
 > As a final denoising step, using the obiclean program, we keep the head sequences that are sequences with no variants with a count greater than 5% of their own count
 >
@@ -393,7 +403,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 ## Taxonomic assignment of sequences with **NCBI BLAST+ blastn**
 
-> ### {% icon hands_on %} Hands-on: Search nucleotide database with nucleotide query sequence(s) from OBITools treatments
+> <hands-on-title>Search nucleotide database with nucleotide query sequence(s) from OBITools treatments</hands-on-title>
 >
 > Once denoising has been done, the next step in diet analysis is to assign the barcodes to the corresponding species in order to get the complete list of species associated to each sample. Taxonomic assignment of sequences requires a reference database compiling all possible species to be identified in the sample. Assignment is then done based on sequence comparison between sample sequences and reference sequences. We here propose to use BLAST+ blastn.
 >
@@ -407,7 +417,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >    - *"Maximum hits to consider/show": `1`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Here we directly use the `db_v05_r117` fasta file proposed on the [original obitools tutorial](https://pythonhosted.org/OBITools/wolves.html#step-by-step-analysis). One can mention you can create such a fasta file using same obitools workflow describe before (using obigrep/obiuniq/obigrep/obiannotate) on downloaded EMBL datrabases and taxonomy treated by obitools ecoPCR tool.
 >    {: .comment}
@@ -417,9 +427,9 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 ## Filter database and query sequences by ID to re associate informations with **Filter sequences by ID**
 
-> ### {% icon hands_on %} Hands-on: Filter Blast results
+> <hands-on-title>Filter Blast results</hands-on-title>
 >
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > This tool allows you to re-associate all the reference sequences information, notably the `species_name` one so you can see which species are potentially seen on the sample.
 > > We will also use it to re-associate all the query sequences information, notably the `merged_sample` and `obiclean_count` attributes so we can better evaluate quality of the results.
@@ -450,12 +460,12 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 ## From FASTA to tabular with **Obitab**
 
-> ### {% icon hands_on %} Hands-on: Convert fasta filtered files in tabular ones
+> <hands-on-title>Convert fasta filtered files in tabular ones</hands-on-title>
 >
 > 1. {% tool [obitab](toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `db_v05_r117 with matched ID`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This tool allows you to convert a fasta file into a tabular one so it is easier to read sequences definitions.
 >    {: .comment}
@@ -468,7 +478,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 ## create a final synthesis as a tabular file
 
-> ### {% icon hands_on %} Hands-on: Join blast and obitab files then cut relevant column and apply filters
+> <hands-on-title>Join blast and obitab files then cut relevant column and apply filters</hands-on-title>
 >
 > 1. {% tool [Join two datasets side by side on a specified field](join1) %} with the following parameters:
 >    - *"Join"*: `obitab on obiclean output file`
@@ -489,7 +499,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >    - *"Fill value"*: `NA`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > To have something easier to read and understand, we create a tabular file containing only columns with important informations (c1: query sequences names / c3-7: query counts / c50: reference sequences names / c54: family / c59: genus / c51: reference annotations).
 >    {: .comment}
@@ -504,19 +514,19 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >    - *"With following condition"*: `c3>1000 or c4>1000 or c5>1000 or c6>1000`
 >    - *"Number of header lines to skip"*: `1`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > To keep only data with significative counts.
 >    {: .comment}
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many species are identified? You can use `Cut columns from a table` and `unique occurences of each record` to isolate the `species name` column of obitab results.
 > 2. Can you deduce the diet of each sample? You can use tools like `obitab` and `Join two Datasets side by side on a specified field` to join megablast results to obigrep one and `db_v05_r117 with matched ID`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 1O
 > > 2. If we remove human sequences ;), some squirrel (sample:26a_F040644), deer (sample:15a_F730814 + sample:29a_F260619), stag (sample:29a_F260619 + sample:13a_F730603), marmot (sample:26a_F040644), doe (sample:29a_F260619), Grimm's duiker (sample:29a_F260619).
@@ -527,6 +537,6 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 
 # Conclusion
-{:.no_toc}
+
 
 You just did a ecological analysis, finding diet from wolves faeces ! So now you know how to preprocess metabarcoding data on Galaxy, producing quantitative informations with quality checks and filtering results to interpret it and to have a synthesis table you can share broadly!

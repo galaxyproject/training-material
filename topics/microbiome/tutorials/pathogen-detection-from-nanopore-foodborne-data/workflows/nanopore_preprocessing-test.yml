@@ -1,0 +1,19 @@
+- doc: Test outline for nanopore_preprocessing
+  job:
+    Collection of all samples:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: Barcode11
+        location: https://zenodo.org/record/8109717/files/Collection of all samples_Barcode11.fastq.gz
+        filetype: fastq.gz
+      - class: File
+        identifier: Barcode10
+        location: https://zenodo.org/record/8109717/files/Collection of all samples_Barcode10.fastq.gz
+        filetype: fastq.gz
+  outputs:
+    MultiQC Stats Before and After Preprocessing:
+      element_tests:
+        sources:
+          path: test-data-pre-processing/MultiQC Stats Before and After Preprocessing_sources.tabular

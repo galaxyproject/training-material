@@ -5,8 +5,6 @@ redirect_from:
 
 title: "RAD-Seq de-novo data analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
-tags:
-  - RAD-seq
 questions:
   - "How to analyze RAD sequencing data without a reference genome for a population genomics study?"
 objectives:
@@ -15,12 +13,16 @@ objectives:
   - "Calculate population genomics statistics from RAD sequencing data"
 time_estimation: "8h"
 key_points:
+tags:
+  - RAD-seq
+  - Genetic composition EBV class
+  - Species populations EBV class
+  - EBV dataset
+  - EBV workflow
 contributors:
   - yvanlebras
 ---
 
-# Introduction
-{:.no_toc}
 
 In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862), a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback *Gasterosteus aculeatus* was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.
 
@@ -29,7 +31,7 @@ In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/
 We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. Existing *Gasterosteus aculeatus* draft genome will not be used here so the analysis will be performed de novo. In a de novo RAD-seq data analysis, the reads are aligned one on each other to create stacks and then clustered to build loci. A reference approach can also be conducted (see [ref_based tutorial]({% link topics/ecology/tutorials/ref-based-rad-seq/tutorial.md %}), allowing to work on existing assembled loci).
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -46,7 +48,7 @@ The original data is available at NCBI SRA ENA under accession number [SRR034310
 
 We will look at the first run SRR034310 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from [Zenodo](https://zenodo.org/record/1134547#.WkugUjfjJXI).
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a **new history** for this RAD-seq exercise. If you are not inspired, you can name it *STACKS RAD: population genomics without reference genome* for example...
 >
@@ -77,7 +79,7 @@ The sequences are raw sequences from the sequencing machine, without any pretrea
 
 For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3journal.org/content/1/3/171.full) .
 
-> ### {% icon hands_on %} Hands-on: Demultiplexing reads
+> <hands-on-title>Demultiplexing reads</hands-on-title>
 >
 > 1. **Process Radtags** {% icon tool %} to demultiplex the reads:
 >  - *"Single-end or paired-end reads files"*: `Single-end files`
@@ -88,14 +90,14 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >  - *"Capture discarded reads to a file*": `Yes`
 >  - *"Output format:"* `fastq`
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. How many reads where on the original dataset?
 >    > 2. How many are kept?
 >    > 3. Can you try to explain the reason why we loose a lot of reads here?
 >    > 4. What kind of information does this result give concerning the upcoming data analysis and the barcodes design in general?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > The informations can be found in the results log file:
 >    > >
 >    > >  1. 8895289 total reads
@@ -119,7 +121,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >
@@ -161,15 +163,15 @@ We propose to continue the tutorial using the dataset collection containing the 
 
 For quality control, we use similar tools as described in [NGS-QC tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
-> ### {% icon hands_on %} Hands-on: Quality control
+> <hands-on-title>Quality control</hands-on-title>
 >
 > 1. **FastQC** {% icon tool %}: Run FastQC on FastQ files to control the quality of the reads. Warning! Don't forget you are working on data collections....
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What is the read length?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > The read length is 32 bp
 >    > {: .solution }
 >    {: .question}
@@ -183,13 +185,13 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({% l
 
 Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Information on denovo_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
 {: .comment}
 
 
-> ### {% icon hands_on %} Hands-on: Stacks: De novo map
+> <hands-on-title>Stacks: De novo map</hands-on-title>
 >
 > 1. First we will create a population map file with the following contents:
 >
@@ -226,7 +228,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    ![The output of de novo map](../../images/RAD4_Population_Genomics/denovo/denovo_out.png)
 >
-> > ### {% icon comment %} Data formatting
+> > <comment-title>Data formatting</comment-title>
 > >
 > > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Replace Text` (for example to replace `Rabbit Slough` by a population number like `2`, `Add column` (for example to add `sample_`) or `Cut columns from a table` (to put the new `sample_` column af the first place) and finally `Regex replace` (replacing `(sample_)\t` by `\1`) to generate it...
 >    {: .comment}
@@ -236,7 +238,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 
 # Calculate population genomics statistics
 
-> ### {% icon hands_on %} Hands-on: Calculate population genomics statistics
+> <hands-on-title>Calculate population genomics statistics</hands-on-title>
 >
 > 1. **Stacks: populations** {% icon tool %} with the following parameters:
 >    - Section **Data filtering options**
@@ -250,13 +252,13 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 > 2. Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > 1. What is the maximum value of FST' at any SNP? Don't hesitate to look at the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files) to find where this parameter is
 > > 2. What is the meaning of this FST' value compared a a classical FST one? Once again, the [STACKS manual](http://catchenlab.life.illinois.edu/stacks/manual/#files) can help you ;)
 > > 3. How many SNPs reach this FST' value?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > 1. 1
 > > > 2. FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1
 > > > 2. 114
@@ -267,7 +269,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 You can now for example filter this dataset to only keep FST'=1 loci for further analysis...
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a de novo RAD-seq data analysis approach. This approach can be sum up with the following scheme:
 

@@ -22,6 +22,7 @@ When something goes wrong in Galaxy, there are a number of things you can do to 
    - Scroll down to the **Job Information** section to view the 2 logs:
      - Tool Standard Output
      - Tool Standard Error
+   - For more information about specific tool errors, please see the [Troubleshooting section]({% link faqs/galaxy/index.md %}#troubleshooting)
 
 
 4. **Submit a bug report!** If you are still unsure what the problem is.

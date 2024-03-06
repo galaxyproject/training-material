@@ -1,4 +1,4 @@
-name: Lint Broken Links
+name: "[CI] Accessibility Linting"
 
 concurrency:
   group: ci-${{ github.head_ref }}
@@ -7,7 +7,9 @@ concurrency:
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
 on:
   pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
     paths:
+      - 'Gemfile.lock'
       - '**/*.md'
       - '**/*.html'
       - '*.yml'
@@ -21,6 +23,7 @@ on:
 jobs:
   build-site:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     steps:
       - uses: actions/checkout@v2
         with:
@@ -33,10 +36,10 @@ jobs:
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.7"
+          ruby-version: "3.0"
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '19'
       - uses: actions/cache@v2
         with:
           path: |
@@ -48,6 +51,7 @@ jobs:
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
@@ -55,18 +59,49 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
-      - run: |
+      - name: Build the site
+        run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
+
+      - name: Validate all links, enforce alt text
+        run: |
           bundle exec htmlproofer \
-            --assume-extension \
-            --http-status-ignore 405,429,503,999 \
-            --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
-            --url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
-            --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
-            --allow-hash-href \
-            --disable-external \
+            --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/" \
+            --ignore-files "/.*krona.*\.html/","/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//","/.*content.html/","/.*recentrifuge.*\.html/" \
+            --swap-urls "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
+            --disable-external=true \
+            --enforce-https=false \
             ./_site
 
-      - run: |
-          # If this fails, ask @hexylena to look at your notebook
-          find _site | grep ipynb | xargs -n 1 bundle exec ruby bin/check-valid-json.rb
+      - name: Ensure no unexpected encoded HTML in output
+        run: |
+          ! fgrep -R 'lt;blockquote' _site
+
+      - name: Ensure no unexpected jekyll in output
+        run: |
+          ! fgrep -R 'site.pages' _site
+
+      - name: Run aXe accessibility testing on some representative URLs
+        run: |
+          node_modules/.bin/http-server _site/ &
+          # We can focus AND scroll these regions. I thus disable their violation warning.
+          # Twitter isn't our fault. Sorry.
+          node_modules/.bin/axe --disable scrollable-region-focusable --exclude '#twitter-widget-0' --chromedriver-path /usr/bin/chromedriver \
+            http://localhost:8080/training-material/ \
+            http://localhost:8080/training-material/hall-of-fame/ \
+            http://localhost:8080/training-material/hall-of-fame/hexylena/ \
+            http://localhost:8080/training-material/topics/introduction/ \
+            http://localhost:8080/training-material/topics/statistics/ \
+            http://localhost:8080/training-material/topics/genome-annotation/ \
+            http://localhost:8080/training-material/topics/admin/ \
+            http://localhost:8080/training-material/topics/dev/ \
+            http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html \
+            http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/workflows/ \
+            http://localhost:8080/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html
+
+      - name: Validate notebooks (If this fails, ask @hexylena to look at your notebook)
+        run: |
+          find _site | grep ipynb | xargs bundle exec ruby bin/check-valid-notebook.rb
+
+      - name: Check URL persistence
+        run: |
+          bash bin/check-url-persistence.sh

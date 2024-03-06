@@ -2,33 +2,69 @@
 layout: base
 ---
 
-{% assign topic = site.data[page.topic_name] %}
+{% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
+
 <section class="tutorial">
     <h1 data-toc-skip>Workflows</h1>
+    <p>These workflows are associated with <a href="../tutorial.html">{{ material.title }}</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
-    <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Workflow</th>
-            <th>Updated</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% directory path: page.dir exclude:md$ %}
-        {% assign name_size = file.name | size %}
-        {% assign maybe_ga = file.name | slice:-3,name_size %}
-        {% assign maybe_gxwf = file.name | slice:-9,name_size %}
 
-        {% if maybe_ga == ".ga" or maybe_gxwf == ".gxwf.yml" %}
-        <tr>
-            <td><a href="{{ site.baseurl }}{{ file.url }}">{{ file.name }}</a></td>
-            <td>{{ file.date | date: "%b %-d, %Y" }}</td>
-        </tr>
-        {% endif %}
-    {% enddirectory %}
-    </tbody>
-    </table>
+    <div class="row">
+    {% for workflow in material.workflows %}
+	<div class="col-md-6">
+		<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">{{ workflow.title }}</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				{% for entity in workflow.creators %}
+				{{ entity.name }}{% if forloop.last == false %}, {% endif %}
+				{% endfor %}
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated {{ workflow.path | gtn_mod_date | date: "%b %-d, %Y" }}</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="{{ workflow.trs_endpoint }}">Launch in Tutorial Mode</span>
+			<a href="{% link faqs/galaxy/tutorial_mode.md %}" class="hide-when-galaxy-proxy-active">{% icon question %}</a>
+			<br/>
+
+
+			License: 
+				{% if workflow.license %}
+				<a href="https://spdx.org/licenses/{{ workflow.license }}">{{ workflow.license }}</a>
+				{% else %}
+				None Specified, defaults to
+				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				{% endif %}
+				<br/>
+			Tests: {% if workflow.tests %}✅{% else %}❌{% endif %}
+			Results: {% if workflow.test_results == nil %}Not yet automated{% endif %}
+			</p>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+    Import or Download
+  </button>
+  <div class="dropdown-menu">
+			<a href="{{ site.url }}{{ site.baseurl }}/{{ workflow.path }}" class="dropdown-item">Download Galaxy Workflow.ga</a>
+			{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+			{% for server in servers %}
+			<a href="{{ server.url }}/workflows/trs_import?run_form=true&trs_url={{ workflow.trs_endpoint }}" class="dropdown-item hide-when-galaxy-proxy-active">{{ server.human }}</a>
+			{% endfor %}
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url={{ workflow.trs_endpoint }}"
+			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+  </div>
+</div>
+
+	<pre class="mermaid">{{ workflow.mermaid }}
+	</pre>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
+{% endfor %}
+
+</div>
 
    <h1 style="margin-top:2em">Importing into Galaxy</h1>
    Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!

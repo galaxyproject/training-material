@@ -18,15 +18,13 @@ contributors:
   - shiltemann
 ---
 
-# Introduction
-{:.no_toc}
 
 If you want to run the entire GTN material website locally or test your new training material you can do this!
 
 Currently, the website is generated from the metadata and the tutorials using Jekyll, a simple static site builder.
 We can use Jekyll to run a server to check if the tutorial is correctly added and rendered.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, you will learn how to run a local instance of the GTN website:
 >
@@ -43,7 +41,7 @@ This step has to be done once.
 
 We also need to make sure that a couple of other utilities and build requirements are present: **git**, **curl** & **make**. The easiest way to install these is with your package manager of choice - i.e. yum, apt, brew etc.
 
-> ### {% icon hands_on %} Hands-on: Install the requirements
+> <hands-on-title>Install the requirements</hands-on-title>
 >
 > 1. Open a Terminal
 > 2. Use your package manager to install `git`, `curl` and `make`
@@ -64,7 +62,7 @@ We also need to make sure that a couple of other utilities and build requirement
 > 6. Install Jekyll and related modules into the conda environment: `make install`
 {: .hands_on}
 
-> ### {% icon details %} Troubleshooting `libxml2` errors
+> <details-title>Troubleshooting `libxml2` errors</details-title>
 > If you encounter an error about libxml2 on Linux, please try to install `libxml2-dev` (executing `sudo apt install libxml2-dev`) if on Debian/Ubuntu or `libxml2-devel` (executing `sudo yum install libxml2-devel`) if on Fedora/RedHat/CentOS, and re-run `make install` .
 {: .details}
 
@@ -73,7 +71,7 @@ We also need to make sure that a couple of other utilities and build requirement
 
 Once Jekyll and its modules are installed in our conda environment, we can check the generation of the website locally:
 
-> ### {% icon hands_on %} Hands-on: Checking the website generation locally
+> <hands-on-title>Checking the website generation locally</hands-on-title>
 >
 > 1. Run a local Jekyll server with `make serve-quick`
 > 2. Visualize at [http://localhost:4000/training-material/ ](http://localhost:4000/training-material/)
@@ -88,7 +86,7 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 With `make serve-quick`, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).
 
 
-> ### {% icon tip %} Tips
+> <tip-title>Tips</tip-title>
 >
 > 1. Use `make serve` instead of `make serve-quick` to get all plugins, but also configure the post, host and pass additional flags. This however can be quite slow.
 >
@@ -119,7 +117,7 @@ With `make serve-quick`, a local Jekyll server will run in background. It will c
 
 Once you are done, you can stop the server and clean your repository.
 
-> ### {% icon hands_on %} Hands-on: Stopping the server
+> <hands-on-title>Stopping the server</hands-on-title>
 >
 > 1. Stop the server with <kbd>CTRL</kbd>-<kbd>C</kbd>
 > 2. Clean the repository: `make clean`
@@ -127,4 +125,4 @@ Once you are done, you can stop the server and clean your repository.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+

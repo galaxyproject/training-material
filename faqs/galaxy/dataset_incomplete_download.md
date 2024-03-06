@@ -1,6 +1,6 @@
 ---
 title: Incomplete Dataset Download
-area: datasets
+area: troubleshooting
 box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb, beachyesh]

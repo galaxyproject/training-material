@@ -41,11 +41,10 @@ contributions:
   - fpsom
   - tobyhodges
   funding:
-  - erasmusplus
+  - gallantries
 ---
 
-# Introduction
-{:.no_toc}
+This tutorial will introduce R basics, using an RStudio Interactive Tool in Galaxy
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 {% include topics/data-science/tutorials/r-basics/r_introduction.md %}
@@ -53,7 +52,7 @@ contributions:
 {% include topics/data-science/tutorials/r-basics/r_advantages.md %}
 {% include topics/data-science/tutorials/r-basics/disclaimer.md %}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -68,7 +67,7 @@ Before diving in the tutorial, we need to open {% tool [RStudio](interactive_too
 
 # Creating objects in R
 
-> ### {% icon comment %} Reminder
+> <comment-title>Reminder</comment-title>
 > At this point you should be coding along in the `r_basics.R` script we created in the last episode. Writing your commands in the script(and commenting it) will make it easier to record what you did and why.
 {: .comment}
 
@@ -80,7 +79,7 @@ To create an object you need:
 - a value (e.g. `1`)
 - the assignment operator (`<-`)
 
-> ### {% icon hands_on %} Hands-on: Create a first object
+> <hands-on-title>Create a first object</hands-on-title>
 >
 > 1. Assign `1` to the object `a` using the R assignment operator `<-` in your script
 > 2. Write a comment in the line above
@@ -93,7 +92,7 @@ To create an object you need:
 > 3. Select the lines
 > 4. Execute them
 >
->    > ### {% icon tip %} Tip: Execute from a script
+>    > <tip-title>Execute from a script</tip-title>
 >    > - Click on the **Run the current line or selection**
 >    > - Type <kbd>CTRL</kbd>+<kbd>Enter</kbd> (or <kbd>CMD</kbd>+<kbd>Enter</kbd>)
 >    {: .tip}
@@ -112,7 +111,7 @@ Values | |
 
 This **Environment** window allows you to keep track of the objects you have created in R.
 
-> ### {% icon question %} Exercise: Create some objects in R
+> <question-title>Exercise: Create some objects in R</question-title>
 >
 > Create the following objects, with an appropriate name (your best guess at what name to use is fine):
 >
@@ -121,14 +120,14 @@ This **Environment** window allows you to keep track of the objects you have cre
 > 3. Create an object that has this URL as its value (`ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/`)
 > 4. Create an object that has the value of the number of chromosomes in a diploid human cell
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Here as some possible answers to the challenge:
 > >
 > > 1. `human_chr_number <- 23`
 > > 2. `gene_name <- 'pten'`
 > > 3. `ensemble_url <- 'ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/'`
-> > 4. `human_diploid_chr_num <-  36`
+> > 4. `human_diploid_chr_num <- 46`
 > >
 > {: .solution}
 {: .question}
@@ -157,7 +156,7 @@ Here are some important details about naming objects in R.
 
 There are a few more suggestions about naming and style you may want to learn more about as you write more R code. There are several "style guides" that have advice, and one to start with is the [tidyverse R style guide](http://style.tidyverse.org/index.html).
 
-> ### {% icon comment %} Pay attention to warnings in the script console
+> <comment-title>Pay attention to warnings in the script console</comment-title>
 >
 > If you enter a line of code in your script that contains an error, RStudio may give you an error message and underline this mistake. Sometimes these messages are easy to understand, but often the messages may need some figuring out. Paying attention to these warnings will help you avoid mistakes.
 >
@@ -170,7 +169,7 @@ There are a few more suggestions about naming and style you may want to learn mo
 
 Once an object has a value, you can change that value by overwriting it. R will not give you a warning or error if you overwriting an object, which may or may not be a good thing depending on how you look at it.
 
-> ### {% icon hands_on %} Hands-on: Overwrite an object
+> <hands-on-title>Overwrite an object</hands-on-title>
 >
 > 1. Overwrite the `gene_name` with the `tp53`
 >
@@ -194,7 +193,7 @@ Once an object has a value, you can change that value by overwriting it. R will 
 
 You can also remove an object from R's memory entirely
 
-> ### {% icon hands_on %} Hands-on: Remove an object
+> <hands-on-title>Remove an object</hands-on-title>
 >
 > 1. Delete the `gene_name` object
 >
@@ -225,7 +224,7 @@ In R, **every object has two properties**:
 
     - **Numeric (num)**: numbers such floating point/decimals (1.0, 0.5, 3.14)
 
-        > ### {% icon comment %} More specific types
+        > <comment-title>More specific types</comment-title>
         > There are also more specific numeric types (dbl - Double, int - Integer). These differences are not relevant for most beginners and pertain to how these values are stored in memory
         {: .comment}
 
@@ -236,7 +235,7 @@ In R, **every object has two properties**:
 
 Data types are familiar in many programming languages, but also in natural language where we refer to them as the parts of speech, e.g. nouns, verbs, adverbs, etc. Once you know if a word - perhaps an unfamiliar one - is a noun, you can probably guess you can count it and make it plural if there is more than one (e.g. 1 [Tuatara](https://en.wikipedia.org/wiki/Tuatara), or 2 Tuataras). If something is a adjective, you can usually change it into an adverb by adding "-ly" (e.g. [jejune](https://www.merriam-webster.com/dictionary/jejune) vs. jejunely). Depending on the context, you may need to decide if a word is in one category or another (e.g "cut" may be a noun when it's on your finger, or a verb when you are preparing vegetables). These concepts have important analogies when working with R objects.
 
-> ### {% icon hands_on %} Hands-on: Create an object and check its mode
+> <hands-on-title>Create an object and check its mode</hands-on-title>
 >
 > 1. Assign `'chr02'` to a `chromosome_name` object
 >
@@ -256,7 +255,7 @@ Data types are familiar in many programming languages, but also in natural langu
 
 The created object seems to a character object.
 
-> ### {% icon question %} Create objects and check their modes
+> <question-title>Create objects and check their modes</question-title>
 >
 > 1. Create the following objects in R
 >    1. `od_600_value` with value `0.47`
@@ -266,7 +265,7 @@ The created object seems to a character object.
 > 2. Guess their mode
 > 3. Check them using `mode()`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Object creation
 > >
@@ -310,7 +309,7 @@ Once an object exists (which by definition also means it has a mode), R can appr
 - `^` or `**`: exponentiation
 - `a%%b`: modulus (the remainder after division)
 
-> ### {% icon hands_on %} Hands-on: Execute mathematical operations
+> <hands-on-title>Execute mathematical operations</hands-on-title>
 >
 > 1. Execute `(1 + (5 ** 0.5))/2`
 >
@@ -330,7 +329,7 @@ Once an object exists (which by definition also means it has a mode), R can appr
 >
 {: .hands_on}
 
-> ### {% icon question %} Exercise: Compute the golden ratio
+> <question-title>Exercise: Compute the golden ratio</question-title>
 >
 > One approximation of the golden ratio ($$\varphi$$) is
 >
@@ -340,7 +339,7 @@ Once an object exists (which by definition also means it has a mode), R can appr
 >
 > Hint: remember the `round()` function can take 2 arguments.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```R
 > > > round((1 + sqrt(5))/2, digits = 3)
@@ -358,7 +357,7 @@ Vectors are probably the most used commonly used object type in R. **A vector is
 
 One of the most common ways to create a vector is to use the `c()` function - the "concatenate" or "combine" function. Inside the function you may enter one or more values, separated by a comma.
 
-> ### {% icon hands_on %} Hands-on: Create a vector
+> <hands-on-title>Create a vector</hands-on-title>
 >
 > 1. Create a `snp_genes` object containing "OXTR", "ACTN3", "AR", "OPRM1"
 >
@@ -372,7 +371,7 @@ One of the most common ways to create a vector is to use the `c()` function - th
 
 Vectors always have a **mode** and a **length**. In the **Environment** panel, we could already have an insight on these properties: `chr [1:4]` may indicate character and 4 values.
 
-> ### {% icon hands_on %} Hands-on: Check vector properties
+> <hands-on-title>Check vector properties</hands-on-title>
 >
 > 1. Check the mode of `snp_genes` object
 >
@@ -407,7 +406,7 @@ Vectors are quite important in R. Another data type that we will not work in thi
 
 Once we have vectors, one thing we may want to do is specifically retrieve one or more values from our vector. To do so, we use **bracket notation**. We type the name of the vector followed by square brackets. In those square brackets we place the index (e.g. a number) in that bracket.
 
-> ### {% icon hands_on %} Hands-on: Get values from vectors
+> <hands-on-title>Get values from vectors</hands-on-title>
 >
 > 1. Create several vectors
 >    - `snps` object with "rs53576", "rs1815739", "rs6152", "rs1799971"
@@ -435,7 +434,7 @@ In R, every item your vector is indexed, starting from the first item (1) throug
 
 You can also retrieve a range of numbers:
 
-> ### {% icon hands_on %} Hands-on: Retrieve a range of values from vectors
+> <hands-on-title>Retrieve a range of values from vectors</hands-on-title>
 > 1. Get the 1st through 3rd value in the `snp_genes` vector
 >
 >    ```R
@@ -458,7 +457,7 @@ To retrieve several (but not necessarily sequential) items from a vector, you pa
 There are additional (and perhaps less commonly used) ways of subsetting a vector (see [these
 examples](https://thomasleeper.com/Rcourse/Tutorials/vectorindexing.html)). Also, several of these subsetting expressions can be combined.
 
-> ### {% icon hands_on %} Hands-on: Retrieve a complex range of values from vectors
+> <hands-on-title>Retrieve a complex range of values from vectors</hands-on-title>
 > 1. Get the 1st through the 3rd value, and 4th value in the `snp_genes` vector
 >
 >    ```R
@@ -473,7 +472,7 @@ examples](https://thomasleeper.com/Rcourse/Tutorials/vectorindexing.html)). Also
 
 Once you have an existing vector, you may want to add a new item to it. To do so, you can use the `c()` function again to add your new value.
 
-> ### {% icon hands_on %} Hands-on: Add values to vectors
+> <hands-on-title>Add values to vectors</hands-on-title>
 > 1. Add "CYP1A1", "APOA5" to `snp_genes` vector
 >
 >    ```R
@@ -492,7 +491,7 @@ Once you have an existing vector, you may want to add a new item to it. To do so
 
 To remove a value from a vection, we can use a negative index that will return a version a vector with that index's value removed.
 
-> ### {% icon hands_on %} Hands-on: Remove values to vectors
+> <hands-on-title>Remove values to vectors</hands-on-title>
 > 1. Check value corresponding to `-6` in `snp_genes`
 >
 >    ```R
@@ -511,7 +510,7 @@ To remove a value from a vection, we can use a negative index that will return a
 
 We can also explicitly rename or add a value to our index using double bracket notation.
 
-> ### {% icon hands_on %} Hands-on: Rename values in vectors
+> <hands-on-title>Rename values in vectors</hands-on-title>
 > 1. Rename the 7th value to "APOA5"
 >
 >    ```R
@@ -523,7 +522,7 @@ We can also explicitly rename or add a value to our index using double bracket n
 
 Notice in the operation above that R inserts an `NA` value to extend our vector so that the gene "APOA5" is an index 7. This may be a good or not-so-good thing depending on how you use this.
 
-> ### {% icon question %} Exercise: Examining and subsetting vectors
+> <question-title>Exercise: Examining and subsetting vectors</question-title>
 >
 > Which of the following are true of vectors in R?
 > 1. All vectors have a mode **or** a length
@@ -533,7 +532,7 @@ Notice in the operation above that R inserts an `NA` value to extend our vector 
 > 5. You can use the `c()` to one or more items to an existing vector
 > 6. You can use the `c()` to add a vector to an exiting vector
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. False: vectors have both of these properties
 > > 2. True
@@ -551,7 +550,7 @@ There is one last set of cool subsetting capabilities we want to introduce. It i
 
 For example, let's say we wanted get
 
-> ### {% icon hands_on %} Hands-on: Subset logically vectors
+> <hands-on-title>Subset logically vectors</hands-on-title>
 > 1. Extract all of the SNPs in our vector of SNP positions (`snp_positions`) that were greater than 100,000,000
 >
 >    ```R
@@ -590,7 +589,7 @@ If you have never coded before, this type of situation starts to expose the "mag
 
 How to know which **index** (1, 2, 3, or 4) in our vector of SNP positions was the one that was greater than 100,000,000?
 
-> ### {% icon hands_on %} Hands-on: Getting which indices of any item that evaluates as TRUE
+> <hands-on-title>Getting which indices of any item that evaluates as TRUE</hands-on-title>
 > 1. Return the indices in our vector of SNP positions (`snp_positions`) that were greater than 100,000,000
 >
 >    ```R
@@ -601,7 +600,7 @@ How to know which **index** (1, 2, 3, or 4) in our vector of SNP positions was t
 
 **Why this is important?** Often in programming we will not know what inputs and values will be used when our code is executed. Rather than put in a pre-determined value (e.g 100000000) we can use an object that can take on whatever value we need.
 
-> ### {% icon hands_on %} Hands-on: Subset logically vectors
+> <hands-on-title>Subset logically vectors</hands-on-title>
 > 1. Create a `snp_marker_cutoff` containing `100000000`
 > 1. Extract all of the SNPs in `snp_positions` that were greater than `snp_marker_cutoff`
 >
@@ -619,7 +618,7 @@ Ultimately, it's putting together flexible, reusable code like this that gets at
 
 Finally, there are a few other common retrieve or replace operations you may want to know about. First, you can check to see if any of the values of your vector are missing (i.e. are `NA`). Missing data will get a more detailed treatment later, but the `is.NA()` function will return a logical vector, with TRUE for any NA value:
 
-> ### {% icon hands_on %} Hands-on: Check for missing values
+> <hands-on-title>Check for missing values</hands-on-title>
 > 1. Check what are the missing values in `snp_genes`
 >
 >    ```R
@@ -633,7 +632,7 @@ Finally, there are a few other common retrieve or replace operations you may wan
 
 Sometimes, you may wish to find out if a specific value (or several values) is present a vector. You can do this using the comparison operator `%in%`, which will return TRUE for any value in your collection that is in the vector you are searching.
 
-> ### {% icon hands_on %} Hands-on: Check for presence of values
+> <hands-on-title>Check for presence of values</hands-on-title>
 > 1. Check if "ACTN3" and "APOA5" are in `snp_genes`
 >
 >    ```R
@@ -647,14 +646,14 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What data types/modes are the following vectors?
 >    1. `snps`
 >    2. `snp_chromosomes`
 >    3. `snp_positions`
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > ```R
 >    > > mode(snps)
@@ -671,7 +670,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    2. Add 11 to the `snp_chromosomes` vector
 >    3. Add 116792991 to the `snp_positions` vector
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > ```R
 >    > > snps <- c(snps, 'rs662799')
@@ -690,7 +689,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    1. Create a new version of `snp_genes` that does not contain CYP1A1
 >    2. Add 2 NA values to the end of `snp_genes`
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > ```R
 >    > > snp_genes <- snp_genes[-5]
@@ -707,7 +706,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    - 1st value in `snp_chromosomes`
 >    - 1st value in `snp_positions`
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > ```R
 >    > > combined <- c(snp_genes[1], snps[1], snp_chromosomes[1], snp_positions[1])
@@ -719,7 +718,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >
 > 5. What type of data is `combined`?
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > ```R
 >    > > typeof(combined)
@@ -753,7 +752,7 @@ Although there are several numbers in our vector, they are all in quotes, so we 
 
 We can use the `as.` functions to explicitly coerce values from one form into another.
 
-> ### {% icon hands_on %} Hands-on: Coerce values
+> <hands-on-title>Coerce values</hands-on-title>
 > 1. Create a `positions` object with "8762685", "66560624", "67545785", "154039662"
 >
 >    ```R
@@ -772,7 +771,7 @@ We can use the `as.` functions to explicitly coerce values from one form into an
 > 3. Coerce into a numeric type using `as.numeric()`
 >
 >    ```R
->    > positions <- as.numeric(positions)
+>    > snp_positions_2 <- as.numeric(positions)
 >    > typeof(snp_positions_2)
 >    [1] "double"
 >    > snp_positions_2[1]
@@ -782,7 +781,7 @@ We can use the `as.` functions to explicitly coerce values from one form into an
 
 Here the coercion is straight forward, but what would happen if we tried using `as.numeric()` on `snp_chromosomes_2`
 
-> ### {% icon hands_on %} Hands-on: Issue with coercing values
+> <hands-on-title>Issue with coercing values</hands-on-title>
 > 1. Create a `chromosomes_2` object with 3, 11, 'X', 6
 >
 >    ```R
@@ -792,12 +791,12 @@ Here the coercion is straight forward, but what would happen if we tried using `
 > 2. Coerce into a numeric type using `as.numeric()`
 >
 >    ```R
->    > snp_chromosomes_2 <- as.numeric(snp_chromosomes_2)
+>    > snp_chromosomes_2 <- as.numeric(chromosomes_2)
 >    Warning message:
 >    NAs introduced by coercion
 >    ```
 >
-> 3. Check the content of `chromosomes_2`
+> 3. Check the content of `snp_chromosomes_2`
 >
 >    ```R
 >    > snp_chromosomes_2
@@ -821,11 +820,11 @@ Let's summarize this section on coercion with a few take home messages:
 
 Lists are quite useful in R. You may come across lists in the way that some bioinformatics programs may store and/or return data to you. One of the key attributes of a list is that, unlike a vector, a list may contain data of more than one mode.
 
-> ### {% icon comment %} Learning more about lists
+> <comment-title>Learning more about lists</comment-title>
 > Learn more about creating and using lists using this [nice tutorial](https://r4ds.had.co.nz/vectors.html#lists). In this one example, we will create a named list and show you how to retrieve items from the list.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Create and manipulate list objects
+> <hands-on-title>Create and manipulate list objects</hands-on-title>
 > 1. Create a named list containing the genes, reference SNPs, chromomosome and position objects we create before
 >
 >    ```R
@@ -836,7 +835,7 @@ Lists are quite useful in R. You may come across lists in the way that some bioi
 >                     position = snp_positions)
 >    ```
 >
->    > ### {% icon comment %} Easy reading
+>    > <comment-title>Easy reading</comment-title>
 >    > For easy reading we have placed each item in the list on a separate line. Nothing special about this, you can do this for any multiline commands. Just make sure the entire command (all 4 lines) are highlighted before running.
 >    >
 >    > As we are doing all this inside the list() function use of the `=` sign is good style

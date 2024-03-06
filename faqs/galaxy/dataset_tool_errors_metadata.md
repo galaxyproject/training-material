@@ -1,6 +1,6 @@
 ---
 title: How to find and correct tool errors related to Metadata?
-area: datasets
+area: troubleshooting
 description:  Finding and Correcting Metadata
 layout: faq
 box_type: tip

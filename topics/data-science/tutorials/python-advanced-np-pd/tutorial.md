@@ -28,7 +28,7 @@ contributors:
   - mcmaniou
   - fpsom
   - carpentries
-  - erasmusplus
+  - gallantries
 
 priority: 2
 notebook:
@@ -38,13 +38,13 @@ notebook:
 
 In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of the Python programming language, as well as, how to run Python programs using Galaxy. Otherwise, it is advised to follow the "Introduction to Python" tutorial available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson. Please note:  JupyterNotebook is only currently available on the [usegalaxy.eu](https://usegalaxy.eu/) and [usegalaxy.org](https://usegalaxy.org/) sites.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/) and [Plotting and Programming in Python](https://swcarpentry.github.io/python-novice-gapminder/), which is licensed CC-BY 4.0.
 >
 > Adaptations have been made to make this work better in a GTN/Galaxy environment.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -213,11 +213,11 @@ print(a)
 ```
 
 
-> ### {% icon question %} Question: Selecting and stacking arrays
+> <question-title>Selecting and stacking arrays</question-title>
 >
 > Write some additional code that slices the first and last columns of A, and stacks them into a 3x2 array. Make sure to print the results to verify your solution.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > A ‘gotcha’ with array indexing is that singleton dimensions are dropped by default. That means `A[:, 0]` is a one dimensional array, which won’t stack as desired. To preserve singleton dimensions, the index itself can be a slice or array. For example, `A[:, :1]` returns a two dimensional array with one singleton dimension (i.e. a column vector).
 > > ```
@@ -229,13 +229,13 @@ print(a)
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question: Selecting with conditionals
+> <question-title>Selecting with conditionals</question-title>
 >
 > Given the followind array `A`, keep only the elements that are lower that `0.05`.
 >```
 >A = np.array([0.81, 0.025, 0.15, 0.67, 0.01])
 >```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > A = A[A<0.05]
@@ -323,13 +323,13 @@ print(data.describe(include='all'))
 ```
 
 
-> ### {% icon question %} Question: Using pd.head and pd.tail
+> <question-title>Using pd.head and pd.tail</question-title>
 >
 > After reading the data, use `help(data.head)` and `help(data.tail)` to find out what `DataFrame.head` and `DataFrame.tail` do.
 > 	a. What method call will display the first three rows of the data?
 > 	b. What method call will display the last three columns of this data? (Hint: you may need to change your view of the data.)
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > a. We can check out the first five rows of the data by executing `data.head()` (allowing us to view the head of the DataFrame). We can specify the number of rows we wish to see by specifying the parameter `n` in our call to `data.head()`. To view the first three rows, execute:
 > > ```
@@ -360,11 +360,11 @@ print(data.describe(include='all'))
 > {: .solution}
 {: .question}
 
- > ### {% icon question %} Question: Saving in a csv file
+ > <question-title>Saving in a csv file</question-title>
 >
 > As well as the `read_csv` function for reading data from a file, Pandas provides a `to_csv` function to write dataframes to files. Applying what you’ve learned about reading from files, write one of your dataframes to a file called `processed.csv`. You can use `help` to get information on how to use `to_csv`.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > data_flipped.to_csv('processed.csv')
@@ -458,7 +458,7 @@ This is very useful because NaNs are ignored by operations like max, min, averag
 print(new_data.describe())
 ```
 
-> ### {% icon question %} Question: Manipulating dataframes
+> <question-title>Manipulating dataframes</question-title>
 >
 > Explain what each line in the following short program does: what is in first, second, etc.?
 >
@@ -469,7 +469,7 @@ print(new_data.describe())
 >fourth = third.drop('StdErr', axis = 1)
 >fourth.to_csv('result.csv')
 >```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Let’s go through this piece of code line by line.
 > > ```
@@ -505,7 +505,7 @@ print(new_data.describe())
 {: .question}
 
 
-> ### {% icon question %} Question: Finding min-max indexes
+> <question-title>Finding min-max indexes</question-title>
 >
 > Explain in simple terms what `idxmin` and `idxmax` do in the short program below. When would you use these methods?
 > ```
@@ -515,7 +515,7 @@ print(new_data.describe())
 > print(data['Base mean'].idxmax())
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > `idxmin` will return the index value corresponding to the minimum; idxmax will do the same for the maximum value.
 > >
@@ -528,14 +528,14 @@ print(new_data.describe())
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question: Selecting with conditionals
+> <question-title>Selecting with conditionals</question-title>
 >
 > Assume Pandas has been imported and the previous dataset has been loaded. Write an expression to select each of the following:
 > a. P-value of each gene
 > b. all the information of gene `FBgn0039178`
 > c. the information of all genes that belong to chromosome `chr3R`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > a. ```data['P-value']```
 > > b.```data.loc['FBgn0039178', :]```
@@ -566,26 +566,26 @@ summarised_data = data.groupby('Chromosome').agg({'Base mean':'first',
 print(summarised_data)
 ```
 
-> ### {% icon question %} Question: Finding the max of each group
+> <question-title>Finding the max of each group</question-title>
 >
 > Using the same dataset, try to find the longest genes in each chromosome.
 >
->> ### {% icon solution %} Solution
+>> <solution-title></solution-title>
 > >
 > > ```
 > > data['Gene Length'] = data['End'] - data['Start']
 > > data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
 > > ```
 > >
-> > {: .solution}
-> > {: .question}
+> {: .solution}
+{: .question}
 
 
-> ### {% icon question %} Question: Grouping with multiple variables
+> <question-title>Grouping with multiple variables</question-title>
 >
 > Using the same dataset, try to find how many genes are found on each strand of each chromosome.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > You can group the data according to more than one column.
 > > ```

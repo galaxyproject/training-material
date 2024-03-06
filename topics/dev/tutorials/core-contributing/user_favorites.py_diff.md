@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``lib/galaxy/webapps/galaxy/api/user_favorites.py``
+> <solution-title>``lib/galaxy/webapps/galaxy/api/user_favorites.py``</solution-title>
 > 
 > Possible changes to file ``lib/galaxy/webapps/galaxy/api/user_favorites.py``:
 > 

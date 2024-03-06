@@ -27,13 +27,13 @@ requirements:
      - ansible-galaxy
 ---
 
-> ### {% icon warning %} Warning: switching object store types will cause issues
+> <warning-title>switching object store types will cause issues</warning-title>
 > Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.
 {: .warning}
 
 # Expanding Storage
 
-{:.no_toc}
+
 
 You may find that your Galaxy files directory has run out of space, but you don't want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy's hierarchical object store to add an additional file space for Galaxy.
 
@@ -41,7 +41,7 @@ Alternatively, you may wish to write new datasets to more than one filesystem. F
 
 This tutorial assumes you have done the "Ansible for installing Galaxy" tutorial, it references the base configuration set up in that tutorial in numerous places.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -54,7 +54,7 @@ This tutorial assumes you have done the "Ansible for installing Galaxy" tutorial
 First, note that your Galaxy datasets have been created thus far in the directory `/data`, due to `galaxy_config: galaxy: file_path`. In some cases, we run out of storage in a particular location. Galaxy allows us to add additional storage locations where it will create new datasets, while still looking in the old locations for old datasets. You will not have to migrate any of your datasets, and can just "plug and play" with new storage pools.
 
 
-> ### {% icon hands_on %} Hands-on: Adding Hierarchical Storage
+> <hands-on-title>Adding Hierarchical Storage</hands-on-title>
 >
 > 1. Open your group variables file and set the `object_store_config_file` variable:
 >
@@ -108,11 +108,11 @@ First, note that your Galaxy datasets have been created thus far in the director
 >
 > 6. Run a couple of jobs after Galaxy has restarted.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > Where is the data now stored?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > You should see `/data2` in the `Full Path`, if not, something went wrong. Check that your "order" is correct
 >    > >
@@ -127,7 +127,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 Rather than searching a hierarchy of object stores until the dataset is found, Galaxy can store the ID (in the database) of the object store in which a dataset is located when the dataset is created. This allows Galaxy to write to more than one object store for new datasets.
 
 
-> ### {% icon hands_on %} Hands-on: Distributed Object Store
+> <hands-on-title>Distributed Object Store</hands-on-title>
 >
 > 1. Edit your `templates/galaxy/config/object_store_conf.xml.j2` file and replace the contents with:
 >
@@ -155,13 +155,13 @@ Rather than searching a hierarchy of object stores until the dataset is found, G
 
 Sites like UseGalaxy.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.
 
-> ### {% icon details %} More documentation
+> <details-title>More documentation</details-title>
 >
 > More information can be found in the [sample file](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/object_store_conf.xml.sample).
 >
 {: .details}
 
-> ### {% icon tip %} Can I distribute objects based on the user?
+> <tip-title>Can I distribute objects based on the user?</tip-title>
 >
 > Yes! You must write your own dynamic job handler code to handle this.
 > See [PR#6552](https://github.com/galaxyproject/galaxy/pull/6552) and [PR#10233](https://github.com/galaxyproject/galaxy/pull/10233)
@@ -170,9 +170,9 @@ Sites like UseGalaxy.eu use the distributed object store in order to balance dat
 > know](https://github.com/galaxyproject/training-material/issues/new) with
 > some example code, and we can include this as a training module for everyone.
 >
-{: .details}
+{: .tip}
 
-> ### {% icon warning %} Warning: switching object store types will cause issues
+> <warning-title>switching object store types will cause issues</warning-title>
 > We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy's database. Any datasets that were created as hierarchical will lack the `object_store_id`, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on [Gitter](http://gitter.im/galaxyproject/Lobby) for more help
 >
 > 1. Move the datasets to their new location: `sudo -u galaxy rsync -avr /hierarchical/000/ /distributed/000/`
@@ -190,7 +190,7 @@ Many sites have access to an S3 service (either public AWS, or something private
 
 we will set up a local S3-compatible object store, and then talk to the API of this service.
 
-> ### {% icon hands_on %} Hands-on: Setting up an S3-compatible Object Store
+> <hands-on-title>Setting up an S3-compatible Object Store</hands-on-title>
 >
 > 1. Edit your `requirements.yml` file and add:
 >
@@ -271,11 +271,11 @@ As of [20.09](https://github.com/galaxyproject/galaxy/pull/9888), Galaxy has sup
 
 This tutorial will help you setup the connection between Galaxy and Dropbox, allowing your users to add their account details and then access their Dropbox data within Galaxy
 
-> ### {% icon hands_on %} Hands-on: Configure Galaxy to access the Dropbox service
+> <hands-on-title>Configure Galaxy to access the Dropbox service</hands-on-title>
 >
 > 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > mkdir -p templates/galaxy/config
 >    > ```
@@ -309,14 +309,10 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -35,6 +35,8 @@ galaxy_config:
->         check_migrate_tools: false
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>         job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
 >    +    file_sources_config_file: "{{ galaxy_config_dir }}/file_sources_conf.yml"
 >    +    user_preferences_extra_conf_path: "{{ galaxy_config_dir }}/user_preferences_extra_conf.yml"
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
 >    ```
 >    {% endraw %}
 >
@@ -327,7 +323,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -65,6 +67,12 @@ galaxy_config_templates:
->       - src: templates/galaxy/config/job_conf.xml.j2
+>       - src: templates/galaxy/config/job_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >     
 >    +galaxy_config_files:
@@ -341,12 +337,13 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```
 >    > > ansible-playbook galaxy.yml
 >    > > ```
 >    > {: .code-in}
->    > > ### {% icon code-in %} Output
+>    >
+>    > > <code-out-title>Output</code-out-title>
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
@@ -359,7 +356,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 
 Now we are ready to configure a Galaxy's user account to upload dataset from Dropbox to the Galaxy server.
 
-> ### {% icon hands_on %} Hands-on: Configure Galaxy to access the Dropbox service
+> <hands-on-title>Configure Galaxy to access the Dropbox service</hands-on-title>
 >
 > 1. Generate a Dropbox access token following the [Dropbox Oauth guide](https://www.dropbox.com/lp/developers/reference/oauth-guide)
 >

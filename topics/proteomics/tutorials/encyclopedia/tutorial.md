@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: EncyclopeDIA
-zenodo_link: 'http://doi.org/10.5281/zenodo.4926594'
+zenodo_link: 'https://doi.org/10.5281/zenodo.4926594'
 tags: [DIA]
 questions:
 - How to perform quantitative analysis using DIA data with the help of EncyclopeDIA?
@@ -28,8 +28,6 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
 
 Data Independent Acquisition (DIA) was introduced as a method to provide reproducible quantitative information as an improvement over the Data Dependent Acquisition (DDA) {% cite Gillet2012 %}. Despite benefits of DIA, such as increased depth of coverage and lesser missing values, the computational analysis of the complicated and multiplexed data presents challenges. Therefore, with the rise of usage of this technique, rises a need for new and robust methods of data analysis.
 
@@ -41,7 +39,7 @@ The EncyclopeDIA {% cite Searle2020 %} workflow described in this tutorial conta
 
 **About the data:** In this tutorial, we will be analyzing the dataset provided by the iPRG.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -68,7 +66,7 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 
 ![Precursor and Fragment scans in DIA](../../images/EncyclopeDIA_Figure3.png "Precursor and Fragment ion scans in DIA experiment")
 
-> ### {% icon details %} Advantages of DIA over DDA
+> <details-title>Advantages of DIA over DDA</details-title>
 >
 > An advantage of DIA-MS compared to DDA-MS is that it is possible to obtain a better coverage of the proteome. Since DDA-MS focuses on the selection of precursor ions with significant abundance, data for less abundant (but perhaps equally interesting or important) peptides is not acquired. Therefore, DIA-MS, which fragments ions based on a mass range and not abundance, can provide a more comprehensive proteome coverage within a sample. DIA-MS relies on quantitation via fragment MS ions as compared to precursor ion MS and hence avoids the issue of quantitative interference due to co-eluting peptides associated with the DDA-MS methods. Finally, since DIA-MS is not dependent on the precursor intensity, MS2 signals can be used for quantitative analysis of low-abundance peptides and proteins.  For a more detailed description of DIA and its applications and advantages, we recommend users to watch two presentations by Brian Searle available on YouTube [Introduction to DIA](https://youtu.be/RidYXjvAk0s) and [DIA tips](https://youtu.be/coRDFs8Z8Ks).
 >
@@ -76,7 +74,7 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 
 # Import data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -99,6 +97,7 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. For all the datasets that you have just uploaded, please rename them as follows:
@@ -145,7 +144,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
   This output will be the DIA data analyzed with EncyclopeDIA.
 
 
-> ### {% icon hands_on %} Hands-on: Conversion of GPF DIA mass spectrometry raw data to mzML data-type.
+> <hands-on-title>Conversion of GPF DIA mass spectrometry raw data to mzML data-type.</hands-on-title>
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `GPF collection` (Input dataset collection)
@@ -166,19 +165,19 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >        - *"Output multiple runs per file"*: `Yes`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > SearchToLib uses the mzML dataset collection from this step as its input, making this step vital for the function of the workflow.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why is conversion from raw to mzML necessary?
 > 2. Can you use any other tool for conversion?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. SearchToLib and EncyclopeDIA require mzML file inputs. Failing to convert the experimental DIA data and the GPF DIA data from raw files would mean that SearchToLib and EncyclopeDIA would not run successfully.
 > > 2. msconvert is specifically used in this workflow as it specializes in conversion of mass spectrometry data, and can therefore be applied to the DIA data that requires conversion to be analyzed in this workflow. However, there is an option to convert from raw to mzML using a command line-based tool.
@@ -188,7 +187,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 {: .question}
 
 
-> ### {% icon hands_on %} Hands-on: Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.
+> <hands-on-title>Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.</hands-on-title>
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `Experimental Design collection` (Input dataset collection)
@@ -209,7 +208,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >        - *"Output multiple runs per file"*: `Yes`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > In order for analysis of the Experimental DIA data via EncyclopeDIA to proceed, the raw dataset collection must be converted to mzML which makes this a critical step in the function of this workflow. Additionally, as DIA uses overlapping windows and fragments (Figure 3B), deconvolution of the data is vital to analyze it correctly in the removal of repeated data. Conversion from raw to mzML allows for this deconvolution to occur within the workflow as part of the data's conversion.
 >    {: .comment}
@@ -233,7 +232,7 @@ As shown in Figure 4, GPF and its multiple injections allows for a far richer an
 SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the GPF DIA dataset collection converted previously, a background proteome FASTA file, as well as a DLIB Spectral Library. Outputs from this tool include the Chromatogram Library in [ELIB format](https://support.proteomesoftware.com/hc/en-us/articles/360022979832-Reference-Libraries-Used-in-Scaffold-DIA), as well as a text log file.
 
 
-> ### {% icon hands_on %} Hands-on: Building a Chromatogram Library with DIA MS/MS data.
+> <hands-on-title>Building a Chromatogram Library with DIA MS/MS data.</hands-on-title>
 >
 > 1. {% tool [SearchToLib](toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/0.9.5.0) %} with the following parameters:
 >    - {% icon param-file %} *"Spectrum files in  mzML format"*: `output` (output of **msconvert** {% icon tool %})
@@ -249,19 +248,19 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 >        - *"Set Search Options"*: `No - use default options`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Chromatogram Library generation using SearchToLib is the step that takes the most time in this workflow. With larger datasets, more time is required to generate the Chromatogram Library and SearchToLib may take up to several days to complete.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What are the benefits to using Chromatogram Libraries compared to DDA generated libraries?
 > 2. How does the EncyclopeDIA workflow change change in the absence of a spectral DLIB library?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The benefit to using Chromatogram Libraries compared to DDA generated libraries is largely found in the method of data aquisition. Because Chromatogram Libraries use pooled DIA sample data and use GPF to generate fractions, Chromatogram Libraries are found to be both very comprehensive, as well as very relevant libraries to the experimental samples that are to be analyzed. As Chromatogram Libraries take the form of an ELIB file-type, they contain additional information on retention times, peak intensities, and more compared to their DLIB DDA generated library counterparts. Furthermore, this method also avoids the extra labor associated with performing DDA for just library generation to analyze DIA samples.
 > > 2. The EncyclopeDIA Walnut workflow, a variation of the Standard EncyclopeDIA workflow (described in this tutorial), can be run in the absence of a spectral DLIB library. The step in the workflow that is most affected by the absence of the spectral DLIB library is Chromatogram Library generation using SearchToLib. The EncyclopeDIA WALNUT workflow and the changed SearchToLib step are described below.
@@ -270,7 +269,7 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 >
 {: .question}
 
-> ### {% icon details %} SearchToLib Inputs and Outputs
+> <details-title>SearchToLib Inputs and Outputs</details-title>
 >
 > In this Standard EncyclopeDIA workflow, SearchToLib requires three inputs:
 >
@@ -304,7 +303,7 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 ![EncyclopeDIA WALNUT workflow](../../images/EncyclopeDIA_WALNUT_Workflow.png "EncyclopeDIA WALNUT workflow overview")
 
 
-> ### {% icon hands_on %} Hands-on: Chromatogram Library generation using WALNUT variation.
+> <hands-on-title>Chromatogram Library generation using WALNUT variation.</hands-on-title>
 >
 > 1. {% tool [SearchToLib](toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/0.9.5.0) %} with the following parameters:
 >    - {% icon param-file %} *"Spectrum files in  mzML format"*: `output` (output of **msconvert** {% icon tool %})
@@ -319,14 +318,14 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 >        - *"Set Modifications Options"*: `No - use default options`
 >        - *"Set Search Options"*: `No - use default options`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > The biggest change between the WALNUT and the Standard EncyclopeDIA workflows is found in Chromatogram Library generation using SearchToLib.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon details %} Without a Chromatogram Library
+> <details-title>Without a Chromatogram Library</details-title>
 >
 > However, there are situations in which DIA data is analyzed without the use of DIA data generated libraries (Chromatogram Libraries) or DDA libraries. There are a few different methods and tools that can be used in cases where neither a Chromatogram library nor a DDA library can be generated.
 >
@@ -341,7 +340,7 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 EncyclopeDIA is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs for both proteins and peptides.
 
 
-> ### {% icon hands_on %} Hands-on: Library searching directly from DIA MS/MS data.
+> <hands-on-title>Library searching directly from DIA MS/MS data.</hands-on-title>
 >
 > 1. {% tool [EncyclopeDIA Quantify](toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_quantify/encyclopedia_quantify/0.9.5.0) %} with the following parameters:
 >    - {% icon param-file %} *"Spectrum files in  mzML format"*: `output` (output of **msconvert** {% icon tool %})
@@ -357,19 +356,19 @@ EncyclopeDIA is the tool used for DIA data analysis through searching peptides a
 >        - *"Set Search Options"*: `No - use default options`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > EncyclopeDIA will generate two important ouputs: Peptide Quantitation Ouput, as well as Protein Quantitation Output (both .txt files). These outputs will contain information on the peptide sequences, protein IDs, and quantitation of protein and peptide fragments.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Are there any other tools available to analyze DIA data?
 > 2. Can EncyclopeDIA be used if a Chromatogram Library is not generated?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. There are other softwares to analyze DIA data, such as Spectronaut and Scaffold DIA. However, these softwares have not been wrapped to form tools on the GalaxyEU platform, and therefore cannot be incorporated into this workflow.
 > > 2. EncyclopeDIA accepts ELIB (Chromatogram Library format) or DLIB (DDA Library format), and therefore a DDA generated library could be used with the EncyclopeDIA tool to analyze DIA data.
@@ -386,7 +385,7 @@ Sample ouput of the Peptide Quantitation Ouput:
 Sample output of the Protein Quantitation Output:
 ![Protein Quantitation Output](../../images/EncyclopeDIA_ProteinQuantitation_Output.png "Protein Quantitation Output Summary")
 
-> ### {% icon details %} EncyclopeDIA Inputs and Ouputs
+> <details-title>EncyclopeDIA Inputs and Ouputs</details-title>
 > Inputs required for EncyclopeDIA:
 >
 > - Chromatogram Library (.dlib)
@@ -409,7 +408,7 @@ Sample output of the Protein Quantitation Output:
 >
 {: .details}
 
-> ### {% icon comment %} Comment: Tool Versions
+> <comment-title>Tool Versions</comment-title>
 >
 > The tools are subjected to changes while being upgraded.
 > Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including the updated parameters.
@@ -417,7 +416,7 @@ Sample output of the Protein Quantitation Output:
 {: .comment}
 
 # **Conclusion**
-{:.no_toc}
+
 
 This completes the walkthrough of the EncyclopeDIA Standard workflow.
 

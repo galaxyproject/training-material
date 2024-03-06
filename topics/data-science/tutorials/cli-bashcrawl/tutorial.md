@@ -29,7 +29,7 @@ notebook:
 subtopic: bash
 contributors:
 - hexylena
-- erasmusplus
+- gallantries
 tags:
 - game
 - bash
@@ -37,7 +37,7 @@ tags:
 
 This is not a tutorial like most GTN content but a fun exercise for you to play around and learn a bit about the command line, and hopefully re-inforce the skills you covered in Basic and Advanced CLI skills.
 
-> ### {% icon hands_on %} Open a Jupyter Terminal
+> <hands-on-title>Open a Jupyter Terminal</hands-on-title>
 > To best follow this tutorial, you should open a terminal.
 >
 > Here are some instructions for how to do this on various environments.

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Classification in Machine Learning'
-zenodo_link: https://zenodo.org/record/3738729#.XoZyHXUzaV4
+zenodo_link: https://zenodo.org/record/3738729
 questions:
 - What is classification and how we can use classification techniques?
 objectives:
@@ -23,8 +23,6 @@ contributors:
 - simonbray
 ---
 
-# Introduction
-{:.no_toc}
 
 In this tutorial you will learn how to apply Galaxy tools to solve [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine logistic regression, which is an example of a linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
 
@@ -32,7 +30,7 @@ Finally, we will discuss how to train the classifiers by finding the values of t
 
 Classification is a [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) method in machine learning and the algorithm which is used for this learning task is called a classifier. In this tutorial we will build a classifier which can predict whether a chemical substance is biodegradable or not. Substances which degrade quickly are preferable to those which degrade slowly, as they do not accumulate and pose a risk to the environment. Therefore, it is useful to be able to predict easily in advance whether a substance is biodegradable prior to production and usage in consumer products.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -75,10 +73,10 @@ We have two datasets available; the training dataset contains 837 molecules, whi
 
 Let's begin by uploading the necessary datasets.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/3738729#.Xs1EeHUzY5k)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/3738729/files/train_rows.csv
@@ -97,7 +95,7 @@ Let's begin by uploading the necessary datasets.
 The `train_rows` contains a column `Class` which is the class label or target. We will evaluate our model on `test_rows` and compare the predicted class with the true class value in `test_rows_labels`
 {: .comment}
 
-> ### {% icon details %} Preparing the data for classification
+> <details-title>Preparing the data for classification</details-title>
 >
 > Preparing the data involves these following major tasks:
 > 1. Data cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.
@@ -112,9 +110,9 @@ As the first step, to learn the mapping between several features and the classes
 
 The second thing we need is an optimization algorithm for iteratively updating the weights so as to minimize this loss function. The standard algorithm for this is gradient descent. So, the dataset is divided into two parts - training and test sets. The training set is used to train a classifier and the test set is used to evaluate the performance of the trained model.
 
-> ### {% icon hands_on %} Hands-on: Train logistic regression classifier
+> <hands-on-title>Train logistic regression classifier</hands-on-title>
 >
-> 1. **Generalized linear models** {% icon tool %} with the following parameters to train the regressor:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Logistic Regression`
 >          - *"Select input type"*: `tabular data`
@@ -129,11 +127,11 @@ The second thing we need is an optimization algorithm for iteratively updating t
 > 2. Rename the generated file to `LogisticRegression_model`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is learned by the logistic regression model?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > In the logistic regressoion model, the coefficients of the logistic regression algorithm have be estimated from our training data. This is done using [maximum-likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation).
 > > 
@@ -148,9 +146,9 @@ After learning on the training dataset, we should evaluate the performance on th
 Now, we will predict the class in the test dataset using this classifier in order to see if it has learned important features which can be generalized on a new dataset. The test dataset (`test_rows`) contains the same number of features but does not contain the `Class` column. This is predicted using the trained classifier.
 
 
-> ### {% icon hands_on %} Hands-on: Predict class using the logistic regression classifier
+> <hands-on-title>Predict class using the logistic regression classifier</hands-on-title>
 >
-> 1. **Generalized linear models** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `LogisticRegression_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -163,7 +161,7 @@ Now, we will predict the class in the test dataset using this classifier in orde
 
 We will evaluate the classification by comparing the predicted with the expected classes. In the previous step, we classified the test dataset (`LogisticRegression_result`). We have one more dataset (`test_rows_labels`) which contains the true class label of the test set. Using the true and predicted class labels in the test set, we will verify the performance by analyzing the plots. As you can see, `LogisticRegression_result` has no header, so first we should remove the header from `test_rows_labels` to compare. 
 
-> ### {% icon hands_on %} Hands-on: Remove the header
+> <hands-on-title>Remove the header</hands-on-title>
 >
 > 1. **Remove beginning** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Remove first"*: `1`
@@ -174,8 +172,8 @@ We will evaluate the classification by comparing the predicted with the expected
 
 Now we visualize and analyze the classification using the "Plot confusion matrix, precision, recall and ROC and AUC curves" tool.
 
-> ### {% icon hands_on %} Hands-on: Check and visualize the classification
-> 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
+> <hands-on-title>Check and visualize the classification</hands-on-title>
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_noheader`
 >    - {% icon param-file %} *"Select predicted data file"*: `LogisticRegression_result`
 >    - {% icon param-file %} *"Select trained model"*: `LogisticRegression_model`
@@ -198,11 +196,11 @@ The visualization tool creates the following plots:
 These plots are important to visualize the quality of the classifier and the true and predicted classes.
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Inspect the plots. What can you say about the classification?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Figures 2,3 and 4 show that the classification is acceptable, but as you will see in the next steps, the results can be improved. 
 > >
@@ -213,11 +211,11 @@ These plots are important to visualize the quality of the classifier and the tru
 
 At the second step, we will use k-nearest neighbor classifier. In the [k-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and if k is too large, the neighborhood may include points from other classes and causes errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What are advantages and disadvantages about this model?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Advantages:
 > > - It is a very simple algorithm to understand and interpret.
 > >
@@ -244,9 +242,9 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Train k-nearest neighbor classifier
+> <hands-on-title>Train k-nearest neighbor classifier</hands-on-title>
 >
-> 1. **Nearest Neighbors Classification** {% icon tool %} with the following parameters to train the regressor:
+> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Classifier type"*: `Nearest Neighbors`
 >          - *"Select input type"*: `tabular data`
@@ -262,11 +260,11 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 > 2. Rename the generated file to `NearestNeighbors_model`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is the value of k (number of neighbors) for the model?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > As you can see in the Advanced Options, the default value for the number of neighbors is 5, and we used the default value. You can set this parameter based on your problem and data. 
 > >
 > {: .solution}
@@ -274,9 +272,9 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 
 Now, we should evaluate the performance on the test dataset to find out whether the KNN classifier is a good model from the training dataset or not. 
 
-> ### {% icon hands_on %} Hands-on: Predict class using the k-nearest neighbor classifier
+> <hands-on-title>Predict class using the k-nearest neighbor classifier</hands-on-title>
 >
-> 1. **Nearest Neighbors Classification** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `NearestNeighbors_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -288,8 +286,8 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 
 Now we visualize and analyze the classification. As you can see, `NearestNeighbors_result` has a header, so use `test_rows_labels` to compare. 
 
-> ### {% icon hands_on %} Hands-on: Check and visualize the classification
-> 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
+> <hands-on-title>Check and visualize the classification</hands-on-title>
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `NearestNeighbors_result`
 >    - {% icon param-file %} *"Select trained model"*: `NearestNeighbors_model`
@@ -313,9 +311,9 @@ To solve this problem, SVM uses kernel functions to map the input to a high dime
 Without going into technical details, a kernel is a function that quantifies the similarity of two observations. Two special properties of SVMs are that SVMs achieve (1) high generalization by maximizing the margin and (2) support an efficient learning of nonlinear functions by
 kernel trick. In the next step, we will build a SVM classifier with our data. 
 
-> ### {% icon hands_on %} Hands-on: Train a SVM classifier
+> <hands-on-title>Train a SVM classifier</hands-on-title>
 >
-> 1. **Support vector machines (SVMs)** {% icon tool %} with the following parameters to train the regressor:
+>  {% tool [Support vector machines (SVMs)](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Linear Support Vector Classification`
 >          - *"Select input type"*: `tabular data`
@@ -330,11 +328,11 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 > 2. Rename the generated file to `SVM_model`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is learned by the support vector machines?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The coefficients of the line with the maximal margin in the kernel space is learned in the training phase.
 > > 
@@ -345,9 +343,9 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 
 Now we will evaluate the performance of the SVM classifier:
 
-> ### {% icon hands_on %} Hands-on: Predict class SVM classifier
+> <hands-on-title>Predict class SVM classifier</hands-on-title>
 >
-> 1. **Support vector machines (SVMs)** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+>  {% tool [Support vector machines (SVMs)](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `SVM_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -359,8 +357,8 @@ Now we will evaluate the performance of the SVM classifier:
 
 Now let's visualize the results:
 
-> ### {% icon hands_on %} Hands-on: Check and visualize the classification
-> 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
+> <hands-on-title>Check and visualize the classification</hands-on-title>
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `SVM_result`
 >    - {% icon param-file %} *"Select trained model"*: `SVM_model`
@@ -377,9 +375,9 @@ The visualization tool creates the following ROC plot:
 
 One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm: one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.
 
-> ### {% icon hands_on %} Hands-on: Train random forest
+> <hands-on-title>Train random forest</hands-on-title>
 >
-> 1. **Ensemble methods** {% icon tool %} with the following parameters to train the regressor:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Random forest classifier`
 >          - *"Select input type"*: `tabular data`
@@ -394,11 +392,11 @@ One big advantage of random forest is that it can be used for both classificatio
 > 2. Rename the generated file to `RandomForest_model`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What are the advantages of random forest classifier compared with KNN and SVM?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. The overfitting problem will never arise when we use the random forest algorithm in any classification problem.
 > > 2. The same random forest algorithm can be used for both classification and regression task.
 > > 3. The random forest algorithm can be used for feature engineering, which means identifying the most important features out of the available features from the training dataset.
@@ -409,9 +407,9 @@ One big advantage of random forest is that it can be used for both classificatio
 
 After learning on the training dataset, we should evaluate the performance on the test dataset.
 
-> ### {% icon hands_on %} Hands-on: Predict targets using the random forest
+> <hands-on-title>Predict targets using the random forest</hands-on-title>
 >
-> 1. **Ensemble methods** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `RandomForest_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -425,11 +423,11 @@ The visualization tool creates the following ROC plot:
 ![roc_scores](images/roc_rf.png "Receiver operator characteristics (ROC) and area under ROC (AUC) for the random forest classifier.")
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Inspect the plots. What can you say about the classification?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Figures show that we achieved an AUC score of `1.0`  for the test set using random forest. It means the prediction is very good, in fact it has no error at all. Unfortunately, this is not usually the case when dealing with chemical data.
 > {: .solution}
@@ -440,9 +438,9 @@ The visualization tool creates the following ROC plot:
 
 At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a zipped file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
 
-> ### {% icon hands_on %} Hands-on: Create pipeline
+> <hands-on-title>Create pipeline</hands-on-title>
 >
-> 1. **Pipeline builder** {% icon tool %} with the following parameters:
+> {% tool [Pipeline builder](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.4) %}:
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `BaggingClassifier`
@@ -457,9 +455,9 @@ At the last step, we will create a bagging classifier by using  the **Pipeline b
 
 After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `BaggingClassifier` for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of `n_estimators` for this regressor is `10`. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose a value which is less than `10` and a few which are more than `10`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.
 
-> ### {% icon hands_on %} Hands-on: Hyperparameter search
+> <hands-on-title>Hyperparameter search</hands-on-title>
 >
-> 1. **Hyperparameter search** {% icon tool %} with the following parameters:
+> {% tool [Hyperparameter search](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.4) %}:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
 >        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
 >        - {% icon param-files %} *"Is the estimator a deep learning model?"*: `NO` {% icon tool %})
@@ -483,13 +481,13 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is the optimal number of estimators for the given dataset?
 >
 > Hint: Please look at the `mean_test_score` column in the tabular result from the **Hyperparameter search** tool.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 20 - even though the default value of the number of estimators for Bagging Classifier is `10`, `20` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset. 
 > >
@@ -499,9 +497,9 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 
 Using the **Hyperparameter search** tool, we found the best model, based on the training data. Now, we will predict age in the test dataset using this model.
 
-> ### {% icon hands_on %} Hands-on: Predict age
+> <hands-on-title>Predict age</hands-on-title>
 >
-> 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file

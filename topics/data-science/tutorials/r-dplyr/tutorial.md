@@ -24,7 +24,7 @@ key_points:
 - The functions for selecting data are a lot easier to understand than R's built in alternatives.
 contributors:
 - hexylena
-- erasmusplus
+- gallantries
 - avans-atgm
 subtopic: r
 notebook:
@@ -38,14 +38,14 @@ license: MIT
 
 dplyr ({% cite r-dplyr %}) is a powerful R-package to transform and summarize tabular data with rows and columns. It is part of a group of packages (including `ggplot2`) called the `tidyverse` ({% cite r-tidyverse %}), a collection of packages for data processing and visualisation. For further exploration please see the dplyr package vignette: [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [GenomicsClass/labs](https://github.com/genomicsclass/labs/blob/master/intro/dplyr_tutorial.Rmd).
 >
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -73,7 +73,7 @@ To load the required packages:
 library(tidyverse)
 ```
 
-> ### {% icon tip %} Package not found?
+> <tip-title>Package not found?</tip-title>
 > Remember that you can install new packages by running
 > ```
 > install.packages("tidyverse")
@@ -160,12 +160,12 @@ Now in this case, we will pipe the msleep tibble to the function that will selec
 msleep %>% select(name, sleep_total) %>% head(2)
 ```
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > How would you rewrite the following code to use the pipe operator?
 > ```
 > prcomp(tail(read.csv("file.csv"), 10))
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Just read from inside to outside, starting with the innermost `()` and use `%>%` between each step.
 > > ```
 > > read.csv("file.csv") %>% tail(10) %>% prcomp()

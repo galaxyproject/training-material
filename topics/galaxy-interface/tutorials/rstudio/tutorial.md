@@ -24,19 +24,18 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 subtopic: analyse
 ---
 
 
-# Introduction
-{:.no_toc}
+This tutorial will introduce you to how to run RStudio in Galaxy
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
 [RStudio](https://www.rstudio.com/products/RStudio/) is an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment). Like most IDEs, it provides a graphical interface to R, making it more user-friendly, and providing dozens of useful features. We will introduce additional benefits of using RStudio as you cover the lessons. In this case, we are specifically using [RStudio Server](https://www.rstudio.com/products/RStudio/#Server), a version of RStudio that can be accessed in your web browser. RStudio Server has the same features of the Desktop version of RStudio you could download as standalone software.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -59,7 +58,7 @@ You should now be looking at a page with the RStudio interface:
 
 Now that we are ready to start exploring R, we will want to keep a record of the commands we are using. To do this we can create an R script.
 
-> ### {% icon hands_on %} Hands-on: Create a R script
+> <hands-on-title>Create a R script</hands-on-title>
 >
 > 1. Click the **File** menu
 > 2. Select **New File**
@@ -68,7 +67,7 @@ Now that we are ready to start exploring R, we will want to keep a record of the
 
 A new panel appears on the top left. Before we go any further, you should save your script.
 
-> ### {% icon hands_on %} Hands-on: Save a R script
+> <hands-on-title>Save a R script</hands-on-title>
 >
 > 1. Click the {% icon galaxy-save %} icon (**Save current document**) in the bar above the first line in the script editor
 >
@@ -109,7 +108,7 @@ Here are the major windows (or panels) of the RStudio environment:
 
 All of the panels in RStudio have configuration options. For example, you can minimize/maximize a panel, or by moving your mouse in the space between panels you can resize as needed. The most important customization options for panel layout are in the **View** menu. Other options such as font sizes, colors/themes, and more are in the **Tools** menu under **Global Options**.
 
-> ### {% icon comment %} Working with R at the terminal
+> <comment-title>Working with R at the terminal</comment-title>
 > Although we won't be working with R at the terminal, there are lots of reasons to.
 >
 > For example, once you have written an RScript, you can run it at any Linux or Windows terminal without the need to start up RStudio. We don't want you to get confused - RStudio runs R, but R is not RStudio.
@@ -121,7 +120,7 @@ All of the panels in RStudio have configuration options. For example, you can mi
 
 A function in R (or any computing language) is a short program that takes some input and returns some output.
 
-> ### {% icon hands_on %} Hands-on: Calling a function in R
+> <hands-on-title>Calling a function in R</hands-on-title>
 >
 > 1. Type `date()` in the **Console** panel
 > 2. Type <kbd>Enter</kbd>
@@ -135,7 +134,7 @@ You should obtain something like:
 [1] "Tue Mar 26 15:12:24 2019"
 ```
 
-> ### {% icon comment %} Display of function call in the tutorial
+> <comment-title>Display of function call in the tutorial</comment-title>
 > Now in the tutorial, we will display the function call like this:
 >
 > ```R
@@ -146,7 +145,7 @@ You should obtain something like:
 
 The other way to execute these functions is to use the script we just created and then keep track of the functions.
 
-> ### {% icon hands_on %} Hands-on: Running a function via a script
+> <hands-on-title>Running a function via a script</hands-on-title>
 >
 > 1. Type `date()` in the **Script** panel
 > 2. Click on the **Run the current line or selection** or type <kbd>CTRL</kbd>+<kbd>Enter</kbd> (or <kbd>CMD</kbd>+<kbd>Enter</kbd>)
@@ -156,7 +155,7 @@ You should see in the **Console** panel the same as when we run the function dir
 
 We would like now to keep information about this function
 
-> ### {% icon hands_on %} Hands-on: Comment in a script
+> <hands-on-title>Comment in a script</hands-on-title>
 >
 > 1. Write on the line before `date()` a comment:
 >
@@ -171,7 +170,7 @@ We would like now to keep information about this function
 
 The comment line is displayed in the console but not executed.
 
-> ### {% icon question %} What do these functions do?
+> <question-title>What do these functions do?</question-title>
 >
 > Try the following functions by writing them in your script. See if you can
 > guess what they do, and make sure to add comments to your script about your
@@ -180,7 +179,7 @@ The comment line is displayed in the console but not executed.
 > 2. `sessionInfo()`
 > 3. `Sys.time()`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `dir()` lists files in the working directory
 > > 2. `sessionInfo()` gives the version of R and additional info including on attached packages
@@ -189,7 +188,7 @@ The comment line is displayed in the console but not executed.
 > {: .solution}
 {: .question}
 
-> ### {% icon warning %} Commands are case sensitive!
+> <warning-title>Commands are case sensitive!</warning-title>
 > In R, the commands are case sensitive. So be careful when you type them.
 {: .warning}
 
@@ -198,13 +197,15 @@ You have hopefully noticed a pattern - an R function has three key properties:
 2. A pair of `()` after the name
 3. 0 or more arguments inside the parentheses
 
-    An argument may be a specific input for your function and/or may modify the function's behavior. For example the function `round()` will round a number with a decimal:
+   An argument may be a specific input for your function and/or may modify the function's behavior. For example the function `round()` will round a number with a decimal:
 
-    ```R
-    # This will round a number to the nearest integer
-    > round(3.14)
-    [1] 3
-    ```
+   > <code-in-title></code-in-title>
+   > ```R
+   > # This will round a number to the nearest integer
+   > > round(3.14)
+   > [1] 3
+   > ```
+   {: .code_in}
 
 ## Getting help
 
@@ -212,7 +213,7 @@ What if you wanted to round to one significant digit, `round()` can do this, but
 
 To see the help you need enter a `?` in front of the function name. The **Help** tab (in the bottom-right panel) will show you information.
 
-> ### {% icon hands_on %} Hands-on: Get help
+> <hands-on-title>Get help</hands-on-title>
 >
 > 1. Add a `?` in front of the function name to see the help
 >
@@ -231,7 +232,7 @@ In R, this help is sometimes also called a "vignette". Often there is too much i
 
 We can also see the arguments of a function without opening its help.
 
-> ### {% icon hands_on %} Hands-on: Get the function arguments
+> <hands-on-title>Get the function arguments</hands-on-title>
 >
 > 1. Type `args()` to see the arguments of `round` function
 >
@@ -254,7 +255,7 @@ Since `x` is not set, `round()` requires we provide it, in contrast to `digits` 
 
 We can explicitly set the digits parameter when we call the function.
 
-> ### {% icon hands_on %} Hands-on: Call a function with several parameters
+> <hands-on-title>Call a function with several parameters</hands-on-title>
 >
 > 1. Call `round` with 2 arguments
 >    - *x*: `3.14159`
@@ -279,7 +280,7 @@ R accepts what we call "positional arguments". If you pass a function arguments 
 
 Finally, what if you are using `?` to get help for a function in a package not installed on your system, such as when you are running a script which has dependencies?
 
-> ### {% icon hands_on %} Hands-on: Get help for a missing function
+> <hands-on-title>Get help for a missing function</hands-on-title>
 >
 > 1. Ask help for `geom_point()`
 > 2. Check the generated error
@@ -299,7 +300,7 @@ Using the two question marks (here `??geom_point()`), R returns results from a s
 
 Finally, if you think there should be a function, for example a statistical test, but you aren't sure what it is called in R, or what functions may be available.
 
-> ### {% icon hands_on %} Hands-on: Search for a function
+> <hands-on-title>Search for a function</hands-on-title>
 >
 > 1. Type `help.search('chi-Squared test')`
 > 2. Check the **Help** panel
@@ -307,7 +308,7 @@ Finally, if you think there should be a function, for example a statistical test
 
 A list of potential interesting function related to "chi-Squared test" are listed. You can click on one of them to see the help of it. Remember to put your search query in quotes inside the function's parentheses.
 
-> ### {% icon question %} Search for R functions
+> <question-title>Search for R functions</question-title>
 >
 > Search the R functions for the following statistical
 > functions
@@ -315,7 +316,7 @@ A list of potential interesting function related to "chi-Squared test" are liste
 > 1. Student-t test
 > 2. mixed linear model
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > While your search results may return several tests, we list a few you might
 > > find:
@@ -333,7 +334,7 @@ We will not discuss now, where to look for the libraries and packages that conta
 
 Here is one last bonus we will mention about RStudio. It's difficult to remember all of the arguments and definitions associated with a given function.
 
-> ### {% icon hands_on %} Hands-on: Search for a function
+> <hands-on-title>Search for a function</hands-on-title>
 >
 > 1. Type `lm` in the **Script** panel
 > 2. Hit <kbd>Tab</kbd>
@@ -369,4 +370,4 @@ Getting data in and out from Galaxy
 
 
 # Conclusion
-{:.no_toc}
+

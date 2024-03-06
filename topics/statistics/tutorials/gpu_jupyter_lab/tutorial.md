@@ -36,7 +36,9 @@ contributors:
 
 ---
 
-> ### Agenda
+[Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust [Jupyterlab notebook application](https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook) has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, [Scikit-learn](https://scikit-learn.org/), [Tensorflow](https://www.tensorflow.org/), [ONNX](https://onnx.ai/) to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated [docker container](https://github.com/anuprulez/ml-jupyter-notebook). The docker container has been built using [nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04](https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo) as the base container. Moreover, a Galaxy [tool](https://github.com/bgruening/galaxytools/pull/1157) ( `run_jupyter_job`) can be executed using [Bioblend](https://bioblend.readthedocs.io/) which uses Galaxy's remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use.
+
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -44,9 +46,6 @@ contributors:
 > {:toc}
 >
 {: .agenda}
-
-# Introduction
-[Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust Jupyterlab notebook application has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, [Scikit-learn](https://scikit-learn.org/), [Tensorflow](https://www.tensorflow.org/), [ONNX](https://onnx.ai/) to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated [docker container](https://github.com/anuprulez/ml-jupyter-notebook). The docker container has been built using [jupyter/tensorflow-notebook:tensorflow-2.6.0](https://hub.docker.com/layers/jupyter/tensorflow-notebook/tensorflow-2.6.0/images/sha256-23ac04200f8f6ee4a224f7f8cb48c810e24bc18cdd20a3614d1914e01f950969?context=explore) as the base container. Moreover, a Galaxy [tool](https://github.com/bgruening/galaxytools/pull/1157) ( `run_jupyter_job`) can be executed using [Bioblend](https://bioblend.readthedocs.io/) which uses Galaxy's remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use.
 
 ## Features of Jupyterlab
 [Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) notebook has been augmented with several useful features and together they make it ready-to-use for quick prototyping and end-to-end artificial intelligence (AI) projects. Being able to **serve online** makes it convenient to share it with other researchers and users. Its features can be broadly classified into two categories - features that have been added solely as Python packages and those that have been added also as Python packages but have their respective user interfaces. We will briefly discuss these features and later, we will use some of those for building and using AI models.
@@ -93,27 +92,27 @@ First, we will discuss a few features of Jupyterlab to create and train a Unet d
 
 ## Open Jupyterlab
 
-> ### {% icon hands_on %} Hands-on: GPU enabled Interactive Jupyter Notebook for Machine Learning
+> <hands-on-title>GPU enabled Interactive Jupyter Notebook for Machine Learning</hands-on-title>
 >
 > - {% tool [GPU enabled Interactive Jupyter Notebook for Machine Learning](interactive_tool_ml_jupyter_notebook) %}
->    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
->    - Click *"Execute"*
+>    - *"Do you already have a notebook?"*: `Start with default notebooks`
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
 Now, we should wait for a few minutes until Galaxy creates the required compute environment for opening a new Jupyterlab. Usually, this task takes around 10-15 minutes. The progress can be checked by clicking on the "User>Active Interactive tools". On "Active Interactive Tools" page, there is a list of all open interactive tools. When the job info shows "running" on the "Active Interactive Tools" page, then the name of the interactive tool gets associated with a URL to the running Jupyterlab. On clicking this URL, the running Jupyterlab can be opened. Several features of Jupyterlab running in Galaxy can be learned by going through the "home_page.ipynb" notebook. The folder "notebooks" contain several notebooks that show multiple use-cases of features and packages. Now, let's download the necessary notebooks from Github for performing image segmentation and predicting 3D structure of protein sequences.
 
 ## Clone Github repository
-To use Git version control for cloning any codebase from GitHub, the following steps should be performed.
+To use Git version control for cloning any codebase from GitHub, the following steps should be performed. Alternatively, the notebooks that showcase different usecases are also available by default at `<<root>>/usecases/`.
 
-> ### {% icon hands_on %} Hands-on: Pull code
+> <hands-on-title>Pull code</hands-on-title>
 >
 > 1. Create a new folder named `covid_ct_segmentation` alongside other folders such as "data", "outputs", "elyra" or you can use your favourite folder name.
 > 2. Inside the created folder, clone a code repository by clicking on "Git" icon as shown in Figure 6.
 > 3. In the shown popup, provide the repository path as shown below and then, click on "clone":
-> > ```
-> > https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation
-> > ```
+>    ```
+>    https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation
+>    ```
 > 4. The repository "anuprulez/gpu_jupyterlab_ct_image_segmentation" gets immediately cloned.
 > 5. Move inside the created folder `gpu_jupyterlab_ct_image_segmentation`. A few notebooks can be found inside that are numbered.
 >    ![Clone repository](../../images/git_clone.png "Clone a code repository using Git")
@@ -127,25 +126,25 @@ Now, we have all the notebooks available for performing image segmentation and p
 
 ### Run notebooks in Jupyterlab
 
-> ### {% icon hands_on %} Hands-on: Run notebooks in Jupyterlab
+> <hands-on-title>Run notebooks in Jupyterlab</hands-on-title>
 >
 > 1. Download and save datasets in the notebook using **"1_fetch_datasets.ipynb"** notebook. It creates all the necessary folders and then, downloads two datasets - one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. 
 >
->    > ### {% icon comment %} Details
+>    > <comment-title></comment-title>
 >    >  Sub-datasets are stored as different variables after reading the original `h5` file once. For training, we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used only for prediction. We use `h5` format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on, therefore, to converge all these different forms of datasets into one format, we use `h5` to store matrices. In any AI analysis, different forms of datasets can be stored as `h5` files. Therefore, for the image segmentation task, all the input datasets/matrices to the deep learning model are saved as sub-datasets in one `h5` file so that they can be easily created, stored, downloaded and used. This step may take a few minutes as it downloads around 450 MB of data from Zenodo ({% cite anupkumar20226091361 %}). Once these datasets are downloaded to the notebook, we can move to the next step to create a deep learning model and start training it.
 >    >
 >    {: .comment}
 >
 > 2. Create and train a deep learning Unet model using **"2_create_model_and_train.ipynb"** notebook. This will read the input `h5` dataset containing all images and train the model after creating deep learning model architecture.
 >
->    > ### {% icon comment %} Details
+>    > <comment-title></comment-title>
 >    > This notebook first creates a deep learning architecture based on Unet including custom loss functions such as total variation and binary cross-entropy losses. After creating the deep learning architecture, all training datasets such as training data, training labels, validation data, validation labels are loaded from the combined `h5` file. In the next step, all the datasets and deep learning architecture are compiled together and training starts for 10 epochs (10 iterations over the entire training dataset). The training is fast as it runs on GPU and finishes in a few minutes and creates a trained model. In the last step, the trained model containing several files is converted to one `onnx` file. Once a trained model is ready, we can move to the next step to make predictions on unseen CT scan masks.
 >    >
 >    {: .comment}
 >
 > 3. Predict unseen masks using the trained model in **"3_predict_masks.ipynb"** notebook.
 >
->    > ### {% icon comment %} Details
+>    > <comment-title></comment-title>
 >    > First, it reads test datasets from the combined "h5" file and then, loads the `onnx` model. Using this model, it predicts masks of unseen CT scans and then plots the ground truth and predicted masks in one plot (see Figure 7)
 >    >
 >    {: .comment}
@@ -161,31 +160,31 @@ Now, we have all the notebooks available for performing image segmentation and p
 
 The training task completed in the notebook above can also be sent to a Galaxy cluster by executing a Galaxy tool in the notebook itself. Using [Bioblend](https://bioblend.readthedocs.io/) APIs, datasets in the form of `h5` files and notebook are uploaded to a Galaxy history and then a Galaxy tool `run_jupyter_job` executes the notebook using the uploaded dataset on a Galaxy cluster and creates a trained model in the Galaxy history. Let's look at how to execute a notebook remotely on a Galaxy cluster.
 
-> ### {% icon hands_on %} Hands-on: Run Jupyterlab notebooks remotely on a Galaxy cluster
+> <hands-on-title>Run Jupyterlab notebooks remotely on a Galaxy cluster</hands-on-title>
 >
 > 1. Download and save datasets in the notebook using **"1_fetch_datasets.ipynb"** notebook in the same way as before. Ignore this step if this notebook has already been executed.
 > 2. Execute **"5_run_remote_training.ipynb"** notebook to dynamically execute code inside **"4_create_model_and_train_remote.ipynb"** notebook on a remote cluster using a different Galaxy tool (`run_jupyter_job`). The notebook **"5_run_remote_training.ipynb"** provides the path of a notebook to be executed remotely along with the datasets to the Galaxy tool by calling a custom function `run_script_job` which is part of the Jupyterlab notebook. 
 >
->    > ### {% icon comment %} Details
+>    > <comment-title></comment-title>
 >    > Executing **"5_run_remote_training.ipynb"** uploads datasets and dynamic Python script, extracted from the **"4_create_model_and_train_remote.ipynb"** notebook, to a newly created Galaxy history (Figure 8). When the task of uploading dataset and dynamic code is finished, the Galaxy tool (`run_jupyter_job`) executes the dynamically uploaded script with the uploaded dataset on a remote Galaxy cluster which is similar to running any other Galaxy tool. When the Galaxy tool (`run_jupyter_job`) finishes its execution, the resulting models and other datasets appear in the created Galaxy history. While the job is running on the Galaxy cluster, the Jupyter notebook can be closed as the model training task gets decoupled from the notebook and is entirely transferred to the Galaxy cluster. Specific history used for this job can be accessed in Galaxy. The Jupyterlab method `run_script_job` has multiple input parameters - `script_path`: relative path to the script that is to be executed remotely, `data_dict`: list of input datasets as `h5` files, `server`: Galaxy server URL, `key`: Galaxy API key and `new_history_name`: the name of the Galaxy history that is created). 
 >    >
 >    {: .comment}
 >
->    > ![Galaxy history](../../images/finished_history_remote_ai.png "Galaxy history showing finished datasets after remote training on a Galaxy cluster")
+>    ![Galaxy history](../../images/finished_history_remote_ai.png "Galaxy history showing finished datasets after remote training on a Galaxy cluster")
 > 
 > **Note**: The training may take longer depending on how busy Galaxy's queueing is as it sends the training task to be done on a Galaxy cluster. Therefore, this feature should be used when the training task is expected to run for several hours. The training time is higher because a large Docker container is downloaded on the assigned cluster and only then, the training task can proceed.
 >
 {: .hands_on}
 
 
-When the Galaxy job finishes, it creates a history having a few datasets such as input `h5` dataset, dynamic Python script extracted from the notebook, a trained model saved as `onnx` file, all saved lists and NumPy arrays and a zipped file containing all the intermediate files created and saved in the dynamic script. One such example of a Galaxy history is available [here](https://usegalaxy.eu/u/kumara/h/ctsegmentationmarch18). Datasets from this history can be downloaded into the Jupyterlab notebook and further analyses can be performed. Using the notebook **"6_predict_masks_remote_model.ipynb"**, the trained model can be downloaded from the newly created Galaxy history to Jupyterlab notebook and then, it can be used to make predictions of unseen CT scan masks in the same way as shown in **"3_predict_masks.ipynb"** notebook.
+When the Galaxy job finishes, it creates a history having a few datasets such as input `h5` dataset, dynamic Python script extracted from the notebook, a trained model saved as `onnx` file, all saved lists and NumPy arrays and a zipped file containing all the intermediate files created and saved in the dynamic script. One such example of a Galaxy history is [available](https://usegalaxy.eu/u/kumara/h/ctsegmentationmarch18). Datasets from this history can be downloaded into the Jupyterlab notebook and further analyses can be performed. Using the notebook **"6_predict_masks_remote_model.ipynb"**, the trained model can be downloaded from the newly created Galaxy history to Jupyterlab notebook and then, it can be used to make predictions of unseen CT scan masks in the same way as shown in **"3_predict_masks.ipynb"** notebook.
 
 
 ## Use-case 2: Run ColabFold to predict 3D structure of protein
 
 Google Deepmind’s AlphaFold2 has made a breakthrough in predicting the 3D structure of proteins with outstanding accuracy. However, due to their large database size (a few TB), it is not easily accessible to researchers. Therefore, a few approaches have been developed that replace the time-consuming steps of AlphaFold2 with slightly different steps to create input features and predict the 3D structure with comparable accuracy as AlphaFold2. One such approach is ColabFold which replaces the large database search in AlphaFold2 for finding homologous sequences by a significantly faster [MMseqs2 API](https://github.com/soedinglab/MMseqs2) call to generate input features based on the query protein sequence. ColabFold is approximately 16 times faster than AlphaFold2 in predicting 3D structures of protein sequences. To make it accessible in this Jupyterlab, it has been integrated into the Docker container by having two additional packages - ColabFold and the GPU enabled [JAX](https://github.com/google/jax) which is just-in-time compiler from Google used for mathematical transformations. In the following hands-on section, we will run a notebook and predict a 3D structure of a protein sequence. 
 
-> ### {% icon hands_on %} Hands-on: Predict 3D structure of protein using ColabFold
+> <hands-on-title>Predict 3D structure of protein using ColabFold</hands-on-title>
 >
 > 1. Clone a Github repository by following the steps described in the previous hands-on section `Clone Github repository`. Ignore this step if already done.
 > 2. Open **7_ColabFold_MMseq2.ipynb** notebook and execute it.
@@ -198,8 +197,130 @@ Google Deepmind’s AlphaFold2 has made a breakthrough in predicting the 3D stru
 ## Docker's security
 For remote training, a dynamic Python script is sent to a Galaxy tool for execution on a Galaxy cluster that may pose security risks of containing malicious code. To minimize the security risks that come along with executing dynamic Python scripts, the Galaxy tool `run_jupyter_job` is executed inside a [Docker container](https://github.com/anuprulez/ml-jupyter-notebook). It is the same container inside which the Jupyterlab notebook runs. All the packages available inside the notebook are also available for the Galaxy tool. Programs run in isolated environments inside Docker containers and have their connections limited to necessary libraries, and network connections. Due to these restrictions, they have a reduced number of interactions with the host operating system.
 
+# GPU Juyterlab tool in a Galaxy workflow
+
+## Introduction
+
+In addition to an interactive mode that opens a Jupyterlab in Galaxy, the GPU Jupyterlab tool can also be used as a tool in a Galaxy workflow. In this mode, it takes input datasets from a different tool along with an `ipynb` notebook file. It executes the `ipynb` file along with the input datasets and produces output datasets inside a dataset collection. This output dataset collection can then be used with other Galaxy tools. This feature enables it to be used in a Galaxy workflow like other Galaxy tools.
+
+### Execute an existing notebook
+In this mode, the GPU Jupyterlab tool executes the input `ipynb` file and produces output datasets (in a collection) if created in the notebook file. Input datasets can also be attached to the notebook which become available at `/galaxy_inputs/<<Name for parameter>>` folder. The parameter `Name for parameter` is set for each input dataset that is used as the folder name inside `/galaxy_inputs/`. More than one input datasets can be attached to the notebook. Another feature `Execute notebook and return a new one` controls whether webfrontend becomes available showing Jupyterlab or a notebook is just executed. When this parameter is set to `yes`, then the attached notebook is executed and output datasets if any become available in an output dataset collection. When this parameter is set to `no` (by default), then Jupyterlab infrastructure as a webfrontend is opened along with the attached notebook and input datasets if attached.
+
+## Run as a tool in workflow
+When the parameter `Execute notebook and return a new one` is set to `yes`, the GPU Jupyterlab tool can be used as a part of any workflow. In this mode, it requires an `ipynb` file/notebook that gets executed in Galaxy and output datasets if any become available in the Galaxy history. Along with a notebook, multiple input datasets can also be attached that become automatically available inside the notebook. They can be accessed inside the notebook and processed to produce desired output datasets. These output datasets can further be used with other Galaxy tools. The following image shows a sample workflow for illustration purposes. Similarly, high-quality workflows to analyse scientific datasets can be created.
+
+
+!["A sample Galaxy workflow that uses GPU Jupyterlab as a tool"](../../images/workflow_gpu_jupyterlab.png "A sample Galaxy workflow that uses GPU Jupyterlab as a tool which takes input datasets from one tool, trains a machine learning model to predict classes and then the predicted datasets is used as input to another Galaxy tool.")
+
+Let's look at how can this workflow be created in a step-wise manner. There are 3 steps - first, the training dataset is filtered using the `Filter` tool. The output of this tool along with 2 other datasets (`test_rows` and `test_rows_labels`), a sample IPython notebook is executed by the GPU Jupyterlab tool. The sample IPython notebook trains a simple machine learning model using the train dataset and creates a classification model using `RandomForestClassifier`. The trained model is then used to predict classes using the test dataset. The predicted classes is produced as a file in an output collection by the GPU Jupyterlab tool. As a last step, `Cut` tool is used to extract the first column of the output collection. Together, these steps showcase how the GPU Jupyterlab tool is used with other Galaxy tools in a workflow.
+
+### Get data
+
+Datasets such as train, test and sample IPython (`ipynb`) notebook files are downloaded from [Zenodo](https://zenodo.org/record/7534061) to import them into a Galaxy history. 
+
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. Make sure you have an empty analysis history.
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. **Rename your history** to make it easy to recognize
+>
+>    > <tip-title>Rename a history</tip-title>
+>    >
+>    > * Click on the title of the history (by default the title is `Unnamed history`)
+>    >
+>    >   ![Renaming history](../../../../shared/images/rename_history.png)
+>    >
+>    > * Type `Galaxy Introduction` as the name
+>    > * Press <kbd>Enter</kbd>
+>    >
+>    {: .tip}
+>
+>
+> 3. Import the files from [Zenodo](https://zenodo.org/record/7534061)
+>
+>    ```
+>    https://zenodo.org/record/7534061/files/sample_notebook.ipynb
+>    https://zenodo.org/record/7534061/files/test_rows.csv
+>    https://zenodo.org/record/7534061/files/train_rows.csv
+>    https://zenodo.org/record/7534061/files/test_rows_labels.csv
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 4. Rename the datasets as `test_rows`, `train_rows` and `test_rows_labels` respectively.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 5. Check that the datatype of all three tabular datasets is `csv`.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+{: .hands_on}
+
+
+### Filter training dataset
+This tool showcases how a tool prior to using the GPU Jupyterlab tool (in a workflow) can be used and how its output can be used as input to the GPU Jupyterlab tool. 
+
+> <hands-on-title>Filter</hands-on-title>
+>
+> - {% tool [Filter](Filter1) %}
+>    - *"Filter *"* : Select `train_rows`
+>    - *"With following condition"* :`c3==0`
+>    - *"Number of header lines to skip"*: `1`
+>    - Click *"Run Tool"*
+>
+{: .hands_on}
+
+Rename the filtered dataset as `new_train_rows` which will be used as one of the inputs to the GPU Jupyterlab tool in the next step. The datatype should be `tabular`.
+
+### Execute IPython notebook using GPU Jupyterlab tool
+This tool showcases GPU Jupyterlab tool that executes a notebook using input datasets produced by different tools. Galaxy tool like features for this interactive tool has been adapted from another interactive Galaxy tool **Interactive JupyTool and notebook**.
+
+> <hands-on-title>GPU Jupyterlab tool</hands-on-title>
+>
+> - {% tool [GPU Jupyterlab tool](interactive_tool_ml_jupyter_notebook) %}
+>    - *"Do you already have a notebook?"* : Select `Load an existing notebook`
+>    - *"IPython Notebook"* : Select `sample_notebook.ipynb`
+>    - *"Execute notebook and return a new one"*: `Yes`
+>    - In *"User inputs"*:
+>        - {% icon param-repeat %} *"1: User inputs"*
+>            - *"Name for parameter"*: `train`
+>            - *"Choose the input type"*: `Dataset`
+>            - *"Select value"*: Select `new_train_rows`
+>        - {% icon param-repeat %} *"2: User inputs"*
+>            - *"Name for parameter"*: `test`
+>            - *"Choose the input type"*: `Dataset`
+>            - *"Select value"*: Select `test_rows`
+>        - {% icon param-repeat %} *"3: User inputs"*
+>            - *"Name for parameter"*: `testlabels`
+>            - *"Choose the input type"*: `Dataset`
+>            - *"Select value"*: Select `test_rows_labels`
+>
+{: .hands_on}
+
+
+### Cut a column from the output collection
+This tool showcases how the output dataset collection produced by the GPU Jupyterlab tool can be used by a different Galaxy tool.
+
+> <hands-on-title>Cut</hands-on-title>
+>
+> - {% tool [Cut](Cut1) %}
+>    - *"Cut columns"* : `c1`
+>    - *"Delimited by"* : `Comma`
+>    - *"From"*: Choose dataset collection `GPU JupyterLab notebook output collection`
+>    - Click *"Run Tool"*
+>
+{: .hands_on}
+
+
+The above tool extracts the first column from dataset residing in the output dataset collection. All three steps explained above show how the GPU Jupyterlab tool can be used with other Galaxy tools to create a workflow.
+
 
 # Conclusion
 In this tutorial, we have discussed several features of the Jupyterlab notebook in Galaxy and used a few of them to perform an image segmentation task on COVID CT scans by training Unet, a deep learning model. In addition, we have used it for predicting 3D structure of a protein sequence which is a memory-intensive and time-consuming task. The ready-to-use infrastructure that we employed here for developing an AI algorithm and training a model shows that it is convenient for creating quick prototypes and end-to-end projects, accelerated by GPU, in the data science field without caring much about the storage and compute resources.
 
 The possibility of remote execution of long-running training tasks obviates keeping the notebook or computer open till the training finishes and at the same time, the datasets and models stay safe in Galaxy history. The usage of `h5` files for input datasets to AI algorithms solves the problem of varying data formats across multiple fields that are used extensively for predictive tasks. Using `onnx` for creating, storing and sharing an AI model makes it easier to handle such it as one compact file. Git integration makes it easy to maintain an entire code repository directly in the notebook. The entire environment can be shared with other researchers only via sharing the URL of the Jupyterlab. Bioblend connects this infrastructure to Galaxy which makes its histories, workflows and tools accessible directly via the notebook. Overall, this infrastructure would prove useful for researchers having little access to large compute resources to develop and manage quick prototypes and end-to-end data science projects.
+
+Feature to use GPU Jupyterlab as a regular Galaxy tool provides an ability to execute IPython notebooks in a workflow. The executed notebook is also available in the Galaxy history with the associated cell outputs.

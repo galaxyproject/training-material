@@ -6,6 +6,7 @@ zenodo_link: "https://doi.org/10.5281/zenodo.940733"
 level: Introductory
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "I have short reads and long reads. How do I assemble a genome?"
 objectives:
@@ -69,9 +70,8 @@ There are 12,738 [2d-reads](http://www.nature.com/nmeth/journal/v12/n4/fig_tab/n
 
 You can see that there many reads under the second peak with median of approximately 7.5 kb.
 
-> ### {% icon warning %} Oxford Nanopore Data Format
-> Oxford Nanopore machines output
- data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that this data is *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling fast5 datasets will be developed shortly.
+> <warning-title>Oxford Nanopore Data Format</warning-title>
+> Oxford Nanopore machines output data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that this data is *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling fast5 datasets will be developed shortly.
 {: .warning}
 
 
@@ -81,7 +81,7 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 
 ### Assembly
 
-> ### {% icon comment %} Knowing your assembly
+> <comment-title>Knowing your assembly</comment-title>
 >
 > Here we assume that you know a thing or two about assembly process. If you don't: look at the slides accompanying this tutorial as well as other tutorials is this section.
 {: .comment}
@@ -150,7 +150,7 @@ Prokka predicts protein-coding regions using a two step process. It first identi
 
 In this example we will use a downsampled version of *E. coli* C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse reads for Illumina, and Long read file produced by ONT. All data are in [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format.
 
-> ### {% icon hands_on %} Hands-on: Obtaining our data
+> <hands-on-title>Obtaining our data</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
@@ -165,6 +165,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
@@ -177,7 +178,7 @@ If all goes well you will see datasets uploading and changing states from gray t
 
 To assess quality we will use two tools: FastQC ({% cite FastQC %}) to generate quality statistics and multiQC ({% cite Ewels2016 %}) to summarize these statistics.
 
-> ### {% icon hands_on %} Hands-on: Quality Control
+> <hands-on-title>Quality Control</hands-on-title>
 >
 > 1. **FastQC** {% icon tool %}:
 >
@@ -202,7 +203,7 @@ So let's zoom in into Illumina data:
 
 Now it is time to perform assembly.
 
-> ### {% icon hands_on %} Hands-on: Unicycler Assembly
+> <hands-on-title>Unicycler Assembly</hands-on-title>
 >
 > 1. **Unicycler** {% icon tool %} with the following parameters :
 >   - "Paired or Single end data?" to `Paired`
@@ -223,7 +224,7 @@ Now it is time to perform assembly.
 
 Quast ({% cite Gurevich2013 %}) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
 
-> ### {% icon hands_on %} Hands-on: Assembly Quality
+> <hands-on-title>Assembly Quality</hands-on-title>
 >
 > 1. **Quast** {% icon tool %}: with the following parameters
 >   - *"Contigs/scaffolds output file"*: Select the fasta file resulting from the Unicycler assembly.
@@ -239,7 +240,7 @@ One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (
 ## Annotation with Prokka
 
 
-> ### {% icon hands_on %} Hands-on: Annotation
+> <hands-on-title>Annotation</hands-on-title>
 >
 > 1. **Prokka** {% icon tool %}:
 >   - *"Contigs to annotate"*: Select the assembly ouput of `Unicycler`
@@ -268,12 +269,12 @@ Let's look at the entire assembly and its annotation in the genome browser. We c
 
 Visualization requires a local installation of IGV. If you have IGV installed - just start it. If you don't - read on.
 
-#### Starting IGV
+### Starting IGV
 
 Go to IGV [download page](http://software.broadinstitute.org/software/igv/download) and select one of the options. The one I would try first would be **Java Web Start**. Simply click the **Launch** button for 10 GB distribution.
 
 
-> ### {% icon hands_on %} Hands-on: Visualization in IGV
+> <hands-on-title>Visualization in IGV</hands-on-title>
 >
 >
 > 1. Start IGV. It will look something like this:

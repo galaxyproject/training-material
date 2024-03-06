@@ -45,13 +45,10 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 tags:
 - R
 ---
-
-# Introduction
-{:.no_toc}
 
 With HTS-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
@@ -64,7 +61,7 @@ Sometimes we want to have some customizations on visualization, some complex tab
 
 In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -78,7 +75,7 @@ In this tutorial, we will take the list of DE genes extracted from DESEq2's outp
 
 A substantial amount of the data we work with in science is tabular data, i.e. data arranged in rows and columns - also known as spreadsheets.
 
-> ### {% icon comment %} Few principles when working with data
+> <comment-title>Few principles when working with data</comment-title>
 > We want to remind you of a few principles before we work with our first set of example data:
 >
 > 1. **Keep raw data separate from analyzed data**
@@ -99,13 +96,17 @@ A substantial amount of the data we work with in science is tabular data, i.e. d
 
 ## Import tabular data into R
 
+As in the "R Basics" tutorial, we will continue in {% tool [RStudio](interactive_tool_rstudio) %}.
+
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
+
 There are several ways to import data into R. For our purpose here, we will focus on using the tools every R installation comes with (so called "base" R) to import a comma-delimited file containing the results of our variant calling workflow. We will need to load the sheet using a function called `read.csv()`.
 
-> ### {% icon question %} Questions: Review the arguments of the `read.csv()` function
+> <question-title>Review the arguments of the `read.csv()` function</question-title>
 >
 > Before using the `read.csv()` function, use R's help feature to answer the following questions.
 >
-> > ### {% icon tip %} Getting help in R
+> > <tip-title>Getting help in R</tip-title>
 > > Entering `?` before the function name and then running that line will bring up the help documentation. Also, when reading this particular help be careful to pay attention to the `read.csv` expression under the **Usage** heading. Other answers will be in the **Arguments** heading.
 > {: .tip}
 >
@@ -114,7 +115,7 @@ There are several ways to import data into R. For our purpose here, we will focu
 > 3. What argument would you have to change to read file in which numbers used commas for decimal separation (i.e. 1,00)?
 > 4. What argument would you have to change to read in only the first 10,000 rows of a very large file?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The `read.csv() `function has the argument `header` set to `TRUE` by default, this means the function always assumes the first row is header information, (i.e. column names)
 > > 2. The `read.csv()` function has the argument 'sep' set to ",". This means the function assumes commas are used as delimiters, as you would expect. Changing this parameter (e.g. `sep=";"`) would now interpret semicolons as delimiters.
@@ -126,10 +127,10 @@ There are several ways to import data into R. For our purpose here, we will focu
 > {: .solution}
 {: .question}
 
-Now, let's read the file with the annotated differentially expressed genes that was produced in the "[Reference-based RNA-Seq data analysis](https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html)" tutorial.
+Now, let's read the file with the annotated differentially expressed genes that was produced in the "[Reference-based RNA-Seq data analysis]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %})" tutorial.
 
 <!--
-> ### {% icon hands_on %} Hands-on: Import dataset into Galaxy
+> <hands-on-title>Import dataset into Galaxy</hands-on-title>
 > 1. In Galaxy, upload the following file from Zenodo:
 >    ```
 >    https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
@@ -140,7 +141,7 @@ Now, let's read the file with the annotated differentially expressed genes that 
 {: .hands_on}
 -->
 
-> ### {% icon hands_on %} Hands-on: Read the annotated differentially expressed genes
+> <hands-on-title>Read the annotated differentially expressed genes</hands-on-title>
 > 1. Create a new script (if needed)
 > 2. Read the tabular file in an object called `annotatedDEgenes`. We can import directly by URL:
 >
@@ -153,7 +154,7 @@ Now, let's read the file with the annotated differentially expressed genes that 
 >
 > 3. Inspect the **Environment** panel
 >
->  > ### {% icon tip %} Upload files from a Galaxy history to RStudio
+>  > <tip-title>Upload files from a Galaxy history to RStudio</tip-title>
 >  > Rstudio in Galaxy provides some special functions to import and export from your history.
 >  >
 >  > ```R
@@ -164,7 +165,7 @@ Now, let's read the file with the annotated differentially expressed genes that 
 
 In the **Environment** panel, you should have the `annotatedDEgenes` object, listed as 130 obs. (observations/rows) of 1 variable (column) - so the command worked (sort of)!
 
-> ### {% icon hands_on %} Hands-on: Inspect the annotatedDEgenes file
+> <hands-on-title>Inspect the annotatedDEgenes file</hands-on-title>
 > 1. Double-click on the name of the object in the **Environment** panel
 >
 {: .hands_on}
@@ -173,12 +174,12 @@ It will open a view of the data in a new tab on the top-left panel.
 
 As you can see, there is a problem with how the data has been loaded. The table should contain 130 observations of 13 variables.
 
-> ### {% icon question %} Question: Identify the issue with data
+> <question-title>Identify the issue with data</question-title>
 >
 > 1. What is wrong?
 > 2. How should you adjust the parameters for `read.csv()` in order to produce the intended output?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The data file was not delimited by commas (`,`) which is the default expected delimiter for `read.csv()`. Instead it seems like it's delimited by "white space", i.e. spaces and/or tabs.
 > > 2. We need to set the correct delimiter using the parameter `sep`. Given that we are not sure what the actual delimiter is, we could try both options, i.e. `sep=" "` (*space*) and `sep="\t"` (*tab*).
@@ -186,7 +187,7 @@ As you can see, there is a problem with how the data has been loaded. The table 
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Read correctly tabular file
+> <hands-on-title>Read correctly tabular file</hands-on-title>
 > 1. Read the file given it's a tabular file
 >
 >    ```R
@@ -215,7 +216,7 @@ Congratulations! You've successfully loaded your data into RStudio!
 
 Tabular data are stored in R using **data frame**. A data frame could also be thought of as a collection of vectors, all of which have the same length.
 
-> ### {% icon hands_on %} Hands-on: Learn more about our data frame
+> <hands-on-title>Learn more about our data frame</hands-on-title>
 > 1. Get summary statistics of `annotatedDEgenes` using `summary` function
 >
 >    ```R
@@ -290,7 +291,7 @@ Factors, the final major data structure we will introduce, can be thought of as 
 
 Since some of the data in our data frame are factors, lets see how factors work.
 
-> ### {% icon hands_on %} Hands-on: Inspect a factor object
+> <hands-on-title>Inspect a factor object</hands-on-title>
 > 1. Extract the `feature` column to a new object called `feature`
 >
 >    ```R
@@ -310,7 +311,7 @@ Since some of the data in our data frame are factors, lets see how factors work.
 
 What we get back are the items in our factor, and also something called "Levels". **Levels are the different categories contained in a factor**. By default, R will organize the levels in a factor in alphabetical order. So the first level in this factor is "lincRNA".
 
-> ### {% icon hands_on %} Hands-on: Get the structure of a factor object
+> <hands-on-title>Get the structure of a factor object</hands-on-title>
 > 1. Get the structure of the `feature` object
 >
 >    ```R
@@ -323,7 +324,7 @@ For the sake of efficiency, R stores the content of a factor as a vector of inte
 
 One of the most common uses for factors is to plot categorical values. For example, suppose we want to know how many of our differentially expressed genes correspond to different features.
 
-> ### {% icon hands_on %} Hands-on: Plot a factor object
+> <hands-on-title>Plot a factor object</hands-on-title>
 > 1. Plot the number of levels in the `feature` object using `plot` function
 >
 >    ```R
@@ -341,7 +342,7 @@ Now we would like to know how to get specific values from data frames, and where
 
 The first thing to remember is that a data frame is two-dimensional (rows and columns). Therefore, to select a specific value we will once again use `[]` (bracket) notation, but we will specify more than one value (except in some cases where we are taking a range).
 
-> ### {% icon question %} Subsetting a data frame
+> <question-title>Subsetting a data frame</question-title>
 >
 > Run the following indices and functions to figure out what they return
 >
@@ -358,7 +359,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > 11. `annotatedDEgenes$GeneID`
 > 12. `annotatedDEgenes[annotatedDEgenes$Feature == "pseudogene", ]`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `annotatedDEgenes[1, 1]`
 > >
@@ -558,7 +559,7 @@ The subsetting notation is very similar to what we learned for vectors. The key 
 - Passing a vector using `c()` for a non continuous set of numbers, pass a vector
 - Index using the name of a column(s) by passing them as vectors using `c()`
 
-> ### {% icon hands_on %} Hands-on: Create a new data frame by subsetting an existing one
+> <hands-on-title>Create a new data frame by subsetting an existing one</hands-on-title>
 > 1. Create a new data frame containing only observations from the "+" strand
 >
 >    ```R
@@ -613,7 +614,7 @@ Sometimes, it is possible that R will misinterpret the type of data represented 
 
 First, its very important to recognize that coercion happens in R all the time. This can be a good thing when R gets it right, or a bad thing when the result is not what you expect.
 
-> ### {% icon hands_on %} Hands-on: Format gene names
+> <hands-on-title>Format gene names</hands-on-title>
 > 1. Check the structure of the `Gene.name` column
 >
 >    ```R
@@ -643,7 +644,7 @@ First, its very important to recognize that coercion happens in R all the time. 
 
 R will sometimes coerce without you asking for it (implicit coercion). You can explicitly change it (explicit coercion).
 
-> ### {% icon tip %} Avoiding needless coercion
+> <tip-title>Avoiding needless coercion</tip-title>
 > One way to avoid needless coercion when importing a data frame using functions such as `read.csv()` is to set the argument `StringsAsFactors` to `FALSE`. By default, this argument is `TRUE`. Setting it to `FALSE` will treat any non-numeric column to a character type. Going through the `read.csv() `documentation, you will also see you can explicitly type your columns using the `colClasses` argument. Other R packages (such as the Tidyverse `readr`) don't have this particular conversion issue, but many packages will still try to guess a data type.
 {: .tip}
 
@@ -653,7 +654,7 @@ Here are a few operations that don't need much explanation, but which are good t
 
 Let's look at the `Base.mean` column, i.e. the mean of normalized counts of all samples, normalizing for sequencing depth and library composition.
 
-> ### {% icon hands_on %} Hands-on: Inspect the `Base.mean` column and sort
+> <hands-on-title>Inspect the `Base.mean` column and sort</hands-on-title>
 > 1. Get the maximum value of `Base.mean` column
 >
 >    ```R
@@ -669,10 +670,10 @@ Let's look at the `Base.mean` column, i.e. the mean of normalized counts of all 
 >    [1] 19.15076 23.55006 24.77052 26.16177 27.71424 31.58769
 >    ```
 >
->    > ### {% icon question %} Changing the order
+>    > <question-title>Changing the order</question-title>
 >    > The `order()` function lists values in increasing order by default. Look at the documentation for this function and change `sorted_by_BaseMean` to start with differentially expressed means with the greatest base mean.
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ```R
 >    > > > sorted_by_BaseMean <- annotatedDEgenes[order(annotatedDEgenes$Base.mean, decreasing = TRUE), ]
@@ -695,7 +696,7 @@ Let's look at the `Base.mean` column, i.e. the mean of normalized counts of all 
 
 We can save data frame as table in our Galaxy history to use it as input for other tools.
 
-> ### {% icon hands_on %} Hands-on: Save data frame in Galaxy history
+> <hands-on-title>Save data frame in Galaxy history</hands-on-title>
 >
 > 1. Save the `annotatedDEgenes_plusStrand` object to a `.csv` file using the `write.csv()` function:
 >
@@ -714,7 +715,7 @@ Selecting columns and rows using bracket subsetting is handy, but it can be cumb
 
 The functions we've been using so far, like `str()`, come built into R. By using packages, we can access more functions. Here, we would like to use [`dplyr`](https://cran.r-project.org/package=dplyr) package provides a number of very useful functions for manipulating data frames in a way that will reduce repetition, reduce the probability of making errors, and probably even save you some typing. As an added bonus, you might even find the `dplyr` grammar easier to read.
 
-> ### {% icon comment %} What is dplyr?
+> <comment-title>What is dplyr?</comment-title>
 >
 > The package `dplyr` is a fairly new (2014) package that tries to provide easy tools for the most common data manipulation tasks. It is built to work directly with data frames. The thinking behind it was largely inspired by the package `plyr` which has been in use for some time but suffered from being slow in some cases.` dplyr` addresses this by porting much of the computation to C++. An additional feature is the ability to work with data stored directly in an external database. The benefits of doing this are that the data can be managed natively in a relational database, queries can be conducted on that database, and only the results of the query returned.
 >
@@ -723,7 +724,7 @@ The functions we've been using so far, like `str()`, come built into R. By using
 
 To use `dplyr`, we need first to install the package and then load it to be able to use it.
 
-> ### {% icon hands_on %} Hands-on: Install and load dyplr
+> <hands-on-title>Install and load dyplr</hands-on-title>
 >
 > 1. Load dyplr
 >
@@ -732,7 +733,7 @@ To use `dplyr`, we need first to install the package and then load it to be able
 >    library("dplyr")
 >    ```
 >
->    > ### {% icon tip %} Tip: Didn't work?
+>    > <tip-title>Didn't work?</tip-title>
 >    > You might need to install dyplr first
 >    >
 >    > ```R
@@ -750,7 +751,7 @@ We only need to install a package once per computer, but we need to load it ever
 
 To select columns, instead with bracket, we could use the `select` function of `dplyr`
 
-> ### {% icon hands_on %} Hands-on: Select column
+> <hands-on-title>Select column</hands-on-title>
 >
 > 1. Select `GeneID`, `Start`, `End`, `Strand` columns in `annotatedDEgenes`
 >
@@ -793,7 +794,7 @@ To select columns, instead with bracket, we could use the `select` function of `
 
 `dplyr` also provides useful functions to select columns based on their names. For instance, `starts_with()` allows you to select columns that starts with specific letters.
 
-> ### {% icon hands_on %} Hands-on: Select columns that start with the letter "P"
+> <hands-on-title>Select columns that start with the letter "P"</hands-on-title>
 >
 > 1. Select columns that start with the letter "P"
 >
@@ -815,13 +816,13 @@ To select columns, instead with bracket, we could use the `select` function of `
 >    ```
 {: .hands_on}
 
-> ### {% icon question %} Selecting on multiple conditions
+> <question-title>Selecting on multiple conditions</question-title>
 >
 > Create a table that contains all the columns with the letter "s" in their name except for the column "Wald.Stats", and that contains the column "End".
 >
 > Hint: look at the help for the function `starts_with()` we've just covered.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```R
 > > select(annotatedDEgenes, contains("s"), -Wald.Stats, End)
@@ -831,7 +832,7 @@ To select columns, instead with bracket, we could use the `select` function of `
 
 Similarly to choose rows, we can use the `filter()` function.
 
-> ### {% icon hands_on %} Hands-on: Filter rows
+> <hands-on-title>Filter rows</hands-on-title>
 >
 > 1. Filter for rows on the forward strand
 >
@@ -851,7 +852,7 @@ Similarly to choose rows, we can use the `filter()` function.
 >    # ... with 120 more rows
 >    ```
 >
->    > ### {% icon comment %} Equivalent in base R code
+>    > <comment-title>Equivalent in base R code</comment-title>
 >    > Note that this is equivalent to the base R code below, but is easier to read!
 >    >
 >    > ```R
@@ -878,7 +879,7 @@ Similarly to choose rows, we can use the `filter()` function.
 
 `filter()` allows to combine multiple conditions. They need to be separated using a `,` as arguments to the function, they will be combined using the `&` (AND) logical operator. If you need to use the `|` (OR) logical operator, you can specify it explicitly:
 
-> ### {% icon hands_on %} Hands-on: Filter rows for multiple conditions
+> <hands-on-title>Filter rows for multiple conditions</hands-on-title>
 >
 > 1. Filter for genes on chrX and with adjusted p-value <= 1e-100
 >
@@ -895,13 +896,13 @@ Similarly to choose rows, we can use the `filter()` function.
 >    ```
 {: .hands_on}
 
-> ### {% icon question %} Practising with conditionals
+> <question-title>Practising with conditionals</question-title>
 >
 > Select all the rows for genes that:
 > - start after position $$1e^6$$ (one million) and before position $$2e^6$$ (included) in their chromosome
 > - have a log2 fold change greater than 1 or an adjusted p-value less than $$1e^{-75}$$.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```R
 > > filter(annotatedDEgenes, Start >= 1e6 & End <= 2e6, (log2.FC. > 1 | P.adj < 1e-75)
@@ -913,14 +914,14 @@ But what if you wanted to select and filter?
 
 We can do this with **pipes**. Pipes, are a fairly recent addition to R. They let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same data set. It was possible to do this before pipes were added to R, but it was much messier and more difficult. Pipes in R look like `%>%` and are made available via the `magrittr` package, which is installed as part of `dplyr`.
 
-> ### {% icon comment %} Pipes on RStudio
+> <comment-title>Pipes on RStudio</comment-title>
 >
 > With RStudio, you can type the pipe with
 > - <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a PC
 > - <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a Mac
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Select and filter
+> <hands-on-title>Select and filter</hands-on-title>
 >
 > 1. Filter for genes on forward strand, select `GeneID`, `Start`, `End`, `Chromosome` and display the first results using pipes
 >
@@ -947,7 +948,7 @@ In the above code, we use the pipe to
 3. Select through `select()` to keep only the `GeneID`, `Start`, `End`, and `Chromosome` columns
 4. Show only the first 6 rows with `head`
 
-> ### {% icon comment %} No need to give 1st argument to the functions
+> <comment-title>No need to give 1st argument to the functions</comment-title>
 >
 > Since `%>%` takes the object on its left and passes it as the first argument to the function on its right, we don't need to explicitly include the data frame as an argument to the `filter()` and `select()` functions any more.
 >
@@ -959,7 +960,7 @@ The `dplyr` functions by themselves are somewhat simple, but by combining them i
 
 If we want to create a new object with this smaller version of the data we can do so by assigning it to a new object.
 
-> ### {% icon hands_on %} Hands-on: Select and filter to create new object
+> <hands-on-title>Select and filter to create new object</hands-on-title>
 >
 > 1. Create an `plus_strand_genes` from `annotatedDEgenes` after filter for genes on forward strand and selection of `GeneID`, `Start`, `End`, `Chromosome`
 >
@@ -985,13 +986,13 @@ If we want to create a new object with this smaller version of the data we can d
 
 This new object includes all of the data from this sample.
 
-> ### {% icon question %} Pipes and up-regulation
+> <question-title>Pipes and up-regulation</question-title>
 >
 > Starting with the `annotatedDEgenes` data frame, use pipes to
 > - subset the data to include only observations from chromosome 3L,with the log2 fold change is at least 2
 > - retain only the columns `GeneID`, `P.adj`, and `log2.FC.`.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```R
 > >  > annotatedDEgenes %>%
 > >     filter(Chromosome == "chr3L" & log2.FC. >= 2) %>%
@@ -1008,7 +1009,7 @@ In the data frame, there is a column titled `log2.FC.`. This is the logarithmica
 
 Let's create a column `FC` to our `annotatedDEgenes` data frame that show the observed expression as a multiple of the reference level.
 
-> ### {% icon hands_on %} Hands-on: Select and filter to create new object
+> <hands-on-title>Select and filter to create new object</hands-on-title>
 >
 > 1. Create a a column `FC` that show the observed expression as a multiple of the reference level
 >
@@ -1027,11 +1028,11 @@ Let's create a column `FC` to our `annotatedDEgenes` data frame that show the ob
 >
 {: .hands_on}
 
-> ### {% icon question %} Selected mutation
+> <question-title>Selected mutation</question-title>
 >
 > Create a column with the gene length and just look at the `GeneID`, `Chromosome`, `Start`, `End`, and `Length` columns
 >
->> ### {% icon solution %} Solution
+>> <solution-title></solution-title>
 >> ```R
 >> annotatedDEgenes %>%
 >>    mutate(Length = End-Start) %>%
@@ -1047,7 +1048,7 @@ then combine the results.
 
 `dplyr` makes this very easy through the use of the `group_by()` function, which splits the data into groups. When the data is grouped in this way `summarize()` can be used to collapse each group into a single-row summary, by applying an aggregating or summary function to each group.
 
-> ### {% icon hands_on %} Hands-on: Group and summarize data
+> <hands-on-title>Group and summarize data</hands-on-title>
 >
 > 1. Group by `Chromosome` and extract the number rows of data for each chromosome
 >
@@ -1071,7 +1072,7 @@ Here the summary function used was `n()` to find the count for each group. Becau
 
 We can also apply many other functions to individual columns to get other summary statistics.
 
-> ### {% icon hands_on %} Hands-on: Group and summarize data
+> <hands-on-title>Group and summarize data</hands-on-title>
 >
 > 1. View the highest fold change (`log2.FC.`) for each chromsome
 >
@@ -1091,13 +1092,13 @@ We can also apply many other functions to individual columns to get other summar
 >
 {: .hands_on}
 
-> ### {% icon question %} Summarizing groups
+> <question-title>Summarizing groups</question-title>
 >
 > What are the longest genes in each chromosome?
 >
 > Hint: the function `abs()` returns the absolute value.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```R
 > > > annotatedDEgenes %>%
@@ -1116,7 +1117,7 @@ We can also apply many other functions to individual columns to get other summar
 > {: .solution}
 {: .question}
 
-> ### {% icon comment %} Missing data and base functions
+> <comment-title>Missing data and base functions</comment-title>
 >
 > R has many base functions like `mean()`, `median()`, `min()`, and `max()` that are useful to compute summary statistics. These are also called "built-in functions" because they come with R and don't require that you install any additional packages.
 >
@@ -1125,11 +1126,11 @@ We can also apply many other functions to individual columns to get other summar
 
 `group_by()` can also take multiple column names.
 
-> ### {% icon question %} Counting
+> <question-title>Counting</question-title>
 >
 > How many genes are found on each strand of each chromosome?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```R
 > > > annotatedDEgenes %>%
@@ -1159,7 +1160,7 @@ While the tidy format is useful to analyze and plot data in R, it can sometimes 
 1. the name of the column whose values will become the column names
 2. the name of the column whose values will fill the cells in the wide data
 
-> ### {% icon hands_on %} Hands-on: Spread a key-value pair across multiple columns
+> <hands-on-title>Spread a key-value pair across multiple columns</hands-on-title>
 >
 > 1. Install and load `tidyr` library
 >
@@ -1168,7 +1169,7 @@ While the tidy format is useful to analyze and plot data in R, it can sometimes 
 >    library("tidyr")
 >    ```
 >
->    > ### {% icon tip %} Tip: Didn't work?
+>    > <tip-title>Didn't work?</tip-title>
 >    > You might need to install tidyr first
 >    >
 >    > ```R
@@ -1199,7 +1200,7 @@ While the tidy format is useful to analyze and plot data in R, it can sometimes 
 
 The opposite operation of `spread()` is taken care by `gather()`.
 
-> ### {% icon hands_on %} Hands-on: Gather columns into key-value pairs
+> <hands-on-title>Gather columns into key-value pairs</hands-on-title>
 >
 > 1. Create a data frame with chromosomes, strand and number as columns from `annotatedDEgenes_wide`
 >
@@ -1226,11 +1227,11 @@ The opposite operation of `spread()` is taken care by `gather()`.
 
 We specify the names of the new columns, and here add `-Chromosome` as this column shouldn't be affected by the reshaping:
 
-> ### {% icon question %} Categorising expression levels
+> <question-title>Categorising expression levels</question-title>
 >
 > 1. Classify each gene as either "up-regulated" (fold change > 1) or "down-regulated" (fold change < 1) and create a table with `Chromosome` as rows, the two new labels as columns, and the number of genes in the cells.
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    >
 >    > ```R
 >    > > annotatedDEgenes %>%
@@ -1257,8 +1258,3 @@ We specify the names of the new columns, and here add `-Chromosome` as this colu
 >    Hint: think about the assumptions that we made about the data when writing this solution.
 {: .question}
 
-
-# Conclusion
-{:.no_toc}
-
-This tutorial

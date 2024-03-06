@@ -8,14 +8,14 @@ function cleanup(){
 trap cleanup EXIT
 
 # We have an old commit ID, so we need to figure out which slides to build.
-videos="$(find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_*ES.html')"
+videos="$(find topics -name 'slides.html' -or -name 'slides_*ES.html')"
 if [[ "${PREVIOUS_COMMIT_ID}" != "none" ]]; then
 	changed_slides="$(join <(echo "$videos" | xargs ./bin/filter-resource-metadata video | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
 else
 	changed_slides="$(echo "$videos" | xargs ./bin/filter-resource-metadata video)"
 fi
 
-$(npm bin)/http-server -p 9876 _site &
+./node_modules/.bin/http-server -p 9876 _site &
 
 for slides in $changed_slides; do
 	echo "====== $slides ======"
@@ -26,7 +26,7 @@ for slides in $changed_slides; do
 
 	# Process the slides
 	echo $built_slides
-	$(npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/training-material/$slides _site/training-material/$pdf; \
+	docker run --rm --network host -v $(pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/_site/training-material/$pdf
 
 	# Build the slides
 	echo ari.sh "_site/training-material/$pdf" "$slides" "$mp4"

@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``lib/galaxy_test/api/test_users.py``
+> <solution-title>``lib/galaxy_test/api/test_users.py``</solution-title>
 > 
 > Possible changes to file ``lib/galaxy_test/api/test_users.py``:
 > 

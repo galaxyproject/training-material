@@ -10,7 +10,10 @@ requirements:
     tutorials:
       - unicycler-assembly
 tags:
+  - gmod
   - prokaryote
+  - microgalaxy
+  - jbrowse1
 questions:
   - "I just assembled a genome. How does it compare with already sequenced genomes?"
   - "How do I find rearranged, inserted, or deleted regions?"
@@ -32,7 +35,7 @@ contributors:
 
 In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of this species.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -43,7 +46,7 @@ In this tutorial we begin with a new genome assembly just produced in the [Unicy
 
 [*E. coli*](https://en.wikipedia.org/wiki/Escherichia_coli) is one of the most studied organisms. There are thousands of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
 
-> ### {% icon comment %} Slow steps ahead
+> <comment-title>Slow steps ahead</comment-title>
 > The first part of this tutorial can take a significant amount of time to find the most related genomes. If you want, you can upload this (outdated) copy of the NCBI E. Coli Genomes table to your history:
 >
 > 1. Import the following URL:
@@ -64,7 +67,7 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 
 [NCBI](https://www.ncbi.nlm.nih.gov/) is the resource that would store [all complete *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167). This list contains over 500 genomes and so uploading them by hand will likely result in carpal tunnel syndrome, which we want to prevent. Galaxy has several features that are specifically designed for uploading and managing large sets of similar types of data. The following two **Hands-on** sections show how they can be used to import all completed *E. coli* genomes into Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Preparing a list of all complete *E. coli* genomes
+> <hands-on-title>Preparing a list of all complete <i>E. coli</i> genomes</hands-on-title>
 >
 > 1. Import the genome list from Zenodo:
 >
@@ -75,7 +78,7 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 {: .hands_on}
 
 
-> ### {% icon details %} Getting the data directly from NCBI
+> <details-title>Getting the data directly from NCBI</details-title>
 >
 > For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
 > Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
@@ -108,18 +111,18 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 {: .details}
 
 
-> ### {% icon hands_on %} Hands-on: Preparing a list of all complete *E. coli* genomes
+> <hands-on-title>Preparing a list of all complete <i>E. coli</i> genomes</hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %}   columns from a table:
 >
 >    - *"Cut columns"*: `c8,c20`
 >    - *"From"*: `genome_proks.txt`
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > How does your data look?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > It should look like this:
 > > > 1               | 2
@@ -157,13 +160,13 @@ ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1/
 
 This can be done as a two step process where we first copy the end part of the existing URL (`/GCA_000008865.1_ASM886v1`) and then add a fixed string `_genomic.fna.gz` to the end of it. Doing this by hand is crazy and trying to do it in a spreadsheet is complicated. Fortunately, Galaxy's new rule-based uploader can help, as shown in the next **Hands-on** section:
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Again **Upload** {% icon tool %} data
 >
 > 2. Switch to the `Rule-based` tab on the right
 >
->    > ### {% icon tip %} Tip: Using the Rule-based Uploader
+>    > <tip-title>Using the Rule-based Uploader</tip-title>
 >    > There is a detailed tutorial on using the [Rule based Uploader](../../../galaxy-data-manipulation/tutorials/upload-rules/tutorial.html) if you want to learn about the more advanced features available.
 >    {: .tip}
 >
@@ -171,7 +174,7 @@ This can be done as a two step process where we first copy the end part of the e
 >    - *"Load tabular data from"*: `History Dataset`
 >    - *"Select dataset to load"*: output of the cut tool
 >
->    > ### {% icon tip %} Tip: dataset not there?
+>    > <tip-title>dataset not there?</tip-title>
 >    > If the dataset doesn't appear in the select list, refresh your page.
 >    {: .tip}
 >
@@ -210,7 +213,7 @@ Now we have all complete *E. coli* genomes in Galaxy's history. It is time to do
 
 Before starting any analyses we need to upload the assembly produced in [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html) from Zenodo:
 
-> ### {% icon hands_on %} Uploading *E. coli* assembly into Galaxy
+> <hands-on-title>Uploading <i>E. coli</i> assembly into Galaxy</hands-on-title>
 >
 > 1. {% tool [Upload](upload1) %}  :
 >   - Click **Paste/Fetch data** button (Bottom of the interface box)
@@ -219,7 +222,7 @@ Before starting any analyses we need to upload the assembly produced in [Unicycl
 >   - Click **Start**
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Finding tools mentioned in this tutorial
+> <tip-title>Finding tools mentioned in this tutorial</tip-title>
 >Galaxy instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.
 >![Tool search](../../images/tool_search.png "Use search box to find tools!")
 {: .tip}
@@ -233,7 +236,7 @@ Let's fix these two problems.
 
 Because phiX173 is around 5,000bp, we can remove those sequences by setting a minimum length of 10,000:
 
-> ### {% icon hands_on %} Hands-on: Fixing assembly
+> <hands-on-title>Fixing assembly</hands-on-title>
 >
 > 1. {% tool [Filter sequences by length](toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2) %} with the following parameters:
 >   - *"Fasta file"*: the dataset you've just uploaded. (`https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna`).
@@ -248,7 +251,7 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="E. coli C" %}
 >
->    > ### {% icon tip %} Regular Expressions
+>    > <tip-title>Regular Expressions</tip-title>
 >    >
 >    > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
 >    >
@@ -264,11 +267,11 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >    >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
 >    {: .tip}
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > 1. What is the meaning of `^` character is SED expression?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > 1. It tells SED to start matching from the beginning of the string.
 > > >
@@ -282,7 +285,7 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 
 Now everything is loaded and ready to go. We will now align our assembly against each of the *E. coli* genomes we have uploaded into the collection. To do this we will use [LASTZ](https://lastz.github.io/lastz/)&mdash;an aligner designed for long sequences.
 
-> ### {% icon hands_on %} Hands-on: Running LASTZ
+> <hands-on-title>Running LASTZ</hands-on-title>
 > 1. {% tool [LASTZ](toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2) %} with the following parameters:
 >   - *"Select TARGET sequence(s) to align against"*: `from your history`
 >   - {% icon param-collection %} *"Select a reference dataset"*: the "Complete genomes" collection we uploaded earlier
@@ -296,7 +299,7 @@ Now everything is loaded and ready to go. We will now align our assembly against
 
 Note that because we started LASTZ on *a collection* of *E. coli* genomes, it will output alignment information as *a collection* as well. A collection is simply a way to represent large sets of similar data in a compact way within Galaxy's interface.
 
-> ### {% icon warning %} It will take a while!
+> <warning-title>It will take a while!</warning-title>
 > Please understand that alignment is not an instantaneous process: allow several hours for these jobs to clear.
 {: .warning}
 
@@ -339,7 +342,7 @@ The alignment information produced by LASTZ is a collection. In this collection 
 
 Collections are a wonderful way to organize large sets of data and parallelize data processing like we did here with LASTZ. However, at this point we need to combine all data into one dataset. Follow the steps below to accomplish this:
 
-> ### {% icon hands_on %} Hands-on: Combining collection into a single dataset
+> <hands-on-title>Combining collection into a single dataset</hands-on-title>
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
 >   - *"Collection of files to collapse"*: the output of **LASTZ** (collecion input)
 {: .hands_on}
@@ -350,7 +353,7 @@ This will produce one gigantic table (over 12 million lines) containing combined
 
 To make further analyses we need to get an idea about alignment data generated with LASTZ. To do this let's select a random subsample of the large dataset we've generated above. This is necessary because processing the entire dataset will take time and will not give us a better insight anyway. So first we will select 10,000 lines from the alignment data:
 
-> ### {% icon hands_on %} Hands-on: Selecting random subset of data
+> <hands-on-title>Selecting random subset of data</hands-on-title>
 > 1. {% tool [Select random lines from a file](random_lines1) %}   with the following parameters:
 >   -  *"Randomly select"*: `10000`
 >   -  *"from"*: the output from `Collapse Collection`
@@ -358,7 +361,7 @@ To make further analyses we need to get an idea about alignment data generated w
 
 Now we can visualize this dataset to discover generalities:
 
-> ### {% icon hands_on %} Hands-on: Graphing alignment data
+> <hands-on-title>Graphing alignment data</hands-on-title>
 > 1. Expand random subset of alignment data generated on the previous step by clicking on it.
 > 2. You will see "chart" button {% icon galaxy-barchart %}. Click on it.
 > 3. In the central panel you will see a list of visualizations. Select **Scatter plot (NVD3)**
@@ -374,12 +377,12 @@ The relationship between the alignment identity and alignment length looks like 
 
 You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging from this graph we can select alignment longer than 10,000 bp with identity above 90%.
 
-> ### {% icon hands_on %} Hands-on: Filtering data
+> <hands-on-title>Filtering data</hands-on-title>
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions:
 >   - *"Filter"*: the full dataset, from the output of the **Collapse Collection** {% icon tool %}.
 >   - *"With following condition"*: `c3 >= 90 and c4 >= 10000` (here `c` stands for *column*).
 >
->  NOTE: You need to select the full dataset; not the down-sampled one, but [the one generated by the collection collapsing operation](#hands_on-hands-on-combining-collection-into-a-single-dataset).
+>  NOTE: You need to select the full dataset; not the down-sampled one, but [the one generated by the collection collapsing operation](#hands-on-combining-collection-into-a-single-dataset).
 >
 {: .hands_on}
 
@@ -392,7 +395,7 @@ Remember, our objective is to find the genomes that are most similar to ours. Gi
 
 However, to extract this information from our data we need to aggregate it. In other words, for each *E. coli* genome we need to calculate the total number of alignment blocks, their combined length, and average identity. The following section explains how to do this:
 
-> ### {% icon hands_on %} Hands-on: Aggregating the data
+> <hands-on-title>Aggregating the data</hands-on-title>
 > 1. {% tool [Datamash (operations on tabular data)](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %}   with the following parameters:
 >     - *"Input tabular dataset"*: output of the previous `Filter` step.
 >     - *"Group by fields"*: `2`. (column 1 contains name of the *E. coli* genome we mapped against)
@@ -414,7 +417,7 @@ However, to extract this information from our data we need to aggregate it. In o
 
 The dataset generated above lists each *E. coli* genome accession only once and will have aggregate information for the number of alignment blocks, mean identity, and total length. Let's graph these data:
 
-> ### {% icon hands_on %} Hands-on: Graphing aggregated data
+> <hands-on-title>Graphing aggregated data</hands-on-title>
 > 1. Expand the aggregated data generated on the previous step by clicking on it.
 > 2. You will see "chart" button {% icon galaxy-barchart %}. Click on it.
 > 3. In the central panel you will see a list of visualizations. Select **Scatter plot (NVD3)**
@@ -431,13 +434,13 @@ The relationship between the number of alignment blocks and total alignment leng
 
 A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set **Data point labels** correctly in the previous step) will reveal their accession numbers: `LT906474.1`, `CP024090.1`, and `CP020543.1`.
 
-> ### {% icon warning %} Things change
+> <warning-title>Things change</warning-title>
 > It is possible that when you repeat these steps the set of sequences in NCBI will have changed and you will obtain different accession numbers. Keep this in mind.
 {: .warning}
 
 Let's find table entries corresponding to these:
 
-> ### {% icon hands_on %} Hands-on: Extracting into about best hits
+> <hands-on-title>Extracting into about best hits</hands-on-title>
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >   - *"Select lines from"*: to the output from `Datamash`
 >   - *"the pattern"*: `LT906474|CP024090|CP020543`. (Here `|` means `or`).
@@ -458,7 +461,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 
 ## Getting sequences and annotations
 
-> ### {% icon hands_on %} Hands-on: Uploading sequences and annotations
+> <hands-on-title>Uploading sequences and annotations</hands-on-title>
 > Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.
 >
 > 1. {% tool [Upload](upload1) %} the *E. coli* C genome if you have not done so already:
@@ -492,11 +495,11 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >       - *"Load tabular data from"*: `History Dataset`
 >       - *"Select dataset to load"*: output of the cut tool
 >
->       > ### {% icon tip %} Tip: dataset not there?
+>       > <tip-title>dataset not there?</tip-title>
 >       > If the dataset doesn't appear in the select list, refresh your page.
 >       {: .tip}
 >
->       > ### {% icon tip %} Take a Shortcut
+>       > <tip-title>Take a Shortcut</tip-title>
 >       > This step is quite long and potentially error prone. If you want to skip those steps, you can copy and paste this bit of text:
 >       >
 >       > ```json
@@ -574,7 +577,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 
 Now we will perform alignments between our assembly and the three most closely related genomes to get a detailed look at any possible genome architecture changes. We will again use LASTZ:
 
-> ### {% icon hands_on %} Hands-on: Aligning again
+> <hands-on-title>Aligning again</hands-on-title>
 >
 > 1. {% tool [LASTZ](toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2) %} with the following parameters:
 >   - *"Select TARGET sequence(s) to align against"*: `from your history`
@@ -582,7 +585,7 @@ Now we will perform alignments between our assembly and the three most closely r
 >   - {% icon param-file %} *"Select QUERY sequence(s)"*: `E. coli C` fasta file
 >   - **Chaining**
 >        - *"Perform chaining of HSPs with no penalties"*: `Yes`
->          > ### {% icon tip %} What does chaining do?
+>          > <tip-title>What does chaining do?</tip-title>
 >          > For more information about chaining [look here](https://lastz.github.io/lastz/#ex_stages)
 >          {: .tip}
 >
@@ -615,7 +618,7 @@ Because we chose to produce Dot Plots as well, LASTZ will generate two collectio
 
 A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly.
 
-> ### {% icon details %} Interpreting Dot Plots
+> <details-title>Interpreting Dot Plots</details-title>
 > If you are not sure how to interpret Dot Plots here is a great explanation by [Michael Schatz](http://schatz-lab.org/):
 >
 > ![Interpreting Dot Plots](../../images/dotplot.png "A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.")
@@ -631,7 +634,7 @@ The dot plots we've produced above are great, but they are static. It would be w
 
 The first step will be collapsing the collection containing the three genomes into a single file:
 
-> ### {% icon hands_on %} Hands-on: Creating a single FASTA dataset with all genomes
+> <hands-on-title>Creating a single FASTA dataset with all genomes</hands-on-title>
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0) %}
 >
@@ -672,9 +675,9 @@ To begin, let's look at the LASTZ output:
 
 One immediate problem is `%` character in column 12 (alignment identity). We need to remove it as we will use this for the score column of the BED file, and that must be a normal number and not a percentage.
 
-Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning-again) is `number`. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection of three genomes it generated a number for each output independently starting with `1` each time. So these alignments identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 12) with the name of the target sequence (column 2). This would create alignments that are truly unique. For example, in the case of the LASTZ output shown above alignment identifier `1` will become `CP020543.11`, `2` will become `CP020543.12` and so on.
+Column 13 of the fields chosen by us for [LASTZ run](#hands-on-aligning-again) is `number`. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection of three genomes it generated a number for each output independently starting with `1` each time. So these alignments identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 12) with the name of the target sequence (column 2). This would create alignments that are truly unique. For example, in the case of the LASTZ output shown above alignment identifier `1` will become `CP020543.11`, `2` will become `CP020543.12` and so on.
 
-> ### {% icon comment %} BED format
+> <comment-title>BED format</comment-title>
 > Our goal is to convert this into a format that will be acceptable to the genome browser. One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
 >
 > 1. Chromosome ID
@@ -685,7 +688,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 > 6. Strand (`+`, `-`, or `.` for no strand data).
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Convert LASTZ output to BED
+> <hands-on-title>Convert LASTZ output to BED</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} in a specific column:
 >    - {% icon param-collection %} *"File to process"*: output of LASTZ (`LASTZ Alignments`)
@@ -698,7 +701,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >    - *"Merge column"*: `Column: 2` (this is the Target sequence name)
 >    - *"with column"*: `Column: 13` (this is the alignment block created by LASTZ)
 >
->    > ### {% icon details %} Output information
+>    > <details-title>Output information</details-title>
 >    > The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, `CP020543.1` and `LT906474.1` because they will have accessions embedded within alignment block IDs. For example, the first alignment between `CP020543.1` and our assembly `Ecoli_C` will have alignment block id `CP020543.11`, while the 225th alignment between `LT906474.1` and `Ecoli_C` will have ID `LT906474.1225`. Because of this we can collapse the entire collection of alignments into a single dataset:
 >    {: .details}
 >
@@ -716,7 +719,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >    - *"Cut columns"*: `c2,c4,c5,c14,c12,c8`
 >    - {% icon param-file %} *"From"*: the output of the previous step (`Unprocessed alignments`)
 >
->    > ### {% icon details %} Converting to BED
+>    > <details-title>Converting to BED</details-title>
 >    > Let's look again at the data we generated in the last step:
 >    >
 >    > 1        | 2          | 4 | 4      | 5      | 6      | 7       | 8 | 9      | 10     | 11            | 12    | 13 | 14
@@ -725,14 +728,14 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >    >     5465 | CP020543.1 | + | 121267 | 121367 | 100    | Ecoli_C | + | 109317 | 109418 | 76/100        | 76.0  | 2  | CP020543.12
 >    >     4870 | CP020543.1 | + | 159368 | 159512 | 144    | Ecoli_C | + | 128706 | 128828 | 95/115        | 82.6  | 3  | CP020543.13
 >    >
->    > Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#hands_on-hands-on-fixing-assembly) `Ecoli_C`.
+>    > Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#hands-on-fixing-assembly) `Ecoli_C`.
 >    > In the first BED, column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`).
 >    > In the second BED, column 1 will contain name of our assembly: `Ecoli_C`.
 >    >
 >    > To create the first BED we will cut six columns from the dataset produced at the last step. Specifically, to produce the target BED we will cut columns 2, 4, 5, 14, 12, and 8. To produce the query BED columns 7, 9, 10, 14, 12, 8 will be cut.
 >    {: .details}
 >
->    > ### {% icon warning %} There are multiple **CUT** tools!
+>    > <warning-title>There are multiple <b>CUT</b> tools!</warning-title>
 >    > The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which we will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but the tools are different.
 >    {: .warning}
 >
@@ -744,7 +747,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >    CP020543.1 | 121267 | 121367 | CP020543.12 | 76.0  | +
 >    CP020543.1 | 159368 | 159512 | CP020543.13 | 82.6  | +
 >
->    > ### {% icon tip %} Not exactly the same?
+>    > <tip-title>Not exactly the same?</tip-title>
 >    > Depending on the steps and other choices, the genomes may be in a different order here. This is unimportant, as all of the same alignments are contained in the file, just the ordering is different. As long as these columns look correct (start/end in column 2/3 are reasonable, a number between 0-100 in column 5, and a + or - in column 6) then it is OK.
 >    {: .tip}
 >
@@ -784,7 +787,7 @@ Ecoli_C | 128706 | 128828 | CP020543.13 | 82.6  | +
 
 ### Extracting Genes
 
-Earlier we [downloaded](#hands_on-hands-on-uploading-sequences-and-annotations) gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotations for `CP020543.1`, `CP024090.1`, and `LT906474.1`. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called `Genes`)):
+Earlier we [downloaded](#hands-on-uploading-sequences-and-annotations) gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotations for `CP020543.1`, `CP024090.1`, and `LT906474.1`. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called `Genes`)):
 
 > Tab-delimited text file reporting locations and attributes for a subset of
 > annotated features. Included feature types are: gene, CDS, RNA (all types),
@@ -815,15 +818,14 @@ Earlier we [downloaded](#hands_on-hands-on-uploading-sequences-and-annotations) 
 > 19     | product_length: length of the product corresponding to the accession.version in column 11. Protein product lengths are in amino acid units, and do not include the stop codon which is included in column 18. Additionally, product_length may differ from feature_interval_length if the product contains sequence differences vs. the genome, as found for some RefSeq transcript and protein products based on mRNA sequences and also for INSDC proteins that are submitted to correct genome discrepancies.
 > 20     | attributes: semi-colon delimited list of a controlled set of qualifiers. The list currently includes: partial, pseudo, pseudogene, ribosomal_slippage, trans_splicing, anticodon=NNN (for tRNAs), old_locus_tag=XXX
 >
-> *from [ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt](ftp://ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt)*
-{: .quote}
+{: .quote cite="https://ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt"}
 
 
 Our objective is to convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`, then
 we will produce a collection with three datasets just like the original `Genes` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#comment-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`.
 Finally we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand), and then we can add the genome name.
 
-> ### {% icon hands_on %} Hands-on: Extract CDSs from annotation datasets
+> <hands-on-title>Extract CDSs from annotation datasets</hands-on-title>
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >    - {% icon param-collection %} *"Select lines from"*: the collection containing annotations, `Genes`
 >    - *"the pattern"*: `^CDS`
@@ -873,9 +875,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Genes (E. coli Relatives)" %}
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    > How does your output look?
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The resulting dataset should look like this:
 >    > >
@@ -925,7 +927,7 @@ It can be useful to have the complement of the aligned regions, to know which re
 
 ![Complementing genomic ranges](../../images/complement.png "Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).")
 
-> ### {% icon hands_on %} Hands-on: Creating a genome file
+> <hands-on-title>Creating a genome file</hands-on-title>
 >
 > 1. {% tool [Compute sequence length](toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1) %}:
 >    - {% icon param-file %} *"Compute length for these sequences"*: `DNA (E. coli + Relatives)`, the FASTA dataset we generated from **Collapse Collection** {% icon tool %}
@@ -937,9 +939,9 @@ It can be useful to have the complement of the aligned regions, to know which re
 >    - *"with flavor"*: `Alphabetical sort`
 >    - *"everything in"*: `Ascending order`
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    > How does the output look?
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > This will generate a dataset that looks like this:
 >    > >
@@ -967,9 +969,9 @@ It can be useful to have the complement of the aligned regions, to know which re
 >
 >    Note: Here we are computing the length (difference between end (column 3) and start (column 2) and making sure it is above 10,000).
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    > How does your output look?
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The resulting dataset should look like this:
 >    > >
@@ -989,15 +991,15 @@ It can be useful to have the complement of the aligned regions, to know which re
 
 You will notice that all three genomes have a region starting past 3,200,000 and only `CP020543.1` has another region starting at 1,668,702. However, this region reflects some unique feature of `CP020543.1` rather than that of our assembly. This is why we will concentrate on the *common* region which is deleted in our genome, but is present in the three closely related *E. coli* strains:
 
-> ### {% icon hands_on %} Hands-on: Restricting list of deleted regions to the *common* deletion
+> <hands-on-title>Restricting list of deleted regions to the <i>common</i> deletion</hands-on-title>
 >
 > 1. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
 >  - *"Filter"*: dataset from the last step (`Filter on data...`)
 >  - *"With following condition"*: `c2 > 2000000`.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    > How does your output look?
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The new set of regions will look like this:
 >    > >
@@ -1023,7 +1025,7 @@ You will notice that all three genomes have a region starting past 3,200,000 and
 
 JBrowse is an interactive genome browser, which has been integrated into Galaxy as a workflow-compatible tool that you can use to summarise all of the datasets we've created thusfar:
 
-> ### {% icon hands_on %} Hands-on: View genomes
+> <hands-on-title>View genomes</hands-on-title>
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1) %} genome browser:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - *"Select the reference genome"*: `DNA (E. coli C + Relatives)`
@@ -1069,7 +1071,7 @@ Close ups of deleted region (this region is deleted from our assembly and looks 
 
 Alternatively to JBrowse, we can use Circos to create a nice image of the alignments:
 
-> ### {% icon hands_on %} Hands-on: Circos
+> <hands-on-title>Circos</hands-on-title>
 >
 > 1. {% tool [LASTZ](toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2) %} with the following parameters:
 >   - *"Select TARGET sequence(s) to align against"*: `from your history`
@@ -1144,7 +1146,7 @@ Above we've been able to look at genes that appear to be deleted in our assembly
 
 ![Intersect between two BED datasets](../../images/intersect.png "Computing intersect means finding overlapping regions in two BED datasets (image from BEDTools documentation).")
 
-> ### {% icon hands_on %} Hands-on: Finding genes deleted in our assembly
+> <hands-on-title>Finding genes deleted in our assembly</hands-on-title>
 >
 > 1. {% tool [Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2) %} with the following parameters:
 >  - *"File A to intersect with B"*: `Gaps`
@@ -1167,7 +1169,7 @@ CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3258389 | 3259999 | entE | 0 | - |
 
 Goodall et al. have recently published a list of essential genes for *E. coli* K-12 ({% cite Goodall2018 %}). We can use their data to answer this question. This paper contains a supplementary file in Excel format listing genes and whether they are essential or not. We have converted this to a <kbd>tab</kbd> delimited file for you, but you could do this in any spreadsheet application:
 
-> ### {% icon hands_on %} Hands-on: Import data
+> <hands-on-title>Import data</hands-on-title>
 >
 > 1. Import the table:
 >
@@ -1189,10 +1191,10 @@ thrB | 0.177920686           | 39.389847            | 0         | 1             
 
 The two truly important columns here are 1 (gene name) and 4 (is gene essential?). Let's join the results of the intersection with this list:
 
-> ### {% icon hands_on %} Hands-on: Are there essential genes?
+> <hands-on-title>Are there essential genes?</hands-on-title>
 >
 > 1. {% tool [Join two Datasets](join1) %} side by side on a specified field:
->   - *"Join"*: the results of the [intersect operation](#hands_on-hands-on-finding-genes-deleted-in-our-assembly)(`Intersect intervals on data...`)
+>   - *"Join"*: the results of the [intersect operation](#hands-on-finding-genes-deleted-in-our-assembly)(`Intersect intervals on data...`)
 >   - *"using column"*: `Column: 7` (because it contains gene names. If it is not a drop down enter `7`.)
 >   - *"with"*: the newly uploaded dataset with essential gene data
 >   - *"and column"*: `Column: 1` (as in this dataset the first column contains gene names)

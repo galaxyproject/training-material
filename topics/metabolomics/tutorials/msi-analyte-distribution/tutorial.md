@@ -26,8 +26,6 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
 
 Mass spectrometry imaging (MSI) is applied to measure the spatial distribution of hundreds of biomolecules in a sample. A mass spectrometer scans over the entire sample and collects a mass spectrum every 5-200 µm. This results in thousands of spots (or pixels) for each of which a mass spectrum is acquired. Each mass spectrum consists of hundreds of analytes that are measured by their mass-to-charge (m/z) ratio. For each analyte the peak intensity in the mass spectra of every pixel is known and can be set together to map the spatial distribution of the analyte in the sample. 
 
@@ -44,7 +42,7 @@ Depending on the analyte of interest, the sample type and the mass spectrometer,
 In this tutorial we will determine analytes with a localized distribution in a chilli cross section. The data analysis steps can be transferred to any other application in which the morphological distribution of an analyte in a sample is analyzed. A common application is studying the distribution of a drug and its metabolites in an animal model to better understand pharmacokinetic properties of the drug. 
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -55,11 +53,11 @@ In this tutorial we will determine analytes with a localized distribution in a c
 
 # Chilli dataset
 
-In this tutorial we will use the chilli dataset generated in the lab of Robert Winkler at the CINVESTAV institute in Irapuato (Mexico) and deposited at [Zenodo](https://zenodo.org/record/484496). The data was acquired to demonstrate their self-made low-cost 'plug and play' MSI system as well as their open source R scripts and to show they allow the direct spatially resolved detection of volatile organic compounds (VOCs) from plant tissue ([Maldonado-Torres et al.](https://doi.org/10.1016/j.jprot.2014.03.003) and [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9)). 
+In this tutorial we will use the chilli dataset generated in the lab of Robert Winkler at the CINVESTAV institute in Irapuato (Mexico) and deposited at [Zenodo](https://zenodo.org/record/484496). The data was acquired to demonstrate their self-made low-cost 'plug and play' MSI system as well as their open source R scripts and to show they allow the direct spatially resolved detection of volatile organic compounds (VOCs) from plant tissue ({% cite Maldonado_Torres_2014 %} and {% cite Gamboa_Becerra_2015 %}). 
 
 The mass spectrometer consisted of a low-temperature plasma (LTP) ionization source coupled to a quadrupole mass analyzer. This ionization source allows measurement of semi-volatile organic compunds directly from fresh material under ambient conditions without destruction of the sample. To get an idea how this set up and the chilli looks, have a look at their [video](https://www.youtube.com/watch?v=NbZ1QqTZvXM) and [website](http://lababi.bioprocess.org/). The chilli (*Capsicum annuum*) was purchased from a local market in Irapuato, Mexico and longitudinally cut into a slice of 80 x 35 mm and 4 mm thickness and laid onto a glass slide. Mass spectra were acquired with a spatial resolution of 1 mm and in a mass range from 15 – 2000 m/z to measure semi-volatile and volatile organic compounds (VOCs). 
 
-We will check the properties of the dataset and then perform a similar analysis to that described by [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9): plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes. 
+We will check the properties of the dataset and then perform a similar analysis to that described by {% cite Gamboa_Becerra_2015 %}: plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes. 
 
 ![Chilli](../../images/msi_distribution_chilli.png "Cross section of a chilli in a similar orientation as in the publication by Gamboa-Becerra")
 
@@ -67,7 +65,7 @@ We will check the properties of the dataset and then perform a similar analysis 
 
 The imzML composite file consists of two files. The first file contains the metadata in an XML file and has the extension .imzML. The second file contains the mass spectra data, is saved as a binary file and has the extension .ibd. To be valid, both files must have the same filename before the extension. More information about the imzML file structure can be found here: [ms-imaging.org](https://ms-imaging.org/wp/imzml/data-structure/). Galaxy provides a composite upload option for files consisting of several components.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. **Create a new history** and give it a name.
 >
@@ -75,7 +73,7 @@ The imzML composite file consists of two files. The first file contains the meta
 >
 > 2. Upload the data from [Zenodo](https://zenodo.org/record/484496) via the **composite** option
 >
->    > ### {% icon tip %} Tip: Upload via the composite option
+>    > <tip-title>Upload via the composite option</tip-title>
 >    > - Open the Galaxy Upload Manager({% icon galaxy-upload %} on the top-right of the tool panel)
 >    > - Click on **Composite** on the top
 >    > - Set **Composite Type** to `imzml`
@@ -95,12 +93,12 @@ The imzML composite file consists of two files. The first file contains the meta
 >
 >    ![Upload imzML files](../../images/msi_distribution_upload_imzml.png "Upload an imzML file via the composite upload")
 >
->    > ### {% icon tip %} Tip: FTP upload for large files
+>    > <tip-title>FTP upload for large files</tip-title>
 >    > * In case one subfile is larger than 2 GB the uploading needs to be done via ftp.
 >    > * The necessary steps are explained in this tutorial [Getting data into Galaxy]({{ site.baseurl }}/topics/galaxy-interface/tutorials/get-data/slides.html)
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Uploading an Analyze7.5 file
+>    > <tip-title>Uploading an Analyze7.5 file</tip-title>
 >    > * `Analyze7.5` files are also supported by Galaxy.
 >    > * The file consists of three components and is therefore uploaded via the 'composite' function, analogously to the imzML upload.
 >    > * The files to select in the `composite` tab are the header file `.hdr`, the m/z values file `.t2m` and the spectra file `.img`.
@@ -108,7 +106,7 @@ The imzML composite file consists of two files. The first file contains the meta
 >
 > 3. Rename the data into `ltpmsi-chilli`
 >
->    > ### {% icon tip %} Tip: Rename a dataset
+>    > <tip-title>Rename a dataset</tip-title>
 >    > - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
 >    > - In the central panel, change the **Name** field to `ltpmsi-chilli`
 >    > - Click the **Save** button
@@ -122,7 +120,7 @@ The imzML composite file consists of two files. The first file contains the meta
 
 Before starting any analysis it is important to check the characteristics and quality of the MSI data. The MSI quality control tool creates a comprehensive PDF report that contains multiple descriptive visualizations of different data attributes. Here we will use the MSI quality control to get an idea about the m/z range and the shape of the chilli section. More details about the MSI quality control tool can be found in the tutorial [Mass spectrometry imaging 1: Loading and exploring MSI data]({{site.baseurl}}/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html).
 
-> ### {% icon hands_on %} Hands-on: Quality control 
+> <hands-on-title>Quality control </hands-on-title>
 >1. {% tool [MSI_Qualitycontrol](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/2.6.0.1) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
 >    - *"Centroided input"*: `yes`
@@ -130,9 +128,9 @@ Before starting any analysis it is important to check the characteristics and qu
 >        - *"Mass accuracy to which the m/z values will be binned"*: `0.2`
 >        - *"Unit of the mass accuracy"*: `mz`
 >    - *"PCA with 2 components"*: `Yes`
->    - Press **Execute**
+>    - Press **Run Tool**
 >
->    > ### {% icon comment %} Properties of the imzML file
+>    > <comment-title>Properties of the imzML file</comment-title>
 >    > To set the parameters for the mass spectrometry imaging tools correctly the following three parameters should be known about the dataset: 1) is the imzML file type processed or continuous, 2) are the spectra in profile or centroided mode and 3) the accuracy of the mass spectrometer. For the chilli dataset the publication states that it is a processed imzML type in centroided mode. This information can also be extracted by opening the local imzML component of the file in a text editor or web browser. Line 10 and 11 state: 
 >    >
 >    >      <cvParam cvRef="MS" accession="MS:1000128" name="profile spectrum" value=""/>
@@ -160,13 +158,13 @@ Before starting any analysis it is important to check the characteristics and qu
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. In which m/z range were the data acquired?
 > 2. How many spectra (pixels) were measured?
 > 3. In which images can you guess the shape of the chilli?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The measured m/z range was m/z 15 - 2000.
 > > 2. 4166 spectra were measured.
@@ -191,7 +189,7 @@ The relevant m/z range for VOCs was not known before the measurement and therefo
 
 We will follow up on the average mass spectra plots from the quality control report as well as on the differences between mass spectra from different chilli compartments. First, we generate more zoomed in mass spectra plots to get an idea about the m/z range that is relevant for VOCs. Next, we will plot and compare mass spectra that derive from different regions of the chilli. 
 
-> ### {% icon hands_on %} Hands-on: Average mass spectra
+> <hands-on-title>Average mass spectra</hands-on-title>
 >
 > 1. {% tool [MSI plot spectra](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
@@ -224,12 +222,12 @@ We will follow up on the average mass spectra plots from the quality control rep
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the approximate m/z of the heaviest peak visible in the average spectra plot of the complete m/z range? 
 > 2. What is the approximate m/z of the peak with the highest average intensity?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. There is a tiny peak at m/z ~760.
 > > 2. The highest peak is at ~80 m/z, which can best be seen in the mass spectrum between 15 and 200 m/z. 
@@ -238,23 +236,24 @@ We will follow up on the average mass spectra plots from the quality control rep
 >
 {: .question}
 
-In the average spectrum of the complete m/z range there are no visible peaks above 800 m/z. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 m/z only a few distinct peaks can be identified in the noise. In accordance with [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9), we will restrict further analysis to the m/z range between 15 and 1000. 
+In the average spectrum of the complete m/z range there are no visible peaks above 800 m/z. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 m/z only a few distinct peaks can be identified in the noise. In accordance with {% cite Gamboa_Becerra_2015 %}, we will restrict further analysis to the m/z range between 15 and 1000. 
 
 ![Average plots](../../images/msi_distribution_average_spectra.png "Complete and zoomed in average mass spectra")
 
 We will rerun the MSI plot spectra tool and add annotation to the pixels that correspond to different chilli compartments.
 
-> ### {% icon hands_on %} Hands-on: Mass spectra of different chilli compartments
+> <hands-on-title>Mass spectra of different chilli compartments</hands-on-title>
 >
 > 1. Create a tabular file with the coordinates of interest and rename it to 'annotations':
+>
 >    ```
-x     y     compartment
-39    53    seeds
-50    44    placenta
-25    60    pericarp
+>    x     y     compartment
+>    39    53    seeds
+>    50    44    placenta
+>    25    60    pericarp
 >    ```
 >
->    > ### {% icon tip %} Tip: Creating a new file
+>    > <tip-title>Creating a new file</tip-title>
 >    >
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
@@ -275,12 +274,12 @@ x     y     compartment
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Which compartment does the highest intensity peak belong to? 
 > 2. Which compartment does the third-highest intensity peak belong to?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The highest intensity peak at around 80 m/z belongs to the spectrum that is located in the pericarp of the chilli. 
 > > 2. The peak at around 60 m/z belongs to the spectrum that is located in the seeds.
@@ -294,7 +293,7 @@ The single spectra that derive from different chilli compartments show some majo
 
 ## Filtering for the relevant m/z range
 
-> ### {% icon hands_on %} Hands-on: filtering for a m/z range
+> <hands-on-title>filtering for a m/z range</hands-on-title>
 >
 > 1. {% tool [MSI filtering](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_filtering/cardinal_filtering/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
@@ -308,12 +307,12 @@ The single spectra that derive from different chilli compartments show some majo
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many m/z features are left in the output dataset?
 > 2. How many m/z features were removed?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. After filtering 4926 m/z features are left. 
 > > 2. The dataset originally had 9926 m/z features; after filtering 4926 are left, which means that 5000 were removed.
@@ -328,11 +327,11 @@ The MSI tools are only able to write outputs as continuous imzML format; therefo
 
 ## Automatic generation of analyte images
 
-The main question for the chilli dataset is which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) scan the m/z range with a step size of 0.2 m/z and a tolerance of 0.4 Th, which resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 m/z. 
+The main question for the chilli dataset is which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. {% cite Gamboa_Becerra_2015 %} scan the m/z range with a step size of 0.2 m/z and a tolerance of 0.4 Th, which resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 m/z. 
 
 This requires three steps. Firstly, all m/z features of the dataset with the MSI data exporter are extracted. Secondly, all m/z features are filtered in the m/z ranges that we are interested in: between 55 and 65 Th, as well as between 75 and 85 m/z (this step can be skipped to obtain distribution images for all features). Thirdly, the MSI m/z image tool is used to automatically generate distribution images for each of the m/z from the second step. As the data is already binned to 0.2 Th, only the m/z tolerance of 0.4 m/z has to be specified. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra.
 
-> ### {% icon hands_on %} Hands-on: Generation of multiple analyte images
+> <hands-on-title>Generation of multiple analyte images</hands-on-title>
 > 1. {% tool [MSI data exporter](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
@@ -355,12 +354,12 @@ This requires three steps. Firstly, all m/z features of the dataset with the MSI
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Which are the two analyte images that show the most localized distribution?
 > 2. Which compartments are the two features localized in? 
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Defining the exact m/z with the best localization is quite tricky. Between 61.8 and 62.6 m/z there is a localized feature, as well as between 84 and 84.4 m/z. We can choose 62.2 and 84.2 to get the best images (in the publication it was 62.1 and 84.1).
 > > 2. The comparison of the feature localization with the chilli image shows that the 62.2 m/z feature is located in the seeds and the 84.2 m/z feature more uniformly in the placenta and pericarp.
@@ -371,11 +370,11 @@ This requires three steps. Firstly, all m/z features of the dataset with the MSI
 
 ![best images](../../images/msi_distribution_auto_images.png "Distribution images for the analytes with the most localized distribution")
 
-In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but seems to still be used sometimes. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by [Alexandrov and Bartels](https://doi.org/10.1093/bioinformatics/btt388) and [Ingelese et al.](https://doi.org/10.1093/bioinformatics/bty622).
+In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but seems to still be used sometimes. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by {% cite Alexandrov_2013 %} and {% cite Inglese_2018 %}
 
-After m/z features with a localized distribution have been found, it is interesting to identify them. [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 m/z could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 m/z).
+After m/z features with a localized distribution have been found, it is interesting to identify them. {% cite Gamboa_Becerra_2015 %} performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 m/z could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 m/z).
 
-> ### {% icon comment %} Identification of m/z features
+> <comment-title>Identification of m/z features</comment-title>
 > The identification of m/z features in MSI experiments is not always necessary, but can increase the confidence in the analysis and the molecular understanding. m/z features are either matched to databases or for more confidence another experiment is performed on the same sample to restrict the identification possibilities to analytes that are actually present in the sample. In this study other mass spectrometry techniques were applied, allowing identification of several m/z features, but at the same time features with defined localization could not be identified (e.g. 62.2 m/z and 84.2 m/z). These molecules may be fragments, metabolites or contaminants that are not available with the used mass spectrometry techniques.
 > Targeted analysis can be performed if the m/z of the molecule of interest is already known (e.g. when studying the tissue distribution of a drug and its known metabolites). In this case distribution images for the molecules of interest are a good starting point and scanning through all m/z features might not be necessary.
 {: .comment}
@@ -384,7 +383,7 @@ After m/z features with a localized distribution have been found, it is interest
 
 To get an idea about the distribution of capsaicin in the chilli we will plot its distribution in an overlay image with the two unknown but localized features 62.2 m/z and 84.2 m/z. 
 
-> ### {% icon hands_on %} Hands-on: Overlay image for several m/z features
+> <hands-on-title>Overlay image for several m/z features</hands-on-title>
 >
 > 1. Create a tabular file with the m/z of interest and rename it to 'mz features':
 >
@@ -394,7 +393,7 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 >    306.6
 >    ```
 >
->    > ### {% icon tip %} Tip: Creating a new file
+>    > <tip-title>Creating a new file</tip-title>
 >    >
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
@@ -421,11 +420,11 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Which compartment is capsaicin located in? 
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Capsaicin is located in the middle of the placenta, as well as partly in the seeds. 
 > >

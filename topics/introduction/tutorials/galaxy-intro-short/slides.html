@@ -42,8 +42,8 @@ What is Galaxy?
 - **Free** and Open Source
 
 
-- Many tools (~8000)
-- Popular (&gt;10.000 [publications](https://www.zotero.org/groups/1732893/galaxy))
+- Many tools (~9400[Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/))
+- Popular (&gt;11.900 [publications](https://www.zotero.org/groups/1732893/galaxy))
 - Extensive [tutorials](https://training.galaxyproject.org) available
 
 
@@ -101,12 +101,13 @@ What is Galaxy?
 
 # Find a Galaxy server
 
-- **The Big Three**: Galaxy Main ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europe ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+- **UseGalaxy.\***: {% for server in servers %}{{ server.human }} ([{{ server.name }}]({{ server.url }})){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 
   .image-50[![usegalaxy.* servers]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
 
 - Many other smaller, often domain-specific Galaxies available
- - List of all public Galaxies (125+): [galaxyproject.org/use](https://galaxyproject.org/use/)
+ - List of all public Galaxies (135+): [galaxyproject.org/use](https://galaxyproject.org/use/)
 
 ???
 
@@ -176,7 +177,7 @@ What is Galaxy?
     - {% icon galaxy-eye %} **View** the file
     - {% icon galaxy-pencil %} **Edit attributes**
         - e.g. change name
-    - {% icon galaxy-cross %} **Delete file**
+    - {% icon galaxy-delete %} **Delete file**
 
 
 - Click to **expand**
@@ -388,37 +389,7 @@ What is Galaxy?
 
 - Galaxy Training Materials ([training.galaxyproject.org](https://training.galaxyproject.org))
 
-<!-- tutorial stats -->
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}
-{% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
-{% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
-
-<div class="row">
-<div class="col-md-3">
- <div class="gtn-card color-agenda">
-   <div class="card-title">{{ topics | size }}</div>
-   <div class="card-text">Topics</div>
- </div>
-</div>
-<div class="col-md-3">
- <div class="gtn-card color-tip">
-   <div class="card-title">{{ tutorials | size }}</div>
-   <div class="card-text">Tutorials</div>
- </div>
-</div>
-<div class="col-md-3">
- <div class="gtn-card color-comment">
-   <div class="card-title">{{ contributors | size }}</div>
-   <div class="card-text">Contributors</div>
- </div>
-</div>
-<div class="col-md-3">
- <div class="gtn-card color-handson">
-   <div class="card-title">{{ site.age | round: 1}}</div>
-   <div class="card-text">Years</div>
- </div>
-</div>
-</div>
+{% snippet faqs/gtn/gtn_stats.md %}
 
 ???
 

@@ -1,0 +1,36 @@
+- doc: Test outline for ERGA QC post-assembly
+  job:
+    NCBI taxonomic ID: '121349'
+    NCBI taxdump directory:
+      class: File
+      location: https://zenodo.org/record/7781236/files/new_taxdump.tar.gz
+    FASTQ files:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: 'dataset_01'
+        location: https://zenodo.org/record/7786773/files/hifi.fastq.gz
+    Primary genome assembly file (fasta):
+      class: File
+      location: https://zenodo.org/record/7831298/files/assembly_sponge.fasta.gz
+    DIAMOND database:
+      class: File
+      location: https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd
+    Hi-C reverse:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: 'CReniformis_Hi-C_R'
+        location: https://zenodo.org/record/7786773/files/hiC_2.fastq.gz
+    Hi-C forward:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: 'CReniformis_Hi-C_F'
+        location: https://zenodo.org/record/7786773/files/hiC_1.fastq.gz
+  outputs:
+    'Merqury on input dataset(s): stats':
+      file: 'merqury.assembly.tabular'

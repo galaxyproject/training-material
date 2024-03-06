@@ -1,32 +1,31 @@
 
-> ### {% icon solution %} ``lib/galaxy/model/__init__.py``
+> <solution-title>``lib/galaxy/model/__init__.py``</solution-title>
 > 
 > Possible changes to file ``lib/galaxy/model/__init__.py``:
 > 
 > ```diff
-> index 35e9ac1ba1..36a3ea9cc5 100644
+> index 76004a716e..c5f2ea79a8 100644
 > --- a/lib/galaxy/model/__init__.py
 > +++ b/lib/galaxy/model/__init__.py
-> @@ -512,6 +512,7 @@ class User(Base, Dictifiable, RepresentById):
->          cascade='all, delete-orphan',
->          collection_class=ordering_list('order_index'))
->      _preferences = relationship('UserPreference', collection_class=attribute_mapped_collection('name'))
-> +    favorite_extensions=relationship('UserFavoriteExtension')
->      values = relationship('FormValues',
->          primaryjoin=(lambda: User.form_values_id == FormValues.id))  # type: ignore
->      # Add type hint (will this work w/SA?)
-> @@ -8557,6 +8558,12 @@ class UserPreference(Base, RepresentById):
->          self.name = name
->          self.value = value
+> @@ -593,6 +593,7 @@ class User(Base, Dictifiable, RepresentById):
+>              & not_(Role.name == User.email)  # type: ignore[has-type]
+>          ),
+>      )
+> +    favorite_extensions = relationship("UserFavoriteExtension", back_populates="user")
 >  
-> +class UserFavoriteExtension(Base, RepresentById):
-> +    __tablename__ = 'user_favorite_extension'
+>      preferences: association_proxy  # defined at the end of this module
+>  
+> @@ -9998,3 +9999,12 @@ def receive_init(target, args, kwargs):
+>          if obj:
+>              add_object_to_object_session(target, obj)
+>              return  # Once is enough.
+> +
+> +class UserFavoriteExtension(Base):
+> +    __tablename__ = "user_favorite_extension"
 > +
 > +    id = Column(Integer, primary_key=True)
-> +    user_id = Column(Integer, ForeignKey("galaxy_user.id"), index=True)
-> +    value = Column(Text)
->  
->  class UserAction(Base, RepresentById):
->      __tablename__ = 'user_action'
+> +    user_id = Column(ForeignKey("galaxy_user.id"))
+> +    value = Column(TEXT)
+> +    user = relationship("User", back_populates="favorite_extensions")
 > ```
 {: .solution }

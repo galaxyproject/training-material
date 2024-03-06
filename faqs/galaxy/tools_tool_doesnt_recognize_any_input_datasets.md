@@ -6,7 +6,7 @@ layout: faq
 contributors: [jennaj, Melkeb]
 ---
 
-The expected input datatype assignment is explained on the tool form. Review the input select areas and the help section below the Execute button. 
+The expected input datatype assignment is explained on the tool form. Review the input select areas and the help section below the Run Tool button. 
 
 Understanding datatypes [FAQ]({% link faqs/galaxy/datatypes_understanding_datatypes.md %}).
 

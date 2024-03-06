@@ -70,7 +70,9 @@ tags:
 - SQL
 ---
 
-> ### {% icon comment %} Comment
+This tutorial will introduce you to {SQL} which can be used to query databases!
+
+> <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.
 >
@@ -81,7 +83,7 @@ tags:
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -126,7 +128,7 @@ SQL provides hundreds of different ways to analyze and recombine data.
 We will only look at a handful of queries,
 but that handful accounts for most of what scientists do.
 
-> ### {% icon tip %} Changing Database Managers
+> <tip-title>Changing Database Managers</tip-title>
 >
 > Many database managers --- Oracle,
 > IBM DB2, PostgreSQL, MySQL, Microsoft Access, and SQLite ---  understand
@@ -235,13 +237,13 @@ capitalization.  One convention is to use UPPER CASE for SQL
 statements, to distinguish them from tables and column names. This is
 the convention that we will use for this lesson.
 
-> ### {% icon question %} Question: Is a personal and family name column a good design?
+> <question-title>Is a personal and family name column a good design?</question-title>
 > If you were tasked with designing a database to store this same data, is storing the name data in
 > this way the best way to do it? Why or why not?
 >
 > Can you think of any names that would be difficult to enter in such a schema?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > No, it is generally not. There are a lot of [falsehoods that programmers believe about names](https://shinesolutions.com/2018/01/08/falsehoods-programmers-believe-about-names-with-examples/).
 > > The situation is much more complex as you can read in that article, but names vary wildly and
 > > generally placing constraints on how names are entered is only likely to frustrate you or your
@@ -307,11 +309,11 @@ we can select all of the columns in a table using `*`:
 SELECT * FROM Person;
 ```
 
-> ### {% icon question %} Question: Selecting Site Names
+> <question-title>Selecting Site Names</question-title>
 >
 > Write a query that selects only the `name` column from the `Site` table.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ~~~
 > > SELECT name FROM Site;
@@ -330,7 +332,7 @@ SELECT * FROM Person;
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Query Style
+> <question-title>Query Style</question-title>
 >
 > Many people format queries as:
 >
@@ -425,7 +427,7 @@ from least to greatest).
 
 We can sort in the opposite order using `DESC` (for "descending"):
 
-> ### {% icon tip %} A note on ordering
+> <tip-title>A note on ordering</tip-title>
 >
 > While it may look that the records are consistent every time we ask for them in this lesson, that is because no one has changed or modified any of the data so far. Remember to use `ORDER BY` if you want the rows returned to have any sort of consistent or predictable order.
 {: .tip}
@@ -461,11 +463,11 @@ removing duplicates.
 SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 ```
 
-> ### {% icon question %} Question: Finding Distinct Dates
+> <question-title>Finding Distinct Dates</question-title>
 >
 > Write a query that selects distinct dates from the `Visited` table.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ~~~
 > > SELECT DISTINCT dated FROM Visited;
@@ -488,12 +490,12 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Displaying Full Names
+> <question-title>Displaying Full Names</question-title>
 >
 > Write a query that displays the full names of the scientists in the `Person` table,
 > ordered by family name.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ~~~
 > > SELECT personal, family FROM Person ORDER BY family ASC;
@@ -513,7 +515,7 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 -- Try solutions here!
 ```
 
-> ### {% icon tip %} Tip: Is sorting names useful?
+> <tip-title>Is sorting names useful?</tip-title>
 > If you are someone with a name which falls at the end of the alphabet, you've likely been
 > penalised for this your entire life. Alphabetically sorting names should always be looked at
 > critically and through a lens to whether you are fairly reflecting everyone's contributions,
@@ -529,11 +531,11 @@ SELECT DISTINCT quant, person FROM Survey ORDER BY quant ASC;
 > > last names toward the end of the alphabet. There is furthermore con-
 > > vincing evidence that researchers are aware of this and that they
 > > react strategically to such alphabetical discrimination, for example
-> > with their choices of who to collaborate with. See [Weber 2018](https://doi.org/10.1093%2Freseval%2Frvy008) for more.
+> > with their choices of who to collaborate with. See {% cite Weber_2018 %} for more.
 > {: .quote}
 {: .tip}
 
-> ### {% icon tip %} Tip: Name collation
+> <tip-title>Name collation</tip-title>
 > When you are sorting things in SQL, you need to be aware of something called collation which can
 > affect your results if you have values that are not the letters A-Z. Collating is the process of
 > sorting values, and this affects many human languages when storing data in a database.
@@ -605,7 +607,7 @@ we can ask for all information from the DR-1 site collected before 1930:
 SELECT * FROM Visited WHERE site = 'DR-1' AND dated < '1930-01-01';
 ```
 
-> ### {% icon tip %} Date Types
+> <tip-title>Date Types</tip-title>
 >
 > Most database managers have a special data type for dates.
 > In fact, many have two:
@@ -627,7 +629,7 @@ SELECT * FROM Visited WHERE site = 'DR-1' AND dated < '1930-01-01';
 > [historical dates in Sweden](https://en.wikipedia.org/wiki/Swedish_calendar).
 {: .tip}
 
-> ### {% icon tip %} '30: 1930 or 2030?
+> <tip-title>'30: 1930 or 2030?</tip-title>
 > Storing the year as the last two digits causes problems in databases, and is part of what caused
 > [Y2K](https://en.wikipedia.org/wiki/Year_2000_problem). Be sure to use the databases' built in
 > format for storing dates, if it is available as that will generally avoid any major issues.
@@ -673,7 +675,7 @@ know something just about the site names beginning with "DR" we can
 use the `LIKE` keyword.  The percent symbol acts as a
 wildcard, matching any characters in that
 place.  It can be used at the beginning, middle, or end of the string
-Click [Here](https://www.w3schools.com/sql/sql_wildcards.asp) for more information about wildcards:
+[See this page on wildcards](https://www.w3schools.com/sql/sql_wildcards.asp) for more information:
 
 ```sql
 SELECT * FROM Visited WHERE site LIKE 'DR%';
@@ -692,7 +694,7 @@ But remember:
 `DISTINCT` is applied to the values displayed in the chosen columns,
 not to the entire rows as they are being processed.
 
-> ### {% icon tip %} Growing Queries
+> <tip-title>Growing Queries</tip-title>
 >
 > What we have just done is how most people "grow" their {SQL} queries.
 > We started with something simple that did part of what we wanted,
@@ -714,7 +716,7 @@ not to the entire rows as they are being processed.
 > and use that.
 {: .tip}
 
-> ### {% icon question %} Question: Fix This Query
+> <question-title>Fix This Query</question-title>
 >
 > Suppose we want to select all sites that lie within 48 degrees of the equator.
 > Our first query is:
@@ -726,7 +728,7 @@ not to the entire rows as they are being processed.
 > Explain why this is wrong,
 > and rewrite the query so that it is correct.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Because we used `OR`, a site on the South Pole for example will still meet
 > > the second criteria and thus be included. Instead, we want to restrict this
@@ -742,13 +744,13 @@ not to the entire rows as they are being processed.
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Finding Outliers
+> <question-title>Finding Outliers</question-title>
 >
 > Normalized salinity readings are supposed to be between 0.0 and 1.0.
 > Write a query that selects all records from `Survey`
 > with salinity values outside this range.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ~~~
 > > SELECT * FROM Survey WHERE quant = 'sal' AND ((reading > 1.0) OR (reading < 0.0));
@@ -765,7 +767,7 @@ not to the entire rows as they are being processed.
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question:  Matching Patterns
+> <question-title> Matching Patterns</question-title>
 >
 > Which of these expressions are true?
 >
@@ -775,7 +777,7 @@ not to the entire rows as they are being processed.
 > 4. `'alpha' LIKE 'a%%'`
 > 5. `'alpha' LIKE 'a%p%'`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. True because these are the same character.
 > > 2. True because the wildcard can match _zero_ or more characters.
@@ -789,7 +791,7 @@ not to the entire rows as they are being processed.
 -- Try solutions here!
 ```
 
-> ### {% icon tip %} Case-insensitive matching
+> <tip-title>Case-insensitive matching</tip-title>
 > But what about if you don't care about if it's `ALPHA` or `alpha` in the database, and you are
 > using a language that has a notion of case (unlike e.g. Chinese, Japenese)?
 >
@@ -850,7 +852,7 @@ SELECT personal || ' ' || family FROM Person;
 But of course that can also be solved by simply having a single name field which avoids other
 issues.
 
-> ### {% icon question %} Question:  Fixing Salinity Readings
+> <question-title> Fixing Salinity Readings</question-title>
 >
 > After further reading,
 > we realize that Valentina Roerich
@@ -859,7 +861,7 @@ issues.
 > from the `Survey` table
 > with the values divided by 100.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ~~~
 > > SELECT taken, reading / 100 FROM Survey WHERE person = 'roe' AND quant = 'sal';
@@ -876,7 +878,7 @@ issues.
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Unions
+> <question-title>Unions</question-title>
 >
 > The `UNION` operator combines the results of two queries:
 >
@@ -915,7 +917,7 @@ issues.
 > |837  |0.21   |
 > |837  |0.225  |
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ~~~
 > > SELECT taken, reading FROM Survey WHERE person != 'roe' AND quant = 'sal' UNION SELECT taken, reading / 100 FROM Survey WHERE person = 'roe' AND quant = 'sal' ORDER BY taken ASC;
@@ -927,7 +929,7 @@ issues.
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Selecting Major Site Identifiers
+> <question-title>Selecting Major Site Identifiers</question-title>
 >
 > The site identifiers in the `Visited` table have two parts
 > separated by a '-':
@@ -952,7 +954,7 @@ issues.
 > (For this data,
 > the list should contain only "DR" and "MSK").
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > SELECT DISTINCT substr(site, 1, instr(site, '-') - 1) AS MajorSite FROM Visited;
 > > ```
@@ -1082,13 +1084,13 @@ for example, unknown values are thus not affecting our data when we
 are averaging it. Aggregation functions will be addressed in more
 detail in [the next section](#).
 
-> ### {% icon question %} Question: Sorting by Known Date
+> <question-title>Sorting by Known Date</question-title>
 >
 > Write a query that sorts the records in `Visited` by date,
 > omitting entries for which the date is not known
 > (i.e., is null).
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ~~~
 > > SELECT * FROM Visited WHERE dated IS NOT NULL ORDER BY dated ASC;
@@ -1110,7 +1112,7 @@ detail in [the next section](#).
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: NULL in a Set
+> <question-title>NULL in a Set</question-title>
 >
 > What do you expect the following query to produce?
 >
@@ -1119,7 +1121,7 @@ detail in [the next section](#).
 > ~~~
 >
 > What does it actually produce?
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > You might expect the above query to return rows where dated is either '1927-02-08' or NULL.
 > > Instead it only returns rows where dated is '1927-02-08', the same as you would get from this
@@ -1144,7 +1146,7 @@ detail in [the next section](#).
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Pros and Cons of Sentinels
+> <question-title>Pros and Cons of Sentinels</question-title>
 >
 > Some database designers prefer to use
 > a sentinel value

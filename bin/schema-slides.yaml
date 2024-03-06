@@ -5,9 +5,10 @@ mapping:
         type: str
         required: true
         enum:
-            - base_slides
+            #- base_slides
             - tutorial_slides
-            - rdmbites_slides
+            - introduction_slides
+            - tutorial_slides_ai4life
         description: |
             The layout to use. Generally you should use `tutorial_slides` and no other value.
     title:
@@ -62,12 +63,14 @@ mapping:
             - Balanced batches and replicates allow bioinformatic batch correction
             - Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.
     edam_ontology:
-        type: str
-        pattern: /^topic_[0-9]+$/
-        description: |
-            An edam ontology id that describes the tutorial.
-        examples:
-            - topic_3173
+        type: seq
+        sequence:
+          - type: str
+            pattern: /^topic_[0-9]+$/
+            description: |
+                An edam ontology id that describes the resource
+            examples:
+                - topic_3173
     video:
         type: bool
         description: |
@@ -80,6 +83,8 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
+              - FUNDERS
+              - ORGANISATIONS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
         examples:
@@ -102,8 +107,10 @@ mapping:
                     - bebatut
                 infrastructure:
                     - natefoo
+                translation:
+                    - shiltemann
                 funding:
-                    - erasmusplus
+                    - gallantries
         type: map
         mapping:
             authorship:
@@ -113,6 +120,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             editing:
                 type: seq
                 description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
@@ -120,6 +128,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             testing:
                 type: seq
                 description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
@@ -127,6 +136,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             ux:
                 type: seq
                 description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
@@ -134,6 +144,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             infrastructure:
                 type: seq
                 description: These entities managed and provided infrastructure to the GTN or for training purposes
@@ -141,13 +152,24 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
                   enum:
+                  - ORGANISATIONS
+                  - FUNDERS
+            translation:
+                type: seq
+                description: These entities did translation and localisation work on this resource
+                sequence:
+                - type: str
+                  enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
     hands_on:
         type: str
         enum:
@@ -173,12 +195,18 @@ mapping:
             - "https://zenodo.org/record/3706539"
     logo:
         type: str
+        enum:
+          - GTN
+          - assets/images/gat.png
+          - assets/images/gga.png
+          - assets/images/ncbi.png
+          - /assets/images/elixir-uk.png
+          - /assets/images/BioNT_Logo.png
+          - topics/ai4life/images/AI4Life-logo_giraffe-nodes.png
+          - assets/images/genomics_intro.png
         required: true
         description: |
             A logo identifier (e.g. GTN) should be used by default, but may be swapped out for special logos from the assets folder.
-        examples:
-            - GTN
-            - assets/images/gat.png
     class:
         type: str
         description: A default CSS class applied to slides
@@ -345,7 +373,24 @@ mapping:
                       type: str
                       description: |
                         URL of the external resource
-    enable:
+    copyright:
+        type: str
+        description: |
+          A copyright attribution string, as required by some licenses.
+        examples:
+            - © Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors
+    license:
+        type: str
+        description: |
+            An [SPDX](https://spdx.org/) identifier for the alternative license that is used for that particular material. This is **only** relevant for materials which have been imported from an external source and were originally licensed under another license. For new materials we strongly encourage contributors to not use this key as materials are CC-BY, by default.
+    draft:
         type: bool
         description: |
-            `false` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+            `true` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+    og_image:
+        type: str
+        description: |
+            A custom image to show on the link preview in external applications (e.g. when the URL is pasted into Twitter)
+        pattern: /^\/.*/
+        examples:
+            - /assets/images/gat.png

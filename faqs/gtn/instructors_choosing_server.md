@@ -14,7 +14,7 @@ Each tutorial is annotated with the information on which [public Galaxy servers]
 If your organization/consortia/community has its own Galaxy server, then you may want to run tutorials on that. This can be ideal because then the instance you are teaching on is the same as your participants will be using after the training. They'll also be able to revisit any analysis they did during the training. If you pursue this option you'll need to work with your organization's Galaxy Admins to confirm that
 
 - the server can support a room full of people all doing the same analysis at the same time.
-- all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %}).
+- all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({% link topics/teaching/tutorials/setup-galaxy-for-training/tutorial.md %}).
 - all participants will be able to create/use accounts on the system.
 
 Some training topics have a Docker image that can be installed and run on all participants' laptops.  These images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant.

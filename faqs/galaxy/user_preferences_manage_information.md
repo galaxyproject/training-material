@@ -1,6 +1,6 @@
 ---
-title: Changing user preferences
-area: user preferences
+title: Changing acount email or password
+area: account
 box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]

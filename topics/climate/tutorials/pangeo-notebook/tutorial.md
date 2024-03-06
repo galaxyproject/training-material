@@ -57,7 +57,6 @@ key_points:
 tags:
   - pangeo
   - interactive-tools
-  - jupyter-notebook
 contributors:
 - annefou
 notebook:
@@ -66,15 +65,12 @@ notebook:
 ---
 
 
-# Introduction
-{:.no_toc}
-
 In this tutorial, we will learn about [Xarray](https://xarray.pydata.org/), one of the most used Python library from the [Pangeo](https://pangeo.io/) ecosystem.
 
 We will be using data from [Copernicus Atmosphere Monitoring Service](https://ads.atmosphere.copernicus.eu/)
 and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter)) 4 days forecast from December, 22 2021. Parallel data analysis with Pangeo is not covered in this tutorial.
 
-> ### {% icon comment %} Remark
+> <comment-title>Remark</comment-title>
 >
 > This tutorial uses data on a regular latitude-longitude grid. More complex and irregular grids are not discussed in this tutorial. In addition,
 > this tutorial is not meant to cover all the different possibilities offered by Xarrays but shows functionalities we find useful for day to day
@@ -82,7 +78,7 @@ and more precisely PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/w
 >
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -129,7 +125,7 @@ print(dset)
 
 Below is what you should get if everything goes fine.
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > ```
 >  <xarray.Dataset>
 >  Dimensions:     (longitude: 700, latitude: 400, level: 1, time: 97)
@@ -151,7 +147,7 @@ Below is what you should get if everything goes fine.
 > ```
 {: .code-out}
 
-> ### {% icon tip %} Command not found
+> <tip-title>Command not found</tip-title>
 > If you get an error with the previous command, first check the location of the input file `CAMS-PM2_5-20211222.netcdf`:
 > it needs to be in the same directory as your Jupyter Notebook.
 {: .tip }
@@ -168,22 +164,22 @@ We can also get metadata information for each coordinate and data variables usin
 print(dset.time)
 ```
 
-> ### {% icon question %} Questions CAM PM2.5 Dataset
+> <question-title>CAM PM2.5 Dataset</question-title>
 >
 > What is the name of the variable for Particle matter < 2.5 μm and its physical units?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. To get metadata information from `pm2p5_conc` Data variable, we use its variable name and print it. Printing it will only print metadata, not the values.
 > >      - Variable name: `mass_concentration_of_pm2p5_ambient_aerosol_in_air`
 > >      - Units: `µg/m3`
 > >
-> > > ### {% icon code-in %} Input: Python
+> > > <code-in-title>Python</code-in-title>
 > > > ```python
 > > > print(dset.pm2p5_conc)
 > > > ```
 > > {: .code-in}
 > >
-> > > ### {% icon code-out %} Output
+> > > <code-out-title></code-out-title>
 > > > ```bash
 > > >    <xarray.DataArray 'pm2p5_conc' (time: 97, level: 1, latitude: 400, longitude: 700)>
 > > >    [27160000 values with dtype=float32]
@@ -202,7 +198,7 @@ print(dset.time)
 > {: .solution }
 {: .question }
 
-> ### {% icon comment %} Different ways to access Data variables
+> <comment-title>Different ways to access Data variables</comment-title>
 >
 > To access a variable or coordinate, we can use "." or specify its name as a string between squared brackets "[" "]". For example:
 >
@@ -242,20 +238,20 @@ print(dset.sel(time=np.timedelta64(0)))
 
 The output will be very similar to what we did previously when selecting from coordinates by index.
 
-> ### {% icon question %} Select a single time for PM2.5
+> <question-title>Select a single time for PM2.5</question-title>
 >
 > How to select the forecast for December, 24th 2021 at 12:00 UTC?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Data starts on December, 22nd 2021 at 00:00 UTC so we need to add 2 days and 12 hours to select the correct time index.
 > >
-> > > ### {% icon code-in %} Input: Python
+> > > <code-in-title>Python</code-in-title>
 > > > ```python
 > > > print(dset.sel(time=(np.timedelta64(2,'D')+ np.timedelta64(12,'h'))))
 > > > ```
 > > {: .code-in}
 > >
-> > > ### {% icon code-out %} Output
+> > > <code-out-title></code-out-title>
 > > > ```bash
 > > > <xarray.Dataset>
 > > > Dimensions:     (longitude: 700, latitude: 400, level: 1)
@@ -316,7 +312,7 @@ We will get a figure like the one below:
 ![CAMS PM2.5 December, 24th 2021 at 12:00 UTC](../../images/PM2_5_default.png)
 
 
-> ### {% icon comment %} What about `level`
+> <comment-title>What about `level`</comment-title>
 > Note that in the previous plot, we did not need to select `level` because there is one value only. However, if we had more than one level, we would need to add a selection on the level before plotting
 >
 {: .comment}
@@ -349,7 +345,6 @@ dset.sel(time=(np.timedelta64(2,'D') + np.timedelta64(12,'h')))['pm2p5_conc'].pl
 plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC", fontsize=18)
 plt.savefig("CAMS-PM2_5-fc-20211224.png")
 ```
->    {: .code-in}
 
 And you should get the following plot:
 
@@ -407,17 +402,17 @@ In the second part of our plot, we are going to customize each subplot (this is 
 ![Customized multi-plot](../../images/CAMS-PM2_5-fc-multi.png)
 
 
-> ### {% icon question %} PM2.5 over Italy
+> <question-title>PM2.5 over Italy</question-title>
 >
 > Using a Multi-plot between Rome and Naples, can you tell us if the forecasted PM2.5 will increase or decrease during the first 24 hours?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N. PM2.5 will increase and reach values close to 35 μm.m-3.
 > > We will use `slice` to select the area and we slice latitudes with `latitude=slice(47.3, 36.5)` and not `latitude=slice(36.5, 47.3)`.
 > > The reason is that when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in
 > > decreasing order for CAMS.
 > >
-> > > ### {% icon code-in %} Input: Python
+> > > <code-in-title>Python</code-in-title>
 > > > ```python
 > > > fig = plt.figure(1, figsize=[10,10])
 > > >
@@ -460,7 +455,7 @@ Sometimes we may want to make more complex selections with criteria on the value
 print(dset.where(dset['pm2p5_conc'] > 25))
 ```
 
-> ### {% icon comment %} What happened?
+> <comment-title>What happened?</comment-title>
 > Each element of the dataset where the criteria within the `where` statement is not met, e.g. when PM2.5 <= 25, will be set to `nan`.
 > You may not see any changes when printing the dataset but if you look carefuly at `pm2p5_conc` values, you will see many `nan`.
 >
@@ -535,7 +530,7 @@ When we do not specify any parameters, we get a single value.
 print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 ```
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > ```bash
 > <xarray.Dataset>
 > Dimensions:     ()
@@ -545,20 +540,20 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 {: .code-out}
 
 
-> ### {% icon question %} Maximum PM2.5 over Italy
+> <question-title>Maximum PM2.5 over Italy</question-title>
 >
 > What is the maximum forecasted PM2.5 value over the Rome-Naples region?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >  We  select the same sub-area: 11. East to 15.0 East and 40. N to 43. N and compute the maximum with `max`. The maximum PM2.5 value is **59.13694382** μm.m-3 (that is rounded to **59.14**).
 > >
-> > > ### {% icon code-in %} Input: Python
+> > > <code-in-title>Python</code-in-title>
 > > > ```python
 > > > dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).max()
 > > > ```
 > > {: .code-in}
 > >
-> > > ### {% icon code-out %} Output
+> > > <code-out-title></code-out-title>
 > > > ```bash
 > > > xarray.Dataset
 > > > Dimensions:
@@ -575,14 +570,14 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 > {: .solution }
 {: .question }
 
-> ### {% icon question %} Find when the maximum PM2.5 is forecasted
+> <question-title>Find when the maximum PM2.5 is forecasted</question-title>
 >
 > When is the maximum PM2.5 value forecasted?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N and average over the entire selected area and search where the maximum PM2.5 value of 59.13694382 μm.m-3 is found. The maximum PM2.5 value occurs on 2021-12-22 at 20:00 UTC.
 > >
-> > > ### {% icon code-in %} Input: Python
+> > > <code-in-title>Python</code-in-title>
 > > > ```python
 > > > dset_tmean = dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).max(dim=('latitude', 'longitude'))
 > > > dset_tmean_max = dset_tmean.where(dset_tmean['pm2p5_conc'] == 59.13694382, drop=True)
@@ -590,7 +585,7 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 > > > ```
 > > {: .code-in}
 > >
-> > > ### {% icon code-out %} Output
+> > > <code-out-title></code-out-title>
 > > > ```bash
 > > > <xarray.Dataset>
 > > > Dimensions:     (time: 1, level: 1)
@@ -604,7 +599,7 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 > {: .solution }
 {: .question }
 
-> ### {% icon comment %} Pixel size when averaging
+> <comment-title>Pixel size when averaging</comment-title>
 > We average over a relatively small area so we do not make a weighted average. Use weighted averages when averaging over the entire globe or over a large area where the pixel sizes may vary (depending on the latitude).
 >
 {: .comment}
@@ -620,7 +615,7 @@ print(dset.sel(latitude=slice(43., 40.), longitude=slice(11.,15.)).mean())
 print(dset.resample(time='1D').mean())
 ```
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > ```bash
 > <xarray.Dataset>
 > Dimensions:     (time: 5, longitude: 700, latitude: 400, level: 1)
@@ -643,10 +638,10 @@ When the resampling frequency is higher than the original data, we need to indic
 print(dset.resample(time='30min').interpolate('linear'))
 ```
 
-> ### {% icon comment %} Be careful when sub-sampling!
+> <comment-title>Be careful when sub-sampling!</comment-title>
 > Increasing the frequency of your data e.g. artificially creating data may not be scientifically relevant. Please use it carefully! Interpolating is not always scientifically relevant and sometimes you may prefer to choose a different method, like taking the nearest value for instance:
 >
->    > ### {% icon code-in %} Input: Python
+>    > <code-in-title>Python</code-in-title>
 >    >  ```python
 >    >  dset.resample(time='30min').nearest()
 >    >  ```
@@ -656,14 +651,14 @@ print(dset.resample(time='30min').interpolate('linear'))
 
 
 
-> ### {% icon question %} PM2.5 over Italy in the next 4 days
+> <question-title>PM2.5 over Italy in the next 4 days</question-title>
 >
 > Using a Multi-plot between Rome and Naples, and making averages per day, can you tell us if forecasted PM2.5 will increase or decrease?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > PM2.5 over Italy is overall decreasing over the next 4 forecasted days.
 > >
-> > > ### {% icon code-in %} Input: Python
+> > > <code-in-title>Python</code-in-title>
 > > > ```python
 > > > fig = plt.figure(1, figsize=[10,10])
 > > >
@@ -690,14 +685,14 @@ print(dset.resample(time='30min').interpolate('linear'))
 > > > ```
 > > {: .code-in}
 > >
-> > >  ![Daily mean for PM2.5 over Italy](../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png)
+> > ![Daily mean for PM2.5 over Italy](../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png)
 > {: .solution }
 {: .question }
 
 
 
 
-> ### {% icon comment %} `Grouby` versus `resample`
+> <comment-title>`Grouby` versus `resample`</comment-title>
 >
 > Use `groupby` instead of `resample` when you wish to group over a dimension that is not `time`. `groupby` is very similar to resample but can be applied to any coordinates and not only to time.
 >
@@ -705,7 +700,7 @@ print(dset.resample(time='30min').interpolate('linear'))
 
 
 # Conclusion
-{:.no_toc}
+
 
 Well done! [Pangeo](https://pangeo.io/) is a fantastic community with many more resources for learning and/or contributing! Please, if you use any Python packages from the Pangeo ecosystem, do not forget to cite Pangeo {% cite Abernathey2017 %}, {% cite Abernathey2021 %}, {% cite Gentemann2021 %} and {% cite Sambasivan2021 %}!
 

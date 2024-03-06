@@ -1,9 +1,9 @@
 ---
 layout: page
+redirect_from:
+- faq
+title: Frequently Asked Questions
 ---
-
-
-# Frequently Asked Questions
 
 Thanks for using the GTN! If you have any questions regarding the GTN, Galaxy, or any of the topics covered by the tutorials, you can check one of the FAQ pages below to see if your question is among them.
 
@@ -25,7 +25,7 @@ Common questions about the Galaxy platform, or about the GTN itself, can be foun
 
 Each topic in the GTN also has a dedicated FAQ page:
 
-{% assign sorted_topics = site | list_topics: "all" %}
+{% assign sorted_topics = site | list_topics_by_category: "non-tag" %}
 
 ### Galaxy for Scientists
 

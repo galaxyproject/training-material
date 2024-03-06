@@ -2,9 +2,13 @@
 layout: tutorial_hands_on
 
 title: "Microbial Variant Calling"
+subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 tags:
   - prokaryote
+  - microgalaxy
+  - gmod
+  - jbrowse1
 questions:
   - "How do we detect differences between a set of reads from a microorganism and a reference genome"
 objectives:
@@ -23,22 +27,20 @@ contributors:
   - tseemann
 ---
 
-# Introduction
-{:.no_toc}
 
 Variant calling is the process of identifying differences between two genome samples. Usually differences are limited to single nucleotide polymorphisms (SNPs) and small insertions and deletions (indels). Larger structural variation such as inversions, duplications and large deletions are not typically covered by “variant calling”.
 
 Imagine that you have been asked to find the differences between a sample that has been sequenced and a known genome. For example: You have a new sample from a patient and you want to see if it has any differences from a well known reference genome of the same species. Typically, you would have a couple of fastq read files sent back to you from the sequencing provider and either an annotated or non annotated reference genome.
 
-In this tutorial, we will use the tool “Snippy” (link to Snippy is [here](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.
+In this tutorial, we will use the tool “Snippy” (see [author development repository](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.
 
 For the read alignment (read mapping) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning reads for microbial type data. For the variant calling step, Snippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.
 
 The Galaxy wrapper for Snippy has the ability to change some of the underlying tool settings in the advanced section but it is not recommended.
 
-More can be read about SNP calling [here](https://en.wikipedia.org/wiki/SNV_calling_from_NGS_data)
+Read more about SNP calling [at Wikipedia](https://en.wikipedia.org/wiki/SNV_calling_from_NGS_data).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -64,9 +66,9 @@ The files we will be using are:
 - `wildtype.gbk` - The reference strain with gene and other annotations in genbank format.
 - `wildtype.gff` - The reference strain with gene and other annotations in gff3 format.
 
-This data is available at Zenodo using the following [link](https://doi.org/10.5281/zenodo.582600).
+[This data is available at Zenodo](https://doi.org/10.5281/zenodo.582600).
 
-> ### {% icon hands_on %} Hands-on: Get the data
+> <hands-on-title>Get the data</hands-on-title>
 >
 > 1. Import all of the following files into a new history:
 >     - [mutant_R1.fastq](https://zenodo.org/record/582600/files/mutant_R1.fastq)
@@ -75,13 +77,13 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 >     - [wildtype.gbk](https://zenodo.org/record/582600/files/wildtype.gbk)
 >     - [wildtype.gff](https://zenodo.org/record/582600/files/wildtype.gff)
 >
->     ```
->     https://zenodo.org/record/582600/files/mutant_R1.fastq
->     https://zenodo.org/record/582600/files/mutant_R2.fastq
->     https://zenodo.org/record/582600/files/wildtype.fna
->     https://zenodo.org/record/582600/files/wildtype.gbk
->     https://zenodo.org/record/582600/files/wildtype.gff
->     ```
+>    ```
+>    https://zenodo.org/record/582600/files/mutant_R1.fastq
+>    https://zenodo.org/record/582600/files/mutant_R2.fastq
+>    https://zenodo.org/record/582600/files/wildtype.fna
+>    https://zenodo.org/record/582600/files/wildtype.gbk
+>    https://zenodo.org/record/582600/files/wildtype.gff
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -97,7 +99,7 @@ If we give Snippy an annotated reference, it will silently run a tool called Snp
 
 We have an annotated reference and so will use it in this case.
 
-> ### {% icon hands_on %} Hands-on: Run Snippy
+> <hands-on-title>Run Snippy</hands-on-title>
 >
 > 1. **Snippy** {% icon tool %} with the following parameters
 >   - "Reference File" to the `wildtype.gbk` file (if the genbank file is not selectable, make sure to change its datatype to 'genbank')
@@ -149,14 +151,14 @@ Wildtype    160552  del CTA CA  CA:20 CTA:0
 Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_variant c.28delA p.Asn10fs   WILD_00166  brnQ    Branched-chain amino acid transport system 2 carrier protein
 ```
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Which types of variants have been found?
 > 2. What is the third variant called?
 > 3. What is the product of the mutation?
 > 4. What might be the result of such a mutation?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >  1. In the 3rd column, you have "snp" for SNP, "del" for deletion, "mnp" for
 > >  2. This is a T→A mutation, causing a stop codon
 > >  3. On the 14th column, we see that The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.
@@ -168,7 +170,7 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
 
 We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.
 
-> ### {% icon hands_on %} Hands-on: Run JBrowse
+> <hands-on-title>Run JBrowse</hands-on-title>
 >
 > 1. **JBrowse** {% icon tool %} with the following parameters
 >    - "Reference genome to display" to `Use a genome from history`
@@ -210,7 +212,7 @@ We could go through all of the variants like this and read them out of a text ta
 
 A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the {% icon galaxy-eye %} (eye) icon of the `JBrowse on data XX and data XX - Complete` dataset. The JBrowse window will appear in the centre Galaxy panel.
 
-> ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
+> <hands-on-title>Inspecting the SNPs using JBrowse</hands-on-title>
 > 1. Display all the tracks and practice maneuvering around
 >    1. Click on the tick boxes on the left to display the tracks
 >    1. Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)
@@ -226,12 +228,12 @@ A new dataset will be created in your history, containing the JBrowse interactiv
 >
 >    ![JBrowse screenshot](../../images/jbrowse2.png "Inspection of the STOP SNP using JBrowse")
 >
->     > ### {% icon question %} Questions
+>     > <question-title></question-title>
 >     >
 >     > 1. What is the correct codon at this position?
 >     > 2. What is the mutation found here?
 >     >
->     > > ### {% icon solution %} Solution
+>     > > <solution-title></solution-title>
 >     > > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
 >     > > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
 >     > {: .solution}
@@ -240,6 +242,5 @@ A new dataset will be created in your history, containing the JBrowse interactiv
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
 
 By running a tool such as Snippy on your read files and reference genome, we can find where the biologically important changes between genomes of different strains occur and perhaps what they mean to the phenotype.

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
+{% assign topic = site.data[page.topic_name] %}
+{% assign locale = site.data.lang[page.lang] %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{ page.title | default: site.title | strip_html }}</title>
+        {% if jekyll.environment == 'production' %}
+            {% include _includes/analytics.html %}
+        {% endif %}
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+        <link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+        {{ 'load' | bundle_preloads }}
+        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=3" | prepend: site.baseurl }}">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        {{ page | generate_dublin_core: site }}
+
+        {% assign topic = site.data[page.topic_name] %}
+        {% assign og_title = topic.title %}
+        {% if page.title %}
+            {% assign og_title = page.title %}
+        {% endif %}
+        {% assign og_desc = page.description | default:topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 120}}">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 120}}">
+
+        <meta property="og:image" content="{{ site.baseurl }}/topics/ai4life/images/AI4Life-logo_giraffe-nodes.png">
+
+        <script type="application/ld+json">
+            {% include _includes/material.jsonld material=page topic=topic site=site %}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+{% if topic.custom_css %}
+<style>
+{{ topic.custom_css }}
+</style>
+{% endif %}
+
+    {{ 'theme' | load_bundle }}
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+{% if page.type == "introduction" %}
+  {% capture link %}{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
+{% else %}
+  {% capture link %}{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
+{% endif %}
+<a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer" style="display: flex; justify-content: space-around;">
+	<div>
+		<img src="{{ site.baseurl }}/topics/ai4life/images/AI4Life-logo_neg_giraffe-solid.png" alt="AI4Life Logo" style="height: 1.6em">
+	</div>
+	<div>
+		<a href="www.ai4life.eurobioimaging.eu">www.ai4life.eurobioimaging.eu</a>
+	</div>
+	<div>
+		<a href="mailto:ai4life@eurobioimaging.eu">ai4life@eurobioimaging.eu</a>
+	</div>
+	<div>
+		<a href="https://twitter.com/AI4LifeTeam">@AI4LifeTeam</a>
+	</div>
+</div>
+
+---
+
+
+{% if page.logo == "GTN" %}
+<img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" class="cover-logo"/>
+{% else %}
+  {% if page.logo contains "://" %}
+<img src="{% if page.logo %}{{ page.logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="cover-logo" />
+  {% else %}
+<img src="{{ site.baseurl }}/{% if page.logo %}{{ page.logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="cover-logo" />
+  {% endif %}
+{% endif %}
+
+# {{ page.title | default: topic.title }}
+
+
+{% include _includes/contributors-line.html page=page authorsonly=true %}
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  {% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}} &nbsp;
+  {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+{% if page.video %}
+  {% icon video-slides %} <a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{{locale['video-slides'] | default: "Video slides"}}</a> |
+{% endif %}
+
+  {% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 3.3em;">
+    <strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}
+    | {% icon arrow-keys %} {{locale['first-time-using-slides'] | default: "Use arrow keys to move between slides"}}
+
+</div>
+
+???
+{{locale['presenter-notes-explanation'] | default: "Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting."
+}}
+
+{% if topic.requirements or page.requirements %}
+
+---
+
+## {{locale['requirements'] | default: "Requirements"}}
+
+{{ locale['before-diving-in'] | default: "Before diving into this slide deck, we recommend you to have a look at"}}:
+
+{% include _includes/display_extra_training_slides.md extra_trainings=topic.requirements %}
+{% include _includes/display_extra_training_slides.md extra_trainings=page.requirements %}
+
+{% endif %}
+
+---
+
+{{ content | xml_escape }}
+
+---
+
+## {{ locale['thank-you'] | default: "Thank You" }}!
+
+{{ locale['collaborative-effort'] | default: "This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!" }}
+
+{% include _includes/contributors-line.html page=page %}
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+{% if page.logo == "GTN" %}
+<img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
+{% else %}
+  {% if page.logo contains "://" %}
+<img src="{{ page.logo }}" alt="page logo" style="height: 100px;"/>
+  {% else %}
+<img src="{{ site.baseurl }}/{{ page.logo }}" alt="page logo" style="height: 100px;"/>
+  {% endif %}
+{% endif %}
+{% if page.contributions %}
+	{% include _includes/funding-statement-short.md contributions=page.contributions %}
+{% endif %}
+</div>
+
+{{ locale['license-framework'] | default: "Tutorial Content is licensed under" }} {% if page.license %} <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
+{% else %}<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.{% endif %}
+
+{% if page.layout == "base_slides" %}
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
+{% endif %}
+    </textarea>
+	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        {{ 'main' | load_bundle }}
+        {% if page.mathjax %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        {% endif %}
+    </body>
+</html>

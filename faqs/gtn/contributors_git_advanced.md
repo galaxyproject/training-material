@@ -7,7 +7,7 @@ contributors: [shiltemann,hexylena]
 ---
 
 
-Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github_repository }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
+Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github_repository }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following structure:
 
 ![Structure of the repository]({% link shared/images/repo_organization.png %}){: width="400px"}
 
@@ -78,6 +78,6 @@ To learn how to add new content, check out our [series of tutorials on creating 
 {% endfor %}
  </ol>
 
-We also strongly recommend you read and follow [The Carpentries](https://carpentries.org/) recommendations on [lesson design](https://carpentries.github.io/lesson-example/01-design/) and [lesson writing](https://carpentries.github.io/instructor-training/15-lesson-study/) if you plan to add or change some training materials, and also to check the [structure of the training material](#structure).
+We also strongly recommend you read and follow [The Carpentries](https://carpentries.org/) recommendations on [lesson design](https://carpentries.github.io/lesson-example/01-design/) and [lesson writing](https://carpentries.github.io/instructor-training/15-lesson-study/) if you plan to add or change some training materials, and also to check the structure of the training material above.
 
 

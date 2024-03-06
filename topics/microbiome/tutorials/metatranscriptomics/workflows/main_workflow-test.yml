@@ -1,0 +1,16 @@
+---
+- doc: Test the workflow
+  job:
+      T1A_forward:
+      class: File
+      location: https://zenodo.org/record/4776250/files/T1A_forward.fastqsanger
+      filetype: fastqsanger
+      T1A_reverse:
+      class: File
+      location: https://zenodo.org/record/4776250/files/T1A_reverse.fastqsanger
+      filetype: fastqsanger
+  outputs:
+    Combined MetaPhlAn and HUMAnN output:
+        asserts:
+          has_text:
+            text: "Acetivibrio"

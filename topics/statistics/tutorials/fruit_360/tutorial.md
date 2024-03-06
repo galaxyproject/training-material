@@ -20,8 +20,6 @@ contributors:
 
 ---
 
-# Introduction
-{:.no_toc}
 
 The classification of fruits and vegetables offers many useful applications such as 
 automated harvesting by robots, building up stocks for supermarkets, effective detection 
@@ -34,7 +32,7 @@ training data, DL techniques have become very popular in recent years. In this t
 we will use Galaxy's ML toolkit to build a DL model to classify fruit and vegetable 
 images. Our DL model is trained and evaluated on Fruit 360 dataset ({% cite Murean2018 %})  
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -183,7 +181,7 @@ Orange:8, Peach:9.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history.
 >
@@ -191,7 +189,7 @@ Orange:8, Peach:9.
 >
 > 2. **Rename your history** to make it easy to recognize
 >
->    > ### {% icon tip %} Rename a history
+>    > <tip-title>Rename a history</tip-title>
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
@@ -250,7 +248,7 @@ its OHE representation.
 
 ### **Extract the Label column from train_y_10**
 
-> ### {% icon hands_on %} Hands-on: Advanced Cut
+> <hands-on-title>Advanced Cut</hands-on-title>
 >
 > - {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
 >    - *"File to cut"* : Select `train_y_10`
@@ -258,25 +256,25 @@ its OHE representation.
 >    - *"Delimited by"*: Select `Tab`
 >    - *"Cut by"*: Select `fields`
 >    - *"List of fields"*: Select `Column: 3`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
 ### **Create One-Hot Encoding (OHE) representation of training labels**
 
-> ### {% icon hands_on %} Hands-on: One-Hot Encoding
+> <hands-on-title>One-Hot Encoding</hands-on-title>
 >
 > - {% tool [To categorical](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
 >    - *"Input file"* : Select the output of the previous step.
 >    - *"Does the dataset contain header?"* : Select `Yes`
 >    - *"Total number of classes"*: Select `10`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
 ### **Create a deep learning model architecture**
 
-> ### {% icon hands_on %} Hands-on: Model config
+> <hands-on-title>Model config</hands-on-title>
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
@@ -320,7 +318,7 @@ its OHE representation.
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `10`
 >                - *"Activation function"*: `softmax`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 Each image is passed in as a vector of size 30,000 (100 x 100 X 3 = 30,000). The reshape 
@@ -339,7 +337,7 @@ highest probability is predicted by CNN. The model config can be downloaded as a
 
 ### **Create a deep learning model**
 
-> ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
+> <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
 > - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
@@ -352,7 +350,7 @@ highest probability is predicted by CNN. The model config can be downloaded as a
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `40`
 >        - *"batch_size"*: `50`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 A loss function measures how different the predicted output is from the expected output. For multi-class classification problems, 
@@ -364,7 +362,7 @@ the weights/biases. *batch_size* decides the size of this subset. The model buil
 
 ### **Deep learning training and evaluation**
 
-> ### {% icon hands_on %} Hands-on: Training the model
+> <hands-on-title>Training the model</hands-on-title>
 >
 > - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
 >    - *"Select a scheme"*: `Train and Validate`
@@ -374,7 +372,7 @@ the weights/biases. *batch_size* decides the size of this subset. The model buil
 >        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Dataset containing class labels or target values"*: Select the OHE representation of `train_y_10` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 >
 {: .hands_on}
@@ -384,7 +382,7 @@ The training step generates 3 datasets. 1) accuracy of the trained model, 2) the
 
 ### **Model Prediction**
 
-> ### {% icon hands_on %} Hands-on: Testing the model
+> <hands-on-title>Testing the model</hands-on-title>
 >
 > - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
@@ -393,7 +391,7 @@ The training step generates 3 datasets. 1) accuracy of the trained model, 2) the
 >    - *"Select input data type for prediction"*: `tabular data`
 >    - *"Training samples dataset"*: Select `test_X_10` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -402,7 +400,7 @@ in the test dataset.
 
 ### **Machine Learning Visualization Extension**
 
-> ### {% icon hands_on %} Hands-on: Creating the confusion matrix
+> <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
 > - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
@@ -412,7 +410,7 @@ in the test dataset.
 >    	- *"Type header name(s):"*: `Label`
 >    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
 >    - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -458,7 +456,7 @@ $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \
 You can calculate the Precision, Recall, and F score for other digits in a similar manner.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we briefly described convolutional neural networks (CNN) and their application to image classification problems.
 We then used Galaxy's ML toolkit to solve an image classification problem using CNN on fruit 360 dataset.

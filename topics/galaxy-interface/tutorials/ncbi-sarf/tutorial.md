@@ -28,8 +28,6 @@ requirements:
       - upload-rules
 ---
 
-# Background
-
 Traditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the workflow. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to Galaxy users from SRA in the Cloud.
 
 SRA Aligned Read Format (SARF) provides further output options beyond basic fastq format, for example:
@@ -44,7 +42,7 @@ SRA Aligned Read Format (SARF) provides further output options beyond basic fast
 - This workshop describes the SARF data objects along with associated searchable metadata, and demonstrates a few ways to enter them into traditional workflows.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -74,7 +72,7 @@ All data submitted to SRA is scanned with our SARS-CoV-2 Detection Tool which us
 The SRA aligned reads, the VCF files, the results of these analyses (such as BLAST and VIGOR3 annotation), and the associated BioSample and sequencing library metadata are available for free access from cloud providers.
 
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > These data can be dumped in `sam` format using the `sam-dump` tool in the SRA Toolkit, but this function doesn't work within Galaxy yet.
 > We hope to include that functionality in a future update.
@@ -90,7 +88,7 @@ The SRA aligned reads, the VCF files, the results of these analyses (such as BLA
 
 Metadata for SARS-CoV-2 submissions to the SRA includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotation information.  These metadata are updated daily and made available to query in the cloud using [Google's BigQuery](https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/) or [Amazon's Athena](https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/) services. However, the raw underlying information is also provided as a group of json files that can be **downloaded for free from the Open Data Platform** without logging in to the cloud. These json files can be imported to Galaxy and queried there to find **Runs of interest**.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Some of these tables include complex data fields (array of values) that don't have a clean analogue in a classic SQL database or table and these can't be easily queried in Galaxy currently. If you require access to [cloud tables](https://www.ncbi.nlm.nih.gov/sra/docs/aligned-metadata-tables/) or fields not available in Galaxy we recommend accessing those natively in [BigQuery](https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/) or [Athena](https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/).
 >
@@ -100,18 +98,19 @@ Metadata for SARS-CoV-2 submissions to the SRA includes submitted sample and lib
 We will import the JSON files into Galaxy to query them directory, however the files are split up for efficient querying in the cloud and updated daily, so we first need to get the most up-to-date list of files so we can import those to Galaxy. We'll just be using a couple of tables in this training, but the other tables can be imported in the same way, using the index files below.
 
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > These metadata files are updated daily around 5:30pm EST. If you try to access the data around this time but encounter an error, trying again a short while later should resolve the issue. [Time Zone Converter](https://www.thetimezoneconverter.com)
 >
 {: .comment}
 
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 
-> ### {% icon hands_on %} Loading SRA Aligned Read Format (SARF) Object Metadata URLs into Galaxy
+> <hands-on-title>Loading SRA Aligned Read Format (SARF) Object Metadata URLs into Galaxy</hands-on-title>
 >
 >This step needs to be repeated at the beginning of an analysis to refresh the metadata to the latest daily version.
 >
-> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other.
+> 1. Go to your Galaxy instance of choice such as one of the {% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %} or any other.
 >
 > 2. Create a new history
 >
@@ -173,7 +172,7 @@ With that you should have 7 different files in your history. If you examine the 
 2021-05-27.000000000007.json.gz
 ```
 
-> ### {% icon hands_on %} Loading SRA Aligned Read Format (SARF) Contig Metadata into Galaxy
+> <hands-on-title>Loading SRA Aligned Read Format (SARF) Contig Metadata into Galaxy</hands-on-title>
 >
 > Next we will convert this list of filenames to the HTTP URLs for easy import into Galaxy.
 >
@@ -207,7 +206,7 @@ With that you should have 7 different files in your history. If you examine the 
 > 2. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %} tail to head (cat) files with the following parameters:
 >
 >    - {% icon param-collection %} *"Datasets to Concatenate"*: `contigs.json` collection
->    - Click Execute
+>    - Click Run Tool
 >
 > 3. Rename this history item to `contigs.single.json`
 >
@@ -218,7 +217,7 @@ With that you should have 7 different files in your history. If you examine the 
 >    - {% icon param-file %} *"JSON Input"*: `contigs.single.json`
 >    - *"jq filter"*: `[.[]]`
 >    - *"Convert output to tabular"*: `yes`
->    - Click Execute
+>    - Click Run Tool
 >
 > 5. Rename this file `contigs.tsv`
 >
@@ -226,7 +225,7 @@ With that you should have 7 different files in your history. If you examine the 
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > The conversion of the json files to tabular format takes some time, this is a good time to go make some tea.
 >
@@ -236,13 +235,13 @@ With that you should have 7 different files in your history. If you examine the 
 
 Now that a table has been generated, we will query the table to find the runs of interest.  It is a good idea to save the table for future queries on the same dataset.  Rerunning the import steps above without filtration will provide a different set of metadata each day.
 
-> ### {% icon hands_on %} Query the SRA Metadata Table using SQLite
+> <hands-on-title>Query the SRA Metadata Table using SQLite</hands-on-title>
 >
 > Next we'll query this metadata using the `Query tabular` tool to get a list of all Runs containing contigs of greater than 20,000 nucleotides and average coverage of at least 100X.
 >
 > 1. Run {% tool [Query Tabular using sqlite sql](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >
->    > ### {% icon tip %} Can't find it?
+>    > <tip-title>Can't find it?</tip-title>
 >    > If you're not using the [GTN-in-Galaxy view](https://docs.galaxyproject.org/en/latest/admin/special_topics/gtn.html), you can search for 'sql' to find it.
 >    {: .tip}
 >
@@ -264,7 +263,7 @@ Now that a table has been generated, we will query the table to find the runs of
 >       ```
 >    - *"include query result column headers"*: `no`
 >
->    > ### {% icon tip %} Save SQlite Database for future queries
+>    > <tip-title>Save SQlite Database for future queries</tip-title>
 >    >
 >    > If you plan to do multiple queries on the same SQL database or want to skip preprocessing the metadata for future work, it may be useful to set
 >    >
@@ -272,15 +271,15 @@ Now that a table has been generated, we will query the table to find the runs of
 >    >
 >    {: .tip}
 >
-> 2. Click **Execute** and rename the output file to `Run_list`
+> 2. Click **Run Tool** and rename the output file to `Run_list`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="Run_list" %}
 >
->    > ### {% icon tip %} Need fastq?
+>    > <tip-title>Need fastq?</tip-title>
 >    > Use `Run_list` to bring in Fastq files with Submitted Quality Scores (+BQS format)
 >    {: .tip}
 >
->    > ### {% icon tip %} Column Headers for the Other Metadata Tables
+>    > <tip-title>Column Headers for the Other Metadata Tables</tip-title>
 >    > We are not going to bring in the other metadata tables in this tutorial. Here is a list of column headers for contigs and the other tables.
 >    > You can find full definitions for these columns here:
 >    >
@@ -322,7 +321,7 @@ Now that a table has been generated, we will query the table to find the runs of
 >
 {: .hands_on}
 
-> ### {% icon tip %} Download Fastq with Quality Scores
+> <tip-title>Download Fastq with Quality Scores</tip-title>
 >
 > If you would like to dump the raw, underlying data in fastq format with the original quality scores, you can stop here and use the {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0) %} tool with the following parameters:
 >
@@ -331,7 +330,7 @@ Now that a table has been generated, we will query the table to find the runs of
 >
 {: .tip}
 
-> ### {% icon tip %} Importing a list of SRR from Athena or BigQuery
+> <tip-title>Importing a list of SRR from Athena or BigQuery</tip-title>
 >
 > If you opted to conduct your metadata search in the cloud using AWS Athena or GCP BigQuery instead of importing the json file to Galaxy, you can save a list of your Run accessions from that search result and import that file as the `Run_list` to proceed with the rest of this tutorial.
 {: .tip}
@@ -340,7 +339,7 @@ Now that a table has been generated, we will query the table to find the runs of
 
 Now that we have assembled a list of Runs that have contigs we are interested in, we'll construct the path to the **SARFS** in the cloud and import those to Galaxy so we can work with them.
 
-> ### {% icon hands_on %} Importing SARFs of Interest
+> <hands-on-title>Importing SARFs of Interest</hands-on-title>
 >
 > 1. Upload Data
 >
@@ -367,7 +366,7 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >
 >    4. Name the output collection `sarf_path` before clicking **Upload**
 >
->       > ### {% icon comment %} Comment
+>       > <comment-title></comment-title>
 >       >
 >       > Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it's possible to get a download error for a file that isn't yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.
 >       >
@@ -381,7 +380,7 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >    - {% icon param-collection %}*"sra archive"*: `sarf_path`
 >    - In "Advanced Options":
 >      - *"Table name within cSRA object"*: `REFERENCE`
->    - Click Execute
+>    - Click Run Tool
 >
 >    The resulting dataset includes the contigs generated from these runs with placeholder `?` for quality scores
 >
@@ -390,11 +389,11 @@ Now that we have assembled a list of Runs that have contigs we are interested in
 >    Run {% tool [Fastq to Fasta converter](toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5) %}
 >
 >    - {% icon param-collection %}*"FASTQ file to convert"*: `sarf_contigs` (note: in the video this did not get renamed)
->    - Click Execute
+>    - Click Run Tool
 >
 >    The resulting dataset includes the contigs generated from these Runs in fasta format
 >
->    > ### {% icon tip %} Fastq format option
+>    > <tip-title>Fastq format option</tip-title>
 >    > If you prefer to dump the raw reads in fastq format with placeholder quality scores, leave the `Table name within cSRA object` field blank.
 >    >
 >    {: .tip}
@@ -407,7 +406,7 @@ This example starts with the same `Run_list` generated for importing SARFs.
 A `Run_list` could also be imported after querying metadata in the cloud using  [Google's BigQuery](https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/) or [Amazon's Athena](https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/) services. Metadata about these runs includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotations. See the tutorial video for a short demo on how to search and download `Run_list` from the cloud.
 
 
-> ### {% icon hands_on %} Importing VCFs of Interest
+> <hands-on-title>Importing VCFs of Interest</hands-on-title>
 >
 > 1. Upload Data
 >
@@ -432,7 +431,7 @@ A `Run_list` could also be imported after querying metadata in the cloud using  
 >
 >    4. Name the output collection `VCFs` before clicking **Upload**
 >
->       > ### {% icon comment %} Comment
+>       > <comment-title></comment-title>
 >       >
 >       > Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it's possible to get a download error for a file that isn't yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.
 >       >
@@ -444,7 +443,7 @@ A `Run_list` could also be imported after querying metadata in the cloud using  
 >
 >    - {% icon param-collection %} *"Sequence changes (SNPs, MNPs, InDels)"*: the `VCFs` collection we just created
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Please note that there are 2 Snepff tools, please choose the one for SARS-CoV-2
 >    >

@@ -1,7 +1,8 @@
 ---
 title: "New Tutorials: Genome assembly of a MRSA genome"
 tags: [new tutorial, assembly, mrsa, amr, nanopore, illumina]
-contributors: [bazante1,miaomiaozhou88,hexylena,shiltemann]
+contributions:
+  authorship: [bazante1,miaomiaozhou88,hexylena,shiltemann]
 cover: "topics/assembly/images/mrsa/bandage-illumina.jpg"
 coveralt: "Assembly visualisation from the Bandage tool"
 

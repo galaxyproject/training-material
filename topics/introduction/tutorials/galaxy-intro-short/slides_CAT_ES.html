@@ -108,7 +108,8 @@ voice:
 
 # Encuentra un servidor Galaxy
 
-- ** Los tres grandes **: Galaxy Main ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europe ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+- ** Los tres grandes **: {% for server in servers %}{{ server.human }} ([{{ server.name }}]({{ server.url }})){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 
   .image-75[![usegalaxy.* servidores]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
 
@@ -184,7 +185,7 @@ voice:
      - {% icon galaxy-eye %} ** Ver ** el archivo
      - {% icon galaxy-pencil %} ** Editar atributos **
          - p.ej. cambiar nombre
-     - {% icon galaxy-cross %} ** Eliminar archivo **
+     - {% icon galaxy-delete %} ** Eliminar archivo **
 
 
 - Haga clic para ampliar**
@@ -313,7 +314,7 @@ voice:
 
 - Galaxy tiene muchas opciones para visualizar datos
 
-! [Ejemplos de 6 visualizaciones diferentes en galaxias con un MSA, un par de gráficos, estructura de ARN y visualizaciones en 3D de proteínas]({{site.baseurl}} / topics / dev / images / charts_examples2.png)
+![Ejemplos de 6 visualizaciones diferentes en galaxias con un MSA, un par de gráficos, estructura de ARN y visualizaciones en 3D de proteínas]({{site.baseurl}}/topics/dev/images/charts_examples2.png)
 
 ???
 

@@ -65,12 +65,12 @@ This tutorial demonstrates how to build and deploy a Galaxy Interactive Tool (Gx
 There are three elements to a GxIT - an application script, a Docker container and a Galaxy tool XML file. This tutorial will take you through creating those components, and installing them as a new Interactive Tool into a local Galaxy instance and an existing Galaxy instance.
 
 
-> ### {% icon comment %} If you plan to use an existing Galaxy instance
-> The Galaxy server requires specific configuration in order to run Interactive Tools! Please refer to [this admin tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html) for setting up a compatible Galaxy instance for development and testing of your GxIT.
+> <comment-title>If you plan to use an existing Galaxy instance</comment-title>
+> The Galaxy server requires specific configuration in order to run Interactive Tools! Please refer to [this admin tutorial]({% link topics/admin/tutorials/interactive-tools/tutorial.md %}) for setting up a compatible Galaxy instance for development and testing of your GxIT.
 > As well as updating the Galaxy server configuration, you will also have to configure the server's DNS provider to allow wildcard DNS records. This allows Galaxy to create unique host names (subdomains) for GxITs to be served over, separating them from the main Galaxy application.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -82,7 +82,7 @@ There are three elements to a GxIT - an application script, a Docker container a
 
 ## How do Interactive Tools work?
 
-Interactive tools are a special breed of Galaxy tool which is relatively
+Interactive tools are a special breed of Galaxy tools, which is relatively
 new to the Galaxy ecosystem - they are a work in progress!
 GxITs enable the user to run an entire web application through Galaxy, which
 opens as a new tab in the browser. This can enable users to explore and manipulate
@@ -107,14 +107,14 @@ run. They then get some output file(s) when the tool run is complete. In an
 Interactive Tool, however, the users are provided with a graphical web interface
 allowing them to interact with their data in real time. This is great for
 visualising data, but if it is possible to provide the same
-functionality with a regular tool (e.g. by rendering an HTML file as an output)
+functionality with a regular tool (e.g. by rendering an HTML file as an output),
 then an Interactive Tool might not be necessary.
 
 If you are sure that a static
 output is not sufficient, then it's time to start building your first
 Interactive Tool!
 
-> ### {% icon comment %} Interactive tool infrastructure
+> <comment-title>Interactive tool infrastructure</comment-title>
 > Interactive tools require some rather complex infrastructure in order to work! However, most of the infrastructure requirements are taken care of by Galaxy core. As such, wrapping a new GxIT requires only three components:
 > - Application script(s)
 > - Docker container image
@@ -151,7 +151,7 @@ As such, reducing the iteration time is the key to quick development! Throughout
 the tutorial, we'll sprinkle in some tips on how to speed up the development
 cycle.
 
-> ### {% icon comment %} A note on architecture
+> <comment-title>A note on architecture</comment-title>
 > When building a GxIT, it is best to keep as much logic as possible in the tool XML, while keeping the Docker image as generic as possible. Why? Updating the tool XML is simple for Galaxy admins and developers in the future. They can view the tool XML directly on the server and understand how the tool works. The Docker image, meanwhile, is relatively opaque to other developers and administrators. To understand the container they must locate the original Dockerfile, which is not always available. Updating the container is more complex, as we will see later. Additionally, keeping the Docker container generic makes it testable outside of Galaxy.
 >
 > In short: updating the Docker container is hard, but updating the tool XML is easy!
@@ -162,7 +162,7 @@ cycle.
 
 The application that we will wrap in this tutorial is a simple web tool which
 allows the user to upload `csv` and `tsv` files, manipulate them and download
-them. Our application is based on an R Shiny App hosted with Shiny server.
+them. Our application is based on an R Shiny App hosted with a Shiny server.
 
 Note that there is no link between this Interactive Tool and the Galaxy history.
 More complex applications might be able to read and write outputs to the user's
@@ -170,11 +170,11 @@ history to create a more integrated experience - see the
 [Additional components section](#galaxy-history-interaction)
 to see an example of how this can be done.
 
-Our example can already be found [online](https://github.com/Lain-inrae/geoc-gxit).
-In the following sections, we will study how it was built.
+Our example application can already be found [online](https://github.com/Lain-inrae/geoc-gxit).
+In the following sections, we will study how it can be built into a GxIT.
 
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > First, let's clone the repository to take a quick look at it.
 >
@@ -204,7 +204,7 @@ These are specific to your container; these are required for an R-Shiny containe
 
 ## The Dockerfile
 
-> ### {% icon tip %} A brief primer on Docker
+> <tip-title>A brief primer on Docker</tip-title>
 > Docker allows an entire application context to be containerized. A typical web application consists of an operating system, installed dependancies, web server configuration, database configuration and, of course, the codebase of the software itself. A Docker container can encapsulate all of these components in a single "image", which can be run on any machine with Docker installed.
 >
 > **Essentials of Docker:**
@@ -248,7 +248,7 @@ FROM rocker/shiny
 # set author
 MAINTAINER Lain Pavot <lain.pavot@inra.fr>
 
-## we copy the installer and run it before copying the entier project to prevent
+## we copy the installer and run it before copying the entire project to prevent
 ## reinstalling everything each time the project has changed
 
 COPY ./gxit/install.R /tmp/
@@ -275,29 +275,43 @@ RUN \
 # inside we will find our Shiny app log file:
 #     docker run -p 8888:8888 -e LOG_PATH=/tmp/shiny/gxit.log -v $PWD/log:/tmp/shiny <container_name>
 
-ARG PORT=8888
-ARG LOG_PATH=/tmp/gxit/gxit.log
+ARG PORT=8765
+ARG LOG_PATH=/tmp/gxit.log
 
 ENV LOG_PATH=$LOG_PATH
 ENV PORT=$PORT
 
 # ------------------------------------------------------------------------------
 
+# Edit shiny-server config to use our port
+RUN cat /etc/shiny-server/shiny-server.conf \
+    | sed "s/3838/${PORT}/" > /etc/shiny-server/shiny-server.conf.1
+RUN mv /etc/shiny-server/shiny-server.conf.1 /etc/shiny-server/shiny-server.conf
+
+# ------------------------------------------------------------------------------
+
 RUN mkdir -p $(dirname "${LOG_PATH}")
 EXPOSE $PORT
-COPY ./gxit /gxit
+COPY ./gxit/app.R /srv/shiny-server/
 
-# This is the command that will be run when the Docker container is launched.
-# In this case it will launch the R Shiny app within the container.
-CMD R -e "shiny::runApp('/gxit', host='0.0.0.0', port=${PORT})" 2>&1 > "${LOG_PATH}"
+CMD ["/bin/sh", "-c", "shiny-server > ${LOG_PATH} 2>&1"]
 ```
+
+> <tip-title>Shiny-based interactive tools</tip-title>
+> In a previous version of this tutorial, we ran the Shiny App with `R -e "shiny:runApp()"`
+> rather than using `shiny-server`. The latter is better practice, because it ensures that
+> ports are mapped correctly for websocket functionality. With `shiny::runApp()` you will
+> probably notice a websocket timeout in the app when run as a GxIT - the UI often greys
+> out and becomes unresponsive after 20-30 seconds.
+>
+{: .tip}
 
 This image is already hosted on [Docker Hub](https://hub.docker.com/r/ancelete/first-gxit)
 , but anyone can use this Dockerfile to rebuild the image if necessary.
 If so, don't forget to create a `gxit` folder containing `app.R` and `install.R`
 next to your Dockerfile.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > Let's start working on this Docker container.
 >
@@ -313,7 +327,7 @@ next to your Dockerfile.
 >    docker build -t $IMAGE_TAG --build-arg LOG_PATH=$LOG_PATH --build-arg PORT=$PORT .
 >    ```
 >
->    > ### {% icon tip %} Automating the build
+>    > <tip-title>Automating the build</tip-title>
 >    > While developing the Docker container you may find yourself tweaking and rebuilding the container image many times.
 >    > In the GitHub repository linked above, you'll notice that the author has used a `Makefile` to accelerate the build and deploy process.
 >    > This allows the developer to simply run `make docker` and `make push_hub` to build and push the container, or `make` to rebuild the container after making changes during development. Check out the `Makefile` to see what commands can be run using `make` in this repository.
@@ -333,7 +347,7 @@ If you are lucky, you might find an available Docker image for the application y
 
 Before we go pushing our container to the cloud, we should give it a local test run to ensure that it's working correctly on our development machine. Have a play and see how our little web app works!
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 > ```sh
 > # Run our application in the container
 > docker run -it -p 127.0.0.1:8765:$PORT $IMAGE_TAG
@@ -359,7 +373,7 @@ during development.
 has great documentation on creating repositories, authenticating with tokens
 and pushing images.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 > ```sh
 > # Set remote tag for your container. This should include your username and
 > # repository name for Docker Hub.
@@ -375,7 +389,7 @@ and pushing images.
 > docker push $REMOTE:latest
 > ```
 >
-> > ### {% icon tip %} Production container hosting
+> > <tip-title>Production container hosting</tip-title>
 > > For production deployment, the
 > > [Galaxy standard](https://docs.galaxyproject.org/en/latest/admin/special_topics/mulled_containers.html)
 > > for container image hosting is
@@ -401,7 +415,7 @@ our new Docker container as a Galaxy tool.
 
 ## The tool XML
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > Create a Galaxy tool XML file named `interactivetool_tabulator.xml`. The file is similar to a regular tool XML, but calls on our remote Docker image as a dependency. The tags that we are most concerned with are:
 > - A `<container>` (under the `<requirements>` tag)
@@ -409,7 +423,7 @@ our new Docker container as a Galaxy tool.
 > - An `<input>` file
 > - The `<command>` section
 >
-> > ### {% icon comment %} Writing the tool command
+> > <comment-title>Writing the tool command</comment-title>
 > >
 > > This step can cause a lot of confusion. Here are a few pointer that you will find critical to understanding the process:
 > > - The `<command>` will be templated by Galaxy
@@ -417,7 +431,7 @@ our new Docker container as a Galaxy tool.
 > >
 > {: .comment}
 >
-> > ### {% icon tip %} Writing the GxIT tool XML
+> > <tip-title>Writing the GxIT tool XML</tip-title>
 > >
 > > * Refer to the [Galaxy tool XML docs](https://docs.galaxyproject.org/en/latest/dev/schema.html).
 > > * You can take inspiration from [Askomics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml), and other [existing Interactive Tools](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive).
@@ -426,7 +440,7 @@ our new Docker container as a Galaxy tool.
 > > * When it comes to testing and debugging your tool XML, it can be easier to update the XML file directly on your Galaxy server between tests.
 > {: .tip}
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > {% raw  %}
 > >
@@ -465,8 +479,8 @@ our new Docker container as a Galaxy tool.
 > >         ## onto the Docker container at runtime - enabling access to
 > >         ## '$infile' and '$outfile' from inside the container.
 > >
-> >         R -e "shiny::runApp('/gxit', host='0.0.0.0', port=8765)" 2>&1 > "/var/log/tuto-gxit-01.log"
-> >         ## The log file can be found inside the container, for debbuging purposes
+> >         shiny-server 2>&1 > /var/log/tuto-gxit-01.log
+> >         ## The log file can be found inside the container, for debugging purposes
 > >
 > >     ]]>
 > >     </command>
@@ -496,8 +510,8 @@ our new Docker container as a Galaxy tool.
 > >     <citations>
 > >        <citation type="bibtex">
 > >        @misc{
-> >             author       = {Lain Pavot - lain.pavot@inrae.fr },
-> >             title        = {{first-gxit -  A tool to visualise tsv/csv files }},
+> >             author       = {Lain Pavot - lain.pavot@inrae.fr},
+> >             title        = {first-gxit -  A tool to visualise tsv/csv files},
 > >             publisher    = {INRAE},
 > >             url          = {}
 > >         }
@@ -516,20 +530,20 @@ our new Docker container as a Galaxy tool.
 You would like to check your GxIT integration in Galaxy but don't have a development server or don't want to disturb your sysadmin at this point?
 Let's check this integration on your machine. You can use a VM if you prefer not to modify your machine environment.
 
-> ### {% icon comment %} A note on the OS
+> <comment-title>A note on the OS</comment-title>
 > This part of the tutorial has been tested on Ubuntu and Debian and there is no guaranteed success for other operating systems.
-> If you have another OS on your machine (i.e. Windows or MacOS), you may need to use an Ubuntu virtual machine or perhaps try <a href="https://docs.microsoft.com/en-us/windows/wsl/install" target="_blank">Windows subsystem for Linux</a>).
+> If you have another OS on your machine (i.e. Windows or MacOS), you may need to use an Ubuntu virtual machine or perhaps try [Windows subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install).
 {: .comment}
 
 ## Docker installation
 
-> ### {% icon hands_on %} Hands-on: Install Docker
+> <hands-on-title>Install Docker</hands-on-title>
 > Install Docker as described on the [docker website](https://docs.docker.com/engine/install/). Click on your distribution name to get specific information.
 {: .hands_on}
 
 ## Galaxy installation
 
-> ### {% icon hands_on %} Hands-on: Install Galaxy
+> <hands-on-title>Install Galaxy</hands-on-title>
 >
 > For Ubuntu:
 > ```sh
@@ -540,24 +554,23 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 > # Get the galaxy project. A new directory named "galaxy" will be created.
 > # This directory contains the whole project
 > git clone https://github.com/galaxyproject/galaxy
-> # Checkout the last stable version (v21.09 as the time of writing)
-> cd galaxy && git checkout v21.09
+> # Checkout the last stable version (v23.1 as the time of writing)
+> cd galaxy && git checkout release_23.1
 > ```
 {: .hands_on}
 
 
 ## Galaxy configuration
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > ```sh
 > cd ~/GxIT/galaxy/config
 > # Create custom config files
 > cat galaxy.yml.interactivetools > galaxy.yml
-> cat job_conf.xml.interactivetools > job_conf.xml
 > cat tool_conf.xml.sample > tool_conf.xml
 > ```
-> In `galaxy.yml`, add the `galaxy_infrastructure_url` parameter to the galaxy section:
+> In `galaxy.yml`, ensure that the `galaxy_infrastructure_url` parameter is present under the galaxy section:
 > ```yaml
 > galaxy:
 >   galaxy_infrastructure_url: http://localhost:8080
@@ -576,9 +589,37 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 > And of course, you have no obligation to put your GxITs in this section.
 > You can put them in any section.
 >
+> Next, create a simple `job_conf.xml` with the following contents, which basically specifies how Galaxy should execute a job. It is also possible to execute the tools directly from the local environment, but here we would like the tool to make use of the container we have just made.
+> ```xml
+> <?xml version="1.0"?>
+> <job_conf>
+>     <plugins>
+>         <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner" workers="4"/>
+>     </plugins>
+>     <destinations default="docker_dispatch">
+>         <destination id="local" runner="local"/>
+>         <destination id="docker_local" runner="local">
+>             <param id="docker_enabled">true</param>
+>             <param id="docker_volumes">$defaults</param>
+>             <param id="docker_sudo">false</param>
+>             <param id="docker_net">bridge</param>
+>             <param id="docker_auto_rm">true</param>
+>             <param id="require_container">true</param>
+>             <param id="container_monitor">true</param>
+>             <param id="docker_set_user"></param>
+>             <param id="docker_run_extra_arguments">--add-host localhost:host-gateway</param>
+>         </destination>
+>         <destination id="docker_dispatch" runner="dynamic">
+>             <param id="type">docker_dispatch</param>
+>             <param id="docker_destination_id">docker_local</param>
+>             <param id="default_destination_id">local</param>
+>         </destination>
+>     </destinations>
+> </job_conf>
+> ```
 > Finally, copy your GxIT wrapper to the Interactive Tool directory:
 > ```sh
-> cp ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/galaxy/server/tools/interactive/
+> cp ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/galaxy/tools/interactive/
 > ```
 {: .hands_on}
 
@@ -592,15 +633,15 @@ Go to the Galaxy directory and:
 Galaxy is available at [http://localhost:8080/](http://localhost:8080/) and you should be able to use your GxIT.
 Congrats!
 
-# Installing in Galaxy
+# Deployment in a running Galaxy instancce
 
-We now have all the required components, we can install the tool in our
-[configured Galaxy instance](#introduction).
+We now have all the required components and tested in a local Galaxy instance above, we can install the tool in our
+configured Galaxy instance for immediate production use.
 This is as simple as dropping the tool XML in the right location inside
 the Galaxy core application directory, and adding the tool to our
 `tool_conf_interactive.xml` file.
 
-> ### {% icon hands_on %} Hands-on: Installing
+> <hands-on-title>Installing</hands-on-title>
 >
 > 1. Add the tool XML
 >
@@ -625,18 +666,18 @@ the Galaxy core application directory, and adding the tool to our
 >
 > 3. Enable the new tool
 >
->    This step is the same as activating any other existing Interactive Tool. See [the admin tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html) for detailed instructions.
+>    This step is the same as activating any other existing Interactive Tool. See [the admin tutorial]({% link topics/admin/tutorials/interactive-tools/tutorial.md %}) for detailed instructions.
 >
 >    ```sh
 >    # Open the Interactive Tools config file for editing:
->    sudo nano /srv/galaxy/config/tool_conf_interactive.xml
+>    sudo nano /srv/galaxy/config/tool_conf.xml
 >    ```
 >
 > 4. This configuration file should have been created when
->    [administering the Galaxy instance to serve Interactive Tools](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html)
+>    [administering the Galaxy instance to serve Interactive Tools]({% link topics/admin/tutorials/interactive-tools/tutorial.md %})
 >    We just need to add a single line to this file to enable our tool. Can you figure it out?
 >
->    > ### {% icon solution %} Solution
+>    > <solution-title></solution-title>
 >    > ```xml
 >    > <toolbox monitor="true">
 >    >     <section id="interactivetools" name="Interactive Tools">
@@ -649,20 +690,20 @@ the Galaxy core application directory, and adding the tool to our
 > 5. Now we just need to restart the Galaxy server to refresh the tool registry
 >
 >    ```sh
->    sudo service galaxy restart
+>    sudo galaxyctl restart
 >    ```
 >
 {: .hands_on}
 
 Have a look in the web interface of your Galaxy instance. You should find the new tool under the "Interactive tools" section in the tool panel. If so, we are ready to start testing it out!
 
-> ### {% icon tip %} Distributing a new GxIT
+> <tip-title>Distributing a new GxIT</tip-title>
 >
 > To release a GxIT for production use, we must distribute two components:
 > - the Galaxy tool XML
 > - the Docker image
 >
-> We have already pushed the Docker image to the cloud (thought it should be hosted on an [approved registry](#push-the-image) for production use).
+> We have already pushed the Docker image to the cloud (though it should be hosted on an [approved registry](#push-the-image) for production use).
 >
 > All that's left is to distribute the tool XML. This would conventionally be done through the ToolShed. But the ToolShed doesn't support GxITs yet! This leaves us only two options for distributing the tool XML:
 > - Make a pull request against [Galaxy core](https://github.com/galaxyproject/galaxy) to include the XML file under `tools/interactive/`
@@ -670,12 +711,12 @@ Have a look in the web interface of your Galaxy instance. You should find the ne
 >
 {: .tip}
 
-> ### {% icon tip %} Install a GxIT with an Ansible playbook
+> <tip-title>Install a GxIT with an Ansible playbook</tip-title>
 >
 > The steps that we took in this section can be easily incorporated into an Ansible playbook for deploying GxITs to a Galaxy server. This means that you can manage and deploy a GxIT as part of your Galaxy instance without merging into the `galaxyproject/galaxy` repository (or a fork of it).
 >
-> The [Interactive Tools admin tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html)
-> demonstrates how this can be acheived by adding our tool XML to the "local tools" section of the Ansible Playbook. However, for our GxIT to show up in the correct tool panel we'll need to add an extra config file: `local_tool_conf.xml`.
+> The [Interactive Tools admin tutorial]({% link topics/admin/tutorials/interactive-tools/tutorial.md %})
+> demonstrates how this can be acheived by adding our tool XML to the "local tools" section of the Ansible Playbook. However, for our GxIT to show up in the correct tool panel, we need to add an extra config file: `local_tool_conf.xml`.
 >
 >
 > 1. Copy the GxIT tool XML to `files/galaxy/tools/interactivetool_tabulator.xml` in your Ansible directory
@@ -718,11 +759,11 @@ Have a look in the web interface of your Galaxy instance. You should find the ne
 
 The most obvious way to test a tool is simply to run it in the Galaxy UI, straight from the tool panel. If you are extremely lucky, you will find that the tool starts up and runs without error. But we all know that never happens! So this is where we start iteratively debugging our tool, until it functions as expected.
 
-> ### {% icon comment %} A successful tool run
+> <comment-title>A successful tool run</comment-title>
 > It is worth pointing out that the appearance of a GxIT in the Galaxy user history is not intuitive when you are used to running "regular" tool jobs. When the history item turns orange ("processing"), that's when a GxIT is actually ready to use! At this point, the tool UI should refresh and display a link to the active GxIT. Remember, the history item doesn't turn green until a job has terminated. With a GxIT, that only happens when the tool has been stopped by the user, or by wall time limits imposed by the Galaxy administrators.
 {: .comment}
 
-> ### {% icon tip %} GxIT testing infrastructure
+> <tip-title>GxIT testing infrastructure</tip-title>
 > Testing and debugging is currently the trickiest part of GxIT development. Ideally, Galaxy core will be developed in the future to better support the process, but for the time being we have to make the most with what is available! In the future, we would like to see GxITs being tested with Planemo, and being installed and tested by Ephemeris from the ToolShed.
 {: .tip}
 
@@ -732,19 +773,19 @@ The most obvious way to test a tool is simply to run it in the Galaxy UI, straig
 The GxIT that we wrapped in this tutorial was a simple example, and you should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
 
 ## Run script
-In the case of our `Tabulator` application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our Galaxy tool XML. However, some web apps might require more elaborate commands to be run. In this situation there are a number of solutions demonstrated in the `<command>` section of [existing GxITs](https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive):
+In the case of our `Tabulator` application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our Galaxy tool XML. However, some web apps might require more elaborate commands to be run. In this situation, there are a number of solutions demonstrated in the `<command>` section of [existing GxITs](https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive):
 - [Guacamole Desktop](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_guacamole_desktop.xml): application startup with `startup.sh`
 - [HiCBrowser](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_hicbrowser.xml): application startup with `supervisord`
 - [AskOmics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml): configuration with Python and Bash scripts, followed by `start_all.sh` to run the application.
 
 ## Templated config files
-Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the application by templating a run script or configuration file to be read by the application. In this application for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
+Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the application by templating a run script or configuration file to be read by the application. In this application, for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
 
 ## Reserved environment variables
 
 There are a few environment variables
 that are accessible in the command section of the tool XML - these can be handy when writing your tool script.
-[check the docs](https://docs.galaxyproject.org/en/latest/dev/schema.html#reserved-variables) for a full reference on the tool XML.
+[Check the docs](https://docs.galaxyproject.org/en/latest/dev/schema.html#reserved-variables) for a full reference on the tool XML.
 
 ```sh
 $__tool_directory__
@@ -753,7 +794,7 @@ $__user_id__
 $__user_email__
 ```
 
-It can also be useful to create and inject environment variables into the tool context. This can be acheived using the `<environment variables>` tag in the tool XML. The RStudio GxIT again provides an example of this:
+It can also be useful to create and inject environment variables into the tool context. This can be acheived using the `<environment variables>` tag in the tool XML. The [RStudio GxIT](https://github.com/galaxyproject/galaxy/blob/b180b7909dc3fe2750fbc8b90214e201eb276794/tools/interactive/interactivetool_rstudio.xml#L12) again provides an example of this:
 
 ```xml
 <environment_variables>
@@ -770,7 +811,7 @@ It can also be useful to create and inject environment variables into the tool c
 ## Galaxy history interaction
 We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user's Galaxy history? For example, if the user creates a file within the application. That's where the environment variables created in the tool XML become useful.
 
-> ### {% icon tip %} Access histories in R
+> <tip-title>Access histories in R</tip-title>
 > From the [R-Studio GxIT](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_rstudio.xml) we can see that there is [an R library](https://github.com/hexylena/rGalaxyConnector) that allows us to interact with Galaxy histories.
 >
 > "The convenience functions `gx_put()` and `gx_get()` are available to you to interact with your current Galaxy history. You can save your workspace with `gx_save()`"
@@ -781,7 +822,7 @@ We have demonstrated how to pass an input file to the Docker container. But what
 
 ## Self-destruct script
 
-Unlike regular tools, web applications will run indefinitely until terminated. With Galaxy's legacy "Interactive Environments", this used to result in "zombie" containers hanging around and clogging up the Galaxy server. You may notice a `terminate.sh` script in some older GxITs as a workaround to this problem, but the new GxIT architecture handles container termination for you. This script is no longer required or reccommended.
+Unlike regular tools that exit after the execution of the underlying command is complete, web applications will run indefinitely until terminated. With Galaxy's legacy "Interactive Environments", this used to result in "zombie" containers hanging around and clogging up the Galaxy server. You may notice a `terminate.sh` script in some older GxITs as a workaround to this problem, but the new GxIT architecture handles container termination for you. This script is no longer required nor recommended.
 
 
 # Troubleshooting
@@ -790,6 +831,6 @@ Having issues with your Interactive Tool? Here are a few ideas for how to troubl
 
 - Getting an error in the Galaxy History? Click on the "view" icon to see details of the tool run, including the tool command, `stdout` and `stderr`.
 - If the tool's `stdout`/`stderr` is not enough, consider modifying the Docker image to make it more verbose. Add print/log statements and assertions. Write an application log to a file that can be collected as Galaxy output.
-- Try running the container with Docker directly on your development machine. If the application doesn't work independantly it certainly won't work inside Galaxy!
+- Try running the container with Docker directly on your development machine. If the application doesn't work independently, it certainly won't work inside Galaxy!
 - If you need to debug the Docker container itself, it can be useful to write output/logging to a [mounted volume](https://docs.docker.com/storage/volumes/) that can be inspected after the tool has run.
 - You can also open a `bash` terminal inside the container to check the container state while the application is running: `docker exec -it mycontainer /bin/bash`

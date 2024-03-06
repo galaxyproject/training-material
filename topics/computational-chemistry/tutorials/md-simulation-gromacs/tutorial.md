@@ -28,8 +28,6 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
 
 Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton's laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.
 
@@ -37,11 +35,11 @@ Multiple packages exist for performing MD simulations. One of the most popular i
 
 This is a introductory guide to using GROMACS ({% cite abraham15 %}) in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.
 
-> ### {% icon comment %} More information
+> <comment-title>More information</comment-title>
 > This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -71,7 +69,7 @@ To perform simulation, an initial PDB file is required. This should be 'cleaned'
 A prepared file is available via Zenodo. Alternatively, you can prepare the file yourself. Download a PDB structure file from the [Protein Data Bank](https://www.rcsb.org/) and remove the unwanted atoms using the grep text processing tool. This simply removes the lines in the PDB file that refer to the unwanted atoms.
 
 
-> ### {% icon hands_on %} Hands-on: Upload an initial structure
+> <hands-on-title>Upload an initial structure</hands-on-title>
 > 1. First of all, create a new history and give it a name.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
@@ -86,7 +84,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >
 {: .hands_on}
 
-> ### {% icon comment %} Alternative upload
+> <comment-title>Alternative upload</comment-title>
 > As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
 > ```
 > https://zenodo.org/record/2598415/files/1AKI_clean.pdb
@@ -95,7 +93,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 > {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .comment}
 
-> ### {% icon details %} Background: What is the PDB (Protein Data Bank) and format?
+> <details-title>Background: What is the PDB (Protein Data Bank) and format?</details-title>
 >
 > The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code [1AKI](https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI).
 >
@@ -123,7 +121,7 @@ In summary, the initial setup tool will:
 
 After these files have been generated, a further step is required to define a simulation box (unit cell) in which the simulation can take place. This can be done with the **GROMACS structure configuration** {% icon tool %} tool. It also defines the unit cell 'box', centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.
 
-> ### {% icon hands_on %} Hands-on: perform initial processing
+> <hands-on-title>perform initial processing</hands-on-title>
 >
 > 1. Run {% tool [GROMACS initial setup](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"PDB input file"*: `1AKI_clean.pdb` (Input dataset)
@@ -132,11 +130,11 @@ After these files have been generated, a further step is required to define a si
 >    - *"Ignore hydrogens"*: `No`
 >    - *"Generate detailed log"*: `Yes`
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > Why is it necessary to provide an input structure containing no non-protein molecules?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > Automatic topology construction only succeeds if the components of the structure are recognized. For example, providing a structure of a protein in complex with a non-protein ligand or cofactor will result in an error.
 > > {: .solution}
 > {: .question}
@@ -157,7 +155,7 @@ The next stage is protein solvation, performed using **GROMACS solvation and add
 
 ![Solvated protein]({% link topics/computational-chemistry/images/solvated_protein.png %} "Solvated protein in a cubic unit cell")
 
-> ### {% icon hands_on %} Hands-on: solvation
+> <hands-on-title>solvation</hands-on-title>
 >
 > {% tool [GROMACS solvation and adding ions](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by the structure configuration tool
@@ -175,7 +173,7 @@ To remove any steric clashes or unusual geometry which would artificially raise 
 
 Here, and in the later steps, two options are presented under 'Parameter input'. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the Galaxy interface. Alternatively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in Galaxy (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found [here](http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html).
 
-> ### {% icon hands_on %} Hands-on: energy minimization
+> <hands-on-title>energy minimization</hands-on-title>
 >
 > {% tool [GROMACS energy minimization](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by solvation tool
@@ -203,7 +201,7 @@ During the first equilibration step (NVT), the protein must be held in place whi
 ## NVT equilibration
 Firstly, we perform equilibration using classical NVT dynamics.
 
-> ### {% icon hands_on %} Hands-on: NVT dynamics
+> <hands-on-title>NVT dynamics</hands-on-title>
 >
 > {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
@@ -235,7 +233,7 @@ Having stabilized the temperature of the system with NVT equilibration, we also 
 
 Note that we can continue where the last simulation left off (with new parameters) by using the checkpoint (CPT) file saved at the end of the NVT simulation.
 
-> ### {% icon hands_on %} Hands-on: NPT dynamics
+> <hands-on-title>NPT dynamics</hands-on-title>
 >
 > {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
@@ -263,11 +261,11 @@ Note that we can continue where the last simulation left off (with new parameter
 >    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Why is the position of the protein restrained during equilibration?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.
 > {: .solution}
 {: .question}
@@ -276,7 +274,7 @@ Note that we can continue where the last simulation left off (with new parameter
 # Production simulation
 Now that equilibration is complete, we can release the position restraints. We are now finally ready to perform a production MD simulation.
 
-> ### {% icon hands_on %} Hands-on: Production simulation
+> <hands-on-title>Production simulation</hands-on-title>
 >
 > 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
@@ -310,7 +308,7 @@ A GROMACS workflow is provided for this tutorial. Overall, the workflow takes a 
 ![GROMACS workflow]({% link topics/computational-chemistry/images/workflow_gromacs.png %} "The basic GROMACS workflow")
 
 # Conclusion
-{:.no_toc}
+
 
 After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
 

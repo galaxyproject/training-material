@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Getting your hands-on climate data
-zenodo_link: 'https://doi.org/10.5281/zenodo.3776499'
+zenodo_link: 'https://zenodo.org/record/3776500'
 questions:
 - What is climate?
 - What type of data is available?
@@ -20,19 +20,16 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
+The practical aims at familiarzing you with Climate Science and the terminology used by climate scientists. The target audience is not a climate scientist but
+anyone interested in learning about climate.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is significantly based on [Getting your hands-on Climate data](https://nordicesmhub.github.io/climate-data-tutorial/).
 >
 {: .comment}
 
-The practical aims at familiarzing you with Climate Science and the terminology used by climate scientists. The target audience is not a climate scientist but
-anyone interested in learning about climate.
-
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -41,7 +38,7 @@ anyone interested in learning about climate.
 >
 {: .agenda}
 
-> ### {% icon comment %} Background
+> <comment-title>Background</comment-title>
 >
 > [European Copernicus Climate Change Service (C3S)](https://climate.copernicus.eu/) provide authoritative information about the past, present
 > and future climate. C3S is one of the many services provided by Copernicus, the European Union's Earth Observation Programme, looking
@@ -64,7 +61,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *climate101*.
 >
@@ -136,21 +133,22 @@ You can also watch an animated illustration of the difference between climate an
 
 In order to answer this question, we are going to inspect and visualize the dataset `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv` using simple galaxy tools.
 
-> ### {% icon hands_on %} Hands-on: Daily temperature time series
->    > ### {% icon comment %} Tip: search for the tool
+> <hands-on-title>Daily temperature time series</hands-on-title>
+>
+>    > <comment-title>Tip: search for the tool</comment-title>
 >    >
 >    > Many different tools can be used to answer to the questions. Here we give you some guidelines to help you to choose.
 >    > Use the **tools search box** at the top of the tool panel to find **Select lines that match an expression** {% icon tool %} and **Datamash** {% icon tool %}.
->    {: .tip}
+>    {: .comment}
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What was the average temperature in Paris on the 14th of July 2003?
 >    > 2. What is the minimum and maximum temperatures in Paris?
 >    > 3. On which date did the minimum temperature occured?
 >    > 4. On which date did the maximum temperature occured?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The average temperature in Paris on the 14th of July 2003 was 26.73 degrees Celcius. It can be found by using **Select lines that match an expression** {% icon tool %} with parameter **"the pattern"** set to 2003-07-14.
 >    > > 2. The minimum temperature in Paris is -11.6799995 degrees celcius and the maximum temperature in Paris is 33.579998 degrees celcius. To find out, you can use **Datamash** {% icon tool %} with the following parameters:
 >    > >      - {% icon param-file %} *"Input tabular dataset"*: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
@@ -197,16 +195,16 @@ To get some information about the (past and current) climate in Paris, we will f
 
 ## Seasonality
 
-> ### {% icon hands_on %} Hands-on: What is the monthly climatological temperature in Paris?
+> <hands-on-title>What is the monthly climatological temperature in Paris?</hands-on-title>
 >
 >   To answer to this question, we will compute the global average temperatures over the entire period 1950 and 2019 for each month (January, February, etc.). Indeed,
 >   this period of time is sufficiently long for computing monthly climatological temperature (more than 30 years).
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What is the warmest summer month e.g. between June, July and August (JJA) in Paris?
 >    > 2. What is the coolest winter month e.g. between December, January and February (DJF) in Paris?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The warmest summer month in Paris is July (19.921018171429 degrees celcius). However, it is interesting to remark that on our dataset we see very little difference in the mean temperature between July and August.
 >    > > 2. The coolest winter month in Paris is January (4.4669169722484 degrees celcius).
 >    > >
@@ -263,7 +261,7 @@ To get some information about the (past and current) climate in Paris, we will f
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Using existing climatologies
+> <tip-title>Using existing climatologies</tip-title>
 >
 > In this tutorial, we compute manually the monthly climatological temperatures to explain you the algorithm used behing.
 > However, many data providers have pre-computed climatologies and can be directly downloaded. For instance, on the [CDS](https://cds.climate.copernicus.eu/cdsapp#!/search?type=dataset), climatologies are provided for [Essential climate variables for assessment of climate variability from 1979 to present](https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview).
@@ -272,7 +270,7 @@ To get some information about the (past and current) climate in Paris, we will f
 
 ## Yearly average
 
-> ### {% icon hands_on %} Hands-on: What is the trend (cooling/warming) in the climate for Paris between 1950 and 2019?
+> <hands-on-title>What is the trend (cooling/warming) in the climate for Paris between 1950 and 2019?</hands-on-title>
 >
 >  To answer to this question, we will compute yearly mean of the temperature in Paris and visualize it.
 >
@@ -303,11 +301,11 @@ To get some information about the (past and current) climate in Paris, we will f
 >
 >    ![Resulting plot showing Yearly mean temperature in Paris](../../images/yearly_mean_temperature_Paris.png)
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > Can we easily observe a trend?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The plot clearly shows a slight increase in the yearly mean temperature between 1950 and 2019. Even though it looks no more than a few degrees celcius, it is
 >    > > quite significant.
@@ -322,7 +320,7 @@ To get some information about the (past and current) climate in Paris, we will f
 In climate change studies, temperature **anomalies** are more important than **absolute** temperature. A temperature anomaly is the difference from an average, or baseline,
 temperature. The baseline temperature is typically computed by averaging 30 or more years of temperature data. A *positive anomaly* indicates the observed temperature was *warmer* than the baseline, while a *negative anomaly* indicates the observed temperature was *cooler* than the baseline.
 
-> ### {% icon hands_on %} Hands-on: Climate stripes for Paris
+> <hands-on-title>Climate stripes for Paris</hands-on-title>
 >    Computing temperature anomalies is out of scope of this tutorial and we will therefore use pre-computed temperature anomalies `ts_cities.csv`.
 >    A simple way to visualize anomalies and highlight cooling/warming over the years,  is to use **climate stripes from timeseries** {% icon tool %} with the following parameters:
 >    - *"timeseries to plot"*: `ts_cities.csv`
@@ -333,9 +331,9 @@ temperature. The baseline temperature is typically computed by averaging 30 or m
 >
 >    ![Resulting plot showing Climate stripes in Paris](../../images/climate_stripes_temperature_Paris.png)
 >
->    > ### {% icon question %} Question: do you observe a warming or cooling between 1950 and 2019?
+>    > <question-title>do you observe a warming or cooling between 1950 and 2019?</question-title>
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The climate stripes clearly show a warming between 1950 and 2019.
 >    > {: .solution}
@@ -343,11 +341,11 @@ temperature. The baseline temperature is typically computed by averaging 30 or m
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Copernicus Climate Bulletin
+> <tip-title>Copernicus Climate Bulletin</tip-title>
 >
 > [Copernicus Climate Bulletins](https://climate.copernicus.eu/climate-bulletins) presents the current condition of the climate using key climate change indicators.
 > They also provide data, analysis of the maps and guidance on how they are produced. Datasets for temperature anomalies can be found and are
-> regularly updated (with recent dates). For instance, in March 2020, the corresponding dataset can be found [here](https://climate.copernicus.eu/sites/default/files/2020-04/ts_1month_anomaly_Global_ea_2t_202003_v01.csv).
+> regularly updated (with recent dates). For instance, in March 2020, [the corresponding dataset](https://climate.copernicus.eu/sites/default/files/2020-04/ts_1month_anomaly_Global_ea_2t_202003_v01.csv) can be found on the Copernicus site.
 >
 {: .tip}
 
@@ -367,7 +365,7 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 
 *Source: [https://gcos.wmo.int/en/essential-climate-variables](https://gcos.wmo.int/en/essential-climate-variables)*
 
-> ### {% icon hands_on %} Hands-on: Essential Climate Variables
+> <hands-on-title>Essential Climate Variables</hands-on-title>
 >
 > We will look at the [Water Vapor Essential Climate Variable ](https://gcos.wmo.int/en/essential-climate-variables/surface-vapour/):
 > *The humidity of air near the surface of the Earth affects the comfort and health of humans, livestock and wildlife, the swarming behaviour of insects and the occurrence of plant disease. The humidity of air near the surface affects evaporation and the strength of the hydrological and energy cycles. Evaporation from the surface of the earth is the source of water in the atmosphere and so is responsible for important feedbacks in the climate system due to clouds and radiation.*
@@ -392,12 +390,12 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 >    ![Resulting plot showing Relative humidity in July 1980 and July 2018](../../images/rh_ecv_july_1980_2018.png)
 >
 >
->    > ### {% icon question %} Relative humidity
+>    > <question-title>Relative humidity</question-title>
 >    >
 >    > 1. Do you observe any significant changes relative humidity in France from 1979 to 2018?
 >    > 2. Do we have sufficient information to make any conclusions on the change in climate?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. We can see significant changes on the plot over France. The relative humidity of air near the surface of the Earth is lower in July 2018 than in July 1980.
 >    > > 2. We do not have sufficient information to draw any conclusions about the change in climate. In our analysis, we only used two different months (July 1980 and July 2018) and can only discuss the average changes in weather during these two periods (July 1980 and July 2018). We learnt that to draw any conclusions on the climate, we would need to make statistics over a long period of time e.g. we would need to download about 30 years of data and for instance compute anomalies in relative humidity to check if there is any trend. These aspects will be discussed further in other Galaxy tutorials.
 >    > >
@@ -420,7 +418,7 @@ When it comes to future climate, we usually need to make some assumptions (such 
 
 # Conclusion
 
-{:.no_toc}
+
 
 We have learnt to differentiate climate from weather and got an overview of the terminology used by climate scientists to identify the
 various source of climate data.

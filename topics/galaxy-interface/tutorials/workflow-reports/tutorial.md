@@ -30,14 +30,12 @@ contributions:
     - guerler
     - mvdbeek
   funding:
-    - erasmusplus
+    - gallantries
 level: Intermediate
 subtopic: workflows
 ---
 
 
-# Introduction
-{:.no_toc}
 
 Workflows are a powerful Galaxy feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to aid interpretation of workflow results, *workflow reports* may be configured to combine and display the most important analysis results in a single, customizable view.
 
@@ -45,7 +43,7 @@ This is especially useful if you are configuring a Galaxy workflow to share with
 
 This tutorial will guide you through the steps of defining such a report for your workflow, and how to view workflow reports after running the workflow.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -60,13 +58,12 @@ For this tutorial, we will use the workflow from the [Galaxy 101 for everyone tu
 
 We will start by importing this workflow into your Galaxy account:
 
-> ### {% icon hands_on %} Hands-on: Import the workflow
+> <hands-on-title>Import the workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/galaxy-101-everyone.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="/topics/galaxy-interface/tutorials/workflow-reports/workflows/galaxy-101-everyone.ga" title="Galaxy 101 for Everyone" %}
+>
 >
 {: .hands_on}
 
@@ -78,7 +75,7 @@ Galaxy will produce a default report for any workflow. This default report shows
 Let's run the workflow and view the default report.
 
 
-> ### {% icon hands_on %} Hands-on: Run the workflow
+> <hands-on-title>Run the workflow</hands-on-title>
 >
 > 1. {% tool [Import](upload1) %} the file `iris.csv` via link
 >
@@ -102,7 +99,7 @@ Let's run the workflow and view the default report.
 After the workflow has completed, we can access the workflow report. The report does not appear in your history, but can be accessed from the **User -> Workflow Invocations** menu on the top bar. An invocation of a workflow means one run (execution) of the workflow.
 
 
-> ### {% icon hands_on %} Hands-on: View the default workflow report
+> <hands-on-title>View the default workflow report</hands-on-title>
 >
 > 1. In the top menu bar, go to **User -> Workflow Invocations**
 >
@@ -129,7 +126,7 @@ After the workflow has completed, we can access the workflow report. The report 
 This is a great start, but we might want to customize this report to fit our needs.
 
 
-> ### {% icon hands_on %} Hands-on: Open the workflow report editor
+> <hands-on-title>Open the workflow report editor</hands-on-title>
 >
 > 1. Open the workflow in the **workflow editor**
 >
@@ -154,7 +151,7 @@ This is a great start, but we might want to customize this report to fit our nee
 >        # Iris analysis
 >        Below are the results for the Iris analysis workflow.</code></pre>
 >
->    > ### {% icon tip %} Tip: Markdown format
+>    > <tip-title>Markdown format</tip-title>
 >    >
 >    > The report is specified in [Markdown format](https://www.markdownguide.org/getting-started/), this is a simple markup language that is commonly used.
 >    > Some basics of the Markdown syntax can be found in [this cheatsheet](https://www.markdownguide.org/cheat-sheet/)
@@ -218,7 +215,7 @@ This is a great start, but we might want to customize this report to fit our nee
 
 As you saw in the previous step, we might need to edit the workflow to add labels outputs so we can easily distinguish between the outputs when adding them to the report. This is especially useful for large workflows with many outputs.
 
-> ### {% icon hands_on %} Hands-on: Add output labels to the workflow
+> <hands-on-title>Add output labels to the workflow</hands-on-title>
 >
 > 1. Open the workflow in the **workflow editor**
 >
@@ -255,7 +252,7 @@ As you saw in the previous step, we might need to edit the workflow to add label
 Now that we have added our output labels, let's go back to our report editor and add these outputs
 
 
-> ### {% icon hands_on %} Hands-on: Open the workflow report editor
+> <hands-on-title>Open the workflow report editor</hands-on-title>
 >
 > 1. Open the workflow in the **workflow editor** (if not already open)
 >
@@ -331,7 +328,7 @@ If you share this workflow with others, they will get the same report every time
 If you would like to share the workflow report of a specific run, you can do so by creating a Galaxy *page* for it. This page can then be shared (either via link or with specific users), or published for all to see under **Shared Data -> Pages** in the top menu.
 
 
-> ### {% icon hands_on %} Hands-on: Share the workflow report as a Galaxy page
+> <hands-on-title>Share the workflow report as a Galaxy page</hands-on-title>
 >
 > 1. Open the workflow report
 >

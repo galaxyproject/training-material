@@ -1,0 +1,683 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Preparing and filtering gene and cell annotations files and expression matrix to be passed as input for Monocle",
+    "format-version": "0.1",
+    "name": "AnnData object to Monocle input files",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "AnnData to extract genes & cells annotations"
+                }
+            ],
+            "label": "AnnData to extract genes & cells annotations",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 246.58749389648438
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "508b2552-1e42-4f6c-9821-1efab3b2bf6a",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "AnnData before processing to extract clean expression matrix"
+                }
+            ],
+            "label": "AnnData before processing to extract clean expression matrix",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 530.25,
+                "top": 1.625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b881b18a-5a3c-4d86-93bf-377fb9edb907",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Extract cell annotations",
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "obs",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 249.8125,
+                "top": 152.60000610351562
+            },
+            "post_job_actions": {
+                "RenameDatasetActionobs": {
+                    "action_arguments": {
+                        "newname": "Extracted cell annotations (obs)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "obs"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "ee98d611afc6",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"obs\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.5+galaxy1",
+            "type": "tool",
+            "uuid": "d141a849-3a8f-4c1d-b8a9-53006ddfa93c",
+            "workflow_outputs": [
+                {
+                    "label": "Extracted cell annotations (obs)",
+                    "output_name": "obs",
+                    "uuid": "9d66a217-4269-4fb4-9a4e-520eedbb0c9d"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Extract gene annotations",
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "var",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 246.9375,
+                "top": 317.2250061035156
+            },
+            "post_job_actions": {
+                "RenameDatasetActionvar": {
+                    "action_arguments": {
+                        "newname": "Extracted gene annotations (var)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "var"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "ee98d611afc6",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"var\", \"__current_case__\": 4}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.5+galaxy1",
+            "type": "tool",
+            "uuid": "687a0f41-408e-4db9-8725-a7fded4691b1",
+            "workflow_outputs": [
+                {
+                    "label": "Extracted gene annotations (var)",
+                    "output_name": "var",
+                    "uuid": "03537e97-d668-4ce2-ba6b-2952a18a2752"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "Unprocessed means here before normalisation or dimensionality reduction. For this step, must have cell IDs as rownames.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Extract clean expression matrix",
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "X",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 756.3375244140625,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionX": {
+                    "action_arguments": {
+                        "newname": "Unprocessed expression matrix"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "X"
+                },
+                "RenameDatasetActionvar": {
+                    "action_arguments": {
+                        "newname": "Extracted gene annotations (var)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "var"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "ee98d611afc6",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"X\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.5+galaxy1",
+            "type": "tool",
+            "uuid": "9fd9b2d2-88b2-4388-a06b-e39f76a5d9e7",
+            "workflow_outputs": [
+                {
+                    "label": "Unprocessed expression matrix",
+                    "output_name": "X",
+                    "uuid": "963462c8-4ae0-486c-8173-d98339127850"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "Double-check the cell_type column number",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "obs"
+                }
+            },
+            "inputs": [],
+            "label": "Filter out unwanted cell types",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 494.8374938964844,
+                "top": 150.66250610351562
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Cells input data for Monocle3"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c22!='Macrophages'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "43cdae35-76c2-411c-8326-28706ca3e6ab",
+            "workflow_outputs": [
+                {
+                    "label": "Cells without macrophages",
+                    "output_name": "out_file1",
+                    "uuid": "5dcb7029-8d03-445d-bb3e-a3119e502be4"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "Check the number of the column with genes names (using column) and its header (Find Regex)",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "var"
+                }
+            },
+            "inputs": [],
+            "label": "gene_short_name annotation",
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 490.3999938964844,
+                "top": 317.07501220703125
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Genes input data for Monocle3"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "399da6b5ec21",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"checks\": [{\"__index__\": 0, \"pattern\": \"Symbol\", \"replacement\": \"gene_short_name\"}], \"field\": \"3\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "8a9b95d8-8e29-4520-a1b8-4344f0429cf8",
+            "workflow_outputs": [
+                {
+                    "label": "Genes table with gene_short_name colname",
+                    "output_name": "out_file1",
+                    "uuid": "15fd415b-2d73-4a1d-92ad-200bb2e73853"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Cut cells IDs",
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 744.8250122070312,
+                "top": 156
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Filtered cells IDs "
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c1\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "863d2026-8351-43cd-ba4b-6ad685984be4",
+            "workflow_outputs": [
+                {
+                    "label": "Filtered cells IDs ",
+                    "output_name": "out_file1",
+                    "uuid": "f9bde249-43b9-4424-8285-e437549223e2"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Cut genes IDs",
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 746.7000122070312,
+                "top": 353.70001220703125
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Genes IDs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c1\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "52315cef-6f1c-4043-adfa-81c269b36fdb",
+            "workflow_outputs": [
+                {
+                    "label": "Genes IDs",
+                    "output_name": "out_file1",
+                    "uuid": "b22efa1d-db99-435f-9357-74150ac9a437"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "join1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input1": {
+                    "id": 7,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 4,
+                    "output_name": "X"
+                }
+            },
+            "inputs": [],
+            "label": "Filter matrix (by cells)",
+            "name": "Join two Datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 999.2750244140625,
+                "top": 152.22500610351562
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Pre-filtered matrix (by cells)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "join1",
+            "tool_state": "{\"field1\": \"1\", \"field2\": \"1\", \"fill_empty_columns\": {\"fill_empty_columns_switch\": \"no_fill\", \"__current_case__\": 0}, \"header\": \"-H\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"partial\": \"-p\", \"unmatched\": \"-u\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.3",
+            "type": "tool",
+            "uuid": "977279d5-cb04-44b6-97b9-9281dc3da96c",
+            "workflow_outputs": [
+                {
+                    "label": "Pre-filtered matrix (by cells)",
+                    "output_name": "out_file1",
+                    "uuid": "b45f18b6-e385-41a1-a8f0-f94e6616e2b3"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Remove duplicate column (cells IDs)",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1243.2000732421875,
+                "top": 153.47500610351562
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Filtered matrix (by cells) "
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"1\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "2b66d7f9-efdb-48bb-b1c2-b414bb74e4f7",
+            "workflow_outputs": [
+                {
+                    "label": "Filtered matrix (by cells) ",
+                    "output_name": "output",
+                    "uuid": "f4d6a581-9b42-41dc-9a4a-278fe5d6591c"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "in_file": {
+                    "id": 10,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Transpose matrix",
+            "name": "Transpose",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1477.8875732421875,
+                "top": 157.41250610351562
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file": {
+                    "action_arguments": {
+                        "newname": "filtered matrix (by cells) transposed"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "ac092723240d",
+                "name": "datamash_transpose",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "91f1a39a-9e94-40ff-b6ad-c40c4d56e2b0",
+            "workflow_outputs": [
+                {
+                    "label": "filtered matrix (by cells) transposed",
+                    "output_name": "out_file",
+                    "uuid": "e4eb8fb3-2028-41fb-8aca-b1c0a6e6bfe5"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "join1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input1": {
+                    "id": 8,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 11,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": "Filter matrix (by genes)",
+            "name": "Join two Datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 994.4500122070312,
+                "top": 344.38751220703125
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Pre-filtered matrix (by cells & genes)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "join1",
+            "tool_state": "{\"field1\": \"1\", \"field2\": \"1\", \"fill_empty_columns\": {\"fill_empty_columns_switch\": \"no_fill\", \"__current_case__\": 0}, \"header\": \"-H\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"partial\": \"-p\", \"unmatched\": \"-u\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.3",
+            "type": "tool",
+            "uuid": "a3a1faee-b050-4459-8b42-96568363bde3",
+            "workflow_outputs": [
+                {
+                    "label": "Pre-filtered matrix (by cells & genes)",
+                    "output_name": "out_file1",
+                    "uuid": "c0481255-0187-407c-9f29-f4c0069d9285"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Remove duplicate column (genes IDs)",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1226.5250244140625,
+                "top": 414.9624938964844
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Expression matrix for Monocle3"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"1\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "34771621-b504-4720-8830-363f2d264468",
+            "workflow_outputs": [
+                {
+                    "label": "Filtered matrix (by cells & genes)",
+                    "output_name": "output",
+                    "uuid": "4dcd8e60-1298-4886-be8f-af1eac9f20f7"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:trajectory_analysis",
+        "name:transcriptomics",
+        "name:scRNA-seq"
+    ],
+    "uuid": "6d92b860-dc13-4cd2-ae0f-697ac85f028b",
+    "version": 4
+}

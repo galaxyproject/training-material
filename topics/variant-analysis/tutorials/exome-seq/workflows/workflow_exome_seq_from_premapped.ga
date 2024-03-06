@@ -1,697 +1,602 @@
 {
-  "uuid": "4dc35bb5-081c-463f-86ca-29ad5537a3f9",
-  "tags": [
-    "variant-analysis"
-  ],
-  "format-version": "0.1",
-  "name": "Exome Seq Training Short W Cached Ref",
-  "version": 4,
-  "steps": {
-    "0": {
-      "tool_id": null,
-      "tool_version": null,
-      "outputs": [],
-      "workflow_outputs": [
+    "a_galaxy_workflow": "true",
+    "annotation": "Exome sequencing data analysis for diagnosing a genetic disease; short version starting from pre-mapped reads",
+    "creator": [
         {
-          "output_name": "output",
-          "uuid": "2b2a0a00-5e17-4766-86e1-b78c35073492",
-          "label": null
+            "class": "Person",
+            "identifier": "0000-0002-9464-6640",
+            "name": "Wolfgang Maier"
         }
-      ],
-      "input_connections": {},
-      "tool_state": "{}",
-      "id": 0,
-      "uuid": "0bd6b438-c4f6-4756-b1e7-fae2985c620e",
-      "errors": null,
-      "name": "Input dataset",
-      "label": "father_mapped_reads",
-      "inputs": [],
-      "position": {
-        "top": 240.8125,
-        "left": 143
-      },
-      "annotation": "",
-      "content_id": null,
-      "type": "data_input"
-    },
-    "1": {
-      "tool_id": null,
-      "tool_version": null,
-      "outputs": [],
-      "workflow_outputs": [
-        {
-          "output_name": "output",
-          "uuid": "d468c4e7-7552-4900-86b9-3eeec642cf3e",
-          "label": null
-        }
-      ],
-      "input_connections": {},
-      "tool_state": "{}",
-      "id": 1,
-      "uuid": "c2c24a21-86f7-478d-83d4-5585155a08bc",
-      "errors": null,
-      "name": "Input dataset",
-      "label": "mother_mapped_reads",
-      "inputs": [],
-      "position": {
-        "top": 454.8125,
-        "left": 182
-      },
-      "annotation": "",
-      "content_id": null,
-      "type": "data_input"
-    },
-    "2": {
-      "tool_id": null,
-      "tool_version": null,
-      "outputs": [],
-      "workflow_outputs": [
-        {
-          "output_name": "output",
-          "uuid": "8f21299e-f547-4006-93fd-8f6b5df30894",
-          "label": null
-        }
-      ],
-      "input_connections": {},
-      "tool_state": "{}",
-      "id": 2,
-      "uuid": "ec322f74-c4cd-4858-904b-7953109c94d0",
-      "errors": null,
-      "name": "Input dataset",
-      "label": "child_mapped_reads",
-      "inputs": [],
-      "position": {
-        "top": 717.8125,
-        "left": 219
-      },
-      "annotation": "",
-      "content_id": null,
-      "type": "data_input"
-    },
-    "3": {
-      "tool_id": null,
-      "tool_version": null,
-      "outputs": [],
-      "workflow_outputs": [
-        {
-          "output_name": "output",
-          "uuid": "e5d195c9-659b-4b55-94d0-58aa4e83ddda",
-          "label": null
-        }
-      ],
-      "input_connections": {},
-      "tool_state": "{}",
-      "id": 3,
-      "uuid": "fc70ff10-87f0-465e-9d3f-0522f174c92b",
-      "errors": null,
-      "name": "Input dataset",
-      "label": "PEDigree data",
-      "inputs": [],
-      "position": {
-        "top": 876.5,
-        "left": 1141
-      },
-      "annotation": "",
-      "content_id": null,
-      "type": "data_input"
-    },
-    "4": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
-      "tool_version": "1.8+galaxy1",
-      "outputs": [
-        {
-          "type": "sam",
-          "name": "output1"
-        }
-      ],
-      "workflow_outputs": [],
-      "input_connections": {
-        "input1": {
-          "output_name": "output",
-          "id": 0
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"__current_case__\\\": 1, \\\"filter\\\": \\\"yes\\\", \\\"reqBits\\\": null, \\\"skipBits\\\": [\\\"0x0004\\\", \\\"0x0008\\\"]}\", \"mapq\": \"\\\"0\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}",
-      "id": 4,
-      "tool_shed_repository": {
-        "owner": "devteam",
-        "changeset_revision": "a7add3e93cc5",
-        "name": "samtool_filter2",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "3479ed8e-baf1-425f-9082-a5dd365b86a0",
-      "errors": null,
-      "name": "Filter SAM or BAM, output SAM or BAM",
-      "post_job_actions": {
-        "HideDatasetActionoutput1": {
-          "output_name": "output1",
-          "action_type": "HideDatasetAction",
-          "action_arguments": {}
-        }
-      },
-      "label": null,
-      "inputs": [
-        {
-          "name": "bed_file",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Exome Seq Training Pre-Mapped W Cached Ref",
+    "steps": {
+        "0": {
+            "annotation": "Pre-mapped reads of the father sample",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Pre-mapped reads of the father sample",
+                    "name": "Father data"
+                }
+            ],
+            "label": "Father data",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 26.03807549941655
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ee9857fa-d51b-4b8d-8238-4de8815a30f5",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "name": "input1",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+        "1": {
+            "annotation": "Pre-mapped reads of the mother sample",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Pre-mapped reads of the mother sample",
+                    "name": "Mother data"
+                }
+            ],
+            "label": "Mother data",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 3.538725142062958,
+                "top": 205.7781449834224
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0d2c49f5-fb2c-4782-ad6d-d57e4543bdf9",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "name": "flag",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
-        }
-      ],
-      "position": {
-        "top": 289,
-        "left": 373.33331298828125
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
-      "type": "tool"
-    },
-    "5": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
-      "tool_version": "1.8+galaxy1",
-      "outputs": [
-        {
-          "type": "sam",
-          "name": "output1"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "output1",
-          "uuid": "3fbd0ea8-4682-4e90-a5fc-50ffb395fa5b",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "input1": {
-          "output_name": "output",
-          "id": 1
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"__current_case__\\\": 1, \\\"filter\\\": \\\"yes\\\", \\\"reqBits\\\": null, \\\"skipBits\\\": [\\\"0x0004\\\", \\\"0x0008\\\"]}\", \"mapq\": \"\\\"0\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}",
-      "id": 5,
-      "tool_shed_repository": {
-        "owner": "devteam",
-        "changeset_revision": "a7add3e93cc5",
-        "name": "samtool_filter2",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "887c2e21-95ad-481b-bed8-6400741a70c4",
-      "errors": null,
-      "name": "Filter SAM or BAM, output SAM or BAM",
-      "post_job_actions": {
-        "HideDatasetActionoutput1": {
-          "output_name": "output1",
-          "action_type": "HideDatasetAction",
-          "action_arguments": {}
-        }
-      },
-      "label": null,
-      "inputs": [
-        {
-          "name": "bed_file",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+        "2": {
+            "annotation": "Pre-mapped reads of the child/proband sample",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Pre-mapped reads of the child/proband sample",
+                    "name": "Proband data"
+                }
+            ],
+            "label": "Proband data",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 4.719825926599924,
+                "top": 409.8589965353308
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a9a4790f-33c7-4f67-b70c-94314f2fd0db",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "name": "input1",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+        "3": {
+            "annotation": "Family tree with sex and phenotype information in PED format",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Family tree with sex and phenotype information in PED format",
+                    "name": "PEDigree data"
+                }
+            ],
+            "label": "PEDigree data",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1192.4082127486454,
+                "top": 449.3970999038761
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "34af307d-3515-45f4-b898-8025066b9149",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "name": "flag",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
-        }
-      ],
-      "position": {
-        "top": 519.9999847412109,
-        "left": 381.33331298828125
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
-      "type": "tool"
-    },
-    "6": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
-      "tool_version": "1.8+galaxy1",
-      "outputs": [
-        {
-          "type": "sam",
-          "name": "output1"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "output1",
-          "uuid": "7241442e-9274-4c77-bfe6-8d9cdfd953e2",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "input1": {
-          "output_name": "output",
-          "id": 2
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"__current_case__\\\": 1, \\\"filter\\\": \\\"yes\\\", \\\"reqBits\\\": null, \\\"skipBits\\\": [\\\"0x0004\\\", \\\"0x0008\\\"]}\", \"mapq\": \"\\\"0\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}",
-      "id": 6,
-      "tool_shed_repository": {
-        "owner": "devteam",
-        "changeset_revision": "a7add3e93cc5",
-        "name": "samtool_filter2",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "8af8801a-a1de-4a59-b0e7-b8b162754b65",
-      "errors": null,
-      "name": "Filter SAM or BAM, output SAM or BAM",
-      "post_job_actions": {
-        "HideDatasetActionoutput1": {
-          "output_name": "output1",
-          "action_type": "HideDatasetAction",
-          "action_arguments": {}
-        }
-      },
-      "label": null,
-      "inputs": [
-        {
-          "name": "bed_file",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Samtools view",
+            "outputs": [
+                {
+                    "name": "outputsam",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 245.226922685293,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5826298f6a73",
+                "name": "samtools_view",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"addref_cond\": {\"addref_select\": \"no\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"outtype\": \"selected_reads\", \"__current_case__\": 1, \"filter_config\": {\"cond_region\": {\"select_region\": \"no\", \"__current_case__\": 0}, \"cond_rg\": {\"select_rg\": \"no\", \"__current_case__\": 0}, \"quality\": null, \"library\": null, \"cigarcons\": null, \"inclusive_filter\": null, \"exclusive_filter\": [\"4\", \"8\"], \"exclusive_filter_all\": null, \"tag\": null, \"qname_file\": {\"__class__\": \"RuntimeValue\"}}, \"subsample_config\": {\"subsampling_mode\": {\"select_subsample\": \"fraction\", \"__current_case__\": 0, \"factor\": \"1.0\", \"seed\": null}}, \"output_options\": {\"reads_report_type\": \"retained\", \"__current_case__\": 0, \"complementary_output\": false, \"adv_output\": {\"readtags\": [], \"collapsecigar\": false}, \"output_format\": {\"oformat\": \"bam\", \"__current_case__\": 2}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.15.1+galaxy0",
+            "type": "tool",
+            "uuid": "4e10a0fb-0c1f-4b4a-9ec2-ed20f5532b78",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "name": "input1",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Samtools view",
+            "outputs": [
+                {
+                    "name": "outputsam",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 248.34245806372297,
+                "top": 182.28437676430497
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5826298f6a73",
+                "name": "samtools_view",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"addref_cond\": {\"addref_select\": \"no\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"outtype\": \"selected_reads\", \"__current_case__\": 1, \"filter_config\": {\"cond_region\": {\"select_region\": \"no\", \"__current_case__\": 0}, \"cond_rg\": {\"select_rg\": \"no\", \"__current_case__\": 0}, \"quality\": null, \"library\": null, \"cigarcons\": null, \"inclusive_filter\": null, \"exclusive_filter\": [\"4\", \"8\"], \"exclusive_filter_all\": null, \"tag\": null, \"qname_file\": {\"__class__\": \"RuntimeValue\"}}, \"subsample_config\": {\"subsampling_mode\": {\"select_subsample\": \"fraction\", \"__current_case__\": 0, \"factor\": \"1.0\", \"seed\": null}}, \"output_options\": {\"reads_report_type\": \"retained\", \"__current_case__\": 0, \"complementary_output\": false, \"adv_output\": {\"readtags\": [], \"collapsecigar\": false}, \"output_format\": {\"oformat\": \"bam\", \"__current_case__\": 2}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.15.1+galaxy0",
+            "type": "tool",
+            "uuid": "96bb9fab-97dc-4aee-ab65-ec320a43572c",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "name": "flag",
-          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
-        }
-      ],
-      "position": {
-        "top": 789.3333129882812,
-        "left": 445.33331298828125
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
-      "type": "tool"
-    },
-    "7": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
-      "tool_version": "2.0.1",
-      "outputs": [
-        {
-          "type": "bam",
-          "name": "output1"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "output1",
-          "uuid": "d5ffd0fa-adb4-40fb-ae45-c332f6f2e80e",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "input1": {
-          "output_name": "output1",
-          "id": 4
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"bam_paired_end_type\": \"{\\\"__current_case__\\\": 0, \\\"bam_paired_end_type_selector\\\": \\\"PE\\\", \\\"force_se\\\": \\\"false\\\"}\"}",
-      "id": 7,
-      "tool_shed_repository": {
-        "owner": "devteam",
-        "changeset_revision": "9129584416e2",
-        "name": "samtools_rmdup",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "dd23d49d-0d54-4c0d-b987-e2ea85531863",
-      "errors": null,
-      "name": "RmDup",
-      "post_job_actions": {},
-      "label": null,
-      "inputs": [],
-      "position": {
-        "top": 260,
-        "left": 659.59375
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
-      "type": "tool"
-    },
-    "8": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
-      "tool_version": "2.0.1",
-      "outputs": [
-        {
-          "type": "bam",
-          "name": "output1"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "output1",
-          "uuid": "8f7674ca-70b5-4c10-8767-376c8f0e71e2",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "input1": {
-          "output_name": "output1",
-          "id": 5
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"bam_paired_end_type\": \"{\\\"__current_case__\\\": 0, \\\"bam_paired_end_type_selector\\\": \\\"PE\\\", \\\"force_se\\\": \\\"false\\\"}\"}",
-      "id": 8,
-      "tool_shed_repository": {
-        "owner": "devteam",
-        "changeset_revision": "9129584416e2",
-        "name": "samtools_rmdup",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "3e01f81b-8021-42de-96d5-1c7a8e7efaf5",
-      "errors": null,
-      "name": "RmDup",
-      "post_job_actions": {},
-      "label": null,
-      "inputs": [],
-      "position": {
-        "top": 456,
-        "left": 656.390625
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
-      "type": "tool"
-    },
-    "9": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
-      "tool_version": "2.0.1",
-      "outputs": [
-        {
-          "type": "bam",
-          "name": "output1"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "output1",
-          "uuid": "fd66af5b-2dd8-495b-b16f-3df608d76db2",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "input1": {
-          "output_name": "output1",
-          "id": 6
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"bam_paired_end_type\": \"{\\\"__current_case__\\\": 0, \\\"bam_paired_end_type_selector\\\": \\\"PE\\\", \\\"force_se\\\": \\\"false\\\"}\"}",
-      "id": 9,
-      "tool_shed_repository": {
-        "owner": "devteam",
-        "changeset_revision": "9129584416e2",
-        "name": "samtools_rmdup",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "46723f8b-73e4-4c01-b0e3-05d60e2038c4",
-      "errors": null,
-      "name": "RmDup",
-      "post_job_actions": {},
-      "label": null,
-      "inputs": [],
-      "position": {
-        "top": 697.609375,
-        "left": 770.796875
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
-      "type": "tool"
-    },
-    "10": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0",
-      "tool_version": "1.1.0.46-0",
-      "outputs": [
-        {
-          "type": "vcf",
-          "name": "output_vcf"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "output_vcf",
-          "uuid": "b7234937-6f13-48c9-a682-f36f8606437c",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "reference_source|batchmode|input_bams": [
-          {
-            "output_name": "output1",
-            "id": 8
-          },
-          {
-            "output_name": "output1",
-            "id": 9
-          },
-          {
-            "output_name": "output1",
-            "id": 7
-          }
-        ]
-      },
-      "tool_state": "{\"__page__\": null, \"reference_source\": \"{\\\"__current_case__\\\": 0, \\\"batchmode\\\": {\\\"__current_case__\\\": 0, \\\"input_bams\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"processmode\\\": \\\"merge\\\"}, \\\"ref_file\\\": \\\"hg19\\\", \\\"reference_source_selector\\\": \\\"cached\\\"}\", \"__rerun_remap_job_id__\": null, \"options_type\": \"{\\\"__current_case__\\\": 1, \\\"options_type_selector\\\": \\\"simple\\\"}\", \"target_limit_type\": \"{\\\"__current_case__\\\": 0, \\\"target_limit_type_selector\\\": \\\"do_not_limit\\\"}\"}",
-      "id": 10,
-      "tool_shed_repository": {
-        "owner": "devteam",
-        "changeset_revision": "156b60c1530f",
-        "name": "freebayes",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "f98cfc96-ae52-456b-abc1-085ffc8d6b46",
-      "errors": null,
-      "name": "FreeBayes",
-      "post_job_actions": {},
-      "label": null,
-      "inputs": [],
-      "position": {
-        "top": 486.796875,
-        "left": 865.796875
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0",
-      "type": "tool"
-    },
-    "11": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
-      "tool_version": "1.9+galaxy1",
-      "outputs": [
-        {
-          "type": "vcf",
-          "name": "output_file"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "output_file",
-          "uuid": "7bc2bde8-9953-4130-a14e-9cf76ff1f8cf",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "input_file": {
-          "output_name": "output_vcf",
-          "id": 10
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"multiallelics\": \"{\\\"__current_case__\\\": 1, \\\"mode\\\": \\\"-\\\", \\\"multiallelic_types\\\": \\\"both\\\"}\", \"sec_restrict\": \"{\\\"regions\\\": {\\\"__current_case__\\\": 0, \\\"regions_src\\\": \\\"__none__\\\"}, \\\"targets\\\": {\\\"__current_case__\\\": 0, \\\"targets_src\\\": \\\"__none__\\\"}}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"sec_default\": \"{\\\"site_win\\\": \\\"1000\\\"}\", \"rm_dup\": \"\\\"\\\"\", \"check_ref\": \"\\\"w\\\"\", \"normalize_indels\": \"\\\"true\\\"\", \"reference_source\": \"{\\\"__current_case__\\\": 0, \\\"fasta_ref\\\": \\\"hg19\\\", \\\"reference_source_selector\\\": \\\"cached\\\"}\", \"output_type\": \"\\\"v\\\"\", \"__rerun_remap_job_id__\": null}",
-      "id": 11,
-      "tool_shed_repository": {
-        "owner": "iuc",
-        "changeset_revision": "76655fe2c70e",
-        "name": "bcftools_norm",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "30a48696-7713-438a-9ab0-a7df3386e62a",
-      "errors": null,
-      "name": "bcftools norm",
-      "post_job_actions": {},
-      "label": null,
-      "inputs": [
-        {
-          "name": "input_file",
-          "description": "runtime parameter for tool bcftools norm"
-        }
-      ],
-      "position": {
-        "top": 375.203125,
-        "left": 1137.796875
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
-      "type": "tool"
-    },
-    "12": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
-      "tool_version": "4.3+T.galaxy1",
-      "outputs": [
-        {
-          "type": "vcf",
-          "name": "snpeff_output"
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Samtools view",
+            "outputs": [
+                {
+                    "name": "outputsam",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 255.16125367284013,
+                "top": 367.2937487110223
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5826298f6a73",
+                "name": "samtools_view",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"addref_cond\": {\"addref_select\": \"no\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"outtype\": \"selected_reads\", \"__current_case__\": 1, \"filter_config\": {\"cond_region\": {\"select_region\": \"no\", \"__current_case__\": 0}, \"cond_rg\": {\"select_rg\": \"no\", \"__current_case__\": 0}, \"quality\": null, \"library\": null, \"cigarcons\": null, \"inclusive_filter\": null, \"exclusive_filter\": [\"4\", \"8\"], \"exclusive_filter_all\": null, \"tag\": null, \"qname_file\": {\"__class__\": \"RuntimeValue\"}}, \"subsample_config\": {\"subsampling_mode\": {\"select_subsample\": \"fraction\", \"__current_case__\": 0, \"factor\": \"1.0\", \"seed\": null}}, \"output_options\": {\"reads_report_type\": \"retained\", \"__current_case__\": 0, \"complementary_output\": false, \"adv_output\": {\"readtags\": [], \"collapsecigar\": false}, \"output_format\": {\"oformat\": \"bam\", \"__current_case__\": 2}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.15.1+galaxy0",
+            "type": "tool",
+            "uuid": "333ef9d7-1f61-49fa-9e3e-492c8b075d75",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "type": "html",
-          "name": "statsFile"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "snpeff_output",
-          "uuid": "5350652f-3a24-4e30-82dc-7d244b685d11",
-          "label": null
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "outputsam"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "RmDup",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 483.3487520659049,
+                "top": 28.44065862833861
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "586f9e1cdb2b",
+                "name": "samtools_rmdup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bam_paired_end_type\": {\"bam_paired_end_type_selector\": \"PE\", \"__current_case__\": 0, \"force_se\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.1",
+            "type": "tool",
+            "uuid": "d7f40369-f49e-484c-a32b-ccbe2a0e9994",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "output_name": "statsFile",
-          "uuid": "d620c0f8-999a-405b-bc9f-80b76f3716a9",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "input": {
-          "output_name": "output_file",
-          "id": 11
-        }
-      },
-      "tool_state": "{\"spliceSiteSize\": \"\\\"2\\\"\", \"csvStats\": \"\\\"false\\\"\", \"filterOut\": \"null\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"inputFormat\": \"\\\"vcf\\\"\", \"__page__\": null, \"outputConditional\": \"{\\\"__current_case__\\\": 0, \\\"outputFormat\\\": \\\"vcf\\\"}\", \"__rerun_remap_job_id__\": null, \"udLength\": \"\\\"5000\\\"\", \"generate_stats\": \"\\\"true\\\"\", \"spliceRegion\": \"{\\\"__current_case__\\\": 0, \\\"setSpliceRegions\\\": \\\"no\\\"}\", \"chr\": \"\\\"\\\"\", \"intervals\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"annotations\": \"null\", \"snpDb\": \"{\\\"__current_case__\\\": 0, \\\"genomeSrc\\\": \\\"cached\\\", \\\"genomeVersion\\\": \\\"hg19\\\", \\\"reg_section\\\": {\\\"regulation\\\": \\\"\\\"}}\", \"offset\": \"\\\"default\\\"\", \"noLog\": \"\\\"true\\\"\", \"transcripts\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"filter\": \"{\\\"__current_case__\\\": 0, \\\"specificEffects\\\": \\\"no\\\"}\"}",
-      "id": 12,
-      "tool_shed_repository": {
-        "owner": "iuc",
-        "changeset_revision": "8f92c2b26e6d",
-        "name": "snpeff",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "67f65eef-9ce8-446a-ae0e-04c0c611ed4c",
-      "errors": null,
-      "name": "SnpEff eff:",
-      "post_job_actions": {},
-      "label": null,
-      "inputs": [
-        {
-          "name": "intervals",
-          "description": "runtime parameter for tool SnpEff eff:"
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input1": {
+                    "id": 5,
+                    "output_name": "outputsam"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "RmDup",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 485.14576532629115,
+                "top": 209.07495334532143
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "586f9e1cdb2b",
+                "name": "samtools_rmdup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bam_paired_end_type\": {\"bam_paired_end_type_selector\": \"PE\", \"__current_case__\": 0, \"force_se\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.1",
+            "type": "tool",
+            "uuid": "7c0f51c8-d38a-472e-9404-1c324b0aa070",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "name": "input",
-          "description": "runtime parameter for tool SnpEff eff:"
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input1": {
+                    "id": 6,
+                    "output_name": "outputsam"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "RmDup",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 488.74673714089846,
+                "top": 388.62608417413503
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "586f9e1cdb2b",
+                "name": "samtools_rmdup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bam_paired_end_type\": {\"bam_paired_end_type_selector\": \"PE\", \"__current_case__\": 0, \"force_se\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.1",
+            "type": "tool",
+            "uuid": "206b4a09-4876-493c-ba9c-5ed75649955e",
+            "when": null,
+            "workflow_outputs": []
         },
-        {
-          "name": "transcripts",
-          "description": "runtime parameter for tool SnpEff eff:"
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "reference_source|batchmode|input_bams": [
+                    {
+                        "id": 7,
+                        "output_name": "output1"
+                    },
+                    {
+                        "id": 8,
+                        "output_name": "output1"
+                    },
+                    {
+                        "id": 9,
+                        "output_name": "output1"
+                    }
+                ]
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FreeBayes",
+            "outputs": [
+                {
+                    "name": "output_vcf",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 739.4177393516102,
+                "top": 201.70319176283567
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a5937157062f",
+                "name": "freebayes",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"coverage_options\": {\"coverage_options_selector\": \"do_not_set\", \"__current_case__\": 1}, \"options_type\": {\"options_type_selector\": \"simple\", \"__current_case__\": 1}, \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"batchmode\": {\"processmode\": \"merge\", \"__current_case__\": 1, \"input_bams\": {\"__class__\": \"ConnectedValue\"}}, \"ref_file\": \"hg19\"}, \"target_limit_type\": {\"target_limit_type_selector\": \"do_not_limit\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.6+galaxy0",
+            "type": "tool",
+            "uuid": "c9ec6a27-eb70-4667-a934-9eb8232377ac",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.15.1+galaxy3",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input_file": {
+                    "id": 10,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "bcftools norm",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 970.8519723072957,
+                "top": 189.22479134569028
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.15.1+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ebb2e12a6de1",
+                "name": "bcftools_norm",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"atomize\": false, \"check_ref\": \"w\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"multiallelics\": {\"mode\": \"-\", \"__current_case__\": 1, \"multiallelic_types\": \"both\"}, \"normalize_indels\": true, \"old_rec_tag\": \"\", \"output_type\": \"v\", \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"fasta_ref\": \"hg19\"}, \"rm_dup\": \"\", \"sec_default\": {\"site_win\": \"1000\"}, \"sec_restrict\": {\"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"regions_overlap\": null, \"targets\": {\"targets_src\": \"__none__\", \"__current_case__\": 0}, \"targets_overlap\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.15.1+galaxy3",
+            "type": "tool",
+            "uuid": "9a004ebd-2ff3-4f62-bcbd-fce076ce1ef9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "intervals"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "transcripts"
+                }
+            ],
+            "label": null,
+            "name": "SnpEff eff:",
+            "outputs": [
+                {
+                    "name": "snpeff_output",
+                    "type": "vcf"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1198.7489327784465,
+                "top": 78.31896712271123
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "5b80f544c67f",
+                "name": "snpeff",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotations\": null, \"chr\": \"\", \"csvStats\": false, \"filter\": {\"specificEffects\": \"no\", \"__current_case__\": 0}, \"filterOut\": null, \"generate_stats\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"inputFormat\": \"vcf\", \"intervals\": {\"__class__\": \"RuntimeValue\"}, \"noLog\": true, \"offset\": \"default\", \"outputConditional\": {\"outputFormat\": \"vcf\", \"__current_case__\": 0}, \"snpDb\": {\"genomeSrc\": \"cached\", \"__current_case__\": 0, \"genomeVersion\": \"hg19\", \"reg_section\": {\"regulation\": null}}, \"spliceRegion\": {\"setSpliceRegions\": \"no\", \"__current_case__\": 0}, \"spliceSiteSize\": \"2\", \"transcripts\": {\"__class__\": \"RuntimeValue\"}, \"udLength\": \"5000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.3+T.galaxy2",
+            "type": "tool",
+            "uuid": "fcf4c091-e91d-4bc6-8a20-0e29d96a75bf",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "snpeff_variant_stats",
+                    "output_name": "statsFile",
+                    "uuid": "974b6b15-ccf7-4fe8-8a71-2b3fe8b45272"
+                },
+                {
+                    "label": "normalized_snpeff_annotated_variants",
+                    "output_name": "snpeff_output",
+                    "uuid": "083b9686-5c6d-495f-9257-7243896e64d7"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "infile": {
+                    "id": 12,
+                    "output_name": "snpeff_output"
+                },
+                "ped": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "GEMINI load",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "gemini.sqlite"
+                }
+            ],
+            "position": {
+                "left": 1436.0952028186657,
+                "top": 213.42842129765972
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "45296e47d565",
+                "name": "gemini_load",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotation_databases\": \"2019-01-12\", \"annotation_type\": \"snpEff\", \"has_genotypes\": true, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"opt_content\": [\"gerp_bp\", \"cadd\", \"gene_tables\", \"genotypes\", \"info_string\"], \"ped\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.20.1+galaxy2",
+            "type": "tool",
+            "uuid": "49fca714-8a19-4c96-9d6d-2faa3465063c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "infile": {
+                    "id": 13,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "GEMINI inheritance pattern",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1666.0204670577175,
+                "top": 285.33148116578377
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
+            "tool_shed_repository": {
+                "changeset_revision": "18d13111692b",
+                "name": "gemini_inheritance",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\", \"family_wise\": {\"min_kindreds\": \"1\", \"families\": \"\", \"per_variant_selection\": {\"enabled\": \"no\", \"__current_case__\": 0, \"min_dp\": \"0\", \"min_gq\": \"0\", \"max_pl\": \"-1\"}}, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"inheritance\": {\"pattern_type\": \"autosomal_recessive\", \"__current_case__\": 2, \"constraint\": [{\"__index__\": 0, \"filter\": \"impact_severity != 'LOW'\"}], \"lenient\": false, \"allow_unaffected\": false}, \"oformat\": {\"report\": {\"report_selector\": \"custom\", \"__current_case__\": 2, \"columns\": [\"max_aaf_all\"], \"extra_cols\": \"chrom, start, ref, alt, impact, gene, clinvar_sig, clinvar_disease_name, clinvar_gene_phenotype, rs_ids\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.20.1",
+            "type": "tool",
+            "uuid": "b5f3f441-e57a-4e7c-8e5a-807c996ea54e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "candidate_mutations",
+                    "output_name": "outfile",
+                    "uuid": "c5a64822-3c68-495e-b2fd-4642b1aabb5a"
+                }
+            ]
         }
-      ],
-      "position": {
-        "top": 613.609375,
-        "left": 1113.390625
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
-      "type": "tool"
     },
-    "13": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy1",
-      "tool_version": "0.20.1+galaxy1",
-      "outputs": [
-        {
-          "type": "gemini.sqlite",
-          "name": "outfile"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "outfile",
-          "uuid": "350447fe-9d6b-4033-b673-23d716793b16",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "ped": {
-          "output_name": "output",
-          "id": 3
-        },
-        "infile": {
-          "output_name": "snpeff_output",
-          "id": 12
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"opt_content\": \"[\\\"gerp_bp\\\", \\\"cadd\\\", \\\"gene_tables\\\", \\\"genotypes\\\", \\\"info_string\\\"]\", \"__rerun_remap_job_id__\": null, \"has_genotypes\": \"\\\"true\\\"\", \"annotation_databases\": \"\\\"2019-01-12\\\"\", \"annotation_type\": \"\\\"snpEff\\\"\", \"ped\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
-      "id": 13,
-      "tool_shed_repository": {
-        "owner": "iuc",
-        "changeset_revision": "b2c25142267e",
-        "name": "gemini_load",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "54484a5a-1ee3-4af6-b5cc-d7a62803c228",
-      "errors": null,
-      "name": "GEMINI load",
-      "post_job_actions": {},
-      "label": null,
-      "inputs": [],
-      "position": {
-        "top": 719,
-        "left": 1446.1875
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy1",
-      "type": "tool"
-    },
-    "14": {
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
-      "tool_version": "0.20.1",
-      "outputs": [
-        {
-          "type": "tabular",
-          "name": "outfile"
-        }
-      ],
-      "workflow_outputs": [
-        {
-          "output_name": "outfile",
-          "uuid": "3a1b0bea-8126-45ac-aa57-566c18c45e8f",
-          "label": null
-        }
-      ],
-      "input_connections": {
-        "infile": {
-          "output_name": "outfile",
-          "id": 13
-        }
-      },
-      "tool_state": "{\"__page__\": null, \"inheritance\": \"{\\\"__current_case__\\\": 2, \\\"allow_unaffected\\\": \\\"false\\\", \\\"constraint\\\": [{\\\"__index__\\\": 0, \\\"filter\\\": \\\"impact_severity != 'LOW'\\\"}], \\\"lenient\\\": \\\"false\\\", \\\"pattern_type\\\": \\\"autosomal_recessive\\\"}\", \"__rerun_remap_job_id__\": null, \"family_wise\": \"{\\\"families\\\": \\\"\\\", \\\"min_kindreds\\\": \\\"1\\\", \\\"per_variant_selection\\\": {\\\"__current_case__\\\": 0, \\\"enabled\\\": \\\"no\\\", \\\"max_pl\\\": \\\"-1\\\", \\\"min_dp\\\": \\\"0\\\", \\\"min_gq\\\": \\\"0\\\"}}\", \"oformat\": \"{\\\"report\\\": {\\\"__current_case__\\\": 2, \\\"columns\\\": [\\\"max_aaf_all\\\"], \\\"extra_cols\\\": \\\"chrom, start, ref, alt, impact, gene, clinvar_sig, clinvar_disease_name, clinvar_gene_phenotype, rs_ids\\\", \\\"report_selector\\\": \\\"custom\\\"}}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
-      "id": 14,
-      "tool_shed_repository": {
-        "owner": "iuc",
-        "changeset_revision": "3123ce7acd0e",
-        "name": "gemini_inheritance",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "uuid": "3796cf69-9951-4e8b-a72c-dac2e181f4c9",
-      "errors": null,
-      "name": "GEMINI inheritance pattern",
-      "post_job_actions": {},
-      "label": null,
-      "inputs": [],
-      "position": {
-        "top": 497.203125,
-        "left": 1399.796875
-      },
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
-      "type": "tool"
-    }
-  },
-  "annotation": "Exome sequencing data analysis for diagnosing a genetic disease",
-  "a_galaxy_workflow": "true"
+    "tags": [
+        "variant-analysis"
+    ],
+    "uuid": "027b1a23-80cd-45fd-971e-d27b473ff91f",
+    "version": 3
 }

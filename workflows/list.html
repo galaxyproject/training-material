@@ -1,0 +1,161 @@
+---
+layout: page
+title: GTN Pan-Galactic Workflow Search
+---
+
+<p>
+We are testing a new search experience. Tell us what you think!
+</p>
+<p>
+This site
+currently lists {{ site.data['workflows'] | size }} workflows from
+{% assign servers = nil | list_usegalaxy_servers %}
+{% for server in servers %}{{ server.name }}, {% endfor %}
+and WorkflowHub.eu. It is updated weekly.
+</p>
+
+<label for="title">Search</label>
+<div class="row" id="search-form">
+	<div class="col-md-8">
+	<div class="form-group">
+		<input type="text" class="form-control" id="title" placeholder="Search Materials" oninput="onInputDebounced()">
+	</div>
+	</div>
+
+	<div class="col-md-2">
+		<button style="width: 100%" class="btn btn-primary" onclick="search()">Search</button>
+	</div>
+
+	<div class="col-md-2">
+		Results: <span id="results-count">{{ site.data['workflows'] | size }}</span>
+	</div>
+</div>
+
+<style>
+#results {
+	table-layout: fixed;
+}
+#results .tags {
+	display: flex;
+	flex-wrap: wrap;
+}
+</style>
+
+<table class="table" id="results" style="table-layout:fixed">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Owner</th>
+			<th scope="col">Updated</th>
+			<th scope="col">Links</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%- for workflow in site.data['workflows'] -%}
+			<tr id="{{ post.short_id }}">
+				<td><div>{{ workflow.name }}</div>
+					<div class="tags">
+					{%- for tag in workflow.tags -%}
+					<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
+					{%- endfor -%}
+					</div>
+				</td>
+				<td>{{ workflow.owner }}</td>
+				<td>{{ workflow.updated }}</td>
+				<td>
+					{% for id in workflow.ids %}
+						{% if id[0] == "https://workflowhub.eu" %}
+					<a href="{{ id[0] }}/workflows/{{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a><br/>
+					<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ id[1] }}%26trs_version=1">
+						Load in Galaxy
+					</a>
+						{% else %}
+					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+						{% endif %}
+					{% endfor %}
+				</td>
+			</tr>
+		{%- endfor -%}
+	</tbody>
+</table>
+
+<script>
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.forEach = Array.prototype.forEach;
+HTMLCollection.prototype.filter = Array.prototype.filter;
+NodeList.prototype.filter = Array.prototype.filter;
+HTMLCollection.prototype.map = Array.prototype.map;
+NodeList.prototype.map = Array.prototype.map;
+
+const textInput = document.getElementById("title")
+const table  = document.getElementById('results'),
+      rows   = table.tBodies[0].rows;
+
+const DEBOUNCE_DURATION = 300; // in milliseconds
+
+var previousSearch = "";
+
+function search(){
+	const textQuery = document.getElementById("title").value
+
+	if (previousSearch == `${textQuery}`) {
+		console.log("Skipping search for the same query")
+		return
+	}
+
+	// Include search term in page title
+	document.getElementsByTagName("title")[0].innerText = `${textQuery} | GTN Pan-Galactic Workflow Search`
+	console.log(`Searching! ${textQuery}`)
+
+	// Which should be hidden
+
+	var count = 0;
+	var to_hide = rows.filter(row => {
+		if (textQuery != "" && (
+			row.children[0].innerText.toLowerCase() + " " + 
+			row.children[1].innerText.toLowerCase()
+		).indexOf(textQuery.toLowerCase()) == -1) {
+			return true;
+		}
+		count += 1;
+		return false;
+	});
+	document.getElementById("results-count").innerText = count;
+
+	// Display all
+	document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
+	// Hide the rest
+	to_hide.map(r => r.style.display = "none");
+
+	previousSearch = `${textQuery}`
+}
+
+// Attribution: https://gist.github.com/beaucharman/1f93fdd7c72860736643d1ab274fee1a
+function debounce(callback, wait, context = this) {
+  let timeout = null;
+  let callbackArgs = null;
+
+  const later = () => callback.apply(context, callbackArgs);
+  return function() {
+    callbackArgs = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+const onInputDebounced = debounce(_ => {
+	search();
+}, DEBOUNCE_DURATION);
+
+
+// Get the q parameter from URL
+// This is a redeclaration of the `var params` in themes.js, not sure how we want to handle that long term.
+var params = (new URL(document.location)).searchParams;
+paramSearch = params.get('query')
+if (paramSearch) {
+	textInput.value = paramSearch
+	search()
+}
+
+
+</script>

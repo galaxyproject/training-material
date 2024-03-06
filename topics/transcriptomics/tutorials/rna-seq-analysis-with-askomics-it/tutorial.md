@@ -33,10 +33,7 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
 
-<!-- AskOmics intro -->
 AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into "RDF triples" and store them in a specific kind of database: an "RDF triplestore". Under this form, data can then be queried using a specific language: "SPARQL". AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface.
 
 <!-- AskOmics for RNA-Seq -->
@@ -55,13 +52,13 @@ In the differentially expressed file, and the homologs file, gene are described 
 
 To link the human gene with neXtProt database, we will use the RDF abstraction of neXtProt. This file was obtained using the [Abstractor](https://github.com/askomics/abstractor) tool.
 
-> ### {% icon details %} Abstraction
+> <details-title>Abstraction</details-title>
 > During the integration step, AskOmics builds an RDF description of the data: the **abstraction**. This abstraction is used to explore the data and build the query.
 > AskOmics can also integrate **abstraction** of distant endpoint. Abstraction are obtained using [abstractor](https://github.com/askomics/abstractor), a python package to generate RDF abstractions from distant endpoints.
 > The query builder interface is used to create a path through the **abstraction** of each ressources. The path is converted to a SPARQL query that is sent to the multiple SPARQL endpoint.
 {: .details}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -83,11 +80,12 @@ We will use four files for this analysis:
 
 ## Import data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq AskOmics`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files.
@@ -97,6 +95,7 @@ We will use four files for this analysis:
 >    - Option 2: From [Zenodo](https://zenodo.org/record/3950862)
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    - You can paste the links below into the **Paste/Fetch** box:
@@ -141,7 +140,7 @@ We will first launch an AskOmics interactive tool, and upload the data into it.
 
 ## Launch AskOmics Interactive Tool
 
-> ### {% icon hands_on %} Hands-on: Launch AskOmics IT
+> <hands-on-title>Launch AskOmics IT</hands-on-title>
 > 1. **AskOmics** a visual SPARQL query builder {% icon tool %} to launch the Interactive Tool
 >    - {% icon param-file %} *"Datasets to load into AskOmics"*: `DE results`, `Mus musculus annotation`, `Gene Symbols`, `QTL`, `Homolog groups` and `neXtProt abstraction`
 {: .hands_on}
@@ -164,7 +163,7 @@ AskOmics conversion into RDF is called *integration*.
 
 On the **Files** page (link at the top of the page), you will see the files you uploaded from Galaxy. We will now integrate all these files.
 
-> ### {% icon hands_on %} Hands-on: Integrate data
+> <hands-on-title>Integrate data</hands-on-title>
 > 1. Got to the **Files** page
 > 2. Select all the input files
 > 3. Click on the **Integrate** button
@@ -180,7 +179,7 @@ The GFF preview shows the entities that the file contains. We need to select the
 
 The `Mus musculus annotation` file we're using contains gene and mRNA entities, and we will need both in the rest of the tutorial.
 
-> ### {% icon hands_on %} Hands-on: Integrate `Mus musculus annotation`
+> <hands-on-title>Integrate `Mus musculus annotation`</hands-on-title>
 > 1. Search for `Mus musculus annotation (preview)`
 > 2. Select `gene` and `mRNA`
 > 3. Click on the **Integrate (private dataset)** button
@@ -212,7 +211,7 @@ If the entity describes a locatable element on a genome:
 <!-- Relation -->
 A column can also represent a relation between the *entity* to another. In this case, the header have to be named `relationName@TargetedEntity` and the type *Directed* or *Symetric* relation. A *Directed* relation is a relation from this entity to the targeted one (e.g. A is B's father, but B is not A's father). A *Symetric relation* is a relation that works in both directions (e.g. A loves B, and B loves A).
 
-> ### {% icon hands_on %} Hands-on: Integrate `DE results`
+> <hands-on-title>Integrate `DE results`</hands-on-title>
 > 1. Search for `DE results (preview)`
 > 2. Edit attribute names and types:
 >   - change `ENTREZ ID` to `Differential Expression` and set type to *start entity*
@@ -223,7 +222,7 @@ A column can also represent a relation between the *entity* to another. In this 
 >   ![De results preview](images/de_results_preview.png "DE results preview")
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Integrate `Gene symbols`
+> <hands-on-title>Integrate `Gene symbols`</hands-on-title>
 > 1. Search for `Gene symbols (preview)`
 > 2. Edit attribute names and types:
 >   - change `symbol` to `Gene Symbol` and set type to *entity*
@@ -232,7 +231,7 @@ A column can also represent a relation between the *entity* to another. In this 
 >   ![Gene symbols preview](images/symbol_to_ensembl_preview.png "Symbol to Ensembl preview")
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Integrate `QTL`
+> <hands-on-title>Integrate `QTL`</hands-on-title>
 > 1. Search for `QTL (preview)`
 > 2. Edit attribute names and types:
 >   - change `Input` to `QTL` and set type to *start entity*
@@ -243,7 +242,7 @@ A column can also represent a relation between the *entity* to another. In this 
 >   ![QTL preview](images/qtl_preview.png "QTL preview")
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Integrate `Homolog groups`
+> <hands-on-title>Integrate `Homolog groups`</hands-on-title>
 > 1. Search for `Homolog groups (preview)`
 > 2. Edit attribute names and types:
 >   - change `HomoloGene ID` to `Homolog Group` and set type to *start entity*
@@ -258,7 +257,7 @@ A column can also represent a relation between the *entity* to another. In this 
 
 The last dataset we want to integrate is the neXtProt abstraction. This file contains some RDF data that instructs AskOmics how to communicate with a remote RDF database containing [neXtProt](https://www.nextprot.org/) data.
 
-> ### {% icon hands_on %} Hands-on: Integrate `neXtProt abstraction`
+> <hands-on-title>Integrate `neXtProt abstraction`</hands-on-title>
 > 1. Search for `neXtProt abstraction (preview)`
 > 2. Check that **Distant endpoint** is set to `https://sparql.nextprot.org/sparql` in **advanced options**
 > 3. Click on the **Integrate (private dataset)** button
@@ -269,7 +268,7 @@ The last dataset we want to integrate is the neXtProt abstraction. This file con
 
 Integration can take some time depending on the file size. The **Datasets** page shows the progress.
 
-> ### {% icon hands_on %} Hands-on: track integration progress
+> <hands-on-title>track integration progress</hands-on-title>
 > 1. Go to the **Dataset** page
 > 2. Wait for all datasets to be in *success* state
 >   ![dataset](images/datasets.png "Datasets table")
@@ -288,7 +287,7 @@ The first step to build a query is to choose a start point for the query.
 ![ask](images/ask.png "ask page")
 
 
-> ### {% icon hands_on %} Hands-on: Start a query
+> <hands-on-title>Start a query</hands-on-title>
 > 1. Go to the **Ask!** page
 > 2. Select the *Differential Expression* entity
 > 3. **Start!**
@@ -304,7 +303,7 @@ The query builder is composed of a graph. Nodes represents *entities* and links 
 
 On the right, attributes of the selected entity are displayed as attribute boxes. Each box has an eye icon: an opened eye means the attribute will be displayed on the results.
 
-> ### {% icon hands_on %} Hands-on: Ask for all Differential Expression and display some attributes
+> <hands-on-title>Ask for all Differential Expression and display some attributes</hands-on-title>
 > 1. Display `logFC` and `adj.P.val` by clicking on the eye icon
 > 2. **Run & preview**
 > ![preview results](images/preview_results.png "Results preview")
@@ -320,7 +319,7 @@ Next query will search for all over-expressed genes. Genes are considered over-e
 
 Back to the query builder,
 
-> ### {% icon hands_on %} Hands-on: Filter attributes to get significant over-expressed genes
+> <hands-on-title>Filter attributes to get significant over-expressed genes</hands-on-title>
 > 1. Filter `logFC` with `> 2`
 > 2. Filter `adj.P.val` with `≤ 0.05`
 > 2. **Run & preview**
@@ -335,7 +334,7 @@ Now that we have found our genes of interest, we will link these genes to the re
 
 To constraint on relation, we have to click on suggested nodes, linked to our entity of interest.
 
-> ### {% icon hands_on %} Hands-on: Link `De results` to `gene` using `Gene Symbol`
+> <hands-on-title>Link `De results` to `gene` using `Gene Symbol`</hands-on-title>
 > 1. First, hide `Label`, `logFC` and `adj.P.val` of `Differential Expression` using the eye icon
 > 2. Instantiate `Gene Symbol` by clicking on the suggested node, and hide his `Label` using the eye icon
 > 3. Instantiate `gene` by clicking on the `gene` node
@@ -345,7 +344,7 @@ To constraint on relation, we have to click on suggested nodes, linked to our en
 
 Results now show the Ensembl id of our over-expressed genes. We have now access to all the information about the `gene` entity contained in the GFF file. For example, we can filter on chromosome and display chromosome and strand to get information about gene location.
 
-> ### {% icon hands_on %} Hands-on: Filter `gene`
+> <hands-on-title>Filter `gene`</hands-on-title>
 > 1. Show `reference` and `strand` using the eye icon
 > 2. Filter `reference` by selecting `X` chromosome
 > 3. Filter `strand` by selecting `+` strand
@@ -361,13 +360,13 @@ AskOmics is able to perform special queries between entities that are locatable.
 - Entities overlapping another one
 - Entities included in another entity
 
-> ### {% icon details %} FALDO ontology
+> <details-title>FALDO ontology</details-title>
 > The [FALDO](https://bioportal.bioontology.org/ontologies/FALDO) ontology describes sequence feature positions and regions. AskOmics uses FALDO ontology to represent entity positions. GFF are using FALDO, as well as TSV entities with chromosome, strand, start and end.
 {: .details}
 
 On the query builder interface, locatable entities are represented with a green circle and relations based on location are represented as green arrow.
 
-> ### {% icon hands_on %} Hands-on: Filter `gene`
+> <hands-on-title>Filter `gene`</hands-on-title>
 > 1. First, remove the reference filter (unselect `X` using `ctrl`+`click`)
 > 1. Remove the strand filter (unselect `+` using `ctrl`+`click`)
 > 2. Hide `reference` `strand` using the eye
@@ -382,7 +381,7 @@ On the query builder interface, locatable entities are represented with a green 
 To go further, we can filter on `QTL` to refine the results.
 
 
-> ### {% icon hands_on %} Hands-on: Filter `gene`
+> <hands-on-title>Filter `gene`</hands-on-title>
 > 1. Go back to the `QTL` node
 > 2. Show the `Name` attribute using the eye icon
 > 3. Filter the name with a `regexp` with `growth`
@@ -391,7 +390,7 @@ To go further, we can filter on `QTL` to refine the results.
 
 From now, our query is "All Genes that are over-expressed (logFC > 2 and FDR ≤ 0.05) and located on a QTL that is related to growth". We can save this results with the *Run & save* button.
 
-> ### {% icon hands_on %} Hands-on: Save a result
+> <hands-on-title>Save a result</hands-on-title>
 > 1. **Run & save**
 {: .hands_on}
 
@@ -401,7 +400,7 @@ From now, our query is "All Genes that are over-expressed (logFC > 2 and FDR ≤
 
 Since we added the neXtProt abstraction into our AskOmics instance, we can link our data to neXtProt.
 
-> ### {% icon hands_on %} Hands-on: Find human homolog genes
+> <hands-on-title>Find human homolog genes</hands-on-title>
 > 1. Go back to the `gene` node
 > 2. instantiate `Gene Symbol` and hide his `Label`
 > 3. Instantiate `Homolog Group`, hide his label and filter his `Common Organism Name` with `human`
@@ -415,7 +414,7 @@ The query we've just built asks for the human homologs of our over-expressed gen
 
 Now we are linked to the neXtProt database, we can obtain information about the proteins encoded by these genes, as well as their location in the cell.
 
-> ### {% icon hands_on %} Hands-on: Get the protein and their location
+> <hands-on-title>Get the protein and their location</hands-on-title>
 > 1. Instantiate `Entry`
 > 2. Instantiate `Isoform` and hide the `Label`
 > 3. Many nodes are connected to `Isoform`. Use the *Filter links* field to filter nodes linked with a link named `location`
@@ -428,7 +427,7 @@ Now we are linked to the neXtProt database, we can obtain information about the 
 
 Finally, our query is "All genes that are over-expressed and located on a QTL that is related to growth, their human homologs and the location of the proteins coded by this genes". We will save it to the results.
 
-> ### {% icon hands_on %} Hands-on: Save a result
+> <hands-on-title>Save a result</hands-on-title>
 > 1. **Run & save**
 {: .hands_on}
 
@@ -437,7 +436,7 @@ Finally, our query is "All genes that are over-expressed and located on a QTL th
 
 The results page displays the saved queries. Queries are sorted by creation date. At the end of the table, action buttons can be used to preview the result, download or send it to Galaxy history.
 
-> ### {% icon hands_on %} Hands-on: Edit query name
+> <hands-on-title>Edit query name</hands-on-title>
 > 1. Go to the *Results* page
 > 2. Use the *Preview* button to check the result
 > 3. Click on the name to rename the two query with `Over-expressed genes on a growth QTL` and `Over-expressed genes on a growth QTL, their human homologs and protein location` (press enter key to validate)
@@ -454,7 +453,7 @@ The **Action** column contain button to perform certain action:
 - Send results to Galaxy: send the results (TSV file) to the most recently used Galaxy history
 - Send query to Galaxy: send the query representation (json file) to the most recently used Galaxy history
 
-> ### {% icon hands_on %} Hands-on: Send results to Galaxy
+> <hands-on-title>Send results to Galaxy</hands-on-title>
 > 1. Click on **Send results to Galaxy** on each query to send them to the last used Galaxy history
 > 2. Get back to galaxy and wait for the dataset (reload if needed)
 {: .hands_on}
@@ -465,6 +464,6 @@ Now that you have used AskOmics to generate this final tabular file, you can con
 If you are done, don't forget to close the AskOmics instance by going to the “User” > “Active Interactive Tools” page.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have seen how to use AskOmics Interactive Tool. We launch the tools with a set of input files, then we have integrated these files into RDF and finally, we built complex queries over this local datasets and neXtProt to answer a biological question.

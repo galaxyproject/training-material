@@ -67,7 +67,7 @@ contributors:
   - carpentries
   - hexylena
   - bazante1
-  - erasmusplus
+  - gallantries
   - avans-atgm
 tags:
 - bash
@@ -75,14 +75,14 @@ tags:
 
 This tutorial will walk you through the basics of how to use the Unix command line.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) ["The Unix Shell"](https://swcarpentry.github.io/shell-novice/) lesson, which is licensed CC-BY 4.0. Adaptations have been made to make this work better in a GTN/Galaxy environment.
 >
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -183,7 +183,7 @@ You may have seen it in a text editor program, for example.
 So let's try our first command, `ls` which is short for listing.
 
 
-> ### {% icon hands_on %} Open a Jupyter Terminal
+> <hands-on-title>Open a Jupyter Terminal</hands-on-title>
 > This tutorial will let you accomplish almost everything from this view, running code in the cells below directly in the training material. You can choose between running the code here, or opening up a terminal tab in which to run it.
 >
 > Here are some instructions for how to do this on various environments.
@@ -220,17 +220,17 @@ This command will list the contents of the current directory:
 ls
 ```
 
-> ### {% icon tip %} Command not found
+> <tip-title>Command not found</tip-title>
 > If the shell can't find a program whose name is the command you typed, it
 > will print an error message such as:
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > $ ks
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > ks: command not found
 > > ```
@@ -305,7 +305,7 @@ pwd
 
 Try running it now.
 
-> ### {% icon tip %} Home Directory Variation
+> <tip-title>Home Directory Variation</tip-title>
 >
 > The home directory path will look different on different operating systems.
 >
@@ -354,7 +354,7 @@ Similarly,
 we know that `/Users` is stored inside the root directory `/`
 because its name begins with `/`.
 
-> ## Slashes
+> <tip-title>Slashes</tip-title>
 >
 > Notice that there are two meanings for the `/` character.
 > When it appears at the front of a file or directory name,
@@ -404,7 +404,7 @@ we can see that our home directory contains only **sub-directories**.
 Any names in our output that don't have a classification symbol
 are plain old **files**.
 
-> ### {% icon tip %} Real Terminal Tip: Clearing your terminal
+> <tip-title>Real Terminal Tip: Clearing your terminal</tip-title>
 >
 > If your screen gets too cluttered, you can clear your terminal using the
 > `clear` command. You can still access previous commands using <kbd>↑</kbd>
@@ -430,17 +430,17 @@ information on how to use the command or program.
 ls --help
 ```
 
-> ### {% icon tip %} Unsupported command-line options
+> <tip-title>Unsupported command-line options</tip-title>
 > If you try to use an option (flag) that is not supported, `ls` and other commands
 > will usually print an error message similar to:
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > ls -j
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > ls: invalid option -- 'j'
 > > Try 'ls --help' for more information.
@@ -453,13 +453,13 @@ ls --help
 
 The other way to learn about `ls` is to type
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```
 > $ man ls
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > ```
 > LS(1)                                                          User Commands                                                          LS(1)
 >
@@ -518,7 +518,7 @@ If so, you can move between hits using <kbd>N</kbd> (for moving forward) and
 
 To **quit** the `man` pages, press <kbd>Q</kbd>.
 
-> ### {% icon tip %} Manual pages on the web
+> <tip-title>Manual pages on the web</tip-title>
 >
 > Of course, there is a third way to access help for commands:
 > searching the internet via your web browser.
@@ -531,7 +531,7 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 > which covers many commands introduced within this lesson.
 {: .tip}
 
-> ### {% icon question %} Exploring More `ls` Flags
+> <question-title>Exploring More `ls` Flags</question-title>
 >
 > You can also use two options at the same time. What does the command `ls` do when used
 > with the `-l` option? What about if you use both the `-l` and the `-h` option?
@@ -540,7 +540,7 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 > as file permissions and ownership), but the rest should be useful
 > nevertheless.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The `-l` option makes `ls` use a **l**ong listing format, showing not only
 > > the file/directory names but also additional information, such as the file size
 > > and the time of its last modification. If you use both the `-h` option and the `-l` option,
@@ -549,7 +549,7 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Listing in Reverse Chronological Order
+> <question-title>Listing in Reverse Chronological Order</question-title>
 >
 > By default, `ls` lists the contents of a directory in alphabetical
 > order by name. The command `ls -t` lists items by time of last
@@ -559,7 +559,7 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 > Hint: You may need to use the `-l` flag to see the
 > last changed dates.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The most recently changed file is listed last when using `-rt`. This
 > > can be very useful for finding your most recent edits or checking to
 > > see if a new output file was written.
@@ -691,7 +691,7 @@ Note that in most command line tools, multiple options can be combined
 with a single `-` and no spaces between the options: `ls -F -a` is
 equivalent to `ls -Fa`.
 
-> ### {% icon tip %} Other Hidden Files
+> <tip-title>Other Hidden Files</tip-title>
 >
 > In addition to the hidden directories `..` and `.`, you may also see a file
 > called `.bash_profile`. This file usually contains shell configuration
@@ -750,13 +750,13 @@ the filesystem (including from inside `data`). To find the absolute path
 we're looking for, we can use `pwd` and then extract the piece we need
 to move to `shell-lesson-data`.
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```
 > $ pwd
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > ```bash
 > /Users/nelle/
 > ```
@@ -775,7 +775,7 @@ pwd
 ls -F
 ```
 
-> ### {% icon tip %} Two More Shortcuts
+> <tip-title>Two More Shortcuts</tip-title>
 >
 > The shell interprets a tilde (`~`) character at the start of a path to
 > mean "the current user's home directory". For example, if Nelle's home
@@ -814,7 +814,7 @@ cd -
 you'll see you're back in `~/Desktop/shell-lesson-data`.
 Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 
-> ### {% icon question %} Absolute vs Relative Paths
+> <question-title>Absolute vs Relative Paths</question-title>
 >
 > Starting from `/Users/amanda/data`,
 > which of the following commands could Amanda use to navigate to her home directory,
@@ -830,7 +830,7 @@ Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 > 8. `cd`
 > 9. `cd ..`
 >
-> > ### {% icon question %} Solution
+> > <solution-title></solution-title>
 > > 1. No: `.` stands for the current directory.
 > > 2. No: `/` stands for the root directory.
 > > 3. No: Amanda's home directory is `/Users/amanda`.
@@ -843,7 +843,7 @@ Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Relative Path Resolution
+> <question-title>Relative Path Resolution</question-title>
 >
 > Using the filesystem diagram below, if `pwd` displays `/Users/thing`,
 > what will `ls -F ../backup` display?
@@ -855,7 +855,7 @@ Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 >
 > ![A directory tree below the Users directory where '/Users' contains the directories 'backup' and 'thing'; '/Users/backup' contains 'original', 'pnas_final' and 'pnas_sub'; '/Users/thing' contains 'backup'; and '/Users/thing/backup' contains '2012-12-01', '2013-01-08' and '2013-01-27'](../../images/carpentries-cli/filesystem-challenge.svg)
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. No: there *is* a directory `backup` in `/Users`.
 > > 2. No: this is the content of `Users/thing/backup`, but with `..`, we asked for one level further up.
 > > 3. No: see previous explanation.
@@ -863,7 +863,7 @@ Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} `ls` Reading Comprehension
+> <question-title>`ls` Reading Comprehension</question-title>
 >
 > Using the filesystem diagram below,
 > if `pwd` displays `/Users/backup`,
@@ -881,7 +881,7 @@ Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 > 2.  `ls -r -F`
 > 3.  `ls -r -F /Users/backup`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >  1. No: `pwd` is not the name of a directory.
 > >  2. Yes: `ls` without directory argument lists files and directories in the current directory.
 > >  3. Yes: uses the absolute path explicitly.
@@ -945,7 +945,7 @@ but she found them hard to understand after a couple of years.
 (The final straw was when she found herself creating
 a directory called `revised-revised-results-3`.)
 
-> ### {% icon tip %} Sorting Output
+> <tip-title>Sorting Output</tip-title>
 >
 > Nelle names her directories 'year-month-day',
 > with leading zeroes for months and days,
@@ -1077,7 +1077,7 @@ project/data:
 project/results:
 ```
 
-> ### {% icon tip %} Two ways of doing the same thing
+> <tip-title>Two ways of doing the same thing</tip-title>
 > Using the shell to create a directory is no different than using a file explorer.
 > If you open the current directory using your operating system's graphical file explorer,
 > the `thesis` directory will appear there too.
@@ -1085,7 +1085,7 @@ project/results:
 > the files and directories themselves are the same.
 {: .tip}
 
-> ### {% icon tip %} Good names for files and directories
+> <tip-title>Good names for files and directories</tip-title>
 >
 > Complicated names of files and directories can make your life painful
 > when working on the command line. Here we provide a few useful
@@ -1125,14 +1125,14 @@ $ cd thesis
 $ nano draft.txt
 ```
 
-> ### {% icon warning %} Nano won't work in a Jupyter Notebook!
+> <warning-title>Nano won't work in a Jupyter Notebook!</warning-title>
 > Nano is an interactive, full screen editor. You'll need to switch to a proper
 > console to do this step, if you haven't already.
 >
 > In JupyterLab you can find this under the top menu by clicking **File -> New -> Terminal**
 {: .warning}
 
-> ### {% icon tip %} Which Editor?
+> <tip-title>Which Editor?</tip-title>
 >
 > When we say, "`nano` is a text editor" we really do mean "text": it can
 > only work with plain character data, not tables, images, or any other
@@ -1168,7 +1168,7 @@ press <kbd>Return</kbd> to accept the suggested default of `draft.txt`).
 Once our file is saved, we can use <kbd>Ctrl</kbd>+<kbd>X</kbd> to quit the editor and
 return to the shell.
 
-> ### {% icon tip %} Control, Ctrl, or ^ Key
+> <tip-title>Control, Ctrl, or ^ Key</tip-title>
 >
 > The Control key is also called the 'Ctrl' key. There are various ways
 > in which using the Control key may be described. For example, you may
@@ -1194,7 +1194,7 @@ but `ls` now shows that we have created a file called `draft.txt`:
 ls
 ```
 
-> ### {% icon question %} Creating Files a Different Way
+> <question-title>Creating Files a Different Way</question-title>
 >
 > We have seen how to create text files using the `nano` editor.
 > Now, try the following command:
@@ -1211,7 +1211,7 @@ ls
 >
 > 3.  When might you want to create a file this way?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1.  The `touch` command generates a new file called `my_file.txt` in
 > >     your current directory.  You
 > >     can observe this newly generated file by typing `ls` at the
@@ -1235,7 +1235,7 @@ ls
 # Explore the possible solutions here!
 ```
 
-> ### {% icon tip %} What's In A Name?
+> <tip-title>What's In A Name?</tip-title>
 >
 > You may have noticed that all of Nelle's files are named 'something dot
 > something', and in this part of the lesson, we always used the extension
@@ -1329,7 +1329,7 @@ We can use this to see that `quotes.txt` is now present in our current directory
 ls quotes.txt
 ```
 
-> ### {% icon question %} Moving Files to a new folder
+> <question-title>Moving Files to a new folder</question-title>
 >
 > After running the following commands,
 > Jamie realizes that she put the files `sucrose.dat` and `maltose.dat` into the wrong folder.
@@ -1350,7 +1350,7 @@ ls quotes.txt
 > mv sucrose.dat maltose.dat ____/____
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > $ mv sucrose.dat maltose.dat ../raw
 > > ```
@@ -1387,7 +1387,7 @@ We can check the result by listing the contents of both the `thesis` and `thesis
 ls thesis thesis_backup
 ```
 
-> ### {% icon question %} Renaming Files
+> <question-title>Renaming Files</question-title>
 >
 > Suppose that you created a plain-text file in your current directory to contain a list of the
 > statistical tests you will need to do to analyze your data, and named it: `statstics.txt`
@@ -1400,7 +1400,7 @@ ls thesis thesis_backup
 > 3. `mv statstics.txt .`
 > 4. `cp statstics.txt .`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. No.  While this would create a file with the correct name,
 > > the incorrectly named file still exists in the directory
 > > and would need to be deleted.
@@ -1413,36 +1413,36 @@ ls thesis thesis_backup
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Moving and Copying
+> <question-title>Moving and Copying</question-title>
 >
 > What is the output of the closing `ls` command in the sequence shown below?
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > pwd
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > /Users/jamie/data
 > > ```
 > {: .code-out}
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > ls
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > proteins.dat
 > > ```
 > {: .code-out}
 >
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > mkdir recombined
 > > mv proteins.dat recombined/
@@ -1456,7 +1456,7 @@ ls thesis thesis_backup
 > 3.   `proteins.dat recombined`
 > 4.   `proteins-saved.dat`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > We start in the `/Users/jamie/data` directory, and create a new folder called `recombined`.
 > > The second line moves (`mv`) the file `proteins.dat` to the new folder (`recombined`).
 > > The third line makes a copy of the file we just moved.
@@ -1490,7 +1490,7 @@ We can confirm the file has gone using `ls`:
 ls quotes.txt
 ```
 
-> ## Deleting Is Forever
+> <tip-title>Deleting Is Forever</tip-title>
 >
 > The Unix shell doesn't have a trash bin that we can recover deleted
 > files from (though most graphical interfaces to Unix do).  Instead,
@@ -1502,12 +1502,12 @@ ls quotes.txt
 {: .tip}
 
 
-> ### {% icon question %} Using `rm` Safely
+> <question-title>Using `rm` Safely</question-title>
 >
 > What happens when we execute `rm -i thesis_backup/quotations.txt`?
 > Why would we want this protection when using `rm`?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > $ rm: remove regular file 'thesis_backup/quotations.txt'? y
 > > ```
@@ -1547,13 +1547,13 @@ Oftentimes one needs to copy or move several files at once.
 This can be done by providing a list of individual filenames,
 or specifying a naming pattern using wildcards.
 
-> ### {% icon question %} Copy with Multiple Filenames
+> <question-title>Copy with Multiple Filenames</question-title>
 >
 > For this exercise, you can test the commands in the `shell-lesson-data/data` directory.
 >
 > In the example below, what does `cp` do when given several filenames and a directory name?
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > $ mkdir backup
 > > $ cp amino-acids.txt animals.txt backup/
@@ -1562,7 +1562,7 @@ or specifying a naming pattern using wildcards.
 >
 > In the example below, what does `cp` do when given three or more file names?
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > $ ls -F
 > > amino-acids.txt  animals.txt  backup/  elements/  morse.txt  pdb/
@@ -1571,7 +1571,7 @@ or specifying a naming pattern using wildcards.
 > > ```
 > {: .code-in}
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > If given more than one file name followed by a directory name
 > > (i.e. the destination directory must be the last argument),
 > > `cp` copies the files to the named directory.
@@ -1592,7 +1592,7 @@ or specifying a naming pattern using wildcards.
 
 ### Using wildcards for accessing multiple files at once
 
-> ### {% icon tip %} Wildcards
+> <tip-title>Wildcards</tip-title>
 >
 > `*` is a **wildcard**, which matches zero or more  characters.
 > Let's consider the `shell-lesson-data/molecules` directory:
@@ -1622,7 +1622,7 @@ or specifying a naming pattern using wildcards.
 > expanding wildcards.
 {: .tip}
 
-> ### {% icon question %} List filenames matching a pattern
+> <question-title>List filenames matching a pattern</question-title>
 >
 > When run in the `molecules` directory, which `ls` command(s) will
 > produce this output?
@@ -1634,7 +1634,7 @@ or specifying a naming pattern using wildcards.
 > 3. `ls *t??ne.pdb`
 > 4. `ls ethane.*`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >  The solution is `3.`
 > >
 > > `1.` shows all files whose names contain zero or more characters (`*`)
@@ -1659,7 +1659,7 @@ or specifying a naming pattern using wildcards.
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} More on Wildcards
+> <question-title>More on Wildcards</question-title>
 >
 > Sam has a directory containing calibration data, datasets, and descriptions of
 > the datasets:
@@ -1745,7 +1745,7 @@ or specifying a naming pattern using wildcards.
 >         └── 2015-11-23-dataset_overview.txt
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > cp *calibration.txt backup/calibration
@@ -1760,7 +1760,7 @@ or specifying a naming pattern using wildcards.
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Organizing Directories and Files
+> <question-title>Organizing Directories and Files</question-title>
 >
 > Jamie is working on a project and she sees that her files aren't very well
 > organized:
@@ -1781,7 +1781,7 @@ or specifying a naming pattern using wildcards.
 > fructose.dat    sucrose.dat
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > mv *.dat analyzed
 > > ```
@@ -1796,7 +1796,7 @@ or specifying a naming pattern using wildcards.
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Reproduce a folder structure
+> <question-title>Reproduce a folder structure</question-title>
 >
 > You're starting a new experiment and would like to duplicate the directory
 > structure from your previous experiment so you can add new data.
@@ -1817,7 +1817,7 @@ or specifying a naming pattern using wildcards.
 > Which of the following set of commands would achieve this objective?
 > What would the other commands do?
 >
-> > ### {% icon code-in %} Option 1
+> > <code-in-title>Option 1</code-in-title>
 > > ```
 > > $ mkdir 2016-05-20
 > > $ mkdir 2016-05-20/data
@@ -1826,7 +1826,7 @@ or specifying a naming pattern using wildcards.
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-in %} Option 2
+> > <code-in-title>Option 2</code-in-title>
 > > ```
 > > $ mkdir 2016-05-20
 > > $ cd 2016-05-20/
@@ -1837,21 +1837,21 @@ or specifying a naming pattern using wildcards.
 > {: .code-in}
 >
 >
-> > ### {% icon code-in %} Option 3
+> > <code-in-title>Option 3</code-in-title>
 > > ```
 > > $ mkdir 2016-05-20/data/raw
 > > $ mkdir 2016-05-20/data/processed
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-in %} Option 4
+> > <code-in-title>Option 4</code-in-title>
 > > ```
 > > $ mkdir -p 2016-05-20/data/raw
 > > $ mkdir -p 2016-05-20/data/processed
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-in %} Option 5
+> > <code-in-title>Option 5</code-in-title>
 > > ```
 > > $ mkdir 2016-05-20
 > > $ cd 2016-05-20
@@ -1860,7 +1860,7 @@ or specifying a naming pattern using wildcards.
 > > ```
 > {: .code-in}
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The first two sets of commands achieve this objective.
 > > The first set uses relative paths to create the top-level directory before
 > > the subdirectories.

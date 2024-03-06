@@ -35,11 +35,12 @@ contributors:
 priority: 4
 notebook:
   language: python
+  pyolite: true
 ---
 
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -128,7 +129,7 @@ print(weekdays[9])
 
 returns a `IndexError: list index out of range`.
 
-> ### {% icon tip %} Tip: Reading Error Messages
+> <tip-title>Reading Error Messages</tip-title>
 > So how do you read this?
 > ```
 > 1 | ---------------------------------------------------------------------------
@@ -145,7 +146,7 @@ returns a `IndexError: list index out of range`.
 > 4. Here an arrow points to the line number where something has broken. 1 shows that it's the first line within the cell, and it points to the print statement. Really it's pointing at the `weekdays[9]` within the print statement.
 > 5. Blank
 > 6. This is where we normally look for the **most important part of the Traceback**. The error message. An `IndexError`, namely that the list index (9) is out of the range of possible values (the length of the list.)
-{: .question}
+{: .tip}
 
 However, sometimes you want to access the very end of a list! You can either start at the beginning and count along to find the last item or second to last item, or you can use Negative Indices
 
@@ -222,12 +223,12 @@ print(f'99th element of element is: {element[99]}')
 
 ## Exercises
 
-> ### {% icon question %} Question: Checking suffixes
+> <question-title>Checking suffixes</question-title>
 >
 > 1. How could you check that the extension of a filename is `.csv`
 > 2. Can you find another way? Maybe check the help page for `str`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `a[-4:] == "csv"` (Here we use `==` for comparing two values)
 > > 2. `a.endswith('.csv')`
@@ -243,13 +244,13 @@ c = "9382.csv"
 d = "1239.csv"
 ```
 
-> ### {% icon question %} Question: Say it loud!
+> <question-title>Say it loud!</question-title>
 >
 > 1. Can you find a method in the `str`'s help that converts the string to upper case
 > 2. or lower case?
 > 3. Can you use it to fix mixed case DNA sequence?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. `"shout it out".upper()`
 > > 2. `"WHISPER THIS".lower()`
 > > 3. `terrible_sequence.upper()`
@@ -266,12 +267,12 @@ print(terrible_sequence)
 ```
 
 
-> ### {% icon question %} Question: Splitting
+> <question-title>Splitting</question-title>
 > 1. We use `.split()` to split a string by some character. Here we have a comma separated list of values, try splitting that up by a comma, but we actually wanted it separated by `|` characters. Can you split it up, and then re-join it with that new character?
 > 2. Does `help(str)` give you another option for replacing a character like that.
 > 3. What happens if you split by another value like `3`?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. `data.split(",")`
 > > 2. `data.replace(",", "|")`
 > > 3. Those characters will disappear! If you want to reconstruct the same string
@@ -312,7 +313,7 @@ print(elements[6:5])
 If you don't supply an end value, Python will default to going to the end of the list. Likewise, if you don't provide a start value, Python will use `0` as the start by default, until whatever end value you provide.
 
 
-> ### {% icon question %} Question: Valid and Invalid Slices
+> <question-title>Valid and Invalid Slices</question-title>
 > Which of these do you think will be valid? Which are invalid? Predict what they will return:
 > ```
 > # 1
@@ -335,7 +336,7 @@ If you don't supply an end value, Python will default to going to the end of the
 > elements[1.5:]
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > All of these are valid except the last two.
 > > 1. If you dont' fill in a position, Python will use the default. 0 for the left hand side of the `:`, and `len(elements)` for the right hand side.
 > > 2. You can request a slice longer than your list (e.g. up to 20), but Python may not give you that many items back.
@@ -380,11 +381,11 @@ students = sorted(students)
 print(students)
 ```
 
-> ### {% icon tip %} Tip: Sorting names is hard!
+> <tip-title>Sorting names is hard!</tip-title>
 > Some people have 1 name, some have 4 or more! Some cultures have surnames first, some not. Sorting names is a complex situation, so be sure you consider your data before sorting and assuming it's correct. Test with multiple values to make sure your code works!
 {: .tip}
 
-> ### {% icon tip %} Tip: Results can be dependent on analysis order!
+> <tip-title>Results can be dependent on analysis order!</tip-title>
 > Some analyses (especially simultaions) can be dependent on data input order or data sorting. This was recently seen in {% cite Bhandari_Neupane_2019 %} where the data files used were sorted one way on Windows, and another on Linux, resulting in different results for the same code and the same datasets! Yikes!
 >
 > If you know your analyses are dependent on file ordering, then you can use `sorted()` to make sure the data is provided in a uniform way every time.
@@ -412,7 +413,7 @@ It takes the string you called it on, and uses that as a separator. Then for the
 
 # Exercise Time
 
-> ### {% icon question %} Question: Fill in the Blanks
+> <question-title>Fill in the Blanks</question-title>
 >
 > Fill in the blanks so that the program below produces the output shown.
 >
@@ -431,7 +432,7 @@ It takes the string you called it on, and uses that as a separator. Then for the
 > second time: [3, 5]
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > values = []
 > > values.append(1)
@@ -572,8 +573,9 @@ print(f'second time: {values}') # should print [3, 5]
 > > lithium
 > >
 > > ```
-> The first statement prints the whole string, since the slice goes beyond the total length of the string.
-> The second statement returns an empty string, because the slice goes "out of bounds" of the string.
+> >
+> > The first statement prints the whole string, since the slice goes beyond the total length of the string.
+> > The second statement returns an empty string, because the slice goes "out of bounds" of the string.
 > {: .solution}
 {: .question}
 
@@ -622,7 +624,7 @@ populations = {
 
 You can see a string (the country name) being used for the key, and then the number (an integer) as the value. (Would a float make sense? Why or why not?)
 
-> ### {% icon tip %} Tip: Other Names
+> <tip-title>Other Names</tip-title>
 > They're also sometimes called associative arrays (because they're an array or list of values that associate a key to a value) or maps (because they map a key to a value), depending on what you're reading.
 {: .tip}
 
@@ -652,7 +654,7 @@ print(populations["Mars"])
 ```
 
 
-> ### {% icon tip %} Tip: Dictionaries are faster than lists for looking up values
+> <tip-title>Dictionaries are faster than lists for looking up values</tip-title>
 > Just like in real life, searching a dictionary for a specific term is quite fast. Often a lot faster than searching a list for a specific value.
 >
 > For those of you old enough to remember the paper version of a dictionary, you knew that As would be at the start and Zs at the end, and probably Ms around the middle. And if you were looking for a word like "Squirrel", you'd open the dictionary in the middle, maybe decide it was in the second half of the book, randomly choose a page in the second half, and you could keep deciding if it was "before" or "after" the current page, never even bothering to search the first half.
@@ -695,14 +697,14 @@ print(populations)
 
 ## Exercises
 
-> ### {% icon question %} Question: DNA Complement
+> <question-title>DNA Complement</question-title>
 >
 > DNA is usually in the form of dsDNA, a paired strand, where A maps to T and C maps to G and vice versa.
 > But when we're working with DNA sequences in bioinformatics, we often only store one strand, because we can calculate the *complement* on the fly, when we need.
 >
 > Write a dictionary that lets you look up the letters A, C, T, and G and find their complements.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > You need to have the complements of every base. If you just defined 'A' and 'C', how would you look up the complement when you want to translate a 'T' or a 'G'? It's not easily possible to look up a key by a value, only to search a key and find a value.
 > > ```
 > > translation = {
@@ -723,7 +725,7 @@ translation = {
 print(translation)
 ```
 
-> ### {% icon question %} Question: Modifying an array
+> <question-title>Modifying an array</question-title>
 >
 > Fill in the blanks to make the execution correct:
 >
@@ -743,7 +745,7 @@ print(translation)
 > print(variants[______]) # Should print 43486
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > variants = {
 > >   'B.1.1.7': 26267,
@@ -798,7 +800,7 @@ Dictionary / Associative Array / map (`dict`) | `{"weight": 3.4, "age": 12, "nam
 
 ## Exercises
 
-> ### {% icon question %} Question: Which Datatype
+> <question-title>Which Datatype</question-title>
 >
 > 1. Chromosome Length
 > 1. Name
@@ -807,7 +809,7 @@ Dictionary / Associative Array / map (`dict`) | `{"weight": 3.4, "age": 12, "nam
 > 4. Hair Colour
 > 5. Money/Currency
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Here you need to use an integer, a fractional or float value would not make sense. You cannot have half an A/C/T/G.
 > > 1. Here a string would be a good choice. (And probably just a single `name` string, rather than a `first` and `last` name, as not all humans have two names! And some have more than two.)

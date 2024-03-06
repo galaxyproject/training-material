@@ -14,4 +14,10 @@ Tools are frequently updated to new versions. Your Galaxy may have multiple vers
   - Navigate to your tutorial
   - Tool names in tutorials will be blue buttons that open the correct tool for you
   - **Note:** this does not work for all tutorials (yet)
-  ![gif showing how GTN-in-Galaxy works]({% link /topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif %})
+  ![gif showing how GTN-in-Galaxy works]({% link topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif %})
+  - You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface
+
+> <warning-title>Not all browsers work!</warning-title>
+> - We've had some issues with Tutorial mode on Safari for Mac users. 
+> - Try a **different browser** if you aren't seeing the button.
+{: .warning}

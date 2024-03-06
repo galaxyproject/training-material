@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "DNA Methylation data analysis"
 zenodo_link: "https://zenodo.org/record/557099"
-edam_ontology: "topic_3173"
+edam_ontology: ["topic_3173"]
 questions:
   - "What is methylation and why it cannot be recognised by a normal NGS procedure?"
   - "Can a different methylation influence the expression of a gene? How?"
@@ -21,55 +21,68 @@ contributors:
   - dpryan79
 ---
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
-> In this tutorial we will do:
+> In this tutorial, we will deal with:
 >
-> 1. quality control
-> 2. alignment
-> 3. methylation extraction
-> 4. visualization of methylation levels
-> 5. differentially methylated regions analysis
->
-> We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).
->
+> 1. TOC
+> {:toc}
 >
 {: .agenda}
 
+We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).
+
 This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 
-# Load data and quality control
-> ### {% icon hands_on %} Hands-on: Get the data and look at the quality
+
+# Data upload
+
+We will start by loading the example dataset which will be used for the tutorial into Galaxy
+
+
+> <hands-on-title>Get the data into Galaxy</hands-on-title>
 >
-> We load now the example dataset which will be used for the tutorial.
 >
-> 1. Load the two example datasets from our data library: subset_1.fastq.gz and subset_2.fastq.gz.
+> 1. Create a new history
 >
->    > ### {% icon tip %} Tip: Get data from the library
->    >
->    > * Click on `Shared Data` --> `Data Libraries` and here `MethylSeq_2017`
->    > * Select the uploaded datasets `subset_1.fastq.gz` and `subset_2.fastq.gz` as the fastq files
->    {: .tip}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Quality control
+> 2. Import the two example datasets from Zenodo or the shared data library:
 >
->    > ### {% icon tip %} Tip: Search for tools
->    >
->    > * **FastQC** {% icon tool %} with the following parameters:
->    > - Select the uploaded datasets `subset_1.fastq.gz` and `subset_2.fastq.gz` as the fastq files
->    {: .tip}
+>    ```
+>    https://zenodo.org/record/557099/files/subset_1.fastq
+>    https://zenodo.org/record/557099/files/subset_2.fastq
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+{: .hands_on}
+
+
+# Quality Control
+
+The first step in any analysis should always be quality control. We will use the FastQC tool to asses the quality of our reads and determine if we need to perform any data cleaning before proceeding with our analysis.
+
+> <hands-on-title>Quality Control</hands-on-title>
+>
+> 2. **FastQC** {% icon tool %} with the following parameters:
+>    - {% icon param-files %} *"Raw read data from your current history"*:  `subset_1.fastq.gz` and `subset_2.fastq.gz`
+>
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
 > 3. Go to the web page result page and have a closer look at 'Per base sequence content'
 >
 >    ![FastQC webpage results](../../images/fastqc.png)
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Note the GC distribution and percentage of "T" and "C". Why is this so weird?
 >    > 2. Is everything as expected?
 >    >
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The attentive audience of the theory part knows: Every C-meth stays a C and every normal C becomes a T during the bisulfite conversion.
 >    > > 2. Yes it is. Always be careful and have the specific characteristics of your data in mind during the interpretation of FastQC results.
 >    > {: .solution }
@@ -77,9 +90,10 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 >
 {: .hands_on}
 
+
 # Alignment
 
-> ### {% icon hands_on %} Hands-on: Mapping with bwameth
+> <hands-on-title>Mapping with bwameth</hands-on-title>
 >
 > We will map now the imported dataset against a reference genome.
 >
@@ -88,20 +102,22 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 > - Choose for the option `Is this library mate-paired?` `Paired-end` and use the two imported datasets as an input.
 > Compute now the alignment. Please notice that depending on your system this computation can take some time. If you want to skip this, we provide for you a precomputed alignment. Import `aligned_subset.bam` to your history.
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > Why we need other alignment tools for bisulfite sequencing data?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > You may have noticed that all the C's are C-meth's and a T can be a T or a C. A mapper for methylation data needs to find out what is what.
 >    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
 
+
+
 # Methylation bias and metric extraction
 
-> ### {% icon hands_on %} Hands-on: Methylation bias
+> <hands-on-title>Methylation bias</hands-on-title>
 >
 > In this step we will have a look at the distribution of the methylation and will look at a possible bias.
 >
@@ -113,12 +129,12 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 >
 >    ![Methylation bias example](../../images/methylation_bias_example_data.png)
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Consider the `original top strand` output. Is there a methylation bias?
 >    > 2. If we would trim, what would be the start and the end positions?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable.
 >    > > 2. To trim the reads we would include for the first strand only the positions 0 to 145, for the second 6 to 149.
 >    > {: .solution }
@@ -128,7 +144,7 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Methylation extraction with MethylDackel
+> <hands-on-title>Methylation extraction with MethylDackel</hands-on-title>
 >
 >
 > We will extract the methylation on the resulting BAM file of the alignment step. We need this to create a methylation level plot in the next step.
@@ -148,14 +164,14 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 
 # Visualization
 
-> ### {% icon hands_on %} Hands-on:
+> <hands-on-title></hands-on-title>
 >
 > In this step we want to visualize the methylation level around all TSS of our data. When located at gene promoters, DNA methylation is usually a repressive mark.
 >
 > 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
 >    - Use the result of MethylDackel to transform it to a bigWig file.
 >
->      > ### {% icon tip %} Tip: Database edit
+>      > <tip-title>Database edit</tip-title>
 >      >
 >      > It can happen that you can not select the correct input file. In this case you have to add meta information about the used genome to the file.
 >      > * Click on the pencil of the correct history item.
@@ -178,16 +194,16 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 > 2. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
 >    - Use the imported file to transform it to a bigWig file.
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > The execution fails. Do you have an idea why?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > A conversion to bigWig would fail right now, probably with some error message like `hashMustFindVal: '1' not found`. The reason is the source of the reference genome which was used. There is ensembl and UCSC as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. UCSC is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.
 >    > {: .solution }
 >    {: .question}
 >
->    > ### {% icon comment %} UCSC - Ensembl convert
+>    > <comment-title>UCSC - Ensembl convert</comment-title>
 >    >
 >    > * Download the `Replace information file` for hg38 chromosome: [Download](https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt) and import it to Galaxy.
 >    > * **Replace column** {% icon tool %}:
@@ -205,7 +221,7 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 
 # Metilene
 
-> ### {% icon hands_on %} Hands-on: Metilene
+> <hands-on-title>Metilene</hands-on-title>
 >
 > With metilene it is possible to detect differentially methylated regions (DMRs) which is a necessary prerequisite for characterizing different epigenetic states.
 >
@@ -215,11 +231,11 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 >    - Select for the option `BED file containing regions of interest` the imported BED file CpGIslands.bed.
 > 3. More information about metilene can be found here: https://www.bioinf.uni-leipzig.de/Software/metilene
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > Have a look at the produced pdf document. What is the data showing?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > It shows the distribution of DMR differences, DMR length in nucleotides and number CpGs, DMR differences vs. q-values, mean methylation group 1 vs. mean methylation group 2 and DMR length in nucleotides vs. length in CpGs
 >    > {: .solution }
 >    {: .question}

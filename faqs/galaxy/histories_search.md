@@ -10,7 +10,7 @@ contributors: [shiltemann,hexylena]
 To make it easier to find datasets in large histories, you can filter your history by keywords as follows:
   1. **Click** on the *search datasets* box at the top of the history panel.
 
-     ![history search box]({% link /shared/images/history_search_datasets.png %})
+     ![history search box]({% link shared/images/history_search_datasets.png %})
 
   2. **Type** a search term in this box
      - For example a tool name, or sample name

@@ -19,8 +19,6 @@ contributors:
   - malloryfreeberg
 ---
 
-# Introduction
-{:.no_toc}
 
 Small, noncoding RNA (sRNA) molecules, typically 18-40nt in length, are key features of post-transcriptional regulatory mechanisms governing gene expression. Through interactions with protein cofactors, these tiny sRNAs typically function by perfectly or imperfectly basepairing with substrate RNA molecules, and then eliciting downstream effects such as translation inhibition or RNA degradation. Different subclasses of sRNAs - *e.g.* microRNAs (miRNAs), Piwi-interaction RNAs (piRNAs), and endogenous short interferring RNAs (siRNAs) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine expression of the piRNA subclass of sRNAs and their targets in *Drosophila melanogaster*.
 
@@ -32,7 +30,7 @@ In this exercise we will identify what small RNAs are present in *Drosophila* Dm
 
 It is of note that this tutorial uses datasets that have been de-multiplexed so that the input data files are a single FASTQ formatted file for each sample. Because sRNAs are typically much smaller than fragments generated for RNA-seq or other types of deep sequencing experiments, single-end sequencing strategies are almost always used to sequence sRNAs. This tutorial uses the *Collections* feature of Galaxy to orgainze each set of replicates into a single group, making tool form submission easier and ensuring reproducibility.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -45,25 +43,27 @@ It is of note that this tutorial uses datasets that have been de-multiplexed so 
 
 Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude a subset of reads. These datasets are available at [`Zenodo`](https://doi.org/10.5281/zenodo.826906) where you can find the FASTQ files corresponding to replicate sRNA-seq experiments and additional annotation files for the *Drosophila melanogaster* genome version dm3.
 
-> ### {% icon hands_on %} Hands-on: Data upload and organization
+> <hands-on-title>Data upload and organization</hands-on-title>
 >
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the 3 `Blank_RNAi_sRNA-seq` and 3 `Symp_RNAi_sRNA-seq` FASTQ files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
 >    ```
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    Set the datatype of the read (.fastqsanger) files to **fastq**
@@ -74,14 +74,14 @@ https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastq
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 >    ![History section with all the loaded datasets](../../images/sRNA/Fig3_dataset_lists_made.png)
-> 
+>
 > 3. Import the remaining files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
 >    ```
-https://zenodo.org/record/826906/files/dm3_transcriptome_Tx2Gene_downsampled.tab.gz
-https://zenodo.org/record/826906/files/dm3_transcriptome_sequences_downsampled.fa.gz
-https://zenodo.org/record/826906/files/dm3_miRNA_hairpin_sequences.fa.gz
-https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_transcriptome_Tx2Gene_downsampled.tab.gz
+>    https://zenodo.org/record/826906/files/dm3_transcriptome_sequences_downsampled.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_miRNA_hairpin_sequences.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
 >    ```
 >
 >    - Set the datatype of the annotation file to **tab** and assign the Genome as **dm3**
@@ -94,7 +94,7 @@ https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
 Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme. If the input FASTQ files are using an alternate encoding scheme, then some tools will not interpret the quality score encodings correctly. It is good practice to confirm the quality encoding scheme of your data and then convert to Sanger/Illumina 1.9, if necessary. We can check the quality encoding scheme using the [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis)).
 
 
-> ### {% icon hands_on %} Hands-on: Quality checking
+> <hands-on-title>Quality checking</hands-on-title>
 >
 > 1. Run **FastQC** {% icon tool %} on the `Blank` collection
 >    - {% icon param-collection %} *"Short read data from your current history"*: `Blank` collection
@@ -104,7 +104,7 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 > 2. Run **FastQC** {% icon tool %} for the *Symplekin* RNAi dataset collection
 > 3. Inspect the **FastQC** {% icon tool %} reports
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What quality score encoding scheme is being used for each sample?
 >    > 2. What is the read length for each sample?
@@ -116,16 +116,16 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >    >
 >    >    ![The output of FastQC stats adapted](../../images/sRNA/Fig5b_fastqc_result_stats_adapter.png)
 >    >
->    > > ### {% icon solution %} Solution
->    > > 1. All samples use the Illumina 1.9 quality encoding scheme, so we do **not** need to convert. 
->    > > 2. All samples have a read length of 50 nt. 
->    > > 3. The base quality across the entire length of the reads is good (phred score > 28 for the most part). 
->    > > 4. Yes, the "Illumina Universal Adapter" is present. 
+>    > > <solution-title></solution-title>
+>    > > 1. All samples use the Illumina 1.9 quality encoding scheme, so we do **not** need to convert.
+>    > > 2. All samples have a read length of 50 nt.
+>    > > 3. The base quality across the entire length of the reads is good (phred score > 28 for the most part).
+>    > > 4. Yes, the "Illumina Universal Adapter" is present.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Formatting 
+> <hands-on-title>Formatting </hands-on-title>
 >
 > If your data are not in **Sanger / Illumina 1.9 format**:
 > 1. **FASTQ Groomer** {% icon tool %} on each collection
@@ -146,7 +146,7 @@ Go back to the **FastQC** {% icon tool %} and scroll down to the "Adapter Conten
 
 sRNA-seq library preparation involves adding an artificial adaptor sequence to both the 5' and 3' ends of the small RNAs. While the 5' adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3' adaptor is typically sequenced immediately following the sRNA sequence. In the example datasets here, the 3' adaptor sequence is identified as the Illumina Universal Adapter, and needs to be removed from each read before aligning to a reference. We will be using the Galaxy tool **Trim Galore!** {% icon tool %} which implements the [`cutadapt`](https://cutadapt.readthedocs.io/en/stable/) tool for adapter trimming.
 
-> ### {% icon hands_on %} Hands-on: Adaptor trimming
+> <hands-on-title>Adaptor trimming</hands-on-title>
 >
 > 1. **Trim Galore!** {% icon tool %} on each collection of FASTQ read files to remove Illumina adapters from the 3' ends of reads with the following parameters:
 >    - *"Is this library paired- or single-end"*: `Single-end`
@@ -164,12 +164,12 @@ sRNA-seq library preparation involves adding an artificial adaptor sequence to b
 
 We don't want to trim for quality because the adapter-trimmed sequences represent a full small RNA molecule, and we want to maintain the integrity of the entire molecule. We increase the minimum read length required to keep a read because small RNAs can potentially be shorter than 20 nt (the default value). We can check out the generated report file for any sample and see the command for the tool, a summary of the total reads processed and number of reads with an adapter identified, and histogram data of the length of adaptor trimmed. We also see that a very small percentage of low-quality bases have been trimmed
 
-> ### {% icon hands_on %} Hands-on: Adaptor trimming check
+> <hands-on-title>Adaptor trimming check</hands-on-title>
 >
 > 1. **FastQC** {% icon tool %} on each collection of trimmed FASTQ read files to assess whether adapters were successfully removed.
 > 2. Inspect the **FastQC** {% icon tool %} reports
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What is the read length?
 >    >
@@ -178,7 +178,7 @@ We don't want to trim for quality because the adapter-trimmed sequences represen
 >    > 2. Are there any adaptors present in these reads? Which one(s)?
 >    >
 >    >   ![FastQC output after trimming](../../images/sRNA/Fig8b_fastqc_post_trimming_lengths.png)
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The read lengths range from 12 to 50 nt after trimming.
 >    > > 2. No, Illumina Universal Adaptors are no longer present. No other adapters are present.
 >    > {: .solution }
@@ -193,7 +193,7 @@ Now that we have converted to *fastqsanger* format and trimmed our reads of the 
 
 To first identify rRNA-originating reads (which we are not interested in in this case), we will align the reads to a reference set of rRNA sequences using [**HISAT2** {% icon tool %}](https://ccb.jhu.edu/software/hisat2/index.shtml), an accurate and fast tool for aligning reads to a reference.
 
-> ### {% icon hands_on %} Hands-on: Hierarchical alignment to rRNA and miRNA reference sequences
+> <hands-on-title>Hierarchical alignment to rRNA and miRNA reference sequences</hands-on-title>
 >
 > 1. **HISAT2** {% icon tool %} on each collection of trimmed reads to align to reference rRNA sequences with the following parameters
 >    - *"Source for the reference genome to align against"*: `Use a genome from history`
@@ -207,7 +207,7 @@ To first identify rRNA-originating reads (which we are not interested in in this
 
 We now need to extract the *unaligned* reads from the output BAM file for aligning to reference miRNA sequences. We can do this by using the `Filter SAM or BAM, output SAM or BAM` tool to obtain reads with a bit flag = 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the `Convert from BAM to FastQ` tool.
 
-> ### {% icon hands_on %} Hands-on: Hierarchical alignment to rRNA and miRNA reference sequences (2)
+> <hands-on-title>Hierarchical alignment to rRNA and miRNA reference sequences (2)</hands-on-title>
 > 1. **Filter SAM or BAM, output SAM or BAM** {% icon tool %} on collection of HISAT2 output BAM files with the following parameters
 >    - {% icon param-collection %} *"SAM or BAM file to filter"*: output of **HISAT2** {% icon tool %} for `Blank` collection
 >    - *"Filter on bitwise flag"*: `Yes`
@@ -222,7 +222,7 @@ We now need to extract the *unaligned* reads from the output BAM file for aligni
 
 Next we will align the non-rRNA reads to a known set of miRNA hairpin sequences to identify miRNA reads.
 
-> ### {% icon hands_on %} Hands-on: Hierarchical alignment to rRNA and miRNA reference sequences (3)
+> <hands-on-title>Hierarchical alignment to rRNA and miRNA reference sequences (3)</hands-on-title>
 > 1. **HISAT2** {% icon tool %} on each collection of filtered HISAT2 output FASTQ files to align non-rRNA reads to reference miRNA hairpin sequences using the following parameters:
 >    - *"Source for the reference genome to align against"*: `Use a genome from history`
 >       - {% icon param-file %} *"Select the reference genome"*: `Dmel_miRNA_sequences.fa`
@@ -240,7 +240,7 @@ In some instances, miRNA-aligned reads are the desired output for downstream ana
 
 In *Drosophila*, non-miRNA small RNAs are typically divided into two major groups: endogenous siRNAs which are 20-22nt long and piRNAs which are 23-29nt long. We want to analyze these sRNA subclasses independently, so next we are going to filter the non-r/miRNA reads based on length using the **Manipulate FASTQ** {% icon tool %} tool.
 
-> ### {% icon hands_on %} Hands-on: Extract subclasses
+> <hands-on-title>Extract subclasses</hands-on-title>
 >
 > 1. **Manipulate FASTQ** {% icon tool %} on each collection of non-r/miRNA reads to identify siRNAs (20-22nt) using the following parameters.
 >    - {% icon param-collection %} *"FASTQ File"*: output of last **HISAT** {% icon tool %} for `Blank` collection
@@ -258,7 +258,7 @@ In *Drosophila*, non-miRNA small RNAs are typically divided into two major group
 
 The regular expression in the **Match by** parameter tells the tool to identify sequences that are length 12-19 or 23-50 (inclusive), and the **Miscellaneous Manipulation Type** parameter tells the tool to remove these sequences. What remains are sequences of length 20-22nt. We will now repeat these steps to identify sequences in the size-range of piRNAs (23-29nt).
 
-> ### {% icon hands_on %} Hands-on: Extract subclasses
+> <hands-on-title>Extract subclasses</hands-on-title>
 > 1. **Manipulate FASTQ** {% icon tool %}: Run `Manipulate FASTQ` on each collection of non-r/miRNA reads to identify sequences in the size-range of piRNAs (23-29nt)
 >    - {% icon param-collection %} *"FASTQ File"*: output of last **HISAT** {% icon tool %} for `Blank` collection
 >    - Click on *"Insert Match Reads"*
@@ -273,7 +273,7 @@ The regular expression in the **Match by** parameter tells the tool to identify 
 > 3. Rename each resulting dataset collection something meaningful (*i.e.* "blank RNAi - piRNA reads (23-29nt)")
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Check the read length
+> <hands-on-title>Check the read length</hands-on-title>
 > 1. **FastQC** {% icon tool %}: Run `FastQC` on each collection of siRNA and piRNA read files to confirm the correct read lengths.
 {: .hands_on}
 
@@ -287,7 +287,7 @@ The next step in our analysis pipeline is to identify which RNA features - e.g. 
 
 We want to identify which siRNAs are differentially abundance between the blank and *Symplekin* RNAi conditions. To do this we will implement a counting approach using **Salmon** {% icon tool %} to quantify siRNAs per RNA feature. Specifically, we will analyzing mRNA and TE elements by counting siRNAs against a FASTA file of transcript sequences, not the reference genome. This approach is especially useful in this case because we are interested in TEs, which occur at many copies (100s - 1000s) in the genome, and thus will result in multiple alignments if we align to the genome with a tool like **HISAT2** {% icon tool %}. Further, we will be counting abundance of siRNAs that align *sense* or *antisense* to an RNA feature independently, as opposite sense alignments are correlated with unique downstream silencing effects. Then, we will provide this information to **DESeq2** {% icon tool %} to generate normalized counts and significance testing for differential abundance of siRNAs per feature.
 
-> ### {% icon hands_on %} Hands-on: siRNA abundance estimation
+> <hands-on-title>siRNA abundance estimation</hands-on-title>
 >
 > 1. **Salmon** {% icon tool %} on each collection of siRNA reads (20-22nt) to quantify the abundance of *antisense* siRNAs at relevant targets
 >    - *"Select a reference transcriptome from your history or use a built-in index?"*: `Use one from the history`
@@ -310,7 +310,7 @@ The output of **Salmon** {% icon tool %} includes a table of RNA features, estim
 
 [**DESeq2** {% icon tool %}](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential expression analysis, but we also employ it here for estimation of abundance of reads targeting each of our RNA features. As input, **DESeq2** {% icon tool %} can take *t*ranscripts *p*er *m*illion (TPM) counts produced by **Salmon** {% icon tool %} for each feature. TPMs are estimates of the relative abundance of a given transcript in units, and analogously can be used here to quantify siRNAs that align either sense or antisense to transcripts.
 
-> ### {% icon hands_on %} Hands-on: siRNA differential abundance testing
+> <hands-on-title>siRNA differential abundance testing</hands-on-title>
 >
 > 1. **DESeq2** {% icon tool %} to test for differential abundance of *antisense* siRNAs at mRNA and TE features using the following parameters:
 >    - In *"Factor"*:
@@ -355,11 +355,11 @@ The output of **Salmon** {% icon tool %} includes a table of RNA features, estim
 >    - *"With following condition"*: `c7<0.05`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How many features have a significant difference in *antisense* and *sense* siRNA abundance in the *Symplekin* RNAi condition?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > There are 87 *antisense* and 15 *sense* features that have significanlty different siRNA abundances.
 > {: .solution }
 {: .question}
@@ -370,8 +370,8 @@ For more information about `DESeq2` and its outputs, have a look at [`DESeq2` do
 
 Coming soon!
 
-## Conclusion
-{:.no_toc}
+# Conclusion
+
 
 Analysis of small RNAs is a complicated and intricate process due to the diversity in characteristics, functionality, and nuances of small RNA subclasses. The goal of this tutorial is to introduce you to a common small RNA workflow that specifically identifies changes in endogenous siRNA abundances that target protein-coding mRNAs and transposable elements. The steps presented here can be rearranged and modified based on small RNA features of specific systems and the needs of the user.
 

@@ -19,9 +19,6 @@ contributors:
   - gallardoalba
 ---
 
-# Introduction
-{:.no_toc}
-
 
 Circos ({% cite krzywinski2009circos %}) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field.
 
@@ -29,7 +26,7 @@ Circos ({% cite krzywinski2009circos %}) is a software package for visualizing d
 
 In this tutorial you will learn how to create such publication-ready Circos plots within Galaxy, and hopefully you can draw inspiration from these for developing your own plots.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -54,7 +51,7 @@ Publication quality circos plots are *rarely* produced on the first try. Develop
 Circos is an extremely flexible but also very complex tool. The Galaxy Circos tool covers the most commonly used Circos features, but in order to avoid becoming too complex, it does not expose every single configuration option available in Circos. However, the Galaxy Circos tool allows you to download the full set of configuration files it uses, allowing you to manually tweak the plot further.
 
 
-> ### {% icon comment %} Comment: Circos tutorials
+> <comment-title>Circos tutorials</comment-title>
 >
 > To learn more about using Circos outside of Galaxy (e.g. for tweaking the
 > Circos configuration output by the Galaxy tool), there are a wide range
@@ -245,7 +242,7 @@ In this section we will reproduce this Circos plot step by step.
 ## Data upload
 
 
-> ### {% icon hands_on %} Hands-on: Obtaining our data
+> <hands-on-title>Obtaining our data</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
@@ -272,14 +269,14 @@ In this section we will reproduce this Circos plot step by step.
 
 As the first step to this Circos plot, let's configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.
 
-> ### {% icon hands_on %} Hands-on: Set ideogram configuration
+> <hands-on-title>Set ideogram configuration</hands-on-title>
 >
-> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a circular layout with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12) %} visualizes data in a circular layout with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_withbands.txt`
 >    - In *"Ideogram"*:
-         - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
+>        - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
 >        - *"Radius"*: `0.85`
 >        - *"Thickness"*: `45`
 >        - In *"Labels"*:
@@ -301,7 +298,7 @@ You should now have a plot that looks like this:
 We will use this as the basis for our plot, and add data tracks one at a time.
 
 
-> ### {% icon comment %} Advanced info: defining your karyotype file
+> <comment-title>Advanced info: defining your karyotype file</comment-title>
 >
 > Since our data uses `hg18` reference genome, we supply a corresponding karyotype file:
 >
@@ -342,11 +339,11 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 >
 > More information about this format (including karyotype definitions for several species) can be found on the [Circos website](http://circos.ca/documentation/tutorials/ideograms/karyotypes/)
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > 1. Why didn't we use the `hg18` built-in genome (using the `Locally Cached` option)?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > 1. These built-in definitions often include more than the canonical chromosomes (chr1-chr22, chrX, chrY), which we might not want to plot. For example, using
 > > >    The full definition of `hg18` built-in to Galaxy, we get the following ideogram:
@@ -357,7 +354,7 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 > > {: .solution}
 > {: .question}
 >
-{: .tip}
+{: .comment}
 
 
 ## Structural Variations
@@ -365,7 +362,7 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 The first data track we will configure, will be the structural variants (SVs) using the *link* track type in Circos. We will colour the links differently depending on whether the SVs are intrachromosomal (within a single chromosome) or interchromosomal (between different chromosomes).
 
 
-> ### {% icon comment %} Background: Structural Variants
+> <comment-title>Background: Structural Variants</comment-title>
 >
 > Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of DNA (>50 bp) that are deleted, duplicated, translocated or inverted.
 >
@@ -385,7 +382,7 @@ The first data track we will configure, will be the structural variants (SVs) us
 SVs are usually described in terms of the SV **breakpoints** (or **junctions**); sets of genomic locations which are separated by a large distance on the reference genome, but have become adjacent in the sample through the occurrence of structural variants. Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Therefore, our first step will be to transform our input dataset to the Circos format for link tracks.
 
 
-**SV File Format:**
+### SV File Format
 
 ```
 #ASSEMBLY_ID	GS000008107-ASM
@@ -405,7 +402,7 @@ SVs are usually described in terms of the SV **breakpoints** (or **junctions**);
 ```
 
 
-**Circos Input Format:**
+### Circos Input Format
 
 ```
 chromosome - start - end - chromosome - start - end
@@ -416,12 +413,9 @@ So in order to convert this to Circos format, we need to
 - Select the columns containing the chromosomes and positions of the breaks (junctions)
 
 
-> ### {% icon warning %} Beware of **Cut**s
-> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table** (without `(cut)`). The difference is that this version allows cutting columns in any order and with repetitions. 
-{: .warning}
+{% snippet faqs/galaxy/analysis_cut.md %}
 
-
-> ### {% icon hands_on %} Hands-on: Prepare input data
+> <hands-on-title>Prepare input data</hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} lines that match an expression with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `VCaP highConfidenceJunctions.tsv`
@@ -440,7 +434,7 @@ Now that we have the correct format, we can plot our data in Circos. We will plo
 
 Given that Circos is a very complex with dozens of parameters to set, we re-run previous circos runs to build on the existing configuration we have done, without losing the progress and having to re-specify parameters every time.
 
-> ### {% icon hands_on %} Hands-on: Add Circos link track for SVs
+> <hands-on-title>Add Circos link track for SVs</hands-on-title>
 >
 > 1. Click **Re-run** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot ideogram`)
 >
@@ -473,12 +467,12 @@ Your output should look something like this:
 
 ![The plot with an SV track](../../images/circos/cancer_svs1.png "SVs on the VCaP cell line. Red lines indicate <i>interchromosomal</i> SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome."){: width="60%"}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Are there more interchromosomal or intrachromosomal SVs?
 > 2. Which chromosome appears to have the most SVs?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Interchromosomal SVs (between different chromosomes) are coloured red in this
 > >    plot, while SVs within a single chromosome are coloured black. By plotting the data with Circos, you can now easily see
@@ -491,7 +485,7 @@ Your output should look something like this:
 We see from this image that chromosome 5 has an unusually large number of SVs, let's look at that chromosome more closely, by limiting the chromosomes Circos should draw:
 
 
-> ### {% icon hands_on %} Hands-on: Plot only Chromosome 5
+> <hands-on-title>Plot only Chromosome 5</hands-on-title>
 >
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
 >
@@ -508,17 +502,17 @@ You should see a plot like:
 
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Are there indeed significantly more SVs on chromosome 5 than on the other chromosomes? (hint: plot some of the other chromosomes as well)
 > 2. Are the SVs equally distributed over chromosome 5? Can you think of an explanation for this?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Yes, plotting for example only chromosome 1 (left) and comparing this with the chromosome 5 plot (right), reveals that chr5 has abnormally high number of SVs compared to the other chromosomes
 > >
-> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr1.png ){: width="40%"}
-> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr5.png ){: width="40%"}
+> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr1.png){: width="40%"}
+> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr5.png){: width="40%"}
 > >
 > >
 > > 2. No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
@@ -531,10 +525,10 @@ You should see a plot like:
 
 
 
-> ### {% icon comment %} Background: Chromothripsis
+> <comment-title>Background: Chromothripsis</comment-title>
 >
 > **Chromothripsis** is a phenomenon whereby (part of) a chromosome is shattered in a single catastrophic event, and subsequently imprecisely stitched
-together by the cell's repair mechanisms. This leads to a huge number of SV junctions.
+> together by the cell's repair mechanisms. This leads to a huge number of SV junctions.
 >
 > ![Chromothripsis](../../images/circos/chromothripsis.png "Chromothripsis is a scattering of the DNA, followed by an imprecise repair process, leading to many structural rearrangements."){: width="60%"}
 >
@@ -544,8 +538,7 @@ together by the cell's repair mechanisms. This leads to a huge number of SV junc
 > > 2. Low **copy number states- alternation between 2 states** (sometimes 3) suggesting that rearrangements occurred in a short period of time.
 > > 3. In chromothriptic areas you get **alternation of regions which retain heterozygosity-two copy (no loss or gain), with regions that have loss of heterozygosity- one copy** (heterozygous deletion). This suggest that the rearrangements took place at a time that both parental copies of the chromosome were present and hence early on the development of the cancer cell.
 > >
-> > *from [https://en.wikipedia.org/wiki/Chromothripsis](https://en.wikipedia.org/wiki/Chromothripsis)*
-> {: .quote}
+> {: .quote cite="https://en.wikipedia.org/wiki/Chromothripsis"}
 >
 {: .comment}
 
@@ -557,7 +550,7 @@ By visualizing the SVs, we have observed characteristic 1 of the list above; lar
 Next, we will create a track displaying copy number. This data comes from Affymetrix SNP arrays.
 
 
-> ### {% icon comment %} Background: Copy Number Variation (CNV)
+> <comment-title>Background: Copy Number Variation (CNV)</comment-title>
 >
 > The human genome is a *diploid* genome, meaning there are 2 copies of each chromosome, one paternal, and one maternal. This means that for any given gene, humans have two different copies of it in our genome.
 >
@@ -573,7 +566,7 @@ Next, we will create a track displaying copy number. This data comes from Affyme
 {: .comment}
 
 
-> ### {% icon comment %} Background: DNA Microarrays
+> <comment-title>Background: DNA Microarrays</comment-title>
 >
 > **Microarrays** are used to measure the expression levels of large number of genes simultaneously, or to genotype multiple regions of a genome. In this example in our tutorial, we have data from a **SNP array**. This type of microarray detects the presence and proportion (homozyogous/heterozygous) of a
 > wide range of SNPs (Single Nucleotide Polymorphisms) known to exist within the population. A set of **probes** targeting positions of a large number of known SNPs
@@ -607,7 +600,7 @@ This is pretty close to the format expected by Circos for 2D data tracks (`chr -
 
 
 
-> ### {% icon hands_on %} Hands-on: Prepare CNV input file
+> <hands-on-title>Prepare CNV input file</hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} of a file with the following parameters:
 >    - *"Remove first"*: `1`
@@ -629,7 +622,7 @@ This is pretty close to the format expected by Circos for 2D data tracks (`chr -
 Now that our file is prepared, we can add a track to our Circos image. We will create a scatterplot, and colour each data point depending on copy number state (green=gain, red=loss)
 
 
-> ### {% icon hands_on %} Hands-on: Add Copy Number track to Circos
+> <hands-on-title>Add Copy Number track to Circos</hands-on-title>
 >
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the Circos plot containing the SV track {% icon tool %} run (`Circos Plot SVs`)
 >
@@ -650,17 +643,17 @@ Now that our file is prepared, we can add a track to our Circos image. We will c
 >
 > 3. **Examine** {% icon galaxy-eye %} the resulting plot
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. Examine the resulting plot, what do you see?
 >    > 2. How could we solve this?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. We see the new track, but it overlaps with the SV track. This is because we used the same `radius` parameter.
 >    > >    This parameter determines the position of the track within the plot.
 >    > >
->    > >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer-overlap.png ){: width="80%"}
+>    > >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer-overlap.png){: width="80%"}
 >    > >
 >    > >
 >    > > 2. To fix this, we can rerun the Circos tool, and change the radius of the link track (SVs) to be inside the new copynumber track (<`0.8`).
@@ -686,7 +679,7 @@ You should see a plot that looks like:
 Now that we are happy with the placement of our track, let's tweak it a bit more. Let's colour positions showing a significant copy number loss (< `-0.15`) red, and positions with a copy number gain (> `0.15`) green, leaving everything inbetween gray (expected copy number):
 
 
-> ### {% icon hands_on %} Hands-on: Colour data points by copy number state
+> <hands-on-title>Colour data points by copy number state</hands-on-title>
 >
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
 >
@@ -720,7 +713,7 @@ You should now see a plot like this:
 Sometimes it can also be nice to see the axes of the plot, to more accurately judge the values of the different data points.
 We can do this as follows:
 
-> ### {% icon hands_on %} Hands-on: Add plot axes
+> <hands-on-title>Add plot axes</hands-on-title>
 >
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
 >
@@ -750,7 +743,7 @@ You should now see a plot with axes:
 
 Next, we will visualize the B-allele frequency (also known as minor allele frequency)
 
-> ### {% icon comment %} Background: B-allele Frequency (BAF)
+> <comment-title>Background: B-allele Frequency (BAF)</comment-title>
 >
 > The B-allele frequency is closely related to copy number. There are many nuances to the measurement of B-allele frequency,
 > but roughly speaking it indicates the frequency (ratio) of the non-reference allele of the SNP within the sample
@@ -791,7 +784,7 @@ Note that the B-allele frequency value is always between 0 and 1.
 We will make another scatterplot, so our data should be in the same format as the copynumber track: `chr - start - end - value`. Luckily, this data is already in the correct format, all we have to do is remove the header line! We will also subset the data again by selecting lines randomly from the file.
 
 
-> ### {% icon hands_on %} Hands-on: Prepare the B-allele frequency table
+> <hands-on-title>Prepare the B-allele frequency table</hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1`
@@ -808,7 +801,7 @@ We will make another scatterplot, so our data should be in the same format as th
 
 Now are data is ready to be plotted in Circos. We will plot this track directly inside the CNV track, which means we will have to change the radius of the SV link track again as well.
 
-> ### {% icon hands_on %} Hands-on: Add B-allele Frequency track to Circos
+> <hands-on-title>Add B-allele Frequency track to Circos</hands-on-title>
 >
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot CopyNumber`)
 >
@@ -846,7 +839,7 @@ You should see a plot that looks like this:
 Great! we can see our B-allele frequency plot track added.
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Look at the B-allele frequency track, try to identify chromosome(s) having a copy number of:
 >    1. `CN=2` (diploid)
@@ -857,7 +850,7 @@ Great! we can see our B-allele frequency plot track added.
 >
 > 2. Do you see anything other than these states?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Compare the B-allele frequency plot to the expected plot shown above for the different copynumber states.
 > >    1. Chromosome 12 appears completely diploid
@@ -874,7 +867,7 @@ Great! we can see our B-allele frequency plot track added.
 You may have noticed, that by moving the link track closer to the center repeatedly, the track of intrachromosomal links has become rather narrow.
 There is a parameter of the link track type called *Bezier*, which controls how tightly the links arc (i.e. how close to the center they reach. By playing around with this parameter, we can fine a more pleasing
 
-> ### {% icon hands_on %} Hands-on: Change Bezier radius
+> <hands-on-title>Change Bezier radius</hands-on-title>
 >
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot BAF`)
 >
@@ -890,7 +883,7 @@ There is a parameter of the link track type called *Bezier*, which controls how 
 
 Another thing you may have noticed, is that in the original image we showed at the start of this section, the red links (interchromosomal SVs) were displayed as a completely different track. To do this, instead of creating a single track with a rule to change the colour of a subset of the data, we can make 2 separate tracks, with rules to only plot a subset of the data.
 
-> ### {% icon question %} Exercise: Split SV track into two
+> <question-title>Exercise: Split SV track into two</question-title>
 >
 > 1. Try to split the link track in two so that it matches the original image. This may take some trial and error. The full configuration is shown in the answer box below, but we provede some hints if you want to try it yourself first:
 >    1. **Change the existing link track:**
@@ -902,11 +895,11 @@ Another thing you may have noticed, is that in the original image we showed at t
 >
 >   ![VCaP cancer Circos plot](../../images/circos/vcap.png "The original image from the paper. Try to make the two link tracks look like this"){: width="40%"}
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The full configuration  of the two link tracks is:
 > >
-> > > ### {% icon hands_on %} Hands on: Two link tracks
+> > > <hands-on-title>Hands on: Two link tracks</hands-on-title>
 > > >
 > > > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
 > > >
@@ -966,7 +959,7 @@ Circos was originally developed for genomics data, and a lot of the terminology 
 ![Original plot from the NYT article](../../images/circos/presidential_debate_nyt.png "Plot showing how many times each presidential candidate mentioned each other candidate in the debates leading up to the 2008 US presidential election."){: width="80%"}
 
 
-> ### {% icon comment %} Note
+> <comment-title>Note</comment-title>
 >
 > This tutorial is based on one of the [tutorials on the Circos website](http://circos.ca/documentation/tutorials/recipes/naming_names/).
 >
@@ -982,7 +975,7 @@ Since we could not obtain the original datasets used to generate this image, we 
 
 First, let's get the data we need for this plot:
 
-> ### {% icon hands_on %} Hands-on: Obtaining our data
+> <hands-on-title>Obtaining our data</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
@@ -1025,15 +1018,15 @@ The last column indicates the party of each candidate (democratic or republican)
 Let's start by creating the ideogram for our plot:
 
 
-> ### {% icon hands_on %} Hands-on: Set ideogram configuration
+> <hands-on-title>Set ideogram configuration</hands-on-title>
 >
-> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12) %} with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `debate_karyotype.tab`
 >    - In *"Ideogram"*:
-         - *"Chromosome units"*: `bases`
-         - *"Spacing Between Ideograms (in chromosome units)"*: `20`
+>        - *"Chromosome units"*: `bases`
+>        - *"Spacing Between Ideograms (in chromosome units)"*: `20`
 >        - In *"Labels"*:
 >            - *"Label Font Size"*: `40`
 >
@@ -1069,7 +1062,7 @@ It is of format `segment - start - end`, with an optional 4th column, which can 
 
 Now, let's use this file to create our highlights track
 
-> ### {% icon hands_on %} Hands-on: Add Highlights track to Circos Plot
+> <hands-on-title>Add Highlights track to Circos Plot</hands-on-title>
 >
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot karyotype`)
 >
@@ -1116,7 +1109,7 @@ The format is `segment start end segment start end`. The first line indicates th
 
 Let's add it to our plot:
 
-> ### {% icon hands_on %} Hands-on: Add Highlights track to Circos Plot
+> <hands-on-title>Add Highlights track to Circos Plot</hands-on-title>
 >
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot highlights`)
 >
@@ -1134,7 +1127,7 @@ Let's add it to our plot:
 ![Debate plot with link track](../../images/circos/debate_links.png){: width="50%"}
 
 
-> ### {% icon question %} Exercise: Focus on a single
+> <question-title>Exercise: Focus on a single</question-title>
 >
 > 1. As an exercise, try to add rules to the link track to colour the links red or blue depending on party of the person who spoke (`from_chromosom`)
 >    - The link should be blue for Obama, and red for McCain and Huckabee
@@ -1143,11 +1136,11 @@ Let's add it to our plot:
 >
 >   ![Debate plot with coloured links](../../images/circos/presidential_debate_plot.png "Try to make the link track look like this"){: width="40%"}
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The full configuration  of the rules for the link tracks is:
 > >
-> > > ### {% icon hands_on %} Hands on: Two link tracks
+> > > <hands-on-title>Hands on: Two link tracks</hands-on-title>
 > > >
 > > > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
 > > >
@@ -1188,7 +1181,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from Zenodo or from the shared data library
@@ -1211,13 +1204,13 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 
 We will now create the plot all at once. Normally, this would be a more iterative step-by-step process. The previous examples show how this stepwise approach is normally used, here we just give you all the configuration to create this plot all at once.
 
-> ### {% icon tip %} Tip: Interface Complexity
+> <tip-title>Interface Complexity</tip-title>
 > The interface looks deceptively simple when all of the sections are collapsed, but as you start adding tracks it can be easy to get lost and become overwhelmed, so just go slowly. Do not worry if your plot does not look exactly like the expected output.
 {: .tip}
 
-> ### {% icon hands_on %} Hands-on: Circos
+> <hands-on-title>Circos</hands-on-title>
 >
-> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12) %} with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`
@@ -1391,6 +1384,6 @@ Hopefully this helps you take your Circos plots from 90% to 100% publication rea
 
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations on finishing this tutorial! You have now seen how you can create Circos plots within Galaxy. Circos is a very flexible tool, but this flexibility also comes with a certain degree of complexity and a steep learning curve. When you are making your own plots, remember that Circos is an iterative process, don't try to do too much at once, but build your plot up step by step, and check the output often.

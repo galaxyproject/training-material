@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-enable: false
+draft: true
 
 title: De novo transcriptome assembly, annotation, and differential expression analysis
 zenodo_link: 'https://zenodo.org/record/3541678'
@@ -27,10 +27,6 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
 
 As a result of the development of novel sequencing technologies, the years between 2008 and 2012 saw a large drop in the cost of sequencing. Per megabase and genome, the cost dropped to 1/100,000th and 1/10,000th of the price, respectively. Prior to this, only transcriptomes of organisms that were of broad interest and utility to scientific research were sequenced; however, these developed in 2010s high-throughput sequencing (also called next-generation sequencing) technologies are both cost- and labor- effective, and the range of organisms studied via these methods is expanding.
 
@@ -38,7 +34,7 @@ Examining non-model organisms can provide novel insights into the mechanisms und
 
 [(source)](https://en.wikipedia.org/wiki/De_novo_transcriptome_assembly)
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -60,7 +56,7 @@ Why do we need to correct those?
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -88,6 +84,7 @@ Why do we need to correct those?
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="List of Pairs" collection_name="fastq_raw" %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
@@ -103,7 +100,7 @@ Why do we need to correct those?
 
 ## Quality control
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >   - *"Short read data from your current history"*: `fastq_raw` (collection)
@@ -112,7 +109,7 @@ Why do we need to correct those?
 
 <!-- ## Quality control with **MultiQC** - step 2/2
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **MultiQC** {% icon tool %} with the following parameters:
 >    - In *"Results"*:
@@ -122,7 +119,7 @@ Why do we need to correct those?
 >                    - *"Type of FastQC output?"*: `Raw data`
 >                    - *"FastQC output"*: `data XX, data XX, and others (flattened)`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > We agree that it's not comfortable. The wrapper of MultiQC must be improved
 >    {: .comment}
@@ -131,7 +128,7 @@ Why do we need to correct those?
 
 ## Read cleaning with **Trimmomatic**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Trimmomatic** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired-end reads?"*: `Paired-end (as collection)`
@@ -155,7 +152,7 @@ Why do we need to correct those?
 > 2. **Rename** the Dataset Collection
 >    - `Trimmomatic on collection XX: paired` -> `fastqc_cleaned`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > You can check the Trimmomatic log files to get the number of read before and after the cleaning
 >    > ```
@@ -172,7 +169,7 @@ Why do we need to correct those?
 
 ## Quality control after cleaning
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >   - *"Short read data from your current history"*: `fastqc_cleaned` (collection)
@@ -183,7 +180,7 @@ Why do we need to correct those?
 
 ## Assembly with **Trinity**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Trinity** {% icon tool %} with the following parameters:
 >    - *"Are you pooling sequence datasets?"*: `Yes`
@@ -203,12 +200,12 @@ Why do we need to correct those?
 
 ## Checking of the assembly statistics
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Trinity Statistics** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_raw.fasta`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    > This step, even with this toy dataset, will take around 2 hours
 >    {: .comment}
 >
@@ -216,7 +213,7 @@ Why do we need to correct those?
 
 ## Remapping on the raw transcriptome
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Align reads and estimate abundance** {% icon tool %} with the following parameters:
 >    - *"Transcripts"*: `transcriptome_raw.fasta`
@@ -237,7 +234,7 @@ Why do we need to correct those?
 >    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
 >    - Rename the datasets: `A1_raw`, `A2_raw`, `A3_raw`, `B1_raw`, `B2_raw`, `B3_raw`.
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > If you check at the Standard Error messages of your outputs. You can get the `Mapping rate`
 >    > 1. Click on one dataset
@@ -248,7 +245,7 @@ Why do we need to correct those?
 >    > ```
 >    {: .comment}
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > At this stage, you can now delete some useless datasets
 >    > - `Trimmomatic on collection XX: unpaired`
@@ -261,7 +258,7 @@ Why do we need to correct those?
 
 ## Merge the mapping tables and compute normalizations
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Build expression matrix** {% icon tool %} with the following parameters:
 >    - *"Abundance estimates"*: `A1_raw`, `A2_raw`, `A3_raw`, `B1_raw`, `B2_raw`, `B3_raw`
@@ -269,11 +266,11 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What are the three tables?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `estimated RNA-Seq fragment isoform counts (raw counts)``
 > > 2. `matrix of isoform TPM expression values (not cross-sample normalized)`
@@ -285,7 +282,7 @@ Why do we need to correct those?
 
 ## Compute contig Ex90N50 statistic and Ex90 transcript count
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Compute contig Ex90N50 statistic and Ex90 transcript count** {% icon tool %} with the following parameters:
 >    - *"Expression matrix"*: `Build expression matrix: matrix of TMM-normalized expression values`
@@ -306,7 +303,7 @@ Why do we need to correct those?
 
 ## Transcriptome annotation completeness
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Busco** {% icon tool %} with the following parameters:
 >    - *"Sequence to analyse"*: `transcriptome_raw.fasta`
@@ -319,7 +316,7 @@ Why do we need to correct those?
 
 ## Filter low expression transcripts
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Filter low expression transcripts** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_raw.fasta`
@@ -328,7 +325,7 @@ Why do we need to correct those?
 >    - *"Isoform filtering method"*: `Keep all isoforms above a minimum percent of dominant expression`
 >        - *"Minimum percent of dominant isoform expression"*: `1`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > If you check at the Standard Error messages of your outputs. You can get the `Retained` rate
 >    > 1. Click on one dataset
@@ -346,7 +343,7 @@ Why do we need to correct those?
 
 ## Checking of the assembly statistics after cleaning
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Trinity Statistics** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_filtered.fasta`
@@ -357,7 +354,7 @@ Why do we need to correct those?
 # Annotation
 ## Generate gene to transcript map
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Generate gene to transcript map** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_filtered.fasta`
@@ -366,7 +363,7 @@ Why do we need to correct those?
 
 ## Peptide prediction
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **TransDecoder** {% icon tool %} with the following parameters:
 >    - *"Transcripts"*: `transcriptome_filtered.fasta`
@@ -377,7 +374,7 @@ Why do we need to correct those?
 
 ## Similarity search
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Diamond** {% icon tool %} with the following parameters:
 >    - *"What do you want to align?"*: `Align amino acid query sequences (blastp)`
@@ -398,7 +395,7 @@ Why do we need to correct those?
 > 4. **Rename** the Diamond output
 >    - `Diamond on data XXX` -> `Diamond (blastx)`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Note that you can both use **Diamond** {% icon tool %} or the **NCBI BLAST+ blastp** {% icon tool %} and **NCBI BLAST+ blast** {% icon tool %}
 >    {: .comment}
@@ -407,7 +404,7 @@ Why do we need to correct those?
 
 ## Find signal peptides
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **SignalP 3.0** {% icon tool %} with the following parameters:
 >    - *"Fasta file of protein sequences"*: `TransDecoder on data XXX: pep`
@@ -416,7 +413,7 @@ Why do we need to correct those?
 
 ## Find transmembrane domains
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **TMHMM 2.0** {% icon tool %} with the following parameters:
 >    - *"FASTA file of protein sequences"*: `TransDecoder on data XXX: pep`
@@ -425,7 +422,7 @@ Why do we need to correct those?
 
 ## Search again profile database
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **hmmscan** {% icon tool %} with the following parameters:
 >    - *"Sequence file"*: `TransDecoder on data XXX: pep`
@@ -434,7 +431,7 @@ Why do we need to correct those?
 
 ## Transcriptome annotation using **Trinotate**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Trinotate** {% icon tool %} with the following parameters:
 >    - *"Transcripts"*: `transcriptome_filtered.fasta`
@@ -453,7 +450,7 @@ Why do we need to correct those?
 
 ## Remapping on the filtered transcriptome using
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Align reads and estimate abundance** {% icon tool %} with the following parameters:
 >    - *"Transcripts"*: `transcriptome_filtered.fasta`
@@ -474,7 +471,7 @@ Why do we need to correct those?
 >    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
 >    - Rename the datasets: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`.
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > If you check at the Standard Error messages of your outputs. You can get the `Mapping rate`
 >    > 1. Click on one dataset
@@ -485,7 +482,7 @@ Why do we need to correct those?
 >    > ```
 >    {: .comment}
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > At this stage, you can now delete some useless datasets
 >    > - `Align reads and estimate abundance on *: genes counts`
@@ -496,7 +493,7 @@ Why do we need to correct those?
 
 ## Merge the mapping tables and compute a TMM normalization
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Build expression matrix** {% icon tool %} with the following parameters:
 >    - *"Abundance estimates"*: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`
@@ -518,7 +515,7 @@ Why do we need to correct those?
 
 ## RNASeq samples quality check
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 > 1. **RNASeq samples quality check** {% icon tool %} with the following parameters:
 >    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
 >    - *"Samples description"*: `Describe samples`
@@ -527,7 +524,7 @@ Why do we need to correct those?
 
 ## Differential expression analysis
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 > 1. **Differential expression analysis** {% icon tool %} with the following parameters:
 >    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
 >    - *"Sample description"*: `Describe samples` (the last one)
@@ -537,7 +534,7 @@ Why do we need to correct those?
 
 ## Extract and cluster differentially expressed transcripts
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Extract and cluster differentially expressed transcripts** {% icon tool %} with the following parameters:
 >    - In *"Additional Options"*:
@@ -547,7 +544,7 @@ Why do we need to correct those?
 >        - *"p-value cutoff for FDR"*: `1`
 >        - *"Run GO enrichment analysis"*: `No`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > *"p-value cutoff for FDR"*: `1`
 >    > Don't do this at home! It's because we have a Toy Dataset. The cutoff should be around `0.001`
@@ -557,7 +554,7 @@ Why do we need to correct those?
 
 ## Partition genes into expression clusters
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Partition genes into expression clusters** {% icon tool %} with the following parameters:
 >    - *"RData file"*: `Extract and cluster differentially expressed transcripts: RData file`
@@ -566,7 +563,7 @@ Why do we need to correct those?
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.

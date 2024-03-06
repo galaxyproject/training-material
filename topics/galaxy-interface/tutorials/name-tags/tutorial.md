@@ -21,8 +21,6 @@ subtopic: manage
 ---
 
 
-# Introduction
-{:.no_toc}
 
 Long ad hoc data analysis sessions in Galaxy can leave you with a multitude of
 datasets named things like "1724: Summarize taxa on data 1628 and data 1629" or "1853: Pick
@@ -47,7 +45,7 @@ Bad | Good
 ![History with untagged and poorly named datasets](../../images/nametag-why.png)| ![History with tagged datasets showing how much easier it is](../../images/nametag-why-fixed.png)
 How would you identify which input sample corresponds with which featureCounts output? | With name tags applied before the start of analysis, each output is also tagged with the appropriate sample name
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -58,7 +56,7 @@ How would you identify which input sample corresponds with which featureCounts o
 
 # Setting name tags manually
 
-> ### {% icon hands_on %} Hands-on: Set name tags manually
+> <hands-on-title>Set name tags manually</hands-on-title>
 >
 > 1. Create a new history
 >
@@ -86,7 +84,7 @@ If you're using a Galaxy server newer than 19.01, you will notice that the tags 
 ![Name tags have different colours based on their contents](../../images/nametag-colour.png)
 
 
-> ### {% icon details %} In depth: Colours
+> <details-title>In depth: Colours</details-title>
 >
 > The colours are generated from a checksum of the text of each tag. Every time the same tag is used, the same colour will be generated. Different words will usually result in different colours.
 >
@@ -102,7 +100,7 @@ In this section we will demonstrate how you can add name tags to datasets automa
 
 For more information about the rule-based uploader, please see [this dedicated tutorial]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %})
 
-> ### {% icon hands_on %} Hands-on: Set name tags during upload
+> <hands-on-title>Set name tags during upload</hands-on-title>
 >
 > 1. Open the **Upload** {% icon galaxy-upload %} interface
 > 2. Click on **Rule-based** at the top
@@ -153,12 +151,12 @@ This will add 7 new datasets to your history, each one tagged and named appropri
 
 The datasets now have two types of tags: name tags and general purpose tags. General purpose tags, unlike name tags, will not propagate. They're mainly useful for searching through your datasets (Try entering `tag=paired` in your History search box).
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
-> 1. How many tags does the dataset named `GSM461176` have? Which ones?
+> 1. How many tags does the dataset named `GSM461177` have? Which ones?
 > 2. How many of those tags are propagating name tags?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 3 tags. You can find all tags of a dataset by first clicking on it to expand it, and then clicking on the tags icon {% icon galaxy-tags %}. The tags are `#GSM461177`, `paired`, and `untreat`
 > > 2. 1 propagating name tag. Only hashtags (tags starting with a `#` symbol) will propagate to downstream results derived from it. So in this example only `#GSM461177` is a propagating name tag.
@@ -171,10 +169,10 @@ The datasets now have two types of tags: name tags and general purpose tags. Gen
 
 Now that we have our name tags in place, let's see them in action!
 
-> ### {% icon hands_on %} Hands-on: Some analysis steps
+> <hands-on-title>Some analysis steps</hands-on-title>
 > 1. **Select first** {% icon tool %} lines from a dataset (head)
 >      - {% icon param-files %} *"File to select"*: Select everything starting with `GSM`
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 {: .hands_on}
 
 We can already see the benefits of name tags. Even though our outputs are named things like "Select first on data 8", they're also visibly tagged with the name of the original input.
@@ -185,11 +183,11 @@ Next we'll join two of these datasets together, to see the tagging behaviour on 
 
 ![Filtering datasets is possible on tag names](../../images/nametag-filter.png)
 
-> ### {% icon hands_on %} Hands-on: Multiple inputs
+> <hands-on-title>Multiple inputs</hands-on-title>
 > 1. **Join two datasets** {% icon tool %} side by side on a specified field
 >      - {% icon param-file %} *"Join"*: Click the select box and type "461181" to filter the list and use the "Select first on data ..." file
 >      - {% icon param-file %} *"With"*: Click the select box and type "461182" to filter the list and use the "Select first on data ..." file
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 {: .hands_on}
 
 The output will include all of the name tags from all of the inputs:

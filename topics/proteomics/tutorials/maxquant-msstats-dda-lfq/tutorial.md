@@ -27,8 +27,6 @@ tags: [label-free]
 ---
 
 
-# Introduction
-{:.no_toc}
 
 Modern mass spectrometry-based proteomics enables the identification and quantification of thousands of proteins. Therefore, quantitative mass spectrometry represents an indispensable technology for biological and clinical research. Statistical analyses are required for the unbiased answering of scientific questions and to uncover all important information in the proteomic data. Classical statistical approaches and methods from other omics technologies are not ideal because they do not take into account the speciality of mass spectrometry data that include several thousands of proteins but often only a few dozens of samples (referred to as ‘curse of dimensionality’) and stochastic data properties that reflect sample preparation and spectral acquisition (Choi 2014).
 
@@ -36,7 +34,7 @@ In this training we will cover the full analysis workflow from label-free, data 
 The training dataset consists of a skin cancer cohort of 19 patients, which is a subset of a [published study](https://doi.org/10.1016/j.matbio.2017.11.004). One fifth of all non melanoma skin cancers are cutaneous squamous cell carcinomas (cSCC) that mainly derive from exposure to ultraviolet light. Most cSCC have a good prognosis but the few metastasizing cSCC have dramatically increased mortality. Here, we compare these metastasizing cSCC to cSCC in patients with the genetic disease recessive dystrophic epidermolysis bullosa (RDEB). RDEB is a genetic skin blistering and extracellular matrix disease caused by collagen VII deficiency. To investigate molecular differences between these two aggressive cSCCs with different origin, we used global proteomic analysis of formalin-fixed paraffin-embedded human cSCC tissues.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -51,7 +49,7 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
 The annotation file, group comparison file and FASTA file for this training is deposited at [Zenodo](https://zenodo.org/record/4896554). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at [Protein FASTA Database Handling tutorial]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html). The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride/archive/projects/PXD006914). As this is a real life study, the raw data sizes are large and computation time in MaxQuant is long. To save time and storage capacity, you can skip downloading the raw data and the MaxQuant run and instead continue with the MaxQuant outputs which we provide later on. In this case skip the data upload steps 5-8 which are only necessary for the MaxQuant run.
 
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
@@ -112,7 +110,7 @@ The annotation file, group comparison file and FASTA file for this training is d
 
 The run time of **MaxQuant** {% icon tool %} depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. Protein level quantification parameters do not really matter here, because MSstats will use feature quantifications and perform protein summarization based on them. A quality control report is generated with the [PTXQC functionality](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780) that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.
 
-> ### {% icon hands_on %} Hands-on: Optional: MaxQuant analysis
+> <hands-on-title>Optional: MaxQuant analysis</hands-on-title>
 >
 > 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3) %} with the following parameters:
 >    - In *"Input Options"*:
@@ -130,7 +128,7 @@ The run time of **MaxQuant** {% icon tool %} depends on the number and size of t
 
 Because the MaxQuant run takes really long, we recommend to download the MaxQuant results from Zenodo and continue with the tutorial. 
 
-> ### {% icon hands_on %} Hands-on: Load MaxQuant results from Zenodo
+> <hands-on-title>Load MaxQuant results from Zenodo</hands-on-title>
 >
 > 1. Import the files from [Zenodo](https://zenodo.org/record/4896554)
 >
@@ -142,13 +140,13 @@ Because the MaxQuant run takes really long, we recommend to download the MaxQuan
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many proteins and features were identified in total?
 > 2. In which columns (number) are the potential contaminants in the protein group and evidence file respectively? 
 > 3. How large is the proportion of potential contaminants?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 2622 protein groups and ~240000 features were found in total (number of lines of protein group and evidence files)
 > > 2. They are in column 118 (protein groups) and 54 (evidence)
@@ -165,7 +163,7 @@ The protein groups and evidence files of MaxQuant can directly be input into MSs
 
 We use the modified MaxQuant protein groups and evidence files as input in MSstats. In addition, an annotation file that describes the experimental design and a comparison matrix is needed. Please start the MSstats run first and while it is running you can find more details on its parameters below.
 
-> ### {% icon hands_on %} Hands-on: MSstats Analysis
+> <hands-on-title>MSstats Analysis</hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `Protein Groups` (output of **MaxQuant** {% icon tool %})
@@ -212,12 +210,12 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many proteins were removed as potential non human contaminants?
 > 2. How many proteins were included into the statistical analysis?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 28 (2622 lines in protein group file minus 2594 lines after select)
 > > 2. 1764 (MSstats log)
@@ -235,7 +233,7 @@ Proteomic data analysis requires statistical approaches that reduce bias and ine
 
 MSstats is directly compatible with the output of several quantitative proteomics software. In addition to the results of the proteomics software an annotation file is needed as input. The annotation file describes the experimental design such as the conditions, biological and technical replicates. To be compatible with MaxQuant results, an additional column with the label type is needed, which only contains L (light) in DDA experiments. A wrong setup of the annotation file is the most common source of errors in MSstats, thus we collected more information in the box below to allow you to adjust the annotation file when analyzing your own experiments. 
 
-> ### {% icon tip %} Tip: Generating the MSstats annotation file
+> <tip-title>Generating the MSstats annotation file</tip-title>
 >
 > For label-free MaxQuant data, the annotation file should have 5 columns with exactly these headers: Raw.file, Condition, BioReplicate, Run; IsotopeLabelType
 > 1. Raw.file: The names must match exactly to the file names in the MaxQuant evidence.txt "Raw file" column. (e.g. "file1.raw.thermo"). 
@@ -248,7 +246,7 @@ MSstats is directly compatible with the output of several quantitative proteomic
 
 MSstats will compare all conditions that are indicated in the comparison matrix. The comparison matrix has to be setup correctly to avoid errors and wrong statistical modelling. It contains a first column that gives the comparisons a name and one column per condition. This matrix is filled with 1 and -1 to specify the conditions that are compared in each comparison and with 0 for conditions that are not part of the comparison.
 
-> ### {% icon tip %} Tip: Generating the MSstats comparison matrix
+> <tip-title>Generating the MSstats comparison matrix</tip-title>
 >
 > 1. The first column of the comparison matrix contains the names of the comparisons and should have 'names' as header. These names will be used in all MSstats output files, therefore it is important that the names are meaningful and reflect the actual comparison (see below)
 > 2. An additional column for each condition that is present in the data. This means each condition present in the annotation file has to be a separate column even when the condition will not be used for any comparison. The header should contain the condition name exactly as written in the annotation file. 
@@ -284,7 +282,7 @@ The volcano plot plots the statistical result as transformed p-values vs. the lo
 The FeatureLevelData file contains the transformed, normalized and imputed intensities for each peptide in each run. ProteinLevelData data summarizes intensities per run and protein.
 We’ll count and visualize the number of features per run and calculate the distribution of proteins per sample.
 
-> ### {% icon hands_on %} Hands-on: Follow up on MSstats results
+> <hands-on-title>Follow up on MSstats results</hands-on-title>
 >
 > 1. {% tool [Summary Statistics](Summary_Statistics1) %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `ProteinLevelData` (output of **MSstats** {% icon tool %})
@@ -308,12 +306,12 @@ We’ll count and visualize the number of features per run and calculate the dis
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Which sample has the lowest amount of proteins after protein summarization?
 > 2. In the complete experiment, how many features has a protein on average?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. RDEB cSCC4 
 > > ![Number of proteins per sample](../../images/maxquant-msstats-lfq/features_sample.png "Number of proteins per sample (run)")
@@ -333,7 +331,7 @@ The Sample Quantification Matrix Table contains the summarized intensities per p
 In order to make its IDs compatible with the ones from the comparison result at a later step, we keep only the Uniprot ID as well.
 
 
-> ### {% icon hands_on %} Hands-on: Filtering MSstats results
+> <hands-on-title>Filtering MSstats results</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Comparison Result` (output of **MSstats** {% icon tool %})
@@ -365,12 +363,12 @@ In order to make its IDs compatible with the ones from the comparison result at 
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why do we filter for the adjusted p-value?
 > 2. How many proteins have a p-value below 0.05?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Adjusted p-values control for the multiplicity of testing. Since we fit a separate model, and conduct a separate comparison for each protein, the number of tests equals the number of comparisons. A 0.05 cutoff of an adjusted p-value controls the False Discovery Rate in the collection of tests over all the proteins at 5%. Since they account for the multiplicity, adjusted p-values are more conservative (i.e. it is more difficult to detect a change).
 > > 2. 148 in total (first filtering step); 133 are upregulated in metastasized cSCC (metastasized filtered) and 13 are upregulated in RDEB cSCC (rdeb filtered).
@@ -383,7 +381,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 
 For each condition we select only the significant proteins, which are proteins with a p-value above 0 and below 0.05. Proteins with a p-value of 0 are missing in one condition and are therfore discarded in the next steps. We'll keep only the column with the Uniprot ID and extract the average protein intensities per sample from the sample quantification matrix file and vizualize them at heatmap. We do the exact same steps for both conditions, therefore, each time you start a tool (except for the replace step) you can use the multiple input file to start the step for the metastasized and rdeb files at the same time. 
 
-> ### {% icon hands_on %} Hands-on: filter differentially abundant proteins
+> <hands-on-title>filter differentially abundant proteins</hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `metastasized filtered` (output of **Filter** {% icon tool %})
@@ -434,11 +432,11 @@ For each condition we select only the significant proteins, which are proteins w
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many proteins are differentially abundant?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 85 are upregulated in metastasized cSCC and 12 are upregulated in RDEB cSCC (number of lines minus 1 in the first filtering step per condition).
 > >
@@ -450,7 +448,7 @@ For each condition we select only the significant proteins, which are proteins w
 
 In addition we retrieve for each Uniprot ID the corresponding protein names from uniprot to allow an easier interpretation.
 
-> ### {% icon hands_on %} Hands-on: MSstats visualizations
+> <hands-on-title>MSstats visualizations</hands-on-title>
 >
 > 1. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with IDs"*: `metastasized join` (output of **Join** {% icon tool %})

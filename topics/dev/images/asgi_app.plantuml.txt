@@ -8,6 +8,10 @@ participant Starlette
 participant Middleware
 participant router
 
+participant Controller
+participant Service
+participant Manager
+
 note over "ASGI Server", router: Framework
 note over Controller, Manager: Galaxy Backend
 
@@ -31,18 +35,23 @@ activate Middleware
 Middleware -> router: asgi args
 activate router
 
-router -> Controller: pydantic models
+router -> Controller: pydantic
 activate Controller
-Controller -> Manager: Python objects
+Controller -> Service: pydantic
+activate Service
+Service -> Manager: pydantic
 activate Manager
 
 note left of Browser: API Request
 note right of Manager: Vanilla Python function calls.\nUse application components\nto perform "business logic"
 
-Manager --> Controller: Python objects
+Manager --> Service: pydantic
 deactivate Manager
 
-Controller --> router: pydantic models
+Service --> Controller: pydantic
+deactivate Service
+
+Controller --> router: pydantic
 deactivate Controller
 
 router --> Middleware:
