@@ -13,7 +13,7 @@ Jekyll::Hooks.register :site, :post_read do |site|
     bundle = resources['resources'].map { |f| File.read(f) }.join("\n")
     hash = Digest::MD5.hexdigest(bundle)[0..7]
     site.config['javascript_bundles'][name]['hash'] = hash
-    site.config['javascript_bundles'][name]['path'] = "/assets/js/bundle.#{hash}.js"
+    site.config['javascript_bundles'][name]['path'] = "/assets/js/bundle.#{name}.#{hash}.js"
 
     Jekyll.logger.info "Analysing JS Bundle #{name} => #{bundle_timestamp} / #{hash}"
   end
@@ -106,7 +106,7 @@ module Jekyll
       attrs = ""
       attrs += " async" if bundle['async']
       attrs += " defer" if bundle['defer']
-      bundle_path = "#{baseurl}#{bundle['path']}?v=#{bundle['timestamp']}"
+      bundle_path = "#{baseurl}#{bundle['path']}"
       "<script #{attrs} src='#{bundle_path}'></script>"
     end
   end
