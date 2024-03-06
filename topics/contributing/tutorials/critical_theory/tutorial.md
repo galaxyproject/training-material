@@ -37,7 +37,7 @@ In the realm of education, the **Critical Learning Theory** aligns with the Fran
 
 Within the realm of **Critical Learning Theory**, the concept of **Hidden Curriculum**, extensively explored by Giroux, refers to the implicit messages, values, and norms transmitted to students through the informal aspects of the educational system, distinct from the explicit and planned syllabus ({% cite Giroux1988 %}).
 
-This training aspires to be a introduction on the **Critical Learning Theory** and the concept of **Hidden Curriculum**, with the aim of pointing out which pedagogical elements are the most appropriate to stimulate **critical thinking**, the backbone of scientific development.
+This training aspires to be a introduction on the **Critical Learning Theory** and the concept of **Hidden Curriculum**, with the aim of pointing out which pedagogical elements are the most appropriate to stimulate **critical thinking**, the backbone of scientific development. Last but not least, this training includes personal reflections from my teaching experiences, both in secondary education and as a lecturer in the Department of Bioinformatics at the Faculty of Freiburg.
 
 # Contextualising framework
 
@@ -103,21 +103,23 @@ From the assumption of this conception of critical thinking a new question arise
 
 > <question-title>Critical thinking quiz</question-title>
 >
-> 1. **How does critical thinking align with the principles of both Critical Theory and Critical Learning Theory?**
-> > a. By avoiding critical examination of societal issues. <br>
-> > b. By promoting conformity to existing structures. <br>
-> > c. By fostering a reflective approach to learning and encouraging critical analysis. <br>
-> > d. By discouraging diverse perspectives.
-> 2. **When dealing with diverse cultural perspectives, why might the positivist conception of critical thinking face limitations?**
-> > a. It fails to acknowledge cultural biases. <br>
-> > b. It prioritizes subjective experiences. <br>
-> > c. Cultural perspectives are irrelevant to objective analysis. <br>
-> > d. It encourages emotional responses. <br>
-> 3. **In the Frankfurt School's view, how does critical thinking contribute to the development of individuals within an educational context?**
-> > a. By discouraging any form of dissent. <br>
-> > b. By promoting uncritical acceptance of information. <br>
-> > c. By fostering independent thought. <br>
-> > d. By reinforcing conformity to existing power structures.
+> 1. **How does critical thinking align with the principles of both Critical Theory and Critical Learning Theory?** <br>
+> &nbsp; a. By avoiding critical examination of societal issues. <br>
+> &nbsp; b. By promoting conformity to existing structures. <br>
+> &nbsp; c. By fostering a reflective approach to learning and encouraging critical analysis. <br>
+> &nbsp; d. By discouraging diverse perspectives.
+> 
+> 2. **When dealing with diverse cultural perspectives, why might the positivist conception of critical thinking face limitations?** <br>
+> &nbsp; a. It fails to acknowledge cultural biases. <br>
+> &nbsp; b. It prioritizes subjective experiences. <br>
+> &nbsp; c. Cultural perspectives are irrelevant to objective analysis. <br>
+> &nbsp; d. It encourages emotional responses.
+>
+> 3. **In the Frankfurt School's view, how does critical thinking contribute to the development of individuals within an educational context?** <br>
+> &nbsp; a. By discouraging any form of dissent. <br>
+> &nbsp; b. By promoting uncritical acceptance of information. <br>
+> &nbsp; c. By fostering independent thought. <br>
+> &nbsp; d. By reinforcing conformity to existing power structures.
 >
 > > <solution-title></solution-title>
 > > 1. By fostering a reflective approach to learning and encouraging critical analysis.
@@ -140,18 +142,20 @@ According the **Critical Learning Theory**, what students learn from the formall
 
 > <question-title>Hidden Curriculum quiz</question-title>
 >
-> 1. **What is the hidden curriculum?**
-> > a. The formal curriculum taught in education systems. <br>
-> > b. Implicit values, behaviors, and expectations transmitted through the educational or social system. <br>
-> > c. Extracurricular activities. <br>
-> 2. **How is the hidden curriculum transmitted?**
-> > a. Through explicit teaching and textbooks. <br>
-> > b. Through unspoken or implicit messages in the educational or social environment. <br>
-> > c. Through standardized tests. <br>
-> 3. **How does the hidden curriculum influence individuals?**
-> > a. It has no impact on individuals' beliefs and attitudes. <br>
-> > b. It shapes subconscious beliefs and attitudes through implicit messages.<br>
-> > c. It directly dictates conscious decision-making.
+> 1. **What is the hidden curriculum?** <br>
+> &nbsp; a. The formal curriculum taught in education systems. <br>
+> &nbsp; b. Implicit values, behaviors, and expectations transmitted through the educational or social system. <br>
+> &nbsp; c. Extracurricular activities.
+>
+> 2. **How is the hidden curriculum transmitted?** <br>
+> &nbsp; a. Through explicit teaching and textbooks. <br>
+> &nbsp; b. Through unspoken or implicit messages in the educational or social environment. <br>
+> &nbsp; c. Through standardized tests.
+>
+> 3. **How does the hidden curriculum influence individuals?** <br>
+> &nbsp; a. It has no impact on individuals' beliefs and attitudes. <br>
+> &nbsp; b. It shapes subconscious beliefs and attitudes through implicit messages.<br>
+> &nbsp; c. It directly dictates conscious decision-making.
 >
 > > <solution-title></solution-title>
 > > 1. Implicit values, behaviors, and expectations transmitted through the educational or social system.
@@ -206,7 +210,7 @@ The principle of maximum performance extends to educational technologies, where 
 
 # Conclusion
 
-The following conclusions are drawn both from the contents of the training and from my personal experience as lecturer in the deparment of Bioinformatics at the University of Freiburg.
+The following conclusions are drawn both from the contents of the training.
 
 The underlying message assimilated under the practices of the dominant hidden curriculum, characterized by a unidirectional vision of the teaching-learning process, points less to educative system that help students think critically about the world they live in, than to institutions that promote the internalization of values that emphasise respect for authority, punctuality, cleanliness, docility and conformity.
 
