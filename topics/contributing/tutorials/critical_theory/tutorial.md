@@ -83,7 +83,7 @@ The most common definition comes from the **positivist tradition** in the applie
 >
 > Positivism, originating in the 19th century under the guidance of figures like Auguste Comte, is a philosophical and scientific stance that emphasizes the importance of empirical observation and the application of the scientific method in gaining knowledge about the world. Central to positivism is the idea that valid knowledge is derived from observable and measurable phenomena.
 >
-> Positivists stress the need for objectivity in the pursuit of knowledge, advocating for the exclusion of personal biases and subjective interpretations. They argue for a systematic and rigorous adherence to scientific methodologies, favoring concrete evidence over speculative reasoning. While positivism has significantly influenced the natural sciences, it has also faced criticism for its limitations in addressing subjective experiences, moral values, and aspects of reality that aren't easily quantifiable. Despite these critiques, positivism continues to be a major perspective in the philosophy of science.
+> Positivists stress the need for objectivity in the pursuit of knowledge, advocating for the exclusion of personal biases and subjective interpretations. While positivism has significantly influenced the natural sciences, it has also faced criticism for its limitations in addressing subjective experiences, moral values, and aspects of reality that aren't easily quantifiable. Despite these critiques, positivism continues to be a major perspective in the philosophy of science.
 >
 > Max Horkheimer, who played a pivotal role in the **Frankfurt School**, argued that positivism misrepresent human social action by ignoring the influence of socially and historically mediated human consciousness on social facts. Positivism failed to acknowledge that these social facts are not objective entities but are shaped by observers and the broader social context, leading to a distorted view of reality. Secondly, Horkheimer contended that positivism construction of social reality was politically conservative, maintaining the existing status quo rather than challenging it.
 >
@@ -108,17 +108,12 @@ From the assumption of this conception of critical thinking a new question arise
 > > b. By promoting conformity to existing structures. <br>
 > > c. By fostering a reflective approach to learning and encouraging critical analysis. <br>
 > > d. By discouraging diverse perspectives.
-> 2. **According to the Frankfurt School thinkers, what did critical thinking in education aim to achieve?**
-> > a. To maintain the status quo. <br>
-> > b. To encourage blind acceptance of authority. <br>
-> > c. To develop individuals who conform to norms. <br>
-> > d. To empower individuals to question and transform social structures. <br>
-> 3. **When dealing with diverse cultural perspectives, why might the positivist conception of critical thinking face limitations?**
+> 2. **When dealing with diverse cultural perspectives, why might the positivist conception of critical thinking face limitations?**
 > > a. It fails to acknowledge cultural biases. <br>
 > > b. It prioritizes subjective experiences. <br>
 > > c. Cultural perspectives are irrelevant to objective analysis. <br>
 > > d. It encourages emotional responses. <br>
-> 4. **In the Frankfurt School's view, how does critical thinking contribute to the development of individuals within an educational context?**
+> 3. **In the Frankfurt School's view, how does critical thinking contribute to the development of individuals within an educational context?**
 > > a. By discouraging any form of dissent. <br>
 > > b. By promoting uncritical acceptance of information. <br>
 > > c. By fostering independent thought. <br>
@@ -126,9 +121,8 @@ From the assumption of this conception of critical thinking a new question arise
 >
 > > <solution-title></solution-title>
 > > 1. By fostering a reflective approach to learning and encouraging critical analysis.
-> > 2. To empower individuals to question and transform social structures.
-> > 3. It fails to acknowledge cultural biases.
-> > 4. By fostering independent thought.
+> > 2. It fails to acknowledge cultural biases.
+> > 3. By fostering independent thought.
 > {: .solution}
 {: .question}
 
@@ -147,9 +141,9 @@ According the **Critical Learning Theory**, what students learn from the formall
 > <question-title>Hidden Curriculum quiz</question-title>
 >
 > 1. **What is the hidden curriculum?**
-> > a. The formal curriculum taught in schools. <br>
+> > a. The formal curriculum taught in education systems. <br>
 > > b. Implicit values, behaviors, and expectations transmitted through the educational or social system. <br>
-> > c. Extracurricular activities in schools. <br>
+> > c. Extracurricular activities. <br>
 > 2. **How is the hidden curriculum transmitted?**
 > > a. Through explicit teaching and textbooks. <br>
 > > b. Through unspoken or implicit messages in the educational or social environment. <br>
@@ -174,7 +168,7 @@ According Giroux, the structure, organisation, and content of dominant curricula
 
 ## System of pedagogical styles of classroom control
 
-The dominant pedagogical style of classroom control, the expository discursive mode, represent other of the manifestations of the hidden curriculum. In this discursive mode the sender acts repeatedly on the receiver but gives him/her a passive role (Castejón, España and Ganzarain, 2004). In this case, the hidden curriculum crystallizes as imposition of meanings, which, according to Giroux is intimately linked to its aspiration to depoliticisation ({% cite Giroux1988 %}). Faced with this, we
+The dominant pedagogical style of classroom control, the expository discursive mode, represent other of the manifestations of the hidden curriculum. In this discursive mode the sender acts repeatedly on the receiver but gives him/her a passive role ({% cite Castejon2004 %}). In this case, the hidden curriculum crystallizes as imposition of meanings, which, according to Giroux is intimately linked to its aspiration to depoliticisation ({% cite Giroux1988 %}). Faced with this, we
 could ask ourselves: does this aspiration impact in any way on the objectives of fostering critical thinking?
 
 According Marcuse, the education system is political, so aspiring to its politicisation does not imply an inference in its functions ({% cite Marcuse1964 %}). The attempt to appropriate concepts that are spontaneously experienced as apolitical would represent a clear attack on critical thinking, derived from the struggle for ideological-political hegemony ({% cite Zizek2009 %}). In words of Giroux, *when students have little room left to generate their own meanings, learning degenerates into a euphemism for a strategy of control* ({% cite Giroux1988 %}).
@@ -200,8 +194,6 @@ The technological system can be defined as a set of interconnected components th
 > In 1923, Gunther Anders obtained his Ph.D. in philosophy from the University of Freiburg, having studied under the esteemed philosophers Martin Heidegger and Edmund Husserl.
 >
 > ![Anders picture](../../images/critical_theory/anders.png "Günther Anders. Source: soziologie.uni-freiburg.de")
->
-> Anders' main contribution to pedagogy lies in his insightful exploration of technology's influence on education. He argued that technological tools, far from being neutral conduits of information, actively shape values and habits of thought. This perspective underscores the need for educators to critically assess the implications of integrating technology into learning environments. 
 >
 > On August 2023, the University of Freiburg established a research position at the [Institute of Sociology](https://www.soziologie.uni-freiburg.de/forschung/gaf) in his honour.
 >
