@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Adding and updating best practice metadata for Galaxy tools using the bio.tools registry / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@91ff5f0ee4159ce082e458f336d1573e5cd17cba",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-annotation/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.f1f2de89.js?v=1709714319' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.14ccc527.js?v=1709714319' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Adding and updating best practice metadata for Galaxy tools using the bio.tools registry">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-03-05 15:11:05 +0000">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Johan Gustafsson">
+<meta name="DC.creator" content="Paul Zierep"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Hands-on: Adding and updating best practice metadata for Galaxy tools using the bio.tools registry">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-03-05 15:11:05 +0000",
+  "datePublished": "2024-03-06 08:37:45 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Adding and updating best practice metadata for Galaxy tools using the bio.tools registry",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Adding and updating best practice metadata for Galaxy tools using the bio.tools registry",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-annotation/tutorial.html",
+  "version": 8,
+  "timeRequired": "PT1H",
+  "teaches": "Identify Galaxy tools without bio.tools entry\n - Create a bio.tools entry\n - Update a bio.tools entry\n - Add EDAM ontology terms to a bio.tools entry\n - Link a Galaxy tool to its corresponding bio.tools entry",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "The questions this  addresses are:\n - How are Galaxy tools linked to EDAM ontology?\n - How to connect Galaxy tools to bio.tools?\n - What is bio.tools?\n - How to add, and update, entries in bio.tools?\n\n\nThe objectives are:\n - Identify Galaxy tools without bio.tools entry\n - Create a bio.tools entry\n - Update a bio.tools entry\n - Add EDAM ontology terms to a bio.tools entry\n - Link a Galaxy tool to its corresponding bio.tools entry\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/supernord/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/supernord/",
+      "name": "Johan Gustafsson",
+      "image": "https://avatars.githubusercontent.com/supernord",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2977-5032",
+      "orcid": "https://orcid.org/0000-0002-2977-5032"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/paulzierep/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/paulzierep/",
+      "name": "Paul Zierep",
+      "image": "https://avatars.githubusercontent.com/paulzierep",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2982-388X",
+      "orcid": "https://orcid.org/0000-0003-2982-388X"
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+
+  ],
+  "abstract": "Galaxy offers thousands of tools. Many of these tools either have incomplete metadata or are not yet linked to sources of high-quality metadata such as [bio.tools](https://bio.tools/)."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.f1f2de89.js?v=1709714319'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Development in Galaxy
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/tool-annotation/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/tool-annotation/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-dev">
+    <h1 data-toc-skip>Adding and updating best practice metadata for Galaxy tools using the bio.tools registry</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/supernord/" class="contributor-badge contributor-supernord"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/supernord?s=36" alt="Johan Gustafsson avatar" width="36" class="avatar" />
+    Johan Gustafsson</a><a href="/training-material/hall-of-fame/paulzierep/" class="contributor-badge contributor-paulzierep"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulzierep?s=36" alt="Paul Zierep avatar" width="36" class="avatar" />
+    Paul Zierep</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How are Galaxy tools linked to EDAM ontology?</p>
+</li>
+        
+        <li><p>How to connect Galaxy tools to bio.tools?</p>
+</li>
+        
+        <li><p>What is bio.tools?</p>
+</li>
+        
+        <li><p>How to add, and update, entries in bio.tools?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Identify Galaxy tools without bio.tools entry</p>
+</li>
+        
+        <li><p>Create a bio.tools entry</p>
+</li>
+        
+        <li><p>Update a bio.tools entry</p>
+</li>
+        
+        <li><p>Add EDAM ontology terms to a bio.tools entry</p>
+</li>
+        
+        <li><p>Link a Galaxy tool to its corresponding bio.tools entry</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 6, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 5, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Galaxy offers thousands of tools. Many of these tools either have incomplete metadata or are not yet linked to sources of high-quality metadata such as <a href="https://bio.tools/">bio.tools</a>.</p>
+
+<p>This prevents filtering for all tools in a specific research community or domain, and makes it all but impossible to employ advanced filtering with ontology terms like the ones from EDAM or to group tools based on an ontology to improve the Galaxy tool panel.</p>
+
+<p><a href="https://edamontology.org/page">EDAM</a> (<span class="citation"><a href="#black2021edam">Black <i>et al.</i> 2021</a></span>) is a comprehensive ontology of well-established, familiar concepts that are prevalent within bioscientific data analysis and data management. It includes 4 main sections of concepts (sub-ontologies):</p>
+
+<ul>
+  <li><strong>Topic</strong>:  A category denoting a rather broad domain or field of interest, of study, application, work, data, or technology. Topics have no clearly defined borders between each other.</li>
+  <li><strong>Operation</strong>&gt; A function that processes a set of inputs and results in a set of outputs, or associates arguments (inputs) with values (outputs).</li>
+  <li><strong>Data</strong>: Information, represented in an information artefact (data record) that is “understandable” by dedicated computational tools that can use the data as input or produce it as output.</li>
+  <li><strong>Format</strong>: A defined way or layout of representing and structuring data in a computer file, blob, string, message, or elsewhere.</li>
+</ul>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/EDAMrelations.png" alt="Simplified data flow diagram in EDAM architecture: boxes for concepts, lines for relations. Streamlined data management." width="1307" height="1050" loading="lazy" /><a target="_blank" href="./images/EDAMrelations.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> EDAM architecture is simple. Boxes indicate top-level concepts (sections, sub-ontologies), and lines indicate types of relations. Source: <a href="https://edamontology.org/page">EDAM website</a></figcaption></figure>
+
+<p>The ontology can be navigated using <a href="https://edamontology.github.io/edam-browser/">EDAM Browser</a>:</p>
+
+<iframe id="edam" src="https://edamontology.github.io/edam-browser/#operation_0291" frameborder="1" width="80%" height="600px"> <a href="./images/edam_browser.png" rel="noopener noreferrer"><img src="./images/edam_browser.png" alt="EDAM ontology browser. " width="2320" height="2010" loading="lazy" /></a> </iframe>
+
+<p>A tool or software can then be characterized by different EDAM terms:</p>
+<ul>
+  <li>A topic term, <em>e.g.</em>  <a href="https://edamontology.github.io/edam-browser/#topic_0121"><code class="language-plaintext highlighter-rouge">Proteomics</code></a>,</li>
+  <li>An operation (a specific scientific thing that a tool does) term, <em>e.g.</em> <a href="https://edamontology.github.io/edam-browser/#operation_3631"><code class="language-plaintext highlighter-rouge">Peptide identification</code></a>,</li>
+  <li>A data term for the type of biological data, <em>e.g.</em> <a href="https://edamontology.github.io/edam-browser/#data_0943"><code class="language-plaintext highlighter-rouge">Mass spectrum</code></a>,</li>
+  <li>A format term, <em>e.g.</em> <a href="https://edamontology.github.io/edam-browser/#format_3712"><code class="language-plaintext highlighter-rouge">Thermo RAW</code></a>.</li>
+</ul>
+
+<p>The annotation of tools can be done on <a href="https://bio.tools/">bio.tools</a>. bio.tools (<span class="citation"><a href="#ison2016tools">Ison <i>et al.</i> 2016</a></span>) is a global portal for bioinformatics resources that helps researchers to find, understand, compare, and select resources suitable for their work. It relies on the EDAM ontology for standardizing the annotations.</p>
+
+<p>In Galaxy, tools can be annotated with EDAM concepts, either by adding them directly to the <code class="language-plaintext highlighter-rouge">XML</code> wrapper or extracting them from their corresponding bio.tools entry by linking to it in the wrapper. The advantage of the second approach is that there is one source of truth (i.e. the bio.tools entry), which centralises the location for storage and update of metadata, including EDAM concepts, as well as preventing replication of metadata across multiple platforms.</p>
+
+<p>The aim of this tutorial is to improve the annotation of a given Galaxy tool by either:</p>
+
+<ul>
+  <li>Linking it to an existing bio.tools identifier,</li>
+  <li>Creating a new bio.tools identifier first and then linking the Galaxy tool, or</li>
+  <li>Updating an existing bio.tools entry with the proper EDAM concepts</li>
+</ul>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#choose-a-tool-without-a-biotools-identifier" id="markdown-toc-choose-a-tool-without-a-biotools-identifier">Choose a tool without a bio.tools identifier</a></li>
+  <li><a href="#determine-if-a-biotools-entry-exists-for-your-chosen-tool" id="markdown-toc-determine-if-a-biotools-entry-exists-for-your-chosen-tool">Determine if a bio.tools entry exists for your chosen tool</a></li>
+  <li><a href="#create-a-biotools-entry-for-a-tool" id="markdown-toc-create-a-biotools-entry-for-a-tool">Create a bio.tools entry for a tool</a></li>
+  <li><a href="#review-and-update-the-edam-terms-for-an-existing-biotools-entry" id="markdown-toc-review-and-update-the-edam-terms-for-an-existing-biotools-entry">Review and update the EDAM terms for an existing bio.tools entry</a></li>
+  <li><a href="#linking-a-galaxy-tool-to-a-biotools-entry" id="markdown-toc-linking-a-galaxy-tool-to-a-biotools-entry">Linking a Galaxy tool to a bio.tools entry</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="choose-a-tool-without-a-biotools-identifier">Choose a tool without a bio.tools identifier</h1>
+
+<p>To start, we need to select a tool without a bio.tools identifier.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-choose-a-tool-without-a-bio-tools-identifier"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Choose a tool without a bio.tools identifier</div>
+
+  <ol>
+    <li>Open <a href="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/">the list of Galaxy tools</a></li>
+    <li>Click on <strong>Add Condition</strong></li>
+    <li>Select <em>bio.tool id</em> in <strong>Data</strong> drop-down</li>
+    <li>Select <em>Empty</em> in <strong>Condition</strong> drop-down</li>
+    <li>Select a tool in the list</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="determine-if-a-biotools-entry-exists-for-your-chosen-tool">Determine if a bio.tools entry exists for your chosen tool</h1>
+
+<p>Now let’s search for our selected tool on bio.tools.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-search-for-a-tool-in-bio-tools"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Search for a tool in bio.tools</div>
+
+  <ol>
+    <li>Open <a href="https://bio.tools/">bio.tools</a></li>
+    <li>Type the name of your tool in the “Search bio.tools” bar on the top</li>
+    <li>Try also other naming possibilities of your tool, e.g. sometimes the galaxy tool name is not identical to the name of the tool in the publication.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoabiotool">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Have you found the tool in bio.tools?
+	</p>
+	
+	
+		<input id="cyoa-opt1biotool" type="radio" name="cyoabiotool" value="No-existing-entry" onclick="cyoaChoice('No-existing-entry', 'gtn-cyoabiotool')" />
+		<label for="cyoa-opt1biotool" class="select btn btn-secondary">No existing entry</label>
+	
+	
+		<input id="cyoa-opt2biotool" type="radio" name="cyoabiotool" value="Existing-entry" onclick="cyoaChoice('Existing-entry', 'gtn-cyoabiotool')" />
+		<label for="cyoa-opt2biotool" class="select btn btn-secondary">Existing entry</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("No-biotool-entry", "gtn-cyoabiotool");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="No-existing-entry">
+
+  <h1 id="create-a-biotools-entry-for-a-tool">Create a bio.tools entry for a tool</h1>
+
+  <p>If the tool is not on bio.tools, we need to create a new entry and populate it with metadata.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-a-bio-tools-entry-with-minimum-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create a bio.tools entry with minimum metadata</div>
+
+    <ol>
+      <li>Sign up to <a href="https://bio.tools/">bio.tools</a></li>
+      <li>Select <strong>Add a tool</strong> from the drop-down <strong>Menu</strong></li>
+      <li>Fill in general information in the first tab of the wizard. Required information includes:
+        <ol>
+          <li><strong>Tool name</strong></li>
+          <li><strong>Description</strong></li>
+          <li><strong>Homepage URL</strong></li>
+        </ol>
+      </li>
+      <li>
+        <p>Add EDAM operation concepts, as well as EDAM data concepts for both inputs and outputs</p>
+
+        <blockquote>
+          <ol>
+            <li>Click on <strong>Function</strong> tab</li>
+            <li>Click on <strong>Add function</strong></li>
+            <li>Add EDAM operation terms
+              <ol>
+                <li>Click on <strong>Add operation</strong></li>
+                <li>Search for operation in the filter or in the hierarchy</li>
+                <li>Click on the selected term</li>
+                <li>Repeat to add as many operation terms as needed</li>
+              </ol>
+            </li>
+            <li>(Optional) Add input
+              <ol>
+                <li>Click on <strong>Add input</strong></li>
+                <li>Add EDAM data term
+                  <ol>
+                    <li>Click on <strong>Add data type</strong></li>
+                    <li>Search for data type in the filter or in the hierarchy</li>
+                  </ol>
+                </li>
+                <li>Add EDAM format term
+                  <ol>
+                    <li>Click on <strong>Add data format</strong></li>
+                    <li>Search for data format in the filter or in the hierarchy</li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li>(Optional) Add output
+              <ol>
+                <li>Click on <strong>Add output</strong></li>
+                <li>Add EDAM data term
+                  <ol>
+                    <li>Click on <strong>Add data type</strong></li>
+                    <li>Search for data type in the filter or in the hierarchy</li>
+                  </ol>
+                </li>
+                <li>Add EDAM format term
+                  <ol>
+                    <li>Click on <strong>Add data format</strong></li>
+                    <li>Search for data format in the filter or in the hierarchy</li>
+                  </ol>
+                </li>
+                <li>Repeat to add as many inputs and outputs as needed</li>
+              </ol>
+            </li>
+          </ol>
+        </blockquote>
+      </li>
+      <li>
+        <p>Add EDAM topic concepts</p>
+
+        <blockquote>
+          <ol>
+            <li>Click on <strong>Labels</strong> tab</li>
+            <li>Add EDAM topic terms
+              <ol>
+                <li>Click on <strong>Add topic</strong></li>
+                <li>Search for topic in the filter or in the hierarchy</li>
+                <li>Click on the selected term</li>
+                <li>Repeat to add as many topic terms as needed</li>
+              </ol>
+            </li>
+            <li>Add license</li>
+            <li>Fill in any known extra information</li>
+          </ol>
+        </blockquote>
+      </li>
+      <li>Add the tool type, license, language, and other metadata as needed</li>
+      <li>In the Permissions tab, select <strong>Make this resource editable by anyone</strong></li>
+      <li>Click on <strong>Validate</strong> on the top</li>
+      <li>Click on <strong>Save</strong> to create the bio.tools entry</li>
+      <li>Copy the bio.tools id</li>
+    </ol>
+  </blockquote>
+
+</div>
+
+<div class="Existing-entry">
+
+  <h1 id="review-and-update-the-edam-terms-for-an-existing-biotools-entry">Review and update the EDAM terms for an existing bio.tools entry</h1>
+
+  <p>Before linking a Galaxy tool with its corresponding bio.tools entry, we need to check if the tool is correctly annotated with EDAM concepts.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-check-edam-terms-in-a-bio-tools-entry"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check EDAM terms in a bio.tools entry</div>
+
+    <ol>
+      <li>Open the bio.tools entry for the tool</li>
+      <li>Check the EDAM <strong>Topic</strong> terms by looking at the green boxes (if they exist) below the tool name, URL, and available versions</li>
+      <li>Check the EDAM <strong>Operation</strong> terms by looking at the blue boxes (if they exist) below the tool description</li>
+    </ol>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoaedamUpdate">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		What do you think about the EDAM terms in the bio.tools entry?
+	</p>
+	
+	
+		<input id="cyoa-opt1edamUpdate" type="radio" name="cyoaedamUpdate" value="Terms-to-be-modified" onclick="cyoaChoice('Terms-to-be-modified', 'gtn-cyoaedamUpdate')" />
+		<label for="cyoa-opt1edamUpdate" class="select btn btn-secondary">Terms to be modified</label>
+	
+	
+		<input id="cyoa-opt2edamUpdate" type="radio" name="cyoaedamUpdate" value="Correct-terms" onclick="cyoaChoice('Correct-terms', 'gtn-cyoaedamUpdate')" />
+		<label for="cyoa-opt2edamUpdate" class="select btn btn-secondary">Correct terms</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Terms-to-be-modified", "gtn-cyoaedamUpdate");
+		})
+	</script>
+	
+</blockquote>
+
+  <div class="Terms-to-be-modified">
+
+    <p>To modify EDAM terms in a bio.tools entry, we need to request editing rights and then modify this entry.</p>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-modify-the-edam-concepts-in-a-bio-tools-entry"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Modify the EDAM concepts in a bio.tools entry</div>
+
+      <ol>
+        <li>Sign up for <a href="https://bio.tools/">bio.tools</a></li>
+        <li>Click on <strong>Request editing rights</strong> at the bottom of the bio.tools entry page</li>
+        <li>Wait for the request to be approved</li>
+        <li>Click on <strong>Update this record</strong></li>
+        <li>
+          <p>Update, or add, EDAM <strong>Operation</strong> term(s) and EDAM <strong>Data</strong> term(s) for both inputs and outputs</p>
+
+          <blockquote>
+            <ol>
+              <li>Click on <strong>Function</strong> tab</li>
+              <li>Click on <strong>Add function</strong></li>
+              <li>Add EDAM operation terms
+                <ol>
+                  <li>Click on <strong>Add operation</strong></li>
+                  <li>Search for operation in the filter or in the hierarchy</li>
+                  <li>Click on the selected term</li>
+                  <li>Repeat to add as many operation terms as needed</li>
+                </ol>
+              </li>
+              <li>(Optional) Add input
+                <ol>
+                  <li>Click on <strong>Add input</strong></li>
+                  <li>Add EDAM data term
+                    <ol>
+                      <li>Click on <strong>Add data type</strong></li>
+                      <li>Search for data type in the filter or in the hierarchy</li>
+                    </ol>
+                  </li>
+                  <li>Add EDAM format term
+                    <ol>
+                      <li>Click on <strong>Add data format</strong></li>
+                      <li>Search for data format in the filter or in the hierarchy</li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+              <li>(Optional) Add output
+                <ol>
+                  <li>Click on <strong>Add output</strong></li>
+                  <li>Add EDAM data term
+                    <ol>
+                      <li>Click on <strong>Add data type</strong></li>
+                      <li>Search for data type in the filter or in the hierarchy</li>
+                    </ol>
+                  </li>
+                  <li>Add EDAM format term
+                    <ol>
+                      <li>Click on <strong>Add data format</strong></li>
+                      <li>Search for data format in the filter or in the hierarchy</li>
+                    </ol>
+                  </li>
+                  <li>Repeat to add as many inputs and outputs as needed</li>
+                </ol>
+              </li>
+            </ol>
+          </blockquote>
+        </li>
+        <li>
+          <p>Update, or add, EDAM <strong>Topic</strong> term(s)</p>
+
+          <blockquote>
+            <ol>
+              <li>Click on <strong>Labels</strong> tab</li>
+              <li>Add EDAM topic terms
+                <ol>
+                  <li>Click on <strong>Add topic</strong></li>
+                  <li>Search for topic in the filter or in the hierarchy</li>
+                  <li>Click on the selected term</li>
+                  <li>Repeat to add as many topic terms as needed</li>
+                </ol>
+              </li>
+              <li>Add license</li>
+              <li>Fill in any known extra information</li>
+            </ol>
+          </blockquote>
+        </li>
+        <li>Update, or add, the metadata for tool type, license, language, and other fields as needed</li>
+        <li>Click on <strong>Validate</strong> on the top</li>
+        <li>Click on <strong>Save</strong> to create the bio.tools entry</li>
+        <li>Copy the bio.tools ID</li>
+      </ol>
+    </blockquote>
+
+  </div>
+
+</div>
+
+<h1 id="linking-a-galaxy-tool-to-a-biotools-entry">Linking a Galaxy tool to a bio.tools entry</h1>
+
+<p>To link a Galaxy tool to its corresponding bio.tools entry, we need to first find the source of the wrapper.</p>
+
+<blockquote>
+  <div class="box-title hands-on-title" id="hands-on-find-the-galaxy-wrapper"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find the Galaxy wrapper</div>
+
+  <ol>
+    <li>Go to the tool on any Galaxy server</li>
+    <li>Click on the drop-down menu next to the <strong>Run tool</strong> button</li>
+    <li>Select <strong>See in Tool Shed</strong></li>
+    <li>Once in the Tool Shed, click on the link to the development repository</li>
+    <li>Fork the repository</li>
+  </ol>
+
+  <p>If the link to the development repository is not correct the column <code class="language-plaintext highlighter-rouge">Galaxy wrapper parsed folder</code> from the <strong>Galaxy Tool Metadata Extractor</strong> will also show you the location of the wrapper.</p>
+  <ol>
+    <li>Open <a href="https://galaxyproject.github.io/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor</a></li>
+    <li>Search your tool</li>
+    <li>Expand the row</li>
+    <li>Open the link shown in the <code class="language-plaintext highlighter-rouge">Galaxy wrapper parsed folder</code> column</li>
+  </ol>
+</blockquote>
+
+<p class="hands_on">Now we have the wrapper, and can add the bio.tools entry.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-bio-tools-entry-to-the-galaxy-wrapper"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add bio.tools entry to the Galaxy wrapper</div>
+
+  <ol>
+    <li>Open the Galaxy tool XML file</li>
+    <li>
+      <p>Add the xref snippet indicated below:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xrefs&gt;
+    &lt;xref type="bio.tools"&gt;biotool-id&lt;/xref&gt;
+&lt;/xrefs&gt;
+</code></pre></div>      </div>
+
+      <p>It should appear below the <code class="language-plaintext highlighter-rouge">macros</code> section and before the <code class="language-plaintext highlighter-rouge">requirements</code> section. If the tools already defines <code class="language-plaintext highlighter-rouge">xrefs</code> in the <code class="language-plaintext highlighter-rouge">macro.xml</code> file. The snipped should be placed there.</p>
+    </li>
+    <li>Replace <code class="language-plaintext highlighter-rouge">biotool-id</code> in the example snippet above with the bio.tools ID for your tool</li>
+    <li>Commit the change on a new branch</li>
+    <li>Make a pull request (PR) against the original repository</li>
+    <li>Wait patiently for the PR to be merged, at which point the new bio.tools reference will be added to the Galaxy tool wrapper</li>
+    <li>Make sure to respond to any feedback from the owner of the wrapper</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Galaxy tools can get EDAM ontology terms from bio.tools</p>
+</li>
+                        
+                        <li><p>bio.tools entry can be created and modified to provide the best EDAM annotations</p>
+</li>
+                        
+                        <li><p>An up-to-date bio.tools entry provides readily accessible metadata that can help users find and understand tools that are available on Galaxy</p>
+</li>
+                        
+                        <li><p>bio.tools entry can easily be added to a Galaxy tool</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/dev/faqs/">FAQ page for the Development in Galaxy topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="ison2016tools">Ison, J., K. Rapacki, H. Ménager, M. Kalaš, E. Rydza <i>et al.</i>, 2016 <b>Tools and data services registry: a community effort to document bioinformatics resources</b>. Nucleic acids research 44: D38–D47. <a href="https://doi.org/10.1093/nar/gkv1116">10.1093/nar/gkv1116</a></li>
+<li id="black2021edam">Black, M., L. Lamothe, H. Eldakroury, M. Kierkegaard, A. Priya <i>et al.</i>, 2021 <b>EDAM: The bioscientific data analysis ontology (update 2021)[version 1; not peer reviewed]</b>. <a href="https://doi.org/10.7490/f1000research.1118900.1">10.7490/f1000research.1118900.1</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=dev/tool-annotation" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Bérénice Batut, Johan Gustafsson, Paul Zierep,  <b>Adding and updating best practice metadata for Galaxy tools using the bio.tools registry (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-annotation/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-annotation/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{dev-tool-annotation,
+author = "Bérénice Batut and Johan Gustafsson and Paul Zierep",
+	title = "Adding and updating best practice metadata for Galaxy tools using the bio.tools registry (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-annotation/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-annotation/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/91ff5f0ee4159ce082e458f336d1573e5cd17cba">91ff5f0</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/tool-annotation/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.14ccc527.js?v=1709714319'></script>
+        
+    </body>
+</html>
