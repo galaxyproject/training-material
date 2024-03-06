@@ -41,9 +41,9 @@ This training aspires to be a introduction on the **Critical Learning Theory** a
 
 # Contextualising framework
 
-> *Critical thinking aims to define the irrational character of the established rationality.*
+> *Questioning is an exercise in dismantling those certainties that are installed as layers of truths imposing the tyranny of the obvious.*
 >
-> One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society. Herbert Marcuse
+> ¿Para qué sirve la filosofía?. Dario Sztajnzrajbe
 >
 {: .quote}
 
@@ -69,9 +69,9 @@ In the face of the conservative claim that educative systems transmit objective 
 
 # Critical thinking
 
-> *Questioning is an exercise in dismantling those certainties that are installed as layers of truths imposing the tyranny of the obvious.*
+> *Critical thinking aims to define the irrational character of the established rationality.*
 >
-> ¿Para qué sirve la filosofía?. Dario Sztajnzrajbe
+> One-Dimensional Man: Studies in the Ideology of Advanced Industrial Society. Herbert Marcuse
 >
 {: .quote}
 
@@ -164,11 +164,11 @@ According the **Critical Learning Theory**, what students learn from the formall
 
 The curricular system is defined as the regulation of the elements that determine the teaching and learning processes for each of the teaching programmes.
 
-According Giroux, the structure, organisation, and content of dominant curricular systems would endow students with the personality needs required in the bureaucratically structured and hierarchically organised workforce ({% cite Giroux1988 %}). Elements such as exposure to a core of common subjects would lead to a dissolution of individuality in the mass, in the collective, to a standardisation and homogenisation of psychologies ({% cite Olivo2005 %}).
+According Giroux, the structure, organisation, and content of dominant curricular systems would endow students with the personality needs required in the bureaucratically structured and hierarchically organised workforce ({% cite Giroux1988 %}). Elements such as exposure to a core of common subjects would lead to a **dissolution of individuality in the mass, in the collective, to a standardisation and homogenisation of psychologies** ({% cite Olivo2005 %}).
 
 ## System of pedagogical styles of classroom control
 
-The dominant pedagogical style of classroom control, the expository discursive mode, represent other of the manifestations of the hidden curriculum. In this discursive mode the sender acts repeatedly on the receiver but gives him/her a passive role ({% cite Castejon2004 %}). In this case, the hidden curriculum crystallizes as imposition of meanings, which, according to Giroux is intimately linked to its aspiration to depoliticisation ({% cite Giroux1988 %}). Faced with this, we
+The dominant pedagogical style of classroom control, the **expository discursive mode**, represent other of the manifestations of the hidden curriculum. In this discursive mode the sender acts repeatedly on the receiver but gives him/her a passive role ({% cite Castejon2004 %}). In this case, the hidden curriculum crystallizes as imposition of meanings, which, according to Giroux is intimately linked to its aspiration to depoliticisation ({% cite Giroux1988 %}). Faced with this, we
 could ask ourselves: does this aspiration impact in any way on the objectives of fostering critical thinking?
 
 According Marcuse, **the education system is political, so aspiring to its politicisation does not imply an inference in its functions** ({% cite Marcuse1964 %}). The attempt to appropriate concepts that are spontaneously experienced as apolitical would represent a clear attack on critical thinking, derived from the struggle for ideological-political hegemony ({% cite Zizek2009 %}). In words of Giroux, *when students have little room left to generate their own meanings, learning degenerates into a euphemism for a strategy of control* ({% cite Giroux1988 %}).
@@ -177,7 +177,7 @@ Darío Sztajnszrajber, a prominent argentine philosopher, essayist and teacher, 
 
 ## Evaluation system
 
-It is in the evaluation system that the nature of the hidden curriculum is most clearly revealed. The potential effect of assessment is clearly perceived when it is recognised that both academic and non-academic aspects are taught and assessed, the latter including institutional adaptation and specific personal qualities ({% cite Giroux1988 %}). 
+It is in the evaluation system that the nature of the hidden curriculum is most clearly revealed. The potential effect of assessment is clearly perceived when it is recognised that **both academic and non-academic aspects are taught and assessed**, the latter including institutional adaptation and specific personal qualities ({% cite Giroux1988 %}). 
 
 An illustrative example is provided by the research of Samuel Bowles and Herbert Gintis, who pointed out that students who are best suited to the social ordering of the education system also had significantly below average scores on measures of mental creativity and flexibility ({% cite Bowles2011 %}).
 
