@@ -214,7 +214,7 @@ The principle of maximum performance extends to educational technologies, where 
 > — José Ortega y Gasset, The Revolt of the Masses
 {: .quote}
 
-The following conclusions are drawn both from the contents of the training.
+The following conclusions are drawn training contents.
 
 The underlying message assimilated under the practices of the dominant hidden curriculum, characterized by a unidirectional vision of the teaching-learning process, points less to educative system that help students think critically about the world they live in, than to institutions that promote the internalization of values that emphasise respect for authority, punctuality, cleanliness, docility and conformity.
 
