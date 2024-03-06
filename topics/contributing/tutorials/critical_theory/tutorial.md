@@ -31,7 +31,7 @@ The **Critical Learning Theory**  is a pedagogical paradigm rooted in the broade
 
 Consisting of a renowned collective of critical theorists such as Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the **Frankfurt School** developed the **Critical Theory** as a multidisciplinary approach crafted with the intent to comprehend and actively confront the oppressive dynamics ingrained within industrial societies (fig. 1).
 
-![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Left image: Max Horkheimer and Theodor Adorno in Heidelberg in 1964 at the Max Weber Institute of Sociology. Right image: Herbert Marcuse in Newton, Massachusetts in 1955. Licence: CC BY-SA 4.0")
+![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Left image: Max Horkheimer and Theodor Adorno in Heidelberg in 1964 at the Max Weber Institute of Sociology. Right image: Herbert Marcuse in Newton, Massachusetts in 1955. Source: Wikipedia")
 
 In the realm of education, the **Critical Learning Theory** aligns with the Frankfurt School's tradition, emphasizing a critical analysis of educative systems as social institutions. It represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of **critical thinking** ({% cite Giroux2018 %}). A leading figure of this school of thought is  prominent American-Canadian critical pedagogue Henry Giroux.
 
@@ -177,7 +177,7 @@ Darío Sztajnszrajber, a prominent argentine philosopher, essayist and teacher, 
 
 ## Evaluation system
 
-It is in the assessment system that the nature of the hidden curriculum is most clearly revealed. The potential effect of assessment is clearly perceived when it is recognised that both academic and non-academic aspects are taught and assessed, the latter including institutional adaptation and specific personal qualities ({% cite Giroux1988 %}). 
+It is in the evaluation system that the nature of the hidden curriculum is most clearly revealed. The potential effect of assessment is clearly perceived when it is recognised that both academic and non-academic aspects are taught and assessed, the latter including institutional adaptation and specific personal qualities ({% cite Giroux1988 %}). 
 
 An illustrative example is provided by the research of Samuel Bowles and Herbert Gintis, who pointed out that students who are best suited to the social ordering of the education system also had significantly below average scores on measures of mental creativity and flexibility ({% cite Bowles2011 %}).
 
@@ -185,7 +185,7 @@ Group evaluation can be considered as an adequate pedagogical instrument for ove
 
 ## Technological system
 
-The technological system can be defined as a set of interconnected components that has been designed to fulfil a particular function without further human design input. According the philospher Günther Anders, the design of technological systems goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Gallardo2021 %}).
+The technological system is a complex arrangement of interconnected components, including hardware, software, data, and human operators, that work together to perform a specific function or achieve a particular goal. According the philospher Günther Anders, the design of technological systems goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Gallardo2021 %}).
 
 > <comment-title>Notes on Günther Anders</comment-title>
 >
