@@ -181,11 +181,11 @@ It is in the evaluation system that the nature of the hidden curriculum is most 
 
 An illustrative example is provided by the research of Samuel Bowles and Herbert Gintis, who pointed out that students who are best suited to the social ordering of the education system also had significantly below average scores on measures of mental creativity and flexibility ({% cite Bowles2011 %}).
 
-Group evaluation can be considered as an adequate pedagogical instrument for overcoming the drawbacks associated to the evaluation system, providing students with social contexts that emphasise social responsibility and group solidarity. According Giroux, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence ({% cite Giroux1988 %}).
+**Group evaluation** can be considered as an adequate pedagogical instrument for overcoming the drawbacks associated to the evaluation system, providing students with social contexts that emphasise social responsibility and group solidarity. According Giroux, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence ({% cite Giroux1988 %}).
 
 ## Technological system
 
-The technological system is a complex arrangement of interconnected components, including hardware, software, data, and human operators, that work together to perform a specific function or achieve a particular goal. According the philospher Günther Anders, the design of technological systems goes beyond mere neutrality in information transmission; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Gallardo2021 %}).
+The technological system is a complex arrangement of interconnected components, including hardware, software, data, and human operators, that work together to perform a specific function or achieve a particular goal. According the philospher Günther Anders, **the design of technological systems goes beyond mere neutrality in information transmission**; instead, they actively convey values and thought patterns ({% cite Anders2002 %}, {% cite Gallardo2021 %}).
 
 > <comment-title>Notes on Günther Anders</comment-title>
 >
@@ -206,20 +206,10 @@ The principle of maximum performance extends to educational technologies, where 
 
 # Conclusion
 
-The underlying message assimilated under the practices of the dominant hidden curriculum, which fosters a unidirectional vision of the teaching-learning process, points less to educative system that help students think critically about the world they live in, than to institutions that act as agents of social control. Through the hidden curriculum, students internalise values that emphasise respect for authority, punctuality, cleanliness, docility and conformity.
+The following conclusions are drawn both from the contents of the training and from my personal experience as lecturer in the deparment of Bioinformatics at the University of Freiburg.
 
-Critical thinking, conceived as an exercise in questioning and evaluation, is antagonistic to the authoritarian character of the dominant hidden curriculum.
+The underlying message assimilated under the practices of the dominant hidden curriculum, characterized by a unidirectional vision of the teaching-learning process, points less to educative system that help students think critically about the world they live in, than to institutions that promote the internalization of values that emphasise respect for authority, punctuality, cleanliness, docility and conformity.
 
+Critical thinking, conceived as an exercise in questioning and evaluation, stands in direct opposition to the authoritarian nature inherent in the prevailing hidden curriculum. Embracing critical thinking necessitates an environment that encourages intellectual curiosity, autonomy, and the exploration of diverse perspectives.
 
-
-
-
-
-
-
-
-
-
-
-
-
+The pernicious effects of the hidden curriculum can be countered in various ways, such as diversification of educational content, dialogue between students and teacher through mutual questioning, group assessment and a preference for face-to-face lessons.
