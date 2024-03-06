@@ -44,7 +44,10 @@
     "/short/T00200",
     "/short/T00384"
   ],
-  "mathjax": 12074,
+  "js_requirements": {
+    "mathjax": 12074,
+    "mermaid": false
+  },
   "short_id": "T00384",
   "url": "/topics/microbiome/tutorials/beer-data-analysis/tutorial.html",
   "topic_name": "microbiome",
@@ -94,8 +97,8 @@
       "name": "Identification of the micro-organisms in a beer using Nanopore sequencing",
       "title": "Identification of the micro-organisms in a beer using Nanopore sequencing",
       "test_results": null,
-      "modified": "2024-03-06 08:38:42 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|outfile| 3;\n  4[\"Kraken2\"];\n  3 -->|out1| 4;\n  86f042a1-15ee-427e-9443-60710c8c131d[\"Output\\nkraken_report\"];\n  4 --> 86f042a1-15ee-427e-9443-60710c8c131d;\n  style 86f042a1-15ee-427e-9443-60710c8c131d stroke:#2c3143,stroke-width:4px;\n  5[\"Filter\"];\n  4 -->|report_output| 5;\n  6[\"Filter\"];\n  4 -->|report_output| 6;\n  7[\"Krakentools: Convert kraken report file\"];\n  4 -->|report_output| 7;\n  433c6f3d-47fd-43fb-b311-999ca1c4ff24[\"Output\\nkrakentool_report\"];\n  7 --> 433c6f3d-47fd-43fb-b311-999ca1c4ff24;\n  style 433c6f3d-47fd-43fb-b311-999ca1c4ff24 stroke:#2c3143,stroke-width:4px;\n  8[\"Krona pie chart\"];\n  7 -->|output| 8;"
+      "modified": "2024-03-06 09:10:38 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|outfile| 3;\n  4[\"Kraken2\"];\n  3 -->|out1| 4;\n  d57468af-62e4-497d-bfaa-684fa37473c1[\"Output\\nkraken_report\"];\n  4 --> d57468af-62e4-497d-bfaa-684fa37473c1;\n  style d57468af-62e4-497d-bfaa-684fa37473c1 stroke:#2c3143,stroke-width:4px;\n  5[\"Filter\"];\n  4 -->|report_output| 5;\n  6[\"Filter\"];\n  4 -->|report_output| 6;\n  7[\"Krakentools: Convert kraken report file\"];\n  4 -->|report_output| 7;\n  1d2d8c09-80cf-4bb1-b98b-2f412a8c86fa[\"Output\\nkrakentool_report\"];\n  7 --> 1d2d8c09-80cf-4bb1-b98b-2f412a8c86fa;\n  style 1d2d8c09-80cf-4bb1-b98b-2f412a8c86fa stroke:#2c3143,stroke-width:4px;\n  8[\"Krona pie chart\"];\n  7 -->|output| 8;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/beer-data-analysis/tutorial.json",
