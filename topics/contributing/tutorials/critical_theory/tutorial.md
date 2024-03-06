@@ -79,7 +79,15 @@ Before going deeper, it is inportant to accurately define **critical thinking**,
 
 The most common definition comes from the **positivist tradition** in the applied sciences; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). Is it enought?
 
-In his famous work *Dialectics of Ideology and Technology*, the American sociologist Alvin Gouldner  pointed out that, in contrast to this superficial and clearly insufficient conception, **critical thinking must be capable of questioning even the logic of reasoning itself**, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool ({% cite Gouldner1976 %}).
+> <comment-title>On positivism</comment-title>
+>
+> Positivism, originating in the 19th century under the guidance of figures like Auguste Comte, is a philosophical and scientific stance that emphasizes the importance of empirical observation and the application of the scientific method in gaining knowledge about the world. Central to positivism is the idea that valid knowledge is derived from observable and measurable phenomena. In other words, if you can't see it or measure it, according to positivism, it doesn't count as reliable knowledge.
+>
+> Positivists stress the need for objectivity in the pursuit of knowledge, advocating for the exclusion of personal biases and subjective interpretations. They argue for a systematic and rigorous adherence to scientific methodologies, favoring concrete evidence over speculative reasoning. While positivism has significantly influenced the natural sciences, it has also faced criticism for its limitations in addressing subjective experiences, moral values, and aspects of reality that aren't easily quantifiable. Despite these critiques, positivism continues to be a major perspective in the philosophy of science, shaping how we approach and validate knowledge.
+>
+{: .comment}
+
+In his famous work *Dialectics of Ideology and Technology*, the American sociologist Alvin Gouldner pointed out that, in contrast to this superficial and clearly insufficient conception, **critical thinking must be capable of questioning even the logic of reasoning itself**, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool ({% cite Gouldner1976 %}).
 
 > <comment-title>Frankfurt School and Critical Thinking </comment-title>
 >
@@ -140,7 +148,7 @@ The technological system can be defined as a set of interconnected components th
 >
 > Anders' main contribution to pedagogy lies in his insightful exploration of technology's influence on education. He argued that technological tools, far from being neutral conduits of information, actively shape values and habits of thought. This perspective underscores the need for educators to critically assess the implications of integrating technology into learning environments. 
 >
-> On 1 August 2023, the University of Freiburg established a research position at the [Institute of Sociology](https://www.soziologie.uni-freiburg.de/forschung/gaf) in his honour.
+> On August 2023, the University of Freiburg established a research position at the [Institute of Sociology](https://www.soziologie.uni-freiburg.de/forschung/gaf) in his honour.
 >
 {: .comment}
 
