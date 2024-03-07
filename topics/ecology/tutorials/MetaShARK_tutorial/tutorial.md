@@ -120,7 +120,7 @@ Then you can upload datafiles. Here, you can import these files from the downloa
  - 02_Ref.**dbf**
 
 > <comment-title>NOTE</comment-title>
-> The folder contains many files with different extensions, which is no problem for MetaShark, which is able to recognise several types of file extension!
+> The folder contains many files with different extensions but MetaShark will normally recognise several types of file extension (notably .tsv for tabulated text files, shapefiles, .geotiff and .geojson)!
 {: .comment}
 
 ![Upload datafiles on MetaShARK](./Images/4_MetaShARK_upload.png)
@@ -133,7 +133,7 @@ Then you can upload datafiles. Here, you can import these files from the downloa
 
 ![Categorical variables](./Images/6_MetaShARK_catvars.png)
 
-<p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
+<p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy can be set to unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
 
 ![Spatial information](./Images/7_MetaShARK_spatialinfo.png)
 
