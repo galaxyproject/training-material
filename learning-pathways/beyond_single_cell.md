@@ -41,7 +41,7 @@ pathway:
 
   - section: "Module 3: Moving into coding environments"
     description: |
-      Did you know Galaxy can host coding environments? They don't have the same level of computational power as are allocated our tools, but you can still learn how to use these environments to analyse your data. Sometimes, there will be a tool you want to use that's not available in Galaxy, and ([after requesting it!](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing)) you can export your data into a coding environment and run the tool there. Let's start with the basics of running these environments in Galaxy.
+      Did you know Galaxy can host coding environments? They don't have the same level of computational power as the easy-to-use Galaxy tools, but you can unlock the full freedom in your data analysis. You can install your favourite single-cell tool suite that is not available on Galaxy, export your data into these coding environments and run your analysis there. If you want your favourite tool suite as a Galaxy tool, you can always request [here](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing). Let's start with the basics of running these environments in Galaxy.
     tutorials:
       - name: jupyterlab
         topic: galaxy-interface
