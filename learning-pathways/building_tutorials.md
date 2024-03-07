@@ -8,7 +8,7 @@ editorial_board:
 
 priority: 1
 
-title: Introduction to building training material in Galaxy
+title: Building training material in Galaxy
 description: |
   This learning path aims to teach you the basics of navigating the Galaxy training Github repository, and turning your ace training materials and workflows into Galaxy sites.
   For support throughout these tutorials, join our Galaxy [training network on Matrix](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im) to ask questions!
