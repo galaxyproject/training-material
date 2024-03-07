@@ -385,13 +385,8 @@ Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters 
 
 ![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 25✕ corresponds to the heterozygous peak. The second peak at coverage 50✕, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes information about the inferred total genome length (len), genome unique length percent ('uniq'), overall heterozygosity rate ('ab'), mean *k*-mer coverage for heterozygous bases ('kcov'), read error rate ('err'), and average rate of read duplications ('dup'). It also reports the user-given parameters of *k*-mer size ('k') and ploidy ('p')."){:width="65%"}
 
-This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%.
+This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%. Some of these parameters can be used later on to parameterize running `purge_dups`. This is covered in the [**solo** contiging section](#solo_hic_switch) section of the tutorial. 
 
-> <comment-title>Are you expecting to purge your assembly?</comment-title>
-> This tutorial covers purging using the program **purge_dups**. purge_dups has some default options and can try to detect coverage-based cutoffs automatically, but the VGP pipeline prefers to define these cutoffs using parameters derived from the GenomeScope2 output.
->
-> _If you expect you need to purge your genome, please see the [**solo** contiging section](#solo_hic_switch) of the tutorial for details on parsing the GenomeScope2 output for purging cutoffs._
-{: .comment}
 
 # Assembly with **hifiasm**
 
