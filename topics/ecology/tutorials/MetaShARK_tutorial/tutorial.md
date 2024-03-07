@@ -212,7 +212,7 @@ Then you can add final elements as:
 {: .tip}
 
 
-# 4] MetaShRIMPS 🦐 : Modify created metadata element
+# 4] MetaShRIMPS 🦐 : Easily FAIRness assessment and data paper sketches creation
 
 To evaluate and modify metadata elements you have created, you can upload the EML xml file on the Galaxy history you created and all MetaShARK metadata templates files.
 
