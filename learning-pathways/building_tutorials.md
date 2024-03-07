@@ -16,7 +16,7 @@ description: |
 priority: 10
 
 pathway:
-  - section: "Module 1: What is this Github malarchy and why do I have to know it?"
+  - section: "Module 1: What is Github and why do I have to use it?"
     description: |
       Galaxy training material is hosted on Github. Finding these materials and getting used to the ideas of submitting a 'Pull request' is a crucial starting point for developing training material in Galaxy.
   tutorials:
@@ -24,7 +24,7 @@ pathway:
       topic: contributing
 
 You may find that [searching Github on our training materials](/search2?query=github) will also provide further resources on this topic.
-      
+
   - section: "Module 2: Creating new material"
     description: |
       Now the fun begins! This module shows you how to turn a workflow into a tutorial skeleton, building the folders necessary in the Galaxy Github environment. Alternatively, this section shows you how to create a Galaxy-formatted slide-deck.
