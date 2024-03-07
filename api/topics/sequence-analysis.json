@@ -488,7 +488,7 @@
           "name": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
           "title": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
           "test_results": null,
-          "modified": "2024-03-07 00:04:16 +0000",
+          "modified": "2024-03-07 07:51:31 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  6[\"Bowtie2\"];\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  cb22563a-fece-4b63-9d85-ff5817edb5c3[\"Output\\nbowtie2_mapping_stats\"];\n  6 --> cb22563a-fece-4b63-9d85-ff5817edb5c3;\n  style cb22563a-fece-4b63-9d85-ff5817edb5c3 stroke:#2c3143,stroke-width:4px;\n  7[\"Samtools stats\"];\n  6 -->|output| 7;\n  490620d4-f083-4999-bb33-73a2a1f736b4[\"Output\\nbam_stats_1\"];\n  7 --> 490620d4-f083-4999-bb33-73a2a1f736b4;\n  style 490620d4-f083-4999-bb33-73a2a1f736b4 stroke:#2c3143,stroke-width:4px;\n  8[\"JBrowse\"];\n  6 -->|output| 8;"
         },
         {
@@ -2281,7 +2281,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2024-03-07 00:04:16 +0000",
+          "modified": "2024-03-07 07:51:31 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  6[\"Bowtie2\"];\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  d2674912-28a6-45f3-ac48-6635eabe47b7[\"Output\\nbowtie2_mapping_stats\"];\n  6 --> d2674912-28a6-45f3-ac48-6635eabe47b7;\n  style d2674912-28a6-45f3-ac48-6635eabe47b7 stroke:#2c3143,stroke-width:4px;\n  7[\"Stats\"];\n  6 -->|output| 7;\n  96de3c0c-4d7e-423b-8e9b-9a12a011d726[\"Output\\nbam_stats_1\"];\n  7 --> 96de3c0c-4d7e-423b-8e9b-9a12a011d726;\n  style 96de3c0c-4d7e-423b-8e9b-9a12a011d726 stroke:#2c3143,stroke-width:4px;\n  8[\"Filter\"];\n  6 -->|output| 8;\n  9[\"Stats\"];\n  8 -->|out_file1| 9;\n  9603a94a-dcd8-4c1f-89cd-bb31d8572783[\"Output\\nbam_stats_2\"];\n  9 --> 9603a94a-dcd8-4c1f-89cd-bb31d8572783;\n  style 9603a94a-dcd8-4c1f-89cd-bb31d8572783 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -3923,7 +3923,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2024-03-07 00:04:16 +0000",
+          "modified": "2024-03-07 07:51:31 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  1f4fad7b-11e7-4ec5-b73d-835080c47e70[\"Output\\nreads_2_fastqc\"];\n  2 --> 1f4fad7b-11e7-4ec5-b73d-835080c47e70;\n  style 1f4fad7b-11e7-4ec5-b73d-835080c47e70 stroke:#2c3143,stroke-width:4px;\n  3[\"Cutadapt\"];\n  1 -->|output| 3;\n  12a1bc96-cfdd-4ed8-b062-433833e09aee[\"Output\\nreads_1_cutadapt\"];\n  3 --> 12a1bc96-cfdd-4ed8-b062-433833e09aee;\n  style 12a1bc96-cfdd-4ed8-b062-433833e09aee stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  12e19f0b-102a-4470-9bc8-e362bb4e2c91[\"Output\\nreads_1_fastqc\"];\n  4 --> 12e19f0b-102a-4470-9bc8-e362bb4e2c91;\n  style 12e19f0b-102a-4470-9bc8-e362bb4e2c91 stroke:#2c3143,stroke-width:4px;\n  5[\"Cutadapt\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  b7c138cc-10d0-4bd0-b960-a3b5e60f29cd[\"Output\\nreads_cutadapt\"];\n  5 --> b7c138cc-10d0-4bd0-b960-a3b5e60f29cd;\n  style b7c138cc-10d0-4bd0-b960-a3b5e60f29cd stroke:#2c3143,stroke-width:4px;\n  6[\"MultiQC\"];\n  4 -->|text_file| 6;\n  2 -->|text_file| 6;\n  fa7f541d-b9be-4283-afa1-8398d89f345e[\"Output\\nmultiqc\"];\n  6 --> fa7f541d-b9be-4283-afa1-8398d89f345e;\n  style fa7f541d-b9be-4283-afa1-8398d89f345e stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -4164,7 +4164,7 @@
           "name": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
           "title": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
           "test_results": null,
-          "modified": "2024-03-07 00:04:16 +0000",
+          "modified": "2024-03-07 07:51:31 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Trimmomatic\"];\n  0 -->|output| 1;\n  2[\"Unzip Collection\"];\n  0 -->|output| 2;\n  3[\"Map with BWA-MEM\"];\n  1 -->|fastq_out_paired| 3;\n  4[\"Samtools fastx\"];\n  3 -->|bam_output| 4;\n  5[\"Select\"];\n  4 -->|forward| 5;\n  6[\"Replace Text\"];\n  5 -->|out_file1| 6;\n  7[\"seqtk_subseq\"];\n  2 -->|forward| 7;\n  6 -->|outfile| 7;\n  8[\"seqtk_subseq\"];\n  2 -->|reverse| 8;\n  6 -->|outfile| 8;\n  9[\"Paired-end collection of cleaned reads\"];\n  7 -->|default| 9;\n  8 -->|default| 9;\n  f24bbf28-dc51-440f-a758-ac05033f0645[\"Output\\nCleaned Data\"];\n  9 --> f24bbf28-dc51-440f-a758-ac05033f0645;\n  style f24bbf28-dc51-440f-a758-ac05033f0645 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -4374,7 +4374,7 @@
           "name": "Sanger1 : From AB1 to aligned consensus and primers fasta + BLAST",
           "title": "Sanger1 : From AB1 to aligned consensus and primers fasta + BLAST",
           "test_results": null,
-          "modified": "2024-03-07 00:04:16 +0000",
+          "modified": "2024-03-07 07:51:31 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nL sequences Forward\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nH sequences Reverse\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nLCOI primers\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nHCOI primers\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ab1 to FASTQ converter\"];\n  0 -->|output| 4;\n  5[\"ab1 to FASTQ converter\"];\n  1 -->|output| 5;\n  6[\"What’s your LCOI primer sequence identifier ?\"];\n  2 -->|output| 6;\n  7[\"What’s your HCOI primer sequence identifier ?\"];\n  3 -->|output| 7;\n  8[\"seqtk_trimfq\"];\n  4 -->|output| 8;\n  9[\"seqtk_trimfq\"];\n  5 -->|output| 9;\n  10[\"Degap.seqs\"];\n  6 -->|output| 10;\n  11[\"Degap.seqs\"];\n  7 -->|output| 11;\n  12[\"Sort collection\"];\n  8 -->|default| 12;\n  13[\"FASTQ Groomer\"];\n  9 -->|default| 13;\n  14[\"Reverse-Complement\"];\n  11 -->|out_fasta| 14;\n  15[\"Reverse-Complement\"];\n  13 -->|output_file| 15;\n  16[\"Sort collection\"];\n  15 -->|output| 16;\n  17[\"seqtk_mergepe\"];\n  12 -->|output| 17;\n  16 -->|output| 17;\n  18[\"FASTQ Groomer\"];\n  17 -->|default| 18;\n  19[\"FASTQ to Tabular\"];\n  18 -->|output_file| 19;\n  20[\"Tabular-to-FASTA\"];\n  19 -->|output_file| 20;\n  21[\"Align sequences\"];\n  20 -->|output| 21;\n  22[\"Consensus sequence from aligned FASTA\"];\n  21 -->|aligned_sequences| 22;\n  23[\"Merge.files\"];\n  22 -->|output| 23;\n  24[\"Merge.files\"];\n  23 -->|output| 24;\n  14 -->|output| 24;\n  10 -->|out_fasta| 24;\n  25[\"Regex Find And Replace\"];\n  24 -->|output| 25;\n  26[\"Align sequences\"];\n  25 -->|out_file1| 26;\n  27[\"NCBI BLAST+ blastn\"];\n  25 -->|out_file1| 27;\n  31c2dd1a-918e-4648-a407-d0e3d7172253[\"Output\\nw_blast_output\"];\n  27 --> 31c2dd1a-918e-4648-a407-d0e3d7172253;\n  style 31c2dd1a-918e-4648-a407-d0e3d7172253 stroke:#2c3143,stroke-width:4px;\n  7514514f-809a-4a14-8981-cb08c950b523[\"Output\\nw_consensus_aligned_sequences\"];\n  27 --> 7514514f-809a-4a14-8981-cb08c950b523;\n  style 7514514f-809a-4a14-8981-cb08c950b523 stroke:#2c3143,stroke-width:4px;"
         },
         {
@@ -4396,7 +4396,7 @@
           "name": "Training Sanger sequences CHD8",
           "title": "Training Sanger sequences CHD8",
           "test_results": null,
-          "modified": "2024-03-07 00:04:16 +0000",
+          "modified": "2024-03-07 07:51:31 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAOPEP_and_CHD8_sequences_20220907.zip?download=1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPrim\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Unzip\"];\n  0 -->|output| 2;\n  3[\"Filter FASTA\"];\n  1 -->|output| 3;\n  4[\"Filter FASTA\"];\n  1 -->|output| 4;\n  5[\"Extract element identifiers\"];\n  2 -->|unzipped| 5;\n  6[\"Degap.seqs\"];\n  3 -->|output| 6;\n  7[\"Degap.seqs\"];\n  4 -->|output| 7;\n  8[\"Regex Find And Replace\"];\n  5 -->|output| 8;\n  9[\"Regex Find And Replace\"];\n  5 -->|output| 9;\n  10[\"Reverse-Complement\"];\n  7 -->|out_fasta| 10;\n  11[\"Filter collection\"];\n  8 -->|out_file1| 11;\n  2 -->|unzipped| 11;\n  12[\"Filter collection\"];\n  9 -->|out_file1| 12;\n  11 -->|output_discarded| 12;\n  13[\"ab1 to FASTQ converter\"];\n  11 -->|output_filtered| 13;\n  14[\"ab1 to FASTQ converter\"];\n  12 -->|output_filtered| 14;\n  15[\"seqtk_trimfq\"];\n  13 -->|output| 15;\n  16[\"seqtk_trimfq\"];\n  14 -->|output| 16;\n  17[\"FASTQ Groomer\"];\n  15 -->|default| 17;\n  18[\"Sort collection\"];\n  16 -->|default| 18;\n  19[\"Sort collection\"];\n  17 -->|output_file| 19;\n  20[\"Reverse-Complement\"];\n  19 -->|output| 20;\n  21[\"seqtk_mergepe\"];\n  18 -->|output| 21;\n  20 -->|output| 21;\n  22[\"FASTQ Groomer\"];\n  21 -->|default| 22;\n  23[\"FASTQ to Tabular\"];\n  22 -->|output_file| 23;\n  24[\"Tabular-to-FASTA\"];\n  23 -->|output_file| 24;\n  25[\"Align sequences\"];\n  24 -->|output| 25;\n  26[\"Consensus sequence from aligned FASTA\"];\n  25 -->|aligned_sequences| 26;\n  27[\"Merge.files\"];\n  26 -->|output| 27;\n  28[\"Merge.files\"];\n  27 -->|output| 28;\n  10 -->|output| 28;\n  6 -->|out_fasta| 28;\n  29[\"Regex Find And Replace\"];\n  28 -->|output| 29;\n  30[\"Align sequences\"];\n  29 -->|out_file1| 30;\n  31[\"NCBI BLAST+ blastn\"];\n  29 -->|out_file1| 31;"
         }
       ],
