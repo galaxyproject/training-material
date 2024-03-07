@@ -3,7 +3,7 @@ layout: learning-pathway
 tags: [intermediate]
 cover-image:
 cover-image-alt:
-type: use
+type: instructors
 
 editorial_board:
 - nomadscientist
@@ -12,8 +12,6 @@ title: Introduction to building training material in Galaxy
 description: |
   This learning path aims to teach you the basics of navigating the Galaxy training Github repository, and turning your ace training materials and workflows into Galaxy sites.
   For support throughout these tutorials, join our Galaxy [training network on Matrix](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im) to ask questions!
-
-priority: 10
 
 pathway:
   - section: "Module 1: What is Github and why do I have to use it?"
