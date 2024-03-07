@@ -44,7 +44,7 @@ pathway:
 
   - section: "The End!"
     description: |
-      And now you're done! There are still loads of resources to help you improve your training [conceptually](../learning-pathways/train-the-trainers.html) or [structurally](../training-material/topics/contributing/).
+      And now you're done! There are still loads of resources to help you improve your training [conceptually](../learning-pathways/train-the-trainers.html) or [structurally](../topics/contributing/).
 ---
 
 New to creating training material in Galaxy? Follow this learning path to get familiar with the basics!
