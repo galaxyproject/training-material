@@ -1,8 +1,6 @@
 ---
 layout: learning-pathway
 tags: [intermediate]
-cover-image:
-cover-image-alt:
 type: instructors
 
 editorial_board:
