@@ -52,7 +52,7 @@ pathway:
 
   - section: "The End!"
     description: |
-      And now you're done! If you are interested in trying out the case study analyses in a coding environment, try out our []"Case study: Reloaded" series](/training-material/topics/single-cell#single-cell-CS) next! Otherwise, you will find more features, tips and tricks in our general [Galaxy Single-cell Training page](/training-material/topics/single-cell/index.html).
+      And now you're done! If you are interested in trying out the case study analyses in a coding environment, try out our ["Case study: Reloaded" series](/training-material/topics/single-cell#single-cell-CS) next! Otherwise, you will find more features, tips and tricks in our general [Galaxy Single-cell Training page](/training-material/topics/single-cell/index.html).
 ---
 
 New to Galaxy and/or the field of scRNA-seq? Follow this learning path to get familiar with the basics!
