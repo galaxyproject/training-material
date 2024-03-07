@@ -293,7 +293,7 @@ Image un peu laide, je l'a modifierai un peu sur Paint pour optimiser sa taille 
 >
 > 4. Recreate a data collection with all metadata template files, taking the new "abstract" and "attributes_Present.Surface.pH.txt" files instead of old ones.
 >
-> 5. You can recreate an EML metadata file with [**Make EML**](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1) EAL tool and then redeploy a metashrimps tool on the new EML.
+> 5. You can recreate an EML metadata file with [**Make EML**](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1) EAL tool and then redeploy a metashrimps tool on the new EML. Before executing [**Make EML**](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1) EAL tool, one need to pay attention to the rename composite datafiles (as here the shapefile one) as named originally (so `02_Ref`) and then create a data collection gathering all "dataTable" datafiles (both .tsv files and .nc one), a data collection gathering all "spatialRaster" datafiles (here `Present.Surface.pH.tif`) and a data collection gathering all "spatialVector" datafiles (here `LakeGeneva_phytoplankton_1974-2004.nc`).
 >
 {: .comment}
 
