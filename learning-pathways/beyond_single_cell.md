@@ -8,6 +8,7 @@ type: use
 editorial_board:
 - nomadscientist
 - pavanvidem
+- pcm32
 
 title: Applying single-cell RNA-seq analysis
 description: |
@@ -20,32 +21,38 @@ description: |
 pathway:
   - section: "Module 1: Case study"
     description: |
-      These tutorials take you from raw scRNA sequencing reads to inferred trajectories to replicate a published analysis. Note that you get two options for inferring trajectories.
+      These tutorials take you from raw scRNA sequencing reads to cell cluster plots to replicate a published analysis.
     tutorials:
       - name: scrna-case_alevin
         topic: single-cell
-      - name: name-tags
+      - name: scrna-case_alevin-combine-datasets
+        topic: single-cell
+      - name: scrna-case_basic-pipeline
         topic: single-cell
 
-  - section: "Module 2: Theory of Single-Cell RNA-seq"
+  - section: "Module 2: Inferring trajectories"
     description: |
-      When analysing sequencing data, you should always start with a quality control step to clean your data and make sure your data is good enough to answer your research question. After this step, you will often proceed with a mapping (alignment) or genome assembly step, depending on whether you have a reference genome to work with.
+      This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset.  Note that you get two options for inferring trajectories, you can choose either.
     tutorials:
-      - name: scrna-intro
+      - name: scrna-case_trajectories
+        topic: single-cell
+      - name: scrna-case_monocle3-trajectories
         topic: single-cell
 
-  - section: "Module 3: Time to analyse data!"
+  - section: "Module 3: Moving into coding environments"
     description: |
-      It's time to apply your skills! You'll now analyse some clean data from the 10X Chromium platform.
+      Did you know Galaxy can host coding environments? They don't have the same level of computational power as are allocated our tools, but you can still learn how to use these environments to analyse your data. Sometimes, there will be a tool you want to use that's not available in Galaxy, and ([after requesting it!](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing)) you can export your data into a coding environment and run the tool there. Let's start with the basics of running these environments in Galaxy.
     tutorials:
-      - name: scrna-preprocessing-tenx
-        topic: single-cell
-      - name: scrna-scanpy-pbmc3k
-        topic: single-cell
+      - name: jupyterlab
+        topic: galaxy-interface
+      - name: galaxy-intro-jupyter
+        topic: galaxy-interface
+      - name: rstudio
+        topic: galaxy-interface
 
   - section: "The End!"
     description: |
-      And now you're done! There are still loads of resources to take you from basic analysis to more difficult decision-making, deconvolution, multiomics, or ingesting from different data sources. See the [Galaxy Single Cell Training page](/training-material/topics/single-cell/index.html) for more!
+      And now you're done! If you are interested in trying out the case study analyses in a coding environment, try out our []"Case study: Reloaded" series](/training-material/topics/single-cell#single-cell-CS) next! Otherwise, you will find more features, tips and tricks in our general [Galaxy Single-cell Training page](/training-material/topics/single-cell/index.html).
 ---
 
 New to Galaxy and/or the field of scRNA-seq? Follow this learning path to get familiar with the basics!
