@@ -6,6 +6,8 @@ type: instructors
 editorial_board:
 - nomadscientist
 
+priority: 1
+
 title: Introduction to building training material in Galaxy
 description: |
   This learning path aims to teach you the basics of navigating the Galaxy training Github repository, and turning your ace training materials and workflows into Galaxy sites.
