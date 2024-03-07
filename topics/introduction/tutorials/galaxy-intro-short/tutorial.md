@@ -181,6 +181,8 @@ Let's look at the quality of the reads in this file.
 
 This tool will run and two new output datasets will appear at the top of your history panel.
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 ## View results
 
 We will now look at the output dataset called *FastQC on data 1: Webpage*.
