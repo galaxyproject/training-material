@@ -1,6 +1,6 @@
 ---
 layout: learning-pathway
-tags: [beginner]
+tags: [intermediate]
 cover-image: assets/images/wab-annotatedcells-2.png
 cover-image-alt: "Image of cells in different coloured clusters"
 type: use
@@ -9,26 +9,23 @@ editorial_board:
 - nomadscientist
 - pavanvidem
 
-title: Introduction to Galaxy and Single Cell RNA Sequence analysis
+title: Applying single-cell RNA-seq analysis
 description: |
-  These tutorials take you from raw scRNA sequencing reads to inferred trajectories to replicate a published analysis. The data is messy. The decisions are tough. The interpretation is meaningful. Come here to advance your single cell skills! Note that you get two options for inferring trajectories.
+  Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will be introduced to a few more tools available for scRNA-seq in Galaxy. Finally, if our tool offerings are not enough for you, you will be directed towards how to use coding notebooks within Galaxy, setting you up to analyse scRNA-seq in R or python notebooks.
 
-  This learning path aims to teach you the basics of Galaxy and analysis of Single Cell RNA-seq data.
-  You will learn how to use Galaxy for analysis, and an important Galaxy feature for iterative single cell analysis. You'll tbe guided through the general theory of single analysis and then perform a basic analysis of 10X chromium data. For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions!
+  The data is messy. The decisions are tough. The interpretation is meaningful. Come here to advance your single cell skills! Note that you get two options for inferring trajectories.
 
-priority: 9
+  For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions!
 
 pathway:
-  - section: "Module 1: Introduction to Galaxy"
+  - section: "Module 1: Case study"
     description: |
-      Get a first look at the Galaxy platform for data analysis. We start with a
-      short introduction (video slides & practical) to familiarize you with the Galaxy
-      interface, and then proceed with a short tutorial of how to tag - and organise! - your history.
+      These tutorials take you from raw scRNA sequencing reads to inferred trajectories to replicate a published analysis. Note that you get two options for inferring trajectories.
     tutorials:
-      - name: galaxy-intro-short
-        topic: introduction
+      - name: scrna-case_alevin
+        topic: single-cell
       - name: name-tags
-        topic: galaxy-interface
+        topic: single-cell
 
   - section: "Module 2: Theory of Single-Cell RNA-seq"
     description: |
