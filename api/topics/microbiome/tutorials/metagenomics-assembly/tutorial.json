@@ -87,7 +87,7 @@
       "name": "Metagenomics assembly tutorial workflow",
       "title": "Metagenomics assembly tutorial workflow",
       "test_results": null,
-      "modified": "2024-03-07 07:51:31 +0000",
+      "modified": "2024-03-07 13:38:16 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"metaSPAdes\"];\n  0 -->|output| 1;\n  833d79ff-e16f-414c-9c41-db8dbfa8ed6b[\"Output\\nmetaSPAdes on input dataset(s): Scaffolds\"];\n  1 --> 833d79ff-e16f-414c-9c41-db8dbfa8ed6b;\n  style 833d79ff-e16f-414c-9c41-db8dbfa8ed6b stroke:#2c3143,stroke-width:4px;\n  10319152-d2f9-47d8-be41-f956a57e86d3[\"Output\\nmetaSPAdes on input dataset(s): Assembly graph\"];\n  1 --> 10319152-d2f9-47d8-be41-f956a57e86d3;\n  style 10319152-d2f9-47d8-be41-f956a57e86d3 stroke:#2c3143,stroke-width:4px;\n  b1ffc3a4-8e39-4255-ac57-fd7cfb9c1633[\"Output\\nmetaSPAdes on input dataset(s): Assembly graph with scaffolds\"];\n  1 --> b1ffc3a4-8e39-4255-ac57-fd7cfb9c1633;\n  style b1ffc3a4-8e39-4255-ac57-fd7cfb9c1633 stroke:#2c3143,stroke-width:4px;\n  b6b74c9d-5a16-4725-a1d1-11c1f05ee909[\"Output\\nmetaSPAdes on input dataset(s): Contigs\"];\n  1 --> b6b74c9d-5a16-4725-a1d1-11c1f05ee909;\n  style b6b74c9d-5a16-4725-a1d1-11c1f05ee909 stroke:#2c3143,stroke-width:4px;\n  2[\"MEGAHIT\"];\n  0 -->|output| 2;\n  3[\"Bowtie2\"];\n  0 -->|output| 3;\n  2 -->|output| 3;\n  4[\"megahit contig2fastg\"];\n  2 -->|output| 4;\n  5[\"Quast\"];\n  2 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Bandage Image\"];\n  4 -->|fastg| 6;\n  7[\"Bandage Info\"];\n  4 -->|fastg| 7;\n  8[\"Column join\"];\n  7 -->|outfile| 8;"
     },
     {
@@ -105,7 +105,7 @@
       "name": "workflow-generate-dataset-for-assembly-tutorial",
       "title": "workflow-generate-dataset-for-assembly-tutorial",
       "test_results": null,
-      "modified": "2024-03-07 07:51:31 +0000",
+      "modified": "2024-03-07 13:38:16 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nERR2231567_1.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nERR2231567_2.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Cutadapt\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"MEGAHIT\"];\n  2 -->|out1| 3;\n  2 -->|out2| 3;\n  4[\"Bowtie2\"];\n  2 -->|out1| 4;\n  2 -->|out2| 4;\n  3 -->|output| 4;\n  5[\"BAM filter\"];\n  4 -->|output| 5;\n  6[\"BAM filter\"];\n  4 -->|output| 6;\n  7[\"Convert, Merge, Randomize\"];\n  5 -->|outfile| 7;\n  8[\"Convert, Merge, Randomize\"];\n  6 -->|outfile| 8;\n  9[\"Select random lines\"];\n  7 -->|out_file1| 9;\n  10[\"Select random lines\"];\n  8 -->|out_file1| 10;\n  11[\"Filter Tabular\"];\n  9 -->|out_file1| 11;\n  12[\"Filter Tabular\"];\n  10 -->|out_file1| 12;\n  13[\"Unique\"];\n  11 -->|output| 13;\n  14[\"Unique\"];\n  12 -->|output| 14;\n  15[\"Concatenate datasets\"];\n  13 -->|outfile| 15;\n  14 -->|outfile| 15;\n  16[\"seqtk_subseq\"];\n  2 -->|out1| 16;\n  15 -->|out_file1| 16;\n  17[\"seqtk_subseq\"];\n  2 -->|out2| 17;\n  15 -->|out_file1| 17;\n  18[\"FastQC\"];\n  16 -->|default| 18;\n  19[\"FastQC\"];\n  17 -->|default| 19;"
     }
   ],
