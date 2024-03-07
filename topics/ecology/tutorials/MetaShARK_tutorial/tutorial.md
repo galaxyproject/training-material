@@ -56,7 +56,7 @@ contributions:
 <p align="justify"> A major gap when a researcher is writing metadata documents is the fact that metadata international <b>standards often use formats not really human readable</b> and/or editable as XML or JSON. To answer this issue, <b>[Environmental Data Initiative](https://edirepository.org/) (EDI)</b> through the <b>EML Assembly Line R package</b> propose to generate intermediate metadata template files using classical tabular text format.
 Another major issue regarding <b>metadata fill in</b>, is the fact that one <b>need to take a lot of time to write</b>, and often rewrite, metadata elements who can be already filled using automatic inferences or use of webservices. Here again, Environmental Data Initiaitve (EDI) through the <b>EML Assembly Line R</b> package propose to <b>generate automatically information</b> related to data attributes, geographic coverage, taxonomic coverage, using the content of provided datafiles.
 <br><br>
-Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiversity data hub research infrastructure (Pôle national de données de Biodiversité (<b>PNDB</b>)), user can <b>use <b>MetaShark</b>, a graphical user interface to apply the EML Assembly Line workflow</b> and benefit from some additionnal functionnalities as:</p>
+Finally, through the MetaShARK R Shiny app, an R Shiny app in beta version for test, created by the french biodiversity data hub research infrastructure (Pôle national de données de Biodiversité (<b>PNDB</b>)), user can use a graphical user interface to apply the EML Assembly Line workflow and benefit from some additionnal functionnalities as:</p>
 
 - Capacity to associate terminological resources terms coming from Bioportal ontologies to data attributes as keywords using CEDAR API
 - Automatic fill in of personal information using ORCID API
@@ -92,12 +92,12 @@ Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiver
 >    ![Upload shapefile](./Images/1_upload_shapefile.png)
 {: .hands_on}
 
-# 3] MetaShARK 🦈 : Write an EML document 
+# 3] MetaShARK 🦈 : Write rapidly an EML document through a work in progress interactive app 
 
 To deploy a MetaShARK app, you can go to the Galaxy tool {% tool [MetaShARK](interactive_tool_metashark) %} and click "Execute". Then, you have to wait the launch of the app, and when ready to be used, you will see the message "There is an InteractiveTool result view available," with an hyperlink on the "Open" statement allowing you to reach the app clicking on it.
 
 > <comment-title>WARNING</comment-title>
-> 🚧 Note that it is a beta version of MetaShARK R shiny app. You can thus encounter issues using it!
+> 🚧 Note that MetaShARK R shiny app is in beta version. You can thus encounter issues using it!
 {: .comment}
 
 When oppening MetaShARK, you will have an interface looking like this :
