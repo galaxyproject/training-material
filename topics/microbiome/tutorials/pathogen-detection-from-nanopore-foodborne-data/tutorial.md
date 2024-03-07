@@ -238,9 +238,18 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     >                    - {% icon param-repeat %} *"Insert FastQC output"*
     >                        - *"Type of FastQC output?"*: `Raw data`
     >                        - {% icon param-files %} *"FastQC output"*: 4 `Raw data` outputs of **FastQC** {% icon tool %}
+    > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
+    >    - In *"Results"*:
     >        - {% icon param-repeat %} *"Insert Results"*
-    >            - *"Which tool was used generate logs?"*: `fastp`
-    >                - {% icon param-files %} *"Output of fastp"*: `JSON report` outputs of **fastp** {% icon tool %}
+    >            - *"Which tool was used generate logs?"*: `FastQC`
+    >                - In *"FastQC output"*:
+    >                    - {% icon param-repeat %} *"Insert FastQC output"*
+    >                        - *"Type of FastQC output?"*: `Raw data`
+    >                        - {% icon param-files %} *"FastQC output"*: 4 `Raw data` outputs of **fastp** {% icon tool %}
+    >
+    >    > <comment-title>View MultiQC before and after trimming</comment-title>
+    >    > Here we observe the reads before and after trimming in two different **MultiQC** HTML views (now you can open them both using the window manager). You can also observe them in one view, but therefore the files after trimming need to be renamed and used as second input to **MultiQC**.
+    >    {: .comment}
     {: .hands_on}
 
     </div>
