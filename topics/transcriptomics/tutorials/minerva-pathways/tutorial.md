@@ -9,6 +9,7 @@ tags:
     - bulk
     - rna-seq
     - viz
+    - cyoa
 level: Intermediate
 zenodo_link: https://zenodo.org/records/10405036
 questions:
@@ -70,83 +71,23 @@ work.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Create a new file with the following factor data:
+> 2. Import the factor table from [Zenodo]({{ page.zenodo_link }})
 >
->    ```text
->    Run	Group
->    SRR16681566	healthy
->    SRR16681565	healthy
->    SRR16681564	healthy
->    SRR16681563	healthy
->    SRR16681562	healthy
->    SRR16681561	healthy
->    SRR16681560	healthy
->    SRR16681559	healthy
->    SRR16681558	healthy
->    SRR16681557	healthy
->    SRR16681556	healthy
->    SRR16681555	healthy
->    SRR16681554	healthy
->    SRR16681553	healthy
->    SRR16681552	healthy
->    SRR16681551	healthy
->    SRR16681550	COVID
->    SRR16681549	COVID
->    SRR16681548	COVID
->    SRR16681547	COVID
->    SRR16681546	COVID
->    SRR16681545	COVID
->    SRR16681544	COVID
->    SRR16681543	COVID
->    SRR16681542	COVID
->    SRR16681541	COVID
->    SRR16681540	COVID
->    SRR16681539	COVID
->    SRR16681538	COVID
->    SRR16681537	COVID
->    SRR16681536	COVID
->    SRR16681535	COVID
->    SRR16681534	COVID
->    SRR16681533	COVID
->    SRR16681532	COVID
->    SRR16681531	COVID
->    SRR16681530	COVID
->    SRR16681529	COVID
->    SRR16681528	COVID
->    SRR16681527	COVID
->    SRR16681526	COVID
->    SRR16681525	COVID
->    SRR16681524	COVID
->    SRR16681523	COVID
->    SRR16681522	COVID
->    SRR16681521	COVID
->    SRR16681520	COVID
->    SRR15462530	COVID
->    SRR15462529	COVID
->    SRR15462528	COVID
->    SRR15462527	COVID
->    SRR15462526	COVID
->    SRR15462525	COVID
->    SRR15462524	COVID
->    SRR15462523	COVID
->    SRR15462522	COVID
->    SRR15462521	COVID
->    SRR15462520	healthy
->    SRR15462519	healthy
->    SRR15462518	healthy
->    SRR15462517	healthy
->    SRR15462516	healthy
+>    ```
+>    https://zenodo.org/records/10405036/files/factordata.tabular
 >    ```
 >
-> - Cut the data
-> - Select the SRR lines
-> - FasterQ to download
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 4. Check that the datatype
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
 ## Analysis
 
-We have split this workflow into two parts, based only on how long the first portion of the workflow takes to execute. The rough runtime of the workflow portions when this was being developed can be broken down as follows:
+We have split this workflow into three parts, based only on how long the first two portions of the workflow take to execute. The rough runtime of the workflow portions when this was being developed can be broken down as follows:
 
 Step                     | Time
 ---                      | ---
@@ -157,9 +98,13 @@ Analysis & Visualisation | 15m
 These numbers were generated on UseGalaxy.eu and may not represent the most
 efficient possible computation, as they are executed on a shared cluster that can, at times, be more or less busy.
 
-As such we recommend you skip to [Limma](#limma) to progress to the efficient
-portion. The data provided in the Zenodo record is from the entire analysis,
-analysed with the Counts step that can be skipped:
+As such we recommend you skip to the analysis step to progress to the interesting portion of the tutorial. We have provided in the Zenodo record data from the entire analysis,
+analysed with the Download & Counts steps that can be skipped.
+
+{% include _includes/cyoa-choices.html option1="Download" option2="Skip" default="Skip"
+       text="Choose whether you want to run the time-consuming Download Data step." %}
+
+<div class="Download" markdown=1>
 
 ### Data Download
 
@@ -167,25 +112,35 @@ We'll start by downloading our fastq files from the [GEO Dataset GSE182152](http
 
 > <hands-on-title>Download the data from GEO (ETA: 6 Hours)</hands-on-title>
 >
-> 1. {% tool [Cut](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"Select lines from"*: `factordata`
+> 1. **Import the workflow** into Galaxy
 >
-> 1. {% tool [Select](Grep1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Cut** {% icon tool %})
->    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `Run`
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-BY-COVID__Data_Download.ga" title="Trim and Filter reads" box_type="none" %}
 >
-> 1. {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.8+galaxy1) %} with the following parameters:
->    - *"select input type"*: `List of SRA accession, one per line`
->        - {% icon param-file %} *"sra accession list"*: `out_file1` (output of **Select** {% icon tool %})
+> 1. **Run the workflow** with the following parameters:
 >
+>    - *"Sample Table"*: `factordata.tabular`
 {: .hands_on}
+
+Here we have cut the `SRR*` identifiers from the sample table and downloaded them with `fasterq`, part of the SRA toolkit.
 
 ### Counts
 
+With that done, we can start to analyse the data using HISAT2 and featureCounts.
+This workflow takes in the RNA Sequencing data we've downloaded previously, before trimming it with cutadapt. 
+Both the trimmed and untrimmed reads are run through FastQC for visualisation.
 
-With that done, we can start to analyse the data using HISAT2 and featureCounts
+<figure>
+{% assign wf_counts = site | get_workflow:page, "Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Counts.ga" %}
+<pre class="mermaid">
+{{ wf_counts.mermaid }}
+</pre>
+<figcaption><b>Workflow 1</b>: Counts Workflow for mRNA-Seq BY-COVID Pipeline.</figcaption>
+</figure>
+
+The trimmed reads are then handled by HISAT2 for alignment to the reference
+human genome, and featureCounts is run for quantification.
+
+This workflow produces a set of featureCounts tables, a set of featureLengths (needed for goseq), and a MultiQC report.
 
 > <hands-on-title>Run the Workflow</hands-on-title>
 >
@@ -193,14 +148,20 @@ With that done, we can start to analyse the data using HISAT2 and featureCounts
 >
 >    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="688" box_type="none" %}
 >
+> 1. **Run the workflow** with the following parameters:
+>
 {: .hands_on}
 
 This workflow produces a handful of outputs: the featureCounts results, and a
 MultiQC report. Looking at the report we see generally reasonable quality data.
 
+</div>
+
 ### limma
 
-> <hands-on-title>Only If You Skipped Here: Download the Counts Files</hands-on-title>
+<div class="Skip" markdown=1>
+
+> <hands-on-title>Download the Counts Files</hands-on-title>
 >
 > 1. Open the Rule Builder
 >    - *"Upload data as"*: `Collection(s)`
@@ -282,6 +243,30 @@ MultiQC report. Looking at the report we see generally reasonable quality data.
 >
 {: .hands_on}
 
+</div>
+
+Now we're ready to analyse the counts files. Here we'll take the feature counts dataset collection and merge it into one count matrix through the use of "Column join". This can then be annotated with the human readable names of the genes. This is all passed to limma for differential expression analysis.
+
+With this result in hand we're ready to do two further steps: preparing the dataset for goseq, and for analysis in MINERVA. Goseq is a tool for gene ontology enrichment analysis, and MINERVA is a tool for visualising pathway analysis.
+
+The MINERVA dataset must be correctly formatted as a tabular dataset (`\t` separated values) like the following:
+
+```
+SYMBOL  logFC              P.Value               adj.P.Val
+TRIM25  2.07376444684004   1.2610025125617e-18   3.57368112059986e-15
+ACSL1   2.90647033200259   2.71976234791064e-16  3.85390324698937e-13
+NBEAL2  2.45952426389725   2.71787290816654e-14  2.56748394058132e-11
+MIR150  -2.55304226607428  9.55912390273625e-14  6.74866152827879e-11
+SLC2A3  2.95861349227708   1.19066011437523e-13  6.74866152827879e-11
+```
+
+<figure>
+{% assign wf_counts = site | get_workflow:page, "Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.ga" %}
+<pre class="mermaid">
+{{ wf_counts.mermaid }}
+</pre>
+<figcaption><b>Workflow 2</b>: Analysis Workflow for mRNA-Seq BY-COVID Pipeline.</figcaption>
+</figure>
 
 > <hands-on-title>Analyse the Counts</hands-on-title>
 >
