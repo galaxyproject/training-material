@@ -242,6 +242,19 @@ MultiQC report. Looking at the report we see generally reasonable quality data.
 >     - `Add Definition` → `List Identifier(s)` → Select Column `B`
 >     - `Add Definition` → `URL` → Column `A`
 >
+>     > <tip-title>Trouble entering?</tip-title>
+>     > 1. Press the {% icon tool %} button by **Rules**
+>     > 1. Paste the following JSON into the dialog:
+>     >    ```json
+>     >    {"rules":[],"mapping":[{"type":"collection_name","columns":[2]},{"type":"list_identifiers","columns":[1],"editing":false},{"type":"url","columns":[0]}],"genome":"hg19"}
+>     >    ```
+>     > 1. Click Apply
+>     {: .tip}
+>
+> 1. At the bottom of the dialog set `Genome` to `hg19` (it is probably something like "Human Feb 2009 (GRCh37/hg19) (hg19)" but we are focused on that last parenthetical portion).
+>
+> 1. Click **Upload**
+>
 {: .hands_on}
 
 </div>
@@ -249,17 +262,6 @@ MultiQC report. Looking at the report we see generally reasonable quality data.
 Now we're ready to analyse the counts files. Here we'll take the feature counts dataset collection and merge it into one count matrix through the use of "Column join". This can then be annotated with the human readable names of the genes. This is all passed to limma for differential expression analysis.
 
 With this result in hand we're ready to do two further steps: preparing the dataset for goseq, and for analysis in MINERVA. Goseq is a tool for gene ontology enrichment analysis, and MINERVA is a tool for visualising pathway analysis.
-
-The MINERVA dataset must be correctly formatted as a tabular dataset (`\t` separated values) like the following:
-
-```
-SYMBOL  logFC              P.Value               adj.P.Val
-TRIM25  2.07376444684004   1.2610025125617e-18   3.57368112059986e-15
-ACSL1   2.90647033200259   2.71976234791064e-16  3.85390324698937e-13
-NBEAL2  2.45952426389725   2.71787290816654e-14  2.56748394058132e-11
-MIR150  -2.55304226607428  9.55912390273625e-14  6.74866152827879e-11
-SLC2A3  2.95861349227708   1.19066011437523e-13  6.74866152827879e-11
-```
 
 <figure>
 {% assign wf_counts = site | get_workflow:page, "Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.ga" %}
@@ -280,6 +282,17 @@ SLC2A3  2.95861349227708   1.19066011437523e-13  6.74866152827879e-11
 You should have a few outputs, namely the `goseq` outputs, and a table ready for visualisation in MINERVA!
 
 ## MINERVA
+
+The dataset prepared for MINERVA must be correctly formatted as a tabular dataset (`\t` separated values) like the following, with the dbkey set to `hg19` or `hg38`. If you've run the above workflow, this should be the case.
+
+```
+SYMBOL  logFC              P.Value               adj.P.Val
+TRIM25  2.07376444684004   1.2610025125617e-18   3.57368112059986e-15
+ACSL1   2.90647033200259   2.71976234791064e-16  3.85390324698937e-13
+NBEAL2  2.45952426389725   2.71787290816654e-14  2.56748394058132e-11
+MIR150  -2.55304226607428  9.55912390273625e-14  6.74866152827879e-11
+SLC2A3  2.95861349227708   1.19066011437523e-13  6.74866152827879e-11
+```
 
 > <hands-on-title>Visualise in MINERVA</hands-on-title>
 >
