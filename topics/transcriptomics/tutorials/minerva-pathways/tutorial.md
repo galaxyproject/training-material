@@ -31,8 +31,9 @@ contributions:
     - hexylena
   testing:
     - hexylena
-  # Helped manage the plugin, deployment of EU where we tested this
+  # Helped manage the plugin, deployment of EU where we tested this, MINERVA plugin
   infrastructure:
+    - MattiHoch
     - mira-miracoli
     - kysrpex
     - sanjaysrikakulam
