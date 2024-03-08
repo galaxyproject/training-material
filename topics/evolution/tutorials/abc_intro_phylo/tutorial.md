@@ -1,11 +1,6 @@
 ---
 layout: tutorial_hands_on
 title: Phylogenetics - Back to basics
-abbreviations: 
-  ME: Minimum Evolution
-  MP: Maximum Parsimony
-  ML: Maximum Likelihood
-  NJ: Neighbor-Joining
 zenodo_link: 'https://zenodo.org/records/10415242'
 draft: true
 tags:
@@ -32,6 +27,8 @@ contributions:
   editing:
     - adamtaranto
     - burkemlou
+
+
 
 
 ---
