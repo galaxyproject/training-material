@@ -82,7 +82,7 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 
 ## Import data from URLs
 
-{% assign servers = list_usegalaxy_servers_shuffle %}
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 
 Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 ({% cite kim2015hisat %}), STAR ({% cite dobin2013star %}) and Subread ({% cite Liao2013 %}). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don't have access to a server you can try to use one of the publically available Galaxies e.g. {% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}.
 

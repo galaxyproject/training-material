@@ -5,7 +5,7 @@ title: "De novo transcriptome reconstruction with RNA-Seq"
 subtopic: introduction
 priority: 3
 
-zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
+zenodo_link: "https://zenodo.org/records/583140"
 questions:
   - "What genes are differentially expressed between G1E cells and megakaryocytes?"
   - "How can we generate a transcriptome de novo from RNA sequencing data?"
@@ -45,7 +45,7 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 
 ## Data upload
 
-Due to the large size of this dataset, we have downsampled it to only include reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at [`Zenodo`](https://zenodo.org/record/583140#.WSW3NhPyub8), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
+Due to the large size of this dataset, we have downsampled it to only include reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at [`Zenodo`](https://zenodo.org/record/583140), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -65,7 +65,7 @@ Due to the large size of this dataset, we have downsampled it to only include re
 > 9. Rename the files in your history to retain just the necessary information (*e.g.* "G1E R1 forward reads")
 >
 >
-> 10. Import the data from [Zenodo](https://zenodo.org/record/583140) [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://zenodo.org/record/583140)
+> 10. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >     ```
 >     https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29

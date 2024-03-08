@@ -53,16 +53,16 @@ pathway:
        The human microbiome consists of a community of thousands of species of microorganisms. Sequencing of this community is often performed to identify which species of microorganism are present. This aids in diagnostics and treatment of patients. [SC2.1-3,6; SC1.4,5]
     tutorials:
       - name: beer-data-analysis
-        topic: metagenomics
+        topic: microbiome
       - name: nanopore-16S-metagenomics
-        topic: metagenomics
+        topic: microbiome
 
   - section: "Year 1: Advanced microbiome analysis"
     description: |
        By using more complex sequencing techniques, it is possible to not only obtain information about which organisms are present in the microbiome, but also their activity. This can e.g. aid in identification of antibiotic resistance. This more complex sequencing requires more complex data analysis [SC2.1-4,6; SC1.4,5]
     tutorials:
       - name: pathogen-detection-from-nanopore-foodborne-data
-        topic: metagenomics
+        topic: microbiome
 
   - section: "Year 2: Cancer Analysis"
     description: |

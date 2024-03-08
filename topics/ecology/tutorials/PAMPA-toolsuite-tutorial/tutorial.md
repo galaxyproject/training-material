@@ -28,10 +28,15 @@ tags:
   - EBV dataset
   - EBV workflow
   - modeling
-contributors:
-- colineroyaux
-- yvanlebras
-- jbmihoub
+contributions:
+  authorship:
+  - colineroyaux
+  - yvanlebras
+  - dpelletier
+  - jbmihoub
+  funding:
+  - gallantries
+  - pndb
 
 ---
 

@@ -104,7 +104,7 @@ We will import the JSON files into Galaxy to query them directory, however the f
 >
 {: .comment}
 
-{% assign servers = list_usegalaxy_servers_shuffle %}
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 
 > <hands-on-title>Loading SRA Aligned Read Format (SARF) Object Metadata URLs into Galaxy</hands-on-title>
 >

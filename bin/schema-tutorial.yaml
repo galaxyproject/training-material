@@ -187,6 +187,7 @@ mapping:
             link on Zenodo to the input data for the tutorial
         examples:
             - "https://zenodo.org/record/3706539"
+        pattern: /(^$|^https://zenodo.org/records?/[0-9]+/?$|^https://doi.org/10.5281/zenodo.[0-9]+/?$)/
     extra:
         type: map
         description: |
@@ -452,3 +453,16 @@ mapping:
         pattern: /^\/.*/
         examples:
             - /assets/images/gat.png
+    hands_on:
+        type: str
+        enum:
+            - external
+        description: |
+            This must be set to `external` to link to an external tutorial
+    hands_on_url:
+        type: str
+        description: |
+            link to the external tutorial
+        examples:
+            - "https://docs.qiime2.org/jupyterbooks/cancer-microbiome-intervention-tutorial/index.html#"
+

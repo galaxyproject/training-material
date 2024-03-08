@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Age prediction using machine learning
-zenodo_link: https://zenodo.org/record/2545213#.XEWTJ9-YVa0
+zenodo_link: https://zenodo.org/record/2545213
 questions:
 - How to use machine learning to create predictive models from biological datasets (RNA-seq and DNA methylation)?
 objectives:
@@ -67,7 +67,7 @@ We proceed to the analysis by uploading the RNA-seq dataset. The dataset has `13
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/2545213/files/training_data_normal.tsv

@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Protein target prediction of a bioactive ligand with Align-it and ePharmaLib
 level: Intermediate
-zenodo_link: 'https://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar'
+zenodo_link: 'https://zenodo.org/record/6055897'
 questions:
 - What is a pharmacophore model?
 - How can I perform protein target prediction with a multi-step workflow or the one-step Zauberkugel workflow?

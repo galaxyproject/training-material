@@ -1,5 +1,7 @@
 ---
-redirect_from: [/faqs/galaxy/galaxy_creating_an_account]
+redirect_from:
+- /faqs/galaxy/galaxy_creating_an_account
+- /faqs/galaxy/creating_account
 title: How do I create an account on a public Galaxy instance?
 area: account
 layout: faq

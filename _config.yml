@@ -48,15 +48,16 @@ javascript_bundles:
       - assets/js/theme.js
   main:
     preload: true
+    defer: true
+    async: true
     resources:
-      - assets/js/jquery.slim.min.js
-      - assets/js/popper.min.js
-      - assets/js/bootstrap.min.js
-      - assets/js/bootstrap-toc.min.js
-      - assets/js/clipboard.min.js
-      - assets/js/list.min.js
-      - assets/js/mermaid@10.6.1.js
+      - assets/js/jquery.slim.min.js   # Mandatory for bootstrap.
+      - assets/js/popper.min.js        # Everywhere, dropdown menu.
+      - assets/js/bootstrap.min.js     # Everywhere
+      - assets/js/bootstrap-toc.min.js # Only tutorials, faqs
+      - assets/js/clipboard.min.js     # Used on anything with a pre
       - assets/js/main.js
+      # - assets/js/list.min.js # Potentially unused?
 
 # Conversion
 markdown: kramdown
@@ -111,6 +112,7 @@ icon-tag:
   galaxy-clear: fas fa-times-circle
   galaxy-columns: fas fa-columns
   galaxy-cross: fas fa-times
+  galaxy-dataset-map: fas fa-sitemap
   galaxy-delete: fas fa-trash
   galaxy-dropdown: fas fa-caret-down
   galaxy-history-options: fas fa-caret-down # Replaces gear.
@@ -210,6 +212,7 @@ icon-tag:
   video-slides: far fa-play-circle
   zenodo_link: far fa-copy
   version: fas fa-code-commit
+  rating: far fa-star
 
 # To exclude in _site
 exclude:
