@@ -27,6 +27,7 @@ contributions:
   editing:
     - adamtaranto
     - burkemlou
+    - PatCapon29
 
 
 
