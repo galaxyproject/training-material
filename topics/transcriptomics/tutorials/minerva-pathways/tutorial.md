@@ -280,4 +280,34 @@ You should have a few outputs, namely the `goseq` outputs, and a table ready for
 
 ## MINERVA
 
+> <hands-on-title>Visualise in MINERVA</hands-on-title>
+>
+> 1. **Click** to expand the final "MINERVA-Ready Table"
+>
+> 1. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+>
+> 1. Select "display at Minerva (SARS-CoV-2 Minerva Map)"
+>
+>    > <tip-title>MINERVA not listed?</tip-title>
+>    > The MINERVA visualisation is only for correctly formatted files with the correct genome (i.e. human, hg19).
+>    > If you dont' see MINERVA listed, first check that your dataset is:
+>    > 1. recognised as a tabular dataset
+>    >
+>    >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>    >
+>    > 2. Has the correct genome build:
+>    >
+>    >    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg19" %}
+>    >
+>    >    It should be specifically `hg19` not a patch like `hg19Patch5`
+>    >
+>    > If that still doesn't work, please check that the Galaxy server you are using is updated to 24.0 or later.
+>    >
+>    {: .tip}
+>
+{: .hands_on}
+
+### Analysis
+
+
 TODO
