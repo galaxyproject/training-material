@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b97845a95f0a1a5cf0d8858cbd4225b1a2e1763a",
+		release: "galaxy-training-network@b260f4faca679d03c873f08996813ea6d0741b1c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Creating metadata using Ecological Metadata Language (EML) standard with EML Assembly Line functionalities">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-05 10:50:12 +0000">
+<meta name="DC.date" content="2024-03-07 15:47:52 +0000">
 <meta name="DC.creator" content="Yvan Le Bras">
 <meta name="DC.creator" content="Glinez Thibaud"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -118,7 +118,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-03-05 10:50:12 +0000",
+  "dateModified": "2024-03-07 15:47:52 +0000",
   "datePublished": "2024-03-04 15:18:02 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Creating metadata using Ecological Metadata Language (EML) standard with EML Assembly Line functionalities",
@@ -232,7 +232,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Creating metadata using Ecological Metadata Language (EML) standard with EML Assembly Line functionalities",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/MetaShARK_tutorial/tutorial.html",
-  "version": 41,
+  "version": 45,
   "timeRequired": "PT30M",
   "teaches": "Explain the necessity of using such tools when producing ecological metadata\n - Learn how to create rich metadata using Ecological Metadata Language (EML) standard\n - Learn how to update EML metadata",
   "keywords": [
@@ -928,7 +928,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 4, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 5, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 7, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -944,7 +944,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 41 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 45 </div>
 
     </blockquote>
     </section>
@@ -969,8 +969,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <ol id="markdown-toc">
   <li><a href="#1-how-can-eml-assembly-line-functionalities-help-producing-rich-metadata-easily" id="markdown-toc-1-how-can-eml-assembly-line-functionalities-help-producing-rich-metadata-easily">1] How can EML Assembly Line functionalities help producing rich metadata easily?</a></li>
   <li><a href="#2-get-data-to-describe-" id="markdown-toc-2-get-data-to-describe-">2] Get data to describe 💾📂</a></li>
-  <li><a href="#3-metashark---write-an-eml-document" id="markdown-toc-3-metashark---write-an-eml-document">3] MetaShARK 🦈 : Write an EML document</a></li>
-  <li><a href="#4-metashrimps---modify-created-metadata-element" id="markdown-toc-4-metashrimps---modify-created-metadata-element">4] MetaShRIMPS 🦐 : Modify created metadata element</a></li>
+  <li><a href="#3-metashark---write-rapidly-an-eml-document-through-a-work-in-progress-interactive-app" id="markdown-toc-3-metashark---write-rapidly-an-eml-document-through-a-work-in-progress-interactive-app">3] MetaShARK 🦈 : Write rapidly an EML document through a work in progress interactive app</a></li>
+  <li><a href="#4-metashrimps---easily-fairness-assessment-and-data-paper-sketches-creation" id="markdown-toc-4-metashrimps---easily-fairness-assessment-and-data-paper-sketches-creation">4] MetaShRIMPS 🦐 : Easily FAIRness assessment and data paper sketches creation</a></li>
   <li><a href="#5-draft-of-data-paper-" id="markdown-toc-5-draft-of-data-paper-">5] Draft of Data Paper 📝</a></li>
   <li><a href="#6-fair-quality-assessment-report-" id="markdown-toc-6-fair-quality-assessment-report-">6] FAIR Quality Assessment report 📊✅</a></li>
   <li><a href="#7-conclusion" id="markdown-toc-7-conclusion">7] Conclusion</a></li>
@@ -983,7 +983,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <p align="justify"> A major gap when a researcher is writing metadata documents is the fact that metadata international <b>standards often use formats not really human readable</b> and/or editable as XML or JSON. To answer this issue, <b>[Environmental Data Initiative](https://edirepository.org/) (EDI)</b> through the <b>EML Assembly Line R package</b> propose to generate intermediate metadata template files using classical tabular text format.
 Another major issue regarding <b>metadata fill in</b>, is the fact that one <b>need to take a lot of time to write</b>, and often rewrite, metadata elements who can be already filled using automatic inferences or use of webservices. Here again, Environmental Data Initiaitve (EDI) through the <b>EML Assembly Line R</b> package propose to <b>generate automatically information</b> related to data attributes, geographic coverage, taxonomic coverage, using the content of provided datafiles.
 <br /><br />
-Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiversity data hub research infrastructure (Pôle national de données de Biodiversité (<b>PNDB</b>)), user can <b>use <b>MetaShark</b>, a graphical user interface to apply the EML Assembly Line workflow</b> and benefit from some additionnal functionnalities as:</p>
+Finally, through the MetaShARK R Shiny app, an R Shiny app in beta version for test, created by the french biodiversity data hub research infrastructure (Pôle national de données de Biodiversité (<b>PNDB</b>)), user can use a graphical user interface to apply the EML Assembly Line workflow and benefit from some additionnal functionnalities as:</p>
 
 <ul>
   <li>Capacity to associate terminological resources terms coming from Bioportal ontologies to data attributes as keywords using CEDAR API</li>
@@ -1023,13 +1023,13 @@ https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
   </ol>
 </blockquote>
 
-<h1 id="3-metashark---write-an-eml-document">3] MetaShARK 🦈 : Write an EML document</h1>
+<h1 id="3-metashark---write-rapidly-an-eml-document-through-a-work-in-progress-interactive-app">3] MetaShARK 🦈 : Write rapidly an EML document through a work in progress interactive app</h1>
 
 <p>To deploy a MetaShARK app, you can go to the Galaxy tool <span class="tool" data-tool="interactive_tool_metashark" title="MetaShARK tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaShARK</strong></span> and click “Execute”. Then, you have to wait the launch of the app, and when ready to be used, you will see the message “There is an InteractiveTool result view available,” with an hyperlink on the “Open” statement allowing you to reach the app clicking on it.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-warning"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: WARNING</div>
-  <p>🚧 Note that it is a beta version of MetaShARK R shiny app. You can thus encounter issues using it!</p>
+  <p>🚧 Note that MetaShARK R shiny app is in beta version. You can thus encounter issues using it!</p>
 </blockquote>
 
 <p>When oppening MetaShARK, you will have an interface looking like this :</p>
@@ -1055,7 +1055,7 @@ https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: NOTE</div>
-  <p>The folder contains many files with different extensions, which is no problem for MetaShark, which is able to recognise several types of file extension!</p>
+  <p>The folder contains many files with different extensions but MetaShark will normally recognise several types of file extension (notably .tsv for tabulated text files, shapefiles, .geotiff and .geojson)!</p>
 </blockquote>
 
 <p><a href="./Images/4_MetaShARK_upload.png" rel="noopener noreferrer"><img src="./Images/4_MetaShARK_upload.png" alt="Upload datafiles on MetaShARK. " width="1915" height="1079" loading="lazy" /></a></p>
@@ -1068,7 +1068,7 @@ https://zenodo.org/records/10663465/files/Present.Surface.pH.tif
 
 <p><a href="./Images/6_MetaShARK_catvars.png" rel="noopener noreferrer"><img src="./Images/6_MetaShARK_catvars.png" alt="Categorical variables. " width="1920" height="1080" loading="lazy" /></a></p>
 
-<p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
+<p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy can be set to unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
 
 <p><a href="./Images/7_MetaShARK_spatialinfo.png" rel="noopener noreferrer"><img src="./Images/7_MetaShARK_spatialinfo.png" alt="Spatial information. " width="1922" height="1051" loading="lazy" /></a></p>
 
@@ -1158,7 +1158,7 @@ You can here click on “metashark visualization” hyperlink. You can then go o
 the data package you created and click <strong>Load</strong>.</p>
 </blockquote>
 
-<h1 id="4-metashrimps---modify-created-metadata-element">4] MetaShRIMPS 🦐 : Modify created metadata element</h1>
+<h1 id="4-metashrimps---easily-fairness-assessment-and-data-paper-sketches-creation">4] MetaShRIMPS 🦐 : Easily FAIRness assessment and data paper sketches creation</h1>
 
 <p>To evaluate and modify metadata elements you have created, you can upload the EML xml file on the Galaxy history you created and all MetaShARK metadata templates files.</p>
 
@@ -1254,7 +1254,7 @@ status lines  are related to an abstract content too short and an attribute defi
       <p>Recreate a data collection with all metadata template files, taking the new “abstract” and “attributes_Present.Surface.pH.txt” files instead of old ones.</p>
     </li>
     <li>
-      <p>You can recreate an EML metadata file with <a href="https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1"><strong>Make EML</strong></a> EAL tool and then redeploy a metashrimps tool on the new EML.</p>
+      <p>You can recreate an EML metadata file with <a href="https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1"><strong>Make EML</strong></a> EAL tool and then redeploy a metashrimps tool on the new EML. Before executing <a href="https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1"><strong>Make EML</strong></a> EAL tool, one need to pay attention to the rename composite datafiles (as here the shapefile one) as named originally (so <code class="language-plaintext highlighter-rouge">02_Ref</code>) and then create a data collection gathering all “dataTable” datafiles (both .tsv files and .nc one), a data collection gathering all “spatialRaster” datafiles (here <code class="language-plaintext highlighter-rouge">Present.Surface.pH.tif</code>) and a data collection gathering all “spatialVector” datafiles (here <code class="language-plaintext highlighter-rouge">LakeGeneva_phytoplankton_1974-2004.nc</code>).</p>
     </li>
   </ol>
 
@@ -1486,7 +1486,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/b97845a95f0a1a5cf0d8858cbd4225b1a2e1763a">b97845a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/b260f4faca679d03c873f08996813ea6d0741b1c">b260f4f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
