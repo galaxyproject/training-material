@@ -345,7 +345,7 @@ module GtnLinter
   def self.check_bad_icon(contents)
     find_matching_texts(contents, /{%\s*icon\s+([^%]*)\s*%}/i)
       .map do |idx, _text, selected|
-      icon_key = selected[1].strip
+      icon_key = selected[1].strip.split[0]
       if jekyll_config['icon-tag'][icon_key].nil?
         ReviewDogEmitter.error(
           path: @path,
@@ -1079,9 +1079,10 @@ module GtnLinter
           end
 
           test = YAML.safe_load(File.open(test_file))
+          test_plain = File.read(test_file)
           # check that for each test, the outputs is non-empty
           test.each do |test_job|
-            if test_job['outputs'].nil? || test_job['outputs'].empty?
+            if (test_job['outputs'].nil? || test_job['outputs'].empty?) && !test_plain.match(/GTN_RUN_SKIP_REASON/)
               results += [
                 ReviewDogEmitter.file_error(path: path,
                                             message: 'This workflow test does not test the contents of outputs, ' \
