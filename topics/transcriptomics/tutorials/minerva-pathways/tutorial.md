@@ -30,12 +30,14 @@ contributions:
     - hexylena
   testing:
     - hexylena
-  funding:
-    - by-covid
+  # Helped manage the plugin, deployment of EU where we tested this
   infrastructure:
     - mira-miracoli
     - kysrpex
     - sanjaysrikakulam
+    - bgruening
+  funding:
+    - by-covid
 ---
 
 This tutorial is a partial reproduction of {% cite Togami_2022 %} wherein they evaluated mRNA and miRNA in a selection of COVID-19 patients and healthy controls.
