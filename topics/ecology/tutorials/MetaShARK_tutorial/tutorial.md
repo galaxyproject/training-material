@@ -56,7 +56,7 @@ contributions:
 <p align="justify"> A major gap when a researcher is writing metadata documents is the fact that metadata international <b>standards often use formats not really human readable</b> and/or editable as XML or JSON. To answer this issue, <b>[Environmental Data Initiative](https://edirepository.org/) (EDI)</b> through the <b>EML Assembly Line R package</b> propose to generate intermediate metadata template files using classical tabular text format.
 Another major issue regarding <b>metadata fill in</b>, is the fact that one <b>need to take a lot of time to write</b>, and often rewrite, metadata elements who can be already filled using automatic inferences or use of webservices. Here again, Environmental Data Initiaitve (EDI) through the <b>EML Assembly Line R</b> package propose to <b>generate automatically information</b> related to data attributes, geographic coverage, taxonomic coverage, using the content of provided datafiles.
 <br><br>
-Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiversity data hub research infrastructure (Pôle national de données de Biodiversité (<b>PNDB</b>)), user can <b>use <b>MetaShark</b>, a graphical user interface to apply the EML Assembly Line workflow</b> and benefit from some additionnal functionnalities as:</p>
+Finally, through the MetaShARK R Shiny app, an R Shiny app in beta version for test, created by the french biodiversity data hub research infrastructure (Pôle national de données de Biodiversité (<b>PNDB</b>)), user can use a graphical user interface to apply the EML Assembly Line workflow and benefit from some additionnal functionnalities as:</p>
 
 - Capacity to associate terminological resources terms coming from Bioportal ontologies to data attributes as keywords using CEDAR API
 - Automatic fill in of personal information using ORCID API
@@ -92,12 +92,12 @@ Finally, through the <b>MetaShARK R Shiny app</b> created by the french biodiver
 >    ![Upload shapefile](./Images/1_upload_shapefile.png)
 {: .hands_on}
 
-# 3] MetaShARK 🦈 : Write an EML document 
+# 3] MetaShARK 🦈 : Write rapidly an EML document through a work in progress interactive app 
 
 To deploy a MetaShARK app, you can go to the Galaxy tool {% tool [MetaShARK](interactive_tool_metashark) %} and click "Execute". Then, you have to wait the launch of the app, and when ready to be used, you will see the message "There is an InteractiveTool result view available," with an hyperlink on the "Open" statement allowing you to reach the app clicking on it.
 
 > <comment-title>WARNING</comment-title>
-> 🚧 Note that it is a beta version of MetaShARK R shiny app. You can thus encounter issues using it!
+> 🚧 Note that MetaShARK R shiny app is in beta version. You can thus encounter issues using it!
 {: .comment}
 
 When oppening MetaShARK, you will have an interface looking like this :
@@ -120,7 +120,7 @@ Then you can upload datafiles. Here, you can import these files from the downloa
  - 02_Ref.**dbf**
 
 > <comment-title>NOTE</comment-title>
-> The folder contains many files with different extensions, which is no problem for MetaShark, which is able to recognise several types of file extension!
+> The folder contains many files with different extensions but MetaShark will normally recognise several types of file extension (notably .tsv for tabulated text files, shapefiles, .geotiff and .geojson)!
 {: .comment}
 
 ![Upload datafiles on MetaShARK](./Images/4_MetaShARK_upload.png)
@@ -133,7 +133,7 @@ Then you can upload datafiles. Here, you can import these files from the downloa
 
 ![Categorical variables](./Images/6_MetaShARK_catvars.png)
 
-<p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
+<p align="justify">Clicking "Next" button will then allows you to fill spatial informations about all GIS recognized datafiles, here the `Present.Surface.pH.tif` geotiff raster file and the `02_Ref` shapefile vector file. Geotiff is in pixel, accuracy can be set to unknown and shapefile is in Point, both are in `GCS_WGS_1984`spatial reference.</p>
 
 ![Spatial information](./Images/7_MetaShARK_spatialinfo.png)
 
@@ -212,7 +212,7 @@ Then you can add final elements as:
 {: .tip}
 
 
-# 4] MetaShRIMPS 🦐 : Modify created metadata element
+# 4] MetaShRIMPS 🦐 : Easily FAIRness assessment and data paper sketches creation
 
 To evaluate and modify metadata elements you have created, you can upload the EML xml file on the Galaxy history you created and all MetaShARK metadata templates files.
 
@@ -293,7 +293,7 @@ Image un peu laide, je l'a modifierai un peu sur Paint pour optimiser sa taille 
 >
 > 4. Recreate a data collection with all metadata template files, taking the new "abstract" and "attributes_Present.Surface.pH.txt" files instead of old ones.
 >
-> 5. You can recreate an EML metadata file with [**Make EML**](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1) EAL tool and then redeploy a metashrimps tool on the new EML.
+> 5. You can recreate an EML metadata file with [**Make EML**](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1) EAL tool and then redeploy a metashrimps tool on the new EML. Before executing [**Make EML**](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/makeeml/makeeml/0.1.1+galaxy1) EAL tool, one need to pay attention to the rename composite datafiles (as here the shapefile one) as named originally (so `02_Ref`) and then create a data collection gathering all "dataTable" datafiles (both .tsv files and .nc one), a data collection gathering all "spatialRaster" datafiles (here `Present.Surface.pH.tif`) and a data collection gathering all "spatialVector" datafiles (here `LakeGeneva_phytoplankton_1974-2004.nc`).
 >
 {: .comment}
 
