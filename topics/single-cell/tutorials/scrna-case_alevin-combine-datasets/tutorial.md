@@ -126,7 +126,7 @@ REMEMBER TO ADD THE CODE FOR SNIPPETS BACK IN
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
-{% snippet faqs/galaxy/analysis_troubleshooting.md %}
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 ## Concatenating objects
 

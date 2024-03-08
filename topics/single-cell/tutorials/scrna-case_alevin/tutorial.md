@@ -145,7 +145,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
-{% snippet faqs/galaxy/analysis_troubleshooting.md %}
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 ## Generate a transcript to gene map
 

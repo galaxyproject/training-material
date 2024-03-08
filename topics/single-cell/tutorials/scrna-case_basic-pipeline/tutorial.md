@@ -118,7 +118,7 @@ You can also pull the data from publicly available [Single Cell Expression Atlas
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
-{% snippet faqs/galaxy/analysis_troubleshooting.md %}
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 # Filtering
 
