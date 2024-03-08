@@ -1232,33 +1232,9 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 
 ## How to cite the tools used in this tutorial
 
-If you use, extend or reference Galaxy in your published work, please acknowledge the public Galaxy platforms you use (e.g. Galaxy Australia) and cite this publication:
-
-The Galaxy Community. The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2022 update, Nucleic Acids Research, Volume 50, Issue W1, 5 July 2022, Pages W345–W351, https//:doi.org/10.1093/nar/gkac247
+If you use, extend or reference Galaxy in your published work, please [cite the Galaxy publication and acknowledge the public Galaxy platforms you use (e.g. Galaxy Australia)](https://galaxyproject.org/citing-galaxy/).
 
 Citations for tools used in a Galaxy workflow can be downloaded from the {%icon galaxy-history-options%} dropdown in your Galaxy history.
-
-To cite IQ-TREE please use:
-
-Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
-Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
-IQ-TREE 2: New models and efficient methods for phylogenetic inference
-in the genomic era. Mol. Biol. Evol.
-https://doi.org/10.1093/molbev/msaa015
-
-To cite ModelFinder please use: 
-
-Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
-and Lars S Jermiin (2017) ModelFinder: Fast model selection for
-accurate phylogenetic estimates. Nature Methods, 14:587–589.
-https://doi.org/10.1038/nmeth.4285
-
-Since you used ultrafast bootstrap (UFBoot) please also cite: 
-
-Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
-and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
-approximation. Mol. Biol. Evol., 35:518–522.
-https://doi.org/10.1093/molbev/msx281
 
 
 
