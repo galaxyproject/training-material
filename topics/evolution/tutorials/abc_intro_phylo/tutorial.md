@@ -29,9 +29,6 @@ contributions:
     - burkemlou
     - PatCapon39
 
-
-
-
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?"></iframe>
