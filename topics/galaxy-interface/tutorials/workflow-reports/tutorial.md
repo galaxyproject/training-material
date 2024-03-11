@@ -320,6 +320,8 @@ Well done! You have created a customized workflow report with text and workflow 
   - ..and more!
 
 
+{% snippet faqs/galaxy/reports_collapsible_box.md %}
+
 
 # Share or publish your workflow report
 
