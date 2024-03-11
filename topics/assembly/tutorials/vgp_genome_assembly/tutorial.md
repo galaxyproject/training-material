@@ -952,7 +952,7 @@ The first relevant parameter is the `estimated genome size`.
 >
 >**Step 8**: Click "Start".
 >
-> ![Image showing where to click to upload data as pasted data.](../../images/vgp_assembly/paste_data_to_upload.png) "Use the 'paste data' dialog to upload a file with the estimated genome size.")
+> ![Image showing where to click to upload data as pasted data.](../../images/vgp_assembly/paste_data_to_upload.png "Use the 'paste data' dialog to upload a file with the estimated genome size.")
 >
 > > <question-title></question-title>
 > >
