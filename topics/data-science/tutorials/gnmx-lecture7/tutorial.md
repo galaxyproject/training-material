@@ -349,7 +349,7 @@ index 1f383ac..e13e461 100644
 +file
  I've
  made
- ```
+```
  
  here:
  
@@ -372,7 +372,7 @@ To enable collaborations and to give the ability to develop major features witho
 Let's create branch dev:
 
 ```bash
-git branch dev
+$ git branch dev
 ```
 
 to see existing branches:
