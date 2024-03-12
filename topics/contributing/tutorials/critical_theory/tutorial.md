@@ -131,7 +131,7 @@ From the assumption of this conception of critical thinking a new question arise
 
 > *Any pedagogy concerned with critical thinking has to consider the form and content of social relations in the classroom.*
 >
-{: .quote author="Henry Giroux" cite_text="Teacher as intellectuals: towards a critical pedagogy of learning"}
+{: .quote author="Henry Giroux" cite="Teacher as intellectuals: towards a critical pedagogy of learning"}
 
 Unlike the official curriculum, with its explicitly stated cognitive and affective objectives, **the hidden curriculum relies on those organisational aspects, such as the communicative systems, whose effects on the learning process are generally not consciously perceived by students** ({% cite Olivo2005 %}). On the light of this definition, a new question emerges: which impact has the hidden curriculum on the learning process?
 
