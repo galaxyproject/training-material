@@ -7,6 +7,7 @@ tags:
   - bacteria
   - tnseq
   - essential genes
+  - microgalaxy
 questions:
   - "What is Transposon insertion Sequencing?"
   - "How to get TA sites Coverage ? "
