@@ -247,7 +247,8 @@ bc3e5c4 Create file1.txt
 
 To roll everything back you can do this:
 
-```$git revert 476adb7
+```bash
+$git revert 476adb7
 [main 1f13d5f] Revert "modified file1"
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
@@ -506,24 +507,24 @@ $ git commit -m 'main changes to file1'
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
-:::info
-
-You can use `git diff` to see the differences between branches such as, for example:
-
-```bash
-$ git diff main dev
-diff --git a/file1.txt b/file1.txt
-index f8e8191..e82ee85 100644
---- a/file1.txt
-+++ b/file1.txt
-@@ -1,4 +1,4 @@
- This
- is
- a 
--file1 - the first file we created
-+file1
-```
-:::
+> <tip-title>Showing differences between branches</tip-title>
+>
+>You can use `git diff` to see the differences between branches such as, for example:
+>
+> ```bash
+> $ git diff main dev
+> diff --git a/file1.txt b/file1.txt
+> index f8e8191..e82ee85 100644
+> --- a/file1.txt
+> +++ b/file1.txt
+> @@ -1,4 +1,4 @@
+>  This
+>  is
+>  a 
+> -file1 - the first file we created
+> +file1
+> ```
+{: .tip}
 
 #### Modify `file1.txt` in `dev`
 
