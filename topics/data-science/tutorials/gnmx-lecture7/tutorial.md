@@ -255,7 +255,7 @@ $git revert 476adb7
 
 This will bring `vim` editor with a pre-filled rollback message:
 
-![](https://i.imgur.com/sEZNPN8.png)
+![vim image](https://i.imgur.com/sEZNPN8.png)
 
 To save this and get out:
 
@@ -361,7 +361,7 @@ index 1f383ac..e13e461 100644
 
 ## Branches
 
-![](https://i.imgur.com/cLCQ650.png)
+![git branches](https://i.imgur.com/cLCQ650.png)
 
 > From [GitBetter](https://gitbetter.substack.com/p/how-to-work-in-multiple-git-branches)
 
@@ -574,12 +574,12 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 If then actually look at the content of the file, you will see this:
 
-![](https://i.imgur.com/s1zuCN6.png)
+![file1](https://i.imgur.com/s1zuCN6.png)
 
 
 so here you need to decide which version you will keep and edit the file correspondingly.  For example, I edited it to this form and saved:
 
-![](https://i.imgur.com/1IbIQmD.png)
+![file1_edited](https://i.imgur.com/1IbIQmD.png)
 
 Now I need to `add` and `commit`:
 
