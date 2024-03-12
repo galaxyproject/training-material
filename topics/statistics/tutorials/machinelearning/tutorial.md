@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Basics of machine learning"
-zenodo_link: https://zenodo.org/record/1468039#.W8zyxBRoSAo
+zenodo_link: https://zenodo.org/record/1468039
 questions:
   - "What is machine learning?"
   - "Why is it useful?"
@@ -43,7 +43,7 @@ The following image shows how a classification task is performed. The complete d
 
 ![data](images/prediction.png "Supervised learning.")
 
-This tutorial shows how to use a machine learning module implemented as a Galaxy tool. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/1468039#.W8zyxBRoSAo).
+This tutorial shows how to use a machine learning module implemented as a Galaxy tool. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/1468039).
 
 > <agenda-title></agenda-title>
 >

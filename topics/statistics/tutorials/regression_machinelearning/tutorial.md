@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Regression in Machine Learning'
-zenodo_link: https://zenodo.org/record/2545213#.XEWTJ9-YVa0
+zenodo_link: https://zenodo.org/record/2545213
 questions:
 - How to use regression techniques to create predictive models from biological datasets?
 objectives:
@@ -81,7 +81,7 @@ Whole blood samples are collected from humans with their ages falling in the ran
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/2545213/files/train_rows.csv

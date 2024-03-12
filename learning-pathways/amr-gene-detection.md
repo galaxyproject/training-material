@@ -19,12 +19,12 @@ pathway:
 #    #  - name: introduction
 #    #    topic: genome-annotation
 
-#  - section: "Module: Taxonomy assignation"
-#    description: |
-#      Taxonomic assignation is useful in AMR detection to check contamination and confirm species
-#    tutorials:
-#      - name: taxonomy
-#        topic: ecology
+  - section: "Module: Species and contamination checking"
+    description: |
+      Taxonomic assignation is useful in AMR detection to check contamination and confirm species
+    tutorials:
+      - name: bacterial-isolate-species-contamination-checking
+        topic: ecology
 
   - section: "Module: Assembly"
     description: |
@@ -32,10 +32,8 @@ pathway:
     tutorials:
       - name: mrsa-illumina
         topic: assembly
-#      - name: mrsa-nanopore
-#        topic: assembly
-#      - name: hybrid-assembly
-#        topic: assembly
+      - name: mrsa-nanopore
+        topic: assembly
 
   - section: "Module: Genome annotation"
     description: |

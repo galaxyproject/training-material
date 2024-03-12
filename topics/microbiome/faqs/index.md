@@ -1,5 +1,5 @@
 ---
 layout: faq-page
 redirect_from:
-- /topics/metagenomics/faqs
+- /topics/metagenomics/faqs/index
 ---

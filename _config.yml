@@ -48,15 +48,16 @@ javascript_bundles:
       - assets/js/theme.js
   main:
     preload: true
+    defer: true
+    async: true
     resources:
-      - assets/js/jquery.slim.min.js
-      - assets/js/popper.min.js
-      - assets/js/bootstrap.min.js
-      - assets/js/bootstrap-toc.min.js
-      - assets/js/clipboard.min.js
-      - assets/js/list.min.js
-      - assets/js/mermaid@10.6.1.js
+      - assets/js/jquery.slim.min.js   # Mandatory for bootstrap.
+      - assets/js/popper.min.js        # Everywhere, dropdown menu.
+      - assets/js/bootstrap.min.js     # Everywhere
+      - assets/js/bootstrap-toc.min.js # Only tutorials, faqs
+      - assets/js/clipboard.min.js     # Used on anything with a pre
       - assets/js/main.js
+      # - assets/js/list.min.js # Potentially unused?
 
 # Conversion
 markdown: kramdown

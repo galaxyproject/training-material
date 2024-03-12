@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Text-mining with the SimText toolset
-zenodo_link: http://doi.org/10.5281/zenodo.4638516
+zenodo_link: https://doi.org/10.5281/zenodo.4638516
 questions:
 - How can I automatically collect PubMed data for a set of biomedical entities such as genes?
 - How can I analyze similarities among biomedical entities based on PubMed data on large-scale?
