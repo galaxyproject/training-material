@@ -37,6 +37,11 @@ tags:
 - prokaryote
 - one-health
 - microgalaxy
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_3324 # Infectious disease
+- topic_2885 # DNA polymorphism
 ---
 
 
