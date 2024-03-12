@@ -31,7 +31,7 @@ The **Critical Learning Theory**  is a pedagogical paradigm rooted in the broade
 
 Consisting of a renowned collective of critical theorists such as Max Horkheimer, Theodor Adorno, Walter Benjamin, and Herbert Marcuse, the **Frankfurt School** developed the **Critical Theory** as a multidisciplinary approach crafted with the intent to comprehend and actively confront the oppressive dynamics ingrained within industrial societies (fig. 1).
 
-![Frankfurt School picture](../../images/critical_theory/frankfurt_school.png "Left image: Max Horkheimer and Theodor Adorno in Heidelberg in 1964 at the Max Weber Institute of Sociology. Right image: Herbert Marcuse in Newton, Massachusetts in 1955. Source: Wikipedia")
+![Frankfurt School picture, on the left two old bald white men dressed in suits shake hands, right an old white man relaxes in a lawnchair holding a cigar.](images/critical_theory/frankfurt_school.png "Left image: Max Horkheimer and Theodor Adorno in Heidelberg in 1964 at the Max Weber Institute of Sociology. Right image: Herbert Marcuse in Newton, Massachusetts in 1955. Source: Wikipedia")
 
 In the realm of education, the **Critical Learning Theory** aligns with the Frankfurt School's tradition, emphasizing a critical analysis of educative systems as social institutions. It represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of **critical thinking** ({% cite Giroux2018 %}). A leading figure of this school of thought is  prominent American-Canadian critical pedagogue Henry Giroux.
 
@@ -76,7 +76,7 @@ In the face of the conservative claim that educative systems transmit objective 
 
 Before going deeper, it is inportant to accurately define **critical thinking**, since it is usually concived as a nebulose concept whose applications appears to be limitated to specific situations.
 
-The most common definition comes from the **positivist tradition** in the applied sciences; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). Is it enought?
+The most common definition comes from the **positivist tradition** in the applied sciences; it appeals to the function of teaching students to analyse and develop reading and writing tasks from the perspective of formal logical patterns of coherence, and determining if the conclusions can be derivated from the evaluated data ({% cite Giroux1988 %}). Is it enough?
 
 > <comment-title>On positivism</comment-title>
 >
@@ -102,11 +102,11 @@ From the assumption of this conception of critical thinking a new question arise
 
 > <question-title>Critical thinking quiz</question-title>
 >
-> 1. **How does critical thinking align with the principles of both Critical Theory and Critical Learning Theory?** <br>
-> &nbsp; a. By avoiding critical examination of societal issues. <br>
-> &nbsp; b. By promoting conformity to existing structures. <br>
-> &nbsp; c. By fostering a reflective approach to learning and encouraging critical analysis. <br>
-> &nbsp; d. By discouraging diverse perspectives.
+> 1. **How does critical thinking align with the principles of both Critical Theory and Critical Learning Theory?**
+>    a. By avoiding critical examination of societal issues.
+>    b. By promoting conformity to existing structures.
+>    c. By fostering a reflective approach to learning and encouraging critical analysis.
+>    d. By discouraging diverse perspectives.
 > 
 > 2. **When dealing with diverse cultural perspectives, why might the positivist conception of critical thinking face limitations?** <br>
 > &nbsp; a. It fails to acknowledge cultural biases. <br>
@@ -131,9 +131,7 @@ From the assumption of this conception of critical thinking a new question arise
 
 > *Any pedagogy concerned with critical thinking has to consider the form and content of social relations in the classroom.*
 >
-> — Henry Giroux, Teacher as intellectuals: towards a critical pedagogy of learning.
->
-{: .quote}
+{: .quote author="Henry Giroux" cite_text="Teacher as intellectuals: towards a critical pedagogy of learning"}
 
 Unlike the official curriculum, with its explicitly stated cognitive and affective objectives, **the hidden curriculum relies on those organisational aspects, such as the communicative systems, whose effects on the learning process are generally not consciously perceived by students** ({% cite Olivo2005 %}). On the light of this definition, a new question emerges: which impact has the hidden curriculum on the learning process?
 
@@ -196,7 +194,7 @@ The technological system is a complex arrangement of interconnected components, 
 >
 > In 1923, Gunther Anders obtained his Ph.D. in philosophy from the University of Freiburg, having studied under the esteemed philosophers Martin Heidegger and Edmund Husserl.
 >
-> ![Anders picture](../../images/critical_theory/anders.png "Günther Anders. Source: soziologie.uni-freiburg.de")
+> ![An old white man wearing glasses and a suit, stares off to the right side with a very pensive thoughtful expression.](../../images/critical_theory/anders.png "Günther Anders. Source: soziologie.uni-freiburg.de")
 >
 > On August 2023, the University of Freiburg established a research position at the [Institute of Sociology](https://www.soziologie.uni-freiburg.de/forschung/gaf) in his honour.
 >
