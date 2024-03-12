@@ -875,6 +875,11 @@ The citation and author parameters are both optional. If provided the `cite` key
 > If you don't know where you're going, you might not get there.
 {: .quote author="Yogi Berra"}
 
+If the `cite` attribute is not a URL, it will be rendered as a simple string.
+
+> If you ask me a question I don't know, I'm not going to answer. 
+{: .quote author="Yogi Berra" cite="What Time Is It? You Mean Now?: Advice for Life from the Zennest Master of Them All"}
+
 # Additional Features to Improve Learning
 
 Here we cover additional features you can use throughout your tutorials to improve the learning experience.

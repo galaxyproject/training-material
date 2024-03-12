@@ -199,7 +199,14 @@ var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
 // Cited blockquotes
 document.querySelectorAll("blockquote[cite],blockquote[author]").forEach(bq => {
 	let bq_cite = bq.getAttribute("cite");
-	let bq_url = bq_cite ? `<cite class="text-muted"><a href="${bq_cite}"><i>Source</i></a></cite>` : "";
+	let bq_url = "";
+	if(bq_cite){
+		if(bq_cite.startsWith("http")){
+			bq_url = `<cite class="text-muted"><a href="${bq_cite}"><i>Source</i></a></cite>`;
+		} else {
+			bq_url = `<cite class="text-muted"><i>${bq_cite}</i></cite>`;
+		}
+	}
 	let bq_author = bq.getAttribute("author") ? "— " + bq.getAttribute("author") + " " : "";
 	bq.insertAdjacentHTML("beforeend", `<footer>${bq_author}${bq_url}</footer>`)
 })
