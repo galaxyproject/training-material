@@ -194,7 +194,7 @@ The technological system is a complex arrangement of interconnected components, 
 >
 > In 1923, Gunther Anders obtained his Ph.D. in philosophy from the University of Freiburg, having studied under the esteemed philosophers Martin Heidegger and Edmund Husserl.
 >
-> ![An old white man wearing glasses and a suit, stares off to the right side with a very pensive thoughtful expression.](../../images/critical_theory/anders.png "Günther Anders. Source: soziologie.uni-freiburg.de")
+> ![An old white man wearing glasses and a suit, in front of a bookshelf full of books.](../../images/critical_theory/anders.png "Günther Anders, during an interview with Manfred Bissinger in 1985. Source: Austrian National Library, Vienna")
 >
 > On August 2023, the University of Freiburg established a research position at the [Institute of Sociology](https://www.soziologie.uni-freiburg.de/forschung/gaf) in his honour.
 >
