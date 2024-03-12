@@ -21,9 +21,6 @@ priority: 7
 subtopic: gnmx
 draft: true
 
-notebook:
-  language: python
-  pyolite: true
 ---
 
 [![XKCD1597](https://imgs.xkcd.com/comics/git.png)](https://xkcd.com/1597/)
@@ -537,6 +534,7 @@ Switched to branch 'dev'
 
 Change `file1.txt`, say, from:
 
+
 ```
 This
 is
@@ -565,11 +563,12 @@ $ git commit -m 'dev changes to file1'
 
 #### Checkout `main` and try to `merge`
 
+
 ```bash
-$ git merge main dev
-Auto-merging file1.txt
-CONFLICT (content): Merge conflict in file1.txt
-Automatic merge failed; fix conflicts and then commit the result.
+ $ git merge main dev
+ Auto-merging file1.txt
+ CONFLICT (content): Merge conflict in file1.txt
+ Automatic merge failed; fix conflicts and then commit the result.
 ```
 
 If then actually look at the content of the file, you will see this:
@@ -584,7 +583,7 @@ so here you need to decide which version you will keep and edit the file corresp
 Now I need to `add` and `commit`:
 
 ```bash
-$ git add file1.txt
-jovyan@jupyter-jupyterlab-2djupyterlab-2ddemo-2dryet2dsd:~/bmmb554_foo_bar$ git commit -m 'merged dev into main'
+ $ git add file1.txt
+ jovyan@jupyter-jupyterlab-2djupyterlab-2ddemo-2dryet2dsd:~/bmmb554_foo_bar$ git commit -m 'merged dev into main'
 ```
 
