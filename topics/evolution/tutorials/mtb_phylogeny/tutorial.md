@@ -33,6 +33,11 @@ tags:
 - one-health
 - phylogenetics
 - microgalaxy
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0084 # Phylogeny
+- topic_3324 # Infectious disease
 ---
 
 
