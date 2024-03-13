@@ -31,6 +31,7 @@ edam_ontology:
 - topic_3305 # Public health and epidemiology
 - topic_0622 # Genomics
 - topic_3301 # Microbiology
+- topic_4013 # Antimicrobial resistance
 level: Introductory
 
 contributions:
