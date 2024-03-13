@@ -21,7 +21,8 @@
     "illumina",
     "amr",
     "one-health",
-    "jbrowse1"
+    "jbrowse1",
+    "microgalaxy"
   ],
   "subtopic": "prokaryote",
   "level": "Introductory",
@@ -77,9 +78,9 @@
   },
   "hands_on": true,
   "slides": false,
-  "mod_date": "2024-02-29 12:49:27 +0000",
+  "mod_date": "2024-03-12 11:07:51 +0000",
   "pub_date": "2024-01-23 16:20:06 +0000",
-  "version": 7,
+  "version": 8,
   "workflows": [
     {
       "workflow": "main-workflow.ga",
@@ -105,8 +106,8 @@
       "name": "mrsa AMR gene detection",
       "title": "mrsa AMR gene detection",
       "test_results": null,
-      "modified": "2024-03-13 00:05:13 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"staramr\"];\n  0 -->|output| 3;\n  19710cb9-6cf2-4045-8852-95e630afa031[\"Output\\nstararm_detailed_summary\"];\n  3 --> 19710cb9-6cf2-4045-8852-95e630afa031;\n  style 19710cb9-6cf2-4045-8852-95e630afa031 stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  4d48f5d8-d20c-4694-81b0-dc07a37edbfa[\"Output\\nbakta_annotation_summary\"];\n  4 --> 4d48f5d8-d20c-4694-81b0-dc07a37edbfa;\n  style 4d48f5d8-d20c-4694-81b0-dc07a37edbfa stroke:#2c3143,stroke-width:4px;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  0d11f1a6-418a-49c6-9399-c4ce018c5dc1[\"Output\\nbowtie_mapping_stats\"];\n  5 --> 0d11f1a6-418a-49c6-9399-c4ce018c5dc1;\n  style 0d11f1a6-418a-49c6-9399-c4ce018c5dc1 stroke:#2c3143,stroke-width:4px;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n  4efcf397-565d-47a3-b658-478ce77f5963[\"Output\\njbrowse_output\"];\n  8 --> 4efcf397-565d-47a3-b658-478ce77f5963;\n  style 4efcf397-565d-47a3-b658-478ce77f5963 stroke:#2c3143,stroke-width:4px;"
+      "modified": "2024-03-13 09:03:08 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"staramr\"];\n  0 -->|output| 3;\n  c6d94750-e960-48e7-866b-7d908c995610[\"Output\\nstararm_detailed_summary\"];\n  3 --> c6d94750-e960-48e7-866b-7d908c995610;\n  style c6d94750-e960-48e7-866b-7d908c995610 stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  72e2eb31-7ac9-4167-a7a9-2c0ce3aaaeaa[\"Output\\nbakta_annotation_summary\"];\n  4 --> 72e2eb31-7ac9-4167-a7a9-2c0ce3aaaeaa;\n  style 72e2eb31-7ac9-4167-a7a9-2c0ce3aaaeaa stroke:#2c3143,stroke-width:4px;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  5c17975a-e3c1-45ef-851c-fa84272da98e[\"Output\\nbowtie_mapping_stats\"];\n  5 --> 5c17975a-e3c1-45ef-851c-fa84272da98e;\n  style 5c17975a-e3c1-45ef-851c-fa84272da98e stroke:#2c3143,stroke-width:4px;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n  723fee18-8497-4240-b121-6a12dd823ee3[\"Output\\njbrowse_output\"];\n  8 --> 723fee18-8497-4240-b121-6a12dd823ee3;\n  style 723fee18-8497-4240-b121-6a12dd823ee3 stroke:#2c3143,stroke-width:4px;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.json",
