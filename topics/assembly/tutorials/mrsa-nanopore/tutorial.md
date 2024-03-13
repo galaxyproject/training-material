@@ -25,6 +25,13 @@ tags:
 - gmod
 - jbrowse1
 - microgalaxy
+edam_ontology:
+- topic_0196 # Sequence Assembly
+- topic_3673 # Whole genome sequencing
+- topic_3305 # Public health and epidemiology
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_4013 # Antimicrobial resistance
 level: Introductory
 
 contributions:
