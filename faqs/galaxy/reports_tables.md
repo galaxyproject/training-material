@@ -7,7 +7,7 @@ layout: faq
 contributors: [jmchilton, hexylena]
 ---
 
-There are a number of options, specifically for tabular data, that can allow it to render more nicely in your workflow reports and pages:
+There are a number of options, specifically for tabular data, that can allow it to render more nicely in your workflow reports and pages and anywhere that GalaxyMarkdown is used.
 
 - `title` to give your table a title
 - `footer` allows you to caption your table
