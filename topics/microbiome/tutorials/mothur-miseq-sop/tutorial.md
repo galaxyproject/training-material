@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "16S Microbial Analysis with mothur (extended)"
 zenodo_link: "https://doi.org/10.5281/zenodo.800651"
+priority: 1000
 questions:
   - "What is the effect of normal variation in the gut microbiome on host health?"
 objectives:
