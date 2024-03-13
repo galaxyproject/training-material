@@ -25,6 +25,13 @@
     "assembly",
     "microgalaxy"
   ],
+  "edam_ontology": [
+    "topic_0196",
+    "topic_3673",
+    "topic_3305",
+    "topic_0622",
+    "topic_3301"
+  ],
   "contributions": {
     "authorship": [
       "bazante1",
@@ -77,9 +84,9 @@
   },
   "hands_on": true,
   "slides": false,
-  "mod_date": "2024-02-16 10:14:00 +0000",
+  "mod_date": "2024-03-11 15:54:36 +0000",
   "pub_date": "2021-03-24 18:30:46 +0000",
-  "version": 27,
+  "version": 28,
   "workflows": [
     {
       "workflow": "main_workflow.ga",
@@ -105,8 +112,8 @@
       "name": "Genome Assembly of MRSA using Illumina MiSeq Data",
       "title": "Genome Assembly of MRSA using Illumina MiSeq Data",
       "test_results": null,
-      "modified": "2024-03-13 09:03:06 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nDRR187559_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nDRR187559_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  03091276-0dba-4e81-9ebd-1fcaf3b941a6[\"Output\\nfastp_json\"];\n  3 --> 03091276-0dba-4e81-9ebd-1fcaf3b941a6;\n  style 03091276-0dba-4e81-9ebd-1fcaf3b941a6 stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Shovill\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  cc36abb0-6462-4037-89bb-ba287e9c0fcf[\"Output\\nshovill_log\"];\n  5 --> cc36abb0-6462-4037-89bb-ba287e9c0fcf;\n  style cc36abb0-6462-4037-89bb-ba287e9c0fcf stroke:#2c3143,stroke-width:4px;\n  6[\"Quast\"];\n  5 -->|contigs| 6;\n  6a5b98c0-a742-4d98-b2ba-bf8726813e10[\"Output\\nquast_output\"];\n  6 --> 6a5b98c0-a742-4d98-b2ba-bf8726813e10;\n  style 6a5b98c0-a742-4d98-b2ba-bf8726813e10 stroke:#2c3143,stroke-width:4px;\n  7[\"Bandage Image\"];\n  5 -->|contigs_graph| 7;\n  8[\"Bandage Info\"];\n  5 -->|contigs_graph| 8;\n  0c5add4b-12ec-4ae5-87f5-640e5d0a8fbc[\"Output\\nbandage_info_output\"];\n  8 --> 0c5add4b-12ec-4ae5-87f5-640e5d0a8fbc;\n  style 0c5add4b-12ec-4ae5-87f5-640e5d0a8fbc stroke:#2c3143,stroke-width:4px;"
+      "modified": "2024-03-13 09:06:24 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nDRR187559_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nDRR187559_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  25d2f852-1bdf-426d-ac08-8a11f6e76eef[\"Output\\nfastp_json\"];\n  3 --> 25d2f852-1bdf-426d-ac08-8a11f6e76eef;\n  style 25d2f852-1bdf-426d-ac08-8a11f6e76eef stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Shovill\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  345df151-d9dd-4aeb-b221-352898bc6294[\"Output\\nshovill_log\"];\n  5 --> 345df151-d9dd-4aeb-b221-352898bc6294;\n  style 345df151-d9dd-4aeb-b221-352898bc6294 stroke:#2c3143,stroke-width:4px;\n  6[\"Quast\"];\n  5 -->|contigs| 6;\n  758021e1-be06-4794-b15e-d259e14a7016[\"Output\\nquast_output\"];\n  6 --> 758021e1-be06-4794-b15e-d259e14a7016;\n  style 758021e1-be06-4794-b15e-d259e14a7016 stroke:#2c3143,stroke-width:4px;\n  7[\"Bandage Image\"];\n  5 -->|contigs_graph| 7;\n  8[\"Bandage Info\"];\n  5 -->|contigs_graph| 8;\n  0881b73f-98d1-45a1-84f0-bd5f8d0e6033[\"Output\\nbandage_info_output\"];\n  8 --> 0881b73f-98d1-45a1-84f0-bd5f8d0e6033;\n  style 0881b73f-98d1-45a1-84f0-bd5f8d0e6033 stroke:#2c3143,stroke-width:4px;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/mrsa-illumina/tutorial.json",
