@@ -25,6 +25,11 @@ contributors:
   - delphine-l
   - bebatut
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0080 # Sequence analysis
+- topic_0798 # Mobile genetic elements
 priority: 4
 ---
 
