@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Creation of an interactive Galaxy tools table for your community / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@5525b1c650791289f66bfc8cb387779722b6d699",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Creation of an interactive Galaxy tools table for your community">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-02-27 08:15:01 +0000">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Hands-on: Creation of an interactive Galaxy tools table for your community">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-02-27 08:15:01 +0000",
+  "datePublished": "2024-03-13 15:41:48 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Creation of an interactive Galaxy tools table for your community",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Creation of an interactive Galaxy tools table for your community",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html",
+  "version": 2,
+  "timeRequired": "PT1H",
+  "teaches": "Create a community reviewed table for Galaxy tools within a specific scientific domain\n - Embed an interactive table in a community page",
+  "keywords": [
+    "Development in Galaxy",
+    "Community",
+    "SIG"
+  ],
+  "description": "The questions this  addresses are:\n - Is it possible to have an overview of all Galaxy tools for a specific scientific domain?\n - How can I create a new overview for a specific Galaxy community or domain?\n\n\nThe objectives are:\n - Create a community reviewed table for Galaxy tools within a specific scientific domain\n - Embed an interactive table in a community page\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "Community"
+    },
+    {
+      "@type": "Thing",
+      "name": "SIG"
+    }
+  ],
+  "abstract": "Galaxy offers thousands of tools. They are developed across various GitHub repositories. Furthermore, Galaxy also embraces granular implementation of software tools as sub-modules. In practice, this means that tool suites are separated into Galaxy tools, also known as wrappers, that capture their component operations. Some key examples of suites include [Mothur](https://bio.tools/mothur) and [OpenMS](https://bio.tools/openms), which translate to tens and even hundreds of Galaxy tools. "
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Development in Galaxy
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/community-tool-table/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/community-tool-table/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-dev">
+    <h1 data-toc-skip>Creation of an interactive Galaxy tools table for your community</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Is it possible to have an overview of all Galaxy tools for a specific scientific domain?</p>
+</li>
+        
+        <li><p>How can I create a new overview for a specific Galaxy community or domain?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Create a community reviewed table for Galaxy tools within a specific scientific domain</p>
+</li>
+        
+        <li><p>Embed an interactive table in a community page</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 13, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 27, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Galaxy offers thousands of tools. They are developed across various GitHub repositories. Furthermore, Galaxy also embraces granular implementation of software tools as sub-modules. In practice, this means that tool suites are separated into Galaxy tools, also known as wrappers, that capture their component operations. Some key examples of suites include <a href="https://bio.tools/mothur">Mothur</a> and <a href="https://bio.tools/openms">OpenMS</a>, which translate to tens and even hundreds of Galaxy tools.</p>
+
+<p>While granularity supports the composability of tools into rich domain-specific workflows, this decentralized development and sub-module architecture makes it <strong>difficult for Galaxy users to find and reuse tools</strong>. It may also result in Galaxy tool developers <strong>duplicating efforts</strong> by simultaneously wrapping the same software. This is further complicated by a lack of tool metadata, which prevents filtering for all tools in a specific research community or domain, and makes it all but impossible to employ advanced filtering with ontology terms and operations like <a href="https://edamontology.org/page">EDAM ontology</a>.</p>
+
+<p>The final challenge is also an opportunity: the global nature of Galaxy means that it is a big community. Solving the visibility of tools across this ecosystem and the potential benefits are far-reaching for global collaboration on tool and workflow development.</p>
+
+<p>To provide the research community with a comprehensive list of available Galaxy tools, <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor</a> was developed to collect Galaxy wrappers from a list of Git repositories and automatically extract their metadata (including Conda version, <a href="https://bio.tools/">bio.tools</a> identifiers, and EDAM annotations). The workflow also queries the availability of the tools and usage statistics from the three main Galaxy servers (usegalaxy.*).</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/galaxy_tool_metadata_extractor_pipeline.png" alt="A diagram illustrating the Galaxy Tool Metadata Extractor pipeline, showcasing the various steps involved in creating a community Galaxy tool table." width="834" height="544" loading="lazy" /><a target="_blank" href="./images/galaxy_tool_metadata_extractor_pipeline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow of the Galaxy Tool Metadata Extractor pipeline. Tool wrappers are parsed from different repositories and additional metadata is retrieved from bio.tools, BioConda, and the main public Galaxy servers. Upon filtering and manual curation of the data for specific scientific communities, the data is transformed into interactive web tables and a tool usage statistic-base word cloud, that can be integrated into any website.</figcaption></figure>
+
+<p>The pipeline creates an <a href="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/">interactive table with all tools and their metadata</a>. This table can be <strong>filtered to only include tools that are relevant to a specific research community</strong>. Here is an example for the microbial related tools:</p>
+
+<iframe id="edam" src="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/microgalaxy/" frameborder="0" width="100%" height="600px"> <a href="./images/microgalaxy_tools.png" rel="noopener noreferrer"><img src="./images/microgalaxy_tools.png" alt="Interactive table for microgalaxy tools. " width="2056" height="1142" loading="lazy" /></a> </iframe>
+
+<p>The generated community-specific interactive table can be used as it and/or embedded, e.g. into the respective Galaxy Hub page or Galaxy subdomain. This table allows further filtering and searching for fine-grained tool selection.</p>
+
+<p>The pipeline is <strong>fully automated</strong> and executes on a <strong>weekly</strong> basis. Any research community can apply the pipeline to create a table specific to their community.</p>
+
+<p>The aim is this tutorial is to create such table for a community.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#add-your-community-to-the-galaxy-tool-metadata-extractor-pipeline" id="markdown-toc-add-your-community-to-the-galaxy-tool-metadata-extractor-pipeline">Add your community to the Galaxy Tool Metadata Extractor pipeline</a></li>
+  <li><a href="#review-the-generated-interactive-table" id="markdown-toc-review-the-generated-interactive-table">Review the generated interactive table</a>    <ol>
+      <li><a href="#add-a-list-of-tools-to-exclude" id="markdown-toc-add-a-list-of-tools-to-exclude">Add a list of tools to exclude</a></li>
+      <li><a href="#add-a-list-of-tools-to-keep" id="markdown-toc-add-a-list-of-tools-to-keep">Add a list of tools to keep</a></li>
+      <li><a href="#review-all-tools-in-your-table" id="markdown-toc-review-all-tools-in-your-table">Review all tools in your table</a></li>
+    </ol>
+  </li>
+  <li><a href="#embed-the-interactive-table-in-your-community-page-on-the-hub" id="markdown-toc-embed-the-interactive-table-in-your-community-page-on-the-hub">Embed the interactive table in your community page on the Hub</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="add-your-community-to-the-galaxy-tool-metadata-extractor-pipeline">Add your community to the Galaxy Tool Metadata Extractor pipeline</h1>
+
+<p>To create a table for a community, you first need to create a new folder in the <code class="language-plaintext highlighter-rouge">data/community</code> folder within <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor code source</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-a-folder-for-your-community"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a folder for your community</div>
+
+  <ol>
+    <li>If not already done, fork the <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor repository</a></li>
+    <li>Go to the <code class="language-plaintext highlighter-rouge">data/communities</code> folder</li>
+    <li>Click on <strong>Add file</strong> in the drop-down menu at the top</li>
+    <li>Select <strong>Create a new file</strong></li>
+    <li>
+      <p>Fill in the <code class="language-plaintext highlighter-rouge">Name of your file</code> field with:  name of your community + <code class="language-plaintext highlighter-rouge">/categories</code></p>
+
+      <p>This will create a new folder for your community and add a categories file to this folder.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>One of the filters for the main community table is based on the tool categories on the <a href="https://toolshed.g2.bx.psu.edu/">Galaxy ToolShed</a>. Only tools in the selected ToolShed categories will be added to the filtered table. As a result, it is recommended to include broad categories.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-select-the-toolshed-categories"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Select the ToolShed categories</div>
+
+  <ol>
+    <li>Go to the <a href="https://toolshed.g2.bx.psu.edu/">Galaxy ToolShed</a></li>
+    <li>On the main page, pick the most obvious categories that represent tools used by your community</li>
+    <li>
+      <p>Add the name of these categories in the <code class="language-plaintext highlighter-rouge">categories</code> file you started above, with 1 ToolShed category per row</p>
+
+      <p>For example:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Assembly
+Metagenomics
+</code></pre></div>      </div>
+    </li>
+    <li>Search on the <a href="https://toolshed.g2.bx.psu.edu/">Galaxy ToolShed</a> for some of the popular tools in your community</li>
+    <li>Open the tool entries on the ToolShed, and note their categories</li>
+    <li>Add any new categories to the <code class="language-plaintext highlighter-rouge">categories</code> file</li>
+  </ol>
+</blockquote>
+
+<p>Once you have a list of the ToolShed categories that you wish to keep, you can submit this to Galaxy Tool Metadata Extractor.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-submit-the-new-community-to-galaxy-tool-metadata-extractor"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Submit the new community to Galaxy Tool Metadata Extractor</div>
+
+  <ol>
+    <li>Click on <strong>Commit changes</strong> at the top</li>
+    <li>Fill in the commit message with something like <code class="language-plaintext highlighter-rouge">Add X community</code></li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create a new branch for this commit and start a pull request</code></li>
+    <li>Create the pull request by following the instructions</li>
+  </ol>
+
+</blockquote>
+
+<p>The Pull Request will be reviewed. Make sure to respond to any feedback.</p>
+
+<p>Once the Pull Request is merged, the interactive table will be created and made available online at <code class="language-plaintext highlighter-rouge">https://galaxyproject.github.io/galaxy_tool_metadata_extractor/&lt;your community&gt;</code>.</p>
+
+<h1 id="review-the-generated-interactive-table">Review the generated interactive table</h1>
+
+<p>The interactive table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community.</p>
+
+<p>Galaxy Tool Metadata Extractor provides 2 optional filters for tools:</p>
+<ul>
+  <li>A list of tools to exclude</li>
+  <li>A list of tools that should definitely be kept.</li>
+</ul>
+
+<h2 id="add-a-list-of-tools-to-exclude">Add a list of tools to exclude</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-a-list-of-tools-to-exclude"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add a list of tools to exclude</div>
+
+  <ol>
+    <li>Open your interactive table</li>
+    <li>Search for some tools to exclude</li>
+    <li>Go to your community folder on <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor repository</a></li>
+    <li>Click on <strong>Add file</strong> drop-down menu on the top</li>
+    <li>Select <strong>Create a new file</strong></li>
+    <li>Fill in <code class="language-plaintext highlighter-rouge">tools_to_exclude</code> in <code class="language-plaintext highlighter-rouge">Name of your file</code></li>
+    <li>Add the <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code> of the tools to exclude, with 1 tool identifier per row</li>
+    <li>Submit your changes as before</li>
+    <li>Wait for the Pull Request to be merged</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="add-a-list-of-tools-to-keep">Add a list of tools to keep</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-a-list-of-tools-to-keep"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add a list of tools to keep</div>
+
+  <ol>
+    <li>Open your interactive table</li>
+    <li>Search for some tools to keep</li>
+    <li>Go to your community folder on <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor repository</a></li>
+    <li>Click on <strong>Add file</strong> drop-down menu on the top</li>
+    <li>Select <strong>Create a new file</strong></li>
+    <li>Fill in <code class="language-plaintext highlighter-rouge">tools_to_keep</code> in <code class="language-plaintext highlighter-rouge">Name of your file</code></li>
+    <li>Add the <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code> of the tools to keep, with 1 tool identifier per row</li>
+    <li>Submit your changes as before</li>
+    <li>Wait for the Pull Request to be merged</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="review-all-tools-in-your-table">Review all tools in your table</h2>
+
+<p>Once the required filters have been implemented, you can review the full list of tools to ensure that you have created an interactive table reflecting the Galaxy tool landscape for your community.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-review-all-tools-in-your-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Review all tools in your table</div>
+
+  <ol>
+    <li>Download the <code class="language-plaintext highlighter-rouge">tools.tsv</code> file in <code class="language-plaintext highlighter-rouge">results/&lt;your community&gt;</code></li>
+    <li>Open <code class="language-plaintext highlighter-rouge">tools.tsv</code> with a Spreadsheet Software</li>
+    <li>Review each line corresponding to a tool
+      <ol>
+        <li>Change the value in the <code class="language-plaintext highlighter-rouge">Reviewed</code> column from <code class="language-plaintext highlighter-rouge">False</code> to <code class="language-plaintext highlighter-rouge">True</code></li>
+        <li>Add <code class="language-plaintext highlighter-rouge">True</code> to the <code class="language-plaintext highlighter-rouge">To keep</code> column if the tool should be kept, and <code class="language-plaintext highlighter-rouge">False</code> if not</li>
+      </ol>
+    </li>
+    <li>Extract the list of tools to keep
+      <ol>
+        <li>Create a sheet for the list of tools to keep to
+          <ol>
+            <li>Filter on the <code class="language-plaintext highlighter-rouge">To keep</code> column to keep value <code class="language-plaintext highlighter-rouge">True</code></li>
+            <li>Keep only the <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code> column</li>
+          </ol>
+        </li>
+        <li>Add this list of <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code> to the <code class="language-plaintext highlighter-rouge">tools_to_keep</code> file</li>
+      </ol>
+    </li>
+    <li>Extract the list of tools to exclude
+      <ol>
+        <li>Create a sheet for the list of tools to keep to
+          <ol>
+            <li>Filter on the <code class="language-plaintext highlighter-rouge">To keep</code> column to keep value <code class="language-plaintext highlighter-rouge">False</code></li>
+            <li>Keep only the <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code> column</li>
+          </ol>
+        </li>
+        <li>Add this list of <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code> to the <code class="language-plaintext highlighter-rouge">tools_to_exclude</code> file</li>
+      </ol>
+    </li>
+    <li>Submit the changes</li>
+    <li>Wait for the Pull Request to be merged</li>
+  </ol>
+
+</blockquote>
+
+<p>You should have now an interactive table reflecting the Galaxy tool landscape for your community.</p>
+
+<h1 id="embed-the-interactive-table-in-your-community-page-on-the-hub">Embed the interactive table in your community page on the Hub</h1>
+
+<p>The interactive table you have created can be embedded in your community page on the Hub, e.g. <a href="https://galaxyproject.org/community/sig/microbial/#tools">microGalaxy</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-embed-your-table-as-an-iframe"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Embed your table as an iframe</div>
+
+  <ol>
+    <li>If not already done, fork the repository <a href="https://github.com/galaxyproject/galaxy-hub">Galaxy Hub</a></li>
+    <li>Open or create your community page: <code class="language-plaintext highlighter-rouge">content/community/sig/&lt;your community&gt;/index.md</code></li>
+    <li>
+      <p>Add an iframe to embed the interactive table</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;iframe
+  id="inlineFrameExample"
+  title="Microbial related tools"
+  width="100%"
+  height="600"
+  frameBorder="0"
+  src="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/&lt;your_community&gt;/"&gt;
+&lt;/iframe&gt;
+</code></pre></div>      </div>
+    </li>
+    <li>Replace <code class="language-plaintext highlighter-rouge">&lt;your_community&gt;</code> by the name of your community in <code class="language-plaintext highlighter-rouge">src</code></li>
+    <li>Submit the changes</li>
+    <li>Wait for the Pull Request to be merged</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>You now have an interactive table with Galaxy tools available for your community, and this table is embedded in a community page.</p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>The Galaxy Tool Metadata Extractor extracts all Galaxy tools to create interactive tables</p>
+</li>
+                        
+                        <li><p>The tool tables can be filtered by ToolShed categories and community-reviewed lists of tools to keep or exclude</p>
+</li>
+                        
+                        <li><p>The community interactive Galaxy tools table can be embed into any website</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/dev/faqs/">FAQ page for the Development in Galaxy topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=dev/community-tool-table" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Bérénice Batut,  <b>Creation of an interactive Galaxy tools table for your community (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{dev-community-tool-table,
+author = "Bérénice Batut",
+	title = "Creation of an interactive Galaxy tools table for your community (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/community-tool-table/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5525b1c650791289f66bfc8cb387779722b6d699">5525b1c</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/community-tool-table/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	
+    </body>
+</html>
