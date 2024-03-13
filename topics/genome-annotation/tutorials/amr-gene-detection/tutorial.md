@@ -20,6 +20,7 @@ tags:
 - amr
 - one-health
 - jbrowse1
+- microgalaxy
 subtopic: prokaryote
 level: Introductory
 
