@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition"
+subtopic: metagenomics
 tags:
     - microgalaxy
     - Nanopore data analysis

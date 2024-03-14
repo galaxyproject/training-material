@@ -13,6 +13,7 @@ objectives:
 - Understand where metatranscriptomics fits in 'multi-omic' analysis of microbiomes
 - Visualise a community structure
 level: Introductory
+subtopic: metatranscriptomics
 tags:
 - metatranscriptomics
 - microgalaxy

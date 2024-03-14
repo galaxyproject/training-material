@@ -26,6 +26,7 @@ contributions:
   authorship:
     - npechl
     - fpsom
+subtopic: metagenomics
 tags:
   - binning
   - metagenomics

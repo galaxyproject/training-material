@@ -22,6 +22,7 @@ key_points:
 contributors:
   - willemdek11
   - shiltemann
+subtopic: metabarcoding
 tags:
   - nanopore
   - plasmids
