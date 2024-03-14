@@ -1,20 +1,23 @@
 ---
 layout: tutorial_hands_on
-title: FAIR Galaxy Training Material
+title: Data Registration
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
   GTN: Galaxy Training Network
 zenodo_link: ''
 questions:
-- What are the FAIR training materials?
-- How to test, reproduce and share your content?
-- How to collaborate and don’t duplicate?
+- What is data registration?
+- Why should you upload your data to a data repository?
+- What types of data repositories are there?
+- How to choose the right repository for your dataset?
 objectives:
-- Learn about metadata and findability
-- Learn how to support system and content curation
-time_estimation: "30M"
+- Describe why indexed data repositories are important.
+- Summarise resources enabling you to choose a searchable repository.
+time_estimation: "40M"
 key_points:
-- FAIR principles in Galaxy training development and content creation.
+- A good way to FAIRify your (meta)data is through submission to a public repository, if it indexes and exposes the appropriate level of metadata to serve your specific use case or serve your envisaged users.
+- Use Repositories that  support controlled access to data if necessary.
+- FAIRsharing is a useful resource to locate relevant public repositories.
 tags:
 - fair
 - gtn
@@ -23,24 +26,21 @@ priority: 3
 contributions:
   authorship:
     - kkamieniecka
+    - Khaled196
     - poterlowicz-lab
-  editing:
-    - hexylena
   funding:
       - ELIXIR-UK-DaSH
-subtopic: fair-data
+subtopic: pointers
 
 requirements:
   - type: "internal"
     topic_name: fair
     tutorials:
       - fair-intro
+      - fair-origin
+      - fair-metadata
 ---
 
-
-Encouraging computational reproducibility in research, we will present a variety of data stewardship recommendations that we have found useful in the process of training development. As part of that process, we are exploring the application of the FAIR (Findable, Accessible, Interoperable, Reusable) guidelines to the Galaxy Training Network (GTN) materials, in order to improve their secondary use and adaptation.
-
-This tutorial outlines how to set and use existing resources to make Galaxy training development and content creation FAIR.
 
 > <agenda-title></agenda-title>
 >
@@ -51,49 +51,83 @@ This tutorial outlines how to set and use existing resources to make Galaxy trai
 >
 {: .agenda}
 
-Here, we refer to a set of good practices as described in *"Ten simple rules for making training materials FAIR"* {% cite Garcia2020 %}.
+# Data registration and the FAIR Principles
+Data registration relates to the following 3 FAIR Principles (Table 3.1).  
+We will discuss and signpost these in this Episode.
 
-![Ten simple rules for making training materials FAIR.]({% link topics/fair/images/fair_gtn.png %} "Ten simple rules for making training materials FAIR. The primary guideline is to share; the Findability rules are description, identity, and registration; the latter two, along with access rules, correspond to accessibility; and the first rule is to share; With the exception of the format rule, which stands alone for interoperability, the remaining four criteria all relate to various facets of reusability")
+| The FAIR Guiding Principles |                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| To be Findable:             | F1. **(meta)data are assigned a globally unique and persistent identifier**<br>F2. data are described with rich metadata (defined by R1 below)<br>F3. metadata clearly and explicitly include the identifier of the data it describes<br>F4. **(meta)data are registered or indexed in a searchable resource**                                   |
+| To be Accessible:           | A1. (meta)data are retrievable by their identifier using a standardized communications protocol <br>A1.1 the protocol is open, free, and universally implementable<br>A1.2 the protocol allows for an authentication and authorization procedure, where necessary<br> A2. metadata are accessible, even when the data are no longer available |
+| To be Interoperable:        | I1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation. <br>I2. (meta)data use vocabularies that follow FAIR principles<br>I3. (meta)data include qualified references to other (meta)data                                                                                         |
+| To be Reusable:             | R1. meta(data) are richly described with a plurality of accurate and relevant attributes <br>R1.1. **(meta)data are released with a clear and accessible data usage license**<br>R1.2. (meta)data are associated with detailed provenance<br>R1.3. (meta)data meet domain-relevant community standards                                        
 
-Image credit: Luc Wiegers and Celia van Gelder {% cite wiegers_luc_2019_3593258 %}
+Table 3.1: The 15 FAIR Guiding Principles. Principles relating to data registration in **black**.
 
-## Plan to share your training materials
+# What is data deposition and registration?
 
-The Galaxy Training Network (GTN) provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide. It provides a record of training content development and ensure materials curation via  cross-domain repositories (i.g., [GitHub](https://github.com/galaxyproject/training-material), [Zenodo](https://zenodo.org/)). Keeping your materials in the right places from the beginning will make it possible for you to more effectively and widely distribute your work without any duplication in contribution. Instruction where to start creating a new tutorial can be found at [GTN contributing tutorial]({% link topics/contributing/tutorials/create-new-tutorial/tutorial.md %}).
+Data deposition and registration refer to the process of uploading data to a searchable resource, and providing appropriate metadata to facilitate its discoverability.  For example, a data repository, where data and metadata can be uploaded, may enable it to be discovered, preserved and accessed.  Here we use the general term data repository to describe any online storage location that can host deposited (meta)data.
 
-## Improve findability of your training materials by properly describing them
+In the context of FAIR, data deposition relates to a number of the Guiding Principles. Firstly,  _“(meta)data are registered or indexed [in a searchable resource](## "Indexed in a searchable resource: a resource where (meta)data are organised so that they can be queried based on defined fields.")”_ (FAIR Principle F4).  Searchable (indexed) metadata enables humans and computers to query and discover data of interest, though this depends on what is indexed.  Here, indexing refers to a process that occurs within the architecture of the data repository (local indexing) where metadata are organised so that they can be queried based on a defined field.  It is worth noting that community resources, focused on a particular domain (for example, the human database in [Ensembl](https://www.ensembl.org/Homo_sapiens/Info/Index)) are better indexed for a particular community, rather than generic repositories (for example, [Zenodo](https://zenodo.org/)) which may not index the community specific components, and may focus on higher level metadata.  Indexing by an internet search engine is another example of this.  Google (and other search engines, such as yahoo and yandex) have an agreed vocabulary ([schema.org](https://schema.org/)), within web pages, that are ‘scraped’ and indexed.  While the focus of this vocabulary was originally intended for commercial products, community specific efforts to facilitate discipline-specific indexing are under way (for example, [Bioschemas](https://faircookbook.elixir-europe.org/content/recipes/findability/seo/bioschemas-data-page.html)). 
 
-Describing your training materials with structured metadata is fundamental to making them FAIR resource. Creating metadata boost findability and preserve information and can be updated after publication. GTN  tutorial require several mandatory metadata information such as learning objectives following Bloom’s taxonomy {% cite chevron2014metacognitive %}, prerequisites, time estimate, or questions addressed by the tutorial. Content developers needs to know where to find all of the available metadata to reference it later. [Schema.org](https://schema.org/) is a collaborative project with a mission to create the addition of structured metadata to web pages. It describes data using shared vocabulary. It is in this spirit that the [BioSchemas](https://bioschemas.org/) community initiative was created to extend the Schema.org standard to life-science resources with training content specification. GTN offers schemas command line [tutorial]({% link topics/contributing/tutorials/schemas/tutorial.md %}) where metadata can be added or updated. This reduces the complexity of keywords and set the scene for controlled vocabularies environment. This increases the effectiveness of metadata filtering, which decreases ambiguity and makes it easier to find and retrieve information.
+# Why should I upload my data to a data repository?
 
-## Give your training materials a unique identity
+Data repositories are generally preferred to file storage systems (such as Dropbox) or sharing data on an ad hoc basis, since they often better support FAIR best practice.  Repositories will assign citable, _“globally unique and persistent identifiers”_ (FAIR Principle F1) to data, and in some cases enable a data submitter to apply a data usage licence through association with the resource (FAIR Principle R1.1).  
 
-To support teachers and trainers, the GTN tutorials rely on specific tags and identifiers. Adding persistent identifiers (PIDs) to training materials makes them easy to cite and aids citation counting in research metric systems {% cite mcmurry2017identifiers %}. Providing PIDs ensure that tag/identifier will continue to work even if webpage location changes. Data used for tutorials are required to be stored at [Zenodo](https://zenodo.org/) and associated with [Digital Object Identifiers](https://www.doi.org/) (DOI).
+Although not exclusively, data repositories support the creation of metadata through curation interfaces providing drop-downs and text fields for metadata entry and validation.  Often in the case of a domain or data-specific data repository, such as BioStudies shown in the previous Episode, drop-downs for metadata curation will link community-endorsed vocabularies (FAIR Principle R1.3).
 
-## Register your training materials online
-Sharing and publishing with the GTN training helps minimize the amount of time and effort required for instructors to prepare for and run their training courses and workshops, by providing templates and a complete training infrastructure. Online registry makes your content more discoverable and accessible to wider community. GTN tutorials are automatically registered on [TeSS](https://tess.elixir-europe.org/) (ELIXIR Training e-support system).
+# Types of data repository
 
-## Define access rules for your training materials
-The GTN materials are designed to be flexible in their use, open access and community-driven. It is important to follow the hosting website disclaimers and keep materials metadata in place.
+General public data repositories, such as [Zenodo](https://zenodo.org/), are multidisciplinary and permit registration and upload of open and closed access (meta)data.  Metadata curation is relatively high level and made searchable via indexing.  Relating to data in the Life Sciences, Zenodo is often used to publish and provide citable URLs to supplementary data within articles, usually in instances where a domain repository does not exist.
 
-## Use an interoperable format for your training materials
-GTN Tutorials aim to follow best practices in course design, so that they can be used in different environments. Content of the tutorials and slides are written in [Markdown]({% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %}) and supported by templates. Metadata are stored in YAML and workflows in JSON. Self-contained structure allow others to tune or reuse existing content.
+Institutional repositories work similarly and provide an online archive for hosting, indexing and preserving research output specific to an institution.  Typically these house more than data, providing a repository often for documents and articles.  Institutions will have their own systems supported locally or buy into company solutions. 
 
-## Make your training materials (re)usable for trainers
-To help others determine whether the training materials are relevant and adaptable to their particular situations, metadata published alongside training materials should include context and sufficient description including: contributor details, license, description, learning outcomes, audience, requirements, tags/keywords, duration and last revision date Applying the proper licence and tagging training materials with metadata can make it simpler for others to (re)use and adapt them.
+Discipline-specific repositories cater for communities and datatypes, and typically provide web interfaces to annotate rich metadata at the point when data are submitted.  Examples of these belong to the suite of data repositories at the [European Bioinformatics Institute (EBI)](https://www.ebi.ac.uk/submission/) where rich metadata creation is supported by teams of curators.
 
-GTN provide strong technical support and set of [contributing self learning material]({% link topics/contributing/index.md %}).
 
-## Make your training materials usable for trainees
-Prerequisites and learning outcomes are particularly helpful metadata. To be effective, learning objectives must be written using active verbs that describe the expected trainee behaviours as well as the knowledge, skills, and expertise they will have received. Rich metadata requirements and SMART—Specific (Measurable, Attainable, Relevant, and Time-bound) learning outcomes following Bloom's taxonomy {% cite chevron2014metacognitive %} helps to clarify which trainees will benefit most from the training. Self-learning structure of the GTN materials supported by slides and video walkthroughs/tours adds another layer of usability.
 
-## Make your training materials contribution friendly
-GTN have clear [guidelines]({% link topics/contributing/tutorials/create-new-tutorial/tutorial.md %}) for contribution and involvement. Community supported CONTRIBUTING files and chat offer the chance to exchange information such as contact details, expectations for contributions, and more. All contributors should be listed and thanked in the acknowledgements; how to cite the tutorial and give credit to contributors can be found at the end of each tutorial.
+> <question-title></question-title>
+>
+> An example of a discipline specific repository is [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress) database.  ArrayExpress stores data from high-through functional genomics assays, such as RNAseq, ChIPseq and expression microarrays.
+The data submission interface of ArrayExpress is called [Annotare](https://www.ebi.ac.uk/fg/annotare/login/).  Without creating a login, what help is given to a person looking to submit a dataset for the first time?
+>
+> > <solution-title></solution-title>
+> >
+> > Both a [submission guide](https://www.ebi.ac.uk/fg/annotare/help/index.html) and [YouTube video](https://www.youtube.com/watch?v=ANr2PTVy7JA) is provided.
+> >
+> {: .solution}
+{: .question}
 
-## Keep your training materials up-to-date
-It is crucial to keep your training materials up-to-date and so you are aware of any new features, trends, or improvements in the topic (such as updated tools or databases). Transparent peer-review and curation process in collaborative and open set up ensure materials quality.
 
-# Conclusion
-There are many ways to improve the training content. It is crucial that we work together to make training materials FAIR so that everyone can benefit from them. These simple suggestions are intended to encourage dialogue and cooperation among Galaxy training community and help bring the latest developments to users.
+> <question-title></question-title>
+>
+> Finding more help on how to upload data to specific repositories
+> The [FAIR Cookbook](https://faircookbook.elixir-europe.org/content/home.html) is an online open resource housing specific ‘how to’ guides or recipes.  Use the FAIR Cookbook to find two recipes for “depositing data to Zenodo” and “registering datasets with Wikidata”, respectively.
+>
+> > <solution-title></solution-title>
+> >
+> > Open the **Findability** pulldown on the left hand banner to find recipes for the following:
+[Depositing to generic repositories - Zenodo use case](https://faircookbook.elixir-europe.org/content/recipes/findability/zenodo-deposition.html) and [Registering Datasets in Wikidata](https://faircookbook.elixir-europe.org/content/recipes/findability/registeringDatasets.html).
+> >
+> {: .solution}
+{: .question}
 
-The Galaxy Training Network is an example of a robust, effective Community of Practice.
-For more information please look at this great article {% cite hiltemann2023galaxy %}, the corresponding FAIR guidelines {% cite fair-training-materials %} and follow [short introduction to FAIR data stewardship](http://fellowship.elixiruknode.org/).
+
+> <question-title></question-title>
+>
+> Choosing the right data repository for your data
+> [FAIRsharing](https://fairsharing.org/) helps researchers identify suitable data repositories, standards and policies relating to their data.  Use this resource to identify data repositories for proteomic data.
+>
+> > <solution-title></solution-title>
+> >
+> > Access the search bar for the [FAIRsharing database registry](https://fairsharing.org/search?fairsharingRegistry=Database).  Search for proteomics and select “repository” under “Record Type”.
+> > ![FAIRsharing](../../images/figure3-1-fairsharing.png "A screenshot of FAIRsharing showing the results for a search for all proteomics repositories.")
+> >
+> {: .solution}
+{: .question}
+
+
+# Useful Resources
+- Registries and lists of public repositories: [FAIR Cookbook](https://fairsharing.org/search?page=1&recordType=repository) and [nature](https://www.nature.com/sdata/policies/repositories) journal
+- Publishing your data: [RDMkit](https://rdmkit.elixir-europe.org/data_publication)
+- Using Bioschemas to embed metadata into webpages: [FAIR Cookbook Bioschemas](https://faircookbook.elixir-europe.org/content/recipes/findability/seo/bioschemas-datacatalog.html)

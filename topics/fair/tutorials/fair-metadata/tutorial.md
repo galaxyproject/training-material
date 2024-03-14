@@ -10,33 +10,33 @@ questions:
 - What is good metadata?
 - Using community standards to write (meta)data
 objectives:
-- Define the term ‘metadata’
-- Recall examples of community/domain standards that apply to data and metadata
+- Define the term ‘metadata’.
+- Recall examples of community/domain standards that apply to data and metadata.
 time_estimation: "40M"
 key_points:
-- Metadata is data about data
-- Metadata is used to help you find and interpret data
-- Domain-relevant community standards helps researchers write better, interoperable metadata 
+- Metadata is data about data.
+- Metadata is used to help you find and interpret data.
+- Domain-relevant community standards helps researchers write better, interoperable metadata.
 tags:
 - fair
 - gtn
 - training
-priority: 3
+priority: 2
 contributions:
   authorship:
     - kkamieniecka
-    - poterlowicz-lab
-  editing:
     - Khaled196
+    - poterlowicz-lab
   funding:
       - ELIXIR-UK-DaSH
-subtopic: fair-data
+subtopic: pointers
 
 requirements:
   - type: "internal"
     topic_name: fair
     tutorials:
       - fair-intro
+      - fair-origin
 ---
 
 > <agenda-title></agenda-title>

@@ -21,16 +21,15 @@ tags:
 - fair
 - gtn
 - training
-priority: 3
+priority: 1
 contributions:
   authorship:
     - kkamieniecka
-    - poterlowicz-lab
-  editing:
     - Khaled196
+    - poterlowicz-lab
   funding:
       - ELIXIR-UK-DaSH
-subtopic: fair-data #create a subtopic for it
+subtopic: pointers
 
 requirements:
   - type: "internal"
