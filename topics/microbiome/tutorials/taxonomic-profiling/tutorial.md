@@ -32,6 +32,11 @@ tags:
 - microgalaxy
 redirect_from:
 - /topics/metagenomics/tutorials/taxonomic-profiling/tutorial
+edam_ontology:
+- topic_3174 # Metagenomics
+- topic_3697 # Microbial ecology
+- topic_0637 # Taxonomy
+- topic_0080 # Sequence analysis
 ---
 
 
