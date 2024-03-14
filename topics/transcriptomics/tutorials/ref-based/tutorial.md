@@ -1434,9 +1434,9 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > We recommend that you add all factors you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), other batch effects, etc...
 {: .comment}
 
-If you have only one or two factors with few number of biological replicates, basic setup of **DESeq2** is enough. In the case of complex experimental setup with large number of biological replicates, then tag-based collections are appropriate. Both the approaches give the same results. The tag-based approach requires a few additional steps before running the **DESeq2** tool but it will payoff when working with complex experimental setup.
+If you have only one or two factors with few number of biological replicates, the basic setup of **DESeq2** is enough. In the case of a complex experimental setup with a large number of biological replicates, tag-based collections are appropriate. Both approaches give the same results. The Tag-based approach requires a few additional steps before running the **DESeq2** tool but it will payoff when working with a complex experimental setup.
 
-{% include _includes/cyoa-choices.html option1="Basic" option2="TagBased" default="Basic" %}
+{% include _includes/cyoa-choices.html option1="Basic" option2="Tag-based" default="Basic" %}
 
 <div class="Basic" markdown="1">
 
@@ -1472,7 +1472,7 @@ We can now run **DESeq2**:
 
 </div>
 
-<div class="TagBased" markdown="1">
+<div class="Tag-based" markdown="1">
 
 DESeq2 requires to provide for each factor, counts of samples in each category. We will thus use tags on our collection of counts to easily select all samples belonging to the same category. For more information about alternative ways to set group tags, please see [this tutorial]({% link topics/galaxy-interface/tutorials/group-tags/tutorial.md %}).
 
