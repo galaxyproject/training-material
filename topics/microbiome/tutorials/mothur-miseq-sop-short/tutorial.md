@@ -23,6 +23,11 @@ tags:
   - microgalaxy
 redirect_from:
   - /topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial
+edam_ontology:
+- topic_3697 # Microbial ecology
+- topic_0637 # Taxonomy
+- topic_0080 # Sequence analysis
+- topic_4038 # Metabarcoding
 ---
 
 {% include topics/microbiome/tutorials/mothur-miseq-sop/content.md short=true %}
