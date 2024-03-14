@@ -311,7 +311,7 @@ This tool is made to partition the pixels of the environmental layers according 
 >
 > 2. Check your outputs. You must have three files:
 >
->    - SIH index plot (See example below.)
+>    - Silhouette plot (See example below.)
 >    - Cluster points (Contains the latitude and longitude of the environmental pixel and the associated cluster number. We will use it in the next step of the workflow)
 >    - Cluster info (Contains all the information related to the clusters created, that is, in column: the latitude, the longitude, the corresponding cluster number and for each taxon the prediction value.)
 >
