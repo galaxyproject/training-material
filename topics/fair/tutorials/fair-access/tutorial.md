@@ -27,7 +27,20 @@ priority: 4
 contributions:
   authorship:
     - kkamieniecka
-    - Khaled196
+    - khaled196
+    - nsoranzo
+    - saskia-lawson-tovey
+    - smza
+    - nsjuty
+    - saramorsy
+    - kellsnow
+    - proccaserra
+    - khens
+    - lcooper
+    - asmasonomics
+    - bfranicevic
+    - sitjart
+    - robertmand
     - poterlowicz-lab
   funding:
       - ELIXIR-UK-DaSH
