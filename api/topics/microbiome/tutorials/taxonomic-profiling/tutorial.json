@@ -32,6 +32,7 @@
       "gallantries"
     ]
   },
+  "subtopic": "metagenomics",
   "tags": [
     "metagenomics",
     "taxonomic profiling",
@@ -71,7 +72,7 @@
   "slides": false,
   "mod_date": "2024-03-14 12:36:08 +0000",
   "pub_date": "2023-05-03 14:34:02 +0000",
-  "version": 2,
+  "version": 3,
   "workflows": [
     {
       "workflow": "main-workflow.ga",
@@ -92,8 +93,8 @@
       "name": "Taxonomic Profiling and Visualization of Metagenomic Data",
       "title": "Taxonomic Profiling and Visualization of Metagenomic Data",
       "test_results": null,
-      "modified": "2024-03-14 13:17:18 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nraw-reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmetadata\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Unzip collection\"];\n  0 -->|output| 2;\n  3[\"Kraken2\"];\n  0 -->|output| 3;\n  29d2657c-dc72-4882-8c55-746514dc7779[\"Output\\nkraken_report\"];\n  3 --> 29d2657c-dc72-4882-8c55-746514dc7779;\n  style 29d2657c-dc72-4882-8c55-746514dc7779 stroke:#2c3143,stroke-width:4px;\n  4[\"MetaPhlAn\"];\n  2 -->|forward| 4;\n  2 -->|reverse| 4;\n  eafac914-93d2-4b1b-9929-067f83201b11[\"Output\\nmetaphlan_output\"];\n  4 --> eafac914-93d2-4b1b-9929-067f83201b11;\n  style eafac914-93d2-4b1b-9929-067f83201b11 stroke:#2c3143,stroke-width:4px;\n  5[\"Krakentools: Convert kraken report file\"];\n  3 -->|report_output| 5;\n  bb7273f7-9fc7-426f-a044-fcf100a6190b[\"Output\\nkrakentool_report\"];\n  5 --> bb7273f7-9fc7-426f-a044-fcf100a6190b;\n  style bb7273f7-9fc7-426f-a044-fcf100a6190b stroke:#2c3143,stroke-width:4px;\n  6[\"Kraken-biom\"];\n  3 -->|report_output| 6;\n  1 -->|output| 6;\n  7[\"Pavian\"];\n  3 -->|report_output| 7;\n  8[\"Estimate Abundance at Taxonomic Level\"];\n  3 -->|report_output| 8;\n  9[\"Krona pie chart\"];\n  4 -->|krona_output_file| 9;\n  10[\"Krona pie chart\"];\n  5 -->|output| 10;\n  11[\"Phinch Visualisation\"];\n  6 -->|biomOutput| 11;"
+      "modified": "2024-03-14 13:34:33 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nraw-reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmetadata\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Unzip collection\"];\n  0 -->|output| 2;\n  3[\"Kraken2\"];\n  0 -->|output| 3;\n  9dd71bb5-e57c-4dc5-b86c-d7ede67c0fd7[\"Output\\nkraken_report\"];\n  3 --> 9dd71bb5-e57c-4dc5-b86c-d7ede67c0fd7;\n  style 9dd71bb5-e57c-4dc5-b86c-d7ede67c0fd7 stroke:#2c3143,stroke-width:4px;\n  4[\"MetaPhlAn\"];\n  2 -->|forward| 4;\n  2 -->|reverse| 4;\n  557ccab8-5333-46a7-bcb8-daaa808bb111[\"Output\\nmetaphlan_output\"];\n  4 --> 557ccab8-5333-46a7-bcb8-daaa808bb111;\n  style 557ccab8-5333-46a7-bcb8-daaa808bb111 stroke:#2c3143,stroke-width:4px;\n  5[\"Krakentools: Convert kraken report file\"];\n  3 -->|report_output| 5;\n  a4092958-dd8d-4de1-8b7f-09f8f0d90f55[\"Output\\nkrakentool_report\"];\n  5 --> a4092958-dd8d-4de1-8b7f-09f8f0d90f55;\n  style a4092958-dd8d-4de1-8b7f-09f8f0d90f55 stroke:#2c3143,stroke-width:4px;\n  6[\"Kraken-biom\"];\n  3 -->|report_output| 6;\n  1 -->|output| 6;\n  7[\"Pavian\"];\n  3 -->|report_output| 7;\n  8[\"Estimate Abundance at Taxonomic Level\"];\n  3 -->|report_output| 8;\n  9[\"Krona pie chart\"];\n  4 -->|krona_output_file| 9;\n  10[\"Krona pie chart\"];\n  5 -->|output| 10;\n  11[\"Phinch Visualisation\"];\n  6 -->|biomOutput| 11;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/taxonomic-profiling/tutorial.json",

@@ -20,6 +20,7 @@
     "With its graphical interface, Galaxy makes it easy to use the needed bioinformatics tools",
     "Beer microbiome is not just made of yeast and can be quite complex"
   ],
+  "subtopic": "metagenomics",
   "tags": [
     "nanopore",
     "beer",
@@ -72,7 +73,7 @@
   "slides": false,
   "mod_date": "2024-03-14 12:27:28 +0000",
   "pub_date": "2022-09-29 12:40:13 +0000",
-  "version": 2,
+  "version": 3,
   "workflows": [
     {
       "workflow": "main_workflow.ga",
@@ -103,8 +104,8 @@
       "name": "Identification of the micro-organisms in a beer using Nanopore sequencing",
       "title": "Identification of the micro-organisms in a beer using Nanopore sequencing",
       "test_results": null,
-      "modified": "2024-03-14 13:17:18 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|outfile| 3;\n  4[\"Kraken2\"];\n  3 -->|out1| 4;\n  06586c62-2366-4083-86e6-54a8f1f2ef46[\"Output\\nkraken_report\"];\n  4 --> 06586c62-2366-4083-86e6-54a8f1f2ef46;\n  style 06586c62-2366-4083-86e6-54a8f1f2ef46 stroke:#2c3143,stroke-width:4px;\n  5[\"Filter\"];\n  4 -->|report_output| 5;\n  6[\"Filter\"];\n  4 -->|report_output| 6;\n  7[\"Krakentools: Convert kraken report file\"];\n  4 -->|report_output| 7;\n  4daf36ae-d761-4f05-a623-7f1f0c330efc[\"Output\\nkrakentool_report\"];\n  7 --> 4daf36ae-d761-4f05-a623-7f1f0c330efc;\n  style 4daf36ae-d761-4f05-a623-7f1f0c330efc stroke:#2c3143,stroke-width:4px;\n  8[\"Krona pie chart\"];\n  7 -->|output| 8;"
+      "modified": "2024-03-14 13:34:33 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|outfile| 3;\n  4[\"Kraken2\"];\n  3 -->|out1| 4;\n  79e258aa-bccc-46d3-af81-7ea86b38d146[\"Output\\nkraken_report\"];\n  4 --> 79e258aa-bccc-46d3-af81-7ea86b38d146;\n  style 79e258aa-bccc-46d3-af81-7ea86b38d146 stroke:#2c3143,stroke-width:4px;\n  5[\"Filter\"];\n  4 -->|report_output| 5;\n  6[\"Filter\"];\n  4 -->|report_output| 6;\n  7[\"Krakentools: Convert kraken report file\"];\n  4 -->|report_output| 7;\n  4a8de31a-a26b-4b55-8b57-5db7e15bee32[\"Output\\nkrakentool_report\"];\n  7 --> 4a8de31a-a26b-4b55-8b57-5db7e15bee32;\n  style 4a8de31a-a26b-4b55-8b57-5db7e15bee32 stroke:#2c3143,stroke-width:4px;\n  8[\"Krona pie chart\"];\n  7 -->|output| 8;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/beer-data-analysis/tutorial.json",
