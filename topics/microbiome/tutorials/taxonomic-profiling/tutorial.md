@@ -26,6 +26,7 @@ contributions:
     - paulzierep
    funding:
     - gallantries
+subtopic: metagenomics
 tags:
 - metagenomics
 - taxonomic profiling

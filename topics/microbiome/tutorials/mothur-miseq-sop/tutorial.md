@@ -20,7 +20,10 @@ contributors:
   - shiltemann
   - bebatut
   - tnabtaf
+subtopic: metabarcoding
 tags:
+  - metabarcoding
+  - 16S
   - microgalaxy
 redirect_from:
   - /topics/metagenomics/tutorials/mothur-miseq-sop/tutorial

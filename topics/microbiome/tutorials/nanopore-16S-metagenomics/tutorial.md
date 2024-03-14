@@ -16,7 +16,10 @@ key_points:
 - We preprocessed Nanopore sequences in order to improve their quality
 contributors:
 - gallardoalba
+subtopic: metabarcoding
 tags:
+  - metabarcoding
+  - 16S
   - nanopore
   - microgalaxy
 redirect_from:

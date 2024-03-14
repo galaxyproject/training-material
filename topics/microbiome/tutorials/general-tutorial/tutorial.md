@@ -21,6 +21,7 @@ key_points:
 contributors:
   - shiltemann
   - bebatut
+subtopic: intro
 tags:
   - microgalaxy
 redirect_from:
