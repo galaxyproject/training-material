@@ -34,6 +34,12 @@ contributors:
 - EngyNasr
 redirect_from:
 - /topics/metagenomics/tutorials/metatranscriptomics-short/tutorial
+edam_ontology:
+- topic_3941 # Metatranscriptomics
+- topic_3697 # Microbial ecology
+- topic_0637 # Taxonomy
+- topic_1775 # Function analysis
+- topic_0080 # Sequence analysis
 ---
 
 
