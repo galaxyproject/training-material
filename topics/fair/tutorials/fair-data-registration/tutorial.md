@@ -20,8 +20,8 @@ key_points:
 - FAIRsharing is a useful resource to locate relevant public repositories.
 tags:
 - fair
-- gtn
-- training
+- dmp
+- data stewardship
 priority: 3
 contributions:
   authorship:

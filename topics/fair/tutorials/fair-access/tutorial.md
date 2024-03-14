@@ -21,8 +21,8 @@ key_points:
 - Sensitive data can be subject to restricted access and/or de-identification.
 tags:
 - fair
-- gtn
-- training
+- dmp
+- data stewardship
 priority: 4
 contributions:
   authorship:

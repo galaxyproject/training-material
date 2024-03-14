@@ -19,8 +19,8 @@ key_points:
 - FAIR data is as open as possible, and as closed as necessary
 tags:
 - fair
-- gtn
-- training
+- dmp
+- data stewardship
 priority: 1
 contributions:
   authorship:

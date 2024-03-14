@@ -19,8 +19,8 @@ key_points:
 - PIDs are commonly URLs in the Life Sciences.
 tags:
 - fair
-- gtn
-- training
+- dmp
+- data stewardship
 priority: 5
 contributions:
   authorship:

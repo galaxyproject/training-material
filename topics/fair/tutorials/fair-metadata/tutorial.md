@@ -19,8 +19,8 @@ key_points:
 - Domain-relevant community standards helps researchers write better, interoperable metadata.
 tags:
 - fair
-- gtn
-- training
+- dmp
+- data stewardship
 priority: 2
 contributions:
   authorship:
