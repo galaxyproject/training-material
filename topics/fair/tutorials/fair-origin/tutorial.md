@@ -86,7 +86,7 @@ Table 1.1: The FAIR guiding principles as described in Wilkinson, M., Dumontier,
 
 > <question-title></question-title>
 >
-> Look at the wording of the FAIR principles in [Table 1.1](#table). Which terms are used more than once?  Which terms are you seeing for the first time?
+> Look at the wording of the FAIR principles in **Table 1.1**. Which terms are used more than once?  Which terms are you seeing for the first time?
 >
 > > <solution-title></solution-title>
 > >
@@ -121,7 +121,7 @@ The [Open Data handbook](https://opendatahandbook.org/) defines Open data as **â
 
 # What is meant by FAIRification and FAIRness of data? 
   
-**FAIRification** is the process of making your data FAIR compliant by applying the 15 Guiding Principles shown in [Table 1.1](#table).  The extent to which you apply these principles defines the **FAIRness** of your data.  In other words, FAIRness refers to the extent by which your data is FAIR and implies some implicit means of measuring its compliance.
+**FAIRification** is the process of making your data FAIR compliant by applying the 15 Guiding Principles shown in **Table 1.1**.  The extent to which you apply these principles defines the **FAIRness** of your data.  In other words, FAIRness refers to the extent by which your data is FAIR and implies some implicit means of measuring its compliance.
 
 # FAIRâ€™s origins
 
