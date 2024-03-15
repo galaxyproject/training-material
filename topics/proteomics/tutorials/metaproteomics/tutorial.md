@@ -23,6 +23,11 @@ contributors:
   - subinamehta
 subtopic: multi-omics
 tags: [microgalaxy]
+edam_ontology:
+- topic_0121 # Proteomics
+- topic_3922 # Proteogenomics
+- topic_3050 # Biodiversity
+- topic_0637 # Taxonomy
 ---
 
 In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.
