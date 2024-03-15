@@ -42,7 +42,6 @@ contributions:
   funding:
       - ELIXIR-UK-DaSH
 subtopic: pointers
-
 requirements:
   - type: "internal"
     topic_name: fair
