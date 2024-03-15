@@ -26,21 +26,21 @@ tags:
 priority: 4
 contributions:
   authorship:
+    - robertmand
+    - asmasonomics
+    - saramorsy
+    - proccaserra
+    - sitjart
+    - bfranicevic
     - kkamieniecka
-    - khaled196
     - nsoranzo
     - saskia-lawson-tovey
     - smza
     - nsjuty
-    - saramorsy
     - kellsnow
-    - proccaserra
     - khens
     - lcooper
-    - asmasonomics
-    - bfranicevic
-    - sitjart
-    - robertmand
+    - khaled196
     - poterlowicz-lab
   funding:
       - ELIXIR-UK-DaSH

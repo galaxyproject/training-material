@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: FAIR and its origins
+title: FAIR and its Origins
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
   GTN: Galaxy Training Network
@@ -9,14 +9,14 @@ questions:
 - What is FAIR and the FAIR Guiding Principles?
 - Where does FAIR come from?
 objectives:
-- Identify the FAIR principles and their origin
-- Explain the difference between FAIR and open data
-- Contextualise the main principles of FAIR around the common characteristics of identifiers, access, metadata and registration
+- Identify the FAIR principles and their origin.
+- Explain the difference between FAIR and open data.
+- Contextualise the main principles of FAIR around the common characteristics of identifiers, access, metadata and registration.
 time_estimation: "40M"
 key_points:
-- FAIR stands for Findable, Accessible, Interoperable and Reusable
-- Metadata, Identifiers, Registration and Access are 4 key components in the process of FAIRification
-- FAIR data is as open as possible, and as closed as necessary
+- FAIR stands for Findable, Accessible, Interoperable and Reusable.
+- Metadata, Identifiers, Registration and Access are 4 key components in the process of FAIRification.
+- FAIR data is as open as possible, and as closed as necessary.
 tags:
 - fair
 - dmp
@@ -24,21 +24,21 @@ tags:
 priority: 1
 contributions:
   authorship:
+    - robertmand
+    - asmasonomics
+    - saramorsy
+    - proccaserra
+    - sitjart
+    - bfranicevic
     - kkamieniecka
-    - khaled196
     - nsoranzo
     - saskia-lawson-tovey
     - smza
     - nsjuty
-    - saramorsy
     - kellsnow
-    - proccaserra
     - khens
     - lcooper
-    - asmasonomics
-    - bfranicevic
-    - sitjart
-    - robertmand
+    - khaled196
     - poterlowicz-lab
   funding:
       - ELIXIR-UK-DaSH
