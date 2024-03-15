@@ -27,19 +27,19 @@ priority: 4
 contributions:
   authorship:
     - robertmand
-    - asmasonomics
-    - saramorsy
-    - proccaserra
-    - sitjart
-    - bfranicevic
-    - kkamieniecka
-    - nsoranzo
-    - saskia-lawson-tovey
-    - smza
     - nsjuty
+    - smza
+    - nsoranzo
+    - saramorsy
     - kellsnow
     - khens
+    - proccaserra
     - lcooper
+    - sitjart
+    - asmasonomics
+    - bfranicevic
+    - saskia-lawson-tovey
+    - kkamieniecka
     - khaled196
     - poterlowicz-lab
   funding:
