@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 title: Access
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
-  GTN: Galaxy Training Network
 zenodo_link: ''
 questions:
 - What is data access in the context of FAIR

@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 title: FAIR and its Origins
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
-  GTN: Galaxy Training Network
 zenodo_link: ''
 questions:
 - What is FAIR and the FAIR Guiding Principles?
