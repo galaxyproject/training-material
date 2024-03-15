@@ -72,7 +72,7 @@ FAIR’s primary goal is to maximise data reuse by researchers.  The FAIR princi
 
 **Reusable** means that metadata is rich, enabling appropriate reuse.  Commonly FAIR will encourage the use of community standards for data curation.
 
-These 4 major components form headings for the 15 FAIR Guiding Principles shown in Table 1.1 <a name="table"></a> 
+These 4 major components form headings for the 15 FAIR Guiding Principles shown in **Table 1.1**
 
 | The FAIR Guiding Principles |                                                                                                                                                                                                                                                                                                                                       |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
