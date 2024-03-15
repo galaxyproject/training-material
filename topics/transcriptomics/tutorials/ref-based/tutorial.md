@@ -934,9 +934,8 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
 
 ## Counting reads per genes
 
-In order to count the number of reads per gene, we offer a parallel tutorial for the 2 methods (STAR and featureCounts) which give very similar results.
 
-{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
+{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" text="In order to count the number of reads per gene, we offer a parallel tutorial for the 2 methods (STAR and featureCounts) which give very similar results. Which methods would you prefer to use?" disambiguation="tool"%}
 
 <div class="featureCounts" markdown="1">
 
@@ -1436,7 +1435,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
 If you have only one or two factors with few number of biological replicates, the basic setup of **DESeq2** is enough. In the case of a complex experimental setup with a large number of biological replicates, tag-based collections are appropriate. Both approaches give the same results. The Tag-based approach requires a few additional steps before running the **DESeq2** tool but it will payoff when working with a complex experimental setup.
 
-{% include _includes/cyoa-choices.html option1="Basic" option2="Tag-based" default="Basic" %}
+{% include _includes/cyoa-choices.html option1="Basic" option2="Tag-based" default="Basic" text="Which approach would you prefer to use?" disambiguation="deseq"%}
 
 <div class="Basic" markdown="1">
 
