@@ -1458,10 +1458,10 @@ We can now run **DESeq2**:
 >               - In *"Factor level"*:
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
->                        - In *"Count file(s)"*: `Select all the untreated count files (GSM461177, GSM461178, GSM461180, GSM461181)`
+>                        - In *"Count file(s)"*: `Select all the paired-end count files (GSM461177, GSM461178, GSM461180, GSM461181)`
 >                    - {% icon param-repeat %} *"Insert Factor level"*
 >                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
->                        - In *"Count file(s)"*: `Select all the untreated count files (GSM461176, GSM461179, GSM461182)`
+>                        - In *"Count file(s)"*: `Select all the single-end count files (GSM461176, GSM461179, GSM461182)`
 >    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
 >    - In *"Output options"*:
