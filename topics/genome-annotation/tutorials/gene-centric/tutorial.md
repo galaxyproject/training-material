@@ -37,7 +37,6 @@ abbreviations:
 priority: 2
 edam_ontology:
 - topic_0622 # Genomics
-- topic_3301 # Microbiology
 - topic_0623 # Gene and protein families
 - topic_0080 # Sequence analysis
 - topic_0084 # Phylogeny
