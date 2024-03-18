@@ -422,7 +422,7 @@ Today you will be aligning sequences using a modern multiple alignment program c
 
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
 >
-> 1. In Galaxy, search for and select the {% tool [MAFFT](https://toolshed.g2.bx.psu.edu/view/rnateam/mafft/6f28e90db932)%} from the tool finder on the left.
+> 1. In Galaxy, search for and select the {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy1)%} from the tool finder on the left.
 > 2. In the MAFFT tool, the **Sequences to align** field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
 > 3. In the **Data type** field select "_Auto detection_".
 > 4. Leave the **MAFFT flavour** as "_fftns_". This is a good default.
@@ -475,7 +475,7 @@ The FastTree2 program that we are using does this. First it creates a "rough" NJ
 
 > <hands-on-title>Build a Neighbour-Joining Tree with FastTree</hands-on-title>
 >
-> 1. Search for the {% tool [FastTree](https://toolshed.g2.bx.psu.edu/view/iuc/fasttree/e005e659ae21) %} in the tool finder on the left.
+> 1. Search for the {% tool [FastTree](toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1) %} in the tool finder on the left.
 > 2. Load your MAFFT output file as the input data for FastTree.
 > 3. Under **protein or nucleotide alignment** select "_Nucleotide_" as it is DNA data
 > 3. For **Nucleotide evolution model** select _Jukes-Cantor + CAT_
@@ -711,7 +711,7 @@ While this is running you might use your time to read the [Models of sequence ev
 
 > <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
-> 1. Find the {% tool [IQTree](https://toolshed.g2.bx.psu.edu/view/iuc/iqtree/9b892d7f82cc) %} program in the tool finder.
+> 1. Find the {% tool [IQTree](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2) %} program in the tool finder.
 > 2. Load your aligned sequence data, i.e., the alignment from MAFFT.
 > 3. Leave the selection of data type as DNA.
 <!-- > 4. Ignore the Time Tree Reconstruction settings and Likelihood Mapping analysis settings. -->
