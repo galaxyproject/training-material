@@ -128,7 +128,7 @@ Help with rich metadata curation is often supported by public data repositories,
 The figure below shows a screenshot of a dataset hosted by the [BioStudies](https://www.ebi.ac.uk/biostudies/) (Figure 2.2).  BioStudies is a public database holding descriptions for biological studies and their (meta)data, and is often used by researchers to provide **primary identifiers** to supplementary information described in publications.
 
 
-![BioStudies](../../images/figure2-2_rnaseq-database.png "A screenshot of a plant RNAseq dataset housed in BioStudies showing rich metadata {% cite RubénSchlaen %}")
+![A screenshot of a plant RNAseq dataset housed in BioStudies showing rich metadata like accession, study type, publication, etc.](../../images/figure2-2_rnaseq-database.png "A FAIR dataset in a public repository {% cite RubénSchlaen %}")
 
 > <question-title></question-title>
 >
