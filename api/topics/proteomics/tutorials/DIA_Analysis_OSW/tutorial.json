@@ -99,7 +99,7 @@
       "name": "DIA_Analysis_OSW",
       "title": "DIA_Analysis_OSW",
       "test_results": null,
-      "modified": "2024-03-18 08:59:14 +0000",
+      "modified": "2024-03-18 09:07:03 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput exp. design annotation\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\niRTassays.tsv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nSpectral library\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Collection\\n”Input Dataset Collection”\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"msconvert\"];\n  3 -->|output| 4;\n  5[\"OpenSwathWorkflow\"];\n  4 -->|output| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  6[\"PyProphet merge\"];\n  5 -->|out_osw| 6;\n  2 -->|output| 6;\n  7[\"PyProphet score\"];\n  6 -->|output| 7;\n  8[\"PyProphet peptide\"];\n  7 -->|output| 8;\n  9[\"PyProphet peptide\"];\n  8 -->|output| 9;\n  10[\"PyProphet protein\"];\n  9 -->|output| 10;\n  11[\"PyProphet protein\"];\n  10 -->|output| 11;\n  12[\"PyProphet export\"];\n  0 -->|output| 12;\n  11 -->|output| 12;\n  13[\"Ecoli protein expression matrix\"];\n  12 -->|protein_signal| 13;"
     }
   ],
