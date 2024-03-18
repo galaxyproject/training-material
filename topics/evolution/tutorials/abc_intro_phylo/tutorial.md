@@ -328,7 +328,7 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 >
 > 2. Import the file anolis-raw.fst from [Zenodo](https://zenodo.org/records/10415242/files/anolis-raw.fst) or from the shared data library.
 >    ```
->    anolis-raw.fst
+>    https://zenodo.org/records/10415242/files/anolis-raw.fst
 >    ```
 >    You may need to refresh your history to show the data.
 >    If the paste/fetch link does not work for you, you can download it to your own computer and then upload it using the "Upload" button at the top of the left panel in Galaxy.
@@ -373,7 +373,7 @@ ACTTGGCGTAGCCGGAGGCC
 > 1. Click on the title of your file to see the row of small icons for saving, linking etc: 
 > ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](./images/LittleJobIcons.png) 
 >
-> 2. Click on the **visualise icon** that looks like a bar chart and then select the **Multiple Sequence Alignment tool**.
+> 2. Click on the **visualise icon** {% icon galaxy-visualise %} and then select the **Multiple Sequence Alignment tool**.
 > You should see something like this:
 >
 > ![Screenshot of sequence visualisation output from Galaxy. Fifteen Anolis DNA sequences are arranged in rows. The nucleotides are colour coded and arranged in columns: A(blue), T (green), C (pink), G (orange). The top half of the image shows approximately 50 bases of each sequence. The lower half of the image shows a zoomed out heatmap-like image of a larger portion of the sequences.](./images/UnalignedAnolis.png){:width="600"}
@@ -442,7 +442,7 @@ Here is a visualisation of the resulting alignment. Note that the colours are no
 >
 > 1. Click on the title of the completed MAFFT job to show the row of small icons for saving, linking etc. 
 > ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark](./images/LittleJobIcons.png){:align="center"} 
-> 2. Click the "Visualisation" icon that looks like a little bar chart.
+> 2. Click on the **visualise icon** {% icon galaxy-visualise %}
 > 3. You will be presented with a couple of options. Select "**Multiple Sequence Alignment**".
 > *Your alignment is displayed!*
 > The colour scheme is horrible to start with because it's not automatically detecting the data as DNA sequences.  Click on the "Color scheme" button and select "**Clustal2**" for a nicer picture.
@@ -539,14 +539,14 @@ That is why methods like FastTree are employed to find a tree with the best poss
 > 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc. 
 > ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](./images/LittleJobIcons.png)
 >
-> 2. Click the "Visualisation" icon that looks like a little bar chart.
-> 3. You will be presented with a couple of options. Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
+> 2. Click on the **Visualisation icon** {% icon galaxy-visualise %}
+> 3. You will be presented with a couple of options. Select **"Phylogenetic Tree Visualisation"** -- this seems to be the best one.
 >
 >    *Your tree is displayed!*
 >
 >    <!-- [SelectTreeVisualisation](./images/PhylogeneticTreeVisualisationOptions.png){:width="400"} -->
 > 
-> 5. Find the angle brackets at the top right of the central panel. Click on these to reveal the settings and display options. Try out "Circular" and "Radial".
+> 5. Open the settings panel via the **Visualisation Settings** {% icon galaxy-vis-config %} at the top right of the central panel. Click on these to reveal the settings and display options. Try out "Circular" and "Radial".
 >   Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves) and that these branches are much shorter near the centre of the tree.
 > Note: **Short branches are much harder to get right.**
 > 6. (If you wish you may of course re-run FastTree and allow it to seek a Maximum Likelihood tree -- maybe once you've learned more about Maximum Likelihood.)
