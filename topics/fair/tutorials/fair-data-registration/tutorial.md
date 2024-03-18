@@ -132,7 +132,7 @@ The data submission interface of ArrayExpress is called [Annotare](https://www.e
 > > <solution-title></solution-title>
 > >
 > > Access the search bar for the [FAIRsharing database registry](https://fairsharing.org/search?fairsharingRegistry=Database).  Search for proteomics and select “repository” under “Record Type”.
-> > ![FAIRsharing](../../images/figure3-1-fairsharing.png "A screenshot of FAIRsharing showing the results for a search for all proteomics repositories.")
+> > ![A screenshot of FAIRsharing showing the results for a search for all proteomics repositories.](../../images/figure3-1-fairsharing.png "FAIRsharing allows you to search for specific record types that are relevant for your area.")
 > >
 > {: .solution}
 {: .question}
