@@ -18,9 +18,9 @@ The GTN wants you to be able to rely on our URLs once you've added them to a pos
 For a long time we relied on contributors ensuring that when files are merged, we add appropriate redirects to each moved file, however this isn't a very reliable system.
 We'd recently also introduced [Persistent URLs (PURLs) to our lessons as well]({{ site.baseurl }}/news/2023/04/19/shortlinks.html) but that only helps our users going forward, it doesn't ensure we are meeting our earlier commitments.
 
-So now we've added a new test to each GTN merge that checks URLs from the last 2 years to ensure that they are *all* still working.
+So now we've added a new test to each GTN merge that checks URLs from the last 3 years to ensure that they are *all* still working.
 If they aren't, the merge will fail and the contributor will need to fix the URLs before the changes can be accepted.
 
 We'll be expanding how far back we check URLs in the future, but for now, this will help us ensure that our URLs are completely persistent!
 
-By implementing this we discovered 49 files that had been moved without proper redirections, and we've fixed them all.
+By implementing this we discovered only 50 pages (out of ~5.3k GTN pages) that had been moved without proper redirections, and we've fixed them all!
