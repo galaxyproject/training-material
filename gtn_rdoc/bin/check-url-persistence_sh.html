@@ -117,7 +117,13 @@
 
 <main role="main" aria-label="Page bin/check-url-persistence.sh">
 
-<p>#!/bin/bash if [[ ! -f /tmp/2022.txt ]]; then</p>
+<p>#!/bin/bash if [[ ! -f /tmp/2021.txt ]]; then</p>
+
+<pre>curl --silent https://training.galaxyproject.org/archive/2021-02-01/sitemap.xml | sed &#39;s|&lt;url&gt;|\n|g&#39; | grep &#39;&lt;loc&gt;[^&lt;]*&lt;/loc&gt;&#39; -o | sed &#39;s/&lt;loc&gt;//;s/&lt;\/loc&gt;//&#39; | sed &#39;s|archive/2021-02-01|training-material|g&#39;  &gt; /tmp/2021.txt</pre>
+
+<p>fi</p>
+
+<p>if [[ ! -f /tmp/2022.txt ]]; then</p>
 
 <pre>curl --silent https://training.galaxyproject.org/archive/2022-01-01/sitemap.xml | sed &#39;s|&lt;url&gt;|\n|g&#39; | grep &#39;&lt;loc&gt;[^&lt;]*&lt;/loc&gt;&#39; -o | sed &#39;s/&lt;loc&gt;//;s/&lt;\/loc&gt;//&#39; | sed &#39;s|archive/2022-01-01|training-material|g&#39;  &gt; /tmp/2022.txt</pre>
 
@@ -129,9 +135,17 @@
 
 <p>fi</p>
 
-<p># No guarantees of API or data-file persistence # 1fe4d7d92e5ea5a5794cbe741eadb96a74511261 cat /tmp/202*.txt | grep -v &#39;/api/&#39; | grep -v &#39;/by-tool/&#39;  | grep -v &#39;/hall-of-fame/&#39; | \</p>
+<p>if [[ ! -f /tmp/2099.txt ]]; then</p>
 
-<pre>grep -v &#39;/badges/&#39; | \
+<pre>curl --silent https://training.galaxyproject.org/training-material/sitemap.xml | sed &#39;s|&lt;url&gt;|\n|g&#39; | grep &#39;&lt;loc&gt;[^&lt;]*&lt;/loc&gt;&#39; -o | sed &#39;s/&lt;loc&gt;//;s/&lt;\/loc&gt;//&#39; &gt; /tmp/2099.txt</pre>
+
+<p>fi</p>
+
+<p># No guarantees of API or data-file persistence # 1fe4d7d92e5ea5a5794cbe741eadb96a74511261 cat /tmp/20*.txt | sort -u | \</p>
+
+<pre>grep -v &#39;/api/&#39; | grep -v &#39;/by-tool/&#39;  | grep -v &#39;/hall-of-fame/&#39; | \
+grep -v &#39;/badges/&#39; | \
+grep --extended-regexp -v &#39;krona_?[a-z]*.html&#39; | \
 grep -v &#39;/transcriptomics/tutorials/ref-based/faqs/rnaseq_data.html&#39; | \
 grep -v &#39;/topics/data-management/&#39; | \
 grep -v &#39;training-material/tags/&#39; | grep -v &#39;data-library&#39;| \
