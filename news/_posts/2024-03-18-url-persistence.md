@@ -22,3 +22,5 @@ So now we've added a new test to each GTN merge that checks URLs from the last 2
 If they aren't, the merge will fail and the contributor will need to fix the URLs before the changes can be accepted.
 
 We'll be expanding how far back we check URLs in the future, but for now, this will help us ensure that our URLs are completely persistent!
+
+By implementing this we discovered 49 files that had been moved without proper redirections, and we've fixed them all.
