@@ -61,7 +61,7 @@ This tutorial is adapted from a 2019 workshop run by the Australian BioCommons a
 <!-- Original notes on scope. Now incorporated into the agenda box
 
 ## Scope:
-**We will cover:**
+We will cover:
 
 * What a phylogeny is
 * Motivation: 
@@ -87,7 +87,7 @@ This tutorial is adapted from a 2019 workshop run by the Australian BioCommons a
 * A little on what can possibly (probably) go wrong?
 * An overview of a workflow
 
-**We will not cover:**
+We will not cover:
 
 * Workflows from read data to sequences
 * How to get an alignment (much: will use automated methods)
@@ -246,7 +246,7 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 
 The table below gives you an idea of the scale we are dealing with.
 
-**The Number of Unrooted Binary Trees**
+*The Number of Unrooted Binary Trees*
 
 > | *n*          | # trees    | notes       |
 > |--------------|------------|-------------|
@@ -554,8 +554,9 @@ That is why methods like FastTree are employed to find a tree with the best poss
 The other way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching the entire set of possible trees for the tree (or trees) that optimises this score.
 Note that such scores are "surrogates for truth" in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case. In many analyses we therefore use *multiple* methods, in the hope that they will give us the same answer. Minimum Evolution (ME), Maximum Parsimony (MP), and Maximum Likelihood (ML) are common such score functions.
 
-**Note: If your conclusion changes based on your reasonable choice of analytical method, then perhaps your data are not adequate.**
-
+> <comment-title>Data vs Method</comment-title>
+> If your conclusion changes based on your reasonable choice of analytical method, then perhaps your data are not adequate.
+{: .comment}
 
 
 ## Minimum Evolution (ME)
