@@ -1485,7 +1485,7 @@
           "version": "0.1"
         }
       },
-      "modified": "2024-03-18 01:33:16 +0000",
+      "modified": "2024-03-18 08:59:14 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  1f4fad7b-11e7-4ec5-b73d-835080c47e70[\"Output\\nreads_2_fastqc\"];\n  2 --> 1f4fad7b-11e7-4ec5-b73d-835080c47e70;\n  style 1f4fad7b-11e7-4ec5-b73d-835080c47e70 stroke:#2c3143,stroke-width:4px;\n  3[\"Cutadapt\"];\n  1 -->|output| 3;\n  12a1bc96-cfdd-4ed8-b062-433833e09aee[\"Output\\nreads_1_cutadapt\"];\n  3 --> 12a1bc96-cfdd-4ed8-b062-433833e09aee;\n  style 12a1bc96-cfdd-4ed8-b062-433833e09aee stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  12e19f0b-102a-4470-9bc8-e362bb4e2c91[\"Output\\nreads_1_fastqc\"];\n  4 --> 12e19f0b-102a-4470-9bc8-e362bb4e2c91;\n  style 12e19f0b-102a-4470-9bc8-e362bb4e2c91 stroke:#2c3143,stroke-width:4px;\n  5[\"Cutadapt\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  b7c138cc-10d0-4bd0-b960-a3b5e60f29cd[\"Output\\nreads_cutadapt\"];\n  5 --> b7c138cc-10d0-4bd0-b960-a3b5e60f29cd;\n  style b7c138cc-10d0-4bd0-b960-a3b5e60f29cd stroke:#2c3143,stroke-width:4px;\n  6[\"MultiQC\"];\n  4 -->|text_file| 6;\n  2 -->|text_file| 6;\n  fa7f541d-b9be-4283-afa1-8398d89f345e[\"Output\\nmultiqc\"];\n  6 --> fa7f541d-b9be-4283-afa1-8398d89f345e;\n  style fa7f541d-b9be-4283-afa1-8398d89f345e stroke:#2c3143,stroke-width:4px;"
     }
   ],
@@ -1570,7 +1570,7 @@
       {
         "name": "pycoqc",
         "owner": "iuc",
-        "revisions": "dc1500f42073",
+        "revisions": "fae03f3d4bf7",
         "tool_panel_section_label": "Nanopore",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
@@ -1590,7 +1590,7 @@
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastqc\n  owner: devteam\n  revisions: e7b2202befea\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 3d0c7bdf12f5\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqe\n  owner: iuc\n  revisions: 89d299153577\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: 75c93c70d094\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nanoplot\n  owner: iuc\n  revisions: 0f1c34698076\n  tool_panel_section_label: Nanopore\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pycoqc\n  owner: iuc\n  revisions: dc1500f42073\n  tool_panel_section_label: Nanopore\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 660cffd8d92a\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 44e2cc14f75b\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastqc\n  owner: devteam\n  revisions: e7b2202befea\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 3d0c7bdf12f5\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqe\n  owner: iuc\n  revisions: 89d299153577\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: 75c93c70d094\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nanoplot\n  owner: iuc\n  revisions: 0f1c34698076\n  tool_panel_section_label: Nanopore\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pycoqc\n  owner: iuc\n  revisions: fae03f3d4bf7\n  tool_panel_section_label: Nanopore\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 660cffd8d92a\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 44e2cc14f75b\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
