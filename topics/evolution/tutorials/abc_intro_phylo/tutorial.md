@@ -426,12 +426,12 @@ Today you will be aligning sequences using a modern multiple alignment program c
 
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
 >
-> 1. In Galaxy, search for and select the {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy1)%} from the tool finder on the left.
-> 2. In the MAFFT tool, the **Sequences to align** field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
-> 3. In the **Data type** field select "_Auto detection_".
-> 4. Leave the **MAFFT flavour** as "_fftns_". This is a good default.
-> 5. In the **Matrix selection** select "_No matrix_".
-> 6. Click "**Run tool**".
+> 1. In Galaxy, search for and select the {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy1)%} from the tool finder on the left, and run it with the following parameters:
+>    - {% icon param-file %} In the MAFFT tool, the **Sequences to align** field should already be filled with your unaligned data. If it isn't, select it using the drop-down menu.
+>    - In the **Data type** field select "_Auto detection_".
+>    - Leave the **MAFFT flavour** as "_fftns_". This is a good default.
+>    - In the **Matrix selection** select "_No matrix_".
+> 2. Click "**Run tool**".
 {: .hands_on}
 
 Here is a visualisation of the resulting alignment. Note that the colours are now vertically aligned:
@@ -479,14 +479,17 @@ The FastTree2 program that we are using does this. First it creates a "rough" NJ
 
 > <hands-on-title>Build a Neighbour-Joining Tree with FastTree</hands-on-title>
 >
-> 1. Search for the {% tool [FastTree](toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1) %} in the tool finder on the left.
-> 2. Load your MAFFT output file as the input data for FastTree.
-> 3. Under **protein or nucleotide alignment** select "_Nucleotide_" as it is DNA data
-> 3. For **Nucleotide evolution model** select _Jukes-Cantor + CAT_
-> 3. Select "**Show Advanced Options**"
-> 4. Select "_Use Constant Rates_"
-> 4. Turn **off** the Maximum Likelihood: we are not up to that bit yet.
-> 5. Click on "Run tool".
+> 1. Search for the {% tool [FastTree](toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1) %} in the tool finder on the left, and run it with the following parameters:
+>
+>    - *"Aligned sequences file (FASTA or Phylip format)"*: `fasta`
+>        - {% icon param-file %} *"FASTA file"*: `outputAlignment` (output of **MAFFT** {% icon tool %})
+>    - *"Protein or nucleotide alignment"*: `Nucleotide`
+>        - *"Nucleotide evolution model"*: `Jukes-Cantor + CAT`
+>    - *"Show advanced options"*: `Yes`
+>        - *"Use constant rates?"*: `Use constant rates.`
+>        - *"Turn off maximum-likelihood."*: `Yes`
+>
+> 2. Click on "Run tool".
 >
 {: .hands_on}
 
@@ -716,13 +719,19 @@ While this is running you might use your time to read the [Models of sequence ev
 
 > <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
-> 1. Find the {% tool [IQTree](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2) %} program in the tool finder.
-> 2. Load your aligned sequence data, i.e., the alignment from MAFFT.
-> 3. Leave the selection of data type as DNA.
+> 1. Find the {% tool [IQTree](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2) %} program in the tool finder, and run it with the following parameters:
+>
+>    - In *"General options"*:
+>        - {% icon param-file %} *"Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format."*: your aligned sequence data (output of **MAFFT** {% icon tool %})
+>        - *"Specify sequence type as either of DNA, AA, BIN, MORPH, CODON or NT2AA for DNA, amino-acid, binary, morphological, codon or DNA-to-AA-translated sequences"*: `DNA`
+>    - In *"Modelling Parameters"*:
+>        - In *"Rate heterogeneity"*:
+>            - *"Write maximum likelihood site ratios to .mlrate file"*: Yes
+>    - In *"Bootstrap Parameters"*:
+>        - In *"Ultrafast bootstrap parameters"*:
+>            - *"Specify number of bootstrap replicates (>=1000)."*: `1000`
+>
 >    <!-- > 4. Ignore the Time Tree Reconstruction settings and Likelihood Mapping analysis settings. -->
-> 4. Under the **Modelling Parameters**, click **Automatic model selection**_ and then under **Use Custom Model** select "_(none))_" in the drop-down menu, and click the **Automatic model selection** menu title again to close it.
-> 5. Open the **Rate heterogeneity** menu and set the last option, **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
-> 6. Close the **Modelling Parameters** menu and open the **Bootstrap Parameters** menu, then *Ultrafast bootstrap parameters*. Enter 1000 in the field "Specify number of bootstrap replicates (>=1000)"
 >    <!-- > 8. Open the *Nonparametric bootstrapping* Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do). -->
 >    <!-- > 9. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates. -->
 > 7. Click "Run tool".
