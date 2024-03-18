@@ -251,20 +251,20 @@ The table below gives you an idea of the scale we are dealing with.
 
 *The Number of Unrooted Binary Trees*
 
-> | *n*          | # trees    | notes       |
-> |--------------|------------|-------------|
-> | 3    | $$3$$       | trivial to check |
-> | 4    | $$15$$       | enumerable by hand |
-> | 5    | $$105$$       | enumerable by hand on a rainy day |
-> | 6    | $$945$$       | enumerable by hand during lockdown |
-> | 7    | $$10395$$       | easily searched by computer |
-> | 8    | $$135135$$       | a bit more than the number of hairs on your head |
-> | 9    | $$2027025$$       | population of Sydney living west of Paramatta |
-> | 10   | $$34459425$$                      | comparable with the number of possible tickets in a typical lottery |
-> | 20   | $$\approx 8.2\times 10^{21}$$       | getting slow for computers even with branch-and-bound |
-> | 48   | $$\approx 3.21\times 10^{70}$$       | number of particles in the universe-ish |
-> | 136  | $$\approx 2.11\times 10^{267}$$       | number of trees to choose from in the first "Out of Africa" data set |
-> |---|---|---|
+| *n*          | # trees    | notes       |
+|--------------|------------|-------------|
+| 3    | $$3$$       | trivial to check |
+| 4    | $$15$$       | enumerable by hand |
+| 5    | $$105$$       | enumerable by hand on a rainy day |
+| 6    | $$945$$       | enumerable by hand during lockdown |
+| 7    | $$10395$$       | easily searched by computer |
+| 8    | $$135135$$       | a bit more than the number of hairs on your head |
+| 9    | $$2027025$$       | population of Sydney living west of Paramatta |
+| 10   | $$34459425$$                      | comparable with the number of possible tickets in a typical lottery |
+| 20   | $$\approx 8.2\times 10^{21}$$       | getting slow for computers even with branch-and-bound |
+| 48   | $$\approx 3.21\times 10^{70}$$       | number of particles in the universe-ish |
+| 136  | $$\approx 2.11\times 10^{267}$$       | number of trees to choose from in the first "Out of Africa" data set |
+|---|---|---|
 
 
 
@@ -336,8 +336,9 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > 
 {: .hands_on} 
-> You can click on the 'eye' icon {% icon galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is the raw FASTA file, with the symbols A, C, G, T representing nucleotides. You can see that the sequences are different lengths.
->
+
+You can click on the 'eye' icon {% icon galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is the raw FASTA file, with the symbols A, C, G, T representing nucleotides. You can see that the sequences are different lengths.
+
 **FASTA** or **Fasta** format (pronounced to rhyme with pasta) format is is commonly used as input to phylogenetic inference programs and has a very simple structure, as follows:
 
 1. Each sequence has a name, which appears on its own line after a '>' sign 
@@ -718,12 +719,12 @@ While this is running you might use your time to read the [Models of sequence ev
 > 1. Find the {% tool [IQTree](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2) %} program in the tool finder.
 > 2. Load your aligned sequence data, i.e., the alignment from MAFFT.
 > 3. Leave the selection of data type as DNA.
-<!-- > 4. Ignore the Time Tree Reconstruction settings and Likelihood Mapping analysis settings. -->
+>    <!-- > 4. Ignore the Time Tree Reconstruction settings and Likelihood Mapping analysis settings. -->
 > 4. Under the **Modelling Parameters**, click **Automatic model selection**_ and then under **Use Custom Model** select "_(none))_" in the drop-down menu, and click the **Automatic model selection** menu title again to close it.
 > 5. Open the **Rate heterogeneity** menu and set the last option, **"Write maximum likelihood site ratios to .mlrate file"** to "Yes".
 > 6. Close the **Modelling Parameters** menu and open the **Bootstrap Parameters** menu, then *Ultrafast bootstrap parameters*. Enter 1000 in the field "Specify number of bootstrap replicates (>=1000)"
-<!-- > 8. Open the *Nonparametric bootstrapping* Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do). -->
-<!-- > 9. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates. -->
+>    <!-- > 8. Open the *Nonparametric bootstrapping* Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do). -->
+>    <!-- > 9. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates. -->
 > 7. Click "Run tool".
 > 8. Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree.
 > ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values.](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")
@@ -1242,12 +1243,12 @@ Citations for tools used in a Galaxy workflow can be downloaded from the {%icon 
 Internal link [Resources](#resources) 
 An external link[RAxML](https://cme.h-its.org/exelixis/web/software/raxml/)
 
-> example table
->
-> | Sample       | Cluster_id | DR profile | Clustering  |
-> |--------------|------------|------------|-------------|
-> | ERR5987352   | 10         | Pre-MDR    | Clustered   |
-> | ERR6362484   | 10         | Pre-MDR    | Clustered   |
+example table
+
+| Sample       | Cluster_id | DR profile | Clustering  |
+|--------------|------------|------------|-------------|
+| ERR5987352   | 10         | Pre-MDR    | Clustered   |
+| ERR6362484   | 10         | Pre-MDR    | Clustered   |
 
 
 
