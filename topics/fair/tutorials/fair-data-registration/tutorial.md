@@ -43,6 +43,11 @@ contributions:
   funding:
       - ELIXIR-UK-DaSH
 subtopic: pointers
+follow_up_training:
+  - type: "internal"
+    topic_name: fair
+    tutorials:
+      - fair-access
 requirements:
   - type: "internal"
     topic_name: fair
