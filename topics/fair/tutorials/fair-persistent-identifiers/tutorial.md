@@ -7,7 +7,7 @@ zenodo_link: ''
 questions:
 - What is a persistent identifier?
 - What is the structure of identifiers?
-- Why it is important for your dataset to have an identifiers?
+- Why does your dataset need to have an identifier?
 objectives:
 - Explain the definition and importance of using identifiers.
 - Illustrate what are the persistent identifiers.
@@ -78,17 +78,17 @@ Table 5.1: The 15 FAIR Guiding Principles.  Principles relating to data identifi
 
 # Using persistent identifiers (PIDs)
 
-Identifiers are an important theme within the FAIR principles, arguably being foundational; they are considered two of the pillars for the FAIR principles, since they are crucial for Findable (F) and Accessible (A) principles.
+Identifiers are an important theme within the FAIR principles, arguably being foundational; they are considered two of the pillars for the FAIR principles since they are crucial for Findable (F) and Accessible (A) principles.
 
 Identifiers are an eternal reference to a digital resource such as a dataset and its metadata. They provide the information required to reliably identify, verify and locate your research data. 
 
 Commonly, a persistent identifier is a unique record ID in a database, or a unique URL that takes a researcher to the data in question in a database. Persistent identifiers (PIDs) have to be unique so that only one dataset can be identified by this identifier. In addition to the identifier being unique, it needs to be persistent. When depositing or hosting data, you should ensure the longevity of this persistence meets your requirements, which may require reading specific database policies regarding identifier policy.  
 
-Since FAIR permits withdrawal of data, the FAIR Principles combat the potential for broken URLs by stating:  _“Metadata are accessible, even when the data are no longer available.”_  (FAIR Principle A2).  This means the link (PID) remains valid, displaying all the original metadata of the record even though the data is no longer available.
+Since FAIR permits the withdrawal of data, the FAIR Principles combat the potential for broken URLs by stating:  _“Metadata are accessible, even when the data are no longer available.”_  (FAIR Principle A2).  This means the link (PID) remains valid, displaying all the original metadata of the record even though the data is no longer available.
 
 **It is important to note that when you upload your data to a public repository, the repository will create this ID for you automatically**.
 
-Based on [how to FAIR](https://howtofair.dk/how-to-fair/persistent-identifiers/), there are many resources that can help you find databases to assign PIDs to your data. One of these resources is [FAIRsharing](https://fairsharing.org/) something we’ve already encountered in the previous episodes. [FAIRsharing](https://fairsharing.org/), provides a list of databases grouped by domains and organisations.
+Based on [how to FAIR](https://howtofair.dk/how-to-fair/persistent-identifiers/), many resources can help you find databases to assign PIDs to your data. One of these resources is [FAIRsharing](https://fairsharing.org/) something we’ve already encountered in the previous episodes. [FAIRsharing](https://fairsharing.org/), provides a list of databases grouped by domains and organisations.
 
 # The structure of persistent identifiers
 
@@ -104,7 +104,7 @@ Commonly, for things like publications, a DOI is used for the PID, where DOI sta
 
 ![DOI_structure](../../images/figure5-1.png "The structure of a DOI")
 
-For biological data, PIDs usually require a resolver that can deal with multiple resolving locations, which means that if a database changes its name or internal structure, the new and old variations of the PID remain valid and take the user to the (meta)data.  One commonly used resolver service is called [identifiers.org](https://docs.identifiers.org/) which maintains a list of database namespaces (prefix’s) as a persistent record.  If a database changes its name, it keeps the original namespace operational, or alternatively arranges for redirection from the original.
+For biological data, PIDs usually require a resolver that can deal with multiple resolving locations, which means that if a database changes its name or internal structure, the new and old variations of the PID remain valid and take the user to the (meta)data.  One commonly used resolver service is called [identifiers.org](https://docs.identifiers.org/) which maintains a list of database namespaces (prefix’s) as a persistent record.  If a database changes its name, it keeps the original namespace operational or alternatively arranges for redirection from the original.
 
 Examples of using identifiers.org to construct a PID are given below for 2 different databases, [Ensembl](https://www.ensembl.org/Mus_musculus/Gene/Summary?g=ENSMUSG00000031887;r=8:105984918-105991241) and [WikiPathways](https://www.wikipathways.org/pathways/WP1243.html), respectively. The **namespace** is given as the database name in these examples.
 
