@@ -31,6 +31,9 @@ contributions:
 
 ---
 
+
+<!-- GTN:IGNORE:002 :: there is a commitment from authors to transition these into proper slides. -->
+
 Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your research. 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?"></iframe>
