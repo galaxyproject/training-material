@@ -236,7 +236,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 > To find intersection we will be using `intersect intervals` tool from [BEDTools](https://bedtools.readthedocs.io/en/latest/content/overview.html) package.
 >
-> 1. {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} the intervals of two datasets side-by-side:
+> 1. {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1) %} the intervals of two datasets side-by-side:
 >
 >    Enter the word `intersect` in the search bar of the tool panel, and select the
 >    tool named `bedtools Intersect intervals`
@@ -297,7 +297,7 @@ Since each line in our file represents a single overlap between SNP and exon, we
 
 > <hands-on-title>Counting SNPs</hands-on-title>
 >
-> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} (operations on tabular data):
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0) %} (operations on tabular data):
 >
 >    - *"Input tabular dataset"*: select the output dataset from **bedtools intersect intervals** {% icon tool %}
 >    - *"Group by fields"*: `Column: 4` (the column with the exon IDs)
@@ -322,7 +322,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > How many exons are there in total in your file?
 >
 > > <solution-title></solution-title>
-> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4,242 lines, which is equal to the number of exons overlapped by at least one SNP.
+> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4,241 lines, which is equal to the number of exons overlapped by at least one SNP.
 > >
 > {: .solution }
 {: .question}
@@ -333,12 +333,13 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 
 > <hands-on-title>Sorting</hands-on-title>
 >
-> 1. {% tool [Sort](sort1) %} data in ascending or descending order:
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1sort1) %} data in ascending or descending order:
 >
->    - *"Sort Dataset"*: Output from **Datamash** {% icon tool %}
->    - *"on column"*: `Column: 2`
->    - *"with flavor"*: `Numerical sort`
->    - *"everything in"*: `Descending order`
+>    - *"Sort Query"*: Output from **Datamash** {% icon tool %}
+>    - In *"Column selections"* set the following:
+>       - *"on column"*: `Column: 2`
+>       - *"in"*: `Descending order`
+>       - *"Flavor"*: `Fast numeric sort`
 >
 > 2. Click **Run Tool**
 >
@@ -367,7 +368,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 > 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %} lines from a dataset (head):
 >
->    - *"File to select"*: The output from **Sort** {% icon tool %}
+>    - *"File to select"*: The output from **Sort** {% icon tool %} (previous step of the analysis)
 >    - "*Operation*": `Keep first lines`
 >    - *"Number of lines"*: `5`
 >
@@ -387,7 +388,7 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 >
 >    - *"Compare"*: `Exons`
 >    - *"Using column"*: `Column: 4`
->    - *"against"*: the output from **Select first** {% icon tool %}
+>    - *"against"*: the output from **Select first** {% icon tool %} (previous step of the analysis)
 >    - *"and column"*: `Column: 1`
 >    - *"to find"*: `Matching rows of 1st dataset`
 >
@@ -405,7 +406,7 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 > 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
 >
->    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg38" %}
+>    {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="Human Dec. 2013 (GRCh38/hg38) (hg38)" %}
 >
 > 2. Second, check that the **format** of your latest history dataset is `bed`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Datatype** field to `bed`.
 >
@@ -428,20 +429,20 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 # Galaxy management
 
-In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the {% icon galaxy-gear %} **History Options** menu on the top of the history panel:
+In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the **History Options** menu on the top of the history panel:
 
-![History options menu](../../images/history_options_menu.png)
+![History options menu](../../images/history_options_menu.png "'History options' allows for a variety of history operations")
 
-If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the {% icon galaxy-columns %} Multi-history view:
+## Listing your histories
 
-![Overview of histories with their datasets](../../images/101_history-overview.png)
+You can create as many histories as you want. If you create a new history, your current history does not disappear. You can view your histories in two ways: (1) as a list or (2) side by side. Two Tip boxes below explain both of these approaches:
 
-Here you can:
-- switch between different histories,
-- delete a history,
-- purge it (i.e. permanently delete it, this action cannot be reversed)
-- copy histories
-- copy datasets between histories (by dragging and dropping)
+{% snippet faqs/galaxy/histories_list.md %}
+
+{% snippet faqs/galaxy/histories_side_by_side_view.md %}
+
+
+![Overview of histories with their datasets](../../images/histories_side_by_side_view.png "Histories side-by-side view: in this view you drag datasets between histories, switch between histories, create new histories etc.")
 
 You can always return to your analysis view by clicking on Home icon {% icon galaxy-home %} (**Analyze Data** on older versions of Galaxy) in the top menu bar.
 
@@ -457,7 +458,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    This will make the creation of the workflow easier.
 >
-> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+> 2. Click on "**History options**" dropdown at the top of your history panel and select **Extract workflow**.
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
@@ -477,7 +478,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 > 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
 >
->    ![`Your workflows` list](../../images/101_26.png)
+>    ![`Your workflows` list](../../images/workflow_cards.png "Workflow are listed in  the center pane of the Galaxy interface as cards.")
 {: .hands_on}
 
 ## The workflow editor
@@ -488,15 +489,13 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 > 1. Click on the triangle to the right of your workflow name.
 >
->    ![`Edit` option in the menu for the latest workflow](../../images/101_27.png)
+>    ![`Edit` option in the menu for the latest workflow](../../images/open_wf_editor.png "To open the interactive workflow editor click the 'Edit' button.")
 >
 > 2. Select **Edit** to launch the workflow editor. You should see something like this:
 >
->    ![Workflow editor](../../images/101_28.png)
+>    ![Workflow editor](../../images/wf_editor_open.png "Workflow editor interface. It can be used for creation and editing of workflows of any complexity.")
 >
 >    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
->
->    {% snippet faqs/galaxy/workflows_hide_intermediate_steps.md %}
 >
 > 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
 >
@@ -515,7 +514,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    - In the menu on the right click on `Configure Output: 'out_file1'`
 >        - Under `Rename dataset`, and enter a descriptive name for the output dataset like `Top 5 exon IDs`
 >
->    ![Rename the output of the `Select first` tool step](../../images/101_34.png)
+>    ![Rename the output of the `Select first` tool step](../../images/configure_wf_output.png "The datasets generated by the workflow execution can be automatically renamed using  the 'Rename dataset' option")
 >
 > 7. **Repeat** this for the output of the `Compare two Datasets` tool, naming it `Top 5 exons`
 >
@@ -539,10 +538,17 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the {% icon galaxy-columns %} history overview. Here you can just drag and drop datasets from one history to another.
+> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. To do this:
 >
->    ![Drag and drop of `Exons` dataset in the history overview](../../images/copying_data.gif)
+>    - Bring up a list of all you histories:
 >
+>    {% snippet faqs/galaxy/histories_list.md %}
+>
+>    - Display the "Galaxy 101" history in the Center pane by clicking "Open in Center pane" button:
+>    ![Opening a history in the center pane](../../images/open_in_center_pane_button.png)
+>
+>    - Drag an drop `Exons` dataset into the empty history created at step 1
+>    ![Drag and drop of `Exons` dataset in the history overview](../../images/drag_n_drop_dataset.gif)
 > 3. Click the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top to return to the main analysis window
 >
 > 4. {% tool [Upload Data](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
@@ -580,7 +586,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 6. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
 >
->    ![`Run` option in the workflow menu](../../images/101_37.png)
+>    ![`Run` option in the workflow menu](../../images/run_workflow_button.png)
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
@@ -591,7 +597,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    - {% icon param-file %} *"Exons"*: the `Exons` file you copied from our previous history
 >    - {% icon param-file %} *"Features"*: the `Repeats` file we downloaded from UCSC
 >
->    ![Settings for running the workflow](../../images/101_38.png)
+>    ![Settings for running the workflow](../../images/workflow_setting_inputs.png)
 >
 >    > <comment-title>Potential workflow issues</comment-title>
 >    >
@@ -601,7 +607,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 8. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
->    ![Datasets appearing in the history](../../images/101_39.png)
+>    ![Datasets appearing in the history](../../images/workflow_running.png)
 {: .hands_on}
 
 > <comment-title>Unhiding hidden datasets</comment-title>
