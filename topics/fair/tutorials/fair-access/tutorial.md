@@ -112,7 +112,7 @@ There are four types of data access as described in [RDMkit](https://rdmkit.elix
 
 **Controlled access or Data Access Committees (DACs)**: researchers will apply for access, and their application reviewed by a data access committee
 
-**Access upon request (not recommended**): a researcher provides their contact details for access. Contact details should be provided in the metadata which will be publicly available.
+**Access upon request (not recommended)**: a researcher provides their contact details for access. Contact details should be provided in the metadata which will be publicly available.
 
 Any access requiring login and password, makes use of _“[a protocol] allowing for an authentication and authorisation procedure, where necessary”_ (FAIR Principle A1.2).  Commonly for authentication, a researcher will be assigned a unique ID, or the system may support sign-in with an ORCID ID, which is the case of many data repositories including [Zenodo](https://zenodo.org/).  In some cases there may be an option to use a google account or institutional email to sign in, and many infrastructures also support ‘single sign in’.
 
