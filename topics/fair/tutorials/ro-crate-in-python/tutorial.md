@@ -35,7 +35,7 @@ This tutorial will show you how to manipulate [RO-Crates](https://w3id.org/ro/cr
 
 > <agenda-title></agenda-title>
 >
-> In this tutorial, you will learn how to create a git repo, and begin working with it.
+> In this tutorial, we will cover:
 >
 > 1. TOC
 > {:toc}
