@@ -89,7 +89,7 @@ Here we will focus on the Caribbean sea surrounding the Antilles during April an
 > >
 > > Create a new history for this tutorial and give it a name (example: “Argo data with Pangeo”) for you to find it again later if needed.
 > > 
-> {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+> > {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 > {: .hands_on}
 {: .tip}
 
@@ -113,7 +113,7 @@ Here we will focus on the Caribbean sea surrounding the Antilles during April an
 > 3. After a couple minutes an `Argo data` output will appear green in your history.
 > 4. Check that your data are in netcdf format with {% icon galaxy-pencil %}, it should be `netcdf`
 >
-{% snippet faqs/galaxy/datasets_change_datatype.md datatype="nectdf" box_type="tip" %}
+> {% snippet faqs/galaxy/datasets_change_datatype.md datatype="nectdf" box_type="tip" %}
 {: .hands_on}
 
 # Argo data analysed, managed, and visualised by th Pangeo tools
