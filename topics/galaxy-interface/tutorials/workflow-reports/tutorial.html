@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8c0707faf56e340e72166dfcde296c334b535a7f",
+		release: "galaxy-training-network@fb8807ec9c835c3d78a45ef474bba66e52cc11b3",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Workflow Reports">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2024-03-13 16:37:56 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Using Galaxy and Managing your Data / Hands-on: Workflow Reports">
@@ -117,7 +117,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2024-03-13 16:37:56 +0000",
   "datePublished": "2022-06-02 13:08:39 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Workflow Reports",
@@ -231,7 +231,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Workflow Reports",
   "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html",
-  "version": 17,
+  "version": 19,
   "timeRequired": "PT30M",
   "teaches": "Understanding, viewing and creating workflow reports",
   "keywords": [
@@ -894,7 +894,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 2, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 13, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -912,7 +912,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 17 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 19 </div>
 
     </blockquote>
     </section>
@@ -943,6 +943,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li><a href="#run-the-workflow-and-view-the-default-report" id="markdown-toc-run-the-workflow-and-view-the-default-report">Run the workflow and view the default report</a></li>
   <li><a href="#customize-the-workflow-report" id="markdown-toc-customize-the-workflow-report">Customize the workflow report</a>    <ol>
       <li><a href="#add-labels-to-workflow-outputs" id="markdown-toc-add-labels-to-workflow-outputs">Add labels to workflow outputs</a></li>
+      <li><a href="#make-your-reports-nicer" id="markdown-toc-make-your-reports-nicer">Make your reports nicer!</a></li>
     </ol>
   </li>
   <li><a href="#share-or-publish-your-workflow-report" id="markdown-toc-share-or-publish-your-workflow-report">Share or publish your workflow report</a></li>
@@ -1310,6 +1311,16 @@ history_dataset_as_image(output="Petal Plot (PNG)")
   <li>..and more!</li>
 </ul>
 
+<h2 id="make-your-reports-nicer">Make your reports nicer!</h2>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-enhancing-tabular-dataset-previews-in-reports-pages"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-enhancing-tabular-dataset-previews-in-reports-pages" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Enhancing tabular dataset previews in reports/pages</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There are a number of options, specifically for tabular data, that can allow it to render more nicely in your workflow reports and pages and anywhere that GalaxyMarkdown is used.</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">title</code> to give your table a title</li>   <li><code class="language-plaintext highlighter-rouge">footer</code> allows you to caption your table</li>   <li><code class="language-plaintext highlighter-rouge">show_column_headers=false</code> to hide the column headers</li>   <li><code class="language-plaintext highlighter-rouge">compact=true</code> to make the table show up more inline, hiding that it was embedded from a Galaxy dataset.</li> </ul>   <p>The existing <code class="language-plaintext highlighter-rouge">history_dataset_display</code> directive displays the dataset name and some useful context at the expense of potentially breaking the flow of the document</p>   <blockquote class="code-in">   <div class="box-title code-in-title" id="code-in-galaxy-markdown"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Galaxy Markdown</div>   <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">galaxy<br /></span><span class="sb">history_dataset_display(history_dataset_id=1e8ab44153008be8) </span><br /><span class="p">```</span><br /></code></pre></div>  </div> </blockquote>   <blockquote class="code-out">   <div class="box-title code-out-title" id="code-out-example-screenshot"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Example Screenshot</div>   <p><img src="/training-material/faqs/galaxy/images/report_table_history_dataset_display.png" alt="a tabular dataset rendered, it has a title and a download button and sortable columns" /></p> </blockquote>   <p>The existing <code class="language-plaintext highlighter-rouge">history_dataset_embedded</code> directive was implemented to try to inline results more and make the results more readable within a more… curated document. It is dispatches on tabular types and puts the results in a table but the table doesn’t have a lot of options.</p>   <blockquote class="code-in">   <div class="box-title code-in-title" id="code-in-galaxy-markdown-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Galaxy Markdown</div>   <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">galaxy<br /></span><span class="sb">history_dataset_embedded(history_dataset_id=1e8ab44153008be8) </span><br /><span class="p">```</span><br /></code></pre></div>  </div> </blockquote>   <blockquote class="code-out">   <div class="box-title code-out-title" id="code-out-example-screenshot-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Example Screenshot</div>   <p><img src="/training-material/faqs/galaxy/images/report_table_history_dataset_embedded.png" alt="the same as before but no title nor download button. just a rendered table with sortable columns" /></p> </blockquote>   <p>The <code class="language-plaintext highlighter-rouge">history_dataset_as_table</code> directive mirrors the <code class="language-plaintext highlighter-rouge">history_dataset_as_image</code> directive: it tries harder to coerce the data into a table and provides new table—specific options. The first of these is “show_column_headers<code class="language-plaintext highlighter-rouge"> which defaults to </code>true`.</p>   <blockquote class="code-in">   <div class="box-title code-in-title" id="code-in-galaxy-markdown-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Galaxy Markdown</div>   <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">galaxy<br /></span><span class="sb">history_dataset_as_table(history_dataset_id=1e8ab44153008be8,show_column_headers=false)</span><br /><span class="p">```</span><br /></code></pre></div>  </div> </blockquote>   <blockquote class="code-out">   <div class="box-title code-out-title" id="code-out-example-screenshot-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Example Screenshot</div>   <p><img src="/training-material/faqs/galaxy/images/report_table_history_dataset_as_table.png" alt="the same as before but no title nor download button nor column headers" /></p> </blockquote>   <p>There is also a <code class="language-plaintext highlighter-rouge">compact</code> option. This provides a much more inline experience for tabular datasets:</p>   <blockquote class="code-in">   <div class="box-title code-in-title" id="code-in-galaxy-markdown-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Galaxy Markdown</div>   <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">galaxy<br /></span><span class="sb">history_dataset_as_table(history_dataset_id=1e8ab44153008be8,show_column_headers=false,compact=true)</span><br /><span class="p">```</span><br /></code></pre></div>  </div> </blockquote>   <blockquote class="code-out">   <div class="box-title code-out-title" id="code-out-example-screenshot-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Example Screenshot</div>   <p><img src="/training-material/faqs/galaxy/images/report_table_history_dataset_compact.png" alt="again the same screenshot, no table metadata, and now it lacks the small margin around it." /></p> </blockquote>   <p>Figures in general should have titles and legends — so there is the “title” and “footer” options also.</p>   <blockquote class="code-in">   <div class="box-title code-in-title" id="code-in-galaxy-markdown-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Galaxy Markdown</div>   <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">galaxy<br /></span><span class="sb">history_dataset_as_table(history_dataset_id=1e8ab44153008be8,show_column_headers=false,title='Binding Site Results',footer='Here is a very good figure caption for this table.')</span><br /><span class="p">```</span><br /></code></pre></div>  </div> </blockquote>   <blockquote class="code-out">   <div class="box-title code-out-title" id="code-out-example-screenshot-4"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Example Screenshot</div>   <p><img src="/training-material/faqs/galaxy/images/report_table_history_dataset_title.png" alt="the same table with now a tasteful title and small caption below it describing that the author would write a caption if he knew what a binding site was." /></p> </blockquote> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-making-an-element-collapsible-in-a-report"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-making-an-element-collapsible-in-a-report" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Making an element collapsible in a report</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>This applies to any GalaxyMarkdown elements, i.e. the things you’ve clicked in the left panel to embed in your Workflow Report or Page</p>   <p>By adding a <code class="language-plaintext highlighter-rouge">collapse=""</code> attribute to a markdown element, you can make it collapsible. Whatever you put in the quotes will be the title of the collapsible box.</p>   <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl"><br /></span>history_dataset_type(history_dataset_id=3108c91feeb505da, collapse="[TITLE]")<br /><span class="p">```</span><br /></code></pre></div></div> </blockquote>
+<p><!--END_SNIPPET--></p>
+
 <h1 id="share-or-publish-your-workflow-report">Share or publish your workflow report</h1>
 
 <p>If you share this workflow with others, they will get the same report every time they run the workflow.</p>
@@ -1591,7 +1602,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/8c0707faf56e340e72166dfcde296c334b535a7f">8c0707f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/fb8807ec9c835c3d78a45ef474bba66e52cc11b3">fb8807e</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
