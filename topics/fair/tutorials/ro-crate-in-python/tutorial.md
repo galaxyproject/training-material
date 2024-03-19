@@ -20,6 +20,9 @@ contributions:
     - kinow
   editing:
     - hexylena
+    - elichad
+  testing:  
+    - elichad
   funding:
     - by-covid
 license: Apache-2.0
@@ -39,13 +42,11 @@ This tutorial will show you how to manipulate [RO-Crates](https://w3id.org/ro/cr
 >
 {: .agenda}
 
-
 Let's start by installing the library via [pip](https://docs.python.org/3/installing/). Note that the name of the package is `rocrate`.
 
 ```bash
 pip install rocrate
 ```
-
 
 ## Creating an RO-Crate
 
@@ -221,8 +222,8 @@ for e in crate.get_entities():
 ```
 
 ```
-ro-crate-metadata.json CreativeWork
 ./ Dataset
+ro-crate-metadata.json CreativeWork
 paper.pdf File
 results.csv File
 images/figure.svg File
@@ -231,7 +232,7 @@ https://orcid.org/0000-0000-0000-0001 Person
 ...
 ```
 
-The first two entities shown in the output are the [metadata file descriptor](https://www.researchobject.org/ro-crate/1.1/metadata.html) and the [root data entity](https://www.researchobject.org/ro-crate/1.1/root-data-entity.html), respectively. The former represents the metadata file, while the latter represents the whole crate. These are special entities managed by the `ROCrate` object, and are always present. The other entities are the ones we added in the [section on RO-Crate creation](#creating-an-ro-crate). As shown above, `get_entities` allows to iterate over all entities in the crate. You can also access only data entities with `crate.data_entities` and only contextual entities with `crate.contextual_entities`. For instance:
+The first two entities shown in the output are the [root data entity](https://www.researchobject.org/ro-crate/1.1/root-data-entity.html) and the [metadata file descriptor](https://www.researchobject.org/ro-crate/1.1/metadata.html), respectively. The former represents the whole crate, while the latter represents the metadata file. These are special entities managed by the `ROCrate` object, and are always present. The other entities are the ones we added in the [section on RO-Crate creation](#creating-an-ro-crate). As shown above, `get_entities` allows to iterate over all entities in the crate. You can also access only data entities with `crate.data_entities` and only contextual entities with `crate.contextual_entities`. For instance:
 
 ```python
 for e in crate.data_entities:
@@ -255,7 +256,6 @@ You can fetch an entity by its `@id` as follows:
 ```python
 article = crate.dereference("paper.pdf")  # or crate.get("paper.pdf")
 ```
-
 
 ## Command Line Interface
 
