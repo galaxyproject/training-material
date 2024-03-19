@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/admin/tutorials/upgrading/slides
 
 title: "Upgrading Galaxy"
 zenodo_link: ""
