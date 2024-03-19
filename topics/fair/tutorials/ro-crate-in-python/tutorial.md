@@ -54,11 +54,15 @@ In its simplest form, an RO-Crate is a directory tree with an `ro-crate-metadata
 
 Suppose Alice and Bob worked on a research project together, and then wrote a paper about it; additionally, Alice prepared a spreadsheet containing experimental data, which Bob then used to generate a diagram. For the purpose of this tutorial, you can just create dummy files for the documents:
 
-```bash
-mkdir exp
-touch exp/paper.pdf
-touch exp/results.csv
-touch exp/diagram.svg
+```python
+import os
+
+data_dir = "exp"
+os.mkdir(data_dir)
+
+for filename in ["paper.pdf", "results.csv", "diagram.svg"]:
+    with open(os.path.join(data_dir, filename), "w") as file:
+        pass
 ```
 
 Let's make an RO-Crate to represent this information:
@@ -108,10 +112,13 @@ diagram["author"] = bob
 
 You can also add whole directories together with their contents. In RO-Crate, a directory is represented by the `Dataset` entity:
 
-```bash
-mkdir exp/logs
-touch exp/logs/log1.txt
-touch exp/logs/log2.txt
+```python
+logs_dir = os.path.join(data_dir, "logs")
+os.mkdir(logs_dir)
+
+for filename in ["log1.txt", "log2.txt"]:
+    with open(os.path.join(logs_dir, filename), "w") as file:
+        pass
 ```
 
 ```python
