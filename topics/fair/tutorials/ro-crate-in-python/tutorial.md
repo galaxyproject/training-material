@@ -119,9 +119,7 @@ os.mkdir(logs_dir)
 for filename in ["log1.txt", "log2.txt"]:
     with open(os.path.join(logs_dir, filename), "w") as file:
         pass
-```
 
-```python
 logs = crate.add_dataset("exp/logs")
 ```
 
@@ -138,6 +136,13 @@ Some applications and services support RO-Crates stored as archives. To save the
 ```python
 crate.write_zip("exp_crate.zip")
 ```
+
+> <comment-title>How `rocrate` handles the contents of `exp/logs`</comment-title>
+>
+> Exploring the `exp_crate` directory, we see that all files and directories contained in `exp/logs` have been added recursively to the crate. However, in the `ro-crate-metadata.json` file, only the top level Dataset with `@id` `"exp/logs"` is listed. This is because we used `crate.add_dataset("exp/logs")` rather than adding every file individually. There is no requirement to represent every file and folder within the crate in the `ro-crate-metadata.json` file - in fact, if there were many files in the crate it would be impractical to do so.
+>
+> If you do want to add files and directories recursively to the metadata, use `crate.add_tree` instead of `crate.add_dataset` (but note that it only works on local directory trees).
+{: .comment}
 
 ## Appending elements to property values
 
@@ -306,7 +311,7 @@ The command acts on the current directory, unless the `-c` option is specified. 
 
 ## Adding items to the crate
 
-The `rocrate add` command allows to add workflows and other entity types (currently [testing-related metadata](https://crs4.github.io/life_monitor/workflow_testing_ro_crate)) to an RO-Crate:
+The `rocrate add` command allows to add files, datasets (directories), workflows, and other entity types (currently [testing-related metadata](https://crs4.github.io/life_monitor/workflow_testing_ro_crate)) to an RO-Crate:
 
 ```console
 $ rocrate add --help
@@ -316,6 +321,8 @@ Options:
   --help  Show this message and exit.
 
 Commands:
+  dataset
+  file
   test-definition
   test-instance
   test-suite
