@@ -48,7 +48,7 @@ Let's start by installing the library via [pip](https://docs.python.org/3/instal
 pip install rocrate
 ```
 
-## Creating an RO-Crate
+# Creating an RO-Crate
 
 In its simplest form, an RO-Crate is a directory tree with an `ro-crate-metadata.json` file at the top level. This file contains metadata about the other files and directories, represented by [data entities](https://www.researchobject.org/ro-crate/1.1/data-entities.html). These metadata consist both of properties of the data entities themselves and of other, non-digital entities called [contextual entities](https://www.researchobject.org/ro-crate/1.1/contextual-entities.html). A contextual entity can represent, for instance, a person, an organization or an event.
 
@@ -139,7 +139,7 @@ Some applications and services support RO-Crates stored as archives. To save the
 crate.write_zip("exp_crate.zip")
 ```
 
-### Appending elements to property values
+## Appending elements to property values
 
 What ro-crate-py entities actually store is their JSON representation:
 
@@ -177,7 +177,7 @@ for n in "Mickey_Mouse", "Scrooge_McDuck":
     donald.append_to("follows", p)
 ```
 
-### Adding remote entities
+## Adding remote entities
 
 Data entities can also be remote:
 
@@ -198,7 +198,7 @@ If you add `fetch_remote=True` to the `add_file` call, however, the library (whe
 
 Another option that influences the behavior when dealing with remote entities is `validate_url`, also `False` by default: if it's set to `True`, when the crate is serialized, the library will try to open the URL to add / update metadata such as the content's length and format.
 
-### Adding entities with an arbitrary type
+## Adding entities with an arbitrary type
 
 An entity can be of any type listed in the [RO-Crate context](https://www.researchobject.org/ro-crate/1.1/context.jsonld). However, only a few of them have a counterpart (e.g., `File`) in the library's class hierarchy, either because they are very common or because they are associated with specific functionality that can be conveniently embedded in the class implementation. In other cases, you can explicitly pass the type via the `properties` argument:
 
@@ -220,7 +220,7 @@ Note that entities can have multiple types, e.g.:
     "@type" = ["File", "SoftwareSourceCode"]
 ```
 
-## Consuming an RO-Crate
+# Consuming an RO-Crate
 
 An existing RO-Crate package can be loaded from a directory or zip file:
 
@@ -266,7 +266,7 @@ You can fetch an entity by its `@id` as follows:
 article = crate.dereference("paper.pdf")  # or crate.get("paper.pdf")
 ```
 
-## Command Line Interface
+# Command Line Interface
 
 > <comment-title>Jupyter Notebook users: switch to a terminal</comment-title>
 > The code cells in this section use Unix shell commands, which can't be run within a notebook. Open a Unix/Linux terminal to follow along.
@@ -287,7 +287,7 @@ Commands:
   write-zip
 ```
 
-### Crate initialization
+## Crate initialization
 
 The `rocrate init` command explores a directory tree and generates an RO-Crate metadata file (`ro-crate-metadata.json`) listing all files and directories as `File` and `Dataset` entities, respectively.
 
@@ -304,7 +304,7 @@ Options:
 
 The command acts on the current directory, unless the `-c` option is specified. The metadata file is added (overwritten if present) to the directory at the top level, turning it into an RO-Crate.
 
-### Adding items to the crate
+## Adding items to the crate
 
 The `rocrate add` command allows to add workflows and other entity types (currently [testing-related metadata](https://crs4.github.io/life_monitor/workflow_testing_ro_crate)) to an RO-Crate:
 
@@ -324,7 +324,7 @@ Commands:
 
 Note that data entities (e.g., workflows) must already be present in the directory tree: the effect of the command is to register them in the metadata file.
 
-### Example
+## Example
 
 To run the following commands, we need a copy of the ro-crate-py repository:
 
