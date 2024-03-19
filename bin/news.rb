@@ -37,7 +37,7 @@ $rooms = {
   'wg-goat' => {
     server: 'https://matrix.org',
     room: '!UQXYBSjdrLHcWgegmg:gitter.im',
-  }
+  },
   'hub-social' => {
     server: 'https://matrix.org',
     room: '!gegHcnUCDklLbtVQor:matrix.org',
