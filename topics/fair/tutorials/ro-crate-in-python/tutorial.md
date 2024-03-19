@@ -268,6 +268,10 @@ article = crate.dereference("paper.pdf")  # or crate.get("paper.pdf")
 
 ## Command Line Interface
 
+> <comment-title>Jupyter Notebook users: switch to a terminal</comment-title>
+> The code cells in this section use Unix shell commands, which can't be run within a notebook. Open a Unix/Linux terminal to follow along.
+{: .comment}
+
 `ro-crate-py` includes a hierarchical command line interface: the `rocrate` tool. `rocrate` is the top-level command, while specific functionalities are provided via sub-commands. Currently, the tool allows to initialize a directory tree as an RO-Crate (`rocrate init`) and to modify the metadata of an existing RO-Crate (`rocrate add`).
 
 ```console
