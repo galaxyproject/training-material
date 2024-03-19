@@ -9,7 +9,7 @@ contributors: [shiltemann,hexylena,nekrut]
 
 - Click on the "?" next to database indicator:
 
-![UI for changing dbkey]({% link shared/images/datasets_dbkey.svg %})
+  ![UI for changing dbkey]({% link shared/images/datasets_dbkey.svg %})
 
 - In the central panel, change the **Database/Build** field
 - Select your desired database key from the dropdown list{% if include.dbkey %}: `{{ include.dbkey }}`{% endif %}
