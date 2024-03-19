@@ -52,7 +52,7 @@ pip install rocrate
 
 In its simplest form, an RO-Crate is a directory tree with an `ro-crate-metadata.json` file at the top level. This file contains metadata about the other files and directories, represented by [data entities](https://www.researchobject.org/ro-crate/1.1/data-entities.html). These metadata consist both of properties of the data entities themselves and of other, non-digital entities called [contextual entities](https://www.researchobject.org/ro-crate/1.1/contextual-entities.html). A contextual entity can represent, for instance, a person, an organization or an event.
 
-Suppose Alice and Bob worked on a research project together, and then wrote a paper about it; additionally, Alice prepared a spreadsheet containing experimental data, which Bob then used to generate a diagram. For the purpose of this tutorial, you can just create dummy files for the documents:
+Suppose Alice and Bob worked on a research project together, and then wrote a paper about it; additionally, Alice prepared a spreadsheet containing experimental data, which Bob then used to generate a diagram. For the purpose of this tutorial, you can just create placeholder files for the documents:
 
 ```python
 import os
@@ -110,7 +110,7 @@ table["author"] = alice
 diagram["author"] = bob
 ```
 
-You can also add whole directories together with their contents. In RO-Crate, a directory is represented by the `Dataset` entity:
+You can also add whole directories together with their contents. In an RO-Crate, a directory is represented by the `Dataset` entity:
 
 ```python
 logs_dir = os.path.join(data_dir, "logs")
@@ -131,7 +131,7 @@ Finally, we serialize the crate to disk:
 crate.write("exp_crate")
 ```
 
-This should generate an `exp_crate` directory containing copies of all the files we added and an `ro-crate-metadata.json` file containing a JSON-LD representation of the metadata. Note that we have chosen a different destination path for the diagram, while the paper and the spreadsheet have been placed at the top level with their names unchanged (the default).
+This should generate an `exp_crate` directory containing copies of all the files we added and an `ro-crate-metadata.json` file containing a [JSON-LD](https://json-ld.org) representation of the metadata. Note that we have chosen a different destination path for the diagram, while the paper and the spreadsheet have been placed at the top level with their names unchanged (the default).
 
 Some applications and services support RO-Crates stored as archives. To save the crate in zip format, you can use `write_zip`:
 
