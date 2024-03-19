@@ -32,7 +32,7 @@
     ]
   },
   "js_requirements": {
-    "mathjax": 8646,
+    "mathjax": 8813,
     "mermaid": false
   },
   "short_id": "T00332",
@@ -51,9 +51,9 @@
   },
   "hands_on": true,
   "slides": false,
-  "mod_date": "2024-01-23 07:49:29 +0000",
+  "mod_date": "2024-03-19 08:46:23 +0000",
   "pub_date": "2023-04-11 09:13:43 +0000",
-  "version": 20,
+  "version": 21,
   "workflows": [
     {
       "workflow": "Obis-indicators.ga",
@@ -63,17 +63,17 @@
       "wfid": "ecology-obisindicators",
       "wfname": "obis-indicators",
       "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-obisindicators/versions/obis-indicators",
-      "license": "CC-BY-SA-4.0",
+      "license": "CC-BY-4.0",
       "creators": [
         {
           "class": "Person",
-          "email": "mailto:marie14.josse@gmail.com",
-          "identifier": "Marie59",
-          "name": "Marie Josse"
+          "identifier": "0009-0008-0622-604X",
+          "name": "Marie Jossé",
+          "url": "https://github.com/Marie59"
         }
       ],
-      "name": "Obis indicators",
-      "title": "Obis indicators",
+      "name": "Marine Omics visualisation",
+      "title": "Marine Omics visualisation",
       "test_results": {
         "eu": {
           "summary": {
@@ -756,14 +756,14 @@
           "version": "0.1"
         }
       },
-      "modified": "2024-03-19 00:07:36 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nOccurrence.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Advanced Cut\"];\n  1 -->|tabular| 2;\n  3[\"Ocean biodiversity indicators\"];\n  2 -->|output| 3;"
+      "modified": "2024-03-19 09:19:52 +0000",
+      "mermaid": "flowchart TD\n  0[\"OBIS occurences\"];\n  1[\"Advanced Cut\"];\n  0 -->|output| 1;\n  2[\"Ocean biodiversity indicators\"];\n  1 -->|output| 2;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/obisindicators/tutorial.json",
   "tools": [
-    "csv_to_tabular",
     "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy0",
     "toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2",
     "toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1",
     "toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.2"
@@ -794,6 +794,13 @@
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
+        "name": "text_processing",
+        "owner": "bgruening",
+        "revisions": "12615d397df7",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
         "name": "obis_data",
         "owner": "ecology",
         "revisions": "1fcd81d65467",
@@ -816,7 +823,7 @@
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obis_data\n  owner: ecology\n  revisions: 1fcd81d65467\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obisindicators\n  owner: ecology\n  revisions: 1015a0070bac\n  tool_panel_section_label: Biodiversity data exploration\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obisindicators\n  owner: ecology\n  revisions: 393957ecc97d\n  tool_panel_section_label: Biodiversity data exploration\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: 12615d397df7\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obis_data\n  owner: ecology\n  revisions: 1fcd81d65467\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obisindicators\n  owner: ecology\n  revisions: 1015a0070bac\n  tool_panel_section_label: Biodiversity data exploration\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obisindicators\n  owner: ecology\n  revisions: 393957ecc97d\n  tool_panel_section_label: Biodiversity data exploration\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
