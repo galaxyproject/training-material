@@ -429,7 +429,7 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 # Galaxy management
 
-In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the **History Options** menu on the top of the history panel:
+In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the {% icon galaxy-history-options %} **History Options** menu on the top of the history panel:
 
 ![History options menu](../../images/history_options_menu.png "'History options' allows for a variety of history operations")
 
