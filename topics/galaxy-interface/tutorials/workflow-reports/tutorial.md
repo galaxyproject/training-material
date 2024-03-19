@@ -319,7 +319,11 @@ Well done! You have created a customized workflow report with text and workflow 
   - peeks into dataset (useful for large files that cannot be included in their entirety in the report)
   - ..and more!
 
+## Make your reports nicer!
 
+{% snippet faqs/galaxy/reports_tables.md %}
+
+{% snippet faqs/galaxy/reports_collapsible_box.md %}
 
 # Share or publish your workflow report
 
