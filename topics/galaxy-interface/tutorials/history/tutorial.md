@@ -32,19 +32,19 @@ contributions:
 subtopic: histories
 ---
 
-{% snippet faqs/gtn/galaxy_tested_with.md version="23.0" %}
+{% snippet faqs/gtn/galaxy_tested_with.md version="24.0" %}
 
 When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps
 generates a dataset. These datasets (and the output datasets from later analysis on them) are stored by Galaxy in
 **Histories**.
 
-## The History
+# The history panel
 
 All users have one 'current' history, which can be thought of as **a workspace** or **a current working directory** in
 bioinformatics terms. Your current history is displayed in the right hand side of the main 'Analyze Data' Galaxy page in
 what is called the history panel.
 
-![Screenshot of the Galaxy UI with the toolbox, center panel, and history visible](../../images/history.png "Galaxy History is simply the right panel of the interface")
+![Screenshot of the Galaxy UI with the toolbox, center panel, and history visible](../../images/history.svg "Galaxy History is simply the right panel of the interface. It lists all datasets uploaded or produced during an analysis. Galaxy was designed around history with the idea of <i>reproducibility</i> in mind!")
 
 The history panel displays output datasets in the order in which they were created, with the oldest/first shown at the
 bottom. As new analyses are done and new output datasets are generated, the newest datasets are added to the top of the
@@ -62,31 +62,44 @@ benefit that they can work on many histories and switch between them.
 > clear you sessions - that history will be lost!** We can not recover it for you if it is.
 {: .warning}
 
-### History controls
+## Global history controls
 
-![Zoom of the history panel showing the word history, three buttons described after this image, the search datasets field, and the history name with edit control.](../../images/current-history-buttons.png "History Controls")
+Above the current history panel are three buttons (Fig. 2 below): 
 
-Above the current history panel are three buttons: create a new history, history quick switcher, and the history options.
+- The {% icon new-history %} "**Create new history**" button will create an empty history.
+- The {% icon switch-histories %} "**Switch to history**" will open a dialog letting you easily swap to any of your other histories.
+- The {% icon galaxy-history-options %} "**History options**" (formerly the {% icon galaxy-gear %} "Gear menu") gives you access to advanced options to work with your history.
 
-- The {% icon new-history %} 'create new history' button will create an empty history.
-- The {% icon switch-histories %} 'history quick switcher' will open a dialog letting you easily swap to any of your other histories.
-- The {% icon galaxy-history-options %} 'history menu' (formerly the {% icon galaxy-gear %} "Gear menu") gives you access to advanced options to work with your history.
+![Zoom of the history panel showing the word history, three buttons described above this image, the search datasets field, and the history name with edit control.](../../images/current-history-buttons.png "Global history controls are located above the history panel.")
 
-## History Information
+### {% icon new-history %} "**Create new history**"
 
-Histories also store information in addition to the datasets they contain. They can be named/re-named, tagged, and
-annotated.
+This button does what the name suggests: it creates a new history. If you click on it you will get a new empty history. The previous history does not disappear: you can always get back using "**Switch to history**" button described below.
 
-### Renaming a history
+### {% icon switch-histories %} "**Switch to history**"
+
+This button bring a list of all you histories. For example:
+
+![List of histories](../../images/list_of_histories.png "A list of histories for a given user.")
+
+### {% icon galaxy-history-options %} "**History options**" 
+
+This button open a drop-down menu with a variety of History-specific functions:
+
+![History options](../../images/history_options.png "A list of options for a given history.")
+
+# History manipulation
+
+## Renaming a history
 
 All histories begin with the name 'Unnamed history'. Non-anonymous users can rename the history as they see fit:
 
 1. Click the {% icon galaxy-pencil %} pencil icon next to the history's name
 2. Enter a new name or edit the existing one.
-3. Press <kbd>Enter</kbd>, or click "Save" to save the new name. The input field will disappear and the new history name will display.
+3. Press <kbd>Enter</kbd>, or click {% icon galaxy-save %} "Save" to save the new name. The input field will disappear and the new history name will display.
 4. To cancel renaming, click the {% icon galaxy-undo %} "Cancel" button
 
-### Tagging a history
+## Tagging a history
 
 Tags are short pieces of text used to describe the thing they're attached to and many things in Galaxy can be tagged.
 Each item can have many tags and you can add new tags or remove them at any time. Tags can be another useful way to
@@ -108,7 +121,7 @@ To tag a history:
 
 ![The history metadata is being edited in this screenshot, we see the history titled "This is the history!" with an empty annotation, and four tags: #protein #modelling, 2023-analyis, and 🐰 in various bright colours. Below is the text "Add tags" followed by the save and cancel buttons.](../../images/tags.png "Tagging a history will help searching for it later on.")
 
-### Annotating a history
+## Annotating a history
 
 Sometimes tags and names are not enough to describe the work done within a history. Galaxy allows you to create history
 annotations: longer text entries that allow for more formatting options. The formatting of the text is preserved. Later, if
@@ -126,7 +139,7 @@ To annotate a history:
 
 ![Essentially the same close up as before, but now the tags are gone, and the box reads: This is an annotation. You can use multiples lines! and     spaces And emoji! 😹🏳️‍⚧️🌈](../../images/annotations.png "Annotating a history allows entering more information such as, for example, experimental details related to the analysis")
 
-### History size
+## Checking history size
 
 As datasets are added to a history, Galaxy will store them on the server. The total size of these files,
 for all the datasets in a history, is displayed underneath the history name. For example, if a history has 200 megabytes
@@ -135,23 +148,18 @@ of dataset data on Galaxy's filesystem, '{% icon galaxy-chart-select-data %} 200
 If your Galaxy server uses quotas, the total combined size of all your histories will be compared to your quota. If you're using more than the quota allows, Galaxy will prevent you from running any new jobs until you've deleted some
 datasets and brought that total below the quota.
 
+# History datasets
 
-## History Panel Datasets
+History is a collection of datasets. Datasets can either be uploaded or generated by analysis tools. 
 
-Datasets in the history panel show the state of the job that has generated or will generate the data.
+## United Colors of Galaxy: Dataset states
 
-There are several different 'states' a dataset can be in:
+There are several different "states" a dataset can be in. These states are shown in Fig. 7.
 
-1. When you first upload a file or run a tool, the dataset will be in the **queued** state. This indicates that the
-  job that will create this dataset has not yet started and is in line to begin.
-1. When the job starts, the dataset will be in the **running** state. The job that created these datasets is now
-  running on Galaxy's cluster.
-1. When the job has completed successfully, the datasets it generated will be in the **ok** state.
-1. If there's been an error while running the tool, the datasets will be in the **error** state.
-1. If a previously running or queued job has been paused by Galaxy, the dataset will be in the **paused** state.
-  You can re-start/resume paused jobs using the options menu above the history panel and selecting 'Resume Paused Jobs'.
+![5 datasets are shown in a history, one in each of the aforementioned dataset states. They are all coloured relative to those states and some include different icons to indicate their state.](../../images/states.png "United Colors of Galaxy: (1) <b>Ok</b>: Dataset is uploaded successfully, or the job that created this dataset finished successfully; (2) <b>Error</b>: The dataset is in error. It may be an error the occurred during the upload of the dataset or an error within the job that created this dataset; (3) <b>Running</b>: The dataset is being uploaded or the job creating this dataset is still executing; (4) <b>Paused</b>: The execution of a job generating this dataset is paused. This typically occurs when the upstream jobs (jobs generating datsets on which this particular job depends) are in error. You can re-start/resume paused jobs using the options menu above the history panel and selecting 'Resume Paused Jobs'; (5) <b>Queued</b>: Upload or job generating this dataset are waiting thier turn to be executed. Galaxy is a public service with hundreds or thousands of simultaneous jobs running at any given moment. As a result some jobs do not start immediately but wait their turn in the cluster queue.")
 
-![5 datasets are shown in a history, one in each of the aforementioned dataset states. They are all coloured relative to those states and some include different icons to indicate their state.](../../images/states.png "Dataset states")
+
+ob has completed successfully, the datasets it generated will be in this state")
 
 Datasets in the panel are initially shown in a 'summary' view, that only displays:
 
