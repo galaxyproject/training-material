@@ -17,12 +17,7 @@ key_points:
 tags:
   - earth-system
   - ocean
-  - geographical information system
-  - ODV
   - netcdf data
-  - maps
-  - marine data
-  - climate
 contributions:
   authorship:
     - Marie59
