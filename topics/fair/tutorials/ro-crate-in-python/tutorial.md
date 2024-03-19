@@ -156,7 +156,9 @@ paper.properties()
 When `paper["author"]` is accessed, a new list containing the `alice` and `bob` entities is generated on the fly. For this reason, calling `append` on `paper["author"]` won't actually modify the `paper` entity in any way. To add an author, use the `append_to` method instead:
 
 ```python
-donald = crate.add(Person(crate, "https://en.wikipedia.org/wiki/Donald_Duck"))
+donald = crate.add(Person(crate, "https://en.wikipedia.org/wiki/Donald_Duck", properties={
+  "name": "Donald Duck"
+}))
 paper.append_to("author", donald)
 ```
 
