@@ -237,13 +237,11 @@ Now, if you have finished with your analysis you can exit ODV. To do so you need
 # DIVAnd : Data-Interpolating Variational Analysis in n dimensions
 
 > <tip-title>Check Datatype</tip-title>
-> > <hands-on-title>Check and change the datatype</hands-on-title>
-> > Go to your output 'data_from_Eutrophication_Med_profiles_2022_unrestricted'
-> >
-> > Check if the datatype is **netcdf** if not :
-> >
+> Go to your output 'data_from_Eutrophication_Med_profiles_2022_unrestricted'
+> 
+> Check if the datatype is **netcdf** if not :
+> 
 > {% snippet  faqs/galaxy/datasets_change_datatype.md %}
-> {: .hands_on}
 {: .tip}
 
 ## Launch DIVAnd 
@@ -260,9 +258,9 @@ Use ODV outputs as DIVAnd input.
 > <hands-on-title>Navigate the jupyterlab</hands-on-title>
 > 1.Once in the jupyterlab, go in the **Notebooks** folder.
 > 2. There open a terminal window and write :
-> > ```bash
-> > wget https://raw.githubusercontent.com/fair-ease/Divand-Galaxy-ext/main/90-analysis-shorten.ipynb
-> > ```
+> ```bash
+> wget https://raw.githubusercontent.com/fair-ease/Divand-Galaxy-ext/main/90-analysis-shorten.ipynb
+> ```
 > 3. Run the entire notebook.
 >
 > In the first ouputs folder (at the root of the jupyterlab folders), you should now have one netcdf file "Water_body_Phosphate_Mediterranean".
