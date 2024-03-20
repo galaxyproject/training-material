@@ -79,7 +79,7 @@ The Galaxy interface consists of three main parts:
 3. Your analysis **History** is recorded on the right
 
 
-![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. On top of the main three you also see the 'Activity bar' that can turned on and off. (Don't see the Activity Bar? See a Tip below).")
+![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "<b>Galactic triptych</b>: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. Here you also see the 'Activity bar' that can be turned on and off (Don't see the Activity Bar? See a Tip below).")
 {: .comment}
 
 
