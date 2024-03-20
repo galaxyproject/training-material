@@ -77,8 +77,12 @@ The Galaxy interface consists of three main parts:
 3. Your analysis **History** is recorded on the right
 
 
-> ![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. On top of the main three you also see the 'Activityy bar' that can turned on and off._history")
+![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. On top of the main three you also see the 'Activity bar' that can turned on and off. (Don't see the Activity Bar? See a Tip below).")
 {: .comment}
+
+
+{% snippet faqs/galaxy/activity_bar_how_to_enable.md %}
+
 
 When you start Galaxy for very first time, your history will be empty. Let's add some data to it.
 
@@ -432,7 +436,7 @@ In Galaxy your analyses live in histories such as your current one. Histories ca
 
 ## Listing your histories
 
-You can create as many histories as you want. If you create a new history, your current history does not disappear. You can view your histories in two ways: (1) as a list or (2) side by side. Two Tip boxes below explain both of these approaches:
+You can create as many histories as you want. If you create a new history, your current history does not disappear. You can view your histories in two ways: (1) as a list or (2) side by side (also known as "Multiview"). Two Tip boxes below explain both of these approaches:
 
 {% snippet faqs/galaxy/histories_list.md %}
 
