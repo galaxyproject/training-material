@@ -116,7 +116,7 @@ All of the panels in RStudio have configuration options. For example, you can mi
 > For more on running an R Script at the terminal see the dedicated [Software Carpentry lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
 {: .comment}
 
-## How to call functions in R, without needing to master them?
+## How to call functions in R, without needing to become proficient in them?
 
 A function in R (or any computing language) is a short program that takes some input and returns some output.
 

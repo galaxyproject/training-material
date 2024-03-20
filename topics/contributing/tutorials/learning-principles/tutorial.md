@@ -579,7 +579,11 @@ Teaching seeks to impart knowledge and provide information, while training is in
 - **Teach**: to provide knowledge, instruction or information
 - **Train**: to develop abilities through practice with instruction or supervision
 
+<!-- vale gtn.inclusive = NO -->
+
 For example, it is possible to teach someone about buoyancy, fluid dynamics, water displacement and coastline safety, but that knowledge will not make them a good swimmer. Specific, practical and applied training is necessary to use abstract knowledge to learn or master a skill. In many cases, teaching and training are complementary. Vocational training programs often combine teaching and training quite nicely.
+
+<!-- vale gtn.inclusive = YES -->
 
 # Conclusion
 

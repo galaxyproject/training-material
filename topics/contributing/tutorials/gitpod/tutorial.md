@@ -33,6 +33,7 @@ If you are working on your own training materials and want preview them online w
 # Setting up Gitpod
 
 
+<!-- vale gtn.inclusive = NO -->
 > <hands-on-title>Setting up GitPod</hands-on-title>
 >
 > 1. **Create a fork** of the GTN GitHub repository

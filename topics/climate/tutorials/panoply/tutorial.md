@@ -51,7 +51,7 @@ In this tutorial, you will learn to:
 > <comment-title>Background</comment-title>
 >
 >There are many online services to get climate data, and it is often difficult to know which ones are up-to date and which resources to trust.
-> Different services provide different Application Programming Interfaces (API), use different terminologies, different file formats etc., which make it difficult for new users to master them all.
+> Different services provide different Application Programming Interfaces (API), use different terminologies, different file formats etc., which make it difficult for new users to become proficient in all of them.
 > Therefore in this tutorial, we will be focusing on the usage of Climate data in [Network Common data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF) because it is the most common data format for storing Climate data.
 > We will be using a freely available dataset containing Essential Climate Variables (sea ice area fraction, surface temperature) from [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/#!/home). We will learn to use panoply to visualize the sea ice area fraction over the poles (southern and northern poles) and surface temperatures for two different years (1979 and 2018).
 {:  .comment}
