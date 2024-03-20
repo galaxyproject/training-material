@@ -12,3 +12,4 @@ Click the {% icon new-history %} icon at the top of the history panel:
 ![UI for creating new history]({% link shared/images/history_create_new.svg %})
 
 
+<!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing -->

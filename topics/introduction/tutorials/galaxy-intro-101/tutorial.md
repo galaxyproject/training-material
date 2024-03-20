@@ -77,7 +77,7 @@ The Galaxy interface consists of three main parts:
 3. Your analysis **History** is recorded on the right
 
 
-> ![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>")
+> ![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. On top of the main three you also see the 'Activityy bar' that can turned on and off._history")
 {: .comment}
 
 When you start Galaxy for very first time, your history will be empty. Let's add some data to it.
@@ -90,7 +90,7 @@ When you start Galaxy for very first time, your history will be empty. Let's add
 >
 > 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is *Unnamed history*) and typing **Galaxy 101** as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.
 >
->    ![Rename the history](../../../../shared/images/rename_history.png)
+>    ![Rename the history](../../../../shared/images/rename_history.svg)
 >
 {: .hands_on}
 
@@ -103,7 +103,7 @@ First we need to get some data into our history. You can upload files from your 
 >
 >    ![upload data button](../../images/upload-data.png)
 >
->    This brings up a box:
+>    This brings up the upload interface:
 >
 >    ![filebox](../../images/upload-box.png)
 >
@@ -246,14 +246,8 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >    - *"File B to intersect with A"*: `SNPs`
 >    - *"What should be written to the output file?"*: `Write the original entry in B for each overlap...`, which means that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 >
->  The interface of the tool should look like this:
->
+>    The interface of the tool should look like this:
 >    ![Bedtool intersect interval interface](../../images/101_bed_intersect_interface.png)
->
->    > <tip-title>How do I use this tool?</tip-title>
->    > All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.
->    {: .tip}
->
 >
 > 2. Click **Run Tool**
 > 3. Wait for the job to finish
@@ -262,15 +256,18 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
 >    Here column 4 contains exon IDs (e.g., `ENST00000252835.5_cds_0_0_chr22_15528159_f`) and column 10 lists SNP IDs (e.g., `rs9617249`) Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!
+>    > <tip-title>Where do I find tool documentation?</tip-title>
+>    > All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.
+>    {: .tip}
 >
-> > <comment-title>If things didn't work...</comment-title>
-> >
-> > Did the Intersect tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
-> >
-> >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
-> >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
-> >  * Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions
-> {: .comment}
+>    > <comment-title>If things didn't work...</comment-title>
+>    >
+>    > Did the Intersect tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
+>    >
+>    >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
+>    >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
+>    >  * Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions
+>    {: .comment}
 >
 {: .hands_on}
 
