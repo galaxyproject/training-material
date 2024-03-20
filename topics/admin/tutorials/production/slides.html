@@ -113,7 +113,7 @@ users see. It is a good idea to extend it with things like:
 option | description
 ---- | ----
 `sanitize_all_html` | by default, Galaxy sanitizes all "text/html" tool outputs. Setting to false potentially exposes users to XSS attacks.
-`sanitize_whitelist_file` | manually override html sanitization for listed tools. Can set in admin interface.
+`sanitize_allowlist_file` | manually override html sanitization for listed tools. Can set in admin interface.
 `serve_xss_vulnerable_mimetypes` | certain filetypes (e.g. SVG) can contain JS that is vulnerable to XSS (Cross-site scripting) and are served as "plain/text" by default.
 `allowed_origin_hostnames` | Returns Access-Control-Allow-Origin response header that matches the Origin header of the request.
 
@@ -122,7 +122,7 @@ option | description
 
 - Some tools produce HTML or SVG outputs.
 - By default, galaxy sanitizes these files, as malicious ones could be used to attack users.
-- If there are some tools you trust like fastqc, you might want to whitelist them.
+- If there are some tools you trust like fastqc, you might want to allow list them.
 
 ---
 # Debugging

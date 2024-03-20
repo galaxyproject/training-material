@@ -68,6 +68,8 @@ The 10X barcoded gel beads consist of a pool barcodes which are used to separate
 
 Though there are approximately 3 million 10x gel barcodes used, the amount actually qualitatively profiled in a sample is ~10,000 due to majority of droplets (>90%) being empty in order to ensure that the remainder contains only one cell.
 
+<!-- vale gtn.inclusive = NO -->
+
 > <details-title>Whitelist Barcodes</details-title>
 >
 > There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with ~3,7 million barcodes.

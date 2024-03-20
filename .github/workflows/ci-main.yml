@@ -73,3 +73,8 @@ jobs:
           reporter: github-pr-review
           rubocop_flags: --except Layout/LineLength,Lint/RedundantCopDisableDirective
           fail_on_error: true
+
+      - name: vale prose & style checking
+        uses: errata-ai/vale-action@reviewdog
+        with:
+          fail_on_error: false

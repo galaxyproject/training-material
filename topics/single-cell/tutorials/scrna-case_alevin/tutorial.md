@@ -249,6 +249,8 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 > The main parameter that needs changing for a 10X Chromium sample is the 'Protocol' parameter of Alevin. Just select the correct 10x Chemistry there instead.
 {: .comment}
 
+<!-- vale gtn.inclusive = NO -->
+
 > <comment-title>Alevin file names</comment-title>
 >
 > You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*.
