@@ -252,9 +252,9 @@ Use ODV outputs as DIVAnd input.
 > <hands-on-title>Navigate the jupyterlab</hands-on-title>
 > 1.Once in the jupyterlab, go in the **Notebooks** folder.
 > 2. There open a terminal window and write :
-> ```bash
-> wget https://raw.githubusercontent.com/fair-ease/Divand-Galaxy-ext/main/90-analysis-shorten.ipynb
-> ```
+>    ```bash
+>    wget https://raw.githubusercontent.com/fair-ease/Divand-Galaxy-ext/main/90-analysis-shorten.ipynb
+>    ```
 > 3. Run the entire notebook.
 >
 > In the first ouputs folder (at the root of the jupyterlab folders), you should now have one netcdf file "Water_body_Phosphate_Mediterranean".
