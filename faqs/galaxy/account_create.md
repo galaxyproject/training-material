@@ -23,7 +23,7 @@ contributors: [jennaj, bernandez, samanthaanjei, wm75]
 
 3. On the login page, find the **Register here** link and click on it.
 
-5. Fill in the the registration form, then click on **Create**.
+5. Fill in the registration form, then click on **Create**.
 
    Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.
 

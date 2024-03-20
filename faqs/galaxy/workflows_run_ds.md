@@ -25,7 +25,7 @@ Click here to run <a href="https://my.galaxy.training/?path=/workflows/trs_impor
 
 1. Go to [Workflow → Import](https://my.galaxy.training/?path=/workflows/import) in your Galaxy
 2. Switch tabs to TRS ID
-3. Ensure the TRS server is set to "dockstore.org"
+3. Ensure the TRS server is set to "Dockstore.org"
 4. Provide your workflow hub ID
 
 {% endif %}

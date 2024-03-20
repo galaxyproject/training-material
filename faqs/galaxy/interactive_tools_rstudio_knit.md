@@ -12,7 +12,7 @@ One of the other nice features of RMarkdown documents is making lovely presentat
 
 Now you're **ready to preview the document**:
 
-![screenshot of preview dropdown with options like preview, knit to html, knit to pdf, knit to word]({% link topics/data-science/images/rstudio/r-preview.png %})
+![screenshot of preview dropdown with options like preview, knit to HTML, knit to PDF, knit to word]({% link topics/data-science/images/rstudio/r-preview.png %})
 
 **Click Preview**. A window will popup with a preview of the rendered verison of this document.
 

@@ -8,7 +8,7 @@ contributors: [nekrut]
 
 [Dockstore](https://dockstore.org/) is a free and open source platform for sharing reusable and scalable analytical tools and workflows.
 
-1. Go to [DockStore](https://dockstore.org).
+1. Go to [Dockstore](https://dockstore.org).
 2. Select any Galaxy workflow you want to import.
 3. Click on "Galaxy" dropdown within the "Launch with" panel located in the upper right corner.
 4. Select a galaxy instance you want to launch this workflow with.

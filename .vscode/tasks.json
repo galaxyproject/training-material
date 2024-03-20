@@ -38,6 +38,28 @@
             }
         },
         {
+            "label": "GTN: Prose Linting",
+            "command": "vale",
+            "args": [
+                "--output", "line", "faqs/galaxy/*.md"
+            ],
+            "problemMatcher": {
+                "owner": "vale",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):(.*):(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "reporter": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
             "label": "GTN: Lint",
             "type": "shell",
             "command": "make lint ACTIVATE_ENV=pwd",

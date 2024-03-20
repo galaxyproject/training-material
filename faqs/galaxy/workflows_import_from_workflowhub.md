@@ -15,7 +15,7 @@ contributors: [gallardoalba, abueg, nekrut]
 1. Click on the **Workflow** menu, located in the top bar.
 2. Click on the **Import** button, located in the right corner.
 3. In the section "Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)", click on **Search form**.
-4. In the **TRS Server: *workflowhub.eu*** menu you should type {% if include.filter %}`{{ include.filter }}`{% else %}your query.{% endif %}
+4. In the **TRS Server: *WorkflowHub.eu*** menu you should type {% if include.filter %}`{{ include.filter }}`{% else %}your query.{% endif %}
    ![galaxy TRS workflow search field, name:vgp is entered in the search bar, and five different workflows all labelled VGP are listed]({% link topics/assembly/images/vgp_assembly/workflow_list.png %})
 5. Click on the desired workflow, and finally select the latest available version.
 
