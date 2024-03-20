@@ -451,21 +451,7 @@ scp -i $PRIV_KEY \
 
 Similar to the Apollo builder but it uploads outputs as GitHub releases which is useful for public projects with complex build pipelines. The CSB takes on average 5-6 hours to run so we cannot easily run this on free infrastructure.
 
-Here we store both the [build](https://github.com/hexylena/chado-schema-builder/blob/master/.ci/run.sh) and [deploy](https://github.com/hexylena/chado-schema-builder/blob/master/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
-
-### Job: Website
-
-We build our own Jekyll website because we have some plugins GitHub will not compile for us. The configuration here is more complex:
-
-- Throttle builds, since GitHub will only accept so many deploy requests in a time period
-- One SSH key used to clone the repository using the Git SCM, with "Wipe out repository & force clone" set.
-- Triggers on both:
-  - Cron, daily
-  - GitHub webhooks notifying us of pushes to master
-- SSH Agent is configured with a deploy SSH key (because git really prefers you provide keys in the SSH agent, I don't know if it is possible to pass a keyfile on the CLI)
-- The [.build.sh](https://github.com/usegalaxy-eu/website/blob/master/.build.sh) is run which activates the RVM pre-installed on the VMs
-- If the master branch is checked out, [`.publish.sh`](https://github.com/usegalaxy-eu/website/blob/master/.publish.sh) is run
-- Empty [`.nojekyll`](https://github.com/usegalaxy-eu/website/blob/master/.nojekyll) file to prevent GitHub from trying to build this.
+Here we store both the [build](https://github.com/galaxy-genome-annotation/chado-schema-builder/blob/main/.ci/run.sh) and [deploy](https://github.com/galaxy-genome-annotation/chado-schema-builder/blob/main/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
 
 ### Job: Install Tools
 
