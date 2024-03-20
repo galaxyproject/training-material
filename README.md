@@ -1,4 +1,4 @@
-<img src="./shared/images/GTNLogo1000.png" alt="GTN logo, a star on a coloured circle with the text Galaxy Training Network at an upward angle." width="400"  align="right" />
+<img src="./shared/images/GTNLogo1000.png" alt="Galaxy Training Network logo, a star on a coloured circle with the text Galaxy Training Network at an upward angle." width="400"  align="right" />
 
 # Galaxy Training Material [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/training-material.svg)](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -20,4 +20,4 @@ The code behind the infrastructure is licensed under the [MIT License](LICENSE.m
 
 ## Acknowledgment and Funding
 
-We would like to thank all contributors, especially those mentioned in the [Contributors list](https://training.galaxyproject.org/training-material/hall-of-fame), the Galaxy community for their constant support, and our funding partners listed in [the GTN](https://training.galaxyproject.org/#acknowledgment-and-funding)
+We would like to thank all contributors, especially those mentioned in the [Contributors list](https://training.galaxyproject.org/training-material/hall-of-fame), the Galaxy community for their constant support, and our funding partners listed in [the Galaxy Training Network (GTN)](https://training.galaxyproject.org/#acknowledgment-and-funding)
