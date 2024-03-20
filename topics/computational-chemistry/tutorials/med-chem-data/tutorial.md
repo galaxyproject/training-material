@@ -31,8 +31,11 @@ tags:
 contributions:
   authorship:
     - wee-snufkin
+    - kkamieniecka
+    - poterlowicz-lab
   funding:
-    - elixir-fair-data
+      - ELIXIR-UK-DaSH
+subtopic: fair-data
 
 requirements:
   - type: "internal"
