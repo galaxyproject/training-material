@@ -85,7 +85,7 @@ Each Argo probe is an autonomous, free drifting, profiling float, i.e. a probe t
 
 ![Schema of a typical 10 days program, cycle, of an Argo float](../../images/argo_pangeo/argofloats_cycle.png "10 days program, cycle, of an Argo float")
 
-Here we will focus on the Caribbean sea surrounding the Antilles during April and May. The 9th of April 2021 an eruption of the volcano La Soufriere Saint Vincent (Antilles) occured. Another tutorials on this event is available on the [Galaxy Training Network]{% link topics/climate/tutorials/sentinel5_data/tutorial.md %}.
+Here we will focus on the Caribbean sea surrounding the Antilles during April and May. The 9th of April 2021 an eruption of the volcano La Soufriere Saint Vincent (Antilles) occured. Another tutorials on this event is available on the [Galaxy Training Network]({% link topics/climate/tutorials/sentinel5_data/tutorial.md %}).
 
 ## Get Argo data
 
