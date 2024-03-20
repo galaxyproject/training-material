@@ -33,29 +33,6 @@ subtopic: maintenance
 - We will now cover many of the configuration options which are necessary for production.
 
 ---
-class: reduce90
-
-# Configuring uWSGI
-
-Important options in the `uwsgi` section of `galaxy.yml`
-
-option | description
----- | ----
-`http` | port and IP on which to listen for HTTP requests, `:8080` for port `8080` on all network interfaces. **For a production server, you should use `socket:` and a proxy server**.
-`socket` | port and IP on which to listen for uWSGI protocol requests, `127.0.0.1:8000` for port `8000` on localhost.
-`processes` | number of uWSGI *web workers*.
-`threads` | number of threads for each web worker.
-`offload-threads` | number of threads for internal routing requests, 1-2 is sufficient.
-`master` | use uWSGI master process manager, defaults to `false` for dev compatibility but should be `true` in production.
-`mule-reload-mercy` | time to gracefully wait for mule shutdown, set > `monitor_thread_join_timeout` galaxy option.
-
-???
-
-- Production servers should use socket instead of http in the uwsgi listen section.
-- This is because socket means using the uwsgi protocol which is more efficient.
-- Processes and threads can be set, but the defaults are usually good.
-
----
 # Securing your Object IDs
 
 * User facing object IDs
