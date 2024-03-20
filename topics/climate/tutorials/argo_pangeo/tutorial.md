@@ -11,6 +11,11 @@ objectives:
 - Learn to get temperature variations.
 - Learn to use an interactive tool to visualise Argo temperature variable on a interactive map.
 time_estimation: 1H
+requirements:
+  - type: "internal"
+    topic_name: introduction
+    tutorials:
+      - galaxy-intro-short
 key_points:
 - Argo data
 - Pangeo Ecosystem
