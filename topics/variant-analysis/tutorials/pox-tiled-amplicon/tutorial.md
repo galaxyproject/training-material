@@ -805,19 +805,16 @@ This leaves us with the tasks of obtaining the sequence for parent P1 (accession
 >    3. When the Replace Text tool run is finished, **rename** the output dataset
 >
 >       {% snippet faqs/galaxy/datasets_rename.md name="Herbivac sequence" format="fasta" %}
-> 2. {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %}
->    - {% icon param-files %} *"Datasets to concatenate"*: the `Herbivac sequence`; renamed output of **Replace**
->    - In *"Dataset"*:
->      - {% icon param-repeat %} *"Insert Dataset"*
->        - {% icon param-collection %} *"Select"*: collection of consensus sequences; output of **ivar consensus**
->      - {% icon param-repeat %} *"Insert Dataset"*
->        - {% icon param-files %} *"Select"*: the `LSDV reference`
->
->    {% snippet faqs/galaxy/analysis_concatenate.md toolspec="#2" %}
-> 3. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0) %}
->    - {% icon param-file %} *"Sequences to align"*: Multi-fasta dataset with four sequences; output of **Concatenate**
->    - *"Data type"*: `Nucleic acids`
->    - *"Matrix selection"*: `No matrix`
+> 2. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.520+galaxy0) %}
+>    - *"For multiple inputs generate"*: `a single MSA of all sequences from all inputs`
+>      - In *"Input batch"*:
+>        - {% icon param-repeat %} *"1: Input batch"*
+>          - {% icon param-files %} *"Sequences to align"*: the `Herbivac sequence`; renamed output of **Replace**
+>        - {% icon param-repeat %} *"2: Input batch"*
+>          - {% icon param-collection %} *"Sequences to align"*: collection of consensus sequences; output of **ivar consensus**
+>        - {% icon param-repeat %} *"3: Input batch"*
+>          - {% icon param-files %} *"Sequences to align"*: the `LSDV reference`
+>    - *"Type of sequences"*: `Nucleic acids`
 >
 {: .hands_on}
 
