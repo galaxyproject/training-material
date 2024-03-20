@@ -85,6 +85,7 @@ Once you finish your work on ODV, if you want to retrieve data and/or the entire
 > 2. Import a ODV collection as a zip folder.
 > 
 >    Use this link `https://github.com/fair-ease/Data-for-Galaxy-/raw/main/Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip` in the folowing instructions.
+>    And **Name** it **Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip**
 >    
 >    {% snippet  faqs/galaxy/datasets_import_via_link.md %}
 >
