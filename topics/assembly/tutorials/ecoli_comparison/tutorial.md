@@ -826,8 +826,8 @@ Earlier we [downloaded](#hands-on-uploading-sequences-and-annotations) gene anno
 
 
 Our objective is to convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`, then
-we will produce a collection with three datasets just like the original `Genes` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#comment-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`.
-Finally we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand), and then we can add the genome name.
+we will produce a collection with three datasets just like the original `Genes` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#comment-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a column that will always have a value of `0`.
+Finally we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (new column we just created), and c10 (strand), and then we can add the genome name.
 
 > <hands-on-title>Extract CDSs from annotation datasets</hands-on-title>
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:

@@ -483,13 +483,13 @@ Identify observable and non observable actions (verbs)
 >    1. Take a course you currently run, plan to run or have run in the
 >       past
 >    2. Take your favorite tutorial from the [GTN Material]({{ site.baseurl }})
->    3. Take the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %})
+>    3. Take the [placeholder tutorial]({% link topics/introduction/tutorials/placeholder/tutorial.md %})
 >       introducing to data import, that we created for this lesson
 >
 > 2. Check the content
 > 3. Are its intended LOs stated?
 >
->    > <solution-title>for any GTN tutorials, including the dummy one</solution-title>
+>    > <solution-title>for any GTN tutorials, including the placeholder one</solution-title>
 >    >
 >    > LOs are always stated on the top for the tutorial, in the Overview box
 >    >
@@ -724,12 +724,12 @@ to learning or how they will help move learners towards the LOs.**
 > <question-title>Evaluate LEs in GTN tutorials</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
->   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
+>   [placeholder tutorial]({% link topics/introduction/tutorials/placeholder/tutorial.md %}))
 >
 > - Are any of the LEs listed in Table 1 used in the course or tutorial you
 >   selected?
 >
->   > <solution-title>for GTN tutorial, including the dummy one</solution-title>
+>   > <solution-title>for GTN tutorial, including the placeholder one</solution-title>
 >   >
 >   > Most of the GTN tutorials are using Practical and Exercises as LEs.
 >   >
@@ -738,7 +738,7 @@ to learning or how they will help move learners towards the LOs.**
 > - What kinds of achievement or learning are they most likely to promote?
 >   Is this consistent with the stated LOs?
 >
->   > <solution-title>for GTN tutorial, including the dummy one</solution-title>
+>   > <solution-title>for GTN tutorial, including the placeholder one</solution-title>
 >   >
 >   > They are most likely to show how to do things and give an idea of how a tool
 >   > work.
@@ -748,7 +748,7 @@ to learning or how they will help move learners towards the LOs.**
 > - Does the course or tutorial have any LO that can't be achieved through the
 >   LEs that the course currently uses?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
+>   > <solution-title>for the placeholder tutorial</solution-title>
 >   >
 >   > "Determine the best strategy to get data into Galaxy" may not be achieved
 >   > with only practical
@@ -761,7 +761,7 @@ to learning or how they will help move learners towards the LOs.**
 > >
 > > They are most likely to show how to do things and give an idea of how a tool works.
 > >
-> > In the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}),
+> > In the [placeholder tutorial]({% link topics/introduction/tutorials/placeholder/tutorial.md %}),
 > > the LO "Determine the best strategy to get data into Galaxy" may not be achieved
 > > with only practical
 > >
@@ -815,12 +815,12 @@ intended and actual curricula
 <!-- >> <question-title>Evaluate content</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
->   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
+>   [placeholder tutorial]({% link topics/introduction/tutorials/placeholder/tutorial.md %}))
 >
 > - Review the LOs and identify which parts of the course content support the
 >   LOs
 >
->   > <solution-title>for the dummy tutorial</solution-title>
+>   > <solution-title>for the placeholder tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -829,28 +829,28 @@ intended and actual curricula
 >   delivered & those specific items of content (e.g., item A supports LO 1, &
 >   will be delivered using a lecture)
 >
->   > <solution-title>for the dummy tutorial</solution-title>
+>   > <solution-title>for the placeholder tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there any piece of content that doesn't support any LO(s)?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
+>   > <solution-title>for the placeholder tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there at least one piece of content for each LO?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
+>   > <solution-title>for the placeholder tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there at least one LE for each piece of content?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
+>   > <solution-title>for the placeholder tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -1063,7 +1063,7 @@ specifically needs to be assessed and why.**
 > <question-title>Evaluate assessment</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
->   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
+>   [placeholder tutorial]({% link topics/introduction/tutorials/placeholder/tutorial.md %}))
 >
 > - How much formative assessment have been used?
 > - Does it paint a consistent picture of learning levels for the course?
@@ -1167,11 +1167,11 @@ LOs**.
 
 > <question-title>Evaluate effectiveness</question-title>
 >
-> - Think of the course or tutorial you selected before (*e.g.*, the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
+> - Think of the course or tutorial you selected before (*e.g.*, the [placeholder tutorial]({% link topics/introduction/tutorials/placeholder/tutorial.md %}))
 >
 > - Do you evaluate its effectiveness?
 >
->   > <solution-title>for the dummy tutorial</solution-title>
+>   > <solution-title>for the placeholder tutorial</solution-title>
 >   >
 >   > - Embeded feedback form
 >   > - Collecting feedback at the end of courses
@@ -1331,7 +1331,7 @@ training materials (slides, exercises, datasets, etc) should also be FAIR
 > <question-title>Is GTN material FAIR?</question-title>
 >
 > - Look at the any GTN tutorial (*e.g.*, the
->   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
+>   [placeholder tutorial]({% link topics/introduction/tutorials/placeholder/tutorial.md %}))
 >
 > - Is this training material FAIR ? If so, how?
 >

@@ -42,7 +42,7 @@ MicroRNAs (miRNAs), mainly 20–22 nucleotide small RNAs (sRNAs), are characteri
 ![fig2:miRNA biosynthesis](../../images/transcriptomics_images/plant_mirna_synthesis.png "Plant miRNA biosynthesis, homeostasis and mechanisms of action ({% cite Wang2019 %}).")
 
 
-miRNAs have been found to be important regulators of many physiological processes, such as stress and hormonal responses. Four factors justify the miRNAs to be considered as master regulators of the plant response to the surrounding environment:
+miRNAs have been found to be important regulators of many physiological processes, such as stress and hormonal responses. Four factors justify the miRNAs to be considered as main regulators of the plant response to the surrounding environment:
 
 - Multiple miRNA genes are regulated under given environmental conditions
 - Computational predictions estimate that each miRNA regulates hundreds of genes

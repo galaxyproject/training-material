@@ -662,7 +662,7 @@ Luckily, and importantly, we don’t see the double negative or mature T-cells b
 {: .tip}
 
 
-Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very distinct, so we could consider stronger filtering. Let's take a look at gene expression of a gene we know should not be expressed in tCells as a sanity check:
+Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very distinct, so we could consider stronger filtering. Let's take a look at gene expression of a gene we know should not be expressed in tCells as a quick check:
 
 ```r
 FeaturePlot(object = filtered_srt, reduction = "umap", features = "Hba-a1")

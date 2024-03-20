@@ -424,7 +424,7 @@ The alternative to the above approach is
 1. Export
 2. git rebase and make the corresponding change in the history
 3. Let the rebase finish
-4. Insert a 'dummy' diff (raw/open code+diff/endraw/close code/data-commit tag) without any content and then run `import` which should insert it in the correct place.
+4. Insert a placeholder diff (raw/open code+diff/endraw/close code/data-commit tag) without any content and then run `import` which should insert it in the correct place.
 
 # Errors that can occur and how to fix them
 

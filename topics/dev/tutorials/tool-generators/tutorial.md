@@ -377,7 +377,7 @@ Bash was used for this demonstration. Literally any scripting language, or any o
 >   - While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
 > - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debug your scripts.
 > - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended.
->      - You will know exactly what to expect from the tool test for a first sanity check.
+>      - You will know exactly what to expect from the tool test for a first quick check.
 > - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 {: .comment}
 

@@ -1320,7 +1320,7 @@ Look at the `birth_day` column. It has values in a format like `12 December`. Su
 
 We can remove columns from a table using either {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} if your table has a header line, or {% tool [Cut columns from a table]({{version_cut_columns}}) %} if it does not (in this case we just indicate columns by their number). These tools can also be used to change the order of columns in your file. There is also the tool {% tool [Advanced Cut columns from a table]({{version_cut_advanced}}) %} that offers a few more options.
 
-To do the reverse, adding one or more columns, we can use the {% tool [Paste]({{version_paste}}) %} tool. This assumes we have the same number of rows in both files, already in the correct order. It is a very "dumb" tool that simple combines the two files next to each other.
+To do the reverse, adding one or more columns, we can use the {% tool [Paste]({{version_paste}}) %} tool. This assumes we have the same number of rows in both files, already in the correct order. It is a very simple tool that combines the two files next to each other.
 
 
 > <hands-on-title>Remove columns</hands-on-title>

@@ -123,7 +123,7 @@ or other complex tool XML constructs outside the `<command>` section, that are n
     - While some simple requirements may be manageable, complex ones will not be suitable for the ToolFactory.
 - Compared to the more usual linux shell and text editor, the ToolFactory appliance is a rather clumsy way to debug scripts.
     - Starting a new ToolFactory tool with a know good command line and data is strongly recommended.
-      - You will know exactly what to expect from the tool test for a first sanity check.
+      - You will know exactly what to expect from the tool test for a first quick check.
     - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use
       - other than for learning about Galaxy tools.
 - The ToolFactory Appliance is for developers and code-writing scientists not yet familiar with the more flexible and complex manual tools, and who need to wrap scripts that are simple

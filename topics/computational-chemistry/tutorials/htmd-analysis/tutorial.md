@@ -132,7 +132,7 @@ Firstly, we need to calculate the topology for the protein file. We will use the
 >    > A force field is essentially a function to calculate the potential energy of a system, based on various empirical parameters (for the atoms, bonds, charges, dihedral angles and so on). There are a number of families of forcefields; some of the most commonly used include CHARMM, AMBER, GROMOS and OpenFF (for a recent, accessible overview see ({% cite Lemkul2020 %}).
 >    >
 >    >
->    > A wide range of models exist for modeling water. Here we are using the common TIP3P model, which is an example of a 'three-site model' - so-called because the molecule is modeled using three points, corresponding to the three atoms of water. (Four- and five-site models include additional 'dummy atoms' representing the negative charges of the lone pairs of the oxygen atom).
+>    > A wide range of models exist for modeling water. Here we are using the common TIP3P model, which is an example of a 'three-site model' - so-called because the molecule is modeled using three points, corresponding to the three atoms of water. (Four- and five-site models include additional 'placeholder atoms' representing the negative charges of the lone pairs of the oxygen atom).
 >    {: .comment}
 >
 {: .hands_on}

@@ -212,7 +212,7 @@ outputs.
 >   - **Specify Advanced PeptideShaker Processing Options**: `Default Processing Options`
 >   - **Specify Advanced Filtering Options**: `Advanced Filtering Options`
 >   - **Maximum Precursor Error Type**: `Daltons`
->   - **Specify Contact Information for mzIdendML**: You can leave the default dummy options for now, but feel free to enter custom contact information.
+>   - **Specify Contact Information for mzIdendML**: You can leave the default options for now, but feel free to enter custom contact information.
 >   - **Include the protein sequences in mzIdentML**: `No`
 >   - **Output options**: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
 >

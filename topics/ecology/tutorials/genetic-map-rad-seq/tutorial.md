@@ -242,7 +242,7 @@ One line by locus, one column by individual (aa, ab, AB if automatic correction 
 > 2. Re-execute **Stacks: De novo map** pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?
 >
 > > <solution-title></solution-title>
-> > 1. This value of 3 is important to use if we don't want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.
+> > 1. This value of 3 is important to use if we don't want to remove loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.
 > > 2. We see a moficiation of the number of unverified haplotypes
 > {: .solution }
 {: .question}

@@ -144,7 +144,7 @@ When the file has uploaded to Galaxy, it will turn green.
 > 1. Import history from: [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/short-introduction-to-galaxy--input)
 >
 >    {% snippet faqs/galaxy/histories_import.md %}
-> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+> 2. **Rename** {% icon galaxy-pencil %} the history to your name of choice.
 >
 {: .details}
 
@@ -199,7 +199,7 @@ We will now look at the output dataset called *FastQC on data 1: Webpage*.
 >
 >    The information is displayed in the central panel
 >
->    ![Graph from fastqc's report. fastqc's images themselves are inaccessible, but this graph shows overall mostly green (good) sequences scores across the length of the read.](../../images/fastqc-out.png){:width="620px"}
+>    ![Graph from FastQC's report. FastQC's images themselves are inaccessible, but this graph shows overall mostly green (good) sequences scores across the length of the read.](../../images/fastqc-out.png){:width="620px"}
 {: .hands_on}
 
 This tool has summarised information about all of the reads in our FASTQ file.
@@ -318,7 +318,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 >
->    ![Selection of steps for Extract Workflow from history. All three of fastqc, filter by quality, and the second filter by quality are selected.](../../images/intro_short_workflow_extract.png)
+>    ![Selection of steps for Extract Workflow from history. All three of FastQC, filter by quality, and the second filter by quality are selected.](../../images/intro_short_workflow_extract.png)
 >
 > 3. Replace the **Workflow name** to something more descriptive, for example: `QC and filtering`.
 >
