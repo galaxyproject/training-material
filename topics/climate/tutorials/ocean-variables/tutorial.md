@@ -82,12 +82,14 @@ Once you finish your work on ODV, if you want to retrieve data and/or the entire
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 > 
-> 2. Import a ODV collection data locally as a zip folder.
->
->    {% snippet  faqs/galaxy/datasets_upload.md %}
+> 2. Import a ODV collection as a zip folder.
+> 
+>    Use this link `https://github.com/fair-ease/Data-for-Galaxy-/raw/main/Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip` in the folowing instructions.
+>    
+>    {% snippet  faqs/galaxy/datasets_import_via_link.md %}
 >
 >  
-> 3. {% tool [Ocean Data View](interactive_tool_odv) %} with the following parameters:
+> 4. {% tool [Ocean Data View](interactive_tool_odv) %} with the following parameters:
 >    - *"Select if you are using an ODV collection in a zip folder or if you have your own raw data"*: `The data you are using are an ODV collection in a zip folder`
 >    - *"ODV collection in a zip folder."*: `Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip`
 >
