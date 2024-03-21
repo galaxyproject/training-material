@@ -113,7 +113,7 @@ In ({% cite Veber2002 %}) we read that the commonly applied molecular weight cut
 
 Have you ever wondered how new drugs are developed? It is actually quite a long and complex pathway and not only takes lots of time but also resources. The scheme below will help you understand the scale of that process.
 
-![A scheme showing drug discovery pipeline: starting from target identification, hit, lead, lead optimisation, pre-clinical testing, clinical evaluation in phases I - III, and finally regulatory approval. Lead optimisation also includes iterative steps of designing, making, testing and analysing the proposed compounds.](topics/computational-chemistry/images/medchem.png "A scheme showing drug discovery pipeline")
+![A scheme showing drug discovery pipeline: starting from target identification, hit, lead, lead optimisation, pre-clinical testing, clinical evaluation in phases I - III, and finally regulatory approval. Lead optimisation also includes iterative steps of designing, making, testing and analysing the proposed compounds.]({% link topics/computational-chemistry/images/medchem.png %} "A scheme showing drug discovery pipeline")
 
 As you can see, to get just one drug to the market, often thousands of structures are assessed to find the most effective and safe compound. That's lots of information being generated in the whole process! The information can be stored in repositories and databases so that subsequent drug discovery process in a similar area is easier, faster and cheaper. Managing big data and using machine learning and computational chemistry methods is crucial in the lead optimisation step. By reviewing chemical databases and studying molecular docking simulations, we can save much time and resources to synthesise only those compounds that are the most promising based on *in-silico* methods. Even after synthesising the optimised 'leads', we still get lots of data from tests and analyses. By using appropriate cheminformatic tools and software, we can use the results to drive forward this iterative process of lead optimisation.
 
@@ -270,9 +270,9 @@ Let's start with importing publicly available data. [Protein Data Bank](https://
 >
 > 1. Open [Protein Data Bank](https://www.rcsb.org/)
 > 2. Type your search term in the box *"Enter search term(s), Entry ID(s), or sequence"*: `MAO B`
-> ![A screenshot showing a search box in the upper right corner of the Protein Data Bank website.](topics/computational-chemistry/images/pdb_search.jpg "Search box of the Protein Data Bank")
+> ![A screenshot showing a search box in the upper right corner of the Protein Data Bank website.]({% link topics/computational-chemistry/images/pdb_search.jpg %} "Search box of the Protein Data Bank")
 >3. Choose the structure of interest and copy its accession code: 2BK3
-> ![A screenshot showing some of the resulting structures with their accession codes.](topics/computational-chemistry/images/pdb_results.jpg "How to get accession code of the resulting structures.")
+> ![A screenshot showing some of the resulting structures with their accession codes.]({% link topics/computational-chemistry/images/pdb_results.jpg %} "How to get accession code of the resulting structures.")
 >4. Switch to Galaxy
 >5. {% tool [Get PDB file](toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0) %} with the following parameters:
 >    - *"PDB accession code"*: `2BK3`
@@ -426,7 +426,7 @@ Let's repeat this step, but with Lipinski's Rule of Five which you learned about
 > >
 > > If you click on the dataset, you will see a short summary of how many molecules have been found.
 > > When we didn't apply any filters, the tool found 45 molecules. After applying Lipinski's Rule of Five filter, 36 molecules satisfied the rules. 
-> > ![Image showing the preview of the output datasets from searching benzenesulfonyl chloride substructures in the ChEMBL database, with and without Lipinski's Rule of Five filter.](topics/computational-chemistry/images/substructures.png "Preview showing the number of molecules found in the ChEMBL database, before and after applying Lipinski's Rule of Five filter")
+> > ![Image showing the preview of the output datasets from searching benzenesulfonyl chloride substructures in the ChEMBL database, with and without Lipinski's Rule of Five filter.]({% link topics/computational-chemistry/images/substructures.png %} "Preview showing the number of molecules found in the ChEMBL database, before and after applying Lipinski's Rule of Five filter")
 > >
 > {: .solution}
 >
