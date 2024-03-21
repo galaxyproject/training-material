@@ -4,11 +4,12 @@ description: Histories are an important part of Galaxy, most people use a new hi
 area: histories
 box_type: tip
 layout: faq
-contributors: [bebatut,wm75,shiltemann,hexylena,nomadscientist,nsoranzo]
+contributors: [bebatut,wm75,shiltemann,hexylena,nomadscientist,nsoranzo,nekrut]
 ---
 
-Click the {% icon new-history %} icon at the top of the history panel.
+Click the {% icon new-history %} icon at the top of the history panel:
 
-If the {% icon new-history %} is missing:
-1. Click on the {% icon galaxy-gear %} icon (**History options**) on the top of the history panel
-2. Select the option **Create New** from the menu
+![UI for creating new history]({% link shared/images/history_create_new.svg %})
+
+
+<!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing -->
