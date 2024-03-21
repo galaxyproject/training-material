@@ -25,11 +25,8 @@ key_points:
   - Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene metadata
 
 tags:
-  - single-cell
   - 10x
   - paper-replication
-  - español
-  - transcriptomics
 
 contributions:
   authorship:
@@ -49,9 +46,6 @@ requirements:
         - scrna-intro
         - scrna-umis
 
-translations:
-  - es
-
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 follow_up_training:
@@ -62,10 +56,6 @@ follow_up_training:
         - scrna-case_alevin-combine-datasets
 ---
 
-# Introduction
-
-
-<!-- This is a comment. -->
 
 This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each with 4 lines of text. Later on in analysis, this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
 
@@ -153,10 +143,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> <comment-title></comment-title>
-> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
-{: .comment}
+{% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
 ## Generate a transcript to gene map
 
@@ -264,7 +251,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > <comment-title>Alevin file names</comment-title>
 >
-> You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*. 
+> You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*.
 {: .comment}
 
 This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, but we're most interested in is:
@@ -532,7 +519,7 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 
 # Mitochondrial flagging
 
-We have assumed you will be combining multiple files - but if that's not the case, you'll need to perform this step to turn your column of `true` and `false` labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: [Mitochondrial calculations](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html#mitochondrial-reads).
+We have assumed you will be combining multiple files - but if that's not the case, you'll need to perform this step to turn your column of `true` and `false` labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: [Mitochondrial calculations]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}#mitochondrial-reads).
 
 # Conclusion
 
@@ -546,5 +533,4 @@ We have:
  * Deployed barcode rank plots as a way of quickly assessing the signal present in droplet datasets.
  * Applied the necessary conversion to pass these data to downstream processes.
 
- To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
- [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+{% snippet topics/single-cell/faqs/user_community_join.md %}
