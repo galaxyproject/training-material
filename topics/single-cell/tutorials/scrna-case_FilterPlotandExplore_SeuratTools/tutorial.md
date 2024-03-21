@@ -189,7 +189,7 @@ We can, and should, ask a number of questions about the quality of our data befo
 > - *"Fill by"*: `ident`
 {: .hands_on}
 
-![Violin Plot of Counts Split by Individual](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_individual_vln_plot.png "Violin Plot of counts split by individual.")
+![Violin Plot of Counts Split by Individual](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Individual_vln_plot.png "Violin Plot of counts split by individual.")
 
 This plot shows us the number of cells split by the individual (mouse) from which the cells came from. Now, depending on your experimental design, batch may be represented by something other than individual--like timepoint or even the wet lab researcher who isolated the cells.
 
@@ -219,7 +219,7 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
   > - *"Fill by"*: `ident`
   {: .hands_on}
 
-![Violin Plot of Counts Split by Sex](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_sex_vln_plot.png "Violin Plot of counts split by sex.")
+![Violin Plot of Counts Split by Sex](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Sex_vln_plot.png "Violin Plot of counts split by sex.")
 
 2. Genotype?
 
@@ -307,7 +307,7 @@ Although that would be fine, adding in a 3rd dimension (or, indeed, in our case,
 
 So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize: this is commonly referred to as preprocessing of the data and a typical scRNA-seq preprocessing pipeline will include the following steps: 
 
-1. Normalization 
+## 1. Normalization 
 
 What is Normalization?
 
@@ -321,7 +321,7 @@ Normalisation helps reduce the differences between gene and UMI counts by fittin
 > - *"Normalisation method"*: `Log Normalise`
 {: .hands_on}
 
-2. Identifying Variable Genes
+## 2. Identifying Variable Genes
 
 What are variable genes? 
 
@@ -341,7 +341,7 @@ This tool will output two new pieces of data into our Galaxy history: a new Seur
 
 This gene list may be used as a sneak peak into understanding what the dataset will look like! We can begin to understand which genes are going to be driving downstream clustering of our cells and maybe even make some decisions about whether we are happy with our filtering based on this list. 
 
-3. Scale Data 
+## 3. Scale Data 
 
 Now we will scale the data.
 
@@ -433,7 +433,7 @@ Let's now use the 15 PC threshold we chose from the Elbowplot and apply it to fi
 > - *"Dimensions"*: `1,2,3,4,5,6,7,8,9,10,11,12,13,14,15`
 > - *"Assay"*: `RNA`
 {: .hands_on}
--->
+
 Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another: we can identify and label clusters: 
 
 > <hands-on-title>Find Clusters </hands-on-title>
@@ -644,7 +644,7 @@ This looks pretty consistent with the Cd8b1 plot, which is expected as these are
 > - *"Feature"*: `Cd4`
 {: .hands_on}
 
-![FeaturePlot Cd4](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd4.png "FeaturePlot of Cd4")
+![FeaturePlot Cd4](../../images/scrna-case_FPE_SeuratTools/FeatuerePlot_Cd4.png "FeaturePlot of Cd4")
 
 Looks like the top portion of these clusters, and mainly cluster 1 hold the vast majority of Cd4 expression. This, coupled with Cd4 being identified as a marker of cluster 1 in our marker table above tells us pretty confidently that the upper part of this "body" cluster are likely the late middle t-cells! 
 
@@ -748,7 +748,7 @@ There doesn't visually appear to be any differences in sequencing depth across t
 > - *"Feature"*: `nCount_RNA`
 {: .hands_on}
 
-![FeaturePlot colored by counts](../../images/scrna-case_FPE_SeuratTools/FeaturePlog_nFeature.png "FeaturePlot colored by counts split by Individual")
+![FeaturePlot colored by counts](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_nCount.png "FeaturePlot colored by counts")
 
 There we go! This might explain the dramatic shift in early to middle T-Cell between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely accounts for the discernment between clusters 0, 4, 5, 6, and 7).
 
