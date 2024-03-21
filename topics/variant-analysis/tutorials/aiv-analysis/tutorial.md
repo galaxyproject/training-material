@@ -419,32 +419,26 @@ Now what if we cannot obtain a consensus base for a position with the above crit
 # Placing segments on a phylogenetic tree
 
 The next logical step after obtaining the consensus sequences of segments of our sample is to explore how those sequences are related to the sequences in our reference collection.
-To do so, we are going to combine the reference sequences of all segments with their corresponding consensus sequence into one multi-sequence fasta dataset per segment. Then we build a multiple sequence alignment (MSA) from the sequences of each segment, and use these alignments to generate phylogenetic trees, again one per segment. We are going to use two rather standard tools, **MAFFT** and **IQTree**, for generating MSAs and trees, respectively.
+To do so, we are going to combine the reference sequences of all segments with their corresponding consensus sequence into one multiple sequence alignment (MSA) per segment, and use these to generate phylogenetic trees, again one per segment. We are going to use two rather standard tools, **MAFFT** and **IQTree**, for generating MSAs and trees, respectively.
 
 > <hands-on-title>Exploring phylogeny</hands-on-title>
 >
-> 1. {% tool [Concatenate datasets](cat1) %}
->    - {% icon param-collection %} *"Concatenate Dataset"*: `References per segment (INSAFlu)`
->    - In *"Dataset"*:
->      - {% icon param-repeat %} *"Insert Dataset"*
->        - {% icon param-collection %} *"Select"*: collection of renamed consensus sequences; output of **Replace** on consensus sequences
+> 1. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.520+galaxy0) %}
+>    - *"For multiple inputs generate"*: `one or several MSAs depending on input structure`
+>      - In *"Input batch"*:
+>        - {% icon param-repeat %} *"1: Input batch"*
+>          - {% icon param-collection %} *"Sequences to align"*: collection of `References per segment (INSAFlu)`
+>        - {% icon param-repeat %} *"2: Input batch"*
+>          - {% icon param-collection %} *"Sequences to align"*: collection of renamed consensus sequences; output of **Replace** on consensus sequences
+>    - *"Type of sequences"*: `Nucleic acids`
 >
->    {% snippet faqs/galaxy/analysis_concatenate.md toolspec="#1" %}
+>    Because both input batches are collections of eight elements each, the result is also a collection of eight MSAs, each aligning all reference sequences of one genome segment plus the consensus sequence we have obtained for that segment against each other.
 >
->    The tool should produce a collection of eight multi-sequence fasta datasets, each of which has the generated consensus sequence for one segment concatenated to the INSAFlu reference sequences of that segment.
->
-> 2. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0) %}
->    - {% icon param-collection %} *"Sequences to align"*: collection of concatenated sequences; output of **Concatenate datasets**
->    - *"Data type"*: `Nucleic Acids`
->    - *"Matrix selection"*: `No matrix`
->
->    The result is a collection of MSAs, each aligning all reference sequences of one genome segment plus the consensus sequence we have obtained for that segment against each other.
->
-> 3. {% tool [IQ-TREE](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2) %}
+> 2. {% tool [IQ-TREE](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2) %}
 >    - {% icon param-collection %} *"Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format."*: output of **MAFFT**
 >    - *"Specify sequence type ..."*: `DNA`
 >
-> 4. {% icon galaxy-eye %} Explore each of the final trees produced by IQTree for the different segments
+> 3. {% icon galaxy-eye %} Explore each of the final trees produced by IQTree for the different segments
 >
 >    > <question-title></question-title>
 >    >

@@ -35,6 +35,7 @@ contributions:
     - bebatut
   funding:
     - gallantries
+subtopic: metagenomics
 tags:
   - assembly
   - metagenomics

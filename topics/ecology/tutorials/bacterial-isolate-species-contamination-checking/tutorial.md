@@ -18,7 +18,11 @@ tags:
 - bacteria
 - microgalaxy
 level: Introductory
-
+edam_ontology:
+- topic_3673 # Whole genome sequencing
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_3697 # Microbial ecology
 contributions:
   authorship:
   - bebatut

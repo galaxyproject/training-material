@@ -48,6 +48,11 @@ requirements:
       - annotation-with-prokka
 
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
 abbreviations:
   OGS: Official Gene Set
 ---

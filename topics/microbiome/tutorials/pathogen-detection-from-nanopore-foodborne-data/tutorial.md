@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition"
+subtopic: metagenomics
 tags:
     - microgalaxy
     - Nanopore data analysis
@@ -36,6 +37,13 @@ contributions:
     - eosc-life
 redirect_from:
     - /topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial
+edam_ontology:
+- topic_3174 # Metagenomics
+- topic_3305 # Public health and epidemiology
+- topic_0637 # Taxonomy
+- topic_0196 # Sequence assembly
+- topic_0634 # Pathology
+- topic_0080 # Sequence analysis
 ---
 
 

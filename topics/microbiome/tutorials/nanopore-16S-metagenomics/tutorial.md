@@ -16,11 +16,19 @@ key_points:
 - We preprocessed Nanopore sequences in order to improve their quality
 contributors:
 - gallardoalba
+subtopic: metabarcoding
 tags:
+  - metabarcoding
+  - 16S
   - nanopore
   - microgalaxy
 redirect_from:
   - /topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial
+edam_ontology:
+- topic_3697 # Microbial ecology
+- topic_0637 # Taxonomy
+- topic_0080 # Sequence analysis
+- topic_4038 # Metabarcoding
 ---
 
 

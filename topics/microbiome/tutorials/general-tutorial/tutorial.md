@@ -21,10 +21,17 @@ key_points:
 contributors:
   - shiltemann
   - bebatut
+subtopic: intro
 tags:
   - microgalaxy
 redirect_from:
   - /topics/metagenomics/tutorials/general-tutorial/tutorial
+edam_ontology:
+- topic_3174 # Metagenomics
+- topic_3697 # Microbial ecology
+- topic_0637 # Taxonomy
+- topic_0080 # Sequence analysis
+- topic_4038 # Metabarcoding
 ---
 
 
