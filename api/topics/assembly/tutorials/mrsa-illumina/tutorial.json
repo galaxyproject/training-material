@@ -112,8 +112,8 @@
       "name": "Genome Assembly of MRSA using Illumina MiSeq Data",
       "title": "Genome Assembly of MRSA using Illumina MiSeq Data",
       "test_results": null,
-      "modified": "2024-03-20 20:53:53 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nDRR187559_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nDRR187559_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  4eb6fa2b-b600-4eef-9bed-6408898c64bf[\"Output\\nfastp_json\"];\n  3 --> 4eb6fa2b-b600-4eef-9bed-6408898c64bf;\n  style 4eb6fa2b-b600-4eef-9bed-6408898c64bf stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Shovill\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  1c193f2f-e309-4338-9a24-718927ecdf37[\"Output\\nshovill_log\"];\n  5 --> 1c193f2f-e309-4338-9a24-718927ecdf37;\n  style 1c193f2f-e309-4338-9a24-718927ecdf37 stroke:#2c3143,stroke-width:4px;\n  6[\"Quast\"];\n  5 -->|contigs| 6;\n  b915adfb-bce8-452b-94db-c6463b8f0849[\"Output\\nquast_output\"];\n  6 --> b915adfb-bce8-452b-94db-c6463b8f0849;\n  style b915adfb-bce8-452b-94db-c6463b8f0849 stroke:#2c3143,stroke-width:4px;\n  7[\"Bandage Image\"];\n  5 -->|contigs_graph| 7;\n  8[\"Bandage Info\"];\n  5 -->|contigs_graph| 8;\n  0e7adedd-f616-4140-984d-6421ecbdf1e4[\"Output\\nbandage_info_output\"];\n  8 --> 0e7adedd-f616-4140-984d-6421ecbdf1e4;\n  style 0e7adedd-f616-4140-984d-6421ecbdf1e4 stroke:#2c3143,stroke-width:4px;"
+      "modified": "2024-03-21 00:05:30 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nDRR187559_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nDRR187559_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  cb2a4684-392d-4ddc-b70c-8c4aa1fa5abc[\"Output\\nfastp_json\"];\n  3 --> cb2a4684-392d-4ddc-b70c-8c4aa1fa5abc;\n  style cb2a4684-392d-4ddc-b70c-8c4aa1fa5abc stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Shovill\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  57590a7f-7871-4591-ad36-3c598f1dd98b[\"Output\\nshovill_log\"];\n  5 --> 57590a7f-7871-4591-ad36-3c598f1dd98b;\n  style 57590a7f-7871-4591-ad36-3c598f1dd98b stroke:#2c3143,stroke-width:4px;\n  6[\"Quast\"];\n  5 -->|contigs| 6;\n  413d5f6f-76f5-4bc2-92bf-b9a047bc79c0[\"Output\\nquast_output\"];\n  6 --> 413d5f6f-76f5-4bc2-92bf-b9a047bc79c0;\n  style 413d5f6f-76f5-4bc2-92bf-b9a047bc79c0 stroke:#2c3143,stroke-width:4px;\n  7[\"Bandage Image\"];\n  5 -->|contigs_graph| 7;\n  8[\"Bandage Info\"];\n  5 -->|contigs_graph| 8;\n  ff8469d4-378a-407a-a3ed-a50af463ac8a[\"Output\\nbandage_info_output\"];\n  8 --> ff8469d4-378a-407a-a3ed-a50af463ac8a;\n  style ff8469d4-378a-407a-a3ed-a50af463ac8a stroke:#2c3143,stroke-width:4px;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/mrsa-illumina/tutorial.json",
@@ -129,6 +129,11 @@
   ],
   "supported_servers": {
     "exact": [
+      {
+        "url": "https://galaxy.metacentrum.cz/",
+        "name": "MetaCentrum",
+        "usegalaxy": false
+      },
       {
         "url": "https://usegalaxy.eu",
         "name": "UseGalaxy.eu",
