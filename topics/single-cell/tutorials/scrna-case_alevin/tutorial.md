@@ -25,8 +25,11 @@ key_points:
   - Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene metadata
 
 tags:
+  - single-cell
   - 10x
   - paper-replication
+  - español
+  - transcriptomics
 
 contributions:
   authorship:
@@ -46,6 +49,9 @@ requirements:
         - scrna-intro
         - scrna-umis
 
+translations:
+  - es
+
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 follow_up_training:
@@ -56,6 +62,10 @@ follow_up_training:
         - scrna-case_alevin-combine-datasets
 ---
 
+# Introduction
+
+
+<!-- This is a comment. -->
 
 This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each with 4 lines of text. Later on in analysis, this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
 
@@ -120,7 +130,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Rename {% icon galaxy-pencil %} the datasets
+> 3. Rename {% icon galaxy-pencil %} the datasets: Change `SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k` to `N701-Read1` and `SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq` to `N701-Read2`.
 >
 {: .hands_on}
 
@@ -133,7 +143,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Read 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k) contains the cell barcode and UMI because it is significantly shorter (indeed, 20 bp!) compared to the longer, r_2 transcript read. For ease, rename these files N701-Read1 and N701-Read2.
+> > 1. Read 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k) contains the cell barcode and UMI because it is significantly shorter (indeed, 20 bp!) compared to the longer, r_2 transcript read. For ease, it's better to rename these files N701-Read1 and N701-Read2.
 > > 2. You can see Read 1 is only 20 bp long, which for original Drop-Seq is 12 bp for cell barcode and 8 bp for UMI. This is correct! Be warned - 10x Chromium (and many technologies) change their chemistry over time, so particularly when you are accessing public data, you want to check and make sure you have your numbers correct!
 > > 3. 'N701' is referring to an index read. This sample was run alongside 6 other samples, each denoted by an Illumina Nextera Index (N70X). Later, this will tell you batch information. If you look at the 'Experimental Design' file, you'll see that the N701 sample was from a male wildtype neonatal thymus.
 > {: .solution}
@@ -143,7 +153,10 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-{% snippet topics/single-cell/faqs/single_cell_omics.md %}
+> <comment-title></comment-title>
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
+{: .comment}
 
 ## Generate a transcript to gene map
 
@@ -212,7 +225,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > <hands-on-title>Running Alevin</hands-on-title>
 >
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2) %}
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.10.1+galaxy0) %} 
 >
 >     > <question-title></question-title>
 >     >
@@ -251,7 +264,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > <comment-title>Alevin file names</comment-title>
 >
-> You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*.
+> You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*. 
 {: .comment}
 
 This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, but we're most interested in is:
@@ -341,7 +354,7 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 ## Generate an unprocessed matrix in a usable format
 
 > <hands-on-title>Stopping Alevin from thresholding</hands-on-title>
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2) %} (Click re-run on the last Alevin output)
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.10.1+galaxy0) %} (Click re-run on the last Alevin output)
 >    - *"Advanced options"*
 >    - *"Fraction of cellular barcodes to keep"*: '1' - i.e. keep them all!
 >    - *"Minimum frequency for a barcode to be considered"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
@@ -484,7 +497,7 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 > How many cell barcodes remain after the emptyDrops treatment? Why might that be?
 >
 >   > <tip-title>Hint</tip-title>
->   > If you click on the `Emptied-Object` in the {% icon galaxy-history %} history, the text in that window says `37 barcodes` or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
+>   > If you click on the `Emptied-Object` in the {% icon galaxy-history %} history, the text in that window says `38 barcodes` or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
 >   > Consider...is this a complete set of data?
 >   {: .tip}
 >
@@ -497,30 +510,29 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 >
 {: .question}
 
-We will nevertheless proceed with your majestic annotated expression matrix of 37 cells, ready to go for further processing and analysis! However, the next tutorials we will link to use a tool suite called Scanpy {% cite Wolf2018 %}. You need to convert this SingleCellExperiment object into a format called `annData`, which is a variant of a file format called `hdf5`.
+We will nevertheless proceed with your majestic annotated expression matrix of 38 cells, ready to go for further processing and analysis! However, the next tutorials we will link to use a tool suite called Scanpy {% cite Wolf2018 %}. You need to convert this SingleCellExperiment object into a format called `annData`, which is a variant of a file format called `hdf5`.
 
 > <hands-on-title>Converting to AnnData format</hands-on-title>
 >
-> 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) %} with the following parameters:
->    - *"Direction of conversion"*: `SingleCellExperiment to AnnData`
->    - {% icon param-file %} *"Input object in SingleCellExperiment RDS format"*: `Emptied-Object`
->    - *"Name of the assay to be transferred as main layer"*: `counts`
+> 1. {% tool [SCEasy Converter](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2) %} with the following parameters:
+>    - *"Convert From / To"*: `SingleCellExperiment to AnnData`
+>    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object` (if the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - just drag the dataset from the history panel and drop into the input field)
 >
 > 2. Rename {% icon galaxy-pencil %} output `N701-400k-AnnData`
 >
 {: .hands_on}
 
-{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3) (if you used Alevin Galaxy Version 1.5.1+galaxy0, you can check the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key) run with that version of the tool). You can also compare how the subsampled datasets you've generated compare with the [total sample](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key) (using Alevin Galaxy Version 1.5.1+galaxy0).
+{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-key). You can also compare how the subsampled datasets you've generated compare with the [total sample](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key) (using Alevin Galaxy Version 1.5.1+galaxy0).
 
 However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
 
 # Analysing multiple FASTQ files
 
-This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-alevin-15) and run them all at once! All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata). To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: [Combining datasets after pre-processing]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %})
+This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://usegalaxy.eu/u/j.jakiela/w/alevin-sc-matrix) and run them all at once! All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://usegalaxy.eu/u/j.jakiela/h/alevin-workflow---all-samples-downsampled-fastq). To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: [Combining datasets after pre-processing]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %})
 
 # Mitochondrial flagging
 
-We have assumed you will be combining multiple files - but if that's not the case, you'll need to perform this step to turn your column of `true` and `false` labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: [Mitochondrial calculations]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}#mitochondrial-reads).
+We have assumed you will be combining multiple files - but if that's not the case, you'll need to perform this step to turn your column of `true` and `false` labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: [Mitochondrial calculations](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html#mitochondrial-reads).
 
 # Conclusion
 
@@ -534,4 +546,5 @@ We have:
  * Deployed barcode rank plots as a way of quickly assessing the signal present in droplet datasets.
  * Applied the necessary conversion to pass these data to downstream processes.
 
-{% snippet topics/single-cell/faqs/user_community_join.md %}
+ To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
+ [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
