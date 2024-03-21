@@ -213,9 +213,9 @@
   },
   "hands_on": true,
   "slides": false,
-  "mod_date": "2023-12-04 11:46:43 +0000",
+  "mod_date": "2024-03-21 12:37:39 +0000",
   "pub_date": "2016-12-19 08:59:53 +0000",
-  "version": 123,
+  "version": 130,
   "workflows": [
     {
       "workflow": "galaxy-intro-101-workflow.ga",
@@ -1290,21 +1290,31 @@
           "version": "0.1"
         }
       },
-      "modified": "2024-03-21 00:05:32 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nExons\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nFeatures\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"bedtools Intersect intervals\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Datamash\"];\n  2 -->|output| 3;\n  4[\"Sort\"];\n  3 -->|out_file| 4;\n  5[\"Select first\"];\n  4 -->|out_file1| 5;\n  6[\"Compare two Datasets\"];\n  0 -->|output| 6;\n  5 -->|outfile| 6;\n  565e3d76-0230-4a5e-87c1-9c36ce0b7df8[\"Output\\ntop_5_exons\"];\n  6 --> 565e3d76-0230-4a5e-87c1-9c36ce0b7df8;\n  style 565e3d76-0230-4a5e-87c1-9c36ce0b7df8 stroke:#2c3143,stroke-width:4px;"
+      "modified": "2024-03-21 14:14:19 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nExons\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nFeatures\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"bedtools Intersect intervals\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Datamash\"];\n  2 -->|output| 3;\n  4[\"Sort\"];\n  3 -->|out_file| 4;\n  5[\"Select first\"];\n  4 -->|outfile| 5;\n  6[\"Compare two Datasets\"];\n  0 -->|output| 6;\n  5 -->|outfile| 6;\n  565e3d76-0230-4a5e-87c1-9c36ce0b7df8[\"Output\\ntop_5_exons\"];\n  6 --> 565e3d76-0230-4a5e-87c1-9c36ce0b7df8;\n  style 565e3d76-0230-4a5e-87c1-9c36ce0b7df8 stroke:#2c3143,stroke-width:4px;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/introduction/tutorials/galaxy-intro-101/tutorial.json",
   "tools": [
     "comp1",
-    "sort1",
     "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
-    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1sort1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1",
     "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0",
     "upload1"
   ],
   "supported_servers": {
     "exact": [
+
+    ],
+    "inexact": [
+      {
+        "url": "https://galaxy.mesocentre.uca.fr",
+        "name": "Galaxy@AuBi",
+        "usegalaxy": false
+      },
       {
         "url": "https://galaxytrakr.org/",
         "name": "GalaxyTrakr",
@@ -1339,13 +1349,11 @@
         "url": "https://usegalaxy.no/",
         "name": "UseGalaxy.no",
         "usegalaxy": false
-      }
-    ],
-    "inexact": [
+      },
       {
-        "url": "https://galaxy.mesocentre.uca.fr",
-        "name": "Galaxy@AuBi",
-        "usegalaxy": false
+        "url": "https://usegalaxy.org",
+        "name": "UseGalaxy.org (Main)",
+        "usegalaxy": true
       }
     ]
   },
@@ -1363,9 +1371,16 @@
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
+        "name": "text_processing",
+        "owner": "bgruening",
+        "revisions": "d698c222f354",
+        "tool_panel_section_label": "Text Manipulation",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
         "name": "bedtools",
         "owner": "iuc",
-        "revisions": "a68aa6c1204a",
+        "revisions": "a1a923cd89e8",
         "tool_panel_section_label": "BED",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
@@ -1375,10 +1390,17 @@
         "revisions": "562f3c677828",
         "tool_panel_section_label": "Join, Subtract and Group",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "datamash_ops",
+        "owner": "iuc",
+        "revisions": "4c07ddedc198",
+        "tool_panel_section_label": "Join, Subtract and Group",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bedtools\n  owner: iuc\n  revisions: a68aa6c1204a\n  tool_panel_section_label: BED\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_ops\n  owner: iuc\n  revisions: 562f3c677828\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bedtools\n  owner: iuc\n  revisions: a1a923cd89e8\n  tool_panel_section_label: BED\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_ops\n  owner: iuc\n  revisions: 562f3c677828\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_ops\n  owner: iuc\n  revisions: 4c07ddedc198\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
