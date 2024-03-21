@@ -66,7 +66,7 @@ We start with the question: In human chromosome 22, which exon has the highest n
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
 But even with your data in hand, you still have the question: "how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
-# Getting your workspace ready
+# Get your workspace ready
 
 Browse to your favorite [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
 
@@ -102,7 +102,7 @@ When you start Galaxy for very first time, your history will be empty. Let's add
 
 # Analysis
 
-## Locating Exons
+## Locate Exons
 
 First we need to get some data into our history. You can upload files from your computer, or Galaxy can also fetch data directly from external sources. We know UCSC has exon locations for humans and we can use Galaxy to import the data for chromosome 22, directly from the UCSC table browser.
 
@@ -226,7 +226,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 >
 {: .tip}
 
-## Finding exons with the most SNPs
+## Find exons with the most SNPs
 
 Our objective is to find which exon contains the most SNPs. Therefore we have to intersect the file with the exon locations with the file containing the SNP locations (here "intersect" is just a fancy word for printing SNPs and exons that overlap side-by-side).
 
@@ -294,7 +294,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 {: .question}
 
 
-## Counting the number of SNPs per exon
+## Count the number of SNPs per exon
 
 Since each line in our file represents a single overlap between SNP and exon, we can find the total number of SNPs in an exon, simply by counting the number of lines that have the same exon ID. However, to be more "proper" we will instead count the number of unique SNP IDs per exon. So let's do this for all the exons in our file:
 
@@ -330,7 +330,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > {: .solution }
 {: .question}
 
-## Sorting the exons by SNPs count
+## Sort the exons by SNPs count
 
 Now that we have a list of all exons, and the number of SNPs they contain, we would like to know which exon has the *highest number* of SNPs. We can do this by sorting the file on the second column.
 
@@ -363,7 +363,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 > {: .solution}
 {: .question}
 
-## Selecting top five exons
+## Select top five exons
 
 Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
@@ -381,7 +381,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 {: .hands_on}
 
-## Recovering exon info
+## Recover exon info
 
 Congratulations! You have now determined which exons on chromosome 22 have the highest number of SNPs, but what else can we learn about them? One way to learn more about a genetic location is to view it in a genome browser. However, in the process of getting our answer, we have lost information about the location of these exons on the chromosome. But fear not, Galaxy saves all of your data, so we can recover this information quite easily.
 
@@ -401,7 +401,7 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 >    ![Contents of the `Compare two Datasets` output dataset](../../images/101_19.png)
 {: .hands_on}
 
-## Displaying data in UCSC genome browser
+## Display data in UCSC genome browser
 
 A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. Galaxy can launch a genome browser such as IGV on your local machine, and it can connect to online genome browsers as well. An example of such an online genome browser is the UCSC genome browser.
 
@@ -436,7 +436,7 @@ In Galaxy your analyses live in histories such as your current one. Histories ca
 
 ![History options menu](../../images/history_options_menu.png "'History options' allows for a variety of history operations")
 
-## Listing your histories
+## List your histories
 
 You can create as many histories as you want. If you create a new history, your current history does not disappear. You can view your histories in two ways: (1) as a list or (2) side by side (also known as "Multiview"). Two Tip boxes below explain both of these approaches:
 
@@ -449,7 +449,7 @@ You can create as many histories as you want. If you create a new history, your 
 
 You can always return to your analysis view by clicking on Home icon {% icon galaxy-home %} (**Analyze Data** on older versions of Galaxy) in the top menu bar.
 
-## Converting your analysis history into a workflow
+## Convert your analysis history into a workflow
 
 When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
 
@@ -531,7 +531,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > We could **validate** our newly built workflow by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.
 {: .comment}
 
-## Running workflow on different data
+## Run workflow on different data
 
 Now that we have built our workflow, let's use it on some different data. For example, let's find out which exons have the highest number of repeat elements.
 
@@ -621,7 +621,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 > Which exon had the highest number of repeats? How many repeats were there?
 {: .question}
 
-# Sharing your work
+# Share your work
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
