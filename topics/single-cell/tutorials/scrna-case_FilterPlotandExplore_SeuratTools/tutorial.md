@@ -62,7 +62,8 @@ We’ll provided you with experimental data to analyse from a mouse dataset of f
 To start, let's get our dataset loaded into Galaxy.
 
 You can access the data for this tutorial in multiple ways:
-1. **EBI Data Retrieval** - You may retrieve that files necessary to construct a Seurat Object in this way.Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
+### 1. **EBI Data Retrieval** 
+You may retrieve that files necessary to construct a Seurat Object in this way.Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
 
 > <hands-on-title>GetData</hands-on-title>
 >
@@ -71,12 +72,13 @@ You can access the data for this tutorial in multiple ways:
 > - *"Choose the type of matrix to download"*: `Raw filtered counts`
 {: .hands_on}
 
-2. **Importing from a history** - You can import [this history](BLANK)
+### 2. **Importing from a history** 
+You can import [this history](BLANK)
 
    {% snippet faqs/galaxy/histories_import.md %}
 This also alleviates the necessity to convert the AnnData object into a Seurat one.
 
-3. **Uploading from Zenodo** (see below)
+### 3. **Uploading from Zenodo** 
 
 > <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
 >
@@ -307,7 +309,7 @@ Although that would be fine, adding in a 3rd dimension (or, indeed, in our case,
 
 So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize: this is commonly referred to as preprocessing of the data and a typical scRNA-seq preprocessing pipeline will include the following steps: 
 
-## 1. Normalization 
+### 1. Normalization 
 
 What is Normalization?
 
@@ -321,7 +323,7 @@ Normalisation helps reduce the differences between gene and UMI counts by fittin
 > - *"Normalisation method"*: `Log Normalise`
 {: .hands_on}
 
-## 2. Identifying Variable Genes
+### 2. Identifying Variable Genes
 
 What are variable genes? 
 
@@ -341,7 +343,7 @@ This tool will output two new pieces of data into our Galaxy history: a new Seur
 
 This gene list may be used as a sneak peak into understanding what the dataset will look like! We can begin to understand which genes are going to be driving downstream clustering of our cells and maybe even make some decisions about whether we are happy with our filtering based on this list. 
 
-## 3. Scale Data 
+### 3. Scale Data 
 
 Now we will scale the data.
 
