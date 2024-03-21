@@ -236,11 +236,11 @@ The prefix "Figure 1." is automatically added before its caption. This is done w
 
 As an example for this image:
 
-![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
+![alt text]({% link topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg %} "Example of an image with a caption ")
 
 {% raw %}
 ```markdown
-!​[Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
+!​[Alt text (shown when image cannot be displayed)]({% link path/to/image.png %} "Example of an image with a caption")
 ```
 {% endraw %}
 
