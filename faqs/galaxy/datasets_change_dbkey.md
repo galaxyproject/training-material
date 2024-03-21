@@ -7,6 +7,7 @@ layout: faq
 contributors: [shiltemann,hexylena,nekrut]
 ---
 
+- Click the desired dataset's name to expand it.
 - Click on the "?" next to database indicator:
 
   ![UI for changing dbkey]({% link shared/images/datasets_dbkey.svg %})

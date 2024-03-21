@@ -4,12 +4,12 @@ description: This FAQ demonstrates how to list all histories for a given user
 area: histories
 box_type: tip
 layout: faq
-contributors: [nekrut]
+contributors: [nekrut, hexylena]
 ---
 
 There are multiple ways in which you can view your histories:
 
-1. Viewing histories using {% icon switch-histories %} "**Switch to history**" button:
+1. Viewing histories using {% icon switch-histories %} "**Switch to history**" button. This is best for quickly switching between multiple histories.
 
    Click the "**Switch history**" icon at the top of the history panel to bring up a list of all your histories:
    ![Listing histories using the "Switch history" button]({% link shared/images/histories_list.svg %})
@@ -23,6 +23,11 @@ There are multiple ways in which you can view your histories:
 
    Click the "**Data**" link on the top bar of Galaxy interface and select "**Histories**":
    ![Listing histories using "Data" menu]({% link shared/images/histories_list_via_masthead.svg %})
+
+3. Using the **Multi-view**, which is best for moving datasets between histories:
+
+   Click the {% icon galaxy-history-options %} menu, and select {% icon galaxy-multihistory %} **Show histories side-by-side**
+
 
 
 <!-- Original drawing for histories_list.svg = https://docs.google.com/drawings/d/1fiMTFt4q1DwJllnxjddG0LA-XwKkxyXfPlOqUHteX_k/edit?usp=sharing -->

@@ -13,6 +13,6 @@ If you do not see the Activity Bar it can be enabled as follows:
 3. Scroll down and click on "**Manage Activity Bar**"
 4. Toggle the "**Enable Activity Bar**" switch and voila!
 
-   ![Four steps for enabling the Activity Bar]({% link shared/images/activity_bar_how_to_enable.svg %})
+   ![The four steps described above are shown visually]({% link shared/images/activity_bar_how_to_enable.svg %})
 
 <!-- Original drawing = https://docs.google.com/drawings/d/1yynqEiV66F8idKH5JwTG-4ASuqK62thIwHeCMHRuupg/edit?usp=sharing -->
