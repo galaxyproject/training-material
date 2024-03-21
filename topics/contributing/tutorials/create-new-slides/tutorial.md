@@ -18,7 +18,11 @@ key_points:
 subtopic: slides
 contributions:
   authorship:
+  - bebatut
   - hexylena
+  editing:
+  - bgruening
+  - shiltemann
 ---
 
 Once we have set up the infrastructure, we are ready to write a slide deck.
