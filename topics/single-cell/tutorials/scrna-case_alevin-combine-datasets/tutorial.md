@@ -76,15 +76,19 @@ The sample data is a subset of the reads in a mouse dataset of fetal growth rest
 
 You can access the data for this tutorial in multiple ways:
 
-1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-input)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
 2. **Importing from a history**
-    - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
-    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/hrukkudyr_us/h/cs2combining-datasets-after-pre-processing---input)
+    - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-input)
+    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/juliajot/h/combining-datasets-input) 
 
    {% snippet faqs/galaxy/histories_import.md %}
+
+   - If you want to import the history to another Galaxy server, check how to do it below!
+  
+   {% snippet faqs/galaxy/histories_transfer_entire_histories_from_one_galaxy_server_to_another.md %}
 
 
 <!--
