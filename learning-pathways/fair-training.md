@@ -1,5 +1,6 @@
 ---
 layout: learning-pathway
+
 title: FAIR Training
 description: |
   The FAIR data management training learning pathway teaches you how to organise, describe, and store research data according to the FAIR principles (Findable, Accessible, Interoperable, Reusable).
@@ -16,7 +17,6 @@ editorial_board:
 funding:
 - ELIXIR-UK-DaSH
 
-
 pathway:
   - section: "Module 1: FAIR Data Management"
     description: |
@@ -29,8 +29,6 @@ pathway:
       - name: fair-clinical
         topic: : data management
 
-
-pathway:
   - section: "Module 2: FAIR Pointers"
     description: |
        This learning path aims to teach you the basics FAIR data and signpost to other useful learning materials and resources.  You will learn FAIR from the perspective of the 15 FAIR Principles published in 2016. You will learn about FAIR, its origins and the FAIR Principles using real examples of FAIR data in the public domain.  The 15 FAIR Principles will be summarised using four encompassing characteristics: metadata, data registration, access and persistent identifiers.
@@ -45,6 +43,5 @@ pathway:
         topic: : FAIR Pointers
       - name: fair-persistant-identifiers
         topic: : FAIR Pointers
-
 
 ---
