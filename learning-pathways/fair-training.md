@@ -35,13 +35,13 @@ pathway:
     tutorials:
       - name: fair-origin
         topic: : FAIR Pointers
-      - name: fair-matadata
+      - name: fair-metadata
         topic: : FAIR Pointers
       - name: fair-data-registration
         topic: : FAIR Pointers
       - name: fair-access
         topic: : FAIR Pointers
-      - name: fair-persistant-identifiers
+      - name: fair-persistent-identifiers
         topic: : FAIR Pointers
 
 ---
