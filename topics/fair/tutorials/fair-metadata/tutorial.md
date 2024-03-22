@@ -55,6 +55,8 @@ requirements:
       - fair-origin
 ---
 
+The term metadata is defined along with what constitutes rich metadata.  Learners will be able to recall examples of community/domain standards that apply to data and metadata.
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -63,6 +65,7 @@ requirements:
 > {:toc}
 >
 {: .agenda}
+
 
 
 # Metadata and the FAIR Principles

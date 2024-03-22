@@ -53,6 +53,7 @@ requirements:
       - fair-access
 ---
 
+The persistent identifier is defined.  Learners will be able to define the structure of an identifier and explain its importance.  
 
 > <agenda-title></agenda-title>
 >

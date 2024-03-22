@@ -58,6 +58,7 @@ requirements:
       - fair-metadata
       - fair-data-registration
 ---
+Data access including levels of access are described.  Learners will be able to illustrate data access in terms of the FAIR Principles using companion terms including communications protocol and authentication.  Learners will also be able to interpret the data usage licence associated with different data sets
 
 > <agenda-title></agenda-title>
 >

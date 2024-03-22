@@ -54,6 +54,8 @@ requirements:
       - fair-intro
 ---
 
+FAIR as an acronym, its origins and its guiding principles are introduced.  Learners will be able to explain the difference between FAIR and open data and contextualise the main principles of FAIR around the common characteristics of identifiers, access, metadata and registration.
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -62,6 +64,8 @@ requirements:
 > {:toc}
 >
 {: .agenda}
+
+
 
 # FAIR
 

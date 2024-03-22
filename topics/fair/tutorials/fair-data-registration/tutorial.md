@@ -57,6 +57,7 @@ requirements:
       - fair-metadata
 ---
 
+The concept of data registration is defined as well as ways in which data registration can be achieved.  Learners will be able to describe why indexed data repositories are important as well as resources enabling you to choose a searchable repository.
 
 > <agenda-title></agenda-title>
 >
@@ -66,6 +67,9 @@ requirements:
 > {:toc}
 >
 {: .agenda}
+
+
+
 
 # Data registration and the FAIR Principles
 Data registration relates to the following 3 FAIR Principles (Table 3.1).  
