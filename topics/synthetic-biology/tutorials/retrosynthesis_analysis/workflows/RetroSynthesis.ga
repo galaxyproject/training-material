@@ -1,18 +1,26 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools",
+    "creator": [
+        {
+            "class": "Organization",
+            "name": "BioRetroSynth",
+            "url": "https://github.com/brsynth"
+        }
+    ],
     "format-version": "0.1",
+    "license": "MIT",
     "name": "RetroSynthesis",
     "steps": {
         "0": {
-            "annotation": "",
+            "annotation": "The International Chemical Identifier (InChI) of the compound of interest to produce",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "The International Chemical Identifier (InChI) of the compound of interest to produce",
                     "name": "Target to produce"
                 }
             ],
@@ -20,31 +28,25 @@
             "name": "Input parameter",
             "outputs": [],
             "position": {
-                "bottom": 348.8999938964844,
-                "height": 61.79998779296875,
-                "left": 182.38333129882812,
-                "right": 382.3833312988281,
-                "top": 287.1000061035156,
+                "bottom": 618.2999725341797,
+                "height": 82.19999694824219,
+                "left": 558.5,
+                "right": 758.5,
+                "top": 536.0999755859375,
                 "width": 200,
-                "x": 182.38333129882812,
-                "y": 287.1000061035156
+                "x": 558.5,
+                "y": 536.0999755859375
             },
             "tool_id": null,
             "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
             "tool_version": null,
             "type": "parameter_input",
-            "uuid": "832d6ff4-18ac-4728-a776-277ba25b6b74",
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "84f408d2-fff1-4e5e-b853-35c636d14653"
-                }
-            ]
+            "uuid": "7d82307c-2714-478b-bf4d-ecaace6e0d0e",
+            "workflow_outputs": []
         },
         "1": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1",
+            "annotation": "Pick a SBML model",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.3",
             "errors": null,
             "id": 1,
             "input_connections": {},
@@ -54,47 +56,75 @@
                     "name": "input"
                 }
             ],
-            "label": null,
+            "label": "SBML model",
             "name": "Pick SBML Model",
             "outputs": [
                 {
-                    "name": "sbml_model",
-                    "type": "xml"
+                    "name": "model",
+                    "type": "sbml"
+                },
+                {
+                    "name": "taxid",
+                    "type": "tsv"
+                },
+                {
+                    "name": "compartments",
+                    "type": "tsv"
+                },
+                {
+                    "name": "biomass",
+                    "type": "tsv"
                 }
             ],
             "position": {
-                "bottom": 481.1999969482422,
-                "height": 102.59999084472656,
-                "left": 180,
-                "right": 380,
-                "top": 378.6000061035156,
+                "bottom": 1055.7999877929688,
+                "height": 397.79998779296875,
+                "left": 558.61669921875,
+                "right": 758.61669921875,
+                "top": 658,
                 "width": 200,
-                "x": 180,
-                "y": 378.6000061035156
+                "x": 558.61669921875,
+                "y": 658
             },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1",
+            "post_job_actions": {
+                "HideDatasetActionbiomass": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "biomass"
+                },
+                "HideDatasetActioncompartments": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "compartments"
+                },
+                "HideDatasetActiontaxid": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "taxid"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.3",
             "tool_shed_repository": {
-                "changeset_revision": "4797d0b36ff3",
+                "changeset_revision": "f59e65c1606a",
                 "name": "get_sbml_model",
                 "owner": "tduigou",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.0.1",
+            "tool_version": "0.0.3",
             "type": "tool",
-            "uuid": "bb68ae97-ef17-41c3-8e99-d62a6a4508ee",
+            "uuid": "6b380d0c-5d09-4236-8249-b58a235f3376",
             "workflow_outputs": [
                 {
-                    "label": "Pick SBML Model - iML1515",
-                    "output_name": "sbml_model",
-                    "uuid": "dc7acc73-6d5a-4cbb-a8a2-d10a8bd38914"
+                    "label": "iML1515",
+                    "output_name": "model",
+                    "uuid": "c7fc0bf3-6768-413a-b652-5b2a702f75fa"
                 }
             ]
         },
         "2": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.5.2+galaxy0",
             "errors": null,
             "id": 2,
             "input_connections": {},
@@ -108,53 +138,48 @@
                 }
             ],
             "position": {
-                "bottom": 586.9833374023438,
+                "bottom": 835.9833068847656,
                 "height": 102.60000610351562,
-                "left": 424,
-                "right": 624,
-                "top": 484.3833312988281,
+                "left": 804.11669921875,
+                "right": 1004.11669921875,
+                "top": 733.38330078125,
                 "width": 200,
-                "x": 424,
-                "y": 484.3833312988281
+                "x": 804.11669921875,
+                "y": 733.38330078125
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.5.2+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "ea590c609fec",
+                "changeset_revision": "77845de246f9",
                 "name": "rrparser",
                 "owner": "tduigou",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"compress\": \"false\", \"diameters\": [\"2\", \"4\", \"6\", \"8\", \"10\", \"12\", \"14\", \"16\"], \"rules\": {\"type\": \"retro\", \"__current_case__\": 2}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.4.6",
+            "tool_state": "{\"compress\": \"false\", \"diameters\": [\"2\", \"4\", \"6\", \"8\", \"10\", \"12\", \"14\", \"16\"], \"rules\": {\"type\": \"retro\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5.2+galaxy0",
             "type": "tool",
-            "uuid": "5bcc6c73-b4cf-45fc-96f6-9e3cbf31832e",
+            "uuid": "be756a4a-e502-4dfb-bf42-12eaf8f9e886",
             "workflow_outputs": [
                 {
                     "label": "RRules Parser(retro, d=['2', '4', '6', '8', '10', '12', '14', '16'])",
                     "output_name": "out_rules",
-                    "uuid": "9fc1e94f-34ea-4173-bdb1-3ecbef49efe3"
+                    "uuid": "d5abb909-8fdb-46e0-8107-6723109624a5"
                 }
             ]
         },
         "3": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1",
+            "annotation": "The sinks expected to be bound in a chassis",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpextractsink/rptools_rpextractsink/6.5.0+galaxy0",
             "errors": null,
             "id": 3,
             "input_connections": {
                 "input": {
                     "id": 1,
-                    "output_name": "sbml_model"
+                    "output_name": "model"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Sink from SBML",
-                    "name": "input"
-                }
-            ],
-            "label": null,
+            "inputs": [],
+            "label": "Sink from SBML",
             "name": "Sink from SBML",
             "outputs": [
                 {
@@ -163,37 +188,37 @@
                 }
             ],
             "position": {
-                "bottom": 455.7833251953125,
-                "height": 93.20001220703125,
-                "left": 427,
-                "right": 627,
-                "top": 362.58331298828125,
+                "bottom": 712.1999969482422,
+                "height": 93.19999694824219,
+                "left": 806.61669921875,
+                "right": 1006.61669921875,
+                "top": 619,
                 "width": 200,
-                "x": 427,
-                "y": 362.58331298828125
+                "x": 806.61669921875,
+                "y": 619
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpextractsink/rptools_rpextractsink/6.5.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "47bb93e7832b",
-                "name": "rpextractsink",
+                "changeset_revision": "b9c1f49f069c",
+                "name": "rptools_rpextractsink",
                 "owner": "tduigou",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adv\": {\"remove_dead_end\": \"true\"}, \"compartment_id\": \"c\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "5.12.1",
+            "tool_state": "{\"adv\": {\"remove_dead_end\": \"true\", \"standalone\": \"true\"}, \"compartment_id\": \"c\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "6.5.0+galaxy0",
             "type": "tool",
-            "uuid": "4dd55661-fbf3-484a-8df4-f884973e06cf",
+            "uuid": "d3663834-02be-4c4a-92dc-6baf6b592921",
             "workflow_outputs": [
                 {
                     "label": null,
                     "output_name": "sink",
-                    "uuid": "e9d0a510-79be-4519-8187-7f0499d350e8"
+                    "uuid": "5672174c-cf31-4e21-9210-1d04acda0e71"
                 }
             ]
         },
         "4": {
-            "annotation": "",
+            "annotation": "Run Retropath2.0",
             "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0",
             "errors": null,
             "id": 4,
@@ -211,17 +236,8 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool RetroPath2.0",
-                    "name": "rulesfile"
-                },
-                {
-                    "description": "runtime parameter for tool RetroPath2.0",
-                    "name": "sinkfile"
-                }
-            ],
-            "label": null,
+            "inputs": [],
+            "label": "Retropath2.0",
             "name": "RetroPath2.0",
             "outputs": [
                 {
@@ -230,14 +246,14 @@
                 }
             ],
             "position": {
-                "bottom": 401.5833282470703,
+                "bottom": 650.5833129882812,
                 "height": 154,
-                "left": 670,
-                "right": 870,
-                "top": 247.5833282470703,
+                "left": 1050.11669921875,
+                "right": 1250.11669921875,
+                "top": 496.58331298828125,
                 "width": 200,
-                "x": 670,
-                "y": 247.5833282470703
+                "x": 1050.11669921875,
+                "y": 496.58331298828125
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0",
@@ -247,20 +263,20 @@
                 "owner": "tduigou",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adv\": {\"version\": \"r20220104\", \"topx\": \"100\", \"dmin\": \"0\", \"dmax\": \"1000\", \"mwmax_source\": \"1000\", \"timeout\": \"60\"}, \"max_steps\": \"3\", \"rulesfile\": {\"__class__\": \"RuntimeValue\"}, \"sinkfile\": {\"__class__\": \"RuntimeValue\"}, \"source_inchi_type\": {\"inchi_type\": \"string\", \"__current_case__\": 0, \"source_inchi\": {\"__class__\": \"ConnectedValue\"}}, \"source_name\": \"target\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adv\": {\"version\": \"r20220104\", \"topx\": \"100\", \"dmin\": \"0\", \"dmax\": \"1000\", \"mwmax_source\": \"1000\", \"timeout\": \"60\"}, \"max_steps\": \"3\", \"rulesfile\": {\"__class__\": \"ConnectedValue\"}, \"sinkfile\": {\"__class__\": \"ConnectedValue\"}, \"source_inchi_type\": {\"inchi_type\": \"string\", \"__current_case__\": 0, \"source_inchi\": {\"__class__\": \"ConnectedValue\"}}, \"source_name\": \"target\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.3.0",
             "type": "tool",
-            "uuid": "61f75528-3c9f-412b-b5ed-ecde3d5f3533",
+            "uuid": "7f4bcb2e-f7ee-4166-91ed-9829b2e9bfb1",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "Retropath2.0",
                     "output_name": "Reaction_Network",
-                    "uuid": "ccbff687-6072-449b-98ed-faf2ab59f8bf"
+                    "uuid": "b9a04db5-d129-4b55-9ee9-8f3379568bee"
                 }
             ]
         },
         "5": {
-            "annotation": "",
+            "annotation": "Enumerate pathways",
             "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0",
             "errors": null,
             "id": 5,
@@ -270,13 +286,8 @@
                     "output_name": "Reaction_Network"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool RP2paths",
-                    "name": "rp2_pathways"
-                }
-            ],
-            "label": null,
+            "inputs": [],
+            "label": "RP2paths",
             "name": "RP2paths",
             "outputs": [
                 {
@@ -289,14 +300,14 @@
                 }
             ],
             "position": {
-                "bottom": 328.3999938964844,
+                "bottom": 576.3999938964844,
                 "height": 164.39999389648438,
-                "left": 924.2999877929688,
-                "right": 1124.2999877929688,
-                "top": 164,
+                "left": 1304.4166259765625,
+                "right": 1504.4166259765625,
+                "top": 412,
                 "width": 200,
-                "x": 924.2999877929688,
-                "y": 164
+                "x": 1304.4166259765625,
+                "y": 412
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0",
@@ -306,26 +317,26 @@
                 "owner": "tduigou",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adv\": {\"timeout\": \"1800\"}, \"rp2_pathways\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adv\": {\"timeout\": \"1800\"}, \"rp2_pathways\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.5.0",
             "type": "tool",
-            "uuid": "dbb47e06-b8c4-4ba3-9385-8a84ca952c7f",
+            "uuid": "3b6accb5-f6c9-45fc-a26a-7e2495d41515",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "RP2paths (pathways)",
                     "output_name": "master_pathways",
-                    "uuid": "386e8738-8ffd-4b7c-9858-6c9f25825d2f"
+                    "uuid": "a2912bc0-3c56-417e-9b1b-bd74a3e4b079"
                 },
                 {
-                    "label": null,
+                    "label": "RP2paths (compounds)",
                     "output_name": "compounds",
-                    "uuid": "0b6e6e77-47d6-49da-aa98-8be2633d2601"
+                    "uuid": "84629abf-4582-41e5-8f75-ef83f4354438"
                 }
             ]
         },
         "6": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2",
+            "annotation": "SBML file compiling output from rp2paths, sink, retropath2.0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpcompletion/rptools_rpcompletion/6.5.0+galaxy0",
             "errors": null,
             "id": 6,
             "input_connections": {
@@ -347,7 +358,7 @@
                 }
             },
             "inputs": [],
-            "label": null,
+            "label": "Complete Reactions",
             "name": "Complete Reactions",
             "outputs": [
                 {
@@ -356,37 +367,40 @@
                 }
             ],
             "position": {
-                "bottom": 506.1000061035156,
+                "bottom": 760.6000061035156,
                 "height": 245.60000610351562,
-                "left": 1200.5,
-                "right": 1400.5,
-                "top": 260.5,
+                "left": 1576.61669921875,
+                "right": 1776.61669921875,
+                "top": 515,
                 "width": 200,
-                "x": 1200.5,
-                "y": 260.5
+                "x": 1576.61669921875,
+                "y": 515
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpcompletion/rptools_rpcompletion/6.5.0+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "d5c53a916005",
-                "name": "rpcompletion",
+                "changeset_revision": "7f684f4519f1",
+                "name": "rptools_rpcompletion",
                 "owner": "tduigou",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adv\": {\"max_subpaths_filter\": \"10\", \"upper_flux_bound\": \"999999\", \"lower_flux_bound\": \"0\"}, \"rp2_pathways\": {\"__class__\": \"ConnectedValue\"}, \"rp2paths_compounds\": {\"__class__\": \"ConnectedValue\"}, \"rp2paths_pathways\": {\"__class__\": \"ConnectedValue\"}, \"sink\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "5.12.2",
+            "tool_state": "{\"adv\": {\"max_subpaths_filter\": \"10\", \"upper_flux_bound\": \"10000\", \"lower_flux_bound\": \"-10000\"}, \"rp2_pathways\": {\"__class__\": \"ConnectedValue\"}, \"rp2paths_compounds\": {\"__class__\": \"ConnectedValue\"}, \"rp2paths_pathways\": {\"__class__\": \"ConnectedValue\"}, \"sink\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "6.5.0+galaxy0",
             "type": "tool",
-            "uuid": "4f7eded9-10da-4459-9345-f8058fc94905",
+            "uuid": "4b401d78-e7f2-4c6c-8dcb-d6863f9bc341",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "Complete Reactions",
                     "output_name": "pathways",
-                    "uuid": "6ac432db-4a20-44b2-a5d2-f0995a4a8697"
+                    "uuid": "53b43a51-96fd-4036-a648-32b7860bafa7"
                 }
             ]
         }
     },
-    "tags": ["synthetic-biology"],
-    "uuid": "e9fadcc6-b582-43e4-b146-df1db35355ab",
-    "version": 3
+    "tags": [
+        "brs",
+        "retrosynthesis"
+    ],
+    "uuid": "2d1908e6-45b7-44cd-9eaa-4bfe5d38ee39",
+    "version": 10
 }
