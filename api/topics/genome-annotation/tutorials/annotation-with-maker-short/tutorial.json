@@ -91,7 +91,7 @@
       "name": "Genome annotation with Maker (short)",
       "title": "Genome annotation with Maker (short)",
       "test_results": null,
-      "modified": "2024-03-24 00:06:35 +0000",
+      "modified": "2024-03-24 11:32:46 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nGenome sequence\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nEST and/or cDNA\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nProteins\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nSNAP model\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nAugustus model\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"Fasta Statistics\"];\n  0 -->|output| 5;\n  6[\"Busco\"];\n  0 -->|output| 6;\n  7[\"Maker\"];\n  4 -->|output| 7;\n  3 -->|output| 7;\n  1 -->|output| 7;\n  0 -->|output| 7;\n  2 -->|output| 7;\n  8[\"Map annotation ids\"];\n  7 -->|output_gff| 8;\n  9[\"Genome annotation statistics\"];\n  8 -->|renamed| 9;\n  0 -->|output| 9;\n  10[\"gffread\"];\n  8 -->|renamed| 10;\n  0 -->|output| 10;\n  11[\"JBrowse\"];\n  0 -->|output| 11;\n  8 -->|renamed| 11;\n  7 -->|output_evidences| 11;\n  12[\"Busco\"];\n  10 -->|output_exons| 12;\n  6951417b-ee0b-4e03-98e4-67d262e086dc[\"Output\\nBusco summary final round\"];\n  12 --> 6951417b-ee0b-4e03-98e4-67d262e086dc;\n  style 6951417b-ee0b-4e03-98e4-67d262e086dc stroke:#2c3143,stroke-width:4px;"
     }
   ],

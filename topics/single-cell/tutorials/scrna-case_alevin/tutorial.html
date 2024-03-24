@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@84b48076f1f482bbe763ddb84783f855c95e8b8a",
+		release: "galaxy-training-network@a0ada5f3da7a93d61e234a53f82eadc115319e40",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Generating a single cell matrix using Alevin">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2024-03-22 17:33:04 +0000">
 <meta name="DC.creator" content="Wendi Bacon">
 <meta name="DC.creator" content="Jonathan Manning"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -118,7 +118,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2024-03-22 17:33:04 +0000",
   "datePublished": "2021-03-03 13:21:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Generating a single cell matrix using Alevin",
@@ -232,7 +232,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Generating a single cell matrix using Alevin",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html",
-  "version": 20,
+  "version": 21,
   "timeRequired": "PT2H",
   "teaches": "Generate a cellxgene matrix for droplet-based single cell sequencing data\n - Interpret quality control (QC) plots to make informed decisions on cell thresholds\n - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata",
   "keywords": [
@@ -1105,7 +1105,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 3, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 22, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1125,7 +1125,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.8</a> (0 recent ratings, 4 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 20 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 21 </div>
 
     </blockquote>
     </section>
@@ -1620,7 +1620,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
         <li><em>“Comma-separated list of field names to extract from the GTF (default: use all fields)”</em>: <code class="language-plaintext highlighter-rouge">gene_id,gene_name,mito</code></li>
         <li><em>“Append version to transcript identifiers?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Flag mitochondrial features?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> - note, this will auto-fill a bunch of acronyms for searching in the GTF for mitochondrial associated genes. This is good!</li>
-        <li><em>“Filter a FASTA-format cDNA file to match annotations?”</em>: <code class="language-plaintext highlighter-rouge">No</code> - we don’t need to, we’re done with the FASTA!</li>
+        <li><em>“Filter the cDNA file to match the annotations?”</em>: <code class="language-plaintext highlighter-rouge">No</code> - we don’t need to, we’re done with the FASTA!</li>
       </ul>
     </li>
     <li>Check that the output file type is <code class="language-plaintext highlighter-rouge">tabular</code>. If not, change the file type by clicking the ‘Edit attributes’<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> on the dataset in the history (as if you were renaming the file.) Then click <code class="language-plaintext highlighter-rouge">Datatypes</code> and type in <code class="language-plaintext highlighter-rouge">tabular</code>. Click <code class="language-plaintext highlighter-rouge">Change datatype</code>.)</li>
@@ -2150,7 +2150,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/84b48076f1f482bbe763ddb84783f855c95e8b8a">84b4807</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a0ada5f3da7a93d61e234a53f82eadc115319e40">a0ada5f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
