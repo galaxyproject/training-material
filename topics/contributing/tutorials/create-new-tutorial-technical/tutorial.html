@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d22d8ee848f167a66d5146c88ced84d2928e84c9",
+		release: "galaxy-training-network@55a2bded142c32ac177b43c280b01fa66d58b43d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Tools, Data, and Workflows for tutorials">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-10-17 11:03:48 +0000">
+<meta name="DC.date" content="2024-03-20 09:05:29 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Saskia Hiltemann">
@@ -120,7 +120,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-10-17 11:03:48 +0000",
+  "dateModified": "2024-03-20 09:05:29 +0000",
   "datePublished": "2017-06-25 22:36:01 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: Tools, Data, and Workflows for tutorials",
@@ -234,7 +234,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Tools, Data, and Workflows for tutorials",
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html",
-  "version": 42,
+  "version": 43,
   "timeRequired": "PT30M",
   "teaches": "Extracting the technical description for a tutorial\n - Populating an existing instance with the needed tools, data and workflows for a tutorial\n - Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial\n - Testing the Galaxy Docker flavor of a tutorial",
   "keywords": [
@@ -719,7 +719,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 25, 2017 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 17, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 20, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -739,7 +739,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.3</a> (0 recent ratings, 3 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 42 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 43 </div>
 
     </blockquote>
     </section>
@@ -985,6 +985,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </span></code></pre></div></div>
 
 <p>Planemo will autodetect that the <code class="language-plaintext highlighter-rouge">workflow-test.yml</code> file and load that for the testing.</p>
+
+<h3 id="skipping-testing-in-the-gtn">Skipping Testing in the GTN</h3>
+
+<p>If for some reason you want to skip this workflow being tested in the GTN,
+please add a comment with <code class="language-plaintext highlighter-rouge">GTN_RUN_SKIP_REASON</code> in the <code class="language-plaintext highlighter-rouge">-test.yml</code> file stating
+the reason it is skipped.</p>
+
+<p>This will also exempt you from writing output tests.</p>
+
+<p>A good use case for this is you want to provide a working test, but the workflow takes upwards of 6 hours to execute (e.g. large download jobs.)</p>
 
 <h1 id="creating-the-data-libraryyaml-recommended">Creating the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> (recommended)</h1>
 
@@ -1405,7 +1415,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d22d8ee848f167a66d5146c88ced84d2928e84c9">d22d8ee</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/55a2bded142c32ac177b43c280b01fa66d58b43d">55a2bde</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

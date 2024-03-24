@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Analyse Argo data / Climate</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@55a2bded142c32ac177b43c280b01fa66d58b43d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Analyse Argo data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-03-24 11:47:01 +0000">
+<meta name="DC.creator" content="Marie Josse"><meta name="description" content="Learn to analyze climate data through Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Climate / Hands-on: Analyse Argo data">
+        <meta property="og:description" content="Learn to analyze climate data through Galaxy.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-03-24 11:47:01 +0000",
+  "datePublished": "2024-03-24 12:51:07 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Analyse Argo data",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to analyze climate data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Analyse Argo data",
+  "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/tutorial.html",
+  "version": 9,
+  "timeRequired": "PT1H",
+  "teaches": "How to fetch Argo Data?\n - How to get metadata with xarray netcdf tools?\n - Learn to get temperature variations.\n - Learn to use an interactive tool to visualise Argo temperature variable on an interactive map.",
+  "keywords": [
+    "Climate",
+    "earth-system",
+    "ocean",
+    "pangeo",
+    "argo"
+  ],
+  "description": "The questions this  addresses are:\n - How to use the Pangeo ecosystem to analyse ocean data?\n - How to process Argo data to visualise ocean temperature variations?\n\n\nThe objectives are:\n - How to fetch Argo Data?\n - How to get metadata with xarray netcdf tools?\n - Learn to get temperature variations.\n - Learn to use an interactive tool to visualise Argo temperature variable on an interactive map.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html",
+      "name": "A Short Introduction to Galaxy",
+      "description": "Slides for 'A Short Introduction to Galaxy' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html",
+      "name": "Hands-on: Hands-on: A short introduction to Galaxy",
+      "description": "Hands-on for 'Hands-on: Hands-on: A short introduction to Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to analyze climate data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "earth-system"
+    },
+    {
+      "@type": "Thing",
+      "name": "ocean"
+    },
+    {
+      "@type": "Thing",
+      "name": "pangeo"
+    },
+    {
+      "@type": "Thing",
+      "name": "argo"
+    }
+  ],
+  "abstract": "The ocean is a key component of the Earth's climate system. It thus needs continuous real-time monitoring to help scientists better understand its dynamics and predict its evolution."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Climate
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/climate/faqs/" title="Check our FAQs for the Climate topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/argo_pangeo/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/argo_pangeo/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-climate">
+    <h1 data-toc-skip>Analyse Argo data</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
+    Marie Josse</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to use the Pangeo ecosystem to analyse ocean data?</p>
+</li>
+        
+        <li><p>How to process Argo data to visualise ocean temperature variations?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>How to fetch Argo Data?</p>
+</li>
+        
+        <li><p>How to get metadata with xarray netcdf tools?</p>
+</li>
+        
+        <li><p>Learn to get temperature variations.</p>
+</li>
+        
+        <li><p>Learn to use an interactive tool to visualise Argo temperature variable on an interactive map.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Hands-on: Hands-on: A short introduction to Galaxy:
+                            
+                                <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/climate/tutorials/argo_pangeo/workflows/" title="Analyse Argo data workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/climate/tutorials/argo_pangeo/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/climate/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 24, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 24, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The ocean is a key component of the Earth’s climate system. It thus needs continuous real-time monitoring to help scientists better understand its dynamics and predict its evolution.
+All around the world, oceanographers have managed to join their efforts and set up a Global Ocean Observing System among which Argo is a key component.
+Argo is an international program that collects information from inside the ocean using a fleet of robotic instruments that drift with the ocean currents and move up and down between the surface and a mid-water level.</p>
+
+<p>The data used in this tutorial are from the Argo gliders network. We are interested in the following variables: water temperature, latitude, longitude and time.
+Our main objective is to plot the water temperature with respect to time. For this, we will be using the netCDF xarray tools available in the Galaxy Europe (or your favourite Galaxy Instance) server.</p>
+
+<p>These tools are part of the Pangeo ecosystem in which the next generation of open-source analysis tools for ocean, atmosphere and climate science can be developed, distributed,
+and sustained. These tools must be scalable to meet the current and future challenges of big data, and these solutions should leverage the existing expertise outside of
+the geoscience community.</p>
+
+<p>This tutorial is part of a set of tutorials on the <a href="https://earth-system.usegalaxy.eu/">Galaxy Earth System</a> supported by the <a href="https://fairease.eu/">EOSC FAIR-EASE project</a>.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#argo-gliders-data" id="markdown-toc-argo-gliders-data">Argo gliders data</a>    <ol>
+      <li><a href="#get-argo-data" id="markdown-toc-get-argo-data">Get Argo data</a></li>
+    </ol>
+  </li>
+  <li><a href="#argo-data-analysed-managed-and-visualised-by-the-pangeo-tools" id="markdown-toc-argo-data-analysed-managed-and-visualised-by-the-pangeo-tools">Argo data analysed, managed, and visualised by the Pangeo tools</a>    <ol>
+      <li><a href="#xarray-tools" id="markdown-toc-xarray-tools">Xarray tools</a></li>
+      <li><a href="#knowing-more-about-hour-data" id="markdown-toc-knowing-more-about-hour-data">Knowing more about hour data</a></li>
+      <li><a href="#get-metadata" id="markdown-toc-get-metadata">Get metadata</a></li>
+      <li><a href="#coordinates-information" id="markdown-toc-coordinates-information">Coordinates information</a></li>
+      <li><a href="#timeseries-visualisation" id="markdown-toc-timeseries-visualisation">Timeseries visualisation</a></li>
+    </ol>
+  </li>
+  <li><a href="#visualisation-mapping-with-a-galaxy-earth-systems-tool" id="markdown-toc-visualisation-mapping-with-a-galaxy-earth-systems-tool">Visualisation mapping with a Galaxy Earth System’s tool</a>    <ol>
+      <li><a href="#ocean-data-view-odv" id="markdown-toc-ocean-data-view-odv">Ocean Data View (ODV)</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="#extra-information" id="markdown-toc-extra-information">Extra information</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-short-introduction-on-how-galaxy-works"><button class="gtn-boxify-button details" type="button" aria-controls="details-short-introduction-on-how-galaxy-works" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Short introduction on how Galaxy works</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>You can come back to where you left off the tutorial anytime by clicking <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-log-in-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Log in to Galaxy</div>
+    <ol>
+      <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
+      <li>Browse to your <a href="https://earth-system.usegalaxy.eu/">Galaxy instance</a></li>
+      <li>On the top go to <strong>Login or Register</strong></li>
+    </ol>
+
+  </blockquote>
+
+  <p>The Galaxy homepage is divided into three panels:</p>
+  <ul>
+    <li>Tools on the left</li>
+    <li>Viewing panel in the middle</li>
+    <li>History of analysis and files on the right</li>
+  </ul>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="/training-material/shared/images/galaxy_interface.png" alt="Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right." width="2009" height="969" loading="lazy" /><a target="_blank" href="/training-material/shared/images/galaxy_interface.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy interface explanation</figcaption></figure>
+
+  <p>The first time you use Galaxy, there will be no files in your history panel.</p>
+</blockquote>
+<hr />
+
+<h1 id="argo-gliders-data">Argo gliders data</h1>
+<p>Argo is a global network of nearly 4000 autonomous probes measuring pressure, temperature and salinity from the surface to 2000m depth every 10 days.
+The localisation of these probes is nearly random between the 60th parallels. All probes data are collected by satellite in real-time, processed by several data
+centers and finally merged in a single dataset (collecting more than 2 million vertical profiles) made freely available to anyone through an FTP server or monthly zip snapshots.</p>
+
+<p>Each Argo probe is an autonomous, free drifting, profiling float, i.e. a probe that can’t control its trajectory but can control its buoyancy and thus move up and down the water
+column as it wishes. Argo floats continuously operate the same program, or cycle, illustrated in the figure below. After 9 to 10 days of free drift at a parking depth of about 1000m,
+a typical Argo float dives down to 2000m and then shoals back to the surface while measuring pressure, temperature and salinity. Once it reaches the surface,
+the float sends by satellite its measurements to a data center where they are processed in real-time and made freely available on the web in less than 24h00.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/argo_pangeo/argofloats_cycle.png" alt="Schema of a typical 10 days program, cycle, of an Argo float. " width="2005" height="1107" loading="lazy" /><a target="_blank" href="../../images/argo_pangeo/argofloats_cycle.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> 10 days program, cycle, of an Argo float</figcaption></figure>
+
+<p>Here we will focus on the Caribbean Sea surrounding the Antilles during April and May. On the 9th of April 2021 an eruption of the volcano La Soufriere Saint Vincent (Antilles) occurred. 
+Another tutorial on this event is available on the <a href="/training-material/topics/climate/tutorials/sentinel5_data/tutorial.html">Galaxy Training Network</a>.</p>
+
+<h2 id="get-argo-data">Get Argo data</h2>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-history-set-up-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-history-set-up-on-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  History set up on Galaxy </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-history-management"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  History management</div>
+
+    <p>Create a new history for this tutorial and give it a name (example: “Argo data with Pangeo”) for you to find it again later if needed.</p>
+
+    <!--SNIPPET-->
+    <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>
+    <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>
+    <p><!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> <!--END_SNIPPET--></p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-arge-data-fetching"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Arge data fetching</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/argo_getdata/argo_getdata/0.1.15+galaxy0" title="Argo data access tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Argo data access</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.15+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“We have preconfigured some mode of operations for you. What mode do you want to use?”</em>: <code class="language-plaintext highlighter-rouge">🏊 standard mode simplifies the dataset, removes most of its jargon and returns a priori good data</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How do you want to select your data of interest ?”</em>: <code class="language-plaintext highlighter-rouge">🗺 For a space/time domain</code>
+          <ul>
+            <li><em>“Input longitude min (+east/-west)”</em>: <code class="language-plaintext highlighter-rouge">-75.0</code></li>
+            <li><em>“Input longitude max (+east/-west)”</em>: <code class="language-plaintext highlighter-rouge">-45.0</code></li>
+            <li><em>“Input latitude min (+north/-south)”</em>: <code class="language-plaintext highlighter-rouge">20.0</code></li>
+            <li><em>“Input latitude max (+north/-south)”</em>: <code class="language-plaintext highlighter-rouge">30.0</code></li>
+            <li><em>“Input pressure min (db)”</em>: <code class="language-plaintext highlighter-rouge">0.0</code></li>
+            <li><em>“Input pressure max (db)”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+            <li><em>“Input starting date”</em>: <code class="language-plaintext highlighter-rouge">2021-04</code></li>
+            <li><em>“Input ending date”</em>: <code class="language-plaintext highlighter-rouge">2021-06</code></li>
+          </ul>
+        </li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which kind of dataset do you want ?”</em>: <code class="language-plaintext highlighter-rouge">Physical parameters: temperature, salinity, pressure</code></li>
+      </ul>
+    </li>
+    <li><strong>Run Tool</strong></li>
+    <li>After a couple of minutes, an <code class="language-plaintext highlighter-rouge">Argo data</code> output will appear green in your history.</li>
+    <li>Check that your data are in netcdf format with <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>, it should be <code class="language-plaintext highlighter-rouge">netcdf</code></li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">nectdf</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+  <p><!--END_SNIPPET--></p>
+</blockquote>
+
+<h1 id="argo-data-analysed-managed-and-visualised-by-the-pangeo-tools">Argo data analysed, managed, and visualised by the Pangeo tools</h1>
+
+<h2 id="xarray-tools">Xarray tools</h2>
+
+<p>First, we’ll use 2 xarray netcdf tools. xarray, formerly known as xray, is a Python package which enables us to play with gridded data.
+This package shares most of its features from numpy, but in a more convenient manner by keeping track of labels in arrays.
+The gridded data is mainly available in netCDF data format. Thus xarray comes in very handy while dealing with netCDF files.</p>
+
+<h2 id="knowing-more-about-hour-data">Knowing more about hour data</h2>
+<p>After fetching the required Argo data, the following stage is to obtain the meta info or metadata of the file.
+The very purpose of these steps is to obtain information about dimensions, variables, global attributes, etc. The coordinate info helps to
+know about the actual data entries present under the various variables.</p>
+
+<h2 id="get-metadata">Get metadata</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-netcdf-dataset-with-xarray-metadata-galaxy-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  NetCDF dataset with Xarray metadata Galaxy Tool</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/2022.3.0+galaxy0" title="NetCDF xarray Metadata Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray Metadata Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2022.3.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">output_argo</code> (output of <strong>Argo data access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In the info output file, we can identify 4 different sections:</p>
+
+<ol>
+  <li>Dimensions: name of dimensions and corresponding number of elements;</li>
+  <li>Coordinates: contains coordinate arrays (longitude, latitude, level and time) with their values.</li>
+  <li>Data variables: contains all the variables available in the dataset. Here, we only have one variable. For each variable, we get information on its shape and values.</li>
+  <li>Global Attributes: at this level, we get the global attributes of the dataset. Each attribute has a name and a value.</li>
+</ol>
+
+<h2 id="coordinates-information">Coordinates information</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-coordinate-information-with-xarray-coordinate"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Get Coordinate information with Xarray Coordinate</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/2022.3.0+galaxy0" title="NetCDF xarray Coordinate Info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF xarray Coordinate Info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2022.3.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">output_argo</code> (output of <strong>Argo data access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the 5 generated outputs:</p>
+
+<ol>
+  <li>latitude: a tabular file containing all the latitude values of our Xarray dataset;</li>
+  <li>longitude: a tabular file containing all the longitudes values;</li>
+  <li>level: this file contains information on all the different levels (here, we have surface data so level=0 meter);</li>
+  <li>time: this tabular file contains all the forecast times. In our case, these are relative to December 22, 2021;</li>
+  <li>version: this is a text file returning the Xarray package version. It is useful when publishing your Galaxy workflow.</li>
+</ol>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/argo_pangeo/argo_history.png" alt="History with the newly generated outputs. " width="302" height="817" loading="lazy" /><a target="_blank" href="../../images/argo_pangeo/argo_history.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> History with the newly generated outputs</figcaption></figure>
+
+<h2 id="timeseries-visualisation">Timeseries visualisation</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-netcdf-timeseries-extractor"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  NetCDF timeseries Extractor</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/timeseries_extraction/timeseries_extraction/2022.3.0+galaxy0" title="NetCDF timeseries Extractor tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NetCDF timeseries Extractor</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2022.3.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input netcdf file”</em>: <code class="language-plaintext highlighter-rouge">output_argo</code> (output of <strong>Argo data access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Choose the variable to plot”</em>: ``</li>
+        <li><em>“Datetime selection”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li>In <em>“Advanced Plotting Options”</em>:
+          <ul>
+            <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Temperature</code></li>
+            <li><em>“Label for x-axis”</em>: <code class="language-plaintext highlighter-rouge">Time</code></li>
+            <li><em>“Label for y-axis”</em>: <code class="language-plaintext highlighter-rouge">Temperature</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="visualisation-mapping-with-a-galaxy-earth-systems-tool">Visualisation mapping with a Galaxy Earth System’s tool</h1>
+
+<p>The Earth System is a complex and dynamic system that encompasses the interactions between the atmosphere, oceans, land, and biosphere.
+Understanding and analyzing data from the Earth System Model (ESM) is essential, for example, to predict and mitigate the impacts of climate change.
+The ESM that the project tries to implement includes coastal water dynamics, ocean bio-geochemical in-situ data, marine omics observations, volcano activities and land degradation.</p>
+
+<p>To know more keep an <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> open for all related blogs on the <a href="https://galaxyproject.org/news/">Galaxy Community Hub</a> or go try the tools directly on <a href="https://earth-system.usegalaxy.eu/">Galaxy Earth System</a>.</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/argo_pangeo/earth_system_galaxy.png" alt="Galaxy Earth System welcome page image. " width="1503" height="461" loading="lazy" /><a target="_blank" href="../../images/argo_pangeo/earth_system_galaxy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Galaxy Earth System welcome page image</figcaption></figure>
+
+<h2 id="ocean-data-view-odv">Ocean Data View (ODV)</h2>
+<p>Ocean Data View (ODV) is a software package for the interactive exploration, analysis and visualization of oceanographic and other geo-referenced profile, time-series, trajectory or sequence data. To know more about ODV go check the <a href="https://odv.awi.de/">official page</a>.</p>
+
+<p>ODV is now integrated with Galaxy as an interactive tool. This kind of tool works differently than classical tools as it allows the user to interact with a dedicated graphical interface. Those tools are used to give access to Jupyter Notebooks, RStudio or R Shiny apps for example.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-launch-odv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Launch ODV</div>
+
+  <ol>
+    <li><span class="tool" data-tool="interactive_tool_odv" title="ODV tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ODV</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Select if you are using a ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are Netcdf or tabular text files</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf or tabular text file. For text file, odv format is recommanded.”</em>: <code class="language-plaintext highlighter-rouge">timeseries_tabular</code> (output of <strong>NetCDF timeseries Extractor</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Click on <strong>Run Tool</strong></li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the ODV to be running (Job Info)</li>   <li>Click on ODV</li> </ol> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-odv-disconnected"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-odv-disconnected" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: ODV - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>If at one point your ODV interface becomes grey with a red panel on the top “X ODV - Disconnected”, do NOT panic ;) you just need to reload your tab (circular arrow on top left)</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-copy-pasting-between-computer-and-odv"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-pasting-between-computer-and-odv" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copy pasting between computer and ODV</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>You can expand the ODV left panel (where there are 3 dots, vertically) to access the “clipboard” menu, and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.</p>
+
+    <p><a href="../../images/argo_pangeo/clipboard.png" rel="noopener noreferrer"><img src="../../images/argo_pangeo/clipboard.png" alt="Image showing in transparent on the left of the ODV interface the clipboard. " width="1918" height="1029" loading="lazy" /></a></p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualise-with-odv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Visualise with ODV</div>
+
+  <p>In the new tab in ODV.</p>
+  <ol>
+    <li>
+      <p>Click on close of the pop-up screen for the check for Updates</p>
+    </li>
+    <li>
+      <p>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></p>
+    </li>
+    <li>
+      <p>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>. 
+You should see a folder open it (double clicking)</p>
+    </li>
+    <li>
+      <p>In the bottom of the pop-up window in <strong>Files of type</strong> select <strong>All Files (*)</strong></p>
+    </li>
+    <li>
+      <p>Click on <strong>Open</strong> in the bottom right</p>
+    </li>
+    <li>
+      <p>On the left smaller map right click and select <strong>Zoom</strong></p>
+    </li>
+    <li>
+      <p>Then move your cursor on the map you should see a red rectangle moving along</p>
+    </li>
+    <li>
+      <p>Reduce the rectangular to have the selection you want on the map. It can be something similar to the following image (no need to be exactly the same).</p>
+    </li>
+    <li>
+      <p>Once you’re happy with your selection click on <strong>Enter</strong> on your keyboard.</p>
+    </li>
+  </ol>
+
+  <p>There your data should be opening and you can now visualise them!</p>
+
+</blockquote>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/argo_pangeo/argo_odv_open.png" alt="Visualistation on a ODV map. " width="1844" height="1010" loading="lazy" /><a target="_blank" href="../../images/argo_pangeo/argo_odv_open.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> ODV map of the Argo data</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualise-the-temperature-on-a-map-with-odv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Visualise the temperature on a map with ODV</div>
+  <ol>
+    <li>Go on the big <strong>+</strong> on the top left</li>
+    <li>Select “1 SURFACE Window”</li>
+    <li>On the central white rectangular next to the map click right and and select <strong>Properties…</strong></li>
+    <li>Go to the <strong>Data</strong> tab of the pop-up window</li>
+    <li>Select for <strong>Z-axis</strong> the variable <strong>TEMP @ N POINTS=first</strong> as the following image.
+<a href="../../images/argo_pangeo/odv_properties.png" rel="noopener noreferrer"><img src="../../images/argo_pangeo/odv_properties.png" alt="Going to the properties and modify the data to visualise the temperature. " width="647" height="651" loading="lazy" /></a></li>
+    <li>Then, click on <strong>OK</strong>.</li>
+  </ol>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-change-your-visualisation-properties"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-change-your-visualisation-properties" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Change your visualisation properties</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Go to the central map</li>
+      <li>Click right and select <strong>Properties…</strong></li>
+      <li>For example, make your data dots bigger in “Display Style” increase the number below “Symbol Size” to 30, and click <strong>OK</strong></li>
+    </ol>
+
+    <p>You can now see bigger dots representing your data.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-save-your-visualisation-map"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save your visualisation map</div>
+  <ol>
+    <li>Click right on the map select <strong>Save Plot As…</strong></li>
+    <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+    <li>In <strong>File name</strong> rename your view (for example subset_temp_argo_data)</li>
+    <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.
+Once you’re finished with ODV :</li>
+    <li>On th top left click on <strong>File</strong> select <strong>Exit</strong></li>
+    <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+  </ol>
+</blockquote>
+
+<p><a href="../../images/argo_pangeo/odv_result.png" rel="noopener noreferrer"><img src="../../images/argo_pangeo/odv_result.png" alt="ODV result map. " width="882" height="576" loading="lazy" /></a></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Awesome! You now know how to get Argo data, then get metadata and other information within the Pangeo ecosystem and finally visualise these data with an Earth System tool,
+Ocean Data View.
+<a href="../../images/argo_pangeo/workflow.png" rel="noopener noreferrer"><img src="../../images/argo_pangeo/workflow.png" alt="The full workflow. " width="1149" height="313" loading="lazy" /></a></p>
+
+<h1 id="extra-information">Extra information</h1>
+<p>Coming up soon even more tutorials on and other Earth-System related trainings. Keep an <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> open if you are interested!</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Argo data</p>
+</li>
+                        
+                        <li><p>Pangeo Ecosystem</p>
+</li>
+                        
+                        <li><p>Galaxy Earth System</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/climate/faqs/">FAQ page for the Climate topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=climate/argo_pangeo" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marie Josse,  <b>Analyse Argo data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/tutorial.html">https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{climate-argo_pangeo,
+author = "Marie Josse",
+	title = "Analyse Argo data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/fairease" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/fairease/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/eurosciencegateway" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/eurosciencegateway/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/argo_pangeo/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: argo_getdata
+  owner: ecology
+  revisions: 055a934a380f
+  tool_panel_section_label: Get Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: timeseries_extraction
+  owner: ecology
+  revisions: 810820a0d45c
+  tool_panel_section_label: GIS Data Handling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: xarray_coords_info
+  owner: ecology
+  revisions: 663e6f115a76
+  tool_panel_section_label: GIS Data Handling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: xarray_metadata_info
+  owner: ecology
+  revisions: 00de53d18b99
+  tool_panel_section_label: GIS Data Handling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/55a2bded142c32ac177b43c280b01fa66d58b43d">55a2bde</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/argo_pangeo/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	
+    </body>
+</html>

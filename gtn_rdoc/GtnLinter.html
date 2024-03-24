@@ -323,7 +323,7 @@
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_bad_icon</span>(<span class="ruby-identifier">contents</span>)
   <span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/{%\s*icon\s+([^%]*)\s*%}/i</span>)
     .<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">_text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">icon_key</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>
+    <span class="ruby-identifier">icon_key</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>[<span class="ruby-value">0</span>]
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">jekyll_config</span>[<span class="ruby-string">&#39;icon-tag&#39;</span>][<span class="ruby-identifier">icon_key</span>].<span class="ruby-identifier">nil?</span>
       <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
         <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
@@ -867,7 +867,7 @@
           
 
           <div class="method-source-code" id="enumerate_all-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1159</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_all</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/.*/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -888,7 +888,7 @@
           
 
           <div class="method-source-code" id="enumerate_lintable-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1153</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_lintable</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/bib$/</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>,
                                                                   <span class="ruby-value">root_dir:</span> <span class="ruby-string">&#39;faqs&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>,
@@ -911,7 +911,7 @@
           
 
           <div class="method-source-code" id="enumerate_symlinks-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1138</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_symlinks</span>
   <span class="ruby-identifier">paths</span> = []
   <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./topics&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
@@ -943,7 +943,7 @@
           
 
           <div class="method-source-code" id="enumerate_type-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1123</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_type</span>(<span class="ruby-identifier">filter</span>, <span class="ruby-value">root_dir:</span> <span class="ruby-string">&#39;topics&#39;</span>)
   <span class="ruby-identifier">paths</span> = []
   <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-node">&quot;./#{root_dir}&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
@@ -1131,15 +1131,19 @@
     <span class="ruby-identifier">possible_tests</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{folder}/#{Regexp.escape(basename)}*ym*&quot;</span>)
     <span class="ruby-identifier">possible_tests</span> = <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-regexp">/#{Regexp.escape(basename)}[_-]tests?.ya?ml/</span>)
 
+    <span class="ruby-identifier">contains_interactive_tool</span> = <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/interactive_tool_/</span>)
+
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">empty?</span>
-      <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
-        <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>,
-                                    <span class="ruby-value">message:</span> <span class="ruby-string">&#39;This workflow is missing a test, which is now mandatory. Please &#39;</span> \
-                                             <span class="ruby-string">&#39;see [the FAQ on how to add tests to your workflows](&#39;</span> \
-                                             <span class="ruby-string">&#39;https://training.galaxyproject.org/training-material/faqs/&#39;</span> \
-                                             <span class="ruby-string">&#39;gtn/gtn_workflow_testing.html).&#39;</span>,
-                                    <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:027&#39;</span>)
-      ]
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">contains_interactive_tool</span>
+        <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
+          <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>,
+                                      <span class="ruby-value">message:</span> <span class="ruby-string">&#39;This workflow is missing a test, which is now mandatory. Please &#39;</span> \
+                                               <span class="ruby-string">&#39;see [the FAQ on how to add tests to your workflows](&#39;</span> \
+                                               <span class="ruby-string">&#39;https://training.galaxyproject.org/training-material/faqs/&#39;</span> \
+                                               <span class="ruby-string">&#39;gtn/gtn_workflow_testing.html).&#39;</span>,
+                                      <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:027&#39;</span>)
+        ]
+      <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-comment"># Load tests and run some quick checks:</span>
       <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">test_file</span><span class="ruby-operator">|</span>
@@ -1153,9 +1157,10 @@
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-identifier">test</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">safe_load</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">test_file</span>))
+        <span class="ruby-identifier">test_plain</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">test_file</span>)
         <span class="ruby-comment"># check that for each test, the outputs is non-empty</span>
         <span class="ruby-identifier">test</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">test_job</span><span class="ruby-operator">|</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-identifier">test_job</span>[<span class="ruby-string">&#39;outputs&#39;</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">test_job</span>[<span class="ruby-string">&#39;outputs&#39;</span>].<span class="ruby-identifier">empty?</span>
+          <span class="ruby-keyword">if</span> (<span class="ruby-identifier">test_job</span>[<span class="ruby-string">&#39;outputs&#39;</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">test_job</span>[<span class="ruby-string">&#39;outputs&#39;</span>].<span class="ruby-identifier">empty?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">test_plain</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/GTN_RUN_SKIP_REASON/</span>)
             <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
               <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>,
                                           <span class="ruby-value">message:</span> <span class="ruby-string">&#39;This workflow test does not test the contents of outputs, &#39;</span> \
@@ -1736,7 +1741,7 @@
           
 
           <div class="method-source-code" id="run_linter_global-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1163</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run_linter_global</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/:/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format_reviewdog_output</span>(
