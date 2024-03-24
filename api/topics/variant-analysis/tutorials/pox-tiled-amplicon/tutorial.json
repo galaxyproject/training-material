@@ -92,7 +92,7 @@
       "name": "pox-virus-tiled-amplicon-ref-masking",
       "title": "pox-virus-tiled-amplicon-ref-masking",
       "test_results": null,
-      "modified": "2024-03-24 11:32:49 +0000",
+      "modified": "2024-03-24 11:49:17 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPrimer Scheme\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference FASTA\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select pool1 primers\"];\n  0 -->|output| 2;\n  3[\"Select pool2 primers\"];\n  0 -->|output| 3;\n  4[\"Compute sequence length\"];\n  1 -->|output| 4;\n  5[\"Datamash\"];\n  2 -->|out_file1| 5;\n  6[\"Datamash\"];\n  3 -->|out_file1| 6;\n  7[\"Cut\"];\n  4 -->|output| 7;\n  8[\"Compute\"];\n  5 -->|out_file| 8;\n  9[\"Get start position of Pool2\"];\n  6 -->|out_file| 9;\n  10[\"Get end position of sequence\"];\n  7 -->|out_file1| 10;\n  11[\"Get end position of Pool1\"];\n  8 -->|out_file1| 11;\n  12[\"Compose text parameter value\"];\n  9 -->|text_param| 12;\n  13[\"Compose text parameter value\"];\n  11 -->|text_param| 13;\n  10 -->|text_param| 13;\n  14[\"Mask Reference for Pool2\"];\n  1 -->|output| 14;\n  12 -->|out1| 14;\n  af755a5e-2b20-49bc-9d52-34781f937f48[\"Output\\nmasked_ref_pool2\"];\n  14 --> af755a5e-2b20-49bc-9d52-34781f937f48;\n  style af755a5e-2b20-49bc-9d52-34781f937f48 stroke:#2c3143,stroke-width:4px;\n  15[\"Mask Reference for Pool1\"];\n  1 -->|output| 15;\n  13 -->|out1| 15;\n  0c3b5b20-c426-428c-a08b-c835a82477c1[\"Output\\nmasked_ref_pool1\"];\n  15 --> 0c3b5b20-c426-428c-a08b-c835a82477c1;\n  style 0c3b5b20-c426-428c-a08b-c835a82477c1 stroke:#2c3143,stroke-width:4px;"
     }
   ],
