@@ -184,7 +184,7 @@ the "Project" Menu tab.
 > You can now see bigger dots representing your data.
 > ![Image of your maps after the increase of the dots' size](../../images/ocean_var/big_dots.png)
 >
-> If you want to save it now that you already saved it once in the right folder outputs you just have to click left on the save icon top left when it's red.
+> If you already saved it once you just have to click left on the save icon (top left) when it's red.
 {: .tip}
 
 ## Save Data
