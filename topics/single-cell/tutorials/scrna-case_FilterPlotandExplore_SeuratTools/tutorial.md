@@ -145,7 +145,7 @@ So let's generate some QC plots. First off, let's visualize the spread of our da
 
 > <hands-on-title>Visualize Counts</hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
 > - *"Plot_type_selector"*: `VlnPlot`
@@ -162,7 +162,7 @@ In a similar fashion we can visualize the spread of cells in our data expressing
 
 > <hands-on-title>Visualize Features</hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
 > - *"Plot_type_selector"*: `VlnPlot`
@@ -179,7 +179,7 @@ We can, and should, ask a number of questions about the quality of our data befo
 
 > <hands-on-title>Visualize Counts Split by Individual</hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
 > - *"Plot_type_selector"*: `VlnPlot`
@@ -209,7 +209,7 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
 
    > <hands-on-title>Visualize Counts Split by Sex</hands-on-title>
   >
-  > Run{% tool [Plot with Seurat]() %} with the following parameters:
+  > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
   > - *"Choose the format of the input"*: `RDS with a Seurat object`
   > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
   > - *"Plot_type_selector"*: `VlnPlot`
@@ -227,7 +227,7 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
 
   > <hands-on-title>Visualize Counts Split by Genotype</hands-on-title>
   >
-  > Run{% tool [Plot with Seurat]() %} with the following parameters:
+  > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
   > - *"Choose the format of the input"*: `RDS with a Seurat object`
   > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
   > - *"Plot_type_selector"*: `VlnPlot`
@@ -470,7 +470,7 @@ Now that we have made note within our object of which cells cluster together, we
 
 > <hands-on-title>Run UMAP </hands-on-title>
 >
-> Run{% tool [RunUMAP]() %} with the following parameters:
+> Run{% tool [RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat FindClusters on data 20: Seurat RDS`
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
@@ -484,7 +484,7 @@ Now that we have run dimensionality reduction on our dataset, it is ready for vi
 
 > <hands-on-title>Plot UMAP </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `DimPlot`
@@ -499,7 +499,7 @@ We can also look for expression of particular genes and see how those map to our
 
 > <hands-on-title>Plot Gapdh </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -516,7 +516,7 @@ For example, we can plot early T-cell marker Il2ra and get an idea of which cell
 
 > <hands-on-title>Plot Il2ra </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -553,7 +553,7 @@ Let's take another look at what our clusters look like:
 
 > <hands-on-title>Plot UMAP </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `DimPlot`
@@ -581,7 +581,7 @@ We can plot these markers as a means of discerning which cluster might be repres
 
 > <hands-on-title>Plot Itm2a </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -596,7 +596,7 @@ Now what about the opposite end of the spectrum: the double negative early T-cel
 
 > <hands-on-title>Plot Il2ra </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -613,7 +613,7 @@ Now for the intermediate populations--which may be a bit more tricky to deconvol
 
 > <hands-on-title>Plot Cd8b1 </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -626,7 +626,7 @@ It looks like clusters 1, 4, 5, and 6 pretty strongly express Cd8b1, now what ab
 
 > <hands-on-title>Plot Cd8a </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -639,7 +639,7 @@ This looks pretty consistent with the Cd8b1 plot, which is expected as these are
 
 > <hands-on-title>Plot Cd4 </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -667,7 +667,7 @@ Are there any differences in genotype? Or in biological terms, is there an impac
 
 > <hands-on-title>Visualize Counts Split by Genotype</hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
 > - *"Plot_type_selector"*: `VlnPlot`
@@ -690,7 +690,7 @@ First thing's first, is there a batch effect?
 
 > <hands-on-title>Visualize Counts Split by Individual</hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
 > - *"Plot_type_selector"*: `VlnPlot`
@@ -710,7 +710,7 @@ Additionally, we will also look at the confounding effect of sex:
 
 > <hands-on-title>Visualize Counts Split by Sex</hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
 > - *"Plot_type_selector"*: `VlnPlot`
@@ -730,7 +730,7 @@ Are there any clusters or differences being driven by sequencing depth, a techni
 
 > <hands-on-title>Plot Counts </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -743,7 +743,7 @@ There doesn't visually appear to be any differences in sequencing depth across t
 
 > <hands-on-title>Plot Features </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
@@ -764,7 +764,7 @@ Do you think we processed these samples well enough? We have seen in the previou
 
 > <hands-on-title>Plot Hba-a1 </hands-on-title>
 >
-> Run{% tool [Plot with Seurat]() %} with the following parameters:
+> Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"Choose the format of the input"*: `RDS with a Seurat object`
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
