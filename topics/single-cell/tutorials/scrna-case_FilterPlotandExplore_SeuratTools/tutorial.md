@@ -327,7 +327,9 @@ The find variable genes step flags genes that *do* vary across cells to expedite
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 {: .hands_on}
 
-This tool will output two new pieces of data into our Galaxy history: a new Seurat object with variable features identified and flagged, and a tabular file with a list of these variable genes. 
+This tool will output two new pieces of data into our Galaxy history: 
+  1. a new Seurat object with variable features identified and flagged
+  2. a tabular file with a list of these variable genes. 
 
 This gene list may be used as a sneak peak into understanding what the dataset will look like! We can begin to understand which genes are going to be driving downstream clustering of our cells and maybe even make some decisions about whether we are happy with our filtering based on this list. 
 
@@ -664,17 +666,17 @@ First thing's first, is there a batch effect?
 >
 > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
-> - *"Plot_type_selector"*: `VlnPlot`
+> - *"Plot_type_selector"*: `DimPlot`
 > - *"Features"*: `nCount_RNA`
 > - *"Group by"*: `RNA_nn_res.0.5`
 > - *"Split by"*: `Sample.Characteristic.individual.`
 > - *"Log"*: `Yes`
-> - *"Fill by"*: `ident`
+> - *"Fill by"*: `feature`
 {: .hands_on}
 
 ![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-case_FPE_SeuratTools//DimPlot_SplitbyIndividual.png "DimPlot colored by assigned clusters split by individual/batch")
 
-While some differences across batch are expected and nothing to be concerned about, the immature T-cells looks to be mainly comprised of Individual 3. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction.
+While some differences across batch are expected and nothing to be concerned about, the immature T-cells looks to be mainly comprised of Individuals 3 and 4. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction.
 
 Additionally, we will also look at the confounding effect of sex:
 
