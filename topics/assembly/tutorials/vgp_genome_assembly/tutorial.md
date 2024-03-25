@@ -324,6 +324,10 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 {: .comment}
 
+In order to do genome profile analysis, first we need the *k*-mer spectrum of the raw reads, which should hopefully contain information about the genome that you sequenced. These *k*-mers are used to build a histogram (the *k*-mer spectrum), and then the GenomeScope model that fits that data will help infer genome characteristics. To count *k*-mers, we first count them on the separate FASTA files, before merging the counts and generating a histogram based on that. This is a way of parallelizing our work. 
+
+![Kmer counting parallelization](../../images/vgp_assembly/meryl_collections.png "K-mer counting is first done on the collection of FASTA files. Because these data are stored in a collection, a separate `count` job is launched for each FASTA file, thus parallelizing our work. After that, the collection of count datasets is merged into one dataset, which we can use to generate the histogram input needed for GenomeScope.")
+
 > <hands-on-title>Generate <i>k</i>-mers count distribution</hands-on-title>
 >
 >**Step 1**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
@@ -1033,9 +1037,13 @@ Now let's parse the `transition between haploid & diploid` and `upper bound for 
 
 An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in downstream analysis, such as scaffolding, gene annotation and read mapping in general ({% cite Small2007 %}, {% cite Guan2019 %}, {% cite Roach2018 %}). In order to solve this problem, we are going to use purge_dups; this tool will allow us to identify and reassign allelic contigs.
 
-This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8).
+This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8). This is meant to try to resolve the {false duplications} depicted in **Figure 1**. 
 
 ![Post-processing with purge_dups](../../images/vgp_assembly/purge_dupspipeline.png "Purge_dups pipeline. Adapted from github.com/dfguan/purge_dups. Purge_dups is integrated in a multi-step pipeline consisting in three main substages. Red indicates the steps which require to use Minimap2.")
+
+The way purging is incorporated in the VGP pipeline, first the **primary assembly** is purged, resulting in a clean (purged) primary assembly and a set of contigs that were *removed* from those contigs. These will often contain haplotigs representing alternate alleles. We would like to keep that in the alternate assembly, so the next step is adding (concatenating) this file to the original alternate assembly. This file then undergoes purging as well, to remove any junk or overlaps.
+
+![Purge_dups workflow in VGP pipeline](../../images/vgp_assembly/purge_dups.png "Purge_dups pipeline as implemented in the VGP pipeline. This consists of first purging the primary contigs, then adding the removed haplotigs to the alternate contigs, and then purging that to get the final alternate assembly.")
 
 ### Read-depth analysis
 
