@@ -295,7 +295,7 @@ Do you want to go even further and visualise your new netcdf data? (Because this
 > 2. Go the top left and click on **File**, then on **Open...**
 > 3. On the pop-up screen on the left panel select **ODV**, then the folder **galaxy**, then **data**. 
 > You should see a file open it (double clicking)
-> 4. Click on **Open** in the bottom right. Then click on **Next** every time and **Finish** you can keep everything by default.
+> 4. Click on **Open** in the bottom right. Then click on **Next*$ until you can click on **Finish** you can keep everything by default.
 > 
 > There your data should be opening and you can now visualise them!
 > ![Image of what the netcdf files look like when opening with ODV](../../images/ocean_var/med_view.png)
