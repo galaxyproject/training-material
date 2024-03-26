@@ -2,19 +2,6 @@
 title: "New GTN Learning Pathway: for FAIR Training developed by ELIXIR-UK Data Stewardship Fellows and Experts"
 contributions:
   authorship: 
-  - robertmand
-  - nsjuty
-  - smza
-  - nsoranzo
-  - saramorsy
-  - kellsnow
-  - khens
-  - proccaserra
-  - lcooper
-  - sitjart
-  - asmasonomics
-  - bfranicevic
-  - saskia-lawson-tovey
   - kkamieniecka
   - khaled196
   - poterlowicz-lab
