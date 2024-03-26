@@ -283,9 +283,7 @@ Finally, this ArrayExpress record links to the raw sequence data housed in the E
 ## (R1.1) (Meta)data are released with a clear and accessible data usage license
 Data licensing makes it clear to any person looking to reuse a dataset, who the data belongs to and how it can be used.  Open licences (available to all) are often used to maximise data reuse, though different stipulations can be applied to these licences to restrict/enforce certain downstream activities, such as reuse of data for commercial purposes.
 
-The [Creative Commons](https://creativecommons.org/) licences are used commonly for life science data, of which there are 7:
-
-**CC0, CC BY, CC BY-SA, CC BY-NC, CC BY-ND, CC BY-NC-SA, CC BY-NC-ND**
+The [Creative Commons](https://creativecommons.org/) licences are used commonly for life science data, of which there are 7: **CC0, CC BY, CC BY-SA, CC BY-NC, CC BY-ND, CC BY-NC-SA, CC BY-NC-ND**
 
 CC0 is the most permissive licence where "no rights are reserved'.  This means the data creator releases the data without restriction to the public domain.
 
