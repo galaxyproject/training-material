@@ -13,7 +13,7 @@ tags:
 - data stewardship
 - data management
 - new learning pathway
-cover: "news/images/2024-03-26-emblem-fellowship.png" 
+cover: "shared/images/dash.png" 
 coveralt: "FAIR TRaining Learning Pathway By ELIXIR fellows funded by the ELIXIR UK DASH project"
 layout: news
 ---
