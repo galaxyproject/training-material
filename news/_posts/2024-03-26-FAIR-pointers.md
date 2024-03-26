@@ -39,4 +39,4 @@ By following FAIR principles, you ensure your data is discoverable by others, ca
 
 You can find out more about the new lessons on the [ELIXIR-UK Fellowship site](http://fellowship.elixiruknode.org/) and its [recommended resources page](https://fellowship.elixiruknode.org/training_materials/).
 
-![Picture of the training pathway form the GTN]({% link news/images/2024-03-26-FAIR-pathway.png %} "The FAIR Training Pathway on GTN for the FAIR Gata Management and FAIR Pointers modules")
+![Picture of the training pathway form the GTN]({% link news/images/2024-03-26-FAIR-pathway.png %} "The FAIR Training Pathway on GTN for the FAIR Data Management and FAIR Pointers modules")
