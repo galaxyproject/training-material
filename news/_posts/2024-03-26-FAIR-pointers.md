@@ -20,9 +20,9 @@ layout: news
 
 ELIXIR-UK's Data Stewardship Fellowship is excited to announce a new learning pathway focused on FAIR data training! This program equips researchers and research support staff with the skills to effectively manage their research data.
 
-By following FAIR principles, you ensure your data is discoverable by others, can be easily integrated with other datasets, and is readily available for future research.
+By following FAIR principles, you ensure your data is discoverable by others, can be easily integrated with other datasets, and is readily available for future research. 
 
-**Together, let's make FAIR data management a standard practice in research!**
+### Together, let's make FAIR data management a standard practice in research!
 
 You can find out more about the new lessons on the [ELIXIR-UK Fellowship site](http://fellowship.elixiruknode.org/) and its [recommended resources page](https://fellowship.elixiruknode.org/training_materials/).
 

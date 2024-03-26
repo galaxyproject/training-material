@@ -249,7 +249,7 @@ Metadata using published ontologies permit interoperability since you can match 
 
 ![fair RNAseq MINSEQ](../../images/fair_rna_11.png "The MINSEQ Score table from the RNAseq data.")
 
-Notice that the "MINSEQE" star rating on the left hand banner, indicates a level of Community Compliance in terms of (meta)data submission.   The community  standard in this case is MINSEQE (Minimum Information about a Sequencing Experiment Checklist) which is recorded in [FAIRsharing](https://doi.org/10.25504/FAIRsharing.a55z32).  This example receives a maximum 5-star score demonstrating that data and metadata are available for experiential design, protocols and  variables as well as processed and raw data.
+Notice that the "MINSEQE" star rating on the left hand banner, indicates a level of Community Compliance in terms of (meta)data submission.   The community  standard in this case is MINSEQE (Minimum Information about a Sequencing Experiment Checklist) which is recorded in FAIRsharing {% cite https://doi.org/10.5281/zenodo.5706412 %}.  This example receives a maximum 5-star score demonstrating that data and metadata are available for experiential design, protocols and  variables as well as processed and raw data.
 
 At a more advanced level of community compliance, the ArrayExpress database uses a domain specific metadata format: MAGE-TAB, also identified in [FAIRsharing](https://fairsharing.org/FAIRsharing.ak8p5g).  MAGE-Tab is a tab-delimited file containing all relevant metadata for the experiment.  This is a machine-readable version of the webpage we are looking at.
 
