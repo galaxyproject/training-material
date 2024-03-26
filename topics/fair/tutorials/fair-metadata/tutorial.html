@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Metadata / FAIR Data, Workflows, and Research</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@32ce226ba2be892dada252370e8e9323ec8b82ee",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-metadata/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Metadata">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-03-22 16:04:41 +0000">
+<meta name="DC.creator" content="Robert Andrews">
+<meta name="DC.creator" content="Nick Juty">
+<meta name="DC.creator" content="Munazah Andrabi">
+<meta name="DC.creator" content="Nicola Soranzo">
+<meta name="DC.creator" content="Sara Morsy">
+<meta name="DC.creator" content="Kellie Snow">
+<meta name="DC.creator" content="Korneel Hens">
+<meta name="DC.creator" content="Philippe Rocca-Serra">
+<meta name="DC.creator" content="Laura Cooper">
+<meta name="DC.creator" content="Xenia Perez Sitja">
+<meta name="DC.creator" content="Andrew Mason">
+<meta name="DC.creator" content="Branka Franicevic">
+<meta name="DC.creator" content="Saskia Lawson-Tovey">
+<meta name="DC.creator" content="Katarzyna Kamieniecka">
+<meta name="DC.creator" content="Khaled Jum'ah">
+<meta name="DC.creator" content="Krzysztof Poterlowicz"><meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="FAIR Data, Workflows, and Research / Hands-on: Metadata">
+        <meta property="og:description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-03-22 16:04:41 +0000",
+  "datePublished": "2024-03-26 08:27:31 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Metadata",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "FAIR Data, Workflows, and Research",
+    "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+    "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Metadata",
+  "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-metadata/tutorial.html",
+  "version": 15,
+  "timeRequired": "PT40M",
+  "teaches": "Define the term ‘metadata’.\n - Recall examples of community/domain standards that apply to data and metadata.",
+  "keywords": [
+    "FAIR Data, Workflows, and Research",
+    "fair",
+    "dmp",
+    "data stewardship"
+  ],
+  "description": "The questions this  addresses are:\n - What is metadata?\n - What is good metadata?\n - Using community standards to write (meta)data\n\n\nThe objectives are:\n - Define the term ‘metadata’.\n - Recall examples of community/domain standards that apply to data and metadata.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html",
+      "name": "FAIR in a nutshell",
+      "description": "Hands-on for 'FAIR in a nutshell' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-origin/tutorial.html",
+      "name": "FAIR and its Origins",
+      "description": "Hands-on for 'FAIR and its Origins' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/",
+      "name": "Robert Andrews",
+      "image": "https://avatars.githubusercontent.com/robertmand",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3491-2361",
+      "orcid": "https://orcid.org/0000-0002-3491-2361"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/",
+      "name": "Nick Juty",
+      "image": "https://avatars.githubusercontent.com/nsjuty",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2036-8350",
+      "orcid": "https://orcid.org/0000-0002-2036-8350"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/smza/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/smza/",
+      "name": "Munazah Andrabi",
+      "image": "https://avatars.githubusercontent.com/smza",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7718-5109",
+      "orcid": "https://orcid.org/0000-0002-7718-5109"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/",
+      "name": "Nicola Soranzo",
+      "image": "https://avatars.githubusercontent.com/nsoranzo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3627-5340",
+      "orcid": "https://orcid.org/0000-0003-3627-5340"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/",
+      "name": "Sara Morsy",
+      "image": "https://avatars.githubusercontent.com/saramorsy",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2477-1139",
+      "orcid": "https://orcid.org/0000-0002-2477-1139"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/",
+      "name": "Kellie Snow",
+      "image": "https://avatars.githubusercontent.com/kellsnow",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/khens/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/khens/",
+      "name": "Korneel Hens",
+      "image": "https://avatars.githubusercontent.com/khens",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/",
+      "name": "Philippe Rocca-Serra",
+      "image": "https://avatars.githubusercontent.com/proccaserra",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9853-5668",
+      "orcid": "https://orcid.org/0000-0001-9853-5668"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/",
+      "name": "Laura Cooper",
+      "image": "https://avatars.githubusercontent.com/lcooper",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/",
+      "name": "Xenia Perez Sitja",
+      "image": "https://avatars.githubusercontent.com/sitjart",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7166-0183",
+      "orcid": "https://orcid.org/0000-0002-7166-0183"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/",
+      "name": "Andrew Mason",
+      "image": "https://avatars.githubusercontent.com/asmasonomics",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8222-3974",
+      "orcid": "https://orcid.org/0000-0002-8222-3974"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/",
+      "name": "Branka Franicevic",
+      "image": "https://avatars.githubusercontent.com/bfranicevic",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3440-6581",
+      "orcid": "https://orcid.org/0000-0002-3440-6581"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/",
+      "name": "Saskia Lawson-Tovey",
+      "image": "https://avatars.githubusercontent.com/saskia-lawson-tovey",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8611-162X",
+      "orcid": "https://orcid.org/0000-0002-8611-162X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "name": "Katarzyna Kamieniecka",
+      "image": "https://avatars.githubusercontent.com/kkamieniecka",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0004-2454-5950",
+      "orcid": "https://orcid.org/0009-0004-2454-5950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/",
+      "name": "Khaled Jum'ah",
+      "image": "https://avatars.githubusercontent.com/khaled196",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-5481-8893",
+      "orcid": "https://orcid.org/0000-0001-5481-8893"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/",
+      "name": "Krzysztof Poterlowicz",
+      "image": "https://avatars.githubusercontent.com/poterlowicz-lab",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6173-5674",
+      "orcid": "https://orcid.org/0000-0001-6173-5674"
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "FAIR Data, Workflows, and Research",
+      "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "fair"
+    },
+    {
+      "@type": "Thing",
+      "name": "dmp"
+    },
+    {
+      "@type": "Thing",
+      "name": "data stewardship"
+    }
+  ],
+  "abstract": "The term metadata is defined along with what constitutes rich metadata.  Learners will be able to recall examples of community/domain standards that apply to data and metadata."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/fair" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> FAIR Data, Workflows, and Research
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/fair/faqs/" title="Check our FAQs for the FAIR Data, Workflows, and Research topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/fair-metadata/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/fair/tutorials/fair-metadata/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-fair">
+    <h1 data-toc-skip>Metadata</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/robertmand/" class="contributor-badge contributor-robertmand"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/robertmand?s=36" alt="Robert Andrews avatar" width="36" class="avatar" />
+    Robert Andrews</a><a href="/training-material/hall-of-fame/nsjuty/" class="contributor-badge contributor-nsjuty"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nsjuty?s=36" alt="Nick Juty avatar" width="36" class="avatar" />
+    Nick Juty</a><a href="/training-material/hall-of-fame/smza/" class="contributor-badge contributor-smza"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/smza?s=36" alt="Munazah Andrabi avatar" width="36" class="avatar" />
+    Munazah Andrabi</a><a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-nsoranzo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nsoranzo?s=36" alt="Nicola Soranzo avatar" width="36" class="avatar" />
+    Nicola Soranzo</a><a href="/training-material/hall-of-fame/saramorsy/" class="contributor-badge contributor-saramorsy"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/saramorsy?s=36" alt="Sara Morsy avatar" width="36" class="avatar" />
+    Sara Morsy</a><a href="/training-material/hall-of-fame/kellsnow/" class="contributor-badge contributor-kellsnow"><img src="https://avatars.githubusercontent.com/kellsnow?s=36" alt="Kellie Snow avatar" width="36" class="avatar" />
+    Kellie Snow</a><a href="/training-material/hall-of-fame/khens/" class="contributor-badge contributor-khens"><img src="/training-material/assets/images/avatar.png" alt="Korneel Hens avatar" width="36" class="avatar" />
+    Korneel Hens</a><a href="/training-material/hall-of-fame/proccaserra/" class="contributor-badge contributor-proccaserra"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/proccaserra?s=36" alt="Philippe Rocca-Serra avatar" width="36" class="avatar" />
+    Philippe Rocca-Serra</a><a href="/training-material/hall-of-fame/lcooper/" class="contributor-badge contributor-lcooper"><img src="/training-material/assets/images/avatar.png" alt="Laura Cooper avatar" width="36" class="avatar" />
+    Laura Cooper</a><a href="/training-material/hall-of-fame/sitjart/" class="contributor-badge contributor-sitjart"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/sitjart?s=36" alt="Xenia Perez Sitja avatar" width="36" class="avatar" />
+    Xenia Perez Sitja</a><a href="/training-material/hall-of-fame/asmasonomics/" class="contributor-badge contributor-asmasonomics"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/asmasonomics?s=36" alt="Andrew Mason avatar" width="36" class="avatar" />
+    Andrew Mason</a><a href="/training-material/hall-of-fame/bfranicevic/" class="contributor-badge contributor-bfranicevic"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bfranicevic?s=36" alt="Branka Franicevic avatar" width="36" class="avatar" />
+    Branka Franicevic</a><a href="/training-material/hall-of-fame/saskia-lawson-tovey/" class="contributor-badge contributor-saskia-lawson-tovey"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/saskia-lawson-tovey?s=36" alt="Saskia Lawson-Tovey avatar" width="36" class="avatar" />
+    Saskia Lawson-Tovey</a><a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
+    Katarzyna Kamieniecka</a><a href="/training-material/hall-of-fame/khaled196/" class="contributor-badge contributor-khaled196"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/khaled196?s=36" alt="Khaled Jum'ah avatar" width="36" class="avatar" />
+    Khaled Jum'ah</a><a href="/training-material/hall-of-fame/poterlowicz-lab/" class="contributor-badge contributor-poterlowicz-lab"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/poterlowicz-lab?s=36" alt="Krzysztof Poterlowicz avatar" width="36" class="avatar" />
+    Krzysztof Poterlowicz</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is metadata?</p>
+</li>
+        
+        <li><p>What is good metadata?</p>
+</li>
+        
+        <li><p>Using community standards to write (meta)data</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Define the term ‘metadata’.</p>
+</li>
+        
+        <li><p>Recall examples of community/domain standards that apply to data and metadata.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/fair">FAIR Data, Workflows, and Research</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> FAIR in a nutshell:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/fair/tutorials/fair-intro/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> FAIR and its Origins:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/fair/tutorials/fair-origin/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 40 minutes</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/fair/tutorials/fair-metadata/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+    
+
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 26, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 22, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 15 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The term metadata is defined along with what constitutes rich metadata.  Learners will be able to recall examples of community/domain standards that apply to data and metadata.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#metadata-and-the-fair-principles" id="markdown-toc-metadata-and-the-fair-principles">Metadata and the FAIR Principles</a></li>
+  <li><a href="#what-is-metadata" id="markdown-toc-what-is-metadata">What is metadata?</a></li>
+  <li><a href="#writing-fair-metadata" id="markdown-toc-writing-fair-metadata">Writing FAIR metadata</a></li>
+  <li><a href="#rich-metadata-in-public-data-repositories" id="markdown-toc-rich-metadata-in-public-data-repositories">Rich metadata in public data repositories</a></li>
+  <li><a href="#using-community-standards-for-metadata" id="markdown-toc-using-community-standards-for-metadata">Using community standards for (meta)data</a></li>
+  <li><a href="#useful-resources" id="markdown-toc-useful-resources">Useful resources</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="metadata-and-the-fair-principles">Metadata and the FAIR Principles</h1>
+<p>Metadata relates most directly to the following 10 FAIR Principles highlighted in Table 2.1.  We will discuss and signpost these in this episode.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>The FAIR Guiding Principles</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>To be Findable:</td>
+      <td>F1. (meta)data are assigned a globally unique and persistent identifier<br /><strong>F2. data are described with rich metadata (defined by R1 below)</strong><br /><strong>F3. metadata clearly and explicitly include the identifier of the data it describes</strong><br />F4. (meta)data are registered or indexed in a searchable resource</td>
+    </tr>
+    <tr>
+      <td>To be Accessible:</td>
+      <td>A1. (meta)data are retrievable by their identifier using a standardized communications protocol <br />A1.1 the protocol is open, free, and universally implementable<br />A1.2 the protocol allows for an authentication and authorization procedure, where necessary <br /><strong>A2. metadata are accessible, even when the data are no longer available</strong></td>
+    </tr>
+    <tr>
+      <td>To be Interoperable:</td>
+      <td><strong>I1. (meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation</strong> <br /><strong>I2. (meta)data use vocabularies that follow FAIR principles<br />I3. (meta)data include qualified references to other (meta)data</strong></td>
+    </tr>
+    <tr>
+      <td>To be Reusable:</td>
+      <td><strong>R1. meta(data) are richly described with a plurality of accurate and relevant attributes</strong> <br /><strong>R1.1. (meta)data are released with a clear and accessible data usage license</strong><br /><strong>R1.2. (meta)data are associated with detailed provenance<br />R1.3. (meta)data meet domain-relevant community standards</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 2.1: The 15 FAIR Guiding Principles. Principles relating directly to metadata are highlighted in <strong>black</strong>.</p>
+
+<h1 id="what-is-metadata">What is metadata?</h1>
+
+<p>Metadata is information that describes your data - it is data about data.</p>
+
+<p>The provision of ‘rich’ metadata is key to FAIR since it allows data to be found, and enables other researchers to interpret data appropriately. ‘Rich’ in this context refers to extensive metadata, often connecting data to other data or terms (even in other datasets), with <strong>qualified references</strong>, Qualified references: terms used to describe relationships to pieces of (meta)data., specifying how they are connected.</p>
+
+<p>If a researcher is given access to a dataset (a spreadsheet in CSV format, for example), the data is not usable without meaningful column headings and context. For example, what is this data about?  Is it part of a larger dataset and, if so, how is it related?  What are the column headings representing, and what are the rows representing?  Additionally, if the values in the individual cells are device or assay measurements, what device was used, and what assay?</p>
+
+<p>If you look at the example of the spreadsheet below (Figure 2.1) the metadata are coloured blue and the data are in orange.  The data in this example are clinical observations for a cohort of patients and the metadata are the descriptive column headings and additional information about the origin of the data.  The column headings provide context for the data values in each cell.  The contact information enables a researcher to direct questions about data reuse and context.  This raises an interesting point though, because metadata should be rich enough to allow any person to reuse the underlying data without ambiguity (FAIR Principles F2, R1).</p>
+
+<p>Though  this Figure 2.1 shows the difference between metadata and data, it does not exemplify the use of rich metadata.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/figure2-1_human-welsh-cohort.png" alt="spreadsheet. " width="2550" height="1281" loading="lazy" /><a target="_blank" href="../../images/figure2-1_human-welsh-cohort.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A spreadsheet showing the relationship between data (orange) and metadata (blue)</figcaption></figure>
+
+<p>We are given only 2 pieces of <strong>data provenance</strong>, Data provenance: metadata describing the origin of a piece of data, including information such as version, original location of the data, and usually an audit trail up to the current version, in this example (i) the study name “LONDON DIABETES COHORT” which could help discover other documentation about the project; (ii) the name of the person who presumably led the study.  While these may help to search for further information, for a human user, this would still be fraught with issues since both names may not uniquely identify the study or its lead.  For a machine agent, such as a script, interpretation is made difficult because the metadata is not clearly marked-up (represented formally with tags).</p>
+
+<p>To fix this, contact details for investigators could be included.  Often <a href="https://info.orcid.org/what-is-orcid/">ORCID IDs</a> associated with names are used since they uniquely identify an individual and do not pose problems when an investigator moves institutions and the original (email) address changes.  Coupled with this, investigators can be formally assigned a role in the provenance metadata allowing people to contact the appropriate person, for example, “data producer”, “data manager”.</p>
+
+<p>A project URL should be used where possible, ideally one that can act as a <strong>persistent identifier</strong>, Globally unique and persistent identifier: a permanent reference to a digital resource, usually given as a URL, that takes the user to that resource, for the dataset.  The landing page for that URL should provide more context for the dataset, and describe high-level information such as how the dataset relates to other project outputs, as well as providing other provenance information (dates, times, places, people).  This could include more metadata about the type of study, objectives, protocols, dates, release versioning and so on.  At the end of this episode, resources are given to help define metadata elements that could be included, including a project called <a href="https://www.dublincore.org/specifications/dublin-core/">Dublin Core</a> which defines <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">15 such elements</a> or metadata fields.</p>
+
+<p>Terms of access and reuse are missing which could be rectified by including a <a href="https://rdmkit.elixir-europe.org/licensing#what-licence-should-you-apply-to-your-research-data">data licence</a>, which often appears as part of the metadata, usually at the bottom of a webpage hosting data.
+There could be ambiguity around the acronym, “BPM”, used in the third column header, so this should be defined within a glossary of acronyms and or ideally hyperlinked to a definition in an existing ontology.</p>
+
+<p>There are issues too with the data, as well as the metadata. The second column DISEASE TYPE could be better designed. Two pieces of information (data) are depicted in the same column: disease type (diabetes) and disease stage (early/late).  Ideally, these should be in 2 separate columns allowing researchers to subset on stage and disease type independently for downstream analysis. There are also four different terms used for diabetes (“Diabetes Mellitus II”, “Diabetes”, “Diabetes Mellitus” and “Diabetes Mellitus I”), which again does not allow a researcher to subset data efficiently.  To fix this you would use defined terms within an existing vocabulary or ontology.  The following accesses a <span class="citation"><a href="#diseaseontology">Ontology</a></span> we could use, where each term (for example, “type 2 diabetes mellitus”) is described and assigned a unique ID.  In the example above you would use this unique ID, or the associated descriptive  term, to tag all patients with the same disease, identically.  This then makes the data sub-setable and machine-readable.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Look at the final row of data in Figure 2.1.  There is a missing disease type.  What problems might this cause?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>This isn’t a metadata problem, but it is worth mentioning that missing data can cause more ambiguity.  Does the blank mean the data were not available, or that the data were available but not recorded, or that the individual has no disease? This has implications on how the data are interpreted, and it is likely this data row would be discarded from an analysis.  Here you would be looking to use terms to denote missing, for example, “no disease”, “not recorded”.</p>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="writing-fair-metadata">Writing FAIR metadata</h1>
+
+<p>We have discussed already how rich metadata enables a dataset to be reused and interpreted correctly.  In the context of the FAIR principles, the previous exercise illustrates two of these, namely that <em>“(Meta)data are richly described with a plurality of accurate and relevant attributes”</em> (FAIR Principle R1) and that <em>“(Meta)data are associated with detailed provenance”</em> (FAIR Principle R1,2).  Further to this, the suggested use of the published <span class="citation"><a href="#diseaseontology">Ontology</a></span> for data, illustrates a further three principles, where <em>“(Meta)data use <strong>vocabularies</strong>,Vocabularies: (or controlled vocabulary) is a dictionary of terms you can use when producing (meta)data, that follow FAIR principles”</em> (FAIR Principle I2), and _“(Meta)data meet domain-relevant <strong>community standards</strong>, Community standards: standard guidelines used to structure and exchange data, usually supported by community-developed resources and/or software, (FAIR Principle R1.3). The use of hyperlinks specifically to terms in the ontology means that Metadata includes <em>qualified references</em>, Qualified references: terms used to describe relationships to pieces of (meta)data. , to other Metadata (FAIR Principle I3).   From the previous exercise, the <a href="https://disease-ontology.org/">disease ontology</a> provides the vocabulary for the different types of diabetes: type 1 diabetes mellits <span class="citation"><a href="#diseaseontology">Ontology</a></span> and type 2 diabetes mellitus <span class="citation"><a href="#diseaseontology">Ontology</a></span>.</p>
+
+<p>The FAIR Guiding Principles also highlight the importance of providing rich metadata to enable researchers to <strong>find</strong> datasets such that <em>“Data are described with rich metadata”</em> (FAIR Principle F2).  More often than not, a researcher will find data through searching its metadata, usually via an online or a database search.  Information on how this can be achieved is discussed in the next episode on data registration.</p>
+
+<p>The use of vocabularies and cross-references is fundamental to data interoperability.  Interoperable (meta)data can be linked and combined across studies, aided by consistent,  compatible and machine-readable curation.  <a href="https://fairsharing.org/search?fairsharingRegistry=Standard">FAIRsharing</a> is a useful registry of vocabularies, and standards, while more comprehensive ontology lists are maintained by <a href="https://www.ebi.ac.uk/ols/index">OLS (Ontology Lookup Service)</a> and <a href="https://bioportal.bioontology.org/">BioPortal</a>.</p>
+
+<p>The previous exercise also touches on <strong>machine-readability</strong>, Machine-readable: (meta)data is supplied in a structured format that can be read by a computer, of (meta)data through mention of using controlled terms in the “DISEASE TYPE” column to allow subsetting.  The <a href="https://opendatahandbook.org/glossary/en/terms/machine-readable/">Open Data handbook</a> gives a nice overview of machine-readable (meta)data but in short, it is (meta)data supplied in a defined and structured format that can easily be read by an appropriate script or piece of software.  If we use our example of a spreadsheet in comma-separated value form (CSV format), the (meta)data will be organised into cells, in a format that is interoperable with many software.  This would not be true if the same data were made available as a screenshot, highlighting that human-readable data may not be machine-readable.</p>
+
+<h1 id="rich-metadata-in-public-data-repositories">Rich metadata in public data repositories</h1>
+
+<p>Help with rich metadata curation is often supported by public data repositories, and data deposition is one way you can improve its level of FAIRness.  During submission, metadata is composed and linked, making it understood, accessible and searchable.</p>
+
+<p>The figure below shows a screenshot of a dataset hosted by the <a href="https://www.ebi.ac.uk/biostudies/">BioStudies</a> (Figure 2.2).  BioStudies is a public database holding descriptions for biological studies and their (meta)data, and is often used by researchers to provide <strong>primary identifiers</strong> to supplementary information described in publications.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/figure2-2_rnaseq-database.png" alt="A screenshot of a plant RNAseq dataset housed in BioStudies showing rich metadata like accession, study type, publication, etc." width="1914" height="2062" loading="lazy" /><a target="_blank" href="../../images/figure2-2_rnaseq-database.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A FAIR dataset in a public repository <span class="citation"><a href="#RubénSchlaen">Schlaen <i>et al.</i> 2020</a></span></figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Look at the example given in Figure 2.2. What metadata is given?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Metadata can be categorised into 3 basic types (i) descriptive (what the data is); (ii) structural (how the data was generated, i.e. provenance); (iii) administrative (data owners, contributors and funders).  In this example, all 3 are given. <br /> <strong>Administrative metadata</strong>: authors and organisations underneath the dataset title, and the information in “Publication” <br /> <strong>Structural metadata</strong>: “Protocols” and data links on the right-hand side of the page <br />  <strong>Descriptive metadata</strong>: All other metadata on the left-hand side of the page, describing the study type through to “Samples” and “Assays and Data”.  Of note here is the use of controlled vocabularies for metadata such as Organism (<a href="https://www.ncbi.nlm.nih.gov/taxonomy">taxonomy database</a>) and BioStudy-specific terms for fields such as Experimental Factors, Technology.  These allow a researcher to search for all experiments in the database around a theme or type: with queries of the type: “get me all Arabidopsis RNAseq data”.<br /></p>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="using-community-standards-for-metadata">Using community standards for (meta)data</h1>
+<p>Public databases often serve communities and specific types of data, and may often use community standards for metadata curation.  These standards include, usually,  open-access <strong>ontologies</strong> that can be used by researchers to annotate their (meta)data.  The <a href="https://fairsharing.org/search?fairsharingRegistry=Standard">FAIRsharing</a> initiative provides a curated, searchable resource to help find many of these.  The <a href="https://disease-ontology.org/">disease ontology</a> we have mentioned already in the first exercise has its <a href="https://fairsharing.org/FAIRsharing.8b6wfq">own page</a> in FAIRsharing.
+Another useful resource serving the data needs of specific communities is <a href="https://rdmkit.elixir-europe.org/">RDMkit</a>.  RDMkit is an online research data management toolkit for Life Sciences, and as part of its product hosts pages for domain-specific best practices and guidelines.  <a href="https://rdmkit.elixir-europe.org/your_domain">Domain pages</a> signpost detail and promote relevant considerations, tools and resources.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Familiarise yourself with the <a href="https://rdmkit.elixir-europe.org/bioimaging_data">Bioimaging data</a> domain page on RDMkit.  Read the section on “Standard (meta)data formats” about a third of the way down. <br /> What 3 URLs are given to help a researcher gather appropriate metadata for their images?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p><a href="https://docs.openmicroscopy.org/ome-model/6.3.1/">OME model</a> XML-based representation of microscopy data. <br /> <a href="https://quarep.org/">Quality assessment working groups</a> <br /> REMBI <span class="citation"><a href="#Sarkans2021">Sarkans <i>et al.</i> 2021</a></span> <br /></p>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="useful-resources">Useful resources</h1>
+<ul>
+  <li>More about Metadata: <a href="https://rdmkit.elixir-europe.org/metadata_management">RDMkit</a>, <a href="https://faircookbook.elixir-europe.org/content/recipes/introduction/metadata-fair.html">FAIR Cookbook</a></li>
+  <li>Definition of Machine readability: <a href="https://www.rd-alliance.org/groups/long-tail-research-data-ig/wiki/enable-machine-readability.html">Research Data Alliance (RDA)</a></li>
+  <li>Definition of Qualified identifiers: <a href="https://www.go-fair.org/fair-principles/i3-metadata-include-qualified-references-metadata/">GO FAIR</a></li>
+  <li>More about Data licensing: <a href="https://rdmkit.elixir-europe.org/licensing">RDMkit</a>,<a href="https://faircookbook.elixir-europe.org/content/recipes/reusability/ATI-licensing.html"> FAIR Cookbook</a></li>
+  <li>Definition of Metadata community standards: <a href="https://fair-dom.org/community_standards">FAIRDOM</a></li>
+  <li>Registry of FAIR metadata standards: <a href="https://fairsharing.org/search?fairsharingRegistry=Standard">FAIRsharing</a></li>
+  <li>Making interoperable metadata: <a href="https://carpentries-incubator.github.io/fair-bio-practice/06-being-precise/index.html">Ed-DaSH</a>, <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009041">Ten simple rules for making a vocabulary FAIR</a>,<br /> <a href="https://eosc-portal.eu/sites/default/files/Final-D4.4%20Guidelines%20for%20RIs%20to%20enable%20discoverability%20of%20research%20data-pdf.pdf">EOSC Guidelines for research institutes to enable discoverability of research data</a></li>
+  <li>Useful metadata projects and tools: <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">Dublin Core</a>, <a href="https://isa-tools.org/index.html">ISA framework</a>, <a href="https://f1000research.com/articles/9-495">COPO</a></li>
+</ul>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Metadata is data about data.</p>
+</li>
+                        
+                        <li><p>Metadata is used to help you find and interpret data.</p>
+</li>
+                        
+                        <li><p>Domain-relevant community standards help researchers write better, interoperable metadata.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/fair/faqs/">FAQ page for the FAIR Data, Workflows, and Research topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="RubénSchlaen">Schlaen, R., M. Yanovsky, E. Mancini, A. Romanowski, and S. Pérez-Santángelo, 2020 <b>RNA-seq of circadian timeseries sampling (LL2-3) of 13-14 day old Arabidopsis thaliana Col-0 (24 h to 68 h, sampled every 4 h)</b>. <a href="https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-7933">https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-7933</a></li>
+<li id="Sarkans2021">Sarkans, U., W. Chiu, L. Collinson, M. C. Darrow, J. Ellenberg <i>et al.</i>, 2021 <b>REMBI: Recommended Metadata for Biological Images—enabling reuse of microscopy data in biology</b>. Nature Methods 18: 1418–1422. <a href="https://doi.org/10.1038/s41592-021-01166-8">10.1038/s41592-021-01166-8</a></li>
+<li id="diseaseontology">Ontology, D. <b>The Disease Ontology is a formal ontology of human disease.</b> <a href="https://disease-ontology.org/?id=DOID:9352">https://disease-ontology.org/?id=DOID:9352</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>FAIR</dt>
+                    <dd>Findable, Accessible, Interoperable, Reusable</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=fair/fair-metadata" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Robert Andrews, Nick Juty, Munazah Andrabi, Nicola Soranzo, Sara Morsy, Kellie Snow, Korneel Hens, Philippe Rocca-Serra, Laura Cooper, Xenia Perez Sitja, Andrew Mason, Branka Franicevic, Saskia Lawson-Tovey, Katarzyna Kamieniecka, Khaled Jum'ah, Krzysztof Poterlowicz,  <b>Metadata (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-metadata/tutorial.html">https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-metadata/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{fair-fair-metadata,
+author = "Robert Andrews and Nick Juty and Munazah Andrabi and Nicola Soranzo and Sara Morsy and Kellie Snow and Korneel Hens and Philippe Rocca-Serra and Laura Cooper and Xenia Perez Sitja and Andrew Mason and Branka Franicevic and Saskia Lawson-Tovey and Katarzyna Kamieniecka and Khaled Jum'ah and Krzysztof Poterlowicz",
+	title = "Metadata (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-metadata/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/ELIXIR-UK-DaSH" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/ELIXIR-UK-DaSH/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/fair">FAIR Data, Workflows, and Research</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Data Registration:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/fair/tutorials/fair-data-registration/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/fair-metadata/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/32ce226ba2be892dada252370e8e9323ec8b82ee">32ce226</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/fair-metadata/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	
+    </body>
+</html>
