@@ -28,7 +28,7 @@ contributions:
   editing:
     - hexylena
   funding:
-      - elixir-uk
+    - elixir-uk
 subtopic: fair-data
 
 requirements:

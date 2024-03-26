@@ -34,7 +34,7 @@ contributions:
     - kkamieniecka
     - poterlowicz-lab
   funding:
-      - elixir-uk
+    - elixir-uk
 
 
 requirements:
