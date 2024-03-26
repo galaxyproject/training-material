@@ -138,7 +138,7 @@ As we've seen above, FASTQ datasets contain two types of information:
 - *sequence of the read*
 - *base qualities* for each nucleotide in the read.
 
-The base qualities allow us to judge how trustworthy each base in a sequencing read is. The following excerpt from an excellent [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf) by Friederike D&uuml;ndar, Luce Skrabanek, Paul Zumbo explains what base qualities are:
+The base qualities allow us to judge how trustworthy each base in a sequencing read is. The following excerpt from an excellent [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf) by Friederike Dündar, Luce Skrabanek, Paul Zumbo explains what base qualities are:
 
 > <comment-title>From "Introduction to differential gene expression analysis using RNA-seq"</comment-title>
 > Illumina sequencing is based on identifying the individual nucleotides by the fluorescence signal emitted upon their incorporation into the growing sequencing read. Once the fluorescence intensities are extracted and translated into the four letter code. The deduction of nucleotide sequences from the images acquired during sequencing is commonly referred to as base calling.
