@@ -29,7 +29,9 @@ paths:
         200:
           description: successful operation
           content:
-            application/csv
+            application/csv:
+              schema:
+                type: string
   /feedback.json:
     get:
       tags:
@@ -39,7 +41,9 @@ paths:
         200:
           description: successful operation
           content:
-            application/json
+            application/json:
+              schema:
+                type: string
   /contributors.json:
     get:
       tags:
@@ -249,7 +253,7 @@ paths:
         description: Tool ID WITHOUT the version component!! Also when you call it properly you do NOT need to encode the /.
         required: true
         schema:
-          type: string
+          type: object
       summary: Get the GTN's public server tool listing for a specific tool ID. It lists all known public servers that are reachable at the time of the GTN's deployment, and which versions of this tool are available. It's very important that you strip the version component!
       responses:
         200:

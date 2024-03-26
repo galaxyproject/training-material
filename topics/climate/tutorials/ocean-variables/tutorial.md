@@ -7,8 +7,8 @@ questions:
 - How to use ODV collections?
 - How to create climatological estimates?
 objectives:
-- Deals with ODV collection with data orginating from Emodnet chemistry
-- Visualise ocean variables in order to study climate changes
+- Deals with ODV collection with data originating from Emodnet chemistry
+- Visualise ocean variables to study climate changes
 time_estimation: 1H
 key_points:
 - Manage ODV collection's data.
@@ -17,12 +17,7 @@ key_points:
 tags:
   - earth-system
   - ocean
-  - geographical information system
-  - ODV
   - netcdf data
-  - maps
-  - marine data
-  - climate
 contributions:
   authorship:
     - Marie59
@@ -35,11 +30,14 @@ contributions:
 # Introduction
 
 
-Through this tutorial, you will learn in the first part how to import, visualise, and extract data from an ODV collection by using the ODV Galaxy interactive tool. In the second part, you will learn how to use DIVAnd using the inputs the outputs from ODV.
+Through this tutorial, you will learn in the first part how to import, visualise, and extract data from an ODV collection by using the ODV Galaxy interactive tool.
+In the second part, you will learn how to use DIVAnd using the inputs the outputs from ODV.
 
-Ocean Data View (ODV) is a software package for the interactive exploration, analysis and visualization of oceanographic and other geo-referenced profile, time-series, trajectory, or sequence data. To know more about ODV go check the [official page](https://odv.awi.de/)
+Ocean Data View (ODV) is a software package for the interactive exploration, analysis and visualization of oceanographic and other geo-referenced profile, time-series, trajectory,
+or sequence data. To know more about ODV go check the [official page](https://odv.awi.de/)
 
-DIVAnd (Data-Interpolating Variational Analysis in n dimensions) performs an n-dimensional variational analysis/gridding of arbitrarily located observations. Observations will be interpolated/analyzed on a curvilinear grid in 1, 2, 3 or more dimensions. See the [official page](https://gher-uliege.github.io/DIVAnd-presentation/#1)
+DIVAnd (Data-Interpolating Variational Analysis in n dimensions) performs an n-dimensional variational analysis/gridding of arbitrarily located observations.
+Observations will be interpolated/analyzed on a curvilinear grid in 1, 2, 3 or more dimensions. See the [official page](https://gher-uliege.github.io/DIVAnd-presentation/#1)
 
 > <agenda-title></agenda-title>
 >
@@ -51,12 +49,17 @@ DIVAnd (Data-Interpolating Variational Analysis in n dimensions) performs an n-d
 {: .agenda}
 
 # Managing ODV Galaxy interactive tool
-ODV is now integrated in Galaxy as an interactive tool. This kind of tool works differently than classical tools as it allows the user to interact in an interactive way with your data.
-This kind of tool is used to give access to Jupyter notebooks, RStudio or R Shiny apps for example. 
 
-To use ODV, you need to use the {% tool [dedicated form](interactive_tool_odv) %}, you can specify input datasets from your history you want to use in ODV, then press the **execute** button to launch an ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu or you can click on {% icon galaxy-eye %} on the tool in the history.
+ODV is now integrated in Galaxy as an interactive tool. This kind of tool works differently than classical tools as it allows the user to interact interactively with your data.
+This kind of tool is used to give access to Jupyter Notebooks, RStudio or R Shiny apps for example. 
 
-Once you finish your work on ODV, if you want to retrieve data and/or the entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through the "Project" Menu tab.
+To use ODV, you need to use the {% tool [dedicated form](interactive_tool_odv) %}, you can specify input datasets from your history you want to use in ODV,
+then press the **execute** button to launch an ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the
+Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu or you can click on {% icon galaxy-eye %} on
+the tool in the history.
+
+Once you finish your work on ODV, if you want to retrieve data and/or the entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through
+the "Project" Menu tab.
 
 > <details-title>Short introduction on how Galaxy works</details-title>
 >
@@ -87,16 +90,19 @@ Once you finish your work on ODV, if you want to retrieve data and/or the entire
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 > 
-> 2. Import a ODV collection data locally as a zip folder.
->
->    {% snippet  faqs/galaxy/datasets_upload.md %}
+> 2. Import an ODV collection as a zip folder.
+> 
+>    Use this link `https://github.com/fair-ease/Data-for-Galaxy-/raw/main/Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip` in the following instructions.
+>    And **Name** it **Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip**
+>    
+>    {% snippet  faqs/galaxy/datasets_import_via_link.md %}
 >
 >  
-> 3. {% tool [Ocean Data View](interactive_tool_odv) %} with the following parameters:
+> 4. {% tool [Ocean Data View](interactive_tool_odv) %} with the following parameters:
 >    - *"Select if you are using an ODV collection in a zip folder or if you have your own raw data"*: `The data you are using are an ODV collection in a zip folder`
 >    - *"ODV collection in a zip folder."*: `Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip`
 >
-> ![Screenshot of what parameters to input in ODV before running the tool](../../images/ocean_var/launching_odv.png)
+>	![Screenshot of what parameters to input in ODV before running the tool](../../images/ocean_var/launching_odv.png)
 >
 > 4. Click on **Run Tool**
 >
@@ -107,14 +113,13 @@ Once you finish your work on ODV, if you want to retrieve data and/or the entire
 
 > <details-title> Some complementary information about your data </details-title>
 > The data here are Mediterranean Sea - Eutrophication and Acidity aggregated datasets
-> EMODnet Chemistry aims to provide access to marine chemistry datasets and derived data products concerning eutrophication, acidity, and contaminants. The importance of the selected substances and other parameters relates to the Marine Strategy Framework Directive (MSFD). This aggregated dataset contains all unrestricted EMODnet Chemistry data on eutrophication and acidity and covers the Mediterranean Sea. Data were aggregated and quality controlled by the 'Hellenic Centre for Marine Research, Hellenic National Oceanographic Data Centre (HCMR/HNODC)' in Greece. 
+> EMODnet Chemistry aims to provide access to marine chemistry datasets and derived data products concerning eutrophication, acidity, and contaminants. The importance of the selected substances and other parameters relates to the Marine Strategy Framework Directive (MSFD). This aggregated dataset contains all unrestricted EMODnet Chemistry data on eutrophication and acidity and covers the Mediterranean Sea. Data were aggregated and quality controlled by the 'Hellenic Centre for Marine Research, Hellenic National Oceanographic Data Centre (HCMR/HNODC)' in Greece. To get more ODV collection and other data please  [search the sextant catalogue](https://sextant.ifremer.fr/eng/Data/Catalogue#/search?isTemplate=n&from=1&to=30&sortBy=dateStamp&sortOrder=desc&languageStrategy=searchInDetectedLanguage&any=EMODnet%20Chemistry) or the [EMODnet Chemistry catalogue](https://emodnet-chemistry.webodv.awi.de/). 
 > 
 >  ITS-90 water temperature and water body salinity variables have also been included ('as are') to complete the eutrophication and acidity data. If you use these variables for calculations, please refer to SeaDataNet for the quality flags: https://www.seadatanet.org/Products/Aggregated-datasets.
+> 
+> Regional datasets concerning eutrophication and acidity are automatically harvested, and the resulting collections are aggregated and quality-controlled using ODV Software and following a common methodology for all sea regions {% cite emodnet %}. Parameter names are based on P35 vocabulary, which relates to EMODnet Chemistry aggregated parameter names and is available at: https://vocab.nerc.ac.uk/search_nvs/P35/.
 >
-> Regional datasets concerning eutrophication and acidity are automatically harvested, and the resulting collections are aggregated and quality-controlled using ODV Software and following a common methodology for all sea regions ( https://doi.org/10.13120/8xm0-5m67). Parameter names are based on P35 vocabulary, which relates to EMODnet Chemistry aggregated parameter names and is available at: https://vocab.nerc.ac.uk/search_nvs/P35/.
->
-> When not present in the original data, water body nitrate plus nitrite was calculated by summing all nitrate and nitrite parameters. The same procedure was applied for water body dissolved inorganic nitrogen (DIN), which was calculated by summing all nitrate, nitrite, and ammonium parameters. Concentrations per unit mass were converted to a unit volume using a constant density of 1.25 kg/L. {% cite hcmrdata %}
->
+> When not present in the original data, water body nitrate plus nitrite was calculated by summing all nitrate and nitrite parameters. The same procedure was applied for water body dissolved inorganic nitrogen (DIN), which was calculated by summing all nitrate, nitrite, and ammonium parameters. Concentrations per unit mass were converted to a unit volume using a constant density of 1.025 kg/L. {% cite hcmrdata %}
 >
 {: .details}
 
@@ -138,7 +143,7 @@ Once you finish your work on ODV, if you want to retrieve data and/or the entire
 > 3. On the pop-up screen on the left panel select **ODV**, then the folder **galaxy**, then **data**. 
 > You should see a folder open it (double clicking)
 > 4. Select the file with a .odv extension 
-> ![Screenshot of what your pop-up screen should be like when selecting the right data](../../images/ocean_var/select_data.png)
+> 	![Screenshot of what your pop-up screen should be like when selecting the right data](../../images/ocean_var/select_data.png)
 > 5. Click on **Open** in the bottom right
 > 
 > There your data should be opening an you can now visualise them!
@@ -163,9 +168,9 @@ Once you finish your work on ODV, if you want to retrieve data and/or the entire
 > 1. On the left smaller map right click and select **Zoom**
 > 2. Then move your cursor on the map you should see a red rectangle moving along
 > 3. Reduce the rectangular to have the selection you want on the map. It can be something similar to the following image (no need to be exactly the same)
-> ![Selection on the map of the part of the data that you want to analyse](../../images/ocean_var/select_subset.png)
+>	![Selection on the map of the part of the data that you want to analyse](../../images/ocean_var/select_subset.png)
 > 4. Once you're happy with your selection click on **Enter** on your keyboard.
-> ![Result of the subsetting and how the maps should look now](../../images/ocean_var/subset.png)
+>	![Result of the subsetting and how the maps should look now](../../images/ocean_var/subset.png)
 >
 > Here you have created a a subset of your data. 
 {: .hands_on}
@@ -179,7 +184,7 @@ Once you finish your work on ODV, if you want to retrieve data and/or the entire
 > You can now see bigger dots representing your data.
 > ![Image of your maps after the increase of the dots' size](../../images/ocean_var/big_dots.png)
 >
-> If you want to save it now that you already saved it once in the right folder outputs you just have to click lef on te save icon top left when it's red.
+> If you already saved it once you just have to click left on the save icon (top left) when it's red.
 {: .tip}
 
 ## Save Data
@@ -209,7 +214,7 @@ Once you finish your work on ODV, if you want to retrieve data and/or the entire
 > 3. Click **Save**
 > 4. A new pop-up window opens "Select Extended Metadata Variables for Export" Let the 56 items selected and click **OK**
 > 5. "Select Data Variables for Export"  `here you need to select 1: Depth[m]`, ̀`4: Water body dissolved oxygen concentration [umol/l]`, `6: Water body phosphate [umol/l]` and click **OK**
-> ![Screenshot of the variables one needs to select](../../images/ocean_var/select_var.png)
+>	![Screenshot of the variables one needs to select](../../images/ocean_var/select_var.png)
 > 6. "NetCDF File Properties" change the **Longitude range** to `[-180 ... 180] degrees_E`, then select `Export metadata quality flags` and `Export data quality flags` and **OK**.
 > 7. And **OK** again
 >
@@ -223,10 +228,10 @@ Now, if you have finished with your analysis you can exit ODV. To do so you need
 > 2. If you want to save the other window also click on **Yes**. Here we don't need it so click **No**.
 >
 > You can now go back to your Galaxy instance.
-> Now, after waiting for everything to turn green in your history, you can see 3 new outputs
-> ![Screenshot of the 3 new outputs present in your galaxy History](../../images/ocean_var/history.png)
+> Now, after waiting for everything to turn green in your history, you can see 2 new outputs
+> ![Screenshot of the 2 new outputs present in your galaxy History](../../images/ocean_var/history.png)
 >
-> In the history panel click on the {% icon galaxy-eye %} (eye) icon of your output.
+> In the history panel in the output **ODV all outputs** click on the {% icon galaxy-eye %} (eye) icon of your output.
 >
 > You can now visualize the outputs in Galaxy middle panel. 
 > 
@@ -234,40 +239,103 @@ Now, if you have finished with your analysis you can exit ODV. To do so you need
 > ![Image in the middle pannel of the map](../../images/ocean_var/galaxy_output.png)
 {: .hands_on}
 
-# DIVAnd : Data-Interpolating Variational Analysis in n dimensions
+# DIVAnd: Data-Interpolating Variational Analysis in n dimensions
 
-## Change Datatype
-> <hands-on-title>Change the datatype from ODV outputs</hands-on-title>
+> <tip-title>Check Datatype</tip-title>
 > Go to your output 'data_from_Eutrophication_Med_profiles_2022_unrestricted'
->
-> In the Datatypes section select **netcdf**
->
+> 
+> Check if the datatype is **netcdf** if not :
+> 
 > {% snippet  faqs/galaxy/datasets_change_datatype.md %}
->
-{: .hands_on}
+{: .tip}
 
 ## Launch DIVAnd 
-Use ODV outputs (which you just changed the datatype) as DIVAnd input.
+Use ODV outputs as DIVAnd input.
 > <hands-on-title>Run DIVANnd</hands-on-title>
 >
 > 1. Use {% tool [DIVAnd](interactive_tool_divand) %} with the following parameters:
 >    - *"Do you already have a notebook"*: `Start with a fresh notebook`
->    - *"Include data into the environment"*: `data_from_Eutrophication_Med_profiles_2022_unrestricted`
+>    - *"Include data into the environment"*: `ODV netcdf outputs` (output of **Ocean Data View** {% icon tool %})
 > 2. **Run tool**
 > 3. {% snippet faqs/galaxy/interactive_tools_open.md tool="DIVAnd" %}
 {: .hands_on}
 
-Now that you are in your jupyterlab with the right environment to use DIVAnd and a set of notebooks (in the folder **notebooks**) to guide you, you can start the rest of your analysis.
-You can find your data from ODV in the **data** folder of the jupyterlab. 
+> <hands-on-title>Navigate the jupyterlab</hands-on-title>
+> 1. Once in the Jupyterlab, go to the **Notebooks** folder.
+> 2. There open a terminal window and write :
+>    ```bash
+>    wget https://raw.githubusercontent.com/fair-ease/Divand-Galaxy-ext/main/90-analysis-shorten.ipynb
+>    ```
+> 3. Run the entire notebook.
+>
+> In the first 'outputs' folder (at the root of the Jupyterlab folders), you should now have one netcdf file "Water_body_Phosphate_Mediterranean".
+>
+> So, you can now properly close the Jupyter notebook.
+>
+> 4. On the top left click on **files** and then on **Shut down**.
+> 5. Go back to your Galaxy instance.
+{: .hands-on}
 
-Once you are done you have to save all your wanted data and visualisation in the **outputs** folder and then go to the top left in the **file** section and click on **Exit**.
+After a couple of minutes, your outputs should appear in your Galaxy history.
 
-After a couple of minutes, your outputs should appear in your Galaxy history. 
+# BONUS: Even more ODV
 
+Do you want to go even further and visualise your new netcdf data? (Because this tutorial is fascinating and you want to keep reading ;))
+
+> <hands-on-title>Open your Netcdf data in ODV</hands-on-title>
+>  {% tool [Ocean Data View](interactive_tool_odv) %} with the following parameters:
+>    - *"Select if you are using an ODV collection in a zip folder or if you have your own raw data"*: `The data you are using are Netcdf or text tabular files`
+>    - *"Netcdf or tabular text file. For text file, odv format is recommanded."*: `DIVAnd netcdf outputs` (output of **DIVAnd** {% icon tool %})
+>
+> Click on **Run Tool**
+>
+> {% snippet faqs/galaxy/interactive_tools_open.md tool="ODV" %}
+>
+> 1. Click on close of the pop-up screen for the check for Updates
+> 2. Go the top left and click on **File**, then on **Open...**
+> 3. On the pop-up screen on the left panel select **ODV**, then the folder **galaxy**, then **data**. 
+> You should see a file open it (double clicking)
+> 4. Click on **Open** in the bottom right. Then click on **Next*$ until you can click on **Finish** you can keep everything by default.
+> 
+> There your data should be opening and you can now visualise them!
+> ![Image of what the netcdf files look like when opening with ODV](../../images/ocean_var/med_view.png)
+>
+{: .hands-on}
+
+> <hands-on-title>Visualise your Phosphate variable</hands-on-title>
+> 1. Go on the big **+** on the top left
+> 2. Select "1 SURFACE Window"
+>	![Create a surface plot for the phosphate](../../images/ocean_var/surface_window.png)
+> 3. Press right on the new plot and select **Properties...**
+>	![Going to the properties of the plot](../../images/ocean_var/properties.png)
+> 4. In the tab "Display Style" increase the "Symbol size" to 22 for instance
+> 5. In the tab "Color Mapping" increase the level of the "Median" part and lower the "Nonlinearity" such as in the following picture
+> 	![Balance the colors of the map to better visualise the Phosphate repartition](../../images/ocean_var/colors.png)
+> 6. Then, click on **OK**, and you can see the Phosphate repartition.
+>
+> 7. Click right on the map and select **Save Plot As...**
+> 8. In the pop-up screen go to the folder **ODV**, **galaxy**, **outputs**.
+> 9. In **Files of type** select `PNG (*.png *.PNG)` and **Save** then **OK** and **OK**.
+>
+> If you want to have a visualisation of the Phosphate according to the depth, you can do the following.
+> 10. Go on the big **+** on the top left
+> 11. Select "1 STATION Window" in the new tab, in the plot press enter on your keyboard.
+> 12. Same as before to save it, click right on the map and select **Save Plot As...**
+> 13. In **Files of type** select `PNG (*.png *.PNG)` and **Save** then **OK** and **OK**.
+> 
+> You can now safely exit ODV.
+> 14. On the top left click on **File** select **Exit**
+> 15. If you want to save the other window also click on **Yes**. Here we don't need it so click **No**.
+{: .hands-on}
 
 # Conclusion
 
 Great you now know how to extract ocean variables from an ODV collection and use these extracted data in DIVAnd.
+From there you can grid the phosphate variable on the subset extracted create a netcdf file and visualise it on ODV again.
+We finished with the last results visible on the galaxy instance in the output **ODV all outputs** :
+![Resulting map of the Phoshate variable repartition in the Mediterranean sea](../../images/ocean_var/phosphate_map.png)
+![Resulting graph of the phosphate variable according to the depth](../../images/ocean_var/phosphate_graph.png)
 
 # Extra information
-Coming up soon follow-up tutorials on Coastal Water Dynamics workflow (and other Earth-System related trainings). Keep an {% icon galaxy-eye %} open if you are interested!
+
+Coming up soon even more tutorials on and other Earth-System related trainings. Keep an {% icon galaxy-eye %} open if you are interested!

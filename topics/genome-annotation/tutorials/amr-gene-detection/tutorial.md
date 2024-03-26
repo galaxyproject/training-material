@@ -22,6 +22,14 @@ tags:
 - jbrowse1
 - microgalaxy
 subtopic: prokaryote
+edam_ontology:
+- topic_3673 # Whole genome sequencing
+- topic_3305 # Public health and epidemiology
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0080 # Sequence analysis
+- topic_3324 # Infectious disease
+- topic_4013 # Antimicrobial resistance
 level: Introductory
 
 contributions:

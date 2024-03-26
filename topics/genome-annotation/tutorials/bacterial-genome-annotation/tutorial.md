@@ -22,14 +22,20 @@ tags:
 - microgalaxy
 - jbrowse1
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
+- topic_3673 # Whole genome sequencing
+- topic_0085 # Functional genomics
+- topic_0798 # Mobile genetic elements
 level: Introductory
-
 contributions:
   authorship:
   - bebatut
   funding:
   - abromics
-
 follow_up_training:
 - type: "internal"
   topic_name: genome-annotation
@@ -44,7 +50,6 @@ follow_up_training:
   topic_name: galaxy-interface
   tutorials:
   - history-to-workflow
-
 ---
 
 After sequencing and assembly, a genome can be annotated. It is an essential step to describe the genome. 
