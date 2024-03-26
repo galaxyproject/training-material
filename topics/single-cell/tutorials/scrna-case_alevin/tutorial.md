@@ -418,7 +418,7 @@ We're now going to re-run {% icon galaxy-refresh %} the tool that extracts infor
 >    - *"Comma-separated list of field names to extract from the GTF (default: use all fields)"*: `gene_id,gene_name,mito`
 >    - *"Append version to transcript identifiers?"*: `Yes`
 >    - *"Flag mitochondrial features?"*: `Yes` - note, this will auto-fill a bunch of acronyms for searching in the GTF for mitochondrial associated genes. This is good!
->    - *"Filter a FASTA-format cDNA file to match annotations?"*: `No` - we don't need to, we're done with the FASTA!
+>    - *"Filter the cDNA file to match the annotations?"*: `No` - we don't need to, we're done with the FASTA!
 > 2. Check that the output file type is `tabular`. If not, change the file type by clicking the 'Edit attributes'{% icon galaxy-pencil %} on the dataset in the history (as if you were renaming the file.) Then click `Datatypes` and type in `tabular`. Click `Change datatype`.)
 > 2. Rename {% icon galaxy-pencil %} the annotation table to `Gene Information`
 {: .hands_on}

@@ -15,7 +15,7 @@ key_points:
 - "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
 contributors:
   - kkamieniecka
-  - Khaled196
+  - khaled196
   - poterlowicz-lab
 ---
 
