@@ -16,6 +16,7 @@ tags:
 - fair
 - dmp
 - data stewardship
+priority: 6
 contributions:
   authorship:
     - robertmand
