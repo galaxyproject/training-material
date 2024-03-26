@@ -40,7 +40,7 @@ contributions:
     - khaled196
     - poterlowicz-lab
   funding:
-      - ELIXIR-UK-DaSH
+      - elixir-uk
 subtopic: pointers
 follow_up_training:
   - type: "internal"

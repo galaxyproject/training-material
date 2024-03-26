@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 title: FAIRification of an RNAseq dataset
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
-  GTN: Galaxy Training Network
 zenodo_link: ''
 questions:
 - How can an RNAseq dataset be made FAIR?
@@ -15,25 +14,32 @@ key_points:
 - FAIR principles in Galaxy training development and content creation.
 tags:
 - fair
-- gtn
-- training
-priority: 3
+- dmp
+- data stewardship
 contributions:
   authorship:
-    - rob(github)
+    - robertmand
+    - asmasonomics
+    - saramorsy
+    - proccaserra
+    - sitjart
+    - bfranicevic
     - kkamieniecka
-    - poterlowicz-lab
-  editing:
     - khaled196
+    - poterlowicz-lab
   funding:
-      - ELIXIR-UK-DaSH
+      - elixir-uk
 subtopic: fair-data
 
 requirements:
   - type: "internal"
     topic_name: fair
     tutorials:
-      - fair-pointers
+      - fair-origin
+      - fair-metadata
+      - fair-data-registration
+      - fair-access
+      - fair-persistent-identifiers
 ---
 
 
@@ -58,7 +64,7 @@ This lesson will take you through a publicly available RNAseq dataset in ArrayEx
 
 We will use the following human RNAseq dataset for this learning material [ArrayExpress:E-MTAB-8316](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-8316). This link hosts all metadata and links to downloadable raw and transformed data, shown as a schematic below.
 
-![fair_rna_data_and_metadata](../../images/fair_rna_1.png "A schematic of RNAseq data and metadata within ArrayExpress. Data shown are raw FASTQ files and summary gene transcript count matrices.")
+![A schematic of RNAseq data and metadata within ArrayExpress](../../images/fair_rna_1.png "A schematic of RNAseq data and metadata within ArrayExpress. Data shown are raw FASTQ files and summary gene transcript count matrices.")
 
 
 # Finding and accessing an RNAseq dataset
@@ -79,7 +85,7 @@ In this section, four of the FAIR Guiding Principles are put into practice:
 > >
 > > Under "Data and code availability', towards the end of the manuscript, we are told the following. 
 > >
-> > ![fair_data_av](../../images/fair_rna_2.png "The data availability section within the RNAseq publication showing links to access primary data.")
+> > ![The data availability section within the RNAseq publication](../../images/fair_rna_2.png "The data availability section within the RNAseq publication showing links to access primary data.")
 > >
 > {: .solution}
 {: .question}
@@ -103,7 +109,7 @@ Note also, the same record can be accessed using a resolution service, such as [
 > > You should see the following webpage hosted at the EBI (www.ebi.ac.uk). In the context of FAIR, you have now accessed this RNAseq data using a weblink employing https, where https is a standardised communications protocol or “data getting method” that is open, free and universally implementable (A1, A1.1).  Note that the title of this RNAseq record and the title of the companion publication are different, which means the two cannot be linked by title.  Instead, the accession (persistent ID) is used to connect the data and companion publication.
 > >
 > > Many databases, including ArrayExpress, also have programmatic ways to access and download data.  For advanced users, ArrayExpress [host a REST server](https://www.ebi.ac.uk/biostudies/arrayexpress/help#programmatic) for this purpose.  Other packages written by third parties, such as [ffq](https://github.com/pachterlab/ffq), also permit this function.
-> > ![fair_data_record](../../images/fair_rna_3.png "The RNAseq data record showing the Primary ID circled in red.")
+> > ![RNAseq data record](../../images/fair_rna_3.png "The RNAseq data record showing the Primary ID circled in red.")
 > >
 > {: .solution}
 {: .question}
@@ -119,7 +125,7 @@ Note also, the same record can be accessed using a resolution service, such as [
 > >
 > > Note here that data access is gained through searching the database whereas previously we used a direct URL.  We are able to search ArrayExpress with the persistent ID  because the RNAseq dataset and its metadata are indexed (F4).
 > >
-> > ![fair_arrayexpress](../../images/fair_rna_4.png "The ArrayExpress/BioStudies search bar with the query circled in red.")
+> > ![ArrayExpress/BioStudies search bar](../../images/fair_rna_4.png "The ArrayExpress/BioStudies search bar with the query circled in red.")
 > >
 > {: .solution}
 {: .question}
@@ -133,7 +139,7 @@ Note also, the same record can be accessed using a resolution service, such as [
 > >
 > > Here, the dataset we want is not the first in the list but appears later in the search results. In this example, data access is gained through searching metadata (data about the experiment) (F4), and not the persistent ID as we did previously.
 > >
-> > ![fair_arrayexpress](../../images/fair_rna_5.png "The ArrayExpress/BioStudies search bar showing a metadata query circled in red.")
+> > ![ArrayExpress/BioStudies search bar for the metadata query](../../images/fair_rna_5.png "The ArrayExpress/BioStudies search bar showing a metadata query circled in red.")
 > >
 > {: .solution}
 {: .question}
@@ -157,7 +163,7 @@ In this section, the Findability Principles are put into practice:
 > >
 > > The persistent identifier is circled in red and is the first thing we see in the record (F1). All metadata (descriptions about the data) and the actual raw data files are linked from this page. Here metadata clearly and explicitly include the identifier of the data they describe (F3).
 > >
-> > ![fair_rnaseq_record](../../images/fair_rna_6.png "The RNAseq data record showing the Primary ID (persistent identifier) circled in red.")
+> > ![RNAseq data record showing the Primary ID (persistent identifier)](../../images/fair_rna_6.png "The RNAseq data record showing the Primary ID (persistent identifier) circled in red.")
 > >
 > > Here data are described with rich metadata (F2), which allows a person to reuse data appropriately by reducing ambiguity around what the data mean or how they are derived. This principle applies also to other principles in  FAIR such as (R1) Meta(data) are richly described with a plurality of accurate and relevant attributes.
 > >
@@ -170,13 +176,13 @@ Indexing rich metadata allows a person to easily locate a dataset of interest, s
 
 > <question-title></question-title>
 >
-> Familiarise yourself with the [page layout}(https://www.ebi.ac.uk/biostudies/ArrayExpress/studies/E-MTAB-8316): there are links to all protocols, data, sample metadata and assay type. How many samples are in this dataset?
+> Familiarise yourself with the [page layout](https://www.ebi.ac.uk/biostudies/ArrayExpress/studies/E-MTAB-8316): there are links to all protocols, data, sample metadata and assay type. How many samples are in this dataset?
 >
 > > <solution-title></solution-title>
 > >
 > > There are 12 samples in this dataset.
 > >
-> > ![fair_rnaseq_record_samples](../../images/fair_rna_7.png "The RNAseq data record showing the number of samples (assays) circled in red.")
+> > ![The RNAseq data record showing the number of samples (assays)](../../images/fair_rna_7.png "The RNAseq data record showing the number of samples (assays) circled in red.")
 > >
 > {: .solution}
 {: .question}
@@ -191,7 +197,7 @@ Indexing rich metadata allows a person to easily locate a dataset of interest, s
 > >
 > > The final 2 protocols within the protocol table drawdown detail all data transformations for the raw and transformed data. 
 > >
-> > ![fair_rnaseq_protocol](../../images/fair_rna_8.png "The protocol table from the RNAseq data record showing the final 2 data protocols circled in red.")
+> > ![The protocol table from the RNAseq data record](../../images/fair_rna_8.png "The protocol table from the RNAseq data record showing the final 2 data protocols circled in red.")
 > >
 > {: .solution}
 {: .question}
@@ -228,11 +234,11 @@ Metadata using published ontologies permit interoperability since you can match 
 > >
 > > There are many.  There are ontologies used for Source Characteristics such as ‘Developmental stage’,  ‘Disease’, ‘Organism part’, ‘Cell type’, and so on. These annotations are curated at the point of data submission.
 > >
-> > ![fair_rnaseq_metadata](../../images/fair_rna_9.png "Metadata within the record using controlled terms from published ontologies.")
+> > ![published ontologies metadata](../../images/fair_rna_9.png "Metadata within the record using controlled terms from published ontologies.")
 > >
 > > There are also others that are not so obvious. Under "Protocols', a protocol ontology is used under the column ‘Type’.  By selecting the EFO link-and-arrow following the protocol annotation, you are taken to the FAIR (Experimental factor ontology)[https://www.ebi.ac.uk/ols/ontologies/efo] at the EBI. 
 > >
-> >![fair_rnaseq_protocol_table](../../images/fair_rna_10.png "The protocol table from the RNAseq data record showing the final 2 data protocols circled in red with links to the Experimental Factor Ontology.")
+> >![Experimental Factor Ontology protocol table from the RNAseq data record](../../images/fair_rna_10.png "The protocol table from the RNAseq data record showing the final 2 data protocols circled in red with links to the Experimental Factor Ontology.")
 > >
 > {: .solution}
 {: .question}
@@ -240,7 +246,7 @@ Metadata using published ontologies permit interoperability since you can match 
 ## (R1.3) (Meta)data meet domain-relevant community standards.
 
 
-![fair_rnaseq_MINSEQ](../../images/fair_rna_11.png "The MINSEQ Score table from the RNAseq data.")
+![fair RNAseq MINSEQ](../../images/fair_rna_11.png "The MINSEQ Score table from the RNAseq data.")
 
 Notice that the "MINSEQE" star rating on the left hand banner, indicates a level of Community Compliance in terms of (meta)data submission.   The community  standard in this case is MINSEQE (Minimum Information about a Sequencing Experiment Checklist) which is recorded in [FAIRsharing](https://doi.org/10.25504/FAIRsharing.a55z32).  This example receives a maximum 5-star score demonstrating that data and metadata are available for experiential design, protocols and  variables as well as processed and raw data.
 
@@ -252,7 +258,7 @@ At a more advanced level of community compliance, the ArrayExpress database uses
 >
 > Notice how all data on the webpage are also contained in this machine-readable format.  You are looking to download the SDRF file (Sample and Data Relationship Format).
 >
-> ![fair_rnaseq_links](../../images/fair_rna_12.png "Links to machine-readable metadata in the RNAseq data record circled in red.")
+> ![fair RNAseq links](../../images/fair_rna_12.png "Links to machine-readable metadata in the RNAseq data record circled in red.")
 {: .hands_on}
 
 
@@ -293,7 +299,7 @@ CC BY 4.0 is virtually identical to CC0, except by using CC BY, legal rights are
 >
 > > <solution-title></solution-title>
 > >
-> > ![fair_rnaseq_licences](../../images/fair_rna_13.png "Screenshots from the Creative Commons licences definitions pages for SA, NC and ND.")
+> > ![fair RNAseq licences](../../images/fair_rna_13.png "Screenshots from the Creative Commons licences definitions pages for SA, NC and ND.")
 > >
 > {: .solution}
 {: .question}
@@ -303,7 +309,7 @@ CC BY 4.0 is virtually identical to CC0, except by using CC BY, legal rights are
 >
 > Look for the licensing options for [arrayexpress](https://www.ebi.ac.uk/biostudies/arrayexpress) at the bottom of the page under [Licensing](https://www.ebi.ac.uk/licencing).  Which licence is used?
 >
-> ![fair_rnaseq_licence_footer](../../images/fair_rna_14.png "The footer from the RNAseq data record showing the link to the Licensing conditions circled in red.")
+> ![fair RNAseq licence footer](../../images/fair_rna_14.png "The footer from the RNAseq data record showing the link to the Licensing conditions circled in red.")
 >
 > > <solution-title></solution-title>
 > >
@@ -325,7 +331,7 @@ CC BY 4.0 is virtually identical to CC0, except by using CC BY, legal rights are
 > >
 > > Access to raw FASTQ data is given via the reference to the ENA database on the right hand banner under “Linked Information”.
 > >
-> > ![fair_rnaseq_metadata_and_rawdata](../../images/fair_rna_15.png "Links to metadata, raw data and processed data in the RNAseq record, circled in red.")
+> > ![fair RNaseq metadata and rawdata](../../images/fair_rna_15.png "Links to metadata, raw data and processed data in the RNAseq record, circled in red.")
 > >
 > {: .solution}
 {: .question}
@@ -342,7 +348,7 @@ The term "data provenance" relates to information about how and why a piece of d
 > >
 > > We are looking for information that could help us understand how data have been created.  We have been given the name of the data creator noting that there is an option too for the author to submit an ORCID.  Data creation and transformations are detailed under Protocols.
 > >
-> > ![fair_rnaseq_submitter](../../images/fair_rna_16.png "Showing submitter and data provenance metadata in the RNAseq record, circled in red.")
+> > ![fair RNaseq submitter](../../images/fair_rna_16.png "Showing submitter and data provenance metadata in the RNAseq record, circled in red.")
 > >
 > {: .solution}
 {: .question}

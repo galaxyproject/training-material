@@ -34,7 +34,7 @@ contributions:
     - kkamieniecka
     - poterlowicz-lab
   funding:
-      - ELIXIR-UK-DaSH
+      - elixir-uk
 
 
 requirements:

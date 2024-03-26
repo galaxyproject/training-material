@@ -15,7 +15,7 @@ editorial_board:
   - poterlowicz-lab
 
 funding:
-  - ELIXIR-UK-DaSH
+  - elixir-uk
 
 pathway:
   - section: "Module 1: FAIR Data Management"

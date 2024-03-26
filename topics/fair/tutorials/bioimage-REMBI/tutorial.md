@@ -33,7 +33,7 @@ contributions:
     - kkamieniecka
     - poterlowicz-lab
   funding:
-      - ELIXIR-UK-DaSH
+      - elixir-uk
 subtopic: fair-data
 
 requirements:
