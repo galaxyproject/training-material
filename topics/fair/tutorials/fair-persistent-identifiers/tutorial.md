@@ -40,7 +40,7 @@ contributions:
     - khaled196
     - poterlowicz-lab
   funding:
-    - elixir-uk
+    - elixir-uk-dash
 subtopic: pointers
 requirements:
   - type: "internal"
