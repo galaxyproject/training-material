@@ -350,6 +350,6 @@ If you wish, you can have a closer look how to pull this dataset from the Single
 ![Combining data files](../../images/scrna-casestudy/wab-combining_datasets_alevin.png "Workflow  - Combining datasets")
 
 You've reached the end of this session!
-You may be interested in seeing an [example history](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-key-history) and [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/cs2combining-datasets-after-pre-processing-1). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing the total the reads can be found in [this Galaxy History on UseGalaxy EU](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing--total-processed-to-single-object).
+You may be interested in seeing an [example history](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-key-history) and [workflow](https://usegalaxy.eu/u/j.jakiela/w/combining-datasets-after-pre-processing). Note that the workflow might require changing of the `column` containing the batch metadata depending on how you are running it and checking the order of the combined datasets. The final object containing the total the reads can be found in [this Galaxy History on UseGalaxy EU](https://usegalaxy.eu/u/j.jakiela/h/all-total-samples-processed-after-alevin-into-single-object).
 
 {% snippet topics/single-cell/faqs/user_community_join.md %}
