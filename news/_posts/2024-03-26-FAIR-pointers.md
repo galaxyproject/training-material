@@ -1,5 +1,5 @@
 ---
-title: "New Learning Pathway: for FAIR Training developed by ELIXIR-UK Data Stewardship Fellows and Experts"
+title: "New GTN Learning Pathway: for FAIR Training developed by ELIXIR-UK Data Stewardship Fellows and Experts"
 contributions:
   authorship: 
   - robertmand
