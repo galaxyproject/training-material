@@ -64,7 +64,7 @@ The following steps provide instructions to upload the test dataset into your Ga
 
 Your data should look like this:
 
-![Galaxy History with Uploaded Data](../../images/ncbi-fcs/fcs-galaxy-1.jpg "Figure 1. Galaxy History with Uploaded Data.")
+![Galaxy History with Uploaded Data](../../images/ncbi-fcs/fcs-galaxy-1.jpg "Galaxy History with Uploaded Data.")
 
 # Importing Workflows
 
