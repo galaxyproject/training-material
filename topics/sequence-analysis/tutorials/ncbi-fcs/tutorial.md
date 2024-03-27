@@ -52,10 +52,11 @@ The following steps provide instructions to upload the test dataset into your Ga
 >    https://zenodo.org/records/10881551/files/FCS.combo.test.fa
 >    ```
 >
-> **Step 3:** Upload `fasta.gz` dataset into Galaxy
->    > {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> 3. Upload `fasta.gz` dataset into Galaxy
 >
->    > {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
 
