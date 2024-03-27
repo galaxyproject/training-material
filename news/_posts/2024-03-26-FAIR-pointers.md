@@ -1,7 +1,7 @@
 ---
-title: "New GTN Learning Pathway: for FAIR Training developed by ELIXIR-UK Data Stewardship Fellows and Experts"
+title: "New Learning Pathway for FAIR Data Management developed by ELIXIR-UK Data Stewardship Fellows and Experts"
 contributions:
-  authorship: 
+  authorship:
   - kkamieniecka
   - khaled196
   - poterlowicz-lab
@@ -16,9 +16,10 @@ tags:
 cover: "shared/images/dash.png" 
 coveralt: "FAIR TRaining Learning Pathway By ELIXIR fellows funded by the ELIXIR UK DASH project"
 layout: news
+tutorial: learning-pathways/fair-training.html
 ---
 
-ELIXIR-UK's Data Stewardship Fellowship is excited to announce a new learning pathway focused on FAIR data training! This program equips researchers and research support staff with the skills to effectively manage their research data.
+ELIXIR-UK's Data Stewardship Fellowship is excited to announce a new learning pathway focused on FAIR Data Management! This program equips researchers and research support staff with the skills to effectively manage their research data.
 
 By following FAIR principles, you ensure your data is discoverable by others, can be easily integrated with other datasets, and is readily available for future research. **Together, let's make FAIR data management a standard practice in research!**
 
