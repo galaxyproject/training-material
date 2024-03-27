@@ -104,8 +104,8 @@
       "name": "Identification of the micro-organisms in a beer using Nanopore sequencing",
       "title": "Identification of the micro-organisms in a beer using Nanopore sequencing",
       "test_results": null,
-      "modified": "2024-03-27 10:57:38 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|outfile| 3;\n  4[\"Kraken2\"];\n  3 -->|out1| 4;\n  589b544d-4c34-45a7-9c64-22df9d80f707[\"Output\\nkraken_report\"];\n  4 --> 589b544d-4c34-45a7-9c64-22df9d80f707;\n  style 589b544d-4c34-45a7-9c64-22df9d80f707 stroke:#2c3143,stroke-width:4px;\n  5[\"Filter\"];\n  4 -->|report_output| 5;\n  6[\"Filter\"];\n  4 -->|report_output| 6;\n  7[\"Krakentools: Convert kraken report file\"];\n  4 -->|report_output| 7;\n  2ef0b728-762f-46fb-9fcb-4925206d11eb[\"Output\\nkrakentool_report\"];\n  7 --> 2ef0b728-762f-46fb-9fcb-4925206d11eb;\n  style 2ef0b728-762f-46fb-9fcb-4925206d11eb stroke:#2c3143,stroke-width:4px;\n  8[\"Krona pie chart\"];\n  7 -->|output| 8;"
+      "modified": "2024-03-27 13:50:43 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Porechop\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|outfile| 3;\n  4[\"Kraken2\"];\n  3 -->|out1| 4;\n  c21d54d2-ea4c-4612-ad68-ce4124f1bde1[\"Output\\nkraken_report\"];\n  4 --> c21d54d2-ea4c-4612-ad68-ce4124f1bde1;\n  style c21d54d2-ea4c-4612-ad68-ce4124f1bde1 stroke:#2c3143,stroke-width:4px;\n  5[\"Filter\"];\n  4 -->|report_output| 5;\n  6[\"Filter\"];\n  4 -->|report_output| 6;\n  7[\"Krakentools: Convert kraken report file\"];\n  4 -->|report_output| 7;\n  10e40a46-4f34-412f-b987-e1a5f62ddb69[\"Output\\nkrakentool_report\"];\n  7 --> 10e40a46-4f34-412f-b987-e1a5f62ddb69;\n  style 10e40a46-4f34-412f-b987-e1a5f62ddb69 stroke:#2c3143,stroke-width:4px;\n  8[\"Krona pie chart\"];\n  7 -->|output| 8;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/beer-data-analysis/tutorial.json",
@@ -131,18 +131,17 @@
         "usegalaxy": true
       },
       {
-        "url": "https://usegalaxy.org",
-        "name": "UseGalaxy.org (Main)",
-        "usegalaxy": true
-      },
-      {
         "url": "https://usegalaxy.org.au",
         "name": "UseGalaxy.org.au",
         "usegalaxy": true
       }
     ],
     "inexact": [
-
+      {
+        "url": "https://usegalaxy.cz/",
+        "name": "UseGalaxy.cz",
+        "usegalaxy": false
+      }
     ]
   },
   "topic_name_human": "Microbiome",

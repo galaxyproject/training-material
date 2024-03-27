@@ -153,7 +153,7 @@
       "name": "GTN Proteogemics3 Novel Peptide Analysis",
       "title": "GTN Proteogemics3 Novel Peptide Analysis",
       "test_results": null,
-      "modified": "2024-03-27 10:57:39 +0000",
+      "modified": "2024-03-27 13:50:43 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nEdited_Mus_Musculus.GRCm38.86\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\npeptides for blast\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nPSM Report\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nmz_sqlite\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\ngenomic mapping sqlite db\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"NCBI BLAST+ blastp\"];\n  1 -->|output| 5;\n  88461c74-1312-41d5-bd54-e7d7297ccd76[\"Output\\nBLASTP_results\"];\n  5 --> 88461c74-1312-41d5-bd54-e7d7297ccd76;\n  style 88461c74-1312-41d5-bd54-e7d7297ccd76 stroke:#2c3143,stroke-width:4px;\n  6[\"PSM_Novel_Peptides\"];\n  5 -->|output1| 6;\n  2 -->|output| 6;\n  29c9a368-a7e6-4e8b-81ca-131f63293093[\"Output\\nPSM_Novel_Peptides\"];\n  6 --> 29c9a368-a7e6-4e8b-81ca-131f63293093;\n  style 29c9a368-a7e6-4e8b-81ca-131f63293093 stroke:#2c3143,stroke-width:4px;\n  7[\"Novel_Peptides\"];\n  6 -->|output| 7;\n  56954668-7aac-423a-89af-aecf2b405b94[\"Output\\nNovel_Peptides\"];\n  7 --> 56954668-7aac-423a-89af-aecf2b405b94;\n  style 56954668-7aac-423a-89af-aecf2b405b94 stroke:#2c3143,stroke-width:4px;\n  8[\"Peptide Genomic Coodinate\"];\n  4 -->|output| 8;\n  3 -->|output| 8;\n  7 -->|output| 8;\n  60fd3e41-8cb7-4a49-b585-2a43117e9cf8[\"Output\\nPeptide Genomic Coodinate on input dataset(s)\"];\n  8 --> 60fd3e41-8cb7-4a49-b585-2a43117e9cf8;\n  style 60fd3e41-8cb7-4a49-b585-2a43117e9cf8 stroke:#2c3143,stroke-width:4px;\n  9[\"PepPointer\"];\n  8 -->|peptide_bed| 9;\n  0 -->|output| 9;\n  3c410bed-ff79-4774-b75c-48659d291160[\"Output\\nPepPointer on input dataset(s)\"];\n  9 --> 3c410bed-ff79-4774-b75c-48659d291160;\n  style 3c410bed-ff79-4774-b75c-48659d291160 stroke:#2c3143,stroke-width:4px;\n  10[\"Final_Summary_Novel_Peptides\"];\n  9 -->|classified| 10;\n  6 -->|output| 10;\n  50e64c95-cd68-47cb-9e0c-b3714b2f2431[\"Output\\nFinal_Summary_Novel_Peptides\"];\n  10 --> 50e64c95-cd68-47cb-9e0c-b3714b2f2431;\n  style 50e64c95-cd68-47cb-9e0c-b3714b2f2431 stroke:#2c3143,stroke-width:4px;"
     }
   ],
@@ -177,17 +177,17 @@
         "usegalaxy": true
       },
       {
-        "url": "https://usegalaxy.org",
-        "name": "UseGalaxy.org (Main)",
-        "usegalaxy": true
-      },
-      {
         "url": "https://usegalaxy.org.au",
         "name": "UseGalaxy.org.au",
         "usegalaxy": true
       }
     ],
     "inexact": [
+      {
+        "url": "https://usegalaxy.cz/",
+        "name": "UseGalaxy.cz",
+        "usegalaxy": false
+      },
       {
         "url": "https://usegalaxy.no/",
         "name": "UseGalaxy.no",

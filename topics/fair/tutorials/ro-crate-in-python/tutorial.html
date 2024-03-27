@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@23464587d24f00e6a9ae239f1d0cf42ba278caad",
+		release: "galaxy-training-network@4191aac2536d2bf4ef01c65dd1e2eb51095144e8",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: RO-Crate in Python">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-19 15:48:30 +0000">
+<meta name="DC.date" content="2024-03-26 13:59:39 +0000">
 <meta name="DC.creator" content="Simone Leo">
 <meta name="DC.creator" content="Bruno P. Kinoshita"><meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -118,7 +118,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-03-19 15:48:30 +0000",
+  "dateModified": "2024-03-26 13:59:39 +0000",
   "datePublished": "2023-05-11 12:51:10 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: RO-Crate in Python",
@@ -232,7 +232,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: RO-Crate in Python",
   "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-python/tutorial.html",
-  "version": 12,
+  "version": 13,
   "timeRequired": "PT30M",
   "teaches": "Create a custom, annotated RO-Crate\n - Use ORCIDs and other linked data to annotate datasets contained within the crate",
   "keywords": [
@@ -802,7 +802,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 11, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 19, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 26, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -822,7 +822,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (1 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
 
     </blockquote>
     </section>
@@ -1170,17 +1170,21 @@ Commands:
 <p>To run the following commands, we need a copy of the ro-crate-py repository:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/ResearchObject/ro-crate-py
-<span class="nb">cd </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase
+</code></pre></div></div>
+
+<p>Navigate to the following directory in the repository we just cloned:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase
 </code></pre></div></div>
 
 <p>This directory is already an RO-Crate. Delete the metadata file to get a plain directory tree:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ro-crate-metadata.json
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm </span>ro-crate-metadata.json
 </code></pre></div></div>
 
 <p>Now the directory tree contains several files and directories, including a Galaxy workflow and a Planemo test file, but it’s not an RO-Crate anymore, since there is no metadata file. Initialize the crate:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ <span class="o">&amp;&amp;</span> rocrate init
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rocrate init
 </code></pre></div></div>
 
 <p>This creates an <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> file that lists files and directories rooted at the current directory. Note that the Galaxy workflow is listed as a plain <code class="language-plaintext highlighter-rouge">File</code>:</p>
@@ -1193,18 +1197,20 @@ Commands:
 
 <p>To register the workflow as a <code class="language-plaintext highlighter-rouge">ComputationalWorkflow</code>, run the following:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ <span class="o">&amp;&amp;</span> rocrate add workflow <span class="nt">-l</span> galaxy sort-and-change-case.ga
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rocrate add workflow <span class="nt">-l</span> galaxy sort-and-change-case.ga
 </code></pre></div></div>
 
-<p>Now the workflow has a type of <code class="language-plaintext highlighter-rouge">["File", "SoftwareSourceCode", "ComputationalWorkflow"]</code> and points to a <code class="language-plaintext highlighter-rouge">ComputerLanguage</code> entity that represents the Galaxy workflow language. Also, the workflow is listed as the crate’s <code class="language-plaintext highlighter-rouge">mainEntity</code> (see the <a href="https://w3id.org/workflowhub/workflow-ro-crate/1.0">Workflow RO-Crate profile</a>).</p>
+<p>Now the workflow has a type of <code class="language-plaintext highlighter-rouge">["File", "SoftwareSourceCode", "ComputationalWorkflow"]</code> and points to a <code class="language-plaintext highlighter-rouge">ComputerLanguage</code> entity that represents the Galaxy workflow language. Also, the workflow is listed as the crate’s <code class="language-plaintext highlighter-rouge">mainEntity</code> (this is required by the <a href="https://w3id.org/workflowhub/workflow-ro-crate/1.0">Workflow RO-Crate profile</a>, a subtype of RO-Crate which provides extra specifications for workflow metadata).</p>
 
-<p>To add <a href="https://crs4.github.io/life_monitor/workflow_testing_ro_crate">workflow testing metadata</a> to the crate:</p>
+<p>To add files or directories after crate initialization:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ <span class="o">&amp;&amp;</span> rocrate add test-suite <span class="nt">-i</span> test1
-<span class="nb">cd </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ <span class="o">&amp;&amp;</span> rocrate add test-instance test1 http://example.com <span class="nt">-r</span> <span class="nb">jobs</span> <span class="nt">-i</span> test1_1
-<span class="nb">cd </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ <span class="o">&amp;&amp;</span> rocrate add test-definition test1 <span class="nb">test</span>/test1/sort-and-change-case-test.yml <span class="nt">-e</span> planemo <span class="nt">-v</span> <span class="s1">'&gt;=0.70'</span>
-<span class="nb">cat </span>ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ro-crate-metadata.json
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> ../sample_file.txt <span class="nb">.</span>
+rocrate add file sample_file.txt <span class="nt">-P</span> <span class="nv">name</span><span class="o">=</span>sample <span class="nt">-P</span> <span class="nv">description</span><span class="o">=</span><span class="s2">"Sample file"</span>
+<span class="nb">cp</span> <span class="nt">-r</span> ../test_add_dir <span class="nb">.</span>
+rocrate add dataset test_add_dir
 </code></pre></div></div>
+
+<p>The above example also shows how to set arbitrary properties for the entity with -P. This is supported by most <code class="language-plaintext highlighter-rouge">rocrate add</code> subcommands.</p>
 
                 </section>
 
@@ -1425,7 +1431,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/23464587d24f00e6a9ae239f1d0cf42ba278caad">2346458</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/4191aac2536d2bf4ef01c65dd1e2eb51095144e8">4191aac</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -106,7 +106,7 @@
       "name": "Unicycler training",
       "title": "Unicycler training",
       "test_results": null,
-      "modified": "2024-03-27 10:57:36 +0000",
+      "modified": "2024-03-27 13:50:40 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nForward reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReverse Reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nLong Reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"FastQC\"];\n  0 -->|output| 3;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Create assemblies with Unicycler\"];\n  2 -->|output| 5;\n  0 -->|output| 5;\n  1 -->|output| 5;\n  6[\"MultiQC\"];\n  3 -->|text_file| 6;\n  4 -->|text_file| 6;\n  7[\"Quast\"];\n  5 -->|assembly| 7;\n  8[\"Prokka\"];\n  5 -->|assembly| 8;\n  0d6b33c9-b105-4997-9045-b86e52f00156[\"Output\\ntbl\"];\n  8 --> 0d6b33c9-b105-4997-9045-b86e52f00156;\n  style 0d6b33c9-b105-4997-9045-b86e52f00156 stroke:#2c3143,stroke-width:4px;\n  8e08b54d-87e1-4269-9b96-8ebf1a9bb4ab[\"Output\\ngbk\"];\n  8 --> 8e08b54d-87e1-4269-9b96-8ebf1a9bb4ab;\n  style 8e08b54d-87e1-4269-9b96-8ebf1a9bb4ab stroke:#2c3143,stroke-width:4px;\n  65e4ddf9-f5bc-4078-8b4e-37b332e12ece[\"Output\\nffn\"];\n  8 --> 65e4ddf9-f5bc-4078-8b4e-37b332e12ece;\n  style 65e4ddf9-f5bc-4078-8b4e-37b332e12ece stroke:#2c3143,stroke-width:4px;"
     }
   ],
@@ -131,11 +131,6 @@
         "usegalaxy": true
       },
       {
-        "url": "https://usegalaxy.org",
-        "name": "UseGalaxy.org (Main)",
-        "usegalaxy": true
-      },
-      {
         "url": "https://usegalaxy.org.au",
         "name": "UseGalaxy.org.au",
         "usegalaxy": true
@@ -155,6 +150,11 @@
       {
         "url": "https://mississippi.sorbonne-universite.fr",
         "name": "MISSISSIPPI",
+        "usegalaxy": false
+      },
+      {
+        "url": "https://usegalaxy.cz/",
+        "name": "UseGalaxy.cz",
         "usegalaxy": false
       },
       {
