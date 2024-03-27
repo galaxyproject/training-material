@@ -41,7 +41,7 @@ contributions:
     - khaled196
     - poterlowicz-lab
   funding:
-      - ELIXIR-UK-DaSH
+    - elixir-uk-dash
 subtopic: pointers
 follow_up_training:
   - type: "internal"
@@ -106,7 +106,6 @@ Institutional repositories work similarly and provide an online archive for host
 Discipline-specific repositories cater for communities and datatypes, and typically provide web interfaces to annotate rich metadata at the point when data are submitted.  Examples of these belong to the suite of data repositories at the [European Bioinformatics Institute (EBI)](https://www.ebi.ac.uk/submission/) where rich metadata creation is supported by teams of curators.
 
 
-
 > <question-title></question-title>
 >
 > An example of a discipline-specific repository is [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress) database.  ArrayExpress stores data from high-through functional genomics assays, such as RNAseq, ChIPseq and expression microarrays.
@@ -132,6 +131,8 @@ The data submission interface of ArrayExpress is called [Annotare](https://www.e
 > >
 > {: .solution}
 {: .question}
+
+
 
 
 > <question-title></question-title>
