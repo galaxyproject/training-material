@@ -118,7 +118,7 @@ Next you will run the Galaxy workflow. Here you will configure the parameters fo
 > 1. Click "Expand to full workflow form." 
 > 1. In the {% icon param-file %} 1: Input genome menu: 
 > - {% icon param-file %} *"Input file (Fasta file)"*: `1:FCS.combo.test.fa`
-> 1. In the {% tool [2: FCS-GX screen](toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.0+galaxy0) %} menu:
+> 1. In the **2: FCS-GX screen** menu:
 > - Select the appropriate taxonomic division for **Taxonomy entry**: {% icon galaxy-wf-edit %} **div** (`fung:budding yeasts` in this example). 
 > - Set the **Advanced Options**: {% icon galaxy-wf-edit %} **Database location** to `/cvmfs/data.galaxyproject.org/byhand/ncbi_fcs_gx/all`
 > 1. In the {% tool [4: FCS-adaptor screen](toolshed.g2.bx.psu.edu/repos/richard-burhans/ncbi_fcs_adaptor/ncbi_fcs_adaptor/0.5.0+galaxy0) %} menu:
