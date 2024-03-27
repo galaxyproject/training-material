@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Downstream analysis with MINERVA"
+title: "Pathway analysis with MINERVA"
 subtopic: visualisation
 priority: 2
 
