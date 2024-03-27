@@ -42,11 +42,11 @@ FCS operates on assembled genome sequences and is not intended for use on raw re
 The following steps provide instructions to upload the test dataset into your Galaxy instance.
 > <hands-on-title> Data Upload </hands-on-title>
 >
-> **Step 1:** Create a new history for this tutorial
+> 1. Create a new history for this tutorial
 >
->    > {% snippet  faqs/galaxy/histories_create_new.md %}
+>    {% snippet  faqs/galaxy/histories_create_new.md %}
 >
-> **Step 2:** Copy the datasets URLs into clipboard.
+> 2. Copy the datasets URLs into clipboard.
 >     Click on the copy button in the right upper corner of the box below.
 >    ```
 >    https://zenodo.org/records/10881551/files/FCS.combo.test.fa
