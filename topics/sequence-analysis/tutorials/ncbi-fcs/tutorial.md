@@ -108,9 +108,9 @@ Once the workflow is loaded, your workflow page should look like this:
 Next you will run the Galaxy workflow. Here you will configure the parameters for the FCS run according to the target organism.
 
 > <hands-on-title> Running the NBCI FCS Workflow </hands-on-title>
-> **Step 1:** Collect inputs
-> 1. Assembled genome in `fasta/fasta.gz` format
-> 1. Taxonomic information for source organism
+> 1. Collect inputs
+>    1. Assembled genome in `fasta/fasta.gz` format
+>    1. Taxonomic information for source organism
 >
 > **Step 2:** Launch the Workflow
 > 1. Click the Workflow menu located in the top menu bar
