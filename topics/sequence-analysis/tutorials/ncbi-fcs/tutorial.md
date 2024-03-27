@@ -18,9 +18,6 @@ contributors:
 ---
 
 
-# Introduction
-
-<!-- This is a comment. -->
 
 The National Center for Biotechnology Information (NCBI) performs contamination screening of genome assemblies submitted to the archival GenBank. Advances in genome sequencing have accelerated the production of genome assemblies and their submission to public databases, necessitating high-performance screening tools. Since contaminants can lead to misleading conclusions about the biology of the organism in question (e.g. gene content, gene evolution, etc.), ideally contamination screening should be performed after the initial contig assembly and prior to downstream genome analyses. 
 
