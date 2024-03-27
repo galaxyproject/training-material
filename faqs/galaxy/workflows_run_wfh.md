@@ -10,13 +10,15 @@ contributors: [hexylena]
 
 <div class="show-when-galaxy-proxy-active">
 
-Click here to run <span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/{{ include.wfhub_id }}/versions/{{ include.wfhub_version | default: 1 }}"><strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span>
+<span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/{{ include.wfhub_id }}/versions/{{ include.wfhub_version | default: 1 }}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span>
+(<a href="https://workflowhub.eu/workflows/{{ include.wfhub_id }}?version={{ include.wfhub_version | default: 1 }}">View on WorkflowHub</a>)
 
 </div>
 
 <div class="hide-when-galaxy-proxy-active">
 
-Click here to run <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ include.wfhub_id }}%26trs_version={{ include.wfhub_version | default: 1}}"><strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a>
+<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ include.wfhub_id }}%26trs_version={{ include.wfhub_version | default: 1}}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a>
+(<a href="https://workflowhub.eu/workflows/{{ include.wfhub_id }}?version={{ include.wfhub_version | default: 1 }}">View on WorkflowHub</a>)
 
 </div>
 
