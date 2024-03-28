@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Pathway analysis with MINERVA"
+title: "Pathway analysis with the MINERVA Platform"
 subtopic: visualisation
 priority: 2
 
@@ -127,7 +127,7 @@ Here we have cut the `SRR*` identifiers from the sample table and downloaded the
 ### Counts
 
 With that done, we can start to analyse the data using HISAT2 and featureCounts.
-This workflow takes in the RNA Sequencing data we've downloaded previously, before trimming it with cutadapt. 
+This workflow takes in the RNA Sequencing data we've downloaded previously, before trimming it with cutadapt.
 Both the trimmed and untrimmed reads are run through FastQC for visualisation.
 
 <figure>
@@ -294,13 +294,19 @@ MIR150  -2.55304226607428  9.55912390273625e-14  6.74866152827879e-11
 SLC2A3  2.95861349227708   1.19066011437523e-13  6.74866152827879e-11
 ```
 
+The tabular dataset, as prepared above is then used by a dedicated MINERVA plugin ({% cite hoksza_minerva_2019 %}) to visualise the data on-the-fly in the [COVID-19 Disease Map](https://covid19map.elixir-luxembourg.org/minerva/). To visualise and explore the data, follow these steps:
+
 > <hands-on-title>Visualise in MINERVA</hands-on-title>
 >
 > 1. **Click** to expand the final "MINERVA-Ready Table"
 >
 > 1. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
 >
+>    ![A galaxy dataset with the barchart icon circled in red](images/1.png)
+>
 > 1. Select "display at Minerva (SARS-CoV-2 Minerva Map)"
+>
+>    ![The galaxy visualisation interface with a big display at minerva banner at the top](images/2.png)
 >
 >    > <tip-title>MINERVA not listed?</tip-title>
 >    > The MINERVA visualisation is only for correctly formatted files with the correct genome (i.e. human, hg19).
@@ -321,32 +327,57 @@ SLC2A3  2.95861349227708   1.19066011437523e-13  6.74866152827879e-11
 >
 {: .hands_on}
 
-### Analysis
+### Analysis in the MINERVA Platform
 
-The tabular dataset, as prepared above is then used by a dedicated MINERVA plugin (see {% cite hoksza_minerva_2019 %}) to visualise the data on-the-fly in the [COVID-19 Disease Map](https://covid19map.elixir-luxembourg.org/minerva/). To visualise and explore the data, follow these steps:
+Welcome to the MINERVA Covid-19 Disease Map! It has a similar interface to Galaxy, there is an interaction menu on the left, the main area is where you'll do your investigation, and on the right are your datasets! In this case the differentially expressed genes analysed above automatically loaded from Galaxy when you clicked "Display at MINERVA".
 
-**1. Overlay the data** in the COVID-19 Disease Map by clicking "Explore" icon and follow the "display at Minerva" link (see images below).
-![Explore](1.png)
-![MINERVA link](2.png)
+![MINERVA main view, a search menu on the left, a view of the disease map in the center showing a colourful cell diagram with signalling and T-Cells and CD8+ and more. On the right is a filtering box for the dataset from Galaxy allowing the user to filter by p-value and FC thresholds. 397 genes have been loaded.](images/3.png)
 
-**2. Select what to visualise.** After the loading time, marked as "Reading Map Elements", the dataset will be visible in the right panel of the COVID-19 Disease Map, with the four corresponding columns specified earlier (see image below). The plugin allows you to:
+After the loading time, marked as "Reading Map Elements", the dataset will be visible in the right panel of the COVID-19 Disease Map, with the four corresponding columns specified earlier (see image below). The MINERVA-Galaxy plugin allows you to:
+
 - filter the data table by fold-change (FC) treshold or by p-value (default: adjusted p-value, treshold set to 0.05)
 - Search for specific gene symbols to display ("Search" box)
 - Select specific differential expression values to display in the map (checkboxes in the data tab)
 - Select all entries in the data table for visualisation (Select All)
 - Reset the visualisation
 
-![MINERVA main window](3.png)
+The general process of data exploration looks like:
 
-**3. Explore the data table.** After selecting what you want to see, browse the COVID-19 Disease Map to explore the pathways with the corresponding expression pattern. To do this
-- in the main map, find pathways with matching entries indicated by blue pins.
-- select a pathway of your choice and in the left panel click the "Associated submap" button
-- explore the expression patterns in the diagram that will be displayed.
+1. In the main map, find pathways with matching entries indicated by blue pins.
+1. After selecting what you want to see, browse the COVID-19 Disease Map to explore the pathways with the corresponding expression pattern.
+1. Select a pathway of your choice and in the left panel click the "Associated submap" button
+1. Explore the expression patterns in the diagram that will be displayed.
 
-Images below illustrates these steps:
-1. Search for all TLR related gene symbols and select them. Find three pathways with TLRs (Interferon 1 pathway, Orf3a protein interactions, PAMP signalling)
-2. Select "PAMP signalling" and click the "Associated button"
-3. Explore the detailed diagram to examine the expression pattern (TLR3 and TLR7 are downregulated, TLR8 is upregulated)
-4. Click "Select all" to visualise the entire data table
-5. Explore the activation pattern donwstream TLR7 and TLR8 - MYD88 and IRAK4 are upregulated despite TLR7 downregulation.
- 
+> <hands-on-title>Explore TLR pathways</hands-on-title>
+>
+> 1. Use the **Search** box above the table on the right to search for **TLR**.
+> 2. Select all four TLR genes.
+> 2. In the main map, find *PAMP Signalling* and click on it. (Note: don't click the blue pin, click the pathway name)
+>
+>    ![The PAMP signalling box next to the golgi body. A blue map pin is placed upon the red and whitebox.](images/6.png)
+>
+> 1. In the left panel, click the **Associated submap: PAMP Signalling** button.
+> 1. Explore the detailed diagram to examine the expression pattern.
+>
+>    > <question-title></question-title>
+>    > What is the expression pattern of TLR3, TLR7, and TLR8 in the PAMP Signalling pathway?
+>    > > <solution-title></solution-title>
+>    > > TLR3 and TLR7 are downregulated (cool/blue colour), TLR8 is upregulated (warm/red colour).
+>    > > ![image of the aforementioned regulation patterns](images/4.png)
+>    > {: .solution}
+>    {: .question}
+>
+>
+> 1. Without closing the PAMP Signalling submap, **click** "Select all" to visualise the entire data table
+>
+>    > <question-title></question-title>
+>    > What is the expression pattern downstream of TLR7 and TLR8, namely how are MYD88 and IRAK4 regulated?
+>    > > <solution-title></solution-title>
+>    > > MYD88 and IRAK4 are strongly and weakly upregulated, respectively, despite TLR7 downregulation.
+>    > > ![image of the aforementioned regulation patterns](images/5.png)
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+For further analysis in the MINERVA Platform, a [full user guide is available](https://covid19map.elixir-luxembourg.org/minerva/resources/other/user_guide.pdf)
