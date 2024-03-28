@@ -13,13 +13,16 @@ tags:
 level: Intermediate
 zenodo_link: https://zenodo.org/records/10405036
 questions:
-    - TODO
+    - Which pathways are affected in this COVID-19 study?
+    - How can I visualise the results of a differential expression analysis in the MINERVA Platform?
 objectives:
     - Perform an analysis using a workflow from WorkflowHub
     - Visualise and interpret the results with MINERVA
 time_estimation: 1h
 key_points:
-    - TODO
+    - The MINERVA Platform is an excellent tool for visualising pathway analysis results
+    - Several built-in maps are available such as the COVID-19 Disease Map which is pre-configured in all updated Galaxy servers.
+    - You can use it to explore the expression patterns of genes in pathways relevant to your interests.
 
 contributions:
   authorship:
@@ -352,6 +355,12 @@ The general process of data exploration looks like:
 >
 > 1. Use the **Search** box above the table on the right to search for **TLR**.
 > 2. Select all four TLR genes.
+>
+>    - TLR3
+>    - TLR4
+>    - TLR7
+>    - TLR8
+>
 > 2. In the main map, find *PAMP Signalling* and click on it. (Note: don't click the blue pin, click the pathway name)
 >
 >    ![The PAMP signalling box next to the golgi body. A blue map pin is placed upon the red and whitebox.](images/6.png)
