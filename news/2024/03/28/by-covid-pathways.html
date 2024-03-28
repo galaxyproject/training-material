@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Learn to use MINERVA Platform's COVID-19 Disease Map with Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@ce8f1166daed60a226135912d1dc89272ef7a5fc",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2024/03/28/by-covid-pathways.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Learn to use MINERVA Platform's COVID-19 Disease Map with Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-03-28 14:14:33 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Marek Ostaszewski"><meta name="description" content="As part of the work of BeYond COVID, we have developed a new integration between the MINERVA Platform’s COVID-19 Disease Map and Galaxy! Datasets created within Galaxy can now be seamlessly visualized in the MINERVA Platform, allowing you to explore your data in the context of the COVID-19 Disease Map. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Learn to use MINERVA Platform's COVID-19 Disease Map with Galaxy">
+        <meta property="og:description" content="As part of the work of BeYond COVID, we have developed a new integration between the MINERVA Platform’s COVID-19 Disease Map and Galaxy! Datasets created within Galaxy can now be seamlessly visualized in the MINERVA Platform, allowing you to explore your data in the context of the COVID-19 Disease Map. ">
+        
+        <meta property="og:image" content="/training-materialtopics/transcriptomics/tutorials/minerva-pathways/images/4.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2024-03-28-by-covid-pathways.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2024/03/28/by-covid-pathways.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>Learn to use MINERVA Platform's COVID-19 Disease Map with Galaxy</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/mjostaszewski/" class="contributor-badge contributor-mjostaszewski"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/mjostaszewski?s=36" alt="Marek Ostaszewski avatar" width="36" class="avatar" />
+    Marek Ostaszewski</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people managed and provided infrastructure to the GTN or for training purposes">Infrastructure</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/MattiHoch/" class="contributor-badge contributor-MattiHoch"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/MattiHoch?s=36" alt="Matti Hoch avatar" width="36" class="avatar" />
+    Matti Hoch</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+<span class="label label-default tutorial_tag" id="by-covid" style="--color-primary: #f3aaff; --color-darker: #ef85ff; --color-dimmed: #f198ff;">by-covid</span>
+
+<span class="label label-default tutorial_tag" id="pathways" style="--color-primary: #f0bd00; --color-darker: #d6a800; --color-dimmed: #e3b300;">pathways</span>
+
+<span class="label label-default tutorial_tag" id="minerva" style="--color-primary: #00dcbe; --color-darker: #00c4a9; --color-dimmed: #00d0b4;">minerva</span>
+
+<span class="label label-default tutorial_tag" id="gtn infrastructure" style="--color-primary: #00e088; --color-darker: #00c779; --color-dimmed: #00d381;">gtn infrastructure</span>
+
+<span class="label label-default tutorial_tag" id="new feature" style="--color-primary: #bcbeff; --color-darker: #a3a6ff; --color-dimmed: #b0b2ff;">new feature</span>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 28 March 2024</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>As part of the work of <a href="https://by-covid.org/">BeYond COVID</a>, we have developed a new integration between the <a href="https://covid19map.elixir-luxembourg.org/minerva/">MINERVA Platform</a>’s COVID-19 Disease Map and Galaxy! Datasets created within Galaxy can now be seamlessly visualized in the MINERVA Platform, allowing you to explore your data in the context of the COVID-19 Disease Map.</p>
+
+<p>This work generated a number of brand new WorkflowHub Workflows, which can now be launched more easily than ever in the GTN:</p>
+
+<ul>
+  <li>
+    <!--SNIPPET-->
+    <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/688/versions/1">Launch <strong>mRNA-Seq BY-COVID Pipeline: Counts</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> (<a href="https://workflowhub.eu/workflows/688?version=1">View on WorkflowHub</a>) </div>
+    <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=688%26trs_version=1">Launch <strong>mRNA-Seq BY-COVID Pipeline: Counts</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a> (<a href="https://workflowhub.eu/workflows/688?version=1">View on WorkflowHub</a>) </div>
+    <p><!--END_SNIPPET--></p>
+  </li>
+  <li>
+    <!--SNIPPET-->
+    <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/689/versions/1">Launch <strong>mRNA-Seq BY-COVID Pipeline: Analysis</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> (<a href="https://workflowhub.eu/workflows/689?version=1">View on WorkflowHub</a>) </div>
+    <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=689%26trs_version=1">Launch <strong>mRNA-Seq BY-COVID Pipeline: Analysis</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a> (<a href="https://workflowhub.eu/workflows/689?version=1">View on WorkflowHub</a>) </div>
+    <p><!--END_SNIPPET--></p>
+  </li>
+</ul>
+
+<p>And a few new GTN features like the ability to embed a workflow visualisation directly into a tutorial.
+Go check it out!</p>
+
+
+
+    
+
+    
+    <a href="/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html" class="btn btn-primary">View Material</a>
+    
+
+    
+
+    
+    
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/by-covid" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/by-covid/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+    
+  </div>
+
+  <div class="col-md-4">
+    <img alt="A screenshot of the MINERVA Platform's COVID-19 Disease Map showing the PAMP signalling pathway submap in view in center as well as some genes in a table to the right." src="/training-material/topics/transcriptomics/tutorials/minerva-pathways/images/4.png" width="300"/>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2024/03/28/by-covid-pathways.html",
+  "name": "Learn to use MINERVA Platform's COVID-19 Disease Map with Galaxy",
+  "headline": "<p>As part of the work of <a href=\"https://by-covid.org/\">BeYond COVID</a>, we have developed a new i",
+  "keywords": [
+    "by-covid",
+    "pathways",
+    "minerva",
+    "gtn infrastructure",
+    "new feature"
+  ],
+  "description": "<p>As part of the work of <a href=\"https://by-covid.org/\">BeYond COVID</a>, we have developed a new i",
+  "articleBody": "<p>As part of the work of <a href=\"https://by-covid.org/\">BeYond COVID</a>, we have developed a new integration between the <a href=\"https://covid19map.elixir-luxembourg.org/minerva/\">MINERVA Platform</a>’s COVID-19 Disease Map and Galaxy! Datasets created within Galaxy can now be seamlessly visualized in the MINERVA Platform, allowing you to explore your data in the context of the COVID-19 Disease Map.</p>\n\n<p>This work generated a number of brand new WorkflowHub Workflows, which can now be launched more easily than ever in the GTN:</p>\n\n<ul>\n  <li>\n    <!--SNIPPET-->\n    <div class=\"show-when-galaxy-proxy-active\"> <span class=\"workflow\" data-workflow=\"https://workflowhub.eu/ga4gh/trs/v2/tools/688/versions/1\">Launch <strong>mRNA-Seq BY-COVID Pipeline: Counts</strong> <i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i></span> (<a href=\"https://workflowhub.eu/workflows/688?version=1\">View on WorkflowHub</a>) </div>\n    <div class=\"hide-when-galaxy-proxy-active\"> <a href=\"https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=688%26trs_version=1\">Launch <strong>mRNA-Seq BY-COVID Pipeline: Counts</strong> <i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i></a> (<a href=\"https://workflowhub.eu/workflows/688?version=1\">View on WorkflowHub</a>) </div>\n    <p><!--END_SNIPPET--></p>\n  </li>\n  <li>\n    <!--SNIPPET-->\n    <div class=\"show-when-galaxy-proxy-active\"> <span class=\"workflow\" data-workflow=\"https://workflowhub.eu/ga4gh/trs/v2/tools/689/versions/1\">Launch <strong>mRNA-Seq BY-COVID Pipeline: Analysis</strong> <i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i></span> (<a href=\"https://workflowhub.eu/workflows/689?version=1\">View on WorkflowHub</a>) </div>\n    <div class=\"hide-when-galaxy-proxy-active\"> <a href=\"https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=689%26trs_version=1\">Launch <strong>mRNA-Seq BY-COVID Pipeline: Analysis</strong> <i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i></a> (<a href=\"https://workflowhub.eu/workflows/689?version=1\">View on WorkflowHub</a>) </div>\n    <p><!--END_SNIPPET--></p>\n  </li>\n</ul>\n\n<p>And a few new GTN features like the ability to embed a workflow visualisation directly into a tutorial.\nGo check it out!</p>\n\n",
+  "datePublished": "2024-03-28 00:00:00 +0000",
+  "dateModified": "2024-03-28 14:14:33 +0000",
+  "author": [
+    "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"name\": \"Helena Rasche\",\n  \"image\": \"https://avatars.githubusercontent.com/hexylena\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"http://purl.org/dc/terms/conformsTo\": {\n        \"@id\": \"https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19\",\n        \"@type\": \"Organization\"\n      },\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"legalName\": \"Galaxy Training Network\",\n      \"alternateName\": \"GTN\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\",\n      \"fundingModel\": \"The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.\",\n      \"keywords\": [\n        \"galaxy\",\n        \"bioinformatics\",\n        \"training\",\n        \"fair\",\n        \"accessible\"\n      ],\n      \"status\": \"active\",\n      \"foundingDate\": \"2015-06-29\",\n      \"socialMedia\": \"https://mstdn.science/@gtn\",\n      \"type\": \"project\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0001-9760-8992\",\n  \"orcid\": \"https://orcid.org/0000-0001-9760-8992\"\n}",
+    "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/mjostaszewski/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/mjostaszewski/\",\n  \"name\": \"Marek Ostaszewski\",\n  \"image\": \"https://avatars.githubusercontent.com/mjostaszewski\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"http://purl.org/dc/terms/conformsTo\": {\n        \"@id\": \"https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19\",\n        \"@type\": \"Organization\"\n      },\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"legalName\": \"Galaxy Training Network\",\n      \"alternateName\": \"GTN\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\",\n      \"fundingModel\": \"The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.\",\n      \"keywords\": [\n        \"galaxy\",\n        \"bioinformatics\",\n        \"training\",\n        \"fair\",\n        \"accessible\"\n      ],\n      \"status\": \"active\",\n      \"foundingDate\": \"2015-06-29\",\n      \"socialMedia\": \"https://mstdn.science/@gtn\",\n      \"type\": \"project\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0003-1473-370X\",\n  \"orcid\": \"https://orcid.org/0000-0003-1473-370X\"\n}"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2024/03/28/by-covid-pathways.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/03/26/FAIR-pointers.html">New Learning Pathway for FAIR Data Management developed by ELIXIR-UK Data Stewardship Fellows and Experts</a>
+	</h3>
+	<p>
+	26 March 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b1d100; --color-darker: #9eba00; --color-dimmed: #a7c500;">fair</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d9dd; --color-darker: #00c1c5; --color-dimmed: #00cdd1;">dmp</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d6fb; --color-darker: #00bedf; --color-dimmed: #00caed;">data stewardship</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f8ba00; --color-darker: #dda500; --color-dimmed: #ebaf00;">data management</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffaeb9; --color-darker: #ff8b9d; --color-dimmed: #ff9dab;">new learning pathway</span>
+	
+	</p>
+	<p class="card-text">
+		
+		ELIXIR-UK’s Data Stewardship Fellowship is excited to announce a new learning pathway focused on FAIR Data Management! This program equips researchers and research support staff with the skills to effectively manage their research data.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/03/18/url-persistence.html">Cool URLs Don't Change, GTN URLs don't either.</a>
+	</h3>
+	<p>
+	18 March 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e088; --color-darker: #00c779; --color-dimmed: #00d381;">gtn infrastructure</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #bcbeff; --color-darker: #a3a6ff; --color-dimmed: #b0b2ff;">new feature</span>
+	
+	</p>
+	<p class="card-text">
+		
+		At the Galaxy Training Network we are really committed to ensuring our training materials are Findable, Accessible, Interoperable, and Reusable.
+This means that we want to make sure that the URLs to our training materials are persistent and don’t change.
+The GTN wants you to be able to rely on our URLs once you’ve added them to a poster or training material, without having to worry about them breaking in the future.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/03/04/gtn-learning-path-highlights.html">Lost in a topic? Try a Learning Pathway!</a>
+	</h3>
+	<p>
+	4 March 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e088; --color-darker: #00c779; --color-dimmed: #00d381;">gtn infrastructure</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #bcbeff; --color-darker: #a3a6ff; --color-dimmed: #b0b2ff;">new feature</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We know the GTN has a lot of learning materials (400 and counting!) which can make it quite difficult to figure out where to start in some topics.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/02/29/new-gmod-topic.html">GTN ❤️ GMOD</a>
+	</h3>
+	<p>
+	29 February 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c0bdff; --color-darker: #a8a5ff; --color-dimmed: #b4b1ff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #bcbeff; --color-darker: #a3a6ff; --color-dimmed: #b0b2ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffa8e7; --color-darker: #ff81df; --color-dimmed: #ff95e3;">genome annotation</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Building upon the work previously done for the SARS-Cov-2 Topic we have further expanded the ‘tag based topics’ to support a new GMOD topic.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/01/31/postmarketos.html">🪐📲 Hosting Galaxy at the Edge: Directly in Your Pocket!</a>
+	</h3>
+	<p>
+	31 January 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffa8e7; --color-darker: #ff81df; --color-dimmed: #ff95e3;">fun</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d7f4; --color-darker: #00bfd9; --color-dimmed: #00cbe6;">system administrators</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffa6f2; --color-darker: #ff7eee; --color-dimmed: #ff93f0;">developers</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffadc3; --color-darker: #ff8aad; --color-dimmed: #ff9cb8;">humour</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Hey Galaxy admins! Have you ever wanted to administer your own instance from
+the luxury of your pocket?
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/ce8f1166daed60a226135912d1dc89272ef7a5fc">ce8f116</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2024-03-28-by-covid-pathways.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	
+    </body>
+</html>

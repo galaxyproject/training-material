@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Pathway analysis with the MINERVA Platform / Transcriptomics</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@ce8f1166daed60a226135912d1dc89272ef7a5fc",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Pathway analysis with the MINERVA Platform">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-03-28 21:26:24 +0000">
+<meta name="DC.creator" content="Marek Ostaszewski">
+<meta name="DC.creator" content="Matti Hoch">
+<meta name="DC.creator" content="Iacopo Cristoferi">
+<meta name="DC.creator" content="Myrthe van Baardwijk">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Training material for all kinds of transcriptomics analysis.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Transcriptomics / Hands-on: Pathway analysis with the MINERVA Platform">
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-03-28 21:26:24 +0000",
+  "datePublished": "2024-03-28 21:41:17 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Pathway analysis with the MINERVA Platform",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Pathway analysis with the MINERVA Platform",
+  "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html",
+  "version": 14,
+  "timeRequired": "PT1H",
+  "teaches": "Perform an analysis using a workflow from WorkflowHub\n - Visualise and interpret the results with MINERVA",
+  "keywords": [
+    "Transcriptomics",
+    "bulk",
+    "rna-seq",
+    "viz",
+    "cyoa"
+  ],
+  "description": "The questions this  addresses are:\n - Which pathways are affected in this COVID-19 study?\n - How can I visualise the results of a differential expression analysis in the MINERVA Platform?\n\n\nThe objectives are:\n - Perform an analysis using a workflow from WorkflowHub\n - Visualise and interpret the results with MINERVA\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mjostaszewski/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mjostaszewski/",
+      "name": "Marek Ostaszewski",
+      "image": "https://avatars.githubusercontent.com/mjostaszewski",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1473-370X",
+      "orcid": "https://orcid.org/0000-0003-1473-370X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/MattiHoch/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/MattiHoch/",
+      "name": "Matti Hoch",
+      "image": "https://avatars.githubusercontent.com/MattiHoch",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2486-0246",
+      "orcid": "https://orcid.org/0000-0002-2486-0246"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/PapXis/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/PapXis/",
+      "name": "Iacopo Cristoferi",
+      "image": "https://avatars.githubusercontent.com/PapXis",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4282-9103",
+      "orcid": "https://orcid.org/0000-0002-4282-9103"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mbaardwijk/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mbaardwijk/",
+      "name": "Myrthe van Baardwijk",
+      "image": "https://avatars.githubusercontent.com/mbaardwijk",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-8747-1494",
+      "orcid": "https://orcid.org/0000-0001-8747-1494"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/MattiHoch/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/MattiHoch/",
+      "name": "Matti Hoch",
+      "image": "https://avatars.githubusercontent.com/MattiHoch",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2486-0246",
+      "orcid": "https://orcid.org/0000-0002-2486-0246"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/",
+      "name": "Mira Kuntz",
+      "image": "https://avatars.githubusercontent.com/mira-miracoli",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4302-5091",
+      "orcid": "https://orcid.org/0000-0003-4302-5091"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kysrpex/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kysrpex/",
+      "name": "José Manuel Domínguez",
+      "image": "https://avatars.githubusercontent.com/kysrpex",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sanjaysrikakulam/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sanjaysrikakulam/",
+      "name": "Sanjay Kumar Srikakulam",
+      "image": "https://avatars.githubusercontent.com/sanjaysrikakulam",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "orcid": "https://orcid.org/0000-0002-3079-6586"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "bulk"
+    },
+    {
+      "@type": "Thing",
+      "name": "rna-seq"
+    },
+    {
+      "@type": "Thing",
+      "name": "viz"
+    },
+    {
+      "@type": "Thing",
+      "name": "cyoa"
+    }
+  ],
+  "abstract": "This tutorial is a partial reproduction of {% cite Togami_2022 %} wherein they evaluated mRNA and miRNA in a selection of COVID-19 patients and healthy controls."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Transcriptomics
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/transcriptomics/faqs/" title="Check our FAQs for the Transcriptomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/minerva-pathways/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-transcriptomics">
+    <h1 data-toc-skip>Pathway analysis with the MINERVA Platform</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/mjostaszewski/" class="contributor-badge contributor-mjostaszewski"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/mjostaszewski?s=36" alt="Marek Ostaszewski avatar" width="36" class="avatar" />
+    Marek Ostaszewski</a><a href="/training-material/hall-of-fame/MattiHoch/" class="contributor-badge contributor-MattiHoch"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/MattiHoch?s=36" alt="Matti Hoch avatar" width="36" class="avatar" />
+    Matti Hoch</a><a href="/training-material/hall-of-fame/PapXis/" class="contributor-badge contributor-PapXis"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/PapXis?s=36" alt="Iacopo Cristoferi avatar" width="36" class="avatar" />
+    Iacopo Cristoferi</a><a href="/training-material/hall-of-fame/mbaardwijk/" class="contributor-badge contributor-mbaardwijk"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/mbaardwijk?s=36" alt="Myrthe van Baardwijk avatar" width="36" class="avatar" />
+    Myrthe van Baardwijk</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people managed and provided infrastructure to the GTN or for training purposes">Infrastructure</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/MattiHoch/" class="contributor-badge contributor-MattiHoch"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/MattiHoch?s=36" alt="Matti Hoch avatar" width="36" class="avatar" />
+    Matti Hoch</a><a href="/training-material/hall-of-fame/mira-miracoli/" class="contributor-badge contributor-mira-miracoli"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/mira-miracoli?s=36" alt="Mira Kuntz avatar" width="36" class="avatar" />
+    Mira Kuntz</a><a href="/training-material/hall-of-fame/kysrpex/" class="contributor-badge contributor-kysrpex"><img src="https://avatars.githubusercontent.com/kysrpex?s=36" alt="José Manuel Domínguez avatar" width="36" class="avatar" />
+    José Manuel Domínguez</a><a href="/training-material/hall-of-fame/sanjaysrikakulam/" class="contributor-badge contributor-sanjaysrikakulam"><img src="https://avatars.githubusercontent.com/sanjaysrikakulam?s=36" alt="Sanjay Kumar Srikakulam avatar" width="36" class="avatar" />
+    Sanjay Kumar Srikakulam</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
+    Björn Grüning</a></td>
+	</tr>
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Which pathways are affected in this COVID-19 study?</p>
+</li>
+        
+        <li><p>How can I visualise the results of a differential expression analysis in the MINERVA Platform?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Perform an analysis using a workflow from WorkflowHub</p>
+</li>
+        
+        <li><p>Visualise and interpret the results with MINERVA</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/10405036">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/" title="Pathway analysis with the MINERVA Platform workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
+			UseGalaxy.cz <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
+			UseGalaxy.no
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main)
+		</a>
+	</li>
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/transcriptomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 28, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 28, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>This tutorial is a partial reproduction of <span class="citation"><a href="#Togami_2022">Togami <i>et al.</i> 2022</a></span> wherein they evaluated mRNA and miRNA in a selection of COVID-19 patients and healthy controls.
+While that paper uses a closed source pipeline, we’ll be reproducing the analysis with open source tools in Galaxy, using a workflow on WorkflowHub developed for the BY-COVID project.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-full-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Full data</div>
+  <p>The original data is available at NCBI under <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA754796">BioProject PRJNA754796</a></p>
+</blockquote>
+<blockquote class="agenda">
+
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#study-design" id="markdown-toc-study-design">Study Design</a></li>
+  <li><a href="#analysis" id="markdown-toc-analysis">Analysis</a></li>
+  <li><a href="#the-minerva-platform" id="markdown-toc-the-minerva-platform">The MINERVA Platform</a></li>
+</ol>
+
+</blockquote>
+
+<p>There are several places you can jump to in this tutorial, using pre-calculated
+data. We recommend you jump skipping the data download and counting step, and
+skipping to the analysis, as that precludes the slowest and most data intensive
+parts of this tutorial. However, the entire process is documented in case you
+want to reproduce our work.</p>
+
+<h2 id="study-design">Study Design</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the factor table from <a href="https://zenodo.org/records/10405036">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/10405036/files/factordata.tabular
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the datatype</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>We have split this workflow into three parts, based only on how long the first two portions of the workflow take to execute.
+The rough runtime of the workflow portions, when this was being developed, can be broken down as follows:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data Download</td>
+      <td>~6h</td>
+    </tr>
+    <tr>
+      <td>Processing Counts</td>
+      <td>~8h</td>
+    </tr>
+    <tr>
+      <td>Analysis &amp; Visualisation</td>
+      <td>15m</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These numbers were generated on UseGalaxy.eu and may not represent the most
+efficient possible computation, as they are executed on a shared cluster that can, at times, be more or less busy.</p>
+
+<p>As such we recommend you skip to the analysis step to progress to the interesting portion of the tutorial. We have provided in the Zenodo record data from the entire analysis,
+analysed with the Download &amp; Counts steps that can be skipped.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Choose whether you want to run the time-consuming Download Data step.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Download" onclick="cyoaChoice('Download', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Download</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Skip" onclick="cyoaChoice('Skip', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Skip</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Skip", "gtn-cyoa");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Download">
+
+  <h3 id="data-download">Data Download</h3>
+
+  <p>We’ll start by downloading our FASTQ files from the <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182152">GEO Dataset GSE182152</a></p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-download-the-data-from-geo-eta-6-hours"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Download the data from GEO (ETA: 6 Hours)</div>
+
+    <ol>
+      <li>
+        <p><strong>Import the workflow</strong> into Galaxy</p>
+
+        <!--SNIPPET-->
+        <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-by-covid__data_download">Launch <strong>Trim and Filter reads</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>
+        <div class="hide-when-galaxy-proxy-active"> Click to  <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-by-covid__data_download">     Launch <strong>Trim and Filter reads</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> </div>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p><strong>Run the workflow</strong> with the following parameters:</p>
+
+        <ul>
+          <li><em>“Sample Table”</em>: <code class="language-plaintext highlighter-rouge">factordata.tabular</code></li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+
+  <p>Here we have cut the <code class="language-plaintext highlighter-rouge">SRR*</code> identifiers from the sample table and downloaded them with <code class="language-plaintext highlighter-rouge">fasterq</code>, part of the SRA toolkit.</p>
+
+  <h3 id="counts">Counts</h3>
+
+  <p>With that done, we can start to analyse the data using HISAT2 and featureCounts.
+This workflow takes in the RNA Sequencing data we’ve downloaded previously, before trimming it with cutadapt.
+Both the trimmed and untrimmed reads are run through FastQC for visualisation.</p>
+
+  <figure>
+
+<pre class="mermaid">
+flowchart TD
+  0["ℹ️ Input Collection\nmRNA-Seq Reads"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nUCSC Genome"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["FastQC"];
+  0 --&gt;|output| 2;
+  3["Cutadapt"];
+  0 --&gt;|output| 3;
+  4["FastQC"];
+  3 --&gt;|out1| 4;
+  5["HISAT2"];
+  3 --&gt;|out1| 5;
+  6["featureCounts"];
+  5 --&gt;|output_alignments| 6;
+  5cb5bd5d-df81-4463-8002-e89551780f01["Output\noutput_feature_lengths"];
+  6 --&gt; 5cb5bd5d-df81-4463-8002-e89551780f01;
+  style 5cb5bd5d-df81-4463-8002-e89551780f01 stroke:#2c3143,stroke-width:4px;
+  5dec13e1-0011-472c-a72d-6715fe55c23c["Output\noutput_short"];
+  6 --&gt; 5dec13e1-0011-472c-a72d-6715fe55c23c;
+  style 5dec13e1-0011-472c-a72d-6715fe55c23c stroke:#2c3143,stroke-width:4px;
+  7["Read Distribution"];
+  5 --&gt;|output_alignments| 7;
+  1 --&gt;|output| 7;
+  8["Gene Body Coverage BAM"];
+  5 --&gt;|output_alignments| 8;
+  1 --&gt;|output| 8;
+  9["Multi QC raw reads"];
+  2 --&gt;|text_file| 9;
+  4 --&gt;|text_file| 9;
+  3 --&gt;|report| 9;
+  5 --&gt;|summary_file| 9;
+  7 --&gt;|output| 9;
+  8 --&gt;|outputtxt| 9;
+  6 --&gt;|output_summary| 9;
+  9217af4e-e34c-4a49-9d67-4b3df511ac2c["Output\nhtml_report"];
+  9 --&gt; 9217af4e-e34c-4a49-9d67-4b3df511ac2c;
+  style 9217af4e-e34c-4a49-9d67-4b3df511ac2c stroke:#2c3143,stroke-width:4px;
+</pre>
+<figcaption><b>Workflow 1</b>: Counts Workflow for mRNA-Seq BY-COVID Pipeline.</figcaption>
+</figure>
+
+  <p>The trimmed reads are then handled by HISAT2 for alignment to the reference
+human genome, and featureCounts is run for quantification.</p>
+
+  <p>This workflow produces a set of featureCounts tables, a set of featureLengths (needed for goseq), and a MultiQC report.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-run-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run the Workflow</div>
+
+    <ol>
+      <li>
+        <p><strong>Import the workflow</strong> into Galaxy</p>
+
+        <!--SNIPPET-->
+        <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/688/versions/1">Launch <strong>mRNA-Seq BY-COVID Pipeline</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> (<a href="https://workflowhub.eu/workflows/688?version=1">View on WorkflowHub</a>) </div>
+        <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=688%26trs_version=1">Launch <strong>mRNA-Seq BY-COVID Pipeline</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a> (<a href="https://workflowhub.eu/workflows/688?version=1">View on WorkflowHub</a>) </div>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p><strong>Run the workflow</strong> with the following parameters:</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>This workflow produces a handful of outputs: the featureCounts results, and a
+MultiQC report. Looking at the report we see generally reasonable quality data.</p>
+
+</div>
+
+<h3 id="limma">limma</h3>
+
+<div class="Skip">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-download-the-counts-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Download the Counts Files</div>
+
+    <ol>
+      <li>Open the Rule Builder
+        <ul>
+          <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+          <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
+          <li>
+            <p><strong>Paste</strong> the following table:</p>
+
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/10405036/files/gene_lengths.tabular	gene_lengths	Gene Lengths
+https://zenodo.org/records/10405036/files/SRR15462516.featureCounts.tabular	SRR15462516	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462517.featureCounts.tabular	SRR15462517	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462518.featureCounts.tabular	SRR15462518	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462519.featureCounts.tabular	SRR15462519	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462520.featureCounts.tabular	SRR15462520	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462521.featureCounts.tabular	SRR15462521	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462522.featureCounts.tabular	SRR15462522	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462523.featureCounts.tabular	SRR15462523	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462524.featureCounts.tabular	SRR15462524	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462525.featureCounts.tabular	SRR15462525	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462526.featureCounts.tabular	SRR15462526	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462527.featureCounts.tabular	SRR15462527	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462528.featureCounts.tabular	SRR15462528	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462529.featureCounts.tabular	SRR15462529	featureCounts
+https://zenodo.org/records/10405036/files/SRR15462530.featureCounts.tabular	SRR15462530	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681520.featureCounts.tabular	SRR16681520	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681521.featureCounts.tabular	SRR16681521	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681522.featureCounts.tabular	SRR16681522	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681523.featureCounts.tabular	SRR16681523	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681524.featureCounts.tabular	SRR16681524	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681525.featureCounts.tabular	SRR16681525	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681526.featureCounts.tabular	SRR16681526	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681527.featureCounts.tabular	SRR16681527	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681528.featureCounts.tabular	SRR16681528	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681529.featureCounts.tabular	SRR16681529	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681530.featureCounts.tabular	SRR16681530	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681531.featureCounts.tabular	SRR16681531	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681532.featureCounts.tabular	SRR16681532	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681533.featureCounts.tabular	SRR16681533	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681534.featureCounts.tabular	SRR16681534	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681535.featureCounts.tabular	SRR16681535	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681536.featureCounts.tabular	SRR16681536	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681537.featureCounts.tabular	SRR16681537	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681538.featureCounts.tabular	SRR16681538	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681539.featureCounts.tabular	SRR16681539	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681540.featureCounts.tabular	SRR16681540	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681541.featureCounts.tabular	SRR16681541	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681542.featureCounts.tabular	SRR16681542	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681543.featureCounts.tabular	SRR16681543	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681544.featureCounts.tabular	SRR16681544	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681545.featureCounts.tabular	SRR16681545	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681546.featureCounts.tabular	SRR16681546	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681547.featureCounts.tabular	SRR16681547	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681548.featureCounts.tabular	SRR16681548	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681549.featureCounts.tabular	SRR16681549	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681550.featureCounts.tabular	SRR16681550	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681551.featureCounts.tabular	SRR16681551	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681552.featureCounts.tabular	SRR16681552	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681553.featureCounts.tabular	SRR16681553	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681554.featureCounts.tabular	SRR16681554	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681555.featureCounts.tabular	SRR16681555	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681556.featureCounts.tabular	SRR16681556	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681557.featureCounts.tabular	SRR16681557	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681558.featureCounts.tabular	SRR16681558	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681559.featureCounts.tabular	SRR16681559	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681560.featureCounts.tabular	SRR16681560	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681561.featureCounts.tabular	SRR16681561	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681562.featureCounts.tabular	SRR16681562	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681563.featureCounts.tabular	SRR16681563	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681564.featureCounts.tabular	SRR16681564	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681565.featureCounts.tabular	SRR16681565	featureCounts
+https://zenodo.org/records/10405036/files/SRR16681566.featureCounts.tabular	SRR16681566	featureCounts
+</code></pre></div>            </div>
+          </li>
+          <li>Click <code class="language-plaintext highlighter-rouge">Build</code></li>
+        </ul>
+      </li>
+      <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Add Definition</code> → <code class="language-plaintext highlighter-rouge">Collection Name</code> → Select Column <code class="language-plaintext highlighter-rouge">C</code></li>
+          <li><code class="language-plaintext highlighter-rouge">Add Definition</code> → <code class="language-plaintext highlighter-rouge">List Identifier(s)</code> → Select Column <code class="language-plaintext highlighter-rouge">B</code></li>
+          <li><code class="language-plaintext highlighter-rouge">Add Definition</code> → <code class="language-plaintext highlighter-rouge">URL</code> → Column <code class="language-plaintext highlighter-rouge">A</code></li>
+        </ul>
+
+        <blockquote class="tip">
+          <div class="box-title tip-title" id="tip-trouble-entering"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-trouble-entering" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Trouble entering?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <ol>
+            <li>Press the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> button by <strong>Rules</strong></li>
+            <li>Paste the following JSON into the dialog:
+              <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"rules"</span><span class="p">:[],</span><span class="nl">"mapping"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"collection_name"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">2</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"list_identifiers"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">],</span><span class="nl">"editing"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"url"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">0</span><span class="p">]}],</span><span class="nl">"genome"</span><span class="p">:</span><span class="s2">"hg19"</span><span class="p">}</span><span class="w">
+</span></code></pre></div>              </div>
+            </li>
+            <li>Click Apply</li>
+          </ol>
+        </blockquote>
+      </li>
+      <li>
+        <p>At the bottom of the dialog set <code class="language-plaintext highlighter-rouge">Genome</code> to <code class="language-plaintext highlighter-rouge">hg19</code> (it is probably something like “Human Feb 2009 (GRCh37/hg19) (hg19)” but we are focused on that last parenthetical portion).</p>
+      </li>
+      <li>Click <strong>Upload</strong></li>
+    </ol>
+
+  </blockquote>
+
+</div>
+
+<p>Now we’re ready to analyse the counts files. Here we’ll take the feature counts dataset collection and merge it into one count matrix through the use of “Column join”.
+This can then be annotated with the human readable names of the genes. This is all passed to limma for differential expression analysis.</p>
+
+<p>With this result in hand, we’re ready to do two further steps: preparing the dataset for goseq, and for analysis in the MINERVA Platform.
+Goseq is a tool for gene ontology enrichment analysis, and the MINERVA Platform is a tool for visualising pathway analysis.</p>
+
+<figure>
+
+<pre class="mermaid">
+flowchart TD
+  0["ℹ️ Input Collection\nfeatureCounts: Counts"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nfactordata"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Collection\nfeatureCounts: Lengths"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["Column join"];
+  0 --&gt;|output| 3;
+  4["Extract dataset"];
+  2 --&gt;|output| 4;
+  5["countdata"];
+  3 --&gt;|tabular_output| 5;
+  e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5["Output\ncount_data"];
+  5 --&gt; e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5;
+  style e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5 stroke:#2c3143,stroke-width:4px;
+  6["annodata"];
+  3 --&gt;|tabular_output| 6;
+  7["Replace Text"];
+  5 --&gt;|outfile| 7;
+  8["limma DEG analysis"];
+  6 --&gt;|out_tab| 8;
+  7 --&gt;|outfile| 8;
+  1 --&gt;|output| 8;
+  1c8d7950-1003-4c86-9986-c6ed1264cd8b["Output\nlimma_report"];
+  8 --&gt; 1c8d7950-1003-4c86-9986-c6ed1264cd8b;
+  style 1c8d7950-1003-4c86-9986-c6ed1264cd8b stroke:#2c3143,stroke-width:4px;
+  9["Extract dataset"];
+  8 --&gt;|outTables| 9;
+  10["MINERVA Formatting"];
+  9 --&gt;|output| 10;
+  9ce4f48b-e742-4b7c-9bde-5d51f11068d3["Output\nminerva_table"];
+  10 --&gt; 9ce4f48b-e742-4b7c-9bde-5d51f11068d3;
+  style 9ce4f48b-e742-4b7c-9bde-5d51f11068d3 stroke:#2c3143,stroke-width:4px;
+  11["Join two Datasets"];
+  9 --&gt;|output| 11;
+  4 --&gt;|output| 11;
+  12["Compute"];
+  11 --&gt;|out_file1| 12;
+  13["Cut"];
+  12 --&gt;|out_file1| 13;
+  14["Unique"];
+  13 --&gt;|out_file1| 14;
+  15["Cut"];
+  14 --&gt;|outfile| 15;
+  16["Cut"];
+  14 --&gt;|outfile| 16;
+  17["goseq"];
+  15 --&gt;|out_file1| 17;
+  16 --&gt;|out_file1| 17;
+</pre>
+<figcaption><b>Workflow 2</b>: Analysis Workflow for mRNA-Seq BY-COVID Pipeline.</figcaption>
+</figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-analyse-the-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Analyse the Counts</div>
+
+  <ol>
+    <li>
+      <p>Run the workflow with the Factor Data from the first Hands-on, and the datasets from the workflow or Zenodo download, depending on your path:</p>
+
+      <!--SNIPPET-->
+      <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/689/versions/1">Launch <strong>mRNA-Seq BY-COVID Pipeline</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> (<a href="https://workflowhub.eu/workflows/689?version=1">View on WorkflowHub</a>) </div>
+      <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=689%26trs_version=1">Launch <strong>mRNA-Seq BY-COVID Pipeline</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a> (<a href="https://workflowhub.eu/workflows/689?version=1">View on WorkflowHub</a>) </div>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You should have a few outputs, namely the <code class="language-plaintext highlighter-rouge">goseq</code> outputs, and a table ready for visualisation in the MINERVA Platform!</p>
+
+<h2 id="the-minerva-platform">The MINERVA Platform</h2>
+
+<p>The dataset prepared for the MINERVA Platform must be correctly formatted as a tabular dataset (<code class="language-plaintext highlighter-rouge">\t</code> separated values) like the following, with the dbkey set to <code class="language-plaintext highlighter-rouge">hg19</code> or <code class="language-plaintext highlighter-rouge">hg38</code>.
+If you’ve run the above workflow, this should be the case.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SYMBOL  logFC              P.Value               adj.P.Val
+TRIM25  2.07376444684004   1.2610025125617e-18   3.57368112059986e-15
+ACSL1   2.90647033200259   2.71976234791064e-16  3.85390324698937e-13
+NBEAL2  2.45952426389725   2.71787290816654e-14  2.56748394058132e-11
+MIR150  -2.55304226607428  9.55912390273625e-14  6.74866152827879e-11
+SLC2A3  2.95861349227708   1.19066011437523e-13  6.74866152827879e-11
+</code></pre></div></div>
+
+<p>The tabular dataset, as prepared above is then used by a dedicated MINERVA plugin (<span class="citation"><a href="#hoksza_minerva_2019">Hoksza <i>et al.</i> 2019</a></span>) to visualise the data on-the-fly in the <a href="https://covid19map.elixir-luxembourg.org/minerva/">COVID-19 Disease Map</a>. To visualise and explore the data, follow these steps:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualise-in-minerva"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualise in MINERVA</div>
+
+  <ol>
+    <li>
+      <p><strong>Click</strong> to expand the final “MINERVA-Ready Table”</p>
+    </li>
+    <li>
+      <p>Click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</p>
+
+      <p><a href="images/1.png" rel="noopener noreferrer"><img src="images/1.png" alt="A galaxy dataset with the barchart icon circled in red. " width="310" height="332" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Select “display at Minerva (SARS-CoV-2 Minerva Map)”</p>
+
+      <p><a href="images/2.png" rel="noopener noreferrer"><img src="images/2.png" alt="The galaxy visualisation interface with a big display at minerva banner at the top. " width="772" height="305" loading="lazy" /></a></p>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-minerva-not-listed"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-minerva-not-listed" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: MINERVA not listed?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>The MINERVA visualisation is only for correctly formatted files with the correct genome (i.e. human, hg19).
+If you dont’ see MINERVA listed, first check that your dataset is:</p>
+        <ol>
+          <li>
+            <p>recognised as a tabular dataset</p>
+
+            <!--SNIPPET-->
+            <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+            <p><!--END_SNIPPET--></p>
+          </li>
+          <li>
+            <p>Has the correct genome build:</p>
+
+            <!--SNIPPET-->
+            <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-database-build-dbkey"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-build-dbkey" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing database/build (dbkey)</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click the desired dataset’s name to expand it.</li>   <li>     <p>Click on the “?” next to database indicator:</p>     <p><img src="/training-material/shared/images/datasets_dbkey.svg" alt="UI for changing dbkey" /></p>   </li>   <li>In the central panel, change the <strong>Database/Build</strong> field</li>   <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">hg19</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+            <p><!--END_SNIPPET--></p>
+
+            <p>It should be specifically <code class="language-plaintext highlighter-rouge">hg19</code> not a patch like <code class="language-plaintext highlighter-rouge">hg19Patch5</code></p>
+          </li>
+        </ol>
+
+        <p>If that still doesn’t work, please check that the Galaxy server you are using is updated to 24.0 or later.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="analysis-in-the-minerva-platform">Analysis in the MINERVA Platform</h3>
+
+<p>Welcome to the MINERVA Covid-19 Disease Map! It has a similar interface to Galaxy, there is an interaction menu on the left, the main area is where you’ll do your investigation,
+and on the right are your datasets! In this case, the differentially expressed genes analysed above automatically loaded from Galaxy when you clicked “Display at MINERVA”.</p>
+
+<p><a href="images/3.png" rel="noopener noreferrer"><img src="images/3.png" alt="MINERVA main view, a search menu on the left, a view of the disease map in the center showing a colourful cell diagram with signalling and T-Cells and CD8+ and more. On the right is a filtering box for the dataset from Galaxy allowing the user to filter by p-value and FC thresholds. 397 genes have been loaded." width="3496" height="1808" loading="lazy" /></a></p>
+
+<p>After the loading time, marked as “Reading Map Elements”, the dataset will be visible in the right panel of the COVID-19 Disease Map, with the four corresponding columns specified earlier (see image below). The MINERVA-Galaxy plugin allows you to:</p>
+
+<ul>
+  <li>filter the data table by fold-change (FC) threshold or by p-value (default: adjusted p-value, threshold set to 0.05)</li>
+  <li>Search for specific gene symbols to display (“Search” box)</li>
+  <li>Select specific differential expression values to display in the map (checkboxes in the data tab)</li>
+  <li>Select all entries in the data table for visualisation (Select All)</li>
+  <li>Reset the visualisation</li>
+</ul>
+
+<p>The general process of data exploration looks like:</p>
+
+<ol>
+  <li>In the main map, find pathways with matching entries indicated by blue pins.</li>
+  <li>After selecting what you want to see, browse the COVID-19 Disease Map to explore the pathways with the corresponding expression pattern.</li>
+  <li>Select a pathway of your choice and in the left panel click the “Associated submap” button</li>
+  <li>Explore the expression patterns in the diagram that will be displayed.</li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-explore-tlr-pathways"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Explore TLR pathways</div>
+
+  <ol>
+    <li>Use the <strong>Search</strong> box above the table on the right to search for <strong>TLR</strong>.</li>
+    <li>
+      <p>Select all four TLR genes.</p>
+
+      <ul>
+        <li>TLR3</li>
+        <li>TLR4</li>
+        <li>TLR7</li>
+        <li>TLR8</li>
+      </ul>
+    </li>
+    <li>
+      <p>In the main map, find <em>PAMP Signalling</em> and click on it. (Note: don’t click the blue pin, click the pathway name)</p>
+
+      <p><a href="images/6.png" rel="noopener noreferrer"><img src="images/6.png" alt="The PAMP signalling box next to the golgi body. A blue map pin is placed upon the red and whitebox." width="447" height="296" loading="lazy" /></a></p>
+    </li>
+    <li>In the left panel, click the <strong>Associated submap: PAMP Signalling</strong> button.</li>
+    <li>
+      <p>Explore the detailed diagram to examine the expression pattern.</p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+        <p>What is the expression pattern of TLR3, TLR7, and TLR8 in the PAMP Signalling pathway?</p>
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <p>TLR3 and TLR7 are downregulated (cool/blue colour), TLR8 is upregulated (warm/red colour).
+<a href="images/4.png" rel="noopener noreferrer"><img src="images/4.png" alt="image of the aforementioned regulation patterns. " width="3520" height="2062" loading="lazy" /></a></p>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Without closing the PAMP Signalling submap, <strong>click</strong> “Select all” to visualise the entire data table</p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+        <p>What is the expression pattern downstream of TLR7 and TLR8, namely how are MYD88 and IRAK4 regulated?</p>
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <p>MYD88 and IRAK4 are strongly and weakly upregulated, respectively, despite TLR7 downregulation.
+<a href="images/5.png" rel="noopener noreferrer"><img src="images/5.png" alt="image of the aforementioned regulation patterns. " width="3520" height="2062" loading="lazy" /></a></p>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>For further analysis in the MINERVA Platform, a <a href="https://covid19map.elixir-luxembourg.org/minerva/resources/other/user_guide.pdf">full user guide is available</a></p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>The MINERVA Platform is an excellent tool for visualising pathway analysis results</p>
+</li>
+                        
+                        <li><p>Several built-in maps are available such as the COVID-19 Disease Map which is pre-configured in all updated Galaxy servers.</p>
+</li>
+                        
+                        <li><p>You can use it to explore the expression patterns of genes in pathways relevant to your interests.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/transcriptomics/faqs/">FAQ page for the Transcriptomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="hoksza_minerva_2019">Hoksza, D., P. Gawron, M. Ostaszewski, E. Smula, and R. Schneider, 2019 <b>MINERVA API and plugins: opening molecular network analysis and visualization to the community</b>. Bioinformatics (Oxford, England) 35: 4496–4498. <a href="https://doi.org/10.1093/bioinformatics/btz286">10.1093/bioinformatics/btz286</a></li>
+<li id="Togami_2022">Togami, Y., H. Matsumoto, J. Yoshimura, T. Matsubara, T. Ebihara <i>et al.</i>, 2022 <b>Significance of interferon signaling based on mRNA-microRNA integration and plasma protein analyses in critically ill COVID-19 patients</b>. Molecular Therapy - Nucleic Acids 29: 343–353. <a href="https://doi.org/10.1016/j.omtn.2022.07.005">10.1016/j.omtn.2022.07.005</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=transcriptomics/minerva-pathways" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marek Ostaszewski, Matti Hoch, Iacopo Cristoferi, Myrthe van Baardwijk, Saskia Hiltemann, Helena Rasche,  <b>Pathway analysis with the MINERVA Platform (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{transcriptomics-minerva-pathways,
+author = "Marek Ostaszewski and Matti Hoch and Iacopo Cristoferi and Myrthe van Baardwijk and Saskia Hiltemann and Helena Rasche",
+	title = "Pathway analysis with the MINERVA Platform (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/by-covid" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/by-covid/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/transcriptomics/tutorials/minerva-pathways/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: column_maker
+  owner: devteam
+  revisions: 9cd341095afd
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastqc
+  owner: devteam
+  revisions: 5ec9f6bceaee
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: annotatemyids
+  owner: iuc
+  revisions: 133f36c29579
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collection_column_join
+  owner: iuc
+  revisions: 3ddd99c7efee
+  tool_panel_section_label: Join, Subtract and Group
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: featurecounts
+  owner: iuc
+  revisions: 6f66ae7c5f7a
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: goseq
+  owner: iuc
+  revisions: 602de62d995b
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: hisat2
+  owner: iuc
+  revisions: f4af63aaf57a
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: limma_voom
+  owner: iuc
+  revisions: d6f5fa4ee473
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: multiqc
+  owner: iuc
+  revisions: abfd8a6544d7
+  tool_panel_section_label: Quality Control
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cutadapt
+  owner: lparsons
+  revisions: 8c0175e03cee
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: rseqc
+  owner: nilesh
+  revisions: 473382134e56
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: rseqc
+  owner: nilesh
+  revisions: 473382134e56
+  tool_panel_section_label: RNA Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/ce8f1166daed60a226135912d1dc89272ef7a5fc">ce8f116</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/minerva-pathways/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	
+	<script src="/training-material/assets/js/mermaid@10.6.1.js" async></script>
+	<link rel="preload" href="/training-material/assets/js/mermaid@10.6.1.js" as="script" crossorigin>
+	
+    </body>
+</html>

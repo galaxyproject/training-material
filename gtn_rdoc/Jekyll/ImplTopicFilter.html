@@ -67,6 +67,7 @@
 
   <ul class="link-list" role="directory">
     <li ><a href="#method-i-fetch_tutorial_material">#fetch_tutorial_material</a>
+    <li ><a href="#method-i-get_workflow">#get_workflow</a>
     <li ><a href="#method-i-identify_contributors">#identify_contributors</a>
     <li ><a href="#method-i-identify_funders">#identify_funders</a>
     <li ><a href="#method-i-list_all_tags">#list_all_tags</a>
@@ -80,6 +81,7 @@
     <li ><a href="#method-i-recently_modified_tutorials">#recently_modified_tutorials</a>
     <li ><a href="#method-i-recently_published_tutorials">#recently_published_tutorials</a>
     <li ><a href="#method-i-to_keys">#to_keys</a>
+    <li ><a href="#method-i-to_material">#to_material</a>
     <li ><a href="#method-i-to_vals">#to_vals</a>
     <li ><a href="#method-i-topic_count">#topic_count</a>
     <li ><a href="#method-i-topic_filter">#topic_filter</a>
@@ -146,6 +148,28 @@
             <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 973</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_tutorial_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">page_name</span>)
   <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">fetch_tutorial_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">page_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-get_workflow" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">get_workflow</span><span
+            class="method-args">(site, page, workflow)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="get_workflow-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 1055</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_workflow</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">page</span>, <span class="ruby-identifier">workflow</span>)
+  <span class="ruby-identifier">mat</span> = <span class="ruby-identifier">to_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">page</span>)
+  <span class="ruby-identifier">mat</span>[<span class="ruby-string">&#39;workflows&#39;</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>[<span class="ruby-string">&#39;workflow&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">workflow</span> }[<span class="ruby-value">0</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -516,6 +540,31 @@
             <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 1007</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_keys</span>(<span class="ruby-identifier">arr</span>)
   <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>[<span class="ruby-value">0</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_material" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">to_material</span><span
+            class="method-args">(site, page)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="to_material-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 1047</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">page</span>)
+  <span class="ruby-identifier">topic</span> = <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span>]
+  <span class="ruby-identifier">material</span> = <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">3</span>]
+  <span class="ruby-identifier">ret</span> = <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">fetch_tutorial_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">material</span>)
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warning</span> <span class="ruby-node">&quot;Could not find material #{topic} #{material}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">ret</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
