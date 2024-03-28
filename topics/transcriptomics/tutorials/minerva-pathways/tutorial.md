@@ -261,7 +261,7 @@ MultiQC report. Looking at the report we see generally reasonable quality data.
 
 Now we're ready to analyse the counts files. Here we'll take the feature counts dataset collection and merge it into one count matrix through the use of "Column join". This can then be annotated with the human readable names of the genes. This is all passed to limma for differential expression analysis.
 
-With this result in hand we're ready to do two further steps: preparing the dataset for goseq, and for analysis in MINERVA. Goseq is a tool for gene ontology enrichment analysis, and MINERVA is a tool for visualising pathway analysis.
+With this result in hand we're ready to do two further steps: preparing the dataset for goseq, and for analysis in the MINERVA Platform. Goseq is a tool for gene ontology enrichment analysis, and the MINERVA Platform is a tool for visualising pathway analysis.
 
 <figure>
 {% assign wf_counts = site | get_workflow:page, "Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.ga" %}
@@ -279,11 +279,11 @@ With this result in hand we're ready to do two further steps: preparing the data
 >
 {: .hands_on}
 
-You should have a few outputs, namely the `goseq` outputs, and a table ready for visualisation in MINERVA!
+You should have a few outputs, namely the `goseq` outputs, and a table ready for visualisation in the MINERVA Platform!
 
-## MINERVA
+## The MINERVA Platform
 
-The dataset prepared for MINERVA must be correctly formatted as a tabular dataset (`\t` separated values) like the following, with the dbkey set to `hg19` or `hg38`. If you've run the above workflow, this should be the case.
+The dataset prepared for the MINERVA Platform must be correctly formatted as a tabular dataset (`\t` separated values) like the following, with the dbkey set to `hg19` or `hg38`. If you've run the above workflow, this should be the case.
 
 ```
 SYMBOL  logFC              P.Value               adj.P.Val
@@ -323,5 +323,30 @@ SLC2A3  2.95861349227708   1.19066011437523e-13  6.74866152827879e-11
 
 ### Analysis
 
+The tabular dataset, as prepared above is then used by a dedicated MINERVA plugin (see {% cite hoksza_minerva_2019 %}) to visualise the data on-the-fly in the [COVID-19 Disease Map](https://covid19map.elixir-luxembourg.org/minerva/). To visualise and explore the data, follow these steps:
 
-TODO
+**1. Overlay the data** in the COVID-19 Disease Map by clicking "Explore" icon and follow the "display at Minerva" link (see images below).
+![Explore](1.png)
+![MINERVA link](2.png)
+
+**2. Select what to visualise.** After the loading time, marked as "Reading Map Elements", the dataset will be visible in the right panel of the COVID-19 Disease Map, with the four corresponding columns specified earlier (see image below). The plugin allows you to:
+- filter the data table by fold-change (FC) treshold or by p-value (default: adjusted p-value, treshold set to 0.05)
+- Search for specific gene symbols to display ("Search" box)
+- Select specific differential expression values to display in the map (checkboxes in the data tab)
+- Select all entries in the data table for visualisation (Select All)
+- Reset the visualisation
+
+![MINERVA main window](3.png)
+
+**3. Explore the data table.** After selecting what you want to see, browse the COVID-19 Disease Map to explore the pathways with the corresponding expression pattern. To do this
+- in the main map, find pathways with matching entries indicated by blue pins.
+- select a pathway of your choice and in the left panel click the "Associated submap" button
+- explore the expression patterns in the diagram that will be displayed.
+
+Images below illustrates these steps:
+1. Search for all TLR related gene symbols and select them. Find three pathways with TLRs (Interferon 1 pathway, Orf3a protein interactions, PAMP signalling)
+2. Select "PAMP signalling" and click the "Associated button"
+3. Explore the detailed diagram to examine the expression pattern (TLR3 and TLR7 are downregulated, TLR8 is upregulated)
+4. Click "Select all" to visualise the entire data table
+5. Explore the activation pattern donwstream TLR7 and TLR8 - MYD88 and IRAK4 are upregulated despite TLR7 downregulation.
+ 
