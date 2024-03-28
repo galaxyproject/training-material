@@ -91,7 +91,8 @@ want to reproduce our work.
 
 ## Analysis
 
-We have split this workflow into three parts, based only on how long the first two portions of the workflow take to execute. The rough runtime of the workflow portions when this was being developed can be broken down as follows:
+We have split this workflow into three parts, based only on how long the first two portions of the workflow take to execute.
+The rough runtime of the workflow portions, when this was being developed, can be broken down as follows:
 
 Step                     | Time
 ---                      | ---
@@ -112,7 +113,7 @@ analysed with the Download & Counts steps that can be skipped.
 
 ### Data Download
 
-We'll start by downloading our fastq files from the [GEO Dataset GSE182152](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182152)
+We'll start by downloading our FASTQ files from the [GEO Dataset GSE182152](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182152)
 
 > <hands-on-title>Download the data from GEO (ETA: 6 Hours)</hands-on-title>
 >
@@ -262,9 +263,11 @@ MultiQC report. Looking at the report we see generally reasonable quality data.
 
 </div>
 
-Now we're ready to analyse the counts files. Here we'll take the feature counts dataset collection and merge it into one count matrix through the use of "Column join". This can then be annotated with the human readable names of the genes. This is all passed to limma for differential expression analysis.
+Now we're ready to analyse the counts files. Here we'll take the feature counts dataset collection and merge it into one count matrix through the use of "Column join".
+This can then be annotated with the human readable names of the genes. This is all passed to limma for differential expression analysis.
 
-With this result in hand we're ready to do two further steps: preparing the dataset for goseq, and for analysis in the MINERVA Platform. Goseq is a tool for gene ontology enrichment analysis, and the MINERVA Platform is a tool for visualising pathway analysis.
+With this result in hand, we're ready to do two further steps: preparing the dataset for goseq, and for analysis in the MINERVA Platform.
+Goseq is a tool for gene ontology enrichment analysis, and the MINERVA Platform is a tool for visualising pathway analysis.
 
 <figure>
 {% assign wf_counts = site | get_workflow:page, "Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.ga" %}
@@ -276,7 +279,7 @@ With this result in hand we're ready to do two further steps: preparing the data
 
 > <hands-on-title>Analyse the Counts</hands-on-title>
 >
-> 1. Run the workflow with the Factor Data from the first Hands on, and the datasets from the workflow or Zenodo download, depending on your path:
+> 1. Run the workflow with the Factor Data from the first Hands-on, and the datasets from the workflow or Zenodo download, depending on your path:
 >
 >    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="689" box_type="none" %}
 >
@@ -286,7 +289,8 @@ You should have a few outputs, namely the `goseq` outputs, and a table ready for
 
 ## The MINERVA Platform
 
-The dataset prepared for the MINERVA Platform must be correctly formatted as a tabular dataset (`\t` separated values) like the following, with the dbkey set to `hg19` or `hg38`. If you've run the above workflow, this should be the case.
+The dataset prepared for the MINERVA Platform must be correctly formatted as a tabular dataset (`\t` separated values) like the following, with the dbkey set to `hg19` or `hg38`.
+If you've run the above workflow, this should be the case.
 
 ```
 SYMBOL  logFC              P.Value               adj.P.Val
@@ -332,13 +336,14 @@ The tabular dataset, as prepared above is then used by a dedicated MINERVA plugi
 
 ### Analysis in the MINERVA Platform
 
-Welcome to the MINERVA Covid-19 Disease Map! It has a similar interface to Galaxy, there is an interaction menu on the left, the main area is where you'll do your investigation, and on the right are your datasets! In this case the differentially expressed genes analysed above automatically loaded from Galaxy when you clicked "Display at MINERVA".
+Welcome to the MINERVA Covid-19 Disease Map! It has a similar interface to Galaxy, there is an interaction menu on the left, the main area is where you'll do your investigation,
+and on the right are your datasets! In this case, the differentially expressed genes analysed above automatically loaded from Galaxy when you clicked "Display at MINERVA".
 
 ![MINERVA main view, a search menu on the left, a view of the disease map in the center showing a colourful cell diagram with signalling and T-Cells and CD8+ and more. On the right is a filtering box for the dataset from Galaxy allowing the user to filter by p-value and FC thresholds. 397 genes have been loaded.](images/3.png)
 
 After the loading time, marked as "Reading Map Elements", the dataset will be visible in the right panel of the COVID-19 Disease Map, with the four corresponding columns specified earlier (see image below). The MINERVA-Galaxy plugin allows you to:
 
-- filter the data table by fold-change (FC) treshold or by p-value (default: adjusted p-value, treshold set to 0.05)
+- filter the data table by fold-change (FC) threshold or by p-value (default: adjusted p-value, threshold set to 0.05)
 - Search for specific gene symbols to display ("Search" box)
 - Select specific differential expression values to display in the map (checkboxes in the data tab)
 - Select all entries in the data table for visualisation (Select All)
