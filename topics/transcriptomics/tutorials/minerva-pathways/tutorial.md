@@ -62,10 +62,10 @@ While that paper uses a closed source pipeline, we'll be reproducing the analysi
 {: .agenda}
 
 There are several places you can jump to in this tutorial, using pre-calculated
-data. We recommend you jump directly to the [Analysis](#Analysis) section, as
-that precludes the slowest and most data intensive parts of this tutorial.
-However, the entire process is documented in case you want to reproduce our
-work.
+data. We recommend you jump skipping the data download and counting step, and
+skipping to the analysis, as that precludes the slowest and most data intensive
+parts of this tutorial. However, the entire process is documented in case you
+want to reproduce our work.
 
 ## Study Design
 
