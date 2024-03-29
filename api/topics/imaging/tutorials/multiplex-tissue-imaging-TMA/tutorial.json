@@ -80,7 +80,7 @@
       "name": "GTN_Exemplar_002_TMA_workflow",
       "title": "GTN_Exemplar_002_TMA_workflow",
       "test_results": null,
-      "modified": "2024-03-28 21:42:29 +0000",
+      "modified": "2024-03-29 00:05:22 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmarkers.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"BaSiC Illumination\"];\n  0 -->|output| 3;\n  4[\"ASHLAR\"];\n  3 -->|output_dfp| 4;\n  3 -->|output_ffp| 4;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"UNetCoreograph\"];\n  4 -->|output| 5;\n  6[\"Mesmer\"];\n  5 -->|tma_sections| 6;\n  ee73bee3-59e7-4e1c-87fd-197b8eac7e15[\"Output\\nMesmer on input dataset(s): Mask\"];\n  6 --> ee73bee3-59e7-4e1c-87fd-197b8eac7e15;\n  style ee73bee3-59e7-4e1c-87fd-197b8eac7e15 stroke:#2c3143,stroke-width:4px;\n  7[\"Convert image\"];\n  5 -->|tma_sections| 7;\n  8[\"MCQUANT\"];\n  1 -->|output| 8;\n  5 -->|tma_sections| 8;\n  6 -->|mask| 8;\n  fe28534a-2b3f-4ecc-8ba9-a106b2d1425c[\"Output\\nPrimary Mask Quantification\"];\n  8 --> fe28534a-2b3f-4ecc-8ba9-a106b2d1425c;\n  style fe28534a-2b3f-4ecc-8ba9-a106b2d1425c stroke:#2c3143,stroke-width:4px;\n  9[\"Rename OME-TIFF Channels\"];\n  1 -->|output| 9;\n  7 -->|output| 9;\n  10[\"Convert McMicro Output to Anndata\"];\n  8 -->|cellmask| 10;\n  11[\"Single Cell Phenotyping\"];\n  10 -->|outfile| 11;\n  2 -->|output| 11;\n  12[\"Vitessce Visualization\"];\n  11 -->|output| 12;\n  9 -->|renamed_image| 12;\n  6 -->|mask| 12;"
     }
   ],
