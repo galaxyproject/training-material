@@ -324,7 +324,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 {: .comment}
 
-In order to do genome profile analysis, first we need the *k*-mer spectrum of the raw reads, which should hopefully contain information about the genome that you sequenced. These *k*-mers are used to build a histogram (the *k*-mer spectrum), and then the GenomeScope model that fits that data will help infer genome characteristics. To count *k*-mers, we first count them on the separate FASTA files, before merging the counts and generating a histogram based on that. This is a way of parallelizing our work. 
+In order to identify some key characteristics of the genome, we do genome profile analysis. To do this, we start by generating a histogram of the *k*-mer distribution in the raw reads (the *k*-mer spectrum). Then, GenomeScope creates a model fitting the spectrum that allows for estimation of genome characteristics. We work in parallel on each set of raw reads, creating a database of each file's *k*-mer counts, and then merge the databases of counts in order to build the histogram.
 
 ![Kmer counting parallelization](../../images/vgp_assembly/meryl_collections.png "K-mer counting is first done on the collection of FASTA files. Because these data are stored in a collection, a separate `count` job is launched for each FASTA file, thus parallelizing our work. After that, the collection of count datasets is merged into one dataset, which we can use to generate the histogram input needed for GenomeScope.")
 
@@ -1041,7 +1041,7 @@ This stage consists of three substages: read-depth analysis, generation of all v
 
 ![Post-processing with purge_dups](../../images/vgp_assembly/purge_dupspipeline.png "Purge_dups pipeline. Adapted from github.com/dfguan/purge_dups. Purge_dups is integrated in a multi-step pipeline consisting in three main substages. Red indicates the steps which require to use Minimap2.")
 
-The way purging is incorporated in the VGP pipeline, first the **primary assembly** is purged, resulting in a clean (purged) primary assembly and a set of contigs that were *removed* from those contigs. These will often contain haplotigs representing alternate alleles. We would like to keep that in the alternate assembly, so the next step is adding (concatenating) this file to the original alternate assembly. This file then undergoes purging as well, to remove any junk or overlaps.
+Purging may be used in the VGP pipeline when there are suspicions of false duplications (Figure 1). In such cases, we start by purging the **primary assembly**, resulting in a clean (purged) primary assembly and a set of contigs that were *removed* from those contigs. These removed contigs will often contain haplotigs representing alternate alleles. We would like to keep that in the alternate assembly, so the next step is adding (concatenating) this file to the original alternate assembly. To make sure we don't introduce redundancies in the alternate assembly that way, we then purge that alternate assembly, which will also remove any junk or overlaps.
 
 ![Purge_dups workflow in VGP pipeline](../../images/vgp_assembly/purge_dups.png "Purge_dups pipeline as implemented in the VGP pipeline. This consists of first purging the primary contigs, then adding the removed haplotigs to the alternate contigs, and then purging that to get the final alternate assembly.")
 
