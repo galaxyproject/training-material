@@ -130,7 +130,7 @@
       "name": "Proteomics: Peptide and Protein Quantification via stable istobe labeling",
       "title": "Proteomics: Peptide and Protein Quantification via stable istobe labeling",
       "test_results": null,
-      "modified": "2024-03-31 23:39:53 +0000",
+      "modified": "2024-04-01 00:15:32 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmzml raw file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nfasta file\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FeatureFinderMultiplex\"];\n  0 -->|output| 2;\n  3[\"XTandemAdapter\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  4[\"FileInfo\"];\n  3 -->|out| 4;\n  5[\"PeptideIndexer\"];\n  1 -->|output| 5;\n  3 -->|out| 5;\n  6[\"IDPosteriorErrorProbability\"];\n  5 -->|out| 6;\n  7[\"FalseDiscoveryRate\"];\n  6 -->|out| 7;\n  8[\"IDScoreSwitcher\"];\n  7 -->|out| 8;\n  9[\"FileInfo\"];\n  8 -->|out| 9;\n  10[\"FidoAdapter\"];\n  8 -->|out| 10;\n  11[\"FalseDiscoveryRate\"];\n  10 -->|out| 11;\n  12[\"FileInfo\"];\n  11 -->|out| 12;\n  13[\"TextExporter\"];\n  11 -->|out| 13;\n  14[\"IDMapper\"];\n  11 -->|out| 14;\n  2 -->|out_multiplets| 14;\n  15[\"Select\"];\n  13 -->|out| 15;\n  16[\"Select\"];\n  13 -->|out| 16;\n  17[\"IDConflictResolver\"];\n  14 -->|out| 17;\n  18[\"MultiplexResolver\"];\n  17 -->|out| 18;\n  19[\"ProteinQuantifier\"];\n  18 -->|out| 19;\n  11 -->|out| 19;\n  20[\"Summary Statistics\"];\n  19 -->|out| 20;\n  21[\"Select last\"];\n  19 -->|out| 21;\n  22[\"Histogram\"];\n  21 -->|outfile| 22;"
     }
   ],
