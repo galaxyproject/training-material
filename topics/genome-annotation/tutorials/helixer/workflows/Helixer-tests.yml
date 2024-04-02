@@ -7,29 +7,28 @@
 
   outputs:
     Helixer:
-      path: 'test-data/fungi.gff3'
-      compare: sim_size
-      delta: 30000
-
+      asserts:
+        has_text:
+          text: '##gff-version 3.2.1'
     compleasm full table:
-      path: 'test-data/compleasm_full_table.tsv '
-      compare: sim_size
-      delta: 30000
+      asserts:
+        has_text:
+          text: '10251at4827'
     compleasm full table busco:
-      path: 'test-data/compleasm_full_table.tsv '
-      compare: sim_size
-      delta: 30000
+      asserts:
+        has_text:
+          text: '10251at4827'
+    compleasm miniprot:
+      asserts:
+        has_text:
+          text: '10011at4827'
     compleasm translated protein:
-      path: 'test-data/compleasm_full_table.tsv '
-      compare: sim_size
-      delta: 30000
+      asserts:
+        has_text:
+          text: 'CCTCCCTCCCTCCCTCLINRLYRERLFFLGQEVDTEISNQLISLMIYLSIEKDTKDLYLFINSPGGWVISGMAIYDTMQFVRPDVQTICMGLAASIASFILVGGAITKRIAFPHAWVMIHQPASSFYEAQTGEFILEAEELLKLRETITRVYVQRTGKPIWVVSEDMERDVFMSATEAQAHGIVDLVACCTCCCTCC'
 
     BUSCO sum:
-      path: 'test-data/busco_sum.txt'
-      compare: sim_size
-      delta: 30000
-
-    summary helixer:
-      path: 'test-data/'
-      compare: sim_size
-      delta: 30000
+      asserts:
+        has_text:
+          text: '2449'
+          text: '5.5.0'
