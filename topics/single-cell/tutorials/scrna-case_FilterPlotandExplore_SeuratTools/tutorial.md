@@ -238,7 +238,7 @@ Now that we have a better understanding of what our data looks like, we can begi
 In a standard workflow, we would plot the percentage of mitochondrial reads (perc.mt) against the total number of reads per cell (nCount_RNA) and number of genes per cell (nFeature_RNA) to get an idea of our thresholds. 
 
 ><comment-title>High Mitochondrial Reads</comment-title>
->High mito expression will typically indicate stressed out cells (often due to the extraction, sorting, or sample prep protocols).
+>High perc.mt will typically indicate stressed out cells (often due to the extraction, sorting, or sample prep protocols).
 >
 {: .comment}
 
