@@ -1,14 +1,8 @@
 # frozen_string_literal: true
 
 # Plugin to add environment variables to the `site` object in Liquid templates
-require 'find'
-require 'bibtex'
-require 'citeproc/ruby'
-require 'csl/styles'
-require 'time'
 require './_plugins/gtn/scholar'
 require './_plugins/gtn/git'
-require './_plugins/gtn'
 
 module Jekyll
   # This module contains a generator for adding environment variables to the `site` object in Liquid templates
