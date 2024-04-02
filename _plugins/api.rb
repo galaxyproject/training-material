@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'securerandom'
 require 'json'
-require 'zip'
 
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn/metrics'
@@ -375,6 +373,10 @@ end
 Jekyll::Hooks.register :site, :post_write do |site|
   # No need to run this except in prod.
   if Jekyll.env == 'production'
+    # Import on-demand
+    require 'securerandom'
+    require 'zip'
+
     dir = File.join(site.dest, 'api', 'workflows')
 
     # Public tool listing: reorganised
