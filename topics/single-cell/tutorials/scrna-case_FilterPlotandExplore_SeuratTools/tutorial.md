@@ -252,7 +252,7 @@ For now, we will use just transcript and gene counts to filter our data. Let's t
 >You can see that very few cells in the dataset contain fewer than ~500 genes. Biologically, this makes sense, and the cells appear to be outliers in the data. As such, we will set our lower threshold of genes (nFeature) at 500. 
 {: .comment}
 
-Now, what about transcripts (nCount)? Let's take a look: 
+Now, what about transcripts (nCount_RNA)? Let's take a look: 
 
 ![Violin Plot of Counts](../../images/scrna-case_FPE_SeuratTools/nCount_RNA_vln_plot.png "Violin Plot of counts.")
 
