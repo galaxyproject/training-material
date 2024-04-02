@@ -348,7 +348,7 @@ This is an important step to set up our data for further dimensionality reductio
 
 > <hands-on-title>Scale Data </hands-on-title>
 >
-> Run{% tool [ScaleData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_scale_data/seurat_scale_data/4.0.4+galaxy0) %} with the following parameters:
+> Run{% tool [Seurat ScaleData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_scale_data/seurat_scale_data/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat FindVariableGenes on data 12: Seurat RDS`
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 > - *"Genes to use"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
