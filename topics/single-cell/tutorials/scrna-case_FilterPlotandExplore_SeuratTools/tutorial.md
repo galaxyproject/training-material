@@ -235,7 +235,7 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them. 
 
-In a standard workflow, we would plot the percent mito (perc.mt) against the transcript count (nCount_RNA) and gene count (nFeature_RNA) to get an idea of our thresholds. 
+In a standard workflow, we would plot the percentage of mitochondrial reads (perc.mt) against the total number of reads per cell (nCount_RNA) and number of genes per cell (nFeature_RNA) to get an idea of our thresholds. 
 
 ><comment-title>High Mitochondrial Reads</comment-title>
 >High mito expression will typically indicate stressed out cells (often due to the extraction, sorting, or sample prep protocols).
