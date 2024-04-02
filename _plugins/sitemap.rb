@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'date'
-require './_plugins/gtn'
-
 module Jekyll
   # Generate a sitemap like Jekyll::Sitemap
   class SitemapGenerator < Generator
@@ -17,6 +14,15 @@ module Jekyll
     # Params:
     # +site+:: The +Jekyll::Site+ object
     def generate(site)
+      if Jekyll.env == 'development'
+        Jekyll.logger.info '[GTN/Sitemap] Skipping in development mode'
+        return
+      end
+
+      # We import later in case we don't need to bother importing in the first place.
+      require 'date'
+      require './_plugins/gtn'
+
       Jekyll.logger.info '[GTN/Sitemap] Generating'
       result = '<?xml version="1.0" encoding="UTF-8"?>'
       result += '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' \
