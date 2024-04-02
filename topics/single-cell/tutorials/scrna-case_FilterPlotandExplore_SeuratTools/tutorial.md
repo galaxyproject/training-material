@@ -147,7 +147,7 @@ So let's generate some QC plots. First off, let's visualize the spread of our da
 > <hands-on-title>Visualize Counts</hands-on-title>
 >
 > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
+> - *"RDS file"*: `Seurat RDS` (output of ** Seurat Read10x** {% icon tool %})
 > - *"Plot_type_selector"*: `VlnPlot`
 > - *"Features"*: `nCount_RNA`
 > - *"Log"*: `Yes`
