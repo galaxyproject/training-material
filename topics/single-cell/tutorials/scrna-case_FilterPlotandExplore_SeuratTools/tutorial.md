@@ -108,7 +108,7 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 >>
 >> Run{% tool [Seurat FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0) %} with the following parameters:
 >> - *"Choose the format of the input"*: `AnnData`
->> - *"AnnData file"*: ``
+>> - *"AnnData file"*: `Mito-counted AnnData`
 >> - *"Choose the format of the output"*: `RDS with a Seurat object`
 > {: .hands_on}
 {: .tip}
