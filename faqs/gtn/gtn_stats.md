@@ -8,7 +8,7 @@ description: Statistics over the GTN
 ---
 
 <!-- tutorial stats -->
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}
+{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.draft != true" %}
 {% assign faqs = site.pages | where:"layout", "faq" %}
 {% assign topics = site | list_topics_by_category: "science-technical" | to_keys %}
 {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
