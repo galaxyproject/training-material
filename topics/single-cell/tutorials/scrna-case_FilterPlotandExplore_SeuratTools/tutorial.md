@@ -205,7 +205,7 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
    > <hands-on-title>Visualize Counts Split by Sex</hands-on-title>
   >
   > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
-  > - *"RDS file"*: `Seurat Read10x on data 4, data 3, and other: Seurat RDS`
+  > - *"RDS file"*: `Seurat RDS` (output of ** Seurat Read10x** {% icon tool %})
   > - *"Plot_type_selector"*: `VlnPlot`
   > - *"Features"*: `nCount_RNA`
   > - *"Group by"*: `Sample.Characteristic.sex.`
