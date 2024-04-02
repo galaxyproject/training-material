@@ -64,7 +64,7 @@ To start, let's get our dataset loaded into Galaxy.
 ## You have options:
 You can access the data for this tutorial in multiple ways:
 ### 1. **EBI Data Retrieval** 
-You may retrieve that files necessary to construct a Seurat Object in this way.Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
+You may retrieve that files necessary to construct a Seurat Object in this way. Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
 
 > <hands-on-title>GetData</hands-on-title>
 >
