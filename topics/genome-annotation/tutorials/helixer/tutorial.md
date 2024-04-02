@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Helixer
-zenodo_link:
+zenodo_link: https://zenodo.org/record/7867921
 tags:
   - eukaryota
   - helixer
@@ -14,7 +14,6 @@ edam_ontology:
 
 questions:
     - How to annotate an eukaryotic genome with Helixer?
-    - How to evaluate anotated genomic features?
     - How to evaluate and visualize annotated genomic features?
 
 objectives:
@@ -23,7 +22,7 @@ objectives:
     - Evaluate annotation quality with BUSCO and Compleasm
     - View annotations in JBrowse
 
-time_estimation:
+time_estimation: 4h
 level: Intermediate
 key_points:
     - Helixer allows to perform structural annotation of an eukaryotic genome
@@ -31,8 +30,6 @@ key_points:
 contributions:
   authorship:
     - rlibouba
-  editing:
-    - 
   funding:
     - eurosciencegateway
 
@@ -50,7 +47,7 @@ Annotating the eukaryotic genome represents a somewhat more complex challenge th
 
 In this tutorial we will use a software tool called Helixer to annotate the genome sequence of a small eukaryote: [*Mucor mucedo*](https://en.wikipedia.org/wiki/Mucor_mucedo) (a fungal plant pathogen).
 
-Helixer is a software package providing a framework for the development and use of a cross-species deep learning model that dramatically improves performance. The software enables models to be configured and trained for *ab initio* prediction of gene structure. In other words, to identify which base pairs in a genome belong to the UTR/CDS/Intron genes.
+[Helixer](https://github.com/weberlab-hhu/Helixer) is a software package providing a framework for the development and use of a cross-species deep learning model that dramatically improves performance. The software enables models to be configured and trained for *ab initio* prediction of gene structure. In other words, to identify which base pairs in a genome belong to the UTR/CDS/Intron genes.
 
 In this tutorial, you'll learn how to perform a structural annotation of the genome and how to assess its quality. 
 
