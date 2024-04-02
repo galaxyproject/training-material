@@ -1,0 +1,35 @@
+- doc: Test outline for Helixer
+  job:
+    Genome:
+      class: File
+      filetype: fasta
+      path: 'test-data/sequence.fasta'
+
+  outputs:
+    Helixer:
+      path: 'test-data/fungi.gff3'
+      compare: sim_size
+      delta: 30000
+
+    compleasm full table:
+      path: 'test-data/compleasm_full_table.tsv '
+      compare: sim_size
+      delta: 30000
+    compleasm full table busco:
+      path: 'test-data/compleasm_full_table.tsv '
+      compare: sim_size
+      delta: 30000
+    compleasm translated protein:
+      path: 'test-data/compleasm_full_table.tsv '
+      compare: sim_size
+      delta: 30000
+
+    BUSCO sum:
+      path: 'test-data/busco_sum.txt'
+      compare: sim_size
+      delta: 30000
+
+    summary helixer:
+      path: 'test-data/'
+      compare: sim_size
+      delta: 30000
