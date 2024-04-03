@@ -275,7 +275,8 @@ In order to include more than one parameter by which to filter, use the "Insert 
 > - *"Min value"*: `500.0`
 > - *"Max value"*: `10000`
 >
-> - *"Name of Parameter to filter on"*: `nFeature_RNA`
+> - {% icon param-repeat %} *"Insert Subsets used to filter cells"*
+>     - *"Name of Parameter to filter on"*: `nFeature_RNA`
 > - *"Min value"*: `500.0`
 > - *"Max value"*: `1000000000.0`
 >
