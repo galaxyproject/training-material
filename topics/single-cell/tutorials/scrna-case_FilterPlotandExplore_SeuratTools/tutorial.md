@@ -309,7 +309,7 @@ Normalisation helps reduce the differences between gene and UMI counts by fittin
 > <hands-on-title>Normalize Data</hands-on-title>
 >
 > Run{% tool [NormaliseData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_normalise_data/seurat_normalise_data/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Seurat FilterCells on data 5: Seurat RDS`
+> - *"RDS file"*: `Seurat RDS` (output of **Seurat FilterCells** {% icon tool %})
 > - *"Normalisation method"*: `Log Normalise`
 {: .hands_on}
 
