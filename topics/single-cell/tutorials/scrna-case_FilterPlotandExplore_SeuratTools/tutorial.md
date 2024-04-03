@@ -417,7 +417,7 @@ Let's now use the 15 PC threshold we chose from the Elbowplot and apply it to fi
 
 > <hands-on-title>Find Neighbors </hands-on-title>
 >
-> Run{% tool [FindNeighbours](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_neighbours/seurat_find_neighbours/4.0.4+galaxy0) %} with the following parameters:
+> Run{% tool [Seurat FindNeighbours](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_neighbours/seurat_find_neighbours/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat RunPCA on data 14 and data 15: Seurat RDS`
 > - *"Reduction"*: `pca`
 > - *"Dimensions"*: `1,2,3,4,5,6,7,8,9,10,11,12,13,14,15`
