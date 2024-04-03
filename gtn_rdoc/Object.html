@@ -393,7 +393,7 @@
           
 
           <div class="method-source-code" id="data_library_for_tutorial-source">
-            <pre><span class="ruby-comment"># File bin/update-data-library, line 120</span>
+            <pre><span class="ruby-comment"># File bin/update-data-library, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data_library_for_tutorial</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>), <span class="ruby-string">&#39;data-library.yaml&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1071,7 +1071,7 @@
           
 
           <div class="method-source-code" id="parse_metadata-source">
-            <pre><span class="ruby-comment"># File bin/update-data-library, line 130</span>
+            <pre><span class="ruby-comment"># File bin/update-data-library, line 149</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_metadata</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)
   <span class="ruby-identifier">topic_id</span> = <span class="ruby-identifier">parts</span>[<span class="ruby-value">1</span>]
@@ -1098,7 +1098,7 @@
           
 
           <div class="method-source-code" id="parse_tutorial_for_zenodo_link-source">
-            <pre><span class="ruby-comment"># File bin/update-data-library, line 124</span>
+            <pre><span class="ruby-comment"># File bin/update-data-library, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_tutorial_for_zenodo_link</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">parse_zenodo_id_formats</span>(<span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">path</span>)[<span class="ruby-string">&#39;zenodo_link&#39;</span>])
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
@@ -1121,7 +1121,7 @@
           
 
           <div class="method-source-code" id="parse_zenodo_id_formats-source">
-            <pre><span class="ruby-comment"># File bin/update-data-library, line 18</span>
+            <pre><span class="ruby-comment"># File bin/update-data-library, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_zenodo_id_formats</span>(<span class="ruby-identifier">link</span>)
   <span class="ruby-comment"># https://zenodo.org/record/1234567</span>
   <span class="ruby-comment"># https://zenodo.org/record/1234567#.X0X0X0X0X0X</span>
@@ -1179,7 +1179,7 @@
           
 
           <div class="method-source-code" id="request-source">
-            <pre><span class="ruby-comment"># File bin/workflows-fetch.rb, line 8</span>
+            <pre><span class="ruby-comment"># File bin/update-data-library, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">request</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">url</span>)
   <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>)
@@ -1188,7 +1188,8 @@
     <span class="ruby-value">use_ssl:</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">scheme</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;https&#39;</span>,
   }
   <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">hostname</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">port</span>, <span class="ruby-identifier">req_options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+    <span class="ruby-identifier">json_s</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>).<span class="ruby-identifier">body</span>
+    <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">json_s</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1545,20 +1546,28 @@
           
 
           <div class="method-source-code" id="update_data_library-source">
-            <pre><span class="ruby-comment"># File bin/update-data-library, line 43</span>
+            <pre><span class="ruby-comment"># File bin/update-data-library, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update_data_library</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">tutorial</span>, <span class="ruby-identifier">zenodo_record</span>)
   <span class="ruby-identifier">zenodo_id</span> = <span class="ruby-identifier">zenodo_record</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">zenodo_files</span> = <span class="ruby-identifier">zenodo_record</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;files&#39;</span>, []).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">official_extension</span> = <span class="ruby-identifier">f</span>[<span class="ruby-string">&#39;type&#39;</span>]
-    <span class="ruby-identifier">unofficial_extension</span> = <span class="ruby-identifier">f</span>[<span class="ruby-string">&#39;links&#39;</span>][<span class="ruby-string">&#39;self&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>)[<span class="ruby-value">-2</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.&#39;</span>)
+
+    <span class="ruby-identifier">link</span> = <span class="ruby-identifier">f</span>[<span class="ruby-string">&#39;links&#39;</span>][<span class="ruby-string">&#39;self&#39;</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">%r{/content$}</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">unofficial_extension</span> = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>)[<span class="ruby-value">-2</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.&#39;</span>)
     <span class="ruby-identifier">ext</span> = <span class="ruby-ivar">@SHARED_DATATYPES</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">unofficial_extension</span>, <span class="ruby-keyword">nil</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@SHARED_DATATYPES</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">official_extension</span>, <span class="ruby-keyword">nil</span>)
+
+    <span class="ruby-comment"># Example:</span>
+    <span class="ruby-comment"># https://zenodo.org/api/records/10870107/files/elem_s2_r1.fq.gz/content</span>
+    <span class="ruby-comment"># Needs to be</span>
+    <span class="ruby-comment"># https://zenodo.org/record/10870107/files/elem_s2_r1.fq.gz</span>
+    <span class="ruby-identifier">real_link</span> = <span class="ruby-identifier">f</span>[<span class="ruby-string">&#39;links&#39;</span>][<span class="ruby-string">&#39;self&#39;</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">%r{/content$}</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-string">&#39;/api/records/&#39;</span>, <span class="ruby-string">&#39;/record/&#39;</span>)
     <span class="ruby-comment"># puts &quot;Processing file: #{f[&#39;type&#39;]} #{f[&#39;links&#39;][&#39;self&#39;]} =&gt; #{ext}&quot;</span>
     <span class="ruby-comment"># puts &quot;#{unofficial_extension} =&gt; #{@SHARED_DATATYPES.fetch(unofficial_extension, nil)}&quot;</span>
     <span class="ruby-comment"># puts &quot;#{official_extension} =&gt; #{@SHARED_DATATYPES.fetch(official_extension, nil)}&quot;</span>
     <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Unknown file type: #{f[&#39;type&#39;]}. Consider adding this to shared/datatypes.yaml&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ext</span>.<span class="ruby-identifier">nil?</span>
 
     {
-      <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&#39;links&#39;</span>][<span class="ruby-string">&#39;self&#39;</span>],
+      <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">real_link</span>,
       <span class="ruby-string">&#39;src&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;url&#39;</span>,
       <span class="ruby-string">&#39;ext&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ext</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">f</span>[<span class="ruby-string">&#39;type&#39;</span>],
       <span class="ruby-string">&#39;info&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;https://doi.org/10.5281/zenodo.#{zenodo_id}&quot;</span>,
@@ -1608,7 +1617,7 @@
           
 
           <div class="method-source-code" id="update_tutorial-source">
-            <pre><span class="ruby-comment"># File bin/update-data-library, line 36</span>
+            <pre><span class="ruby-comment"># File bin/update-data-library, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update_tutorial</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">zenodo_id</span>)
   <span class="ruby-comment"># Edit the yaml header of the markdown file to update the ID</span>
   <span class="ruby-identifier">contents</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>)
@@ -1656,11 +1665,10 @@
           
 
           <div class="method-source-code" id="write_data_library-source">
-            <pre><span class="ruby-comment"># File bin/update-data-library, line 89</span>
+            <pre><span class="ruby-comment"># File bin/update-data-library, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write_data_library</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">tutorial</span>, <span class="ruby-identifier">tutorial_zenodo_id</span>, <span class="ruby-identifier">force</span>)
   <span class="ruby-comment"># Fetch the zenodo record</span>
-  <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>(<span class="ruby-node">&quot;https://zenodo.org/api/records/#{tutorial_zenodo_id}&quot;</span>)
-  <span class="ruby-identifier">zenodo_record</span> = <span class="ruby-constant">HTTParty</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">uri</span>)
+  <span class="ruby-identifier">zenodo_record</span> = <span class="ruby-identifier">request</span>(<span class="ruby-node">&quot;https://zenodo.org/api/records/#{tutorial_zenodo_id}&quot;</span>)
   <span class="ruby-identifier">new_zenodo_id</span> = <span class="ruby-identifier">zenodo_record</span>[<span class="ruby-string">&#39;id&#39;</span>].<span class="ruby-identifier">to_s</span>
 
   <span class="ruby-comment"># If it&#39;s redirected we&#39;ll get a different ID here</span>
