@@ -3,6 +3,7 @@
 require 'json'
 require 'yaml'
 require './_plugins/gtn'
+require 'securerandom'
 
 # The main GTN module to parse tutorials and topics into useful lists of things that can bes shown on topic pages
 module TopicFilter

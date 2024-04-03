@@ -169,6 +169,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the topic has been mentioned
     def how_many_topic_feedbacks(feedback, name)
+      if feedback.nil?
+        return 0
+      end
+
       feedback.select { |x| x['topic'] == name }.length
     end
 
@@ -180,6 +184,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the tutorial has been mentioned
     def how_many_tutorial_feedbacks(feedback, name)
+      if feedback.nil?
+        return 0
+      end
+
       feedback.select { |x| x['tutorial'] == name }.length
     end
 
@@ -599,8 +607,6 @@ module Jekyll
       else
         og_title.push page['title']
       end
-
-      Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
 
       if reverse.to_s == 'true'
         og_title.compact.reverse.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
