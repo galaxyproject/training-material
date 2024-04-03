@@ -1,0 +1,495 @@
+---
+layout: tutorial_slides
+logo: GTN
+title: "Phylogenetics - Back to Basics"
+zenodo_link: ""
+contributors:
+  - mcharleston  
+---
+
+# Phylogenetics - Back to Basics
+
+.center[Multiple Sequence Alignment]
+.center[Prof. Michael Charleston, PhD]
+![Australian BioCommons logo](images/Australian-Biocommons-Logo-Horizontal-RGB.png)
+![University of Tasmania logo](images/UTas logo.svg)
+---
+
+# Motivation
+
+       
+We use sequence alignment to:
+- identify complex relationships among multiple species -- more than just pairwise comparisons;
+--
+- find homologous parts (sites / loci) in sequences that may be under different selection dynamics;
+--
+- and to build phylogenetic trees!
+
+Multiple sequence alignment (MSA) is a required step in molecular phylogenetics
+---
+
+# Sequence Alignment
+
+One of the best understood and best solved bioinformatics problem is *how to align two sequences*.
+        
+In order to do this we need to know
+
+1.  what an "alignment" really means;
+
+2.  how to judge how good an alignment is;
+
+3.  an algorithm to do the alignment.
+---
+
+# What is an alignment?
+   
+Given two sequences like ![DNA sequence GGCTGAA. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGGACTG.pdf-1.png) and ![DNA sequence GGGACTG. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGCTGAA.pdf-1.png), "an alignment" is a _mapping_ of their positions (a.k.a. "sites") to a common ordering, by inserting gaps in one sequence or another:
+```
+
+![Alignment of two DNA sequences GGGACTG and GGCTGAA. In the alignment gaps (indicated by - ) are added to the sequences to form GGGACTG-- and -GG-CTGAA so that homologous sites are aligned at positions 2, 3, 5, 6, 7. ](images/03-msa-01-what-is-an-alignment.pdf-1.png)
+---
+# Alignments represent homology
+
+     
+Our goal with sequence alignment is to identify which regions, down to individual positions in a molecular sequence, are _homologous_: that is, their shared evolutionary history is the same as that of the taxa of interest.
+
+
+It's like tracing the origin of a set of transcribed documents through all their copies back to the original, where each was only copied (with maybe some mistakes) from one predecessor.
+
+Once we have identified homologous sites then we can analyse their differences and similarities under an evolutionary model -- a crucial centrepiece of phylogenetic analysis, and in fact of all comparative analysis of molecular sequences.
+---
+
+# Sequences evolve on a tree
+
+![Schematic example of a phylogenetic tree where species are represented by short DNA sequences to demonstrate how sequences evolve on a tree. The tree branches multiple times from a common ancestor to five extant taxa.](images/03-msa-02-a-tree-only.pdf-1.png)
+---
+
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An A to G substitution is highlighted in the first branching event.](images/03-msa-02-b.pdf-1.png)
+---
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. A deletion of a T is highlighted in the first branching event.](images/03-msa-02-c-deleteT.pdf-1.png)
+---
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An insertion of TT is highlighted in one of the branches.](images/03-msa-02-d-insertTT.pdf-1.png)
+---
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An A to G substitution is highlighted in one of the branches.](images/03-msa-02-e-AtoG.pdf-1.png)
+---
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An insertion of a T is highlighted in one of the branches.](images/03-msa-02-f-insertT.pdf-1.png)
+---
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. Two T to G substitutions have occurred on one branch.](images/03-msa-02-g-2xTtoG.pdf-1.png)
+---
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. A C to A substitution has occurred on one branch.](images/03-msa-02-h-CtoA.pdf-1.png)
+---
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. A deletion of a T has occurred on one branch.](images/03-msa-02-i-deleteT.pdf-1.png)
+---
+# Sequences evolve on a tree
+
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An A to C substitution has occurred on one branch.](images/03-msa-02-j-AtoC.pdf-1.png)
+---
+# Let's align these
+
+Gaps don't remain in the history so we only have
+
+![Five unaligned DNA sequences are arranged vertically. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-a-unaligned.pdf-1.png)
+---
+# A good alignment
+
+This alignment reflects truth
+
+![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-b-truth.pdf-1.png)
+---
+# Although...
+
+         
+But alignment also looks ``good'' (?)
+
+![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-c-good1.pdf-1.png)
+---
+# Although...
+
+        
+And so does this:
+
+
+![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink
+](images/03-msa-03-d-good2.pdf-1.png)
+---
+# This is nonsensical
+
+Only matches and indels! Win?
+
+![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-e-nonsense.pdf-1.png)
+
+Here, the indels do not make sense as having come from the same phylogenetic history.
+---
+# Fixing errors
+
+![A possible alignment of six DNA sequences arranged vertically drawing attention to a position (1) where gaps have been introduced in nearly all sequences and (2) gaps are not aligned but could be.](images/03-msa-04-a-fixingerrors-badly.pdf-1.png)
+
+At (1) a gap has been inserted in EVERY sequence.
+---
+# Fixing errors
+
+![A possible alignment of six DNA sequences arranged vertically drawing attention to a position (1) where gaps have been introduced in nearly all sequences and (2) gaps are not aligned but could be.](images/03-msa-04-a-fixingerrors-badly.pdf-1.png)
+At (2) the gaps don't line up, but they *could*.
+
+# Fixing errors
+![A possible alignment of six DNA sequences arranged vertically drawing attention to a position 1 where gaps have been removed to improve alignment at position 2.](images/03-msa-04-b-fixingerrors-well.pdf-1.png)
+
+        
+This fixes both problems.
+---
+
+# Rating alignments
+
+This can be a bit of an art: you need to
+
+-   balance the number of gaps with number of mismatches
+
+-   notice when there are insertions / deletions that don't make sense, where there are alternative arrangements that do
+---
+
+# 
+.center[Pair-wise Alignment]
+.center[: Dynamic Programming Approach]
+---
+# Sequence Similarity
+
+To do any kind of comparison we need a distance or similarity measure: without it we can't say whether, e.g., *these* two species are more similar than *those* two.
+
+-   Sequence Dissimilarity
+    -   Two main methods first: Hamming and *p*-distances, counting the number or proportion of differences between sequences
+-   Edit cost
+    -   a measure of the amount of evolutionary "work" that has to be done to change one character state into another one
+-   Likelihood
+    -   under a specific model of evolution, what is the probability that we would observe these sequences?
+---
+# Hamming Distance
+
+The *Hamming* distance between two sequences is just the number of differences between them.
+It makes no distinction between substitutions or insertions/deletions, and not between transitions and transversions.
+
+![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the value ‘1’.](images/03-msa-05-hamming-distance.pdf-1.png)
+
+Sequence length: 20
+Number of differences: 5
+
+Hamming Distance = 5
+P-distance = 5/20 = 0.25 or 25%
+---
+# Edit Cost
+
+We use a matrix of costs to describe how much evolutionary "work" must be done to convert one character to another.
+This is the *Edit cost matrix*.
+
+```{=tex}
+\medskip
+\wad
+\begin{minipage}[c]{0.4\textwidth}
+    Edit cost matrix
+    \medskip
+    
+    $\begin{array}{c|ccccc}
+        - & A & C & G & T & - \\
+        \hline
+        A & 0 & 1 & 2 & 1 & 5 \\
+        C & 1 & 0 & 1 & 2 & 5 \\
+        G & 2 & 1 & 0 & 1 & 5 \\
+        T & 1 & 2 & 1 & 0 & 5 \\
+        - & 5 & 5 & 5 & 5 & n/a
+    \end{array}$
+\end{minipage}
+```
+![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the values 1, 2 or 5.](images/03-msa-06-edit-distance.pdf-1.png)
+
+Complete edit-cost = 1 + 1 + 2 + 1 + 5 = 10
+
+\medskip
+
+Using edit costs we can describe better the relationships between sequences: for example it's less common for an  *A*  to change to a *G* in the above than for an *A* to change to a *T*, in turn less common than for an *A* to remain as an *A*.
+--
+
+Also note we have introduced a bigger cost for aligning any nucleotide with a gap, reflecting our believe that insertion/deletion events are less common than substitutions.
+---
+# What price a gap?
+
+There are two basic methods for assigning a cost *c* to a gap of length *g* in a sequence.
+
+```{=tex}
+\begin{enumerate}
+    \item  Linear cost: $$c = -dg$$ \\
+            where $$d$$ is the _gap open penalty_;
+
+    \item  Affine cost: $$c = -d - (g-1)e$$
+            where $$e$$ is the _gap extension penalty_.
+\end{enumerate}
+```
+Typical values are $$d = 10, e = 0.1$$.
+
+The affine gap cost method is the most complex method we can use in order to solve the alignment of two sequences quickly.
+
+More complex models prohibit the use of dynamic programming to solve the alignment (and must use \underline{heuristics}).
+---
+# Numbers of alignments
+
+
+```{=tex}
+\begin{minipage}[t]{0.45\textwidth}
+For two sequences of length $$x$$ and $$y$$, there are
+$$\frac{(x+y)!}{x!\ y!}$$
+possible alignments.
+
+\medskip
+
+For three sequences, of length $$x$$, $$y$$ and $$z$$ say, there are
+$$\frac{(x+y+z)!}{x!\ y!\ z!}$$
+alignments.
+    
+\end{minipage}\wad
+```
+\\begin{minipage}\[t\]{0.45\textwidth} For $n$ sequences of length 10, this increases rapidly: \\begin{center}
+
+```{=tex}
+\begin{tabular}{|c|c|}
+                \hline
+                $$n$$ & \hash alignments  \\
+                \hline
+                2 & $$184756$$  \\
+                3 & $$5.55 \times 10^{12}$$ \\
+                4 & $$4.71 \times 10^{21}$$ \\
+                5 & $$4.83 \times 10^{31}$$ \\
+                6 & $$3.64 \times 10^{42}$$ \\
+                7 & $$1.45 \times 10^{54}$$ \\
+                8 & $$2.38 \times 10^{66}$$ \\
+                9 & $$4.94 \times 10^{85}$$ \\
+                10 & $#2.35 \times 10^{92}$$ \\
+                \hline
+                 
+            \end{tabular}
+```
+\\end{center\\end{minipage} \medskip
+
+In general it is not possible - even with really fast computers - to guarantee optimal multiple alignments, even with simple costing schemes.
+---
+# Dynamic Programming
+
+Dynamic Programming (DP) is a common method to solve many types of problems, including pairwise sequence alignment.
+
+-   Solves local problems optimally
+-   Amalgamates these into globally optimal complete solutions
+-   is "Fast"
+---
+# DP overview
+
+Dynamic Programming solves problems by breaking them down recursively into (slightly) smaller problems.
+
+![Schematic representation of dynamic programming showing how the process solves a problem by breaking it down and finding optimal partial solutions that can be used to infer the full solution.](images/DPOverviewDiagram.png)
+
+In terms of sequence alignment, this comes down to basing alignment of two sequences up to positions *i* and *j* in terms of the best alignments yet found for the two sequences, up to positions $$i-1,j-10$$, $$i,j-1$$, and $$i-1,j$$.
+---
+#DP overview (cont.)
+![Schematic representation of how alignment of two DNA sequences progresses. Three scenarios are shown: i) both sequences are identical ii) the sequences differ and a gap is introduced in the top sequence ii) the sequences differ and a gap is introduced in the bottom sequence.](images/03-msa-10-advancing-seqs.pdf-1.png)
+
+---
+# Dynamic Programming alignment
+
+1. Array two sequences along the top and left sides of a cost matrix.
+2. Fill in the cells of the matrix from top-left to bottom right.
+    At each stage find the minimum cost sub-alignment and add to it:
+  2.1  Find the maximum score from the previous cells including 
+        gap costs;
+  2.2 Put the result into this new cell;
+  2.3  _Note_ which cell we chose with a pointer or
+        reference.
+
+
+
+```{=tex}
+\begin{columns}
+    \column[c]{0.3\linewidth}
+    \includegraphics[scale=0.5]{DPcell.pdf} \\
+    \column[c]{0.576\linewidth}\raggedright
+    We add the cost of the best solution to the previous cells (above, 
+    to the left and above-left) to the best possible score for this
+    cell.
+\end{columns}
+```
+---
+# Alignment example
+
+We will align two amino acid sequences next:
+
+Input sequences:
+
+```{=tex}
+\begin{tabular}{cl}
+        $$x$$ & \texttt{HEAGAWGHEE}  \\
+        $$y$$ & \texttt{PAWHEAE}  \\ 
+\end{tabular}
+```
+---
+# Filling in the cost matrix}
+
+Edit costs for these two sequences:
+
+````{=tex}
+\begin{center}
+    \begin{tabular}{c|cccccccccc}
+             & H & E & A & G & A & W & G & H & E & E  \\
+        \hline
+            P & -2 & -1 & -1 & -2 & -1 & -4 & -2 & -2 & -1 & -1  \\
+            A & -2 & -1 & 5 & 0 & 5 & -3 & 0 & -2 & -1 & -1  \\
+            W & -3 & -3 & -3 & -3 & -3 & 15 & -3 & -3 & -3 & -3  \\
+            H & 10 & 0 & -2 & -2 & -2 & -3 & -2 & 10 & 0 & 0  \\
+            E & 0 & 6 & -1 & -3 & -1 & -3 & -3 & 0 & 6 & 6  \\
+            A & -2 & -1 & 5 & 0 & 5 & -3 & 0 & -2 & -1 & -1  \\
+            E & 0 & -6 & -1 & -3 & -1 & -3 & -3 & 0 & 6 & 6  \\ 
+    \end{tabular}
+\end{center}
+```
+---
+# Dynamic Programming: fill in
+
+![Cost matrix of possible alignments of the amino acid sequences HEAGAWGHEE on the x-axis and PAWHEAE on the y axis. Arrows indicate the direction taken to reach each score.](images/03-msa-08-a-DP-forward.pdf-1.png)
+---
+
+# Dynamic Programming: backtrack
+
+![Cost matrix of possible alignments of the amino acid sequences HEAGAWGHEE on the x-axis and PAWHEAE on the y axis. The optimal alignment is indicated in red. Arrows indicate the direction taken to reach each score.](images/03-msa-08-b-DP-backtrack.pdf-1.png)
+
+---
+#  Alignments are paths in the table
+
+![Cost matrix of possible alignments of the amino acid sequences HEAGAWGHEE on the x-axis and PAWHEAE on the y axis. Arrows indicate the direction taken to reach this alignment.](images/03-msa-09-alignments-are-paths.pdf-1.png)
+---
+# Conclusion of simple alignment
+
+Aligned sequences:
+
+
+```{=tex}
+\begin{tabular}{c|ccccccccccc}
+        $$s_{1}$$ & \texttt{H} & \texttt{E} & \texttt{A} & \texttt{G} &
+        \texttt{A} & \texttt{W} & \texttt{G} & \texttt{H} & \texttt{E} &
+        \texttt{-} & \texttt{E}  \\
+        $$s_{2}$$ & \texttt{-} & \texttt{-} & \texttt{P} & \texttt{-} &
+        \texttt{A} & \texttt{W} & \texttt{-} & \texttt{H} & \texttt{E} &
+        \texttt{A} & \texttt{E}  \\
+        \hline
+         & -5 & -5 & -1 & -5 & +5 & +15 & -5 & +10 & +6 & -5 & +6
+\end{tabular}
+```
+
+Total cost = 16
+---
+# Generalising this approach
+
+Without too much effort it is possible to generalise this approach:
+
+**Needleman-Wunsch** is used for _local_ alignment;
+
+**Smith-Waterman** is used for _global_ alignment;
+
+**longest match** can be found by setting high match costs and large negative mis-match and gap costs;
+
+**BLAST** uses this system once good patching pairs have been found;
+
+**Affine gap scores** as mentioned, accounting for gap opening and gap extension penalties to differ.
+
+---
+ Properties of DP Pairwise Alignment
+
+-   Pairwise Sequence Alignment takes an amount of *time* that is proportional to the number of cells in the table, which is roughly the product of the lengths of the two sequences.
+
+    That means it is \bigO{nm} if the lengths of the sequences are $$n$$ and $$m$$; usually as these are about the same we can write \bigO{n^{2}}: it's *quadratic in sequence length*.
+
+-   The amount of space required is also quadratic in $$n$$.
+    There is a linear-space version of the DP method (which is rarely used as it takes longer).
+
+-   This solution is globally optimal. It will always produce an optimal alignment, though there may be more than one.
+
+-   With more sequences, the size of the table increase: for $$k$$ sequences the algorithm is \bigO{n^{k}}: not practical.
+
+# Multiple Sequence Alignment: Aligning groups of sequences using heuristics
+
+.center[*Aligning multiple sequences*]
+---
+#Aligning multiple sequences
+We cannot check all possible alignments (there are simply too many), so we must use make a compromise.
+
+We will use pairwise alignment (which is easy) and build up a multiple sequence alignment from pairs of sequences.
+
+These *heuristic* methods are used in Clustal, GCG and others.
+---
+# Progressive Alignment
+
+The process is quite simple:
+
+1.  Align all pairs of sequences using DP (dynamic programming).
+2.  Create a distance matrix based on the alignments.
+3.  Form a *guide tree* from the distance matrix. This is not the same as a phylogenetic tree, nor should it be interpreted as one!
+4.  Progressively align the pairs of sequences with DP, creating summary (consensus) sequences as we go.
+---
+# MAFFT, Muscle, T-COFFEE, k-align
+
+- Clustal is not that great to be honest
+- Other very good automatic alignment methods exist, such as Muscle, T-Coffee, k-align, di-align.
+- My current favourites are Muscle and MAFFT.
+
+---
+# MAFFT
+
+     
+"MAFFT offers various multiple alignment strategies. They are classified into three types, (a) the progressive method, (b) the iterative refinement method with the WSP score, and (c) the iterative refinement method using both the WSP and consistency scores. In general, there is a tradeoff between speed and accuracy. The order of speed is a > b > c, whereas the order of accuracy is a < b < c. The results of benchmarks can be seen here. The following are the detailed procedures for the major options of MAFFT."
+
+source: MAFFT is available at https://mafft.cbrc.jp/; first paper 10.1093/nar/gkf436
+
+---
+# MAFFT algorithms overview
+
+![Flow chart giving an overview of algorithms used by the program MAFFT to convert distance matrices into alignments. The flow chart is described in the video recording at 37:52.](images/03-msa-11-MAFFT-1.png)
+---
+
+# *Anolis* example
+
+![Screenshot from the program SeeView showing a multiple sequence alignment of Anolis species. DNA sequences are aligned vertically and nucleotides are colour coded. Aligned sites can be identified by solid lines of colour that run from top to bottom of the image. Full description included in the video recording at 40:06.](images/AnolisPartialAlignment2.png)
+
+Around site 982-990 there is a 2 bp gap in all sequences.
+
+---
+# *Anolis* example
+
+![Screenshot from the program SeeView showing a multiple sequence alignment of Anolis species. DNA sequences are aligned vertically and nucleotides are colour coded. Aligned sites can be identified by solid lines of colour that run from top to bottom of the image. Full description included in the video recording at 40:06.](images/AnolisPartialAlignmentGapsAligned.png)
+
+Here I have lined up these gaps: more substitutions? but makes sense.
+---
+
+# *Anolis* example
+
+![Screenshot from the program SeaView showing a multiple sequence alignment of Anolis species. DNA sequences are aligned vertically and nucleotides are colour coded. Aligned sites can be identified by solid lines of colour that run from top to bottom of the image. Full description included in the video recording at 40:06.](images/AnolisPartialAlignmentGapsAlignedTidied.png)
+
+
+We can remove the gap-only sites now.  There's more to do!
+
+---
+# What's Next?
+
+Once your sequences are properly aligned, they can be used for _phylogenetic analysis_.
+
+# Thank you!
+
+.center[*Next: building trees from distances!*]
