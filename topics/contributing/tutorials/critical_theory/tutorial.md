@@ -19,6 +19,15 @@ objectives:
 contributions:
   authorship:
     - gallardoalba
+    editing:
+    - hexylena
+requirements:
+  - type: "internal"
+    topic_name: contributing
+    tutorials:
+      - learning-principles
+abbreviations:
+  OECD: Organisation for Economic Co-operation and Development
 ---
 
 > <warning-title>Recommended starting point</warning-title>
@@ -43,27 +52,24 @@ This training aspires to be a introduction on the **Critical Learning Theory** a
 
 > *Critical thinking aims to define the irrational character of the established rationality.*
 >
-> — Herbert Marcuse, One-dimensional man: Studies in the ideology of advanced industrial society. 
->
-{: .quote}
+{: .quote author="Herbert Marcuse" cite="One-dimensional man: Studies in the ideology of advanced industrial society"}
 
-Education is the result of multiple contextual variables that have an effect on behaviour, ideology and professional development, so it could be said that human beings, as social beings, are educated and transformed by their context ({% cite Careaga2007 %}). In this line, John Dewey, a distinguished American philosopher and advocate for educational reform, beautifully articulated that **the education proposed by society has its roots in society itself** ({% cite Perez2018 %}). Thus, in order to contextualise current educational practices, we can start by analyzing the current stage of society, the so-called **information society**.
+According **Critical Theory**, education is the result of multiple contextual variables that have an effect on behaviour, ideology and professional development; so it could be said that human beings, as social beings, are educated and transformed by their context ({% cite Careaga2007 %}). In this line, John Dewey, a distinguished American philosopher and advocate for educational reform, beautifully articulated that **the education proposed by society has its roots in society itself** ({% cite Perez2018 %}). Thus, in order to contextualise current educational practices, we can start by analyzing the current stage of society, the so-called **information society**.
 
 The **information society** can be characterised by the interrelationships that link individuals through access to and provision of information for the purpose of generating knowledge. According Manuel Esteve, a renowned Spanish pedagogue with great influence on official teacher training, the **information society** needs to increase the number of citizens with high levels of scientific and technical training capable of maintaining the current technological development ({% cite Esteve2009 %}). But is this true? 
 
-Contrary to Esteve's assertion, the argentinian sociologists Sara Morgenstern and Lucia Finkel indicate that the **information society** can function with very few, highly qualified and highly paid employees who constitute the decisive core of the companies' activity; the remaining skills are outsourced to other companies, leaving at the bottom a mass of precarious workers whose required competences are often embodied in demands for punctuality, organisational skills, non-conflict and submission to authority ({% cite Morgenstern2005 %}). Their assertion seems to be confirmed by current technological development ({% cite Georgeva2024 %}).
+Contrary to Esteve's assertion, the argentinian sociologists Sara Morgenstern and Lucia Finkel indicate that the **information society** can function with very few, highly qualified employees who constitute the decisive core of the companies' activity; the remaining skills are outsourced to a mass of precarious workers whose required competences are often embodied in demands for punctuality, organisational skills, non-conflict and submission to authority ({% cite Morgenstern2005 %}). Their assertion seems to be confirmed by current technological development ({% cite Georgeva2024 %}).
 
 > *The findings are striking: almost 40 percent of global employment is exposed to AI. Historically, automation and information technology have tended to affect routine tasks, but one of the things that sets AI apart is its ability to impact high-skilled jobs.*
 >
-> — Kristalina Georgieva, managing director of the International Monetary Fund.
->
-{: .quote}
+{: .quote author="Kristalina Georgieva, managing director of the International Monetary Fund"}
+
 
 ## Educative systems
 
 According the **Critical Theory**, educative systems are agents of ideological control linked to the principles and processes that govern the workplace; the dominant culture in educative systems is characterised by selectively ordering and legitimising privileged forms of language, social relations, life experiences and modes of reasoning ({% cite Marcuse1964 %}).
 
-The philospher Pedro García Olivo affirms that the criterion governing Western educative systems, in line with OECD recommendations, is none other than that of favouring the adaptation of students to the requirements of the established productive and political apparatus, which requires their psychological and cultural homogenisation ({% cite Olivo2005 %}).
+The philospher Pedro García Olivo affirms that the criterion governing Western educative systems, in line with {OECD} recommendations, is none other than that of favouring the adaptation of students to the requirements of the established productive and political apparatus, which requires their psychological and cultural homogenisation ({% cite Olivo2005 %}).
 
 In the face of the conservative claim that educative systems transmit objective knowledge, **Critical Learning Theory** concives knowledge as a particular representation of the dominant culture that structure the hegemonic cosmovision throught a selective process of emphasis and exclusions ({% cite Giroux1988 %}).
 
@@ -71,8 +77,7 @@ In the face of the conservative claim that educative systems transmit objective 
 
 > *Questioning is an exercise in dismantling those certainties that are installed as layers of truths imposing the tyranny of the obvious.*
 >
-> — Dario Sztajnzrajbe, ¿Para qué sirve la filosofía?
-{: .quote}
+{: .quote author="Dario Sztajnzrajbe" cite="¿Para qué sirve la filosofía?"}
 
 Before going deeper, it is inportant to accurately define **critical thinking**, since it is usually concived as a nebulose concept whose applications appears to be limitated to specific situations.
 
@@ -102,23 +107,23 @@ From the assumption of this conception of critical thinking a new question arise
 
 > <question-title>Critical thinking quiz</question-title>
 >
-> 1. **How does critical thinking align with the principles of both Critical Theory and Critical Learning Theory?**
+> 1. How does critical thinking align with the principles of both Critical Theory and Critical Learning Theory?
 >    a. By avoiding critical examination of societal issues.
 >    b. By promoting conformity to existing structures.
 >    c. By fostering a reflective approach to learning and encouraging critical analysis.
 >    d. By discouraging diverse perspectives.
 > 
-> 2. **When dealing with diverse cultural perspectives, why might the positivist conception of critical thinking face limitations?** <br>
-> &nbsp; a. It fails to acknowledge cultural biases. <br>
-> &nbsp; b. It prioritizes subjective experiences. <br>
-> &nbsp; c. Cultural perspectives are irrelevant to objective analysis. <br>
-> &nbsp; d. It encourages emotional responses.
+> 2. When dealing with diverse cultural perspectives, why might the positivist conception of critical thinking face limitations?
+>    a. It fails to acknowledge cultural biases.
+>    b. It prioritizes subjective experiences.
+>    c. Cultural perspectives are irrelevant to objective analysis.
+>    d. It encourages emotional responses.
 >
-> 3. **In the Frankfurt School's view, how does critical thinking contribute to the development of individuals within an educational context?** <br>
-> &nbsp; a. By discouraging any form of dissent. <br>
-> &nbsp; b. By promoting uncritical acceptance of information. <br>
-> &nbsp; c. By fostering independent thought. <br>
-> &nbsp; d. By reinforcing conformity to existing power structures.
+> 3. In the Frankfurt School's view, how does critical thinking contribute to the development of individuals within an educational context?
+>    a. By discouraging any form of dissent.
+>    b. By promoting uncritical acceptance of information.
+>    c. By fostering independent thought.
+>    d. By reinforcing conformity to existing power structures.
 >
 > > <solution-title></solution-title>
 > > 1. By fostering a reflective approach to learning and encouraging critical analysis.
@@ -139,20 +144,20 @@ According the **Critical Learning Theory**, what students learn from the formall
 
 > <question-title>Hidden Curriculum quiz</question-title>
 >
-> 1. **What is the hidden curriculum?** <br>
-> &nbsp; a. The formal curriculum taught in education systems. <br>
-> &nbsp; b. Implicit values, behaviors, and expectations transmitted through the educational or social system. <br>
-> &nbsp; c. Extracurricular activities.
+> 1. What is the hidden curriculum?
+>    a. The formal curriculum taught in education systems.
+>    b. Implicit values, behaviors, and expectations transmitted through the educational or social system.
+>    c. Extracurricular activities.
 >
-> 2. **How is the hidden curriculum transmitted?** <br>
-> &nbsp; a. Through explicit teaching and textbooks. <br>
-> &nbsp; b. Through unspoken or implicit messages in the educational or social environment. <br>
-> &nbsp; c. Through standardized tests.
+> 2. How is the hidden curriculum transmitted?
+>    a. Through explicit teaching and textbooks.
+>    b. Through unspoken or implicit messages in the educational or social environment.
+>    c. Through standardized tests.
 >
-> 3. **How does the hidden curriculum influence individuals?** <br>
-> &nbsp; a. It has no impact on individuals' beliefs and attitudes. <br>
-> &nbsp; b. It shapes subconscious beliefs and attitudes through implicit messages.<br>
-> &nbsp; c. It directly dictates conscious decision-making.
+> 3. How does the hidden curriculum influence individuals?
+>    a. It has no impact on individuals' beliefs and attitudes.
+>    b. It shapes subconscious beliefs and attitudes through implicit messages.
+>    c. It directly dictates conscious decision-making.
 >
 > > <solution-title></solution-title>
 > > 1. Implicit values, behaviors, and expectations transmitted through the educational or social system.
@@ -169,20 +174,23 @@ According Giroux, the structure, organisation, and content of dominant curricula
 
 ## System of pedagogical styles of classroom control
 
-The dominant pedagogical style of classroom control, the **expository discursive mode**, represent other of the manifestations of the hidden curriculum. In this discursive mode the sender acts repeatedly on the receiver but gives him/her a passive role ({% cite Castejon2004 %}). In this case, the hidden curriculum crystallizes as imposition of meanings, which, according to Giroux is intimately linked to its aspiration to depoliticisation ({% cite Giroux1988 %}). Faced with this, we
-could ask ourselves: does this aspiration impact in any way on the objectives of fostering critical thinking?
+The dominant pedagogical style of classroom control, the **expository discursive mode**, represent other of the manifestations of the hidden curriculum. In this discursive mode the sender acts repeatedly on the receiver but gives him/her a passive role ({% cite Castejon2004 %}). In this case, the hidden curriculum crystallizes as imposition of meanings, which, according to Giroux is intimately linked to its aspiration to depoliticisation ({% cite Giroux1988 %}). Faced with this, we could ask ourselves: does this aspiration impact in any way on the objectives of fostering critical thinking?
 
 According Marcuse, **the education system is political, so aspiring to its politicisation does not imply an inference in its functions** ({% cite Marcuse1964 %}). The attempt to appropriate concepts that are spontaneously experienced as apolitical would represent a clear attack on critical thinking, derived from the struggle for ideological-political hegemony ({% cite Zizek2009 %}). In words of Giroux, *when students have little room left to generate their own meanings, learning degenerates into a euphemism for a strategy of control* ({% cite Giroux1988 %}).
 
+> <comment-title>Biology and ideology</comment-title>
+>
+> According to Richard Lewontin and Richard Levins, theories of evolution underwent a shift in the course of the 20th century from an emphasis on directionality to a focus on the state of equilibrium, which can only be understood as ideological in origin.
+>
+> > *Just as the ideas of change and movement were the intellectual foundations of the bourgeois revolution, for the legitimisation of the collapse of the old class relations, the consolidation of that revolution in the latter part of the 19th century and in the 20th century has required a different view of the world, in line with the stabilisation of society. The idea of change had to be repressed in science as it was in society. The result has been the emphasis in modern evolutionary theories on dynamic equilibrium.*
+> >
+> {: .quote author="Richard Lewontin and Richard Levins" cite="The dialectical biologist"}
+>
+> Similarly, these authors consider that the description of evolution as producing order is also deeply ideological.  In this sense, evolution is neither a fact nor a theory, but a way of organising knowledge about the world.
+>
+{: .comment}
+
 Darío Sztajnszrajber, a prominent argentine philosopher, essayist and teacher, considers that if there were really an interest in fostering critical thinking, the discursive mode that should dominate in the classroom should be the interrogative one. According him, *questioning is a way of thinking, and that is why thinking is not only deriving conclusions, but often consists of the opposite: starting from the accepted conclusions of a community and turning them upside down* ({% cite Sztajnszrajber2013 %}). 
-
-## Evaluation system
-
-It is in the evaluation system that the nature of the hidden curriculum is most clearly revealed. The potential effect of assessment is clearly perceived when it is recognised that **both academic and non-academic aspects are taught and assessed**, the latter including institutional adaptation and specific personal qualities ({% cite Giroux1988 %}). 
-
-An illustrative example is provided by the research of Samuel Bowles and Herbert Gintis, who pointed out that students who are best suited to the social ordering of the education system also had significantly below average scores on measures of mental creativity and flexibility ({% cite Bowles2011 %}).
-
-**Group evaluation** can be considered as an adequate pedagogical instrument for overcoming the drawbacks associated to the evaluation system, providing students with social contexts that emphasise social responsibility and group solidarity. According Giroux, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence ({% cite Giroux1988 %}).
 
 ## Technological system
 
@@ -202,17 +210,22 @@ The technological system is a complex arrangement of interconnected components, 
 
 Anders challenged the assumption that technology might solely enhance educational processes, encouraging to transcend the temptation to view technology as a complete replacement for traditional, face-to-face engagement ({% cite Anders1980 %}, {% cite Anders2002 %}). According to him, the most pernicious element of technological devices is their normative power, and particulally the inextricable link between technology and **the principle of maximum performance** ({% cite Bischof2014 %}). From this insight we could ask ourselves, how does this impact on education?
 
-The principle of maximum performance extends to educational technologies, where software and applications are expected to deliver optimal results in terms of student engagement, academic achievement, and preparation for a technologically advanced workforce. This normative influence can inadvertently shape the educational experience, **emphasizing quantitative measures of success over qualitative aspects of learning, such as critical thinking, creativity, and collaboration** ({% cite Anders1980 %}, {% cite Anders2002 %}).
+The principle of maximum performance extends to educational technologies, where software and applications are expected to deliver optimal results in terms of student engagement, academic achievement, and preparation for a technologically advanced workforce. This normative influence can inadvertently shape the educational experience, **emphasizing quantitative measures of success over qualitative aspects of learning, such as critical thinking, creativity, and collaboration** ({% cite Anders1980 %}, {% cite Anders2002 %}). The effects of maximum performance permeate to the evaluation system, the last of the communication systems to be analysed.
+
+## Evaluation system
+
+It is in the evaluation system that the nature of the hidden curriculum is most clearly revealed. The potential effect of assessment is clearly perceived when it is recognised that **both academic and non-academic aspects are taught and assessed**, the latter including institutional adaptation and specific personal qualities ({% cite Giroux1988 %}). 
+
+An illustrative example is provided by the research of Samuel Bowles and Herbert Gintis, who pointed out that students who are best suited to the social ordering of the education system also had significantly below average scores on measures of mental creativity and flexibility ({% cite Bowles2011 %}).
+
+**Group evaluation** can be considered as an adequate pedagogical instrument for overcoming the drawbacks associated to the evaluation system, providing students with social contexts that emphasise social responsibility and group solidarity. According Giroux, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence ({% cite Giroux1988 %}).
 
 
 # Conclusion
 
 > *[...] to think is, whether you want or not, to exaggerate. If you prefer not to exaggerate, you must remain silent; or, rather, you must paralyse your intellect and find some way of becoming an idiot.*
 >
-> — José Ortega y Gasset, The revolt of the masses.
-{: .quote}
-
-The following conclusions are drawn from the training content.
+{: .quote author="José Ortega y Gasset" cite="The revolt of the masses"}
 
 The underlying message assimilated under the practices of the dominant hidden curriculum, characterized by a unidirectional vision of the teaching-learning process, points less to educative system that help students think critically about the world they live in, than to institutions that promote the internalization of values that emphasise respect for authority, punctuality, cleanliness, docility and conformity.
 
