@@ -270,7 +270,8 @@ In order to include more than one parameter by which to filter, use the "Insert 
 >
 > Run{% tool [FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat RDS` (output of ** Seurat Read10x** {% icon tool %})
-> - *"Name of Parameter to filter on"*: `nCount_RNA`
+> - In *"Subsets used to filter cells"*:
+>    - *"Name of Parameter to filter on"*: `nCount_RNA`
 > - *"Min value"*: `500.0`
 > - *"Max value"*: `10000`
 >
