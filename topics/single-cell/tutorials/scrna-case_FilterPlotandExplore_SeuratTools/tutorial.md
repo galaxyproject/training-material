@@ -377,7 +377,7 @@ Transcript changes are not usually singular--which is to say, genes function and
 We can calculate the first handful of principal components in our data to drastically reduce the number of dimensions:
 
 ><tip-title>Running Computationally Demanding Steps on Variable Features </tip-title>
->You'll notice that the RunPCA() function is run using the variable features from the previous step. This signficantly decreases the number of genes, and their expression changes, that must be grouped into principal components by this step.
+>You'll notice that the **Seurat RunPCA** tool is run using the variable features from the previous step. This signficantly decreases the number of genes, and their expression changes, that must be grouped into principal components by this step.
 {: .tip}
 
 > <hands-on-title>Run PCA </hands-on-title>
