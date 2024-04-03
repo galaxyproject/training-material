@@ -140,7 +140,7 @@ From the assumption of this conception of critical thinking a new question arise
 
 Unlike the official curriculum, with its explicitly stated cognitive and affective objectives, **the hidden curriculum relies on those organisational aspects, such as the communicative systems, whose effects on the learning process are generally not consciously perceived by students** ({% cite Olivo2005 %}). On the light of this definition, a new question emerges: which impact has the hidden curriculum on the learning process?
 
-According the **Critical Learning Theory**, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in communicative systems ({% cite Giroux1988 %}, {% cite Anders1980 %}). In this training, we will focus in four of them: the curricular system, the system of pedagogical styles of classroom control, the evaluative system, and the technological system.
+According the **Critical Learning Theory**, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in communicative systems ({% cite Giroux1988 %}, {% cite Anders1980 %}). In this training, we will focus in four of them: the curricular system, the system of pedagogical styles of classroom control, the technological system and the evaluative system.
 
 > <question-title>Hidden Curriculum quiz</question-title>
 >
