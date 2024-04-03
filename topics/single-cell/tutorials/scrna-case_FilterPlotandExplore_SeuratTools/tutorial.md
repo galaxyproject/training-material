@@ -399,7 +399,7 @@ This tool will output you with four new datasets into your history:
 ><tip-title>Visualizing PCA</tip-title>
 >In order to use the PCA information which was just calculated, we must visualize it. The currently available tools unfortunately do not [YET] carry the capacity to do so, but I will provide the plot so that we may make an informed decision together: 
 >
->![Elbow Plot](../../images/scrna-case_FPE_SeuratTools/ElbowPlot.png "Elbow Plot of Principal Components (PCs) and the standard deviation of variability they account for")
+>![Elbow Plot of Principal Components (PCs) and the standard deviation of variability they account for](../../images/scrna-case_FPE_SeuratTools/ElbowPlot.png "Elbow Plot")
 >
 >We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 15 PCs to be conservative.
 >You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs.
@@ -656,7 +656,7 @@ Are there any differences in genotype? Or in biological terms, is there an impac
 > - *"Fill by"*: `ident`
 {: .hands_on}
 
-![DimPlot colored by labelled celltype split by genotype](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbyGenotype.png "DimPlot colored by assigned clusters split by genotype")
+![VlnPlot colored by genotype and split by cluster](../../images/scrna-case_FPE_SeuratTools/VlnPlot_GroupedbyCluster_SplitbyGenotype.png.png "Violin Plot colored by assigned clusters & split by genotype")
 
 We can see that there seems to be a decrease in cellcounts across the celltypes in the het mutant... INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
 
@@ -670,11 +670,8 @@ First thing's first, is there a batch effect?
 > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat RDS` (output of **Seurat UMAP** {% icon tool %})
 > - *"Plot_type_selector"*: `DimPlot`
-> - *"Features"*: `nCount_RNA`
 > - *"Group by"*: `RNA_nn_res.0.5`
 > - *"Split by"*: `Sample.Characteristic.individual.`
-> - *"Log"*: `Yes`
-> - *"Fill by"*: `feature`
 {: .hands_on}
 
 ![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-case_FPE_SeuratTools//DimPlot_SplitbyIndividual.png "DimPlot colored by assigned clusters split by individual/batch")
@@ -687,12 +684,9 @@ Additionally, we will also look at the confounding effect of sex:
 >
 > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat RDS` (output of **Seurat UMAP** {% icon tool %})
-> - *"Plot_type_selector"*: `VlnPlot`
-> - *"Features"*: `nCount_RNA`
+> - *"Plot_type_selector"*: `DimPlot`
 > - *"Group by"*: `RNA_nn_res.0.5`
 > - *"Split by"*: `Sample.Characteristic.sex.`
-> - *"Log"*: `Yes`
-> - *"Fill by"*: `ident`
 {: .hands_on}
 
 ![DimPlot colored by Sex, Individual, and Genotype](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbySex.png "DimPlot colored by assigned clusters and split by Sex")
