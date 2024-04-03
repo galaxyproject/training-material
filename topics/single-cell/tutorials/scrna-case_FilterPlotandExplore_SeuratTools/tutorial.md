@@ -519,7 +519,7 @@ To do so, we'll run Seurat's FindMarkers function, which will compare each ident
 
 > <hands-on-title>Find Markers </hands-on-title>
 >
-> Run{% tool [FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_markers/seurat_find_markers/4.0.4+galaxy0) %} with the following parameters:
+> Run{% tool [Seurat FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_markers/seurat_find_markers/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 {: .hands_on}
 
