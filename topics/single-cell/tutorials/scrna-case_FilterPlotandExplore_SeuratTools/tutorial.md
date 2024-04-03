@@ -716,7 +716,7 @@ There doesn't visually appear to be any differences in sequencing depth across t
 > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
-> - *"Feature"*: `nCount_RNA`
+> - *"Features"*: `nCount_RNA`
 > - *"group.by"*: `Sample.Characteristic.individual.`
 > - *"split.by"*: `Sample.Characteristic.individual.`
 {: .hands_on}
