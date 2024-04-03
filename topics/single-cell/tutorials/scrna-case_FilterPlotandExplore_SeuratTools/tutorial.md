@@ -656,7 +656,7 @@ Are there any differences in genotype? Or in biological terms, is there an impac
 > - *"Fill by"*: `ident`
 {: .hands_on}
 
-![VlnPlot colored by genotype and split by cluster](../../images/scrna-case_FPE_SeuratTools/VlnPlot_GroupedbyCluster_SplitbyGenotype.png.png "Violin Plot colored by assigned clusters & split by genotype")
+![VlnPlot colored by genotype and split by cluster](../../images/scrna-case_FPE_SeuratTools/VlnPlot_GroupedbyCluster_SplitbyGenotype.png "Violin Plot colored by assigned clusters & split by genotype")
 
 We can see that there seems to be a decrease in cellcounts across the celltypes in the het mutant... INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
 
@@ -674,7 +674,7 @@ First thing's first, is there a batch effect?
 > - *"Split by"*: `Sample.Characteristic.individual.`
 {: .hands_on}
 
-![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-case_FPE_SeuratTools/DimPlotColorbyClusters_SplitbyIndividual.png.png "DimPlot colored by assigned clusters split by individual/batch")
+![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-case_FPE_SeuratTools/DimPlotColorbyClusters_SplitbyIndividual.png "DimPlot colored by assigned clusters split by individual/batch")
 
 While some differences across batch are expected and nothing to be concerned about, the immature T-cells looks to be mainly comprised of Individuals 3 and 4. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction.
 
