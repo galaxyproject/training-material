@@ -674,7 +674,7 @@ First thing's first, is there a batch effect?
 > - *"Split by"*: `Sample.Characteristic.individual.`
 {: .hands_on}
 
-![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-case_FPE_SeuratTools//DimPlot_SplitbyIndividual.png "DimPlot colored by assigned clusters split by individual/batch")
+![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-case_FPE_SeuratTools/DimPlotColorbyClusters_SplitbyIndividual.png.png "DimPlot colored by assigned clusters split by individual/batch")
 
 While some differences across batch are expected and nothing to be concerned about, the immature T-cells looks to be mainly comprised of Individuals 3 and 4. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction.
 
@@ -689,7 +689,7 @@ Additionally, we will also look at the confounding effect of sex:
 > - *"Split by"*: `Sample.Characteristic.sex.`
 {: .hands_on}
 
-![DimPlot colored by Sex, Individual, and Genotype](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbySex.png "DimPlot colored by assigned clusters and split by Sex")
+![DimPlot colored by Sex](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbySex.png "DimPlot colored by assigned clusters and split by Sex")
 
 We note that the one female sample - unfortunately one of merely three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
 
@@ -713,11 +713,10 @@ There doesn't visually appear to be any differences in sequencing depth across t
 > - *"RDS file"*: `Seurat RDS` (output of **Seurat UMAP** {% icon tool %})
 > - *"Plot_type_selector"*: `FeaturePlot`
 > - *"Features"*: `nCount_RNA`
-> - *"group.by"*: `Sample.Characteristic.individual.`
 > - *"split.by"*: `Sample.Characteristic.individual.`
 {: .hands_on}
 
-![FeaturePlot colored by counts](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbyIndividual.png "FeaturePlot colored by counts & split by individual")
+![FeaturePlot colored by counts & Split by Individual](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Counts_SplitbyIndividual.png "FeaturePlot colored by counts & split by individual")
 
 There we go! This might explain the dramatic shift in early to middle T-Cell between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely accounts for the discernment between clusters 0, 4, 5, 6, and 7).
 
