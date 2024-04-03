@@ -382,7 +382,7 @@ We can calculate the first handful of principal components in our data to drasti
 
 > <hands-on-title>Run PCA </hands-on-title>
 >
-> Run{% tool [RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_pca/seurat_run_pca/4.0.4+galaxy0) %} with the following parameters:
+> Run{% tool [Seurat RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_pca/seurat_run_pca/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat ScaleData on data 14 and data 13: Seurat RDS`
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 > - *"Genes to scale"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
