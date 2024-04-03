@@ -457,7 +457,7 @@ Now that we have made note within our object of which cells cluster together, we
 
 > <hands-on-title>Run UMAP </hands-on-title>
 >
-> Run{% tool [RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0) %} with the following parameters:
+> Run{% tool [Seurat RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat FindClusters on data 20: Seurat RDS`
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 > - *"Dims"*: `1:15`
