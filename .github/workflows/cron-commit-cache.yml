@@ -47,7 +47,7 @@ jobs:
             git fetch --unshallow
           fi
 
-          ruby bin/commit-cache-update.rb >> $GITHUB_OUTPUT
+          bundle exec ruby bin/commit-cache-update.rb >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
