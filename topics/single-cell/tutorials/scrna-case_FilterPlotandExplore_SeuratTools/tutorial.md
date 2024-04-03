@@ -20,7 +20,7 @@ objectives:
 
 time_estimation: 3H
 
-suggested:
+requirements:
 -
     type: "internal"
     topic_name: single-cell
@@ -36,7 +36,9 @@ contributions:
   authorship:
     - Camila-goclowski
     - pcm32
-
+  editing:
+    - pavanvidem
+    - hexylena
 ---
 
 
