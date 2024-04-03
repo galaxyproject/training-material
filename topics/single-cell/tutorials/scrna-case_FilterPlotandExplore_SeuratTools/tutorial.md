@@ -20,13 +20,13 @@ objectives:
 
 time_estimation: 3H
 
-requirements:
+suggested:
 -
     type: "internal"
     topic_name: single-cell
     tutorials:
-        - scrna-case_alevin-combine-datasets
-        - scrna-case_basic-pipeline
+        - scrna-intro
+        - scrna-preprocessing-tenx
 
 tags:
 - 10x
@@ -431,7 +431,7 @@ Now we can use the neighborhood graph to identify clusters of cells whose transc
 > Run{% tool [Seurat FindClusters](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat RDS` (output of **Seurat FindNeighbors** {% icon tool %})
 > - In *"Advanced Options "*
-> - *"Resolution"*: `0.5`
+>   - *"Resolution"*: `0.5`
 {: .hands_on}
 
 This tool will output two new datasets: as usual, a new Seurat object which includes a metadata column denoting which cluster each cell was assigned to, and a csv file of the same information. 
