@@ -326,7 +326,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 
 In order to identify some key characteristics of the genome, we do genome profile analysis. To do this, we start by generating a histogram of the *k*-mer distribution in the raw reads (the *k*-mer spectrum). Then, GenomeScope creates a model fitting the spectrum that allows for estimation of genome characteristics. We work in parallel on each set of raw reads, creating a database of each file's *k*-mer counts, and then merge the databases of counts in order to build the histogram.
 
-![Kmer counting parallelization](../../images/vgp_assembly/meryl_collections.png "K-mer counting is first done on the collection of FASTA files. Because these data are stored in a collection, a separate `count` job is launched for each FASTA file, thus parallelizing our work. After that, the collection of count datasets is merged into one dataset, which we can use to generate the histogram input needed for GenomeScope.")
+![Workflow of Kmer counting parallelization, described in the figure caption.](../../images/vgp_assembly/meryl_collections.png "K-mer counting is first done on the collection of FASTA files. Because these data are stored in a collection, a separate `count` job is launched for each FASTA file, thus parallelizing our work. After that, the collection of count datasets is merged into one dataset, which we can use to generate the histogram input needed for GenomeScope.")
 
 > <hands-on-title>Generate <i>k</i>-mers count distribution</hands-on-title>
 >
