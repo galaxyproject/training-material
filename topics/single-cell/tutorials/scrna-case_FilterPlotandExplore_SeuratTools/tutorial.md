@@ -115,7 +115,7 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 # Generating a Seurat object
 You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
 
-This can be accomplished via the Read10x() step. Read10x() is Seurat's function to create a matrix and add in feature and barcode names simultaneously: 
+This can be accomplished via the Read10x step. **Read10x** tool implements Seurat's function to create a matrix and add in feature and barcode names simultaneously: 
 
 > <hands-on-title>Read10X</hands-on-title>
 >
