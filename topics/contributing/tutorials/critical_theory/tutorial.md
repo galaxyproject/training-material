@@ -44,7 +44,7 @@ Consisting of a renowned collective of critical theorists such as Max Horkheimer
 
 In the realm of education, the **Critical Learning Theory** aligns with the Frankfurt School's tradition, emphasizing a critical analysis of educative systems as social institutions. It represents a framework for critically examinate the role of education in shaping and perpetuating power structures, cultural norms and social inequalities throught the repression of **critical thinking** ({% cite Giroux2018 %}). A leading figure of this school of thought is  prominent American-Canadian critical pedagogue Henry Giroux.
 
-Within the realm of **Critical Learning Theory**, the concept of **Hidden Curriculum**, extensively explored by Giroux, refers to the implicit messages, values, and norms transmitted to students through the informal aspects of the educational system, distinct from the explicit and planned syllabus ({% cite Giroux1988 %}).
+Within the realm of **Critical Learning Theory**, the concept of **Hidden Curriculum**, extensively explored by Giroux, refers to the implicit messages, values, and norms transmitted through the informal aspects of the educational system, distinct from the explicit and planned syllabus ({% cite Giroux1988 %}).
 
 This training aspires to be a introduction on the **Critical Learning Theory** and the concept of **Hidden Curriculum**, with the aim of pointing out which pedagogical elements are the most appropriate to stimulate **critical thinking**, the backbone of scientific development. Last but not least, this training includes personal reflections from my teaching experiences, both in secondary education and as a lecturer in the Department of Bioinformatics at the Faculty of Freiburg.
 
