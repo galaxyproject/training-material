@@ -323,7 +323,7 @@ The find variable genes step flags genes that *do* vary across cells to expedite
 
 > <hands-on-title>Find Variable Genes</hands-on-title>
 >
-> Run{% tool [FindVariableGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_variable_genes/seurat_find_variable_genes/4.0.4+galaxy0) %} with the following parameters:
+> Run{% tool [Seurat FindVariableGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_variable_genes/seurat_find_variable_genes/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat NormaliseData in data 11: Seurat RDS`
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 {: .hands_on}
