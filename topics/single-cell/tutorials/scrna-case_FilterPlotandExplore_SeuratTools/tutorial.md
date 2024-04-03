@@ -487,7 +487,7 @@ We can also look for expression of particular genes and see how those map to our
 > Run{% tool [Plot with Seurat](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat UMAP on Data 20: Seurat RDS`
 > - *"Plot_type_selector"*: `FeaturePlot`
-> - *"Feature"*: `Gapdh`
+> - *"Features"*: `Gapdh`
 {: .hands_on}
 
 ![FeaturePlot: Gapdh](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Gapdh.png "FeaturePlot: Gapdh")
