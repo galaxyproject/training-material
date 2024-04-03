@@ -428,7 +428,7 @@ Now we can use the neighborhood graph to identify clusters of cells whose transc
 
 > <hands-on-title>Find Clusters </hands-on-title>
 >
-> Run{% tool [FindClusters](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0) %} with the following parameters:
+> Run{% tool [Seurat FindClusters](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Seurat FindNeighbours on data 16: Seurat RDS`
 > - *"Advanced Options "*
 > - *"Resolution"*: `0.5`
