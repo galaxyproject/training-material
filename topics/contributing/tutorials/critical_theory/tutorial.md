@@ -180,11 +180,12 @@ According Marcuse, **the education system is political, so aspiring to its polit
 
 > <comment-title>Biology and ideology</comment-title>
 >
-> According to Richard Lewontin and Richard Levins, theories of evolution underwent a shift in the course of the 20th century from an emphasis on directionality to a focus on the state of equilibrium, which can only be understood as ideological in origin.
+> According to Richard Lewontin and Richard Levins, in the course of the 20th century **theories of evolution underwent a shift from an emphasis on directionality to a focus on the state of equilibrium**, which can only be understood as ideological in origin.
 >
 > > *Just as the ideas of change and movement were the intellectual foundations of the bourgeois revolution, for the legitimisation of the collapse of the old class relations, the consolidation of that revolution in the latter part of the 19th century and in the 20th century has required a different view of the world, in line with the stabilisation of society. The idea of change had to be repressed in science as it was in society. The result has been the emphasis in modern evolutionary theories on dynamic equilibrium.*
 > >
 > {: .quote author="Richard Lewontin and Richard Levins" cite="The dialectical biologist"}
+>
 >
 > Similarly, these authors consider that **the description of evolution as producing order is also deeply ideological**.  An alternative conception is represented by the *[disorder-function paradigm]({% link topics/transcriptomics/tutorials/differential-isoform-expression/slides.html#19})*. In this sense, evolution is neither a fact nor a theory, but a way of organising knowledge about the world.
 >
