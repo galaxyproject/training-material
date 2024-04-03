@@ -215,7 +215,7 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
   > - *"Fill by"*: `ident`
   {: .hands_on}
 
-![Violin Plot of Counts Split by Sex](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Sex_vln_plot.png "Violin Plot of counts split by sex.")
+![Violin Plot of Counts Split by Sex with males representing more of the counts than females but distributions are about the same across both sexes](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Sex_vln_plot.png "Violin Plot of counts split by sex.")
 
 ## 2. Genotype Differences in Counts?
 
@@ -231,7 +231,7 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
   > - *"Fill by"*: `ident`
   {: .hands_on}
 
-  ![Violin Plot split by Genotype](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Genotype_vln_plot.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
+  ![Violin Plot split by Genotype--Mutant versus Control](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Genotype_vln_plot.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
 
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them. 
@@ -399,7 +399,7 @@ This tool will output you with four new datasets into your history:
 ><tip-title>Visualizing PCA</tip-title>
 >In order to use the PCA information which was just calculated, we must visualize it. The currently available tools unfortunately do not [YET] carry the capacity to do so, but I will provide the plot so that we may make an informed decision together: 
 >
->![Elbow Plot of Principal Components (PCs) and the standard deviation of variability they account for](../../images/scrna-case_FPE_SeuratTools/ElbowPlot.png "Elbow Plot")
+>![Elbow Plot of Principal Components (PCs) against the standard deviation (variability in the dataset) they each account for](../../images/scrna-case_FPE_SeuratTools/ElbowPlot.png "Elbow Plot")
 >
 >We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 15 PCs to be conservative.
 >You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs.
@@ -478,7 +478,7 @@ Now that we have run dimensionality reduction on our dataset, it is ready for vi
 > - *"Group by"*: `RNA_nn_res.0.5`
 {: .hands_on}
 
-![DimPlot colored by 0.5 resolution cluster](../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png "DimPlot colored by 0.5 resolution cluster.")
+![DimPlot colored by 0.5 resolution clusters with a total of 8 clusters--two noticeably different "island" populations and six clustering more closely to one another](../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png "DimPlot colored by 0.5 resolution cluster.")
 
 Good work! It looks like with a clustering resolution of 0.5, we are able to identify 8 clusters of cells in our data.
 
@@ -492,7 +492,7 @@ We can also look for expression of particular genes and see how those map to our
 > - *"Features"*: `Gapdh`
 {: .hands_on}
 
-![FeaturePlot: Gapdh](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Gapdh.png "FeaturePlot: Gapdh")
+![FeaturePlot of Gapdh expression shown boradly across the whole dataset](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Gapdh.png "FeaturePlot: Gapdh")
 
 We just plotted a housekeeping gene, Gapdh, so the broad expression we observe is expected.
 
@@ -508,7 +508,7 @@ For example, we can plot early T-cell marker Il2ra and get an idea of which cell
 > - *"Features"*: `Il2ra`
 {: .hands_on}
 
-![FeaturePlot: Il2ra](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png "FeaturePlot: Il2ra")
+![FeaturePlot of Il2ra expression most highlky expressed in the lower island population (cluster 2)](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png "FeaturePlot: Il2ra")
 
 It is a good idea, when analyzing your own data, to plot some markers of cell types you expect to be present. Later on we can also use these FeaturePlots to visualize manual annotation of clusters.
 
@@ -544,7 +544,7 @@ Let's take another look at what our clusters look like:
 > - *"Group by"*: `RNA_nn_res.0.5`
 {: .hands_on}
 
-![DimPlot colored by 0.5 resolution cluster](../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png "DimPlot colored by 0.5 resolution cluster.")
+![DimPlot colored by 0.5 resolution cluster showing 8 total clusters](../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png "DimPlot colored by 0.5 resolution cluster.")
 
 ><comment-title>On Cluster Numbering</comment-title>
 >Note that Seurat's cluster numbering is based on size alone, so clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells.
@@ -571,7 +571,7 @@ We can plot these markers as a means of discerning which cluster might be repres
 > - *"Features"*: `Itm2a`
 {: .hands_on}
 
-![FeaturePlot Itm2a](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Itm2a.png "FeaturePlot of Itm2a")
+![FeaturePlot of Itm2a expression most highly localized to cluster 3](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Itm2a.png "FeaturePlot of Itm2a")
 
 We can see that Cluster 3 seems to be most highly expressing this gene, and when we look back at the marker list we created earlier, Itm2a appears as a marker for cluster 3 with an average log fold change of 3! Therefore, we can quite conficently say that cluster 3 is likely to be representing Mature T-cells! 
 
@@ -585,7 +585,7 @@ Now what about the opposite end of the spectrum: the double negative early T-cel
 > - *"Features"*: `Il2ra`
 {: .hands_on}
 
-![FeaturePlot Il2ra](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png "FeaturePlot of Il2ra")
+![FeaturePlot of Il2ra expression mainly in cluster 2](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png "FeaturePlot of Il2ra")
 
 Il2ra expression seems to be most prominent in Cluster 2 and as seen in our marker list, has a fold change of 2.79! 
 
@@ -601,7 +601,7 @@ Now for the intermediate populations--which may be a bit more tricky to deconvol
 > - *"Features"*: `Cd8b1`
 {: .hands_on}
 
-![FeaturePlot Cd8b1](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8b1.png "FeaturePlot of Cd8b1")
+![FeaturePlot of Cd8b1 expression expressed across each of the "body" clusters (0, 1, 4, 5, 6, and 7)](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8b1.png "FeaturePlot of Cd8b1")
 
 It looks like clusters 1, 4, 5, and 6 pretty strongly express Cd8b1, now what about Cd8a? 
 
@@ -613,7 +613,7 @@ It looks like clusters 1, 4, 5, and 6 pretty strongly express Cd8b1, now what ab
 > - *"Features"*: `Cd8a`
 {: .hands_on}
 
-![FeaturePlot Cd8a](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8a.png "FeaturePlot of Cd8a")
+![FeaturePlot of Cd8a expression in the same clsuters as Cd8b1 (0, 1, 4, 5, 6, and 7)](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8a.png "FeaturePlot of Cd8a")
 
 This looks pretty consistent with the Cd8b1 plot, which is expected as these are markers of a double positive population! The true discernment between the two populations will be the level of Cd4 expression: 
 
@@ -625,7 +625,7 @@ This looks pretty consistent with the Cd8b1 plot, which is expected as these are
 > - *"Features"*: `Cd4`
 {: .hands_on}
 
-![FeaturePlot Cd4](../../images/scrna-case_FPE_SeuratTools/FeatuerePlot_Cd4.png "FeaturePlot of Cd4")
+![FeaturePlot of Cd4 expression most highly expressed in cluster 1 and lowly expressed in clusters 4, 5, 6, and 7](../../images/scrna-case_FPE_SeuratTools/FeatuerePlot_Cd4.png "FeaturePlot of Cd4")
 
 Looks like the top portion of these clusters, and mainly cluster 1 hold the vast majority of Cd4 expression. This, coupled with Cd4 being identified as a marker of cluster 1 in our marker table above tells us pretty confidently that the upper part of this "body" cluster are likely the late middle t-cells! 
 
@@ -656,7 +656,7 @@ Are there any differences in genotype? Or in biological terms, is there an impac
 > - *"Fill by"*: `ident`
 {: .hands_on}
 
-![VlnPlot colored by genotype and split by cluster](../../images/scrna-case_FPE_SeuratTools/VlnPlot_GroupedbyCluster_SplitbyGenotype.png "Violin Plot colored by assigned clusters & split by genotype")
+![VlnPlot colored by cluster and split by genotype showing the mutant clusters appearing more sparse than the control](../../images/scrna-case_FPE_SeuratTools/VlnPlot_GroupedbyCluster_SplitbyGenotype.png "Violin Plot colored by assigned clusters & split by genotype")
 
 We can see that there seems to be a decrease in cellcounts across the celltypes in the het mutant... INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
 
@@ -674,7 +674,7 @@ First thing's first, is there a batch effect?
 > - *"Split by"*: `Sample.Characteristic.individual.`
 {: .hands_on}
 
-![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-case_FPE_SeuratTools/DimPlotColorbyClusters_SplitbyIndividual.png "DimPlot colored by assigned clusters split by individual/batch")
+![DimPlot colored by labelled celltype split by individual/batch showing that individual 3 and 4 contribute the vast majority of immature T-cells](../../images/scrna-case_FPE_SeuratTools/DimPlotColorbyClusters_SplitbyIndividual.png "DimPlot colored by assigned clusters split by individual/batch")
 
 While some differences across batch are expected and nothing to be concerned about, the immature T-cells looks to be mainly comprised of Individuals 3 and 4. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction.
 
@@ -689,7 +689,7 @@ Additionally, we will also look at the confounding effect of sex:
 > - *"Split by"*: `Sample.Characteristic.sex.`
 {: .hands_on}
 
-![DimPlot colored by Sex](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbySex.png "DimPlot colored by assigned clusters and split by Sex")
+![DimPlot colored by cluster and split by sex showing that there are fewere female cells (a product of fewer female samples being present in the data as a whole)](../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbySex.png "DimPlot colored by assigned clusters and split by Sex")
 
 We note that the one female sample - unfortunately one of merely three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
 
@@ -703,7 +703,7 @@ Are there any clusters or differences being driven by sequencing depth, a techni
 > - *"Features"*: `nCount_RNA`
 {: .hands_on}
 
-![FeaturePlot colored by counts](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_nCount.png "FeaturePlot colored by counts")
+![FeaturePlot colored by counts showing no differences in sequencing depth across the dataset](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_nCount.png "FeaturePlot colored by counts")
 
 There doesn't visually appear to be any differences in sequencing depth across the clusters, but let's check out some of those other variables we grouped by:
 
@@ -716,7 +716,7 @@ There doesn't visually appear to be any differences in sequencing depth across t
 > - *"split.by"*: `Sample.Characteristic.individual.`
 {: .hands_on}
 
-![FeaturePlot colored by counts & Split by Individual](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Counts_SplitbyIndividual.png "FeaturePlot colored by counts & split by individual")
+![FeaturePlot colored by counts & Split by Individual showing that Individual 3 seems to have been most deeply sequenced](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Counts_SplitbyIndividual.png "FeaturePlot colored by counts & split by individual")
 
 There we go! This might explain the dramatic shift in early to middle T-Cell between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely accounts for the discernment between clusters 0, 4, 5, 6, and 7).
 
@@ -736,7 +736,7 @@ Do you think we processed these samples well enough? We have seen in the previou
 > - *"Features"*: `Hba-a1`
 {: .hands_on}
 
-![FeaturePlot Hba-a1](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Hba-a1.png "FeaturePlot of Hba-a1")
+![FeaturePlot of Hba-a1 showing sparse expression across the whole dataset](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Hba-a1.png "FeaturePlot of Hba-a1")
 
 Hemoglobin--a red blood cell marker that should NOT be found in T-cells--appears throughout the entire dataset in low numbers and as a likely marker of Cluster 6. This suggests that some background noise may have been introduced by the media the cells were in. We might consider in the wet lab trying to get a purer, happier sample, with less background or in the dry lab, we can take advantage of techniques such as SoupX or others to remove this technical noise.
 
