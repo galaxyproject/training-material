@@ -39,7 +39,6 @@ contributions:
 
 ---
 
-# Introduction
 
 You’ve previously done all the work to make a single cell matrix. Now it’s time to fully process our data using Seurat: remove low quality cells, reduce the many dimensions of data that make it difficult to work with, and ultimately try to define clusters and find some biological meaning and insights! There are many packages for analysing single cell data - Seurat ({% cite Satija2015 %}), Scanpy ({% cite Wolf2018 %}), Monocle ({% cite Trapnell2014 %}), Scater ({% cite McCarthy2017 %}), and many more. We’re working with Seurat because it is well updated, broadly used, and highly trusted within the field of bioinformatics.
 
