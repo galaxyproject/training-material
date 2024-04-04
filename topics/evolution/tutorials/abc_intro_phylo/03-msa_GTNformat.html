@@ -219,7 +219,7 @@ This is the *Edit cost matrix*.
 |T|1|2|1|0|5|
 |-|5|5|5|5|n/a|
 
-.image-10[
+.image-25[
     ![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the values 1, 2 or 5.](images/03-msa-06-edit-distance.pdf-1.png)
 ]
 
@@ -227,6 +227,7 @@ Complete edit-cost = 1 + 1 + 2 + 1 + 5 = 10
 
 Using edit costs we can describe better the relationships between sequences: for example it's less common for an  *A*  to change to a *G* in the above than for an *A* to change to a *T*, in turn less common than for an *A* to remain as an *A*.
 --
+
 Also note we have introduced a bigger cost for aligning any nucleotide with a gap, reflecting our believe that insertion/deletion events are less common than substitutions.
 
 ---
@@ -292,8 +293,7 @@ In terms of sequence alignment, this comes down to basing alignment of two seque
 1. Array two sequences along the top and left sides of a cost matrix.
 2. Fill in the cells of the matrix from top-left to bottom right.
     At each stage find the minimum cost sub-alignment and add to it:
-  2.1  Find the maximum score from the previous cells including 
-        gap costs;
+  2.1  Find the maximum score from the previous cells including gap costs;
   2.2 Put the result into this new cell;
   2.3  _Note_ which cell we chose with a pointer or reference.
 ![Schematic of the dynamic programming alignment described on the slide](images/DPcell.pdf)
@@ -304,13 +304,14 @@ We add the cost of the best solution to the previous cells (above, to the left a
 We will align two amino acid sequences next:
 
 Input sequences:
-
-| x   | `HEAGAWGHEE` |
+.center[
+| x   | HEAGAWGHEE |
 |-----|--------------|
-| y   | `PAWHEAE`    |
+| y   | PAWHEAE    |
+]
 
 ---
-# Filling in the cost matrix}
+# Filling in the cost matrix
 
 Edit costs for these two sequences:
 
@@ -351,6 +352,7 @@ Aligned sequences:
 |         | -5  | -5  | -1  | -5  | +5  | +15 | -5  | +10 | +6  | -5  | +6  |
 
 Total cost = 16
+
 ---
 # Generalising this approach
 
@@ -380,11 +382,14 @@ Without too much effort it is possible to generalise this approach:
 
 -   With more sequences, the size of the table increase: for $$k$$ sequences the algorithm is \bigO{n^{k}}: not practical.
 
+---
+
 # Multiple Sequence Alignment: Aligning groups of sequences using heuristics
 
 .center[*Aligning multiple sequences*]
 ---
 #Aligning multiple sequences
+
 We cannot check all possible alignments (there are simply too many), so we must use make a compromise.
 
 We will use pairwise alignment (which is easy) and build up a multiple sequence alignment from pairs of sequences.
@@ -411,6 +416,7 @@ The process is quite simple:
 
      
 "MAFFT offers various multiple alignment strategies. They are classified into three types, (a) the progressive method, (b) the iterative refinement method with the WSP score, and (c) the iterative refinement method using both the WSP and consistency scores. In general, there is a tradeoff between speed and accuracy. The order of speed is a > b > c, whereas the order of accuracy is a < b < c. The results of benchmarks can be seen here. The following are the detailed procedures for the major options of MAFFT."
+
 
 source: MAFFT is available at https://mafft.cbrc.jp/; first paper 10.1093/nar/gkf436
 
