@@ -43,7 +43,7 @@ One of the best understood and best solved bioinformatics problem is *how to ali
 
 # What is an alignment?
    
-Given two sequences like ![DNA sequence GGCTGAA. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images/DNA-GGGACTG.pdf-1.png) and ![DNA sequence GGGACTG. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images/DNA-GGCTGAA.pdf-1.png),
+Given two sequences like .image_50[![DNA sequence GGCTGAA. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGGACTG.pdf-1.png)] and .image_50[![DNA sequence GGGACTG. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGCTGAA.pdf-1.png)],
 
 "an alignment" is a _mapping_ of their positions (a.k.a. "sites") to a common ordering, by inserting gaps in one sequence or another:
 
@@ -287,10 +287,13 @@ Dynamic Programming solves problems by breaking them down recursively into (slig
 In terms of sequence alignment, this comes down to basing alignment of two sequences up to positions *i* and *j* in terms of the best alignments yet found for the two sequences, up to positions $$i-1,j-10$$, $$i,j-1$$, and $$i-1,j$$.
 ---
 #DP overview (cont.)
+
+
 ![Schematic representation of how alignment of two DNA sequences progresses. Three scenarios are shown: 1. both sequences are identical 2. the sequences differ and a gap is introduced in the top sequence 3. the sequences differ and a gap is introduced in the bottom sequence.](images/03-msa-10-advancing-seqs.pdf-1.png)
 
 ---
 # Dynamic Programming alignment
+
 
 1. Array two sequences along the top and left sides of a cost matrix.
 2. Fill in the cells of the matrix from top-left to bottom right.
@@ -303,12 +306,11 @@ We add the cost of the best solution to the previous cells (above, to the left a
 
 ---
 
-# Alignment example
+#Alignment example
 
 We will align two amino acid sequences next:
 
 Input sequences:
-
 .center[
 | x   | HEAGAWGHEE |
 |-----|--------------|
@@ -352,9 +354,10 @@ Aligned sequences:
 
 |         | H   | E   | A   | G   | A   | W   | G   | H   | E   | -   | E   |
 |---------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
-| $$s_{1}$$ | `H` | `E` | `A` | `G` | `A` | `W` | `G` | `H` | `E` | `-` | `E` |
-| $$s_{2}$$ | `-` | `-` | `P` | `-` | `A` | `W` | `-` | `H` | `E` | `A` | `E` |
+| $$s_{1}$$ | H | E | A | G | A | W | G | H | E | - | E |
+| $$s_{2}$$ | - | - | P | - | A | W | - | H | E | A | E |
 |         | -5  | -5  | -1  | -5  | +5  | +15 | -5  | +10 | +6  | -5  | +6  |
+
 
 Total cost = 16
 
@@ -374,7 +377,7 @@ Without too much effort it is possible to generalise this approach:
 **Affine gap scores** as mentioned, accounting for gap opening and gap extension penalties to differ.
 
 ---
- Properties of DP Pairwise Alignment
+#Properties of DP Pairwise Alignment
 
 -   Pairwise Sequence Alignment takes an amount of *time* that is proportional to the number of cells in the table, which is roughly the product of the lengths of the two sequences.
 
@@ -403,7 +406,7 @@ These *heuristic* methods are used in Clustal, GCG and others.
 ---
 # Progressive Alignment
 
-The process is quite simple:
+.left[The process is quite simple:]
 
 1.  Align all pairs of sequences using DP (dynamic programming).
 2.  Create a distance matrix based on the alignments.
@@ -460,3 +463,5 @@ Once your sequences are properly aligned, they can be used for _phylogenetic ana
 # Thank you!
 
 .center[*Next: building trees from distances!*]
+
+---
