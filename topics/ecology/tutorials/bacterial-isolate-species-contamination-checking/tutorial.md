@@ -12,7 +12,7 @@ time_estimation: 1H
 key_points:
 - Kraken assigns taxons to sequences
 - Bracken extracts species from Kraken assignations 
-- Centrifuge extracts stats and creates visualization from Kraken report
+- Recentrifuge extracts stats and creates visualization from Kraken report
 tags:
 - illumina
 - bacteria
@@ -181,7 +181,7 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
    >
    > 1. How many taxa have been found?
    > 2. What are the percentage on unclassified?
-   > 3. What are the kindgoms found?
+   > 3. What are the domains found?
    >
    > > <solution-title></solution-title>
    > >
