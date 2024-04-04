@@ -62,9 +62,11 @@ We’ll provided you with experimental data to analyse from a mouse dataset of f
 # Get Data onto Galaxy
 To start, let's get our dataset loaded into Galaxy.
 
-## You have options:
-You can access the data for this tutorial in multiple ways:
-### 1. **EBI Data Retrieval** 
+{% include _includes/cyoa-choices.html option1="EBI Data Retrieval" option2="Importing from a history" option 3="Uploading from Zenodo" default="EBI Data Retrieval"
+       text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the **EBI Data Retrieval** {% icon tool %} " %}
+
+<div class="EBI Data Retrieval" markdown="1">
+## 1. **EBI Data Retrieval** 
 You may retrieve that files necessary to construct a Seurat Object in this way. Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
 
 > <hands-on-title>GetData</hands-on-title>
@@ -73,15 +75,19 @@ You may retrieve that files necessary to construct a Seurat Object in this way. 
 > - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
 > - *"Choose the type of matrix to download"*: `Raw filtered counts`
 {: .hands_on}
+</div>
 
-### 2. **Importing from a history** 
+<div class="Importing from a history" markdown="1">
+## 2. **Importing from a history** 
 You can import [this history](https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data)
 
 {% snippet faqs/galaxy/histories_import.md %}
 
 This also alleviates the necessity to convert the AnnData object into a Seurat one, which is an additional step you must complete if you choose to use the next method. 
+</div>
 
-### 3. **Uploading from Zenodo** 
+<div class="Uploading from Zenodo" markdown="1">
+## 3. **Uploading from Zenodo** 
 
 > <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
 >
@@ -113,6 +119,7 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 >> - *"Choose the format of the output"*: `RDS with a Seurat object`
 > {: .hands_on}
 {: .tip}
+</div>
 
 # Generating a Seurat object
 You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
