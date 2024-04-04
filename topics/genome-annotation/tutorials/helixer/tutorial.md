@@ -102,7 +102,7 @@ Depending on the lineage selected, default values for certain parameters change.
 >    - {% icon param-file %} *"Genomic sequence"*: `genome_masked.fasta` (Input dataset)
 >    - In *"Available lineages"*: "*select*" `fungi`
 >    - In *"Species name"*: `Mucor mucedo`
-
+>
 {: .hands_on}
 
 > <comment-title>on parameters</comment-title>
@@ -113,8 +113,8 @@ Depending on the lineage selected, default values for certain parameters change.
 > - Indeed, it is recommended to increase the value of subsequence-length when genomes contain large genes. This is particularly important for vertebrates and invertebrates.
 > - Recommendations have therefore been defined.
 On Galaxy, if you wish to modify these default values, you can do so by entering your value in the parameters: subsequence length, overlep offset and overlap core legth.
+>
 {: .comment}
-
 
 > <comment-title>Don't wait</comment-title>
 >
@@ -211,8 +211,8 @@ Click on the newly created dataset's eye to display it. You will see a JBrowse g
 
 Congratulations on reaching the end of this tutorial! You now know how to perform a structural annotation of a new eukaryotic genome, using Helixer. You've learned how to visualize your new annotation using JBrowse.
 
-If you're interested in using other genomes, take a look at the tutorial [Masking repeats with RepeatMasker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html). This tutorial explains how to mask a genome. 
+If you're interested in using other genomes, take a look at the tutorial [Masking repeats with RepeatMasker]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). This tutorial explains how to mask a genome. 
 
-If you'd like to complete this annotation, we recommend you follow the tutorial on annotation with [Funannotate](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html) and take a look at the sections on functional annotation with EggNOG Mapper and InterProScan. The datasets are the same.
+If you'd like to complete this annotation, we recommend you follow the tutorial on annotation with [Funannotate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}) and take a look at the sections on functional annotation with EggNOG Mapper and InterProScan. The datasets are the same.
 
 
