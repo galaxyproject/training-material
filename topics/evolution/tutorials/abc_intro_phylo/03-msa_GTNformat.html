@@ -19,10 +19,8 @@ contributors:
 
        
 We use sequence alignment to:
-- identify complex relationships among multiple species -- more than just pairwise comparisons;
---
+- identify complex relationships among multiple species - more than just pairwise comparisons;
 - find homologous parts (sites / loci) in sequences that may be under different selection dynamics;
---
 - and to build phylogenetic trees!
 
 Multiple sequence alignment (MSA) is a required step in molecular phylogenetics
@@ -32,7 +30,7 @@ Multiple sequence alignment (MSA) is a required step in molecular phylogenetics
 
 One of the best understood and best solved bioinformatics problem is *how to align two sequences*.
         
-In order to do this we need to know
+.left[In order to do this we need to know]
 
 1.  what an "alignment" really means;
 
@@ -43,10 +41,11 @@ In order to do this we need to know
 
 # What is an alignment?
    
-Given two sequences like ![DNA sequence GGCTGAA. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGGACTG.pdf-1.png) and ![DNA sequence GGGACTG. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGCTGAA.pdf-1.png), "an alignment" is a _mapping_ of their positions (a.k.a. "sites") to a common ordering, by inserting gaps in one sequence or another:
-```
+Given two sequences like ![DNA sequence GGCTGAA. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGGACTG.pdf-1.png) and ![DNA sequence GGGACTG. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGCTGAA.pdf-1.png),
 
-![Alignment of two DNA sequences GGGACTG and GGCTGAA. In the alignment gaps (indicated by - ) are added to the sequences to form GGGACTG-- and -GG-CTGAA so that homologous sites are aligned at positions 2, 3, 5, 6, 7. ](images/03-msa-01-what-is-an-alignment.pdf-1.png)
+"an alignment" is a _mapping_ of their positions (a.k.a. "sites") to a common ordering, by inserting gaps in one sequence or another:
+
+![Alignment of two DNA sequences GGGACTG and GGCTGAA. In the alignment gaps, indicated by -, are added to the sequences to form GGGACTG-- and -GG-CTGAA so that homologous sites are aligned at positions 2, 3, 5, 6, 7. ](images/03-msa-01-what-is-an-alignment.pdf-1.png)
 ---
 # Alignments represent homology
 
@@ -56,7 +55,7 @@ Our goal with sequence alignment is to identify which regions, down to individua
 
 It's like tracing the origin of a set of transcribed documents through all their copies back to the original, where each was only copied (with maybe some mistakes) from one predecessor.
 
-Once we have identified homologous sites then we can analyse their differences and similarities under an evolutionary model -- a crucial centrepiece of phylogenetic analysis, and in fact of all comparative analysis of molecular sequences.
+Once we have identified homologous sites then we can analyse their differences and similarities under an evolutionary model - a crucial centrepiece of phylogenetic analysis, and in fact of all comparative analysis of molecular sequences.
 ---
 
 # Sequences evolve on a tree
@@ -115,19 +114,22 @@ This alignment reflects truth
 # Although...
 
          
-But alignment also looks ``good'' (?)
+But this alignment also looks "good" (?)
 
 ![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-c-good1.pdf-1.png)
+
 ---
+
 # Although...
 
         
 And so does this:
 
 
-![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink
-](images/03-msa-03-d-good2.pdf-1.png)
+![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-d-good2.pdf-1.png)
+
 ---
+
 # This is nonsensical
 
 Only matches and indels! Win?
@@ -135,38 +137,48 @@ Only matches and indels! Win?
 ![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-e-nonsense.pdf-1.png)
 
 Here, the indels do not make sense as having come from the same phylogenetic history.
+
 ---
+
 # Fixing errors
 
-![A possible alignment of six DNA sequences arranged vertically drawing attention to a position (1) where gaps have been introduced in nearly all sequences and (2) gaps are not aligned but could be.](images/03-msa-04-a-fixingerrors-badly.pdf-1.png)
+![A possible alignment of six DNA sequences arranged vertically drawing attention to a position, 1, where gaps have been introduced in nearly all sequences and, 2, gaps are not aligned but could be.](images/03-msa-04-a-fixingerrors-badly.pdf-1.png)
 
-At (1) a gap has been inserted in EVERY sequence.
+At 1 a gap has been inserted in EVERY sequence.
+
 ---
+
 # Fixing errors
 
-![A possible alignment of six DNA sequences arranged vertically drawing attention to a position (1) where gaps have been introduced in nearly all sequences and (2) gaps are not aligned but could be.](images/03-msa-04-a-fixingerrors-badly.pdf-1.png)
-At (2) the gaps don't line up, but they *could*.
+![A possible alignment of six DNA sequences arranged vertically drawing attention to a position, 1, where gaps have been introduced in nearly all sequences and, 2, gaps are not aligned but could be.](images/03-msa-04-a-fixingerrors-badly.pdf-1.png)
+
+At 2 the gaps don't line up, but they *could*.
+
+---
 
 # Fixing errors
 ![A possible alignment of six DNA sequences arranged vertically drawing attention to a position 1 where gaps have been removed to improve alignment at position 2.](images/03-msa-04-b-fixingerrors-well.pdf-1.png)
 
         
 This fixes both problems.
+
 ---
 
 # Rating alignments
 
-This can be a bit of an art: you need to
+.left[This can be a bit of an art: you need to]
 
 -   balance the number of gaps with number of mismatches
 
 -   notice when there are insertions / deletions that don't make sense, where there are alternative arrangements that do
+
 ---
 
-# 
-.center[Pair-wise Alignment]
-.center[: Dynamic Programming Approach]
+# Pair-wise Alignment
+.center[*Dynamic Programming Approach*]
+
 ---
+
 # Sequence Similarity
 
 To do any kind of comparison we need a distance or similarity measure: without it we can't say whether, e.g., *these* two species are more similar than *those* two.
@@ -177,13 +189,15 @@ To do any kind of comparison we need a distance or similarity measure: without i
     -   a measure of the amount of evolutionary "work" that has to be done to change one character state into another one
 -   Likelihood
     -   under a specific model of evolution, what is the probability that we would observe these sequences?
+
 ---
+
 # Hamming Distance
 
 The *Hamming* distance between two sequences is just the number of differences between them.
 It makes no distinction between substitutions or insertions/deletions, and not between transitions and transversions.
 
-![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the value ‘1’.](images/03-msa-05-hamming-distance.pdf-1.png)
+![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the value 1.](images/03-msa-05-hamming-distance.pdf-1.png)
 
 Sequence length: 20
 Number of differences: 5
@@ -191,58 +205,61 @@ Number of differences: 5
 Hamming Distance = 5
 P-distance = 5/20 = 0.25 or 25%
 ---
+
 # Edit Cost
 
 We use a matrix of costs to describe how much evolutionary "work" must be done to convert one character to another.
 This is the *Edit cost matrix*.
 
-```{=tex}
-\medskip
-\wad
-\begin{minipage}[c]{0.4\textwidth}
-    Edit cost matrix
-    \medskip
-    
-    $\begin{array}{c|ccccc}
-        - & A & C & G & T & - \\
-        \hline
-        A & 0 & 1 & 2 & 1 & 5 \\
-        C & 1 & 0 & 1 & 2 & 5 \\
-        G & 2 & 1 & 0 & 1 & 5 \\
-        T & 1 & 2 & 1 & 0 & 5 \\
-        - & 5 & 5 & 5 & 5 & n/a
-    \end{array}$
-\end{minipage}
-```
+|-|A|C|G|T|-|
+|------|--------------------|
+|A|0|1|2|1|5|
+|C|1|0|1|2|5|
+|G|2|1|0|1|5|
+|T|1|2|1|0|5|
+|-|5|5|5|5|n/a|
+
 ![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the values 1, 2 or 5.](images/03-msa-06-edit-distance.pdf-1.png)
 
 Complete edit-cost = 1 + 1 + 2 + 1 + 5 = 10
 
-\medskip
-
 Using edit costs we can describe better the relationships between sequences: for example it's less common for an  *A*  to change to a *G* in the above than for an *A* to change to a *T*, in turn less common than for an *A* to remain as an *A*.
---
+---
+# Edit Cost
 
+We use a matrix of costs to describe how much evolutionary "work" must be done to convert one character to another.
+This is the *Edit cost matrix*.
+
+|-|A|C|G|T|-|
+|-|---------|
+|A|0|1|2|1|5|
+|C|1|0|1|2|5|
+|G|2|1|0|1|5|
+|T|1|2|1|0|5|
+|-|5|5|5|5|n/a|
+Complete edit-cost = 1 + 1 + 2 + 1 + 5 = 10
 Also note we have introduced a bigger cost for aligning any nucleotide with a gap, reflecting our believe that insertion/deletion events are less common than substitutions.
+
+.image_10[
+    ![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the values 1, 2 or 5.](images/03-msa-06-edit-distance.pdf-1.png)
+]
+
 ---
 # What price a gap?
 
 There are two basic methods for assigning a cost *c* to a gap of length *g* in a sequence.
 
-```{=tex}
-\begin{enumerate}
-    \item  Linear cost: $$c = -dg$$ \\
-            where $$d$$ is the _gap open penalty_;
+- Linear cost: $$c = -dg$$
+    where $$d$$ is the _gap open penalty_;
 
-    \item  Affine cost: $$c = -d - (g-1)e$$
-            where $$e$$ is the _gap extension penalty_.
-\end{enumerate}
-```
+- Affine cost: $$c = -d - (g-1)e$$
+    where $$e$$ is the _gap extension penalty_.
+
 Typical values are $$d = 10, e = 0.1$$.
 
 The affine gap cost method is the most complex method we can use in order to solve the alignment of two sequences quickly.
 
-More complex models prohibit the use of dynamic programming to solve the alignment (and must use \underline{heuristics}).
+More complex models prohibit the use of dynamic programming to solve the alignment (and must use _heuristics_).
 ---
 # Numbers of alignments
 
@@ -302,7 +319,7 @@ Dynamic Programming solves problems by breaking them down recursively into (slig
 In terms of sequence alignment, this comes down to basing alignment of two sequences up to positions *i* and *j* in terms of the best alignments yet found for the two sequences, up to positions $$i-1,j-10$$, $$i,j-1$$, and $$i-1,j$$.
 ---
 #DP overview (cont.)
-![Schematic representation of how alignment of two DNA sequences progresses. Three scenarios are shown: i) both sequences are identical ii) the sequences differ and a gap is introduced in the top sequence ii) the sequences differ and a gap is introduced in the bottom sequence.](images/03-msa-10-advancing-seqs.pdf-1.png)
+![Schematic representation of how alignment of two DNA sequences progresses. Three scenarios are shown: 1. both sequences are identical 2. the sequences differ and a gap is introduced in the top sequence 3. the sequences differ and a gap is introduced in the bottom sequence.](images/03-msa-10-advancing-seqs.pdf-1.png)
 
 ---
 # Dynamic Programming alignment
