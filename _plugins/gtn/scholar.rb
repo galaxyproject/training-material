@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+require 'bibtex'
+require 'citeproc/ruby'
+require 'csl/styles'
 
 module Gtn
   # GTN implementation of Jekyll::Scholar except faster.

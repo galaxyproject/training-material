@@ -337,19 +337,24 @@ To run the following commands, we need a copy of the ro-crate-py repository:
 
 ```bash
 git clone https://github.com/ResearchObject/ro-crate-py
+```
+
+Navigate to the following directory in the repository we just cloned:
+
+```bash
 cd ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase
 ```
 
 This directory is already an RO-Crate. Delete the metadata file to get a plain directory tree:
 
 ```bash
-rm ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ro-crate-metadata.json
+rm ro-crate-metadata.json
 ```
 
 Now the directory tree contains several files and directories, including a Galaxy workflow and a Planemo test file, but it's not an RO-Crate anymore, since there is no metadata file. Initialize the crate:
 
 ```bash
-cd ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ && rocrate init
+rocrate init
 ```
 
 This creates an `ro-crate-metadata.json` file that lists files and directories rooted at the current directory. Note that the Galaxy workflow is listed as a plain `File`:
@@ -364,16 +369,18 @@ This creates an `ro-crate-metadata.json` file that lists files and directories r
 To register the workflow as a `ComputationalWorkflow`, run the following:
 
 ```bash
-cd ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ && rocrate add workflow -l galaxy sort-and-change-case.ga
+rocrate add workflow -l galaxy sort-and-change-case.ga
 ```
 
-Now the workflow has a type of `["File", "SoftwareSourceCode", "ComputationalWorkflow"]` and points to a `ComputerLanguage` entity that represents the Galaxy workflow language. Also, the workflow is listed as the crate's `mainEntity` (see the [Workflow RO-Crate profile](https://w3id.org/workflowhub/workflow-ro-crate/1.0)).
+Now the workflow has a type of `["File", "SoftwareSourceCode", "ComputationalWorkflow"]` and points to a `ComputerLanguage` entity that represents the Galaxy workflow language. Also, the workflow is listed as the crate's `mainEntity` (this is required by the [Workflow RO-Crate profile](https://w3id.org/workflowhub/workflow-ro-crate/1.0), a subtype of RO-Crate which provides extra specifications for workflow metadata).
 
-To add [workflow testing metadata](https://crs4.github.io/life_monitor/workflow_testing_ro_crate) to the crate:
+To add files or directories after crate initialization:
 
 ```bash
-cd ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ && rocrate add test-suite -i test1
-cd ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ && rocrate add test-instance test1 http://example.com -r jobs -i test1_1
-cd ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ && rocrate add test-definition test1 test/test1/sort-and-change-case-test.yml -e planemo -v '>=0.70'
-cat ro-crate-py/test/test-data/ro-crate-galaxy-sortchangecase/ro-crate-metadata.json
+cp ../sample_file.txt .
+rocrate add file sample_file.txt -P name=sample -P description="Sample file"
+cp -r ../test_add_dir .
+rocrate add dataset test_add_dir
 ```
+
+The above example also shows how to set arbitrary properties for the entity with -P. This is supported by most `rocrate add` subcommands.

@@ -35,10 +35,10 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Update Shortlinks
+      - name: Update google news
         id: generate
         run: |
-          ruby bin/google-form-news.rb >> $GITHUB_OUTPUT
+          bundle exec ruby bin/google-form-news.rb
 
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.

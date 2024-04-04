@@ -34,7 +34,7 @@ contributions:
     - smza
     - poterlowicz-lab
   funding:
-    - ELIXIR-UK-DaSH
+    - elixir-uk-dash
 subtopic: fair-data
 
 ---
