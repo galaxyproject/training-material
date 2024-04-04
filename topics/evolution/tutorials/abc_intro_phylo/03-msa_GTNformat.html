@@ -219,40 +219,25 @@ This is the *Edit cost matrix*.
 |T|1|2|1|0|5|
 |-|5|5|5|5|n/a|
 
-![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the values 1, 2 or 5.](images/03-msa-06-edit-distance.pdf-1.png)
+.image-10[
+    ![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the values 1, 2 or 5.](images/03-msa-06-edit-distance.pdf-1.png)
+]
 
 Complete edit-cost = 1 + 1 + 2 + 1 + 5 = 10
 
 Using edit costs we can describe better the relationships between sequences: for example it's less common for an  *A*  to change to a *G* in the above than for an *A* to change to a *T*, in turn less common than for an *A* to remain as an *A*.
----
-# Edit Cost
-
-We use a matrix of costs to describe how much evolutionary "work" must be done to convert one character to another.
-This is the *Edit cost matrix*.
-
-|-|A|C|G|T|-|
-|-|---------|
-|A|0|1|2|1|5|
-|C|1|0|1|2|5|
-|G|2|1|0|1|5|
-|T|1|2|1|0|5|
-|-|5|5|5|5|n/a|
-Complete edit-cost = 1 + 1 + 2 + 1 + 5 = 10
+--
 Also note we have introduced a bigger cost for aligning any nucleotide with a gap, reflecting our believe that insertion/deletion events are less common than substitutions.
-
-.image_10[
-    ![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the values 1, 2 or 5.](images/03-msa-06-edit-distance.pdf-1.png)
-]
 
 ---
 # What price a gap?
 
 There are two basic methods for assigning a cost *c* to a gap of length *g* in a sequence.
 
-- Linear cost: $$c = -dg$$
+Linear cost: $$c = -dg$$
     where $$d$$ is the _gap open penalty_;
 
-- Affine cost: $$c = -d - (g-1)e$$
+Affine cost: $$c = -d - (g-1)e$$
     where $$e$$ is the _gap extension penalty_.
 
 Typical values are $$d = 10, e = 0.1$$.
@@ -260,45 +245,25 @@ Typical values are $$d = 10, e = 0.1$$.
 The affine gap cost method is the most complex method we can use in order to solve the alignment of two sequences quickly.
 
 More complex models prohibit the use of dynamic programming to solve the alignment (and must use _heuristics_).
+
 ---
 # Numbers of alignments
+For two sequences of length $$x$$ and $$y$$, there are $$\frac{(x+y)!}{x!\ y!}$$ possible alignments.
+For three sequences, of length $$x$$, $$y$$ and $$z$$ say, there are $$\frac{(x+y+z)!}{x!\ y!\ z!}$$ alignments.
 
+For $n$ sequences of length 10, this increases rapidly:
 
-```{=tex}
-\begin{minipage}[t]{0.45\textwidth}
-For two sequences of length $$x$$ and $$y$$, there are
-$$\frac{(x+y)!}{x!\ y!}$$
-possible alignments.
-
-\medskip
-
-For three sequences, of length $$x$$, $$y$$ and $$z$$ say, there are
-$$\frac{(x+y+z)!}{x!\ y!\ z!}$$
-alignments.
-    
-\end{minipage}\wad
-```
-\\begin{minipage}\[t\]{0.45\textwidth} For $n$ sequences of length 10, this increases rapidly: \\begin{center}
-
-```{=tex}
-\begin{tabular}{|c|c|}
-                \hline
-                $$n$$ & \hash alignments  \\
-                \hline
-                2 & $$184756$$  \\
-                3 & $$5.55 \times 10^{12}$$ \\
-                4 & $$4.71 \times 10^{21}$$ \\
-                5 & $$4.83 \times 10^{31}$$ \\
-                6 & $$3.64 \times 10^{42}$$ \\
-                7 & $$1.45 \times 10^{54}$$ \\
-                8 & $$2.38 \times 10^{66}$$ \\
-                9 & $$4.94 \times 10^{85}$$ \\
-                10 & $#2.35 \times 10^{92}$$ \\
-                \hline
-                 
-            \end{tabular}
-```
-\\end{center\\end{minipage} \medskip
+| n   | Hash alignments  |
+|-----|------------------|
+| 2   | 184756           |
+| 3   | 5.55 × 10^12     |
+| 4   | 4.71 × 10^21     |
+| 5   | 4.83 × 10^31     |
+| 6   | 3.64 × 10^42     |
+| 7   | 1.45 × 10^54     |
+| 8   | 2.38 × 10^66     |
+| 9   | 4.94 × 10^85     |
+| 10  | 2.35 × 10^92     |
 
 In general it is not possible - even with really fast computers - to guarantee optimal multiple alignments, even with simple costing schemes.
 ---
@@ -330,21 +295,9 @@ In terms of sequence alignment, this comes down to basing alignment of two seque
   2.1  Find the maximum score from the previous cells including 
         gap costs;
   2.2 Put the result into this new cell;
-  2.3  _Note_ which cell we chose with a pointer or
-        reference.
-
-
-
-```{=tex}
-\begin{columns}
-    \column[c]{0.3\linewidth}
-    \includegraphics[scale=0.5]{DPcell.pdf} \\
-    \column[c]{0.576\linewidth}\raggedright
-    We add the cost of the best solution to the previous cells (above, 
-    to the left and above-left) to the best possible score for this
-    cell.
-\end{columns}
-```
+  2.3  _Note_ which cell we chose with a pointer or reference.
+![Schematic of the dynamic programming alignment described on the slide](images/DPcell.pdf)
+We add the cost of the best solution to the previous cells (above, to the left and above-left) to the best possible score for this cell.
 ---
 # Alignment example
 
@@ -352,32 +305,25 @@ We will align two amino acid sequences next:
 
 Input sequences:
 
-```{=tex}
-\begin{tabular}{cl}
-        $$x$$ & \texttt{HEAGAWGHEE}  \\
-        $$y$$ & \texttt{PAWHEAE}  \\ 
-\end{tabular}
-```
+| x   | `HEAGAWGHEE` |
+|-----|--------------|
+| y   | `PAWHEAE`    |
+
 ---
 # Filling in the cost matrix}
 
 Edit costs for these two sequences:
 
-````{=tex}
-\begin{center}
-    \begin{tabular}{c|cccccccccc}
-             & H & E & A & G & A & W & G & H & E & E  \\
-        \hline
-            P & -2 & -1 & -1 & -2 & -1 & -4 & -2 & -2 & -1 & -1  \\
-            A & -2 & -1 & 5 & 0 & 5 & -3 & 0 & -2 & -1 & -1  \\
-            W & -3 & -3 & -3 & -3 & -3 & 15 & -3 & -3 & -3 & -3  \\
-            H & 10 & 0 & -2 & -2 & -2 & -3 & -2 & 10 & 0 & 0  \\
-            E & 0 & 6 & -1 & -3 & -1 & -3 & -3 & 0 & 6 & 6  \\
-            A & -2 & -1 & 5 & 0 & 5 & -3 & 0 & -2 & -1 & -1  \\
-            E & 0 & -6 & -1 & -3 & -1 & -3 & -3 & 0 & 6 & 6  \\ 
-    \end{tabular}
-\end{center}
-```
+|      | H  | E  | A  | G  | A  | W  | G  | H  | E  | E  |
+|------|----|----|----|----|----|----|----|----|----|----|
+| P    | -2 | -1 | -1 | -2 | -1 | -4 | -2 | -2 | -1 | -1 |
+| A    | -2 | -1 | 5  | 0  | 5  | -3 | 0  | -2 | -1 | -1 |
+| W    | -3 | -3 | -3 | -3 | -3 | 15 | -3 | -3 | -3 | -3 |
+| H    | 10 | 0  | -2 | -2 | -2 | -3 | -2 | 10 | 0  | 0  |
+| E    | 0  | 6  | -1 | -3 | -1 | -3 | -3 | 0  | 6  | 6  |
+| A    | -2 | -1 | 5  | 0  | 5  | -3 | 0  | -2 | -1 | -1 |
+| E    | 0  | -6 | -1 | -3 | -1 | -3 | -3 | 0  | 6  | 6  |
+
 ---
 # Dynamic Programming: fill in
 
@@ -398,18 +344,11 @@ Edit costs for these two sequences:
 Aligned sequences:
 
 
-```{=tex}
-\begin{tabular}{c|ccccccccccc}
-        $$s_{1}$$ & \texttt{H} & \texttt{E} & \texttt{A} & \texttt{G} &
-        \texttt{A} & \texttt{W} & \texttt{G} & \texttt{H} & \texttt{E} &
-        \texttt{-} & \texttt{E}  \\
-        $$s_{2}$$ & \texttt{-} & \texttt{-} & \texttt{P} & \texttt{-} &
-        \texttt{A} & \texttt{W} & \texttt{-} & \texttt{H} & \texttt{E} &
-        \texttt{A} & \texttt{E}  \\
-        \hline
-         & -5 & -5 & -1 & -5 & +5 & +15 & -5 & +10 & +6 & -5 & +6
-\end{tabular}
-```
+|         | H   | E   | A   | G   | A   | W   | G   | H   | E   | -   | E   |
+|---------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| $$s_{1}$$ | `H` | `E` | `A` | `G` | `A` | `W` | `G` | `H` | `E` | `-` | `E` |
+| $$s_{2}$$ | `-` | `-` | `P` | `-` | `A` | `W` | `-` | `H` | `E` | `A` | `E` |
+|         | -5  | -5  | -1  | -5  | +5  | +15 | -5  | +10 | +6  | -5  | +6  |
 
 Total cost = 16
 ---
