@@ -145,6 +145,8 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
+
 ## Generate a transcript to gene map
 
 Gene-level, rather than transcript-level, quantification is standard in scRNA-seq, which means that the expression level of alternatively spliced RNA molecules are combined to create gene-level values. Droplet-based scRNA-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.
