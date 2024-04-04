@@ -13,7 +13,7 @@
   "key_points": [
     "Kraken assigns taxons to sequences",
     "Bracken extracts species from Kraken assignations",
-    "Centrifuge extracts stats and creates visualization from Kraken report"
+    "Recentrifuge extracts stats and creates visualization from Kraken report"
   ],
   "tags": [
     "illumina",
@@ -30,6 +30,9 @@
   "contributions": {
     "authorship": [
       "bebatut"
+    ],
+    "editing": [
+      "clsiguret"
     ],
     "funding": [
       "abromics"
@@ -55,9 +58,9 @@
   },
   "hands_on": true,
   "slides": false,
-  "mod_date": "2024-03-11 16:07:26 +0000",
+  "mod_date": "2024-04-04 12:40:28 +0000",
   "pub_date": "2024-03-04 11:07:10 +0000",
-  "version": 2,
+  "version": 5,
   "workflows": [
     {
       "workflow": "Checking-expected-species-and-contamination-in-bacterial-isolate.ga",
@@ -86,14 +89,13 @@
       "name": "Checking expected species and contamination in bacterial isolate",
       "title": "Checking expected species and contamination in bacterial isolate",
       "test_results": null,
-      "modified": "2024-04-04 12:34:59 +0000",
+      "modified": "2024-04-04 12:51:38 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Kraken2\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  a408a644-58cd-4f5e-af25-15b5ea63aa76[\"Output\\nkraken_report_reads\"];\n  2 --> a408a644-58cd-4f5e-af25-15b5ea63aa76;\n  style a408a644-58cd-4f5e-af25-15b5ea63aa76 stroke:#2c3143,stroke-width:4px;\n  54b85a53-72ee-4b73-b186-7fd55e8aab9b[\"Output\\nkraken_report_tabular\"];\n  2 --> 54b85a53-72ee-4b73-b186-7fd55e8aab9b;\n  style 54b85a53-72ee-4b73-b186-7fd55e8aab9b stroke:#2c3143,stroke-width:4px;\n  3[\"Bracken\"];\n  2 -->|report_output| 3;\n  ae6c6464-f5f5-4e5b-b616-d38166fc0133[\"Output\\nbracken_report_tsv\"];\n  3 --> ae6c6464-f5f5-4e5b-b616-d38166fc0133;\n  style ae6c6464-f5f5-4e5b-b616-d38166fc0133 stroke:#2c3143,stroke-width:4px;\n  8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8[\"Output\\nbracken_kraken_report\"];\n  3 --> 8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8;\n  style 8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8 stroke:#2c3143,stroke-width:4px;\n  4[\"Recentrifuge\"];\n  2 -->|output| 4;\n  b5694f2d-c8cd-4460-bfff-74fd0792ecb3[\"Output\\nrecentrifuge_stats_tabular\"];\n  4 --> b5694f2d-c8cd-4460-bfff-74fd0792ecb3;\n  style b5694f2d-c8cd-4460-bfff-74fd0792ecb3 stroke:#2c3143,stroke-width:4px;\n  bd947a1d-0443-465f-8658-5d76d9ce69f8[\"Output\\nrecentrifuge_report_html\"];\n  4 --> bd947a1d-0443-465f-8658-5d76d9ce69f8;\n  style bd947a1d-0443-465f-8658-5d76d9ce69f8 stroke:#2c3143,stroke-width:4px;\n  c7457acb-41bc-4191-b3fb-6716e15fbe57[\"Output\\nrecentrifuge_data_tabular\"];\n  4 --> c7457acb-41bc-4191-b3fb-6716e15fbe57;\n  style c7457acb-41bc-4191-b3fb-6716e15fbe57 stroke:#2c3143,stroke-width:4px;\n  94f6ff07-0e06-47ad-88f8-a058d0808537[\"Output\\nrecentrifuge_logfile\"];\n  4 --> 94f6ff07-0e06-47ad-88f8-a058d0808537;\n  style 94f6ff07-0e06-47ad-88f8-a058d0808537 stroke:#2c3143,stroke-width:4px;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.json",
   "tools": [
-    "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1",
-    "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.8+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.9+galaxy0",
     "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
     "toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0",
     "upload1"
@@ -104,6 +106,11 @@
         "url": "https://usegalaxy.eu",
         "name": "UseGalaxy.eu",
         "usegalaxy": true
+      },
+      {
+        "url": "https://usegalaxy.fr/",
+        "name": "UseGalaxy.fr",
+        "usegalaxy": false
       }
     ],
     "inexact": [
@@ -121,11 +128,6 @@
         "url": "https://usegalaxy.cz/",
         "name": "UseGalaxy.cz",
         "usegalaxy": false
-      },
-      {
-        "url": "https://usegalaxy.fr/",
-        "name": "UseGalaxy.fr",
-        "usegalaxy": false
       }
     ]
   },
@@ -138,14 +140,7 @@
       {
         "name": "bracken",
         "owner": "iuc",
-        "revisions": "79450f7fd718",
-        "tool_panel_section_label": "Metagenomic Analysis",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "bracken",
-        "owner": "iuc",
-        "revisions": "978ae4147c29",
+        "revisions": "1d4bd12f01cf",
         "tool_panel_section_label": "Metagenomic Analysis",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
@@ -165,7 +160,7 @@
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bracken\n  owner: iuc\n  revisions: 79450f7fd718\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bracken\n  owner: iuc\n  revisions: 978ae4147c29\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: kraken2\n  owner: iuc\n  revisions: 20e2f64aa1fe\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: recentrifuge\n  owner: iuc\n  revisions: b5407cc2bf51\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bracken\n  owner: iuc\n  revisions: 1d4bd12f01cf\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: kraken2\n  owner: iuc\n  revisions: 20e2f64aa1fe\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: recentrifuge\n  owner: iuc\n  revisions: b5407cc2bf51\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
@@ -204,6 +199,17 @@
       "id": "bebatut",
       "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
       "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+    },
+    {
+      "name": "Clea Siguret",
+      "joined": "2024-04",
+      "elixir_node": "fr",
+      "affiliations": [
+        "ifb"
+      ],
+      "id": "clsiguret",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/clsiguret.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/clsiguret/"
     },
     {
       "name": "ABRomics",
