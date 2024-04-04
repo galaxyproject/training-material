@@ -7,6 +7,10 @@ level: Introductory
 tags:
   - prokaryote
   - microgalaxy
+edam_ontology:
+  - topic_0196 # Sequence Assembly
+  - topic_0622 # Genomics
+  - topic_3301 # Microbiology
 questions:
   - "I have short reads and long reads. How do I assemble a genome?"
 objectives:

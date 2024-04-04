@@ -1057,15 +1057,19 @@ module GtnLinter
       possible_tests = Dir.glob("#{folder}/#{Regexp.escape(basename)}*ym*")
       possible_tests = possible_tests.grep(/#{Regexp.escape(basename)}[_-]tests?.ya?ml/)
 
+      contains_interactive_tool = contents.match(/interactive_tool_/)
+
       if possible_tests.empty?
-        results += [
-          ReviewDogEmitter.file_error(path: path,
-                                      message: 'This workflow is missing a test, which is now mandatory. Please ' \
-                                               'see [the FAQ on how to add tests to your workflows](' \
-                                               'https://training.galaxyproject.org/training-material/faqs/' \
-                                               'gtn/gtn_workflow_testing.html).',
-                                      code: 'GTN:027')
-        ]
+        if !contains_interactive_tool
+          results += [
+            ReviewDogEmitter.file_error(path: path,
+                                        message: 'This workflow is missing a test, which is now mandatory. Please ' \
+                                                 'see [the FAQ on how to add tests to your workflows](' \
+                                                 'https://training.galaxyproject.org/training-material/faqs/' \
+                                                 'gtn/gtn_workflow_testing.html).',
+                                        code: 'GTN:027')
+          ]
+        end
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|

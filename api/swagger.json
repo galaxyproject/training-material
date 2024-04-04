@@ -41,7 +41,13 @@
         "responses": {
           "200": {
             "description": "successful operation",
-            "content": "application/csv"
+            "content": {
+              "application/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -55,7 +61,13 @@
         "responses": {
           "200": {
             "description": "successful operation",
-            "content": "application/json"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -376,10 +388,10 @@
             "name": "toolId",
             "in": "path",
             "example": "toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate",
-            "description": "Tool ID WITHOUT the version component!!",
+            "description": "Tool ID WITHOUT the version component!! Also when you call it properly you do NOT need to encode the /.",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "object"
             }
           }
         ],

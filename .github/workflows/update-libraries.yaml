@@ -35,10 +35,10 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Update Shortlinks
+      - name: Update data libraries
         id: generate
         run: |
-          grep zenodo_link: -R topics -l | grep '.md$' | xargs -r -n 1 ruby bin/update-data-library update --fragile
+          grep zenodo_link: -R topics -l | grep '.md$' | xargs -r -n 1 bundle exec ruby bin/update-data-library update --fragile
 
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.

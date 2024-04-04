@@ -25,6 +25,11 @@ contributors:
   - tseemann
   - slugger70
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
 follow_up_training:
   - type: "internal"
     topic_name: genome-annotation

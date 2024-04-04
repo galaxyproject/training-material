@@ -64,6 +64,8 @@ We will use the same sample from the previous three tutorials, which contains la
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
+
 # Prepare datasets
 
 ## Get data

@@ -18,6 +18,7 @@ key_points:
 - Yeast species but also contamination can be identified and visualized directly from the sequences using several bioinformatics tools
 - With its graphical interface, Galaxy makes it easy to use the needed bioinformatics tools
 - Beer microbiome is not just made of yeast and can be quite complex
+subtopic: metagenomics
 tags:
 - nanopore
 - beer
@@ -34,6 +35,11 @@ contributions:
     - gallantries
 redirect_from:
 - /topics/metagenomics/tutorials/beer-data-analysis/tutorial
+edam_ontology:
+- topic_3174 # Metagenomics
+- topic_3697 # Microbial ecology
+- topic_0637 # Taxonomy
+- topic_0080 # Sequence analysis
 ---
 
 

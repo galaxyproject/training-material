@@ -10,14 +10,16 @@ contributors: [hexylena]
 
 <div class="show-when-galaxy-proxy-active">
 
-Click here to run <span class="workflow" data-workflow="https://dockstore.org/api/ga4gh/trs/v2/tools/#{{ include.dockstore_id }}"><strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span>
+<span class="workflow" data-workflow="https://dockstore.org/api/ga4gh/trs/v2/tools/#{{ include.dockstore_id }}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span>
+(<a href="https://dockstore.org/workflows/{{ include.dockstore_id }}">View on Dockstore</a>)
+
 
 </div>
 
 <div class="hide-when-galaxy-proxy-active">
 
-Click here to run <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523{{ include.dockstore_id }}"><strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a>
-
+<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523{{ include.dockstore_id }}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a>
+(<a href="https://dockstore.org/workflows/{{ include.dockstore_id }}">View on Dockstore</a>)
 
 </div>
 
