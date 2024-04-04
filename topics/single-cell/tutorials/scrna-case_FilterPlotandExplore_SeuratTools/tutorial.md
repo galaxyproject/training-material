@@ -62,10 +62,10 @@ We’ll provided you with experimental data to analyse from a mouse dataset of f
 # Get Data onto Galaxy
 To start, let's get our dataset loaded into Galaxy.
 
-{% include _includes/cyoa-choices.html option1="EBI Data Retrieval" option2="Importing from a history" option 3="Uploading from Zenodo" default="EBI Data Retrieval"
-       text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the **EBI Data Retrieval** {% icon tool %} " %}
+{% include _includes/cyoa-choices.html option1='EBI' option2='History" option 3='Zenodo' default='EBI' 
+  text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the EBI Data Retrieval tool." %}
 
-<div class="EBI Data Retrieval" markdown="1">
+<div class="EBI" markdown="1">
 ## 1. **EBI Data Retrieval** 
 You may retrieve that files necessary to construct a Seurat Object in this way. Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
 
@@ -76,8 +76,7 @@ You may retrieve that files necessary to construct a Seurat Object in this way. 
 > - *"Choose the type of matrix to download"*: `Raw filtered counts`
 {: .hands_on}
 </div>
-
-<div class="Importing from a history" markdown="1">
+<div class="History" markdown="1">
 ## 2. **Importing from a history** 
 You can import [this history](https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data)
 
@@ -85,8 +84,7 @@ You can import [this history](https://singlecell.usegalaxy.eu/u/camila-goclowski
 
 This also alleviates the necessity to convert the AnnData object into a Seurat one, which is an additional step you must complete if you choose to use the next method. 
 </div>
-
-<div class="Uploading from Zenodo" markdown="1">
+<div class="Zenodo" markdown="1">
 ## 3. **Uploading from Zenodo** 
 
 > <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
