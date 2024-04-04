@@ -1,5 +1,5 @@
 ---
-layout: histories
+layout: history-list
 
 ---
 

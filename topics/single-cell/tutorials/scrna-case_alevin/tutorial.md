@@ -15,26 +15,17 @@ questions:
   - I have some single cell FASTQ files I want to analyse. Where do I start?
 
 answer_histories:
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    {% icon galaxy-history %} Answer Key Histories
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">[galaxy.eu](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3) </a>
-    <a class="dropdown-item" href="#"> [Older Alevin version](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key) </a>
-  </div>
-</div>
+  current:
+    label: "UseGalaxy.eu"
+    history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+  older-alevin:
+    label: "Older Alevin version"
+    history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
 
 input_histories:
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    {% icon galaxy-history %} Answer Key Histories
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">[galaxy.eu](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3) </a>
-    <a class="dropdown-item" href="#"> [Older Alevin version](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key) </a>
-  </div>
-</div>
+  current:
+    label: "UseGalaxy.eu"
+    history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
 
 objectives:
   - Generate a cellxgene matrix for droplet-based single cell sequencing data
