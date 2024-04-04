@@ -200,7 +200,7 @@ __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken
 
 > <hands-on-title>Extract species with Bracken</hands-on-title>
 >
-> 1. {% tool [Estimate Abundance at Taxonomic Level](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1) %} with the following parameters:
+> 1. {% tool [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.9+galaxy0) %} with the following parameters:
 >     - {% icon param-collection %} *"Kraken report file"*: **Report** output of **Kraken**
 >     - *"Select a kmer distribution"*: `PlusPF`, same as for Kraken
 >
