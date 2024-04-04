@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9ffe69d1bbc78fab23a5077a108df7215b466681",
+		release: "galaxy-training-network@fe49487112fe03c8847b46927ac29925a4e1ab98",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -320,6 +320,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  
   
   
+<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Creating Slides</a></li>
+   
+  
+ 
+
+ 
+  
+  
 <li><a href="/training-material/topics/contributing/tutorials/introduction/slides.html">Overview of the Galaxy Training Material</a></li>
    
   
@@ -336,31 +344,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  
   
   
-<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Creating Slides</a></li>
-   
-  
- 
-
- 
-  
-  
-<li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the GTN website locally</a></li>
-  
-  
- 
-
- 
-  
-  
-<li><a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">Principles of learning and how they apply to training and teaching</a></li>
-  
-  
- 
-
- 
-  
-  
-<li><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">GTN Metadata</a></li>
+<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
   
   
  
@@ -376,7 +360,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  
   
   
-<li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
+<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">Adding Quizzes to your Tutorial</a></li>
   
   
  
@@ -384,7 +368,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  
   
   
-<li><a href="/training-material/topics/contributing/tutorials/python/tutorial.html">Teaching Python</a></li>
+<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating content in Markdown</a></li>
   
   
  
@@ -392,15 +376,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  
   
   
-<li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
-  
-  
- 
-
- 
-  
-  
-<li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+<li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the GTN website locally</a></li>
   
   
  
@@ -424,30 +400,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  
   
   
-<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Tools, Data, and Workflows for tutorials</a></li>
-  
-  
- 
-
- 
-  
-  
-<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating content in Markdown</a></li>
-  
-  
- 
-
- 
-  
-  
-<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">Adding Quizzes to your Tutorial</a></li>
-  
-  
- 
-
- 
-  
-  
 <li><a href="/training-material/topics/contributing/tutorials/design/tutorial.html">Design and plan session, course, materials</a></li>
   
   
@@ -456,7 +408,55 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  
   
   
-<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+<li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
+  
+  
+ 
+
+ 
+  
+  
+<li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
+  
+  
+ 
+
+ 
+  
+  
+<li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+  
+  
+ 
+
+ 
+  
+  
+<li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Tools, Data, and Workflows for tutorials</a></li>
+  
+  
+ 
+
+ 
+  
+  
+<li><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">GTN Metadata</a></li>
+  
+  
+ 
+
+ 
+  
+  
+<li><a href="/training-material/topics/contributing/tutorials/python/tutorial.html">Teaching Python</a></li>
+  
+  
+ 
+
+ 
+  
+  
+<li><a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">Principles of learning and how they apply to training and teaching</a></li>
   
   
  
@@ -544,7 +544,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9ffe69d1bbc78fab23a5077a108df7215b466681">9ffe69d</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/fe49487112fe03c8847b46927ac29925a4e1ab98">fe49487</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
