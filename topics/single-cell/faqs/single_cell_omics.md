@@ -12,4 +12,4 @@ The Single Cell Lab currently uses the main European Galaxy infrastructure and p
 
 Try it out! All your histories/workflows/logins from the general [European Galaxy server](https://usegalaxy.eu) will be there!
 
- - <i class="fa fa-tv" aria-hidden="true"></i> [Single Cell Lab](https://singlecell.usegalaxy.eu)
+ - {% icon subdomain %} [Single Cell Lab](https://singlecell.usegalaxy.eu)
