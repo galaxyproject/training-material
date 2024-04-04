@@ -26,6 +26,8 @@ edam_ontology:
 contributions:
   authorship:
   - bebatut
+  editing:
+  - clsiguret
   funding:
   - abromics
 ---
