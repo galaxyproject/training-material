@@ -59,7 +59,9 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 
 We’ll provided you with experimental data to analyse from a mouse dataset of fetal growth restriction ({% cite Bacon2018 %}). This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}).
 
-# Get Data onto Galaxy
+# Get Data onto Galaxy and generate a Seurat object
+
+## Get Data onto Galaxy
 To start, let's get our dataset loaded into Galaxy.
 
 {% include _includes/cyoa-choices.html option1='EBI Data Retrieval' option2='Importing from a history' option3='Uploading from Zenodo' default='EBI Data Retrieval' text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the EBI Data Retrieval." %}
@@ -85,6 +87,30 @@ To start, let's get our dataset loaded into Galaxy.
 {:.hands_on}
 </div>
 
+<div class='Importing-from-a-history EBI-Data-Retrieval' markdown='1'>
+
+## Generating a Seurat object
+You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
+
+This can be accomplished via the Read10x step. **Read10x** tool implements Seurat's function to create a matrix and add in feature and barcode names simultaneously: 
+
+> <hands-on-title>Read10X</hands-on-title>
+>
+> Run{% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/4.0.4+galaxy0) %} with the following parameters:
+> - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
+> - *"Gene table"*: `EBI SCXA Data Retrieval on EMTAB-6945 genes.tsv (Raw filtered counts)`
+> - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
+> - *"Cell Metadata"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
+> - *"Minimum cells to include features"*: `5`
+> - *"Choose the format of the output"*: `RDS with a Seurat object`
+> 
+> **Rename** {% icon galaxy-pencil %} output `Initial Seurat Object`
+{: .hands_on}
+
+The output of this tool will result in a Seurat object with row/column names as described above.
+
+</div>
+
 <div class='Uploading-from-Zenodo' markdown='1'>
 > <hands-on-title>Uploading from Zenodo</hands-on-title>
 >
@@ -107,6 +133,7 @@ To start, let's get our dataset loaded into Galaxy.
 >
 {: .hands_on}
 
+## Generating a Seurat object
 When you uploaded your data from Zenodo, it came in AnnData format, thus we will need to convert this to a Seurat Object. This can be easily accomplished using the Seurat FilterCells tool.
 Simply run the tool without any actual filtering thresholds and with the following parameters: 
 
@@ -120,25 +147,7 @@ Simply run the tool without any actual filtering thresholds and with the followi
 
 </div>
 
-# Generating a Seurat object
-You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
-
-This can be accomplished via the Read10x step. **Read10x** tool implements Seurat's function to create a matrix and add in feature and barcode names simultaneously: 
-
-> <hands-on-title>Read10X</hands-on-title>
->
-> Run{% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/4.0.4+galaxy0) %} with the following parameters:
-> - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
-> - *"Gene table"*: `EBI SCXA Data Retrieval on EMTAB-6945 genes.tsv (Raw filtered counts)`
-> - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
-> - *"Cell Metadata"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
-> - *"Minimum cells to include features"*: `5`
-> - *"Choose the format of the output"*: `RDS with a Seurat object`
-> 
-> **Rename** {% icon galaxy-pencil %} output `Initial Seurat Object`
-{: .hands_on}
-
-The output of this tool will result in a Seurat object with row/column names as described above. You've created a Seurat object, congratulations!
+You've created a Seurat object, congratulations!
 
 # QC Plots
 Now that we have a complete Seurat object, we can begin the filtering process.
