@@ -112,6 +112,8 @@ The output of this tool will result in a Seurat object with row/column names as 
 </div>
 
 <div class='Uploading-from-Zenodo' markdown='1'>
+
+## Get Data onto Galaxy
 > <hands-on-title>Uploading from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial
