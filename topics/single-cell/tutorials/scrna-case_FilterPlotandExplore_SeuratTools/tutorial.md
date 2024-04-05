@@ -98,23 +98,26 @@ To start, let's get our dataset loaded into Galaxy.
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
+>
+>    {% snippet faqs/galaxy/datasets_rename.md name="Mito-counted AnnData" %}
+>
 > 4. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
-><tip-title>AnnData to Seurat</tip-title>
->If you have uploaded your data from Zenodo, and it came in AnnData format, we will need to convert this to a Seurat Object. This can be easily accomplished using the Seurat FilterCells tool.
->Simply run the tool without any actual filtering thresholds and with the following parameters: 
+
+When you uploaded your data from Zenodo, it came in AnnData format, thus we will need to convert this to a Seurat Object. This can be easily accomplished using the Seurat FilterCells tool.
+Simply run the tool without any actual filtering thresholds and with the following parameters: 
+
+> <hands-on-title>Filter Cells</hands-on-title>
 >
->> <hands-on-title>Filter Cells</hands-on-title>
->>
->> Run{% tool [Seurat FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0) %} with the following parameters:
->> - *"Choose the format of the input"*: `AnnData`
->> - *"AnnData file"*: `Mito-counted AnnData`
->> - *"Choose the format of the output"*: `RDS with a Seurat object`
-> {: .hands_on}
-{: .tip}
+> Run{% tool [Seurat FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0) %} with the following parameters:
+> - *"Choose the format of the input"*: `AnnData`
+> - *"AnnData file"*: `Mito-counted AnnData`
+> - *"Choose the format of the output"*: `RDS with a Seurat object`
+{: .hands_on}
+
 </div>
 
 # Generating a Seurat object
