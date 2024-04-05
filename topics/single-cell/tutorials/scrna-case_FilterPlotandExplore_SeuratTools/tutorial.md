@@ -64,7 +64,7 @@ We’ll provided you with experimental data to analyse from a mouse dataset of f
 ## Get Data onto Galaxy
 To start, let's get our dataset loaded into Galaxy.
 
-{% include _includes/cyoa-choices.html option1='EBI Data Retrieval' option2='Importing from a history' option3='Uploading from Zenodo' default='EBI-Data-Retrieval' text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the EBI Data Retrieval." %}
+{% include _includes/cyoa-choices.html option1='EBI-Data-Retrieval' option2='Importing-from-a-history' option3='Uploading-from-Zenodo' default='EBI-Data-Retrieval' text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the EBI Data Retrieval." %}
 
 <div class='EBI-Data-Retrieval' markdown='1'>
 > <hands-on-title>EBI Data Retrieval</hands-on-title>
@@ -87,7 +87,7 @@ To start, let's get our dataset loaded into Galaxy.
 {:.hands_on}
 </div>
 
-<div class='Importing-from-a-history EBI-Data-Retrieval' markdown='1'>
+<div class='EBI-Data-Retrieval Importing-from-a-history' markdown='1'>
 
 ## Generating a Seurat object
 You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
@@ -99,7 +99,7 @@ This can be accomplished via the Read10x step. **Read10x** tool implements Seura
 > Run{% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/4.0.4+galaxy0) %} with the following parameters:
 > - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 > - *"Gene table"*: `EBI SCXA Data Retrieval on EMTAB-6945 genes.tsv (Raw filtered counts)`
-> - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
+> - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)` 
 > - *"Cell Metadata"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 > - *"Minimum cells to include features"*: `5`
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
