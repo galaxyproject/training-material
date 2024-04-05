@@ -2,7 +2,7 @@
 
 module Jekyll
   # Generate a sitemap like Jekyll::Sitemap
-  class SitemapGenerator < Generator
+  class SitemapGenerator2 < Generator
     safe true
 
     ##
@@ -14,11 +14,14 @@ module Jekyll
     # Params:
     # +site+:: The +Jekyll::Site+ object
     def generate(site)
-      if Jekyll.env == 'development'
+      if Jekyll.env == 'production'
+        _build(site)
+      else
         Jekyll.logger.info '[GTN/Sitemap] Skipping in development mode'
-        return
       end
+    end
 
+    def _build(site)
       # We import later in case we don't need to bother importing in the first place.
       require 'date'
       require './_plugins/gtn'
