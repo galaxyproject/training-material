@@ -64,27 +64,29 @@ To start, let's get our dataset loaded into Galaxy.
 
 {% include _includes/cyoa-choices.html option1='EBI Data Retrieval' option2='Importing from a history' option3='Uploading from Zenodo' default='EBI Data Retrieval' text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the EBI Data Retrieval." %}
 
-<div class='EBI Data Retrieval' markdown='1'>
-## **EBI Data Retrieval** 
-You may retrieve that files necessary to construct a Seurat Object in this way. Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
-> <hands-on-title>GetData</hands-on-title>
+<div class='EBI-Data-Retrieval' markdown='1'>
+> <hands-on-title>EBI Data Retrieval</hands-on-title>
+>
+> You may retrieve that files necessary to construct a Seurat Object in this way. Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
 >
 > Run{% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
 > - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
 > - *"Choose the type of matrix to download"*: `Raw filtered counts`
 {: .hands_on}
 </div>
-<div class='Importing from a history' markdown='1'>
-## **Importing from a history** 
-You can import [this history](https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data)
 
-{% snippet faqs/galaxy/histories_import.md %}
-
-This also alleviates the necessity to convert the AnnData object into a Seurat one, which is an additional step you must complete if you choose to use the next method. 
+<div class='Importing-from-a-history' markdown='1'>
+> <hands-on-title>Importing from a history</hands-on-title>
+> You can import [this history](https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data)
+> 
+> {% snippet faqs/galaxy/histories_import.md %}
+> 
+> This also alleviates the necessity to convert the AnnData object into a Seurat one, which is an additional step you must complete if you choose to use the next method. 
+{:.hands_on}
 </div>
-<div class='Uploading from Zenodo' markdown='1'>
-## **Uploading from Zenodo** 
-> <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
+
+<div class='Uploading-from-Zenodo' markdown='1'>
+> <hands-on-title>Uploading from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
