@@ -187,7 +187,7 @@ According Marcuse, **the education system is political, so aspiring to its polit
 > {: .quote author="Richard Lewontin and Richard Levins" cite="The dialectical biologist"}
 >
 >
-> Similarly, these authors consider that **the description of evolution as producing order is also deeply ideological**.  An alternative conception is represented by the *[disorder-function paradigm]({% link topics/transcriptomics/tutorials/differential-isoform-expression/slides.html#19})*. In this sense, evolution is neither a fact nor a theory, but a way of organising knowledge about the world.
+> Similarly, these authors consider that **the description of evolution as producing order is also deeply ideological**.  An alternative conception is represented by the *[disorder-function paradigm](https://www.blopig.com/blog/2016/12/disorder-function/). In this sense, evolution is neither a fact nor a theory, but a way of organising knowledge about the world.
 >
 {: .comment}
 
