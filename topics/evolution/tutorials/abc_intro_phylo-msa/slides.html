@@ -25,6 +25,7 @@ We use sequence alignment to:
 - find homologous parts (sites / loci) in sequences that may be under different selection dynamics;
 - and to build phylogenetic trees!
 
+
 Multiple sequence alignment (MSA) is a required step in molecular phylogenetics
 ---
 
@@ -44,10 +45,12 @@ One of the best understood and best solved bioinformatics problem is *how to ali
 # What is an alignment?
    
 Given two sequences like
+
 .image_50[
     ![DNA sequence GGCTGAA. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGGACTG.pdf-1.png)
 ]
 and
+
 .image_50[
     ![DNA sequence GGGACTG. Each base is a different colour G = orange, C = Blue, T = pink, A = green](images\DNA-GGCTGAA.pdf-1.png)
 ]
@@ -260,7 +263,7 @@ More complex models prohibit the use of dynamic programming to solve the alignme
 For two sequences of length $$x$$ and $$y$$, there are $$\frac{(x+y)!}{x!\ y!}$$ possible alignments.
 For three sequences, of length $$x$$, $$y$$ and $$z$$ say, there are $$\frac{(x+y+z)!}{x!\ y!\ z!}$$ alignments.
 
-For $n$ sequences of length 10, this increases rapidly:
+For $$n$$ sequences of length 10, this increases rapidly:
 
 | n   | Hash alignments  |
 |-----|------------------|
@@ -294,7 +297,6 @@ In terms of sequence alignment, this comes down to basing alignment of two seque
 ---
 #DP overview (cont.)
 
-
 ![Schematic representation of how alignment of two DNA sequences progresses. Three scenarios are shown: 1. both sequences are identical 2. the sequences differ and a gap is introduced in the top sequence 3. the sequences differ and a gap is introduced in the bottom sequence.](images/03-msa-10-advancing-seqs.pdf-1.png)
 
 ---
@@ -304,10 +306,11 @@ In terms of sequence alignment, this comes down to basing alignment of two seque
 1. Array two sequences along the top and left sides of a cost matrix.
 2. Fill in the cells of the matrix from top-left to bottom right.
     At each stage find the minimum cost sub-alignment and add to it:
-  2.1  Find the maximum score from the previous cells including gap costs;
-  2.2 Put the result into this new cell;
-  2.3  _Note_ which cell we chose with a pointer or reference.
-![Schematic of the dynamic programming alignment described on the slide](images/DPcell.pdf)
+        2.1  Find the maximum score from the previous cells including gap costs;
+        2.2 Put the result into this new cell;
+        2.3  _Note_ which cell we chose with a pointer or reference.
+![Schematic of the dynamic programming alignment described on the slide](images/03-DPcell.png)
+
 We add the cost of the best solution to the previous cells (above, to the left and above-left) to the best possible score for this cell.
 
 ---
@@ -319,7 +322,7 @@ We will align two amino acid sequences next:
 Input sequences:
 .center[
 | x   | HEAGAWGHEE |
-|-----|--------------|
+|---|---|
 | y   | PAWHEAE    |
 ]
 
@@ -387,14 +390,14 @@ Without too much effort it is possible to generalise this approach:
 
 -   Pairwise Sequence Alignment takes an amount of *time* that is proportional to the number of cells in the table, which is roughly the product of the lengths of the two sequences.
 
-    That means it is \bigO{nm} if the lengths of the sequences are $$n$$ and $$m$$; usually as these are about the same we can write \bigO{n^{2}}: it's *quadratic in sequence length*.
+    That means it is $$O(nm)$$ if the lengths of the sequences are $$n$$ and $$m$$; usually as these are about the same we can write $$O(n^{2})$$: it's *quadratic in sequence length*.
 
 -   The amount of space required is also quadratic in $$n$$.
     There is a linear-space version of the DP method (which is rarely used as it takes longer).
 
 -   This solution is globally optimal. It will always produce an optimal alignment, though there may be more than one.
 
--   With more sequences, the size of the table increase: for $$k$$ sequences the algorithm is \bigO{n^{k}}: not practical.
+-   With more sequences, the size of the table increase: for $$k$$ sequences the algorithm is $$O(n^{k})$$: not practical.
 
 ---
 
@@ -465,7 +468,7 @@ We can remove the gap-only sites now.  There's more to do!
 # What's Next?
 
 Once your sequences are properly aligned, they can be used for _phylogenetic analysis_.
-
+---
 # Thank you!
 
 .center[*Next: building trees from distances!*]
