@@ -1,0 +1,2347 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Filter, plot, and explore single cell RNA-seq data (Seurat) / Single Cell</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@7b4500170f6f322f3000639edd789d954841feff",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Filter, plot, and explore single cell RNA-seq data (Seurat)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-04-05 12:55:56 +0000">
+<meta name="DC.creator" content="Camila Goclowski">
+<meta name="DC.creator" content="Pablo Moreno"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Single Cell / Hands-on: Filter, plot, and explore single cell RNA-seq data (Seurat)">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-04-05 12:55:56 +0000",
+  "datePublished": "2024-04-09 08:31:24 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Filter, plot, and explore single cell RNA-seq data (Seurat)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Filter, plot, and explore single cell RNA-seq data (Seurat)",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html",
+  "version": 73,
+  "timeRequired": "PT3H",
+  "teaches": "Interpret quality control plots to direct parameter decisions\n - Repeat analysis from matrix to clustering to labelling clusters\n - Identify decision-making points\n - Appraise data outputs and decisions\n - Explain why single cell analysis is an iterative process (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly)",
+  "keywords": [
+    "Single Cell",
+    "10x",
+    "paper-replication"
+  ],
+  "description": "The questions this  addresses are:\n - Is my single cell dataset a quality dataset?\n - How do I pick thresholds and parameters in my analysis? What’s a “reasonable” number, and will the world collapse if I pick the wrong one?\n - How do I generate and annotate cell clusters?\n\n\nThe objectives are:\n - Interpret quality control plots to direct parameter decisions\n - Repeat analysis from matrix to clustering to labelling clusters\n - Identify decision-making points\n - Appraise data outputs and decisions\n - Explain why single cell analysis is an iterative process (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly)\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html",
+      "name": "An introduction to scRNA-seq data analysis",
+      "description": "Slides for 'An introduction to scRNA-seq data analysis' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html",
+      "name": "Hands-on: Hands-on: Pre-processing of 10X Single-Cell RNA Datasets",
+      "description": "Hands-on for 'Hands-on: Hands-on: Pre-processing of 10X Single-Cell RNA Datasets' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/",
+      "name": "Camila Goclowski",
+      "image": "https://avatars.githubusercontent.com/Camila-goclowski",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pcm32/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pcm32/",
+      "name": "Pablo Moreno",
+      "image": "https://avatars.githubusercontent.com/pcm32",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "name": "Pavankumar Videm",
+      "image": "https://avatars.githubusercontent.com/pavanvidem",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5192-126X",
+      "orcid": "https://orcid.org/0000-0002-5192-126X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "10x"
+    },
+    {
+      "@type": "Thing",
+      "name": "paper-replication"
+    }
+  ],
+  "abstract": "You’ve previously done all the work to make a single cell matrix. Now it’s time to fully process our data using Seurat: remove low quality cells, reduce the many dimensions of data that make it difficult to work with, and ultimately try to define clusters and find some biological meaning and insights! There are many packages for analysing single cell data - Seurat ({% cite Satija2015 %}), Scanpy ({% cite Wolf2018 %}), Monocle ({% cite Trapnell2014 %}), Scater ({% cite McCarthy2017 %}), and many more. We’re working with Seurat because it is well updated, broadly used, and highly trusted within the field of bioinformatics."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/single-cell" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Single Cell
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-single-cell">
+    <h1 data-toc-skip>Filter, plot, and explore single cell RNA-seq data (Seurat)</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Camila-goclowski/" class="contributor-badge contributor-Camila-goclowski"><img src="https://avatars.githubusercontent.com/Camila-goclowski?s=36" alt="Camila Goclowski avatar" width="36" class="avatar" />
+    Camila Goclowski</a><a href="/training-material/hall-of-fame/pcm32/" class="contributor-badge contributor-pcm32"><img src="https://avatars.githubusercontent.com/pcm32?s=36" alt="Pablo Moreno avatar" width="36" class="avatar" />
+    Pablo Moreno</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
+    Pavankumar Videm</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Is my single cell dataset a quality dataset?</p>
+</li>
+        
+        <li><p>How do I pick thresholds and parameters in my analysis? What’s a “reasonable” number, and will the world collapse if I pick the wrong one?</p>
+</li>
+        
+        <li><p>How do I generate and annotate cell clusters?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Interpret quality control plots to direct parameter decisions</p>
+</li>
+        
+        <li><p>Repeat analysis from matrix to clustering to labelling clusters</p>
+</li>
+        
+        <li><p>Identify decision-making points</p>
+</li>
+        
+        <li><p>Appraise data outputs and decisions</p>
+</li>
+        
+        <li><p>Explain why single cell analysis is an iterative process (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly)</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/single-cell">Single Cell</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> An introduction to scRNA-seq data analysis:
+                            
+                                <a href="/training-material/topics/single-cell/tutorials/scrna-intro/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Hands-on: Hands-on: Pre-processing of 10X Single-Cell RNA Datasets:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7053673">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 9, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 5, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 73 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>You’ve previously done all the work to make a single cell matrix. Now it’s time to fully process our data using Seurat: remove low quality cells, reduce the many dimensions of data that make it difficult to work with, and ultimately try to define clusters and find some biological meaning and insights! There are many packages for analysing single cell data - Seurat (<span class="citation"><a href="#Satija2015">Satija <i>et al.</i> 2015</a></span>), Scanpy (<span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>), Monocle (<span class="citation"><a href="#Trapnell2014">Trapnell <i>et al.</i> 2014</a></span>), Scater (<span class="citation"><a href="#McCarthy2017">McCarthy <i>et al.</i> 2017</a></span>), and many more. We’re working with Seurat because it is well updated, broadly used, and highly trusted within the field of bioinformatics.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <p>This tutorial is significantly based on the Seurat documentation(<span class="citation"><a href="#Satija2015">Satija <i>et al.</i> 2015</a></span>) as well as <a href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html">Seurat’s Guided Clustering Tutorial</a>.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data-onto-galaxy-and-generate-a-seurat-object" id="markdown-toc-get-data-onto-galaxy-and-generate-a-seurat-object">Get Data onto Galaxy and generate a Seurat object</a>    <ol>
+      <li><a href="#get-data-onto-galaxy" id="markdown-toc-get-data-onto-galaxy">Get Data onto Galaxy</a></li>
+      <li><a href="#generating-a-seurat-object" id="markdown-toc-generating-a-seurat-object">Generating a Seurat object</a></li>
+      <li><a href="#get-data-onto-galaxy" id="markdown-toc-get-data-onto-galaxy">Get Data onto Galaxy</a></li>
+      <li><a href="#generating-a-seurat-object-1" id="markdown-toc-generating-a-seurat-object-1">Generating a Seurat object</a></li>
+    </ol>
+  </li>
+  <li><a href="#qc-plots" id="markdown-toc-qc-plots">QC Plots</a>    <ol>
+      <li><a href="#1-sex-differences-in-counts" id="markdown-toc-1-sex-differences-in-counts">1. Sex Differences in Counts?</a></li>
+      <li><a href="#2-genotype-differences-in-counts" id="markdown-toc-2-genotype-differences-in-counts">2. Genotype Differences in Counts?</a></li>
+    </ol>
+  </li>
+  <li><a href="#finding-our-filtering-parameters" id="markdown-toc-finding-our-filtering-parameters">Finding Our Filtering Parameters</a></li>
+  <li><a href="#applying-our-thresholds" id="markdown-toc-applying-our-thresholds">Applying our Thresholds</a></li>
+  <li><a href="#processing" id="markdown-toc-processing">Processing</a>    <ol>
+      <li><a href="#1-normalization" id="markdown-toc-1-normalization">1. Normalization</a></li>
+      <li><a href="#2-identifying-variable-genes" id="markdown-toc-2-identifying-variable-genes">2. Identifying Variable Genes</a></li>
+      <li><a href="#3-scale-data" id="markdown-toc-3-scale-data">3. Scale Data</a></li>
+    </ol>
+  </li>
+  <li><a href="#dimensionality-reduction" id="markdown-toc-dimensionality-reduction">Dimensionality Reduction</a></li>
+  <li><a href="#lets-take-a-look" id="markdown-toc-lets-take-a-look">Let’s Take a Look</a></li>
+  <li><a href="#differential-expression-testing-finding-markers" id="markdown-toc-differential-expression-testing-finding-markers">Differential Expression Testing: Finding Markers</a></li>
+  <li><a href="#biological-interpretations" id="markdown-toc-biological-interpretations">Biological Interpretations</a>    <ol>
+      <li><a href="#keep-digging" id="markdown-toc-keep-digging">Keep Digging</a></li>
+    </ol>
+  </li>
+  <li><a href="#technical-assessment" id="markdown-toc-technical-assessment">Technical Assessment</a></li>
+</ol>
+
+</blockquote>
+
+<p>We’ll provided you with experimental data to analyse from a mouse dataset of fetal growth restriction (<span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>). This is the full dataset generated from <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">this tutorial</a>.</p>
+
+<h1 id="get-data-onto-galaxy-and-generate-a-seurat-object">Get Data onto Galaxy and generate a Seurat object</h1>
+
+<h2 id="get-data-onto-galaxy">Get Data onto Galaxy</h2>
+<p>To start, let’s get our dataset loaded into Galaxy.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the EBI Data Retrieval.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="EBI-Data-Retrieval" onclick="cyoaChoice('EBI-Data-Retrieval', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">EBI Data Retrieval</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Importing-from-a-history" onclick="cyoaChoice('Importing-from-a-history', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Importing from a history</label>
+	
+	
+		<input id="cyoa-opt3" type="radio" name="cyoa" value="Uploading-from-Zenodo" onclick="cyoaChoice('Uploading-from-Zenodo', 'gtn-cyoa')" />
+		<label for="cyoa-opt3" class="select btn btn-secondary">Uploading from Zenodo</label>
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("EBI-Data-Retrieval", "gtn-cyoa");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="EBI-Data-Retrieval">
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-ebi-data-retrieval"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: EBI Data Retrieval</div>
+
+    <p>You may retrieve that files necessary to construct a Seurat Object in this way. Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:</p>
+
+    <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2" title="EBI SCXA Data Retrieval tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>EBI SCXA Data Retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version v0.0.2+galaxy2)</span> with the following parameters:</p>
+    <ul>
+      <li><em>“SC-Atlas experiment accession”</em>: <code class="language-plaintext highlighter-rouge">E-MTAB-6945</code></li>
+      <li><em>“Choose the type of matrix to download”</em>: <code class="language-plaintext highlighter-rouge">Raw filtered counts</code></li>
+    </ul>
+  </blockquote>
+</div>
+
+<div class="Importing-from-a-history">
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-importing-from-a-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Importing from a history</div>
+    <p>You can import <a href="https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data">this history</a></p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <p>This also alleviates the necessity to convert the AnnData object into a Seurat one, which is an additional step you must complete if you choose to use the next method.</p>
+  </blockquote>
+</div>
+
+<div class="EBI-Data-Retrieval Importing-from-a-history">
+
+  <h2 id="generating-a-seurat-object">Generating a Seurat object</h2>
+  <p>You now should have imported the <code class="language-plaintext highlighter-rouge">matrix.mtx</code>, <code class="language-plaintext highlighter-rouge">genes.tsv</code>, <code class="language-plaintext highlighter-rouge">barcodes.tsv</code>, and <code class="language-plaintext highlighter-rouge">exp_design.tsv</code> files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.</p>
+
+  <p>This can be accomplished via the Read10x step. <strong>Read10x</strong> tool implements Seurat’s function to create a matrix and add in feature and barcode names simultaneously:</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-read10x"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read10X</div>
+
+    <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/4.0.4+galaxy0" title="Seurat Read10x tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat Read10x</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+    <ul>
+      <li><em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)</code></li>
+      <li><em>“Gene table”</em>: <code class="language-plaintext highlighter-rouge">EBI SCXA Data Retrieval on EMTAB-6945 genes.tsv (Raw filtered counts)</code></li>
+      <li><em>“Barcode/cell table”</em>: <code class="language-plaintext highlighter-rouge">EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)</code></li>
+      <li><em>“Cell Metadata”</em>: <code class="language-plaintext highlighter-rouge">EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv</code></li>
+      <li><em>“Minimum cells to include features”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+      <li><em>“Choose the format of the output”</em>: <code class="language-plaintext highlighter-rouge">RDS with a Seurat object</code></li>
+    </ul>
+
+    <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Initial Seurat Object</code></p>
+  </blockquote>
+
+  <p>The output of this tool will result in a Seurat object with row/column names as described above.</p>
+
+</div>
+
+<div class="Uploading-from-Zenodo">
+
+  <h2 id="get-data-onto-galaxy">Get Data onto Galaxy</h2>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-uploading-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Uploading from Zenodo</div>
+
+    <ol>
+      <li>Create a new history for this tutorial</li>
+      <li>
+        <p>Import the AnnData object from <a href="https://zenodo.org/record/7053673">Zenodo</a></p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7053673/files/Mito-counted_AnnData
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the datasets <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">h5ad</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <h2 id="generating-a-seurat-object-1">Generating a Seurat object</h2>
+  <p>When you uploaded your data from Zenodo, it came in AnnData format, thus we will need to convert this to a Seurat Object. This can be easily accomplished using the Seurat FilterCells tool.
+Simply run the tool without any actual filtering thresholds and with the following parameters:</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-filter-cells"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter Cells</div>
+
+    <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0" title="Seurat FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+    <ul>
+      <li><em>“Choose the format of the input”</em>: <code class="language-plaintext highlighter-rouge">AnnData</code></li>
+      <li><em>“AnnData file”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
+      <li><em>“Choose the format of the output”</em>: <code class="language-plaintext highlighter-rouge">RDS with a Seurat object</code></li>
+    </ul>
+  </blockquote>
+
+</div>
+
+<p>You’ve created a Seurat object, congratulations!</p>
+
+<h1 id="qc-plots">QC Plots</h1>
+<p>Now that we have a complete Seurat object, we can begin the filtering process.</p>
+
+<p>There will  be a number of ‘cells’ that are actually just empty droplets or low-quality. There will also be genes that could be sequencing artifacts or that appear with such low frequency that statistical tools will fail to accurately analyse them.</p>
+
+<p>This background noise of both cells and genes not only makes it harder to distinguish real biological information from artifacts, but also makes it computationally demanding to analyze.</p>
+
+<p>We want to filter our cells, but first we need to know what our data looks like. There are a number of subjective decisions to make within scRNA-seq analysis, for instance we now need to make informed decisions about where to set our thresholds (more on that soon!).</p>
+
+<p>We’re going to plot our data a few different ways. Different bioinformaticians might prefer to see the data in different ways, and here we are only generating a few of the plots you can use. Ultimately you need to go with what makes the most sense to you.</p>
+
+<p>So let’s generate some QC plots. First off, let’s visualize the spread of our data:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize Counts</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Initial Seurat Object</code> (output of <strong>Seurat Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">VlnPlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+    <li><em>“Log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/nCount_RNA_vln_plot.png" alt="Violin Plot of Counts. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/nCount_RNA_vln_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Violin Plot of counts.</figcaption></figure>
+
+<p>This plot will show us the spread of cells in our data containing a given number of counts (or transcripts) observed in a given cell. We can use this plot, and others like it in a moment, to help filter out the uninformative cells.</p>
+
+<p>In a similar fashion we can visualize the spread of cells in our data expressing a given number of features (or genes):</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-features"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize Features</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Initial Seurat Object</code> (output of <strong>Seurat Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">VlnPlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">nFeature_RNA</code></li>
+    <li><em>“Log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/nFeature_RNA_vln_plot.png" alt="Violin Plot of Features. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/nFeature_RNA_vln_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Violin Plot of features.</figcaption></figure>
+
+<p>Now, we could just pick filtering thresholds based on these plots, and in a typical pipeline we would also plot the proportion of features that map to the mitochondrial genome (a tool coming soon to do so!). In the meantime, let’s do some QC checks.</p>
+
+<p>We can, and should, ask a number of questions about the quality of our data before conducting any actual analyses. Batch effect, for example carries the potential to alter the conclusions we make. Let’s take a look at whether this may be the case here:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-counts-split-by-individual"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize Counts Split by Individual</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Initial Seurat Object</code> (output of <strong>Seurat Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">VlnPlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+    <li><em>“Group by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.individual.</code></li>
+    <li><em>“Split by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.individual.</code></li>
+    <li><em>“Log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+    <li><em>“Fill by”</em>: <code class="language-plaintext highlighter-rouge">ident</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Individual_vln_plot.png" alt="Violin Plot of Counts Split by Individual. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Individual_vln_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Violin Plot of counts split by individual.</figcaption></figure>
+
+<p>This plot shows us the number of cells split by the individual (mouse) from which the cells came from. Now, depending on your experimental design, batch may be represented by something other than individual–like timepoint or even the wet lab researcher who isolated the cells.</p>
+
+<p>Ideally, we would like to see a relatively even distribution of counts for each individual (or batch) but if there isn’t, fear not, we can regress this variable out in a later step.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-plotting-lesson"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-plotting-lesson" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Plotting Lesson</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>In order to accurately assess potential batch effects, use the “group.by” parameter to indicate the variable which differed across experiments. 
+If you are analyzing your own data, try plotting another variable which you know differed across experiments or even just samples.</p>
+
+</blockquote>
+
+<p>Now let’s get an idea of how other variables, like  sex or genotype of the mice, might be represented across our dataset.</p>
+
+<h2 id="1-sex-differences-in-counts">1. Sex Differences in Counts?</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-counts-split-by-sex"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize Counts Split by Sex</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Initial Seurat Object</code> (output of <strong>Seurat Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">VlnPlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+    <li><em>“Group by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.sex.</code></li>
+    <li><em>“Split by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.sex.</code></li>
+    <li><em>“Log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+    <li><em>“Fill by”</em>: <code class="language-plaintext highlighter-rouge">ident</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Sex_vln_plot.png" alt="Violin Plot of Counts Split by Sex with males representing more of the counts than females but distributions are about the same across both sexes. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Sex_vln_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Violin Plot of counts split by sex.</figcaption></figure>
+
+<h2 id="2-genotype-differences-in-counts">2. Genotype Differences in Counts?</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-counts-split-by-genotype"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize Counts Split by Genotype</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Initial Seurat Object</code> (output of <strong>Seurat Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">VlnPlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+    <li><em>“Group by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.genotype.</code></li>
+    <li><em>“Split by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.genotype.</code></li>
+    <li><em>“Log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+    <li><em>“Fill by”</em>: <code class="language-plaintext highlighter-rouge">ident</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Genotype_vln_plot.png" alt="Violin Plot split by Genotype--Mutant versus Control. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Genotype_vln_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Violin Plot of counts split by Genotype--Mutant versus Control.</figcaption></figure>
+
+<h1 id="finding-our-filtering-parameters">Finding Our Filtering Parameters</h1>
+<p>Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them.</p>
+
+<p>In a standard workflow, we would plot the percentage of mitochondrial reads (perc.mt) against the total number of reads per cell (nCount_RNA) and number of genes per cell (nFeature_RNA) to get an idea of our thresholds.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-high-mitochondrial-reads"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: High Mitochondrial Reads</div>
+  <p>High perc.mt will typically indicate stressed out cells (often due to the extraction, sorting, or sample prep protocols).</p>
+
+</blockquote>
+
+<p>However, this is not always necessary, and in fact, filtering based on counts and features (indeed, even just counts alone) will often remove the cells with spuriously high mitochondrial transcripts. These tools (and this tutorial) will soon be updated to allow us to do so–in the meantime, please see <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html">Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)</a> <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, plot and explore single-cell RNA-seq (Scanpy)</a>, or <a href="/training-material/topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html">Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)</a> if you hope to include perc.mt in your own data analysis adventures.</p>
+
+<p>For now, we will use just transcript and gene counts to filter our data. Let’s take a look back at our nFeature Violin Plot to pick our gene threshold:</p>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/nFeature_RNA_vln_plot.png" alt="Violin Plot of Features. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/nFeature_RNA_vln_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Violin Plot of features.</figcaption></figure>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-interpretations"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Interpretations</div>
+  <p>You can see that very few cells in the dataset contain fewer than ~500 genes. Biologically, this makes sense, and the cells appear to be outliers in the data. As such, we will set our lower threshold of genes (nFeature_RNA) at 500.</p>
+</blockquote>
+
+<p>Now, what about transcripts (nCount_RNA)? Let’s take a look:</p>
+
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/nCount_RNA_vln_plot.png" alt="Violin Plot of Counts. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/nCount_RNA_vln_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Violin Plot of counts.</figcaption></figure>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-interpretations-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Interpretations</div>
+  <p>This one is a bit more difficult to visualize but we see a severe drop off in the number of cells that contain fewer than 500 and more than 10,000 transcripts. These will be our nCount thresholds that we filter based on.</p>
+</blockquote>
+
+<p>These cells won’t tell us much biologically, rather, they will contribute noise that we’ll want to filter out of the data. With that being said, filtering scRNA-seq data will always be an iterative process–so label your work well and be ready to revisit these thresholds if your analyses seem strange down the line.</p>
+
+<h1 id="applying-our-thresholds">Applying our Thresholds</h1>
+<p>It’s time to filter our cells by applying the above thresholds!</p>
+
+<p>In order to include more than one parameter by which to filter, use the “Insert Subsets used to filter cells” button below the first parameter box.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filter-cells-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter Cells</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0" title="Seurat FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Initial Seurat Object</code> (output of <strong>Seurat Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li>In <em>“Subsets used to filter cells”</em>:
+      <ul>
+        <li><em>“Name of Parameter to filter on”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+      </ul>
+    </li>
+    <li><em>“Min value”</em>: <code class="language-plaintext highlighter-rouge">500.0</code></li>
+    <li>
+      <p><em>“Max value”</em>: <code class="language-plaintext highlighter-rouge">10000</code></p>
+    </li>
+    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Subsets used to filter cells”</em>
+      <ul>
+        <li><em>“Name of Parameter to filter on”</em>: <code class="language-plaintext highlighter-rouge">nFeature_RNA</code></li>
+      </ul>
+    </li>
+    <li><em>“Min value”</em>: <code class="language-plaintext highlighter-rouge">500.0</code></li>
+    <li>
+      <p><em>“Max value”</em>: <code class="language-plaintext highlighter-rouge">1000000000.0</code></p>
+    </li>
+    <li><em>“Choose the format of the output”</em>: <code class="language-plaintext highlighter-rouge">RDS with a Seurat object</code></li>
+  </ul>
+
+  <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Filtered Seurat Object</code></p>
+</blockquote>
+
+<p>In this step we are creating a new Seurat object (notice that the selected output of this tool will be an RDS file as opposed to the png plots we have thus far been creating).</p>
+
+<p>Now, genes that do not appear in any cell, or even in only 1 or 2 cells, may break some analytical tools and will generally not be biologically informative.</p>
+
+<p>Since you’ve removed a whole heap of cells, and the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes still present in your matrix that are not expressed in any of the cells.</p>
+
+<p>The removal of these genes is by no means necessary, but will speed up your analyses. The developers are currently working to enable a means of doing this through the Seurat Tools, but, in the meantime if you are analyzing your own data and would like to filter genes–please see <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html">Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)</a> <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, plot and explore single-cell RNA-seq (Scanpy)</a>, or <a href="/training-material/topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html">Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)</a>.</p>
+
+<h1 id="processing">Processing</h1>
+<p>Currently, we still have quite big data. We have two issues here</p>
+<ol>
+  <li>We already saw in our filtering plots that there are differences in how many transcripts and genes have been counted per cell. This technical variable could, and likely will, distract us from identifying true biological differences.</li>
+  <li>We like to plot things on 2-dimensional X/Y plots. So, for instance, Gapdh could be on one axis, and Actin could be on another, and then each cell is plotted onto that 2D axis based on how many of each transcript they possess.</li>
+</ol>
+
+<p>Although that would be fine, adding in a 3rd dimension (or, indeed, in our case, a dimension for each of the thousands of genes), is a bit trickier.</p>
+
+<p>So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize: this is commonly referred to as preprocessing of the data and a typical scRNA-seq preprocessing pipeline will include the following steps:</p>
+
+<h2 id="1-normalization">1. Normalization</h2>
+
+<p>What is Normalization?</p>
+
+<p>Normalisation helps reduce the differences between gene and UMI counts by fitting total counts across cells in our data to be comparable to one another. SCTransform regularizes the gene expression profiles via a negative binomial regression while also controlling for overfitting of the data.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-normalize-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalize Data</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_normalise_data/seurat_normalise_data/4.0.4+galaxy0" title="Seurat NormaliseData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat NormaliseData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Filtered Seurat Object</code> (output of <strong>Seurat FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Normalisation method”</em>: <code class="language-plaintext highlighter-rouge">Log Normalise</code></li>
+  </ul>
+
+  <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Normalised Seurat Object</code></p>
+</blockquote>
+
+<h2 id="2-identifying-variable-genes">2. Identifying Variable Genes</h2>
+
+<p>What are variable genes?</p>
+
+<p>The datasets have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses.</p>
+
+<p>The find variable genes step flags genes that <em>do</em> vary across cells to expedite future analyses and ensure that we, and Seurat, don’t waste time looking for meaningful differences where they don’t exist.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-find-variable-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find Variable Genes</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_variable_genes/seurat_find_variable_genes/4.0.4+galaxy0" title="Seurat FindVariableGenes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat FindVariableGenes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Normalised Seurat Object</code> (output of <strong>Seurat NormaliseData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Choose the format of the output”</em>: <code class="language-plaintext highlighter-rouge">RDS with a Seurat object</code></li>
+  </ul>
+
+  <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Normalised Seurat Object with Variable Features</code></p>
+</blockquote>
+
+<p>This tool will output two new pieces of data into our Galaxy history:</p>
+<ol>
+  <li>a new Seurat object with variable features identified and flagged</li>
+  <li>a tabular file with a list of these variable genes.</li>
+</ol>
+
+<p>This gene list may be used as a sneak peak into understanding what the dataset will look like! We can begin to understand which genes are going to be driving downstream clustering of our cells and maybe even make some decisions about whether we are happy with our filtering based on this list.</p>
+
+<h2 id="3-scale-data">3. Scale Data</h2>
+
+<p>Now we will scale the data.</p>
+
+<p>What is scaling?</p>
+
+<p>This is an important step to set up our data for further dimensionality reduction. It will transform the dataset such that all genes have the same variance and a zero mean. It helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-don-t-worry"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Don't Worry!</div>
+  <p>Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a ‘0’ when you calculate gene differences between clusters.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-scale-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Scale Data</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_scale_data/seurat_scale_data/4.0.4+galaxy0" title="Seurat ScaleData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat ScaleData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Normalised Seurat Object with Variable Features</code> (output of <strong>SeuratFindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Choose the format of the output”</em>: <code class="language-plaintext highlighter-rouge">RDS with a Seurat object</code></li>
+    <li><em>“Genes to use”</em>: <code class="language-plaintext highlighter-rouge">Seurat FindVariableGenes on data 12: Variable genes tabular file</code></li>
+    <li><em>“Vars to regress”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+    <li><em>“Statistical model”</em>: <code class="language-plaintext highlighter-rouge">Linear model</code></li>
+  </ul>
+
+  <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Preprocessed Seurat Object</code></p>
+</blockquote>
+
+<p>You now have a preprocessed Seurat object!</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-regressing-variables"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Regressing Variables</div>
+  <p>Take note of the “Vars to regress” argument in the above tool. This function allow us to mitigate the effects of confounding factors in our dataset.
+In true research practice, I often regress out multiple variables including but not limited to perc.mt, cell cycle scoring, and feature count. 
+As currently written, this tool only allows us to regress out a single variable: so feel free to pick another to regress and see how it changes the downstream analyses!</p>
+</blockquote>
+
+<h1 id="dimensionality-reduction">Dimensionality Reduction</h1>
+<p>Although we’ve made our expression values comparable to one another and our overall dataset less computationally demanding, we still have way too many dimensions (n cells x n genes!).</p>
+
+<p>Transcript changes are not usually singular–which is to say, genes function and exist in pathways and groups. It would be easier to analyse our data if we could group these differences. To address this we will run principal component analysis (PCA).</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-what-is-pca"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What is PCA?</div>
+  <p>Principal components (PCs) are calculated from highly dimensional data to find the most representative spread in the dataset. So in our highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component.</p>
+</blockquote>
+
+<p>We can calculate the first handful of principal components in our data to drastically reduce the number of dimensions:</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-running-computationally-demanding-steps-on-variable-features"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-computationally-demanding-steps-on-variable-features" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Running Computationally Demanding Steps on Variable Features </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>You’ll notice that the <strong>Seurat RunPCA</strong> tool is run using the variable features from the previous step. This signficantly decreases the number of genes, and their expression changes, that must be grouped into principal components by this step.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-pca"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run PCA</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_pca/seurat_run_pca/4.0.4+galaxy0" title="Seurat RunPCA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat RunPCA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Preprocessed Seurat Object</code> (output of <strong>Seurat RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Choose the format of the output”</em>: <code class="language-plaintext highlighter-rouge">RDS with a Seurat object</code></li>
+    <li><em>“Genes to scale”</em>: <code class="language-plaintext highlighter-rouge">Seurat FindVariableGenes on data 12: Variable genes tabular file</code></li>
+  </ul>
+</blockquote>
+
+<p>This tool will output you with four new datasets into your history:</p>
+<ol>
+  <li>Seurat RDS which includes all of the following PCA metadata</li>
+  <li>Embeddings: Principal component values for each of the cells in your dataset</li>
+  <li>Loadings: Prinicial component values for each of the genes in your dataset</li>
+  <li>Standard deviations of each principal component coordinates</li>
+</ol>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-visualizing-pca"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-visualizing-pca" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Visualizing PCA</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>In order to use the PCA information which was just calculated, we must visualize it. The currently available tools unfortunately do not [YET] carry the capacity to do so, but I will provide the plot so that we may make an informed decision together:</p>
+
+  <figure id="figure-8" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/ElbowPlot.png" alt="Elbow Plot of Principal Components (PCs) against the standard deviation (variability in the dataset) they each account for. " width="948" height="680" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/ElbowPlot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Elbow Plot</figcaption></figure>
+
+  <p>We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 15 PCs to be conservative.
+You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs.</p>
+</blockquote>
+
+<p>We’re still looking at around 15 dimensions at this point–likely not the easiest to visualize. To make our lives easier, we need to identify how similar a cell is to another cell, across every cell across each of these dimensions.</p>
+
+<p>For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not.</p>
+
+<p>The kNN graph plots connections between cells if their distance (when plotted in this 10 dimensional space!) is amongst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP–which is what will ultimately allow us to visualize our data in 2 dimensions.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-from-umap-developers"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: From UMAP developers:</div>
+  <p>“Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.</p>
+</blockquote>
+
+<p>Let’s now use the 15 PC threshold we chose from the Elbowplot and apply it to find neighbors:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-find-neighbors"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find Neighbors</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_neighbours/seurat_find_neighbours/4.0.4+galaxy0" title="Seurat FindNeighbours tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat FindNeighbours</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Preprocessed Seurat Object</code> (output of <strong>Seurat RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Reduction”</em>: <code class="language-plaintext highlighter-rouge">pca</code></li>
+    <li><em>“Dimensions”</em>: <code class="language-plaintext highlighter-rouge">1,2,3,4,5,6,7,8,9,10,11,12,13,14,15</code></li>
+    <li><em>“Assay”</em>: <code class="language-plaintext highlighter-rouge">RNA</code></li>
+  </ul>
+</blockquote>
+
+<p>Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another: we can identify and label clusters:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-find-clusters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find Clusters</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0" title="Seurat FindClusters tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat FindClusters</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Preprocessed Seurat Object</code> (output of <strong>Seurat FindNeighbors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li>In <em>“Advanced Options “</em>
+      <ul>
+        <li><em>“Resolution”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>This tool will output two new datasets: as usual, a new Seurat object which includes a metadata column denoting which cluster each cell was assigned to, and a csv file of the same information.</p>
+
+<p>Unfortunately, identifying clusters is not as majestic as biologists often think - the math doesn’t necessarily identify true cell clusters. Every algorithm for identifying cell clusters falls short of a biologist knowing their data, knowing what cells should be there, and proving it in the lab.</p>
+
+<p>So, we’re going to make the best of it as a starting point and see what happens! We will define clusters from the kNN graph, based on how many connections cells have with one another. Roughly, this will depend on a resolution parameter for how granular you want to be.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-on-clustering-resolution"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-on-clustering-resolution" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: On Clustering Resolution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>The resolution parameter available in the advanced options of this tool allows for you, the bioinformatician, to dictate the granularity of the clusters.</p>
+
+  <p>For example, a higher clustering resolution dictates increased granularity, and more stringent clusters. That is–cells must more closely resemble one another in order to be grouped into the same cluster than at a lower clustering resolution.</p>
+
+  <p>In general, I find it easiest to think of a higher resolution producing more clusters and conversely, a lower resolution will produce less clusters. This parameter is a useful one that you will use often to help decipher how many true populations of cells are present in your data!</p>
+</blockquote>
+
+<p>Now that we have made note within our object of which cells cluster together, we can start to visualize our data! Two major visualizations for this data type are tSNE and UMAP. We can calculate the coordinates for both prior to visualization. For tSNE, the parameter perplexity can be changed to best represent the data, while for UMAP the main change would be to change the kNN graph above itself, via the <strong>Seurat FindNeighbors</strong> tool.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-on-umap"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-on-umap" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: On UMAP</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>UMAP is the most recently developed, and most widely used dimensionality reduction for visualization of principal component data. It has been optimized since tSNE to better preserve global structure and is less computationally demanding.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-umap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run UMAP</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0" title="Seurat UMAP tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat UMAP</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Preprocessed Seurat Object</code> (output of <strong>Seurat FIndClusters</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Choose the format of the output”</em>: <code class="language-plaintext highlighter-rouge">RDS with a Seurat object</code></li>
+    <li><em>“Dims”</em>: <code class="language-plaintext highlighter-rouge">1:15</code></li>
+  </ul>
+
+  <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code></p>
+</blockquote>
+
+<p>You now have a completely preprocessed and ready to be analyzed Seurat object–congratulations!</p>
+
+<h1 id="lets-take-a-look">Let’s Take a Look</h1>
+<p>Now that we have run dimensionality reduction on our dataset, it is ready for visualization. Let’s take a look at what our cells look like in a UMAP projection:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-umap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot UMAP</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">DimPlot</code></li>
+    <li><em>“Group by”</em>: <code class="language-plaintext highlighter-rouge">RNA_nn_res.0.5</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-9" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png" alt="DimPlot colored by 0.5 resolution clusters with a total of 8 clusters--two noticeably different &quot;island&quot; populations and six clustering more closely to one another. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> DimPlot colored by 0.5 resolution cluster.</figcaption></figure>
+
+<p>Good work! It looks like with a clustering resolution of 0.5, we are able to identify 8 clusters of cells in our data.</p>
+
+<p>We can also look for expression of particular genes and see how those map to our UMAP projection. This is often useful in getting an initial understanding of which clusters might be representative of which cell types.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-gapdh"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Gapdh</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">Gapdh</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-10" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Gapdh.png" alt="FeaturePlot of Gapdh expression shown boradly across the whole dataset. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Gapdh.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> FeaturePlot: Gapdh</figcaption></figure>
+
+<p>We just plotted a housekeeping gene, Gapdh, so the broad expression we observe is expected.</p>
+
+<p>In practice, it is helpful to plot known markers of cell types you expect to be in your dataset. This will give you a first look at how your cells are clustered.</p>
+
+<p>For example, we can plot early T-cell marker Il2ra and get an idea of which cells and/or clusters might resemble the early T-cells:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-il2ra"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Il2ra</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">Il2ra</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png" alt="FeaturePlot of Il2ra expression most highlky expressed in the lower island population (cluster 2). " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> FeaturePlot: Il2ra</figcaption></figure>
+
+<p>It is a good idea, when analyzing your own data, to plot some markers of cell types you expect to be present. Later on we can also use these FeaturePlots to visualize manual annotation of clusters.</p>
+
+<h1 id="differential-expression-testing-finding-markers">Differential Expression Testing: Finding Markers</h1>
+<p>Because each cluster of cells was grouped based on similar transcriptome profiles, each cluster will inherently differ from one another based on a set of “marker” genes.</p>
+
+<p>Following an initial look at the DimPlots and FeaturePlots, we can take an even closer look at which genes are driving the clustering.</p>
+
+<p>To do so, we’ll run Seurat’s FindMarkers function, which will compare each identity (in this case cluster) against every other identity within its class (all the other clusters). This function of marker finding is particularly useful in identifying up, or down, regulated genes that drive differences in identity/cluster.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-find-markers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find Markers</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_markers/seurat_find_markers/4.0.4+galaxy0" title="Seurat FindMarkers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Seurat FindMarkers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+  </ul>
+</blockquote>
+
+<p>The marker list that has been output by this tool will be useful to us shortly for identifying which cells types are represented by the various clusters.\</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-on-finding-markers"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: On Finding Markers</div>
+  <p>Differential expression can be run using any identity class and any two identities within the same class. The tools as of current do not allow for such direct comparisons (but will soon!) and I implore you to try <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html">Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)</a> if you hope to conduct marker identification across, say, genotypes.</p>
+</blockquote>
+
+<h1 id="biological-interpretations">Biological Interpretations</h1>
+<p>Now it’s the fun bit! We can see where genes are expressed, and start considering and interpreting the biology of it. At this point, it’s really about what information you want to get from your data–the following is only the tip of the iceberg. However, a brief exploration is good, because it may help give you ideas going forward for your own data. Let’s start interrogating our data!</p>
+
+<p>Let’s take another look at what our clusters look like:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-umap-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot UMAP</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">DimPlot</code></li>
+    <li><em>“Group by”</em>: <code class="language-plaintext highlighter-rouge">RNA_nn_res.0.5</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-12" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png" alt="DimPlot colored by 0.5 resolution cluster showing 8 total clusters. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/DimPlot_GroupBy_pt5Res.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> DimPlot colored by 0.5 resolution cluster.</figcaption></figure>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-on-cluster-numbering"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: On Cluster Numbering</div>
+  <p>Note that Seurat’s cluster numbering is based on size alone, so clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells.</p>
+</blockquote>
+
+<p>It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are and then going through marker tables we generated) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!</p>
+
+<p>Here are the markers per cell type that the paper uses to classify the avrious cell types which are expected to be present in the data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Markers</th>
+      <th>Cell Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Il2ra</td>
+      <td>Double negative (early T-cell)</td>
+    </tr>
+    <tr>
+      <td>Cd8b1, Cd8a, Cd4</td>
+      <td>Double positive (middle T-cell)</td>
+    </tr>
+    <tr>
+      <td>Cd8b1, Cd8a, Cd4 - high</td>
+      <td>Double positive (late middle T-cell)</td>
+    </tr>
+    <tr>
+      <td>Itm2a</td>
+      <td>Mature T-cell</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We can plot these markers as a means of discerning which cluster might be representing a given cell type. Let’s start with the Mature T-cell marker Itm2a:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-itm2a"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Itm2a</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">Itm2a</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-13" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Itm2a.png" alt="FeaturePlot of Itm2a expression most highly localized to cluster 3. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Itm2a.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> FeaturePlot of Itm2a</figcaption></figure>
+
+<p>We can see that Cluster 3 seems to be most highly expressing this gene, and when we look back at the marker list we created earlier, Itm2a appears as a marker for cluster 3 with an average log fold change of 3! Therefore, we can quite conficently say that cluster 3 is likely to be representing Mature T-cells!</p>
+
+<p>Now what about the opposite end of the spectrum: the double negative early T-cells? We can see from our table about that Il2ra is a known marker of this cell type, let’s see where it’s most strongly expressed in the data:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-il2ra-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Il2ra</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">Il2ra</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-14" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png" alt="FeaturePlot of Il2ra expression mainly in cluster 2. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> FeaturePlot of Il2ra</figcaption></figure>
+
+<p>Il2ra expression seems to be most prominent in Cluster 2 and as seen in our marker list, has a fold change of 2.79!</p>
+
+<p>It can, and should, act as a sanity check that the most (and least) differentiated cell types expected in the data appear as two “island” clusters.</p>
+
+<p>Now for the intermediate populations–which may be a bit more tricky to deconvolute. Based on our known markers, we see that both the double-positive populations express many of the same genes: Cd8b1, Cd8a, and Cd4. Let’s make sure that the remaining clusters (0, 1, 3, 4, 5, 6, and 7) all express these:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-cd8b1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Cd8b1</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">Cd8b1</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-15" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8b1.png" alt="FeaturePlot of Cd8b1 expression expressed across each of the &quot;body&quot; clusters (0, 1, 4, 5, 6, and 7). " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8b1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> FeaturePlot of Cd8b1</figcaption></figure>
+
+<p>It looks like clusters 1, 4, 5, and 6 pretty strongly express Cd8b1, now what about Cd8a?</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-cd8a"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Cd8a</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">Cd8a</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-16" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8a.png" alt="FeaturePlot of Cd8a expression in the same clsuters as Cd8b1 (0, 1, 4, 5, 6, and 7). " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8a.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> FeaturePlot of Cd8a</figcaption></figure>
+
+<p>This looks pretty consistent with the Cd8b1 plot, which is expected as these are markers of a double positive population! The true discernment between the two populations will be the level of Cd4 expression:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-cd4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Cd4</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">Cd4</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-17" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeatuerePlot_Cd4.png" alt="FeaturePlot of Cd4 expression most highly expressed in cluster 1 and lowly expressed in clusters 4, 5, 6, and 7. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeatuerePlot_Cd4.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> FeaturePlot of Cd4</figcaption></figure>
+
+<p>Looks like the top portion of these clusters, and mainly cluster 1 hold the vast majority of Cd4 expression. This, coupled with Cd4 being identified as a marker of cluster 1 in our marker table above tells us pretty confidently that the upper part of this “body” cluster are likely the late middle t-cells!</p>
+
+<p>Here is a breakdown of the cell type labeling we just accomplished:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Clusters</th>
+      <th>Markers</th>
+      <th>Cell Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2</td>
+      <td>Il2ra</td>
+      <td>Double negative (early T-cell)</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Il2ra, Cd8b1, Cd8a</td>
+      <td>[maybe] Early transitioning T-cell</td>
+    </tr>
+    <tr>
+      <td>4, 5, 6, 7</td>
+      <td>Cd8b1, Cd8a, Cd4</td>
+      <td>Double positive (middle T-cell)</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Cd8b1, Cd8a, Cd4 - high</td>
+      <td>Double positive (late middle T-cell)</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Itm2a</td>
+      <td>Mature T-cell</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some real biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, real science!</p>
+
+<h2 id="keep-digging">Keep Digging</h2>
+<p>Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus? We can begin to answer this question visually by using the “split.by” parameter in Seurat’s plot functions.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-counts-split-by-genotype-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize Counts Split by Genotype</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">VlnPlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+    <li><em>“Group by”</em>: <code class="language-plaintext highlighter-rouge">RNA_nn_res.0.5</code></li>
+    <li><em>“Split by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.genotype.</code></li>
+    <li><em>“Log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+    <li><em>“Fill by”</em>: <code class="language-plaintext highlighter-rouge">ident</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-18" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/VlnPlot_GroupedbyCluster_SplitbyGenotype.png" alt="VlnPlot colored by cluster and split by genotype showing the mutant clusters appearing more sparse than the control. " width="1326" height="677" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/VlnPlot_GroupedbyCluster_SplitbyGenotype.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Violin Plot colored by assigned clusters &amp; split by genotype</figcaption></figure>
+
+<p>We can see that there seems to be a decrease in cellcounts across the celltypes in the het mutant… INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.</p>
+
+<h1 id="technical-assessment">Technical Assessment</h1>
+<p>Is our analysis real? Is it right? Well, we can assess that a little bit.</p>
+
+<p>First thing’s first, is there a batch effect?</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-counts-split-by-individual-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize Counts Split by Individual</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">DimPlot</code></li>
+    <li><em>“Group by”</em>: <code class="language-plaintext highlighter-rouge">RNA_nn_res.0.5</code></li>
+    <li><em>“Split by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.individual.</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-19" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/DimPlotColorbyClusters_SplitbyIndividual.png" alt="DimPlot colored by labelled celltype split by individual/batch showing that individual 3 and 4 contribute the vast majority of immature T-cells. " width="1688" height="461" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/DimPlotColorbyClusters_SplitbyIndividual.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> DimPlot colored by assigned clusters split by individual/batch</figcaption></figure>
+
+<p>While some differences across batch are expected and nothing to be concerned about, the immature T-cells looks to be mainly comprised of Individuals 3 and 4. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction.</p>
+
+<p>Additionally, we will also look at the confounding effect of sex:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-counts-split-by-sex-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize Counts Split by Sex</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">DimPlot</code></li>
+    <li><em>“Group by”</em>: <code class="language-plaintext highlighter-rouge">RNA_nn_res.0.5</code></li>
+    <li><em>“Split by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.sex.</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-20" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbySex.png" alt="DimPlot colored by cluster and split by sex showing that there are fewere female cells (a product of fewer female samples being present in the data as a whole). " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/DimPlot_SplitbySex.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> DimPlot colored by assigned clusters and split by Sex</figcaption></figure>
+
+<p>We note that the one female sample - unfortunately one of merely three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.</p>
+
+<p>Are there any clusters or differences being driven by sequencing depth, a technical factor?</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Counts</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-21" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_nCount.png" alt="FeaturePlot colored by counts showing no differences in sequencing depth across the dataset. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_nCount.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> FeaturePlot colored by counts</figcaption></figure>
+
+<p>There doesn’t visually appear to be any differences in sequencing depth across the clusters, but let’s check out some of those other variables we grouped by:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-features"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Features</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">nCount_RNA</code></li>
+    <li><em>“split.by”</em>: <code class="language-plaintext highlighter-rouge">Sample.Characteristic.individual.</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-22" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Counts_SplitbyIndividual.png" alt="FeaturePlot colored by counts &amp; Split by Individual showing that Individual 3 seems to have been most deeply sequenced. " width="1687" height="460" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Counts_SplitbyIndividual.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> FeaturePlot colored by counts &amp; split by individual</figcaption></figure>
+
+<p>There we go! This might explain the dramatic shift in early to middle T-Cell between wildtype and knockout cells–the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely accounts for the discernment between clusters 0, 4, 5, 6, and 7).</p>
+
+<p>Luckily, and importantly, we don’t see the double negative or mature T-cells being similarly affected. So, although, this variable of sequencing depth, or moreso, Individual, might be something to regress out somehow, it doesn’t seem to be impacting our dataset such that we cannot draw meaningful insights.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-overprocessing"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-overprocessing" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Overprocessing</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>The less you can regress/modify your data, in general, the better–you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).</p>
+</blockquote>
+
+<p>Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Let’s take a look at gene expression of a gene we know should not be expressed in tCells as a sanity check:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-hba-a1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot Hba-a1</div>
+
+  <p>Run<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0" title="Plot with Seurat tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with Seurat</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.4+galaxy0)</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RDS file”</em>: <code class="language-plaintext highlighter-rouge">Final Preprocessed Seurat Object</code> (output of <strong>Seurat UMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Plot_type_selector”</em>: <code class="language-plaintext highlighter-rouge">FeaturePlot</code></li>
+    <li><em>“Features”</em>: <code class="language-plaintext highlighter-rouge">Hba-a1</code></li>
+  </ul>
+</blockquote>
+
+<figure id="figure-23" style="max-width: 90%;"><img src="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Hba-a1.png" alt="FeaturePlot of Hba-a1 showing sparse expression across the whole dataset. " width="2362" height="2362" loading="lazy" /><a target="_blank" href="../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Hba-a1.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> FeaturePlot of Hba-a1</figcaption></figure>
+
+<p>Hemoglobin–a red blood cell marker that should NOT be found in T-cells–appears throughout the entire dataset in low numbers and as a likely marker of Cluster 6. This suggests that some background noise may have been introduced by the media the cells were in. We might consider in the wet lab trying to get a purer, happier sample, with less background or in the dry lab, we can take advantage of techniques such as SoupX or others to remove this technical noise.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-removing-noise"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-removing-noise" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Removing Noise</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Adjusting the filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.</p>
+</blockquote>
+
+<p>Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?</p>
+
+<p>Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the double positive populations, which we know are also affected by depth of sequencing. That’s a reasonable argument that Clusters 0, 4, 5, 6, and 7 might not be all that different. Maybe we need more depth of sequencing across all those cells, or to compare these explicitly to each other (consider variations on FindMarkers!).</p>
+
+<p>However, the late double positive cluster is both seemingly leaving the larger body of clusters and also has fewer knockout cells, so we might go and look at what those cells are expressing in the marker genes. If we look at the mature T-cells further, we can see that their marker gene–Itm2a–is only expressed in half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone.</p>
+
+<p>If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that many, if not most, of the genes in that list are actually ribosomal. This could be a housekeeping background, it might be cell cycle related, it may be biological, or some combination of all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).</p>
+
+<p>Ultimately, there are quite a lot ways to analyse your single-cell data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population, suggesting some sort of abberant development of T-cells in the Igf2-p0 hets.</p>
+
+<p>Congratulations! You have interpreted your plots in several important ways!</p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/single-cell/faqs/">FAQ page for the Single Cell topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/single-cell#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Trapnell2014">Trapnell, C., D. Cacchiarelli, J. Grimsby, P. Pokharel, S. Li <i>et al.</i>, 2014 <b>The dynamics and regulators of cell fate decisions are revealed by pseudotemporal ordering of single cells</b>. Nature Biotechnology 32: 381–386. <a href="https://doi.org/10.1038/nbt.2859">10.1038/nbt.2859</a></li>
+<li id="Satija2015">Satija, R., J. A. Farrell, D. Gennert, A. F. Schier, and A. Regev, 2015 <b>Spatial reconstruction of single-cell gene expression data</b>. Nature Biotechnology 33: 495–502. <a href="https://doi.org/10.1038/nbt.3192">10.1038/nbt.3192</a></li>
+<li id="McCarthy2017">McCarthy, D. J., K. R. Campbell, A. T. L. Lun, and Q. F. Wills, 2017 <b>Scater: pre-processing, quality control, normalization and visualization of single-cell RNA-seq data in R</b>. Bioinformatics 33: <a href="https://doi.org/10.1093/bioinformatics/btw777">10.1093/bioinformatics/btw777</a></li>
+<li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li>
+<li id="Wolf2018">Wolf, F. A., P. Angerer, and F. J. Theis, 2018 <b>SCANPY: large-scale single-cell gene expression data analysis</b>. Genome Biology 19: <a href="https://doi.org/10.1186/s13059-017-1382-0">10.1186/s13059-017-1382-0</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=single-cell/scrna-case_FilterPlotandExplore_SeuratTools" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Camila Goclowski, Pablo Moreno,  <b>Filter, plot, and explore single cell RNA-seq data (Seurat) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{single-cell-scrna-case_FilterPlotandExplore_SeuratTools,
+author = "Camila Goclowski and Pablo Moreno",
+	title = "Filter, plot, and explore single cell RNA-seq data (Seurat) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: retrieve_scxa
+  owner: ebi-gxa
+  revisions: 72b6e1747e37
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_filter_cells
+  owner: ebi-gxa
+  revisions: cd9f564bd63f
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_find_clusters
+  owner: ebi-gxa
+  revisions: d541e9e62beb
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_find_markers
+  owner: ebi-gxa
+  revisions: 07fc9f4841b3
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_find_neighbours
+  owner: ebi-gxa
+  revisions: ba897c57bdd9
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_find_variable_genes
+  owner: ebi-gxa
+  revisions: 948fc0276b4f
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_normalise_data
+  owner: ebi-gxa
+  revisions: 3f49bc9c9213
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_plot
+  owner: ebi-gxa
+  revisions: 95d79f1134f0
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_read10x
+  owner: ebi-gxa
+  revisions: f5db0e853f57
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_run_pca
+  owner: ebi-gxa
+  revisions: 8ded486b0014
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_run_umap
+  owner: ebi-gxa
+  revisions: b9424c715a0d
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: seurat_scale_data
+  owner: ebi-gxa
+  revisions: 5e9ba303f9e1
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7b4500170f6f322f3000639edd789d954841feff">7b45001</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	
+    </body>
+</html>
