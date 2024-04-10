@@ -792,7 +792,7 @@ We will continue working on previously used dataset, so you can copy it from you
 > 
 >    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 >
-> Or, alternatively, download the dataset from [Zenodo]({{ page.zenodo_link }})
+>    Or, alternatively, download the dataset from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/10391629/files/Downsampled_annotated_AnnData.h5ad

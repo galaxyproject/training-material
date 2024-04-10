@@ -763,6 +763,22 @@ module GtnLinter
     end
   end
 
+  def self.nonsemantic_list(contents)
+    find_matching_texts(contents, />\s*(\*\*\s*[Ss]tep)/)
+      .map do |idx, _text, selected|
+      ReviewDogEmitter.error(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: nil,
+        message: 'This is a non-semantic list which is bad for accessibility and bad for screenreaders. ' \
+                 'It results in poorly structured HTML and as a result is not allowed.',
+        code: 'GTN:035'
+      )
+    end
+  end
+
   def self.fix_md(contents)
     [
       *fix_notoc(contents),
@@ -789,7 +805,8 @@ module GtnLinter
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
       *zenodo_api(contents),
-      *empty_alt_text(contents)
+      *empty_alt_text(contents),
+      *nonsemantic_list(contents)
     ]
   end
 

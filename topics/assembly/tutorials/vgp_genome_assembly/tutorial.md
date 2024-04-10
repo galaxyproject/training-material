@@ -171,11 +171,11 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 
 > <hands-on-title><b>Uploading <tt>FASTA</tt> datasets from Zenodo</b></hands-on-title>
 >
->**Step 1**: Create a new history for this tutorial
+> 1. Create a new history for this tutorial
 >
-> {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
->**Step 2**: Copy the following URLs into the clipboard.
+> 2. Copy the following URLs into the clipboard.
 >    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
@@ -184,7 +184,7 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
 >    ```
 >
->**Step 3**: Upload datasets into Galaxy.
+> 3. Upload datasets into Galaxy.
 >    - set the datatype to `fasta`
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
@@ -203,18 +203,18 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 > <hands-on-title><b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></hands-on-title>
 >
->**Step 1**: Copy the following URLs into the clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
+> 1. Copy the following URLs into the clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
 >    https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
 >    https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 >    ```
 >
->**Step 2**: Upload datasets into Galaxy and set the datatype to `fastqsanger.gz`
+> 2. Upload datasets into Galaxy and set the datatype to `fastqsanger.gz`
 >
-> {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
 >
-> {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
+>    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
 {: .hands_on}
 
@@ -1326,7 +1326,7 @@ Before we begin, we need to upload BioNano data:
 >**Step 1**: Copy the following URLs into clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
->    https://zenodo.org/records/5887339/files/bionano.cmap
+>https://zenodo.org/records/5887339/files/bionano.cmap
 >    ```
 >
 >**Step 2**: Upload datasets into Galaxy
