@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Screening assembled genomes for contamination using NCBI FCS
-zenodo_link: 'https://zenodo.org/records/10881551'
+zenodo_link: 'https://zenodo.org/records/10932013'
 questions:
 - Are the sequences in a genome assembly contaminant-free?
 objectives:
@@ -14,6 +14,8 @@ key_points:
 - Contamination cleanup is essential for reliable comparative genomics analyses.
 contributors:
 - tvedtees
+funding:
+- nih
 
 ---
 
@@ -21,7 +23,7 @@ contributors:
 
 The National Center for Biotechnology Information (NCBI) performs contamination screening of genome assemblies submitted to the archival GenBank. Advances in genome sequencing have accelerated the production of genome assemblies and their submission to public databases, necessitating high-performance screening tools. Since contaminants can lead to misleading conclusions about the biology of the organism in question (e.g. gene content, gene evolution, etc.), ideally contamination screening should be performed after the initial contig assembly and prior to downstream genome analyses. 
 
-NCBI has released a publicly-available Foreign Contamination Screen (FCS) tool suite to detect contaminants from various sources and produce a cleaned sequence set. This tutorial provides a quick example of two current FCS tools: FCS-adaptor identifies synthetic sequences used in library preparation, and FCS-GX {% cite Astashya2024 %} identifies sequences from foreign organisms assigned to discordant taxonomies compared to the user-declared source organism.
+NCBI has released a publicly-available Foreign Contamination Screen (FCS) tool suite to detect contaminants from various sources and produce a cleaned sequence set. This tutorial provides a quick example of two current FCS tools: FCS-adaptor identifies synthetic sequences used in library preparation, and FCS-GX {% cite Astashyn2024 %} identifies sequences from foreign organisms assigned to discordant taxonomies compared to the user-declared source organism.
 
 
 > <agenda-title></agenda-title>
@@ -37,7 +39,7 @@ NCBI has released a publicly-available Foreign Contamination Screen (FCS) tool s
 
 FCS operates on assembled genome sequences and is not intended for use on raw reads. The following tutorial uses an assembled genome from yeast (*Saccharomyces cerevisiae*) with contaminants artificially inserted into the genome. The first step is to retrieve the genome FASTA. 
 
-## Upload the genome FASTA from NCBI FCS GitHub
+## Upload the genome FASTA from Zenodo
 
 The following steps provide instructions to upload the test dataset into your Galaxy instance.
 > <hands-on-title> Data Upload </hands-on-title>
@@ -46,13 +48,13 @@ The following steps provide instructions to upload the test dataset into your Ga
 >
 >    {% snippet  faqs/galaxy/histories_create_new.md %}
 >
-> 2. Copy the datasets URLs into clipboard.
+> 1. Copy the datasets URLs into clipboard.
 >     Click on the copy button in the right upper corner of the box below.
 >    ```
->    https://zenodo.org/records/10881551/files/FCS.combo.test.fa
+>    https://zenodo.org/records/10932013/files/FCS_combo_test.fa
 >    ```
 >
-> 3. Upload `fasta.gz` dataset into Galaxy
+> 1. Upload `fasta.gz` dataset into Galaxy
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -75,31 +77,32 @@ Next we will import a Galaxy workflow - a chain of tools to perform a set of ope
 1. Screen the genome for synthetic sequences using **FCS-adaptor** and remove identified contaminants. 
 1. Produce a final set of cleaned contigs using a second iteration of **FCS-GX** `clean` mode.
 
-![NCBI Foreign Contamination Screen Galaxy Workflow](../../images/ncbi-fcs/fcs-galaxy-2.jpg "Figure 2. NCBI Foreign Contamination Screen Galaxy Workflow.")
+![NCBI Foreign Contamination Screen Galaxy Workflow](../../images/ncbi-fcs/fcs-galaxy-2.jpg "NCBI Foreign Contamination Screen Galaxy Workflow.")
 
 > <hands-on-title> Importing Galaxy Workflows </hands-on-title>
 >
-> **Step 1:** Copy the workflow URLs into clipboard.
+> 1. Import the workflow into Galaxy
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="/topics/sequence-analysis/tutorials/ncbi-fcs/workflows/NCBI-Foreign-Contamination_Screen.ga title="NCBI Foreign Contamination Screen Workflow" %}
 >
 >    ```
 >    https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/workflows/ncbi-fcs.ga
 >    ```
 >
-> **Step 2:** Open Galaxy.
+> 1. Open Galaxy.
 > 
 >    > <warning-title>Log in to Galaxy</warning-title>
 >    > Make sure you are logged in to your Galaxy account!
 >    {: .warning}
 >
 >
-> **Step 3:** Import NCBI Foreign Contamination Screen Workflow into your Galaxy interface.
->    > {% snippet  faqs/galaxy/workflows_import.md %}
+> 1. Import NCBI Foreign Contamination Screen Workflow into your Galaxy interface.
+>    {% snippet  faqs/galaxy/workflows_import.md %}
 >
 {: .hands_on}
 
 Once the workflow is loaded, your workflow page should look like this:
 
-![Galaxy Workflows page with NCBI Foreign Contamination Screen](../../images/ncbi-fcs/fcs-galaxy-3.jpg "Figure 3. Galaxy Workflows page with NCBI Foreign Contamination Screen.")
+![Galaxy Workflows page with NCBI Foreign Contamination Screen](../../images/ncbi-fcs/fcs-galaxy-3.jpg "Galaxy Workflows page with NCBI Foreign Contamination Screen.")
 
 # Contamination screening
 
@@ -112,19 +115,19 @@ Next you will run the Galaxy workflow. Here you will configure the parameters fo
 >    1. Assembled genome in `fasta/fasta.gz` format
 >    1. Taxonomic information for source organism
 >
-> **Step 2:** Launch the Workflow
-> 1. Click the Workflow menu located in the top menu bar
-> 1. Click the {% icon workflow-run %} button located in the NCBI Foreign Contamination Screen Workflow box
-> 1. Click "Expand to full workflow form." 
-> 1. In the {% icon param-file %} 1: Input genome menu: 
-> - {% icon param-file %} *"Input file (Fasta file)"*: `1:FCS.combo.test.fa`
-> 1. In the **2: FCS-GX screen** menu:
-> - Select the appropriate taxonomic division for **Taxonomy entry**: {% icon galaxy-wf-edit %} **div** (`fung:budding yeasts` in this example). 
-> - Set the **Advanced Options**: {% icon galaxy-wf-edit %} **Database location** to `/cvmfs/data.galaxyproject.org/byhand/ncbi_fcs_gx/all`
-> 1. In the {% tool [4: FCS-adaptor screen](toolshed.g2.bx.psu.edu/repos/richard-burhans/ncbi_fcs_adaptor/ncbi_fcs_adaptor/0.5.0+galaxy0) %} menu:
-> - Select the appropriate taxonomy for {% icon galaxy-wf-edit %} **Choose the taxonomy** (`Eukaryotes` in this example).
-> 1. Run the workflow
-> 1. Take a coffee break! 
+> 1. Launch the Workflow
+>    1. Click the Workflow menu located in the top menu bar
+>    1. Click the {% icon workflow-run %} button located in the NCBI Foreign Contamination Screen Workflow box
+>    1. Click "Expand to full workflow form." 
+>    1. In the {% icon param-file %} 1: Input genome menu: 
+>       - {% icon param-file %} *"Input file (Fasta file)"*: `1:FCS.combo.test.fa`
+>    1. In the **2: FCS-GX screen** menu:
+>       - Select the appropriate taxonomic division for **Taxonomy entry**: {% icon galaxy-wf-edit %} **div** (`fung:budding yeasts` in this example). 
+>       - Set the **Advanced Options**: {% icon galaxy-wf-edit %} **Database location** to `/cvmfs/data.galaxyproject.org/byhand/ncbi_fcs_gx/all`
+>    1. In the **4: FCS-adaptor screen** menu:
+>       - Select the appropriate taxonomy for {% icon galaxy-wf-edit %} **Choose the taxonomy** (`Eukaryotes` in this example).
+>    1. Run the workflow
+>    1. Take a coffee break! 
 {: .hands_on}
 
 ## Interpreting FCS Output
@@ -134,14 +137,16 @@ Running NCBI FCS on Galaxy is dependent on loading a large reference database on
 After the workflow is completed, you will be able to visualize tables of identified contaminants and can access FASTA files of clean sequences separated from contaminants.
 
 > <hands-on-title> Reviewing FCS Contamination Reports </hands-on-title>
-> **Step 1:** Look at the FCS-GX contamination report
-> 1. In your Galaxy history, click the {% icon galaxy-eye %} icon for 3: **NCBI FCS GX on data 1: Action report**
-> 1. Confirm that the taxonomic division you specified for the workflow run appears in the metadata in the first row of the file. It should appear as the "asserted-div" and in the list of "inferred-primary-divs".
+> 1. Look at the FCS-GX contamination report
+>   1. In your Galaxy history, click the {% icon galaxy-eye %} icon for 3: **NCBI FCS GX on data 1: Action report**
+>   1. Confirm that the taxonomic division you specified for the workflow run appears in the metadata in the first row of the file. It should appear as the "asserted-div" and in the list of "inferred-primary-divs".
+>
 > > <warning-title> My organism's division is not in inferred-primary-divs </warning-title>
 > > If your target organism division is not in the set of inferred-primary-divs, it means that the assembly is likely heavily contaminated. FCS-GX will still call contaminants with respect to the taxonomy you define as the target organism (i.e. the primary division), but you should review the sequencing and assembly data for errors. 
 > {: .warning}
 >
-> 1. Review the contaminated sequence list, the suggested contamination cleanup actions, and the taxonomic divisions assigned to contaminants
+>   1. Review the contaminated sequence list, the suggested contamination cleanup actions, and the taxonomic divisions assigned to contaminants
+>
 >    > <question-title></question-title>
 >    >
 >    > 1. What are the major contaminants in this genome assembly?
@@ -154,15 +159,15 @@ After the workflow is completed, you will be able to visualize tables of identif
 >    > {: .solution}
 >    {: .question}
 >
-> **Step 2:** Look at the FCS-GX cleaned sequences
-> 1. Click the box in your workflow history - 1: **FCS.combo.test.fa**. Note the total number of sequences.
-> 1. Click the box in your workflow history - 4: **NCBI FCS GX on data 3 and data 1: Fasta for EXCLUDE entries**. Note the total number of sequences.
-> 1. Click the box in your workflow history - 5: **NCBI FCS GX on data 3 and data 1: Cleaned Fasta**. Note the total number of sequences as well as Applied actions.
-> 1. Confirm that Cleaned Fasta sequences (Step 5) = Total sequences (Step 1) - Contaminant sequences (Step 4)
+> 1. Look at the FCS-GX cleaned sequences
+>   1. Click the box in your workflow history - 1: **FCS.combo.test.fa**. Note the total number of sequences.
+>   1. Click the box in your workflow history - 4: **NCBI FCS GX on data 3 and data 1: Fasta for EXCLUDE entries**. Note the total number of sequences.
+>   1. Click the box in your workflow history - 5: **NCBI FCS GX on data 3 and data 1: Cleaned Fasta**. Note the total number of sequences as well as Applied actions.
+>   1. Confirm that Cleaned Fasta sequences (Step 5) = Total sequences (Step 1) - Contaminant sequences (Step 4)
 >
-> **Step 3:** Look at the FCS-adaptor contamination report
-> 1. In your Galaxy history, click the {% icon galaxy-eye %} icon for 6: **NCBI FCS Adaptor on data 5: Adaptor report**
-> 1. Review the contaminated sequence list, the suggested contamination cleanup actions, and the identity of adaptor/vector contaminants. Adaptor/vector sequences can be found on the [NCBI UniVec FTP](https://ftp.ncbi.nlm.nih.gov/pub/UniVec/UniVec) page.
+> 1. Look at the FCS-adaptor contamination report
+>   1. In your Galaxy history, click the {% icon galaxy-eye %} icon for 6: **NCBI FCS Adaptor on data 5: Adaptor report**
+>   1. Review the contaminated sequence list, the suggested contamination cleanup actions, and the identity of adaptor/vector contaminants. Adaptor/vector sequences can be found on the [NCBI UniVec FTP](https://ftp.ncbi.nlm.nih.gov/pub/UniVec/UniVec) page.
 >  
 >    > <question-title></question-title>
 >    >
@@ -176,10 +181,10 @@ After the workflow is completed, you will be able to visualize tables of identif
 >    > {: .solution}
 >    {: .question}
 >
-> **Step 4:** Look at the FCS-adaptor cleaned sequences
-> 1. Click the box in your workflow history - 5: **NCBI FCS GX on data 3 and data 1: Cleaned Fasta**. Note the total number of sequences.
-> 1. Click the box in your workflow history - 8: **NCBI FCS GX on data 6 and data 5: Fasta for EXCLUDE entries**. Note the total number of sequences as well as Applied actions.
-> 1. Click the box in your workflow history - 9: **NCBI FCS GX on data 6 and data 5: Cleaned Fasta**. Note the total number of sequences.
+> 1. Look at the FCS-adaptor cleaned sequences
+>   1. Click the box in your workflow history - 5: **NCBI FCS GX on data 3 and data 1: Cleaned Fasta**. Note the total number of sequences.
+>   1. Click the box in your workflow history - 8: **NCBI FCS GX on data 6 and data 5: Fasta for EXCLUDE entries**. Note the total number of sequences as well as Applied actions.
+>   1. Click the box in your workflow history - 9: **NCBI FCS GX on data 6 and data 5: Cleaned Fasta**. Note the total number of sequences.
 >
 > > <warning-title> Two different cleaned FASTA files from FCS-adaptor step </warning-title>
 > > FCS-adaptor only removes sequences that are completely/mostly adaptor (assigned `ACTION_EXCLUDE`) and adaptors near contig ends (assigned `ACTION_TRIM`). FCS-adaptor **does not remove** small internal trims in large sequences. In this example, the FASTA file in workflow history - 7: **NCBI FCS Adaptor on data 5: Cleaned Fasta** is the same as the uncleaned input FASTA. FCS-GX `clean` is required to handle these internal spans. The FASTA file in workflow history - 9: **NCBI FCS GX on data 6 and data 5: Cleaned Fasta** has the contigs seq_1 through seq_16 split into two separate contigs at the `ACTION_TRIM` sites. If you want to hardmask these regions instead, you must download the tabular adaptor report, convert `ACTION_TRIM` values to `FIX`, and run the FCS-GX `clean` tool separately.
