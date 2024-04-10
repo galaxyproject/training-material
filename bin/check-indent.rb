@@ -14,7 +14,7 @@ def check_indent(file)
     lines = content.split("\n")
 
     # If all lines look like URLs:
-    if lines.all? { |line| line =~ /:\/\// }
+    if lines.all? { |line| line =~ %r{://} }
       # If any are space indented
       lines.each do |line|
         if line =~ /^\s+/
@@ -29,10 +29,8 @@ end
 
 should_exit = false
 Find.find('./_site/training-material/topics/') do |path|
-  if path =~ /tutorial.*\.html$/
-    if check_indent(path)
-      should_exit = true
-    end
+  if path =~ (/tutorial.*\.html$/) && check_indent(path)
+    should_exit = true
   end
 end
 
