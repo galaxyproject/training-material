@@ -12,10 +12,13 @@ time_estimation: 90M
 key_points:
 - Contamination can arise from multiple sources and occur at multiple stages of a genome assembly project.
 - Contamination cleanup is essential for reliable comparative genomics analyses.
-contributors:
-- tvedtees
-funding:
-- nih
+contributions:
+  authorship:
+    - tvedtees
+  editing:
+    - hexylena
+  funding:
+    - nih
 
 ---
 
