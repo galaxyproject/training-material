@@ -179,9 +179,9 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
->    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
->    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
->    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
+>https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
+>https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
+>https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
 >    ```
 >
 >**Step 3**: Upload datasets into Galaxy.
@@ -206,8 +206,8 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 >**Step 1**: Copy the following URLs into the clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
->    https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
->    https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
+>https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
+>https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 >    ```
 >
 >**Step 2**: Upload datasets into Galaxy and set the datatype to `fastqsanger.gz`
@@ -1326,7 +1326,7 @@ Before we begin, we need to upload BioNano data:
 >**Step 1**: Copy the following URLs into clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
->    https://zenodo.org/records/5887339/files/bionano.cmap
+>https://zenodo.org/records/5887339/files/bionano.cmap
 >    ```
 >
 >**Step 2**: Upload datasets into Galaxy
