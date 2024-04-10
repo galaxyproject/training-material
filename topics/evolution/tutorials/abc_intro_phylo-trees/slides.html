@@ -6,7 +6,7 @@ zenodo_link: ""
 subtopic: phylogenetics
 priority: 4
 contributors:
-  - mcharleston  
+  - mcharleston
 ---
 
 # Phylogenetics - Back to Basics
@@ -20,7 +20,8 @@ contributors:
 # Why _build_ trees?
 
 The main reason we end up building a tree is that searching tree space for an optimal one takes too long when the number of taxa gets large.
-.reduce50[
+
+.reduce70[
 | _n_ | # trees | yes, but how much is that _really_?
 | --- |---|:--|
 | 3 | 3 | enumerable by hand |
@@ -30,22 +31,27 @@ The main reason we end up building a tree is that searching tree space for an op
 | 7 | 10395 | still searchable very quickly on computer |
 | 8 | 135135 | a bit more than the number of hairs on your head |
 | 9 | 2027025 | population of Sydney living west of Parramatta |
-| 10 | 34459425 | $\approx$ upper limit for exhaustive searching; about the number of possible combinations of numbers in the National Lottery |
-| 20 | $8.2\times 10^{21}$ | $\approx$ upper limit for branch-and-bound searching |
-| 48 | $3.21 \times 10^{70}$ | $\approx$ number of particles in the universe |
-| 136 | $2.11 \times 10^{267}$ | number of trees to choose from in the ``Out of Africa'' data¹ |
+| 10 | 34459425 | \\(\approx\\) upper limit for exhaustive searching; about the number of possible combinations of numbers in the National Lottery |
+| 20 | $$8.2\times 10^{21}$$ | \\( \approx \\) upper limit for branch-and-bound searching |
+| 48 | $$ 3.21 \times 10^{70} $$ | \\(\approx\\) number of particles in the universe |
+| 136 | $$ 2.11 \times 10^{267} $$ | number of trees to choose from in the ``Out of Africa'' data¹ |
 ]
+
+.footnote[
 ¹: Vigilant et al., 1991
+]
 
 ---
 # Tree space is worse than "space" space
 
 ![Hubble Space Telescope image of two colliding galaxies from Wikimedia commons. https://en.wikipedia.org/wiki/NGC_2207_and_IC_2163](graphics/NGC2207+IC2163.jpg)
-	
-	NGC 2207 and IC 2163 galaxies colliding.
 
-Source: https://commons.wikimedia.org/wiki/Commons:Featured\_pictures/Astronomy
-	
+NGC 2207 and IC 2163 galaxies colliding.
+
+.footnote[
+Source: https://commons.wikimedia.org/wiki/Commons:Featured_pictures/Astronomy
+]
+
 ---
 # Why should building work then?
 
@@ -55,10 +61,10 @@ Some parts of a phylogeny can be confidently accepted: when there are two specie
 If molecular sequences evolve at a nice steady rate - the "molecular clock" hypothesis - and if there's neither too little nor too much change, this can be good enough.
 
 ---
-# Distances from trees	
-	
+# Distances from trees
+
 Before we talk about building a tree from distances, we need to think about how distances are reflected by trees.
-	
+
 The most natural way to infer distances from trees is by adding the lengths of branches between each pair of nodes.
 
 Such distances are called *patristic* distances (I don't know why).
@@ -89,7 +95,7 @@ Patristic distance between tips e and f is 0.02 + 0.015 + 0.02 + 0.01 + 0.02 = 0
 
 ---
 # Tree-like distances are easy
-	
+
 A set of distances between the tips (taxa) that match the patristic distances of some tree is called **tree-like**.
 
 Given tree-like distances, most tree construction methods will work.
@@ -97,12 +103,15 @@ Given tree-like distances, most tree construction methods will work.
 Yes, _most_ - not all!
 
 ---
+
 # Clock-like
 
 The easiest possible distance data to work with are those where the distance from the root to every tip is the same.
 
 Such trees (and the distances derived from them) are called _ultrametric_ (that is, they have the same root-to-tip distance for every tip).
+
 ---
+
 # Clock-like
 
 For example, suppose this is the _true_ tree relating some species of interest, with actual branch lengths as labelled:
@@ -110,6 +119,7 @@ For example, suppose this is the _true_ tree relating some species of interest, 
 ![Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same. Described at 4:44 in the video recording.](graphics/04-UltrametricTreeScaled-1.png)
 
 ---
+
 # These distances are _ultrametric_
 
 .image_75[
@@ -120,12 +130,15 @@ For example, suppose this is the _true_ tree relating some species of interest, 
 * Here, the root-to-tip distances are all the same. A set of distances with this property is called _ultrametric_.
 * If the distances represent evolutionary time accurately and all the tips are in the present, then we should expect this property.
 * Reconstructing trees from ultrametric distances is _super easy_.
+
 ---
+
 # These distances are _ultrametric_
+
 .left-column40[
 	![Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same. Described at 4:44 in the video recording.](graphics/04-UltrametricTree-1.png)
 ]
-.right-column40[
+.right-column60[
 Distance matrix:
 .center[
 |   | d | e | f | g | h |
@@ -140,8 +153,12 @@ Distance matrix:
 ]
 
 
+.pull-bottom[
 Any ultrametric tree satisfies the three-point condition (for rooted trees): for any three tips x, y, z, the larger two pairwise distances of D(x, y), D(x,z), D(y,z) will be equal.
+]
+
 ---
+
 # These distances are _ultrametric_
 
 .left-column40[
@@ -161,7 +178,9 @@ Distance matrix:
 
 Since this is a symmetric matrix we usually just show half of it...
 ]
+
 ---
+
 # These distances are _ultrametric_
 
 .left-column40[
@@ -173,9 +192,9 @@ Distance matrix:
 |	| e | f | g | h |
 |---|---|---|---|---|
 | d | 0.07 | 0.1 | 0.1 | 0.1 |
-| e | - | 0.1 | 0.1 | 0.1 | 
-| f | - | - | 0.04 | 0.06 | 
-| g | - | - | - | 0.06 | 
+| e | - | 0.1 | 0.1 | 0.1 |
+| f | - | - | 0.04 | 0.06 |
+| g | - | - | - | 0.06 |
 ]
 
 ... and only the non-zero entries.
@@ -185,20 +204,23 @@ Distance matrix:
 # The general approach
 
 ![Flow chart illustrating how sequence alignment data or dis/similarity measures are used to calculate and calculate phylogenetic distances. Colours and shapes are used to differentiate different sections of the flowchart, guiding the viewer through each step from left to right. The flowchart begins with Sequence Alignment or Dis/Similarity Measures. These are used to form a distance matrix (D) which is used to select two nodes (x and y) forming a new node z. The distance matrix is updated with the new node z until no further nodes can be formed. Described at 8:20 in the video recording.](graphics/TreeConstruction.drawio.png)
+
 ---
+
 # Our distances
 
 * We get distances from molecular sequences once they have been _aligned_.
 * There are various ways to compare aligned sequences to obtain distances:
 	- uncorrected "p-distance" -- the proportion of sites that differ between the two sequences;
 	- the Jukes-Cantor (JC69) correction, which takes into account of multiple character state changes through time;
-	- The Hasegawa-Kishino-Yano (HKY85) model, which also allows for variation in nucleotide frequencies $\pi_{A}, \pi_{C}, \pi_{G}, \pi_{T}$ as well as different transition/transversion rates;
+	- The Hasegawa-Kishino-Yano (HKY85) model, which also allows for variation in nucleotide frequencies \\(\pi_{A}, \pi_{C}, \pi_{G}, \pi_{T}\\) as well as different transition/transversion rates;
 	- and more.
 
 ---
+
 # Jukes-Cantor / JC69
 
-This model has one single parameter, assuming that the base frequencies are each 25%: $$\pi_{A}=\pi_{G}=\pi_{C}=\pi_{T}=0.25$$.
+This model has one single parameter, assuming that the base frequencies are each 25%: \\(\pi_{A}=\pi_{G}=\pi_{C}=\pi_{T}=0.25\\)
 
 The rate matrix looks like this:
 
@@ -207,25 +229,26 @@ The rate matrix looks like this:
 ]
 where the asterisk is a short-hand to make the row-sums equal 0.
 
-Under this model the expected number of substitutions between two sequences with a p-distance of $p$ is
+Under this model the expected number of substitutions between two sequences with a p-distance of \\(p\\) is
 $$\hat{d} = \frac{-3}{4}\ln\left(1-\frac{4}{3}p\right)$$
 
 ---
 # Hasegawa-Kishino-Yano / HKY85
 
-This model allows for variation in nucleotide frequencies $\pi_{A}, \pi_{G}, \pi_{C}, \pi_{T}$ as well as different transition/transversion rates using parameter $\kappa$:
+This model allows for variation in nucleotide frequencies \\(\pi_{A}, \pi_{G}, \pi_{C}, \pi_{T}\\) as well as different transition/transversion rates using parameter \\(\kappa\\):
 
 ![Rate matrix representing the HKY85 model. The matrix has the nucleotides AGCT on both the x and y axis. Variation in nucleotide frequencies πA; πG; πC; πT as well as different transition/transversion rates using parameter kappa. Described at 14:08 in the video recording.](graphics/04-QHKY85-1.png)
 
 This model also allows for a correction to turn relative observed numbers of substitutions between the different bases into expected total number of substitutions between two sequences, but it is much more complex.
 
 ---
+
 # From alignment to distances
 
 .left-column50[
 	![Screenshot from the program SeaView showing a multiple sequence alignment of Anolis species. DNA sequences are aligned vertically and nucleotides are colour coded. Aligned sites can be identified by solid lines of colour that run from top to bottom of the image. Full description included in the video recording at 40:06.](graphics/AnolisPartialAlignmentGapsAlignedTidied.png)
 ]
-.right-column50[	
+.right-column50[
 	![Figure representing a distance matrix (D) comparing sequences from A. acutus and A. aeneus.](graphics/04-AnolisDistanceMatrixCorner-1.png)
 ]
 Once the alignment is complete, each pair of sequences is compared to give an estimated distance between them: this forms the distance matrix for tree building.
@@ -345,7 +368,7 @@ Now we have reduced the problem by one taxon / sequence: we repeat until we have
 ** Losing the ultrametric property **
 ---
 # Not perfectly clock-like
-		
+
 Now suppose this is the _true_ tree relating some species of interest, with actual branch lengths as labelled:
 
 ![Schematic of a rooted non-clocklike phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is not the same. Description from 21:08 in the video recording.](graphics/04-NonclocklikeTree-1.png)
@@ -366,11 +389,11 @@ Now suppose this is the _true_ tree relating some species of interest, with actu
 Neighbo[u]r-Joining solves this problem by accounting for the _net divergence_ of node from the rest, so if distances are tree-like, even if they're not ultrametric, it _will_ get the tree right.
 
 The formula for net divergence, with $$n$$ taxa (i.e., an $$n\times n$$ distance matrix) is
-	
+
 $$r_{i} = \frac{1}{n-2}\sum_{j\neq i}D(i,j)$$
-	
+
 And the adjusted distance becomes
-	
+
 $$D^{\ast}(i,j) = D(i,j) - r(i) - r(j)$$
 
 ---
@@ -405,7 +428,7 @@ Adjusted Distances
 #
 * Real data are not tree-like in general.
 * We should adjust the final branch lengths that are found.
-* One criterion is _Minimum Evolution_; this minimises the sum of squared differences ("ordinary least squares"; OLS) between the patristic distances, say $G$, from the tree and the original distances $$D$$: 
+* One criterion is _Minimum Evolution_; this minimises the sum of squared differences ("ordinary least squares"; OLS) between the patristic distances, say $G$, from the tree and the original distances $$D$$:
 
 $$OLS = \sum_{i,j}(D(i,j) - G(i,j))^{2}$$
 This assumes that the estimates are independent of each other, which clearly isn't the case as the distances between tips in the tree often share parts of the paths between them.
@@ -430,7 +453,7 @@ This assumes that the estimates are independent of each other, which clearly isn
 
 ---
 # Limitations
-	
+
 * A tree-building method will _always give you a tree_, even if the data didn't come from one.
 * There is no information on "next best" trees.
 * There is no measure of "goodness" for the most part (though you could always quote the least squares error)
