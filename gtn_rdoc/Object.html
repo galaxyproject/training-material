@@ -75,6 +75,7 @@
     <li ><a href="#method-i-automagic_loading">#automagic_loading</a>
     <li ><a href="#method-i-build_news">#build_news</a>
     <li ><a href="#method-i-call_engine">#call_engine</a>
+    <li ><a href="#method-i-check_indent">#check_indent</a>
     <li ><a href="#method-i-correct">#correct</a>
     <li ><a href="#method-i-data_library_for_tutorial">#data_library_for_tutorial</a>
     <li ><a href="#method-i-fetch_toolcats">#fetch_toolcats</a>
@@ -346,6 +347,48 @@
       <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-check_indent" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">check_indent</span><span
+            class="method-args">(file)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="check_indent-source">
+            <pre><span class="ruby-comment"># File bin/check-indent.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_indent</span>(<span class="ruby-identifier">file</span>)
+  <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">HTML</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>))
+  <span class="ruby-comment"># Find all &lt;pre&gt; tags</span>
+  <span class="ruby-comment"># &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;</span>
+  <span class="ruby-identifier">ec</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">css</span>(<span class="ruby-string">&#39;div.language-plaintext.highlighter-rouge div.highlight pre.highlight code&#39;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pre</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># Get the text content of the &lt;pre&gt; tag</span>
+    <span class="ruby-identifier">content</span> = <span class="ruby-identifier">pre</span>.<span class="ruby-identifier">text</span>
+    <span class="ruby-comment"># Split the content by newlines</span>
+    <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+
+    <span class="ruby-comment"># If all lines look like URLs:</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{://}</span> }
+      <span class="ruby-comment"># If any are space indented</span>
+      <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\s+/</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{file}: Indentation error: #{line}&quot;</span>
+          <span class="ruby-identifier">ec</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">ec</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

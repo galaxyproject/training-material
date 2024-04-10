@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@732d6331af82fd162459ea0d913284dff711778a",
+		release: "galaxy-training-network@6e0285e9d141851bb47cde25a2b7d038d32083e6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: VGP assembly pipeline - short version">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-27 16:46:13 +0000">
+<meta name="DC.date" content="2024-04-10 10:22:37 +0000">
 <meta name="DC.creator" content="Delphine Lariviere">
 <meta name="DC.creator" content="Alex Ostrovsky">
 <meta name="DC.creator" content="Cristóbal Gallardo">
@@ -122,7 +122,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2023-11-27 16:46:13 +0000",
+  "dateModified": "2024-04-10 10:22:37 +0000",
   "datePublished": "2022-04-06 05:32:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Hands-on: Hands-on: VGP assembly pipeline - short version",
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: VGP assembly pipeline - short version",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html",
-  "version": 72,
+  "version": 73,
   "timeRequired": "PT1H",
   "teaches": "Learn the tools necessary to perform a de novo assembly of a vertebrate genome\n - Evaluate the quality of the assembly",
   "keywords": [
@@ -1028,6 +1028,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
 	<li>
+		<a class="dropdown-item" href="https://mississippi.sorbonne-universite.fr" title="">
+			MISSISSIPPI <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+	<li>
 		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
 			UseGalaxy.cz <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
 		</a>
@@ -1089,7 +1095,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 6, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 27, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 10, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1107,7 +1113,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 72 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 73 </div>
 
     </blockquote>
     </section>
@@ -1255,17 +1261,18 @@ The first stage of the pipeline is the generation of <em>k</em>-mer profiles of 
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Copy the following URLs into clipboard.
-      <ul>
-        <li>you can do this by clicking on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">copy</span> button in the right upper corner of the box below. It will appear if you mouse over the box.)</li>
-      </ul>
+    <li>
+      <p>Copy the following URLs into clipboard.</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
- https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
- https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
+      <p>you can do this by clicking on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">copy</span> button in the right upper corner of the box below. It will appear if you mouse over the box.)</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
+https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
+https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
 </code></pre></div>      </div>
     </li>
-    <li>Upload datasets into Galaxy.
+    <li>
+      <p>Upload datasets into Galaxy.</p>
       <ul>
         <li>set the datatype to <code class="language-plaintext highlighter-rouge">fasta</code></li>
       </ul>
@@ -1352,10 +1359,9 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 <p>All analyses described in this tutorial are performed using <em>workflows</em>–chains of tools–shown in <a href="#figure-1">Fig. 1</a>. Specifically, we will use four workflows corresponding to analysis trajectory <strong>B</strong>: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below:</p>
 
 <blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-b-importing-workflows-from-github-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <b>Importing workflows from GitHub</b></div>
+  <div class="box-title hands-on-title" id="hands-on-importing-workflows-from-github"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Importing workflows from GitHub</div>
 
-  <p>Links to the four workflows that will be used in this tutorial are listed in the table. Follow the procedure described below the table to import each of them into your Galaxy account.
-<br /></p>
+  <p>Links to the four workflows that will be used in this tutorial are listed in the table. Follow the procedure described below the table to import each of them into your Galaxy account.</p>
 
   <table>
     <thead>
@@ -1384,30 +1390,31 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
     </tbody>
   </table>
 
-  <p><br /></p>
-
-  <p><strong>Step 1: Copy the workflow URL into clipboard</strong></p>
-
   <ol>
-    <li>Right click on a URL in the table above.</li>
-    <li>Select “Copy link address” option in the dropdown menu that appears.</li>
-    <li>Go to Galaxy</li>
-  </ol>
+    <li>
+      <p>Copy the workflow URL into clipboard</p>
 
-  <blockquote class="warning">
-    <div class="box-title warning-title" id="warning-make-sure-you-are-logged-in"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Make sure you are logged in!</div>
-    <p>Ensure that you are logged in into your Galaxy account!</p>
-  </blockquote>
+      <ol>
+        <li>Right click on a URL in the table above.</li>
+        <li>Select “Copy link address” option in the dropdown menu that appears.</li>
+        <li>Go to Galaxy</li>
+      </ol>
 
-  <p><br /></p>
+      <blockquote class="warning">
+        <div class="box-title warning-title" id="warning-make-sure-you-are-logged-in"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Make sure you are logged in!</div>
+        <p>Ensure that you are logged in into your Galaxy account!</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the workflow</p>
 
-  <p><strong>Step 2: Import the workflow</strong></p>
-
-  <ol>
-    <li>Click “Workflow” on top of the Galaxy interface.</li>
-    <li>On top-right of the middle pane click “<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Import” button.</li>
-    <li>Paste the URL you copied into the clipboard at Step 1 above to “Archived Workflow URL” box.</li>
-    <li>Click “Import workflow” button.</li>
+      <ol>
+        <li>Click “Workflow” on top of the Galaxy interface.</li>
+        <li>On top-right of the middle pane click “<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Import” button.</li>
+        <li>Paste the URL you copied into the clipboard at Step 1 above to “Archived Workflow URL” box.</li>
+        <li>Click “Import workflow” button.</li>
+      </ol>
+    </li>
   </ol>
 
   <p>This entire procedure is shown in the animated figure below. <i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> <strong>You need to repeat this process for all four workflows</strong></p>
@@ -1453,45 +1460,54 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-b-launching-i-k-i-mer-profile-analysis-workflow-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <b>Launching <i>K</i>-mer profile analysis workflow</b></div>
 
-  <p><strong>Step 1: Identify inputs</strong></p>
-
-  <p>The profiling workflow takes the following inputs:</p>
-
   <ol>
-    <li><abbr title="high fidelity reads">HiFi</abbr> reads as a collection</li>
-    <li><em>K</em>-mer length</li>
-    <li>Ploidy</li>
-  </ol>
+    <li>
+      <p>Identify inputs</p>
 
-  <p><strong>Step 2: Launch <em>k</em>-mer profiling workflow</strong></p>
+      <p>The profiling workflow takes the following inputs:</p>
 
-  <ol>
-    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">K-mer profiling and QC (WF1)</code></li>
-    <li>In the <strong>Workflow: VGP genome profile analysis</strong> menu:
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Collection of Pacbio Data</em>”: <code class="language-plaintext highlighter-rouge">7: HiFi_collection</code></li>
-        <li>“<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">31</code></li>
-        <li>“<em>Ploidy</em>”: <code class="language-plaintext highlighter-rouge">2</code></li>
-      </ul>
+      <ol>
+        <li><abbr title="high fidelity reads">HiFi</abbr> reads as a collection</li>
+        <li><em>K</em>-mer length</li>
+        <li>Ploidy</li>
+      </ol>
     </li>
-    <li>Click on the <kbd>Run workflow</kbd> buttom</li>
+    <li>
+      <p>Launch <em>k</em>-mer profiling workflow</p>
+
+      <ol>
+        <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
+        <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">K-mer profiling and QC (WF1)</code></li>
+        <li>In the <strong>Workflow: VGP genome profile analysis</strong> menu:
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Collection of Pacbio Data</em>”: <code class="language-plaintext highlighter-rouge">7: HiFi_collection</code></li>
+            <li>“<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">31</code></li>
+            <li>“<em>Ploidy</em>”: <code class="language-plaintext highlighter-rouge">2</code></li>
+          </ul>
+        </li>
+        <li>Click on the <kbd>Run workflow</kbd> buttom</li>
+      </ol>
+
+      <p>This should like this:</p>
+
+      <figure id="figure-5" style="max-width: 90%;"><img src="../../images/vgp_assembly/wf1_launch_ui.png" alt="Parameters of *k*-mer profiling workflow. " width="1408" height="744" loading="lazy" /><a target="_blank" href="../../images/vgp_assembly/wf1_launch_ui.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-k-mer-length"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: K-mer length</div>
+        <p>In this tutorial, we are using a <em>k</em>-mer length of 31. This can vary, but the VGP pipeline tends to use a <em>k</em>-mer length of 21, which tends to work well for most mammalian-size genomes. There is more discussion about <em>k</em>-mer length trade-offs in the extended VGP pipeline tutorial.</p>
+      </blockquote>
+    </li>
   </ol>
-
-  <p>This should like this:</p>
-
-  <figure id="figure-5" style="max-width: 90%;"><img src="../../images/vgp_assembly/wf1_launch_ui.png" alt="Parameters of *k*-mer profiling workflow. " width="1408" height="744" loading="lazy" /><a target="_blank" href="../../images/vgp_assembly/wf1_launch_ui.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
-
-  <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-k-mer-length"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: K-mer length</div>
-    <p>In this tutorial, we are using a <em>k</em>-mer length of 31. This can vary, but the VGP pipeline tends to use a <em>k</em>-mer length of 21, which tends to work well for most mammalian-size genomes. There is more discussion about <em>k</em>-mer length trade-offs in the extended VGP pipeline tutorial.</p>
-  </blockquote>
 
   <p><br /></p>
 
-  <p><strong>Step 3: Refill your coffee</strong></p>
+  <ol>
+    <li>
+      <p>Refill your coffee</p>
 
-  <p>Assembly is not exactly an instantaneous type of analysis - this workflow will take approx 15 minutes to complete. The same is true for all analyses in tutorial.</p>
+      <p>Assembly is not exactly an instantaneous type of analysis - this workflow will take approx 15 minutes to complete. The same is true for all analyses in tutorial.</p>
+    </li>
+  </ol>
 </blockquote>
 
 <h3 id="interpreting-the-results">Interpreting the results</h3>
@@ -2100,7 +2116,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/732d6331af82fd162459ea0d913284dff711778a">732d633</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e0285e9d141851bb47cde25a2b7d038d32083e6">6e0285e</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
