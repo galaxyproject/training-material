@@ -76,6 +76,10 @@ jobs:
         run: |
           ! fgrep -R 'lt;blockquote' _site
 
+      - name: Ensure no poorly indented code blocks
+        run: |
+          bundle exec ruby bin/check-indent.rb
+
       - name: Ensure no unexpected jekyll in output
         run: |
           ! fgrep -R 'site.pages' _site
