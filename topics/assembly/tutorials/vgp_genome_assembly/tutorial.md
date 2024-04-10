@@ -212,9 +212,9 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 >
 > 2. Upload datasets into Galaxy and set the datatype to `fastqsanger.gz`
 >
->   {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
->  
->   {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+>
+>    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
 {: .hands_on}
 
