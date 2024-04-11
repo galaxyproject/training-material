@@ -235,13 +235,13 @@ Also note we have introduced a bigger cost for aligning any nucleotide with a ga
 
 There are two basic methods for assigning a cost *c* to a gap of length *g* in a sequence.
 
-Linear cost: $$c = -dg$$
-    where $$d$$ is the _gap open penalty_;
+Linear cost: \\(c = -dg\\)
+    where \\(d\\) is the _gap open penalty_;
 
-Affine cost: $$c = -d - (g-1)e$$
-    where $$e$$ is the _gap extension penalty_.
+Affine cost: \\(c = -d - (g-1)e\\)
+    where \\(e\\) is the _gap extension penalty_.
 
-Typical values are $$d = 10, e = 0.1$$.
+Typical values are \\(d = 10, e = 0.1\\).
 
 The affine gap cost method is the most complex method we can use in order to solve the alignment of two sequences quickly.
 
@@ -249,10 +249,10 @@ More complex models prohibit the use of dynamic programming to solve the alignme
 
 ---
 # Numbers of alignments
-For two sequences of length $$x$$ and $$y$$, there are $$\frac{(x+y)!}{x!\ y!}$$ possible alignments.
-For three sequences, of length $$x$$, $$y$$ and $$z$$ say, there are $$\frac{(x+y+z)!}{x!\ y!\ z!}$$ alignments.
+For two sequences of length \\(x\\) and \\(y\\), there are \\(\frac{(x+y)!}{x!\ y!}\\) possible alignments.
+For three sequences, of length \\(x\\) \\(y\\)and \\(z\\) say, there are \\(\frac{(x+y+z)!}{x!\ y!\ z!}\\) alignments.
 
-For $$n$$ sequences of length 10, this increases rapidly:
+For \\(n\\) sequences of length 10, this increases rapidly:
 
 | n   | Hash alignments  |
 |-----|------------------|
@@ -282,7 +282,7 @@ Dynamic Programming solves problems by breaking them down recursively into (slig
 
 ![Schematic representation of dynamic programming showing how the process solves a problem by breaking it down and finding optimal partial solutions that can be used to infer the full solution.](images/DPOverviewDiagram.png)
 
-In terms of sequence alignment, this comes down to basing alignment of two sequences up to positions *i* and *j* in terms of the best alignments yet found for the two sequences, up to positions $$i-1,j-10$$, $$i,j-1$$, and $$i-1,j$$.
+In terms of sequence alignment, this comes down to basing alignment of two sequences up to positions *i* and *j* in terms of the best alignments yet found for the two sequences, up to positions \\(i-1,j-10\\), \\(i,j-1\\), and \\(i-1,j\\).
 ---
 #DP overview (cont.)
 
@@ -298,7 +298,9 @@ In terms of sequence alignment, this comes down to basing alignment of two seque
         2.1  Find the maximum score from the previous cells including gap costs;
         2.2 Put the result into this new cell;
         2.3  _Note_ which cell we chose with a pointer or reference.
-![Schematic of the dynamic programming alignment described on the slide](images/03-DPcell.png)
+.reduce50[
+    ![Schematic of the dynamic programming alignment described on the slide](images/03-DPcell.png)
+]
 
 We add the cost of the best solution to the previous cells (above, to the left and above-left) to the best possible score for this cell.
 
@@ -379,14 +381,15 @@ Without too much effort it is possible to generalise this approach:
 
 -   Pairwise Sequence Alignment takes an amount of *time* that is proportional to the number of cells in the table, which is roughly the product of the lengths of the two sequences.
 
-    That means it is $$O(nm)$$ if the lengths of the sequences are $$n$$ and $$m$$; usually as these are about the same we can write $$O(n^{2})$$: it's *quadratic in sequence length*.
+    That means it is \\(O(nm)\\) if the lengths of the sequences are \\(n\\) and \\(m\\); usually as these are about the same we can write \\(O(n^{2})\\): it's *quadratic in sequence length*.
 
--   The amount of space required is also quadratic in $$n$$.
+-   The amount of space required is also quadratic in \\(n\\).
     There is a linear-space version of the DP method (which is rarely used as it takes longer).
 
 -   This solution is globally optimal. It will always produce an optimal alignment, though there may be more than one.
 
--   With more sequences, the size of the table increase: for $$k$$ sequences the algorithm is $$O(n^{k})$$: not practical.
+-   With more sequences, the size of the table increase:
+    For \\(k\\) sequences the algorithm is \\(O(n^{k})\\): not practical.
 
 ---
 
