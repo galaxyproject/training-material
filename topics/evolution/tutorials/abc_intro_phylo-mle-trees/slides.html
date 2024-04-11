@@ -1,8 +1,10 @@
 ---
 layout: tutorial_slides
 logo: GTN
-title: "Phylogenetics - Back to Basics"
+title: "Phylogenetics - Back to Basics - MLE Trees"
 zenodo_link: ""
+subtopic: phylogenetics
+priority: 5
 contributors:
   - mcharleston  
 ---
@@ -14,7 +16,9 @@ contributors:
 ![University of Tasmania logo](images/UTas logo.svg)
 ---
 
-# A way to select models, given data / Likelihood
+# Likelihood
+
+*A way to select models, given data*
 
 ---
 # Why Likelihood?
@@ -63,9 +67,9 @@ Suppose I choose a die and roll it three times, getting values 3, 6, and 2.
 
 Which die is most likely to have been used?
 
-If it were the .blue[blue] die then the probability of this outcome is $$0.1\times 0.3 \times 0.1 = 0.003$$.
+If it were the .blue[blue] die then the probability of this outcome is \\(0.1\times 0.3 \times 0.1 = 0.003\\).
 
-If it were the .red[red] die then this probability is $$0.2\times 0.1 \times 0.2 = 0.004$$.	
+If it were the .red[red] die then this probability is \\(0.2\times 0.1 \times 0.2 = 0.004\\).	
 
 Neither of these probabilities is high!  But the larger of the two is for the .red[red] die: thus, given the data, we would say the maximum likelihood estimate of the "model" (here, which die was used) is the .red[red] die.
 
@@ -75,26 +79,26 @@ Neither of these probabilities is high!  But the larger of the two is for the .r
 
 We could write this example more formally as
 
-* Data $$D$$ is the outcome $$(3,6,2)$$;
+* Data \\(D\\) is the outcome \\((3,6,2)\\);
 
-* $$P(.blue[B])$$ and $$P(.red[R])$$ are the probabilities of choosing the blue and red dice (say 0.5 each);
+* \\(P(.blue[B])\\) and \\(P(.red[R])\\) are the probabilities of choosing the blue and red dice (say 0.5 each);
 
-* $$P(D|.blue[B])$$ and $$P(D|.red[R])$$ are the probabilities of the data given the model "blue die" and "red die";
+* \\(P(D|.blue[B])\\) and \\(P(D|.red[R])\\) are the probabilities of the data given the model "blue die" and "red die";
 
-* $$P(.blue[B]|D)$$ is the probability of the *model* given the *data*, and it can be written
+* \\(P(.blue[B]|D)\\) is the probability of the *model* given the *data*, and it can be written
 		
-$$
+\\(
 	P(.blue[B]|D) = \frac{P(D|.blue[B])P(.blue[B])}{P(D)} = \frac{P(D|.blue[B])P(.blue[B])}{P(D|.blue[B])P(.blue[B])+P(D|.red[R])P(.red[R])} 
-$$
+\\)
 
 -- this is *Bayes' formula*.
 
 
-* Similarly we can write $$P(.red[R]|D)$$ as
+* Similarly we can write \\(P(.red[R]|D)\\) as
 
-$$
+\\(
 	P(.red[R]|D) = \frac{P(D|.red[R])P(.red[R])}{P(D)} = \frac{P(D|.red[R])P(.red[R])}{P(D|.blue[B])P(.blue[B])+P(D|.red[R])P(.red[R])} .
-$$
+\\)
 
 * These conditional probabilities can be thought of as the relative likelihoods of the model, given the data.
 
@@ -125,9 +129,9 @@ Now suppose we have a probability matrix whose entries are the probabilities of 
 	
 We could then calculate the probability of going from one nucleotide to another, say *A* to *G*, in 1M years by reading it from the graph:
 
-$$
+\\(
 	Pr(A\to G) = P_{A,G} = 0.01.
-$$
+\\)
 
 
 ---
@@ -135,19 +139,19 @@ $$
 
 To calculate the probability of multiple nucleotides changing we multiply the individual probabilities together -- which is making direct use of the assumption that each nucleotide site evolves independently of the others.
 
-We would then calculate the probability of going from sequence \DNA{AAGT} to \DNA{AGGA} as
+We would then calculate the probability of going from sequence **AAGT** to **AAGA** as
 
-$$
+\\(
 		prob = P(A\to A)x P(A\to G) \x P(G\to G) \x P(T\to A) \\
 		 = 0.97 \x 0.01 \x 0.97 \x 0.01 \\
-		 \approx 9.4\x 10^{-6
-$$
+		 \approx 9.4\x 10^{-6}
+\\)
 
 
 ---
 # Changing the time
 
-To calculate the probability of sequences changing in our toy example for say *two* million years, we would *square* the probability matrix $$P$$:
+To calculate the probability of sequences changing in our toy example for say *two* million years, we would *square* the probability matrix \\(P\\):
 
 ![Formula where the probability of sequences changing over two million years P2 is expressed in a matrix with the nucleotides AGCT on both the x and y axis. The probability of changing from any nucleotide to another is 0.0196. Probability of not changing is 0.9412.
 Long description provided in the video recording at 13:12.](graphics/05-mle-03-probmatrixsquared-1.png)
@@ -165,9 +169,9 @@ This doesn't generalise to arbitrary time periods, so instead we use a *rate* ma
 
 Converting a rate matrix to a probability requires a matrix *exponentiation*, giving formulae like this:
 
-$$
+\\(
 	P(t) = e^{Qt}.
-$$
+\\)
 
 We won't worry here about technical details, but note that some classes of rate matrix are easier to work with than others, the easiest being the JC69 (one parameter) matrix.
 
@@ -200,14 +204,14 @@ We won't worry here about technical details, but note that some classes of rate 
 For a model with $k$ free parameters and a log likelihood $L$, here are the penalty functions:
 
 AIC is the original information-theoretic correction:
-$$ AIC = 2k-2\ln(L)$$	
+\\( AIC = 2k-2\ln(L)\\)	
 
 AICc is a correction for small sample sizes and is equal to 
-$$ AICc = AIC + \frac{2k^{2}+2k}{n-k-1} $$
+\\( AICc = AIC + \frac{2k^{2}+2k}{n-k-1} \\)
 
 BIC is defined by
-$$ BIC = k\ln(n) - 2\ln(L)$$
-(where $$n$$ is a measure of sample size).
+\\( BIC = k\ln(n) - 2\ln(L)\\)
+(where \\(n\\) is a measure of sample size).
 All of these are in common use but the commonest is AIC, and that is the method we use in the tutorial.
 
 ---
@@ -257,9 +261,9 @@ where the asterisk is a short-hand to make the row-sums equal 0.
 
 ![Formula where rate of nucleic acid substitutions  according to the HKY85 model QHKY85  is expressed as a matrix with the nucleotides AGCT on both the x and y axis. The rate of change from any nucleotide to another is a factor of variation in nucleotide frequencies πA; πG; πC; πT and transition/transversion rates kappa. The rate of not changing is represented by an asterisk. Long description provided in the video recording at 28:06](graphics/05-mle-06-HKY85-1.png)
 
-* The HKY85 model has *four* parameters: $$\pi_{A}$$, $$\pi_{G}$$, $$\pi_{C}$$ (and this fixes $$\pi_{T}$$), and a transition/ transversion rate ratio $$\kappa$$.
+* The HKY85 model has *four* parameters: \\(\pi_{A}\\), \\(\pi_{G}\\), \\(\pi_{C}\\) (and this fixes \\(\pi_{T}\\)), and a transition/ transversion rate ratio \\(\kappa\\).
 
-* Can fix $$\pi$$ or estimate it from the observed frequencies, or even estimate it by searching for the best values (which means it takes longer of course).
+* Can fix \\(\pi\\) or estimate it from the observed frequencies, or even estimate it by searching for the best values (which means it takes longer of course).
 
 
 ---
@@ -347,14 +351,14 @@ there are two internal edges: $x-y$ and $y-z$. We can do an NNI move on each of 
 
 ![Schematic of an unrooted phylogenetic tree. There are three connected internal nodes x,y,z and five tips A, B, C, D, E. A and B are connected to x; C is connected to Y; E and D are connected to z. The edge connecting x and y is coloured red.](graphics/05-mle-11-select-1.png)
 
-Select edge $$xy$$ to collapse.
+Select edge \\(xy\\) to collapse.
 
 ---
 # Tree perturbations 1: NNI
 
 ![Schematic of a non-binary phylogenetic tree. There are two connected internal nodes xy and z and five tips A, B, C, D, E. A, B and C are connected to xy; D and E are connected to z. The internal node xy coloured red.](graphics/05-mle-12-collapse-1.png)
 
-$$xy$$ is collapsed.
+\\(xy\\) is collapsed.
 
 ---
 # Tree perturbations 1: NNI
@@ -362,10 +366,10 @@ $$xy$$ is collapsed.
 ![Schematic of two phylogenetic trees. The tree on the left has three connected internal nodes x,y,z and five tips A, B, C, D, E. A and C are connected to x; B is connected to Y; E and D are connected to z. The edge connecting x and y is red. The tree on the right has three connected internal nodes x,y,z and five tips A, B, C, D, E. B and C are connected to x; A is connected to Y; E and D are connected to z. The edge connecting x and y is red.
 ](graphics/05-mle-13-expand-1.png)
 
-Expand $$xy$$ in either of two ways.
+Expand \\(xy\\) in either of two ways.
 
 
-For an unrooted binary tree with $$n$$ leaves, there are $$2(n-3)$$ neighbouring trees under this move.
+For an unrooted binary tree with \\(n\\) leaves, there are \\(2(n-3)\\) neighbouring trees under this move.
 
 ---
 # Simple example: five taxa
@@ -390,27 +394,27 @@ Trim the root of the subtree...
 
 ![Schematic of an unrooted phylogenetic tree. The tree has four connected internal nodes w,x,y,z and six tips A, B, C, D, E, F. A and B are connected to w; C is connected to x;  D is connected to y; E and F are connected to z. There is a black dot on the edge connecting w and z. A red arrow points from this dot to the edge connecting y and D.](graphics/05-mle-17-SPR-graft-yD-1.png)
 
-Regraft to $$y-D$$,
+Regraft to \\(y-D\\),
 ---
 # Tree perturbations 2: SPR
 
 ![Schematic of an unrooted phylogenetic tree. The tree has four connected internal nodes w,x,y,z and six tips A, B, C, D, E, F. A and B are connected to w; C is connected to x;  D is connected to y; E and F are connected to z. There is a black dot on the edge connecting w and z. Red arrows point from this dot to the edge connecting y and D and the edge connecting y and z.](graphics/05-mle-18-SPR-graft-yz-1.png)
 
-... or $$y-z$$,
+... or \\(y-z\\),
 ---
 # Tree perturbations 2: SPR
 
 ![Schematic of an unrooted phylogenetic tree. The tree has four connected internal nodes w,x,y,z and six tips A, B, C, D, E, F. A and B are connected to w; C is connected to x;  D is connected to y; E and F are connected to z. There is a black dot on the edge connecting w and z. Red arrows point from this dot to the edges connecting y and D; y and z; and z and E.](graphics/05-mle-19-SPR-graft-zE-1.png)
 
-... or $$z-E$$,
+... or \\(z-E\\),
 ---
 # Tree perturbations 2: SPR
 
 ![Schematic of an unrooted phylogenetic tree. The tree has four connected internal nodes w,x,y,z and six tips A, B, C, D, E, F. A and B are connected to w; C is connected to x;  D is connected to y; E and F are connected to z. There is a black dot on the edge connecting w and z. Red arrows point from this dot to the edges connecting y and D; y and z;  z and E; and z and F.](graphics/05-mle-20-SPR-graft-zF-1.png)
 
-... or $$z-F$$.
+... or \\(z-F\\).
 
-Under this move there are more neighbours: $$4(n-3)(n-2)$$ possible moves.
+Under this move there are more neighbours: \\(4(n-3)(n-2)\\) possible moves.
 
 ---
 # Tree perturbations 3: TBR
@@ -486,7 +490,7 @@ This file is licensed under the Creative Commons Attribution-Share Alike 3.0 Unp
 
 ---
 # `iqtree` output
-
+.reduce50[
 ```
 mac@mac-pc-443 ~/N/p/t/2/AusBioCommons-Phylogenetics> iqtree2 -s anolis-aligned.fasta
 IQ-TREE multicore version 2.1.3 COVID-edition for Linux 64-bit built Apr 21 2021
@@ -519,10 +523,11 @@ Alignment has 55 sequences with 1462 columns, 1138 distinct patterns
   10  A.bartschi                    3.76%    passed     30.22%
   11  A.bimaculatus                 4.65%    passed     32.77%
 ```
+]
 ---
 
 # `iqtree` output
-
+.reduce50[
 ```
 Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.010 seconds
 Perform fast likelihood tree search using GTR+I+G model...
@@ -539,9 +544,10 @@ Gamma shape alpha: 0.832
 Parameters optimization took 2 rounds (0.144 sec)
 Time for fast ML tree search: 0.993 seconds
 ```
+]
 ---
 # `iqtree` output
-
+.reduce50[
 ```
 ModelFinder will test up to 286 DNA models (sample size: 1462) ...
  No. Model         -LnL         df  AIC          AICc         BIC
@@ -574,9 +580,10 @@ ModelFinder will test up to 286 DNA models (sample size: 1462) ...
 126  TIMe+R6       37750.820    120 75741.641    75763.296    76376.148
 138  TPM3u+F+R5    37129.051    120 74498.103    74519.758    75132.610
 ```
+]
 ---
 # `iqtree` output
-
+.reduce50[
 ```
 Estimate model parameters (epsilon = 0.100)
 1. Initial log-likelihood: -37042.461
@@ -590,9 +597,10 @@ Computing ML distances took 0.054833 sec (of wall-clock time) 0.054830 sec(of CP
 Computing RapidNJ tree took 0.000283 sec (of wall-clock time) 0.000282 sec (of CPU time)
 Log-likelihood of RapidNJ tree: -37150.315
 ```
+]
 ---
 # `iqtree` output
-
+.reduce50[
 ```
 -------------------------------------------------------------------
 |             INITIALIZING CANDIDATE TREE SET                      |
@@ -612,10 +620,10 @@ Finish initializing candidate tree set (10)
 Current best tree score: -37036.294 / CPU time: 6.458
 Number of iterations: 20
 ```
-
+]
 ---
 # `iqtree` output
-
+.reduce50[
 ```
 --------------------------------------------------------------------
 |               OPTIMIZING CANDIDATE TREE SET                      |
@@ -634,10 +642,10 @@ Iteration 110 / LogL: -37036.508 / Time: 0h:0m:28s (0h:0m:4s left)
 Iteration 120 / LogL: -37036.242 / Time: 0h:0m:31s (0h:0m:1s left)
 TREE SEARCH COMPLETED AFTER 128 ITERATIONS / Time: 0h:0m:33s
 ```
-
+]
 ---
 # `iqtree` output
-
+.reduce50[
 ```
 --------------------------------------------------------------------
 |                    FINALIZING TREE SEARCH                        |
@@ -667,6 +675,7 @@ Analysis results written to:
 
 Date and Time: Thu Dec 21 13:28:52 2023
 ```
+]
 ---
 
 
