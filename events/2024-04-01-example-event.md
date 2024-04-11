@@ -55,12 +55,19 @@ program:
         topic: admin
         time_start: "13:00"
       - type: custom
-        name: Question and Answer Session
+        name: Custom Session
         time_start: "16:00"
         time_end: "17:00"
         description: |
           Description of the custom session here, in markdown, can add
           [links](https://example.com) if needed
+      - type: custom
+        name: Wrap-up & Drinks
+        time_start: "17:00"
+        time_end: "18:00"
+        description: |
+          Time for some well-deserved drinks and socializing!
+
 
 ---
 
