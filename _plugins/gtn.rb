@@ -332,6 +332,13 @@ module Jekyll
         if m.key?('name') && m.key?('topic')
           found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])
           Jekyll.logger.warn "Could not find material #{m['topic']}/#{m['name']} in the site data" if found.nil?
+
+          if m.key?('time_start')
+            found = found.merge('time_start' => m['time_start'])
+          end
+          if m.key?('time_end')
+            found = found.merge('time_end' => m['time_end'])
+          end
           found
         elsif m.key?('external') && m['external']
           {
@@ -340,6 +347,15 @@ module Jekyll
             'title' => m['name'],
             'hands_on' => 'external',
             'hands_on_url' => m['link'],
+          }
+        elsif m.key?('type') && m['type'] == 'custom'
+         {
+            'layout' => 'custom',
+            'name' => m['name'],
+            'title' => m['name'],
+            'description' => m['description'],
+            'time_start' => m['time_start'],
+            'time_end' => m['time_end']
           }
         else
           Jekyll.logger.warn "[GTN] Unsure how to render #{m}"

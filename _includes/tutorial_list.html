@@ -1,6 +1,11 @@
+{% assign page = include.page %}
+
 <table class="table table-responsive table-striped">
   <thead>
     <tr>
+      {% if page.layout == 'event' and page.async != 'true' %}
+      <th scope="col">Time</th>
+      {% endif %}
       <th scope="col">Lesson</th>
       <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
       <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
@@ -25,6 +30,14 @@
       <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
 
         <tr>
+          {% if page.layout == 'event' and page.async != 'true' %}
+          <td>{{material.time_start}} {% if material.time_end%}- {{material.time_end}}{% endif %}</td>
+          {% endif %}
+
+          {% if material.layout == 'custom' %} <!-- e.g. for events -->
+            <td> {{material.title}} </td>
+            <td colspan="3"> {{material.description | markdownify }}</td>
+          {% else %}
           <td class="tutorial_title">
             {% assign default_resource_url = material | get_default_link %}
             {% if default_resource_url %}
@@ -81,6 +94,7 @@
           {% if instances[topic.name].supported %}
           <td> {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %} </td>
           {% endif %}
+         {% endif %} <!-- not custom session -->
          </tr>
        {% endif %}
     {% endfor %}
