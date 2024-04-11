@@ -9,14 +9,16 @@ description: |
 
 cover-image: assets/images/gat.png
 cover-image-alt: GTN Logo on a spiral galaxy background with text galaxy admin training
-editorial_board:
+
+organizers:
+- shiltemann
 - hexylena
-- natefoo
-- slugger70
 
-tags: [Galaxy administrators, 5-day course]
+tags: [Topic 1, Topic 2, 5-day course]
 
-pathway:
+
+
+program:
   - section: "Monday: Setting up Galaxy with Ansible"
     description: This module covers getting a Galaxy server setup with Ansible, a server you will develop furhter in the rest of the modules
     tutorials:
