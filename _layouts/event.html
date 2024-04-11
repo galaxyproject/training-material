@@ -1,0 +1,111 @@
+---
+layout: base
+---
+
+{% assign event = page %}
+
+{% assign start = event.date_start %}
+{% assign startday = start | date: "%d" %}
+{% assign startmonth = start | date: "%m" %}
+{% assign startyear = start | date: "%Y" %}
+{% assign end = event.date_end %}
+{% assign endday = end | date: "%d" %}
+{% assign endmonth = end | date: "%m" %}
+{% assign endyear = end | date: "%Y" %}
+
+{% if startyear == endyear and startmonth == endmonth and startday == endday %}
+  {% capture event_date %}{{ start | date: "%-d %B %Y"}} {% endcapture %}
+
+{% elsif startyear == endyear and startmonth == endmonth and startday != endday %}
+  {% capture event_date %} {{start | date: "%-d"}}-{{end | date: "%-d"}} {{ start | date: "%B %Y" }}{% endcapture %}
+
+{% elsif startyear == endyear and startmonth != endmonth %}
+  {% capture event_date %}{{start | date: "%-d %B"}}-{{end | date: "%-d %B"}} {{ start | date: "%Y" }}{% endcapture %}
+
+{% elsif startyear != endyear %}
+  {% capture event_date %}{{ start | date: "%-d %B %Y" }} - {{ end | date: "%-d %B %Y" }}{% endcapture %}
+{% endif %}
+
+
+<script type="application/ld+json">
+{
+	"@context": "https://schema.org",
+	"@type": "Course",
+	"name": "{{ pathway.title }}",
+	"description": "{{ pathway.description }}",
+	"provider": {
+		"@type": "Organization",
+		"email": "galaxytrainingnetwork@gmail.com",
+		"name": "Galaxy Training Network",
+		"url": "https://training.galaxyproject.org",
+		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+		"sameAs": "https://training.galaxyproject.org"
+	}
+}
+</script>
+
+
+
+<section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
+    <hgroup>
+      <h1>{{ event.title }}</h1>
+    </hgroup>
+
+    <p>{{ event.description | markdownify }}</p>
+
+    <h2> Practical Information </h2>
+    <ul>
+      <li><b>When: </b> {{ event_date }} </li>
+      <li><b>Where: </b> {{ event.location }} </li>
+      <li><b>Cost: </b> {{ event.cost }} </li>
+      <li><b>Intended Audience:</b> {{ event.audience }} </li>
+      <li><b>Contact: </b> <a href="mailto:{{ event.contact_email }}">{{event.contact_email}}</a> </li>
+    </ul>
+
+    TODO: registration button
+    TODO: "Add to calendar" buttons
+
+    <p>{{ content | markdownify }}</p>
+
+
+    {% if event.requirements %}
+    <h3 id="requirements">Requirements</h3>
+    <p>Before joining this event, we recommend you to have a look at:</p>
+
+    <ul>
+        {% include _includes/display_extra_training.md extra_trainings=event.requirements %}
+    </ul>
+    {% endif %}
+
+
+
+    <h2> Program </h2>
+    {% for section in event.program %}
+        <h3 id="st-{{ section.section | slugify }}">{{ section.section }}</h3>
+        <p>{{ section.description | markdownify }}</p>
+
+	{% if section.tutorials %}
+        {% assign material_list = site | convert_to_material_list: section.tutorials %}
+	{% include _includes/tutorial_list.html sub=material_list page=page %}
+	{% endif %}
+    {% endfor %}
+</section>
+
+
+<hr style="margin-top: 6em"/>
+<section>
+	<!-- Maintained by -->
+	<h2 id="editorial-board">Editorial Board</h2>
+	<p>This material is reviewed by our Editorial Board:</p>
+	{% assign organizers = event.organizers %}
+	{% include _includes/contributor-list.html contributors=organizers badge=true %}
+
+	{% if event.funding %}
+	<h2 id="funders">Funders</h2>
+	<p>This event is brought to you by:</p>
+	{% assign funders = event.funding | sorted %}
+	{% include _includes/contributor-list.html contributors=funders badge=true %}
+	{% endif %}
+
+</section>
+
