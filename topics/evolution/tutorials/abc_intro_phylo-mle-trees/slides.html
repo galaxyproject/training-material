@@ -135,18 +135,24 @@ We could then calculate the probability of going from one nucleotide to another,
 
 
 ---
+
 # Probability of sequences changing
 
 To calculate the probability of multiple nucleotides changing we multiply the individual probabilities together -- which is making direct use of the assumption that each nucleotide site evolves independently of the others.
 
 We would then calculate the probability of going from sequence **AAGT** to **AAGA** as
+.left[
+  $$
+    	prob = P(A\to A)\times P(A\to G) \times P(G\to G) \times P(T\to A)
+  $$
 
-\\(
-		prob = P(A\to A)x P(A\to G) \x P(G\to G) \x P(T\to A) \\
-		 = 0.97 \x 0.01 \x 0.97 \x 0.01 \\
-		 \approx 9.4\x 10^{-6}
-\\)
-
+  $$ 
+    = 0.97 \times 0.01 \times 0.97 \times 0.01
+  $$
+  $$
+	 \approx 9.4\times 10^{-6}
+  $$
+]
 
 ---
 # Changing the time
@@ -201,7 +207,7 @@ We won't worry here about technical details, but note that some classes of rate 
 ---
 # Penalised likelihood
 
-For a model with $k$ free parameters and a log likelihood $L$, here are the penalty functions:
+For a model with \\(k\\) free parameters and a log likelihood \\(L\\), here are the penalty functions:
 
 AIC is the original information-theoretic correction:
 \\( AIC = 2k-2\ln(L)\\)
@@ -297,16 +303,17 @@ Models that accommodate this are called "Rates Across Sites" or RAS models.
 ---
 # Rates across sites
 
-![Schematic representing differences in the rate of substitutions at different sites.
-
-A line with two dots on it represents two positions within a gene. Blue arrows connect each dot to separate rate matrices. The matrices are identical but the matrix on the right is annotated 5x indicating that there are 5 times more substitutions at this site. Described at 33:00](images/05-mle-08-RAS-1.png)
+![Schematic representing differences in the rate of substitutions at different sites. A line with two dots on it represents two positions within a gene. Blue arrows connect each dot to separate rate matrices. The matrices are identical but the matrix on the right is annotated 5x indicating that there are 5 times more substitutions at this site. Described at 33:00](images/05-mle-08-RAS-1.png)
 
 While the proportions of substitution types might be the same, the overall *rate* at these two sites can differ.
 
 ---
+
 # IQTree
 
-![IQTree logo](images/05-mle-09-IQTreeLogo-1.png)
+.image-25[
+  ![IQTree logo](images/05-mle-09-IQTreeLogo-1.png)
+]
 
 IQTree is at the forefront of maximum likelihood phylogenetic tools.  It is by far the most advanced such tool and is under active development, adding new models and features.
 
@@ -335,15 +342,16 @@ Fortunately this turns out to be the case!  The best trees tend to clump togethe
 ---
 # Tree perturbations 1: NNI
 
-_N_earest _N_eighbour _I_nterchange is a way to transform one tree into another -- so we can search for the best tree.
+*N*earest *N*eighbour *I*nterchange is a way to transform one tree into another -- so we can search for the best tree.
 
 An NNI move consists of effectively collapsing an internal branch of the tree and re-expanding it out in either of two possible ways.
 
 For example, given the original tree
 
-![Schematic of an unrooted phylogenetic tree. There are three connected internal nodes x,y,z and five tips A, B, C, D, E. A and B are connected to x; C is connected to Y; E and D are connected to z.](images/05-mle-10-initialtree-1.png)
-
-there are two internal edges: $x-y$ and $y-z$. We can do an NNI move on each of them.
+.image-70[
+  ![Schematic of an unrooted phylogenetic tree. There are three connected internal nodes x,y,z and five tips A, B, C, D, E. A and B are connected to x; C is connected to Y; E and D are connected to z.](images/05-mle-10-initialtree-1.png)
+]
+there are two internal edges: \\(x-y\\) and \\(y-z\\). We can do an NNI move on each of them.
 
 
 ---
@@ -380,7 +388,7 @@ For an unrooted binary tree with \\(n\\) leaves, there are \\(2(n-3)\\) neighbou
 ---
 # Tree perturbations 2: SPR
 
-_S_ubtree _P_runing and _R_egrafting works by choosing an edge, cutting the tree at that edge, and then reconnecting the smaller part anywhere else in the larger part.
+*S*ubtree *P*runing and *R*egrafting works by choosing an edge, cutting the tree at that edge, and then reconnecting the smaller part anywhere else in the larger part.
 
 ![Schematic of an unrooted phylogenetic tree. The tree has four connected internal nodes w,x,y,z and six tips A, B, C, D, E, F. A and B are connected to w; C is connected to x;  D is connected to y; E and F are connected to z. The edge connecting w and z is red.](images/05-mle-15-SPR-select-1.png)
 ---
@@ -419,7 +427,7 @@ Under this move there are more neighbours: \\(4(n-3)(n-2)\\) possible moves.
 ---
 # Tree perturbations 3: TBR
 
-_T_ree _B_isection and _R_econnection works by cutting the tree at any internal edge, then re-rooting each of the parts just formed, and reconnecting the roots:
+*T*ree *B*isection and *R*econnection works by cutting the tree at any internal edge, then re-rooting each of the parts just formed, and reconnecting the roots:
 
 ![Schematic of an unrooted phylogenetic tree. The tree has four connected internal nodes w,x,y,z and six tips A, B, C, D, E, F. A and B are connected to w; C is connected to x;  D is connected to y; E and F are connected to z. The edge connecting x and y is red.](images/05-mle-21-TBR-select-1.png)
 ---
@@ -469,8 +477,7 @@ This kind of heuristic search is called *hill climbing*, from the obvious analog
 ---
 
 
-![Two networks containing 15 phylogenetic trees are shown. Lines connect the trees in the networks forming a star shaped pattern. The network on the right is additionally annotated with lines that trace over selected connections between trees multiple times.
-Long description in video recording at 47:17 Image from: https://doi.org/10.1101/746362](images/CaoEtAl2019Fig3cropped.jpg)
+![Two networks containing 15 phylogenetic trees are shown. Lines connect the trees in the networks forming a star shaped pattern. The network on the right is additionally annotated with lines that trace over selected connections between trees multiple times. Long description in video recording at 47:17 Image from: https://doi.org/10.1101/746362](images/CaoEtAl2019Fig3cropped.jpg)
 
 This figure from Cao _et al._ (2019) illustrates moving around in tree space.
 
