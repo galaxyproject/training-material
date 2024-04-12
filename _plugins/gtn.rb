@@ -334,7 +334,7 @@ module Jekyll
           Jekyll.logger.warn "Could not find material #{m['topic']}/#{m['name']} in the site data" if found.nil?
 
           if m.key?('time_start')
-            found = found.merge('time_start' => m['time_start'])
+            found['time_start'] = m['time_start']
           end
           if m.key?('time_end')
             found = found.merge('time_end' => m['time_end'])
