@@ -22,7 +22,7 @@ location: Example street 42, City, Country
 cost: free
 audience: This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
 contact_email: organizers@example.com
-async: false # if asynchronous, we will not add time columns to program
+async: false # if asynchronous, we will not display the time columns on the program
 
 registraton:
 - link:
