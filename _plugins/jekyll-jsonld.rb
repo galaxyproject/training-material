@@ -168,24 +168,25 @@ module Jekyll
           description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
           url: contributor.fetch('url', "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/"),
           logo: contributor.fetch('avatar', "https://github.com/#{id}.png"),
-        },
+        }
+      ]
+
+      organization
+    end
+
+    def generate_funding_jsonld(id, contributor, site)
+      organization = [
         {
           '@context': 'https://schema.org',
           '@type': 'Grant',
           identifier: contributor['funding_id'],
           url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
-          funder: {
-            '@type': 'Organization',
-            name: contributor['funder_name'],
-            description: contributor.fetch('funding_statement',
-                                           'An organization supporting the Galaxy Training Network'),
-            url: Gtn::Contributors.fetch_funding_url(contributor),
-          }
+          funder: generate_funder_jsonld(id, contributor, site)
         }
       ]
 
-      organization[1]['startDate'] = contributor['start_date'] if contributor.key?('start_date')
-      organization[1]['endDate'] = contributor['end_date'] if contributor.key?('end_date')
+      organization[0]['startDate'] = contributor['start_date'] if contributor.key?('start_date')
+      organization[0]['endDate'] = contributor['end_date'] if contributor.key?('end_date')
 
       organization
     end
@@ -198,14 +199,20 @@ module Jekyll
     # +site+:: The site object.
     # Returns:
     # +String+:: The JSON-LD metadata.
-    def to_pfo_jsonld(id, site)
+    def to_pfo_jsonld(id, site, json: true)
       contributor = Gtn::Contributors.fetch_contributor(site, id)
       if Gtn::Contributors.person?(site, id)
-        JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
+        d = generate_person_jsonld(id, contributor, site)
       elsif Gtn::Contributors.funder?(site, id)
-        JSON.pretty_generate(generate_funder_jsonld(id, contributor, site))
+        d = generate_funder_jsonld(id, contributor, site)
       else
-        JSON.pretty_generate(generate_org_jsonld(id, contributor, site))
+        d = generate_org_jsonld(id, contributor, site)
+      end
+
+      if json
+        JSON.pretty_generate(d)
+      else
+        d
       end
     end
 
@@ -218,7 +225,7 @@ module Jekyll
     # +Hash+:: The JSON-LD metadata.
     def generate_news_jsonld(page, site)
       authors = Gtn::Contributors.get_authors(page.to_h).map do |x|
-        to_pfo_jsonld(x, site)
+        to_pfo_jsonld(x, site, json: false)
       end
 
       data = {
@@ -246,6 +253,96 @@ module Jekyll
         }
       }
       data.update(A11Y)
+
+      JSON.pretty_generate(data)
+    end
+
+    ##
+    # Generate the JSON-LD metadata for an event
+    # Parameters:
+    # +page+:: The page object.
+    # +site+:: The +Jekyll::Site+ site object.
+    # Returns:
+    # +Hash+:: The JSON-LD metadata.
+    def generate_event_jsonld(page, site)
+      p page.to_h
+      organisers = Gtn::Contributors.get_organisers(page.to_h).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+      funders = Gtn::Contributors.get_funders(page.to_h).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+      funding = Gtn::Contributors.get_funders(page.to_h).map do |x|
+        generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+      end
+
+      # TODO: fill out parts.
+      parts = []
+
+      data = {
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        url: "#{site['url']}#{site['baseurl']}#{page['url']}",
+        name: page['title'],
+        keywords: page['tags'] || [],
+        description: page['description'],
+
+        # about: [], # TeSS, "scientific topics". TODO: fetch all materials, extract all EDAM terms.
+        audience: page['audience'], # TeSS: target audience
+        courseMode: page['mode'], # TeSS, "course mode", only online is currently understood.
+        startDate: page['date_start'],
+        endDate: page['date_end'],
+        organizer: organisers, # TeSS only, US spelling, non-standard
+
+        # Cost: TODO
+        #   "hasCourseInstance": [
+        # {
+        #   "@type": "CourseInstance",
+        #   "courseMode": [
+        #     "distance learning",
+        #     "Online"
+        #   ],
+        #   "offers": {
+        #     "@type": "Offer",
+        #     "price": "395",
+        #     "priceCurrency": "GBP"
+        #   }
+
+        # location: nil, # TODO, TeSS location
+        # teaches: [], # TeSS, "learning objectives", TODO fetch all materials, extract all LOs
+        # timeRequired: 'P1D', # TeSS, "duration", TODO: calculate from start/end date, not implemented in scraper currently.
+        #
+
+        # availableLanguage
+        # courseCode
+        # coursePrerequisites
+        # educationalCredentialAwarded
+        # financialAidEligible
+        # hasCourseInstance
+        # numberOfCredits
+        # occupationalCredentialAwarded
+        # syllabusSections
+        # totalHistoricalEnrollment
+
+        # assesses
+        # competencyRequired
+        # educationalAlignment
+        # educationalLevel
+        # educationalUse
+        # learningResourceType
+        # teaches
+
+        dateModified: Gtn::ModificationTimes.obtain_time(page['path']),
+        datePublished: Gtn::PublicationTimes.obtain_time(page['path']),
+        funder: funders, # Org or person
+        funding: funding, # Grant
+        publisher: GTN,
+        provider: GTN,
+        # Session materials
+        hasPart: parts,
+      }
+      # We CANNOT guarantee A11Y
+      # data.update(A11Y)
 
       JSON.pretty_generate(data)
     end

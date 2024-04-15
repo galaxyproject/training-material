@@ -28,20 +28,7 @@ layout: base
 
 
 <script type="application/ld+json">
-{
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "{{ pathway.title }}",
-	"description": "{{ pathway.description }}",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
-}
+{{ page | generate_event_jsonld: site }}
 </script>
 
 
@@ -95,16 +82,13 @@ layout: base
 <hr style="margin-top: 6em"/>
 <section>
 	<!-- Maintained by -->
-	<h2 id="editorial-board">Editorial Board</h2>
-	<p>This material is reviewed by our Editorial Board:</p>
-	{% assign organizers = event.organizers %}
-	{% include _includes/contributor-list.html contributors=organizers badge=true %}
-
-	{% if event.funding %}
-	<h2 id="funders">Funders</h2>
+	<h2 id="Organisers">Organisers & Instructors</h2>
 	<p>This event is brought to you by:</p>
-	{% assign funders = event.funding | sorted %}
-	{% include _includes/contributor-list.html contributors=funders badge=true %}
+	{% include _includes/contributor-list2.html contributors=page.contributions badge=true %}
+
+
+	{% if event.contributions.funding %}
+	{% include _includes/funding-statement.md contributions=page.contributions %}
 	{% endif %}
 
 </section>

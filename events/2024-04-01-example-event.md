@@ -10,9 +10,15 @@ cover-image: assets/images/gat.png
 cover-image-alt: GTN Logo on a spiral galaxy background with text galaxy admin training
 
 
-organizers: # GTN contributors or funders, must be defined in CONTRIBUTORS.yaml
-- shiltemann
-- hexylena
+contributions:
+  organisers: # GTN contributors or funders, must be defined in CONTRIBUTORS.yaml
+  - shiltemann
+  - hexylena
+  instructors:
+  - bebatut
+  - fpsom
+  funding:
+  - gallantries
 
 tags: [Topic 1, Topic 2, 5-day course]
 
@@ -21,8 +27,9 @@ date_end: 2024-04-02 # optional, if event is more than one day
 location: Example street 42, City, Country
 cost: free
 audience: This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
-contact_email: organizers@example.com
+contact_email: organisers@example.com
 async: false # if asynchronous, we will not display the time columns on the program
+mode: online # In-person?
 
 registraton:
 - link:
