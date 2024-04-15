@@ -8,27 +8,40 @@ layout: base
 {{ page | generate_event_jsonld: site }}
 </script>
 
-<section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
+<section class="event">
     <hgroup>
       <h1>{{ event.title }}</h1>
+      {% if event.location.name == "Online" %}
+      <p>Virtual course</p>
+      {% else %}
+      <p>In-person course</p>
+      {% endif %}
     </hgroup>
 
+    <div class="row">
+	    <div class="col-md-9">
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Course Overview</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Programme</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="register-tab" data-toggle="tab" data-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">How to Register</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Instructor Zone</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <p>{{ event.description | markdownify }}</p>
-
-    <h2> Practical Information </h2>
-    <ul>
-      <li><b>When: </b> {{ event | collapse_date_pretty }} </li>
-      <li><b>Where: </b> {{ event.location | format_location }} </li>
-      <li><b>Cost: </b> {{ event.cost }} </li>
-      <li><b>Intended Audience:</b> {{ event.audience }} </li>
-      <li><b>Contact: </b> <a href="mailto:{{ event.contact_email }}">{{event.contact_email}}</a> </li>
-    </ul>
-
-    TODO: registration button
-    TODO: "Add to calendar" buttons
-
     <p>{{ content | markdownify }}</p>
 
+    <h3>Who is this course for?</h3>
+    {{ event.audience }}
 
     {% if event.requirements %}
     <h3 id="requirements">Requirements</h3>
@@ -38,26 +51,9 @@ layout: base
         {% include _includes/display_extra_training.md extra_trainings=event.requirements %}
     </ul>
     {% endif %}
-
-
-
-    <h2> Program </h2>
-    {% for section in event.program %}
-        <h3 id="st-{{ section.section | slugify }}">{{ section.section }}</h3>
-        <p>{{ section.description | markdownify }}</p>
-
-	{% if section.tutorials %}
-        {% assign material_list = site | convert_to_material_list: section.tutorials %}
-	{% include _includes/tutorial_list.html sub=material_list page=page %}
-	{% endif %}
-    {% endfor %}
-</section>
-
-
-<hr style="margin-top: 6em"/>
 <section>
 	<!-- Maintained by -->
-	<h2 id="Organisers">Organisers & Instructors</h2>
+	<h3 id="Organisers">Organisers & Instructors</h3>
 	<p>This event is brought to you by:</p>
 	{% include _includes/contributor-list2.html contributors=page.contributions badge=true %}
 
@@ -68,6 +64,25 @@ layout: base
 
 </section>
 
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <h2> Program </h2>
+    {% for section in event.program %}
+        <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
+        <p>{{ section.description | markdownify }}</p>
+
+	{% if section.tutorials %}
+        {% assign material_list = site | convert_to_material_list: section.tutorials %}
+	{% include _includes/tutorial_list.html sub=material_list page=page %}
+	{% endif %}
+    {% endfor %}
+  </div>
+  <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+    <h2>Registering</h2>
+
+    TODO: registration button
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 <section>
 	<h2>Instructor Zone</h2>
 	<details open>
@@ -121,4 +136,40 @@ layout: base
 		
 	</details>
 </section>
+
+  </div>
+</div>
+
+	</div> <!-- col-md-9 -->
+	<div class="col-md-3">
+		<table>
+			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
+			<tr><td>{% icon event-location %}</td><td>{{ event.location | format_location }}</td></tr>
+			<tr><td>{% icon event-cost %}</td><td>{{ event.cost }}</td></tr>
+			<tr><td>{% icon email %}</td><td><a href="mailto:{{ event.contact_email }}?subject={{ event.title | uri_escape }}">{{event.contact_email}}</a></td></tr>
+		</table>
+
+		<hr />
+		    TODO: "Add to calendar" buttons
+
+		<hr />
+
+		<b>Organisers</b><br/>
+		{% for org in event.contributions.organisers %}
+			{% include _includes/contributor-badge-inline.html id=org %}
+		{% endfor %}
+
+		<hr />
+		<b>In collaboration with</b><br/>
+		{% for org in event.contributions.funding %}
+			{% include _includes/contributor-badge-inline.html id=org %}
+		{% endfor %}
+
+
+	</div>
+</div><!-- row -->
+
+</section>
+
+
 
