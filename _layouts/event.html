@@ -68,3 +68,57 @@ layout: base
 
 </section>
 
+<section>
+	<h2>Instructor Zone</h2>
+	<details open>
+		<summary>Are you an instructor? Here are some useful things</summary>
+
+		<h3>Promote the Event</h3>
+
+		<p>Tootable/Tweetable version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+📅 {{ event | collapse_date_pretty }}
+➡️ {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+📝 Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+{{ event.short_id }}
+
+
+		{% if event.infrastructure %}
+		<h3>TIaaS</h3>
+
+{%- capture org0 -%}
+{{ event.contributions.organisers[0] }}
+{%- endcapture -%}
+
+		<ul>
+		{% for server in event.infrastructure.servers %}
+
+{%- capture urlparams -%}
+?name={{ site.data.contributors[org0].name | uri_escape}}
+&email={{ site.data.contributors[org0].email | uri_escape }}
+&title={{ event.title | uri_escape }}
+&description={{ event.description | uri_escape }}
+&start={{ event.date_start }}
+&end={{ event.date_end }}
+&website={{ site.url }}{{ site.baseurl }}{{ page.url }}
+&use_gtn=true&gtn_links={{ 'See course event' | uri_escape }}
+&training_identifier={{ server.tiaas | uri_escape }}
+{%- endcapture -%}
+			<li>
+				<a href="{{ server.server }}/tiaas/new/{{ urlparams }}">Request TIaaS @ {{ server.server }}</a>
+			</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+		
+	</details>
+</section>
+
