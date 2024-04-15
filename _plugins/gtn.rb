@@ -558,6 +558,27 @@ module Jekyll
       end
     end
 
+    def format_location(location)
+      url = "https://www.openstreetmap.org/search?query="
+      # location:
+      #   name: Bioinf Dept
+      #   address: 42 E Main St.
+      #   city: Reyjkjavik
+      #   country: Iceland
+      #   #region: # optional
+      #   postcode: 912NM
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil),
+      ].compact.join(', ')
+
+      "<a href=\"#{url}#{loc}\">#{loc}</a>"
+    end
+
     ##
     # Get the topic of a page's path
     # Params:

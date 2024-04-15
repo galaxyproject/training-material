@@ -265,7 +265,6 @@ module Jekyll
     # Returns:
     # +Hash+:: The JSON-LD metadata.
     def generate_event_jsonld(page, site)
-      p page.to_h
       organisers = Gtn::Contributors.get_organisers(page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end

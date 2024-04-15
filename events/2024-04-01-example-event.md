@@ -48,6 +48,15 @@ feedback:
   link: https://example.org
   deadline: 2024-05-01
 
+infrastructure:
+  servers:
+  - server: https://usegalaxy.eu
+    tiaas: smorgasbord3
+
+#  support:
+#    slack:
+#      name: "#social"
+#      #link: "https://gtnsmrgsbord.slack.com/archives/C032C2MRHAS" # Assumes GTN slack by default.
 
 program:
   - section: "Monday: Introduction"

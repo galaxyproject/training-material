@@ -270,3 +270,21 @@ mapping:
                         type: str
                         enum:
                           - custom
+    infrastructure:
+        description: |
+            Link to the feedback form
+        type: map
+        mapping:
+          servers:
+            type: seq
+            sequence:
+              - type: map
+                mapping:
+                  server:
+                    type: str
+                    description: |
+                      The URL of the server
+                  tiaas:
+                    type: str
+                    description: |
+                      The TIaaS identifier. If you don't have one officially yet, just set it provisionally (we'll generate a link which will make it easier to request it!)
