@@ -87,7 +87,7 @@
       "name": "MSI Finding Diff Analytes",
       "title": "MSI Finding Diff Analytes",
       "test_results": null,
-      "modified": "2024-04-15 06:16:40 +0000",
+      "modified": "2024-04-15 06:52:22 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ntreated\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\ncontrol\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"MSI classification\"];\n  9 -->|outfile_imzml| 10;\n  4 -->|pixel_annotations| 10;\n  11[\"MSI segmentation\"];\n  9 -->|outfile_imzml| 11;\n  12[\"Filter\"];\n  10 -->|mzfeatures| 12;\n  13[\"Join two files\"];\n  12 -->|out_file1| 13;\n  2 -->|output| 13;\n  14[\"Summary Statistics\"];\n  13 -->|merged_file| 14;\n  15[\"MSI mz images\"];\n  13 -->|merged_file| 15;\n  3 -->|output| 15;\n  16[\"Select\"];\n  13 -->|merged_file| 16;\n  17[\"MSI mz images\"];\n  16 -->|out_file1| 17;\n  3 -->|output| 17;\n  2[\"ℹ️ Input Dataset\\nGlycan_IDs\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nall_files\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"MSI combine\"];\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"MSI preprocessing\"];\n  4 -->|outfile_imzml| 5;\n  6[\"MSI Qualitycontrol\"];\n  4 -->|outfile_imzml| 6;\n  4 -->|pixel_annotations| 6;\n  7[\"MALDIquant preprocessing\"];\n  5 -->|outfile_imzml| 7;\n  8[\"MALDIquant peak detection\"];\n  7 -->|outfile_imzml| 8;\n  4 -->|pixel_annotations| 8;\n  9[\"MSI preprocessing\"];\n  5 -->|outfile_imzml| 9;\n  8 -->|intensity_matrix| 9;"
     }
   ],
