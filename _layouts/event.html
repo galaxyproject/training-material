@@ -28,9 +28,9 @@ layout: base
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Programme</button>
   </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="register-tab" data-toggle="tab" data-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">How to Register</button>
-  </li>
+  <!-- <li class="nav-item" role="presentation"> -->
+  <!--   <button class="nav-link" id="register-tab" data-toggle="tab" data-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">How to Register</button> -->
+  <!-- </li> -->
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Instructor Zone</button>
   </li>
@@ -77,11 +77,11 @@ layout: base
 	{% endif %}
     {% endfor %}
   </div>
-  <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-    <h2>Registering</h2>
-
-    TODO: registration button
-  </div>
+  <!-- <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab"> -->
+  <!--   <h2>Registering</h2> -->
+  <!--  -->
+  <!--   TODO: registration button -->
+  <!-- </div> -->
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 <section>
 	<h2>Instructor Zone</h2>
@@ -142,6 +142,12 @@ layout: base
 
 	</div> <!-- col-md-9 -->
 	<div class="col-md-3">
+
+		<a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
+		todo: registration date / check if passed.
+
+		<hr/>
+
 		<table>
 			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
 			<tr><td>{% icon event-location %}</td><td>{{ event.location | format_location }}</td></tr>
