@@ -93,12 +93,8 @@ module Jekyll
 
       baseurl = @context.registers[:site].config['baseurl']
 
-      attrs = ""
-      attrs += " async" if bundle['async']
-      attrs += " defer" if bundle['defer']
-
       bundle['resources'].map do |f|
-        "<script #{attrs} src='#{baseurl}/#{f}'></script>"
+        "<script src='#{baseurl}/#{f}'></script>"
       end.join("\n")
     end
 
