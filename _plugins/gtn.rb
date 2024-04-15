@@ -785,6 +785,25 @@ Jekyll::Hooks.register :site, :post_read do |site|
       end
     end
   end
+
+  # Add shortlinks
+  Jekyll.logger.info '[GTN] Loading shortlinks'
+  shortlinks = site.data['shortlinks']
+  shortlinks_reversed = shortlinks['id'].invert
+
+  if site.posts.respond_to?(:docs)
+    posts = site.posts.docs
+  else
+    posts = site.posts
+  end
+
+  posts.each do |post|
+    post.data['short_id'] = shortlinks_reversed[post.url]
+  end
+
+  site.pages.each do |page|
+    page.data['short_id'] = shortlinks_reversed[page.url]
+  end
 end
 
 if $PROGRAM_NAME == __FILE__
