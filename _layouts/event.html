@@ -4,34 +4,9 @@ layout: base
 
 {% assign event = page %}
 
-{% assign start = event.date_start %}
-{% assign startday = start | date: "%d" %}
-{% assign startmonth = start | date: "%m" %}
-{% assign startyear = start | date: "%Y" %}
-{% assign end = event.date_end %}
-{% assign endday = end | date: "%d" %}
-{% assign endmonth = end | date: "%m" %}
-{% assign endyear = end | date: "%Y" %}
-
-{% if startyear == endyear and startmonth == endmonth and startday == endday %}
-  {% capture event_date %}{{ start | date: "%-d %B %Y"}} {% endcapture %}
-
-{% elsif startyear == endyear and startmonth == endmonth and startday != endday %}
-  {% capture event_date %} {{start | date: "%-d"}}-{{end | date: "%-d"}} {{ start | date: "%B %Y" }}{% endcapture %}
-
-{% elsif startyear == endyear and startmonth != endmonth %}
-  {% capture event_date %}{{start | date: "%-d %B"}}-{{end | date: "%-d %B"}} {{ start | date: "%Y" }}{% endcapture %}
-
-{% elsif startyear != endyear %}
-  {% capture event_date %}{{ start | date: "%-d %B %Y" }} - {{ end | date: "%-d %B %Y" }}{% endcapture %}
-{% endif %}
-
-
 <script type="application/ld+json">
 {{ page | generate_event_jsonld: site }}
 </script>
-
-
 
 <section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
     <hgroup>
@@ -42,7 +17,7 @@ layout: base
 
     <h2> Practical Information </h2>
     <ul>
-      <li><b>When: </b> {{ event_date }} </li>
+      <li><b>When: </b> {{ event | collapse_date_pretty }} </li>
       <li><b>Where: </b> {{ event.location | format_location }} </li>
       <li><b>Cost: </b> {{ event.cost }} </li>
       <li><b>Intended Audience:</b> {{ event.audience }} </li>
