@@ -24,20 +24,29 @@ tags: [Topic 1, Topic 2, 5-day course]
 
 date_start: 2024-04-01
 date_end: 2024-04-02 # optional, if event is more than one day
-location: Example street 42, City, Country
-cost: free
+
+# Required, but minimally the Name field for online events
+location:
+  name: Bioinf Dept
+  address: 42 E Main St.
+  city: Reyjkjavik
+  country: Iceland
+  #region: # optional
+  postcode: 912NM
+
+cost: free # Or, e.g. 150 EUR, must be space separated, must include a currency in ISO 4217 format
 audience: This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
 contact_email: organisers@example.com
 async: false # if asynchronous, we will not display the time columns on the program
 mode: online # In-person?
 
-registraton:
-- link:
-  deadline:
+registration:
+  link: https://example.org
+  deadline: 2024-01-01
 
 feedback:
-- link:
-  deadline:
+  link: https://example.org
+  deadline: 2024-05-01
 
 
 program:
@@ -46,32 +55,28 @@ program:
     tutorials:
       - name: galaxy-intro-short
         topic: introduction
-        time_start: "09:00"
-        time_end: "10:00"
+        time: "09:00 - 10:00"
       - name: data-manipulation-olympics
         topic: introduction
-        time_start: "10:00"
+        time: "10:00"
       - type: custom
         name: Coffee Break
-        time_start: "10:30"
+        time: "10:30"
       - name: data-manipulation-olympics
         topic: introduction
-        time_start: "10:45"
-        time_end: "12:00"
+        time: "10:45 - 12:00"
       - name: ansible-galaxy
         topic: admin
-        time_start: "13:00"
+        time: "13:00"
       - type: custom
         name: Custom Session
-        time_start: "16:00"
-        time_end: "17:00"
+        time: "16:00 - 17:00"
         description: |
           Description of the custom session here, in markdown, can add
           [links](https://example.com) if needed
       - type: custom
         name: Wrap-up & Drinks
-        time_start: "17:00"
-        time_end: "18:00"
+        time: "17:00 - 18:00"
         description: |
           Time for some well-deserved drinks and socializing!
 
