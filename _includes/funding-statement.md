@@ -6,27 +6,25 @@
 <div class="row">
 {% for id in include.contributions.funding %}
 	{% assign name = site.data.contributors[id].name | default: id -%}
-	<div class="col-md-3 col-xs-12">
-		<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="funder-badge">
-			<div>
-				{% if site.data.contributors[id].avatar %}
-				<img class="funder-avatar" src="{{ site.data.contributors[id].avatar }}" alt="Logo">
-				{% else %}
+	<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="funder-badge">
+		{% assign pfo = site.data.funders[id] | default: site.data.organisations[id] | default: site.data.contributors[id] | default: nil %}
+		<div class="avatar">
+			{% if pfo.avatar %}
+			<img class="funder-avatar" src="{{ pfo.avatar }}" alt="Logo">
+			{% else %}
+				{% unless pfo.github %}
 				<img class="funder-avatar" src="https://avatars.githubusercontent.com/{{ id }}" alt="Logo">
-				{% endif %}
-			</div>
+				{% endunless %}
+			{% endif %}
+		</div>
 
-			<div class="info">
-				<div class="name">{{ site.data.funders[id].short_name | default: site.data.funders[id].name | default: id }}</div>
-				<div class="description">
-				{{ site.data.funders[id].funding_statement | markdownify | strip_html }}
-				</div>
+		<div class="info">
+			<div class="name">{{ pfo.short_name | default: pfo.name | default: id }}</div>
+			<div class="description">
+			{{ site.data.funders[id].funding_statement | markdownify | strip_html }}
 			</div>
-		</a>
-	</div>
-	<div class="col-md-9 col-xs-12">
-		{{ site.data.contributors[id].funding_statement | markdownify }}
-	</div>
+		</div>
+	</a>
 {% endfor %}
 </div>
 </div>
