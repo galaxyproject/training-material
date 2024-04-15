@@ -294,20 +294,6 @@ module Jekyll
         endDate: page['date_end'],
         organizer: organisers, # TeSS only, US spelling, non-standard
 
-        # Cost: TODO
-        #   "hasCourseInstance": [
-        # {
-        #   "@type": "CourseInstance",
-        #   "courseMode": [
-        #     "distance learning",
-        #     "Online"
-        #   ],
-        #   "offers": {
-        #     "@type": "Offer",
-        #     "price": "395",
-        #     "priceCurrency": "GBP"
-        #   }
-
         # location: nil, # TODO, TeSS location
         # teaches: [], # TeSS, "learning objectives", TODO fetch all materials, extract all LOs
         # timeRequired: 'P1D', # TeSS, "duration", TODO: calculate from start/end date, not implemented in scraper currently.
@@ -343,6 +329,31 @@ module Jekyll
       }
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
+      if page.key?('cost')
+        if page['cost'] == 'free'
+          data['isAccessibleForFree'] = true
+          offer = {
+            '@type': 'Offer',
+            price: 0,
+            priceCurrency: 'EUR',
+          }
+        else
+          data['isAccessibleForFree'] = false
+          offer = {
+            '@type': 'Offer',
+            price: page['cost'].split(' ')[0],
+            priceCurrency: page['cost'].split(' ')[1],
+          }
+        end
+
+        data['hasCourseInstance'] = [
+          {
+            '@type': 'CourseInstance',
+            courseMode: [page['mode']],
+            offers: offer
+          }
+        ]
+      end
 
       JSON.pretty_generate(data)
     end
