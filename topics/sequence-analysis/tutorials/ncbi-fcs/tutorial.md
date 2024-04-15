@@ -18,7 +18,7 @@ contributions:
   editing:
     - hexylena
   funding:
-    - nih
+    - NIH
 
 ---
 
