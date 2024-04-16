@@ -297,7 +297,7 @@ module Jekyll
 
       learning_objectives = materials.map do |material|
         material.fetch('objectives', [])
-      end.flatten
+      end.flatten.compact
 
       # TODO: add topic edam terms too? Not sure.
 
