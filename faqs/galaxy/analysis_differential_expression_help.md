@@ -48,7 +48,7 @@ General
     * If you are summarizing by **exon**, your annotation should contain exon features (3rd column)
 - Sometimes these tools do not understand `transcript_id.N` and `gene_id.N` notation (where N is a version number).
     * This notation could be in fasta or tabular inputs.
-    * Try [removing `.N` from all inputs]({% link search2?query=olympics %}), and check for the accidential creation of new duplicates!
+    * Try [removing `.N` from all inputs]({% link search2.html %}?query=olympics), and check for the accidential creation of new duplicates!
 - Errors? [Understanding the job log messages]({% link faqs/galaxy/analysis_troubleshooting.md %}) can be confusing! But are accessible and worth reviewing.
     * The good news is that usage in Galaxy produces the same error messages as direct usage.
     * This means that a search at the [Bioconductor Support](https://support.bioconductor.org/) website can provide useful clues! Come back to the [Galaxy Help](https://help.galaxyproject.org/) forum with any remaining questions.
