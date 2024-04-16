@@ -10,7 +10,11 @@ require './bin/gtn'
 learning_pathway_SCHEMA_UNSAFE = YAML.load_file('bin/schema-learning-pathway.yaml')
 learning_pathway_SCHEMA = automagic_loading(learning_pathway_SCHEMA_UNSAFE)
 
-event_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event.yaml', permitted_classes: [Date])
+begin
+  event_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event.yaml', permitted_classes: [Date])
+rescue
+  event_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event.yaml')
+end
 event_SCHEMA = automagic_loading(event_SCHEMA_UNSAFE)
 
 Dir.glob('learning-pathways/*.md').reject { |p| p.match(/index.md/) }.each do |file|
@@ -41,7 +45,11 @@ end
 
 Dir.glob('events/*.md').reject { |p| p.match(/index.md/) }.each do |file|
   errs = []
-  pathway = YAML.load_file(file, permitted_classes: [Date])
+  begin
+    pathway = YAML.load_file(file, permitted_classes: [Date])
+  rescue
+    pathway = YAML.load_file(file)
+  end
 
   # Build validators now that we've filled out the subtopic enum
   contribs_validator = Kwalify::Validator.new(event_SCHEMA)
