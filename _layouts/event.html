@@ -142,9 +142,12 @@ layout: base
 
 	</div> <!-- col-md-9 -->
 	<div class="col-md-3">
-
+		{% assign passed = event.date_end | is_date_passed %}
+		{% if passed %}
+		<span class="btn btn-primary btn-lg btn-block disabled">Registration has Closed</span>
+		{% else %}
 		<a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
-		todo: registration date / check if passed.
+		{% endif %}
 
 		<hr/>
 

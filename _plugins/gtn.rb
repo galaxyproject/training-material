@@ -621,6 +621,16 @@ module Jekyll
       array.shuffle
     end
 
+    def is_date_passed(date)
+      if date.nil?
+        false
+      elsif date.is_a?(String)
+        Date.parse(date) < Date.today
+      else
+        date < Date.today
+      end
+    end
+
     def get_og_desc(site, page); end
 
     def get_og_title(site, page, reverse)
