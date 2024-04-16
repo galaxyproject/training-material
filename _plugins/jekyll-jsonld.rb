@@ -109,6 +109,12 @@ module Jekyll
     #  }
     #
     def generate_person_jsonld(id, contributor, site)
+      member_of = Gtn::Contributors.fetch_contributor(site, id)['affiliations'] || []
+      member_of = member_of.map do |org_id|
+        org = Gtn::Contributors.fetch_contributor(site, org_id)
+        generate_org_jsonld(org_id, org, site)
+      end
+
       person = {
         '@context': 'https://schema.org',
         '@type': 'Person',
@@ -128,7 +134,7 @@ module Jekyll
                        contributor.fetch('bio',
                                          'A contributor to the GTN project.')
                      end,
-        memberOf: [GTN],
+        memberOf: [GTN] + member_of,
       }
       if !contributor.nil? && contributor.key?('orcid') && contributor['orcid']
         person['identifier'] = "https://orcid.org/#{contributor['orcid']}"
@@ -156,8 +162,7 @@ module Jekyll
     end
 
     def generate_funder_jsonld(id, contributor, site)
-      organization = [
-        {
+      organization = {
           '@context': 'https://schema.org',
           '@type': 'Organization',
           'http://purl.org/dc/terms/conformsTo': {
@@ -169,24 +174,21 @@ module Jekyll
           url: contributor.fetch('url', "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/"),
           logo: contributor.fetch('avatar', "https://github.com/#{id}.png"),
         }
-      ]
 
       organization
     end
 
     def generate_funding_jsonld(id, contributor, site)
-      organization = [
-        {
+      organization = {
           '@context': 'https://schema.org',
           '@type': 'Grant',
           identifier: contributor['funding_id'],
           url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
           funder: generate_funder_jsonld(id, contributor, site)
         }
-      ]
 
-      organization[0]['startDate'] = contributor['start_date'] if contributor.key?('start_date')
-      organization[0]['endDate'] = contributor['end_date'] if contributor.key?('end_date')
+      organization['startDate'] = contributor['start_date'] if contributor.key?('start_date')
+      organization['endDate'] = contributor['end_date'] if contributor.key?('end_date')
 
       organization
     end
@@ -275,8 +277,37 @@ module Jekyll
         generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
       end
 
-      # TODO: fill out parts.
+      materials = []
+      page['program'].each do |section|
+        section['tutorials'].each do |tutorial|
+          if tutorial.key?('custom')
+            next
+          end
+
+          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+          materials.push(material)
+        end
+      end
+      materials.compact!
+
+      # Extract EDAM terms from all materials
+      edam_terms = materials.map do |material|
+        material.fetch('edam_ontology', [])
+      end.flatten.uniq
+
+      learning_objectives = materials.map do |material|
+        material.fetch('objectives', [])
+      end.flatten
+
+      # TODO: add topic edam terms too? Not sure.
+
       parts = []
+      materials.each do |material|
+        mat = generate_material_jsonld(material, site['data'][material['topic_name']], site)
+        if ! mat.nil? && ! mat.empty?
+          parts.push(mat)
+        end
+      end
 
       data = {
         '@context': 'https://schema.org',
@@ -286,7 +317,7 @@ module Jekyll
         keywords: page['tags'] || [],
         description: page['description'],
 
-        # about: [], # TeSS, "scientific topics". TODO: fetch all materials, extract all EDAM terms.
+        about: edam_terms, # TeSS, "scientific topics".
         audience: page['audience'], # TeSS: target audience
         courseMode: page['mode'], # TeSS, "course mode", only online is currently understood.
         startDate: page['date_start'],
@@ -294,9 +325,8 @@ module Jekyll
         organizer: organisers, # TeSS only, US spelling, non-standard
 
         # location: nil, # TODO, TeSS location
-        # teaches: [], # TeSS, "learning objectives", TODO fetch all materials, extract all LOs
+        teaches: learning_objectives, # TeSS, "learning objectives"
         # timeRequired: 'P1D', # TeSS, "duration", TODO: calculate from start/end date, not implemented in scraper currently.
-        #
 
         # availableLanguage
         # courseCode
@@ -317,8 +347,6 @@ module Jekyll
         # learningResourceType
         # teaches
 
-        dateModified: Gtn::ModificationTimes.obtain_time(page['path']),
-        datePublished: Gtn::PublicationTimes.obtain_time(page['path']),
         funder: funders, # Org or person
         funding: funding, # Grant
         publisher: GTN,
@@ -326,6 +354,16 @@ module Jekyll
         # Session materials
         hasPart: parts,
       }
+
+      begin
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page.path)
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page.path)
+      rescue
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page['path'])
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page['path'])
+      end
+
+
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
       if page.key?('cost')
@@ -354,7 +392,35 @@ module Jekyll
         ]
       end
 
+      if page.key?('location') && page['location'].keys.length > 1
+        data['location'] = {
+          '@type': 'Place',
+          name: page['location']['name'],
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: page['location'].fetch('address', nil),
+            addressLocality: page['location'].fetch('city', nil),
+            addressRegion: page['location'].fetch('region', nil),
+            postalCode: page['location'].fetch('postcode', nil),
+            addressCountry: page['location'].fetch('country', nil)
+          }
+        }
+      end
+
       JSON.pretty_generate(data)
+    end
+
+    ##
+    # Convert a material to JSON-LD, intended to be used in Jekyll Liquid templates.
+    # Parameters:
+    # +material+:: The material object.
+    # +topic+:: The topic object.
+    # +site+:: The +Jekyll::Site+ site object.
+    #
+    # Returns:
+    # +String+:: The JSON-LD metadata.
+    def to_jsonld(material, topic, site)
+      JSON.pretty_generate(generate_material_jsonld(material, topic, site))
     end
 
     ##
@@ -365,8 +431,8 @@ module Jekyll
     # +site+:: The +Jekyll::Site+ site object.
     #
     # Returns:
-    # +String+:: The JSON-LD metadata.
-    def to_jsonld(material, topic, site)
+    # +Hash+:: The JSON-LD metadata.
+    def generate_material_jsonld(material, topic, site)
       langCodeMap = {
         en: 'English',
         es: 'Español',
@@ -429,8 +495,6 @@ module Jekyll
         # "correction":,
         # "creator":,
         # "dateCreated":,
-        dateModified: Gtn::ModificationTimes.obtain_time(material['path']),
-        datePublished: Gtn::PublicationTimes.obtain_time(material['path']),
         # "datePublished":,
         discussionUrl: site['gitter_url'],
         # "editor":,
@@ -502,6 +566,19 @@ module Jekyll
         workTranslation: [],
         creativeWorkStatus: material['draft'] ? 'Draft' : 'Active',
       }
+
+      if material.key?('pub_date')
+          data['dateModified'] = material['mod_date']
+          data['datePublished'] = material['pub_date']
+      else
+        begin
+          data['dateModified'] = Gtn::ModificationTimes.obtain_time(material.path)
+          data['datePublished'] = Gtn::PublicationTimes.obtain_time(material.path)
+        rescue
+          data['dateModified'] = Gtn::ModificationTimes.obtain_time(material['path'])
+          data['datePublished'] = Gtn::PublicationTimes.obtain_time(material['path'])
+        end
+      end
 
       data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}" if material.key?('short_id')
 
@@ -695,9 +772,9 @@ module Jekyll
 
       data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
       data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x } }
-      data['abstract'] = material['content'].split("\n").first
+      data['abstract'] = material.fetch('content', '').split("\n").first
 
-      JSON.pretty_generate(data)
+      data
     end
   end
 end
