@@ -118,7 +118,7 @@
 <p>Example: {{ &#39;load&#39; | <a href="JsBundle.html#method-i-bundle_preloads"><code>bundle_preloads</code></a> }}</p>
 
           <div class="method-source-code" id="bundle_preloads-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-bundler.rb, line 48</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-bundler.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bundle_preloads</span>(<span class="ruby-identifier">_test</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;production&#39;</span>
     <span class="ruby-identifier">bundle_preloads_prod</span>
@@ -143,7 +143,7 @@
           <p>(Internal) Return the production preloads for the bundles</p>
 
           <div class="method-source-code" id="bundle_preloads_prod-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-bundler.rb, line 57</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-bundler.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bundle_preloads_prod</span>
   <span class="ruby-identifier">bundles</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;javascript_bundles&#39;</span>]
   <span class="ruby-identifier">baseurl</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>]
@@ -183,7 +183,7 @@
 <p>Example: {{ &#39;main&#39; | <a href="JsBundle.html#method-i-load_bundle"><code>load_bundle</code></a> }}</p>
 
           <div class="method-source-code" id="load_bundle-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-bundler.rb, line 78</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-bundler.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_bundle</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;development&#39;</span>
     <span class="ruby-identifier">load_bundle_dev</span>(<span class="ruby-identifier">name</span>)
@@ -208,19 +208,15 @@
           
 
           <div class="method-source-code" id="load_bundle_dev-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-bundler.rb, line 86</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-bundler.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_bundle_dev</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-identifier">bundle</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;javascript_bundles&#39;</span>][<span class="ruby-identifier">name</span>]
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Bundle #{name} not found in site config&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">bundle</span>.<span class="ruby-identifier">nil?</span>
 
   <span class="ruby-identifier">baseurl</span> = <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>].<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>]
 
-  <span class="ruby-identifier">attrs</span> = <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-identifier">attrs</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot; async&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">bundle</span>[<span class="ruby-string">&#39;async&#39;</span>]
-  <span class="ruby-identifier">attrs</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot; defer&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">bundle</span>[<span class="ruby-string">&#39;defer&#39;</span>]
-
   <span class="ruby-identifier">bundle</span>[<span class="ruby-string">&#39;resources&#39;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-    <span class="ruby-node">&quot;&lt;script #{attrs} src=&#39;#{baseurl}/#{f}&#39;&gt;&lt;/script&gt;&quot;</span>
+    <span class="ruby-node">&quot;&lt;script src=&#39;#{baseurl}/#{f}&#39;&gt;&lt;/script&gt;&quot;</span>
   <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
