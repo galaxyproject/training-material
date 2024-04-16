@@ -256,7 +256,7 @@ In this section, you can run the RetroSynthesis Workflow more easily and fastly 
 >
 > 1. Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/RetroSynthesis.ga" title="RetroSynthesis workflow" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga" title="RetroSynthesis workflow" %}
 >
 > 2. Click on *Workflow* on the top menu bar of Galaxy. You will see **RetroSynthesis** workflow.
 > 3. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow
