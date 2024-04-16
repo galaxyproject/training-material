@@ -26,12 +26,15 @@ date_end: 2024-04-02 # optional, if event is more than one day
 
 # Required, but minimally the Name field for online events
 location:
-  name: Bioinf Dept      # can be e.g. "Zoom" for online events
-  address: 42 E Main St.
-  city: Reyjkjavik
-  country: Iceland
+  geo:
+    lat: 51.9109324
+    lon: 4.4680514
+  name: Department of Pathology and Clinical Bioinformatics      # can be e.g. "Zoom" for online events
+  address: Dr. Molewaterplein 40
+  city: Rotterdam
+  country: The Netherlands
   #region: # optional
-  postcode: 912NM
+  postcode: 3015 GD
 
 cost: free # Or, e.g. 150 EUR, must be space separated, must include a currency in ISO 4217 format
 audience: This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.

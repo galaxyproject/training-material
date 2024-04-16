@@ -51,7 +51,35 @@ layout: base
         {% include _includes/display_extra_training.md extra_trainings=event.requirements %}
     </ul>
     {% endif %}
+
+
 <section>
+	{% if event.location.geo %}
+	<h3 id="location">Event Location</h3>
+
+	<script src="{% link assets/js/leaflet-1.9.3.js %}"></script>
+	<div id="map" style="width: 100%; height: 300px"></div>
+
+	<script>
+	const map = L.map('map').setView([{{ event.location.geo.lat }}, {{ event.location.geo.lon }}], 14);
+
+	var Stadia_StamenTonerLite = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.{ext}', {
+		minZoom: 0,
+		maxZoom: 20,
+		attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		ext: 'png'
+	});
+
+	Stadia_StamenTonerLite.addTo(map);
+
+
+	L.marker([{{ event.location.geo.lat }}, {{ event.location.geo.lon }}]).addTo(map)
+		.bindPopup('{{ event.title }}')
+		.openPopup();
+	</script>
+	{% endif %}
+
+
 	<!-- Maintained by -->
 	<h3 id="Organisers">Organisers & Instructors</h3>
 	<p>This event is brought to you by:</p>
@@ -85,12 +113,10 @@ layout: base
   <div class="tab-pane " id="contact" role="tabpanel" aria-labelledby="contact-tab">
 <section>
 	<h2>Instructor Zone</h2>
-	<details open>
-		<summary>Are you an instructor? Here are some useful things</summary>
 
-		<h3>Promote the Event</h3>
+	<h3>Promote the Event</h3>
 
-		<p>Tootable/Tweetable version:</p>
+	<p>Tootable/Tweetable version:</p>
 <div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 {{ event.title }}! 📢
 
@@ -103,19 +129,12 @@ layout: base
 {% endif %}
 </code></pre></div>      </div>
 
-{{ event.short_id }}
 
-
-		{% if event.infrastructure %}
-		<h3>TIaaS</h3>
-
-{%- capture org0 -%}
-{{ event.contributions.organisers[0] }}
-{%- endcapture -%}
-
-		<ul>
-		{% for server in event.infrastructure.servers %}
-
+	{% if event.infrastructure %}
+	<h3>TIaaS</h3>
+	{%- capture org0 -%}{{ event.contributions.organisers[0] }}{%- endcapture -%}
+	<ul>
+	{% for server in event.infrastructure.servers %}
 {%- capture urlparams -%}
 ?name={{ site.data.contributors[org0].name | uri_escape}}
 &email={{ site.data.contributors[org0].email | uri_escape }}
@@ -127,14 +146,12 @@ layout: base
 &use_gtn=true&gtn_links={{ 'See course event' | uri_escape }}
 &training_identifier={{ server.tiaas | uri_escape }}
 {%- endcapture -%}
-			<li>
-				<a href="{{ server.server }}/tiaas/new/{{ urlparams }}">Request TIaaS @ {{ server.server }}</a>
-			</li>
-		{% endfor %}
-		</ul>
-		{% endif %}
-
-	</details>
+		<li>
+			<a href="{{ server.server }}/tiaas/new/{{ urlparams }}">Request TIaaS @ {{ server.server }}</a>
+		</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
 </section>
 
   </div>
