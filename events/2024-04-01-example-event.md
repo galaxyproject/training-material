@@ -4,11 +4,10 @@ title: My Training Event Title
 draft: true  # will hide your event from the GTN events list, remove once you are ready to announce your event
 
 description: |
-    Short one or two line description of the event
+    Short description of the event (one or two sentences).
 
-cover-image: assets/images/gat.png
-cover-image-alt: GTN Logo on a spiral galaxy background with text galaxy admin training
-
+cover-image:         # you can add an image for your course, if empty, the GTN logo will be used
+cover-image-alt:     # supply alt text describing your image
 
 contributions:
   organisers: # GTN contributors or funders, must be defined in CONTRIBUTORS.yaml
@@ -27,7 +26,7 @@ date_end: 2024-04-02 # optional, if event is more than one day
 
 # Required, but minimally the Name field for online events
 location:
-  name: Bioinf Dept
+  name: Bioinf Dept      # can be e.g. "Zoom" for online events
   address: 42 E Main St.
   city: Reyjkjavik
   country: Iceland
@@ -60,7 +59,7 @@ infrastructure:
 
 program:
   - section: "Monday: Introduction"
-    description: Short description of the program.
+    description: Short description of the program in this section.
     tutorials:
       - name: galaxy-intro-short
         topic: introduction
@@ -88,6 +87,15 @@ program:
         time: "17:00 - 18:00"
         description: |
           Time for some well-deserved drinks and socializing!
+
+  - section: "Tuesday: An advanced look at .."
+    description: Short description of the program for this section.
+    tutorials:
+      - name: galaxy-intro-short
+        topic: introduction
+        time: "09:00 - 10:00"
+      - type: custom
+        name: "Wrap-up"
 
 
 ---
