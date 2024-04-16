@@ -133,7 +133,7 @@ layout: base
 		{% endfor %}
 		</ul>
 		{% endif %}
-		
+
 	</details>
 </section>
 
@@ -142,11 +142,20 @@ layout: base
 
 	</div> <!-- col-md-9 -->
 	<div class="col-md-3">
-		{% assign passed = event.date_end | is_date_passed %}
+
+        <img class="event-image" src="{{site.baseurl}}{{event.cover-image| default: '/assets/images/GTN-event-logo.png' }}" alt="{{event.cover-image-alt | default: 'event logo' }}">
+        {% assign enddate = event.date_end | default: event.date_start %}
+		{% assign passed = enddate | is_date_passed %}
 		{% if passed %}
-		<span class="btn btn-primary btn-lg btn-block disabled">Registration has Closed</span>
+		<span class="btn btn-primary btn-lg btn-block disabled">Event is Over</span>
 		{% else %}
-		<a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
+          {% assign deadline = event.registration.deadline | default: event.date_start %}
+		  {% assign passed = deadline | is_date_passed %}
+          {% if passed %}
+          <span class="btn btn-primary btn-lg btn-block disabled">Registration is closed</span>
+          {% else %}
+		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
+          {% endif %}
 		{% endif %}
 
 		<hr/>
