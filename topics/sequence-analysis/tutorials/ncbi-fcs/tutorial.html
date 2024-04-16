@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Screening assembled genomes for contamination using NCBI FCS / Sequence analysis</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@5aadedc572034e74cc7f89a281505de21ad6cef0",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hands-on: Hands-on: Screening assembled genomes for contamination using NCBI FCS">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-04-16 08:23:16 +0000">
+<meta name="DC.creator" content="Eric Tvedte"><meta name="description" content="Analyses of sequences">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Sequence analysis / Hands-on: Screening assembled genomes for contamination using NCBI FCS">
+        <meta property="og:description" content="Analyses of sequences">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-04-16 08:23:16 +0000",
+  "datePublished": "2024-04-16 09:25:46 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hands-on: Hands-on: Screening assembled genomes for contamination using NCBI FCS",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Sequence analysis",
+    "description": "Analyses of sequences",
+    "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on: Hands-on: Screening assembled genomes for contamination using NCBI FCS",
+  "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.html",
+  "version": 12,
+  "timeRequired": "PT90M",
+  "teaches": "Learn how to screen a genome assembly for adaptor and vector contamination.\n - Learn how to screen a genome assembly for non-host organism contamination.",
+  "keywords": [
+    "Sequence analysis"
+  ],
+  "description": "The questions this  addresses are:\n - Are the sequences in a genome assembly contaminant-free?\n\n\nThe objectives are:\n - Learn how to screen a genome assembly for adaptor and vector contamination.\n - Learn how to screen a genome assembly for non-host organism contamination.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tvedtees/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tvedtees/",
+      "name": "Eric Tvedte",
+      "image": "https://avatars.githubusercontent.com/tvedtees",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Sequence analysis",
+      "description": "Analyses of sequences",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0080"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "The National Center for Biotechnology Information (NCBI) performs contamination screening of genome assemblies submitted to the archival GenBank. Advances in genome sequencing have accelerated the production of genome assemblies and their submission to public databases, necessitating high-performance screening tools. Since contaminants can lead to misleading conclusions about the biology of the organism in question (e.g. gene content, gene evolution, etc.), ideally contamination screening should be performed after the initial contig assembly and prior to downstream genome analyses. "
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/sequence-analysis" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Sequence analysis
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/sequence-analysis/faqs/" title="Check our FAQs for the Sequence analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.html">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-sequence-analysis">
+    <h1 data-toc-skip>Screening assembled genomes for contamination using NCBI FCS</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/tvedtees/" class="contributor-badge contributor-tvedtees"><img src="https://avatars.githubusercontent.com/tvedtees?s=36" alt="Eric Tvedte avatar" width="36" class="avatar" />
+    Eric Tvedte</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Are the sequences in a genome assembly contaminant-free?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn how to screen a genome assembly for adaptor and vector contamination.</p>
+</li>
+        
+        <li><p>Learn how to screen a genome assembly for non-host organism contamination.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 90 minutes</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/10932013">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/workflows/" title="Screening assembled genomes for contamination using NCBI FCS workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/sequence-analysis/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 16, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 16, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The National Center for Biotechnology Information (NCBI) performs contamination screening of genome assemblies submitted to the archival GenBank. Advances in genome sequencing have accelerated the production of genome assemblies and their submission to public databases, necessitating high-performance screening tools. Since contaminants can lead to misleading conclusions about the biology of the organism in question (e.g. gene content, gene evolution, etc.), ideally contamination screening should be performed after the initial contig assembly and prior to downstream genome analyses.</p>
+
+<p>NCBI has released a publicly-available Foreign Contamination Screen (FCS) tool suite to detect contaminants from various sources and produce a cleaned sequence set. This tutorial provides a quick example of two current FCS tools: FCS-adaptor identifies synthetic sequences used in library preparation, and FCS-GX (<span class="citation"><a href="#Astashyn2024">Astashyn <i>et al.</i> 2024</a></span>) identifies sequences from foreign organisms assigned to discordant taxonomies compared to the user-declared source organism.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#retrieving-the-data" id="markdown-toc-retrieving-the-data">Retrieving the data</a>    <ol>
+      <li><a href="#upload-the-genome-fasta-from-zenodo" id="markdown-toc-upload-the-genome-fasta-from-zenodo">Upload the genome FASTA from Zenodo</a></li>
+      <li><a href="#confirm-dataset-upload" id="markdown-toc-confirm-dataset-upload">Confirm dataset upload</a></li>
+    </ol>
+  </li>
+  <li><a href="#importing-workflows" id="markdown-toc-importing-workflows">Importing Workflows</a></li>
+  <li><a href="#contamination-screening" id="markdown-toc-contamination-screening">Contamination screening</a>    <ol>
+      <li><a href="#running-the-ncbi-fcs-workflow" id="markdown-toc-running-the-ncbi-fcs-workflow">Running the NCBI FCS Workflow</a></li>
+      <li><a href="#interpreting-fcs-output" id="markdown-toc-interpreting-fcs-output">Interpreting FCS Output</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="retrieving-the-data">Retrieving the data</h1>
+
+<p>FCS operates on assembled genome sequences and is not intended for use on raw reads. The following tutorial uses an assembled genome from yeast (<em>Saccharomyces cerevisiae</em>) with contaminants artificially inserted into the genome. The first step is to retrieve the genome FASTA.</p>
+
+<h2 id="upload-the-genome-fasta-from-zenodo">Upload the genome FASTA from Zenodo</h2>
+
+<p>The following steps provide instructions to upload the test dataset into your Galaxy instance.</p>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Copy the datasets URLs into clipboard.
+Click on the copy button in the right upper corner of the box below.
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/10932013/files/FCS_combo_test.fa
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Upload <code class="language-plaintext highlighter-rouge">fasta.gz</code> dataset into Galaxy</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="confirm-dataset-upload">Confirm dataset upload</h2>
+
+<p>Your data should look like this:</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/ncbi-fcs/fcs-galaxy-1.jpg" alt="Galaxy History with FCS.combo.test.fa showing in green, successfully uploaded." width="500" height="220" loading="lazy" /><a target="_blank" href="../../images/ncbi-fcs/fcs-galaxy-1.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy History with Uploaded Data.</figcaption></figure>
+
+<h1 id="importing-workflows">Importing Workflows</h1>
+
+<p>Next we will import a Galaxy workflow - a chain of tools to perform a set of operations on a user-supplied input. Specificially in this workflow, we will:</p>
+
+<ol>
+  <li>Screen the genome for foreign organism sequences using <strong>FCS-GX</strong> <code class="language-plaintext highlighter-rouge">screen</code> mode.</li>
+  <li>Produce a cleaned set of contigs using <strong>FCS-GX</strong> <code class="language-plaintext highlighter-rouge">clean</code> mode.</li>
+  <li>Screen the genome for synthetic sequences using <strong>FCS-adaptor</strong> and remove identified contaminants.</li>
+  <li>Produce a final set of cleaned contigs using a second iteration of <strong>FCS-GX</strong> <code class="language-plaintext highlighter-rouge">clean</code> mode.</li>
+</ol>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/ncbi-fcs/fcs-galaxy-2.jpg" alt="The workflow pictured has five steps, input data is provided to FCS-GX screen, and both of these are inputs to FCS-GX clean. This output is fed to FCS-adapter screen, and both of these outputs are fed to FCS-adapter clean. " width="2325" height="1208" loading="lazy" /><a target="_blank" href="../../images/ncbi-fcs/fcs-galaxy-2.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> NCBI Foreign Contamination Screen Galaxy Workflow.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-importing-galaxy-workflows"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Importing Galaxy Workflows</div>
+
+  <ol>
+    <li>
+      <p>Ensure you are logged in to Galaxy</p>
+    </li>
+    <li>
+      <p>Import the workflow into Galaxy</p>
+
+      <!--SNIPPET-->
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-gtn-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and launching a GTN workflow</div>   <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-ncbi-fcs/versions/ncbi-foreign-contamination_screen">Launch <strong>NCBI Foreign Contamination Screen Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <div class="hide-when-galaxy-proxy-active"> Click to  <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-ncbi-fcs/versions/ncbi-foreign-contamination_screen">     Launch <strong>NCBI Foreign Contamination Screen Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> </div> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <blockquote class="warning">
+        <div class="box-title warning-title" id="warning-log-in-to-galaxy"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Log in to Galaxy</div>
+        <p>If the workflow failed to import, it is usually because you are not logged in.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Once the workflow is loaded, your workflow page should look like this:</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/ncbi-fcs/fcs-galaxy-3.jpg" alt="Galaxy Workflows page with NCBI Foreign Contamination Screen workflow loaded and ready to run." width="2421" height="917" loading="lazy" /><a target="_blank" href="../../images/ncbi-fcs/fcs-galaxy-3.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Galaxy Workflows page with NCBI Foreign Contamination Screen.</figcaption></figure>
+
+<h1 id="contamination-screening">Contamination screening</h1>
+
+<h2 id="running-the-ncbi-fcs-workflow">Running the NCBI FCS Workflow</h2>
+
+<p>Next you will run the Galaxy workflow. Here you will configure the parameters for the FCS run according to the target organism.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-running-the-nbci-fcs-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Running the NBCI FCS Workflow</div>
+  <ol>
+    <li>Collect inputs
+      <ol>
+        <li>Assembled genome in <code class="language-plaintext highlighter-rouge">fasta/fasta.gz</code> format</li>
+        <li>Taxonomic information for source organism</li>
+      </ol>
+    </li>
+    <li>Launch the Workflow
+      <ol>
+        <li>Click the Workflow menu located in the top menu bar</li>
+        <li>Click the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> button located in the NCBI Foreign Contamination Screen Workflow box</li>
+        <li>Click “Expand to full workflow form.”</li>
+        <li>In the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> 1: Input genome menu:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file (Fasta file)”</em>: <code class="language-plaintext highlighter-rouge">1:FCS.combo.test.fa</code></li>
+          </ul>
+        </li>
+        <li>In the <strong>2: FCS-GX screen</strong> menu:
+          <ul>
+            <li>Select the appropriate taxonomic division for <strong>Taxonomy entry</strong>: <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>div</strong> (<code class="language-plaintext highlighter-rouge">fung:budding yeasts</code> in this example).</li>
+            <li>Set the <strong>Advanced Options</strong>: <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Database location</strong> to <code class="language-plaintext highlighter-rouge">/cvmfs/data.galaxyproject.org/byhand/ncbi_fcs_gx/all</code></li>
+          </ul>
+        </li>
+        <li>In the <strong>4: FCS-adaptor screen</strong> menu:
+          <ul>
+            <li>Select the appropriate taxonomy for <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Choose the taxonomy</strong> (<code class="language-plaintext highlighter-rouge">Eukaryotes</code> in this example).</li>
+          </ul>
+        </li>
+        <li>Run the workflow</li>
+        <li>Take a coffee break!</li>
+      </ol>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="interpreting-fcs-output">Interpreting FCS Output</h2>
+
+<p>Running NCBI FCS on Galaxy is dependent on loading a large reference database on an adequate host. Currently the database is not persistent, meaning run times may vary. Most runs <em>should</em> complete in around one hour.</p>
+
+<p>After the workflow is completed, you will be able to visualize tables of identified contaminants and can access FASTA files of clean sequences separated from contaminants.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-reviewing-fcs-contamination-reports"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Reviewing FCS Contamination Reports</div>
+  <ol>
+    <li>
+      <p>Look at the FCS-GX contamination report</p>
+
+      <ol>
+        <li>In your Galaxy history, click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon for 3: <strong>NCBI FCS GX on data 1: Action report</strong></li>
+        <li>
+          <p>Confirm that the taxonomic division you specified for the workflow run appears in the metadata in the first row of the file. It should appear as the “asserted-div” and in the list of “inferred-primary-divs”.</p>
+
+          <blockquote class="warning">
+            <div class="box-title warning-title" id="warning-my-organism-s-division-is-not-in-inferred-primary-divs"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning:  My organism's division is not in inferred-primary-divs</div>
+            <p>If your target organism division is not in the set of inferred-primary-divs, it means that the assembly is likely heavily contaminated. FCS-GX will still call contaminants with respect to the taxonomy you define as the target organism (i.e. the primary division), but you should review the sequencing and assembly data for errors.</p>
+          </blockquote>
+        </li>
+        <li>Review the contaminated sequence list, the suggested contamination cleanup actions, and the taxonomic divisions assigned to contaminants</li>
+      </ol>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <ol>
+          <li>What are the major contaminants in this genome assembly?</li>
+          <li>When was this contamination likely introduced in the genome assembly process?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li><em>Homo sapiens</em> (human) and <em>Pseudomonas aeruginosa</em>. Note that for various reasons the actual contaminating genus/species isn’t reported as the top_tax_name.</li>
+            <li>Contamination was likely introduced at the sample/library preparation stage. <em>Pseudomonas aeruginosa</em> can be found in multiple human tissues, including skin flora.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Look at the FCS-GX cleaned sequences</p>
+
+      <ol>
+        <li>Click the box in your workflow history - 1: <strong>FCS.combo.test.fa</strong>. Note the total number of sequences.</li>
+        <li>Click the box in your workflow history - 4: <strong>NCBI FCS GX on data 3 and data 1: Fasta for EXCLUDE entries</strong>. Note the total number of sequences.</li>
+        <li>Click the box in your workflow history - 5: <strong>NCBI FCS GX on data 3 and data 1: Cleaned Fasta</strong>. Note the total number of sequences as well as Applied actions.</li>
+        <li>Confirm that Cleaned Fasta sequences (Step 5) = Total sequences (Step 1) - Contaminant sequences (Step 4)</li>
+      </ol>
+    </li>
+    <li>
+      <p>Look at the FCS-adaptor contamination report</p>
+
+      <ol>
+        <li>In your Galaxy history, click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon for 6: <strong>NCBI FCS Adaptor on data 5: Adaptor report</strong></li>
+        <li>Review the contaminated sequence list, the suggested contamination cleanup actions, and the identity of adaptor/vector contaminants. Adaptor/vector sequences can be found on the <a href="https://ftp.ncbi.nlm.nih.gov/pub/UniVec/UniVec">NCBI UniVec FTP</a> page.</li>
+      </ol>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <ol>
+          <li>What are the adaptor/vector contaminants in this genome assembly?</li>
+          <li>When was this contamination likely introduced in the genome assembly process?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li>Illumina PCR Primer sequence.</li>
+            <li>Contamination was likely introduced during contig assembly or polishing. Often the initial contig assembly is generated using long reads alone, so the introduction of contamination via polishing with untrimmed reads is the more likely explanation.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Look at the FCS-adaptor cleaned sequences</p>
+
+      <ol>
+        <li>Click the box in your workflow history - 5: <strong>NCBI FCS GX on data 3 and data 1: Cleaned Fasta</strong>. Note the total number of sequences.</li>
+        <li>Click the box in your workflow history - 8: <strong>NCBI FCS GX on data 6 and data 5: Fasta for EXCLUDE entries</strong>. Note the total number of sequences as well as Applied actions.</li>
+        <li>Click the box in your workflow history - 9: <strong>NCBI FCS GX on data 6 and data 5: Cleaned Fasta</strong>. Note the total number of sequences.</li>
+      </ol>
+    </li>
+  </ol>
+
+  <blockquote class="warning">
+    <div class="box-title warning-title" id="warning-two-different-cleaned-fasta-files-from-fcs-adaptor-step"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning:  Two different cleaned FASTA files from FCS-adaptor step</div>
+    <p>FCS-adaptor only removes sequences that are completely/mostly adaptor (assigned <code class="language-plaintext highlighter-rouge">ACTION_EXCLUDE</code>) and adaptors near contig ends (assigned <code class="language-plaintext highlighter-rouge">ACTION_TRIM</code>). FCS-adaptor <strong>does not remove</strong> small internal trims in large sequences. In this example, the FASTA file in workflow history - 7: <strong>NCBI FCS Adaptor on data 5: Cleaned Fasta</strong> is the same as the uncleaned input FASTA. FCS-GX <code class="language-plaintext highlighter-rouge">clean</code> is required to handle these internal spans. The FASTA file in workflow history - 9: <strong>NCBI FCS GX on data 6 and data 5: Cleaned Fasta</strong> has the contigs seq_1 through seq_16 split into two separate contigs at the <code class="language-plaintext highlighter-rouge">ACTION_TRIM</code> sites. If you want to hardmask these regions instead, you must download the tabular adaptor report, convert <code class="language-plaintext highlighter-rouge">ACTION_TRIM</code> values to <code class="language-plaintext highlighter-rouge">FIX</code>, and run the FCS-GX <code class="language-plaintext highlighter-rouge">clean</code> tool separately.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this example, we removed 200 contaminant sequences from non-target organisms using FCS-GX and removed 16 internal adaptor sequences using FCS-adaptor, producing a cleaned yeast genome. Following contamination detection, we can perform separate validation checks to support the removal of these sequences from our assembly. One example is to perform BLAST searches or NUCmer alignments against reference genomes of the same or closely related species.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Contamination can arise from multiple sources and occur at multiple stages of a genome assembly project.</p>
+</li>
+                        
+                        <li><p>Contamination cleanup is essential for reliable comparative genomics analyses.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/sequence-analysis/faqs/">FAQ page for the Sequence analysis topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/sequence-analysis#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Astashyn2024">Astashyn, A., E. S. Tvedte, D. Sweeney, V. Sapojnikov, N. Bouk <i>et al.</i>, 2024 <b>Rapid and sensitive detection of genome contamination at scale with FCS-GX</b>. Genome Biology 25: <a href="https://doi.org/10.1186/s13059-024-03198-7">10.1186/s13059-024-03198-7</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=sequence-analysis/ncbi-fcs" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Eric Tvedte,  <b>Screening assembled genomes for contamination using NCBI FCS (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{sequence-analysis-ncbi-fcs,
+author = "Eric Tvedte",
+	title = "Screening assembled genomes for contamination using NCBI FCS (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/NIH" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/NIH/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: ncbi_fcs_gx
+  owner: iuc
+  revisions: 3cdb96f2855d
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ncbi_fcs_adaptor
+  owner: richard-burhans
+  revisions: d55ad8533d58
+  tool_panel_section_label: Sequence Contamination Filtering
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5aadedc572034e74cc7f89a281505de21ad6cef0">5aadedc</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/ncbi-fcs/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	
+    </body>
+</html>
