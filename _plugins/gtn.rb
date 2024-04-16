@@ -580,6 +580,27 @@ module Jekyll
       end
     end
 
+     def format_location_simple(location)
+      # location:
+      #   name: Bioinf Dept
+      #   address: 42 E Main St.
+      #   city: Reyjkjavik
+      #   country: Iceland
+      #   #region: # optional
+      #   postcode: 912NM
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil),
+      ].compact
+
+      loc.join(', ')
+    end
+
+
     def collapse_date_pretty(event)
       s = event['date_start']
       if event['date_end'].nil?
