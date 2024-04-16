@@ -69,7 +69,7 @@ The following steps provide instructions to upload the test dataset into your Ga
 
 Your data should look like this:
 
-![Galaxy History with Uploaded Data](../../images/ncbi-fcs/fcs-galaxy-1.jpg "Galaxy History with Uploaded Data.")
+![Galaxy History with FCS.combo.test.fa showing in green, successfully uploaded.](../../images/ncbi-fcs/fcs-galaxy-1.jpg "Galaxy History with Uploaded Data.")
 
 # Importing Workflows
 
@@ -80,7 +80,7 @@ Next we will import a Galaxy workflow - a chain of tools to perform a set of ope
 1. Screen the genome for synthetic sequences using **FCS-adaptor** and remove identified contaminants. 
 1. Produce a final set of cleaned contigs using a second iteration of **FCS-GX** `clean` mode.
 
-![NCBI Foreign Contamination Screen Galaxy Workflow](../../images/ncbi-fcs/fcs-galaxy-2.jpg "NCBI Foreign Contamination Screen Galaxy Workflow.")
+![The workflow pictured has five steps, input data is provided to FCS-GX screen, and both of these are inputs to FCS-GX clean. This output is fed to FCS-adapter screen, and both of these outputs are fed to FCS-adapter clean](../../images/ncbi-fcs/fcs-galaxy-2.jpg "NCBI Foreign Contamination Screen Galaxy Workflow.")
 
 > <hands-on-title> Importing Galaxy Workflows </hands-on-title>
 >
@@ -98,7 +98,7 @@ Next we will import a Galaxy workflow - a chain of tools to perform a set of ope
 
 Once the workflow is loaded, your workflow page should look like this:
 
-![Galaxy Workflows page with NCBI Foreign Contamination Screen](../../images/ncbi-fcs/fcs-galaxy-3.jpg "Galaxy Workflows page with NCBI Foreign Contamination Screen.")
+![Galaxy Workflows page with NCBI Foreign Contamination Screen workflow loaded and ready to run.](../../images/ncbi-fcs/fcs-galaxy-3.jpg "Galaxy Workflows page with NCBI Foreign Contamination Screen.")
 
 # Contamination screening
 
