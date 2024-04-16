@@ -34,11 +34,9 @@ contributions:
 ---
 
 
-<!-- GTN:IGNORE:002 :: there is a commitment from authors to transition these into proper slides. -->
-
 Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your research. 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dmCCQRliEMk?si=iAmOuuO_x0OXkJ4q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen alt="Video: Welcome and why phylogenetics?"></iframe>
+{% include _includes/slides-youtube-selector.html id="dmCCQRliEMk" title="Introductory Lecture: Welcome and why phylogenetics?" slides="topics/evolution/tutorials/abc_intro_phylo-intro" %}
 
 Using real-life data and standard tools that are (mostly) available in Galaxy, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data.
 
@@ -56,11 +54,12 @@ This tutorial is adapted from a 2019 workshop run by the Australian BioCommons a
 >
 > 1. TOC
 > {:toc}
->**We will not cover:**
 >
->* Workflows from read data to sequences
->* How to get an alignment (much: will use automated methods)
->* Bayesian phylogenetics: MCMC / BEAST / MrBayes
+> **We will not cover:**
+>
+> * Workflows from read data to sequences
+> * How to get an alignment (much: will use automated methods)
+> * Bayesian phylogenetics: MCMC / BEAST / MrBayes
 {: .agenda}
 
 <!-- Original notes on scope. Now incorporated into the agenda box
@@ -166,8 +165,7 @@ Aside from gaining a fundamental understanding of biology, other reasons for inf
 ## Terminology
 {% icon video %} From the root to the tips, watch the video to explore common features of phylogenetic trees. See how these features relate to evolutionary patterns and how outgroups can be used to find the root or common ancestor of extant species.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gnWlMbGPYx8?si=eCOgJXSo-M5E6ZDK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+{% include _includes/slides-youtube-selector.html id="gnWlMbGPYx8" title="Lecture: Phylogenetics Terminology" slides="topics/evolution/tutorials/abc_intro_phylo-terminology" %}
 
 Before we start building trees, let's define some terms.
 
@@ -403,7 +401,7 @@ ACTTGGCGTAGCCGGAGGCC
 [0:00] What ‘alignment’ really means and why it is useful for phylogenetics; [6:22] What makes a good alignment; [12:15] How pairwise sequence alignment and dynamic programming work; [33:47] How the multiple sequence alignment algorithms work; and to 
 [40:00] explore multiple sequence alignment of the Anolis sequences with SeaView.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FUc2A2r1LGY?si=eJolYh8_oAZ1IEDU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+{% include _includes/slides-youtube-selector.html id="FUc2A2r1LGY" title="Lecture: Sequence alignment" slides="topics/evolution/tutorials/abc_intro_phylo-msa" %}
 
 
 Molecular sequences must be aligned before they can be used to build phylogenies.
@@ -462,10 +460,7 @@ A tool you can use on your own computer is [SeaView](https://doua.prabi.fr/softw
 [3:05] Types of distances and distance matrices
 [11:31] The mathematics behind the Jukes-Cantor/JC69 and HKY85 models [16:04] An example of building a tree from ultrametric distances [21:01] Building a tree from non-clocklike distances with the Neighbour-joining method [25:59] Real life data and limitations for building trees from distances.
 
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/t68H2Ilc4mI?si=7i6ZePO3_7CqN5H3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+{% include _includes/slides-youtube-selector.html id="t68H2Ilc4mI" title="Lecture: Phylogenetic Trees" slides="topics/evolution/tutorials/abc_intro_phylo-trees" %}
 
 We are going to build our first tree, using a very common method called _Neighbor-Joining_. This method was created in the 1980s by Saitou & Nei ({% cite 10.1093/oxfordjournals.molbev.a040454 %}). 
 
@@ -591,7 +586,7 @@ We do not use the Maximum Parsimony method in this tutorial.
 ## Maximum Likelihood (ML) 
 {% icon video %} Watch the video to learn about [0:00] the concept of likelihood and how it lends statistic rigour to phylogenetic analysis as well as [26:45] how it is applied in models like Jukes-Cantor, HKY85 and GTR models to select the “best tree” from your data. [34:16] Wander through tree space to find the best tree using Nearest Neighbour Interchange, Subtree Pruning and Regrafting, and Tree Bisection and Reconnection tree perturbations and [45:40] go “hill climbing” with tree-search algorithms. [48:52] Finally, explore the output of IQTree for the Anolis dataset used in the tutorial.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0WzQLAl9h8Q?si=XaWu5Do_xi02ewyY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+{% include _includes/slides-youtube-selector.html id="0WzQLAl9h8Q" title="Lecture: Maximum Likelihood & Trees" slides="topics/evolution/tutorials/abc_intro_phylo-mle-trees" %}
 
 Likelihood is the most statistically defensible phylogenetic inference method.
 It is based on the idea that the tree that has the highest probability of producing the sequences at the tips of the tree is the tree that is the "most likely" to be correct: this is called the Maximum Likelihood (ML) Tree.
@@ -1091,7 +1086,7 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 
 {% icon video %} Watch the video to see how SplitsTree4 can be used to explore the evidence supporting different phylogenetic splits in data from Anolis species using networks built with uncorrected P, Jukes-Cantor and HKY85 models.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MvZhj3cSVhA?si=fcFWkzQpIxm8Aa0v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+{% include _includes/slides-youtube-selector.html id="MvZhj3cSVhA" title="Introductory Lecture: Welcome and why phylogenetics?" slides="topics/evolution/tutorials/abc_intro_phylo-networks" %}
 
 
 Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with a *phylogenetic network*.
