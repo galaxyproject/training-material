@@ -27,7 +27,8 @@
         "pndb",
         "gallantries",
         "fairease",
-        "fnso2019"
+        "fnso2019",
+        "elixir-europe"
       ],
       "id": "yvanlebras",
       "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -125,7 +126,7 @@
           "name": "Sentinel 2 example",
           "title": "Sentinel 2 example",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSENTINEL2A_20230214-105638-781_L2A_T31UET_D.zip\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Preprocess sentinel 2 data\"];\n  0 -->|output| 1;\n  2[\"Compute spectral indices\"];\n  1 -->|output_refl| 2;\n  3[\"Compute biodiversity indices\"];\n  1 -->|output_refl| 3;\n  4[\"Map diversity\"];\n  1 -->|output_refl| 4;"
         }
       ],
@@ -249,7 +250,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -1033,7 +1035,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"OBIS occurences\"];\n  1[\"Advanced Cut\"];\n  0 -->|output| 1;\n  2[\"Ocean biodiversity indicators\"];\n  1 -->|output| 2;"
         }
       ],
@@ -1139,7 +1141,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -1200,6 +1203,7 @@
           "funding_statement": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.",
           "members": [
             "abretaud",
+            "anuprulez",
             "bgruening",
             "erxleben",
             "pauldg",
@@ -1340,7 +1344,7 @@
           "name": "Compute and analyze biodiversity metrics with PAMPA toolsuite",
           "title": "Compute and analyze biodiversity metrics with PAMPA toolsuite",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Column Regex Find And Replace\"];\n  0 -->|output| 3;\n  4[\"Column Regex Find And Replace\"];\n  1 -->|output| 4;\n  5[\"Concatenate datasets\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Column Regex Find And Replace\"];\n  2 -->|output| 6;\n  7[\"Merge Columns\"];\n  3 -->|out_file1| 7;\n  8[\"Merge Columns\"];\n  4 -->|out_file1| 8;\n  9[\"Count\"];\n  5 -->|out_file1| 9;\n  10[\"Filter\"];\n  5 -->|out_file1| 10;\n  11[\"Merge Columns\"];\n  6 -->|out_file1| 11;\n  12[\"Regex Find And Replace\"];\n  7 -->|out_file1| 12;\n  13[\"Regex Find And Replace\"];\n  8 -->|out_file1| 13;\n  14[\"Column Regex Find And Replace\"];\n  10 -->|out_file1| 14;\n  15[\"Regex Find And Replace\"];\n  11 -->|out_file1| 15;\n  16[\"Calculate presence absence table\"];\n  12 -->|out_file1| 16;\n  17[\"Calculate presence absence table\"];\n  13 -->|out_file1| 17;\n  18[\"Merge Columns\"];\n  14 -->|out_file1| 18;\n  19[\"Calculate presence absence table\"];\n  15 -->|out_file1| 19;\n  20[\"Regex Find And Replace\"];\n  18 -->|out_file1| 20;\n  21[\"Calculate community metrics\"];\n  20 -->|out_file1| 21;\n  22[\"Column Regex Find And Replace\"];\n  20 -->|out_file1| 22;\n  23[\"Merge Columns\"];\n  22 -->|out_file1| 23;\n  24[\"Column Regex Find And Replace\"];\n  23 -->|out_file1| 24;\n  25[\"Advanced Cut\"];\n  24 -->|out_file1| 25;\n  26[\"Sort\"];\n  25 -->|output| 26;\n  27[\"Regex Find And Replace\"];\n  26 -->|outfile| 27;\n  28[\"Compute GLM on community data\"];\n  21 -->|output_community| 28;\n  27 -->|out_file1| 28;\n  29[\"Compute GLM on population data\"];\n  16 -->|output_presabs| 29;\n  27 -->|out_file1| 29;\n  30[\"Compute GLM on population data\"];\n  17 -->|output_presabs| 30;\n  27 -->|out_file1| 30;\n  31[\"Compute GLM on population data\"];\n  19 -->|output_presabs| 31;\n  27 -->|out_file1| 31;\n  32[\"Transpose\"];\n  28 -->|output_summary| 32;\n  33[\"Create a plot from GLM data\"];\n  21 -->|output_community| 33;\n  28 -->|output_summary| 33;\n  27 -->|out_file1| 33;\n  34[\"Transpose\"];\n  29 -->|output_summary| 34;\n  35[\"Create a plot from GLM data\"];\n  16 -->|output_presabs| 35;\n  29 -->|output_summary| 35;\n  27 -->|out_file1| 35;\n  36[\"Transpose\"];\n  30 -->|output_summary| 36;\n  37[\"Create a plot from GLM data\"];\n  17 -->|output_presabs| 37;\n  30 -->|output_summary| 37;\n  27 -->|out_file1| 37;\n  38[\"Transpose\"];\n  31 -->|output_summary| 38;\n  39[\"Create a plot from GLM data\"];\n  19 -->|output_presabs| 39;\n  31 -->|output_summary| 39;\n  27 -->|out_file1| 39;"
         }
       ],
@@ -1519,7 +1523,8 @@
           "elixir_node": "fr",
           "affiliations": [
             "pndb",
-            "gallantries"
+            "gallantries",
+            "elixir-europe"
           ],
           "id": "colineroyaux",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
@@ -1537,7 +1542,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -1700,7 +1706,7 @@
           "name": "preparing genomic data for phylogeny recostruction (GTN)",
           "title": "preparing genomic data for phylogeny recostruction (GTN)",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput genomes as collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Replace Text\"];\n  0 -->|output| 1;\n  6a2d3fcd-b557-4440-910d-b4c537feef20[\"Output\\nheaders_shortened\"];\n  1 --> 6a2d3fcd-b557-4440-910d-b4c537feef20;\n  style 6a2d3fcd-b557-4440-910d-b4c537feef20 stroke:#2c3143,stroke-width:4px;\n  2[\"RepeatMasker\"];\n  1 -->|outfile| 2;\n  1db6607a-343a-4a61-9a3b-43101eb8223b[\"Output\\nrepeat_masked\"];\n  2 --> 1db6607a-343a-4a61-9a3b-43101eb8223b;\n  style 1db6607a-343a-4a61-9a3b-43101eb8223b stroke:#2c3143,stroke-width:4px;\n  3[\"Funannotate predict annotation\"];\n  2 -->|output_masked_genome| 3;\n  642c1c09-82f4-4ef4-bd53-d14a583044e2[\"Output\\nfunannotate_predicted_proteins\"];\n  3 --> 642c1c09-82f4-4ef4-bd53-d14a583044e2;\n  style 642c1c09-82f4-4ef4-bd53-d14a583044e2 stroke:#2c3143,stroke-width:4px;\n  4[\"Extract ORF\"];\n  3 -->|annot_gbk| 4;\n  07fb8c04-990e-4bc7-b607-9c4161b4786d[\"Output\\nextracted_ORFs\"];\n  4 --> 07fb8c04-990e-4bc7-b607-9c4161b4786d;\n  style 07fb8c04-990e-4bc7-b607-9c4161b4786d stroke:#2c3143,stroke-width:4px;\n  5[\"Regex Find And Replace\"];\n  4 -->|aa_output| 5;\n  8dc378a8-d485-42df-8322-6cf8230257a0[\"Output\\nsample_names_to_headers\"];\n  5 --> 8dc378a8-d485-42df-8322-6cf8230257a0;\n  style 8dc378a8-d485-42df-8322-6cf8230257a0 stroke:#2c3143,stroke-width:4px;\n  6[\"Collapse Collection\"];\n  5 -->|out_file1| 6;\n  e9a55459-4a2c-4238-8494-e99ec67307ea[\"Output\\nproteomes_to_one_file\"];\n  6 --> e9a55459-4a2c-4238-8494-e99ec67307ea;\n  style e9a55459-4a2c-4238-8494-e99ec67307ea stroke:#2c3143,stroke-width:4px;\n  7[\"Proteinortho\"];\n  5 -->|out_file1| 7;\n  ee688b7a-2a9e-4480-a27a-db8cf795b635[\"Output\\nProteinortho on input dataset(s): orthology-groups\"];\n  7 --> ee688b7a-2a9e-4480-a27a-db8cf795b635;\n  style ee688b7a-2a9e-4480-a27a-db8cf795b635 stroke:#2c3143,stroke-width:4px;\n  8[\"Busco\"];\n  5 -->|out_file1| 8;\n  9[\"Filter\"];\n  7 -->|proteinortho| 9;\n  10[\"Proteinortho grab proteins\"];\n  6 -->|output| 10;\n  9 -->|out_file1| 10;\n  8625e8b1-e3af-4afa-bf85-1a3258cbbfb2[\"Output\\nProteinortho_extract_by_orthogroup\"];\n  10 --> 8625e8b1-e3af-4afa-bf85-1a3258cbbfb2;\n  style 8625e8b1-e3af-4afa-bf85-1a3258cbbfb2 stroke:#2c3143,stroke-width:4px;\n  11[\"Regex Find And Replace\"];\n  10 -->|listproteinorthograbproteins| 11;\n  b072d32e-f725-4833-af0b-74f4df526d9a[\"Output\\nfasta_header_cleaned\"];\n  11 --> b072d32e-f725-4833-af0b-74f4df526d9a;\n  style b072d32e-f725-4833-af0b-74f4df526d9a stroke:#2c3143,stroke-width:4px;\n  12[\"ClustalW\"];\n  11 -->|out_file1| 12;\n  f704b4b2-5214-4393-8a85-6274bda27c8c[\"Output\\nClustalW on input dataset(s): clustal\"];\n  12 --> f704b4b2-5214-4393-8a85-6274bda27c8c;\n  style f704b4b2-5214-4393-8a85-6274bda27c8c stroke:#2c3143,stroke-width:4px;\n  13[\"ClipKIT. Alignment trimming software for phylogenetics.\"];\n  12 -->|output| 13;\n  37092981-191a-4413-8f60-51802dd95f9c[\"Output\\nTrimmed alignment.\"];\n  13 --> 37092981-191a-4413-8f60-51802dd95f9c;\n  style 37092981-191a-4413-8f60-51802dd95f9c stroke:#2c3143,stroke-width:4px;\n  14[\"PhyKit - Alignment-based functions\"];\n  13 -->|trimmed_output| 14;\n  09ad25e3-cd68-4fb4-9c57-3e79212b8e01[\"Output\\nConcatenated fasta alignment file\"];\n  14 --> 09ad25e3-cd68-4fb4-9c57-3e79212b8e01;\n  style 09ad25e3-cd68-4fb4-9c57-3e79212b8e01 stroke:#2c3143,stroke-width:4px;\n  1d546e4c-7e3c-499d-870c-4846feb7a46d[\"Output\\nA partition file ready for input into RAxML or IQ-tree\"];\n  14 --> 1d546e4c-7e3c-499d-870c-4846feb7a46d;\n  style 1d546e4c-7e3c-499d-870c-4846feb7a46d stroke:#2c3143,stroke-width:4px;\n  26846814-d43a-4ce7-9f26-cfb70f184dce[\"Output\\nAn occupancy file that summarizes the taxon occupancy per sequence\"];\n  14 --> 26846814-d43a-4ce7-9f26-cfb70f184dce;\n  style 26846814-d43a-4ce7-9f26-cfb70f184dce stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -1874,7 +1880,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -1920,7 +1927,7 @@
           "name": "Genetic Map Rad Seq Workflow",
           "title": "Genetic Map Rad Seq Workflow",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 9 stroke:#2c3143,stroke-width:4px;\n  10[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 10 stroke:#2c3143,stroke-width:4px;\n  11[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 11 stroke:#2c3143,stroke-width:4px;\n  12[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 12 stroke:#2c3143,stroke-width:4px;\n  13[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 13 stroke:#2c3143,stroke-width:4px;\n  14[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 14 stroke:#2c3143,stroke-width:4px;\n  15[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 15 stroke:#2c3143,stroke-width:4px;\n  16[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 16 stroke:#2c3143,stroke-width:4px;\n  17[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 17 stroke:#2c3143,stroke-width:4px;\n  18[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 18 stroke:#2c3143,stroke-width:4px;\n  19[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 19 stroke:#2c3143,stroke-width:4px;\n  20[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 20 stroke:#2c3143,stroke-width:4px;\n  21[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 21 stroke:#2c3143,stroke-width:4px;\n  22[\"Stacks: de novo map\"];\n  1 -->|output| 22;\n  0 -->|output| 22;\n  15 -->|output| 22;\n  14 -->|output| 22;\n  13 -->|output| 22;\n  12 -->|output| 22;\n  11 -->|output| 22;\n  10 -->|output| 22;\n  9 -->|output| 22;\n  8 -->|output| 22;\n  7 -->|output| 22;\n  6 -->|output| 22;\n  5 -->|output| 22;\n  4 -->|output| 22;\n  3 -->|output| 22;\n  2 -->|output| 22;\n  17 -->|output| 22;\n  18 -->|output| 22;\n  19 -->|output| 22;\n  20 -->|output| 22;\n  21 -->|output| 22;\n  16 -->|output| 22;\n  23[\"Stacks: genotypes\"];\n  22 -->|all_output| 23;"
         }
       ],
@@ -2087,7 +2094,7 @@
           "name": "Xarray_Map_Plotting_Workflow",
           "title": "Xarray_Map_Plotting_Workflow",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nair_temperature_at_2_metres.nc\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"NetCDF xarray Coordinate Info\"];\n  0 -->|output| 1;\n  2[\"NetCDF xarray Metadata Info\"];\n  0 -->|output| 2;\n  3[\"CDO Operations\"];\n  0 -->|output| 3;\n  4[\"CDO Operations\"];\n  3 -->|output_files| 4;\n  5[\"NetCDF xarray Metadata Info\"];\n  4 -->|output_files| 5;\n  6[\"NetCDF xarray map plotting\"];\n  4 -->|output_files| 6;\n  5 -->|output| 6;\n  7[\"NetCDF xarray map plotting\"];\n  4 -->|output_files| 7;\n  5 -->|output| 7;"
         }
       ],
@@ -2248,7 +2255,7 @@
           "name": "GBIF data Quality check and filtering workflow Feb-2020",
           "title": "GBIF data Quality check and filtering workflow Feb-2020",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"Get species occurrences data\"];\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Count\"];\n  0 -->|output| 2;\n  3[\"Summary Statistics\"];\n  1 -->|out_file1| 3;\n  4[\"Summary Statistics\"];\n  1 -->|out_file1| 4;\n  5[\"Filter\"];\n  1 -->|out_file1| 5;\n  6[\"Filter\"];\n  5 -->|out_file1| 6;\n  7[\"Count\"];\n  6 -->|out_file1| 7;\n  8[\"Filter\"];\n  6 -->|out_file1| 8;\n  9[\"OGR2ogr\"];\n  8 -->|out_file1| 9;\n  10[\"OGR2ogr\"];\n  8 -->|out_file1| 10;"
         }
       ],
@@ -2336,7 +2343,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -2348,6 +2356,9 @@
           "twitter": "sbenateau",
           "joined": "2019-03",
           "elixir_node": "fr",
+          "affiliations": [
+            "elixir-europe"
+          ],
           "id": "sbenateau",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/sbenateau.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/sbenateau/"
@@ -2463,7 +2474,7 @@
           "name": "Checking expected species and contamination in bacterial isolate",
           "title": "Checking expected species and contamination in bacterial isolate",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Kraken2\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  a408a644-58cd-4f5e-af25-15b5ea63aa76[\"Output\\nkraken_report_reads\"];\n  2 --> a408a644-58cd-4f5e-af25-15b5ea63aa76;\n  style a408a644-58cd-4f5e-af25-15b5ea63aa76 stroke:#2c3143,stroke-width:4px;\n  54b85a53-72ee-4b73-b186-7fd55e8aab9b[\"Output\\nkraken_report_tabular\"];\n  2 --> 54b85a53-72ee-4b73-b186-7fd55e8aab9b;\n  style 54b85a53-72ee-4b73-b186-7fd55e8aab9b stroke:#2c3143,stroke-width:4px;\n  3[\"Bracken\"];\n  2 -->|report_output| 3;\n  ae6c6464-f5f5-4e5b-b616-d38166fc0133[\"Output\\nbracken_report_tsv\"];\n  3 --> ae6c6464-f5f5-4e5b-b616-d38166fc0133;\n  style ae6c6464-f5f5-4e5b-b616-d38166fc0133 stroke:#2c3143,stroke-width:4px;\n  8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8[\"Output\\nbracken_kraken_report\"];\n  3 --> 8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8;\n  style 8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8 stroke:#2c3143,stroke-width:4px;\n  4[\"Recentrifuge\"];\n  2 -->|output| 4;\n  b5694f2d-c8cd-4460-bfff-74fd0792ecb3[\"Output\\nrecentrifuge_stats_tabular\"];\n  4 --> b5694f2d-c8cd-4460-bfff-74fd0792ecb3;\n  style b5694f2d-c8cd-4460-bfff-74fd0792ecb3 stroke:#2c3143,stroke-width:4px;\n  bd947a1d-0443-465f-8658-5d76d9ce69f8[\"Output\\nrecentrifuge_report_html\"];\n  4 --> bd947a1d-0443-465f-8658-5d76d9ce69f8;\n  style bd947a1d-0443-465f-8658-5d76d9ce69f8 stroke:#2c3143,stroke-width:4px;\n  c7457acb-41bc-4191-b3fb-6716e15fbe57[\"Output\\nrecentrifuge_data_tabular\"];\n  4 --> c7457acb-41bc-4191-b3fb-6716e15fbe57;\n  style c7457acb-41bc-4191-b3fb-6716e15fbe57 stroke:#2c3143,stroke-width:4px;\n  94f6ff07-0e06-47ad-88f8-a058d0808537[\"Output\\nrecentrifuge_logfile\"];\n  4 --> 94f6ff07-0e06-47ad-88f8-a058d0808537;\n  style 94f6ff07-0e06-47ad-88f8-a058d0808537 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -2568,7 +2579,8 @@
           "fediverse_flavor": "mastodon",
           "affiliations": [
             "gallantries",
-            "ifb"
+            "ifb",
+            "elixir-europe"
           ],
           "id": "bebatut",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
@@ -2579,7 +2591,8 @@
           "joined": "2024-04",
           "elixir_node": "fr",
           "affiliations": [
-            "ifb"
+            "ifb",
+            "elixir-europe"
           ],
           "id": "clsiguret",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/clsiguret.json",
@@ -2704,7 +2717,7 @@
           "name": "Workflow 'Biodiversity data exploration tuto'",
           "title": "Workflow 'Biodiversity data exploration tuto'",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nReel_life_survey_fish_modif.tabular\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Spatial coordinates anonymization\"];\n  0 -->|output| 1;\n  2[\"Homoscedasticity and normality\"];\n  0 -->|output| 2;\n  3[\"Variables exploration\"];\n  0 -->|output| 3;\n  4[\"Presence-absence and abundance\"];\n  0 -->|output| 4;\n  5[\"Statistics on presence-absence\"];\n  0 -->|output| 5;\n  6[\"Local Contributions to Beta Diversity LCBD\"];\n  0 -->|output| 6;"
         }
       ],
@@ -2825,6 +2838,9 @@
           "email": "olivier.norvez@mnhn.fr",
           "joined": "2022-02",
           "elixir_node": "fr",
+          "affiliations": [
+            "elixir-europe"
+          ],
           "id": "onorvez",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/onorvez.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/onorvez/"
@@ -2850,7 +2866,8 @@
           "elixir_node": "fr",
           "affiliations": [
             "pndb",
-            "gallantries"
+            "gallantries",
+            "elixir-europe"
           ],
           "id": "colineroyaux",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
@@ -2868,7 +2885,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -3026,7 +3044,7 @@
           "name": "Champs blocs indicators",
           "title": "Champs blocs indicators",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nchampbloc_ivr_val.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nchampbloc_ivr.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nficheterrain_val.csv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nficheterrain.csv\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nchampbloc_qecb_val.csv\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nchampbloc_qecb.csv\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"IVR\"];\n  3 -->|output| 6;\n  2 -->|output| 6;\n  0 -->|output| 6;\n  1 -->|output| 6;\n  7[\"QECB\"];\n  3 -->|output| 7;\n  2 -->|output| 7;\n  4 -->|output| 7;\n  5 -->|output| 7;\n  8[\"Champs blocs indicators\"];\n  7 -->|output_rds| 8;"
         }
       ],
@@ -3106,7 +3124,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -3257,7 +3276,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -3270,7 +3290,8 @@
           "joined": "2024-02",
           "elixir_node": "fr",
           "affiliations": [
-            "pndb"
+            "pndb",
+            "elixir-europe"
           ],
           "id": "ThibaudGlinez",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/ThibaudGlinez.json",
@@ -3288,7 +3309,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -3301,7 +3323,8 @@
           "joined": "2024-02",
           "elixir_node": "fr",
           "affiliations": [
-            "pndb"
+            "pndb",
+            "elixir-europe"
           ],
           "id": "ThibaudGlinez",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/ThibaudGlinez.json",
@@ -3418,7 +3441,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -3443,7 +3467,8 @@
           "fediverse_flavor": "mastodon",
           "affiliations": [
             "gallantries",
-            "ifb"
+            "ifb",
+            "elixir-europe"
           ],
           "id": "bebatut",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
@@ -3489,7 +3514,7 @@
           "name": "Species Distribution Modeling With Wallace From GBIF - Training Material",
           "title": "Species Distribution Modeling With Wallace From GBIF - Training Material",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"Get species occurrences data\"];\n  1[\"Wallace\"];\n  2[\"Cut\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  2 -->|output| 3;\n  4[\"Convert tabular to CSV\"];\n  3 -->|out_file1| 4;\n  5[\"Replace\"];\n  4 -->|csv| 5;"
         }
       ],
@@ -3621,7 +3646,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -3646,7 +3672,8 @@
           "fediverse_flavor": "mastodon",
           "affiliations": [
             "gallantries",
-            "ifb"
+            "ifb",
+            "elixir-europe"
           ],
           "id": "bebatut",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
@@ -3658,6 +3685,9 @@
           "twitter": "sbenateau",
           "joined": "2019-03",
           "elixir_node": "fr",
+          "affiliations": [
+            "elixir-europe"
+          ],
           "id": "sbenateau",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/sbenateau.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/sbenateau/"
@@ -3702,7 +3732,7 @@
           "name": "Abundance Index \"stacked\" Visualization Creation",
           "title": "Abundance Index \"stacked\" Visualization Creation",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAbundance index file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  0 -->|output| 3;\n  4[\"Filter\"];\n  0 -->|output| 4;\n  5[\"Filter\"];\n  0 -->|output| 5;\n  6[\"Paste\"];\n  1 -->|out_file1| 6;\n  2 -->|out_file1| 6;\n  7[\"Paste\"];\n  3 -->|out_file1| 7;\n  4 -->|out_file1| 7;\n  8[\"Paste\"];\n  6 -->|out_file1| 8;\n  7 -->|out_file1| 8;\n  9[\"Paste\"];\n  8 -->|out_file1| 9;\n  5 -->|out_file1| 9;"
         },
         {
@@ -3720,7 +3750,7 @@
           "name": "Phenology \"stacked\" Visualization Creation",
           "title": "Phenology \"stacked\" Visualization Creation",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nFlight curve dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Paste\"];\n  1 -->|out_file1| 3;\n  2 -->|out_file1| 3;"
         },
         {
@@ -3738,7 +3768,7 @@
           "name": "Tutorial regionalGAM Complete Multispecies",
           "title": "Tutorial regionalGAM Complete Multispecies",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"CSV to Tabular\"];\n  0 -->|output| 1;\n  10[\"Count\"];\n  8 -->|output| 10;\n  11[\"Column Regex Find And Replace\"];\n  8 -->|output| 11;\n  12[\"Count\"];\n  9 -->|output| 12;\n  13[\"Column Regex Find And Replace\"];\n  9 -->|output| 13;\n  14[\"Merge Columns\"];\n  11 -->|out_file1| 14;\n  15[\"Merge Columns\"];\n  13 -->|out_file1| 15;\n  16[\"Remove beginning\"];\n  14 -->|out_file1| 16;\n  17[\"Remove beginning\"];\n  15 -->|out_file1| 17;\n  18[\"Paste\"];\n  16 -->|out_file1| 18;\n  17 -->|out_file1| 18;\n  2[\"Column Regex Find And Replace\"];\n  1 -->|output| 2;\n  3[\"Count\"];\n  2 -->|out_file1| 3;\n  4[\"Filter\"];\n  2 -->|out_file1| 4;\n  5[\"Filter\"];\n  2 -->|out_file1| 5;\n  6[\"Tabular to CSV\"];\n  4 -->|out_file1| 6;\n  7[\"Tabular to CSV\"];\n  5 -->|out_file1| 7;\n  8[\"Flight curve\"];\n  6 -->|output| 8;\n  9[\"Flight curve\"];\n  7 -->|output| 9;"
         },
         {
@@ -3756,7 +3786,7 @@
           "name": "Regional GAM Workflow",
           "title": "Regional GAM Workflow",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nregionalGAM.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Text reformatting\"];\n  0 -->|output| 1;\n  2[\"Count\"];\n  1 -->|outfile| 2;\n  3[\"Flight curve\"];\n  2 -->|out_file1| 3;\n  4[\"Abundance index\"];\n  2 -->|out_file1| 4;\n  3 -->|output| 4;\n  5[\"Scatterplot w ggplot2\"];\n  3 -->|output| 5;\n  6[\"Expected temporal trend\"];\n  4 -->|output| 6;\n  7[\"Model temporal trend\"];\n  4 -->|output| 7;\n  6 -->|output2| 7;\n  8[\"Autocorrelation test\"];\n  7 -->|output2| 8;\n  9[\"Plot abundance\"];\n  4 -->|output| 9;\n  7 -->|output2| 9;"
         }
       ],
@@ -4003,7 +4033,7 @@
           "name": "Workflow constructed from history 'Tuto Obitools'",
           "title": "Workflow constructed from history 'Tuto Obitools'",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nwolf_tutorial.zip?download=1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Illuminapairedend\"];\n  2[\"Unzip\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"FASTQ Groomer\"];\n  1 -->|output| 4;\n  5[\"obigrep\"];\n  4 -->|output_file| 5;\n  6[\"Line/Word/Character count\"];\n  4 -->|output_file| 6;\n  7[\"Line/Word/Character count\"];\n  5 -->|output| 7;\n  8[\"NGSfilter\"];\n  5 -->|output| 8;\n  9[\"obiuniq\"];\n  8 -->|output| 9;\n  10[\"obiannotate\"];\n  9 -->|output| 10;\n  11[\"obistat\"];\n  10 -->|output| 11;\n  12[\"obigrep\"];\n  10 -->|output| 12;\n  13[\"obigrep\"];\n  12 -->|output| 13;\n  14[\"obiclean\"];\n  13 -->|output| 14;\n  15[\"NCBI BLAST+ blastn\"];\n  14 -->|output| 15;\n  16[\"Filter sequences by ID\"];\n  15 -->|output1| 16;\n  17[\"Filter sequences by ID\"];\n  15 -->|output1| 17;\n  14 -->|output| 17;\n  18[\"obitab\"];\n  16 -->|output_pos| 18;\n  19[\"obitab\"];\n  17 -->|output_pos| 19;\n  20[\"Join two Datasets\"];\n  19 -->|output| 20;\n  15 -->|output1| 20;\n  21[\"Join two Datasets\"];\n  20 -->|out_file1| 21;\n  18 -->|output| 21;\n  22[\"Cut\"];\n  21 -->|out_file1| 22;\n  23[\"Filter\"];\n  22 -->|out_file1| 23;"
         }
       ],
@@ -4181,7 +4211,8 @@
           "elixir_node": "fr",
           "affiliations": [
             "pndb",
-            "gallantries"
+            "gallantries",
+            "elixir-europe"
           ],
           "id": "colineroyaux",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
@@ -4192,6 +4223,9 @@
           "email": "olivier.norvez@mnhn.fr",
           "joined": "2022-02",
           "elixir_node": "fr",
+          "affiliations": [
+            "elixir-europe"
+          ],
           "id": "onorvez",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/onorvez.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/onorvez/"
@@ -4224,7 +4258,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -4315,7 +4350,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -4361,7 +4397,7 @@
           "name": "de novo Rad Seq",
           "title": "de novo Rad Seq",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPopulation_map.txt\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nSRR034310.fastq\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Stacks: process radtags\"];\n  1 -->|output| 4;\n  2 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  1 -->|output| 6;\n  2 -->|output| 6;\n  7[\"FastQC\"];\n  2 -->|output| 7;\n  8[\"Stacks: de novo map\"];\n  4 -->|demultiplexed| 8;\n  0 -->|output| 8;\n  9[\"Stacks: populations\"];\n  8 -->|all_output| 9;\n  0 -->|output| 9;"
         }
       ],
@@ -4497,7 +4533,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -4543,7 +4580,7 @@
           "name": "Workflow Constructed From History 'STACKS RAD: Population Genomics With Reference Genome'",
           "title": "Workflow Constructed From History 'STACKS RAD: Population Genomics With Reference Genome'",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nEBI SRA: SRR034310 File: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Barcode_SRR034310.txt\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"FastQC\"];\n  5 -->|demultiplexed| 10;\n  11[\"Map with BWA\"];\n  5 -->|demultiplexed| 11;\n  3 -->|output| 11;\n  12[\"Select\"];\n  6 -->|output_log| 12;\n  13[\"Select\"];\n  6 -->|output_log| 13;\n  14[\"Replace Text\"];\n  7 -->|outfile| 14;\n  15[\"Replace Text\"];\n  8 -->|out_file1| 15;\n  16[\"Replace Text\"];\n  9 -->|out_file1| 16;\n  17[\"MultiQC\"];\n  10 -->|text_file| 17;\n  18[\"Replace Text\"];\n  12 -->|out_file1| 18;\n  19[\"Replace Text\"];\n  13 -->|out_file1| 19;\n  2[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  20[\"Add column\"];\n  14 -->|outfile| 20;\n  21[\"Concatenate datasets\"];\n  19 -->|outfile| 21;\n  15 -->|outfile| 21;\n  16 -->|outfile| 21;\n  18 -->|outfile| 21;\n  22[\"Cut\"];\n  20 -->|out_file1| 22;\n  23[\"Convert\"];\n  21 -->|out_file1| 23;\n  24[\"Regex Replace\"];\n  22 -->|out_file1| 24;\n  25[\"Stacks: reference map\"];\n  11 -->|bam_output| 25;\n  24 -->|outfile| 25;\n  26[\"Stacks: populations\"];\n  25 -->|all_output| 26;\n  24 -->|outfile| 26;\n  27[\"Summary Statistics\"];\n  26 -->|out_fstats| 27;\n  28[\"Sort\"];\n  26 -->|out_fstats| 28;\n  29[\"Count\"];\n  26 -->|out_fstats| 29;\n  3[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  30[\"Filter\"];\n  26 -->|out_fstats| 30;\n  4[\"Stacks: process radtags\"];\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  1 -->|output| 6;\n  0 -->|output| 6;\n  7[\"Replace Text\"];\n  2 -->|output| 7;\n  8[\"Select\"];\n  4 -->|output_log| 8;\n  9[\"Select\"];\n  5 -->|output_log| 9;"
         },
         {
@@ -4561,7 +4598,7 @@
           "name": "Ref Based Rad Seq",
           "title": "Ref Based Rad Seq",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPopulation_map.txt\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nSRR034310.fastq\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Stacks: process radtags\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  2 -->|output| 5;\n  3 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  2 -->|output| 6;\n  3 -->|output| 6;\n  7[\"Map with BWA for Illumina\"];\n  0 -->|output| 7;\n  4 -->|demultiplexed| 7;\n  8[\"Stacks: reference map\"];\n  7 -->|output| 8;\n  1 -->|output| 8;\n  9[\"Stacks: populations\"];\n  8 -->|all_output| 9;\n  1 -->|output| 9;"
         }
       ],
@@ -4815,7 +4852,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -4833,7 +4871,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -4983,7 +5022,7 @@
           "name": "NDVI with OpenEO",
           "title": "NDVI with OpenEO",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"Copernicus Data Space Ecosystem\"];\n  1[\"Holoviz\"];\n  0 -->|output_collection| 1;"
         },
         {
@@ -5006,7 +5045,7 @@
           "name": "NDVI with OpenEO",
           "title": "NDVI with OpenEO",
           "test_results": null,
-          "modified": "2024-04-16 12:24:55 +0000",
+          "modified": "2024-04-16 17:49:44 +0000",
           "mermaid": "flowchart TD\n  0[\"Copernicus Data Space Ecosystem\"];\n  1[\"Holoviz\"];\n  0 -->|output_collection| 1;"
         }
       ],
@@ -5089,6 +5128,7 @@
           "funding_statement": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.",
           "members": [
             "abretaud",
+            "anuprulez",
             "bgruening",
             "erxleben",
             "pauldg",
@@ -5236,7 +5276,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
@@ -5251,7 +5292,8 @@
           "elixir_node": "fr",
           "affiliations": [
             "pndb",
-            "gallantries"
+            "gallantries",
+            "elixir-europe"
           ],
           "id": "colineroyaux",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
@@ -5449,7 +5491,8 @@
           "elixir_node": "fr",
           "affiliations": [
             "pndb",
-            "gallantries"
+            "gallantries",
+            "elixir-europe"
           ],
           "id": "colineroyaux",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
@@ -5479,7 +5522,8 @@
             "pndb",
             "gallantries",
             "fairease",
-            "fnso2019"
+            "fnso2019",
+            "elixir-europe"
           ],
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
