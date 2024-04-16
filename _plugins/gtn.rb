@@ -835,6 +835,11 @@ Jekyll::Hooks.register :site, :post_read do |site|
   site.pages.each do |page|
     page.data['short_id'] = shortlinks_reversed[page.url]
   end
+
+  Jekyll.logger.info '[GTN] Annotating events'
+  site.pages.select{ |p| p.data['layout'] == 'event' }.each do |page|
+    page.data['not_started'] = page.data['date_start'] > Date.today
+  end
 end
 
 if $PROGRAM_NAME == __FILE__
