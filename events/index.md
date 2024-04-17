@@ -15,7 +15,7 @@ Anybody is welcome to add their events here.
 
 # Training Events
 
-{% assign events = site.pages |  where: "layout", "event" | sort: 'date_start' | reverse %}
+{% assign events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | sort: 'date_start' | reverse %}
 
 
 <table class="eventtable table table-striped">
