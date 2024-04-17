@@ -68,7 +68,16 @@ module Gtn
       @@COMMIT_COUNT_CACHE
     end
 
-    def self.obtain_modification_count(f)
+    def self.clean_path(f)
+      if f =~ %r{^\./}
+        f[2..]
+      else
+        f
+      end
+    end
+
+    def self.obtain_modification_count(f_unk)
+      f = clean_path(f_unk)
       init_cache
       if @@COMMIT_COUNT_CACHE.key? f
         @@COMMIT_COUNT_CACHE[f]
@@ -77,7 +86,8 @@ module Gtn
       end
     end
 
-    def self.obtain_time(f)
+    def self.obtain_time(f_unk)
+      f = clean_path(f_unk)
       init_cache
       if @@TIME_CACHE.key? f
         @@TIME_CACHE[f]
@@ -85,7 +95,7 @@ module Gtn
         begin
           # Non git file.
           @@TIME_CACHE[f] = File.mtime(f)
-          Jekyll.logger.warning "[GTN/Time/Mod] No git cached time available for #{f}, defaulting to checkout"
+          Jekyll.logger.warn "[GTN/Time/Mod] No git cached time available for #{f}, defaulting to checkout"
           @@TIME_CACHE[f]
         rescue StandardError
           Time.at(0)
@@ -173,7 +183,16 @@ module Gtn
       @@TIME_CACHE
     end
 
-    def self.obtain_time(f)
+    def self.clean_path(f)
+      if f =~ %r{^\./}
+        f[2..]
+      else
+        f
+      end
+    end
+
+    def self.obtain_time(f_unk)
+      f = clean_path(f_unk)
       init_cache
       if @@TIME_CACHE.key? f
         @@TIME_CACHE[f]
@@ -181,7 +200,7 @@ module Gtn
         begin
           # Non git file.
           @@TIME_CACHE[f] = File.mtime(f)
-          Jekyll.logger.warning "[GTN/Time/Pub] No git cached time available for #{f}, defaulting to checkout"
+          Jekyll.logger.warn "[GTN/Time/Pub] No git cached time available for #{f}, defaulting to checkout"
           @@TIME_CACHE[f]
         rescue StandardError
           Time.at(0)
