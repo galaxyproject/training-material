@@ -22,25 +22,28 @@ Anybody is welcome to add their events here.
  <thead>
   <tr>
    <th>Date</th>
-   <th>Topic/Event</th>
-   <th>Venue/Location</th>
+   <th>Event</th>
+   <th>Location</th>
    <th>Contact</th>
   </tr>
  </thead>
  <tbody>
- {% for event in events  %}
+ {% for event in events %}
+ {% unless event.draft and jekyll.environment == "production" %}
  <tr>
   <td class="eventtable-date"> {{event | collapse_date_pretty }} </td>
   <td>
-   <a class="eventtable-title" href="{{site.baseurl}}{{event.url}}">{{event.title}}</a>
+
+   <a class="eventtable-title" href="{% if event.external %}{{event.external}}{% else %}{{site.baseurl}}{{event.url}}{% endif %}">{{event.title}}{% if event.draft %} (draft, will be hidden) {% endif %}</a>
    <div class="eventtable-description"> {{event.description}} </div>
   </td>
-  <td> {{event.location | format_location}} </td>
+  <td> {{event.location | format_location_short }} </td>
   <td> {% for org in event.contributions.organisers %}
 			{% include _includes/contributor-badge-inline.html id=org %}
 		{% endfor %}
   </td>
  </tr>
+ {% endunless %}
  {% endfor %}
  </tbody>
 </table>
