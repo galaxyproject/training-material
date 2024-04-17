@@ -580,7 +580,21 @@ module Jekyll
       end
     end
 
-     def format_location_simple(location)
+    def format_location_simple(location)
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil),
+      ].compact
+
+      loc.join(', ')
+    end
+
+    def format_location_short(location)
+      url = "https://www.openstreetmap.org/search?query="
       # location:
       #   name: Bioinf Dept
       #   address: 42 E Main St.
@@ -597,7 +611,18 @@ module Jekyll
         location.fetch('postcode', nil),
       ].compact
 
-      loc.join(', ')
+      loc2 = [
+        location.fetch('name', nil),
+        location.fetch('city', nil),
+        location.fetch('country', nil),
+      ].compact
+
+      if loc.length > 1
+        "<a href=\"#{url}#{loc.join(', ')}\">#{loc2.join(', ')}</a>"
+      else
+        # Just e.g. the name
+        loc.join(', ')
+      end
     end
 
 
