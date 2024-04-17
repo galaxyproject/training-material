@@ -1,5 +1,5 @@
 ---
-layout: event
+layout: event-external
 title: My External Training Event Title
 
 draft: true  # will hide your event from the GTN events list, remove once you are ready to announce your event
