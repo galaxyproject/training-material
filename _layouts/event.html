@@ -4,9 +4,11 @@ layout: base
 
 {% assign event = page %}
 
+{% unless event.external %}
 <script type="application/ld+json">
 {{ page | generate_event_jsonld: site }}
 </script>
+{% endunless %}
 
 <section class="event">
     <hgroup>
@@ -95,6 +97,9 @@ layout: base
   </div>
   <div class="tab-pane " id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <h2> Program </h2>
+    {% if event.external %}
+       For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
+    {% else %}
     {% for section in event.program %}
         <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
         <p>{{ section.description | markdownify }}</p>
@@ -104,6 +109,7 @@ layout: base
 	{% include _includes/tutorial_list.html sub=material_list page=page %}
 	{% endif %}
     {% endfor %}
+    {% endif %}
   </div>
   <!-- <div class="tab-pane " id="register" role="tabpanel" aria-labelledby="register-tab"> -->
   <!--   <h2>Registering</h2> -->
