@@ -279,6 +279,9 @@ module Jekyll
 
       materials = []
       page['program'].each do |section|
+        if !section.key?'tutorials'
+          next
+        end
         section['tutorials'].each do |tutorial|
           if tutorial.key?('custom')
             next
