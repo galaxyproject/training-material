@@ -17,6 +17,13 @@ rescue
 end
 event_SCHEMA = automagic_loading(event_SCHEMA_UNSAFE)
 
+begin
+  event_external_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event-external.yaml', permitted_classes: [Date])
+rescue
+  event_external_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event-external.yaml')
+end
+event_external_SCHEMA = automagic_loading(event_SCHEMA_UNSAFE)
+
 Dir.glob('learning-pathways/*.md').reject { |p| p.match(/index.md/) }.each do |file|
   errs = []
   pathway = YAML.load_file(file)
