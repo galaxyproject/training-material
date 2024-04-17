@@ -203,6 +203,6 @@ end
 Jekyll::Hooks.register :site, :post_write do |site|
   if Jekyll.env == 'production'
     generate_topic_feeds(site)
-  end
     generate_event_feeds(site)
+  end
 end

@@ -88,7 +88,7 @@ Next we will import a Galaxy workflow - a chain of tools to perform a set of ope
 >
 > 1. Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/sequence-analysis/tutorials/ncbi-fcs/workflows/NCBI-Foreign-Contamination_Screen.ga" title="NCBI Foreign Contamination Screen Workflow" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/sequence-analysis/tutorials/ncbi-fcs/workflows/NCBI-Foreign-Contamination-Screen.ga" title="NCBI Foreign Contamination Screen Workflow" %}
 >
 >    > <warning-title>Log in to Galaxy</warning-title>
 >    > If the workflow failed to import, it is usually because you are not logged in.
