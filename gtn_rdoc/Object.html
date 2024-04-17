@@ -87,6 +87,7 @@
     <li ><a href="#method-i-fixNews">#fixNews</a>
     <li ><a href="#method-i-format_news">#format_news</a>
     <li ><a href="#method-i-format_tutorials">#format_tutorials</a>
+    <li ><a href="#method-i-generate_topic_feeds">#generate_topic_feeds</a>
     <li ><a href="#method-i-json_boxify">#json_boxify</a>
     <li ><a href="#method-i-jupyter_post_write">#jupyter_post_write</a>
     <li ><a href="#method-i-jupyter_pre_render">#jupyter_pre_render</a>
@@ -727,6 +728,113 @@
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">modified</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:md</span>] }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;- &#39;</span>)
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">output</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_topic_feeds" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">generate_topic_feeds</span><span
+            class="method-args">(site)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_topic_feeds-source">
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_topic_feeds</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_topics</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">topic</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">feed_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">dest</span>, <span class="ruby-string">&#39;topics&#39;</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-string">&#39;feed.xml&#39;</span>)
+    <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Generating feed for #{topic} =&gt; #{feed_path}&quot;</span>
+
+    <span class="ruby-identifier">topic_pages</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>
+                      .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{^\.?/?topics/#{topic}}</span> }
+                      .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{(tutorial.md|slides.html|faqs/.*.md)}</span> }
+                      .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/index.md/</span> }
+                      .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;draft&#39;</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;true&#39;</span> }
+                      .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides-plain.html/</span> }
+                      .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">symlink?</span>(<span class="ruby-identifier">x</span>.<span class="ruby-identifier">path</span>) } <span class="ruby-comment"># Remove symlinks to other faqs/tutorials</span>
+                      .<span class="ruby-identifier">uniq</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:path</span>)
+                      .<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">PublicationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span>) }
+                      .<span class="ruby-identifier">reverse</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">topic_pages</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;No pages for #{topic}&quot;</span>
+      <span class="ruby-keyword">next</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Found #{topic_pages.length} pages for #{topic}&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">builder</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">encoding:</span> <span class="ruby-string">&#39;UTF-8&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">xml</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># Set stylesheet</span>
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">feed</span>(<span class="ruby-value">xmlns:</span> <span class="ruby-string">&#39;http://www.w3.org/2005/Atom&#39;</span>) <span class="ruby-keyword">do</span>
+        <span class="ruby-comment"># Set generator also needs a URI attribute</span>
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">generator</span>(<span class="ruby-string">&#39;Jekyll&#39;</span>, <span class="ruby-value">uri:</span> <span class="ruby-string">&#39;https://jekyllrb.com/&#39;</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">link</span>(<span class="ruby-value">href:</span> <span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/topics/#{topic}/feed.xml&quot;</span>, <span class="ruby-value">rel:</span> <span class="ruby-string">&#39;self&#39;</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">updated</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">topic_pages</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_datetime</span>.<span class="ruby-identifier">rfc3339</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">id</span>(<span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/topics/#{topic}/feed.xml&quot;</span>)
+        <span class="ruby-identifier">topic_title</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic</span>][<span class="ruby-string">&#39;title&#39;</span>]
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">title</span>(<span class="ruby-node">&quot;Galaxy Training Network - #{topic_title}&quot;</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">subtitle</span>(<span class="ruby-node">&quot;Recently added tutorials, slides, and FAQs in the #{topic} topic&quot;</span>)
+
+        <span class="ruby-identifier">topic_pages</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">page_type</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{faqs/.*.md}</span>
+                        <span class="ruby-string">&#39;faq&#39;</span>
+                      <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">first</span>
+                      <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">entry</span> <span class="ruby-keyword">do</span>
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>])
+            <span class="ruby-identifier">link</span> = <span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}#{page.url}&quot;</span>
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">link</span>(<span class="ruby-value">href:</span> <span class="ruby-identifier">link</span>)
+            <span class="ruby-comment"># Our links are stable</span>
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">id</span>(<span class="ruby-identifier">link</span>)
+
+            <span class="ruby-comment"># This is a feed of only NEW tutorials, so we only include publication times.</span>
+            <span class="ruby-comment"># xml.published(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)</span>
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">updated</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">PublicationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_datetime</span>.<span class="ruby-identifier">rfc3339</span>)
+
+            <span class="ruby-comment"># xml.path(page.path)</span>
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">category</span>(<span class="ruby-value">term:</span> <span class="ruby-node">&quot;new #{page_type}&quot;</span>)
+            <span class="ruby-comment"># xml.content(page.content, type: &quot;html&quot;)</span>
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">summary</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">first</span>, <span class="ruby-value">type:</span> <span class="ruby-string">&#39;html&#39;</span>)
+
+            <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_authors</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">author</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">name</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_name</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>))
+                <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">uri</span>(<span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/hall-of-fame/#{c}/&quot;</span>)
+              <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">end</span>
+
+            <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_non_authors</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">contributor</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">name</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_name</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>))
+                <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">uri</span>(<span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/hall-of-fame/#{c}/&quot;</span>)
+              <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># The builder won&#39;t let you add a processing instruction, so we have to</span>
+    <span class="ruby-comment"># serialise it to a string and then parse it again. Ridiculous.</span>
+    <span class="ruby-identifier">finalised</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span> <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">to_xml</span>
+    <span class="ruby-identifier">pi</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">ProcessingInstruction</span>.<span class="ruby-identifier">new</span>(
+      <span class="ruby-identifier">finalised</span>, <span class="ruby-string">&#39;xml-stylesheet&#39;</span>,
+      <span class="ruby-node">%(type=&quot;text/xml&quot; href=&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/feed.xslt.xml&quot;)</span>
+    )
+    <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">add_previous_sibling</span> <span class="ruby-identifier">pi</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">feed_path</span>, <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">to_xml</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
