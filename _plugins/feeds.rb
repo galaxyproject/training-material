@@ -93,9 +93,86 @@ def generate_topic_feeds(site)
   nil
 end
 
+def generate_event_feeds(site)
+  events = site.pages.select { |x| x['layout'] == 'event' || x['layout'] == 'event-external' }
+  feed_path = File.join(site.dest, 'events', 'feed.xml')
+  Jekyll.logger.debug "Generating event feed"
+
+  if events.empty?
+    Jekyll.logger.warn "No events"
+    return nil
+  else
+    Jekyll.logger.debug "Found #{events.length} events"
+  end
+  p "#{events}"
+
+  builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+    # Set stylesheet
+    xml.feed(xmlns: 'http://www.w3.org/2005/Atom') do
+      # Set generator also needs a URI attribute
+      xml.generator('Jekyll', uri: 'https://jekyllrb.com/')
+      xml.link(href: "#{site.config['url']}#{site.baseurl}/events/feed.xml", rel: 'self')
+      xml.updated(Gtn::ModificationTimes.obtain_time(events.first.path).to_datetime.rfc3339)
+      xml.id("#{site.config['url']}#{site.baseurl}/events/feed.xml")
+      xml.title("Galaxy Training Network - Events")
+      xml.subtitle("Events in the Inter-Galactic Network")
+
+      events.each do |page|
+        xml.entry do
+          xml.title(page.data['title'])
+          link = "#{site.config['url']}#{site.baseurl}#{page.url}"
+          xml.link(href: link)
+          # Our links are stable
+          xml.id(link)
+
+          # This is a feed of only NEW tutorials, so we only include publication times.
+          # xml.published(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
+          xml.updated(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
+
+          # xml.path(page.path)
+          xml.category(term: "new #{page['layout']}")
+          # xml.content(page.content, type: "html")
+          xml.summary(page.content.strip.split("\n").first, type: 'html')
+
+          if page.data['location'] && page.data['location']['geo']
+            lat = page.data['location']['geo']['lat']
+            lon = page.data['location']['geo']['lon']
+            xml.georss('point', "#{lat} #{lon}")
+          end
+
+          Gtn::Contributors.get_authors(page.data).each do |c|
+            xml.author do
+              xml.name(Gtn::Contributors.fetch_name(site, c))
+              xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+            end
+          end
+
+          Gtn::Contributors.get_non_authors(page.data).each do |c|
+            xml.contributor do
+              xml.name(Gtn::Contributors.fetch_name(site, c))
+              xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+            end
+          end
+        end
+      end
+    end
+  end
+
+  # The builder won't let you add a processing instruction, so we have to
+  # serialise it to a string and then parse it again. Ridiculous.
+  finalised = Nokogiri::XML builder.to_xml
+  pi = Nokogiri::XML::ProcessingInstruction.new(
+    finalised, 'xml-stylesheet',
+    %(type="text/xml" href="#{site.config['url']}#{site.baseurl}/feed.xslt.xml")
+  )
+  finalised.root.add_previous_sibling pi
+  File.write(feed_path, finalised.to_xml)
+end
+
 # Basically like `PageWithoutAFile`
 Jekyll::Hooks.register :site, :post_write do |site|
   if Jekyll.env == 'production'
     generate_topic_feeds(site)
+    generate_event_feeds(site)
   end
 end
