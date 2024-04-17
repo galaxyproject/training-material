@@ -21,15 +21,15 @@ contributions:
 
 tags: [Topic 1, Topic 2, 5-day course]
 
-date_start: 2024-04-01
-date_end: 2024-04-02 # optional, if event is more than one day
+date_start: 1970-04-01
+date_end: 1970-04-02 # optional, if event is more than one day
 
 # Required, but minimally the Name field for online events
 location:
   geo:
     lat: 51.9109324
     lon: 4.4680514
-  name: Department of Pathology and Clinical Bioinformatics      # can be e.g. "Zoom" for online events
+  name: Erasmus Medical Center    # can be e.g. "Online" for online events (and leave the rest empty)
   address: Dr. Molewaterplein 40
   city: Rotterdam
   country: The Netherlands
