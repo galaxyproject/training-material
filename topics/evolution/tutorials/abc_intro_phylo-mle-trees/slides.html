@@ -391,16 +391,14 @@ _A way to navigate among trees_
 
 ---
 # Tree perturbations 1: NNI
-<br>
-<br>
+
 *N*earest *N*eighbour *I*nterchange is a way to transform one tree into another -- so we can search for the best tree.
 
 An NNI move consists of effectively collapsing an internal branch of the tree and re-expanding it out in either of two possible ways.
 
 For example, given the original tree
-<br>
-<br>
-.image-15[ ![Schematic of an unrooted phylogenetic tree. There are three connected internal nodes x,y,z and five tips A, B, C, D, E. A and B are connected to x; C is connected to Y; E and D are connected to z.](images/05-mle-10-initialtree-1.png) ]
+
+.image-25[ ![Schematic of an unrooted phylogenetic tree. There are three connected internal nodes x,y,z and five tips A, B, C, D, E. A and B are connected to x; C is connected to Y; E and D are connected to z.](images/05-mle-10-initialtree-1.png) ]
 <br>
 <br>
 there are two internal edges: \\(x-y\\) and \\(y-z\\). We can do an NNI move on each of them.
@@ -430,8 +428,8 @@ Select edge \\(xy\\) to collapse.
 ](images/05-mle-13-expand-1.png)
 
 Expand \\(xy\\) in either of two ways.
-
-
+<br>
+<br>
 For an unrooted binary tree with \\(n\\) leaves, there are \\(2(n-3)\\) neighbouring trees under this move.
 
 ---
@@ -502,6 +500,7 @@ Under this move there are more neighbours: \\(4(n-3)(n-2)\\) possible moves.
 # Tree perturbations 3: TBR
 <br>
 <br>
+<br>
 ![Schematic of two phylogenetic trees. In the tree on the left node w is connected to nodes A, B and C. In the tree on the right node z is connected to nodes D, E and F. Black dots are shown on the edges connecting A-w and D-z.](images/05-mle-23-TBR-selectroots-1.png)
 
 Selecting edges as roots of the new subtrees
@@ -509,11 +508,12 @@ Selecting edges as roots of the new subtrees
 # Tree perturbations 3: TBR
 <br>
 <br>
+<br>
 ![Schematic of two phylogenetic trees. In the tree on the left node w is connected to nodes A, B and C. In the tree on the right node z is connected to nodes D, E and F. Black dots are shown on the edges connecting A-w and D-z. A dashed line connects the trees through these dots.](images/05-mle-24-TBR-regraft-1.png)
 
 And reconnect!
-
-
+<br>
+<br>
 *Note*: There is no neat form for the number of neighbours of a given tree under the SPR moves, but it's more than TBR.
 
 ---
@@ -532,14 +532,16 @@ This file is licensed under the Creative Commons Attribution-Share Alike 3.0 Unp
 <br>
 <br>
 Tree Search algorithms work essentially by
-
+<br>
+<br>
 1. Starting with a reasonably good estimate, e.g., using Neighbour-Joining;
 
 2. Checking all the neighbouring trees under whichever perturbation is being used for an acceptable new tree;
 
 3. If an acceptable new tree is available, move to it!  If not, then stop.
 	- Most simply, "acceptable" means "better than this one".
-
+<br>
+<br>
 This kind of heuristic search is called *hill climbing*, from the obvious analogy.
 
 ---
@@ -554,17 +556,20 @@ Source: [https://doi.org/10.1101/746362](https://doi.org/10.1101/746362)
 
 ---
 
-# _Anolis_ phylogeny Example
+# _Anolis_ phylogeny example
 <br>
 <br>
+.pull-left[
 ![Photograph of a green lizard](images/Anole.jpg)
-
+]
+.pull-right[ 
 _Anolis_ is a highly speciose genus of lizards -- more than 425 species (unless as some would have it, many should be moved to another genus) -- native to the Americas.
+<br>
+<br>
+.reduce50[ Graphic: "Picture of a lizard (Anolis carolinensis) I (DanielCD) took in Atascocita, Texas (USA) on 4/22/05. Atascocita is in southeast Texas just north of Houston."
 
-Graphic: "Picture of a lizard (Anolis carolinensis) I (DanielCD) took in Atascocita, Texas (USA) on 4/22/05. Atascocita is in southeast Texas just north of Houston."
-
-This file is licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license.
-
+This file is licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license. ]
+]
 ---
 
 layout: true
@@ -776,11 +781,15 @@ Date and Time: Thu Dec 21 13:28:52 2023
 layout: false
 
 # Beyond Maximum Likelihood Trees
-
+<br>
+<br>
 * Bayesian analyses with BEAST and MrBayes
 * Networks -- next video!
 
 ---
+layout: false
 
-# Next -- phylogenetic networks!
+# Thank you!
+
+.center[_Next - phylogenetic networks!_]
 
