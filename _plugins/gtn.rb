@@ -625,7 +625,6 @@ module Jekyll
       end
     end
 
-
     def collapse_date_pretty(event)
       s = event['date_start']
       if event['date_end'].nil?
@@ -862,8 +861,9 @@ Jekyll::Hooks.register :site, :post_read do |site|
   end
 
   Jekyll.logger.info '[GTN] Annotating events'
-  site.pages.select{ |p| p.data['layout'] == 'event' }.each do |page|
+  site.pages.select{ |p| p.data['layout'] == 'event'  || p.data['layout'] == 'event-external' }.each do |page|
     page.data['not_started'] = page.data['date_start'] > Date.today
+    page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
   end
 end
 

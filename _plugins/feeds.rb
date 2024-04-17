@@ -3,10 +3,34 @@
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn'
 
+# TODO: move into a lib somewhere.
+def collapse_date_pretty(event)
+  s = event['date_start']
+  if event['date_end'].nil?
+    e = s
+  else
+    e = event['date_end']
+  end
+  # want dates like "Mar 22-25, 2024" or "Mar 22-May 1, 2024"
+  if s.year == e.year
+    if s.month == e.month
+      if s.day == e.day
+        "#{s.strftime('%B')} #{s.day}, #{s.year}"
+      else
+        "#{s.strftime('%B')} #{s.day}-#{e.day}, #{s.year}"
+      end
+    else
+      "#{s.strftime('%B')} #{s.day}-#{e.strftime('%B')} #{e.day}, #{s.year}"
+    end
+  else
+    "#{s.strftime('%B')} #{s.day}, #{s.year}-#{e.strftime('%B')} #{e.day}, #{e.year}"
+  end
+end
+
 def generate_topic_feeds(site)
   TopicFilter.list_topics(site).each do |topic|
     feed_path = File.join(site.dest, 'topics', topic, 'feed.xml')
-    Jekyll.logger.debug "Generating feed for #{topic} => #{feed_path}"
+    Jekyll.logger.info "[GTN/Feeds] Generating feed for #{topic}"
 
     topic_pages = site.pages
                       .select { |x| x.path =~ %r{^\.?/?topics/#{topic}} }
@@ -96,15 +120,20 @@ end
 def generate_event_feeds(site)
   events = site.pages.select { |x| x['layout'] == 'event' || x['layout'] == 'event-external' }
   feed_path = File.join(site.dest, 'events', 'feed.xml')
-  Jekyll.logger.debug "Generating event feed"
+  Jekyll.logger.info "[GTN/Feeds] Generating event feed"
 
-  if events.empty?
-    Jekyll.logger.warn "No events"
-    return nil
-  else
+  # Pre-filering.
+  updated = events.map { |x| Gtn::PublicationTimes.obtain_time(x.path) }.max
+
+  events = events
+    .reject { |x| x.data.fetch('draft', '').to_s == 'true' }
+    .reject { |x| x.data['event_over'] == true } # Remove past events, prunes our feed nicely.
+    .sort_by { |page| Gtn::PublicationTimes.obtain_time(page.path) }
+    .reverse
+
+  if ! events.empty?
     Jekyll.logger.debug "Found #{events.length} events"
   end
-  p "#{events}"
 
   builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
     # Set stylesheet
@@ -112,14 +141,15 @@ def generate_event_feeds(site)
       # Set generator also needs a URI attribute
       xml.generator('Jekyll', uri: 'https://jekyllrb.com/')
       xml.link(href: "#{site.config['url']}#{site.baseurl}/events/feed.xml", rel: 'self')
-      xml.updated(Gtn::ModificationTimes.obtain_time(events.first.path).to_datetime.rfc3339)
+      xml.updated(updated.to_datetime.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/events/feed.xml")
       xml.title("Galaxy Training Network - Events")
       xml.subtitle("Events in the Inter-Galactic Network")
 
       events.each do |page|
         xml.entry do
-          xml.title(page.data['title'])
+          pdate = collapse_date_pretty(page.data)
+          xml.title("[#{pdate}] #{page.data['title']}")
           link = "#{site.config['url']}#{site.baseurl}#{page.url}"
           xml.link(href: link)
           # Our links are stable
@@ -132,7 +162,7 @@ def generate_event_feeds(site)
           # xml.path(page.path)
           xml.category(term: "new #{page['layout']}")
           # xml.content(page.content, type: "html")
-          xml.summary(page.content.strip.split("\n").first, type: 'html')
+          xml.summary(page.data['description'])
 
           if page.data['location'] && page.data['location']['geo']
             lat = page.data['location']['geo']['lat']
@@ -173,6 +203,6 @@ end
 Jekyll::Hooks.register :site, :post_write do |site|
   if Jekyll.env == 'production'
     generate_topic_feeds(site)
-    generate_event_feeds(site)
   end
+    generate_event_feeds(site)
 end
