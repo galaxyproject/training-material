@@ -1291,7 +1291,7 @@ At this point, we have a set of contigs, which may or may not be fully phased, d
 
 > <comment-title>What assembly am I scaffolding??</comment-title>
 >
->  For the purposes of this tutorial, the scaffolding hands-on exercises will be <b>referring to a Hap1 assembly</b> produced with Hi-C mode of hifiasm. If you have hap1 contigs or hap2 contigs, then you can also follow along just using Primary purged contigs or Alternate purged contigs. <b>Wherever the tutorial refers to primary contigs, just replace it with whichever haplotype you are scaffolding.</b>
+>  For the purposes of this tutorial, the scaffolding hands-on exercises will be <b>referring to a Hap1 assembly</b> produced with the Hi-C mode of hifiasm. You can try the tutorial on hap2, if you want. And if you have a pseudohaplotype assembly, then you can also follow along with your purged (if necessary) primary contigs. (NB: The alternate assembly *is not* scaffolded, as it is an incomplete assembly.) <b>Either way, wherever the tutorial refers to hap1 contigs, just replace that with whichever haplotype you are scaffolding.</b>
 >
 {: .comment}
 
