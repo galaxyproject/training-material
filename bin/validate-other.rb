@@ -22,7 +22,7 @@ begin
 rescue
   event_external_SCHEMA_UNSAFE = YAML.load_file('bin/schema-event-external.yaml')
 end
-event_external_SCHEMA = automagic_loading(event_SCHEMA_UNSAFE)
+event_external_SCHEMA = automagic_loading(event_external_SCHEMA_UNSAFE)
 
 Dir.glob('learning-pathways/*.md').reject { |p| p.match(/index.md/) }.each do |file|
   errs = []
@@ -59,7 +59,11 @@ Dir.glob('events/*.md').reject { |p| p.match(/index.md/) }.each do |file|
   end
 
   # Build validators now that we've filled out the subtopic enum
-  contribs_validator = Kwalify::Validator.new(event_SCHEMA)
+  if pathway['layout'] == 'event'
+    contribs_validator = Kwalify::Validator.new(event_SCHEMA)
+  else
+    contribs_validator = Kwalify::Validator.new(event_external_SCHEMA)
+  end
 
   def validate_document(document, validator)
     errors = validator.validate(document)
