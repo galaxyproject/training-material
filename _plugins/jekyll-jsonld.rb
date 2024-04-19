@@ -14,6 +14,7 @@ module Jekyll
         '@id': 'https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19',
         '@type': 'Organization'
       },
+      id: 'https://training.galaxyproject.org',
       email: 'galaxytrainingnetwork@gmail.com',
       name: 'Galaxy Training Network',
       legalName: 'Galaxy Training Network',
@@ -152,6 +153,7 @@ module Jekyll
           '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
           '@type': 'CreativeWork'
         },
+        id: "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
         name: Gtn::Contributors.fetch_name(site, id),
         description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
       }
@@ -322,7 +324,10 @@ module Jekyll
 
         about: edam_terms, # TeSS, "scientific topics".
         audience: page['audience'], # TeSS: target audience
-        courseMode: page['mode'], # TeSS, "course mode", only online is currently understood.
+        # If 'online' is present in the mode, the course is online.
+        # Will fail on "this is NOT an online course"
+        # Acceptable.
+        courseMode: page['mode'],
         startDate: page['date_start'],
         endDate: page['date_end'],
         organizer: organisers, # TeSS only, US spelling, non-standard
@@ -355,7 +360,8 @@ module Jekyll
         publisher: GTN,
         provider: GTN,
         # Session materials
-        hasPart: parts,
+        # TODO: not currently parsed by TeSS, google just complains about it, so we're leaving it out.
+        # hasPart: parts,
       }
 
       begin
@@ -369,31 +375,45 @@ module Jekyll
 
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
-      if page.key?('cost')
-        if page['cost'] == 'free'
-          data['isAccessibleForFree'] = true
-          offer = {
-            '@type': 'Offer',
-            price: 0,
-            priceCurrency: 'EUR',
-          }
-        else
-          data['isAccessibleForFree'] = false
-          offer = {
-            '@type': 'Offer',
-            price: page['cost'].split(' ')[0],
-            priceCurrency: page['cost'].split(' ')[1],
-          }
-        end
-
-        data['hasCourseInstance'] = [
-          {
-            '@type': 'CourseInstance',
-            courseMode: [page['mode']],
-            offers: offer
-          }
-        ]
+      if page['cost'].downcase == 'free'
+        data['isAccessibleForFree'] = true
+        offer = {
+          '@type': 'Offer',
+          price: 0,
+          priceCurrency: 'EUR',
+          category: 'Course',
+          isAccessibleForFree: true,
+        }
+      else
+        data['isAccessibleForFree'] = false
+        offer = {
+          '@type': 'Offer',
+          price: page['cost'].split(' ')[0],
+          priceCurrency: page['cost'].split(' ')[1],
+          isAccessibleForFree: false,
+          category: 'Course',
+          # TODO: this can be more advanced but we need to collect start/end times, and timezone.
+        }
       end
+
+      data['hasCourseInstance'] = [
+        {
+          '@type': 'CourseInstance',
+          courseMode: page['mode'],
+          # courseWorkload: "A daily course running from #{page['date_start']} to #{page['date_end']}",
+          offers: offer,
+          isAccessibleForFree: data['isAccessibleForFree'],
+          courseSchedule: {
+            '@type': 'Schedule',
+            startDate: page['date_start'],
+            endDate: page['date_end'],
+            repeatCount: 1,
+            repeatFrequency: 'yearly', # Contrary to schema.org spec, this is what Google wants.
+          }
+        }
+      ]
+
+      data['offers'] = [offer]
 
       if page.key?('location') && page['location'].keys.length > 1
         data['location'] = {

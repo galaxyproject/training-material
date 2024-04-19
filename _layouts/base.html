@@ -34,11 +34,11 @@
 	{% endif %}
 
         {{ page | generate_dublin_core: site }}
-        {%- assign og_desc = page.description | default: page.excerpt | default:topic.summary | default: page.content | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" -%}
-        <meta name="description" content="{{ og_desc | strip_html | regex_replace:'[\n\r\s]',' ' | truncate: 1000 }}">
+        {%- assign og_desc = page.description | default: page.excerpt | default:topic.summary | default: page.content | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" | strip_html | regex_replace:'[\n\r\s"]',' ' | truncate: 1000 -%}
+        <meta name="description" content="{{ og_desc }}">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="{{ og_title | default: page.title }}">
-        <meta property="og:description" content="{{ og_desc | strip_html | regex_replace:'[\n\r\s]',' ' | truncate: 1000 }}">
+        <meta property="og:description" content="{{ og_desc }}">
 
         {%- if page.cover %}{% assign coverimage = page.cover %}
         {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
