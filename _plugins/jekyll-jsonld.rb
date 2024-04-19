@@ -272,6 +272,9 @@ module Jekyll
       organisers = Gtn::Contributors.get_organisers(page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
+      instructors = Gtn::Contributors.get_instructors(page.to_h).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
       funders = Gtn::Contributors.get_funders(page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
@@ -305,13 +308,20 @@ module Jekyll
       end.flatten.compact
 
       # TODO: add topic edam terms too? Not sure.
-
       parts = []
       materials.each do |material|
         mat = generate_material_jsonld(material, site['data'][material['topic_name']], site)
         if ! mat.nil? && ! mat.empty?
           parts.push(mat)
         end
+      end
+
+      syllab = page['program'].map do |section|
+        {
+          '@type': 'Syllabus',
+          name: section['title'],
+          description: section.fetch('description', nil),
+        }
       end
 
       data = {
@@ -336,7 +346,8 @@ module Jekyll
         teaches: learning_objectives, # TeSS, "learning objectives"
         # timeRequired: 'P1D', # TeSS, "duration", TODO: calculate from start/end date, not implemented in scraper currently.
 
-        # availableLanguage
+        availableLanguage: ['en'], # TODO: support other languages
+        inLanguage: ['en'], # TODO: support other languages
         # courseCode
         # coursePrerequisites
         # educationalCredentialAwarded
@@ -359,6 +370,7 @@ module Jekyll
         funding: funding, # Grant
         publisher: GTN,
         provider: GTN,
+        syllabusSections: syllab,
         # Session materials
         # TODO: not currently parsed by TeSS, google just complains about it, so we're leaving it out.
         # hasPart: parts,
@@ -372,6 +384,14 @@ module Jekyll
         data['datePublished'] = Gtn::PublicationTimes.obtain_time(page['path'])
       end
 
+      if page['cover']
+        if page['cover'] =~ /^http/
+          data['image'] = [page['cover']]
+        else
+          data['image'] = ["#{site['url']}#{site['baseurl']}#{page['cover']}"]
+        end
+      end
+
 
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
@@ -381,7 +401,7 @@ module Jekyll
           '@type': 'Offer',
           price: 0,
           priceCurrency: 'EUR',
-          category: 'Course',
+          category: 'Free',
           isAccessibleForFree: true,
         }
       else
@@ -391,25 +411,32 @@ module Jekyll
           price: page['cost'].split(' ')[0],
           priceCurrency: page['cost'].split(' ')[1],
           isAccessibleForFree: false,
-          category: 'Course',
+          category: 'Paid',
           # TODO: this can be more advanced but we need to collect start/end times, and timezone.
         }
       end
 
+      # TODO: this is wrong in a whole host of scenarios like incl weekends.
+      course_days = (page.fetch('date_end', page['date_start']) - page['date_start']).to_i
+      if course_days < 1
+        course_days = 1
+      end
       data['hasCourseInstance'] = [
         {
           '@type': 'CourseInstance',
           courseMode: page['mode'],
           # courseWorkload: "A daily course running from #{page['date_start']} to #{page['date_end']}",
           offers: offer,
+          instructor: instructors,
           isAccessibleForFree: data['isAccessibleForFree'],
           courseSchedule: {
             '@type': 'Schedule',
             startDate: page['date_start'],
-            endDate: page['date_end'],
-            repeatCount: 1,
-            repeatFrequency: 'yearly', # Contrary to schema.org spec, this is what Google wants.
-          }
+            endDate: page.fetch('date_end', page['date_start']),
+            repeatCount: course_days,
+            repeatFrequency: 'daily', # Contrary to schema.org spec, this is what Google wants.
+          },
+          courseWorkload: "P#{course_days}D",
         }
       ]
 
