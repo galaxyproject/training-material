@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 import os
+import sys
 import requests
 import glob
 import time
+import multiprocessing
 
 crates = glob.glob(
     "_site/training-material/api/workflows/**/rocrate.zip", recursive=True
 )
 
-for crate_path in crates:
-    # _site/training-material/api/workflows/proteomics/proteogenomics-novel-peptide-analysis/galaxy-workflow-mouse_novel_peptide_analysis/rocrate.zip
+def doUpload(crate_path):
     p = crate_path.split("/")
     (topic, tutorial, workflow) = p[4:7]
 
@@ -25,10 +26,18 @@ for crate_path in crates:
     code = response.status_code
     if code != 200:
         print(f"Error {code} uploading {crate_path}")
-        print(response.text)
-        continue
+        # sys.stdout.write('!')
+        return response.text
+    # sys.stdout.write('.')
 
     data = response.json()
     wf_id = data["data"]["id"]
-    print(f"Uploaded {crate_path} as workflow {wf_id}")
-    # time.sleep(1)
+    return f"Uploaded {crate_path} as workflow {wf_id}"
+
+
+with multiprocessing.Pool(8) as p:
+    results = p.map(doUpload, crates)
+
+print()
+for result in results:
+    print(result)
