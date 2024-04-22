@@ -346,11 +346,6 @@ end
 Jekyll::Hooks.register :site, :post_write do |site|
   # No need to run this except in prod.
   if Jekyll.env == 'production'
-    # Import on-demand
-    require 'securerandom'
-    require 'zip'
-
-    dir = File.join(site.dest, 'api', 'workflows')
 
     # Public tool listing: reorganised
     if site.data['public-server-tools'] && site.data['public-server-tools']['tools']
@@ -404,6 +399,11 @@ Jekyll::Hooks.register :site, :post_write do |site|
       end
     end
 
+    # Import on-demand
+    require 'securerandom'
+    require 'zip'
+
+    dir = File.join(site.dest, 'api', 'workflows')
 
     # ro-crate-metadata.json
     TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
@@ -431,6 +431,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
         path = File.join(wfdir, 'ro-crate-metadata.json')
         Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
 
+        # Replace last / with # to make a valid URL
+        wfurlid = site.config['url'] + site.config['baseurl'] + '/' + workflow['path'].gsub(%r{/workflows/}, '/workflows#')
+
         uuids = workflow['creators'].map do |c|
           if c.key?('identifier') && !c['identifier'].empty?
             "https://orcid.org/#{c['identifier']}"
@@ -449,31 +452,25 @@ Jekyll::Hooks.register :site, :post_write do |site|
         license = workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0'
 
         crate = {
-          '@context' => 'https://w3id.org/ro/crate/1.1/context',
+          '@context' => ['https://w3id.org/ro/crate/1.1/context'],
           '@graph' => [
-            # {
-            #   '@id': './',
-            #   '@type': 'Dataset',
-            #   datePublished: workflow['modified'],
-            # },
             {
               '@id': 'ro-crate-metadata.json',
               '@type': 'CreativeWork',
               about: {
-                '@id': './'
+                '@id': wfurlid,
               },
-              conformsTo: [
-                {
-                  '@id': 'https://w3id.org/ro/crate/1.1'
-                },
-                {
-                  '@id': 'https://about.workflowhub.eu/Workflow-RO-Crate/'
-                }
-              ]
+              conformsTo: {
+                '@id': 'https://w3id.org/ro/crate/1.1'
+              },
             },
             {
-              '@id': './',
+              '@id': wfurlid,
               '@type': 'Dataset',
+              name: workflow['name'],
+              description: 'Galaxy workflow',
+              version: Gtn::ModificationTimes.obtain_modification_count(workflow['path']).to_s,
+              license: license,
               datePublished: workflow['modified'].strftime('%Y-%m-%dT%H:%M:%S.%L%:z'),
               # hasPart: [
               #   {
@@ -482,7 +479,10 @@ Jekyll::Hooks.register :site, :post_write do |site|
               # ],
               mainEntity: {
                 '@id': "#{wfname}.ga"
-              }
+              },
+              hasPart: [{
+                '@id': "#{wfname}.ga"
+              }]
             },
             {
               '@id': "#{wfname}.ga",
@@ -492,19 +492,10 @@ Jekyll::Hooks.register :site, :post_write do |site|
                 ComputationalWorkflow
               ],
               author: author_uuids,
-              license: {
-                '@id': license,
-              },
               name: workflow['name'],
-              version: Gtn::ModificationTimes.obtain_modification_count(workflow['path']),
               programmingLanguage: {
                 '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy'
               }
-            },
-            {
-              '@id': license,
-              '@type': 'CreativeWork',
-              name: workflow['license'],
             },
             {
               '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy',
