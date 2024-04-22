@@ -403,7 +403,6 @@ Jekyll::Hooks.register :site, :post_write do |site|
     # ro-crate-metadata.json
     TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
       material['workflows'].each do |workflow|
-        wfid = workflow['wfid']
         wfname = workflow['wfname']
         # {"workflow"=>"galaxy-workflow-mouse_novel_peptide_analysis.ga",
         # "tests"=>false,
@@ -427,7 +426,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
         Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
 
         # Replace last / with # to make a valid URL
-        wfurlid = site.config['url'] + site.config['baseurl'] + '/' + workflow['path'].gsub(%r{/workflows/}, '/workflows#')
+        wfurlid = site.config['url'] + site.config['baseurl'] + '/' + workflow['path'].gsub(%r{/workflows/},
+                                                                                            '/workflows#')
 
         uuids = workflow['creators'].map do |c|
           if c.key?('identifier') && !c['identifier'].empty?
