@@ -18,9 +18,13 @@ jobs:
           fetch-depth: 200
 
       # BEGIN Dependencies
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
+          ruby-version: "3.1"
       - uses: actions/cache@v2
         with:
           path: |
@@ -44,6 +48,6 @@ jobs:
 
       - name: Upload workflows
         run: |
-          find _site/training-material/api/workflows/ -name 'rocrate.zip' | xargs -P 1 -I {} curl -L -X POST -H "Authorization: Token $DEV_WFH_TOKEN" -F 'workflow[project_ids][]=63' -F 'ro_crate=@{}' https://dev.workflowhub.eu/workflows/submit
+          python bin/wfh-upload.py
         env:
           DEV_WFH_TOKEN: ${{ secrets.DEV_WFH_TOKEN }}
