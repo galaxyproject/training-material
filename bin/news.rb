@@ -170,7 +170,6 @@ def build_news(data, filter: nil, updates: true, only_news: false)
     return [output, newsworthy]
   end
 
-
   o = format_tutorials(
     data[:added][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
     data[:modified][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },

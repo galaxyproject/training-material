@@ -346,7 +346,7 @@ module Jekyll
             'hands_on_url' => m['link'],
           }
         elsif m.key?('type') && m['type'] == 'custom'
-         {
+          {
             'layout' => 'custom',
             'name' => m['name'],
             'title' => m['name'],
@@ -555,7 +555,7 @@ module Jekyll
     end
 
     def format_location(location)
-      url = "https://www.openstreetmap.org/search?query="
+      url = 'https://www.openstreetmap.org/search?query='
       # location:
       #   name: Bioinf Dept
       #   address: 42 E Main St.
@@ -569,7 +569,7 @@ module Jekyll
         location.fetch('city', nil),
         location.fetch('region', nil),
         location.fetch('country', nil),
-        location.fetch('postcode', nil),
+        location.fetch('postcode', nil)
       ].compact
 
       if loc.length > 1
@@ -587,14 +587,14 @@ module Jekyll
         location.fetch('city', nil),
         location.fetch('region', nil),
         location.fetch('country', nil),
-        location.fetch('postcode', nil),
+        location.fetch('postcode', nil)
       ].compact
 
       loc.join(', ')
     end
 
     def format_location_short(location)
-      url = "https://www.openstreetmap.org/search?query="
+      url = 'https://www.openstreetmap.org/search?query='
       # location:
       #   name: Bioinf Dept
       #   address: 42 E Main St.
@@ -608,13 +608,13 @@ module Jekyll
         location.fetch('city', nil),
         location.fetch('region', nil),
         location.fetch('country', nil),
-        location.fetch('postcode', nil),
+        location.fetch('postcode', nil)
       ].compact
 
       loc2 = [
         location.fetch('name', nil),
         location.fetch('city', nil),
-        location.fetch('country', nil),
+        location.fetch('country', nil)
       ].compact
 
       if loc.length > 1
@@ -627,11 +627,11 @@ module Jekyll
 
     def collapse_date_pretty(event)
       s = event['date_start']
-      if event['date_end'].nil?
-        e = s
-      else
-        e = event['date_end']
-      end
+      e = if event['date_end'].nil?
+            s
+          else
+            event['date_end']
+          end
       # want dates like "Mar 22-25, 2024" or "Mar 22-May 1, 2024"
       if s.year == e.year
         if s.month == e.month
@@ -846,11 +846,11 @@ Jekyll::Hooks.register :site, :post_read do |site|
   shortlinks = site.data['shortlinks']
   shortlinks_reversed = shortlinks['id'].invert
 
-  if site.posts.respond_to?(:docs)
-    posts = site.posts.docs
-  else
-    posts = site.posts
-  end
+  posts = if site.posts.respond_to?(:docs)
+            site.posts.docs
+          else
+            site.posts
+          end
 
   posts.each do |post|
     post.data['short_id'] = shortlinks_reversed[post.url]
@@ -861,7 +861,7 @@ Jekyll::Hooks.register :site, :post_read do |site|
   end
 
   Jekyll.logger.info '[GTN] Annotating events'
-  site.pages.select{ |p| p.data['layout'] == 'event'  || p.data['layout'] == 'event-external' }.each do |page|
+  site.pages.select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }.each do |page|
     page.data['not_started'] = page.data['date_start'] > Date.today
     page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
   end

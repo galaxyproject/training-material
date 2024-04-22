@@ -164,30 +164,28 @@ module Jekyll
     end
 
     def generate_funder_jsonld(id, contributor, site)
-      organization = {
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          'http://purl.org/dc/terms/conformsTo': {
-            '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
-            '@type': 'CreativeWork'
-          },
-          name: Gtn::Contributors.fetch_name(site, id),
-          description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
-          url: contributor.fetch('url', "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/"),
-          logo: contributor.fetch('avatar', "https://github.com/#{id}.png"),
-        }
-
-      organization
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        'http://purl.org/dc/terms/conformsTo': {
+          '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
+          '@type': 'CreativeWork'
+        },
+        name: Gtn::Contributors.fetch_name(site, id),
+        description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
+        url: contributor.fetch('url', "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/"),
+        logo: contributor.fetch('avatar', "https://github.com/#{id}.png"),
+      }
     end
 
     def generate_funding_jsonld(id, contributor, site)
       organization = {
-          '@context': 'https://schema.org',
-          '@type': 'Grant',
-          identifier: contributor['funding_id'],
-          url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
-          funder: generate_funder_jsonld(id, contributor, site)
-        }
+        '@context': 'https://schema.org',
+        '@type': 'Grant',
+        identifier: contributor['funding_id'],
+        url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
+        funder: generate_funder_jsonld(id, contributor, site)
+      }
 
       organization['startDate'] = contributor['start_date'] if contributor.key?('start_date')
       organization['endDate'] = contributor['end_date'] if contributor.key?('end_date')
@@ -205,13 +203,13 @@ module Jekyll
     # +String+:: The JSON-LD metadata.
     def to_pfo_jsonld(id, site, json: true)
       contributor = Gtn::Contributors.fetch_contributor(site, id)
-      if Gtn::Contributors.person?(site, id)
-        d = generate_person_jsonld(id, contributor, site)
-      elsif Gtn::Contributors.funder?(site, id)
-        d = generate_funder_jsonld(id, contributor, site)
-      else
-        d = generate_org_jsonld(id, contributor, site)
-      end
+      d = if Gtn::Contributors.person?(site, id)
+            generate_person_jsonld(id, contributor, site)
+          elsif Gtn::Contributors.funder?(site, id)
+            generate_funder_jsonld(id, contributor, site)
+          else
+            generate_org_jsonld(id, contributor, site)
+          end
 
       if json
         JSON.pretty_generate(d)
@@ -284,9 +282,10 @@ module Jekyll
 
       materials = []
       page['program'].each do |section|
-        if !section.key?'tutorials'
+        if !section.key? 'tutorials'
           next
         end
+
         section['tutorials'].each do |tutorial|
           if tutorial.key?('custom')
             next
@@ -311,7 +310,7 @@ module Jekyll
       parts = []
       materials.each do |material|
         mat = generate_material_jsonld(material, site['data'][material['topic_name']], site)
-        if ! mat.nil? && ! mat.empty?
+        if !mat.nil? && !mat.empty?
           parts.push(mat)
         end
       end
@@ -379,19 +378,18 @@ module Jekyll
       begin
         data['dateModified'] = Gtn::ModificationTimes.obtain_time(page.path)
         data['datePublished'] = Gtn::PublicationTimes.obtain_time(page.path)
-      rescue
+      rescue StandardError
         data['dateModified'] = Gtn::ModificationTimes.obtain_time(page['path'])
         data['datePublished'] = Gtn::PublicationTimes.obtain_time(page['path'])
       end
 
       if page['cover']
-        if page['cover'] =~ /^http/
-          data['image'] = [page['cover']]
-        else
-          data['image'] = ["#{site['url']}#{site['baseurl']}#{page['cover']}"]
-        end
+        data['image'] = if page['cover'] =~ /^http/
+                          [page['cover']]
+                        else
+                          ["#{site['url']}#{site['baseurl']}#{page['cover']}"]
+                        end
       end
-
 
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
@@ -408,8 +406,8 @@ module Jekyll
         data['isAccessibleForFree'] = false
         offer = {
           '@type': 'Offer',
-          price: page['cost'].split(' ')[0],
-          priceCurrency: page['cost'].split(' ')[1],
+          price: page['cost'].split[0],
+          priceCurrency: page['cost'].split[1],
           isAccessibleForFree: false,
           category: 'Paid',
           # TODO: this can be more advanced but we need to collect start/end times, and timezone.
@@ -618,13 +616,13 @@ module Jekyll
       }
 
       if material.key?('pub_date')
-          data['dateModified'] = material['mod_date']
-          data['datePublished'] = material['pub_date']
+        data['dateModified'] = material['mod_date']
+        data['datePublished'] = material['pub_date']
       else
         begin
           data['dateModified'] = Gtn::ModificationTimes.obtain_time(material.path)
           data['datePublished'] = Gtn::PublicationTimes.obtain_time(material.path)
-        rescue
+        rescue StandardError
           data['dateModified'] = Gtn::ModificationTimes.obtain_time(material['path'])
           data['datePublished'] = Gtn::PublicationTimes.obtain_time(material['path'])
         end

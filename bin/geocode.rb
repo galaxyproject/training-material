@@ -18,20 +18,20 @@ def request(url)
 end
 
 # loop across events
-events = Dir.glob("events/*.md")
+events = Dir.glob('events/*.md')
 events.each do |event|
   # Load as yaml
   begin
     event_data = YAML.load_file(event, permitted_classes: [Date])
-  rescue
+  rescue StandardError
     event_data = YAML.load_file(event)
   end
   # Check if it is already geocoded
-  if ! event_data.key?('location')
+  if !event_data.key?('location')
     next
   end
 
-  if ! event_data['location'].key?('geo')
+  if !event_data['location'].key?('geo')
     # Geocode
     loc = {
       'street' => event_data['location'].fetch('address', nil),
@@ -53,13 +53,14 @@ events.each do |event|
     data = JSON.parse(request(url).body)
 
     # Open the file, replace ^location:$ with the geo text appended
-    if data.length > 0
+    if data.length.positive?
       event_data['location']['geo'] = {
         'lat' => data[0]['lat'],
         'lon' => data[0]['lon'],
       }
       contents = File.read(event)
-      contents = contents.gsub(/^location:$/, "location:\n  geo:\n    lat: #{data[0]['lat']}\n    lon: #{data[0]['lon']}")
+      contents = contents.gsub(/^location:$/,
+                               "location:\n  geo:\n    lat: #{data[0]['lat']}\n    lon: #{data[0]['lon']}")
       File.open(event, 'w') { |file| file.puts contents }
     end
   end

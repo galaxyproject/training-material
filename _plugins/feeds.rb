@@ -6,11 +6,11 @@ require './_plugins/gtn'
 # TODO: move into a lib somewhere.
 def collapse_date_pretty(event)
   s = event['date_start']
-  if event['date_end'].nil?
-    e = s
-  else
-    e = event['date_end']
-  end
+  e = if event['date_end'].nil?
+        s
+      else
+        event['date_end']
+      end
   # want dates like "Mar 22-25, 2024" or "Mar 22-May 1, 2024"
   if s.year == e.year
     if s.month == e.month
@@ -120,18 +120,18 @@ end
 def generate_event_feeds(site)
   events = site.pages.select { |x| x['layout'] == 'event' || x['layout'] == 'event-external' }
   feed_path = File.join(site.dest, 'events', 'feed.xml')
-  Jekyll.logger.info "[GTN/Feeds] Generating event feed"
+  Jekyll.logger.info '[GTN/Feeds] Generating event feed'
 
   # Pre-filering.
   updated = events.map { |x| Gtn::PublicationTimes.obtain_time(x.path) }.max
 
   events = events
-    .reject { |x| x.data.fetch('draft', '').to_s == 'true' }
-    .reject { |x| x.data['event_over'] == true } # Remove past events, prunes our feed nicely.
-    .sort_by { |page| Gtn::PublicationTimes.obtain_time(page.path) }
-    .reverse
+           .reject { |x| x.data.fetch('draft', '').to_s == 'true' }
+           .reject { |x| x.data['event_over'] == true } # Remove past events, prunes our feed nicely.
+           .sort_by { |page| Gtn::PublicationTimes.obtain_time(page.path) }
+           .reverse
 
-  if ! events.empty?
+  if !events.empty?
     Jekyll.logger.debug "Found #{events.length} events"
   end
 
@@ -143,8 +143,8 @@ def generate_event_feeds(site)
       xml.link(href: "#{site.config['url']}#{site.baseurl}/events/feed.xml", rel: 'self')
       xml.updated(updated.to_datetime.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/events/feed.xml")
-      xml.title("Galaxy Training Network - Events")
-      xml.subtitle("Events in the Inter-Galactic Network")
+      xml.title('Galaxy Training Network - Events')
+      xml.subtitle('Events in the Inter-Galactic Network')
 
       events.each do |page|
         xml.entry do
