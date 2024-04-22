@@ -426,7 +426,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
         # "test_results"=>nil,
         # "modified"=>2023-06-07 12:09:36.12 +0200}
 
-        wfdir = File.join(dir, wfid, wfname)
+        wfdir = File.join(dir, workflow['topic_id'], workflow['tutorial_id'], wfname)
         FileUtils.mkdir_p(wfdir)
         path = File.join(wfdir, 'ro-crate-metadata.json')
         Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
