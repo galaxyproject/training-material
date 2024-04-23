@@ -247,7 +247,7 @@ Now, we want to filter for confident peptides from PepQuery2 and prepare them fo
 
 ##  **Querying verified peptides**
 
-We will use the Query Tabular tool { % cite Johnson2019 % } to search the PepQuery-verified peptides against the concatenated dataset that contains peptides and proteins from SearchGUI/Peptide and MaxQuant. This step ensures all the PepQuery-verified peptides are assigned to their protein/protein groups.
+We will use the Query Tabular tool {% cite Johnson2019 %} to search the PepQuery-verified peptides against the concatenated dataset that contains peptides and proteins from SearchGUI/Peptide and MaxQuant. This step ensures all the PepQuery-verified peptides are assigned to their protein/protein groups.
 
 > <hands-on-title> Querying verified peptides </hands-on-title>
 >
