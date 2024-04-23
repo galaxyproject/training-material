@@ -455,6 +455,69 @@ module TopicFilter
     "flowchart TD\n" + statements.map { |q| "  #{q}" }.join("\n")
   end
 
+  def self.graph_dot(wf)
+    # We're converting it to Mermaid
+    # flowchart TD
+    #     A[Start] --> B{Is it?}
+    #     B -- Yes --> C[OK]
+    #     C --> D[Rethink]
+    #     D --> B
+    #     B -- No ----> E[End]
+    # digraph test {
+    #
+    #   0[shape=box,style=filled,color=lightblue,label="ℹ️ Input Dataset\nBionano_dataset"]
+    #   1[shape=box,style=filled,color=lightblue,label="ℹ️ Input Dataset\nHi-C_dataset_R"]
+    #   3 -> 6 [label="output"]
+    #   7[shape=box,label="Busco"]
+    #   4 -> 7 [label="out_fa"]
+    #   8[shape=box,label="Busco"]
+    #   5 -> 8 [label="out_fa"]
+
+    statements = []
+    wf['steps'].each_key do |id|
+      step = wf['steps'][id]
+      chosen_label = mermaid_safe_label(step['label'] || step['name'])
+
+      case step['type']
+      when 'data_collection_input'
+        statements.append "#{id}[shape=box,style=filled,color=lightblue,label=\"ℹ️ Input Collection\\n#{chosen_label}\"]"
+      when 'data_input'
+        statements.append "#{id}[shape=box,style=filled,color=lightblue,label=\"ℹ️ Input Dataset\\n#{chosen_label}\"]"
+      when 'parameter_input'
+        statements.append "#{id}[shape=box,style=filled,color=lightgreen,label=\"ℹ️ Input Parameter\\n#{chosen_label}\"]"
+      when 'subworkflow'
+        statements.append "#{id}[shape=box,style=filled,color=lightcoral,label=\"🛠️ Subworkflow\\n#{chosen_label}\"]"
+      else
+        statements.append "#{id}[shape=box,label=\"#{chosen_label}\"]"
+      end
+
+      step = wf['steps'][id]
+      step['input_connections'].each do |_, v|
+        # if v is a list
+        if v.is_a?(Array)
+          v.each do |v2|
+            statements.append "#{v2['id']} -> #{id} [label=\"#{mermaid_safe_label(v2['output_name'])}\"]"
+          end
+        else
+          statements.append "#{v['id']} -> #{id} [label=\"#{mermaid_safe_label(v['output_name'])}\"]"
+        end
+      end
+
+      (step['workflow_outputs'] || [])
+        .reject { |wo| wo['label'].nil? }
+        .map do |wo|
+          wo['uuid'] = SecureRandom.uuid.to_s if wo['uuid'].nil?
+          wo
+        end
+        .each do |wo|
+          statements.append "k#{wo['uuid'].gsub('-', '')}[style=filled,color=lightseagreen,label=\"Output\\n#{wo['label']}\"]"
+        statements.append "#{id} -> k#{wo['uuid'].gsub('-', '')}"
+      end
+    end
+
+    "digraph main {\n" + statements.map { |q| "  #{q}" }.join("\n") + "\n}"
+  end
+
   def self.resolve_material(site, material)
     # We've already
     # looked in every /topic/*/tutorials/* folder, and turn these disparate
@@ -559,7 +622,7 @@ module TopicFilter
       workflow_names = workflows.map { |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map do |wf|
         wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
-        wfname = wf.gsub(/.ga/, '').downcase
+        wfname = wf.gsub(/.ga/, '').downcase.gsub(/[^a-z0-9]/, '-')
         trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
         wf_path = "#{folder}/workflows/#{wf}"
         wf_json = JSON.parse(File.read(wf_path))
@@ -594,6 +657,7 @@ module TopicFilter
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
           'mermaid' => mermaid(wf_json),
+          'graph_dot' => graph_dot(wf_json),
         }
       end
     end

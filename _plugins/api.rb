@@ -406,8 +406,11 @@ Jekyll::Hooks.register :site, :post_write do |site|
     dir = File.join(site.dest, 'api', 'workflows')
 
     # ro-crate-metadata.json
+    crate_start = Time.now
+    count = 0
     TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
       material['workflows'].each do |workflow|
+        count += 1
         wfname = workflow['wfname']
         # {"workflow"=>"galaxy-workflow-mouse_novel_peptide_analysis.ga",
         # "tests"=>false,
@@ -429,6 +432,11 @@ Jekyll::Hooks.register :site, :post_write do |site|
         FileUtils.mkdir_p(wfdir)
         path = File.join(wfdir, 'ro-crate-metadata.json')
         Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
+        # We have the `dot` graph code in a variable, we need to pass it to `dot -T png ` on the stdin
+        dot_path = File.join(wfdir, "graph.dot")
+        File.write(dot_path, workflow['graph_dot'])
+        Jekyll.logger.debug "[GTN/API/WFRun] dot -T png #{dot_path} > graph.png"
+        `dot -T png '#{dot_path}' > '#{File.join(wfdir, 'graph.png')}'`
 
         # Replace last / with # to make a valid URL
         wfurlid = site.config['url'] + site.config['baseurl'] + '/' + workflow['path'].gsub(%r{/workflows/},
@@ -480,9 +488,14 @@ Jekyll::Hooks.register :site, :post_write do |site|
               mainEntity: {
                 '@id': "#{wfname}.ga"
               },
-              hasPart: [{
+              hasPart: [
+                {
                 '@id': "#{wfname}.ga"
-              }]
+                },
+                {
+                '@id': "graph.png"
+                },
+              ]
             },
             {
               '@id': "#{wfname}.ga",
@@ -495,7 +508,19 @@ Jekyll::Hooks.register :site, :post_write do |site|
               name: workflow['name'],
               programmingLanguage: {
                 '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy'
+              },
+              image: {
+                '@id': 'graph.png'
               }
+            },
+            {
+              '@id': 'graph.png',
+              '@type': [
+                'File',
+                'ImageObject',
+                'WorkflowSketch'
+              ],
+              contentSize: File.size(File.join(wfdir, 'graph.png')),
             },
             {
               '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy',
@@ -519,9 +544,12 @@ Jekyll::Hooks.register :site, :post_write do |site|
           # - The name of the file as it will appear in the archive
           # - The original file, including the path to find it
           zipfile.add('ro-crate-metadata.json', path)
+          zipfile.add('graph.png', File.join(wfdir, 'graph.png'))
           zipfile.add("#{wfname}.ga", workflow['path'])
         end
       end
     end
+
+    Jekyll.logger.debug "[GTN/API/WFRun] RO-Crate Metadata written in #{Time.now - crate_start} seconds for #{count} workflows"
   end
 end
