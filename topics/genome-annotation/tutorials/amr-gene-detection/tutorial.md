@@ -44,6 +44,7 @@ contributions:
   funding:
   - avans-atgm
   - abromics
+  - elixir
 
 follow_up_training:
 - type: "internal"

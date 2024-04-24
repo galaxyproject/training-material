@@ -19,9 +19,10 @@ key_points:
 - There are powerful interactive visualization tools available in Galaxy that can combine the real images with associated data
 - Tissue Microarray data can be analyzed using workflows that invoke MTI tools in batch
 - Segmentation quality can vary significantly depending on features of the input image, tool used, and parameters
-contributors:
-- CameronFRWatson
-- alliecreason
+contributions:
+  authorship:
+    - CameronFRWatson
+    - alliecreason
 
 ---
 

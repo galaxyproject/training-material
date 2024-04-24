@@ -13,9 +13,10 @@ key_points:
 - Genoest' OGS Tools makes it easy to validate and release a build of your genome and its annotations.
 contributions:
   authorship:
-  - abretaud
+    - abretaud
   funding:
-  - gallantries
+    - gallantries
+    - elixir
 
 tags:
 - gmod

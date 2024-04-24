@@ -13,10 +13,15 @@ objectives:
 key_points:
 - "Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology."
 - "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
-contributors:
-  - kkamieniecka
-  - khaled196
-  - poterlowicz-lab
+contributions:
+  authorship:
+    - kkamieniecka
+    - khaled196
+    - poterlowicz-lab
+  editing:
+  testing:
+  funding:
+    - elixir
 ---
 
 This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance {% cite Hugo2015 %}.

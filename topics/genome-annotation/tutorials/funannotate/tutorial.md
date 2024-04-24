@@ -36,6 +36,7 @@ contributions:
   funding:
     - gallantries
     - eurosciencegateway
+    - elixir
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling
