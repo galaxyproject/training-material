@@ -17,8 +17,6 @@ contributions:
   funding:
     - uni-freiburg
     - elixir-europe
-contributors:
-
 ---
 
 # Using the Integrative Genomics Viewer
