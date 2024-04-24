@@ -17,7 +17,7 @@ contributions:
     - bgruening
   funding:
     - eurosciencegateway
-    - elixir
+    - elixir-europe
 subtopic: prokaryote
 ---
 

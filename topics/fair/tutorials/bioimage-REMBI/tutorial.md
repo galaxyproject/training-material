@@ -34,7 +34,7 @@ contributions:
     - poterlowicz-lab
   funding:
     - elixir-uk-dash
-    - elixir
+    - elixir-europe
 subtopic: fair-data
 
 requirements:

@@ -36,6 +36,8 @@ contributions:
   funding:
     - gallantries
     - eurosciencegateway
+    - elixir-europe
+    - ifb
 
 requirements:
   - type: "internal"

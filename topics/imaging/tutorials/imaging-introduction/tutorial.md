@@ -30,7 +30,7 @@ contributions:
     - shiltemann
     - kostrykin
   funding:
-    - elixir
+    - elixir-europe
 tags:
   - HeLa
 

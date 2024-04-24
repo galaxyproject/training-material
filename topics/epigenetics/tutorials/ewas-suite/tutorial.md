@@ -21,7 +21,7 @@ contributions:
   editing:
   testing:
   funding:
-    - elixir
+    - elixir-europe
 ---
 
 This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance {% cite Hugo2015 %}.

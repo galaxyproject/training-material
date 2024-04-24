@@ -30,10 +30,13 @@ translations:
   - es
 contributions:
   authorship:
-  - annasyme
-  - nsoranzo
+    - annasyme
+    - nsoranzo
   editing:
-  - bebatut
+    - elixir-europe
+  funding:
+    - elixir
+    - uni-freiburg
 
 ---
 

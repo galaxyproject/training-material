@@ -16,7 +16,8 @@ contributions:
     - abretaud
   funding:
     - gallantries
-    - elixir
+    - elixir-europe
+    - ifb
 
 tags:
 - gmod

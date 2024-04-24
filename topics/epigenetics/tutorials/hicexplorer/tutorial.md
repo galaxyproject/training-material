@@ -21,8 +21,9 @@ contributions:
   editing:
   testing:
   funding:
-    - elixir
+    - elixir-europe
     - deNBI
+    - uni-freiburg
     - sfb992
 ---
 

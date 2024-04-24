@@ -39,7 +39,7 @@ contributions:
     - thomaswollmann
     - kostrykin
   funding:
-    - elixir
+    - elixir-europe
 tags:
   - HeLa
 

@@ -19,10 +19,14 @@ key_points:
 - MSI data can be filtered for m/z ranges of interest to speed up analysis time.
 - Distribution images for many analytes can be automatically generated with the MSI m/z image tool.
 - The MSI m/z image tools allow overlaying the distribution images for several analytes.
-contributors:
-- foellmelanie
-- MarenStillger
-
+contributions:
+  authorship:
+    - foellmelanie
+    - MarenStillger
+  editing:
+  funding:
+    - elixir-europe
+    - uni-freiburg
 ---
 
 

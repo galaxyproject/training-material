@@ -22,8 +22,11 @@ requirements :
     topic_name: metabolomics
     tutorials: 
       - lcms
-contributors : 
+contributions:
+  authorship:
     - jsaintvanne
+  editing:
+  funding:
 
 --- 
 

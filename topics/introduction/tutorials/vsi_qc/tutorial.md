@@ -13,8 +13,10 @@ time_estimation: 30M
 key_points:
   - 'Galaxy is an excellent tool for quickly QCing your data'
 subtopic: core
-contributors:
-  - nekrut
+contributions:
+  authorship:
+    - nekrut
+  funding:
 draft: true
 
 ---

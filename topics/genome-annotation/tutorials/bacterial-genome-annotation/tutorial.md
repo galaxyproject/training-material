@@ -36,7 +36,8 @@ contributions:
   - bebatut
   funding:
   - abromics
-  - elixir
+  - elixir-europe
+  - ifb
 follow_up_training:
 - type: "internal"
   topic_name: genome-annotation

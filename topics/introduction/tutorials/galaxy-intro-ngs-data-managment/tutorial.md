@@ -19,11 +19,12 @@ key_points:
   - "One can retrieve NGS data from Sequence Read Archive"
   - "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
 subtopic: next-steps
-contributors:
-  - nekrut
-  - mvdbeek
-  - tnabtaf
-  - blankenberg
+contributions:
+  authorship:
+    - nekrut
+    - mvdbeek
+    - tnabtaf
+    - blankenberg
 ---
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.

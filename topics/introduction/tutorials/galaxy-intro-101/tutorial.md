@@ -21,14 +21,21 @@ key_points:
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
 subtopic: core
+contributions:
+  authorship:
+    - shiltemann
+    - nsoranzo
+    - blankclemens
+    - nekrut
+    - bgruening
+    - pajanne
+    - hexylena
+  funding:
+    - elixir-europe
+    - uni-freiburg
+    - deNBI
 contributors:
-  - shiltemann
-  - nsoranzo
-  - blankclemens
-  - nekrut
-  - bgruening
-  - pajanne
-  - hexylena
+
 ---
 
 This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.

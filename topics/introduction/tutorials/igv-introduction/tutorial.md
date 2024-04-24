@@ -9,10 +9,16 @@ objectives:
 time_estimation: "2H"
 key_points:
 subtopic: next-steps
+contributions:
+  authorship:
+    - nekrut
+    - joachimwolff
+    - pajanne
+  funding:
+    - uni-freiburg
+    - elixir-europe
 contributors:
-  - nekrut
-  - joachimwolff
-  - pajanne
+
 ---
 
 # Using the Integrative Genomics Viewer

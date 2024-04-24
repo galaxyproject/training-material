@@ -16,10 +16,13 @@ key_points:
 - Data processing is a key step in untargeted Metabolomics analyses. The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to the decision of no action on data. In particular, blank filtering, pool variation study and signal drift correction are common aspects to consider when dealing with LC-MS.
 - Although some main steps are standard, various ways to combine tools exist. Remember that depending on your context (type of samples, protocol specificities...) specific filters/normalisations may be needed, independently of standards ones.
 - A variety of tools is available in Galaxy, but do not forget that you need appropriate knowledge to decide what to use depending on your data.
-contributors:
-- melpetera
-- workflow4metabolomics
-
+contributions:
+  authorship:
+    - melpetera
+    - workflow4metabolomics
+  editing:
+  funding:
+    - elixir-europe
 ---
 
 

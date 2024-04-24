@@ -22,15 +22,22 @@ key_points:
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
 subtopic: core
+contributions:
+  authorship:
+    - pajanne
+    - blankclemens
+    - bebatut
+    - bgruening
+    - nsoranzo
+    - dyusuf
+    - sarah-peter
+    - hexylena
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
 contributors:
-  - pajanne
-  - blankclemens
-  - bebatut
-  - bgruening
-  - nsoranzo
-  - dyusuf
-  - sarah-peter
-  - hexylena
+
 ---
 
 We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
