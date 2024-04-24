@@ -473,22 +473,25 @@ module TopicFilter
     #   8[shape=box,label="Busco"]
     #   5 -> 8 [label="out_fa"]
 
-    statements = []
+    statements = [
+      'node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];',
+      'edge [fontname="Atkinson Hyperlegible"];',
+    ]
     wf['steps'].each_key do |id|
       step = wf['steps'][id]
       chosen_label = mermaid_safe_label(step['label'] || step['name'])
 
       case step['type']
       when 'data_collection_input'
-        statements.append "#{id}[shape=box,style=filled,color=lightblue,label=\"ℹ️ Input Collection\\n#{chosen_label}\"]"
+        statements.append "#{id}[color=lightblue,label=\"ℹ️ Input Collection\\n#{chosen_label}\"]"
       when 'data_input'
-        statements.append "#{id}[shape=box,style=filled,color=lightblue,label=\"ℹ️ Input Dataset\\n#{chosen_label}\"]"
+        statements.append "#{id}[color=lightblue,label=\"ℹ️ Input Dataset\\n#{chosen_label}\"]"
       when 'parameter_input'
-        statements.append "#{id}[shape=box,style=filled,color=lightgreen,label=\"ℹ️ Input Parameter\\n#{chosen_label}\"]"
+        statements.append "#{id}[color=lightgreen,label=\"ℹ️ Input Parameter\\n#{chosen_label}\"]"
       when 'subworkflow'
-        statements.append "#{id}[shape=box,style=filled,color=lightcoral,label=\"🛠️ Subworkflow\\n#{chosen_label}\"]"
+        statements.append "#{id}[color=lightcoral,label=\"🛠️ Subworkflow\\n#{chosen_label}\"]"
       else
-        statements.append "#{id}[shape=box,label=\"#{chosen_label}\"]"
+        statements.append "#{id}[label=\"#{chosen_label}\"]"
       end
 
       step = wf['steps'][id]
@@ -510,10 +513,13 @@ module TopicFilter
           wo
         end
         .each do |wo|
-          statements.append "k#{wo['uuid'].gsub('-', '')}[style=filled,color=lightseagreen,label=\"Output\\n#{wo['label']}\"]"
-        statements.append "#{id} -> k#{wo['uuid'].gsub('-', '')}"
-      end
+          statements.append "k#{wo['uuid'].gsub('-', '')}[color=lightseagreen,label=\"Output\\n#{wo['label']}\"]"
+          statements.append "#{id} -> k#{wo['uuid'].gsub('-', '')}"
+          statements.append "k#{wo['uuid'].gsub('-', '')} -> logo"
+        end
     end
+
+    statements.append 'logo[image="assets/branding/gtn-workflows.png", label="", color="white"];'
 
     "digraph main {\n" + statements.map { |q| "  #{q}" }.join("\n") + "\n}"
   end
