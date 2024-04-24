@@ -196,8 +196,8 @@
           "name": "mrsa AMR gene detection",
           "title": "mrsa AMR gene detection",
           "test_results": null,
-          "modified": "2024-04-24 00:04:58 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"staramr\"];\n  0 -->|output| 3;\n  e668cfcd-f987-477b-8843-9b4287441071[\"Output\\nstararm_detailed_summary\"];\n  3 --> e668cfcd-f987-477b-8843-9b4287441071;\n  style e668cfcd-f987-477b-8843-9b4287441071 stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  c501443c-d58f-4db0-8ba4-c09e98a3b8ad[\"Output\\nbakta_annotation_summary\"];\n  4 --> c501443c-d58f-4db0-8ba4-c09e98a3b8ad;\n  style c501443c-d58f-4db0-8ba4-c09e98a3b8ad stroke:#2c3143,stroke-width:4px;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  74c24bcf-a716-48b3-8042-210fa9f7ab11[\"Output\\nbowtie_mapping_stats\"];\n  5 --> 74c24bcf-a716-48b3-8042-210fa9f7ab11;\n  style 74c24bcf-a716-48b3-8042-210fa9f7ab11 stroke:#2c3143,stroke-width:4px;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n  77a62247-6c84-4746-90e8-8c8aa1696901[\"Output\\njbrowse_output\"];\n  8 --> 77a62247-6c84-4746-90e8-8c8aa1696901;\n  style 77a62247-6c84-4746-90e8-8c8aa1696901 stroke:#2c3143,stroke-width:4px;"
+          "modified": "2024-04-24 07:36:30 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"staramr\"];\n  0 -->|output| 3;\n  38ed3889-439d-4844-b9e1-6c043dd1d698[\"Output\\nstararm_detailed_summary\"];\n  3 --> 38ed3889-439d-4844-b9e1-6c043dd1d698;\n  style 38ed3889-439d-4844-b9e1-6c043dd1d698 stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  2269ad2e-c37e-4159-9d97-89e4b28ecf6d[\"Output\\nbakta_annotation_summary\"];\n  4 --> 2269ad2e-c37e-4159-9d97-89e4b28ecf6d;\n  style 2269ad2e-c37e-4159-9d97-89e4b28ecf6d stroke:#2c3143,stroke-width:4px;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  5e756796-0224-4319-9fc6-c295e8076477[\"Output\\nbowtie_mapping_stats\"];\n  5 --> 5e756796-0224-4319-9fc6-c295e8076477;\n  style 5e756796-0224-4319-9fc6-c295e8076477 stroke:#2c3143,stroke-width:4px;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n  fd5de83f-c0ad-4a9d-b0a6-7ea57522f8cb[\"Output\\njbrowse_output\"];\n  8 --> fd5de83f-c0ad-4a9d-b0a6-7ea57522f8cb;\n  style fd5de83f-c0ad-4a9d-b0a6-7ea57522f8cb stroke:#2c3143,stroke-width:4px;"
         }
       ],
       "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.json",
@@ -528,7 +528,7 @@
           "name": "From BAMs to drug resistance prediction with TB-profiler",
           "title": "From BAMs to drug resistance prediction with TB-profiler",
           "test_results": null,
-          "modified": "2024-04-24 00:04:58 +0000",
+          "modified": "2024-04-24 07:36:30 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nMTB single-end BAMs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nMTB paired-end BAMs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Merge collections\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Samtools view BAM > SAM\"];\n  2 -->|output| 3;\n  aa220027-9d10-4328-b2c2-e4d139d5d5bd[\"Output\\nSamtools view on input dataset(s): filtered alignments\"];\n  3 --> aa220027-9d10-4328-b2c2-e4d139d5d5bd;\n  style aa220027-9d10-4328-b2c2-e4d139d5d5bd stroke:#2c3143,stroke-width:4px;\n  4[\"Sed MTB_anc to Chromosome\"];\n  3 -->|outputsam| 4;\n  5[\"Samtools view SAM > BAM\"];\n  4 -->|output| 5;\n  6[\"TB-profiler\"];\n  5 -->|outputsam| 6;\n  7[\"Get drug resistance profile\"];\n  6 -->|output_txt| 7;\n  8[\"Add Sample Name\"];\n  7 -->|output| 8;\n  9[\"Concatenate DR profiles in a single table\"];\n  8 -->|output| 9;\n  10[\"Cleanup the table\"];\n  9 -->|out_file1| 10;"
         },
         {
@@ -546,7 +546,7 @@
           "name": "From Fastqs to VCFs and BAMs",
           "title": "From Fastqs to VCFs and BAMs",
           "test_results": null,
-          "modified": "2024-04-24 00:04:58 +0000",
+          "modified": "2024-04-24 07:36:30 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nSingle-End FASTQs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nPaired-End FASTQs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nMycobacterium_tuberculosis_ancestral_reference.gbk\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Trimmomatic\"];\n  0 -->|output| 3;\n  4[\"Trimmomatic\"];\n  1 -->|output| 4;\n  5[\"Mapping and variant calling of SINGLE END FASTQs with snippy\"];\n  3 -->|fastq_out| 5;\n  2 -->|output| 5;\n  6[\"Mapping and variant calling of PAIRED END FASTQs with snippy\"];\n  4 -->|fastq_out_paired| 6;\n  2 -->|output| 6;\n  7[\"Merge PE/SE VCFs in a single collection with all samples\"];\n  5 -->|snpvcf| 7;\n  6 -->|snpvcf| 7;\n  8[\"Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler\"];\n  5 -->|snpsbam| 8;\n  6 -->|snpsbam| 8;\n  9[\"TB Variant Filter\"];\n  7 -->|output| 9;"
         },
         {
@@ -564,7 +564,7 @@
           "name": "From VCFs to SNP distance matrix",
           "title": "From VCFs to SNP distance matrix",
           "test_results": null,
-          "modified": "2024-04-24 00:04:58 +0000",
+          "modified": "2024-04-24 07:36:30 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nCollection of VCFs to analyze\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome of the MTBC ancestor\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter TB variants\"];\n  0 -->|output| 2;\n  3[\"Generate the complete genome of each of the samples\"];\n  2 -->|output1| 3;\n  1 -->|output| 3;\n  ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a[\"Output\\n#{input_file}\"];\n  3 --> ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a;\n  style ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a stroke:#2c3143,stroke-width:4px;\n  4[\"Concatenate genomes to build a MSA\"];\n  3 -->|output_file| 4;\n  5[\"Keep only variable positions\"];\n  4 -->|out_file1| 5;\n  6[\"Calculate SNP distances\"];\n  5 -->|output_fasta| 6;"
         }
       ],
@@ -918,7 +918,7 @@
           "name": "Mtb phylogeny",
           "title": "Mtb phylogeny",
           "test_results": null,
-          "modified": "2024-04-24 00:04:58 +0000",
+          "modified": "2024-04-24 07:36:30 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput alignment\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"RStudio\"];\n  2[\"Estimate phylogeny with RAxML\"];\n  0 -->|output| 2;\n  9f8ae577-c583-4a2d-b64d-14c25fb859d9[\"Output\\nBest-scoring ML Tree\"];\n  2 --> 9f8ae577-c583-4a2d-b64d-14c25fb859d9;\n  style 9f8ae577-c583-4a2d-b64d-14c25fb859d9 stroke:#2c3143,stroke-width:4px;\n  bdb8cf2f-b553-4a96-8b55-38b4b499ab88[\"Output\\nInfo\"];\n  2 --> bdb8cf2f-b553-4a96-8b55-38b4b499ab88;\n  style bdb8cf2f-b553-4a96-8b55-38b4b499ab88 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -1117,7 +1117,7 @@
           "name": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "title": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "test_results": null,
-          "modified": "2024-04-24 00:04:56 +0000",
+          "modified": "2024-04-24 07:36:28 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nCandidates\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nMpro-x0195_0_apo-desolv.pdb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nhits.sdf\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Enumerate changes\"];\n  0 -->|output| 3;\n  4[\"Compound conversion\"];\n  1 -->|output| 4;\n  5[\"Create Frankenstein ligand\"];\n  2 -->|output| 5;\n  6[\"Compound conversion\"];\n  3 -->|output| 6;\n  7[\"rDock cavity definition\"];\n  4 -->|outfile| 7;\n  5 -->|outfile| 7;\n  8[\"Split file\"];\n  6 -->|outfile| 8;\n  9[\"rDock docking\"];\n  4 -->|outfile| 9;\n  8 -->|list_output_sdf| 9;\n  7 -->|activesite| 9;\n  10[\"Collapse Collection\"];\n  9 -->|output| 10;\n  11[\"XChem TransFS pose scoring\"];\n  1 -->|output| 11;\n  10 -->|output| 11;\n  12[\"Max SuCOS score\"];\n  11 -->|output| 12;\n  2 -->|output| 12;"
         }
       ],
@@ -1382,7 +1382,7 @@
           "name": "pox-virus-tiled-amplicon-ref-masking",
           "title": "pox-virus-tiled-amplicon-ref-masking",
           "test_results": null,
-          "modified": "2024-04-24 00:05:01 +0000",
+          "modified": "2024-04-24 07:36:32 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPrimer Scheme\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference FASTA\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select pool1 primers\"];\n  0 -->|output| 2;\n  3[\"Select pool2 primers\"];\n  0 -->|output| 3;\n  4[\"Compute sequence length\"];\n  1 -->|output| 4;\n  5[\"Datamash\"];\n  2 -->|out_file1| 5;\n  6[\"Datamash\"];\n  3 -->|out_file1| 6;\n  7[\"Cut\"];\n  4 -->|output| 7;\n  8[\"Compute\"];\n  5 -->|out_file| 8;\n  9[\"Get start position of Pool2\"];\n  6 -->|out_file| 9;\n  10[\"Get end position of sequence\"];\n  7 -->|out_file1| 10;\n  11[\"Get end position of Pool1\"];\n  8 -->|out_file1| 11;\n  12[\"Compose text parameter value\"];\n  9 -->|text_param| 12;\n  13[\"Compose text parameter value\"];\n  11 -->|text_param| 13;\n  10 -->|text_param| 13;\n  14[\"Mask Reference for Pool2\"];\n  1 -->|output| 14;\n  12 -->|out1| 14;\n  af755a5e-2b20-49bc-9d52-34781f937f48[\"Output\\nmasked_ref_pool2\"];\n  14 --> af755a5e-2b20-49bc-9d52-34781f937f48;\n  style af755a5e-2b20-49bc-9d52-34781f937f48 stroke:#2c3143,stroke-width:4px;\n  15[\"Mask Reference for Pool1\"];\n  1 -->|output| 15;\n  13 -->|out1| 15;\n  0c3b5b20-c426-428c-a08b-c835a82477c1[\"Output\\nmasked_ref_pool1\"];\n  15 --> 0c3b5b20-c426-428c-a08b-c835a82477c1;\n  style 0c3b5b20-c426-428c-a08b-c835a82477c1 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -1759,7 +1759,7 @@
           "name": "Simple COVID-19 - PE Variation",
           "title": "Simple COVID-19 - PE Variation",
           "test_results": null,
-          "modified": "2024-04-24 00:05:01 +0000",
+          "modified": "2024-04-24 07:36:32 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNC_045512.2 fasta file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRA Manifest\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  0 -->|output| 4;\n  5[\"MarkDuplicates\"];\n  4 -->|bam_output| 5;\n  6[\"Realign reads\"];\n  5 -->|outFile| 6;\n  0 -->|output| 6;\n  7[\"Samtools stats\"];\n  5 -->|outFile| 7;\n  8[\"Insert indel qualities\"];\n  6 -->|realigned| 8;\n  0 -->|output| 8;\n  2ca7c89b-999f-41dc-8037-e54e25959a7e[\"Output\\nRealigned Alignments with Indel Qualities\"];\n  8 --> 2ca7c89b-999f-41dc-8037-e54e25959a7e;\n  style 2ca7c89b-999f-41dc-8037-e54e25959a7e stroke:#2c3143,stroke-width:4px;\n  9[\"Call variants\"];\n  8 -->|output| 9;\n  0 -->|output| 9;\n  10[\"SnpEff eff:\"];\n  9 -->|variants| 10;\n  11[\"SnpSift Extract Fields\"];\n  10 -->|snpeff_output| 11;\n  06259137-eaa5-404a-923c-70ee5f1d89d4[\"Output\\nSnpSift tabular output\"];\n  11 --> 06259137-eaa5-404a-923c-70ee5f1d89d4;\n  style 06259137-eaa5-404a-923c-70ee5f1d89d4 stroke:#2c3143,stroke-width:4px;\n  12[\"MultiQC\"];\n  3 -->|report_json| 12;\n  7 -->|output| 12;\n  5 -->|metrics_file| 12;\n  10 -->|csvFile| 12;\n  758ffde5-7ddd-482a-88b2-1504f8335488[\"Output\\nMultiQC Report PE\"];\n  12 --> 758ffde5-7ddd-482a-88b2-1504f8335488;\n  style 758ffde5-7ddd-482a-88b2-1504f8335488 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -2460,7 +2460,7 @@
           "name": "M. tuberculosis Variant Analysis tutorial",
           "title": "M. tuberculosis Variant Analysis tutorial",
           "test_results": null,
-          "modified": "2024-04-24 00:05:01 +0000",
+          "modified": "2024-04-24 07:36:33 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nRead 1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nRead 2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nGenbank reference genome\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nGenome annotation GFF3\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nFASTA reference genome\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"FastQC\"];\n  0 -->|output| 5;\n  6[\"FastQC\"];\n  1 -->|output| 6;\n  7[\"Trimmomatic\"];\n  0 -->|output| 7;\n  1 -->|output| 7;\n  8[\"MultiQC\"];\n  6 -->|text_file| 8;\n  5 -->|text_file| 8;\n  8b6d9b61-619b-4509-b8ff-b89a3c37c528[\"Output\\nmtbva_multiqc_webpage\"];\n  8 --> 8b6d9b61-619b-4509-b8ff-b89a3c37c528;\n  style 8b6d9b61-619b-4509-b8ff-b89a3c37c528 stroke:#2c3143,stroke-width:4px;\n  9[\"snippy\"];\n  7 -->|fastq_out_r1_paired| 9;\n  7 -->|fastq_out_r2_paired| 9;\n  2 -->|output| 9;\n  f08867c3-1ef9-4b60-b3bc-50c54355729e[\"Output\\nmtbva_snippy_vcf\"];\n  9 --> f08867c3-1ef9-4b60-b3bc-50c54355729e;\n  style f08867c3-1ef9-4b60-b3bc-50c54355729e stroke:#2c3143,stroke-width:4px;\n  fbd56a0e-978f-4dad-ad65-7e6a04df871a[\"Output\\nmtbva_snippy_variants_table\"];\n  9 --> fbd56a0e-978f-4dad-ad65-7e6a04df871a;\n  style fbd56a0e-978f-4dad-ad65-7e6a04df871a stroke:#2c3143,stroke-width:4px;\n  10[\"Kraken2\"];\n  7 -->|fastq_out_r1_paired| 10;\n  7 -->|fastq_out_r2_paired| 10;\n  bbb7a59f-a352-4780-a77f-5e1127ae1f31[\"Output\\nmtbva_kraken_report\"];\n  10 --> bbb7a59f-a352-4780-a77f-5e1127ae1f31;\n  style bbb7a59f-a352-4780-a77f-5e1127ae1f31 stroke:#2c3143,stroke-width:4px;\n  11[\"TB Variant Filter\"];\n  9 -->|snpvcf| 11;\n  12[\"TB-Profiler Profile\"];\n  9 -->|snpsbam| 12;\n  13[\"JBrowse\"];\n  4 -->|output| 13;\n  9 -->|snpsbam| 13;\n  11 -->|output1| 13;\n  3 -->|output| 13;\n  cebc6e6d-5fc8-4e28-9a0b-f2f5717f0ec1[\"Output\\nmtbva_jbrowse\"];\n  13 --> cebc6e6d-5fc8-4e28-9a0b-f2f5717f0ec1;\n  style cebc6e6d-5fc8-4e28-9a0b-f2f5717f0ec1 stroke:#2c3143,stroke-width:4px;\n  14[\"TB Variant Report\"];\n  9 -->|snpvcf| 14;\n  12 -->|results_json| 14;\n  5b51f4fb-4f8f-4b20-a411-a4d9ac60652b[\"Output\\nmtbva_tb_variant_dr_report_html\"];\n  14 --> 5b51f4fb-4f8f-4b20-a411-a4d9ac60652b;\n  style 5b51f4fb-4f8f-4b20-a411-a4d9ac60652b stroke:#2c3143,stroke-width:4px;\n  98e3dd70-7d44-41b1-ae57-c21aa975dad5[\"Output\\nmtbva_tb_variant_report_html\"];\n  14 --> 98e3dd70-7d44-41b1-ae57-c21aa975dad5;\n  style 98e3dd70-7d44-41b1-ae57-c21aa975dad5 stroke:#2c3143,stroke-width:4px;"
         }
       ],
