@@ -149,7 +149,7 @@ All tutorials and slides must give credit to all contributors. This can be any t
      affiliations: [gallantries]         # optional
    ```
 
-2. Add all contributors to the metadata of the slide deck.ms
+2. Add all contributors to the metadata of the slide deck.
 
    ```yaml
    contributions:
