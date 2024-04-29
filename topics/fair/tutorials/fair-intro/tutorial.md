@@ -35,7 +35,7 @@ subtopic: fair-data
 
 The FAIR (Findable, Accessible, Interoperable, Reusable) principles emphasize machine-actionability. The main objective of FAIR is to increase data reuse by researchers. The core concepts of the FAIR principles are based on good scientific practice and intuitively grounded. 
 
-This tutorial is a short introduction to the FAIR principles and their origin. You can find out more at the **FAIR Pointers module** at the [FAIR FAIR Data Management](https://training.galaxyproject.org/training-material/learning-pathways/fair-training.html) learning path.
+This tutorial is a short introduction to the FAIR principles and their origin. You can find out more at the **FAIR Pointers module** at the [FAIR Data Management](https://training.galaxyproject.org/training-material/learning-pathways/fair-training.html) learning path.
 
 > <agenda-title></agenda-title>
 >
