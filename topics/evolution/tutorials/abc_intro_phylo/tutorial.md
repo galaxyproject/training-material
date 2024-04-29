@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Phylogenetics - Back to basics
-zenodo_link: 'https://zenodo.org/records/10415242'
+zenodo_link: 'https://zenodo.org/records/11089653'
 draft: true
 tags:
   - phylogenetics
@@ -326,9 +326,9 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the file anolis-raw.fst from [Zenodo](https://zenodo.org/records/10415242/files/anolis-raw.fst) or from the shared data library.
+> 2. Import the file anolis-raw.fst from [Zenodo](https://zenodo.org/records/11089653/files/anolis-raw.fst) or from the shared data library.
 >    ```
->    https://zenodo.org/records/10415242/files/anolis-raw.fst
+>    https://zenodo.org/records/11089653/files/anolis-raw.fst
 >    ```
 >    You may need to refresh your history to show the data.
 >    If the paste/fetch link does not work for you, you can download it to your own computer and then upload it using the "Upload" button at the top of the left panel in Galaxy.
