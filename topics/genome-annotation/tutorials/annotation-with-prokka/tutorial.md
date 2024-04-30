@@ -98,7 +98,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 
 > <hands-on-title>Visualize the annotation</hands-on-title>
 >
-> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters
 >    - *"Reference genome to display"*: `Use a genome from history`
 >       - {% icon param-file %} *"Select the reference genome"*: `fna` output of {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %}
 >
