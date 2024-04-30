@@ -16,4 +16,3 @@ contributors: [shiltemann, hexylena]
 * Click **Create collection** to build your collection
 * Click on the checkmark icon at the top of your history again
 
-![Creating a simple collection]({{site.baseurl}}/faqs/galaxy/images/create_simple_list.png "Creating a simple (list) collection in Galaxy's history")
