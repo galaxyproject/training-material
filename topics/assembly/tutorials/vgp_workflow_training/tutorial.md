@@ -178,11 +178,11 @@ Once we have imported the datasets, the next step is to import the workflows nec
 
 # Importing workflows
 
-All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below:
+All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below. Note: these are not necessarily the latest versions of the actual workflows, but versions that have been tested for this tutorial. To see the latest versions, see the [Galaxy Project VGP workflows page](https://galaxyproject.org/projects/vgp/workflows/) and click on the Dockstore links to import workflows.
 
 > <hands-on-title>Importing workflows from GitHub</hands-on-title>
 >
-> Links to the four workflows that will be used in this tutorial are listed in the table. Follow the procedure described below the table to import each of them into your Galaxy account.
+> Links to the four workflows that will be used in this tutorial are listed in the table. Follow the procedure described below the table to import each of them into your Galaxy account. 
 >
 > | Workflow | Link |
 > |---------|---------|
