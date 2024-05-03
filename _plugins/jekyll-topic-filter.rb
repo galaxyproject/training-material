@@ -3,6 +3,7 @@
 require 'json'
 require 'yaml'
 require './_plugins/gtn'
+require 'securerandom'
 
 # The main GTN module to parse tutorials and topics into useful lists of things that can bes shown on topic pages
 module TopicFilter
@@ -1042,6 +1043,19 @@ module Jekyll
 
     def list_draft_materials(site)
       TopicFilter.list_all_materials(site).select { |k, _v| k['draft'] }
+    end
+
+    def to_material(site, page)
+      topic = page['path'].split('/')[1]
+      material = page['path'].split('/')[3]
+      ret = TopicFilter.fetch_tutorial_material(site, topic, material)
+      Jekyll.logger.warn "Could not find material #{topic} #{material}" if ret.nil?
+      ret
+    end
+
+    def get_workflow(site, page, workflow)
+      mat = to_material(site, page)
+      mat['workflows'].select { |w| w['workflow'] == workflow }[0]
     end
   end
 end

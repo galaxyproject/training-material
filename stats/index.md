@@ -7,10 +7,10 @@ description: Some useful statistics about the GTN. We're a growing community!
 ---
 
 <!-- tutorial stats -->
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}
+{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.draft != true" %}
 
 <!-- topic stats -->
-{% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
+{% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.draft != true" %}
 {% assign topics_science = site | list_topics_by_category: "science" | to_vals %}
 {% assign topics_technical = site | list_topics_by_category: "technical" | to_vals %}
 

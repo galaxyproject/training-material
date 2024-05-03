@@ -67,7 +67,11 @@ layout: base
 
     {% unless topic.tag_based %}
     <h2 id="topic-faq">Frequently Asked Questions</h2>
-    Common questions regarding this topic have been collected on a <a href="faqs/">dedicated FAQ page </a>. Common questions related to specific tutorials can be accessed from the tutorials themselves.
+    <p>Common questions regarding this topic have been collected on a <a href="faqs/">dedicated FAQ page </a>. Common questions related to specific tutorials can be accessed from the tutorials themselves.</p>
+
+    {% if jekyll.environment == "production" %}
+    <p><a href="feed.xml">Follow topic updates {% icon rss-feed %}</a> with our RSS Feed</p>
+    {% endif %}
     {% endunless %}
 
     {% if topic.editorial_board %}
