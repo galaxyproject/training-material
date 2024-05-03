@@ -1,0 +1,323 @@
+---
+layout: tutorial_slides
+
+title: "UX and Accessibility"
+subtitle: User Interfaces for Everyone
+contributions:
+  authorship:
+  - ElectronicBlueberry
+  editing:
+  - hexylena
+---
+
+# What is UX? (User Experience Design)
+
+Having good user experience means making your user interface as easy and straight-forward to use by as many people as possible.
+
+--
+
+# What is Accessibility? (Sometimes called a11y)
+
+Having good accessibility means making your user interface as easy and straight-forward to use by as many people as possible.
+
+???
+
+TODO: can we narrate with the transitions nicely?
+
+---
+
+# UX and Accessibility go Hand in Hand
+
+- Benefit ease of use
+- Allows for more methods of interacting with UI
+- Makes the UI easier to understand
+- Makes UIs usable on more devices
+
+**Accessibility is for everyone**
+
+---
+
+# Semantic HTML
+
+- Give meaning to containers
+- Can be used by software such as screen readers
+- May come with useful default behaviour
+- Document the markup
+
+---
+
+# Headings
+
+.pull-right[
+
+## Example Structure
+
+
+* h1 (page title)
+  * h2
+  * h2
+    * h3
+      * h4
+      * h4
+    * h3
+  * h2
+    * h3
+    * h3
+      * h4
+        * h5
+        * h5
+        * h5
+  * h2
+]
+
+.pull-left[
+
+- Come in several Level(h1, h2, h3, …)
+- Levels do  __not__  indicate size
+- Levels give your page structure.This structure can be extracted by screen-readers and other software,to better navigate the site
+- __Detach size styling from the heading level__
+
+Also see `<hgroup>` which can group sub-headings, or alternative headings with a heading
+
+]
+
+---
+
+# Keyboard Navigation
+
+Attempt navigating your components with keyboard
+
+.pull-left[
+“X” buttons can offer too many click targets, which need to be cycled through, when many tags are present.
+
+![](img/UX%20and%20Accessibility0.png)
+]
+
+.pull-right[
+![](img/UX%20and%20Accessibility1.png)
+
+Re-entering tag removes it instead.
+]
+
+---
+
+# Keyboard Navigation
+
+.pull-left[
+Focusing internal elements would slow down selection
+
+![](img/UX%20and%20Accessibility2.png)
+]
+
+.pull-right[
+![](img/UX%20and%20Accessibility3.png)
+
+Internal elements selectable once history item is expanded
+]
+
+---
+
+# Color and Contrast
+
+- Contrast mostly determined by perceived lightness
+- HSL does  __not __ model perceived lightness
+
+
+.pull-left[
+Constant HSL lightness with varying hue. Notice the contrast to the text.
+![](img/UX%20and%20Accessibility4.png)
+]
+
+.pull-right[
+HSL Spectrum with chroma (colorfulness) removed.
+![](img/UX%20and%20Accessibility5.png)
+]
+
+---
+
+# Color and Contrast
+
+.pull-left[
+
+![](img/UX%20and%20Accessibility6.png)
+
+![](img/UX%20and%20Accessibility7.png)
+
+- Generated using HSL
+- No outline
+
+]
+
+
+.pull-right[
+![](img/UX%20and%20Accessibility8.png)
+
+![](img/UX%20and%20Accessibility9.png)
+
+- Generated using HSLuv
+- Partial outline
+
+]
+
+---
+
+# Color and Contrast
+
+.pull-right[
+![](img/UX%20and%20Accessibility10.png)
+[https://www.hsluv.org/](https://www.hsluv.org/)
+]
+
+- Try HSLuv for generating colors
+- Also has a great color picker!
+
+---
+
+# Firefox Accessibility Tools
+
+.pull-right[
+![](img/UX%20and%20Accessibility11.png)
+]
+
+.pull-left[
+- Color-blindness simulation
+- Contrast checker
+- Keyboard issue checker
+]
+
+---
+
+# Accessible Fonts
+
+* Easy to differentiate between similar looking letters
+* Readable with:
+  * Small font-size
+  * Small screen
+  * Blurry vision
+  * Low resolution
+* Spacing narrow enough to connect words, far enough to differentiate letters.
+* Consistent shapes
+  * lower-case vs UPPER-CASE
+  * Letters vs Numbers 0123 vs Symbols ,!?=”
+
+---
+
+# Legibility
+
+.pull-right[
+![](img/UX%20and%20Accessibility12.png)
+Font: Atkinson Hyperlegible
+
+Source:  _[https://brailleinstitute.org/freefont](https://brailleinstitute.org/freefont)_
+]
+
+Legibility describes how easy it is for a reader to decode symbols in a text.
+
+---
+
+# Atkinson Hyperlegible
+
+.pull-right[
+![](img/UX%20and%20Accessibility13.png)
+
+Source _[Wikimedia Commons](https://en.wikipedia.org/wiki/File:Atkinson_Hyperlegible_characters.png)_
+]
+
+.pull-left[
+- Very high legibility
+- Font used by Galaxy(and this presentation)
+- Free and permissive font-license
+
+by the Braille Institute of America _[https://brailleinstitute.org/freefont](https://brailleinstitute.org/freefont)_
+]
+
+---
+
+# Fira Sans
+
+.pull-right[
+![](img/UX%20and%20Accessibility14.png)
+![](img/UX%20and%20Accessibility15.png)
+
+Source  _[Wikimedia Commons](https://en.wikipedia.org/wiki/File:Fira_Sans_sample_image.png)_
+
+by Mozilla _[https://mozilla.github.io/Fira/](https://mozilla.github.io/Fira/)_
+
+Source  _[Wikimedia Commons](https://en.wikipedia.org/wiki/File:Fira_Mono_font_specimen.png)_
+]
+
+* Free and permissive font-license
+* Many variants
+  * Regular
+  * Mono
+  * Math
+  * Multilingual
+  * Code(Variable weight and with ligatures!)
+
+---
+
+# Lexend
+
+.pull-right[
+![](img/UX%20and%20Accessibility16.png)
+Source _[Lexend Website](https://www.lexend.com/)_
+
+by Google _[https://www.lexend.com/](https://www.lexend.com/)_
+]
+
+* Variable font
+  * Width
+  * Weight
+* Designed easy reading
+* Free and permissive font-license
+
+---
+
+# DIN 1451
+
+.pull-right[
+![](img/UX%20and%20Accessibility17.png)
+
+![](img/UX%20and%20Accessibility18.png)
+
+Source  _[Wikimedia Commons](https://en.wikipedia.org/wiki/File:DIN_1451.svg)_
+
+Source  _[Wikimedia Commons](https://de.wikipedia.org/wiki/Datei:Bahnschrift.svg)_
+]
+
+- Designed for quick reading
+- Official traffic sign font in Germany
+
+Several Implementations:
+
+* __Alte DIN 1451 Mittelschrift__
+  * __Public domain__
+  * __Limited variants__
+  * __Limited character-set__
+
+* __Bahnschrift__
+  * __Restrictive license only for personal use__
+  * __Included in Windows__
+  * __Large character set__
+  * __Variable font__
+
+---
+
+# Bonus: Developer Experience and Code Accessibility
+
+- Not only users are affected
+- Don’t abbreviate
+- Format code consistently (Prettier)
+- Limit line length
+- Use tabs for indentation
+
+---
+
+# Everyone can Help
+
+- Report issues
+- Test for common concerns
+- Tell people UX and accessibility matters
+
+__Accessibility is for everyone__
+
