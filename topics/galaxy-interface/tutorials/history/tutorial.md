@@ -5,6 +5,7 @@ redirect_from:
 
 title: "Understanding Galaxy history system"
 zenodo_link: ""
+level: Introductory
 questions:
   - "How do Galaxy histories work?"
 objectives:
@@ -54,8 +55,7 @@ the history panel. In this way, the history panel displays the history of your *
 between them and creating new ones. This can be useful to organize different analyses.
 
 **Anonymous users** (if your Galaxy allows them) are users that have not registered an account. Anonymous users are
-only allowed one history. On our main, public Galaxy server, users are encouraged to register and log in with the
-benefit that they can work on many histories and switch between them.
+only allowed one history. Users are encouraged to register and log in with the benefit that they can work on many histories and switch between them.
 
 > <warning-title>Anonymous Users: Beware</warning-title>
 > The histories of anonymous users are only associated through your browser's session. **If you close the browser or
@@ -84,9 +84,7 @@ This button bring a list of all you histories. For example:
 
 ### {% icon galaxy-history-options %} "**History options**" 
 
-This button open a drop-down menu with a variety of History-specific functions:
-
-![History options](../../images/history_options.png "A list of options for a given history.")
+This button open a drop-down menu with a variety of History-specific functions.
 
 # History manipulation
 
