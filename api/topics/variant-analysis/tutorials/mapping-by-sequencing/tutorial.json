@@ -75,7 +75,7 @@
       "name": "Mapping And Molecular Identification Of Phenotype Causing Mutations",
       "title": "Mapping And Molecular Identification Of Phenotype Causing Mutations",
       "test_results": null,
-      "modified": "2024-05-07 00:05:15 +0000",
+      "modified": "2024-05-07 09:16:09 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nA. thaliana TAIR10 ref genome\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\naligned reads from outcrossed F2 pool\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\naligned reads from Ler mapping strain\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"SnpEff Download\"];\n  4[\"Replace parts of text\"];\n  0 -->|output| 4;\n  5[\"MiModD Variant Calling\"];\n  4 -->|outfile| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  6[\"MiModD Extract Variant Sites\"];\n  5 -->|ofile| 6;\n  7[\"MiModD NacreousMap\"];\n  6 -->|output_vcf| 7;\n  8[\"MiModD VCF Filter\"];\n  6 -->|output_vcf| 8;\n  9[\"SnpEff\"];\n  8 -->|outputfile| 9;\n  3 -->|snpeff_db| 9;\n  10[\"MiModD Report Variants\"];\n  9 -->|snpeff_output| 10;"
     }
   ],
