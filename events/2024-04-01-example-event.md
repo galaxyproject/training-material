@@ -50,15 +50,23 @@ feedback:
   link: https://example.org
   deadline: 2024-05-01
 
-infrastructure:
-  servers:
-  - server: https://usegalaxy.eu
-    tiaas: smorgasbord3
 
-#  support:
-#    slack:
-#      name: "#social"
-#      #link: "https://gtnsmrgsbord.slack.com/archives/C032C2MRHAS" # Assumes GTN slack by default.
+# infrastructure that will be used for your event. This will be used to
+# create setup instructions for participants
+infrastructure:
+  tiaas: true
+  servers:
+    - server: https://usegalaxy.eu
+      name: Galaxy EU
+      tiaas_link: https://usegalaxy.eu/join-training/smorgasbord3
+    - server: https://usegalaxy.org
+      name: Galaxy Main
+      tiaas_link:
+  support: # remove this entire section if you don't wish to use online support platform (e.g. for in-person training)
+     platform: Slack
+     join_link:  # GTN Slack by default
+     channel: "#my-event" # instructors can create channels on the GTN slack themselves.
+     link: "https://gtnsmrgsbord.slack.com/archives/C032C2MRHAS" # will use the #general channel on GTN slack by default.
 
 program:
   - section: "Monday: Introduction"
