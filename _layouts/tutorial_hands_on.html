@@ -281,7 +281,11 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                         <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
                         <script>
                         function tutorial_finish() {
-                          plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
                         }
                         function tutorial_finish_finish() {
                           document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
