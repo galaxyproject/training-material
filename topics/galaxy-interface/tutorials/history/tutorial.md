@@ -64,27 +64,19 @@ only allowed one history. Users are encouraged to register and log in with the b
 
 ## Global history controls
 
-Above the current history panel are three buttons (Fig. 2 below): 
-
-- The {% icon new-history %} "**Create new history**" button will create an empty history.
-- The {% icon switch-histories %} "**Switch to history**" will open a dialog letting you easily swap to any of your other histories.
-- The {% icon galaxy-history-options %} "**History options**" (formerly the {% icon galaxy-gear %} "Gear menu") gives you access to advanced options to work with your history.
-
-![Zoom of the history panel showing the word history, three buttons described above this image, the search datasets field, and the history name with edit control.](../../images/current-history-buttons.png "Global history controls are located above the history panel.")
+{% snippet faqs/galaxy/histories_top_control_buttons.md box_type="none"%}
 
 ### {% icon new-history %} "**Create new history**"
 
-This button does what the name suggests: it creates a new history. If you click on it you will get a new empty history. The previous history does not disappear: you can always get back using "**Switch to history**" button described below.
+{% snippet faqs/galaxy/histories_create_new.md box_type="none"%}
 
 ### {% icon switch-histories %} "**Switch to history**"
 
-This button bring a list of all you histories. For example:
-
-![List of histories](../../images/list_of_histories.png "A list of histories for a given user.")
+{% snippet faqs/galaxy/histories_switch.md box_type="none"%}
 
 ### {% icon galaxy-history-options %} "**History options**" 
 
-This button open a drop-down menu with a variety of History-specific functions.
+{% snippet faqs/galaxy/histories_options.md box_type="none"%}
 
 # History manipulation
 
@@ -92,10 +84,7 @@ This button open a drop-down menu with a variety of History-specific functions.
 
 All histories begin with the name 'Unnamed history'. Non-anonymous users can rename the history as they see fit:
 
-1. Click the {% icon galaxy-pencil %} pencil icon next to the history's name
-2. Enter a new name or edit the existing one.
-3. Press <kbd>Enter</kbd>, or click {% icon galaxy-save %} "Save" to save the new name. The input field will disappear and the new history name will display.
-4. To cancel renaming, click the {% icon galaxy-undo %} "Cancel" button
+{% snippet faqs/galaxy/histories_rename.md box_type="none"%}
 
 ## Tagging a history
 
