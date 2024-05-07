@@ -1334,7 +1334,7 @@ Before we begin, we need to upload BioNano data:
 >
 >The box below explains how to upload data if you forgot. Just make sure you set dataset type to `cmap`.
 >
-> {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
+> {% snippet faqs/galaxy/datasets_import_via_link.md format="cmap" %}
 >
 {: .hands_on}
 
