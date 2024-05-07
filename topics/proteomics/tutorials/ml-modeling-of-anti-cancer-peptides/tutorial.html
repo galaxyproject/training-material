@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -34,11 +34,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -1080,6 +1081,25 @@ https://zenodo.org/record/4111092/files/non_ACPs.fasta
                 </section>
 
                 <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
                 
 
                 <h1>Frequently Asked Questions</h1>
@@ -1103,14 +1123,12 @@ https://zenodo.org/record/4111092/files/non_ACPs.fasta
 
                 
 
-                <h1>Feedback</h1>
+                <h1 id="gtn-feedback">Feedback</h1>
                 <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=proteomics/ml-modeling-of-anti-cancer-peptides" alt="Feedback form link">
-                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
-                </a>
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=proteomics/ml-modeling-of-anti-cancer-peptides"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=proteomics/ml-modeling-of-anti-cancer-peptides">Feedback Form</a></iframe>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
@@ -1297,7 +1315,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6fc568f3ffe7ee516bb916e175f36f6ea153c156">6fc568f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/64f3e2daca32990c281ec4af7ddfbc771cf1de91">64f3e2d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

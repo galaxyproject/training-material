@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -34,11 +34,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -1645,25 +1646,25 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <script>
     var tuto_data =
     {
-        label: "Galaxy 101",
-        data: [{x:"2018-09", y: 6 } ,{x:"2018-10", y: 8 } ,{x:"2018-11", y: 17 } ,{x:"2018-12", y: 18 } ,{x:"2019-01", y: 20 } ,{x:"2019-02", y: 21 } ,{x:"2019-03", y: 23 } ,{x:"2019-04", y: 26 } ,{x:"2019-05", y: 29 } ,{x:"2019-06", y: 34 } ,{x:"2019-07", y: 37 } ,{x:"2019-08", y: 42 } ,{x:"2019-09", y: 44 } ,{x:"2019-10", y: 48 } ,{x:"2019-11", y: 50 } ,{x:"2019-12", y: 52 } ,{x:"2020-01", y: 55 } ,{x:"2020-02", y: 57 } ,{x:"2020-03", y: 60 } ,{x:"2020-04", y: 61 } ,{x:"2020-05", y: 62 } ,{x:"2020-06", y: 63 } ,{x:"2020-07", y: 64 } ,{x:"2020-09", y: 66 } ,{x:"2020-11", y: 67 } ,{x:"2021-01", y: 69 } ,{x:"2021-03", y: 72 } ,{x:"2021-05", y: 75 } ,{x:"2021-06", y: 78 } ,{x:"2021-07", y: 79 } ,{x:"2021-08", y: 90 } ,{x:"2021-09", y: 91 } ,{x:"2021-10", y: 94 } ,{x:"2021-11", y: 96 } ,{x:"2021-12", y: 97 } ,{x:"2022-02", y: 104 } ,{x:"2022-03", y: 109 } ,{x:"2022-04", y: 111 } ,{x:"2022-05", y: 113 } ,{x:"2022-06", y: 114 } ,{x:"2022-07", y: 115 } ,{x:"2022-09", y: 116 } ,{x:"2022-11", y: 118 } ,{x:"2023-01", y: 119 } ,{x:"2023-02", y: 124 } ,{x:"2023-03", y: 125 } ,{x:"2023-04", y: 126 } ,{x:"2023-05", y: 127 } ,{x:"2023-06", y: 128 } ,{x:"2023-07", y: 131 } ,{x:"2023-09", y: 134 } ,{x:"2023-10", y: 135 } ,{x:"2023-11", y: 136 } ,{x:"2024-02", y: 138 } ],
-        fill: false,
-    };
-    fdbk_over_month['tuto-galaxy-intro-101'] = [tuto_data];
-    fdbk_over_month['topic-introduction'].push(tuto_data);
-    data_notes['tuto-galaxy-intro-101'] = [0,4,1,4,25,104];
-</script>
-
-<script>
-    var tuto_data =
-    {
-        label: "Galaxy 101 for everyone",
+        label: "Galaxy Basics for everyone",
         data: [{x:"2019-11", y: 1 } ,{x:"2020-02", y: 3 } ,{x:"2020-03", y: 7 } ,{x:"2020-06", y: 9 } ,{x:"2020-07", y: 11 } ,{x:"2020-10", y: 12 } ,{x:"2020-11", y: 14 } ,{x:"2021-02", y: 15 } ,{x:"2021-03", y: 17 } ,{x:"2021-04", y: 18 } ,{x:"2021-05", y: 19 } ,{x:"2021-06", y: 20 } ,{x:"2021-07", y: 23 } ,{x:"2021-09", y: 25 } ,{x:"2021-10", y: 27 } ,{x:"2021-11", y: 29 } ,{x:"2022-02", y: 31 } ,{x:"2022-03", y: 39 } ,{x:"2022-04", y: 42 } ,{x:"2022-06", y: 45 } ,{x:"2022-07", y: 46 } ,{x:"2022-11", y: 47 } ,{x:"2023-03", y: 51 } ,{x:"2023-04", y: 52 } ,{x:"2023-07", y: 54 } ,{x:"2023-08", y: 55 } ,{x:"2023-09", y: 57 } ,{x:"2024-02", y: 58 } ,{x:"2024-04", y: 59 } ],
         fill: false,
     };
     fdbk_over_month['tuto-galaxy-intro-101-everyone'] = [tuto_data];
     fdbk_over_month['topic-introduction'].push(tuto_data);
     data_notes['tuto-galaxy-intro-101-everyone'] = [0,0,0,4,7,48];
+</script>
+
+<script>
+    var tuto_data =
+    {
+        label: "Galaxy Basics for genomics",
+        data: [{x:"2018-09", y: 6 } ,{x:"2018-10", y: 8 } ,{x:"2018-11", y: 17 } ,{x:"2018-12", y: 18 } ,{x:"2019-01", y: 20 } ,{x:"2019-02", y: 21 } ,{x:"2019-03", y: 23 } ,{x:"2019-04", y: 26 } ,{x:"2019-05", y: 29 } ,{x:"2019-06", y: 34 } ,{x:"2019-07", y: 37 } ,{x:"2019-08", y: 42 } ,{x:"2019-09", y: 44 } ,{x:"2019-10", y: 48 } ,{x:"2019-11", y: 50 } ,{x:"2019-12", y: 52 } ,{x:"2020-01", y: 55 } ,{x:"2020-02", y: 57 } ,{x:"2020-03", y: 60 } ,{x:"2020-04", y: 61 } ,{x:"2020-05", y: 62 } ,{x:"2020-06", y: 63 } ,{x:"2020-07", y: 64 } ,{x:"2020-09", y: 66 } ,{x:"2020-11", y: 67 } ,{x:"2021-01", y: 69 } ,{x:"2021-03", y: 72 } ,{x:"2021-05", y: 75 } ,{x:"2021-06", y: 78 } ,{x:"2021-07", y: 79 } ,{x:"2021-08", y: 90 } ,{x:"2021-09", y: 91 } ,{x:"2021-10", y: 94 } ,{x:"2021-11", y: 96 } ,{x:"2021-12", y: 97 } ,{x:"2022-02", y: 104 } ,{x:"2022-03", y: 109 } ,{x:"2022-04", y: 111 } ,{x:"2022-05", y: 113 } ,{x:"2022-06", y: 114 } ,{x:"2022-07", y: 115 } ,{x:"2022-09", y: 116 } ,{x:"2022-11", y: 118 } ,{x:"2023-01", y: 119 } ,{x:"2023-02", y: 124 } ,{x:"2023-03", y: 125 } ,{x:"2023-04", y: 126 } ,{x:"2023-05", y: 127 } ,{x:"2023-06", y: 128 } ,{x:"2023-07", y: 131 } ,{x:"2023-09", y: 134 } ,{x:"2023-10", y: 135 } ,{x:"2023-11", y: 136 } ,{x:"2024-02", y: 138 } ],
+        fill: false,
+    };
+    fdbk_over_month['tuto-galaxy-intro-101'] = [tuto_data];
+    fdbk_over_month['topic-introduction'].push(tuto_data);
+    data_notes['tuto-galaxy-intro-101'] = [0,4,1,4,25,104];
 </script>
 
 <script>
@@ -15759,7 +15760,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                             <div class="card-header" id="heading-galaxy-intro-101">
                                 <div class="mb-0">
                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-galaxy-intro-101" aria-expanded="false" aria-controls="collapse-galaxy-intro-101">
-                                        Galaxy 101
+                                        Galaxy Basics for genomics
                                     </button>
                                 </div>
                             </div>
@@ -22787,7 +22788,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                             <div class="card-header" id="heading-galaxy-intro-101-everyone">
                                 <div class="mb-0">
                                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-galaxy-intro-101-everyone" aria-expanded="false" aria-controls="collapse-galaxy-intro-101-everyone">
-                                        Galaxy 101 for everyone
+                                        Galaxy Basics for everyone
                                     </button>
                                 </div>
                             </div>
@@ -41903,7 +41904,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6fc568f3ffe7ee516bb916e175f36f6ea153c156">6fc568f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/64f3e2daca32990c281ec4af7ddfbc771cf1de91">64f3e2d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

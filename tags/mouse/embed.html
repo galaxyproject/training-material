@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -35,11 +35,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -135,9 +136,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00f3c7; --color-darker: #00d8b1; --color-dimmed: #00e5bc;" title="Click to show all tutorials tagged mouse">mouse</a>
+              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00f9cd; --color-darker: #00ddb6; --color-dimmed: #00ebc1;" title="Click to show all tutorials tagged mouse">mouse</a>
               
-              <a href="/training-material/search?query=imaging" class="label label-default tutorial_tag" style="--color-primary: #ffc7e8; --color-darker: #ffa2dc; --color-dimmed: #ffb5e2;" title="Click to show all tutorials tagged imaging">imaging</a>
+              <a href="/training-material/search?query=imaging" class="label label-default tutorial_tag" style="--color-primary: #ffcfeb; --color-darker: #ffaade; --color-dimmed: #ffbde4;" title="Click to show all tutorials tagged imaging">imaging</a>
               
             
             </div>
@@ -417,11 +418,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=collections" class="label label-default tutorial_tag" style="--color-primary: #ffcacf; --color-darker: #ffa7b1; --color-dimmed: #ffb9c0;" title="Click to show all tutorials tagged collections">collections</a>
+              <a href="/training-material/search?query=collections" class="label label-default tutorial_tag" style="--color-primary: #ffd2d6; --color-darker: #ffafb7; --color-dimmed: #ffc1c7;" title="Click to show all tutorials tagged collections">collections</a>
               
-              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00f3c7; --color-darker: #00d8b1; --color-dimmed: #00e5bc;" title="Click to show all tutorials tagged mouse">mouse</a>
+              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00f9cd; --color-darker: #00ddb6; --color-dimmed: #00ebc1;" title="Click to show all tutorials tagged mouse">mouse</a>
               
-              <a href="/training-material/search?query=QC" class="label label-default tutorial_tag" style="--color-primary: #ffcaca; --color-darker: #ffa8a9; --color-dimmed: #ffbaba;" title="Click to show all tutorials tagged QC">QC</a>
+              <a href="/training-material/search?query=QC" class="label label-default tutorial_tag" style="--color-primary: #ffd2d2; --color-darker: #ffb0b0; --color-dimmed: #ffc1c1;" title="Click to show all tutorials tagged QC">QC</a>
               
             
             </div>
@@ -669,11 +670,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=limma-voom" class="label label-default tutorial_tag" style="--color-primary: #75e7ff; --color-darker: #00d2ee; --color-dimmed: #00dffd;" title="Click to show all tutorials tagged limma-voom">limma-voom</a>
+              <a href="/training-material/search?query=limma-voom" class="label label-default tutorial_tag" style="--color-primary: #91eaff; --color-darker: #00d7f4; --color-dimmed: #45e3ff;" title="Click to show all tutorials tagged limma-voom">limma-voom</a>
               
-              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00f3c7; --color-darker: #00d8b1; --color-dimmed: #00e5bc;" title="Click to show all tutorials tagged mouse">mouse</a>
+              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00f9cd; --color-darker: #00ddb6; --color-dimmed: #00ebc1;" title="Click to show all tutorials tagged mouse">mouse</a>
               
-              <a href="/training-material/search?query=QC" class="label label-default tutorial_tag" style="--color-primary: #ffcaca; --color-darker: #ffa8a9; --color-dimmed: #ffbaba;" title="Click to show all tutorials tagged QC">QC</a>
+              <a href="/training-material/search?query=QC" class="label label-default tutorial_tag" style="--color-primary: #ffd2d2; --color-darker: #ffb0b0; --color-dimmed: #ffc1c1;" title="Click to show all tutorials tagged QC">QC</a>
               
             
             </div>
@@ -921,7 +922,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00f3c7; --color-darker: #00d8b1; --color-dimmed: #00e5bc;" title="Click to show all tutorials tagged mouse">mouse</a>
+              <a href="/training-material/search?query=mouse" class="label label-default tutorial_tag" style="--color-primary: #00f9cd; --color-darker: #00ddb6; --color-dimmed: #00ebc1;" title="Click to show all tutorials tagged mouse">mouse</a>
               
             
             </div>

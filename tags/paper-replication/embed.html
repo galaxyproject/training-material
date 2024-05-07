@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -35,11 +35,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -125,11 +126,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #69efff; --color-darker: #00d8ea; --color-dimmed: #00e6f8;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -361,9 +362,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -669,13 +670,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=Python" class="label label-default tutorial_tag" style="--color-primary: #ded0ff; --color-darker: #cbb3ff; --color-dimmed: #d4c2ff;" title="Click to show all tutorials tagged Python">Python</a>
+              <a href="/training-material/search?query=Python" class="label label-default tutorial_tag" style="--color-primary: #e2d7ff; --color-darker: #cfb9ff; --color-dimmed: #d8c8ff;" title="Click to show all tutorials tagged Python">Python</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #69efff; --color-darker: #00d8ea; --color-dimmed: #00e6f8;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -915,15 +916,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b1ea00; --color-darker: #9dd000; --color-dimmed: #a7dd00;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b5f000; --color-darker: #a1d500; --color-dimmed: #abe200;" title="Click to show all tutorials tagged R">R</a>
               
-              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #dfd0ff; --color-darker: #ccb3ff; --color-dimmed: #d5c1ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
+              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #e3d7ff; --color-darker: #d0b9ff; --color-dimmed: #dac8ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #69efff; --color-darker: #00d8ea; --color-dimmed: #00e6f8;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -1163,9 +1164,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -1471,9 +1472,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #6ff400; --color-darker: #62d900; --color-dimmed: #69e600;" title="Click to show all tutorials tagged plants">plants</a>
+              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #72fa00; --color-darker: #65df00; --color-dimmed: #6cec00;" title="Click to show all tutorials tagged plants">plants</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -1779,9 +1780,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -2021,9 +2022,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -2329,13 +2330,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=Python" class="label label-default tutorial_tag" style="--color-primary: #ded0ff; --color-darker: #cbb3ff; --color-dimmed: #d4c2ff;" title="Click to show all tutorials tagged Python">Python</a>
+              <a href="/training-material/search?query=Python" class="label label-default tutorial_tag" style="--color-primary: #e2d7ff; --color-darker: #cfb9ff; --color-dimmed: #d8c8ff;" title="Click to show all tutorials tagged Python">Python</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #69efff; --color-darker: #00d8ea; --color-dimmed: #00e6f8;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -2633,15 +2634,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b1ea00; --color-darker: #9dd000; --color-dimmed: #a7dd00;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b5f000; --color-darker: #a1d500; --color-dimmed: #abe200;" title="Click to show all tutorials tagged R">R</a>
               
-              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #dfd0ff; --color-darker: #ccb3ff; --color-dimmed: #d5c1ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
+              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #e3d7ff; --color-darker: #d0b9ff; --color-dimmed: #dac8ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #69efff; --color-darker: #00d8ea; --color-dimmed: #00e6f8;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -2881,11 +2882,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffd2d8; --color-darker: #ffaeba; --color-dimmed: #ffc0c9;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00efec; --color-darker: #00d5d2; --color-dimmed: #00e2df;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00f6f3; --color-darker: #00dad7; --color-dimmed: #00e8e5;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b1ea00; --color-darker: #9dd000; --color-dimmed: #a7dd00;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b5f000; --color-darker: #a1d500; --color-dimmed: #abe200;" title="Click to show all tutorials tagged R">R</a>
               
             
             </div>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -34,11 +34,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -288,7 +289,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=kubernetes" class="label label-default tutorial_tag" style="--color-primary: #ffc9d7; --color-darker: #ffa6bf; --color-dimmed: #ffb8cb;" title="Click to show all tutorials tagged kubernetes">kubernetes</a>
+              <a href="/training-material/search?query=kubernetes" class="label label-default tutorial_tag" style="--color-primary: #ffd1dd; --color-darker: #ffadc4; --color-dimmed: #ffc0d0;" title="Click to show all tutorials tagged kubernetes">kubernetes</a>
               
             
             </div>
@@ -530,7 +531,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=kubernetes" class="label label-default tutorial_tag" style="--color-primary: #ffc9d7; --color-darker: #ffa6bf; --color-dimmed: #ffb8cb;" title="Click to show all tutorials tagged kubernetes">kubernetes</a>
+              <a href="/training-material/search?query=kubernetes" class="label label-default tutorial_tag" style="--color-primary: #ffd1dd; --color-darker: #ffadc4; --color-dimmed: #ffc0d0;" title="Click to show all tutorials tagged kubernetes">kubernetes</a>
               
             
             </div>
@@ -772,12 +773,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/pcm32/" class="contributor-badge contributor-pcm32"><img src="https://avatars.githubusercontent.com/pcm32?s=36" alt="Pablo Moreno avatar" width="36" class="avatar" />
-    Pablo Moreno</a><a href="/training-material/hall-of-fame/afgane/" class="contributor-badge contributor-afgane"><img src="https://avatars.githubusercontent.com/afgane?s=36" alt="Enis Afgan avatar" width="36" class="avatar" />
-    Enis Afgan</a><a href="/training-material/hall-of-fame/almahmoud/" class="contributor-badge contributor-almahmoud"><img src="https://avatars.githubusercontent.com/almahmoud?s=36" alt="Alex Mahmoud avatar" width="36" class="avatar" />
-    Alex Mahmoud</a><a href="/training-material/hall-of-fame/nuwang/" class="contributor-badge contributor-nuwang"><img src="https://avatars.githubusercontent.com/nuwang?s=36" alt="Nuwan Goonasekera avatar" width="36" class="avatar" />
-    Nuwan Goonasekera</a><a href="/training-material/hall-of-fame/jdavcs/" class="contributor-badge contributor-jdavcs"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jdavcs?s=36" alt="John Davis avatar" width="36" class="avatar" />
-    John Davis</a>
+    <a href="/training-material/hall-of-fame/afgane/" class="contributor-badge contributor-afgane"><img src="https://avatars.githubusercontent.com/afgane?s=36" alt="Enis Afgan avatar" width="36" class="avatar" />
+    Enis Afgan</a><a href="/training-material/hall-of-fame/jdavcs/" class="contributor-badge contributor-jdavcs"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jdavcs?s=36" alt="John Davis avatar" width="36" class="avatar" />
+    John Davis</a><a href="/training-material/hall-of-fame/nuwang/" class="contributor-badge contributor-nuwang"><img src="https://avatars.githubusercontent.com/nuwang?s=36" alt="Nuwan Goonasekera avatar" width="36" class="avatar" />
+    Nuwan Goonasekera</a><a href="/training-material/hall-of-fame/pcm32/" class="contributor-badge contributor-pcm32"><img src="https://avatars.githubusercontent.com/pcm32?s=36" alt="Pablo Moreno avatar" width="36" class="avatar" />
+    Pablo Moreno</a><a href="/training-material/hall-of-fame/almahmoud/" class="contributor-badge contributor-almahmoud"><img src="https://avatars.githubusercontent.com/almahmoud?s=36" alt="Alex Mahmoud avatar" width="36" class="avatar" />
+    Alex Mahmoud</a>
 
     <h2 id="funders">Funders</h2>
     <p>This material was funded by:</p>
@@ -801,7 +802,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6fc568f3ffe7ee516bb916e175f36f6ea153c156">6fc568f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/64f3e2daca32990c281ec4af7ddfbc771cf1de91">64f3e2d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

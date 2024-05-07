@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Galaxy 101 / Introduction to Galaxy Analyses</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Galaxy Basics for genomics / Introduction to Galaxy Analyses</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -34,11 +34,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -65,9 +66,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Hands-on: Hands-on: Galaxy 101">
+<meta name="DC.title" content="Hands-on: Hands-on: Galaxy Basics for genomics">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-21 12:37:39 +0000">
+<meta name="DC.date" content="2024-05-03 12:00:22 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Nicola Soranzo">
 <meta name="DC.creator" content="Clemens Blank">
@@ -76,7 +77,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.creator" content="Anne Pajon">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Introduction to Galaxy Analyses / Hands-on: Galaxy 101">
+	<meta property="og:title" content="Introduction to Galaxy Analyses / Hands-on: Galaxy Basics for genomics">
         <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
@@ -123,10 +124,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-03-21 12:37:39 +0000",
+  "dateModified": "2024-05-03 12:00:22 +0000",
   "datePublished": "2016-12-19 08:59:53 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Hands-on: Hands-on: Galaxy 101",
+  "headline": "Hands-on: Hands-on: Galaxy Basics for genomics",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -235,9 +236,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org/training-material/topics/introduction/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on: Hands-on: Galaxy 101",
+  "name": "Hands-on: Hands-on: Galaxy Basics for genomics",
   "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html",
-  "version": 130,
+  "version": 131,
   "timeRequired": "PT1H",
   "teaches": "Familiarize yourself with the basics of Galaxy\n - Learn how to obtain data from external sources\n - Learn how to run tools\n - Learn how histories work\n - Learn how to create a workflow\n - Learn how to share your work",
   "keywords": [
@@ -724,7 +725,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 <article class="tutorial topic-introduction">
-    <h1 data-toc-skip>Galaxy 101</h1>
+    <h1 data-toc-skip>Galaxy Basics for genomics</h1>
     
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
@@ -822,7 +823,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/workflows/" title="Galaxy 101 workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/workflows/" title="Galaxy Basics for genomics workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -983,7 +984,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 19, 2016 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 21, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 3, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1003,7 +1004,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.2</a> (9 recent ratings, 138 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 130 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 131 </div>
 
     </blockquote>
     </section>
@@ -1086,7 +1087,7 @@ But even with your data in hand, you still have the question: “how do I actual
 <p>Browse to your favorite <a href="https://galaxyproject.org/use/">Galaxy instance</a> and log in or register.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-create-an-account-on-a-public-galaxy-instance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-create-an-account-on-a-public-galaxy-instance" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: How do I create an account on a public Galaxy instance?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>To create an account at any public Galaxy instance, choose your server from the available <a href="https://galaxyproject.org/use/">list of Galaxy Platforms</a>.</p>     <p>There are several UseGalaxy servers:</p>     <ul>       <li>         <p><a href="https://usegalaxy.eu">UseGalaxy.eu</a> (<strong>EU</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.fr">UseGalaxy.fr</a> (<strong>FR</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.org.au">UseGalaxy.org.au</a> (<strong>AU</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.org">UseGalaxy.org</a> (<strong>US</strong>)</p>       </li>     </ul>   </li>   <li>     <p>Click on <strong>“Login or Register”</strong> in the masthead on the server.</p>     <p><img src="/training-material/faqs/galaxy/images/login_register.png" alt="Login or Register on the top panel" /></p>   </li>   <li>     <p>On the login page, find the <strong>Register here</strong> link and click on it.</p>   </li>   <li>     <p>Fill in the the registration form, then click on <strong>Create</strong>.</p>     <p>Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.</p>     <p><img src="/training-material/faqs/galaxy/images/unverified_account.png" alt="Banner warning about account with unverified email address" /></p>   </li>   <li>     <p>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</p>     <p>Missing? Check your <strong>Trash</strong> and <strong>Spam</strong> folders.</p>   </li>   <li>     <p>Click on the <strong>Email confirmation link</strong> to fully activate your account.</p>     <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?</p>     <p>Please do <strong>not</strong> register again, but follow the <a href="/training-material/faqs/galaxy/user_preferences_manage_information.html">instructions to change the email address</a> registered with your account! The confirmation email will be resent to your new address once you have changed it.</p>     <p>Trouble logging in later? Account email addresses and public names are caSe-sensiTive. Check your activation email for formats.</p>   </li> </ol> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-create-an-account-on-a-public-galaxy-instance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-create-an-account-on-a-public-galaxy-instance" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: How do I create an account on a public Galaxy instance?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>To create an account at any public Galaxy instance, choose your server from the available <a href="https://galaxyproject.org/use/">list of Galaxy Platforms</a>.</p>     <p>There are several UseGalaxy servers:</p>     <ul>       <li>         <p><a href="https://usegalaxy.fr">UseGalaxy.fr</a> (<strong>FR</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.org">UseGalaxy.org</a> (<strong>US</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.org.au">UseGalaxy.org.au</a> (<strong>AU</strong>)</p>       </li>       <li>         <p><a href="https://usegalaxy.eu">UseGalaxy.eu</a> (<strong>EU</strong>)</p>       </li>     </ul>   </li>   <li>     <p>Click on <strong>“Login or Register”</strong> in the masthead on the server.</p>     <p><img src="/training-material/faqs/galaxy/images/login_register.png" alt="Login or Register on the top panel" /></p>   </li>   <li>     <p>On the login page, find the <strong>Register here</strong> link and click on it.</p>   </li>   <li>     <p>Fill in the the registration form, then click on <strong>Create</strong>.</p>     <p>Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.</p>     <p><img src="/training-material/faqs/galaxy/images/unverified_account.png" alt="Banner warning about account with unverified email address" /></p>   </li>   <li>     <p>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</p>     <p>Missing? Check your <strong>Trash</strong> and <strong>Spam</strong> folders.</p>   </li>   <li>     <p>Click on the <strong>Email confirmation link</strong> to fully activate your account.</p>     <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?</p>     <p>Please do <strong>not</strong> register again, but follow the <a href="/training-material/faqs/galaxy/user_preferences_manage_information.html">instructions to change the email address</a> registered with your account! The confirmation email will be resent to your new address once you have changed it.</p>     <p>Trouble logging in later? Account email addresses and public names are caSe-sensiTive. Check your activation email for formats.</p>   </li> </ol> </blockquote>
 <p><!--END_SNIPPET--></p>
 
 <p>The Galaxy interface consists of three main parts:</p>
@@ -1864,6 +1865,25 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
                 </section>
 
                 <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
                 
                 <blockquote class="key_points">
                     <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
@@ -1902,20 +1922,18 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
                 
 
-                <h1>Feedback</h1>
+                <h1 id="gtn-feedback">Feedback</h1>
                 <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=introduction/galaxy-intro-101" alt="Feedback form link">
-                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
-                </a>
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=introduction/galaxy-intro-101"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=introduction/galaxy-intro-101">Feedback Form</a></iframe>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Saskia Hiltemann, Nicola Soranzo, Clemens Blank, Anton Nekrutenko, Björn Grüning, Anne Pajon, Helena Rasche,  <b>Galaxy 101 (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html</a> Online; accessed TODAY
+                            Saskia Hiltemann, Nicola Soranzo, Clemens Blank, Anton Nekrutenko, Björn Grüning, Anne Pajon, Helena Rasche,  <b>Galaxy Basics for genomics (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
@@ -1942,7 +1960,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <code id="citation-code">@misc{introduction-galaxy-intro-101,
 author = "Saskia Hiltemann and Nicola Soranzo and Clemens Blank and Anton Nekrutenko and Björn Grüning and Anne Pajon and Helena Rasche",
-	title = "Galaxy 101 (Galaxy Training Materials)",
+	title = "Galaxy Basics for genomics (Galaxy Training Materials)",
 	year = "",
 	month = "",
 	day = ""
@@ -2285,7 +2303,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6fc568f3ffe7ee516bb916e175f36f6ea153c156">6fc568f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/64f3e2daca32990c281ec4af7ddfbc771cf1de91">64f3e2d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

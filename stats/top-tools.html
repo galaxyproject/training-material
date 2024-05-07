@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -34,11 +34,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -544,6 +545,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</li>
 				
 				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
 					Ecology /
 					<a href="/training-material/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html">
 					Metabarcoding/eDNA through Obitools
@@ -602,7 +610,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-					Galaxy 101 for everyone
+					Galaxy Basics for everyone
 					</a>
 				</li>
 				
@@ -836,6 +844,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Contributing to the Galaxy Training Material /
 					<a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">
 					Creating a new tutorial
+					</a>
+				</li>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
 					</a>
 				</li>
 				
@@ -1574,6 +1589,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</li>
 				
 				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
 					Ecology /
 					<a href="/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html">
 					Checking expected species and contamination in bacterial isolate
@@ -1625,14 +1647,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">
-					Galaxy 101
+					Galaxy Basics for genomics
 					</a>
 				</li>
 				
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-					Galaxy 101 for everyone
+					Galaxy Basics for everyone
 					</a>
 				</li>
 				
@@ -1675,6 +1697,141 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Variant Analysis /
 					<a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">
 					M. tuberculosis Variant Analysis
+					</a>
+				</li>
+				
+				<li>
+					Visualisation /
+					<a href="/training-material/topics/visualisation/tutorials/circos/tutorial.html">
+					Visualisation with Circos
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/Remove beginning1.html">Remove beginning1</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html">
+					Biodiversity data exploration
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">
+					Regional GAM
+					</a>
+				</li>
+				
+				<li>
+					Epigenetics /
+					<a href="/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html">
+					Infinium Human Methylation BeadChip
+					</a>
+				</li>
+				
+				<li>
+					Using Galaxy and Managing your Data /
+					<a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">
+					Workflow Reports
+					</a>
+				</li>
+				
+				<li>
+					Genome Annotation /
+					<a href="/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html">
+					Secondary metabolite discovery
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
+					Galaxy Basics for everyone
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html">
+					How to reproduce published Galaxy analyses
+					</a>
+				</li>
+				
+				<li>
+					Microbiome /
+					<a href="/training-material/topics/microbiome/tutorials/nanopore-16S-metagenomics/tutorial.html">
+					16S Microbial analysis with Nanopore data
+					</a>
+				</li>
+				
+				<li>
+					Microbiome /
+					<a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
+					Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-2-discovery/tutorial.html">
+					Clinical-MP-2-Discovery
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-3-verification/tutorial.html">
+					Clinical-MP-3-Verification
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html">
+					metaQuantome 1: Data creation
+					</a>
+				</li>
+				
+				<li>
+					Statistics and machine learning /
+					<a href="/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html">
+					Classification in Machine Learning
+					</a>
+				</li>
+				
+				<li>
+					Statistics and machine learning /
+					<a href="/training-material/topics/statistics/tutorials/regression_machinelearning/tutorial.html">
+					Regression in Machine Learning
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">
+					Genome-wide alternative splicing analysis
 					</a>
 				</li>
 				
@@ -1960,134 +2117,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
-		<td><a href="/training-material/by-tool/Remove beginning1.html">Remove beginning1</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html">
-					Biodiversity data exploration
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">
-					Regional GAM
-					</a>
-				</li>
-				
-				<li>
-					Epigenetics /
-					<a href="/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html">
-					Infinium Human Methylation BeadChip
-					</a>
-				</li>
-				
-				<li>
-					Using Galaxy and Managing your Data /
-					<a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">
-					Workflow Reports
-					</a>
-				</li>
-				
-				<li>
-					Genome Annotation /
-					<a href="/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/tutorial.html">
-					Secondary metabolite discovery
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-					Galaxy 101 for everyone
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html">
-					How to reproduce published Galaxy analyses
-					</a>
-				</li>
-				
-				<li>
-					Microbiome /
-					<a href="/training-material/topics/microbiome/tutorials/nanopore-16S-metagenomics/tutorial.html">
-					16S Microbial analysis with Nanopore data
-					</a>
-				</li>
-				
-				<li>
-					Microbiome /
-					<a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
-					Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-2-discovery/tutorial.html">
-					Clinical-MP-2-Discovery
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-3-verification/tutorial.html">
-					Clinical-MP-3-Verification
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html">
-					metaQuantome 1: Data creation
-					</a>
-				</li>
-				
-				<li>
-					Statistics and machine learning /
-					<a href="/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html">
-					Classification in Machine Learning
-					</a>
-				</li>
-				
-				<li>
-					Statistics and machine learning /
-					<a href="/training-material/topics/statistics/tutorials/regression_machinelearning/tutorial.html">
-					Regression in Machine Learning
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">
-					Genome-wide alternative splicing analysis
-					</a>
-				</li>
-				
-				<li>
-					Visualisation /
-					<a href="/training-material/topics/visualisation/tutorials/circos/tutorial.html">
-					Visualisation with Circos
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
 		<td><a href="/training-material/by-tool/bgruening/tp_cat.html">bgruening/tp_cat</a></td>
 		<td>
 			<ul>
@@ -2124,6 +2153,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Contributing to the Galaxy Training Material /
 					<a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">
 					Creating a new tutorial
+					</a>
+				</li>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
 					</a>
 				</li>
 				
@@ -2463,6 +2499,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</li>
 				
 				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
 					Ecology /
 					<a href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html">
 					Compute and analyze biodiversity metrics with PAMPA toolsuite
@@ -2500,7 +2543,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">
-					Galaxy 101
+					Galaxy Basics for genomics
 					</a>
 				</li>
 				
@@ -2550,6 +2593,220 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Transcriptomics /
 					<a href="/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.html">
 					Small Non-coding RNA Clustering using BlockClust
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/join1.html">join1</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Assembly /
+					<a href="/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html">
+					Making sense of a newly assembled genome
+					</a>
+				</li>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html">
+					Metabarcoding/eDNA through Obitools
+					</a>
+				</li>
+				
+				<li>
+					Genome Annotation /
+					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
+					Comparative gene analysis in unannotated genomes
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html">
+					Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">
+					Generating a single cell matrix using Alevin
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">
+					Filter, plot and explore single-cell RNA-seq data (Scanpy)
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">
+					Inferring single cell trajectories (Monocle3)
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">
+					Converting between common single cell data formats
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
+					Pathway analysis with the MINERVA Platform
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
+					Reference-based RNA-Seq data analysis
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">
+					3: RNA-seq genes to pathways
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">
+					Visualization of RNA-Seq results with heatmap2
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/cat1.html">cat1</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Assembly /
+					<a href="/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html">
+					Making sense of a newly assembled genome
+					</a>
+				</li>
+				
+				<li>
+					Assembly /
+					<a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">
+					VGP assembly pipeline: Step by Step
+					</a>
+				</li>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html">
+					RAD-Seq Reference-based data analysis
+					</a>
+				</li>
+				
+				<li>
+					Epigenetics /
+					<a href="/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/tutorial.html">
+					Formation of the Super-Structures on the Inactive X
+					</a>
+				</li>
+				
+				<li>
+					Genome Annotation /
+					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
+					Comparative gene analysis in unannotated genomes
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">
+					Introduction to Genomics and Galaxy
+					</a>
+				</li>
+				
+				<li>
+					Microbiome /
+					<a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
+					Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html">
+					Removing the effects of the cell cycle
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
+					Clustering 3K PBMCs with Scanpy
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">
+					Genome-wide alternative splicing analysis
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">
+					Whole transcriptome analysis of Arabidopsis thaliana
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
+					Reference-based RNA-Seq data analysis
 					</a>
 				</li>
 				
@@ -2765,206 +3022,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
-		<td><a href="/training-material/by-tool/join1.html">join1</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Assembly /
-					<a href="/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html">
-					Making sense of a newly assembled genome
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html">
-					Metabarcoding/eDNA through Obitools
-					</a>
-				</li>
-				
-				<li>
-					Genome Annotation /
-					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
-					Comparative gene analysis in unannotated genomes
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html">
-					Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">
-					Generating a single cell matrix using Alevin
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">
-					Filter, plot and explore single-cell RNA-seq data (Scanpy)
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">
-					Inferring single cell trajectories (Monocle3)
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">
-					Converting between common single cell data formats
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
-					Pathway analysis with the MINERVA Platform
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
-					Reference-based RNA-Seq data analysis
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">
-					3: RNA-seq genes to pathways
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">
-					Visualization of RNA-Seq results with heatmap2
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/cat1.html">cat1</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Assembly /
-					<a href="/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html">
-					Making sense of a newly assembled genome
-					</a>
-				</li>
-				
-				<li>
-					Assembly /
-					<a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">
-					VGP assembly pipeline: Step by Step
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html">
-					RAD-Seq Reference-based data analysis
-					</a>
-				</li>
-				
-				<li>
-					Epigenetics /
-					<a href="/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/tutorial.html">
-					Formation of the Super-Structures on the Inactive X
-					</a>
-				</li>
-				
-				<li>
-					Genome Annotation /
-					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
-					Comparative gene analysis in unannotated genomes
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">
-					Introduction to Genomics and Galaxy
-					</a>
-				</li>
-				
-				<li>
-					Microbiome /
-					<a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
-					Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html">
-					Removing the effects of the cell cycle
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
-					Clustering 3K PBMCs with Scanpy
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">
-					Genome-wide alternative splicing analysis
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">
-					Whole transcriptome analysis of Arabidopsis thaliana
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
-					Reference-based RNA-Seq data analysis
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
 		<td><a href="/training-material/by-tool/iuc/datamash_ops.html">iuc/datamash_ops</a></td>
 		<td>
 			<ul>
@@ -2980,6 +3037,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Climate /
 					<a href="/training-material/topics/climate/tutorials/climate-101/tutorial.html">
 					Getting your hands-on climate data
+					</a>
+				</li>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
 					</a>
 				</li>
 				
@@ -3000,14 +3064,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">
-					Galaxy 101
+					Galaxy Basics for genomics
 					</a>
 				</li>
 				
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-					Galaxy 101 for everyone
+					Galaxy Basics for everyone
 					</a>
 				</li>
 				
@@ -3050,6 +3114,99 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Variant Analysis /
 					<a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">
 					Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/galaxyp/regexColumn1.html">galaxyp/regexColumn1</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Climate /
+					<a href="/training-material/topics/climate/tutorials/pangeo/tutorial.html">
+					Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools
+					</a>
+				</li>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html">
+					Compute and analyze biodiversity metrics with PAMPA toolsuite
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html">
+					Biodiversity data exploration
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">
+					Regional GAM
+					</a>
+				</li>
+				
+				<li>
+					Genome Annotation /
+					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
+					Comparative gene analysis in unannotated genomes
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html">
+					Proteogenomics 1: Database Creation
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">
+					Importing files from public atlases
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">
+					Inferring single cell trajectories (Monocle3)
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">
+					Converting between common single cell data formats
+					</a>
+				</li>
+				
+				<li>
+					Variant Analysis /
+					<a href="/training-material/topics/variant-analysis/tutorials/trio-analysis/tutorial.html">
+					Trio Analysis using Synthetic Datasets from RD-Connect GPAP
 					</a>
 				</li>
 				
@@ -3237,92 +3394,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
-		<td><a href="/training-material/by-tool/galaxyp/regexColumn1.html">galaxyp/regexColumn1</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Climate /
-					<a href="/training-material/topics/climate/tutorials/pangeo/tutorial.html">
-					Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html">
-					Compute and analyze biodiversity metrics with PAMPA toolsuite
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html">
-					Biodiversity data exploration
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">
-					Regional GAM
-					</a>
-				</li>
-				
-				<li>
-					Genome Annotation /
-					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
-					Comparative gene analysis in unannotated genomes
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html">
-					Proteogenomics 1: Database Creation
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">
-					Importing files from public atlases
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">
-					Inferring single cell trajectories (Monocle3)
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">
-					Converting between common single cell data formats
-					</a>
-				</li>
-				
-				<li>
-					Variant Analysis /
-					<a href="/training-material/topics/variant-analysis/tutorials/trio-analysis/tutorial.html">
-					Trio Analysis using Synthetic Datasets from RD-Connect GPAP
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
 		<td><a href="/training-material/by-tool/bgruening/tp_awk_tool.html">bgruening/tp_awk_tool</a></td>
 		<td>
 			<ul>
@@ -3495,6 +3566,178 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
+		<td><a href="/training-material/by-tool/devteam/Add_a_column1.html">devteam/Add_a_column1</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Assembly /
+					<a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">
+					VGP assembly pipeline: Step by Step
+					</a>
+				</li>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Genome Annotation /
+					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
+					Comparative gene analysis in unannotated genomes
+					</a>
+				</li>
+				
+				<li>
+					Genome Annotation /
+					<a href="/training-material/topics/genome-annotation/tutorials/tnseq/tutorial.html">
+					Essential genes detection with Transposon insertion sequencing
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">
+					From peaks to genes
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">
+					Label-free data analysis using MaxQuant
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
+					Pathway analysis with the MINERVA Platform
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
+					Reference-based RNA-Seq data analysis
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">
+					3: RNA-seq genes to pathways
+					</a>
+				</li>
+				
+				<li>
+					Variant Analysis /
+					<a href="/training-material/topics/variant-analysis/tutorials/pox-tiled-amplicon/tutorial.html">
+					Pox virus genome analysis from tiled-amplicon sequencing data
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/Grouping1.html">Grouping1</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Using Galaxy and Managing your Data /
+					<a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">
+					Workflow Reports
+					</a>
+				</li>
+				
+				<li>
+					Genome Annotation /
+					<a href="/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">
+					Bacterial Genome Annotation
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
+					Galaxy Basics for everyone
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">
+					From peaks to genes
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html">
+					How to reproduce published Galaxy analyses
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-2-discovery/tutorial.html">
+					Clinical-MP-2-Discovery
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-3-verification/tutorial.html">
+					Clinical-MP-3-Verification
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-4-quantitation/tutorial.html">
+					Clinical-MP-4-Quantitation
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
+					Reference-based RNA-Seq data analysis
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
 		<td><a href="/training-material/by-tool/iuc/bandage_image.html">iuc/bandage_image</a></td>
 		<td>
 			<ul>
@@ -3566,6 +3809,85 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Microbiome /
 					<a href="/training-material/topics/microbiome/tutorials/plasmid-metagenomics-nanopore/tutorial.html">
 					Antibiotic resistance detection
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/bgruening/tp_sorted_uniq.html">bgruening/tp_sorted_uniq</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Contributing to the Galaxy Training Material /
+					<a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">
+					Creating a new tutorial
+					</a>
+				</li>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Using Galaxy and Managing your Data /
+					<a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">
+					Workflow Reports
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
+					Galaxy Basics for everyone
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html">
+					How to reproduce published Galaxy analyses
+					</a>
+				</li>
+				
+				<li>
+					Proteomics /
+					<a href="/training-material/topics/proteomics/tutorials/secretome-prediction/tutorial.html">
+					Secretome Prediction
+					</a>
+				</li>
+				
+				<li>
+					Single Cell /
+					<a href="/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html">
+					Pre-processing of 10X Single-Cell ATAC-seq Datasets
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">
+					Genome-wide alternative splicing analysis
+					</a>
+				</li>
+				
+				<li>
+					Transcriptomics /
+					<a href="/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
+					Pathway analysis with the MINERVA Platform
 					</a>
 				</li>
 				
@@ -3732,164 +4054,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
-		<td><a href="/training-material/by-tool/devteam/Add_a_column1.html">devteam/Add_a_column1</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Assembly /
-					<a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">
-					VGP assembly pipeline: Step by Step
-					</a>
-				</li>
-				
-				<li>
-					Genome Annotation /
-					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
-					Comparative gene analysis in unannotated genomes
-					</a>
-				</li>
-				
-				<li>
-					Genome Annotation /
-					<a href="/training-material/topics/genome-annotation/tutorials/tnseq/tutorial.html">
-					Essential genes detection with Transposon insertion sequencing
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">
-					From peaks to genes
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">
-					Label-free data analysis using MaxQuant
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
-					Pathway analysis with the MINERVA Platform
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
-					Reference-based RNA-Seq data analysis
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">
-					3: RNA-seq genes to pathways
-					</a>
-				</li>
-				
-				<li>
-					Variant Analysis /
-					<a href="/training-material/topics/variant-analysis/tutorials/pox-tiled-amplicon/tutorial.html">
-					Pox virus genome analysis from tiled-amplicon sequencing data
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/Grouping1.html">Grouping1</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Using Galaxy and Managing your Data /
-					<a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">
-					Workflow Reports
-					</a>
-				</li>
-				
-				<li>
-					Genome Annotation /
-					<a href="/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">
-					Bacterial Genome Annotation
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-					Galaxy 101 for everyone
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">
-					From peaks to genes
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html">
-					How to reproduce published Galaxy analyses
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-2-discovery/tutorial.html">
-					Clinical-MP-2-Discovery
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-3-verification/tutorial.html">
-					Clinical-MP-3-Verification
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/clinical-mp-4-quantitation/tutorial.html">
-					Clinical-MP-4-Quantitation
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
-					Reference-based RNA-Seq data analysis
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
 		<td><a href="/training-material/by-tool/iuc/anndata_inspect.html">iuc/anndata_inspect</a></td>
 		<td>
 			<ul>
@@ -4026,78 +4190,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Genome Annotation /
 					<a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">
 					Genome annotation with Funannotate
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/bgruening/tp_sorted_uniq.html">bgruening/tp_sorted_uniq</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Contributing to the Galaxy Training Material /
-					<a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">
-					Creating a new tutorial
-					</a>
-				</li>
-				
-				<li>
-					Using Galaxy and Managing your Data /
-					<a href="/training-material/topics/galaxy-interface/tutorials/workflow-reports/tutorial.html">
-					Workflow Reports
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-					Galaxy 101 for everyone
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/galaxy-reproduce/tutorial.html">
-					How to reproduce published Galaxy analyses
-					</a>
-				</li>
-				
-				<li>
-					Proteomics /
-					<a href="/training-material/topics/proteomics/tutorials/secretome-prediction/tutorial.html">
-					Secretome Prediction
-					</a>
-				</li>
-				
-				<li>
-					Single Cell /
-					<a href="/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html">
-					Pre-processing of 10X Single-Cell ATAC-seq Datasets
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">
-					Genome-wide alternative splicing analysis
-					</a>
-				</li>
-				
-				<li>
-					Transcriptomics /
-					<a href="/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
-					Pathway analysis with the MINERVA Platform
 					</a>
 				</li>
 				
@@ -4761,7 +4853,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-					Galaxy 101 for everyone
+					Galaxy Basics for everyone
 					</a>
 				</li>
 				
@@ -5298,6 +5390,57 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Variant Analysis /
 					<a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html">
 					From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/Count1.html">Count1</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html">
+					Compute and analyze biodiversity metrics with PAMPA toolsuite
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/gbif_cleaning/tutorial.html">
+					Cleaning GBIF data for the use in Ecology
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html">
+					RAD-Seq Reference-based data analysis
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">
+					Regional GAM
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
 					</a>
 				</li>
 				
@@ -5940,50 +6083,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Single Cell /
 					<a href="/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">
 					Converting NCBI Data to the AnnData Format
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/Count1.html">Count1</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html">
-					Compute and analyze biodiversity metrics with PAMPA toolsuite
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/gbif_cleaning/tutorial.html">
-					Cleaning GBIF data for the use in Ecology
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html">
-					RAD-Seq Reference-based data analysis
-					</a>
-				</li>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/regionalGAM/tutorial.html">
-					Regional GAM
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
 					</a>
 				</li>
 				
@@ -6819,7 +6918,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">
-					Galaxy 101
+					Galaxy Basics for genomics
 					</a>
 				</li>
 				
@@ -7395,6 +7494,43 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
+		<td><a href="/training-material/by-tool/Show beginning1.html">Show beginning1</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Using Galaxy and Managing your Data /
+					<a href="/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html">
+					Creating, Editing and Importing Galaxy Workflows
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Variant Analysis /
+					<a href="/training-material/topics/variant-analysis/tutorials/aiv-analysis/tutorial.html">
+					Avian influenza viral strain analysis from gene segment sequencing data
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
 		<td><a href="/training-material/by-tool/bgruening/ml_visualization_ex.html">bgruening/ml_visualization_ex</a></td>
 		<td>
 			<ul>
@@ -7683,6 +7819,43 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Metabolomics /
 					<a href="/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html">
 					Mass spectrometry: LC-MS preprocessing with XCMS
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/bgruening/tp_split_on_column.html">bgruening/tp_split_on_column</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Genome Annotation /
+					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
+					Comparative gene analysis in unannotated genomes
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Microbiome /
+					<a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
+					Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition
 					</a>
 				</li>
 				
@@ -8260,7 +8433,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-					Galaxy 101 for everyone
+					Galaxy Basics for everyone
 					</a>
 				</li>
 				
@@ -8881,6 +9054,66 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
+		<td><a href="/training-material/by-tool/tabular_to_csv.html">tabular_to_csv</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/species-distribution-modeling/tutorial.html">
+					Species distribution modeling
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/wc_gnu.html">wc_gnu</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Ecology /
+					<a href="/training-material/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html">
+					Metabarcoding/eDNA through Obitools
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
 		<td><a href="/training-material/by-tool/peterjc/seq_filter_by_id.html">peterjc/seq_filter_by_id</a></td>
 		<td>
 			<ul>
@@ -9271,36 +9504,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
-		<td><a href="/training-material/by-tool/Show beginning1.html">Show beginning1</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Using Galaxy and Managing your Data /
-					<a href="/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html">
-					Creating, Editing and Importing Galaxy Workflows
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Variant Analysis /
-					<a href="/training-material/topics/variant-analysis/tutorials/aiv-analysis/tutorial.html">
-					Avian influenza viral strain analysis from gene segment sequencing data
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
 		<td><a href="/training-material/by-tool/iuc/snippy.html">iuc/snippy</a></td>
 		<td>
 			<ul>
@@ -9683,36 +9886,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Variant Analysis /
 					<a href="/training-material/topics/variant-analysis/tutorials/pox-tiled-amplicon/tutorial.html">
 					Pox virus genome analysis from tiled-amplicon sequencing data
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/bgruening/tp_split_on_column.html">bgruening/tp_split_on_column</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Genome Annotation /
-					<a href="/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">
-					Comparative gene analysis in unannotated genomes
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-				<li>
-					Microbiome /
-					<a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
-					Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition
 					</a>
 				</li>
 				
@@ -10125,7 +10298,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">
-					Galaxy 101
+					Galaxy Basics for genomics
 					</a>
 				</li>
 				
@@ -11024,6 +11197,420 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</tr>
 	
 	<tr>
+		<td><a href="/training-material/by-tool/{{version_wc}}.html">{{version_wc}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_unique}}.html">{{version_unique}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_split}}.html">{{version_split}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_sort}}.html">{{version_sort}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_select_first}}.html">{{version_select_first}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_replace_text_line}}.html">{{version_replace_text_line}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_replace_text_column}}.html">{{version_replace_text_column}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_remove_columns_by_header}}.html">{{version_remove_columns_by_header}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_remove_beginning}}.html">{{version_remove_beginning}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_paste}}.html">{{version_paste}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_join}}.html">{{version_join}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_filter}}.html">{{version_filter}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_datamash}}.html">{{version_datamash}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_cut_columns}}.html">{{version_cut_columns}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_cut_advanced}}.html">{{version_cut_advanced}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_count}}.html">{{version_count}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_compute}}.html">{{version_compute}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><a href="/training-material/by-tool/{{version_cat}}.html">{{version_cat}}</a></td>
+		<td>
+			<ul>
+				
+				<li>
+					Foundations of Data Science /
+					<a href="/training-material/topics/data-science/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+				<li>
+					Introduction to Galaxy Analyses /
+					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+					Data Manipulation Olympics
+					</a>
+				</li>
+				
+			</ul>
+		</td>
+	</tr>
+	
+	<tr>
 		<td><a href="/training-material/by-tool/iuc/lofreq_viterbi.html">iuc/lofreq_viterbi</a></td>
 		<td>
 			<ul>
@@ -11338,52 +11925,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Ecology /
 					<a href="/training-material/topics/ecology/tutorials/species-distribution-modeling/tutorial.html">
 					Species distribution modeling
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/tabular_to_csv.html">tabular_to_csv</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/species-distribution-modeling/tutorial.html">
-					Species distribution modeling
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/wc_gnu.html">wc_gnu</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Ecology /
-					<a href="/training-material/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html">
-					Metabarcoding/eDNA through Obitools
-					</a>
-				</li>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
 					</a>
 				</li>
 				
@@ -14757,7 +15298,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<li>
 					Introduction to Galaxy Analyses /
 					<a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">
-					Galaxy 101
+					Galaxy Basics for genomics
 					</a>
 				</li>
 				
@@ -16215,294 +16756,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					Visualisation /
 					<a href="/training-material/topics/visualisation/tutorials/circos-microbial/tutorial.html">
 					Ploting a Microbial Genome with Circos
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_wc}}.html">{{version_wc}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_unique}}.html">{{version_unique}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_split}}.html">{{version_split}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_sort}}.html">{{version_sort}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_select_first}}.html">{{version_select_first}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_replace_text_line}}.html">{{version_replace_text_line}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_replace_text_column}}.html">{{version_replace_text_column}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_remove_columns_by_header}}.html">{{version_remove_columns_by_header}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_remove_beginning}}.html">{{version_remove_beginning}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_paste}}.html">{{version_paste}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_join}}.html">{{version_join}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_filter}}.html">{{version_filter}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_datamash}}.html">{{version_datamash}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_cut_columns}}.html">{{version_cut_columns}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_cut_advanced}}.html">{{version_cut_advanced}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_count}}.html">{{version_count}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_compute}}.html">{{version_compute}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
-					</a>
-				</li>
-				
-			</ul>
-		</td>
-	</tr>
-	
-	<tr>
-		<td><a href="/training-material/by-tool/{{version_cat}}.html">{{version_cat}}</a></td>
-		<td>
-			<ul>
-				
-				<li>
-					Introduction to Galaxy Analyses /
-					<a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-					Data Manipulation Olympics
 					</a>
 				</li>
 				
@@ -24224,7 +24477,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6fc568f3ffe7ee516bb916e175f36f6ea153c156">6fc568f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/64f3e2daca32990c281ec4af7ddfbc771cf1de91">64f3e2d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

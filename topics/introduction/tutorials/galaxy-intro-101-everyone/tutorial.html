@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Galaxy 101 for everyone / Introduction to Galaxy Analyses</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Galaxy Basics for everyone / Introduction to Galaxy Analyses</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -34,11 +34,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -65,9 +66,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Hands-on: Hands-on: Galaxy 101 for everyone">
+<meta name="DC.title" content="Hands-on: Hands-on: Galaxy Basics for everyone">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-05 11:50:50 +0000">
+<meta name="DC.date" content="2024-05-03 12:00:22 +0000">
 <meta name="DC.creator" content="Anne Fouilloux">
 <meta name="DC.creator" content="Nadia Goué">
 <meta name="DC.creator" content="Christopher Barnett">
@@ -76,7 +77,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.creator" content="Dave Clements">
 <meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Introduction to Galaxy Analyses / Hands-on: Galaxy 101 for everyone">
+	<meta property="og:title" content="Introduction to Galaxy Analyses / Hands-on: Galaxy Basics for everyone">
         <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
@@ -123,10 +124,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "dateModified": "2024-03-05 11:50:50 +0000",
+  "dateModified": "2024-05-03 12:00:22 +0000",
   "datePublished": "2019-11-14 09:26:37 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Hands-on: Hands-on: Galaxy 101 for everyone",
+  "headline": "Hands-on: Hands-on: Galaxy Basics for everyone",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -235,9 +236,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org/training-material/topics/introduction/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on: Hands-on: Galaxy 101 for everyone",
+  "name": "Hands-on: Hands-on: Galaxy Basics for everyone",
   "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html",
-  "version": 77,
+  "version": 78,
   "timeRequired": "PT1H30M",
   "teaches": "Familiarize yourself with the basics of Galaxy\n - Learn how to obtain data from external sources\n - Learn how to tag datasets\n - Learn how to run tools\n - Learn how histories work\n - Learn how to create a workflow\n - Learn how to share your work",
   "keywords": [
@@ -722,7 +723,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 <article class="tutorial topic-introduction">
-    <h1 data-toc-skip>Galaxy 101 for everyone</h1>
+    <h1 data-toc-skip>Galaxy Basics for everyone</h1>
     
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
@@ -823,7 +824,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/" title="Galaxy 101 for everyone workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/" title="Galaxy Basics for everyone workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -987,7 +988,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 14, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 5, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 3, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1007,7 +1008,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (4 recent ratings, 59 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 77 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 78 </div>
 
     </blockquote>
     </section>
@@ -2108,6 +2109,25 @@ This is fine and will result in <em>price</em> getting plotted against <em>carat
                 </section>
 
                 <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
                 
                 <blockquote class="key_points">
                     <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
@@ -2149,20 +2169,18 @@ This is fine and will result in <em>price</em> getting plotted against <em>carat
 
                 
 
-                <h1>Feedback</h1>
+                <h1 id="gtn-feedback">Feedback</h1>
                 <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
                 <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
                 </p>
 
-		<a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=introduction/galaxy-intro-101-everyone" alt="Feedback form link">
-                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
-                </a>
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=introduction/galaxy-intro-101-everyone"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=introduction/galaxy-intro-101-everyone">Feedback Form</a></iframe>
 
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Anne Fouilloux, Nadia Goué, Christopher Barnett, Michele Maroni, Olha Nahorna, Dave Clements, Saskia Hiltemann,  <b>Galaxy 101 for everyone (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html</a> Online; accessed TODAY
+                            Anne Fouilloux, Nadia Goué, Christopher Barnett, Michele Maroni, Olha Nahorna, Dave Clements, Saskia Hiltemann,  <b>Galaxy Basics for everyone (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
@@ -2189,7 +2207,7 @@ This is fine and will result in <em>price</em> getting plotted against <em>carat
 
 <code id="citation-code">@misc{introduction-galaxy-intro-101-everyone,
 author = "Anne Fouilloux and Nadia Goué and Christopher Barnett and Michele Maroni and Olha Nahorna and Dave Clements and Saskia Hiltemann",
-	title = "Galaxy 101 for everyone (Galaxy Training Materials)",
+	title = "Galaxy Basics for everyone (Galaxy Training Materials)",
 	year = "",
 	month = "",
 	day = ""
@@ -2497,7 +2515,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6fc568f3ffe7ee516bb916e175f36f6ea153c156">6fc568f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/64f3e2daca32990c281ec4af7ddfbc771cf1de91">64f3e2d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

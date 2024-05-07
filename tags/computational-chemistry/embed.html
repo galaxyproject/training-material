@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -35,11 +35,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -389,13 +390,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=fair" class="label label-default tutorial_tag" style="--color-primary: #c3e600; --color-darker: #adcc00; --color-dimmed: #b8d900;" title="Click to show all tutorials tagged fair">fair</a>
+              <a href="/training-material/search?query=fair" class="label label-default tutorial_tag" style="--color-primary: #c8ec00; --color-darker: #b2d200; --color-dimmed: #bdde00;" title="Click to show all tutorials tagged fair">fair</a>
               
-              <a href="/training-material/search?query=data-management" class="label label-default tutorial_tag" style="--color-primary: #a8deff; --color-darker: #54ccff; --color-dimmed: #85d5ff;" title="Click to show all tutorials tagged data-management">data-management</a>
+              <a href="/training-material/search?query=data-management" class="label label-default tutorial_tag" style="--color-primary: #b6e3ff; --color-darker: #6bd0ff; --color-dimmed: #95d9ff;" title="Click to show all tutorials tagged data-management">data-management</a>
               
-              <a href="/training-material/search?query=medicinal-chemistry" class="label label-default tutorial_tag" style="--color-primary: #8ae4ff; --color-darker: #00d1f5; --color-dimmed: #46dcff;" title="Click to show all tutorials tagged medicinal-chemistry">medicinal-chemistry</a>
+              <a href="/training-material/search?query=medicinal-chemistry" class="label label-default tutorial_tag" style="--color-primary: #9fe8ff; --color-darker: #00d6fb; --color-dimmed: #6adfff;" title="Click to show all tutorials tagged medicinal-chemistry">medicinal-chemistry</a>
               
-              <a href="/training-material/search?query=computational-chemistry" class="label label-default tutorial_tag" style="--color-primary: #00f782; --color-darker: #00dc73; --color-dimmed: #00e97a;" title="Click to show all tutorials tagged computational-chemistry">computational-chemistry</a>
+              <a href="/training-material/search?query=computational-chemistry" class="label label-default tutorial_tag" style="--color-primary: #00fd86; --color-darker: #00e176; --color-dimmed: #00ef7e;" title="Click to show all tutorials tagged computational-chemistry">computational-chemistry</a>
               
             
             </div>
@@ -645,13 +646,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=fair" class="label label-default tutorial_tag" style="--color-primary: #c3e600; --color-darker: #adcc00; --color-dimmed: #b8d900;" title="Click to show all tutorials tagged fair">fair</a>
+              <a href="/training-material/search?query=fair" class="label label-default tutorial_tag" style="--color-primary: #c8ec00; --color-darker: #b2d200; --color-dimmed: #bdde00;" title="Click to show all tutorials tagged fair">fair</a>
               
-              <a href="/training-material/search?query=data-management" class="label label-default tutorial_tag" style="--color-primary: #a8deff; --color-darker: #54ccff; --color-dimmed: #85d5ff;" title="Click to show all tutorials tagged data-management">data-management</a>
+              <a href="/training-material/search?query=data-management" class="label label-default tutorial_tag" style="--color-primary: #b6e3ff; --color-darker: #6bd0ff; --color-dimmed: #95d9ff;" title="Click to show all tutorials tagged data-management">data-management</a>
               
-              <a href="/training-material/search?query=medicinal-chemistry" class="label label-default tutorial_tag" style="--color-primary: #8ae4ff; --color-darker: #00d1f5; --color-dimmed: #46dcff;" title="Click to show all tutorials tagged medicinal-chemistry">medicinal-chemistry</a>
+              <a href="/training-material/search?query=medicinal-chemistry" class="label label-default tutorial_tag" style="--color-primary: #9fe8ff; --color-darker: #00d6fb; --color-dimmed: #6adfff;" title="Click to show all tutorials tagged medicinal-chemistry">medicinal-chemistry</a>
               
-              <a href="/training-material/search?query=computational-chemistry" class="label label-default tutorial_tag" style="--color-primary: #00f782; --color-darker: #00dc73; --color-dimmed: #00e97a;" title="Click to show all tutorials tagged computational-chemistry">computational-chemistry</a>
+              <a href="/training-material/search?query=computational-chemistry" class="label label-default tutorial_tag" style="--color-primary: #00fd86; --color-darker: #00e176; --color-dimmed: #00ef7e;" title="Click to show all tutorials tagged computational-chemistry">computational-chemistry</a>
               
             
             </div>
@@ -2216,9 +2217,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffc7e7; --color-darker: #ffa2d9; --color-dimmed: #ffb5e0;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffd0ea; --color-darker: #ffaadc; --color-dimmed: #ffbde3;" title="Click to show all tutorials tagged covid19">covid19</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #99ee00; --color-darker: #88d400; --color-dimmed: #90e100;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9df400; --color-darker: #8bd900; --color-dimmed: #94e700;" title="Click to show all tutorials tagged one-health">one-health</a>
               
             
             </div>
@@ -2508,13 +2509,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=fair" class="label label-default tutorial_tag" style="--color-primary: #c3e600; --color-darker: #adcc00; --color-dimmed: #b8d900;" title="Click to show all tutorials tagged fair">fair</a>
+              <a href="/training-material/search?query=fair" class="label label-default tutorial_tag" style="--color-primary: #c8ec00; --color-darker: #b2d200; --color-dimmed: #bdde00;" title="Click to show all tutorials tagged fair">fair</a>
               
-              <a href="/training-material/search?query=data-management" class="label label-default tutorial_tag" style="--color-primary: #a8deff; --color-darker: #54ccff; --color-dimmed: #85d5ff;" title="Click to show all tutorials tagged data-management">data-management</a>
+              <a href="/training-material/search?query=data-management" class="label label-default tutorial_tag" style="--color-primary: #b6e3ff; --color-darker: #6bd0ff; --color-dimmed: #95d9ff;" title="Click to show all tutorials tagged data-management">data-management</a>
               
-              <a href="/training-material/search?query=medicinal-chemistry" class="label label-default tutorial_tag" style="--color-primary: #8ae4ff; --color-darker: #00d1f5; --color-dimmed: #46dcff;" title="Click to show all tutorials tagged medicinal-chemistry">medicinal-chemistry</a>
+              <a href="/training-material/search?query=medicinal-chemistry" class="label label-default tutorial_tag" style="--color-primary: #9fe8ff; --color-darker: #00d6fb; --color-dimmed: #6adfff;" title="Click to show all tutorials tagged medicinal-chemistry">medicinal-chemistry</a>
               
-              <a href="/training-material/search?query=computational-chemistry" class="label label-default tutorial_tag" style="--color-primary: #00f782; --color-darker: #00dc73; --color-dimmed: #00e97a;" title="Click to show all tutorials tagged computational-chemistry">computational-chemistry</a>
+              <a href="/training-material/search?query=computational-chemistry" class="label label-default tutorial_tag" style="--color-primary: #00fd86; --color-darker: #00e176; --color-dimmed: #00ef7e;" title="Click to show all tutorials tagged computational-chemistry">computational-chemistry</a>
               
             
             </div>

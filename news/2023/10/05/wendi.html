@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fc568f3ffe7ee516bb916e175f36f6ea153c156",
+		release: "galaxy-training-network@64f3e2daca32990c281ec4af7ddfbc771cf1de91",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -34,11 +34,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </script>
 
 <!-- Page view tracking -->
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 <script>
 if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	localStorage.removeItem("plausible_ignore")
 	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
 } else {
 	// if they're opting-out, or DNT
 	// we might get one page by accident but we won't get future ones.
@@ -256,9 +257,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<span class="label label-default tutorial_tag" id="new feature" style="--color-primary: #d3d4ff; --color-darker: #b8b9ff; --color-dimmed: #c5c7ff;">new feature</span>
+<span class="label label-default tutorial_tag" id="new feature" style="--color-primary: #d9daff; --color-darker: #bdbfff; --color-dimmed: #cbcdff;">new feature</span>
 
-<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff6c7; --color-darker: #f1dc00; --color-dimmed: #ffe92f;">gtn</span>
+<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff7d0; --color-darker: #f2dd00; --color-dimmed: #ffeb50;">gtn</span>
 
 
 <hr/>
@@ -410,9 +411,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	24 April 2024 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00f86b; --color-darker: #00dc5e; --color-dimmed: #00ea64;">jobs</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00fe6e; --color-darker: #00e261; --color-dimmed: #00f067;">jobs</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #82f100; --color-darker: #73d700; --color-dimmed: #7ae400;">australia</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #86f800; --color-darker: #76dc00; --color-dimmed: #7eea00;">australia</span>
 	
 	</p>
 	<p class="card-text">
@@ -431,15 +432,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	28 March 2024 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #f6c8ff; --color-darker: #f2a3ff; --color-dimmed: #f4b6ff;">by-covid</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #f7d0ff; --color-darker: #f3abff; --color-dimmed: #f5beff;">by-covid</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffd167; --color-darker: #ebb900; --color-dimmed: #f9c400;">pathways</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffd888; --color-darker: #f1bd00; --color-dimmed: #ffc91a;">pathways</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00f2d1; --color-darker: #00d7ba; --color-dimmed: #00e4c5;">minerva</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00f8d6; --color-darker: #00ddbe; --color-dimmed: #00eaca;">minerva</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00f696; --color-darker: #00db85; --color-dimmed: #00e88e;">gtn infrastructure</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00fc9b; --color-darker: #00e089; --color-dimmed: #00ee92;">gtn infrastructure</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d3d4ff; --color-darker: #b8b9ff; --color-dimmed: #c5c7ff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #d9daff; --color-darker: #bdbfff; --color-dimmed: #cbcdff;">new feature</span>
 	
 	</p>
 	<p class="card-text">
@@ -458,15 +459,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	26 March 2024 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #c3e600; --color-darker: #adcc00; --color-dimmed: #b8d900;">fair</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #c8ec00; --color-darker: #b2d200; --color-dimmed: #bdde00;">fair</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00eff3; --color-darker: #00d4d8; --color-dimmed: #00e1e5;">dmp</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00f5f9; --color-darker: #00dade; --color-dimmed: #00e7eb;">dmp</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #8ae4ff; --color-darker: #00d1f5; --color-dimmed: #46dcff;">data stewardship</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #9fe8ff; --color-darker: #00d6fb; --color-dimmed: #6adfff;">data stewardship</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffd084; --color-darker: #f3b500; --color-dimmed: #ffc133;">data management</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffd79b; --color-darker: #f9ba00; --color-dimmed: #ffc860;">data management</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffcad0; --color-darker: #ffa7b3; --color-dimmed: #ffb9c2;">new learning pathway</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffd2d7; --color-darker: #ffafb9; --color-dimmed: #ffc0c8;">new learning pathway</span>
 	
 	</p>
 	<p class="card-text">
@@ -485,9 +486,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>
 	18 March 2024 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00f696; --color-darker: #00db85; --color-dimmed: #00e88e;">gtn infrastructure</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00fc9b; --color-darker: #00e089; --color-dimmed: #00ee92;">gtn infrastructure</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d3d4ff; --color-darker: #b8b9ff; --color-dimmed: #c5c7ff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #d9daff; --color-darker: #bdbfff; --color-dimmed: #cbcdff;">new feature</span>
 	
 	</p>
 	<p class="card-text">
@@ -508,9 +509,9 @@ The GTN wants you to be able to rely on our URLs once you’ve added them to a p
 	<p>
 	4 March 2024 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #00f696; --color-darker: #00db85; --color-dimmed: #00e88e;">gtn infrastructure</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #00fc9b; --color-darker: #00e089; --color-dimmed: #00ee92;">gtn infrastructure</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d3d4ff; --color-darker: #b8b9ff; --color-dimmed: #c5c7ff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #d9daff; --color-darker: #bdbfff; --color-dimmed: #cbcdff;">new feature</span>
 	
 	</p>
 	<p class="card-text">
@@ -541,7 +542,7 @@ The GTN wants you to be able to rely on our URLs once you’ve added them to a p
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6fc568f3ffe7ee516bb916e175f36f6ea153c156">6fc568f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/64f3e2daca32990c281ec4af7ddfbc771cf1de91">64f3e2d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
