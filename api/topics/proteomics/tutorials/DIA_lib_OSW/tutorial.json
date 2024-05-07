@@ -89,7 +89,7 @@
       "name": "DIA_lib_OSW",
       "title": "DIA_lib_OSW",
       "test_results": null,
-      "modified": "2024-05-07 09:16:07 +0000",
+      "modified": "2024-05-07 09:40:00 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nHEK_Ecoli_exp_design.txt\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\niRTassays.tsv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Collection\\nFASTA collection\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Collection\\nDDA_data collection\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"MaxQuant\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Filter\"];\n  4 -->|evidence| 5;\n  6[\"Filter\"];\n  4 -->|msms| 6;\n  7[\"diapysef library generation\"];\n  5 -->|out_file1| 7;\n  1 -->|output| 7;\n  6 -->|out_file1| 7;\n  8[\"OpenSwathAssayGenerator\"];\n  7 -->|output_tabular| 8;\n  9[\"OpenSwathDecoyGenerator\"];\n  8 -->|out| 9;\n  10[\"TargetedFileConverter\"];\n  9 -->|out| 10;"
     }
   ],

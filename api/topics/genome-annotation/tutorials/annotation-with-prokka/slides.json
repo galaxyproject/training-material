@@ -126,9 +126,9 @@
   },
   "hands_on": true,
   "slides": true,
-  "mod_date": "2024-03-13 13:55:55 +0000",
+  "mod_date": "2024-04-30 23:31:35 +0000",
   "pub_date": "2018-03-06 18:15:31 +0000",
-  "version": 41,
+  "version": 42,
   "workflows": [
     {
       "workflow": "Galaxy-Workflow-Workflow_constructed_from_history__prokka-workflow_.ga",
@@ -138,31 +138,39 @@
       "wfid": "genome-annotation-annotation-with-prokka",
       "wfname": "galaxy-workflow-workflow_constructed_from_history__prokka-workflow_",
       "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-annotation-with-prokka/versions/galaxy-workflow-workflow_constructed_from_history__prokka-workflow_",
-      "license": null,
+      "license": "GPL-3.0-or-later",
       "creators": [
-
+        {
+          "class": "Person",
+          "identifier": "0000-0002-9906-0673",
+          "name": "Anna Syme"
+        },
+        {
+          "class": "Person",
+          "identifier": "0000-0001-6046-610X",
+          "name": "Torsten Seemann"
+        },
+        {
+          "class": "Person",
+          "identifier": "0000-0002-6100-4385",
+          "name": "Simon Gladman"
+        }
       ],
-      "name": "Genome Annotation with Prokka [Feb 2020]",
-      "title": "Genome Annotation with Prokka [Feb 2020]",
+      "name": "Genome Annotation with Prokka ",
+      "title": "Genome Annotation with Prokka ",
       "test_results": null,
-      "modified": "2024-05-07 09:16:06 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs.fasta\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Prokka\"];\n  0 -->|output| 1;\n  e18185af-892d-46bb-aa40-df5d2640e9c7[\"Output\\ngff_output\"];\n  1 --> e18185af-892d-46bb-aa40-df5d2640e9c7;\n  style e18185af-892d-46bb-aa40-df5d2640e9c7 stroke:#2c3143,stroke-width:4px;\n  2[\"JBrowse\"];\n  0 -->|output| 2;\n  1 -->|out_gff| 2;"
+      "modified": "2024-05-07 09:39:59 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs.fasta\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Prokka\"];\n  0 -->|output| 1;\n  a336c364-e69e-47eb-ace6-a7fe46d285fe[\"Output\\ngff_output\"];\n  1 --> a336c364-e69e-47eb-ace6-a7fe46d285fe;\n  style a336c364-e69e-47eb-ace6-a7fe46d285fe stroke:#2c3143,stroke-width:4px;\n  2[\"JBrowse\"];\n  1 -->|out_fna| 2;\n  1 -->|out_gff| 2;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.json",
   "tools": [
     "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5",
     "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
-    "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.5+galaxy7",
-    "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0"
+    "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1"
   ],
   "supported_servers": {
     "exact": [
-      {
-        "url": "https://usegalaxy.be/",
-        "name": "UseGalaxy.be",
-        "usegalaxy": false
-      },
       {
         "url": "https://usegalaxy.eu",
         "name": "UseGalaxy.eu",
@@ -188,6 +196,11 @@
       {
         "url": "https://mississippi.sorbonne-universite.fr",
         "name": "MISSISSIPPI",
+        "usegalaxy": false
+      },
+      {
+        "url": "https://usegalaxy.be/",
+        "name": "UseGalaxy.be",
         "usegalaxy": false
       },
       {
@@ -235,20 +248,13 @@
       {
         "name": "jbrowse",
         "owner": "iuc",
-        "revisions": "edb534491f92",
-        "tool_panel_section_label": "Graph/Display Data",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "jbrowse",
-        "owner": "iuc",
-        "revisions": "17359b808b01",
+        "revisions": "a6e57ff585c0",
         "tool_panel_section_label": "Graph/Display Data",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: prokka\n  owner: crs4\n  revisions: bf68eb663bc3\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: prokka\n  owner: crs4\n  revisions: 111884f0d912\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jbrowse\n  owner: iuc\n  revisions: edb534491f92\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jbrowse\n  owner: iuc\n  revisions: 17359b808b01\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: prokka\n  owner: crs4\n  revisions: bf68eb663bc3\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: prokka\n  owner: crs4\n  revisions: 111884f0d912\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jbrowse\n  owner: iuc\n  revisions: a6e57ff585c0\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": true,
   "translations": {
