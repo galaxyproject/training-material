@@ -88,56 +88,31 @@ All histories begin with the name 'Unnamed history'. Non-anonymous users can ren
 
 ## Tagging a history
 
-Tags are short pieces of text used to describe the thing they're attached to and many things in Galaxy can be tagged.
-Each item can have many tags and you can add new tags or remove them at any time. Tags can be another useful way to
-organize and search your data. For instance, you might tag a history with the type of analysis you did in it: `assembly`
-or `variants`. Or you may tag them according to data sources or some other metadata: `long-term-care-facility` or
-`yellowstone park:2014`.
-
-> <comment-title>Best Practices for Tagging</comment-title>
-> It is strongly recommended to replace spaces in tags with `_` or `-`, as spaces will automatically be removed when the tag is saved.
-{: .comment}
-
-To tag a history:
-
-1. Click the tag button at the top of the history panel. An input field showing existing tags (if any) will appear.
-2. Begin typing your new tag in the field. Any tags that you've used previously will show below your partial entry -
-  allowing you to use this 'autocomplete' data to re-use your previous tags without typing them in full.
-3. Press enter or select one of the previous tags with your arrow keys or mouse.
-4. To remove an existing tag, click the small 'X' on the tag or use the backspace key while in the input field.
-
-![The history metadata is being edited in this screenshot, we see the history titled "This is the history!" with an empty annotation, and four tags: #protein #modelling, 2023-analyis, and 🐰 in various bright colours. Below is the text "Add tags" followed by the save and cancel buttons.](../../images/tags.png "Tagging a history will help searching for it later on.")
+{% snippet faqs/galaxy/histories_tagging.md box_type="none"%}
 
 ## Annotating a history
 
-Sometimes tags and names are not enough to describe the work done within a history. Galaxy allows you to create history
-annotations: longer text entries that allow for more formatting options. The formatting of the text is preserved. Later, if
-you publish or share the history, the annotation will be displayed automatically - allowing you to share additional
-notes about the analysis.
+{% snippet faqs/galaxy/histories_annotation.md box_type="none"%}
 
-To annotate a history:
+## History size, storage selection, and views
 
-1. Click the annotation button at the top of the history panel. A larger text section will appear displaying any
-  existing annotation (or, if there's none, italic text saying you can click on the control to create an annotation).
-2. Click the annotation section. A larger input field will appear.
-3. Add your annotations. <kbd>Enter</kbd> will move the cursor to the next line. (Tabs cannot be
-  entered since the 'Tab' button is used to switch between controls on the page - tabs can be pasted in however).
-4. To save the annotation, click the 'Done' button.
+The lower part of the history header contains a number of buttons:
 
-![Essentially the same close up as before, but now the tags are gone, and the box reads: This is an annotation. You can use multiples lines! and     spaces And emoji! 😹🏳️‍⚧️🌈](../../images/annotations.png "Annotating a history allows entering more information such as, for example, experimental details related to the analysis")
+![Buttons for figuring out history size, selecting storage location, and controlling views](../../../../shared/images/history_size_storage_views.png "Using these buttons one can obtain an information about history's disk footpring, change storage options, and control dataset views.")
 
-## Checking history size
+> <warning-title>Some icons are instance-specific</warning-title>
+> The list of buttons shown above may vary depending on which Galaxy instance you are using. For example, at the tim eof writing the **Preferred storage** {% icon galaxy-history-storage-choice %} button is only available on https://usegalaxy.org.
+{: .warning}
 
-As datasets are added to a history, Galaxy will store them on the server. The total size of these files,
-for all the datasets in a history, is displayed underneath the history name. For example, if a history has 200 megabytes
-of dataset data on Galaxy's filesystem, '{% icon galaxy-chart-select-data %} 200 MB' will be displayed underneath the history name.
-
-If your Galaxy server uses quotas, the total combined size of all your histories will be compared to your quota. If you're using more than the quota allows, Galaxy will prevent you from running any new jobs until you've deleted some
-datasets and brought that total below the quota.
+- {% icon galaxy-history-size %} **History size** - shows history storage overview in the central pane of the interface.
+- {% icon galaxy-history-storage-choice %} **Preferred storage location** - allows users to specify where history datasets will be stored. This button is only available on Galaxy instances with scratch storage such as usegalaxy.org. Scratch storage allows users to much larger storage allocation for a limited amount time.
+- {% icon galaxy-show-active %} **Show active** - shows active (non-deleted and non-hidden) datasets in the history.
+- {% icon galaxy-delete %} **Include deleted** - include deleted datasets into the history view. If you delete a dataset is does not disappear unless you explicitly purge it.
+- {% icon galaxy-show-hidden %} **Include hidden** - include hidden datasets into the history view. Any dataset in history can be hidden. For example, workflow executions frequently hide intermediate datasets so that they do now complicate history view. It is a way to hide non-importnat datasets from the view. 
 
 # History datasets
 
-History is a collection of datasets. Datasets can either be uploaded or generated by analysis tools. 
+So far we only discussed functions and controls affecting the *entrire* history. Yet history is a collection of datasets. Now it is time to discuss interfacse elements of individual datasets.  
 
 ## United Colors of Galaxy: Dataset states
 
