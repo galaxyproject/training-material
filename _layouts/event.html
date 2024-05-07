@@ -30,9 +30,9 @@ layout: base
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Programme</button>
   </li>
-  <!-- <li class="nav-item" role="presentation"> -->
-  <!--   <button class="nav-link" id="register-tab" data-toggle="tab" data-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">How to Register</button> -->
-  <!-- </li> -->
+  <li class="nav-item" role="presentation">
+     <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false">Setup</button>
+  </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Instructor Zone</button>
   </li>
@@ -95,11 +95,19 @@ layout: base
 </section>
 
   </div>
+
+  <!-- Programme Tab -->
   <div class="tab-pane " id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <h2> Program </h2>
     {% if event.external %}
        For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
     {% else %}
+
+    <b>Important:</b> Before starting the course, make sure to follow the setup instructions
+    <br>
+
+    <button id="setup-button" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
+
     {% for section in event.program %}
         <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
         <p>{{ section.description | markdownify }}</p>
@@ -110,12 +118,113 @@ layout: base
 	{% endif %}
     {% endfor %}
     {% endif %}
-  </div>
-  <!-- <div class="tab-pane " id="register" role="tabpanel" aria-labelledby="register-tab"> -->
-  <!--   <h2>Registering</h2> -->
-  <!--  -->
-  <!--   TODO: registration button -->
-  <!-- </div> -->
+  </div><!-- end programme tab -->
+
+
+  <!-- Setup Tab -->
+  <div class="tab-pane " id="setup" role="tabpanel" aria-labelledby="setup-tab">
+
+    <h3>Get set up for the course!</h3>
+    <p>Follow the steps below to get set up with everything you need to participate in the course!</p>
+
+    <!-- Galaxy setup -->
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="{% link assets/images/galaxylogo.png %}" class="card-img" alt="Galaxy logo" style="width: 70%">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Create a Galaxy Account</h5>
+			<p class="card-text">
+              Create an account on one of the following Galaxy servers:
+              <ul>
+              {% for galaxy in event.infrastructure.servers %}
+              <li><a href="{{ galaxy.server }}">{{galaxy.name}}</a></li>
+              {% endfor %}
+              </ul>
+            </p>
+            <p class="card-text">
+              You will get an email with <b>activation link</b>. It may end up in your junk folder.
+            </p>
+			<p class="card-text text-muted">
+              Note: If you already have a Galaxy account you can skip this step and just log in to your existing account.
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+    <!-- TIaaS setup -->
+    {% if event.infrastructure.tiaas %}
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="{% link assets/images/tiaas.png %}" class="card-img" alt="TIaaS" style="width:70%">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Join Galaxy Training Group (TIaaS)</h5>
+			<p class="card-text">
+            Join TIaaS by clicking on the link below matching your Galaxy server:
+            <ul>
+              {% for galaxy in event.infrastructure.servers %}
+              {% if galaxy.tiaas_link %}
+              <li><a href="{{galaxy.tiaas_link}}">{{galaxy.name}} TIaaS</a></li>
+              {% else %}
+              <li>{{galaxy.name}} is not using TIaaS</li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+            </p>
+            <p class="card-text">
+            This will give your analysis jobs <b>priority on Galaxy</b> for the duration of the event. Make sure you are <b>logged in</b> before clicking the link.
+            You should see a <b>green message box</b> if all went well.
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    {% endif %}
+
+
+    <!-- Support setup -->
+    {% if event.infrastructure.support %}
+    {% assign support = event.infrastructure.support %}
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="{% link assets/images/galaxy-for-developers.svg %}" class="card-img" alt="Galaxy logo">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Join {{support.platform | default: "Slack" }}!</h5>
+			<p class="card-text">
+
+            We will provide support via {{support.platform | default: "Slack" }}. Here you can <b>ask any questions</b> you may have during the course,
+            and <b>socialize</b> with your fellow participants and instructors.
+
+            The following steps will get you set up with {{support.platform | default: "Slack" }}:
+
+
+            <ol>
+              <li>Join {{support.platform}} via this <a href="{{support.join_link | default: site.slack.invite }}">Invite Link</a></li>
+              <li>Join the event channel: <a href="{{support.link | default: site.slack.general_channel}}">{{event.infrastructure.support.channel | default: "#general"}}</a></li>
+              <li>Introduce yourself here!</li>
+            </ol>
+
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    {% endif %}
+
+
+
+  </div><!-- end setup tab -->
+
+
   <div class="tab-pane " id="contact" role="tabpanel" aria-labelledby="contact-tab">
 <section>
 	<h2>Instructor Zone</h2>
