@@ -100,7 +100,7 @@ The lower part of the history header contains a number of buttons:
 
 ![Buttons for figuring out history size, selecting storage location, and controlling views](../../../../shared/images/history_size_storage_views.png "Using these buttons one can obtain an information about history's disk footpring, change storage options, and control dataset views.")
 
-> <warning-title>Some icons are instance-specific</warning-title>
+> <warning-title>Some buttons are instance-specific</warning-title>
 > The list of buttons shown above may vary depending on which Galaxy instance you are using. For example, at the tim eof writing the **Preferred storage** {% icon galaxy-history-storage-choice %} button is only available on https://usegalaxy.org.
 {: .warning}
 
@@ -114,14 +114,18 @@ The lower part of the history header contains a number of buttons:
 
 So far we only discussed functions and controls affecting the *entrire* history. Yet history is a collection of datasets. Now it is time to discuss interfacse elements of individual datasets.  
 
+## Datasets can be individual or bundled into collections
+
+A histiry dataset can exist by iteslf, as an independent entity, or as a part of a **collection**. Collections make it possible to analyze datasets with hundreds of thousands of samples.
+
+{% snippet faqs/galaxy/histories_datasets_vs_collections.md box_type="none"%}
+
 ## United Colors of Galaxy: Dataset states
 
 There are several different "states" a dataset can be in. These states are shown in Fig. 7.
 
 ![5 datasets are shown in a history, one in each of the aforementioned dataset states. They are all coloured relative to those states and some include different icons to indicate their state.](../../images/states.png "United Colors of Galaxy: (1) <b>Ok</b>: Dataset is uploaded successfully, or the job that created this dataset finished successfully; (2) <b>Error</b>: The dataset is in error. It may be an error the occurred during the upload of the dataset or an error within the job that created this dataset; (3) <b>Running</b>: The dataset is being uploaded or the job creating this dataset is still executing; (4) <b>Paused</b>: The execution of a job generating this dataset is paused. This typically occurs when the upstream jobs (jobs generating datsets on which this particular job depends) are in error. You can re-start/resume paused jobs using the options menu above the history panel and selecting 'Resume Paused Jobs'; (5) <b>Queued</b>: Upload or job generating this dataset are waiting thier turn to be executed. Galaxy is a public service with hundreds or thousands of simultaneous jobs running at any given moment. As a result some jobs do not start immediately but wait their turn in the cluster queue.")
 
-
-ob has completed successfully, the datasets it generated will be in this state")
 
 Datasets in the panel are initially shown in a 'summary' view, that only displays:
 
