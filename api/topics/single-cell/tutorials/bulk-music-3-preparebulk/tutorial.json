@@ -99,7 +99,7 @@
       "name": "MuSiC-Deconvolution: Data generation | bulk | ESet",
       "title": "MuSiC-Deconvolution: Data generation | bulk | ESet",
       "test_results": null,
-      "modified": "2024-05-08 08:17:40 +0000",
+      "modified": "2024-05-08 13:55:08 +0000",
       "mermaid": "flowchart TD\n  0[\"Expression matrix\"];\n  1[\"Metadata\"];\n  2[\"annotateMyIDs\"];\n  0 -->|output_tabular| 2;\n  8415bac0-6beb-467d-a0fa-fb6465987ff7[\"Output\\nannotateMyIDs on input dataset(s): Annotated IDs\"];\n  2 --> 8415bac0-6beb-467d-a0fa-fb6465987ff7;\n  style 8415bac0-6beb-467d-a0fa-fb6465987ff7 stroke:#2c3143,stroke-width:4px;\n  3[\"Regex Find And Replace\"];\n  1 -->|output| 3;\n  4[\"🛠️ Subworkflow\\nCopy of Convert from Ensembl to GeneSymbol, summing duplicate genes\"];\n  style 4 fill:#edd,stroke:#900,stroke-width:4px;\n  2 -->|out_tab| 4;\n  0 -->|output_tabular| 4;\n  5[\"Construct Expression Set Object\"];\n  4 -->|Gene Symbol Count Matrix| 5;\n  3 -->|out_file1| 5;\n  6[\"Manipulate Expression Set Object\"];\n  5 -->|out_rds| 6;\n  88196d0b-7254-4794-b08a-5409f19c8323[\"Output\\nManipulate Expression Set Object on input dataset(s): ExpressionSet Object\"];\n  6 --> 88196d0b-7254-4794-b08a-5409f19c8323;\n  style 88196d0b-7254-4794-b08a-5409f19c8323 stroke:#2c3143,stroke-width:4px;\n  7[\"Manipulate Expression Set Object\"];\n  5 -->|out_rds| 7;"
     }
   ],
