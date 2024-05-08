@@ -1332,7 +1332,6 @@ Before we begin, we need to upload BioNano data:
 >**Step 2**: Upload datasets into Galaxy
 >    - set the datatype to `cmap`
 >
->The box below explains how to upload data if you forgot. Just make sure you set dataset type to `cmap`.
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md format="cmap" %}
 >
