@@ -536,7 +536,16 @@ Ideally, these will reflect the actual input distances, but such distances are b
 That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred, and that calculated from sequence data.
 
 > <hands-on-title>Visualising a tree</hands-on-title>
-> 1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc. 
+> To visualise your tree in Galaxy:
+> 1. Search for the {% tool [Newick Display](toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1) %} in the tool finder on the left, and run it with the following parameters:
+>
+>    - *"Newick file"*: {% icon param-file %}: `tree.nhx` (output of **FastTree** {% icon tool %})
+>    - *"Branch support"*: `Display branch support`
+>    - *"Branch length"*: `Display branch length`
+>    - *"Choose an ouput format"*: `PNG`
+> 2. Click on the **display icon** {% icon galaxy-eye %} next to the title of the completed Newick Display job to display your tree.
+>
+> <!--1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc. 
 > ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](./images/LittleJobIcons.png)
 >
 > 2. Click on the **Visualisation icon** {% icon galaxy-visualise %}
@@ -546,10 +555,17 @@ That is why methods like FastTree are employed to find a tree with the best poss
 >
 >    <!-- [SelectTreeVisualisation](./images/PhylogeneticTreeVisualisationOptions.png){:width="400"} -->
 > 
-> 5. Open the settings panel via the **Visualisation Settings** {% icon galaxy-vis-config %} at the top right of the central panel. Click on these to reveal the settings and display options. Try out "Circular" and "Radial".
+> <!--5. Open the settings panel via the **Visualisation Settings** {% icon galaxy-vis-config %} at the top right of the central panel. Click on these to reveal the settings and display options. Try out "Circular" and "Radial". -->
 >   Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves) and that these branches are much shorter near the centre of the tree.
 > Note: **Short branches are much harder to get right.**
-> 6. (If you wish you may of course re-run FastTree and allow it to seek a Maximum Likelihood tree -- maybe once you've learned more about Maximum Likelihood.)
+>
+> Additional visualisation options
+> 1. To build a radial tree, rerun Newick Display and choose the *"Draw a radial tree"*: `Yes` option.
+> 2. Alternatively you can visualise your tree outside of Galaxy by downloading your FastTree output and using software such as [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/). These tools provide additional options for customising the appearance of your tree.
+>
+>(If you wish you may of course re-run FastTree and allow it to seek a Maximum Likelihood tree -- maybe once you've learned more about Maximum Likelihood.)
+>
+>  
 {: .hands_on}
 
 
@@ -732,9 +748,19 @@ While this is running you might use your time to read the [Models of sequence ev
 >    <!-- > 8. Open the *Nonparametric bootstrapping* Leave all the Tree Parameters as they are. (Have a look at them and see if you can work out what they do). -->
 >    <!-- > 9. For **Bootstrap Parameters** select "Ultrafast bootstrap parameters" and enter "1000" bootstrap replicates. -->
 > 7. Click "Run tool".
-> 8. Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree.
-> ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values.](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")
->Observe that the bootstrap values in the IQTree output for deep branches are not as high.
+> 8. To visualise your tree in Galaxy, search for the {% tool [Newick Display](toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1) %} in the tool finder on the left, and run it with the following parameters:
+>
+>    - *"Newick file"*: {% icon param-file %}: `MaxLikelihoodTree` (output of **IQTree** {% icon tool %})
+>    - *"Branch support"*: `Display branch support`
+>    - *"Choose an ouput format"*: `PNG`
+> 9. Click on the **display icon** {% icon galaxy-eye %} next to the title of the completed Newick Display job to display your tree.
+>
+>	Alternatively you can visualise your tree outside of Galaxy by downloading your IQTree output and using software such as [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/). These tools provide additional options for customising the appearance of your tree.
+><!-- 8. Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree. -->
+><!-- ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values.](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")-->
+> ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values in red.](./images/Newick_Display_IQTree.png "The resulting tree found by IQTree, displayed using Newick Display.")
+>
+>Observe that the bootstrap values (in red) in the IQTree output for deep branches are not as high.
 >
 >Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
 {: .hands_on}
@@ -1236,6 +1262,7 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 - [Phylogenetic Inference in the Stanford Encyclopedia](https://plato.stanford.edu/entries/phylogenetic-inference/)
 - [MrBayes](https://nbisweden.github.io/MrBayes/index.html)
 - [BEAST](http://www.beast2.org/)
+- [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/) can be used to visualise phylogenetic trees outside of Galaxy. These tools provide additional options for customising the appearance of your tree.
 
 ## How to cite the tools used in this tutorial
 
