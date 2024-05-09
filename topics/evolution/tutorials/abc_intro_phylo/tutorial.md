@@ -561,7 +561,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 >
 > Additional visualisation options
 > 1. To build a radial tree, rerun Newick Display and choose the *"Draw a radial tree"*: `Yes` option.
-> 2. Alternatively you can visualise your tree outside of Galaxy by downloading your FastTree output and using software such as [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/). These tools provide additional options for customising the appearance of your tree.
+> 2. Alternatively you can visualise your tree outside of Galaxy by downloading your FastTree output and using software such as [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/). These tools provide additional options for interactively exploring and customising the appearance of your tree.
 >
 >(If you wish you may of course re-run FastTree and allow it to seek a Maximum Likelihood tree -- maybe once you've learned more about Maximum Likelihood.)
 >
@@ -755,7 +755,7 @@ While this is running you might use your time to read the [Models of sequence ev
 >    - *"Choose an ouput format"*: `PNG`
 > 9. Click on the **display icon** {% icon galaxy-eye %} next to the title of the completed Newick Display job to display your tree.
 >
->	Alternatively you can visualise your tree outside of Galaxy by downloading your IQTree output and using software such as [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/). These tools provide additional options for customising the appearance of your tree.
+>	Alternatively you can visualise your tree outside of Galaxy by downloading your IQTree output and using software such as [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/). These tools provide additional options for interactively exploring and customising the appearance of your tree.
 ><!-- 8. Click on the output of IQ-Tree and select the visualisation icon. Select 'Phyloviz' to view your tree. -->
 ><!-- ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values.](./images/PhyloVisTree.png "The resulting tree found by IQTree, displayed using PhyloVis.")-->
 > ![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values in red.](./images/Newick_Display_IQTree.png "The resulting tree found by IQTree, displayed using Newick Display.")
@@ -1262,7 +1262,7 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 - [Phylogenetic Inference in the Stanford Encyclopedia](https://plato.stanford.edu/entries/phylogenetic-inference/)
 - [MrBayes](https://nbisweden.github.io/MrBayes/index.html)
 - [BEAST](http://www.beast2.org/)
-- [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/) can be used to visualise phylogenetic trees outside of Galaxy. These tools provide additional options for customising the appearance of your tree.
+- [SplitsTree](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [FigTree](http://tree.bio.ed.ac.uk/software/Figtree/) can be used to visualise phylogenetic trees outside of Galaxy. These tools provide additional options for exploring and customising your trees.
 
 ## How to cite the tools used in this tutorial
 
