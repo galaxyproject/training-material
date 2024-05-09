@@ -1,6 +1,7 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "",
+    "comments": [],
     "creator": [
         {
             "class": "Person",
@@ -9,7 +10,8 @@
         }
     ],
     "format-version": "0.1",
-    "name": "Data QC",
+    "license": "GPL-3.0-or-later",
+    "name": "Data QC - upgraded",
     "report": {
         "markdown": "\n# Workflow Report for Data QC\n\n## Workflow steps\n\n```galaxy\nworkflow_display()\n```\n\n"
     },
@@ -30,20 +32,15 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "bottom": 237.015625,
-                "height": 81,
-                "left": 279,
-                "right": 479,
-                "top": 156.015625,
-                "width": 200,
-                "x": 279,
-                "y": 156.015625
+                "left": 0,
+                "top": 0.0
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
             "uuid": "e2e4a70b-6e36-4b8b-bdf6-12b97189a6bd",
+            "when": null,
             "workflow_outputs": []
         },
         "1": {
@@ -62,20 +59,15 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "bottom": 258.015625,
-                "height": 81,
-                "left": 814.703125,
-                "right": 1014.703125,
-                "top": 177.015625,
-                "width": 200,
-                "x": 814.703125,
-                "y": 177.015625
+                "left": 535.703125,
+                "top": 21.0
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
             "uuid": "ea859a58-c81a-4ef6-9bd2-4ef2f17bb5a9",
+            "when": null,
             "workflow_outputs": []
         },
         "2": {
@@ -94,25 +86,20 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "bottom": 617,
-                "height": 81,
-                "left": 809.703125,
-                "right": 1009.703125,
-                "top": 536,
-                "width": 200,
-                "x": 809.703125,
-                "y": 536
+                "left": 530.703125,
+                "top": 379.984375
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
             "uuid": "472adc05-88a5-4955-9e43-e82e9550ad08",
+            "when": null,
             "workflow_outputs": []
         },
         "3": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.42.0+galaxy1",
             "errors": null,
             "id": 3,
             "input_connections": {
@@ -131,30 +118,16 @@
                 },
                 {
                     "name": "nanostats",
-                    "type": "txt"
+                    "type": "tabular"
                 },
                 {
                     "name": "nanostats_post_filtering",
-                    "type": "txt"
-                },
-                {
-                    "name": "read_length",
-                    "type": "png"
-                },
-                {
-                    "name": "log_read_length",
-                    "type": "png"
+                    "type": "tabular"
                 }
             ],
             "position": {
-                "bottom": 692.375,
-                "height": 432,
-                "left": 519.84375,
-                "right": 719.84375,
-                "top": 260.375,
-                "width": 200,
-                "x": 519.84375,
-                "y": 260.375
+                "left": 240.84375,
+                "top": 104.359375
             },
             "post_job_actions": {
                 "HideDatasetActionlog_read_length": {
@@ -178,17 +151,18 @@
                     "output_name": "read_length"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.42.0+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "edbb6c5028f5",
+                "changeset_revision": "a02b8b3f5a0c",
                 "name": "nanoplot",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"customization\": {\"color\": null, \"format\": \"png\", \"plots\": null, \"N50\": \"false\"}, \"filter\": {\"maxlength\": null, \"minlength\": null, \"drop_outliers\": \"false\", \"downsample\": null, \"loglength\": \"false\", \"percentqual\": \"false\", \"alength\": \"false\", \"minqual\": null, \"readtype\": null, \"barcoded\": \"false\"}, \"mode\": {\"choice\": \"batch\", \"__current_case__\": 0, \"reads\": {\"type\": \"fastq\", \"__current_case__\": 0, \"files\": {\"__class__\": \"RuntimeValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.28.2+galaxy1",
+            "tool_state": "{\"customization\": {\"color\": null, \"plots\": null, \"N50\": false}, \"filter\": {\"maxlength\": null, \"minlength\": null, \"drop_outliers\": false, \"downsample\": null, \"loglength\": false, \"percentqual\": false, \"alength\": false, \"minqual\": null, \"runtime_until\": null, \"readtype\": null, \"barcoded\": false, \"no_supplementary\": false}, \"mode\": {\"choice\": \"batch\", \"__current_case__\": 0, \"reads\": {\"type\": \"fastq\", \"__current_case__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.42.0+galaxy1",
             "type": "tool",
             "uuid": "3b8a87fe-1506-48d2-a4d9-f4dca8b6065d",
+            "when": null,
             "workflow_outputs": [
                 {
                     "label": "NanoPlot on input dataset(s): HTML report",
@@ -199,7 +173,7 @@
         },
         "4": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
             "errors": null,
             "id": 4,
             "input_connections": {
@@ -235,14 +209,8 @@
                 }
             ],
             "position": {
-                "bottom": 488,
-                "height": 332,
-                "left": 1065.84375,
-                "right": 1265.84375,
-                "top": 156,
-                "width": 200,
-                "x": 1065.84375,
-                "y": 156
+                "left": 786.548095703125,
+                "top": 0.5756988525390625
             },
             "post_job_actions": {
                 "HideDatasetActionhtml_file": {
@@ -256,22 +224,23 @@
                     "output_name": "text_file"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "e7b2202befea",
+                "changeset_revision": "5ec9f6bceaee",
                 "name": "fastqc",
                 "owner": "devteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.72+galaxy1",
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.74+galaxy0",
             "type": "tool",
             "uuid": "175dd690-5995-4bb7-8994-c73bc864e092",
+            "when": null,
             "workflow_outputs": []
         },
         "5": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
             "errors": null,
             "id": 5,
             "input_connections": {
@@ -307,14 +276,8 @@
                 }
             ],
             "position": {
-                "bottom": 853,
-                "height": 332,
-                "left": 1071.53125,
-                "right": 1271.53125,
-                "top": 521,
-                "width": 200,
-                "x": 1071.53125,
-                "y": 521
+                "left": 792.53125,
+                "top": 364.984375
             },
             "post_job_actions": {
                 "HideDatasetActionhtml_file": {
@@ -328,22 +291,23 @@
                     "output_name": "text_file"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "e7b2202befea",
+                "changeset_revision": "5ec9f6bceaee",
                 "name": "fastqc",
                 "owner": "devteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.72+galaxy1",
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.74+galaxy0",
             "type": "tool",
             "uuid": "bb99a593-dff8-4b5b-94b4-ac1b4e5d29e7",
+            "when": null,
             "workflow_outputs": []
         },
         "6": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
             "errors": null,
             "id": 6,
             "input_connections": {
@@ -370,14 +334,8 @@
                 }
             ],
             "position": {
-                "bottom": 659.15625,
-                "height": 272,
-                "left": 1512.5,
-                "right": 1712.5,
-                "top": 387.15625,
-                "width": 200,
-                "x": 1512.5,
-                "y": 387.15625
+                "left": 1233.5,
+                "top": 230.844970703125
             },
             "post_job_actions": {
                 "HideDatasetActionstats": {
@@ -386,17 +344,18 @@
                     "output_name": "stats"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "75c93c70d094",
+                "changeset_revision": "abfd8a6544d7",
                 "name": "multiqc",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"comment\": \"\", \"export\": \"false\", \"flat\": \"false\", \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}], \"saveLog\": \"false\", \"title\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.9+galaxy1",
+            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}], \"saveLog\": false, \"title\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.11+galaxy1",
             "type": "tool",
             "uuid": "3e29a59b-dca0-4993-b20d-495a3f17e291",
+            "when": null,
             "workflow_outputs": [
                 {
                     "label": "MultiQC on input dataset(s): Webpage",
@@ -407,8 +366,9 @@
         }
     },
     "tags": [
-        "LG-WF"
+        "LG-WF",
+        "GTN"
     ],
-    "uuid": "294a11cb-e544-41b1-8e2a-ad8f89fc91db",
-    "version": 19
+    "uuid": "57eaff09-c635-4390-8def-78e2b904ce1a",
+    "version": 4
 }
