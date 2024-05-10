@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Phylogenetics - Back to basics
 zenodo_link: 'https://zenodo.org/records/11089653'
-draft: true
 tags:
   - phylogenetics
   - evolution
@@ -34,7 +33,7 @@ contributions:
 ---
 
 
-Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your research. 
+Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your research.
 
 {% include _includes/slides-youtube-selector.html id="dmCCQRliEMk" title="Introductory Lecture: Welcome and why phylogenetics?" slides="topics/evolution/tutorials/abc_intro_phylo-intro" %}
 
@@ -68,9 +67,9 @@ This tutorial is adapted from a 2019 workshop run by the Australian BioCommons a
 We will cover:
 
 * What a phylogeny is
-* Motivation: 
-	* conservation / biodiversity, 
-	* fundamental knowledge, 
+* Motivation:
+	* conservation / biodiversity,
+	* fundamental knowledge,
 	* designing vaccines
 * Why it’s hard to find a phylogeny
 	* How long it takes
@@ -122,7 +121,7 @@ A *phylogenetic tree*, also called a *phylogeny*, is usually a tree-like structu
 The intersections of lines correspond to hypothetical ancestral taxa. They represent branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
 
 The phylogeny of a group of taxa is the best representation of their evolutionary relationships.
-It is also the main basis on which we can build statistics comparing species: without the phylogeny, comparing species (or strains, genera, etc.) is not meaningful.  
+It is also the main basis on which we can build statistics comparing species: without the phylogeny, comparing species (or strains, genera, etc.) is not meaningful.
 
 As Theodosius Dobzhansky famously wrote, **"Nothing in biology makes sense except in the light of evolution"** {% cite 6ef38333-9ecd-3f40-8f3e-5f3d6df3c4b4 %}.
 
@@ -175,21 +174,21 @@ Before we start building trees, let's define some terms.
 
 It's common to call **phylogenetic tree** a **phylogeny**.
 
-Mathematically, a **tree** is a kind of **graph**, which has objects called **nodes** or **vertices** (lavender, white, and blue boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).  
+Mathematically, a **tree** is a kind of **graph**, which has objects called **nodes** or **vertices** (lavender, white, and blue boxes in the figure above), connected in pairs by things called **edges** (green and orange lines in the figure above).
 
 Trees are a natural way to think about phylogenetic relationships. The nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them, where taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
 
 Nodes with only one edge attached to them are called **leaves** (or **tips**; in white above) and correspond to taxa with no descendant taxa in the tree. These taxa might be from fossils, or, be currently living, in which case they’re referred to as **extant**.
 
-Internal nodes (in lavender above) correspond to hypothetical common ancestors of the extant taxa: the set of descendants that each one has determines the tree. 
+Internal nodes (in lavender above) correspond to hypothetical common ancestors of the extant taxa: the set of descendants that each one has determines the tree.
 
-Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree. This node is called the **root** (in blue above). When this is the case, a natural direction is implied from the root to the tips, going forward in time. We call such trees and phylogenies **rooted**; if there is no root, they are called **unrooted**. 
+Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree. This node is called the **root** (in blue above). When this is the case, a natural direction is implied from the root to the tips, going forward in time. We call such trees and phylogenies **rooted**; if there is no root, they are called **unrooted**.
 
 *The majority of phylogenetic inference methods produce unrooted trees, but rooted trees are more useful.*
 
 In a rooted phylogeny, all the leaves that are descendant from any given node form a **monophyletic clade**, or often just “**clade**” (monophyletic means “one tribe (of) origin” from the Greek).
 
-One way to determine where the root of a tree belongs is to include an **outgroup** in the data, which is a set of taxa that are definitely not within the clade of interest (which is then called our **ingroup**) but which share a common ancestor with that clade. A good outgroup won’t be too distantly related to our ingroup, because if it’s too distant, choosing where it should connect to the ingroup will be hard, ultimately resulting in a guess. 
+One way to determine where the root of a tree belongs is to include an **outgroup** in the data, which is a set of taxa that are definitely not within the clade of interest (which is then called our **ingroup**) but which share a common ancestor with that clade. A good outgroup won’t be too distantly related to our ingroup, because if it’s too distant, choosing where it should connect to the ingroup will be hard, ultimately resulting in a guess.
 
 You can see in the diagram above that the connection of the ingroup to the outgroup could be from multiple locations. Once the unrooted tree is created, using combined data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
 
@@ -225,18 +224,18 @@ First and foremost, **phylogenetic inference is a statistic _estimation_ process
 
 Different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.
 
-It is generally not possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events. 
+It is generally not possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events.
 
 > <comment-title>Common evolutionary assumptions used in phylogenetic estimation</comment-title>
-> 
+>
 >  We will (mostly) make these assumptions in this tutorial!
 >
 > 1. Evolution is “memoryless.” This assumption is that the future evolutionary trajectory of an organism is not affected by its past. This means we can use the powerful mathematics of Markov processes.
-> 
+>
 > 2. Phylogenetic relationships can be correctly represented by a tree! This isn't *always* assumed, but it is very common. Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However evolution is not always explained by a tree-like, "branching" process as other events such as hybridisation and sharing of genetic material can influence envolutionary processes.
 > 3. The molecular clock assumption is that sequences in a clade evolve at about the same rate. This is known to be wrong, but is useful. For instance, there is variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information in the data.
-> 4. Lineages don’t interact – once they have speciated, they are independent of each other. This isn't always the case and we know that biological lineages *do* interact with each other -- but our methods are generally not able to manage such complexity. The vast majority of methods make this assumption, particularly if the evolution is also assumed to be tree-like. 
-> 
+> 4. Lineages don’t interact – once they have speciated, they are independent of each other. This isn't always the case and we know that biological lineages *do* interact with each other -- but our methods are generally not able to manage such complexity. The vast majority of methods make this assumption, particularly if the evolution is also assumed to be tree-like.
+>
 {: .comment}
 
 
@@ -308,15 +307,15 @@ gawk 'BEGIN {OFS=","} {if (length>100) print length; else print $1}' anolis-raw.
 sed -r 'N;s/^(>[A-Za-z2\.]+)\n/\1,/g' anolis-sequence-lengths.txt -->
 
 
-We are using a relatively small set of sequences to ensure the methods run quickly for the purposes of the tutorial. 
+We are using a relatively small set of sequences to ensure the methods run quickly for the purposes of the tutorial.
 
 In the real world, a phylogenetic analyses often span hundreds, or even thousands, of taxa. Phylogenetic estimation on this many sequences is computationally very intensive, and can take weeks of time even on a high-performance computer.
 
 ### Get the data
 
-<!-- 
-* Does it auto-detect ok? 
-* 
+<!--
+* Does it auto-detect ok?
+*
  -->
 <!-- One sequence is here: https://www.ncbi.nlm.nih.gov/nucleotide/AF055943.2?report=genbank&log$=nuclalign&blast_rank=1&RID=JEX49T9G013 -->
 
@@ -332,16 +331,16 @@ In the real world, a phylogenetic analyses often span hundreds, or even thousand
 >    ```
 >    You may need to refresh your history to show the data.
 >    If the paste/fetch link does not work for you, you can download it to your own computer and then upload it using the "Upload" button at the top of the left panel in Galaxy.
->    
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
-> 
-{: .hands_on} 
+>
+{: .hands_on}
 
 You can click on the 'eye' icon {% icon galaxy-eye %} on the right to see the unaligned data (go ahead!) but the view isn't very informative. This is the raw FASTA file, with the symbols A, C, G, T representing nucleotides. You can see that the sequences are different lengths.
 
 **FASTA** or **Fasta** format (pronounced to rhyme with pasta) format is is commonly used as input to phylogenetic inference programs and has a very simple structure, as follows:
 
-1. Each sequence has a name, which appears on its own line after a '>' sign 
+1. Each sequence has a name, which appears on its own line after a '>' sign
 2. The next line(s) contain the sequence; continuing either until the next sequence name line, or the end of the file.
 
 The example below has four sequences in it named Taxon_1, Taxon_2, etc, each with a short set of characters representing DNA sequences.
@@ -370,18 +369,18 @@ ACTTGGCGTAGCCGGAGGCC
 > <hands-on-title>View your data</hands-on-title>
 > Let's view the unaligned sequence in a more understandable form.
 >
-> 1. Click on the title of your file to see the row of small icons for saving, linking etc: 
-> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](./images/LittleJobIcons.png) 
+> 1. Click on the title of your file to see the row of small icons for saving, linking etc:
+> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](./images/LittleJobIcons.png)
 >
 > 2. Click on the **visualise icon** {% icon galaxy-visualise %} and then select the **Multiple Sequence Alignment tool**.
 > You should see something like this:
 >
 > ![Screenshot of sequence visualisation output from Galaxy. Fifteen Anolis DNA sequences are arranged in rows. The nucleotides are colour coded and arranged in columns: A(blue), T (green), C (pink), G (orange). The top half of the image shows approximately 50 bases of each sequence. The lower half of the image shows a zoomed out heatmap-like image of a larger portion of the sequences.](./images/UnalignedAnolis.png){:width="600"}
-> 
-> Play around with the view. You can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
+>
+> Play around with the view. You can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".
 >
 > If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
-> 
+>
 > Do not adjust the scale slider!  Currently, this breaks the page.
 {: .hands_on}
 
@@ -398,7 +397,7 @@ ACTTGGCGTAGCCGGAGGCC
 # Sequence Alignment
 
 {% icon video %} Watch the video to find out
-[0:00] What ‘alignment’ really means and why it is useful for phylogenetics; [6:22] What makes a good alignment; [12:15] How pairwise sequence alignment and dynamic programming work; [33:47] How the multiple sequence alignment algorithms work; and to 
+[0:00] What ‘alignment’ really means and why it is useful for phylogenetics; [6:22] What makes a good alignment; [12:15] How pairwise sequence alignment and dynamic programming work; [33:47] How the multiple sequence alignment algorithms work; and to
 [40:00] explore multiple sequence alignment of the Anolis sequences with SeaView.
 
 {% include _includes/slides-youtube-selector.html id="FUc2A2r1LGY" title="Lecture: Sequence alignment" slides="topics/evolution/tutorials/abc_intro_phylo-msa" %}
@@ -440,8 +439,8 @@ Here is a visualisation of the resulting alignment. Note that the colours are no
 
 > <hands-on-title>Inspecting your alignment</hands-on-title>
 >
-> 1. Click on the title of the completed MAFFT job to show the row of small icons for saving, linking etc. 
-> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark](./images/LittleJobIcons.png){:align="center"} 
+> 1. Click on the title of the completed MAFFT job to show the row of small icons for saving, linking etc.
+> ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark](./images/LittleJobIcons.png){:align="center"}
 > 2. Click on the **visualise icon** {% icon galaxy-visualise %}
 > 3. You will be presented with a couple of options. Select "**Multiple Sequence Alignment**".
 > *Your alignment is displayed!*
@@ -462,11 +461,11 @@ A tool you can use on your own computer is [SeaView](https://doua.prabi.fr/softw
 
 {% include _includes/slides-youtube-selector.html id="t68H2Ilc4mI" title="Lecture: Phylogenetic Trees" slides="topics/evolution/tutorials/abc_intro_phylo-trees" %}
 
-We are going to build our first tree, using a very common method called _Neighbor-Joining_. This method was created in the 1980s by Saitou & Nei ({% cite 10.1093/oxfordjournals.molbev.a040454 %}). 
+We are going to build our first tree, using a very common method called _Neighbor-Joining_. This method was created in the 1980s by Saitou & Nei ({% cite 10.1093/oxfordjournals.molbev.a040454 %}).
 
 <!-- (Saitou, N. & Nei, M. _The Neighbor-Joining method: a new method for reconstructing phylogenetic trees_. 1987, *Molecular Biology and Evolution*  , Vol. **4**(4):406-425); see also Studier, J. A. & Keppler, K. J., _A Note on the Neighbor-Joining Algorithm of Saitou and Nei_, 1988. *Molecular Biology and Evolution* **5**(6): 729-731) -->
 
-## Building a Neighbor-Joining Tree 
+## Building a Neighbor-Joining Tree
 
 The Neighbor-Joining (NJ) algorithm is a standard method that takes a set of distances between taxa as input, and sequentially connects them into larger and larger clusters until all taxa have been joined.
 
@@ -490,7 +489,7 @@ The FastTree2 program that we are using does this. First it creates a "rough" NJ
 >
 {: .hands_on}
 
-<!-- 
+<!--
 > Removed and linked to the source instead
 >**Heuristic Neighbor-Joining**
 >
@@ -500,7 +499,7 @@ The FastTree2 program that we are using does this. First it creates a "rough" NJ
 >
 >FastTree then tries to reduce the length of the tree, using a mix of nearest-neighbor interchanges (NNIs) and subtree-prune-regraft moves (SPRs). These "balanced minimum-evolution" rearrangements are roughly the same as what FastME does, but because FastTree uses profiles instead of distances, it is much faster. By default, FastTree uses 4*log<sub>2</sub>(N) rounds of nearest-neighbor interchanges and 2 rounds of subtree-prune-regraft moves. In each round, it considers every possible NNI in the tree. Because there are too many (O(N<sup>2</sup>)) possible SPR moves, FastTree treats SPR moves as chains of NNIs and only extends the best choice in the chain for chains of length two or greater. In the minimum-evolution framework, if the distances are not too noisy, NNI and SPR moves suffice to reach optimal trees (Desper & Gascuel 2004, Bordewich et al. 2009).
 >
->Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula $-1.3 \times \log(1-d)$, where $d$ is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance $-0.75\times\log(1 - \frac{4}{3} d)$, where $d$ is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps. 
+>Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula $-1.3 \times \log(1-d)$, where $d$ is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance $-0.75\times\log(1 - \frac{4}{3} d)$, where $d$ is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps.
 >
 {: .comment} -->
 
@@ -509,7 +508,7 @@ It won't take very long for FastTree to build your tree.
 But when it's done, how can you see it?
 
 Clicking on the 'eye' icon  {% icon galaxy-eye %} of the output doesn't at first appear to be very illuminating: it's just a parenthesised list of taxon names and numbers.
-This is **Newick Format**, and it's worth knowing at least a little of what it means.  
+This is **Newick Format**, and it's worth knowing at least a little of what it means.
 
 * Each matched pair of parentheses denotes a **cluster** or **subtree**: "(A,B)" means that A and B are each others' closest relatives (also called _sister taxa_).
 * A number after a cluster (so, after a closing parenthesis) is a **label** for that cluster.  In the output from FastTree, this label is an indicator of the support for that branch.
@@ -522,7 +521,7 @@ The rooted, 3-taxon trees above have three taxa, labelled A, B and C.  Two of th
 
 In both trees, A and B are sister taxa, and branch lengths are indicated near each branch: you can see how the branch lengths are above each cluster, including the individual taxa (the "leaves" of the tree), but not above the root.
 
-The Newick format for the tree on the left is "((A:3, B:2)x:2, C:6)y;" and for the one on the right it is "((A:3, B:2)x:3, C:5)y;". The number after each colon is the length of the branch above it (closer to the root). 
+The Newick format for the tree on the left is "((A:3, B:2)x:2, C:6)y;" and for the one on the right it is "((A:3, B:2)x:3, C:5)y;". The number after each colon is the length of the branch above it (closer to the root).
 
 Note that these two trees are very similar: they only differ in the position of the root (y), either being distance 2 from node x, or being 3 from it.  The distance between any two nodes in the tree is the sum of the branch lengths on the path connecting them, so for the trees above, the distance matrix is
 
@@ -545,7 +544,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 >    - *"Choose an ouput format"*: `PNG`
 > 2. Click on the **display icon** {% icon galaxy-eye %} next to the title of the completed Newick Display job to display your tree.
 >
-> <!--1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc. 
+> <!--1. Click on the title of the completed FastTree job to show the row of small icons for saving, linking etc.
 > ![Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark.](./images/LittleJobIcons.png)
 >
 > 2. Click on the **Visualisation icon** {% icon galaxy-visualise %}
@@ -554,7 +553,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 >    *Your tree is displayed!*
 >
 >    <!-- [SelectTreeVisualisation](./images/PhylogeneticTreeVisualisationOptions.png){:width="400"} -->
-> 
+>
 > <!--5. Open the settings panel via the **Visualisation Settings** {% icon galaxy-vis-config %} at the top right of the central panel. Click on these to reveal the settings and display options. Try out "Circular" and "Radial". -->
 >   Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves) and that these branches are much shorter near the centre of the tree.
 > Note: **Short branches are much harder to get right.**
@@ -565,7 +564,7 @@ That is why methods like FastTree are employed to find a tree with the best poss
 >
 >(If you wish you may of course re-run FastTree and allow it to seek a Maximum Likelihood tree -- maybe once you've learned more about Maximum Likelihood.)
 >
->  
+>
 {: .hands_on}
 
 
@@ -599,7 +598,7 @@ The Maximum Parsimony method for finding the "best" tree is to search tree space
 
 We do not use the Maximum Parsimony method in this tutorial.
 
-## Maximum Likelihood (ML) 
+## Maximum Likelihood (ML)
 {% icon video %} Watch the video to learn about [0:00] the concept of likelihood and how it lends statistic rigour to phylogenetic analysis as well as [26:45] how it is applied in models like Jukes-Cantor, HKY85 and GTR models to select the “best tree” from your data. [34:16] Wander through tree space to find the best tree using Nearest Neighbour Interchange, Subtree Pruning and Regrafting, and Tree Bisection and Reconnection tree perturbations and [45:40] go “hill climbing” with tree-search algorithms. [48:52] Finally, explore the output of IQTree for the Anolis dataset used in the tutorial.
 
 {% include _includes/slides-youtube-selector.html id="0WzQLAl9h8Q" title="Lecture: Maximum Likelihood & Trees" slides="topics/evolution/tutorials/abc_intro_phylo-mle-trees" %}
@@ -616,7 +615,7 @@ This seems much more biologically reasonable and makes this into a Markov proces
 
 ### Searching for trees and their branch lengths
 
-When dealing with nucleotides A, C, G, T, there are 4x4 rate matrices with different names: Jukes-Cantor (JC69) with one parameter, Hasegawa-Kishino-Yano (HKY85) with five parameters, and many more, that define the rates at which nucleotides change. 
+When dealing with nucleotides A, C, G, T, there are 4x4 rate matrices with different names: Jukes-Cantor (JC69) with one parameter, Hasegawa-Kishino-Yano (HKY85) with five parameters, and many more, that define the rates at which nucleotides change.
 There are other 20x20 matrices for amino acids, and even 64x64 matrices for codons.
 
 To convert from a rate to a probability, hence giving us a likelihood, requires that we have a branch length. Then, we can calculate the probability under a given model, and after a specific time interval, of going from one nucleotide to another. We multiply these site probabilities to calculate the probability of going from an entire sequence to another.
@@ -632,13 +631,13 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 > <details-title>Likelihood models</details-title>
 > Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
 > The simplest model for DNA is that each nucleotide has the same rate of change, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%. This is the Jukes-Cantor (JC69) model published in 1969, and this model has just one parameter.
-> 
+>
 > More biological realism allows for different nucleotide proportions outside the uniform 25% rate. This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies, this defines the other one).
-> 
+>
 > A next level of sophistication is the Hasegawa-Kishino-Yano model (HKY85) published in 1985, which acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
 > Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:<!-- ![HKY85 Formula](./images/HKY85RateMatrix.png "HKY85 rate matrix"){: width="300px"}-->\
 > \
-> $$ 
+> $$
 > Q_{HKY} = \left[\begin{array}{c@{ }c@{ }c@{ }c}
 > \ * & \kappa\pi_{G} & \pi_{C} & \pi_{T} \\
 > \kappa\pi_{A} & * & \pi_{C} & \pi_{T} \\
@@ -648,7 +647,7 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 >
 > \
 > In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "the sum of everything else in the row."
-> 
+>
 > A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the "reversible" property) but otherwise all rates are independent of each other:<!-- ![GTR](./images/GTRRateMatrix.png "GTR rate matrix"){: width="300px"}-->\
 > \
 > $$
@@ -659,21 +658,21 @@ Maximum Likelihood is therefore the **slowest** tree inference method we discuss
 > \gamma\pi_{A} & \epsilon\pi_{G} & \eta\pi_{C} & * \\
 > \end{array}\right]
 > $$
-> 
+>
 > \
 > A further level of sophistication is the recognition that some sites may be constrained from changing at all. For example, there may be some that have a critical role in fixing the correct amino acid for a protein to function. This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
-> 
+>
 > The last level of sophistication is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
 > The most common way to allow for this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like allowing most sites to change very slowly and permitting some to change rapidly.
-> This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
-> 
+> This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name.
+>
 > There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task!
 >
 > Fortunately there are tools that help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
-> 
+>
 > The program IQTree, which we use later, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
 > In that step, trees, and their likelihoods based on your data, are estimated for many different models. Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting. One such penalty function is the AIC; there are others.
-> 
+>
 > There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an Maximum Likelihood method is looking for the best model for your data.
 >
 {: .details}
@@ -787,7 +786,7 @@ Look at the IQTree Report file.
 
 In that you will see a *long* list of models that have been tested, with the favoured one at the top.
 
-You will also see the Newick Format of the best tree found.  When I ran it, the best model was "GTR+F+R6", which means the General Time-Reversible 
+You will also see the Newick Format of the best tree found.  When I ran it, the best model was "GTR+F+R6", which means the General Time-Reversible
 
 > <question-title>Understanding the IQ-Tree report</question-title>
 > 1. What is the second-most favoured model?
@@ -802,55 +801,55 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 > <details-title>Guide to the report</details-title>
 > The report below shows a long list of models that have been tested, and these are sorted by their AIC score.
 > The columns comprise the name of the model, the log-likelihood (that is, the log of the likelihood), of the best-fit tree using that model, then six more columns that are the penalised according to the number of parameters each model has, and an overall weighting of the posterior probability of each model.  In the table below, the GTR+F+R6 model has approximately 81.7% of the probability mass based on AIC, but in terms of BIC, it is about 2.37% (guide at the bottom of the table).
-> 
+>
 > It next shows details of the model selected, with relative rate parameters for the various substitutions (A-C is from A to C, etc.); estimated nucleotide frequencies, and then the rate categories.
 > In this analysis the best-fit model is GTR+F+R6:
 > "Model of rate heterogeneity: FreeRate with 6 categories"
 > ... which allows for six categories of relative rates, and shows the proportion of sites estimated to be in each category.
-> 
+>
 > The last thing in the report is the tree!  First in the nostalgic ASCII-format "drawing," and then the same tree in Newick format.
 >
 > <pre>
 > IQ-TREE 2.1.2 COVID-edition built Mar 30 2021
-> 
+>
 > Input file name: /mnt/pulsar/files/staging/7756321/inputs/dataset_6092bb0e-7934-473c-8e8f-77054b0192c5.dat
 > Type of analysis: ModelFinder + tree reconstruction
 > Random seed number: 204403
-> 
+>
 > REFERENCES
 > ----------
-> 
+>
 > To cite IQ-TREE please use:
-> 
+>
 > Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
 > Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
 > IQ-TREE 2: New models and efficient methods for phylogenetic inference
 > in the genomic era. Mol. Biol. Evol., in press.
 > https://doi.org/10.1093/molbev/msaa015
-> 
-> To cite ModelFinder please use: 
-> 
+>
+> To cite ModelFinder please use:
+>
 > Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
 > and Lars S Jermiin (2017) ModelFinder: Fast model selection for
 > accurate phylogenetic estimates. Nature Methods, 14:587–589.
 > https://doi.org/10.1038/nmeth.4285
-> 
+>
 > SEQUENCE ALIGNMENT
 > ------------------
-> 
+>
 > Input data: 55 sequences with 1462 nucleotide sites
 > Number of constant sites: 377 (= 25.7866% of all sites)
 > Number of invariant (constant or ambiguous constant) sites: 377 (= 25.7866% of all sites)
 > Number of parsimony informative sites: 913
 > Number of distinct site patterns: 1138
-> 
+>
 > ModelFinder
 > -----------
-> 
+>
 > Best-fit model according to AIC: GTR+F+R6
-> 
-> List of models sorted by AIC scores: 
-> 
+>
+> List of models sorted by AIC scores:
+>
 > Model                  LogL         AIC      w-AIC        AICc     w-AICc         BIC      w-BIC
 > GTR+F+R6         -37031.233   74312.465 +    0.817   74336.043 +    0.832   74973.410 -   0.0237
 > GTR+F+R7         -37031.088   74316.176 +    0.128   74340.548 +   0.0875   74987.696 - 1.88e-05
@@ -919,45 +918,45 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 > JC+R5            -39408.095   79046.191 -        0   79066.012 -        0   79654.260 -        0
 > JC+R6            -39407.610   79049.220 -        0   79069.765 -        0   79667.865 -        0
 > GTR+F            -41407.684   83045.369 -        0   83065.190 -        0   83653.438 -        0
-> 
+>
 > AIC, w-AIC   : Akaike information criterion scores and weights.
 > AICc, w-AICc : Corrected AIC scores and weights.
 > BIC, w-BIC   : Bayesian information criterion scores and weights.
-> 
+>
 > Plus signs denote the 95% confidence sets.
 > Minus signs denote significant exclusion.
-> 
+>
 > SUBSTITUTION PROCESS
 > --------------------
-> 
+>
 > Model of substitution: GTR+F+R6
-> 
+>
 > Rate parameter R:
-> 
+>
 >   A-C: 1.4045
 >   A-G: 4.3329
 >   A-T: 1.6165
 >   C-G: 0.7046
 >   C-T: 7.4429
 >   G-T: 1.0000
-> 
+>
 > State frequencies: (empirical counts from alignment)
-> 
+>
 >   pi(A) = 0.3392
 >   pi(C) = 0.2607
 >   pi(G) = 0.1184
 >   pi(T) = 0.2817
-> 
+>
 > Rate matrix Q:
-> 
+>
 >   A   -0.6328    0.1737    0.2432    0.2159
 >   C    0.2259     -1.26   0.03954    0.9942
 >   G     0.697   0.08712   -0.9177    0.1336
 >   T      0.26    0.9203   0.05613    -1.236
-> 
+>
 > Model of rate heterogeneity: FreeRate with 6 categories
 > Site proportion and rates:  (0.2697,0.01936) (0.1987,0.1952) (0.1537,0.6315) (0.1929,1.365) (0.1619,2.662) (0.02305,7.146)
-> 
+>
 >  Category  Relative_rate  Proportion
 >   1         0.01936        0.2697
 >   2         0.1952         0.1987
@@ -965,22 +964,22 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 >   4         1.365          0.1929
 >   5         2.662          0.1619
 >   6         7.146          0.02305
-> 
+>
 > MAXIMUM LIKELIHOOD TREE
 > -----------------------
-> 
+>
 > Log-likelihood of the tree: -37024.7700 (s.e. 781.9510)
 > Unconstrained log-likelihood (without tree): -9373.5747
 > Number of free parameters (#branches + #model parameters): 125
 > Akaike information criterion (AIC) score: 74299.5399
 > Corrected Akaike information criterion (AICc) score: 74323.1178
 > Bayesian information criterion (BIC) score: 74960.4850
-> 
+>
 > Total tree length (sum of branch lengths): 10.7102
 > Sum of internal branch lengths: 2.7107 (25.3096% of tree length)
-> 
+>
 > NOTE: Tree is UNROOTED although outgroup taxon 'Anolis.acutus' is drawn at root
-> 
+>
 > +------Anolis.acutus
 > |
 > |                                              +-----A.aeneus
@@ -1090,19 +1089,19 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 > |    +------------A.cristatellus
 > |
 > +-----A.stratulus
-> 
+>
 > Tree in newick format:
-> 
+>
 > (Anolis.acutus:0.1010470578,((((((((((((((A.aeneus:0.0894217579,A.richardi:0.0771663752):0.0905009536,A.luciae:0.1452269292):0.0505637895,((A.agassizi:0.1016958548,A.microtus:0.1274705993):0.0466408653,P.nicefori:0.2174577338):0.0678983736):0.0434625375,(Diplolaemus.darwinii:0.3250757059,Phenacosaurus.acutirostrus:0.3269305219):0.1596746115):0.0466548353,(((((A.aliniger:0.1391142437,A.coelestinus:0.1557602669):0.0598840477,A.bahorucoensis:0.1976626377):0.0075156245,(A.bartschi:0.1398068405,A.vermiculatus:0.1026256093):0.0701730721):0.0088445438,A.equestris:0.1698075932):0.0120788802,A.occulatus:0.3404603086):0.0198461252):0.0251152781,(((A.etheridgei:0.0991665297,A.insolitus:0.1482517520):0.0540499255,A.olssoni:0.1910514865):0.0088098284,Chamaeleolis.barbouri:0.2095740155):0.0188459879):0.0077203037,((((A.barahonae:0.1260843543,A.christophei:0.1262731407):0.0348296954,A.cuvieri:0.1361832093):0.0309217949,(C.guamuhaya:0.0431099935,C.chamaeleonides:0.0257796446):0.1779877789):0.0345206566,A.lucius:0.2146844398):0.0147942476):0.0193880895,(A.marcanoi:0.1954668346,A.strahmi:0.1658659731):0.1384272979):0.0071850401,((A.ahli:0.2194974552,(A.ophiolepis:0.0874380486,A.sagrei:0.0746247231):0.1427321115):0.0307428243,((((A.garmani:0.0905499626,A.grahami:0.0943764186):0.0703118985,A.equestris2:0.1314905403):0.0198447353,A.lineatopus:0.1838950754):0.0232334317,((A.humilis:0.2006656769,A.limifrons:0.1903931082):0.1159932105,A.lineatus:0.2020567025):0.0284469354):0.0386892413):0.0788578675):0.0071420002,((A.alutaceous:0.1299690048,A.vanidicus:0.1769083322):0.1269197421,((((A.angusticeps:0.0766354706,(A.paternus:0.0125693305,A.paternus2:0.0058013518):0.0519908238):0.1128275458,A.sheplani:0.2418794624):0.0228102911,(A.carolinensis:0.0645999975,A.maynardi:0.0760546166):0.0733086724):0.0301309147,(A.loysiana:0.0985169696,A.pumilis:0.1631220132):0.0511013731):0.0207983825):0.0498971029):0.0462944857,(A.bimaculatus:0.1713426754,A.wattsi:0.1884789044):0.0574997330):0.0334141164,(A.brevirostrus:0.1442087439,A.distichus:0.1088311847):0.0833172684):0.0398851829,A.krugi:0.1583953901):0.0256700857,A.cristatellus:0.1827036810):0.0725247864,A.stratulus:0.0863000570);
-> 
+>
 > TIME STAMP
 > ----------
-> 
+>
 > Date and time: Fri Dec  8 00:36:23 2023
 > Total CPU time used: 243.654 seconds (0h:4m:3s)
 > Total wall-clock time used: 56.1638 seconds (0h:0m:56s)
 > </pre>
-> 
+>
 {: .details}
 
 
@@ -1117,11 +1116,11 @@ You will also see the Newick Format of the best tree found.  When I ran it, the 
 
 Perhaps surprisingly, phylogenetic estimation doesn't have to start with a tree. Instead you can start with a *phylogenetic network*.
 
-Phylogenetic networks have two purposes: 
+Phylogenetic networks have two purposes:
 
 1. to show an estimate of the evolutionary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events.
-  
-   or 
+
+   or
 
 2. to show conflicting phylogenetic signal in the data set, suggesting different possible trees.
 
@@ -1176,23 +1175,23 @@ The beauty of the network is that both thes pieces of information can be shown o
 
 > <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
 >
-> 1. Download and install [SplitsTree 4](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [SplitsTree 6 CE](https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html) (Community Edition) on your own computer. 
+> 1. Download and install [SplitsTree 4](https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html) or [SplitsTree 6 CE](https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html) (Community Edition) on your own computer.
 >
 >    Note: SplitsTree 4 is an older version, but works well. SplitsTree 6 is in development but appears to work equally well (at the time of writing). They do the same thing, and we only use tools common to both versions. Installing either version takes a minute or two.
 > 2. Download the aligned data .FASTA file (the output of MAFFT) to your own computer.
 > 3. Start up SplitsTree and open the file.  Within moments you should see something like this (using SplitsTree 4):
 >    ![Screenshot of a phylogenetic network of Anolis species. The root of the network is at the centre of the image and clades radiate outwards forming a circular network.](./images/ST4-default.png)
->    Click on some of the interior branches, which will highlight sets of parallel lines, that correspond to each split that is shown in the network. 
+>    Click on some of the interior branches, which will highlight sets of parallel lines, that correspond to each split that is shown in the network.
 >    This network shows a number of deep branches that are quite well resolved, in the sense that they have very long, thin parallelograms, but there is a jumble of very small parallelograms in the centre of the network, indicating that there is not a lot of information in the data to determine the early branching order of the _Anolis_ phylogeny.
-> 
-> 4. Note that the initial distance measure is using "Uncorrected P" distance, which is simply the proportion of sites that differ between each pair of sequences. It is  possible to use more sophisticated models for maximum likelihood, such as Jukes-Cantor and HKY85. 
+>
+> 4. Note that the initial distance measure is using "Uncorrected P" distance, which is simply the proportion of sites that differ between each pair of sequences. It is  possible to use more sophisticated models for maximum likelihood, such as Jukes-Cantor and HKY85.
 >   Click on the **Distances menu** and select "HKY85".  A dialog box will appear with some options. Click "Apply" and get a network like this:
 > ![HKY85 Network. Screenshot of a phylogenetic network of Anolis species. The root of the network is at the centre of the image and clades radiate outwards forming a circular network.](./images/ST4-HKY85.png)
 >   The above shows you that the basic structure of the network does not change very much using different distance measures. This is a good thing because it means reasonable assumptions you make about your data are not drastically changing the results.
 > 5. Finally, perform a bootstrap analysis on this network.  Click on the **Analysis menu** and select Bootstrap.  Leave the default number of replicates as 1000 and click "run".
 >After a few seconds (less than a minute) you should see something like this:
 > ![HKY85 Network with Bootstrap. Screenshot of a phylogenetic network of Anolis species. The root of the network is at the centre of the image and clades radiate outwards forming a circular network. The network is annotated with bootstrap values.](./images/ST4-HKY85-BS.png)
-> This network shows the percentage of times out of those 1000 replicates that each split was in the network created for each replicate. 
+> This network shows the percentage of times out of those 1000 replicates that each split was in the network created for each replicate.
 >Zoom in (there is a magnifying glass tool at the top) and scroll around the figure to see which are the strongly supported *splits*, which should correspond to the well supported bootstrap values in the trees you inferred above.
 {: .hands_on}
 
@@ -1217,11 +1216,11 @@ Here are a few things that can catch us out:
 
 ><tip-title>Low resolution:</tip-title>
 >Low bootstrap support or lots of conflict in a network.
->  
+>
 >**Fix:** Look at which sites support which splits (internal branches); consider sliding window approaches to identify recombination, or check that your sequences don’t span regions with different selection pressures; consider using PartitionFinder or similar methods to work out which sets of sites have similar evolutionary dynamics.
 {: .tip}
 
-><tip-title>The gene trees are different!</tip-title>  
+><tip-title>The gene trees are different!</tip-title>
 >**Fix:** They might not need fixing: it might just be that the genes’ evolutionary histories aren’t the same as those of the species that host them. Look at all the gene trees and see what other events might have led to the differences between them.
 {: .tip}
 
@@ -1229,7 +1228,7 @@ Here are a few things that can catch us out:
 >**Fix:** Consider mid-point rooting: it is in most cases pretty good.
 {: .tip}
 
-# Summary 
+# Summary
 
 Phylogenetics provides the statistical framework that is essential for comparing biological organisms. A phylogenetic tree provides a best estimate of the evolutionary relationships between species (taxa) of interest, which is the framework we need to compare them.
 
@@ -1273,7 +1272,7 @@ Citations for tools used in a Galaxy workflow can be downloaded from the {%icon 
 
 
 <!-- # Markdown hints
-Internal link [Resources](#resources) 
+Internal link [Resources](#resources)
 An external link[RAxML](https://cme.h-its.org/exelixis/web/software/raxml/)
 
 example table
