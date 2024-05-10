@@ -129,7 +129,7 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 >
 {: .hands_on}
 
-<question-title></question-title>
+> <question-title></question-title>
 >
 > 1. What information is provided here?
 > 2. How many reads have been mapped exactly 1 time?

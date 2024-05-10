@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy 101 for everyone"
+title: "Galaxy Basics for everyone"
 zenodo_link: https://zenodo.org/record/1319069/
 level: Introductory
 questions:
@@ -22,6 +22,7 @@ key_points:
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
 subtopic: core
+priority: 2
 contributors:
   - annefou
   - nagoue

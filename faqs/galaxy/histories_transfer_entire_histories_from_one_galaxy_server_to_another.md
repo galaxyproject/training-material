@@ -27,7 +27,7 @@ At the **sender** Galaxy server
 At the **receiver** Galaxy server
 
 8. Confirm that you are logged into your account.
-9. Click on **User** in the top menu, and choose **Histories** to reach your **Saved Histories**.
+9. Click on **Data** in the top menu, and choose **Histories** to reach your **Saved Histories**.
 10. Click on **Import history** in the grey button on the top right.
 11. Paste in your link's URL from step 7.
 12. Click on **Import History**.
@@ -39,3 +39,4 @@ At the **receiver** Galaxy server
 
 
 {% icon tip %} If the history to transfer is large, you may [copy just your important datasets into a new history]({% link faqs/galaxy/histories_copy_dataset.md %}), and create the archive from that new smaller history. Clearing away deleted and purged datasets will make *all* histories smaller and faster to archive and transfer!
+
