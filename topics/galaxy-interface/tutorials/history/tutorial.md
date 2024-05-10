@@ -124,38 +124,9 @@ A histiry dataset can exist by iteslf, as an independent entity, or as a part of
 
 {% snippet faqs/galaxy/histories_dataset_colors.md box_type="none"%}
 
+## Dataset snippet in detail
 
-Datasets in the panel are initially shown in a 'summary' view, that only displays:
-
-1. A **number** indicating in what order (or what step) this dataset was created,
-2. The dataset **name**.
-3. {% icon galaxy-eye %} **view** button: click this to view the dataset contents in raw format in the browser.
-4. {% icon galaxy-pencil %}  **edit** button: click this to edit dataset properties.
-5. {% icon galaxy-delete %} **delete** button: click this to delete the dataset from the history (*don't worry*, you can undo this action).
-
-![Close up of a single dataset, number 4 with title pdb70_hmm.ffindex. Three icons are visible, eyeball, pencil, trash. It has a purple hashtag of 🦠 (bacteria emoji)](../../images/summary.png "Controls for 'summary' (or collapsed) dataset view. From left to right: view, edit, delete.")
-
-> <tip-title>Disabled buttons?</tip-title>
-> some of the buttons above may be disabled if the dataset is in a state that doesn't allow the
-> action. For example, the 'edit' button is disabled for datasets that are still queued or running
-{: .tip}
-
-You can click the dataset name and the view will expand to show more details:
-
-1. A short description of the data.
-2. The file **format** (Bed in this case) and the reference sequence (or **database**) for the data (`?` here)
-4. (Optionally) some information/output from the job that produced this dataset.
-5. A row of buttons that allow further actions on the dataset.
-6. A **peek** of the data: a couple of rows of data with the column headers (if available).
-
-![Close up of expanded dataset. The top row is the dataset name and view/edit/delete controls.](../../images/details.png "Controls for expanded dataset view. Here we see the aforementioned dataset view and edit controls, tags, description, format, actions, and a dataset preview.")
-
-> <tip-title>Where are the details?</tip-title>
-> Many of these details are only displayed if the dataset has finished running, is in the 'ok' state, and
-> is not deleted. Otherwise, you may only see a shorter message describing the dataset's state (e.g. 'this dataset
-> is waiting to run')
-{: .tip}
-
+{% snippet faqs/galaxy/histories_dataset_item.md box_type="none"%}
 
 ## Managing Datasets Individually
 
