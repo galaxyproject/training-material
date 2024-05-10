@@ -17,7 +17,7 @@
     ],
     "format-version": "0.1",
     "license": "MIT",
-    "name": "Pathogen-Detection-Nanopore-Pre-Processing-collection",
+    "name": "Pathogen-Detection-Nanopore-Pre-Processing-collection v0.2",
     "steps": {
         "0": {
             "annotation": "Nanopore reads of each sample are all in a single fastq or fastq.gz file",
@@ -182,14 +182,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "Nanoplot on Reads Before Preprocessing Log Transformed Histogram Read Length",
-                    "output_name": "log_read_length",
-                    "uuid": "2e38fcb0-9e13-4ef5-9b7e-7423b4794dcc"
-                },
-                {
                     "label": "Nanoplot QC on Reads Before Preprocessing HTML Report",
                     "output_name": "output_html",
                     "uuid": "c1513a6f-392c-406b-9a9e-5a05f54014a8"
+                },
+                {
+                    "label": "Nanoplot on Reads Before Preprocessing Histogram Read Length",
+                    "output_name": "read_length",
+                    "uuid": "c727d318-e1a7-4f06-91ea-5edbc6fade01"
                 },
                 {
                     "label": "Nanoplot on Reads Before Preprocessing NanoStats",
@@ -202,9 +202,9 @@
                     "uuid": "dcc872d2-02f4-4fb7-bea5-c7b2e69ba3b1"
                 },
                 {
-                    "label": "Nanoplot on Reads Before Preprocessing Histogram Read Length",
-                    "output_name": "read_length",
-                    "uuid": "c727d318-e1a7-4f06-91ea-5edbc6fade01"
+                    "label": "Nanoplot on Reads Before Preprocessing Log Transformed Histogram Read Length",
+                    "output_name": "log_read_length",
+                    "uuid": "2e38fcb0-9e13-4ef5-9b7e-7423b4794dcc"
                 }
             ]
         },
@@ -360,10 +360,79 @@
             ]
         },
         "5": {
+            "annotation": "Quality Control Before Preprocessing\n\n",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "results_0|software_cond|output_0|input": {
+                    "id": 3,
+                    "output_name": "text_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MultiQC",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "input"
+                },
+                {
+                    "name": "html_report",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1180.7194421452666,
+                "top": 1286.8009717359205
+            },
+            "post_job_actions": {
+                "RenameDatasetActionhtml_report": {
+                    "action_arguments": {
+                        "newname": "MultiQC HTML report Before Preprocessing"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "html_report"
+                },
+                "RenameDatasetActionstats": {
+                    "action_arguments": {
+                        "newname": "MultiQC Stats Before Preprocessing"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9a913cdee30e",
+                "name": "multiqc",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"RuntimeValue\"}}]}}], \"saveLog\": false, \"title\": \"MultiQC Report Before PreProcessing\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.11+galaxy0",
+            "type": "tool",
+            "uuid": "a21c5fac-afab-44fd-8f02-f1dea3f39680",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "MultiQC HTML report Before Preprocessing",
+                    "output_name": "html_report",
+                    "uuid": "42bbe69b-efa7-4950-91f0-d8db1a3e536f"
+                },
+                {
+                    "label": "MultiQC Stats Before Preprocessing",
+                    "output_name": "stats",
+                    "uuid": "6fb42d0f-1459-4925-92a2-e6de8c0bc45b"
+                }
+            ]
+        },
+        "6": {
             "annotation": "Nanoplot Quality Check After Preprocessing",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
             "errors": null,
-            "id": 5,
+            "id": 6,
             "input_connections": {
                 "mode|reads|files": {
                     "id": 4,
@@ -450,6 +519,11 @@
             "when": null,
             "workflow_outputs": [
                 {
+                    "label": "Nanoplot on Reads After Preprocessing Log Transformed Histogram Read Length",
+                    "output_name": "log_read_length",
+                    "uuid": "a678588d-233a-47d7-95e8-c7939d7677d5"
+                },
+                {
                     "label": "Nanoplot on Reads After Preprocessing Histogram Read Length",
                     "output_name": "read_length",
                     "uuid": "f32ba6ef-9bc1-4a81-8146-bb346b6ffa8e"
@@ -468,19 +542,14 @@
                     "label": "Nanoplot QC on Reads After Preprocessing HTML Report",
                     "output_name": "output_html",
                     "uuid": "3ae0f96b-10bc-4869-a810-817b3467e657"
-                },
-                {
-                    "label": "Nanoplot on Reads After Preprocessing Log Transformed Histogram Read Length",
-                    "output_name": "log_read_length",
-                    "uuid": "a678588d-233a-47d7-95e8-c7939d7677d5"
                 }
             ]
         },
-        "6": {
+        "7": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
             "errors": null,
-            "id": 6,
+            "id": 7,
             "input_connections": {
                 "single_paired|input_sequences": {
                     "id": 4,
@@ -522,7 +591,7 @@
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "e674066930b2",
+                "changeset_revision": "20e2f64aa1fe",
                 "name": "kraken2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
@@ -534,22 +603,22 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "Kraken2 with Kalamri database output",
-                    "output_name": "output",
-                    "uuid": "dadf4422-55c7-412b-a735-dbd638a80736"
-                },
-                {
                     "label": "Kraken2 with Kalamri database Report",
                     "output_name": "report_output",
                     "uuid": "4cbf81c5-07cc-4466-ad62-7ffce8fc99a4"
+                },
+                {
+                    "label": "Kraken2 with Kalamri database output",
+                    "output_name": "output",
+                    "uuid": "dadf4422-55c7-412b-a735-dbd638a80736"
                 }
             ]
         },
-        "7": {
+        "8": {
             "annotation": "Quality Check After Preprocessing",
             "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
             "errors": null,
-            "id": 7,
+            "id": 8,
             "input_connections": {
                 "input_file": {
                     "id": 4,
@@ -583,8 +652,8 @@
                 }
             ],
             "position": {
-                "left": 840,
-                "top": 706
+                "left": 959.698564079201,
+                "top": 816.7211671498034
             },
             "post_job_actions": {
                 "RenameDatasetActionhtml_file": {
@@ -616,25 +685,25 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "FastQC Quality Check After Preprocessing HTML file",
-                    "output_name": "html_file",
-                    "uuid": "b03b7ac6-5759-427b-b613-2bd822606338"
-                },
-                {
                     "label": "FastQC Quality Check After Preprocessing Text file",
                     "output_name": "text_file",
                     "uuid": "218c340c-d245-42c2-afb0-5b493faad109"
+                },
+                {
+                    "label": "FastQC Quality Check After Preprocessing HTML file",
+                    "output_name": "html_file",
+                    "uuid": "b03b7ac6-5759-427b-b613-2bd822606338"
                 }
             ]
         },
-        "8": {
+        "9": {
             "annotation": "",
             "content_id": "__FILTER_FAILED_DATASETS__",
             "errors": null,
-            "id": 8,
+            "id": 9,
             "input_connections": {
                 "input": {
-                    "id": 6,
+                    "id": 7,
                     "output_name": "output"
                 }
             },
@@ -674,14 +743,14 @@
                 }
             ]
         },
-        "9": {
+        "10": {
             "annotation": "",
             "content_id": "__FILTER_FAILED_DATASETS__",
             "errors": null,
-            "id": 9,
+            "id": 10,
             "input_connections": {
                 "input": {
-                    "id": 6,
+                    "id": 7,
                     "output_name": "report_output"
                 }
             },
@@ -721,18 +790,14 @@
                 }
             ]
         },
-        "10": {
-            "annotation": "Quality Control Before and After Preprocessing\n\n",
+        "11": {
+            "annotation": "Quality Control After Preprocessing\n\n",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
             "errors": null,
-            "id": 10,
+            "id": 11,
             "input_connections": {
                 "results_0|software_cond|output_0|input": {
-                    "id": 3,
-                    "output_name": "text_file"
-                },
-                "results_0|software_cond|output_1|input": {
-                    "id": 7,
+                    "id": 8,
                     "output_name": "text_file"
                 }
             },
@@ -750,20 +815,20 @@
                 }
             ],
             "position": {
-                "left": 1120,
-                "top": 955
+                "left": 1336.9537678479942,
+                "top": 943.0301683955615
             },
             "post_job_actions": {
                 "RenameDatasetActionhtml_report": {
                     "action_arguments": {
-                        "newname": "MultiQC HTML report Before and After Preprocessing"
+                        "newname": "MultiQC HTML report After Preprocessing"
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "html_report"
                 },
                 "RenameDatasetActionstats": {
                     "action_arguments": {
-                        "newname": "MultiQC Stats Before and After Preprocessing"
+                        "newname": "MultiQC Stats After Preprocessing"
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "stats"
@@ -776,40 +841,40 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}], \"saveLog\": false, \"title\": \"MultiQC Report Before and After PreProcessing\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"RuntimeValue\"}}]}}], \"saveLog\": false, \"title\": \"MultiQC Report After PreProcessing\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.11+galaxy0",
             "type": "tool",
             "uuid": "affa6703-0145-4bb3-9824-64d40fc25337",
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "MultiQC HTML report Before and After Preprocessing",
+                    "label": "MultiQC HTML report After Preprocessing",
                     "output_name": "html_report",
-                    "uuid": "a9025e09-e05d-4ed0-beaf-39d212996b55"
+                    "uuid": "6f8dfaf7-a29c-4bc1-92bc-a7807d3173b3"
                 },
                 {
-                    "label": "MultiQC Stats Before and After Preprocessing",
+                    "label": "MultiQC Stats After Preprocessing",
                     "output_name": "stats",
-                    "uuid": "1f055aaa-a283-4620-b926-f0b6de57410b"
+                    "uuid": "adfe58eb-b08d-4b22-816e-f2ae5e6d51a9"
                 }
             ]
         },
-        "11": {
+        "12": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/krakentools_extract_kraken_reads/krakentools_extract_kraken_reads/1.2+galaxy1",
             "errors": null,
-            "id": 11,
+            "id": 12,
             "input_connections": {
                 "library|input_1": {
                     "id": 4,
                     "output_name": "out1"
                 },
                 "report": {
-                    "id": 9,
+                    "id": 10,
                     "output_name": "output"
                 },
                 "results": {
-                    "id": 8,
+                    "id": 9,
                     "output_name": "output"
                 }
             },
@@ -860,6 +925,6 @@
         "microbiome",
         "nanopore"
     ],
-    "uuid": "7557d023-231a-4188-a24d-d1fa38f42488",
-    "version": 62
+    "uuid": "40a388b1-7de0-43f9-9dae-a5b5909ab3ea",
+    "version": 6
 }
