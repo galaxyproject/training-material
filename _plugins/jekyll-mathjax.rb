@@ -8,8 +8,8 @@ Jekyll::Hooks.register :pages, :post_init do |page|
   # some fixes for mathjax: escape underscores
   # both in inline mode \\( .. \\) and block mode $$ ..$$
   if page.content
-    page.content = page.content.gsub(/\$\$(.*?)\$\$/) {|m| m.gsub('_','\\\\_')}
-    page.content = page.content.gsub(/\\\\\((.*?)\\\\\)/) {|m| m.gsub('_','\\\\_')}
+    page.content = page.content.gsub(/\$\$(.*?)\$\$/) { |m| m.gsub('_', '\\\\_') }
+    page.content = page.content.gsub(/\\\\\((.*?)\\\\\)/) { |m| m.gsub('_','\\\\_') }
 
   end
 end
