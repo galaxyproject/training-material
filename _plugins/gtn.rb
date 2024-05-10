@@ -681,6 +681,17 @@ Jekyll::Hooks.register :site, :pre_render do |site|
           match
         end
       end
+
+      # This would also need to modify the box types themselves, not sure how is best to do that.
+      page.content = page.content.gsub(/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/) do |match|
+        if match =~ /(CAUTION|WARNING)/
+          "> <warning-title></warning-title>"
+        elsif match =~ /TIP/
+          "> <tip-title></tip-title>"
+        else
+          "> <comment-title></comment-title>"
+        end
+      end
     end
   end
 end

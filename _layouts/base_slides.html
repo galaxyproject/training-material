@@ -95,9 +95,13 @@ class: center, middle, inverse
 <img src="{{ site.baseurl }}/{% if page.logo %}{{ page.logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="cover-logo" />
   {% endif %}
 {% endif %}
+<br/>
+<br/>
 
 # {{ page.title | default: topic.title }}
 
+<br/>
+<br/>
 
 {% include _includes/contributors-line.html page=page authorsonly=true %}
 
@@ -211,8 +215,16 @@ Useful when presenting."
         }
     </script>
         {{ 'main' | load_bundle }}
-        {% if page.mathjax %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        {% if page.js_requirements.mathjax %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=configured" type="text/javascript"></script>
+	<script>
+	MathJax.Hub.Config({
+          tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+      MathJax.Hub.Configured();
+	</script>
         {% endif %}
     </body>
 </html>

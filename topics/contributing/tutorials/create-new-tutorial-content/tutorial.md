@@ -349,6 +349,8 @@ Surround your math expression with two `$` signs on each side (like in LaTeX mat
 
    $$ 5 + 5 $$
 
+- Note: if inline mode is not working correctly, you can force it by using the following delimiters instead of dollar signs: `\\( 5 +5 \\)`
+
 Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
 
 
