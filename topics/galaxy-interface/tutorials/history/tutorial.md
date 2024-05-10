@@ -122,9 +122,7 @@ A histiry dataset can exist by iteslf, as an independent entity, or as a part of
 
 ## United Colors of Galaxy: Dataset states
 
-There are several different "states" a dataset can be in. These states are shown in Fig. 7.
-
-![5 datasets are shown in a history, one in each of the aforementioned dataset states. They are all coloured relative to those states and some include different icons to indicate their state.](../../images/states.png "United Colors of Galaxy: (1) <b>Ok</b>: Dataset is uploaded successfully, or the job that created this dataset finished successfully; (2) <b>Error</b>: The dataset is in error. It may be an error the occurred during the upload of the dataset or an error within the job that created this dataset; (3) <b>Running</b>: The dataset is being uploaded or the job creating this dataset is still executing; (4) <b>Paused</b>: The execution of a job generating this dataset is paused. This typically occurs when the upstream jobs (jobs generating datsets on which this particular job depends) are in error. You can re-start/resume paused jobs using the options menu above the history panel and selecting 'Resume Paused Jobs'; (5) <b>Queued</b>: Upload or job generating this dataset are waiting thier turn to be executed. Galaxy is a public service with hundreds or thousands of simultaneous jobs running at any given moment. As a result some jobs do not start immediately but wait their turn in the cluster queue.")
+{% snippet faqs/galaxy/histories_dataset_colors.md box_type="none"%}
 
 
 Datasets in the panel are initially shown in a 'summary' view, that only displays:
