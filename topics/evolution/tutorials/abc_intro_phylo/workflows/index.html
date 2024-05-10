@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Workflows / Phylogenetics - Back to basics / Evolution</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo/workflows/">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-01-17 04:46:23 +0000"><meta name="description" content="phylogenetics">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Evolution / Phylogenetics - Back to basics / Workflows">
+        <meta property="og:description" content="phylogenetics">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/evolution/faqs/" title="Check our FAQs for the Evolution topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/evolution/tutorials/abc_intro_phylo/workflows/index.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/evolution/tutorials/abc_intro_phylo/workflows/">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+<section class="tutorial">
+    <h1 data-toc-skip>Workflows</h1>
+    <p>These workflows are associated with <a href="../tutorial.html">Phylogenetics - Back to basics</a></p>
+    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+
+
+    <div class="row">
+    
+	<div class="col-md-6">
+		<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">Tree Building (imported from uploaded file)</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Helena Rasche, 
+				
+				Michael Charleston
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Apr 23, 2024</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/evolution-abc_intro_phylo/versions/tree-building">Launch in Tutorial Mode</span>
+			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
+			<br/>
+
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+    Import or Download
+  </button>
+  <div class="dropdown-menu">
+			<a href="https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo/workflows/tree-building.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
+			
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/evolution-abc_intro_phylo/versions/tree-building" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/evolution-abc_intro_phylo/versions/tree-building" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/evolution-abc_intro_phylo/versions/tree-building" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/evolution-abc_intro_phylo/versions/tree-building" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/evolution-abc_intro_phylo/versions/tree-building"
+			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+  </div>
+</div>
+
+	<pre class="mermaid">flowchart TD
+  0["ℹ️ Input Dataset\nInput FASTA Sequence File"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["MAFFT"];
+  0 -->|output| 1;
+  e5d56101-daff-420b-82e9-dc6cc923f7ab["Output\noutputAlignment"];
+  1 --> e5d56101-daff-420b-82e9-dc6cc923f7ab;
+  style e5d56101-daff-420b-82e9-dc6cc923f7ab stroke:#2c3143,stroke-width:4px;
+  2["FASTTREE"];
+  1 -->|outputAlignment| 2;
+  632ce28d-3086-490e-bd97-949eb2cb385a["Output\noutput"];
+  2 --> 632ce28d-3086-490e-bd97-949eb2cb385a;
+  style 632ce28d-3086-490e-bd97-949eb2cb385a stroke:#2c3143,stroke-width:4px;
+  3["IQ-TREE"];
+  1 -->|outputAlignment| 3;
+  b8434b2b-2001-4b1a-bd06-faeab18519a4["Output\ntreefile"];
+  3 --> b8434b2b-2001-4b1a-bd06-faeab18519a4;
+  style b8434b2b-2001-4b1a-bd06-faeab18519a4 stroke:#2c3143,stroke-width:4px;
+	</pre>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
+
+
+</div>
+
+   <h1 style="margin-top:2em">Importing into Galaxy</h1>
+   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
+
+   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe></p> </blockquote> <!--END_SNIPPET-->
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b47bdc273ab4487117a15567aca86681cfd3295">1b47bdc</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/evolution/tutorials/abc_intro_phylo/workflows/index.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	
+	<script src="/training-material/assets/js/mermaid@10.6.1.js" async></script>
+	<link rel="preload" href="/training-material/assets/js/mermaid@10.6.1.js" as="script" crossorigin>
+	
+    </body>
+</html>

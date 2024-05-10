@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Phylogenetics - Back to Basics - Introduction</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo-intro/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Phylogenetics - Back to Basics - Introduction">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-04-17 00:57:46 +0000">
+<meta name="DC.creator" content="Michael Charleston">
+
+        
+        
+        
+        
+        <meta name="description" content="phylogenetics">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Phylogenetics - Back to Basics - Introduction">
+        <meta property="og:description" content="phylogenetics">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-04-17 00:57:46 +0000",
+  "datePublished": "2024-05-10 11:23:12 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Phylogenetics - Back to Basics - Introduction",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Evolution",
+    "description": "phylogenetics",
+    "url": "https://training.galaxyproject.org/training-material/topics/evolution/"
+  },
+  "learningResourceType": "slides",
+  "name": "Phylogenetics - Back to Basics - Introduction",
+  "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo-intro/slides.html",
+  "version": 5,
+  "keywords": [
+    "Evolution"
+  ],
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/",
+      "name": "Michael Charleston",
+      "image": "https://avatars.githubusercontent.com/mcharleston",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Evolution",
+      "description": "phylogenetics",
+      "url": "https://training.galaxyproject.org/training-material/topics/evolution/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3299",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3299",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3299"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "![Hand drawn phylogenetic tree from Charles Darwin’s notebook with clades A, B, C, D branching from a common ancestor. Prefaced with handwriting that reads ‘I think’ and annotated with other illegible notes.](images/Darwin_tree.png )"
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/evolution" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/evolution/tutorials/abc_intro_phylo-intro/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+  
+<img src="/training-material/shared/images/biocommons-utas.png" alt="page logo" style="height: 40px;"/>
+  
+
+</span></div>
+
+---
+
+
+
+  
+<img src="/training-material/shared/images/biocommons-utas.png" alt="page logo" class="cover-logo" />
+  
+
+<br/>
+<br/>
+
+# Phylogenetics - Back to Basics - Introduction
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/mcharleston/" class="contributor-badge contributor-mcharleston"><img src="https://avatars.githubusercontent.com/mcharleston?s=36" alt="Michael Charleston avatar" width="36" class="avatar" />
+    Michael Charleston</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+![Hand drawn phylogenetic tree from Charles Darwin’s notebook with clades A, B, C, D branching from a common ancestor. Prefaced with handwriting that reads ‘I think’ and annotated with other illegible notes.](images/Darwin_tree.png )
+
+Charles Darwin, 1837 Notebeook entry
+---
+![Model of the external structure of the SARS-CoV-2 virion](images/SARS-CoV-2-www.ncbi.nlm.nih.png)
+.right[https://en.wikipedia.org/wiki/Coronavirus; CC BY-SA 4.0]
+---
+
+![Two-part figure showing a phylogenetic tree of SARS-CoV-2 strains on the left and genomic epidemiology of SARS-CoV-2 with subsampling focused globally over the 6 months leading up to November 2023 on the right](images/CovidNextStrain20231102.png)
+.right[https://nextstrain.org/ncov/gisaid/global/6m]
+---
+# Covid-19, latest tree from NextStrain
+
+![Phylogenetic tree for SARS-CoV-2 strains coloured by strain grouping](images/CovidTree20231102NextStrain.png)
+---
+# Terminology
+
+![Schematic of a phylogenetic tree where features such as nodes/taxa, edges/branches are annotated and colour coded. The root of the tree is at the top of the image and the tree branches into two clades as you move towards the bottom of the image. The clades are formed of hypothetical common ancestors and five extant taxa which are labelled as the ‘in group’. Two additional taxa are appended to the right hand side of the tree and are labelled as the outgroup.](images/TreeAnatomy.png)
+---
+# Phylogenetic tree of hexapods
+
+![Circular phylogenetic tree of hexapods (insects). Clades are colour coded and labelled with common names e.g. ‘Fleas’. Silhouettes of representative species are shown around the outside of the tree.](images/Hexapoda_phylogenetic_tree.png)
+.left[https://doi.org/10.1371/journal.pone.0109085; CCBY 4.0 DEED license]
+---
+# Sequence alignment
+
+![Screenshot of sequence visualisation output from Galaxy. Fifteen Anolis DNA sequences are arranged in rows. The nucleotides are colour coded and arranged in columns: A(blue), T (green), C (pink), G (orange). The top half of the image shows approximately 50 bases of each sequence. The lower half of the image shows a zoomed out heatmap-like image of a larger portion of the sequences.](images/UnalignedAnolis.png)
+---
+# Building trees from distances
+
+![Flow chart illustrating how sequence alignment data or dis/similarity measures are used to calculate and calculate phylogenetic distances. Colours and shapes are used to differentiate different sections of the flowchart, guiding the viewer through each step from left to right. The flowchart begins with Sequence Alignment or Dis/Similarity Measures. These are used to form a distance matrix (D) which is used to select two nodes (x and y) forming a new node z. The distance matrix is updated with the new node z until no further nodes can be formed.](images/TreeConstruction.drawio.png)
+---
+# Searching for trees
+
+![Screenshot of a phylogenetic tree of Anolis species. The root of the tree is on the left and the species are listed vertically on the right. The tree consists of multiple branching events and clades and includes bootstrap values.](images/PhyloVisTree.png)
+---
+# Phylogenetic Networks
+
+![Screenshot of a phylogenetic network of Anolis species. The root of the network is at the centre of the image and clades radiate outwards forming a circular network.](images/ST4-HKY85.png)
+---
+# Thank you!
+
+Let&apos;s begin
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/mcharleston/" class="contributor-badge contributor-mcharleston"><img src="https://avatars.githubusercontent.com/mcharleston?s=36" alt="Michael Charleston avatar" width="36" class="avatar" />
+    Michael Charleston</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+  
+<img src="/training-material/shared/images/biocommons-utas.png" alt="page logo" style="height: 100px;"/>
+  
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+        
+    </body>
+</html>

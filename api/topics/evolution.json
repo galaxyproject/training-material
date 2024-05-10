@@ -11,6 +11,13 @@
     }
   ],
   "docker_image": "",
+  "subtopics": [
+    {
+      "id": "phylogenetics",
+      "title": "Phylogenetics",
+      "description": "Learn about evolution through Phylogenetics, the study of evolutionary relationships among groups of organisms."
+    }
+  ],
   "editorial_board": [
     {
       "name": "Christoph Stritt",
@@ -34,6 +41,240 @@
     "topic_3299"
   ],
   "materials": [
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Phylogenetics - Back to basics",
+      "zenodo_link": "https://zenodo.org/records/11089653",
+      "tags": [
+        "phylogenetics",
+        "evolution"
+      ],
+      "level": "Intermediate",
+      "questions": [
+        "What information can I get from a phylogenetic tree?",
+        "How do I estimate a phylogeny?",
+        "How can I tell whether the phylogeny is reliable?",
+        "How do phylogenetic models work?"
+      ],
+      "objectives": [
+        "Describe the basic concepts behind phylogenetic trees and how they are made",
+        "Read and interrogate a phylogeny encountered in the literature",
+        "Use standard tools to align a set of molecular sequences",
+        "Assess the quality of a molecular sequence alignment and be able to modify it appropriately for phylogenetic analysis",
+        "Use standard tools to estimate a phylogenetic tree based on a set of aligned molecular sequences",
+        "Assess the reliability of estimated phylogenies with bootstrapping",
+        "Explore phylogenetic signal using phylogenetic networks"
+      ],
+      "time_estimation": "4H",
+      "subtopic": "phylogenetics",
+      "priority": 0,
+      "contributions": {
+        "authorship": [
+          "mcharleston"
+        ],
+        "editing": [
+          "adamtaranto",
+          "burkemlou",
+          "PatCapon39"
+        ]
+      },
+      "js_requirements": {
+        "mathjax": 16771,
+        "mermaid": false
+      },
+      "short_id": null,
+      "url": "/topics/evolution/tutorials/abc_intro_phylo/tutorial.html",
+      "topic_name": "evolution",
+      "tutorial_name": "abc_intro_phylo",
+      "dir": "topics/evolution/tutorials/abc_intro_phylo",
+      "symlink": null,
+      "id": "evolution/abc_intro_phylo",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-05-10 11:06:13 +0000",
+      "pub_date": "2024-05-10 11:23:12 +0000",
+      "version": 142,
+      "workflows": [
+        {
+          "workflow": "tree-building.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo/workflows/tree-building.ga",
+          "path": "topics/evolution/tutorials/abc_intro_phylo/workflows/tree-building.ga",
+          "wfid": "evolution-abc_intro_phylo",
+          "wfname": "tree-building",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/evolution-abc_intro_phylo/versions/tree-building",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0000-0001-9760-8992",
+              "name": "Helena Rasche"
+            },
+            {
+              "class": "Person",
+              "identifier": "0000-0001-8385-341X",
+              "name": "Michael Charleston"
+            }
+          ],
+          "name": "Tree Building (imported from uploaded file)",
+          "title": "Tree Building (imported from uploaded file)",
+          "test_results": null,
+          "modified": "2024-05-10 11:24:19 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput FASTA Sequence File\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"MAFFT\"];\n  0 -->|output| 1;\n  e5d56101-daff-420b-82e9-dc6cc923f7ab[\"Output\\noutputAlignment\"];\n  1 --> e5d56101-daff-420b-82e9-dc6cc923f7ab;\n  style e5d56101-daff-420b-82e9-dc6cc923f7ab stroke:#2c3143,stroke-width:4px;\n  2[\"FASTTREE\"];\n  1 -->|outputAlignment| 2;\n  632ce28d-3086-490e-bd97-949eb2cb385a[\"Output\\noutput\"];\n  2 --> 632ce28d-3086-490e-bd97-949eb2cb385a;\n  style 632ce28d-3086-490e-bd97-949eb2cb385a stroke:#2c3143,stroke-width:4px;\n  3[\"IQ-TREE\"];\n  1 -->|outputAlignment| 3;\n  b8434b2b-2001-4b1a-bd06-faeab18519a4[\"Output\\ntreefile\"];\n  3 --> b8434b2b-2001-4b1a-bd06-faeab18519a4;\n  style b8434b2b-2001-4b1a-bd06-faeab18519a4 stroke:#2c3143,stroke-width:4px;"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          }
+        ]
+      },
+      "topic_name_human": "Evolution",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "fasttree",
+            "owner": "iuc",
+            "revisions": "e005e659ae21",
+            "tool_panel_section_label": "Genome Diversity",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "iqtree",
+            "owner": "iuc",
+            "revisions": "24d024316465",
+            "tool_panel_section_label": "Evolution",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "newick_utils",
+            "owner": "iuc",
+            "revisions": "b4163d2f64ab",
+            "tool_panel_section_label": "Graph/Display Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "mafft",
+            "owner": "rnateam",
+            "revisions": "6f28e90db932",
+            "tool_panel_section_label": "Multiple Alignments",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fasttree\n  owner: iuc\n  revisions: e005e659ae21\n  tool_panel_section_label: Genome Diversity\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: iqtree\n  owner: iuc\n  revisions: 24d024316465\n  tool_panel_section_label: Evolution\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: newick_utils\n  owner: iuc\n  revisions: b4163d2f64ab\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mafft\n  owner: rnateam\n  revisions: 6f28e90db932\n  tool_panel_section_label: Multiple Alignments\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Michael Charleston",
+          "email": "michael.charleston@utas.edu.au",
+          "joined": "2023-01",
+          "affiliations": [
+            "UTas"
+          ],
+          "id": "mcharleston",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mcharleston.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/"
+        },
+        {
+          "name": "Adam Taranto",
+          "email": "adam.p.taranto@gmail.com",
+          "joined": "2023-01",
+          "id": "adamtaranto",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/adamtaranto.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/adamtaranto/"
+        },
+        {
+          "name": "Melissa Burke",
+          "email": "melissa@biocommons.org.au",
+          "joined": "2023-12",
+          "affiliations": [
+            "AustralianBioCommons"
+          ],
+          "id": "burkemlou",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/burkemlou.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/burkemlou/"
+        },
+        {
+          "name": "Patrick Capon",
+          "joined": "2024-02",
+          "affiliations": [
+            "AustralianBioCommons"
+          ],
+          "id": "PatCapon39",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/PatCapon39.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/PatCapon39/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo/tutorial.json"
+      }
+    },
     {
       "layout": "tutorial_hands_on",
       "title": "Identifying tuberculosis transmission links: from SNPs to transmission clusters",
@@ -128,7 +369,7 @@
           "name": "From BAMs to drug resistance prediction with TB-profiler",
           "title": "From BAMs to drug resistance prediction with TB-profiler",
           "test_results": null,
-          "modified": "2024-05-10 00:05:21 +0000",
+          "modified": "2024-05-10 11:24:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nMTB single-end BAMs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nMTB paired-end BAMs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Merge collections\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Samtools view BAM > SAM\"];\n  2 -->|output| 3;\n  aa220027-9d10-4328-b2c2-e4d139d5d5bd[\"Output\\nSamtools view on input dataset(s): filtered alignments\"];\n  3 --> aa220027-9d10-4328-b2c2-e4d139d5d5bd;\n  style aa220027-9d10-4328-b2c2-e4d139d5d5bd stroke:#2c3143,stroke-width:4px;\n  4[\"Sed MTB_anc to Chromosome\"];\n  3 -->|outputsam| 4;\n  5[\"Samtools view SAM > BAM\"];\n  4 -->|output| 5;\n  6[\"TB-profiler\"];\n  5 -->|outputsam| 6;\n  7[\"Get drug resistance profile\"];\n  6 -->|output_txt| 7;\n  8[\"Add Sample Name\"];\n  7 -->|output| 8;\n  9[\"Concatenate DR profiles in a single table\"];\n  8 -->|output| 9;\n  10[\"Cleanup the table\"];\n  9 -->|out_file1| 10;"
         },
         {
@@ -146,7 +387,7 @@
           "name": "From Fastqs to VCFs and BAMs",
           "title": "From Fastqs to VCFs and BAMs",
           "test_results": null,
-          "modified": "2024-05-10 00:05:21 +0000",
+          "modified": "2024-05-10 11:24:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nSingle-End FASTQs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nPaired-End FASTQs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nMycobacterium_tuberculosis_ancestral_reference.gbk\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Trimmomatic\"];\n  0 -->|output| 3;\n  4[\"Trimmomatic\"];\n  1 -->|output| 4;\n  5[\"Mapping and variant calling of SINGLE END FASTQs with snippy\"];\n  3 -->|fastq_out| 5;\n  2 -->|output| 5;\n  6[\"Mapping and variant calling of PAIRED END FASTQs with snippy\"];\n  4 -->|fastq_out_paired| 6;\n  2 -->|output| 6;\n  7[\"Merge PE/SE VCFs in a single collection with all samples\"];\n  5 -->|snpvcf| 7;\n  6 -->|snpvcf| 7;\n  8[\"Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler\"];\n  5 -->|snpsbam| 8;\n  6 -->|snpsbam| 8;\n  9[\"TB Variant Filter\"];\n  7 -->|output| 9;"
         },
         {
@@ -164,7 +405,7 @@
           "name": "From VCFs to SNP distance matrix",
           "title": "From VCFs to SNP distance matrix",
           "test_results": null,
-          "modified": "2024-05-10 00:05:21 +0000",
+          "modified": "2024-05-10 11:24:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nCollection of VCFs to analyze\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome of the MTBC ancestor\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter TB variants\"];\n  0 -->|output| 2;\n  3[\"Generate the complete genome of each of the samples\"];\n  2 -->|output1| 3;\n  1 -->|output| 3;\n  ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a[\"Output\\n#{input_file}\"];\n  3 --> ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a;\n  style ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a stroke:#2c3143,stroke-width:4px;\n  4[\"Concatenate genomes to build a MSA\"];\n  3 -->|output_file| 4;\n  5[\"Keep only variable positions\"];\n  4 -->|out_file1| 5;\n  6[\"Calculate SNP distances\"];\n  5 -->|output_fasta| 6;"
         }
       ],
@@ -499,9 +740,9 @@
       },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-03-12 15:51:09 +0000",
+      "mod_date": "2023-02-15 00:53:30 +0000",
       "pub_date": "2022-03-16 10:37:17 +0000",
-      "version": 18,
+      "version": 19,
       "workflows": [
         {
           "workflow": "main_workflow.ga",
@@ -518,7 +759,7 @@
           "name": "Mtb phylogeny",
           "title": "Mtb phylogeny",
           "test_results": null,
-          "modified": "2024-05-10 00:05:21 +0000",
+          "modified": "2024-05-10 11:24:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput alignment\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"RStudio\"];\n  2[\"Estimate phylogeny with RAxML\"];\n  0 -->|output| 2;\n  9f8ae577-c583-4a2d-b64d-14c25fb859d9[\"Output\\nBest-scoring ML Tree\"];\n  2 --> 9f8ae577-c583-4a2d-b64d-14c25fb859d9;\n  style 9f8ae577-c583-4a2d-b64d-14c25fb859d9 stroke:#2c3143,stroke-width:4px;\n  bdb8cf2f-b553-4a96-8b55-38b4b499ab88[\"Output\\nInfo\"];\n  2 --> bdb8cf2f-b553-4a96-8b55-38b4b499ab88;\n  style bdb8cf2f-b553-4a96-8b55-38b4b499ab88 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -629,6 +870,666 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/mtb_phylogeny/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/mtb_phylogeny/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "shared/images/biocommons-utas.png",
+      "title": "Phylogenetics - Back to Basics - Introduction",
+      "zenodo_link": "",
+      "subtopic": "phylogenetics",
+      "priority": 1,
+      "contributors": [
+        {
+          "name": "Michael Charleston",
+          "email": "michael.charleston@utas.edu.au",
+          "joined": "2023-01",
+          "affiliations": [
+            "UTas"
+          ],
+          "id": "mcharleston",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mcharleston.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "url": "/topics/evolution/tutorials/abc_intro_phylo-intro/slides.html",
+      "topic_name": "evolution",
+      "tutorial_name": "abc_intro_phylo-intro",
+      "dir": "topics/evolution/tutorials/abc_intro_phylo-intro",
+      "symlink": null,
+      "id": "evolution/abc_intro_phylo-intro",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2024-04-17 00:57:46 +0000",
+      "pub_date": "2024-05-10 11:23:12 +0000",
+      "version": 5,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-intro/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Evolution",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-intro/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-intro/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "shared/images/biocommons-utas.png",
+      "title": "Phylogenetics - Back to Basics - Terminology",
+      "zenodo_link": "",
+      "subtopic": "phylogenetics",
+      "priority": 2,
+      "contributors": [
+        {
+          "name": "Michael Charleston",
+          "email": "michael.charleston@utas.edu.au",
+          "joined": "2023-01",
+          "affiliations": [
+            "UTas"
+          ],
+          "id": "mcharleston",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mcharleston.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "url": "/topics/evolution/tutorials/abc_intro_phylo-terminology/slides.html",
+      "topic_name": "evolution",
+      "tutorial_name": "abc_intro_phylo-terminology",
+      "dir": "topics/evolution/tutorials/abc_intro_phylo-terminology",
+      "symlink": null,
+      "id": "evolution/abc_intro_phylo-terminology",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2024-04-17 00:59:42 +0000",
+      "pub_date": "2024-05-10 11:23:12 +0000",
+      "version": 5,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-terminology/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Evolution",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-terminology/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-terminology/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "shared/images/biocommons-utas.png",
+      "title": "Phylogenetics - Back to Basics - Multiple Sequence Alignment",
+      "zenodo_link": "",
+      "subtopic": "phylogenetics",
+      "priority": 3,
+      "contributors": [
+        {
+          "name": "Michael Charleston",
+          "email": "michael.charleston@utas.edu.au",
+          "joined": "2023-01",
+          "affiliations": [
+            "UTas"
+          ],
+          "id": "mcharleston",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mcharleston.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": 14973,
+        "mermaid": false
+      },
+      "short_id": null,
+      "url": "/topics/evolution/tutorials/abc_intro_phylo-msa/slides.html",
+      "topic_name": "evolution",
+      "tutorial_name": "abc_intro_phylo-msa",
+      "dir": "topics/evolution/tutorials/abc_intro_phylo-msa",
+      "symlink": null,
+      "id": "evolution/abc_intro_phylo-msa",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2024-04-23 01:55:40 +0000",
+      "pub_date": "2024-05-10 11:23:12 +0000",
+      "version": 17,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-msa/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Evolution",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-msa/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-msa/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "shared/images/biocommons-utas.png",
+      "title": "Phylogenetics - Back to Basics - Building Trees",
+      "zenodo_link": "",
+      "subtopic": "phylogenetics",
+      "priority": 4,
+      "contributors": [
+        {
+          "name": "Michael Charleston",
+          "email": "michael.charleston@utas.edu.au",
+          "joined": "2023-01",
+          "affiliations": [
+            "UTas"
+          ],
+          "id": "mcharleston",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mcharleston.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": 746,
+        "mermaid": false
+      },
+      "short_id": null,
+      "url": "/topics/evolution/tutorials/abc_intro_phylo-trees/slides.html",
+      "topic_name": "evolution",
+      "tutorial_name": "abc_intro_phylo-trees",
+      "dir": "topics/evolution/tutorials/abc_intro_phylo-trees",
+      "symlink": null,
+      "id": "evolution/abc_intro_phylo-trees",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2024-04-23 01:55:40 +0000",
+      "pub_date": "2024-05-10 11:23:12 +0000",
+      "version": 11,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-trees/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Evolution",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-trees/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-trees/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "shared/images/biocommons-utas.png",
+      "title": "Phylogenetics - Back to Basics - Estimating trees from alignments",
+      "zenodo_link": "",
+      "subtopic": "phylogenetics",
+      "priority": 5,
+      "contributors": [
+        {
+          "name": "Michael Charleston",
+          "email": "michael.charleston@utas.edu.au",
+          "joined": "2023-01",
+          "affiliations": [
+            "UTas"
+          ],
+          "id": "mcharleston",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mcharleston.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": 4916,
+        "mermaid": false
+      },
+      "short_id": null,
+      "url": "/topics/evolution/tutorials/abc_intro_phylo-mle-trees/slides.html",
+      "topic_name": "evolution",
+      "tutorial_name": "abc_intro_phylo-mle-trees",
+      "dir": "topics/evolution/tutorials/abc_intro_phylo-mle-trees",
+      "symlink": null,
+      "id": "evolution/abc_intro_phylo-mle-trees",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2024-04-17 06:30:20 +0000",
+      "pub_date": "2024-05-10 11:23:12 +0000",
+      "version": 9,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-mle-trees/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Evolution",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-mle-trees/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-mle-trees/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "shared/images/biocommons-utas.png",
+      "title": "Phylogenetics - Back to Basics - Phylogenetic Networks",
+      "zenodo_link": "",
+      "subtopic": "phylogenetics",
+      "priority": 6,
+      "contributors": [
+        {
+          "name": "Michael Charleston",
+          "email": "michael.charleston@utas.edu.au",
+          "joined": "2023-01",
+          "affiliations": [
+            "UTas"
+          ],
+          "id": "mcharleston",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mcharleston.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "url": "/topics/evolution/tutorials/abc_intro_phylo-networks/slides.html",
+      "topic_name": "evolution",
+      "tutorial_name": "abc_intro_phylo-networks",
+      "dir": "topics/evolution/tutorials/abc_intro_phylo-networks",
+      "symlink": null,
+      "id": "evolution/abc_intro_phylo-networks",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2024-04-23 01:55:40 +0000",
+      "pub_date": "2024-05-10 11:23:12 +0000",
+      "version": 7,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-networks/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Evolution",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-networks/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/evolution/tutorials/abc_intro_phylo-networks/slides.json"
       }
     }
   ]

@@ -21,7 +21,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1197168e29bb3ded3b35251dc8a1608288decfc3",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -388,14 +388,18 @@ class: center, middle, inverse
 
 <img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
 
+<br/>
+<br/>
 
 # High Performance Computing for Pairwise Genome Comparison
 
+<br/>
+<br/>
 
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/estebanpw/" class="contributor-badge contributor-estebanpw"><img src="https://avatars.githubusercontent.com/estebanpw?s=36" alt="Esteban Perez-Wohlfeil avatar" width="36" class="avatar" />
+		<a href="/training-material/hall-of-fame/estebanpw/" class="contributor-badge contributor-estebanpw"><img src="https://avatars.githubusercontent.com/estebanpw?s=36" alt="Esteban Perez-Wohlfeil avatar" width="36" class="avatar" />
     Esteban Perez-Wohlfeil</a>
 	</div>
 
@@ -936,9 +940,9 @@ Amoeba genome		|  ~6 * 10&lt;sup&gt;11&lt;/sup&gt; bp
  - A kernel is convoluted with the dotplot to improve visualization and remove single repetitions
  - The scoring distance is calculated between the peak hit points using taxicab distance:
 
-$$d_{raw} = \sum_{i}^{l-1}taxicab(max(H_m(i), H_m(i+1)))$$
+$$d\_{raw} = \sum\_{i}^{l-1}taxicab(max(H\_m(i), H\_m(i+1)))$$
 
-$$d = \frac{d_{raw}}{l^2}$$
+$$d = \frac{d\_{raw}}{l^2}$$
 
 ---
 
@@ -1039,6 +1043,16 @@ Tutorial Content is licensed under <a rel="license" href="http://creativecommons
         }
     </script>
         <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+        
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=configured" type="text/javascript"></script>
+	<script>
+	MathJax.Hub.Config({
+          tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+      MathJax.Hub.Configured();
+	</script>
         
     </body>
 </html>

@@ -96,7 +96,7 @@
       "name": "MuSiC-Deconvolution: Data generation | sc | matrix + ESet",
       "title": "MuSiC-Deconvolution: Data generation | sc | matrix + ESet",
       "test_results": null,
-      "modified": "2024-05-10 00:05:23 +0000",
+      "modified": "2024-05-10 11:24:21 +0000",
       "mermaid": "flowchart TD\n  0[\"EBI SCXA Data Retrieval\"];\n  1[\"ℹ️ Input Dataset\\nSingle cell metadata\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Scanpy Read10x\"];\n  0 -->|barcode_tsv| 2;\n  0 -->|genes_tsv| 2;\n  0 -->|matrix_mtx| 2;\n  6bd01730-f0b5-4824-8cfc-d563cc9c7f7d[\"Output\\nScanpy Read10x on input dataset(s): anndata\"];\n  2 --> 6bd01730-f0b5-4824-8cfc-d563cc9c7f7d;\n  style 6bd01730-f0b5-4824-8cfc-d563cc9c7f7d stroke:#2c3143,stroke-width:4px;\n  3[\"Inspect AnnData\"];\n  2 -->|output_h5| 3;\n  4[\"Transpose\"];\n  3 -->|X| 4;\n  5[\"annotateMyIDs\"];\n  4 -->|out_file| 5;\n  c39c7d69-550e-4b54-a412-317b599c5e55[\"Output\\nannotateMyIDs on input dataset(s): Annotated IDs\"];\n  5 --> c39c7d69-550e-4b54-a412-317b599c5e55;\n  style c39c7d69-550e-4b54-a412-317b599c5e55 stroke:#2c3143,stroke-width:4px;\n  6[\"🛠️ Subworkflow\\n1st step removed - Convert from Ensembl to GeneSymbol, summing duplicate genes\"];\n  style 6 fill:#edd,stroke:#900,stroke-width:4px;\n  5 -->|out_tab| 6;\n  4 -->|out_file| 6;\n  7[\"Construct Expression Set Object\"];\n  6 -->|Gene Symbol Count Matrix| 7;\n  1 -->|output| 7;\n  e8c91df0-4e6c-4eb2-9807-c2679b494958[\"Output\\nConstruct Expression Set Object on input dataset(s): RData ESet Object\"];\n  7 --> e8c91df0-4e6c-4eb2-9807-c2679b494958;\n  style e8c91df0-4e6c-4eb2-9807-c2679b494958 stroke:#2c3143,stroke-width:4px;\n  2912d09b-b178-4035-b7c8-7038392e2bf2[\"Output\\nConstruct Expression Set Object on input dataset(s): General Info\"];\n  7 --> 2912d09b-b178-4035-b7c8-7038392e2bf2;\n  style 2912d09b-b178-4035-b7c8-7038392e2bf2 stroke:#2c3143,stroke-width:4px;\n  8[\"Manipulate Expression Set Object\"];\n  7 -->|out_rds| 8;\n  08de92d8-32fe-4b47-9038-298cdd13fac5[\"Output\\nManipulate Expression Set Object on input dataset(s): ExpressionSet Object\"];\n  8 --> 08de92d8-32fe-4b47-9038-298cdd13fac5;\n  style 08de92d8-32fe-4b47-9038-298cdd13fac5 stroke:#2c3143,stroke-width:4px;\n  9[\"Manipulate Expression Set Object\"];\n  7 -->|out_rds| 9;"
     },
     {
@@ -123,7 +123,7 @@
       "name": "MuSiC-Deconvolution: Data generation | sc | metadata",
       "title": "MuSiC-Deconvolution: Data generation | sc | metadata",
       "test_results": null,
-      "modified": "2024-05-10 00:05:23 +0000",
+      "modified": "2024-05-10 11:24:21 +0000",
       "mermaid": "flowchart TD\n  0[\"EBI SCXA Data Retrieval\"];\n  1[\"Cut\"];\n  0 -->|design_tsv| 1;\n  2[\"Add line to file\"];\n  0 -->|barcode_tsv| 2;\n  3[\"Reformatting metadata columns\"];\n  1 -->|out_file1| 3;\n  4[\"Join two Datasets\"];\n  2 -->|outfile| 4;\n  3 -->|out_file1| 4;\n  5[\"Advanced Cut\"];\n  4 -->|out_file1| 5;"
     }
   ],

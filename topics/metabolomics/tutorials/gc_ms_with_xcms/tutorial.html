@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1197168e29bb3ded3b35251dc8a1608288decfc3",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -636,11 +636,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<h6 class="dropdown-header">Instructor Utilities</h6>
 
         <a class="dropdown-item" href="/training-material/stats.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
         <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/metabolomics/tutorials/gc_ms_with_xcms/tutorial.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
         </a>
 
         <!-- link to feedback -->
@@ -648,7 +648,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
                 <a class="dropdown-item" href="/training-material/feedback.html">
-                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
                 </a>
             
         
@@ -1459,7 +1459,7 @@ your data:</p>
   <p>Click <em>“View data”</em> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon next to the dataset in the Galaxy history. The contents of the file would look like this:</p>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-different-dataset-icons-and-their-usage"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-different-dataset-icons-and-their-usage" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Different dataset icons and their usage</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Dataset icons and their usage:</p>   <ul>   <li><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <strong>“Eye icon”</strong>: Display dataset contents.</li>   <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>“Pencil icon”</strong>: Edit attributes of dataset metadata: labels, datatype, database.</li>   <li><i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> <strong>“Trash icon”</strong>: Delete the dataset.</li>   <li><i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> <strong>“Disc icon”</strong>: Download the dataset.</li>   <li><i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden">galaxy-link</span> <strong>“Copy link”</strong>: Copy link URL to the dataset.</li>   <li><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> <strong>“Info icon”</strong>: Dataset details and job runtime information: inputs, parameters, logs.</li>   <li><i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> <strong>“Refresh/Rerun icon”</strong>: Run this (selected) job again or examine original submitted form.</li>   <li><i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> <strong>“Visualize icon”</strong>: External display links (UCSC, IGV, NPL, PV); Charts and graphing; Editor (manually edit text).</li>   <li><i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-dataset-map</span> <strong>“Dataset Map icon”</strong>: Filter the history for related Input/Output Datasets. Click again to clear the filter.</li>   <li><i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden">galaxy-bug</span> <strong>“Bug icon”</strong>: Review subset of logs (review all under <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span>), and optionally submit a bug report.</li> </ul> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-different-dataset-icons-and-their-usage"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-different-dataset-icons-and-their-usage" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Different dataset icons and their usage</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Dataset icons and their usage:</p>   <ul>   <li><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <strong>“Eye icon”</strong>: Display dataset contents.</li>   <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>“Pencil icon”</strong>: Edit attributes of dataset metadata: labels, datatype, database.</li>   <li><i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> <strong>“Trash icon”</strong>: Delete the dataset.</li>   <li><i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> <strong>“Disc icon”</strong>: Download the dataset.</li>   <li><i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden">galaxy-link</span> <strong>“Copy link”</strong>: Copy link URL to the dataset.</li>   <li><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> <strong>“Info icon”</strong>: Dataset details and job runtime information: inputs, parameters, logs.</li>   <li><i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> <strong>“Refresh/Rerun icon”</strong>: Run this (selected) job again or examine original submitted form.</li>   <li><i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> <strong>“Visualize icon”</strong>: External display links (UCSC, IGV, NPL, PV); Charts and graphing; Editor (manually edit text).</li>   <li><i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-dataset-map</span> <strong>“Dataset Map icon”</strong>: Filter the history for related Input/Output Datasets. Click again to clear the filter.</li>   <li><i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden">galaxy-bug</span> <strong>“Bug icon”</strong>: Review subset of logs (review all under <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span>), and optionally submit a bug report.</li> </ul> </blockquote>
   <p><!--END_SNIPPET--></p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME:C001
@@ -1544,9 +1544,9 @@ Num Peaks:165
 
         <p>The Kováts retention index (or Kováts index) of a compound is its retention time normalized to the retention times of adjacently eluting n-alkanes. It is based on the fact that the logarithm of the retention time converges to the number of carbon atoms in the alkane. For an isothermal chromatogram, you use the following equation to calculate the Kováts index:</p>
 
-\[I = 100 \times \frac{\mathtt{log}~t_x - \mathtt{log}~t_n}{\mathtt{log}~t_{n+1} - \mathtt{log}~t_n}\]
+\[I = 100 \times \frac{\mathtt{log}~t\_x - \mathtt{log}~t\_n}{\mathtt{log}~t\_{n+1} - \mathtt{log}~t\_n}\]
 
-        <p>where \(t_n\) and \(t_{n+1}\) are retention times of the reference n-alkane hydrocarbons eluting immediately before and after chemical compound <em>X</em> and \(t_x\) is the retention time of compound <em>X</em>.</p>
+        <p>where \(t\_n\) and \(t\_{n+1}\) are retention times of the reference n-alkane hydrocarbons eluting immediately before and after chemical compound <em>X</em> and \(t\_x\) is the retention time of compound <em>X</em>.</p>
 
         <p>In practice, first, you run a chromatogram of a standard alkane mixture in the range of interest. Then you do a co-injection of your sample with the standard alkanes. The main advantage of this method is reproducibility.</p>
 
@@ -2020,7 +2020,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1197168e29bb3ded3b35251dc8a1608288decfc3">1197168</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b47bdc273ab4487117a15567aca86681cfd3295">1b47bdc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Phylogenetics - Back to Basics - Multiple Sequence Alignment</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo-msa/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Phylogenetics - Back to Basics - Multiple Sequence Alignment">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-04-23 01:55:40 +0000">
+<meta name="DC.creator" content="Michael Charleston">
+
+        
+        
+        
+        
+        <meta name="description" content="phylogenetics">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Phylogenetics - Back to Basics - Multiple Sequence Alignment">
+        <meta property="og:description" content="phylogenetics">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "dateModified": "2024-04-23 01:55:40 +0000",
+  "datePublished": "2024-05-10 11:23:12 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Phylogenetics - Back to Basics - Multiple Sequence Alignment",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Evolution",
+    "description": "phylogenetics",
+    "url": "https://training.galaxyproject.org/training-material/topics/evolution/"
+  },
+  "learningResourceType": "slides",
+  "name": "Phylogenetics - Back to Basics - Multiple Sequence Alignment",
+  "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo-msa/slides.html",
+  "version": 17,
+  "keywords": [
+    "Evolution"
+  ],
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mcharleston/",
+      "name": "Michael Charleston",
+      "image": "https://avatars.githubusercontent.com/mcharleston",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Evolution",
+      "description": "phylogenetics",
+      "url": "https://training.galaxyproject.org/training-material/topics/evolution/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3299",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3299",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3299"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "# Motivation"
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/evolution" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/evolution/tutorials/abc_intro_phylo-msa/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+  
+<img src="/training-material/shared/images/biocommons-utas.png" alt="page logo" style="height: 40px;"/>
+  
+
+</span></div>
+
+---
+
+
+
+  
+<img src="/training-material/shared/images/biocommons-utas.png" alt="page logo" class="cover-logo" />
+  
+
+<br/>
+<br/>
+
+# Phylogenetics - Back to Basics - Multiple Sequence Alignment
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/mcharleston/" class="contributor-badge contributor-mcharleston"><img src="https://avatars.githubusercontent.com/mcharleston?s=36" alt="Michael Charleston avatar" width="36" class="avatar" />
+    Michael Charleston</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+# Motivation
+&lt;br&gt;
+&lt;br&gt;
+We use sequence alignment to:
+&lt;br&gt;
+&lt;br&gt;
+- identify complex relationships among multiple species - more than just pairwise comparisons;
+- find homologous parts (sites / loci) in sequences that may be under different selection dynamics;
+- and to build phylogenetic trees!
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Multiple sequence alignment (MSA) is a required step in molecular phylogenetics&lt;/b&gt;
+---
+
+# Sequence Alignment
+&lt;br&gt;
+&lt;br&gt;
+.left[One of the best understood and best solved bioinformatics problem is *how to align two sequences*.]
+&lt;br&gt;      
+.left[In order to do this we need to know:]
+&lt;br&gt;
+1.  what an &quot;alignment&quot; really means;
+&lt;br&gt;
+2.  how to judge how good an alignment is;
+&lt;br&gt;
+3.  an algorithm to do the alignment.
+---
+
+# What is an alignment?
+&lt;br&gt; 
+Given two sequences like **GGGCTGAA** and **GGGACTG** &quot;an alignment&quot; is a _mapping_ of their positions (a.k.a. &quot;sites&quot;) to a common ordering, by inserting gaps in one sequence or another:
+&lt;br&gt; 
+&lt;br&gt; 
+![Alignment of two DNA sequences GGGACTG and GGCTGAA. In the alignment gaps, indicated by -, are added to the sequences to form GGGACTG-- and -GG-CTGAA so that homologous sites are aligned at positions 2, 3, 5, 6, 7. ](images/03-msa-01-what-is-an-alignment.pdf-1.png)&lt;/p&gt;
+---
+# Alignments represent homology
+&lt;br&gt;
+&lt;br&gt;
+     
+&lt;p&gt;Our goal with sequence alignment is to identify which regions, down to individual positions in a molecular sequence, are homologous: that is, their shared evolutionary history is the same as that of the taxa of interest.&lt;/p&gt;
+&lt;br&gt; 
+
+&lt;p&gt;It&apos;s like tracing the origin of a set of transcribed documents through all their copies back to the original, where each was only copied (with maybe some mistakes) from one predecessor.&lt;/p&gt;
+&lt;br&gt; 
+&lt;p&gt;Once we have identified homologous sites then we can analyse their differences and similarities under an evolutionary model - a crucial centrepiece of phylogenetic analysis, and in fact of all comparative analysis of molecular sequences.&lt;/p&gt;
+---
+
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![Schematic example of a phylogenetic tree where species are represented by short DNA sequences to demonstrate how sequences evolve on a tree. The tree branches multiple times from a common ancestor to five extant taxa.](images/03-msa-02-a-tree-only.pdf-1.png)
+---
+
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An A to G substitution is highlighted in the first branching event.](images/03-msa-02-b.pdf-1.png)
+---
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. A deletion of a T is highlighted in the first branching event.](images/03-msa-02-c-deleteT.pdf-1.png)
+---
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An insertion of TT is highlighted in one of the branches.](images/03-msa-02-d-insertTT.pdf-1.png)
+---
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An A to G substitution is highlighted in one of the branches.](images/03-msa-02-e-AtoG.pdf-1.png)
+---
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An insertion of a T is highlighted in one of the branches.](images/03-msa-02-f-insertT.pdf-1.png)
+---
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. Two T to G substitutions have occurred on one branch.](images/03-msa-02-g-2xTtoG.pdf-1.png)
+---
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. A C to A substitution has occurred on one branch.](images/03-msa-02-h-CtoA.pdf-1.png)
+---
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. A deletion of a T has occurred on one branch.](images/03-msa-02-i-deleteT.pdf-1.png)
+---
+# Sequences evolve on a tree
+&lt;br&gt;
+&lt;br&gt;
+![A schematic of a phylogenetic tree showing the evolution of different DNA sequences from a common ancestral sequence. An A to C substitution has occurred on one branch.](images/03-msa-02-j-AtoC.pdf-1.png)
+---
+# Let&apos;s align these
+&lt;br&gt;
+&lt;br&gt;
+Gaps don&apos;t remain in the history so we only have
+&lt;br&gt;
+&lt;br&gt;
+.image-50[ ![Five unaligned DNA sequences are arranged vertically. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-a-unaligned.pdf-1.png) ]
+---
+# A good alignment
+&lt;br&gt;
+&lt;br&gt;
+This alignment reflects truth
+&lt;br&gt;
+&lt;br&gt;
+.image-50[ ![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-b-truth.pdf-1.png) ]
+---
+# Although...
+&lt;br&gt;
+&lt;br&gt;
+         
+But this alignment also looks &quot;good&quot; (?)
+&lt;br&gt;
+&lt;br&gt;
+.image-50[ ![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-c-good1.pdf-1.png) ]
+
+---
+
+# Although...
+&lt;br&gt;
+&lt;br&gt;
+        
+And so does this
+&lt;br&gt;
+&lt;br&gt;
+.image-50[ ![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-d-good2.pdf-1.png) ]
+
+---
+
+# This is nonsensical
+&lt;br&gt;
+Only matches and indels! Win?
+&lt;br&gt;
+&lt;br&gt;
+.image-50[ ![A possible alignment of five DNA sequences arranged vertically. Gaps have been introduced to align homologous sites. Nucleotides are colour coded G = orange, C = blue, A = green, T = pink](images/03-msa-03-e-nonsense.pdf-1.png) ]
+&lt;br&gt;
+&lt;br&gt;
+Here, the indels do not make sense as having come from the same phylogenetic history.
+
+---
+
+# Fixing errors
+&lt;br&gt;
+&lt;br&gt;
+![A possible alignment of six DNA sequences arranged vertically drawing attention to a position, 1, where gaps have been introduced in nearly all sequences and, 2, gaps are not aligned but could be.](images/03-msa-04-a-fixingerrors-badly.pdf-1.png)
+
+At 1 a gap has been inserted in EVERY sequence.
+
+---
+
+# Fixing errors
+&lt;br&gt;
+&lt;br&gt;
+![A possible alignment of six DNA sequences arranged vertically drawing attention to a position, 1, where gaps have been introduced in nearly all sequences and, 2, gaps are not aligned but could be.](images/03-msa-04-a-fixingerrors-badly.pdf-1.png)
+
+At 2 the gaps don&apos;t line up, but they *could*.
+
+---
+
+# Fixing errors
+&lt;br&gt;
+&lt;br&gt;
+![A possible alignment of six DNA sequences arranged vertically drawing attention to a position 1 where gaps have been removed to improve alignment at position 2.](images/03-msa-04-b-fixingerrors-well.pdf-1.png)
+
+        
+This fixes both problems.
+
+---
+
+# Rating alignments
+&lt;br&gt;
+This can be a bit of an art.
+&lt;br&gt;
+.left[You need to:]
+
+-   balance the number of gaps with number of mismatches
+
+-   notice when there are insertions / deletions that don&apos;t make sense, where there are alternative arrangements that do
+
+---
+
+# Pair-wise Alignment
+&lt;br&gt;
+&lt;br&gt;
+.center[*Dynamic Programming Approach*]
+
+---
+
+# Sequence Similarity
+&lt;br&gt;
+&lt;br&gt;
+To do any kind of comparison we need a distance or similarity measure.
+&lt;br&gt;
+Without it we can&apos;t say whether, e.g., *these* two species are more similar than *those* two.
+&lt;br&gt;
+-   **Sequence Dissimilarity**
+    -   Two main methods first: Hamming and *p*-distances, counting the number or proportion of differences between sequences
+-   **Edit cost**
+    -   a measure of the amount of evolutionary &quot;work&quot; that has to be done to change one character state into another one
+-   **Likelihood**
+    -   under a specific model of evolution, what is the probability that we would observe these sequences?
+
+---
+
+# Hamming Distance
+&lt;br&gt;
+The *Hamming* distance between two sequences is just the number of differences between them.
+&lt;br&gt;
+It makes no distinction between substitutions or insertions/deletions, and not between transitions and transversions.
+&lt;br&gt;
+&lt;br&gt;
+.image-40[ ![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the value 1.](images/03-msa-05-hamming-distance.pdf-1.png) ]
+
+Sequence length: 20
+&lt;p&gt;Number of differences: 5&lt;/p&gt;
+
+&lt;p&gt;Hamming Distance = 5&lt;/p&gt;
+&lt;p&gt;P-distance = 5/20 = 0.25 or 25%&lt;/p&gt;
+---
+
+# Edit Cost
+&lt;br&gt;
+&lt;br&gt;
+We use a matrix of costs to describe how much evolutionary &quot;work&quot; must be done to convert one character to another.
+&lt;br&gt;
+&lt;br&gt;
+.pull-left[
+
+This is the *Edit cost matrix*.
+
+|-|A|C|G|T|-|
+|------|--------------------|
+|**A**|0|1|2|1|5|
+|**C**|1|0|1|2|5|
+|**G**|2|1|0|1|5|
+|**T**|1|2|1|0|5|
+|**-**|5|5|5|5|n/a|
+]
+.pull-right[
+
+
+&lt;p&gt;.image-75[
+    ![An alignment of two DNA sequences. Positions that are not homologous are indicated by an asterisk and assigned the values 1, 2 or 5.](images/03-msa-06-edit-distance.pdf-1.png)
+]&lt;/p&gt;
+&lt;p&gt;Complete edit-cost = 1 + 1 + 2 + 1 + 5 = 10&lt;/p&gt;
+]
+&lt;br&gt;
+
+
+
+&lt;br&gt;
+Using edit costs we can describe better the relationships between sequences: for example it&apos;s less common for an  *A*  to change to a *G* in the above than for an *A* to change to a *T*, in turn less common than for an *A* to remain as an *A*.
+--
+
+Also note we have introduced a bigger cost for aligning any nucleotide with a gap, reflecting our believe that insertion/deletion events are less common than substitutions.
+
+---
+# What price a gap?
+&lt;br&gt;
+&lt;br&gt;
+There are two basic methods for assigning a cost *c* to a gap of length *g* in a sequence.
+&lt;br&gt;
+&lt;br&gt;
+**Linear cost**: \\(c = -dg\\)
+    where \\(d\\) is the _gap open penalty_;
+&lt;br&gt;
+&lt;br&gt;
+**Affine cost**: \\(c = -d - (g-1)e\\)
+    where \\(e\\) is the _gap extension penalty_.
+&lt;br&gt;
+&lt;br&gt;
+Typical values are \\(d = 10, e = 0.1\\).
+&lt;br&gt;
+&lt;br&gt;
+The affine gap cost method is the most complex method we can use in order to solve the alignment of two sequences quickly.
+&lt;br&gt;
+&lt;br&gt;
+More complex models prohibit the use of dynamic programming to solve the alignment (and must use _heuristics_).
+
+---
+# Numbers of alignments
+
+For two sequences of length \\(x\\) and \\(y\\), there are \\(\frac{(x+y)!}{x!\ y!}\\) possible alignments.
+&lt;br&gt;
+For three sequences, of length \\(x\\), \\(y\\) and \\(z\\) say, there are \\(\frac{(x+y+z)!}{x!\ y!\ z!}\\) alignments.
+&lt;br&gt;
+For \\(n\\) sequences of length 10, this increases rapidly:
+
+| n   | Hash alignments  |
+|-----|------------------|
+| 2   | 184756           |
+| 3   | 5.55 × 10^12     |
+| 4   | 4.71 × 10^21     |
+| 5   | 4.83 × 10^31     |
+| 6   | 3.64 × 10^42     |
+| 7   | 1.45 × 10^54     |
+| 8   | 2.38 × 10^66     |
+| 9   | 4.94 × 10^85     |
+| 10  | 2.35 × 10^92     |
+
+
+&lt;br&gt;
+In general it is not possible - even with really fast computers - to guarantee optimal multiple alignments, even with simple costing schemes.
+---
+# Dynamic Programming
+&lt;br&gt;
+&lt;br&gt;
+.left[Dynamic Programming (DP) is a common method to solve many types of problems, including pairwise sequence alignment. ]
+&lt;br&gt;
+-   Solves local problems optimally
+-   Amalgamates these into globally optimal complete solutions
+-   &quot;Fast&quot;
+---
+# DP overview
+&lt;br&gt;
+&lt;br&gt;
+Dynamic Programming solves problems by breaking them down recursively into (slightly) smaller problems.
+
+![Schematic representation of dynamic programming showing how the process solves a problem by breaking it down and finding optimal partial solutions that can be used to infer the full solution.](images/DPOverviewDiagram.png)
+
+In terms of sequence alignment, this comes down to basing alignment of two sequences up to positions *i* and *j* in terms of the best alignments yet found for the two sequences, up to positions \\(i-1,j-10\\), \\(i,j-1\\), and \\(i-1,j\\).
+---
+#DP overview (cont.)
+&lt;br&gt;
+&lt;br&gt;
+![Schematic representation of how alignment of two DNA sequences progresses. Three scenarios are shown: 1. both sequences are identical 2. the sequences differ and a gap is introduced in the top sequence 3. the sequences differ and a gap is introduced in the bottom sequence.](images/03-msa-10-advancing-seqs.pdf-1.png)
+
+---
+# Dynamic Programming alignment
+
+1. Array two sequences along the top and left sides of a cost matrix.
+2. Fill in the cells of the matrix from top-left to bottom right.
+    At each stage find the minimum cost sub-alignment and add to it:
+   &lt;p&gt;2.1 Find the maximum score from the previous cells including gap costs;&lt;/p&gt; 
+   &lt;p&gt;2.2 Put the result into this new cell;&lt;/p&gt; 
+   &lt;p&gt;2.3 Note which cell we chose with a pointer or reference.&lt;/p&gt; 
+&lt;br&gt;
+
+.image-25[ ![Schematic of the dynamic programming alignment described on the slide](images/03-DPcell.png) ]
+
+
+We add the cost of the best solution to the previous cells (above, to the left and above-left) to the best possible score for this cell.
+
+---
+
+#Alignment example
+&lt;br&gt;
+&lt;br&gt;
+We will align two amino acid sequences next:
+&lt;br&gt;
+&lt;br&gt;
+Input sequences:
+&lt;br&gt;
+&lt;br&gt;
+.center[
+| x   | HEAGAWGHEE |
+|---|---|
+| **y**   | **PAWHEAE**    |
+]
+
+---
+# Filling in the cost matrix
+&lt;br&gt;
+&lt;br&gt;
+Edit costs for these two sequences:
+&lt;br&gt;
+
+|      | H  | E  | A  | G  | A  | W  | G  | H  | E  | E  |
+|------|----|----|----|----|----|----|----|----|----|----|
+| **P**    | -2 | -1 | -1 | -2 | -1 | -4 | -2 | -2 | -1 | -1 |
+| **A**    | -2 | -1 | 5  | 0  | 5  | -3 | 0  | -2 | -1 | -1 |
+| **W**    | -3 | -3 | -3 | -3 | -3 | 15 | -3 | -3 | -3 | -3 |
+| **H**    | 10 |  0 | -2 | -2 | -2 | -3 | -2 | 10 | 0  | 0  |
+| **E**    |  0 |  6 | -1 | -3 | -1 | -3 | -3 | 0  | 6  | 6  |
+| **A**    | -2 | -1 | 5  | 0  | 5  | -3 | 0  | -2 | -1 | -1 |
+| **E**    |  0 | -6 | -1 | -3 | -1 | -3 | -3 | 0  | 6  | 6  |
+
+---
+# Dynamic Programming: fill in
+&lt;br&gt;
+&lt;br&gt;
+![Cost matrix of possible alignments of the amino acid sequences HEAGAWGHEE on the x-axis and PAWHEAE on the y axis. Arrows indicate the direction taken to reach each score.](images/03-msa-08-a-DP-forward.pdf-1.png)
+---
+
+# Dynamic Programming: backtrack
+&lt;br&gt;
+&lt;br&gt;
+![Cost matrix of possible alignments of the amino acid sequences HEAGAWGHEE on the x-axis and PAWHEAE on the y axis. The optimal alignment is indicated in red. Arrows indicate the direction taken to reach each score.](images/03-msa-08-b-DP-backtrack.pdf-1.png)
+
+---
+#  Alignments are paths in the table
+&lt;br&gt;
+&lt;br&gt;
+![Cost matrix of possible alignments of the amino acid sequences HEAGAWGHEE on the x-axis and PAWHEAE on the y axis. Arrows indicate the direction taken to reach this alignment.](images/03-msa-09-alignments-are-paths.pdf-1.png)
+---
+# Conclusion of simple alignment
+&lt;br&gt;
+&lt;br&gt;
+Aligned sequences:
+&lt;br&gt;
+&lt;br&gt;
+
+|         |     |     |     |     |     |    |     |     |     |     |     |
+|---------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| $$s\_{1}$$ | H | E | A | G | A | W | G | H | E | - | E |
+| $$s\_{2}$$ | - | - | P | - | A | W | - | H | E | A | E |
+|         | -5  | -5  | -1  | -5  | +5  | +15 | -5  | +10 | +6  | -5  | +6  |
+
+&lt;br&gt;
+&lt;br&gt;
+Total cost = 16
+
+---
+# Generalising this approach
+&lt;br&gt;
+&lt;br&gt;
+Without too much effort it is possible to generalise this approach:
+&lt;br&gt;
+&lt;br&gt;
+**Needleman-Wunsch** is used for _local_ alignment;
+&lt;br&gt;
+&lt;br&gt;
+**Smith-Waterman** is used for _global_ alignment;
+&lt;br&gt;
+&lt;br&gt;
+**longest match** can be found by setting high match costs and large negative mis-match and gap costs;
+&lt;br&gt;
+&lt;br&gt;
+**BLAST** uses this system once good patching pairs have been found;
+&lt;br&gt;
+&lt;br&gt;
+**Affine gap scores** as mentioned, accounting for gap opening and gap extension penalties to differ.
+
+---
+#Properties of DP Pairwise Alignment
+&lt;br&gt;
+&lt;br&gt;
+-   Pairwise Sequence Alignment takes an amount of *time* that is proportional to the number of cells in the table, which is roughly the product of the lengths of the two sequences.
+
+    That means it is \\(O(nm)\\) if the lengths of the sequences are \\(n\\) and \\(m\\); usually as these are about the same we can write \\(O(n^{2})\\): it&apos;s *quadratic in sequence length*.
+
+-   The amount of space required is also quadratic in \\(n\\).
+    There is a linear-space version of the DP method (which is rarely used as it takes longer).
+
+-   This solution is globally optimal. It will always produce an optimal alignment, though there may be more than one.
+
+-   With more sequences, the size of the table increase:
+    For \\(k\\) sequences the algorithm is \\(O(n^{k})\\): not practical.
+
+---
+
+# Multiple Sequence Alignment: Aligning groups of sequences using heuristics
+&lt;br&gt;
+&lt;br&gt;
+.center[*Aligning multiple sequences*]
+---
+#Aligning multiple sequences
+&lt;br&gt;
+&lt;br&gt;
+We cannot check all possible alignments (there are simply too many), so we must use make a compromise.
+&lt;br&gt;
+&lt;br&gt;
+We will use pairwise alignment (which is easy) and build up a multiple sequence alignment from pairs of sequences.
+&lt;br&gt;
+&lt;br&gt;
+These *heuristic* methods are used in Clustal, GCG and others.
+---
+# Progressive Alignment
+&lt;br&gt;
+&lt;br&gt;
+.left[The process is quite simple:]
+
+1.  Align all pairs of sequences using DP (dynamic programming).
+2.  Create a distance matrix based on the alignments.
+3.  Form a *guide tree* from the distance matrix. This is not the same as a phylogenetic tree, nor should it be interpreted as one!
+4.  Progressively align the pairs of sequences with DP, creating summary (consensus) sequences as we go.
+---
+# MAFFT, Muscle, T-COFFEE, k-align
+&lt;br&gt;
+&lt;br&gt;
+- Clustal is not that great to be honest
+- Other very good automatic alignment methods exist, such as Muscle, T-Coffee, k-align, di-align.
+- My current favourites are Muscle and MAFFT.
+
+---
+# MAFFT
+&lt;br&gt;
+&lt;br&gt;
+     
+&quot;MAFFT offers various multiple alignment strategies. They are classified into three types, (a) the progressive method, (b) the iterative refinement method with the WSP score, and (c) the iterative refinement method using both the WSP and consistency scores. In general, there is a tradeoff between speed and accuracy. The order of speed is a &gt; b &gt; c, whereas the order of accuracy is a &lt; b &lt; c. The results of benchmarks can be seen here. The following are the detailed procedures for the major options of MAFFT.&quot;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+Source: MAFFT is available at https://mafft.cbrc.jp/; first paper 10.1093/nar/gkf436
+
+---
+# MAFFT algorithms overview
+&lt;br&gt;
+&lt;br&gt;
+![Flow chart giving an overview of algorithms used by the program MAFFT to convert distance matrices into alignments. The flow chart is described in the video recording at 37:52.](images/03-msa-11-MAFFT-1.png)
+---
+
+# *Anolis* example
+&lt;br&gt;
+&lt;br&gt;
+![Screenshot from the program SeeView showing a multiple sequence alignment of Anolis species. DNA sequences are aligned vertically and nucleotides are colour coded. Aligned sites can be identified by solid lines of colour that run from top to bottom of the image. Full description included in the video recording at 40:06.](images/AnolisPartialAlignment2.png)
+
+Around site 982-990 there is a 2 bp gap in all sequences.
+
+---
+# *Anolis* example
+&lt;br&gt;
+&lt;br&gt;
+![Screenshot from the program SeeView showing a multiple sequence alignment of Anolis species. DNA sequences are aligned vertically and nucleotides are colour coded. Aligned sites can be identified by solid lines of colour that run from top to bottom of the image. Full description included in the video recording at 40:06.](images/AnolisPartialAlignmentGapsAligned.png)
+
+Here I have lined up these gaps: more substitutions? but makes sense.
+---
+
+# *Anolis* example
+&lt;br&gt;
+&lt;br&gt;
+![Screenshot from the program SeaView showing a multiple sequence alignment of Anolis species. DNA sequences are aligned vertically and nucleotides are colour coded. Aligned sites can be identified by solid lines of colour that run from top to bottom of the image. Full description included in the video recording at 40:06.](images/AnolisPartialAlignmentGapsAlignedTidied.png)
+
+
+We can remove the gap-only sites now.  There&apos;s more to do!
+
+---
+# What&apos;s Next?
+&lt;br&gt;
+&lt;br&gt;
+Once your sequences are properly aligned, they can be used for _phylogenetic analysis_.
+---
+# Thank you!
+&lt;br&gt;
+&lt;br&gt;
+.center[*Next: building trees from distances!*]
+
+---
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/mcharleston/" class="contributor-badge contributor-mcharleston"><img src="https://avatars.githubusercontent.com/mcharleston?s=36" alt="Michael Charleston avatar" width="36" class="avatar" />
+    Michael Charleston</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+  
+<img src="/training-material/shared/images/biocommons-utas.png" alt="page logo" style="height: 100px;"/>
+  
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+        
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=configured" type="text/javascript"></script>
+	<script>
+	MathJax.Hub.Config({
+          tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+      MathJax.Hub.Configured();
+	</script>
+        
+    </body>
+</html>

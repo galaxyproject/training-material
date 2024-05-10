@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slide Deck: Slide Deck: Phylogenetics - Back to Basics - Building Trees / Evolution</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo-trees/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.105e595f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Phylogenetics - Back to Basics - Building Trees">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-04-23 01:55:40 +0000">
+<meta name="DC.creator" content="Michael Charleston"><meta name="description" content="# Why _build_ trees?  The main reason we end up building a tree is that searching tree space for an optimal one takes too long when the number of taxa gets large.  .reduce70[ | _n_ | # trees | yes, but how much is that _really_? | --- |---|:--| | 3 | 3 | enumerable by hand | | 4 | 15 | enumerable by hand | | 5 | 105 | enumerable by hand on a rainy day | | 6 | 945 | enumerable by computer | | 7 | 10395 | still searchable very quickly on computer | | 8 | 135135 | a bit more than the number of hairs on your head | | 9 | 2027025 | population of Sydney living west of Parramatta | | 10 | 34459425 | \\(\approx\\) upper limit for exhaustive searching; about the number of possible combinations of numbers in the National Lottery | | 20 | $$8.2\times 10^{21}$$ | \\( \approx \\) upper limit for branch-and-bound searching | | 48 | $$ 3.21 \times 10^{70} $$ | \\(\approx\\) number of particles in the universe | | 136 | $$ 2.11 \times 10^{267} $$ | number of trees to choose from in the ``Out of Afr...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Evolution / Slide Deck: Phylogenetics - Back to Basics - Building Trees">
+        <meta property="og:description" content="# Why _build_ trees?  The main reason we end up building a tree is that searching tree space for an optimal one takes too long when the number of taxa gets large.  .reduce70[ | _n_ | # trees | yes, but how much is that _really_? | --- |---|:--| | 3 | 3 | enumerable by hand | | 4 | 15 | enumerable by hand | | 5 | 105 | enumerable by hand on a rainy day | | 6 | 945 | enumerable by computer | | 7 | 10395 | still searchable very quickly on computer | | 8 | 135135 | a bit more than the number of hairs on your head | | 9 | 2027025 | population of Sydney living west of Parramatta | | 10 | 34459425 | \\(\approx\\) upper limit for exhaustive searching; about the number of possible combinations of numbers in the National Lottery | | 20 | $$8.2\times 10^{21}$$ | \\( \approx \\) upper limit for branch-and-bound searching | | 48 | $$ 3.21 \times 10^{70} $$ | \\(\approx\\) number of particles in the universe | | 136 | $$ 2.11 \times 10^{267} $$ | number of trees to choose from in the ``Out of Afr...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/evolution/tutorials/abc_intro_phylo-trees/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/evolution/tutorials/abc_intro_phylo-trees/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/evolution/tutorials/abc_intro_phylo-trees/slides.html">View markdown source on GitHub</a>
+	<h1>Phylogenetics - Back to Basics - Building Trees</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/mcharleston/" class="contributor-badge contributor-mcharleston"><img src="https://avatars.githubusercontent.com/mcharleston?s=36" alt="Michael Charleston avatar" width="36" class="avatar" />
+    Michael Charleston</a>
+	</div>
+
+</div>
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> May 10, 2024 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Apr 23, 2024 </div>
+
+	<hr />
+
+
+	<h1 id="why-build-trees">Why <em>build</em> trees?</h1>
+<p><br />
+The main reason we end up building a tree is that searching tree space for an optimal one takes too long when the number of taxa gets large.
+<br />
+.reduce70[
+| <em>n</em> | # trees | yes, but how much is that <em>really</em>?
+| — |—|:–|
+| 3 | 3 | enumerable by hand |
+| 4 | 15 | enumerable by hand |
+| 5 | 105 | enumerable by hand on a rainy day |
+| 6 | 945 | enumerable by computer |
+| 7 | 10395 | still searchable very quickly on computer |
+| 8 | 135135 | a bit more than the number of hairs on your head |
+| 9 | 2027025 | population of Sydney living west of Parramatta |
+| 10 | 34459425 | \(\approx\) upper limit for exhaustive searching; about the number of possible combinations of numbers in the National Lottery |
+| 20 | \(8.2\times 10^{21}\) | \( \approx \) upper limit for branch-and-bound searching |
+| 48 | \(3.21 \times 10^{70}\) | \(\approx\) number of particles in the universe |
+| 136 | \(2.11 \times 10^{267}\) | number of trees to choose from in the ``Out of Africa’’ data¹ |
+]</p>
+
+<p>.footnote[
+¹ Vigilant et al., 1991
+]</p>
+
+<hr />
+<h1 id="tree-space-is-worse-than-space-space">Tree space is worse than “space” space</h1>
+<p><br />
+<img src="graphics/NGC2207+IC2163.jpg" alt="Hubble Space Telescope image of two colliding galaxies" />
+<br />
+NGC 2207 and IC 2163 galaxies colliding.
+<br />
+.footnote[Source: https://commons.wikimedia.org/wiki/Commons:Featured_pictures/Astronomy]
+—</p>
+<h1 id="why-should-building-work-then">Why should building work then?</h1>
+<p><br />
+<br />
+Some parts of a phylogeny can be confidently accepted: when there are two species much more similar to each other than they are to any other species, we can confidently say that they are likely to be each other’s closest relatives, in the set of species of interest.
+<br />
+<br />
+If molecular sequences evolve at a nice steady rate - the “molecular clock” hypothesis - and if there’s neither too little nor too much change, this can be good enough.</p>
+
+<hr />
+<h1 id="distances-from-trees">Distances from trees</h1>
+<p><br />
+<br />
+Before we talk about building a tree from distances, we need to think about how distances are reflected by trees.
+<br />
+<br />
+The most natural way to infer distances from trees is by adding the lengths of branches between each pair of nodes.
+<br />
+<br />
+Such distances are called <em>patristic</em> distances (I don’t know why).
+—</p>
+<h1 id="patristic-distances">Patristic Distances</h1>
+<p><br />
+<br />
+<img src="graphics/04-NonUltrametricTree1-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. Described at 3:05 in the video recording." /></p>
+
+<h2 id="rooted-binary-tree-with-branch-lengths">Rooted binary tree with branch lengths</h2>
+<h1 id="patristic-distances-1">Patristic Distances</h1>
+<p><br />
+<br />
+<img src="graphics/04-NonUltrametricTree2-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The distance between nodes f and g via the internal node c is highlighted with a red dotted line and annotated with the value 0.045. Described at 3:50 in the video recording." />
+<br />
+Patristic distance between tips f and g is 0.02 + 0.025 = 0.045
+—</p>
+<h1 id="patristic-distances-2">Patristic Distances</h1>
+<p><br />
+<br />
+<img src="graphics/04-NonUltrametricTree3-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The distance between nodes g and h via the internal nodes c and b is highlighted with a red dotted line and annotated with the value 0.07. Described at 4:03 in the video recording." />
+<br />
+Patristic distance between tips g and h is 0.025 + 0.01 + 0.035 = 0.07
+—</p>
+<h1 id="patristic-distances-3">Patristic Distances</h1>
+<p><br />
+<br />
+<img src="graphics/04-NonUltrametricTree4-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The distance between nodes e and f the internal node a, the root and internal nodes b and c is highlighted with a red dotted line and annotated with the value 0.085.Described at 4:10 in the video recording." />
+<br />
+Patristic distance between tips e and f is 0.02 + 0.015 + 0.02 + 0.01 + 0.02 = 0.085</p>
+
+<hr />
+<h1 id="tree-like-distances-are-easy">Tree-like distances are easy</h1>
+<p><br />
+<br />
+A set of distances between the tips (taxa) that match the patristic distances of some tree is called <strong>tree-like</strong>.
+<br />
+<br />
+Given tree-like distances, most tree construction methods will work.
+<br />
+<br />
+Yes, <em>most</em> - not all!</p>
+
+<hr />
+
+<h1 id="clock-like">Clock-like</h1>
+<p><br />
+<br />
+The easiest possible distance data to work with are those where the distance from the root to every tip is the same.
+<br />
+<br />
+Such trees (and the distances derived from them) are called <em>ultrametric</em> (that is, they have the same root-to-tip distance for every tip).</p>
+
+<hr />
+
+<h1 id="clock-like-1">Clock-like</h1>
+<p><br />
+<br />
+For example, suppose this is the <em>true</em> tree relating some species of interest, with actual branch lengths as labelled:
+<br />
+<br />
+<img src="graphics/04-UltrametricTreeScaled-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same. Described at 4:44 in the video recording." /></p>
+
+<hr />
+
+<h1 id="these-distances-are-ultrametric">These distances are <em>ultrametric</em></h1>
+<p><br />
+.pull-left[
+.image-90[ <img src="graphics/04-UltrametricTree-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same. Described at 4:44 in the video recording." /> ]
+]
+.pull.right[</p>
+<ul>
+  <li>The maximum root-to-tip distance is called the <em>height</em> of the tree.</li>
+  <li>Here, the root-to-tip distances are all the same. A set of distances with this property is called <em>ultrametric</em>.</li>
+  <li>If the distances represent evolutionary time accurately and all the tips are in the present, then we should expect this property.</li>
+  <li>Reconstructing trees from ultrametric distances is <em>super easy</em>.
+]
+—</li>
+</ul>
+
+<h1 id="these-distances-are-ultrametric-1">These distances are <em>ultrametric</em></h1>
+<p><br />
+<br />
+.left-column40[
+	<img src="graphics/04-UltrametricTree-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same. Described at 4:44 in the video recording." />
+]
+.right-column60[
+Distance matrix:
+.center[
+|   | d | e | f | g | h |
+|:—:|:—:|:—:|:—:|:—:|:—:|
+|<strong>d</strong> | 0 | 0.07 | 0.1* | 0.1 | 0.1 |
+|<strong>e</strong> | 0.07 | 0 | 0.1 | 0.1 | 0.1 |
+|<strong>f</strong> | 0.1 | 0.1 | 0 | 0.04 | 0.06 |
+|<strong>g</strong> | 0.1 | 0.1 | 0.04 | 0 | 0.06 |
+|<strong>h</strong> | 0.1 | 0.1 | 0.06 | 0.06 | 0 |
+]
+.reduce70[* Note; this is twice the root-to-tip distance.]
+]</p>
+
+<p>.pull-bottom[
+Any ultrametric tree satisfies the three-point condition (for rooted trees): for any three tips x, y, z, the larger two pairwise distances of D(x, y), D(x,z), D(y,z) will be equal.
+]</p>
+
+<hr />
+
+<h1 id="these-distances-are-ultrametric-2">These distances are <em>ultrametric</em></h1>
+<p><br />
+<br />
+.left-column40[
+	<img src="graphics/04-UltrametricTree-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same. Described at 4:44 in the video recording." />
+]
+.right-column60[
+Distance matrix:
+.center[
+|   | d | e | f | g | h |
+|:—:|:—:|:—:|:—:|:—:|:—:|
+|<strong>d</strong> | 0 | 0.07 | 0.1 | 0.1 | 0.1 |
+|<strong>e</strong> | - | 0 | 0.1 | 0.1 | 0.1 |
+|<strong>f</strong> | - | - | 0 | 0.04 | 0.06 |
+|<strong>g</strong> | - | - | - | 0 | 0.06 |
+|<strong>h</strong> | - | - | - | - | 0 |
+]
+<br />
+Since this is a symmetric matrix we usually just show half of it…
+]</p>
+
+<hr />
+
+<h1 id="these-distances-are-ultrametric-3">These distances are <em>ultrametric</em></h1>
+<p><br />
+<br />
+.left-column40[
+	<img src="graphics/04-UltrametricTree-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same. Described at 4:44 in the video recording." />
+]
+.right-column60[
+Distance matrix:
+.center[
+|	| e | f | g | h |
+|:—:|:—:|:—:|:—:|:—:|:—:|
+|<strong>d</strong> | 0.07 | 0.1 | 0.1 | 0.1 |
+|<strong>e</strong> | - | 0.1 | 0.1 | 0.1 |
+|<strong>f</strong> | - | - | 0.04 | 0.06 |
+|<strong>g</strong> | - | - | - | 0.06 |
+]
+<br />
+… and only the non-zero entries.
+]</p>
+
+<hr />
+<h1 id="the-general-approach">The general approach</h1>
+<p><br />
+<br />
+<img src="graphics/TreeConstruction.drawio.png" alt="Flow chart illustrating how sequence alignment data or dis/similarity measures are used to calculate and calculate phylogenetic distances. Colours and shapes are used to differentiate different sections of the flowchart, guiding the viewer through each step from left to right. The flowchart begins with Sequence Alignment or Dis/Similarity Measures. These are used to form a distance matrix (D) which is used to select two nodes (x and y) forming a new node z. The distance matrix is updated with the new node z until no further nodes can be formed. Described at 8:20 in the video recording." /></p>
+
+<hr />
+
+<h1 id="our-distances">Our distances</h1>
+<p><br />
+<br /></p>
+<ul>
+  <li>We get distances from molecular sequences once they have been <em>aligned</em>.</li>
+  <li>There are various ways to compare aligned sequences to obtain distances:
+    <ul>
+      <li>uncorrected “p-distance” – the proportion of sites that differ between the two sequences;</li>
+      <li>the Jukes-Cantor (JC69) correction, which takes into account of multiple character state changes through time;</li>
+      <li>The Hasegawa-Kishino-Yano (HKY85) model, which also allows for variation in nucleotide frequencies \(\pi_{A}, \pi_{C}, \pi_{G}, \pi_{T}\) as well as different transition/transversion rates;</li>
+      <li>and more.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="jukes-cantor--jc69">Jukes-Cantor / JC69</h1>
+<p><br />
+This model has one single parameter, assuming that the base frequencies are each 25%: \(\pi_{A}=\pi_{G}=\pi_{C}=\pi_{T}=0.25\)
+<br />
+<br />
+The rate matrix looks like this:
+<br />
+.image-40[ <img src="graphics/04-QJC69-1.png" alt="Rate matrix representing the Jukes Cantor model. The matrix has the nucleotides AGCT on both the x and y axis. The substitution rates are identical and represented by the character alpha. Asterisks are used as shorthand for values that make the row sums equal 0. Described at 11:31 in the video recording." /> ]
+<br />
+.reduce50[where the asterisk is a short-hand to make the row-sums equal 0.]
+<br />
+<br />
+Under this model the expected number of substitutions between two sequences with a p-distance of \(p\) is
+\(\hat{d} = \frac{-3}{4}\ln\left(1-\frac{4}{3}p\right)\)</p>
+
+<hr />
+<h1 id="hasegawa-kishino-yano--hky85">Hasegawa-Kishino-Yano / HKY85</h1>
+<p><br />
+This model allows for variation in nucleotide frequencies \(\pi_{A}, \pi_{G}, \pi_{C}, \pi_{T}\) as well as different transition/transversion rates using parameter \(\kappa\):
+<br />
+<br />
+.image-40[ <img src="graphics/04-QHKY85-1.png" alt="Rate matrix representing the HKY85 model. The matrix has the nucleotides AGCT on both the x and y axis. Variation in nucleotide frequencies πA; πG; πC; πT as well as different transition/transversion rates using parameter kappa. Described at 14:08 in the video recording." /> ]
+<br />
+<br />
+This model also allows for a correction to turn relative observed numbers of substitutions between the different bases into expected total number of substitutions between two sequences, but it is much more complex.</p>
+
+<hr />
+
+<h1 id="from-alignment-to-distances">From alignment to distances</h1>
+<p><br />
+<br />
+.left-column50[
+	<img src="graphics/AnolisPartialAlignmentGapsAlignedTidied.png" alt="Screenshot from the program SeaView showing a multiple sequence alignment of Anolis species. DNA sequences are aligned vertically and nucleotides are colour coded. Aligned sites can be identified by solid lines of colour that run from top to bottom of the image. Full description included in the video recording at 40:06." />
+]
+.right-column50[
+	<img src="graphics/04-AnolisDistanceMatrixCorner-1.png" alt="Figure representing a distance matrix (D) comparing sequences from A. acutus and A. aeneus." />
+<br />
+<br />
+Once the alignment is complete, each pair of sequences is compared to give an estimated distance between them: this forms the distance matrix for tree building.
+]
+—</p>
+<h1 id="example">Example</h1>
+<p><br />
+<br />
+<em>Ultrametric distances</em></p>
+
+<hr />
+<h1 id="the-true-tree">The true tree</h1>
+<p><br />
+<br />
+<img src="graphics/04-TrueTreeUltrametric-1.png" alt="Schematic of an ultrametric phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same." /></p>
+
+<hr />
+<h1 id="original-distance-matrix">Original Distance Matrix</h1>
+<p><br />
+<br />
+<img src="graphics/04-InitialDistancesUltrametric-1.png" alt="Distance matrix representing the evolutionary distance between nodes d, e, f, g and h on a phylogenetic tree." />
+—</p>
+<h1 id="original-distance-matrix-1">Original Distance Matrix</h1>
+<p><br />
+<br />
+<img src="graphics/04-InitialDistancesUltrametric-2.png" alt="Distance matrix representing the evolutionary distance between nodes d, e, f, g and h on a phylogenetic tree. The distance between g and f is highlighted in red and has a value of 0.04." />
+—
+<br />
+<br />
+<br />
+<br />
+<br />
+<img src="graphics/04-TreeBuildStep1-1.png" alt="The letters d, e, f, g and h are equally distributed horizontally. They represent the tips of a phylogenetic tree. Described at 16:08 in the video recording." />
+—</p>
+
+<h2><img src="graphics/04-TreeBuildStep2-1.png" alt="The letters d, e, f, g and h are equally distributed horizontally at the bottom of the image. They represent the tips of a phylogenetic tree. An internal node c sits above the tips and is connected to nodes f and g. Described at 16:08 in the video recording." /></h2>
+<p><br />
+<br />
+<br />
+<br />
+<br />
+<img src="graphics/04-TreeBuildStep3-1.png" alt="The letters d, e, f, g and h are equally distributed horizontally at the bottom of the image. They represent the tips of a phylogenetic tree. An internal node c sits above the tips and is connected to nodes f and g. The distance from f to g via c is highlighted with a red dotted line and annotated with the value 0.04.Described at 16:08 in the video recording." />
+<br />
+<br />
+The distance between f and g <em>D(f,g)</em> is the sum of the branch lengths on the path between them.
+—
+<br />
+<br />
+<br />
+<br />
+<br /></p>
+
+<p><img src="graphics/04-TreeBuildStep4-1.png" alt="The letters d, e, f, g and h are equally distributed horizontally at the bottom of the image. They represent the tips of a phylogenetic tree. An internal node c sits above the tips and is connected to nodes f and g. The distance from f to g via c is highlighted with a red dotted line and annotated with the value 0.04. A blue dotted line represents the distance between f and h with the value 0.06. A green dotted line represents the distance between g and h with the value 0.06. Described at 16:08 in the video recording." />
+<br />
+<br />
+Similarly the distances <em>D(f,h)</em> and <em>D(g,h)</em> are the sum of branch lengths.
+—
+<br />
+<br />
+<br />
+<br /></p>
+
+<p><img src="graphics/04-TreeBuildStep5-1.png" alt="The letters d, e, f, g and h are equally distributed horizontally at the bottom of the image. They represent the tips of a phylogenetic tree. An internal node c sits above the tips and is connected to nodes f and g. The distance from f to g via c is highlighted with a red dotted line and annotated with the value 0.04. A blue dotted line represents the distance between f and h with the value 0.06. A green dotted line represents the distance between g and h with the value 0.06. A brown line represents the path between c and h with the value 0.08. Described at 16:08 in the video recording." />
+<br />
+<br />
+Therefore: 
+<br />
+\(\mathbf{D(c,h)} = \frac{D(f,h)+D(g,h)-D(f,g)}{2}\)</p>
+
+<hr />
+<h1 id="forming-the-next-distance-matrix">Forming the next Distance Matrix</h1>
+<p><br />
+<br />
+We need to remove columns and rows f and g, and add new column and row c.</p>
+
+<p>.image-75[ <img src="graphics/04-DistanceMatrixMod1-1.png" alt="Distance matrix (D0) representing the evolutionary distance between nodes d, e, f, g on the y axis and e,f, g and h the x axis. Explanation provided at 19:00 in the video recording." /> ]</p>
+
+<hr />
+<h1 id="forming-the-next-distance-matrix-1">Forming the next Distance Matrix</h1>
+<p><br />
+<br />
+The entries for <em>D(f,d), D(g,d)</em> etc get dropped.</p>
+
+<h2 id="image-75--">.image-75[ <img src="graphics/04-DistanceMatrixMod2-1.png" alt="Distance matrix D1 representing the evolutionary distance between nodes d, e, f, g and c on the y-axis and nodes e, f, g, c and h on the x-axis.  Some values have been struck out to illustrate how a matrix is sequentially updated during the tree building process. Explanation provided at 19:00 in the video recording." /> ]</h2>
+<h1 id="forming-the-next-distance-matrix-2">Forming the next Distance Matrix</h1>
+<p><br />
+<br />
+We fill in the new entries using the formulae below:</p>
+
+<p>.image-75[ <img src="graphics/04-DistanceMatrixMod3-1.png" alt="Distance matrix D1 representing the evolutionary distance between nodes d, e, f, g and c on the y-axis and nodes e, f, g, c and h on the x-axis.  Some values have been struck out or replaced with a formula to illustrate how a matrix is sequentially updated during the tree building process. Explanation provided at 19:00 in the video recording." /> ]
+<br />
+<br />
+\(D(c,d) = \frac{1}{2}(D(f,d)+D(g,d)-D(f,g)) = \frac{1}{2}(0.1+0.1-0.04) = \mathbf{0.08}\)
+—</p>
+<h1 id="forming-the-next-distance-matrix-3">Forming the next Distance Matrix</h1>
+<p><br />
+<br />
+We fill in the new entries using the formulae below:</p>
+
+<p>.image-75[ <img src="graphics/04-DistanceMatrixMod4-1.png" alt="Distance matrix D1 representing the evolutionary distance between nodes d, e, f, g and c on the y-axis and nodes e, f, g, c and h on the x-axis.  Some values have been struck out to illustrate how a matrix is sequentially updated during the tree building process. The distance from d to c is highlighted and is 0.08. Explanation provided at 19:00 in the video recording." /> ]
+<br />
+<br />
+\(D(c,e) = \frac{1}{2}(D(f,e)+D(g,e)-D(f,g)) = \frac{1}{2}(0.1+0.1-0.04) = \mathbf{0.08}\)
+—</p>
+<h1 id="forming-the-next-distance-matrix-4">Forming the next Distance Matrix</h1>
+<p><br />
+<br />
+We fill in the new entries using the formulae below:</p>
+
+<p>.image-75[ <img src="graphics/04-DistanceMatrixMod5-1.png" alt="Distance matrix D1 representing the evolutionary distance between nodes d, e, f, g and c on the y-axis and nodes e, f, g, c and h on the x-axis.  Some values have been struck out to illustrate how a matrix is sequentially updated during the tree building. The distances from d to c and e to c are highlighted and are 0.08. Explanation provided at 19:00 in the video recording." /> ]
+<br />
+<br />
+\(D(c,h) = \frac{1}{2}(D(f,h)+D(g,h)-D(f,g)) = \frac{1}{2}(0.06+0.06-0.04) =  \mathbf{0.04}\)
+—</p>
+<h1 id="forming-the-next-distance-matrix-5">Forming the next Distance Matrix</h1>
+<p><br />
+<br />
+.image-75[ <img src="graphics/04-DistanceMatrixMod6-1.png" alt="Distance matrix D1 representing the evolutionary distance between nodes d, e, f, g and c on the y-axis and nodes e, f, g, c and h on the x-axis.  Some values have been struck out to illustrate how a matrix is sequentially updated during the tree building. The distances from d to c and e to c are highlighted and are 0.08. The distance between c and h is highlighted and is 0.04. Explanation provided at 19:00 in the video recording." /> ]
+—</p>
+<h1 id="forming-the-next-distance-matrix-6">Forming the next Distance Matrix</h1>
+<p><br />
+<br />
+Completed new distance matrix:</p>
+
+<p>.image-50[ <img src="graphics/04-NewDistanceMatrix1-1.png" alt="Distance matrix D1 representing the evolutionary distance between nodes d, e, c,  and e, c and h on a phylogenetic tree." /> ]</p>
+
+<hr />
+
+<p><img src="graphics/04-FoundC1-1.png" alt="Schematic of an ultrametric phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is the same. Node c is circled in red and annotated with the words ‘Found this!’." /></p>
+
+<hr />
+
+<p><img src="graphics/04-FoundC2-1.png" alt="Schematic of a phylogenetic tree containing internal nodes a and b. Nodes c, d, e, and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. " /></p>
+
+<p>Now we have reduced the problem by one taxon / sequence: we repeat until we have just two more taxa to join and that will give us the root!</p>
+
+<hr />
+<h1 id="non-clocklike-trees">Non-clocklike trees</h1>
+<p><br />
+<br />
+<em>Losing the ultrametric property</em>
+—</p>
+<h1 id="not-perfectly-clock-like">Not perfectly clock-like</h1>
+<p><br />
+<br />
+Now suppose this is the <em>true</em> tree relating some species of interest, with actual branch lengths as labelled:
+<br />
+<br />
+<img src="graphics/04-NonclocklikeTree-1.png" alt="Schematic of a rooted non-clocklike phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is not the same. Description from 21:08 in the video recording." />
+—
+<br />
+<br />
+.left-column40[
+	<img src="graphics/04-NonclocklikeTree-1.png" alt="Schematic of a rooted non-clocklike phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is not the same. Description from 21:08 in the video recording." />
+]
+.right-column60[
+.image-75[ <img src="graphics/04-NonclocklikeTreeDistances-1.png" alt="Distance matrix D from a non-clocklike phylogenetic tree comparing evolutionary distances between nodes d, e,f g on the y-axis and e, f, g and h on the x-axis. The smallest distance between e and h is highlighted and is 0.020. Description from 21:08 in the video recording." /> ]
+<br />	
+The smallest distance doesn’t match a true pair of siblings.
+]</p>
+
+<hr />
+<h1 id="neighbour-joining">Neighbo[u]r-Joining</h1>
+<p><br />
+<br />
+Neighbo[u]r-Joining solves this problem by accounting for the <em>net divergence</em> of node from the rest, so if distances are tree-like, even if they’re not ultrametric, it <em>will</em> get the tree right.
+<br />
+<br />
+The formula for net divergence, with <em>n</em> taxa (i.e., an <em>n</em> <em>x</em> <em>n</em> distance matrix) is
+<br />
+<br />
+\(r\_{i} = \frac{1}{n-2}\sum\_{j\neq i}D(i,j)\)
+<br />
+<br />
+And the adjusted distance becomes
+<br />
+<br />
+\(D^{\ast}(i,j) = D(i,j) - r(i) - r(j)\)</p>
+
+<hr />
+<h1 id="adjusted-distance-matrix">Adjusted distance matrix</h1>
+<p><br />
+Net divergences:
+.center[
+| \(i\) | \(r(i)\) |
+|:—:|:——:|
+|	d | 0.075666 |
+|	e | 0.050666 |
+|	f | 0.065666 |
+|	g | 0.072666 |
+|	h | 0.047333 |
+]
+<br />
+Adjusted Distances:
+<br />
+.image-50[ <img src="graphics/04-NJAdjustedDistances-1.png" alt="Adjusted Distance matrix D* from a non-clocklike phylogenetic tree comparing evolutionary distances between nodes d, e,f g on the y-axis and e, f, g and h on the x-axis. The values have been adjusted using the Neighbor-Joining method. Description from 24:03 in the video recording." /> ]</p>
+
+<hr />
+
+<p><img src="graphics/04-NJTriumphs-1.png" alt="Schematic of a rooted non-clocklike phylogenetic tree containing internal nodes a, b, c. Nodes d, e, f, g and h form the tips. The branches of the tree are annotated with numbers that represent the evolutionary distance between species. The distance between the root and tip on all branches is not the same. The paths from d to e via a and f to g via c are highlighted in purple. Description from 24:03 in the video recording" /></p>
+
+<hr />
+<p>#Realistic data
+<br />
+<br />
+<em>Losing tree-like distances</em>
+—</p>
+<ul>
+  <li>Real data are not tree-like in general.</li>
+  <li>We should adjust the final branch lengths that are found.</li>
+  <li>One criterion is <em>Minimum Evolution</em>; this minimises the sum of squared differences (“ordinary least squares”; OLS) between the patristic distances, say <em>G</em>, from the tree and the original distances <em>D</em>:
+<br />
+\(OLS = \sum\_{i,j}(D(i,j) - G(i,j))^{2}\)
+<br />
+This assumes that the estimates are independent of each other, which clearly isn’t the case as the distances between tips in the tree often share parts of the paths between them.
+<br />
+<br />
+.reduce70[ Further reading: Denis and Gascuel: doi.org/10.1016/S0166-218X(02)00285-8. ]</li>
+</ul>
+
+<hr />
+<h1 id="anolis-tree-with-uncorrected-p-distances"><em>Anolis</em> tree with uncorrected p-distances</h1>
+<p><br />
+<br />
+<img src="graphics/04-AnolisTreeUncorrectedPDistances-1.png" alt="Screenshot of a phylogenetic tree of Anolis species created in SplitsTree using uncorrected p-distances. The root of the tree is at the centre of the image and branches outward. There are a large number of very short branches near the centre of the tree.The branches are labelled with Anolis species names. Described from 28:44 in the video recording." /></p>
+
+<hr />
+<h1 id="anolis-tree-with-jc69-distances"><em>Anolis</em> tree with JC69 distances</h1>
+<p><br />
+<br />
+<img src="graphics/04-AnolisTreeJC69Distances-1.png" alt="Screenshot of a phylogenetic tree of Anolis species created in SplitsTree using the Jukes Cantor model. The root of the tree is at the centre of the image and branches outward. The branches are labelled with Anolis species names. Described from 29:21 in the video recording" /></p>
+
+<hr />
+<h1 id="anolis-tree-with-hky85-distances"><em>Anolis</em> tree with HKY85 distances</h1>
+<p><br />
+<br />
+<img src="graphics/04-AnolisTreeHKY85Distances-1.png" alt="Screenshot of a phylogenetic tree of Anolis species created in SplitsTree using the HKY85 model. The root of the tree is at the centre of the image and branches outward. The branches are labelled with Anolis species names. Described from 29:55 in the video recording" /></p>
+
+<hr />
+<h1 id="limitations">Limitations</h1>
+<p><br />
+<br /></p>
+<ul>
+  <li>A tree-building method will <em>always give you a tree</em>, even if the data didn’t come from one.</li>
+  <li>There is no information on “next best” trees.</li>
+  <li>There is no measure of “goodness” for the most part (though you could always quote the least squares error).</li>
+  <li>Lastly, there is by default no going back on bad decisions: because NJ is a greedy heuristic, once the tree is finished, we <em>stop</em>. Luckily, we have programs like FastTree to do some adjustment!</li>
+</ul>
+
+<hr />
+
+<p>#Thank you!
+<br />
+<br />
+<em>Next - estimating trees from alignments</em>
+—</p>
+
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+
+<img src="/training-material/shared/images/biocommons-utas.png" alt="page logo" style="height: 100px;"/>
+
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b47bdc273ab4487117a15567aca86681cfd3295">1b47bdc</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/evolution/tutorials/abc_intro_phylo-trees/slides.html" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.105e595f.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+    </body>
+</html>

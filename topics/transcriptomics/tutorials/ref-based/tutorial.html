@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1197168e29bb3ded3b35251dc8a1608288decfc3",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1034,11 +1034,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<h6 class="dropdown-header">Instructor Utilities</h6>
 
         <a class="dropdown-item" href="/training-material/stats.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
         <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
         </a>
 
         <!-- link to feedback -->
@@ -1046,7 +1046,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
                 <a class="dropdown-item" href="/training-material/feedback.html">
-                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
                 </a>
             
         
@@ -2258,7 +2258,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
     <li>Start IGV locally</li>
     <li>Click on the collection <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li>Expand the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> file.</li>
-    <li>Click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> visualize icon in the <code class="language-plaintext highlighter-rouge">GSM461177</code> file block.</li>
+    <li>Click on the <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> visualize icon in the <code class="language-plaintext highlighter-rouge">GSM461177</code> file block.</li>
     <li>In the center panel click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV (local, D. melanogaster (dm6))</code>to load the reads into the IGV browser
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
@@ -4071,7 +4071,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
 
   <ol>
     <li>
-      <p>Take the log\(_e\) of all the values:</p>
+      <p>Take the log\(\_e\) of all the values:</p>
 
       <table>
         <tbody>
@@ -4870,9 +4870,9 @@ correction for the variability due to the 2nd factor. In our current case, treat
         <p>The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.</p>
       </blockquote>
 
-      <p>We will now select only the genes with a fold change (FC) &gt; 2 or FC &lt; 0.5. Note that the DESeq2 output file contains \(log_{2} FC\), rather than FC itself, so we filter for \(abs(log_{2} FC) &gt; 1\) (which implies FC &gt; 2 or FC &lt; 0.5).</p>
+      <p>We will now select only the genes with a fold change (FC) &gt; 2 or FC &lt; 0.5. Note that the DESeq2 output file contains \(log\_{2} FC\), rather than FC itself, so we filter for \(abs(log\_{2} FC) &gt; 1\) (which implies FC &gt; 2 or FC &lt; 0.5).</p>
     </li>
-    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> to extract genes with an \(abs(log_{2} FC) &gt; 1\):
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> to extract genes with an \(abs(log\_{2} FC) &gt; 1\):
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">abs(c3)&gt;1</code></li>
@@ -4904,11 +4904,11 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 </blockquote>
 
-<p>We now have a table with 113 lines and a header corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its \(log_{2} FC\) and other information including gene name and position.</p>
+<p>We now have a table with 113 lines and a header corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its \(log\_{2} FC\) and other information including gene name and position.</p>
 
 <h2 id="visualization-of-the-expression-of-the-differentially-expressed-genes">Visualization of the expression of the differentially expressed genes</h2>
 
-<p>We could plot the \(log_{2} FC\) for the extracted genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.</p>
+<p>We could plot the \(log\_{2} FC\) for the extracted genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.</p>
 
 <p>We proceed in several steps:</p>
 
@@ -4947,7 +4947,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
         <li><em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
-      <p>The generated file has more columns than we need for the heatmap: mean normalized counts, \(log_{2} FC\) and other annotation information. We need to remove the extra columns.</p>
+      <p>The generated file has more columns than we need for the heatmap: mean normalized counts, \(log\_{2} FC\) and other annotation information. We need to remove the extra columns.</p>
     </li>
     <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters to extract the columns with the gene IDs and normalized counts:
       <ul>
@@ -5003,7 +5003,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       <li>The samples are clustering by treatment.</li>
       <li>The scale changes and we only see few genes.</li>
       <li>Because the normalized expression of the gene <code class="language-plaintext highlighter-rouge">FBgn0013688</code> in <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code> is at <code class="language-plaintext highlighter-rouge">0</code>.</li>
-      <li>Extract the genes with \(log_{2} FC\) &gt; 1 (filter for genes with <code class="language-plaintext highlighter-rouge">c3&gt;1</code> on the summary of the differentially expressed genes) and run <strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the generated table.</li>
+      <li>Extract the genes with \(log\_{2} FC\) &gt; 1 (filter for genes with <code class="language-plaintext highlighter-rouge">c3&gt;1</code> on the summary of the differentially expressed genes) and run <strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the generated table.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -5014,7 +5014,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 
 <p>The Z-score gives the number of standard-deviations that a value is away from the mean of all the values in the same group, here the same gene. A Z-score of -2 for the gene X in sample A means that this value is 2 standard-deviations lower than the mean of the values for gene X in all the samples (A, B, C, etc).</p>
 
-<p>The Z-score \(z_{i,j}\) for a gene \(i\) in a sample \(j\) given the normalized count \(x_{i,j}\) is computed as \(z_{i,j} = \frac{x_{i,j}- \overline{x_i}}{s_i}\) with \(\overline{x_i}\) the mean and \(s_i\) the standard deviation of the normalized counts for the gene \(i\) over all samples.</p>
+<p>The Z-score \(z\_{i,j}\) for a gene \(i\) in a sample \(j\) given the normalized count \(x\_{i,j}\) is computed as \(z\_{i,j} = \frac{x\_{i,j}- \overline{x\_i}}{s\_i}\) with \(\overline{x\_i}\) the mean and \(s\_i\) the standard deviation of the normalized counts for the gene \(i\) over all samples.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-compute-the-z-score-for-all-genes"><button class="gtn-boxify-button details" type="button" aria-controls="details-compute-the-z-score-for-all-genes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Compute the Z-score for all genes</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -5022,7 +5022,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <p>We often need the Z-score for some visualisations. To compute the Z-score, we break the process into 2 steps:</p>
 
   <ol>
-    <li>Substract each value by the mean of values in the row (i.e. \(x_{i,j}- \overline{x_i}\)) using the normalized count table</li>
+    <li>Substract each value by the mean of values in the row (i.e. \(x\_{i,j}- \overline{x\_i}\)) using the normalized count table</li>
     <li>Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the  previous step)</li>
   </ol>
 
@@ -6326,7 +6326,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1197168e29bb3ded3b35251dc8a1608288decfc3">1197168</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b47bdc273ab4487117a15567aca86681cfd3295">1b47bdc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

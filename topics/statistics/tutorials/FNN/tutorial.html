@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1197168e29bb3ded3b35251dc8a1608288decfc3",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -470,11 +470,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<h6 class="dropdown-header">Instructor Utilities</h6>
 
         <a class="dropdown-item" href="/training-material/stats.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
         <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/FNN/tutorial.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
         </a>
 
         <!-- link to feedback -->
@@ -482,7 +482,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
                 <a class="dropdown-item" href="/training-material/feedback.html">
-                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
                 </a>
             
         
@@ -1098,7 +1098,7 @@ regression problems.</p>
 
 <p>For multiclass classification problems, the cross entropy is calculated as below</p>
 
-\[\mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}}) = - \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y}_{i}^{(j)}})\]
+\[\mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}}) = - \sum\_{i=1}^{c} \boldsymbol{y\_{i}^{(j)}}ln(\boldsymbol{\hat{y}\_{i}^{(j)}})\]
 
 <p>You can find the cross entropy formula for binary and multilabel classifications in <span class="citation"><a href="#Bagheri">Bagheri 2020</a></span>. They are just special
 cases of multiclass cross entropy and are not give here for the sake of brevity.</p>
@@ -1107,7 +1107,7 @@ cases of multiclass cross entropy and are not give here for the sake of brevity.
 for all training examples in the training set is the <strong>cost function</strong>. For multiclass classification problems, the cost function
 is calculated as below (again refer to <span class="citation"><a href="#Bagheri">Bagheri 2020</a></span> for binary classification and multilabel classification formulas).</p>
 
-\[J(\boldsymbol{W}, \boldsymbol{b}) = - \frac{1}{m} \sum_{j=1}^{m} \sum_{i=1}^{c} \boldsymbol{y_{i}^{(j)}}ln(\boldsymbol{\hat{y}_{i}^{(j)}})\]
+\[J(\boldsymbol{W}, \boldsymbol{b}) = - \frac{1}{m} \sum\_{j=1}^{m} \sum\_{i=1}^{c} \boldsymbol{y\_{i}^{(j)}}ln(\boldsymbol{\hat{y}\_{i}^{(j)}})\]
 
 <p>For regression problems, the quadratic loss function is calculated as below:</p>
 
@@ -1116,7 +1116,7 @@ is calculated as below (again refer to <span class="citation"><a href="#Bagheri"
 <p>Similarly, the <em>quadratic</em> cost function (or <em>Mean Squared Error (MSE)</em>) is the average of the calculated loss functions
 for all training examples in the training set.</p>
 
-\[J(\boldsymbol{W}, \boldsymbol{b}) = \frac{1}{2m} \sum_{j=1}^{m} \| \boldsymbol{y^{(j)}} - \boldsymbol{\hat{y}^{(j)}} \| ^ 2\]
+\[J(\boldsymbol{W}, \boldsymbol{b}) = \frac{1}{2m} \sum\_{j=1}^{m} \| \boldsymbol{y^{(j)}} - \boldsymbol{\hat{y}^{(j)}} \| ^ 2\]
 
 <h1 id="backpropagation-learning-algorithm">Backpropagation Learning algorithm</h1>
 
@@ -1128,24 +1128,24 @@ Backpropagation iteratively computes the gradient of cost function relative to e
 the weights and biases in the opposite direction of the gradient, to find a local minimum.</p>
 
 <p>In order to specify the formula for backpropagation, we need to define the error of the \(i^{th}\) neuron in \(l^{th}\)
-layer of a network for the \(j^{th}\) training example as follows (where \(z_{i}^{[l](j)}\) is the weighted some of
+layer of a network for the \(j^{th}\) training example as follows (where \(z\_{i}^{[l](j)}\) is the weighted some of
 input to the neuron, and \(\mathcal{L}\) is the loss function):</p>
 
-\[\delta_{i}^{[l](j)} = \frac{\partial \mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}})}{\partial z_{i}^{[l](j)}}\]
+\[\delta\_{i}^{[l](j)} = \frac{\partial \mathcal{L}(\boldsymbol{\hat{y}^{(j)}}, \boldsymbol{y^{(j)}})}{\partial z\_{i}^{[l](j)}}\]
 
 <p>Backpropagation formulas are expressed in terms of the error defined above. Full derivation of the formulas below is outside
 the scope of this tutorial (Repeated use of chain rule is needed. Please refer to the excellent article by <span class="citation"><a href="#Bagheri">Bagheri 2020</a></span>
 for details). Note that in formulas below L denotes the output layer, g the activation function, \(\nabla\) the gradient,
-\(W^{[l]^{T}}\) layer l weights transposed, \(b_{i}^{l}\) bias of neuron i at layer l, \(w_{ik}^{l}\) weight to neuron
-i at layer l from neuron k from layer l-1, and \(a_{k}^{[l-1](j)}\) activation of neuron k at layer l-1 for training example j.</p>
+\(W^{[l]^{T}}\) layer l weights transposed, \(b\_{i}^{l}\) bias of neuron i at layer l, \(w\_{ik}^{l}\) weight to neuron
+i at layer l from neuron k from layer l-1, and \(a\_{k}^{[l-1](j)}\) activation of neuron k at layer l-1 for training example j.</p>
 
-\[\boldsymbol{\delta}^{[L](j)} = \nabla_{\boldsymbol{\hat{y}^{(j)}}}\mathcal{L} \odot (g^{[L]})^{'} (\boldsymbol{z}^{[L](j)}) = \boldsymbol{\hat{y}^{(j)}} - \boldsymbol{y^{(j)}}\]
+\[\boldsymbol{\delta}^{[L](j)} = \nabla\_{\boldsymbol{\hat{y}^{(j)}}}\mathcal{L} \odot (g^{[L]})^{'} (\boldsymbol{z}^{[L](j)}) = \boldsymbol{\hat{y}^{(j)}} - \boldsymbol{y^{(j)}}\]
 
 \[\boldsymbol{\delta}^{[l](j)} = W^{[l+1]^{T}} \boldsymbol{\delta}^{[l+1](j)}  \odot (g^{[l]})^{'} (\boldsymbol{z}^{[l](j)})\]
 
-\[\frac{\partial L}{\partial b_{i}^{[l]}} = \boldsymbol{\delta}_{i}^{[l](j)}\]
+\[\frac{\partial L}{\partial b\_{i}^{[l]}} = \boldsymbol{\delta}\_{i}^{[l](j)}\]
 
-\[\frac{\partial L}{\partial w_{ik}^{[l]}} = \boldsymbol{\delta}_{i}^{[l](j)} a_{k}^{[l-1](j)}\]
+\[\frac{\partial L}{\partial w\_{ik}^{[l]}} = \boldsymbol{\delta}\_{i}^{[l](j)} a\_{k}^{[l-1](j)}\]
 
 <p>As you can see, we can calculate the error at the output layer for sample <em>j</em> using the first equation. Afterwards, we can calculate
 the error in the layer right before the output layer for sample <em>j</em> using the second equation. The second equation is recursive,
@@ -1741,7 +1741,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1197168e29bb3ded3b35251dc8a1608288decfc3">1197168</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b47bdc273ab4487117a15567aca86681cfd3295">1b47bdc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1197168e29bb3ded3b35251dc8a1608288decfc3",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -506,11 +506,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<h6 class="dropdown-header">Instructor Utilities</h6>
 
         <a class="dropdown-item" href="/training-material/stats.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
         <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
         </a>
 
         <!-- link to feedback -->
@@ -518,7 +518,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
                 <a class="dropdown-item" href="/training-material/feedback.html">
-                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
                 </a>
             
         
@@ -1408,7 +1408,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
   <p>Jaccard distance is measured by the intersection of the two or more sets divided by the union of those sets.</p>
 
-  <p>\(d_J(X,Y) = 1 - J(X,Y) = \frac{|X \cup  Y| - |X \cap Y|}{|X \cup Y|}\)
+  <p>\(d\_J(X,Y) = 1 - J(X,Y) = \frac{|X \cup  Y| - |X \cap Y|}{|X \cup Y|}\)
 <!-- This seems to be visible when collapsed...? --></p>
 
   <p>In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on its similarity to other sets.</p>
@@ -1434,7 +1434,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
     <p>(Top-Left) Outlier identification via background model based on distribution of transcript counts within a cluster.</p>
   </li>
   <li>
-    <p>(Top-Right) Outlier cells are detected if the probability for that cell \(c\) that a minimum number of genes \(G_{min}\) of observing total counts \(T_{G_{min}}\) is less than a specific threshold \(P_{thr}\), as given by the red dotted line.</p>
+    <p>(Top-Right) Outlier cells are detected if the probability for that cell \(c\) that a minimum number of genes \(G\_{min}\) of observing total counts \(T\_{G\_{min}}\) is less than a specific threshold \(P\_{thr}\), as given by the red dotted line.</p>
   </li>
   <li>
     <p>(Bottom-Left) Outlier probabilities of all cells in all clusters.</p>
@@ -1455,7 +1455,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
         <li>In the background model, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes. <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 --></li>
       </ul>
     </li>
-    <li>(Top-Right) Outlier cells are detected if the probability for that cell \(c\) that a minimum number of genes \(G_{min}\) of observing total counts \(T_{G_{min}}\) is less than a specific threshold \(P_{thr}\), as given by the red dotted line.
+    <li>(Top-Right) Outlier cells are detected if the probability for that cell \(c\) that a minimum number of genes \(G\_{min}\) of observing total counts \(T\_{G\_{min}}\) is less than a specific threshold \(P\_{thr}\), as given by the red dotted line.
       <ul>
         <li>This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to \(1 \cdot 10^{-3}\) by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).</li>
       </ul>
@@ -2644,7 +2644,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1197168e29bb3ded3b35251dc8a1608288decfc3">1197168</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b47bdc273ab4487117a15567aca86681cfd3295">1b47bdc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

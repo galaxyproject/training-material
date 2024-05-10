@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1197168e29bb3ded3b35251dc8a1608288decfc3",
+		release: "galaxy-training-network@1b47bdc273ab4487117a15567aca86681cfd3295",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -427,11 +427,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<h6 class="dropdown-header">Instructor Utilities</h6>
 
         <a class="dropdown-item" href="/training-material/stats.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
         <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html">
-            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
         </a>
 
         <!-- link to feedback -->
@@ -439,7 +439,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
                 <a class="dropdown-item" href="/training-material/feedback.html">
-                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
                 </a>
             
         
@@ -745,7 +745,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (2 recent ratings, 20 all time)</div>
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (3 recent ratings, 21 all time)</div>
 	
 	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
 
@@ -1755,32 +1755,43 @@ tools:
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 1.0">12</td>
+				<td style="--size: 1.0">13</td>
 			</tr>
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 0.25">3</td>
+				<td style="--size: 0.23076923076923078">3</td>
 			</tr>
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 0.25">3</td>
+				<td style="--size: 0.23076923076923078">3</td>
 			</tr>
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 0.08333333333333333">1</td>
+				<td style="--size: 0.07692307692307693">1</td>
 			</tr>
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 0.08333333333333333">1</td>
+				<td style="--size: 0.07692307692307693">1</td>
 			</tr>
 		   
 		   </table>
 		   </p>
 		
+		    
+		    <b>May 2024</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<b>Liked</b>: Very interactive. Video helped when I couldn't find certain tools, the explanations were very in-depth. This was precisely the resource that a beginner like me needed (but couldn't find elsewhere) for getting started with pre-processing expression data. I am not in a genomics lab, so a tool like this is absolutely invaluable. Thank you so much!
+					<b>Disliked</b>: A few things. 1) it was difficult to know how to search for the tools (i.e. UMI-tools extract) and I had to look at the video to understand how to access it. 2) I had to double-back from UMIs to understand why we need both cell-barcodes and transcript-barcodes. What made everything click was the statement that there are 200,000 mRNA transcripts in each cell, so one gene will produce k transcripts in the cell, and the goal of transcript-barcodes is to try to uniquely identify k. 3) Figure 1 is still a bit unclear to me. If read 1 and read 2 are performed and sequenced separately, then how does the fastq file know which read 1 is paired with which read 2? Perhaps this information is in an earlier tutorial, and I am doing this out of sequence. 4) I would like to see a bit more calculus on how 6 base pairs is enough. 4^6 = 4096, so does that mean each processing batch can handle up to 4096 cells? But the cell barcodes are designed to be far apart, so maybe it's closer 1024 cells? Also, that implies that we can capture at max 4096 transcript copies per gene, which seems like not a lot? Generally, concrete numbers like these and motivations for why only 6 base pairs are used for cell barcodes and transcript barcodes would be very insightful (maybe some people use more, maybe there are tradeoffs?). 5) Figure 1 was incredibly insightful, but still a bit abstract. I know the simplicity helps broad comprehension, but I personally wanted a single, very concrete example of an RNA sequence (with all 70 bases), because there is some ambiguity. For example, in Figure 1, what is V? Also, the article starts off talking about cDNA, but then refers to figure 1 and mRNA. It might be too tedious or pedagogical, but it would have helped (and still would help!) a complete beginner like me to understand step-by-step even the very beginning of "this is a typical mRNA strand of length 70", "mRNA has a poly-A tail that is specifically targeted by a barcode containing a poly-T tail". Something I still don't understand is how the joint complex gets sequenced. The article mentions 2 promoters (one on each end), but what happens when the mRNA gets replicated from one end, and the polymerase reaches the intersection? 
+				</li>
+				
+		    </ul>
 		    
 		    <b>September 2023</b>
 		    <ul>
@@ -1910,7 +1921,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/1197168e29bb3ded3b35251dc8a1608288decfc3">1197168</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/1b47bdc273ab4487117a15567aca86681cfd3295">1b47bdc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
