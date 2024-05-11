@@ -223,7 +223,7 @@
       "name": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
       "title": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
       "test_results": null,
-      "modified": "2024-05-10 12:13:12 +0000",
+      "modified": "2024-05-11 00:05:45 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  6[\"Bowtie2\"];\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  cb22563a-fece-4b63-9d85-ff5817edb5c3[\"Output\\nbowtie2_mapping_stats\"];\n  6 --> cb22563a-fece-4b63-9d85-ff5817edb5c3;\n  style cb22563a-fece-4b63-9d85-ff5817edb5c3 stroke:#2c3143,stroke-width:4px;\n  7[\"Samtools stats\"];\n  6 -->|output| 7;\n  490620d4-f083-4999-bb33-73a2a1f736b4[\"Output\\nbam_stats_1\"];\n  7 --> 490620d4-f083-4999-bb33-73a2a1f736b4;\n  style 490620d4-f083-4999-bb33-73a2a1f736b4 stroke:#2c3143,stroke-width:4px;\n  8[\"JBrowse\"];\n  6 -->|output| 8;"
     },
     {
@@ -2016,7 +2016,7 @@
           "version": "0.1"
         }
       },
-      "modified": "2024-05-10 12:13:12 +0000",
+      "modified": "2024-05-11 00:05:45 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  6[\"Bowtie2\"];\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  d2674912-28a6-45f3-ac48-6635eabe47b7[\"Output\\nbowtie2_mapping_stats\"];\n  6 --> d2674912-28a6-45f3-ac48-6635eabe47b7;\n  style d2674912-28a6-45f3-ac48-6635eabe47b7 stroke:#2c3143,stroke-width:4px;\n  7[\"Stats\"];\n  6 -->|output| 7;\n  96de3c0c-4d7e-423b-8e9b-9a12a011d726[\"Output\\nbam_stats_1\"];\n  7 --> 96de3c0c-4d7e-423b-8e9b-9a12a011d726;\n  style 96de3c0c-4d7e-423b-8e9b-9a12a011d726 stroke:#2c3143,stroke-width:4px;\n  8[\"Filter\"];\n  6 -->|output| 8;\n  9[\"Stats\"];\n  8 -->|out_file1| 9;\n  9603a94a-dcd8-4c1f-89cd-bb31d8572783[\"Output\\nbam_stats_2\"];\n  9 --> 9603a94a-dcd8-4c1f-89cd-bb31d8572783;\n  style 9603a94a-dcd8-4c1f-89cd-bb31d8572783 stroke:#2c3143,stroke-width:4px;"
     }
   ],
