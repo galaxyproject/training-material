@@ -101,7 +101,7 @@ The lower part of the history header contains a number of buttons:
 ![Buttons for figuring out history size, selecting storage location, and controlling views](../../../../shared/images/history_size_storage_views.png "Using these buttons one can obtain an information about history's disk footpring, change storage options, and control dataset views.")
 
 > <warning-title>Some buttons are instance-specific</warning-title>
-> The list of buttons shown above may vary depending on which Galaxy instance you are using. For example, at the tim eof writing the **Preferred storage** {% icon galaxy-history-storage-choice %} button is only available on https://usegalaxy.org.
+> The list of buttons shown above may vary depending on which Galaxy instance you are using. For example, at the time of writing the **Preferred storage** {% icon galaxy-history-storage-choice %} button is only available on https://usegalaxy.org.
 {: .warning}
 
 - {% icon galaxy-history-size %} **History size** - shows history storage overview in the central pane of the interface.
