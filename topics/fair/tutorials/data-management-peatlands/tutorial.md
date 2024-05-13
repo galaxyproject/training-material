@@ -99,10 +99,8 @@ More information is available in the [FAIR data management tutorial](https://tra
 
 Creating a DMP will allow you and your institution to make the most of your peatland data. This introduction to DMP aims to highlight the usefulness of data management for peatland research and monitoring.
 
-# References (check referncing style)
-
-* Katarzyna Kamieniecka, Krzysztof Poterlowicz, FAIR in a nutshell (Galaxy Training Materials). https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html Online; accessed Fri Sep 29 2023
-* FAIR pointers https://elixir-uk-dash.github.io/FAIR-Pointers/
+# References
+*Wilkinson, M. D., M. Dumontier, I. J. J. Aalbersberg, G. Appleton, M. Axton et al., 2016 The FAIR Guiding Principles for scientific data management and stewardship. Scientific data 3: 1–9. [10.1038/sdata.2016.18](https://www.nature.com/articles/sdata201618)
 
 
 ##  Suggested reading
