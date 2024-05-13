@@ -110,7 +110,7 @@ Creating a DMP will allow you and your institution to make the most of your peat
 * FAIR walkthrough using examples from across all academic disciplines: How to FAIR
 
 ## Resources
-* How to write a data-sharing agreement between collaborators https://www.youtube.com/watch?v=iaZInoaHa04
+* [How to write a data-sharing agreement between collaborators](https://www.youtube.com/watch?v=iaZInoaHa04)
 
 
 * DMP online https://dmponline.dcc.ac.uk
