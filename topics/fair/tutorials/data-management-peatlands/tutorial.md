@@ -65,7 +65,7 @@ DMP templates vary by institution and funding agencies.
 | ------------- | ------------- |
 | Descriptions of the data  |    &bull; Project details <br> &bull; Types of data <br> collected and generated <br> &bull; Origin of data <br> &bull; Format and size of data |
 |Data collection/generation | &bull; Data collection methods <br> &bull; Data quality standards| 
-|Data management, documentation, and curation | &bull; Storage and accessibility </<br> &bull; Metadata standards and documentation <br> &bull; Curation and preservation |  
+|Data management, documentation, and curation | &bull; Storage and accessibility </<br>| &bull; Metadata standards and documentation <br> &bull; Curation and preservation |  
 |Data sharing and access | &bull; Where the data will be shared <br> &bull; When will the data be available |
 |Data security (where relevant)|&bull; Risks to data security<br> &bull; GDPR considerations|
 |Capabilities| &bull; Evaluation of institutional capabilities to preserve and manage data|
