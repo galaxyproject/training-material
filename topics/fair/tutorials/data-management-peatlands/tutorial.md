@@ -78,7 +78,7 @@ DMP templates vary by institution and funding agencies.
 |Relevant institutional, departmental or study policies on data sharing and data security| &bull; Review of institutional policies for data management|
 
 ## Hands-on: Create a DMP for peatland research
-* Download the DMP template for Peatland Research
+* Download the DMP template for [Peatland Research and Monitoring](https://zenodo.org/records/11185774).
 * Fill in the DMP template using the prompt questions.
 * Review your DMP with your team and collaborators.
 
