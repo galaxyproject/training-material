@@ -98,7 +98,7 @@ Interestingly, the PepQuery tool does not rely on searching peptides against a r
 >
 > 7. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="[https://usegalaxy.eu/u/galaxyp/w/wf1databasegenerationworkflow](https://usegalaxy.eu/u/galaxyp/w/wf2discovery-workflow)" title="Pretreatments" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="[https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow](https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow))" title="Pretreatments" %}
 {: .hands_on}
 
 # Extraction of Microbial Peptides from SearchGUI/PeptideShaker and MaxQuant
