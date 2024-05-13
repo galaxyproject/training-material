@@ -92,7 +92,7 @@ In this current workflow, we perform Quantification using the MaxQuant tool and 
 >
 > 7. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="[https://usegalaxy.eu/u/galaxyp/w/wf1databasegenerationworkflow](https://usegalaxy.eu/u/galaxyp/w/wf2discovery-workflow)" title="Pretreatments" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="[https://usegalaxy.eu/u/galaxyp/w/wf4quantitationworkflow](https://usegalaxy.eu/u/galaxyp/w/wf4quantitationworkflow)" title="Pretreatments" %}
 {: .hands_on}
 
 
