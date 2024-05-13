@@ -12,7 +12,11 @@ require './bin/gtn'
 module SchemaValidator
   # Schemas
   @TOPIC_SCHEMA_UNSAFE = YAML.load_file('bin/schema-topic.yaml')
-  @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml', aliases: true)
+  begin
+    @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml', aliases: true)
+  rescue
+    @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml')
+  end
   @SLIDES_SCHEMA_UNSAFE = YAML.load_file('bin/schema-slides.yaml')
   @FAQ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-faq.yaml')
   @QUIZ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-quiz.yaml')
@@ -105,7 +109,11 @@ module SchemaValidator
 
   def self.lintable?(fn)
     begin
-      data = YAML.load_file(fn, permitted_classes:[Date])
+      begin
+        data = YAML.load_file(fn, permitted_classes:[Date])
+      rescue
+        data = YAML.load_file(fn)
+      end
     rescue StandardError => e
       return ["YAML error, failed to parse #{fn}, #{e}"]
     end
