@@ -86,7 +86,7 @@ The final workflow in the array of clinical metaproteomics tutorials is the data
 >
 > 7. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="[https://usegalaxy.eu/u/galaxyp/w/wf1databasegenerationworkflow](https://usegalaxy.eu/u/galaxyp/w/wf5datainterpretationworklow)" title="Pretreatments" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="[https://usegalaxy.eu/u/galaxyp/w/wf5datainterpretationworklow](https://usegalaxy.eu/u/galaxyp/w/wf5datainterpretationworklow)" title="Pretreatments" %}
 {: .hands_on}
 
 
