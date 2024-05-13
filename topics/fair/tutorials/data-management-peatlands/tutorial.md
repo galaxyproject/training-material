@@ -104,9 +104,9 @@ Creating a DMP will allow you and your institution to make the most of your peat
 
 ##  Suggested reading
 * [FAIR in a nutshell](https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html) 
-* [The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016)] {https://doi.org/10.1038/sdata.2016.18.}
+* [The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016)]{https://doi.org/10.1038/sdata.2016.18}
 * [Recipes for data FAIRification, written by domain experts giving real-world examples: FAIR Cookbook]{https://faircookbook.elixir-europe.org/content/home.html}
-* [Documentation and frameworks for data FAIRification. Each of the 15 FAIR principles is put into context with real data examples: GO FAIR]{https://www.go-fair.org/fair-principles/}
+* [Documentation and frameworks for data FAIRification. Each of the 15 FAIR principles is put into context with real data examples: GO FAIR]{https://www.go-fair.org/fair-principles}
 * [FAIR walkthrough using examples from across all academic disciplines: How to FAIR]{https://howtofair.dk/}
 
 ## Resources
