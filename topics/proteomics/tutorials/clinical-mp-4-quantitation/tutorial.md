@@ -86,13 +86,15 @@ In this current workflow, we perform Quantification using the MaxQuant tool and 
 > 6. Create a dataset of the RAW files.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
->  # Import Workflow
+{: .hands_on}
+
+# Import Workflow
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
-> 7. **Import the workflow** into Galaxy:
+> 1. **Import the workflow** into Galaxy:
 >
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="[https://usegalaxy.eu/u/galaxyp/w/wf4quantitationworkflow](https://usegalaxy.eu/u/galaxyp/w/wf4quantitationworkflow)" title="Pretreatments" %}
+> 2. Import and Run the workflow
 {: .hands_on}
 
 
