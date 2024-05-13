@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'date'
 require 'yaml'
 require 'find'
 require 'pathname'
@@ -11,7 +12,7 @@ require './bin/gtn'
 module SchemaValidator
   # Schemas
   @TOPIC_SCHEMA_UNSAFE = YAML.load_file('bin/schema-topic.yaml')
-  @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml')
+  @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml', aliases: true)
   @SLIDES_SCHEMA_UNSAFE = YAML.load_file('bin/schema-slides.yaml')
   @FAQ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-faq.yaml')
   @QUIZ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-quiz.yaml')
@@ -104,7 +105,7 @@ module SchemaValidator
 
   def self.lintable?(fn)
     begin
-      data = YAML.load_file(fn)
+      data = YAML.load_file(fn, permitted_classes:[Date])
     rescue StandardError => e
       return ["YAML error, failed to parse #{fn}, #{e}"]
     end

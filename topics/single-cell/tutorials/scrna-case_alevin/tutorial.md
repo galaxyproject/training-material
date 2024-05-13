@@ -15,16 +15,15 @@ questions:
   - I have some single cell FASTQ files I want to analyse. Where do I start?
 
 answer_histories:
-  current:
-    label: "UseGalaxy.eu"
+  - label: "UseGalaxy.eu"
     history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
-  older-alevin:
-    label: "Older Alevin version"
+    date: 2024-05-01
+  - label: "Older Alevin version"
     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+    date: 2024-01-01
 
 input_histories:
-  current:
-    label: "UseGalaxy.eu"
+  - label: "UseGalaxy.eu"
     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
 
 objectives:
