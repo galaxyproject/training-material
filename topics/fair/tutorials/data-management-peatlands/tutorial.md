@@ -90,7 +90,7 @@ There are several ways to set up FAIR (Findable, Accessible, Interoperable, Reus
 * Interoperable (I): Documentation and data quality, and community standards for data exchange (e.g. tab-delimited text).
 * Reusable (R): Storage and backup supported by legal and ethical requirements, as well as data release policies.
 
-See FAIR data management solutions for more information   https://training.galaxyproject.org/training-material/topics/fair/tutorials/data-management/tutorial.html
+More information is available in the [FAIR data management tutorial]{https://training.galaxyproject.org/training-material/topics/fair/tutorials/data-management/tutorial.html}
 
 # Conclusion
 
@@ -103,18 +103,15 @@ Creating a DMP will allow you and your institution to make the most of your peat
 
 
 ##  Suggested reading
-* FAIR in a nutshell https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html 
-* The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016). https://doi.org/10.1038/sdata.2016.18.
-* Recipes for data FAIRification, written by domain experts giving real-world examples: FAIR Cookbook
-* Documentation and frameworks for data FAIRification. Each of the 15 FAIR principles is put into context with real data examples: GO FAIR
-* FAIR walkthrough using examples from across all academic disciplines: How to FAIR
+* [FAIR in a nutshell](https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html) 
+* [The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016)] {https://doi.org/10.1038/sdata.2016.18.}
+* [Recipes for data FAIRification, written by domain experts giving real-world examples: FAIR Cookbook]{https://faircookbook.elixir-europe.org/content/home.html}
+* [Documentation and frameworks for data FAIRification. Each of the 15 FAIR principles is put into context with real data examples: GO FAIR]{https://www.go-fair.org/fair-principles/}
+* [FAIR walkthrough using examples from across all academic disciplines: How to FAIR]{https://howtofair.dk/}
 
 ## Resources
 * [How to write a data-sharing agreement between collaborators](https://www.youtube.com/watch?v=iaZInoaHa04)
-
-
-* DMP online https://dmponline.dcc.ac.uk
-* DSWizard: https://bio.tools/tool/Data_Stewardship_Wizard
-* https://tess.elixir-europe.org/materials/introduction-to-data-management-practices-datamanagement-plans
-
-WaterLands PeatDataHub
+* [DMP online]{ https://dmponline.dcc.ac.uk}
+* [DSWizard]{https://bio.tools/tool/Data_Stewardship_Wizard}
+* [WaterLands]{https://waterlands.eu/}
+* [PeatDataHub]{https://peatdatahub.net/}
