@@ -273,7 +273,8 @@ We will use the Query Tabular tool {% cite Johnson2019 %} to search the PepQuery
 > > <comment-title>SQL Query information</comment-title>
 > >  The query input files are the list of peptides and the peptide report we obtained from MaxQuant and SGPS. The query is matching each peptide (m.pep) from the PepQuery results to the peptide reports so that each verified peptide has its protein/protein group assigned to it.
 > {: .comment}
-> 
+
+
 > <hands-on-title> Remove Header with Remove beginning </hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
