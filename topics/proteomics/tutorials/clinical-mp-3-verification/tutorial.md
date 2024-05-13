@@ -92,13 +92,16 @@ Interestingly, the PepQuery tool does not rely on searching peptides against a r
 > 6. Users can create a database collection of the MGF files.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
->   # Import Workflow
+> 
+{: .hands_on}
+
+# Import Workflow
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
-> 7. **Import the workflow** into Galaxy:
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="[https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow](https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow))" title="Pretreatments" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="`https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow`" title="Pretreatments" %}
+> 2. Run the workflow.
 {: .hands_on}
 
 # Extraction of Microbial Peptides from SearchGUI/PeptideShaker and MaxQuant
