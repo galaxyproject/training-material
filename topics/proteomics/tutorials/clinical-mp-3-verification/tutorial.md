@@ -333,8 +333,9 @@ Again, we will use the Query Tabular tool to retrieve UniProt IDs (accession num
 >                - *"Use first line as column names"*: `Yes`
 >                - *"Specify Column Names (comma-separated list)"*: `pep,prot`
 >    ` *"SQL Query to generate tabular output"*: `SELECT distinct(prot) AS Accession 
->     from t1`
->     *"include query result column headers"*: `No`
+>       from t1`
+>
+>            - *"include query result column headers"*: `No`
 >
 >
 {: .hands_on}
