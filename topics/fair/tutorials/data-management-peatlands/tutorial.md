@@ -26,7 +26,10 @@ tags:
 priority: 1
 contributions:
   authorship:
+    - GabrielaLopez
     - kkamieniecka
+    - robertmand
+    - angiolini
     - poterlowicz-lab
   editing:
     - hexylena
