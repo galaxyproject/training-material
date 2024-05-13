@@ -96,7 +96,7 @@ In this current workflow, we perform Quantification using the MaxQuant tool and 
 
 In the [Discovery Module](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-discovery/tutorial.md), we used MaxQuant to identify peptides for verification. Now, we will again use MaxQuant to further quantify the PepQuery-verified peptides, both microbial and human. More information about quantitation using MaxQuant is available, including [Label-free data analysis](https://gxy.io/GTN:T00218) and [MaxQuant and MSstats for the analysis of TMT data](https://gxy.io/GTN:T00220).
 
-The outputs we are most interested in consist of the `MaxQuant Evidence file`, `MaxQuant Protein Group`s, and `MaxQuant Peptides`. The `MaxQuant Peptides` file will allow us to group them to generate a list of quantified microbial peptides.
+The outputs we are most interested in consist of the `MaxQuant Evidence file`, `MaxQuant Protein Groups`, and `MaxQuant Peptides`. The `MaxQuant Peptides` file will allow us to group them to generate a list of quantified microbial peptides.
 
 > <hands-on-title> Quantify verified peptides (from PepQuery2) </hands-on-title>
 >
