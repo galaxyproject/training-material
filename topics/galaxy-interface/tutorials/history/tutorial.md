@@ -132,6 +132,8 @@ A histiry dataset can exist by iteslf, as an independent entity, or as a part of
 
 ### Hiding and unhiding datasets
 
+{% snippet faqs/galaxy/datasets_hidden.md %}
+
 Some procedures in Galaxy such as workflows will often **hide** history datasets in order to simplify the history
 and hide intermediate steps of an automated analysis. These hidden datasets won't normally appear in the history panel
 but theyre still mentioned in the history subtitle (the smaller, grey text that appears below the history name). If
