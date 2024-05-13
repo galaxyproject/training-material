@@ -38,7 +38,7 @@ redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-database-generation/tutorial
 ---
 
-Metaproteomics is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins {% cite Batut2018 %} ; [{% cite Jagtap2015 %} .
+Metaproteomics is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins {% cite Batut2018 %} ; {% cite Jagtap2015 %} .
 
 To address this, we used tandem mass spectrometry (MS/MS) and bioinformatics tools on the Galaxy platform to develop a metaproteomics workflow to characterize the metaproteomes of clinical samples. This clinical metaproteomics workflow holds potential for general clinical applications such as potential secondary infections during COVID-19 infection, microbiome changes during cystic fibrosis as well as broad research questions regarding host-microbe interactions.
 
@@ -167,7 +167,7 @@ For this tutorial, a literature survey was conducted to obtain 118 taxonomic spe
 ## Merging databases to obtain a large comprehensive database for MetaNovo
 Once generated, the Species UniProt database (~3.38 million sequences) will be merged with the Human SwissProt database (reviewed only; ~20.4K sequences) and contaminant (cRAP) sequences database (116 sequences) and filtered to generate the large comprehensive database (~2.59 million sequences). The large comprehensive database will be used to generate a compact database using MetaNovo, which is much more manageable.
 
-> <hands-on-title> Download contaminants with **Protein Database Downloader </hands-on-title>
+> <hands-on-title> Download contaminants with **Protein Database Downloader** </hands-on-title>
 >
 > 1. {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4) %} with the following parameters:
 >    - *"Download from?"*: `cRAP (contaminants)`
