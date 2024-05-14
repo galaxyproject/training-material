@@ -83,6 +83,8 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
+              - FUNDERS
+              - ORGANISATIONS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
         examples:
@@ -108,7 +110,7 @@ mapping:
                 translation:
                     - shiltemann
                 funding:
-                    - erasmusplus
+                    - gallantries
         type: map
         mapping:
             authorship:
@@ -118,6 +120,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             editing:
                 type: seq
                 description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
@@ -125,6 +128,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             testing:
                 type: seq
                 description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
@@ -132,6 +136,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             ux:
                 type: seq
                 description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
@@ -139,6 +144,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             infrastructure:
                 type: seq
                 description: These entities managed and provided infrastructure to the GTN or for training purposes
@@ -146,13 +152,16 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
                   enum:
-                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             translation:
                 type: seq
                 description: These entities did translation and localisation work on this resource
@@ -160,6 +169,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
     hands_on:
         type: str
         enum:
@@ -193,6 +203,8 @@ mapping:
           - /assets/images/elixir-uk.png
           - /assets/images/BioNT_Logo.png
           - topics/ai4life/images/AI4Life-logo_giraffe-nodes.png
+          - assets/images/genomics_intro.png
+          - shared/images/biocommons-utas.png
         required: true
         description: |
             A logo identifier (e.g. GTN) should be used by default, but may be swapped out for special logos from the assets folder.
@@ -362,6 +374,16 @@ mapping:
                       type: str
                       description: |
                         URL of the external resource
+    copyright:
+        type: str
+        description: |
+          A copyright attribution string, as required by some licenses.
+        examples:
+            - © Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors
+    license:
+        type: str
+        description: |
+            An [SPDX](https://spdx.org/) identifier for the alternative license that is used for that particular material. This is **only** relevant for materials which have been imported from an external source and were originally licensed under another license. For new materials we strongly encourage contributors to not use this key as materials are CC-BY, by default.
     draft:
         type: bool
         description: |

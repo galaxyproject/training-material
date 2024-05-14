@@ -4,8 +4,11 @@ layout: tutorial_hands_on
 title: Refining Genome Annotations with Apollo (eukaryotes)
 zenodo_link: https://zenodo.org/record/3270822
 tags:
+  - gmod
   - eukaryote
   - cyoa
+  - jbrowse1
+  - apollo2
 questions:
   - How to visualize your genome after automated annotations have been performed?
   - How to manually annotate genome after automated annotations have been performed?
@@ -28,7 +31,8 @@ contributions:
   authorship:
     - abretaud
   funding:
-    - erasmusplus
+    - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"
@@ -46,14 +50,11 @@ abbreviations:
   OGS: Official Gene Set
 ---
 
+After automatically annotating your genome using [Funannotate](../funannotate/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
+
 > <warning-title>Only works on UseGalaxy.eu</warning-title>
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
-
-# Introduction
-
-
-After automatically annotating your genome using [Funannotate](../funannotate/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 

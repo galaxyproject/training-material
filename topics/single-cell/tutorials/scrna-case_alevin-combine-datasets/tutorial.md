@@ -58,9 +58,6 @@ follow_up_training:
         - scrna-case_basic-pipeline
 ---
 
-# Introduction
-
-<!-- This is a comment. -->
 
 This tutorial will take you from the multiple AnnData outputs of the [previous tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) to a single, combined  AnnData object, ready for all the fun downstream processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on.
 
@@ -89,6 +86,8 @@ You can access the data for this tutorial in multiple ways:
 
    {% snippet faqs/galaxy/histories_import.md %}
 
+
+<!--
 3. **Uploading from Zenodo** (see below)
 
 
@@ -108,22 +107,26 @@ You can access the data for this tutorial in multiple ways:
 >    {{ page.zenodo_link }}/files/N707-400k.h5ad
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    % snippet faqs/galaxy/datasets_import_via_link.md %
 >
 > 3. Rename the datasets
 > 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    % snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %
 >
 {: .hands_on}
+REMEMBER TO ADD THE CODE FOR SNIPPETS BACK IN
+-->
 
-Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
+{% icon galaxy-eye %} Inspect the {% icon param-file %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
 
 # Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
+
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 ## Concatenating objects
 

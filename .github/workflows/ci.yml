@@ -66,7 +66,7 @@ jobs:
         run: |
           bundle exec htmlproofer \
             --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/" \
-            --ignore-files "/.*krona.*\.html/","/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//","/.*content.html/" \
+            --ignore-files "/.*krona.*\.html/","/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//","/.*content.html/","/.*recentrifuge.*\.html/" \
             --swap-urls "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
             --disable-external=true \
             --enforce-https=false \
@@ -75,6 +75,14 @@ jobs:
       - name: Ensure no unexpected encoded HTML in output
         run: |
           ! fgrep -R 'lt;blockquote' _site
+
+      - name: Ensure no poorly indented code blocks
+        run: |
+          bundle exec ruby bin/check-indent.rb
+
+      - name: Ensure no unexpected jekyll in output
+        run: |
+          ! fgrep -R 'site.pages' _site
 
       - name: Run aXe accessibility testing on some representative URLs
         run: |
@@ -97,3 +105,7 @@ jobs:
       - name: Validate notebooks (If this fails, ask @hexylena to look at your notebook)
         run: |
           find _site | grep ipynb | xargs bundle exec ruby bin/check-valid-notebook.rb
+
+      - name: Check URL persistence
+        run: |
+          bash bin/check-url-persistence.sh

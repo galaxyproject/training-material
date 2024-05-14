@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: EncyclopeDIA
-zenodo_link: 'http://doi.org/10.5281/zenodo.4926594'
+zenodo_link: 'https://doi.org/10.5281/zenodo.4926594'
 tags: [DIA]
 questions:
 - How to perform quantitative analysis using DIA data with the help of EncyclopeDIA?
@@ -27,8 +27,6 @@ contributors:
 
 ---
 
-
-# Introduction
 
 
 Data Independent Acquisition (DIA) was introduced as a method to provide reproducible quantitative information as an improvement over the Data Dependent Acquisition (DDA) {% cite Gillet2012 %}. Despite benefits of DIA, such as increased depth of coverage and lesser missing values, the computational analysis of the complicated and multiplexed data presents challenges. Therefore, with the rise of usage of this technique, rises a need for new and robust methods of data analysis.

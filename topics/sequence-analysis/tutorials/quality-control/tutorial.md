@@ -35,12 +35,10 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
-  - erasmusplus
+  - gallantries
   - neoformit
 
 ---
-
-# Introduction
 
 
 During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a **read**, which is simply a succession of nucleotides.

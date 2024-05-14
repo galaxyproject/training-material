@@ -15,4 +15,4 @@ contributors: [jennaj, garimavs]
 - Import the History into your account via copying it to work with it.
 - Unshare Histories that you no longer want shared with you or that you have already made a copy of.
 
-**Note:** Shared Histories (when copied into your account or not) do count in portion toward your total account data quota usage. More details on histories shared concerning account quota usage can be found in [this link](https://training.galaxyproject.org/training-material/faqs/galaxy/#unsharing-unwanted-histories).
+**Note:** Shared Histories (when copied into your account or not) do count in portion toward your total account data quota usage. More details on histories shared concerning account quota usage can be found in [this link]({% link faqs/galaxy/histories_unsharing_histories.md %}).

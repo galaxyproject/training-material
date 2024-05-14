@@ -32,7 +32,6 @@ abbreviations:
 
 ---
 
-# Introduction
 
 Discovered over 40 years ago, {AS} formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  ({% cite Alt1980 %}). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average ({% cite Piovesan2016 %}). In humans,  approximately 95% of multi-exon genes show evidence of {AS} and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions ({% cite Carninci2006 %}, {% cite Miura2012 %}). Its regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}).
 
@@ -957,8 +956,8 @@ As result, we will have two new FASTA files, one of them corresponding to long n
 > 1. {% tool [CPAT](toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Query nucletide sequences"*: `Nucleotide sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >    - {% icon param-file %} *"Reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
->    - {% icon param-file %} *"Coding sequences file"*: `lncRNA.fasta`
->    - {% icon param-file %} *"Non coding sequeces file"*: `coding.fasta`
+>    - {% icon param-file %} *"Coding sequences file"*: `coding.fasta`
+>    - {% icon param-file %} *"Non coding sequeces file"*: `lncRNA.fasta`
 >
 {: .hands_on}
 

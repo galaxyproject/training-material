@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'English'
+require './_plugins/gtn/contributors'
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
 require './_plugins/gtn/images'
@@ -9,6 +10,7 @@ require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 require './_plugins/gtn/supported'
 require './_plugins/gtn/toolshed'
+require './_plugins/gtn/usegalaxy'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
@@ -18,37 +20,6 @@ puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if vers
 
 ##
 # This module contains functions that are used in the GTN, our internal functions that is.
-
-##
-# This function returns the authors of a material, if it has any. (via contributors or contribution)
-# Params:
-# +material+:: The material to get the authors of
-# Returns:
-# +Array+:: The authors of the material
-def get_authors(material)
-  if material.key?('contributors')
-    material['contributors']
-  elsif material.key?('contributions')
-    material['contributions']['authorship']
-  else
-    []
-  end
-end
-
-##
-# This function returns the name of a user, if it is known. Otherwise, it returns the user name.
-# Params:
-# +user+:: The user to get the name of
-# +site+:: The +Jekyll::Site+ object
-# Returns:
-# +String+:: The name of the user
-def lookup_name(user, site)
-  if site.data['contributors'].key?(user)
-    site.data['contributors'][user].fetch('name', user)
-  else
-    user
-  end
-end
 
 module Jekyll
   # The main GTN function library
@@ -153,6 +124,20 @@ module Jekyll
     end
 
     ##
+    # Returns the publication date of a page, when it was merged into `main`
+    # Params:
+    # +page+:: The page to get the publication date of
+    # Returns:
+    # +String+:: The publication date of the page
+    #
+    def gtn_pub_date(path)
+      # if it's not a string then log a warning
+      path = path['path'] if !path.is_a?(String)
+      # Automatically strips any leading slashes.
+      Gtn::PublicationTimes.obtain_time(path.gsub(%r{^/}, ''))
+    end
+
+    ##
     # Returns the last modified date of a page
     # Params:
     # +page+:: The page to get the last modified date of
@@ -184,6 +169,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the topic has been mentioned
     def how_many_topic_feedbacks(feedback, name)
+      if feedback.nil?
+        return 0
+      end
+
       feedback.select { |x| x['topic'] == name }.length
     end
 
@@ -195,6 +184,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the tutorial has been mentioned
     def how_many_tutorial_feedbacks(feedback, name)
+      if feedback.nil?
+        return 0
+      end
+
       feedback.select { |x| x['tutorial'] == name }.length
     end
 
@@ -211,21 +204,80 @@ module Jekyll
     end
 
     ##
-    # Basically a dupe of 'get_authors'
     # Params:
-    # +contributors+:: The contributors to the material
-    # +contributions+:: The contributions to the material
+    # +data+:: The page data
     # Returns:
-    # +Array+:: The "authors" of the material
-    #
-    # TODO(hexylena) de-duplicate
+    # +Array+:: The "authors" of the material (list of strings)
     #
     # Example:
-    #  {% assign authors = page.contributors | filter_authors:page.contributions -%}
-    def filter_authors(contributors, contributions)
-      return contributors if !contributors.nil?
+    #  {% assign authors = page | filter_authors -%}
+    def filter_authors(data)
+      Gtn::Contributors.get_authors(data)
+    end
 
-      contributions['authorship']
+    ##
+    # Params:
+    # +data+:: The site data
+    # +string+:: The contributor id
+    # Returns:
+    # +Hash+:: The contributing entity
+    #
+    # Example:
+    #  {% assign contrib = site | fetch_contributor: page.contributor -%}
+    def fetch_contributor(site, id)
+      Gtn::Contributors.fetch_contributor(site, id)
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
+    # +String+:: The funding URL
+    #
+    # Example:
+    #  {{ entity | fetch_funding_url }}
+    def fetch_funding_url(entity)
+      Gtn::Contributors.fetch_funding_url(entity)
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
+    # +String+:: The avatar's URL
+    #
+    # Example:
+    #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
+    def fetch_entity_avatar_url(entity, id, width)
+      return 'ERROR_NO_ENTITY' if entity.nil?
+
+      width.nil? ? '' : "width=\"#{width}\""
+      if !entity['avatar'].nil?
+        entity['avatar']
+      elsif entity['github'] != false
+        qp = width.nil? ? '' : "?s=#{width}"
+        "https://avatars.githubusercontent.com/#{id}#{qp}"
+      else
+        '/training-material/assets/images/avatar.png'
+      end
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
+    # +String+:: The funding URL
+    #
+    # Example:
+    #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
+    def fetch_entity_avatar(entity, id, width)
+      if entity.nil?
+        return '<img src="/training-material/assets/images/avatar.png" alt="ERROR_NO_ENTITY avatar" class="avatar"/>'
+      end
+
+      w = width.nil? ? '' : "width=\"#{width}\""
+      url = fetch_entity_avatar_url(entity, id, width)
+      %(<img src="#{url}" alt="#{entity['name']} avatar" #{w} class="avatar" />)
     end
 
     ##
@@ -328,6 +380,160 @@ module Jekyll
       end
     end
 
+    def get_version_number(page)
+      Gtn::ModificationTimes.obtain_modification_count(page['path'])
+    end
+
+    def get_rating_histogram(site, material_id, recent: false)
+      return {} if material_id.nil?
+
+      feedbacks = recent ? get_recent_feedbacks_time(site, material_id) : get_feedbacks(site, material_id)
+
+      return {} if feedbacks.nil? || feedbacks.empty?
+
+      ratings = feedbacks.map { |f| f['rating'] }
+      ratings.each_with_object(Hash.new(0)) { |w, counts| counts[w] += 1 }
+    end
+
+    def get_rating_histogram_chart(site, material_id)
+      histogram = get_rating_histogram(site, material_id)
+      return {} if histogram.empty?
+
+      highest = histogram.map { |_k, v| v }.max
+      histogram
+        .map { |k, v| [k, [v, v / highest.to_f]] }
+        .sort_by { |k, _v| -k }
+        .to_h
+    end
+
+    def get_rating(site, material_id, recent: false)
+      f = get_rating_histogram(site, material_id, recent: recent)
+      rating = f.map { |k, v| k * v }.sum / f.map { |_k, v| v }.sum.to_f
+      rating.round(1)
+    end
+
+    def get_rating_recent(site, material_id)
+      r = get_rating(site, material_id, recent: true)
+      r.nan? ? get_rating(site, material_id, recent: false) : r
+    end
+
+    # Only accepts an integer rating
+    def to_stars(rating)
+      if rating.nil? || (rating.to_i < 1) || (rating == '0') || rating.zero?
+        %(<span class="sr-only">0 stars</span>) +
+          '<i class="far fa-star" aria-hidden="true"></i>'
+      elsif rating.to_i < 1
+        '<span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i>'
+      else
+        %(<span class="sr-only">#{rating} stars</span>) +
+          ('<i class="fa fa-star" aria-hidden="true"></i>' * rating.to_i)
+      end
+    end
+
+    def get_feedbacks(site, material_id)
+      return [] if material_id.nil?
+
+      begin
+        topic, tutorial = material_id.split('/')
+
+        if tutorial.include?(':')
+          language = tutorial.split(':')[1]
+          tutorial = tutorial.split(':')[0]
+          # If a language is supplied, then
+          feedbacks = site.data['feedback2'][topic][tutorial]
+                          .select { |f| (f['lang'] || '').downcase == language.downcase }
+        else
+          # English is the default
+          feedbacks = site.data['feedback2'][topic][tutorial]
+                          .select { |f| f['lang'].nil? }
+        end
+      rescue StandardError
+        return []
+      end
+
+      return [] if feedbacks.nil? || feedbacks.empty?
+
+      feedbacks
+        .sort_by { |f| f['date'] }
+        .reverse
+        .map do |f|
+        f['stars'] = to_stars(f['rating'])
+        f
+      end
+    end
+
+    def get_feedback_count(site, material_id)
+      get_feedbacks(site, material_id).length
+    end
+
+    def get_feedback_count_recent(site, material_id)
+      get_recent_feedbacks_time(site, material_id).length
+    end
+
+    def get_recent_feedbacks_time(site, material_id)
+      feedbacks = get_feedbacks(site, material_id)
+                  .select do |f|
+                    f['pro']&.length&.positive? ||
+                      f['con']&.length&.positive?
+                  end
+                  .map do |f|
+        f['f_date'] = Date.parse(f['date']).strftime('%B %Y')
+        f
+      end
+
+      feedbacks.select { |f| Date.parse(f['date']) > Date.today - 365 }
+    end
+
+    def get_recent_feedbacks(site, material_id)
+      feedbacks = get_feedbacks(site, material_id)
+                  .select do |f|
+                    f['pro']&.length&.positive? ||
+                      f['con']&.length&.positive?
+                  end
+                  .map do |f|
+        f['f_date'] = Date.parse(f['date']).strftime('%B %Y')
+        f
+      end
+
+      last_year = feedbacks.select { |f| Date.parse(f['date']) > Date.today - 365 }
+      # If we have fewer than 20 in the last year, then extend further.
+      if last_year.length < 20
+        feedbacks
+          .first(20)
+          .group_by { |f| f['f_date'] }
+      else
+        # Otherwise just everything last year.
+        last_year
+          .group_by { |f| f['f_date'] }
+      end
+    end
+
+    def tutorials_over_time_bar_chart(site)
+      graph = Hash.new(0)
+      TopicFilter.list_all_materials(site).each do |material|
+        yymm = material['pub_date'].strftime('%Y-%m')
+        graph[yymm] += 1
+      end
+
+      # Cumulative over time
+      # https://stackoverflow.com/questions/71745593/how-to-do-a-single-line-cumulative-count-for-hash-values-in-ruby
+      graph
+        # Turns it into an array
+        .sort_by { |k, _v| k }
+        # Cumulative sum
+        .each_with_object([]) { |(k, v), a| a << [k, v + a.last&.last.to_i] }.to_h
+        .map { |k, v| { 'x' => k, 'y' => v } }
+        .to_json
+    end
+
+    def list_usegalaxy_servers(_site)
+      Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }
+    end
+
+    def list_usegalaxy_servers_shuffle(_site)
+      Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }.shuffle
+    end
+
     def topic_name_from_page(page, site)
       if page.key? 'topic_name'
         site.data[page['topic_name']]['title']
@@ -350,6 +556,65 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
+    def shuffle(array)
+      array.shuffle
+    end
+
+    def get_og_desc(site, page); end
+
+    def get_og_title(site, page, reverse)
+      og_title = []
+      topic_id = page['path'].gsub(%r{^\./}, '').split('/')[1]
+
+      if site.data.key?(topic_id)
+        if site.data[topic_id].is_a?(Hash) && site.data[topic_id].key?('title')
+          og_title = [site.data[topic_id]['title']]
+        else
+          Jekyll.logger.warn "Missing title for #{topic_id}"
+        end
+      end
+
+      if page['layout'] == 'topic'
+        og_title.push 'Tutorial List'
+        return og_title.join(' / ')
+      end
+
+      material_id = page['path'].gsub(%r{^\./}, '').split('/')[3]
+      material = nil
+      material = fetch_tutorial_material(site, topic_id, material_id) if site.data.key? topic_id
+
+      og_title.push material['title'] if !material.nil?
+
+      case page['layout']
+      when 'workflow-list'
+        og_title.push 'Workflows'
+      when 'faq-page', 'faqs'
+        if page['path'] =~ %r{faqs/gtn}
+          og_title.push 'GTN FAQs'
+        elsif page['path'] =~ %r{faqs/galaxy}
+          og_title.push 'Galaxy FAQs'
+        else
+          og_title.push 'FAQs'
+        end
+      when 'faq'
+        og_title.push "FAQ: #{page['title']}"
+      when 'learning-pathway'
+        og_title.push "Learning Pathway: #{page['title']}"
+      when 'tutorial_hands_on'
+        og_title[-1]&.prepend 'Hands-on: '
+      when /slides/
+        og_title[-1]&.prepend 'Slide Deck: '
+      else
+        og_title.push page['title']
+      end
+
+      if reverse.to_s == 'true'
+        og_title.compact.reverse.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
+      else
+        og_title.compact.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
+      end
+    end
+
     ##
     # Gets the 'default' link for a material, hands on if it exists, otherwise slides.
     # Params:
@@ -370,6 +635,10 @@ module Jekyll
 
       url
     end
+
+    def group_icons(icons)
+      icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
+    end
   end
 end
 
@@ -381,8 +650,91 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 #
 # This exists because the jekyll-feed plugin expects those fields to look like that.
 Jekyll::Hooks.register :posts, :pre_render do |post, _out|
-  post.data['author'] = get_authors(post.data).map { |c| lookup_name(c, post.site) }.join(', ')
+  post.data['author'] = Gtn::Contributors.get_authors(post.data).map do |c|
+    Gtn::Contributors.fetch_name(post.site, c)
+  end.join(', ')
   post.data['image'] = post.data['cover']
+end
+
+# We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
+Jekyll::Hooks.register :site, :pre_render do |site|
+  site.posts.docs.each do |post|
+    if post.content
+      post.content = post.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
+        # Get first capture
+        name = match.gsub('@gtn:', '')
+        if site.data['contributors'].key?(name)
+          "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
+        else
+          match
+        end
+      end
+    end
+  end
+  site.pages.each do |page|
+    if page.content
+      page.content = page.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
+        name = match.gsub('@gtn:', '')
+        if site.data['contributors'].key?(name)
+          "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
+        else
+          match
+        end
+      end
+
+      # This would also need to modify the box types themselves, not sure how is best to do that.
+      page.content = page.content.gsub(/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/) do |match|
+        if match =~ /(CAUTION|WARNING)/
+          "> <warning-title></warning-title>"
+        elsif match =~ /TIP/
+          "> <tip-title></tip-title>"
+        else
+          "> <comment-title></comment-title>"
+        end
+      end
+    end
+  end
+end
+
+# Create back-refs for affiliations
+Jekyll::Hooks.register :site, :post_read do |site|
+  # Users list affiliations on their profile in site.data['contributors']
+  # And we want to create a back-ref to the user from the affiliation
+  site.data['contributors'].each do |name, contributor|
+    if contributor.key?('affiliations')
+      contributor['affiliations'].each do |affiliation|
+        if site.data['organisations'].key?(affiliation)
+          if !site.data['organisations'][affiliation].key?('members')
+            site.data['organisations'][affiliation]['members'] = []
+          end
+
+          site.data['organisations'][affiliation]['members'] << name
+        elsif site.data['funders'].key?(affiliation)
+          site.data['funders'][affiliation]['members'] = [] if !site.data['funders'][affiliation].key?('members')
+
+          site.data['funders'][affiliation]['members'] << name
+        end
+      end
+    end
+
+    if contributor.key?('former_affiliations')
+      contributor['former_affiliations'].each do |affiliation|
+        if site.data['organisations'].key?(affiliation)
+          if !site.data['organisations'][affiliation].key?('former_members')
+            site.data['organisations'][affiliation]['former_members'] = []
+          end
+
+          site.data['organisations'][affiliation]['former_members'] << name
+        elsif site.data['funders'].key?(affiliation)
+          if !site.data['funders'][affiliation].key?('former_members')
+            site.data['funders'][affiliation]['former_members'] = []
+          end
+
+          site.data['funders'][affiliation]['former_members'] << name
+        end
+      end
+    end
+  end
 end
 
 if $PROGRAM_NAME == __FILE__

@@ -29,7 +29,7 @@ notebook:
 subtopic: bash
 contributors:
 - hexylena
-- erasmusplus
+- gallantries
 tags:
 - game
 - bash

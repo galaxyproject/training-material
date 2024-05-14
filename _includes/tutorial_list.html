@@ -21,7 +21,8 @@
   {% assign subtopic_materials = include.sub[1].materials | default: include.sub %}
   {% for material in subtopic_materials %}
         <!-- MAT: {{ material.id }} -->
-      {% if material.draft != true or jekyll.environment != "production" %}
+      {% if page.draft == true or material.draft != true or jekyll.environment != "production"  %}
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
 
         <tr>
           <td class="tutorial_title">

@@ -37,14 +37,10 @@ tags:
 contributors:
 - roncoronimiguel
 - bedroesb
+- B0r1sD
 
 ---
 
-
-# Introduction
-
-
-<!-- This is a comment. -->
 
 Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
 Submission of raw reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic ({% cite Maier2021 %}).
@@ -52,7 +48,7 @@ Submission of raw reads to public repositories allows reuse of data and reproduc
 The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this [introductory slide deck]({% link topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html %}) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
 
 
-In this tutorial we will show you how to use Galaxy's 'ENA Upload tool' to submit raw sequencing reads, consensus sequences and their associated metadata to ENA {% cite Roncoroni2021 %}. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server using Galaxy's 'ENA upload tool'.
+In this tutorial we will show you how to use Galaxy's 'ENA Upload tool' to submit raw sequencing reads, consensus sequences and their associated metadata to ENA ({% cite Roncoroni2021 %}). You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server using Galaxy's 'ENA upload tool'.
 Specifically, we will use one ONT sequencing file to demonstrate interactive metadata input and two sets of PE Illumina reads to demonstrate how to use the ENA metadata template. Finally, we will submit consensus sequences to ENA using 'Submit consensus sequence to ENA' tool.
 
 Data will be submitted to ENA's test server and will not be public.
@@ -106,7 +102,7 @@ In this first example, you will submit one ONT sequence file using the interacti
 >
 {: .hands_on}
 
-Once the data is uploaded, we fill the metadata using  the ENA Upload tool. Interactive metadata forms are nested to fit [ENA's metadata model](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html). Briefly, you add Samples to a Study, Experiments to Samples and Runs to Experiments. The interactive metadata form does only two two [ENA Sample Checklists](https://www.ebi.ac.uk/ena/browser/checklists), the basic minimal sample metadata and the ENA virus pathogen reporting standard checklist. Switch between the basic template and the virus pathogen one under the "Does your submission contains viral samples?" question. If you wish to include additional metadata from a sample checklist, please use Option 2 below.
+Once the data is uploaded, we fill the metadata using  the ENA Upload tool. Interactive metadata forms are nested to fit [ENA's metadata model](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html). Briefly, you add Samples to a Study, Experiments to Samples and Runs to Experiments. The interactive metadata form does only two [ENA Sample Checklists](https://www.ebi.ac.uk/ena/browser/checklists), the basic minimal sample metadata and the ENA virus pathogen reporting standard checklist. Switch between the basic template and the virus pathogen one under the "Select your sample type" option. If you wish to include additional metadata from a sample checklist, please use Option 2 below.
 
 We recommend always submitting to the test server before submitting to the public one.
 After you confirm that all the data and metadata looks ok, you can go ahead and submit to the public ENA server.
@@ -116,14 +112,15 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 
 > <hands-on-title>add metadata interactively and submit a single sequence to ENA</hands-on-title>
 >
-> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %}:
->    - *"Action to execute"*: `Add new data`
->    - Under "Testing options":
->       - *"Submit to test ENA server?"*: `yes`
->       - *"Print the tables but do not submit the datasets"*: `no`
->    - *"Would you like to submit pregenerated table files or interactively define the input structures?"*: `Interactive generation of the study structure`
->    - *"Add .fastq.(gz.bz2) extension to the Galaxy dataset names to match the ones described in the input tables?"*: `No`
->    - *"Does your submission contains viral samples?"*: `yes`
+> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.7.1) %}:
+>    - *"Action to execute"*: `Add new (meta)data`
+>    - *"Select the metadata input method"*: `Interactively (only recommended for small studies)`
+>    - *"Add .fastq (.gz, .bz2) extension to the Galaxy dataset names to match the ones described in the input tables?"*: `No`
+>    - *"Select your sample type"*: `Viral`
+>    - Under "Submission options":
+>       - *"Affiliation centre"*: your institution  
+>       - *"Submit to ENA test server"*: `yes`
+>       - *"Create test outputs without submitting (meta)data to ENA"*: `no`
 > 2. Fill all metadata boxes and make sure that:
 >    - *""*:
 >    - *"Please select the type of study"*: `Whole Genome Sequencing`
@@ -140,7 +137,6 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 >    - *"Instrument model"*: `minION`
 >    - *"Runs executed within this experiment"*
 >      - {% icon param-files %} *"File(s) associated with this run"*: `SRR10902284_ONT.fq.gz`
->    - *"Affiliation center"*: your institution
 >
 {: .hands_on}
 
@@ -149,7 +145,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 {: .warning}
 
 > <warning-title>Submit to the test server first</warning-title>
-> Make sure  *"Submit to test ENA server?"*: `yes`. Otherwise your data will be submitted to the public server.
+> Make sure *"Submit to ENA test server"*: `yes`. Otherwise your data will be submitted to the public server.
 {: .warning}
 
 Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket with submission information are generated. You can confirm a successful submission at ENA [test server](https://wwwdev.ebi.ac.uk/ena/submit/webin/) (or the [public server](https://www.ebi.ac.uk/ena/submit/sra), if you chose it).
@@ -216,17 +212,17 @@ As before, the submission is done to the test server before submitting to the pu
 
 > <hands-on-title>use a metadata template and submit multiple sequences to ENA</hands-on-title>
 >
-> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %}:
->    - *"Action to execute"*: `Add new data`
->    - Under "Testing options":
->       - *"Submit to test ENA server?"*: `yes`
->       - *"Print the tables but do not submit the datasets"*: `no`
->    - *"Would you like to submit pregenerated table files or interactively define the input structures?"*: `User generated metadata tables based on Excel templates`
->    - *"Select the metadata checklist"*: `ENA virus pathogen reporting standard checklist (ERC000033)`
->    - *"Select Excel (xlsx) file based on template"*: `metadata_template_ERC000033_mock_complete.xlsx`
->    - *"Select runs input format"*: `Input from a paired collection`
->    - *"List of paired-end runs files"*: select the collection you made above during data upload
->    - *"Affiliation center"*: your institution
+> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.7.1) %}:
+>    - *"Action to execute"*: `Add new (meta)data`
+>    - *"Select the metadata input method"*: `Excel file`
+>    - *"Select the ENA sample checklist"*: `ENA virus pathogen reporting standard checklist (ERC000033)`
+>    - *"Select Excel (.xlsx) file based on template"*: `metadata_template_ERC000033_mock_complete.xlsx`
+>    - *"Select input data"*: `Paired dataset collection`
+>    - *"List of paired-end sequencing data files"*: select the collection you made above during data upload
+>    - Under "Submission options":
+>       - *"Affiliation centre"*: your institution 
+>       - *"Submit to ENA test server?"*: `yes`
+>       - *"Create test outputs without submitting (meta)data to ENA"*: `no`
 >
 {: .hands_on}
 
@@ -235,7 +231,7 @@ As before, the submission is done to the test server before submitting to the pu
 {: .warning}
 
 > <warning-title>Submit to the test server first</warning-title>
-> Make sure  *"Submit to test ENA server?"*: `yes`. Otherwise your data will be submitted to the public server.
+> Make sure *"Submit to ENA test server?"*: `yes`. Otherwise your data will be submitted to the public server.
 {: .warning}
 
 Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket with submission information are generated. You can confirm a successful submission at ENA [test server](https://wwwdev.ebi.ac.uk/ena/submit/webin/) (or the [public server](https://www.ebi.ac.uk/ena/submit/sra), if you chose it).

@@ -108,7 +108,8 @@ voice:
 
 # Encuentra un servidor Galaxy
 
-- ** Los tres grandes **: Galaxy Main ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europe ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+- ** Los tres grandes **: {% for server in servers %}{{ server.human }} ([{{ server.name }}]({{ server.url }})){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 
   .image-75[![usegalaxy.* servidores]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
 

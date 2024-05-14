@@ -15,7 +15,7 @@ Below is a checklist of things to look out for to help you get started. If you f
 Basic:
 
 - **Test** the tutorial on a running Galaxy instance
-   - For example [Galaxy Main](https://usegalaxy.org), [Galaxy Europe](https://usegalaxy.eu), or [Galaxy Australia](https://usegalaxy.org.au)
+   - For example {% assign servers = nil | list_usegalaxy_servers_shuffle %}{% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
    - Report any issues you run into
 - **Language** editing
   - Fix spelling and grammar mistakes

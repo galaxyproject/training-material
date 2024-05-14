@@ -3,6 +3,8 @@ layout: topic
 topic_name: single-cell
 ---
 
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
+
 ## Want to explore analysis beyond our tutorials?
 
 Check out workflows shared by users like you!

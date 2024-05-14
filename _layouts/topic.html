@@ -26,6 +26,18 @@ layout: base
     </ul>
     {% endif %}
 
+    {% if topic.learning_path_cta %}
+    <div id="cta-lp" style="color: var(--brand-color-contrast);background: var(--brand-color);">
+      <div style="background: repeating-linear-gradient( 135deg, transparent, transparent 10px, #fff1 10px, #fff1 20px );padding: 1rem;">
+        <h3 style="margin: unset;">Not sure where to start?</h3>
+        <p style="display: flex;justify-content: space-between;align-items: center;vertical-align: bottom;margin-bottom: 0;">
+          <span>Try the {{ topic.title }} Learning Pathway!</span>
+          <a href="/training-material/learning-pathways/{{ topic.learning_path_cta }}.html?utm_source=gtn&utm_medium=topic-admin&utm_campaign=home-cta-lp" class="btn btn-success">Start Learning</a>
+        </p>
+      </div>
+    </div>
+    {% endif %}
+
     <h2 id="material">Material</h2>
     {% if topic.draft %}
     <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}
@@ -55,7 +67,11 @@ layout: base
 
     {% unless topic.tag_based %}
     <h2 id="topic-faq">Frequently Asked Questions</h2>
-    Common questions regarding this topic have been collected on a <a href="faqs/">dedicated FAQ page </a>. Common questions related to specific tutorials can be accessed from the tutorials themselves.
+    <p>Common questions regarding this topic have been collected on a <a href="faqs/">dedicated FAQ page </a>. Common questions related to specific tutorials can be accessed from the tutorials themselves.</p>
+
+    {% if jekyll.environment == "production" %}
+    <p><a href="feed.xml">Follow topic updates {% icon rss-feed %}</a> with our RSS Feed</p>
+    {% endif %}
     {% endunless %}
 
     {% if topic.editorial_board %}

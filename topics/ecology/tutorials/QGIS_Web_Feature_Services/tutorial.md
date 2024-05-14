@@ -17,15 +17,18 @@ tags:
   - QGIS
   - Maps
   - OGC
-contributors:
-- colineroyaux
-- Marie59
-- yvanlebras
+contributions:
+  authorship:
+  - colineroyaux
+  - Marie59
+  - yvanlebras
+  funding:
+  - gallantries
+  - fairease
+  - pndb
 
 ---
 
-
-# Introduction
 
 Based on this [QGIS official tutorial](https://docs.qgis.org/2.18/en/docs/training_manual/online_resources/wfs.html), you will learn here how to access, filter and import GIS data through WFS web service using QGIS Galaxy interactive tool:
 

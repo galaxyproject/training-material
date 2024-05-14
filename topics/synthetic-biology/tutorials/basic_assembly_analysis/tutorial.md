@@ -27,9 +27,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 Synthetic biology is a novel engineering discipline which requires computational tools for the design of metabolic pathways for the production of chemicals such as SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}). 
 
 In this tutorial, we will use a set of tools from the **Genetic Design - BASIC Assembly Workflow** (https://galaxy-synbiocad.org) which will enable you to design plasmids implementing metabolic pathways for the bioproduction of lycopene in _E.coli_ (one of the preferred host cell for microbial biochemicals production).

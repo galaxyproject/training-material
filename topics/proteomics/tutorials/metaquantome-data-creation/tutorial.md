@@ -31,21 +31,24 @@ follow_up_training:
             - metaproteomics
 
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
+edam_ontology:
+- topic_0121 # Proteomics
+- topic_3922 # Proteogenomics
+- topic_3050 # Biodiversity
+- topic_0637 # Taxonomy
 ---
 
 
-# Introduction
 
-
-Metaproteomics {% cite Metaproteomics_video %} involves characterization of community level expression of microbial proteins from an environmental
+Metaproteomics {% cite Metaproteomics_video %} involves the characterization of community-level expression of microbial proteins from an environmental
 or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named metaQuantome {% cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional,
-taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions.
+taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide-level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions.
 
 ![Microbiome](../../images/microbiome.png){: width="75%"}
 
 metaQuantome offers differential abundance analysis, principal components analysis, and clustered heat map visualizations,
-across multiple experimental conditions. metaQuantome, an open source tool, is available via command line and also
+across multiple experimental conditions. metaQuantome, an open-source tool, is available via the command line and also
 accessible via Galaxy platform for reproducible analysis. As a first step for metaQuantome analysis, metaproteomics
 data needs to be made compatible for subsequent analysis. With this in mind, we have developed a metaQuantome data
 generation workflow tutorial that will help users generate inputs for metaQuantome analysis.
@@ -56,7 +59,7 @@ To demonstrate the use of the data creation workflow, we have used a thermophili
 food waste and manure is digested to generate methane gas. After one round in the reactor, the microbial community was
 simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian
 Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass
-spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen two time points-8 hour and 33 hour.
+spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen two time points 8-hour and 33-hour.
 
 ![Dataset](../../images/biogasdataset.png){: width="75%"}
 

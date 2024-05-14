@@ -40,8 +40,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
-# Introduction
-
 
 Single-cell RNA-seq (scRNA-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.
 

@@ -55,6 +55,7 @@ abbreviations:
   RO-Crate: Research Object Crate; a way to package research data with structured FAIR metadata
 ---
 
+This tutorial assumes you have already completed [An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/) and have a basic understanding of working with JSON.
 
 > <agenda-title></agenda-title>
 >
@@ -65,10 +66,6 @@ abbreviations:
 >
 {: .agenda}
 
-
-## Introduction
-
-This tutorial assumes you have already completed [An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/) and have a basic understanding of working with JSON.
 
 
 In this tutorial, meant to be read along with the [RO-Crate specification](https://www.researchobject.org/ro-crate/1.1/), we'll walk through the initial steps for creating a basic RO-Crate. You are invited to replicate the below steps on your local computer.
@@ -256,7 +253,7 @@ The root has several metadata properties that describe the RO-Crate as a whole, 
 A main type of resources collected in a Research Object is _data_ -- simplifying, we can consider data as any kind of file that can be opened in other programs. These are aggregated by the Root Dataset with the `hasPart` property. In this example we have an array with a single value, a reference to the entity describing the file `data.csv`. 
 
 > <tip-title>Referencing external resources</tip-title>
-> RO-Crates can also contain data entities that are folders and Web resources, as well as non-File data like online databases -- see section on [data entities](https://www.researchobject.org/ro-crate/1.1/data-entitites.html).
+> RO-Crates can also contain data entities that are folders and Web resources, as well as non-File data like online databases -- see section on [data entities](https://www.researchobject.org/ro-crate/1.1/data-entities.html).
 {: .tip}
 
 We should now be able to follow the `@id` reference for the corresponding _data entity_ JSON block for our CSV file, which we need to add to the `@graph` of the RO-Crate Metadata Document. 
@@ -285,7 +282,7 @@ We should now be able to follow the `@id` reference for the corresponding _data 
 
 It is recommended that every entity has a human-readable `name`; as shown in the above example, this does not need to match the filename/identifier. The `encodingFormat` indicates the media file type so that consumers of the crate can open `data.csv` in an appropriate program, and can be particularly important for less common file extensions frequently encounted in outputs from research software and instruments.
 
-For more information on describing files and folders, including their recommended and required attributes, see section on [data entities](https://www.researchobject.org/ro-crate/1.1/data-entitites.html).
+For more information on describing files and folders, including their recommended and required attributes, see section on [data entities](https://www.researchobject.org/ro-crate/1.1/data-entities.html).
 
 > <question-title></question-title>
 > 

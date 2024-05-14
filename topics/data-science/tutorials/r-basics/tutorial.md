@@ -41,10 +41,10 @@ contributions:
   - fpsom
   - tobyhodges
   funding:
-  - erasmusplus
+  - gallantries
 ---
 
-# Introduction
+This tutorial will introduce R basics, using an RStudio Interactive Tool in Galaxy
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 {% include topics/data-science/tutorials/r-basics/r_introduction.md %}

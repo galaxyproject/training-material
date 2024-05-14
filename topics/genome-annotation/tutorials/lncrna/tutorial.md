@@ -46,10 +46,6 @@ subtopic: eukaryote
 priority: 7
 ---
 
-
-# Introduction
-
-
 {mRNAs} are not the only type of RNAs present in organisms (like mammals, insects or plants) and represent only a small fraction of the transcripts. A vast repertoire of small (miRNAs, snRNAs) and {lncRNAs} are also present. {LncRNAs} are generally defined as transcripts longer than 200 nucleotides that are not translated into functional proteins. They are important because of their major roles in cellular machinery and their presence in large number. Indeed, they are notably involved in gene expression regulation, control of translation or imprinting. Statistics from the [GENCODE project](https://www.gencodegenes.org/human/stats_41.html) reveals that the human genome contains more than 19,095 lncRNA genes, almost as much as the 19,370 protein-coding genes.
 
 Using RNASeq data, we can reconstruct assembled transcripts (with ou without any reference genome) which can then be annotated and identified individually as {mRNAs} or {lncRNAs}.

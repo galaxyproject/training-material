@@ -48,8 +48,6 @@ follow_up_training:
 ---
 
 
-# Introduction
-
 
 Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
 
@@ -101,17 +99,17 @@ We will use three files for this analysis:
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
 >    To import the files, there are two options:
->     - Option 1: From a shared data library if available (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`)
->     - Option 2: From [Zenodo](https://zenodo.org/record/4273218)
+>    - Option 1: From a shared data library if available (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`)
+>    - Option 2: From [Zenodo](https://zenodo.org/record/4273218)
 >
->       {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>      {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->     - You can paste both links below into the **Paste/Fetch** box:
+>    - You can paste both links below into the **Paste/Fetch** box:
 >
->     ```
->     https://zenodo.org/record/4273218/files/countdata.tsv
->     https://zenodo.org/record/4273218/files/factordata.tsv
->     ```
+>    ```
+>    https://zenodo.org/record/4273218/files/countdata.tsv
+>    https://zenodo.org/record/4273218/files/factordata.tsv
+>    ```
 >
 > 2. Rename the counts dataset as `countdata` and the sample information dataset as `factordata` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
@@ -133,14 +131,14 @@ The `factordata` file contains basic information about the samples that we will 
 
 > <details-title>Formatting the data</details-title>
 >
->The files above have been formatted for you. If you are interested to know how they were formatted the information is below.
+> The files above have been formatted for you. If you are interested to know how they were formatted the information is below.
 >
 > The original files are available at
 >
->     ```
->     https://zenodo.org/record/4273218/files/GSE60450_Lactation-GenewiseCounts.txt
->     https://zenodo.org/record/4273218/files/SampleInfo.txt
->     ```
+> ```
+> https://zenodo.org/record/4273218/files/GSE60450_Lactation-GenewiseCounts.txt
+> https://zenodo.org/record/4273218/files/SampleInfo.txt
+> ```
 >
 >![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
 >

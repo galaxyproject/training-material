@@ -5,24 +5,38 @@ box_type: tip
 layout: faq
 contributors: [jennaj, AnomalyCodes]
 ---
-1. Click on {% icon galaxy-gear %} in the history panel of the *sender* Galaxy server
-2. Click on **Export to File**
-3. Select either exporting history **to a link** or **to a remote file**
-4. Click on the link text to generate a new archive for the history *if* exporting to a link
-5. Wait for the link to generate
-6. Copy the link address or click on the generated link to download the history archive
-7. Click on **User** on the top menu of the *receiver* Galaxy server
-8. Click on **Histories** to view saved histories
-9. Click on **Import history** in the grey button on the top right
-10. Select the appropriate importing method based on the choices made in steps 3 and 6
-    - Choose **Export URL from another galaxy instance** if link address was copied in step 6
-    - Select **Upload local file from your computer** if history archive was downloaded in step 6
-    - Choose **Select a remote file** if history was exported to a remote file in step 3
-11. Click the link text to check out your histories if import is successful
+
+**Transfer a Single Dataset**
+
+At the **sender** Galaxy server, [set the history to a shared state]({% link faqs/galaxy/histories_sharing.md %}), then directly capture the {% icon galaxy-link %} link for a dataset and paste the URL into the **Upload** tool at the **receiver** Galaxy server. 
+
+**Transfer an Entire History**
+
+[Have an account]({% link faqs/galaxy/account_create.md %}) at two different Galaxy servers, and be logged into both.
+
+At the **sender** Galaxy server
+
+1. Navigate to the history you want to transfer, and [set the history to a shared state]({% link faqs/galaxy/histories_sharing.md %}).
+2. Click into the **History Options** menu in the history panel.
+3. Select from the menu {% icon galaxy-history-archive %} **Export History to File**.
+4. Choose the option for **How do you want to export this History?** as **to direct download**.
+5. Click on **Generate direct download**.
+6. Allow the archive generation process to complete. \*
+7. Copy the {% icon galaxy-link %} link for your new archive.
+
+At the **receiver** Galaxy server
+
+8. Confirm that you are logged into your account.
+9. Click on **Data** in the top menu, and choose **Histories** to reach your **Saved Histories**.
+10. Click on **Import history** in the grey button on the top right.
+11. Paste in your link's URL from step 7.
+12. Click on **Import History**.
+13. Allow the archive import process to complete. \*
+14. The transfered history will be uncompressed and added to your **Saved Histories**.
 
 
-If history being transferred is too large, you may:
-1. Click on {% icon galaxy-gear %} in the history panel of the *sender* Galaxy server
-2. Click **Copy Datasets** to move just the important datasets into a new history
-3. Create the archive from that smaller history
+\* For steps 6 and 13: It is Ok to navigate away for other tasks during processing. If enabled, Galaxy will send you [status notifications]({% link faqs/galaxy/account_update_preference.md %}).
+
+
+{% icon tip %} If the history to transfer is large, you may [copy just your important datasets into a new history]({% link faqs/galaxy/histories_copy_dataset.md %}), and create the archive from that new smaller history. Clearing away deleted and purged datasets will make *all* histories smaller and faster to archive and transfer!
 

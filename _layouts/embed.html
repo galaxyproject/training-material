@@ -15,10 +15,7 @@
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css?v=3" as="style">
-        {{ 'load' | bundle_preloads }}
         <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
-        <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
 
         {{ page | generate_dublin_core: site }}
@@ -28,30 +25,15 @@
         {% if page.title %}
             {% assign og_title = page.title %}
         {% endif %}
-        {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
-        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}">
+        {% assign og_desc = page.description | default:topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 120}}">
         <meta property="og:site_name" content="Galaxy Training Network">
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
-        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}">
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 120}}">
 
-        {%- if page.cover %}{% assign coverimage = page.cover %}
-        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
-        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
-        {%- elsif page.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
-        {%- else %}{% assign coverimage = "/assets/images/GTNLogo1000.png" %}{% endif %}
-        {% assign og_image = page.og_image | default: coverimage | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
-        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
-
-        {% if page.layout == "tutorial_hands_on" %}
-        <script type="application/ld+json">
-            {% include _includes/material.jsonld material=page topic=topic site=site %}
-        </script>
-        {% endif %}
+        <meta property="og:image" content="/assets/images/GTNLogo1000.png">
     </head>
     <body data-brightness="auto" data-contrast="auto">
-        {{ 'theme' | load_bundle }}
         {{ content }}
-
-        {{ 'main' | load_bundle }}
     </body>
 </html>

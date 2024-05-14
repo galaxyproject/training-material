@@ -45,12 +45,10 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 tags:
 - R
 ---
-
-# Introduction
 
 With HTS-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 

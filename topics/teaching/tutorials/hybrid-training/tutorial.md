@@ -20,7 +20,7 @@ contributions:
     - bebatut
     - fpsom
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
 > <tip-title>Combine with Australia Biocommon paper</tip-title>

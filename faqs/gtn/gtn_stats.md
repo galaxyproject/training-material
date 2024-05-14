@@ -4,13 +4,15 @@ area: other
 layout: faq
 box_type: none
 contributors: [hexylena]
+description: Statistics over the GTN
 ---
 
 <!-- tutorial stats -->
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}
+{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.draft != true" %}
 {% assign faqs = site.pages | where:"layout", "faq" %}
 {% assign topics = site | list_topics_by_category: "science-technical" | to_keys %}
 {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
+{% assign learning_pathways = site.pages | where:"layout", "learning-pathway" | where_exp:"item","item.draft != true"  %}
 
 
 {% if include.compact %}
@@ -43,6 +45,7 @@ contributors: [hexylena]
    <div class="card-text-small">Years</div>
  </div>
 </div>
+
 </div>
 
 {% else %}
@@ -64,20 +67,27 @@ contributors: [hexylena]
 </div>
 
 <div class="col-md-4">
+ <div class="gtn-card color-handson">
+   <div class="card-title">{{ learning_pathways | size }}</div>
+   <div class="card-text-small">Learning Pathways</div>
+ </div>
+</div>
+
+<div class="col-md-4">
  <div class="gtn-card color-details">
    <div class="card-title">{{ faqs | size }}</div>
    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>
  </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
  <div class="gtn-card color-comment">
    <div class="card-title">{{ contributors | size }}</div>
    <div class="card-text">Contributors</div>
  </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
  <div class="gtn-card color-handson">
    <div class="card-title">{{ site.age | round: 1}}</div>
    <div class="card-text">Years</div>

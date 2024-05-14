@@ -28,7 +28,7 @@ contributions:
   testing:
     - shiltemann
   funding:
-    - erasmusplus
+    - gallantries
 level: Introductory
 notebook:
   language: r
@@ -37,7 +37,8 @@ notebook:
   - patchwork
   - hexbin
 
-subtopic: olympics
+priority: 2
+subtopic: next-steps
 ---
 
 In this tutorial, you will learn how to produce scatter plots, boxplots, and time series plots using ggplot. You will also learn how to set universal plot settings, modify the aesthetics of an existing ggplot plots (including axis labels and color), and learn how to facet in ggplot.

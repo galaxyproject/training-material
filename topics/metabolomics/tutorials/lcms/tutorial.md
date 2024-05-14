@@ -25,8 +25,6 @@ contributors:
 ---
 
 
-# Introduction
-
 
 You may already know that there are different types of *-omic* sciences; out of these, metabolomics is most closely related to phenotypes.
 Metabolomics involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants. It  focuses on studying the very small molecules

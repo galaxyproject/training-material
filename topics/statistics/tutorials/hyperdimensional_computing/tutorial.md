@@ -24,8 +24,6 @@ contributors:
 
 ---
 
-# Introduction
-
 `chopin2` ({% cite Cumbo2020 %}) implements a domain-agnostic supervised classification method based on the hyperdimensional (HD) computing paradigm. It is an open-source tool and its code is available on GitHub at [https://github.com/cumbof/chopin2](https://github.com/cumbof/chopin2).
 
 In this tutorial, we are going to work on a dataset with microbial relative abundances (RA) and presence/absence information (BIN) computed on metagenomic samples collected from individuals affected by colorectal cancer (CRC) in a case/control scenario.

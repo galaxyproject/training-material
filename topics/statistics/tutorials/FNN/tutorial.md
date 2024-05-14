@@ -29,8 +29,6 @@ contributors:
 - kxk302
 ---
 
-# Introduction
-
 
 Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a
 human brain work. In the past decade, there has been a huge resurgence of neural networks thanks

@@ -27,6 +27,8 @@ contributions:
     - poterlowicz-lab
   editing:
     - hexylena
+  funding:
+    - elixir-uk-dash
 subtopic: fair-data
 
 requirements:
@@ -37,8 +39,6 @@ requirements:
 
 ---
 
-
-# Introduction
 
 The FAIR (Findable, Accessible, Interoperable, Reusable)  data stewardship created the foundation for sharing and publishing digital assets, especially data. This apply to machine accessibility and emphasize that all digital assets should share data in a way that will enable maximum use and reuse.
 

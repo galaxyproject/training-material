@@ -48,6 +48,7 @@ module Gtn
         'git_tags' => tags,
         'git_tags_recent' => tags.reverse[0..2],
         'age' => (today - first_commit).to_f / 365.25,
+        'founding_date' => first_commit,
       }
     end
   end

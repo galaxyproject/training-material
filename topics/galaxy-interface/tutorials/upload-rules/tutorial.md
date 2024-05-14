@@ -33,8 +33,6 @@ contributors:
 subtopic: upload
 ---
 
-# Introduction
-
 
 Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..
 

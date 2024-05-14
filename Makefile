@@ -27,9 +27,12 @@ else
 	ENV_FILE=environment.yml
 endif
 
-CONDA=$(shell which conda)
+CONDA=$(shell which mamba)
 ifeq ($(CONDA),)
-	CONDA=${HOME}/miniconda3/bin/conda
+    CONDA=$(shell which conda)
+    ifeq ($(CONDA),)
+    	CONDA=${HOME}/miniconda3/bin/mamba
+    endif
 endif
 
 default: help
@@ -53,7 +56,7 @@ COND_ENV_DIR=$(shell dirname $(dir $(CONDA)))
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --no-document --system && \
-		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage rubyzip && \
 		pushd ${COND_ENV_DIR}/envs/${CONDA_ENV}/share/rubygems/bin && \
 		ln -sf ../../../bin/ruby ruby
 .PHONY: install
@@ -80,8 +83,12 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 .PHONY: serve-quick
 
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
-	bundle exec jekyll serve --config _config.yml --incremental
+	bundle exec jekyll serve --config _config.yml --incremental --livereload
 .PHONY: serve-gitpod
+
+serve-gitpod-quick: bundle-install  ## run a server on a gitpod.io environment
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental --livereload
+.PHONY: serve-gitpod-quick
 
 build-gitpod: bundle-install  ## run a build on a gitpod.io environment
 	bundle exec jekyll build --config _config.yml
@@ -214,27 +221,31 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 
 _site/%/slides.pdf: _site/%/slides.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_ES.pdf: _site/%/slides_ES.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
+	./node_modules/.bin/http-server _site -p 9876 & \
 	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 video: ## Build all videos
 	bash bin/ari-make.sh
+
+metadata/public-server-tools.json:
+	python ./bin/supported-fetch.py
 
 annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
 	wget https://github.com/hexylena/toolshed-version-database/raw/main/guid-rev.json -O metadata/toolshed-revisions.json && \
 	python bin/supported-fetch.py
 	bin/workflows-fetch.rb
+	bin/fetch-categories.rb
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index

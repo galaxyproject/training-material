@@ -56,12 +56,61 @@ module Jekyll
           res = %(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
         end
       rescue StandardError => e
-        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
+        Jekyll.logger.warn "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
         res = %(<span>ERROR INVALID CITATION #{@text}</span>)
       end
 
       res.gsub!(/"/, '\"') if page['citation_target'] == 'jupyter'
 
+      res
+    end
+  end
+
+  # {% cite_url X %} which generates URL for the article
+  class CiteUrlTag < Liquid::Tag
+    def initialize(tag_name, text, tokens)
+      super
+      @text = text.strip
+    end
+
+    def render(context)
+      page = context.registers[:page]
+      site = context.registers[:site]
+      Gtn::Scholar.load_bib(site)
+
+      # Mark this page as having citations
+      page['cited'] = true
+
+      return "@#{@text}" if page['citation_target'] == 'R'
+
+      # Which page is rendering this tag?
+      source_page = page['path']
+
+      # Citation Frequency
+      site.config['citation_count'] = Hash.new(0) if !site.config.key?('citation_count')
+      site.config['citation_count'][@text] += 1
+
+      # If the overall cache is nil, create it
+      site.config['citation_cache'] = {} if site.config['citation_cache'].nil?
+      # If the individual page in the chace is nil, create it.
+      site.config['citation_cache'][source_page] = [] if site.config['citation_cache'][source_page].nil?
+
+      # Push it to our cache.
+      site.config['citation_cache'][source_page].push(@text)
+
+      begin
+        doi = site.config['cached_citeproc'].items[@text].doi
+        url = site.config['cached_citeproc'].items[@text].url
+        if !doi.nil?
+          "https://doi.org/#{doi}"
+        elsif !url.nil?
+          url
+        end
+        res = url
+      rescue StandardError => e
+        Jekyll.logger.warn "[GTN/scholar] Could not render #{@text} from #{source_page} (#{e})"
+        res = %(<span>https://example.com/ERROR+INVALID+CITATION+#{@text}</span>)
+      end
       res
     end
   end
@@ -107,4 +156,5 @@ module Jekyll
 end
 
 Liquid::Template.register_tag('cite', Jekyll::CiteTag)
+Liquid::Template.register_tag('cite_url', Jekyll::CiteUrlTag)
 Liquid::Template.register_tag('bibliography', Jekyll::BibTag)

@@ -26,16 +26,17 @@ contributions:
     - poterlowicz-lab
   editing:
     - hexylena
+  funding:
+    - elixir-uk-dash
 subtopic: fair-data
 
 ---
 
 
-# Introduction
-
 The FAIR (Findable, Accessible, Interoperable, Reusable) principles emphasize machine-actionability. The main objective of FAIR is to increase data reuse by researchers. The core concepts of the FAIR principles are based on good scientific practice and intuitively grounded. 
 
-This tutorial is a short introduction to the FAIR principles and their origin. You can find out more at the [FAIR Pointers](https://elixir-uk-dash.github.io/FAIR-Pointers/ep1/index.html) online course.
+This tutorial is a short introduction to the FAIR principles and their origin. You can find out more at the **FAIR Pointers module** at the [FAIR Data Management]({% link learning-pathways/fair-training.md %}) learning path.
+
 
 > <agenda-title></agenda-title>
 >

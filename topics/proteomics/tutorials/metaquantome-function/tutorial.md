@@ -38,11 +38,15 @@ requirements:
     tutorials:
       - metaquantome-data-creation
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
+edam_ontology:
+- topic_0121 # Proteomics
+- topic_3922 # Proteogenomics
+- topic_3941 # Metatranscriptomics
+- topic_3697 # Microbial ecology
+- topic_3174 # Metagenomics
 ---
 
-
-# Introduction
 
 
 metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
@@ -62,12 +66,12 @@ In this tutorial, we will learn specifically about the metaQuantome Function wor
 {: .agenda}
 
 
-# **Pretreatments**
+# Pretreatments
 
 The first step in this tutorial is to get the data from the Zenodo link provided and make sure that it is in the correct format.
 
 
-## *Get data*
+## Get data
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -95,7 +99,7 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >
 {: .hands_on}
 
-# **Download metaQuantome Databases**
+# Download metaQuantome Databases
 
 > <hands-on-title>Run metaQuantome databases</hands-on-title>
 >
@@ -136,7 +140,7 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >
 {: .question}
 
-# **Create metaQuantome sample file**
+# Create metaQuantome sample file
 
 The create samples file module is used to generate the samples file input file for the metaQuantome workflow. This input file is used to specify the column names used for each experimental group. These column names are referenced when handling the input data and performing statistical analysis.
 
@@ -159,10 +163,10 @@ The create samples file module is used to generate the samples file input file f
 {: .hands_on}
 
 
-# **Run metaQuantome**
+# Run metaQuantome
 
 
-## *metaQuantome: expand*
+## metaQuantome: expand
 
 The expand module is the first analysis step in the metaQuantome analysis workflow, and can be run to analyze differently expressed functions in the samples.
 In function mode, the following information is required apart from metaQuantome databases and samples file:
@@ -200,7 +204,7 @@ In function mode, the following information is required apart from metaQuantome 
 {: .hands_on}
 
 
-##  *metaQuantome: filter*
+##  metaQuantome: filter
 
 The filter module is the second step in the metaQuantome workflow. The filter module filters the expanded terms to those that are representative of the data according to the sample parameters the user has specified.
 
@@ -241,7 +245,7 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >
 {: .question}
 
-##  *metaQuantome: stat*
+##  metaQuantome: stat
 
 > <hands-on-title>Statistical analysis of the filtered data on multiple conditions.</hands-on-title>
 >
@@ -264,13 +268,13 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >
 {: .hands_on}
 
-# **Visualize your Data**
+# Visualize your Data
 
 The  outputs of the visualization module of metaQuantome are high-quality, publication-ready visualizations: barplots for the analysis of a single sample or experimental condition and differential abundance analysis, volcano plots, heatmaps, and principal components analysis for comparisons between two or more experimental conditions.
 Here were are showing 2 visualizations: **Barplot and Volcano Plot**. The Heatmap and PCA plot for multiple conditions are under development.
 There are two outputs of the visualization tool : an **HTML file (figure) and a tabular output containing the plot data**.
 
-## *metaQuantome: visualize* Bar Chart
+## metaQuantome: visualize Bar Chart
 
 > <hands-on-title>Bar chart visualization of Functions in T2 sample.</hands-on-title>
 >
@@ -339,7 +343,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 {: .hands_on}
 ![T7_MF](../../images/T7-mf.png "Top five differentially expressed Molecular Function GO terms for sample T7."){: width="85%"}
 
-## *metaQuantome: visualize* Volcano Plots
+## metaQuantome: visualize Volcano Plots
 
 > <hands-on-title>Volcano Plot visualization of the data T7 and T2.</hands-on-title>
 >

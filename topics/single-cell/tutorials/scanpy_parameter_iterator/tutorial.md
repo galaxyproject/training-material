@@ -47,8 +47,6 @@ contributions:
 ---
 
 
-# Introduction
-
 The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us investigate biology. However, analysis is not always straightforward – each tool has various parameters to select. Eventually, we can end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data, then make sure your analysis shows that, for you to then be able to identify the 25% new information.
 
 Given the vast array of values that we can specify in the tool parameters, how can we know if the values we choose are the most optimal ones - or at least good enough? Well, we can try different values in our workflow and then compare the outputs to see which is consistent with our understanding of the underlying biology. But can we do this efficiently, at scale, to test multiple values?
@@ -167,7 +165,7 @@ The output of the Parameter Iterator is the list of datasets. We will be working
 >
 > 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Scanpy RunPCA: AnnData object`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"File with n_neighbours, use with parameter iterator. Overrides the n_neighbors setting"*:
 >       - Click on {% icon param-collection %} (*Dataset collection*)
 >       - Choose `Parameter iterated - n-neighbours`
@@ -198,20 +196,20 @@ Where are we now in our workflow?
 > 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)`
 >    - *"Use the indicated representation"*: `X_pca`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
 > 1A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)`
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 >
 > 2A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 > 3. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunUMAP on collection X: UMAP object AnnData`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 >
 > 3A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then rename it)
@@ -281,7 +279,7 @@ The next tool in our workflow is Scanpy RunTSNE, which contains the perplexity p
 > 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Scanpy ComputeGraph on data X and data Y: Graph object AnnData` with the tag `#n-neighbours_15`
 >    - *"Use the indicated representation"*: `X_pca`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours"*:
 >       - Click on {% icon param-collection %} (*Dataset collection*)
 >       - Choose `Parameter iterated - perplexity`
@@ -295,13 +293,13 @@ Changing the value of perplexity will only affect the tSNE graphs, so we can com
 > <hands-on-title> Complete the workflow </hands-on-title>
 > 1. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)`
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 >
 > 1A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 > 2. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 >
 > 3A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy FindCluster on collection X: Clusters AnnData (perplexity)` (you have to first click on the collection so that you see the datasets, and then rename it)
@@ -370,7 +368,7 @@ The last tool that we can use Parameter Iterator for is **Scanpy FindCluster** {
 > <hands-on-title> FindCluster with iterated parameter </hands-on-title>
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9) %} with the following parameters:
 >   - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Scanpy RunUMAP on data X: UMAP object AnnData` with the tags `#n-neighbours_15` and `#perplexity_30`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"File with resolution, use with parameter iterator. Overrides the resolution setting"*:
 >       - Click on {% icon param-collection %} (*Dataset collection*)
 >       - Choose `Parameter iterated - resolution`

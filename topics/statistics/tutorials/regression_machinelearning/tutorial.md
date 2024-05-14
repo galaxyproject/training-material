@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Regression in Machine Learning'
-zenodo_link: https://zenodo.org/record/2545213#.XEWTJ9-YVa0
+zenodo_link: https://zenodo.org/record/2545213
 questions:
 - How to use regression techniques to create predictive models from biological datasets?
 objectives:
@@ -20,8 +20,6 @@ contributors:
 - anuprulez
 - simonbray
 ---
-
-# Introduction
 
 
 In this tutorial you will learn how to use Galaxy tools to solve [regression](https://en.wikipedia.org/wiki/Regression_analysis) problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step. Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.
@@ -83,7 +81,7 @@ Whole blood samples are collected from humans with their ages falling in the ran
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/2545213/files/train_rows.csv

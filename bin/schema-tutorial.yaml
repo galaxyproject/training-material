@@ -83,6 +83,8 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
+              - FUNDERS
+              - ORGANISATIONS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
         examples:
@@ -108,7 +110,7 @@ mapping:
                 translation:
                     - shiltemann
                 funding:
-                    - erasmusplus
+                    - gallantries
         type: map
         mapping:
             authorship:
@@ -118,6 +120,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             editing:
                 type: seq
                 description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
@@ -125,6 +128,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             testing:
                 type: seq
                 description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
@@ -132,6 +136,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             ux:
                 type: seq
                 description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
@@ -139,6 +144,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             infrastructure:
                 type: seq
                 description: These entities managed and provided infrastructure to the GTN or for training purposes
@@ -146,13 +152,16 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
                   enum:
-                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
             translation:
                 type: seq
                 description: These entities did translation and localisation work on this resource
@@ -160,6 +169,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
     subtopic:
         type: str
         description: |
@@ -177,6 +187,13 @@ mapping:
             link on Zenodo to the input data for the tutorial
         examples:
             - "https://zenodo.org/record/3706539"
+        pattern: /(^$|^https://zenodo.org/records?/[0-9]+/?$|^https://doi.org/10.5281/zenodo.[0-9]+/?$)/
+    extra:
+        type: map
+        description: |
+            Any additional variables you want to set on the page
+        mapping:
+          '=': {}
     tags:
         type: seq
         sequence:
@@ -436,3 +453,43 @@ mapping:
         pattern: /^\/.*/
         examples:
             - /assets/images/gat.png
+    hands_on:
+        type: str
+        enum:
+            - external
+        description: |
+            This must be set to `external` to link to an external tutorial
+    hands_on_url:
+        type: str
+        description: |
+            link to the external tutorial
+        examples:
+            - "https://docs.qiime2.org/jupyterbooks/cancer-microbiome-intervention-tutorial/index.html#"
+    answer_histories:
+        type: seq
+        examples: |
+          - label: "UseGalaxy.eu"
+            history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+          - label: "Older Alevin version"
+            history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+        sequence:
+          - type: map
+            mapping: &answer_histories
+              label:
+                type: str
+                required: true
+              history:
+                type: str
+                required: true
+              date:
+                type: date
+                pattern: /[0-9]{4,}-[0-9]{2}-[0-9]{2}/
+    input_histories:
+        type: seq
+        examples: |
+          input_histories:
+            - label: "UseGalaxy.eu"
+              history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+        sequence:
+          - type: map
+            mapping: *answer_histories

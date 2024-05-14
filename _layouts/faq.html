@@ -1,9 +1,9 @@
 ---
 layout: base
 ---
-
+<div itemscope itemtype="https://schema.org/FAQPage">
 {% assign contributors = site.data['contributors'] %}
-<section class="tutorial">
+<section class="tutorial" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
 
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -37,8 +37,7 @@ layout: base
 
     </ol>
   </nav>
-
-  <h1>{{page.title}}</h1>
+  <h1 itemprop="name">{{page.title}}</h1>
 
     {% if page.contributors %}
     <div class="contributors-line" style="font-size:1rem;">{{ locale['authors'] | default: "Authors" }}: {% include
@@ -48,8 +47,8 @@ layout: base
     {% endif %}
 
     <div class="container">
-      <div class="row">
-        <div class="col-md-8">
+      <div class="row" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div class="col-md-8" itemprop="text">
            {{ page.description }}
 
 
@@ -85,3 +84,4 @@ layout: base
     {% endif %}
 
 </section>
+</div>

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Object tracking using CellProfiler
-zenodo_link: http://doi.org/10.5281/zenodo.4567084
+zenodo_link: https://doi.org/10.5281/zenodo.4567084
 requirements:
   -
     type: "internal"
@@ -23,9 +23,6 @@ contributors:
 - jkh1
 
 ---
-
-
-# Introduction
 
 
 Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. {% cite Neumann2010 %}, {% cite Heriche2014%}). However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.

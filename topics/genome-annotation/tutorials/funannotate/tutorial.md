@@ -4,7 +4,9 @@ layout: tutorial_hands_on
 title: Genome annotation with Funannotate
 zenodo_link: https://zenodo.org/record/7867921
 tags:
+  - gmod
   - eukaryote
+  - jbrowse1
 questions:
   - How to annotate an eukaryotic genome with Funannotate?
   - How to perform functional annotation?
@@ -32,7 +34,8 @@ contributions:
     - r1corre
     - stephanierobin
   funding:
-    - erasmusplus
+    - gallantries
+    - eurosciencegateway
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling
@@ -42,13 +45,15 @@ requirements:
    topic_name: genome-annotation
    tutorials:
      - repeatmasker
+follow_up_training:
+  - type: "internal"
+    topic_name: genome-annotation
+    tutorials:
+      - apollo
 
 subtopic: eukaryote
 priority: 2
 ---
-
-
-# Introduction
 
 
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.

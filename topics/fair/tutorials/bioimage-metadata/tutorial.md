@@ -34,7 +34,8 @@ contributions:
     - Laura190
     - kkamieniecka
     - poterlowicz-lab
-
+  funding:
+    - elixir-uk-dash
 subtopic: fair-data
 
 requirements:
