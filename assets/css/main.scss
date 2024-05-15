@@ -168,6 +168,7 @@ hr {
 @import "./bootstrap-toc.min";
 @import "./leaflet-1.9.3";
 @import "../fontawesome/css/all.min";
+@import "./charts.css@1.1.0";
 
 
 // palette
@@ -287,6 +288,21 @@ body {
 		display: none;
 	}
 
+	// Don't break over a page boundary if possible
+	h2,h3,h4,h5,h6,h7,h8 {break-after: avoid-page;}
+	img, svg, table, canvas {break-inside: avoid;}
+
+	// Fun fact: paper is not clickable.
+	// This is mostly applicable for folks printing tutorials which they
+	// probably shouldn't be doing anyway but just in case.
+	section#tutorial-content {
+		a::after {content: " (" attr(href) ")";}
+
+		blockquote.agenda {
+			a::after {content: unset;}
+		}
+	}
+
 	// Save ink.
 	pre.highlight {
 		background: none !important;
@@ -366,6 +382,9 @@ figure {
   margin: 2rem;
   border: thin silver solid;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
 
   & > img {
       margin-bottom: 1rem;
@@ -463,7 +482,7 @@ nav.navbar {
     }
 
     a.navbar-brand {
-	padding-right: 2.5em; // the image seems to work poorly with parent size calculations.
+	padding-right: 0.5em; // the image seems to work poorly with parent size calculations.
     }
 
     // Text decoration not necessary for accessibility here.
@@ -1175,6 +1194,17 @@ nav[data-toggle='toc'] {
     }
 }
 
+.contributor-badge-inline {
+    /* prevent breaking across lines */
+    white-space: nowrap;
+    img {
+	height: 1em !important;
+	width: 1em !important;
+        border-radius: 50%;
+        margin: 0 0.25em 0 0;
+    }
+}
+
 table.contributions{
     tr td:nth-child(1) {
         display: flex;
@@ -1505,6 +1535,31 @@ $btn-pink: var(--keypoints-color);
   margin: 5px;
 }
 
+.home-cta-button {
+	width: 45%;
+	flex-direction: column;
+	padding: 5px;
+	font-size:1.25rem;
+	margin: 5px;
+	color: var(--text-color); // don't need to distinguish for wcag.
+	border: 1px solid var(--border-light);
+
+	div {
+		font-size: 1.3rem !important;
+	}
+
+	&:hover {
+		box-shadow: 2px 2px 4px var(--text-color);
+	}
+}
+
+.button-group {
+	display: flex;
+	align-items: stretch;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
 .btn-primary {
 	background-color: var(--brand-color);
 	border-color: var(--brand-color);
@@ -1718,4 +1773,8 @@ figure > a[target="_blank"]::after {
 	.logo {
 		border: none;
 	}
+}
+
+section#tutorial-content {
+	margin-top: 2rem;
 }

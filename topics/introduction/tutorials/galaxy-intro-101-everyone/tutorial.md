@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy 101 for everyone"
-zenodo_link: https://zenodo.org/record/1319069/files/iris.csv
+title: "Galaxy Basics for everyone"
+zenodo_link: https://zenodo.org/record/1319069/
 level: Introductory
 questions:
   - "What are the differences between the Iris species?"
@@ -22,6 +22,7 @@ key_points:
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
 subtopic: core
+priority: 2
 contributors:
   - annefou
   - nagoue
@@ -111,7 +112,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 > <hands-on-title>Data upload</hands-on-title>
 >
-> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1319069/files/iris.csv

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "GO Enrichment Analysis"
-zenodo_link: "https://zenodo.org/record/2565417#.XGXUXlz7TIU"
+zenodo_link: "https://zenodo.org/record/2565417"
 questions:
   - "How can I functionally interpret a list of genes of interest that I obtained from my experiment?"
 objectives:
@@ -71,7 +71,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 
 > <hands-on-title></hands-on-title>
 >
-> The data for this tutorial is available at [Zenodo](https://zenodo.org/record/2565417#.XGXUXlz7TIU) to download. For convenience and reproducibility of results, we already added the GO ontology and annotations in the Zenodo repository.
+> The data for this tutorial is available at [Zenodo](https://zenodo.org/record/2565417) to download. For convenience and reproducibility of results, we already added the GO ontology and annotations in the Zenodo repository.
 >
 > 1. **Create a new history**
 >

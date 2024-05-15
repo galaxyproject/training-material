@@ -108,7 +108,7 @@ voice:
 
 # Encuentra un servidor Galaxy
 
-{% assign servers = list_usegalaxy_servers_shuffle %}
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 - ** Los tres grandes **: {% for server in servers %}{{ server.human }} ([{{ server.name }}]({{ server.url }})){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 
   .image-75[![usegalaxy.* servidores]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]

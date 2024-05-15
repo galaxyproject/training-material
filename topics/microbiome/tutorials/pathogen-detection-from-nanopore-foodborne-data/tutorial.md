@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition"
+subtopic: metagenomics
 tags:
     - microgalaxy
     - Nanopore data analysis
@@ -36,6 +37,13 @@ contributions:
     - eosc-life
 redirect_from:
     - /topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial
+edam_ontology:
+- topic_3174 # Metagenomics
+- topic_3305 # Public health and epidemiology
+- topic_0637 # Taxonomy
+- topic_0196 # Sequence assembly
+- topic_0634 # Pathology
+- topic_0080 # Sequence analysis
 ---
 
 
@@ -419,8 +427,8 @@ To assign reads to taxons, we use **Kraken2** with **Standard PlusPF** database.
 > > <solution-title></solution-title>
 > >
 > > 1. _Escherichia coli_ with 10,243 sequences
-> > 2. _Salmonella enterica_ with 7,457 sequences
-> > 3. 40,113 sequences are classified and 50,455 are unclassified
+> > 2. _Salmonella enterica_ with 7,458 sequences
+> > 3. 40,143 sequences are classified and 50,455 are unclassified
 > > 4. With **Kalamari** database the most found species is _Escherichia coli_ with 12,577 sequences and the second most found species is _Salmonella enterica_ with 10,632 sequences. The number of classified sequences are 32,020 sequences and the unclassified sequences are 59,414. In conclusion, both databases are able to show the same results of the most common species. However, the number of the classified sequences with **Standard PlusPF** database is higher than **Kalamari** database and it would be even higher since all chicken sequences were removed before testing the **Standard PlusPF** database.
 > {: .solution}
 {: .question}
@@ -464,7 +472,9 @@ Now let's explore the **Phinch visulization** tool running for `Barcode11`
 >
 >    {% snippet faqs/galaxy/interactive_tools_open.md tool="Phinch visualization" %}
 >
-> 2. Click on **Proceed to Gallery** button on the top right of the opened webpage to see all the plots
+> 2. Choose only **0-kraken_report** from the GROUPABLE list on the left, to select `Barcode11`
+>
+> 3. Click on **Proceed to Gallery** button on the top right of the opened webpage to see all the plots
 >
 {: .hands_on}
 
@@ -625,14 +635,14 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 >
 > Inspect **Flye** and **Medaka consensus pipeline** output results for `Barcode10`
 >
-> 1. How many different contigs did you get after **Flye**?
-> 2. How many were left after **Medaka consensus pipeline**, and what does that mean?
+> 1. How many different contigs did you get after **Flye**, collection name: Flye Consensus Fasta?
+> 2. How many were left after **Medaka consensus pipeline**, collection name: Sample all contigs, and what does that mean?
 > 2. What is the result of your **Bandage Image**?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. After **Flye** we have got 130 contigs
-> > 2. After **Medaka consensus pipeline** all 130 contigs were kept, which means that the quality of the **Flye** run was high, and as a result the polishing did not remove any of the contigs.
+> > 1. After **Flye** we have got 138 contigs
+> > 2. After **Medaka consensus pipeline** all 138 contigs were kept, which means that the quality of the **Flye** run was high, and as a result the polishing did not remove any of the contigs.
 > > 3. The graph looks like:
 > >
 > >    ![Bandage Image Barcode 10 Assembly Graph](./images/bandage_image_flye_graph.png)
@@ -735,7 +745,7 @@ The outputs of **ABRicate** is a tabular file with different columns:
 > > <solution-title></solution-title>
 > >
 > > 1. 5 **AMR** genes were found:
-> >    1. Tet(C), which resists [TETRACYCLINE](https://medlineplus.gov/druginfo/meds/a682098.html). It was found in contig 158 from the position 1633 till 2808, with 100% coverage, so 100% of gene is covered in this contig.
+> >    1. Tet(C), which resists [TETRACYCLINE](https://medlineplus.gov/druginfo/meds/a682098.html). It was found in contig 120 from the position 1634 till 2809, with 100% coverage, so 100% of gene is covered in this contig.
 > >    2. 2 genes with sulfonamide-resistant dihydropteroate synthase Sul1 products
 > >    3. 2 genes with oxacillin-hydrolyzing class D beta-lactamase OXA-2 products
 > > 2. No **AMR** genes were found by the database in `Barcode11` sample.
@@ -782,7 +792,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 107
+> > 1. 134
 > > 2. 97
 > >
 > {: .solution}
@@ -961,8 +971,8 @@ To identify variants, we
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Before filtering: 2,652
-> > 2. After filtering 2,489
+> > 1. Before filtering: 2,651
+> > 2. After filtering 2,488
 > > 2. Strain [LT2](https://bacdive.dsmz.de/strain/5117), can be inferred searching the Chroms. NCBI Reference Sequence ID: NC_003197.2
 > {: .solution}
 {: .question}

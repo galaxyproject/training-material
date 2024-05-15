@@ -33,6 +33,14 @@ $rooms = {
   'single-cell' => {
     server: 'https://matrix.org',
     room: '!yuLoaCWKpFHkWPmVEO:gitter.im',
+  },
+  'wg-goat' => {
+    server: 'https://matrix.org',
+    room: '!UQXYBSjdrLHcWgegmg:gitter.im',
+  },
+  'hub-social' => {
+    server: 'https://matrix.org',
+    room: '!gegHcnUCDklLbtVQor:matrix.org',
   }
 }
 # rubocop:enable Style/GlobalVars
@@ -148,7 +156,7 @@ def format_tutorials(added, modified, kind: 'tutorials', updates: true)
   output
 end
 
-def build_news(data, filter: nil, updates: true)
+def build_news(data, filter: nil, updates: true, only_news: false)
   infix = filter.nil? ? '' : titleize(filter)
   output = "# GTN #{infix} News for #{NOW.strftime('%b %d')}"
   newsworthy = false
@@ -157,6 +165,11 @@ def build_news(data, filter: nil, updates: true)
     output += format_news(data[:added][:news])
     newsworthy |= format_news(data[:added][:news]).length.positive?
   end
+
+  if only_news
+    return [output, newsworthy]
+  end
+
 
   o = format_tutorials(
     data[:added][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
@@ -252,5 +265,11 @@ if newsworthy
   send_news(output, options, channel: channel)
 end
 
+# Single Cell
 output, newsworthy = build_news(data, filter: 'single-cell', updates: false)
 send_news(output, options, channel: 'single-cell') if newsworthy
+
+# GOATS: Rss/news only.
+output, newsworthy = build_news(data, only_news: true)
+send_news(output, options, channel: 'wg-goat') if newsworthy
+send_news(output, options, channel: 'hub-social') if newsworthy

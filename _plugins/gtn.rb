@@ -169,6 +169,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the topic has been mentioned
     def how_many_topic_feedbacks(feedback, name)
+      if feedback.nil?
+        return 0
+      end
+
       feedback.select { |x| x['topic'] == name }.length
     end
 
@@ -180,6 +184,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the tutorial has been mentioned
     def how_many_tutorial_feedbacks(feedback, name)
+      if feedback.nil?
+        return 0
+      end
+
       feedback.select { |x| x['tutorial'] == name }.length
     end
 
@@ -376,6 +384,148 @@ module Jekyll
       Gtn::ModificationTimes.obtain_modification_count(page['path'])
     end
 
+    def get_rating_histogram(site, material_id, recent: false)
+      return {} if material_id.nil?
+
+      feedbacks = recent ? get_recent_feedbacks_time(site, material_id) : get_feedbacks(site, material_id)
+
+      return {} if feedbacks.nil? || feedbacks.empty?
+
+      ratings = feedbacks.map { |f| f['rating'] }
+      ratings.each_with_object(Hash.new(0)) { |w, counts| counts[w] += 1 }
+    end
+
+    def get_rating_histogram_chart(site, material_id)
+      histogram = get_rating_histogram(site, material_id)
+      return {} if histogram.empty?
+
+      highest = histogram.map { |_k, v| v }.max
+      histogram
+        .map { |k, v| [k, [v, v / highest.to_f]] }
+        .sort_by { |k, _v| -k }
+        .to_h
+    end
+
+    def get_rating(site, material_id, recent: false)
+      f = get_rating_histogram(site, material_id, recent: recent)
+      rating = f.map { |k, v| k * v }.sum / f.map { |_k, v| v }.sum.to_f
+      rating.round(1)
+    end
+
+    def get_rating_recent(site, material_id)
+      r = get_rating(site, material_id, recent: true)
+      r.nan? ? get_rating(site, material_id, recent: false) : r
+    end
+
+    # Only accepts an integer rating
+    def to_stars(rating)
+      if rating.nil? || (rating.to_i < 1) || (rating == '0') || rating.zero?
+        %(<span class="sr-only">0 stars</span>) +
+          '<i class="far fa-star" aria-hidden="true"></i>'
+      elsif rating.to_i < 1
+        '<span class="sr-only">0 stars</span><i class="far fa-star" aria-hidden="true"></i>'
+      else
+        %(<span class="sr-only">#{rating} stars</span>) +
+          ('<i class="fa fa-star" aria-hidden="true"></i>' * rating.to_i)
+      end
+    end
+
+    def get_feedbacks(site, material_id)
+      return [] if material_id.nil?
+
+      begin
+        topic, tutorial = material_id.split('/')
+
+        if tutorial.include?(':')
+          language = tutorial.split(':')[1]
+          tutorial = tutorial.split(':')[0]
+          # If a language is supplied, then
+          feedbacks = site.data['feedback2'][topic][tutorial]
+                          .select { |f| (f['lang'] || '').downcase == language.downcase }
+        else
+          # English is the default
+          feedbacks = site.data['feedback2'][topic][tutorial]
+                          .select { |f| f['lang'].nil? }
+        end
+      rescue StandardError
+        return []
+      end
+
+      return [] if feedbacks.nil? || feedbacks.empty?
+
+      feedbacks
+        .sort_by { |f| f['date'] }
+        .reverse
+        .map do |f|
+        f['stars'] = to_stars(f['rating'])
+        f
+      end
+    end
+
+    def get_feedback_count(site, material_id)
+      get_feedbacks(site, material_id).length
+    end
+
+    def get_feedback_count_recent(site, material_id)
+      get_recent_feedbacks_time(site, material_id).length
+    end
+
+    def get_recent_feedbacks_time(site, material_id)
+      feedbacks = get_feedbacks(site, material_id)
+                  .select do |f|
+                    f['pro']&.length&.positive? ||
+                      f['con']&.length&.positive?
+                  end
+                  .map do |f|
+        f['f_date'] = Date.parse(f['date']).strftime('%B %Y')
+        f
+      end
+
+      feedbacks.select { |f| Date.parse(f['date']) > Date.today - 365 }
+    end
+
+    def get_recent_feedbacks(site, material_id)
+      feedbacks = get_feedbacks(site, material_id)
+                  .select do |f|
+                    f['pro']&.length&.positive? ||
+                      f['con']&.length&.positive?
+                  end
+                  .map do |f|
+        f['f_date'] = Date.parse(f['date']).strftime('%B %Y')
+        f
+      end
+
+      last_year = feedbacks.select { |f| Date.parse(f['date']) > Date.today - 365 }
+      # If we have fewer than 20 in the last year, then extend further.
+      if last_year.length < 20
+        feedbacks
+          .first(20)
+          .group_by { |f| f['f_date'] }
+      else
+        # Otherwise just everything last year.
+        last_year
+          .group_by { |f| f['f_date'] }
+      end
+    end
+
+    def tutorials_over_time_bar_chart(site)
+      graph = Hash.new(0)
+      TopicFilter.list_all_materials(site).each do |material|
+        yymm = material['pub_date'].strftime('%Y-%m')
+        graph[yymm] += 1
+      end
+
+      # Cumulative over time
+      # https://stackoverflow.com/questions/71745593/how-to-do-a-single-line-cumulative-count-for-hash-values-in-ruby
+      graph
+        # Turns it into an array
+        .sort_by { |k, _v| k }
+        # Cumulative sum
+        .each_with_object([]) { |(k, v), a| a << [k, v + a.last&.last.to_i] }.to_h
+        .map { |k, v| { 'x' => k, 'y' => v } }
+        .to_json
+    end
+
     def list_usegalaxy_servers(_site)
       Gtn::Usegalaxy.servers.map { |x| x.transform_keys(&:to_s) }
     end
@@ -404,6 +554,10 @@ module Jekyll
     def get_topic(page)
       # Arrays that will store all introduction slides and tutorials we discover.
       page['path'].split('/')[1]
+    end
+
+    def shuffle(array)
+      array.shuffle
     end
 
     def get_og_desc(site, page); end
@@ -454,12 +608,10 @@ module Jekyll
         og_title.push page['title']
       end
 
-      Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
-
       if reverse.to_s == 'true'
-        og_title.compact.reverse.join(' / ')
+        og_title.compact.reverse.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
       else
-        og_title.compact.join(' / ')
+        og_title.compact.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
       end
     end
 
@@ -485,7 +637,7 @@ module Jekyll
     end
 
     def group_icons(icons)
-      icons.group_by{|k, v| v}.map{|k, v| [k, v.map{|z|z[0]} ]}.to_h.invert
+      icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
     end
   end
 end
@@ -502,6 +654,46 @@ Jekyll::Hooks.register :posts, :pre_render do |post, _out|
     Gtn::Contributors.fetch_name(post.site, c)
   end.join(', ')
   post.data['image'] = post.data['cover']
+end
+
+# We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
+Jekyll::Hooks.register :site, :pre_render do |site|
+  site.posts.docs.each do |post|
+    if post.content
+      post.content = post.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
+        # Get first capture
+        name = match.gsub('@gtn:', '')
+        if site.data['contributors'].key?(name)
+          "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
+        else
+          match
+        end
+      end
+    end
+  end
+  site.pages.each do |page|
+    if page.content
+      page.content = page.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
+        name = match.gsub('@gtn:', '')
+        if site.data['contributors'].key?(name)
+          "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
+        else
+          match
+        end
+      end
+
+      # This would also need to modify the box types themselves, not sure how is best to do that.
+      page.content = page.content.gsub(/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/) do |match|
+        if match =~ /(CAUTION|WARNING)/
+          "> <warning-title></warning-title>"
+        elsif match =~ /TIP/
+          "> <tip-title></tip-title>"
+        else
+          "> <comment-title></comment-title>"
+        end
+      end
+    end
+  end
 end
 
 # Create back-refs for affiliations
@@ -521,6 +713,24 @@ Jekyll::Hooks.register :site, :post_read do |site|
           site.data['funders'][affiliation]['members'] = [] if !site.data['funders'][affiliation].key?('members')
 
           site.data['funders'][affiliation]['members'] << name
+        end
+      end
+    end
+
+    if contributor.key?('former_affiliations')
+      contributor['former_affiliations'].each do |affiliation|
+        if site.data['organisations'].key?(affiliation)
+          if !site.data['organisations'][affiliation].key?('former_members')
+            site.data['organisations'][affiliation]['former_members'] = []
+          end
+
+          site.data['organisations'][affiliation]['former_members'] << name
+        elsif site.data['funders'].key?(affiliation)
+          if !site.data['funders'][affiliation].key?('former_members')
+            site.data['funders'][affiliation]['former_members'] = []
+          end
+
+          site.data['funders'][affiliation]['former_members'] << name
         end
       end
     end

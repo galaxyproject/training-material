@@ -32,7 +32,8 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          # Based on logic in deploy.yml
+          fetch-depth: 1200
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v2
@@ -66,13 +67,6 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Configure AWS credentials from GTN account
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
       - name: Build Site
         run: |
           git tag -l
@@ -91,6 +85,13 @@ jobs:
         env:
           SOURCE_TAG: ${{ env.release_tag }}
           GTN_FORK: ${{ github.repository_owner }}
+
+      - name: Configure AWS credentials from GTN account
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
       - name: Deploy 🚀
         run: |

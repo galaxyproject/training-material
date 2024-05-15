@@ -33,6 +33,8 @@ contributions:
     - hexylena
   testing:
     - pavanvidem
+  funding:
+    - elixir-fair-data
 
 follow_up_training:
   -
@@ -57,9 +59,9 @@ The first step is the obtain the data. For this tutorial, we will use data from 
 > <hands-on-title>Download and extract the data from GEO</hands-on-title>
 >
 > 1. Using a web browser navigate to the GEO repository for the paper
->     ```
->     https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
->     ```
+>    ```
+>    https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031
+>    ```
 > 2. Copy the ```(http)``` link located in the supplemental materials section of the page
 >
 > 3. Import the data into Galaxy

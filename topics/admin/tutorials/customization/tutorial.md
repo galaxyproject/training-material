@@ -30,6 +30,7 @@ Customizing your Galaxy instance makes it more recognizable at a glance, and can
 This tutorial will teach you three basic customizations you can make to Galaxy:
 
   - Setting a brand text
+  - Setting the contact information
   - Adding a custom welcome page
   - Customizing the masthead using themes
 
@@ -85,6 +86,35 @@ It is an easy way to set your instance apart, and make it more identifiable.
 >    ![screenshot of fictional "Galaxy Mars" start page, with the brand text set to "Mars"](images/galaxy-mars-brand.png "Your Galaxy start page should now look something like this")
 {: .hands_on}
 
+## Configuring Support
+
+The Galaxy Help Site (https://help.galaxyproject.org) receives a lot of user support questions, sometimes for Galaxies that we do not manage. Including support information inside your Galaxy can help users find the right place to ask about issues with tools or quotas!
+
+> <hands-on-title>Adding Support Information</hands-on-title>
+>
+> 1. Open your `group_vars/galaxyserers.yml` and the following option under `galaxy_config.galaxy`:
+> 
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -35,6 +35,9 @@ galaxy_config:
+>         # Branding
+>         brand: Mars 🚀
+>         logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
+>    +    # Support
+>    +    support_url: "https://example.org/support"
+>    +    terms_url: "https://example.org/terms-of-service"
+>         # Main Configuration
+>         admin_users:
+>         - admin@example.org
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add support information"}
+>
+> Ideally this would point to a support URL and a terms of service that are appropriate to *your* deployment of Galaxy. You could, for instance, add a page on your group's blog with the appropriate contents of who should be contacted in case of issue, their email or a ticketing system. These options will help users from your site find you when they need help.
+{: .hands_on}
+
 ## Custom Welcome Page
 
 The welcome page is an html document embedded in Galaxy's start page.
@@ -101,7 +131,7 @@ This page can be used to communicate what your instance is about, and share news
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -93,6 +93,10 @@ galaxy_config:
+>    @@ -96,6 +96,10 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -208,10 +238,10 @@ You can even offer several options, to allow users to switch to the default if t
 >         brand: Mars 🚀
 >         logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
 >    +    themes_config_file: "{{ galaxy_config_dir }}/themes.yml"
->         # Main Configuration
->         admin_users:
->         - admin@example.org
->    @@ -97,6 +98,10 @@ galaxy_config_files_public:
+>         # Support
+>         support_url: "https://example.org/support"
+>         terms_url: "https://example.org/terms-of-service"
+>    @@ -100,6 +101,10 @@ galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
 >     

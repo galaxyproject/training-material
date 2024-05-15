@@ -19,7 +19,12 @@ end
 
 # Get the list of workflows
 def fetch_workflows(server)
-  response = request("#{server}/api/workflows/")
+  begin
+    response = request("#{server}/api/workflows/")
+  rescue StandardError
+    puts "ERROR: Failed to fetch workflows from #{server}"
+    return []
+  end
 
   begin
     JSON.parse(response.body).map do |w|

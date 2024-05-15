@@ -4,8 +4,10 @@ layout: tutorial_hands_on
 title: "Genome annotation with Prokka"
 zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
 tags:
+  - gmod
   - prokaryote
   - microgalaxy
+  - jbrowse1
 questions:
   - "How can we annotate a bacterial genome?"
   - "How can we visualize annotated genomic features?"
@@ -23,6 +25,16 @@ contributors:
   - tseemann
   - slugger70
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
+follow_up_training:
+  - type: "internal"
+    topic_name: genome-annotation
+    tutorials:
+      - apollo
 ---
 
 In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.
@@ -86,7 +98,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 
 > <hands-on-title>Visualize the annotation</hands-on-title>
 >
-> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters
 >    - *"Reference genome to display"*: `Use a genome from history`
 >       - {% icon param-file %} *"Select the reference genome"*: `fna` output of {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %}
 >

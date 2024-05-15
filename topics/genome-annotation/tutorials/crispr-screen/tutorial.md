@@ -39,6 +39,8 @@ abbreviations:
   MAGeCK: Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout
 subtopic: eukaryote
 priority: 8
+redirect_from:
+ - /topics/genome-editing/tutorials/crispr-screen/tutorial
 ---
 
 
@@ -403,7 +405,7 @@ If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8
 * a sgRNA Summary file
 * a PDF report
 
-**Gene Summary file**
+### Gene Summary file
 
 The Gene Summary file contains the columns described below and a row for each gene targeted by sgRNAs. We have >20,000 genes in the file for this dataset.
 We get values for both negative and positive selection. The dataset here is from a negative selection screen so we are most interested in the negative values.
@@ -427,7 +429,7 @@ pos\|goodsgrna | The number of "good" sgRNAs, i.e., sgRNAs whose ranking is belo
 pos\|lfc | The log fold change of this gene in positive selection
 
 
-**sgRNA summary file**
+### sgRNA summary file
 
 The sgRNA Summary file contains the columns described below. We can use the sgRNA file to check how the individual guides for genes of interest performed.
 
@@ -450,7 +452,7 @@ FDR | false discovery rate
 high_in_treatment | Whether the abundance is higher in treatment samples
 
 
-**PDF report**
+### PDF report
 
 The PDF shows plots of the top 10 negatively and positively selected genes.
 We can see the top genes ranked by RRA scores or p value. These values come from the gene summary file.

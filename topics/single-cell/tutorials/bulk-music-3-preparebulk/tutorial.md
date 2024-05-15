@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 subtopic: datamanipulation
-priority: 2
+priority: 5
 
 title: Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution
 zenodo_link: 'https://zenodo.org/record/7319173'

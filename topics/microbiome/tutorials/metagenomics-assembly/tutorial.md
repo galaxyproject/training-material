@@ -26,12 +26,16 @@ key_points:
   - "De Brujin Graphs use k-mers to assembly reads"
   - "MetaSPAdes and MEGAHIT are assemblers"
   - "Quast is the tool to assess the assembly quality"
+edam_ontology:
+  - topic_3174 # Metagenomics
+  - topic_0196 # Sequence assembly
 contributions:
   authorship:
     - plushz
     - bebatut
   funding:
     - gallantries
+subtopic: metagenomics
 tags:
   - assembly
   - metagenomics

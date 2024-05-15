@@ -32,6 +32,9 @@ layout: base
     <div class="row">
         <div class="col-lg-7 col-md-7 col-sm-12">
             <h2>Galaxy for Scientists</h2>
+	    <p>We have separated the tutorials into several categories based on field and technology. We are exploring other ways to organise the tutorials going forward!</p>
+
+	    <h3>Start Here</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -42,7 +45,7 @@ layout: base
                 <tbody>
                 {% for topic_name in sorted_topics %}
                     {% assign topic = site.data[topic_name] %}
-                    {% if topic.type == "use" %}
+                    {% if topic.name == "introduction" %}
                     {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
@@ -51,21 +54,6 @@ layout: base
                     </tr>
                     {% endif %}
                     {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
-
-            <h2>Galaxy Tips & Tricks</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Topic</th>
-                        <th scope="col">Tutorials</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for topic_name in sorted_topics %}
-                    {% assign topic = site.data[topic_name] %}
                     {% if topic.type == "basics" %}
                     {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
@@ -79,7 +67,17 @@ layout: base
                 </tbody>
             </table>
 
-            <h2>Data Science Survival Kit</h2>
+            <div id="cta-lp" style="color: var(--brand-color-contrast);background: var(--brand-color);">
+              <div style="background: repeating-linear-gradient( 135deg, transparent, transparent 10px, #fff1 10px, #fff1 20px );padding: 1rem;">
+                <h3 style="margin: unset;">Not sure where to start?</h3>
+                <p style="display: flex;justify-content: space-between;align-items: center;vertical-align: bottom;margin-bottom: 0;">
+                  <span>Try the NGS Basics Learning Path! </span>
+                  <a href="{% link learning-pathways/intro-to-galaxy-and-genomics.md %}?utm_source=gtn&utm_medium=home&utm_campaign=home-cta-lp" class="btn btn-success">Start Learning</a>
+                </p>
+              </div>
+            </div>
+
+            <h3>Scientific Fields</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -90,13 +88,43 @@ layout: base
                 <tbody>
                 {% for topic_name in sorted_topics %}
                     {% assign topic = site.data[topic_name] %}
-                    {% if topic.type == "data-science" %}
+                    {% if topic.type == "use" %}
+                    {% if topic.name != "introduction" %}
+                    {% if topic.topic_type != "technology" %}
                     {% if topic.draft != true or jekyll.environment != "production" %}
                     <tr>
-                        {% assign tutorial_number = site | topic_filter:topic.name | topic_count %}
+                        {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
                         <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Methodologies</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for topic_name in sorted_topics %}
+                    {% assign topic = site.data[topic_name] %}
+                    {% if topic.type == "use" %}
+                    {% if topic.topic_type == "technology" %}
+                    {% if topic.draft != true or jekyll.environment != "production" %}
+                    <tr>
+                        {% assign tutorial_number = site | topic_filter_tutorial_count:topic.name %}
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic.name }}/">{{ topic.title }}</a>{% if topic.draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td>{{ tutorial_number }}</td>
+                    </tr>
+                    {% endif %}
                     {% endif %}
                     {% endif %}
                 {% endfor %}
@@ -179,13 +207,26 @@ layout: base
         </div>
 
         <div class="col-lg-5 col-md-5 col-sm-12">
+
+		<h2>Quickstart</h2>
+
+		<div class="button-group">
+<a href="{% link learning-pathways/index.md %}" class="btn home-cta-button"><div>Learning Pathways</div><img alt="A scientist with a hair bun passes accepts a flask from a small grey creature" src="{% link assets/images/galaxy-for-scientists.svg %}" style="height: 5rem"></a>
+<a href="{% link topics/admin/index.md %}" class="btn home-cta-button"><div>Galaxy for SysAdmins</div><img alt="a person sits at a computer with baudot code in the backgorund" src="{% link assets/images/galaxy-for-admins.svg %}" style="height: 5rem"></a>
+<a href="{% link topics/dev/index.md %}" class="btn home-cta-button"><div>Galaxy for Developers</div><img alt="a small person leans against a large laptop" src="{% link assets/images/galaxy-for-developers.svg %}" style="height: 5rem"></a>
+<a href="{% link topics/teaching/index.md %}" class="btn home-cta-button"><div>Galaxy for Teachers</div><img alt="a person stands in front of a blackboard" src="{% link assets/images/galaxy-for-trainers.svg %}" style="height: 5rem"></a>
+</div>
+
+
             <!-- GTN video -->
+	    <!--
             <div class="col-12">
                 <h2> Welcome to the GTN!</h2>
                 <p> Find out more about Galaxy Training Network</p>
                 <iframe width="100%" height="314" src="https://www.youtube-nocookie.com/embed/lDqWxzWNk1k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="YouTube video highlighting GTN features. Video does not need audio."></iframe>
                 <p>Video created by Geert Bonamie.</p>
             </div>
+	    -->
                 <!-- GTN news  -->
             <div class="col-12" id="news">
                  <h2><a href="{% link news.md %}">The latest GTN news</a> <a class="float-right" href="{{ "/feed.xml" | prepend: site.baseurl }}">{% icon rss-feed %}</a></h2>
@@ -194,18 +235,20 @@ layout: base
                  <p><a href="{% link news.md %}">See all news</a>
             </div>
                 <!-- Galaxy community video  -->
+			<!--
                 <div class="col-12">
                 <h2>Meet & Join the Community!</h2>
                 <p> Find out how you can become part of the Galaxy community</p>
                 <iframe width="100%" height="314" src="https://www.youtube-nocookie.com/embed/-1MPdxmRs8U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="YouTube video highlighting the GTN Community. Video has english language audio and subtitles."></iframe>
                 <p>Video created by Beatriz Serrano-Solano</p>
            </div>
+		-->
                  <!-- GTN Tweets -->
           <div class="col-12">
             <h2>GTN Toots</h2>
 
 <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/js/emfed/toots.css">
-		<script type="module" src="{{ site.baseurl }}/assets/js/emfed/emfed.js"></script>
+		<script async defer type="module" src="{{ site.baseurl }}/assets/js/emfed/emfed.js"></script>
 		<a rel="me" class="mastodon-feed"
 		href="https://mstdn.science/@gtn"
 		data-toot-limit="3"

@@ -33,7 +33,7 @@ contributors:
 
 # Where can Galaxy run?
 
-{% assign servers = list_usegalaxy_servers_shuffle %}
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
 
 * Cloud (SaaS)
   - A usegalaxy.* site: {% for server in servers %}[{{ server.human }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}

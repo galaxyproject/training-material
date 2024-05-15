@@ -118,13 +118,15 @@ You can access the data for this tutorial in multiple ways:
 REMEMBER TO ADD THE CODE FOR SNIPPETS BACK IN
 -->
 
-Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
+{% icon galaxy-eye %} Inspect the {% icon param-file %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
 
 # Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
+
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 ## Concatenating objects
 

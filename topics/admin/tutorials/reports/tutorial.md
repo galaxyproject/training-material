@@ -82,7 +82,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -148,6 +148,11 @@ galaxy_config:
+>    @@ -151,6 +151,11 @@ galaxy_config:
 >             pools:
 >               - job-handlers
 >               - workflow-schedulers
@@ -94,7 +94,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >     
 >     galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >     
->    @@ -168,6 +173,8 @@ galaxy_config_templates:
+>    @@ -171,6 +176,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >       - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"

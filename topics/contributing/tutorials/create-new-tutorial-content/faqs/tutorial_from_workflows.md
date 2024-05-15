@@ -4,6 +4,8 @@ area: markdown
 box_type: tip
 layout: faq
 contributors: [shiltemann]
+redirect_from:
+- /topics/contributing/faqs/tutorial_from_workflows
 ---
 
 There are two ways to do this:

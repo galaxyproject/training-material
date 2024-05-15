@@ -26,12 +26,16 @@ contributions:
   authorship:
     - npechl
     - fpsom
+subtopic: metagenomics
 tags:
   - binning
   - metagenomics
   - microgalaxy
 redirect_from:
 - /topics/metagenomics/tutorials/metagenomics-binning/tutorial
+edam_ontology:
+- topic_3174 # Metagenomics
+- topic_0196 # Sequence assembly
 ---
 
 Metagenomics is the study of genetic material recovered directly from environmental samples, such as soil, water, or gut contents, without the need for isolation or cultivation of individual organisms. Metagenomics binning is a process used to classify DNA sequences obtained from metagenomic sequencing into discrete groups, or bins, based on their similarity to each other.

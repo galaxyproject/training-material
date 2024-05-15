@@ -17,6 +17,9 @@ contributions:
   funding:
   - gallantries
 
+tags:
+- gmod
+- apollo2
 draft: true
 ---
 

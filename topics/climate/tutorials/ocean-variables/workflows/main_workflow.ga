@@ -1,0 +1,165 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Subset data on the Mediterreanean see and extract and visualise the Phosphate variable",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0008-0622-604X",
+            "name": "Marie Joss\u00e9",
+            "url": "https://github.com/Marie59"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Ocean's variables",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip"
+                }
+            ],
+            "label": "Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 2
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "04b96704-a567-4c94-8708-285fe2efb087",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "interactive_tool_odv",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "method|folder": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ODV",
+            "outputs": [
+                {
+                    "name": "outputs_netcdf",
+                    "type": "input"
+                },
+                {
+                    "name": "outputs_all",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 256,
+                "top": 16
+            },
+            "post_job_actions": {},
+            "tool_id": "interactive_tool_odv",
+            "tool_state": "{\"__input_ext\": \"zip\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"type\": \"zip\", \"__current_case__\": 1, \"folder\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.6.5.1",
+            "type": "tool",
+            "uuid": "6e83d448-87de-48da-9649-95a87a23973c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "interactive_tool_divand",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "outputs_netcdf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Interactive DIVAnd Notebooks",
+            "outputs": [
+                {
+                    "name": "output_netcdf",
+                    "type": "input"
+                },
+                {
+                    "name": "output_all",
+                    "type": "input"
+                },
+                {
+                    "name": "jupyter_notebook",
+                    "type": "ipynb"
+                }
+            ],
+            "position": {
+                "left": 515,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "interactive_tool_divand",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"mode_select\": \"scratch\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "aaa2c97b-cef5-4952-b21e-b4f71a7d6e3b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "interactive_tool_odv",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "method|infiles": {
+                    "id": 2,
+                    "output_name": "output_netcdf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ODV",
+            "outputs": [
+                {
+                    "name": "outputs_netcdf",
+                    "type": "input"
+                },
+                {
+                    "name": "outputs_all",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 778,
+                "top": 87
+            },
+            "post_job_actions": {},
+            "tool_id": "interactive_tool_odv",
+            "tool_state": "{\"__input_ext\": \"netcdf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"type\": \"own_data\", \"__current_case__\": 0, \"infiles\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.6.5.1",
+            "type": "tool",
+            "uuid": "13277c72-e0e3-4353-9c2a-d3440ba1860e",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "earth-system",
+        "Ocean"
+    ],
+    "uuid": "aacfc1b1-2c81-486d-8bed-5eeaef39a818",
+    "version": 2
+}
