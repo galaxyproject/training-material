@@ -110,15 +110,13 @@ The lower part of the history header contains a number of buttons:
 - {% icon galaxy-delete %} **Include deleted** - include deleted datasets into the history view. If you delete a dataset is does not disappear unless you explicitly purge it.
 - {% icon galaxy-show-hidden %} **Include hidden** - include hidden datasets into the history view. Any dataset in history can be hidden. For example, workflow executions frequently hide intermediate datasets so that they do now complicate history view. It is a way to hide non-importnat datasets from the view. 
 
-## Multiple dataset operations
-
 # History datasets
 
 So far we only discussed functions and controls affecting the *entrire* history. Yet history is a collection of datasets. Now it is time to discuss interfacse elements of individual datasets.  
 
 ## Datasets can be individual or bundled into collections
 
-A histiry dataset can exist by iteslf, as an independent entity, or as a part of a **collection**. Collections make it possible to analyze datasets with hundreds of thousands of samples.
+A history dataset can exist by itself, as an independent entity, or as a part of a **collection**. Collections make it possible to analyze datasets with hundreds of thousands of samples.
 
 {% snippet faqs/galaxy/histories_datasets_vs_collections.md box_type="none"%}
 
