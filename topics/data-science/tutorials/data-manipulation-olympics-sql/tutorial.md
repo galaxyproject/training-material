@@ -34,7 +34,8 @@ notebook:
 abbreviations:
     SQL: "Structured Query Language"
 
-subtopic: olympics
+priority: 3
+subtopic: next-steps
 ---
 
 
