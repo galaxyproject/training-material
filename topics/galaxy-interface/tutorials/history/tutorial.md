@@ -110,6 +110,8 @@ The lower part of the history header contains a number of buttons:
 - {% icon galaxy-delete %} **Include deleted** - include deleted datasets into the history view. If you delete a dataset is does not disappear unless you explicitly purge it.
 - {% icon galaxy-show-hidden %} **Include hidden** - include hidden datasets into the history view. Any dataset in history can be hidden. For example, workflow executions frequently hide intermediate datasets so that they do now complicate history view. It is a way to hide non-importnat datasets from the view. 
 
+## Multiple dataset operations
+
 # History datasets
 
 So far we only discussed functions and controls affecting the *entrire* history. Yet history is a collection of datasets. Now it is time to discuss interfacse elements of individual datasets.  
@@ -132,42 +134,48 @@ A histiry dataset can exist by iteslf, as an independent entity, or as a part of
 
 ### Hiding and unhiding datasets
 
-{% snippet faqs/galaxy/datasets_hidden.md %}
+Datasets in Galaxy history can be hidden. This is useful for reducing complexity of history. For example, some intermediate datasets generating during an analysis of workflow execution are not important and there is no need to see them. 
 
-Some procedures in Galaxy such as workflows will often **hide** history datasets in order to simplify the history
-and hide intermediate steps of an automated analysis. These hidden datasets won't normally appear in the history panel
-but theyre still mentioned in the history subtitle (the smaller, grey text that appears below the history name). If
-your history has hidden datasets, the number will appear there (e.g. '3 hidden') as a clickable link. If you click this link,
-the hidden datasets are shown. Each hidden dataset has a link in the top of the summary view that allows you to unhide
-it. You can click that link again (which will now be 'hide hidden') to make them not shown again.
+#### Hiding datasets
 
-![Two histories side by side, one shows a message saying "this history is empty", on the right the history search has been replaced by visible:false and now one history is visible.](../../images/hide.png "Hiding and unhiding datasets. Left side shows a history with one hidden dataset. We know this because of the eye with a slash through it and the number 1 which appears under the history's name. Clicking this link will reveal the hidden dataset as shown on the right side of the figure.")
+{% snippet faqs/galaxy/datasets_hidden.md box_type="none"%}
+
+#### Unhiding datasets
+
+{% snippet faqs/galaxy/datasets_unhidden.md box_type="none"%}
 
 ### Deleting and undeleting datasets
 
-You can **delete** any dataset in your history by clicking the delete button. This does not immediately remove the
-dataset's data from Galaxy and **it is reversible**. When you delete a dataset from the history, it will be removed
-from the panel but (like hidden datasets) the total number of deleted datasets is shown in the history subtitle as a
-link. Clicking this link (e.g. '3 deleted') will make the deleted datasets visible and each deleted dataset will have a
-link for manually undeleting it, above its title. You can click that link again (which will now be 'hide deleted') to
-make them not shown again.
+You can **delete** any dataset in your history. Unless you explicitly tell Galaxy to delete a dataset permanently (see below) this does not immediately remove the dataset from Galaxy" **it is reversible**. When you delete a dataset from the history, it will be removed from the panel but (just like hidden datasets).
 
-![Two histories side by side, the left shows the same "this history is empty" message. The right shows a dataset, only identifiable as deleted by a new trash can icon next to the pencil icon.](../../images/delete.png "Deleting and undeleting datasets. The left side shows a history with one deleted dataset. We know this because a button with 1 and a trash can icon appears under the history's name. Clicking this link will reveal the deleted dataset as shown on the right side of the figure. From here it can be undeleted.")
+#### Deleting datasets
 
-### Admins may purge your deleted datasets
+{% snippet faqs/galaxy/datasets_deleting.md box_type="none"%}
 
-Depending on the policy of your Galaxy server, administrators will often run scripts that search for and purge the
-datasets you've marked as deleted. Often, deleted datasets and histories are purged based on the age of the deletion
-(e.g. datasets that have been marked as deleted for 90 days or more). Check with the administrators of your Galaxy instance to
-find out the policy used.
+#### Undeleting datasets
 
-### Tagging datasets
+{% snippet faqs/galaxy/datasets_undelete.md box_type="none"%}
 
-There are two types of tags that can be used as an additional level of labeling for datasets: **standard tags** and **hashtags**. The standard tags work similarly to history tags described above - they add another level of description to datasets making them easier to find. **Hashtags** (also known as **name tags** or **propagating tags**) are much more powerful as they **propagate** through the analysis:
+> <comment-title>Admins may purge your deleted datasets</comment-title>
+> Depending on the policy of your Galaxy server, administrators may run scripts that search for and purge the
+> datasets you've marked as deleted. Often, deleted datasets and histories are purged based on the age of the deletion
+> (e.g. datasets that have been marked as deleted for 90 days or more). Check with the administrators of your Galaxy instance to
+> find out the policy used.
+{: .comment}
 
-![Close up of the history showing tag:#🐇 in the search field, and four discovered datasets. Two are tagged hashtag rabbit emoji only, and the other two are tagged hashtag rabbit emoji and two other identifiers, CS219 and PDB.](../../images/name_tags.png "Hashtags allow you to more easily track datasets through the analysis. Hashtags are added similarly to standard tags but with one important difference: they are prepended with a hash '#' symbol. Here you see a history where two datasets were given tags, some hash tags and some normal tags. The hashtag propagates, when a computation is done, while the standard tags do not.")
+## Tagging datasets
 
-For more information on name tags, a [dedicated nametag tutorial is available]({% link topics/galaxy-interface/tutorials/name-tags/tutorial.md %}).
+{% snippet faqs/galaxy/histories_why_name_tags.md box_type="none"%}
+
+
+Datasets can be tagged. This simplifies tracking of datasets through a single history and across multiple histories. Two types of tags can be associated with datasets:
+
+1. **Standard tags**
+2. **Name tags** also called "hashtags" or "propagation tags"
+
+The difference between these two types is in the fact that **Name tags** propagate: if a dataset is labelled with a name tag all derivatives (children) of this dataset will automatically inherit this tag. 
+ 
+ [dedicated nametag tutorial is available]({% link topics/galaxy-interface/tutorials/name-tags/tutorial.md %}).
 
 ## Managing Multiple Datasets Easily
 
