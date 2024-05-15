@@ -81,20 +81,26 @@ The advent of large language models has transformed the field of natural languag
 
 From the cloned repository, open the `fine-tune-protTrans-dephophorylation.ipynb` notebook. The notebook contains all the necessary script for processing protein sequences, creating and configuring protein large language model, training it on the protein sequences and evaluating them on the test protein sequences and visualising results. Let's look at these key steps of fine-tuning.
 
-#### Install necessary Python packages
+### Install necessary Python packages
+The protein large language model has been developed using Pytorch and the model weights are stored at HuggingFace. Therefore, to recreate the model, packages such as Pytorch, Transformers, SentencePiece 
+needs to be installed in the notebook. Additional packages such Scikit-learn, Pandas, Matplotlib and Seaborn are also required for data preprocessing, manipulation and visualisation of model training and test performances. 	All the necessary packages are installed in the notebook using `!pip install` command. Note: the installed packages have a lifespan equal to that of the notebook session. When a new session of JupyterLab is created, all the packages needs to be installed again.
+
+### Fetch and split data
+After installing all the packages and importing necessary Python packages, protein sequences (available as a FASTA file) alongwith their labels are read into the notebook. These sequences are further divided into training and validation sets. Training set is used for fine-tuning the protein large language model and validation set is used for model evaluation after each training epoch.
+
+### Define configurations for LoRA and transformer (T5) model
+The protein large language model (ProtT5) used in this tutorial has over 1.2 billion parameters (1,209,193,474) and it is impossible to train such a large model on any commercial GPU having 15GB of memory. To make fine tuning process feasible on such GPUs, low ranking adaption (LoRA) technique has been devised. LoRA learns low rank matrices and when these are multiplied, they take the shape of matrix of original large language model. While fine tuning, the weight matrices of the original large language model are kept frozen (not updated) and only these low rank matrices are updated. Once fine-tuning is finished, these low rank matrices are combined with the original frozen weight matrices to update the model. Essentially, all the knowledge obtained by fine-tuning on a small dataset is contained in the low rank matrices. This approach help retain the original knowledge of the model while adding the additional knowledge from the fine tuning dataset. When LoRA is applied to the ProtT5 model, the trainable parameters become little over 3 million (3,559,426) making it possible to fine-tune on a commercial GPU with at least around 10 GB of memory. The following figure shows a comparison between fine-tuning with and without LoRA. Fine tuning without LoRA requires additional weight matrices to be of the same size as the original model which needs large amount of computational resources compared to using LoRA where much small sized weight matrices are learned.
+
+    ![lora](images/lora.png "Low ranking adaptation (LoRA).")
+
+### Create T5 model
 
 
-#### Fetch and split data
+### Create model training method
 
-#### Define configurations for LoRA and transformer (T5) model
+### Train model
 
-#### Create T5 model
-
-#### Create model training method
-
-#### Train model
-
-#### Analyse results 
+### Analyse results 
 
 ## Conclusion
 
