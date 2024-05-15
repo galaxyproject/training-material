@@ -51,6 +51,8 @@ The Beacon v2 comprises two main parts, the framework and the models. The framew
 
 ![Beacon Framework and Model](../../images/Beacon_framework_and_model.png "Schematic representation of Beacon v2 API specification from B2RI Documentation")
 
+MongoDB is a versatile, document-oriented NoSQL database that provides flexibility and scalability for modern applications, allowing developers to efficiently manage and query unstructured data. 
+
 MongoDB databases are created with different security levels. This controls accessing the Beacon through the import and query processes. There are three security levels for Beacon. Public, registered and controlled, in our import and query tools, we have classified them into public and authenticated.
 
 
@@ -78,6 +80,129 @@ Bradford Computational and Data-Driven Science research team.
 >
 {: .agenda}
 
+
+# Create Beacon protocol using MongoDB
+
+The beacon-providing institution creates a Beacon to serve the institution's needs, and it depends if they want to make their Beacon open access or private.
+For this training we will create a provate access bracon that with admin user rigts to modefiy the beacon with an additional account for querying the database only. 
+
+We will use docker and docker-compose for this step. If you don't have it installed, please follow this [documentation](https://docs.docker.com/engine/install/) to install it
+
+
+> <hands-on-title>Create Beacon Database on MongoDB</hands-on-title>
+> 1. Create a directory in your local environment and name it as `mongo-init`
+> ```bash
+> mkdir mongo-init
+> ```
+> 2. Change your location to the created directory
+> ```bash
+> cd <mongo-init
+> ```
+> 3. Use any text editor you are comfortable with to create a new YAML file and name it `docker-compose.yaml`
+> ```bash
+> nano docker-compose.yaml
+> ```
+> 4. Copy the text below into the `docker-compose.yaml` file
+> >```yaml
+> > version: '3.6'
+> > services:
+> >
+> >  mongo-client:
+> >    image: mongo:3.6
+> >    restart: unless-stopped
+> >    volumes:
+> >      - ./mongo/db:/data/db
+> >      - ./mongo-init:/docker-entrypoint-initdb.d
+> >    ports:
+> >      - "27017:27017"
+> >    environment:
+> >      MONGO_INITDB_ROOT_USERNAME: admin
+> >      MONGO_INITDB_ROOT_PASSWORD: adminpass
+> >
+> >  mongo-express:
+> >    image: mongo-express
+> >    restart: unless-stopped
+> >    environment:
+> >      - ME_CONFIG_MONGODB_SERVER=mongo-client
+> >      - ME_CONFIG_MONGODB_PORT=27017
+> >      - ME_CONFIG_BASICAUTH_USERNAME=admin
+> >      - ME_CONFIG_BASICAUTH_PASSWORD=adminpass
+> >    ports:
+> >      - "8081:8081"
+> >
+> >  mongo-init:
+> >    image: mongo:3.6
+> >    restart: "no"
+> >    depends_on:
+> >      - mongo-client
+> >    environment:
+> >      - MONGO_INITDB_DATABASE=admin
+> >      - MONGO_INITDB_ROOT_USERNAME=admin
+> >      - MONGO_INITDB_ROOT_PASSWORD=adminpass
+> >    volumes:
+> >      - ./mongo-init:/docker-entrypoint-initdb.d
+> > ```
+> 5. Create the path `mongo/db` in your directory using `$mkdir` tool
+> ```bash
+> mkdir mongo
+> mkdir mongo/db
+> ```
+> You can change the name of that bath, but you have to change that also from the docker-compose.yaml file. 
+> We have everything ready for creating the MongoDB server hosted in the docker container. This will create a Beacon database with admin access. Next we will add users. 
+> 6. Create a another directory in your mongo-init directory and name it as `mongo-init`
+> ```bash
+> mkdir mongo-init
+> ```
+> 7. Change your location to the created directory
+> ```bash
+> cd <mongo-init
+> ```
+> 8. Use any text editor you are comfortable with to create a new JS file and name it `create-user.js`
+> ```bash
+> nano create-user.js
+> ```
+> 9. Copy the text below into the `docker-compose.yaml` file
+> >```js
+> > // create_user.js
+> >
+> > // Connect to the admin database
+> > var adminDB = db.getSiblingDB("admin");
+> >
+> > // Create a new user with read-only access to all databases
+> > adminDB.createUser({
+> >  user: "query_user",
+> >  pwd: "querypassword",
+> >  roles: [
+> >    { role: "read", db: "admin" },
+> >    { role: "read", db: "beacon" }, // Adjust this for your needs
+> >    // Add additional read roles as needed
+> >  ]
+> >});
+> > ```
+> This will add a user account with read-only permision to beacon database. This is important to avoid unwanted modefications to the Beacon database. 
+> To know more about MongoDB please read the [MongoDB documentation](https://www.mongodb.com/docs/)
+> 10. Run the tool `$docker-compose` with the following parameters
+> ```bash
+> docker-compose up -d
+> ```
+> 11. Check the created docker containers and test if your docker container is running
+> ```bash
+> docker ps
+> ```
+> This will give you a massage similar to this
+> ```
+> CONTAINER ID   IMAGE           COMMAND                  CREATED       STATUS                         PORTS                                           NAMES
+> 96d7886f9cdb   mongo:3.6       "docker-entrypoint.s…"   5 weeks ago   Up 5 weeks                     27017/tcp                                       mongo-init_mongo-init_1
+> 1bb520888fbf   mongo:3.6       "docker-entrypoint.s…"   5 weeks ago   Up 5 weeks                     0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   mongo-init_mongo-client_1
+> a148fb3db385   mongo-express   "/sbin/tini -- /dock…"   5 weeks ago   Restarting (1) 9 seconds ago                                                   mongo-init_mongo-express_1
+> ```
+> 12. Test your docker to see if it is running by using `$docker exec` command
+> ```bash
+> docker exec -it <mongo-client> bash #If the docker image for the Mongo was installed with a different name, Change the name in <mongo-client>
+> ```
+> This will take you into the docker container. You can exit that by prising `ctrl + d` from your keyboard.
+> This will create an empty MongoDB server where we can add the beacon database or any additional databases. 
+{: .hands_on}
 
 
 # prepare the Data
@@ -184,163 +309,6 @@ few examples. The same Biosample may be referred to by many instances (e.g., tec
 
 
 
-# Create Beacon data discovery protocol using MongoDB
-
-The beacon-providing institution creates a Beacon to serve the institution's needs, and it depends if they want to make their Beacon open access or private. We will show examples of creating both types of Beacons 
-by creating 2 docker servers for MongoDB. The first docker is for the open-access Beacon, and the second is for the private Beacon. 
-
-In this tutorial, we will use the first MongoDB method to create the Beacon protocol. Depending on your requirements, you can choose between the methods to customise your Beacon. We will use docker and docker-compose for this step. If you don't have it installed, please follow this [documentation](https://docs.docker.com/engine/install/) to install it
-## Create and open access MongoDB server
-
-> <hands-on-title>Create open access Beacon Database on MongoDB</hands-on-title>
-> 1. Create a directory in your local environment and give it a suitable name
-> ```bash
-> mkdir <directory_name>
-> ```
-> 2. Change your location to the created directory
-> ```bash
-> cd <directory_name>
-> ```
-> 3. Use any text editor you are comfortable with to create a new YAML file and name it `docker-compose.yaml`
-> ```bash
-> nano docker-compose.yaml
-> ```
-> 4. Copy the text below into the `docker-compose.yaml` file
-> >
-> > ```yaml
-> > version: '3.6'
-> > services:
-> >
-> >  mongo-client:
-> >    image: mongo:3.6
-> >    restart: unless-stopped
-> >    volumes:
-> >      - ./beacon/db:/data/db
-> >    ports:
-> >      - "27017:27017"
-> >
-> >  mongo-express:
-> >    image: mongo-express
-> >    restart: unless-stopped
-> >    environment:
-> >      - ME_CONFIG_MONGODB_SERVER=mongo-client
-> >      - ME_CONFIG_MONGODB_PORT=27017
-> >      - ME_CONFIG_BASICAUTH_USERNAME=admin
-> >      - ME_CONFIG_BASICAUTH_PASSWORD=adminpass
-> >    ports:
-> >      - "8081:8081"
-> > ```
-> 5. Create the path `beacon/db` in your directory using `$mkdir` tool
-> ```bash
-> mkdir beacon
-> mkdir beacon/db
-> ```
-> You can change the name of that bath, but you have to change that also from the docker-compose.yaml file. 
-> We have everything ready for creating the MongoDB server hosted in the docker container. Next is to run docker.
-> 6. Run the tool `$docker-compose` with the following parameters
-> ```bash
-> docker-compose up -d
-> ```
-> 7. Check the created docker containers and test if your docker container is running
-> ```bash
-> docker ps
-> ```
-> This will give you a massage similar to this
-> ```
-> CONTAINER ID   IMAGE           COMMAND                  CREATED      STATUS          PORTS                                           NAMES
-> 54aeff806042   mongo:3.6       "docker-entrypoint.s…"   6 weeks ago   Up 6 weeks   0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   beacon_mongo-client_1
-> 38a8e4481963   mongo-express   "/sbin/tini -- /dock…"   6 weeks ago   Up 6 weeks   0.0.0.0:8081->8081/tcp, :::8081->8081/tcp       beacon_mongo-express_1
-> ```
-> 8. Test your docker to see if it is running by using `$docker exec` command
-> ```bash
-> docker exec -it <mongo-client> bash #If the docker image for the Mongo was installed with a different name, Change the name in <mongo-client>
-> ```
-> This will take you into the docker container. You can exit that by prising `ctrl + d` from your keyboard.
-> This will create an empty MongoDB server where we can add the beacon database or any additional databases. 
-{: .hands_on}
-
-
-## Create private MongoDB database
-
-> <hands-on-title>Create a Private Beacon Database on MongoDB</hands-on-title>
-> 1. Create a directory in your local environment and give it a suitable name
-> ```bash
-> mkdir <directory_name>
-> ```
-> 2. Change your location to the created directory
-> ```bash
-> cd <directory_name>
-> ```
-> 3. Use any text editor you are comfortable with to create a new YAML file and name it `docker-compose.yaml`
-> ```bash
-> nano docker-compose.yaml
-> ``` 
-> 4. Copy the text below into the `docker-compose.yaml` file
-> > ```yaml
-> > version: '3.1'
-> >
-> > # networks:
-> > #   beacon-priv:
-> > #   idp-priv:
-> > #   pub:
-> >
-> > services:
-> >
-> >  ###########################################
-> >  # MongoDB Database
-> >  ###########################################
-> >
-> >  mongo-client:
-> >    image: mongo:3.6
-> >    restart: unless-stopped
-> >    volumes:
-> >      - ./beacon/db:/data/db
-> >    ports:
-> >      - "27017:27017"
-> >    environment:
-> >      MONGO_INITDB_ROOT_USERNAME: root
-> >      MONGO_INITDB_ROOT_PASSWORD: example
-> >
-> >  mongo-express:
-> >    image: mongo-express
-> >    restart: unless-stopped
-> >    environment:
-> >      - ME_CONFIG_MONGODB_SERVER=mongo-client
-> >      - ME_CONFIG_MONGODB_PORT=27017
-> >      - ME_CONFIG_BASICAUTH_USERNAME=admin
-> >      - ME_CONFIG_BASICAUTH_PASSWORD=adminpass
-> >    ports:
-> >      - "8081:8081"
-> ```
-> 5. Create the path `beacon/db` in your directory using `$mkdir` tool
-> ```bash
-> mkdir beacon
-> mkdir beacon/db
-> ```
-> You can change the name of that bath, but you have to change that also from the docker-compose.yaml file. 
-> We have everything ready for creating the MongoDB server hosted in the docker container. Next is to run docker.
-> 6. Run the tool `$docker-compose` with the following parameters
-> ```bash
-> docker-compose up -d
-> ```
-> 7. Check the created docker containers and test if your docker container is running
-> ```bash
-> docker ps
-> ```
-> This will give you a massage similar to this
-> ```
-> CONTAINER ID   IMAGE           COMMAND                  CREATED      STATUS          PORTS                                           NAMES
-> 54aeff806042   mongo:3.6       "docker-entrypoint.s…"   6 weeks ago   Up 6 weeks   0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   beacon_mongo-client_1
-> 38a8e4481963   mongo-express   "/sbin/tini -- /dock…"   6 weeks ago   Up 6 weeks   0.0.0.0:8081->8081/tcp, :::8081->8081/tcp       beacon_mongo-express_1
-> ```
-> 8. Test your docker to see if it is running by using `$docker exec` command
-> ```bash
-> docker exec -it <mongo-client> bash #If the docker image for the Mongo was installed with a different name, Change the name in <mongo-client>
-> ```
-> This will take you into the docker container. You can exit that by prising `ctrl + d` from your keyboard.
-> This will create an empty MongoDB server where we can add the beacon database or any additional databases. 
-> There are many ways to create a Beacon using MongoDB. Check the B2RI MongoDB beacon docker on [github](https://github.com/EGA-archive/beacon2-ri-tools/tree/main) repo for more information. 
-{: .hands_on}
 
 
 # Import data into Beacon MongoDB
