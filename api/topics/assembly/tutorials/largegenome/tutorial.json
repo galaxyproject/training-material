@@ -104,7 +104,7 @@
       "name": "Assembly polishing - upgraded",
       "title": "Assembly polishing - upgraded",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAssembly to be polished\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nminimap setting for long reads\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nIllumina reads R1\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"🛠️ Subworkflow\\nRacon polish with long reads, x4 - upgraded\"];\n  style 4 fill:#edd,stroke:#900,stroke-width:4px;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  2 -->|output| 4;\n  5[\"Medaka polish\"];\n  4 -->|Assembly polished by long reads using Racon| 5;\n  1 -->|output| 5;\n  e3136060-bce7-4af3-87c4-9dcbb0d1f531[\"Output\\nAssembly polished by long reads using Medaka\"];\n  5 --> e3136060-bce7-4af3-87c4-9dcbb0d1f531;\n  style e3136060-bce7-4af3-87c4-9dcbb0d1f531 stroke:#2c3143,stroke-width:4px;\n  6[\"Fasta statistics after Racon long read polish\"];\n  4 -->|Assembly polished by long reads using Racon| 6;\n  7[\"Fasta statistics after Medaka polish\"];\n  5 -->|out_consensus| 7;\n  8[\"🛠️ Subworkflow\\nRacon polish with Illumina reads R1 only, x2 - upgraded\"];\n  style 8 fill:#edd,stroke:#900,stroke-width:4px;\n  5 -->|out_consensus| 8;\n  3 -->|output| 8;\n  9[\"Fasta statistics after Racon short read polish\"];\n  8 -->|Assembly polished by short reads using Racon| 9;"
     },
     {
@@ -126,7 +126,7 @@
       "name": "Assembly with Flye - upgraded",
       "title": "Assembly with Flye - upgraded",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Flye: assembly\"];\n  0 -->|output| 1;\n  3960e31d-7a9e-400c-bb21-f6e47b75e649[\"Output\\nFlye assembly on input dataset(s) (consensus)\"];\n  1 --> 3960e31d-7a9e-400c-bb21-f6e47b75e649;\n  style 3960e31d-7a9e-400c-bb21-f6e47b75e649 stroke:#2c3143,stroke-width:4px;\n  e524f295-a957-4c91-838c-f8e98e809b6c[\"Output\\nFlye assembly on input dataset(s) (assembly_graph)\"];\n  1 --> e524f295-a957-4c91-838c-f8e98e809b6c;\n  style e524f295-a957-4c91-838c-f8e98e809b6c stroke:#2c3143,stroke-width:4px;\n  48b854e2-dd6e-4345-8d05-09abca6659da[\"Output\\nFlye assembly on input dataset(s) (Graphical Fragment Assembly)\"];\n  1 --> 48b854e2-dd6e-4345-8d05-09abca6659da;\n  style 48b854e2-dd6e-4345-8d05-09abca6659da stroke:#2c3143,stroke-width:4px;\n  8672c172-71a7-432c-9679-a8e37f36cf53[\"Output\\nFlye assembly on input dataset(s) (assembly_info)\"];\n  1 --> 8672c172-71a7-432c-9679-a8e37f36cf53;\n  style 8672c172-71a7-432c-9679-a8e37f36cf53 stroke:#2c3143,stroke-width:4px;\n  2[\"Fasta statistics\"];\n  1 -->|consensus| 2;\n  3[\"Quast genome report\"];\n  1 -->|consensus| 3;\n  17cdf8e0-8ad4-4570-afae-1861934fc678[\"Output\\nQuast on input dataset(s):  HTML report\"];\n  3 --> 17cdf8e0-8ad4-4570-afae-1861934fc678;\n  style 17cdf8e0-8ad4-4570-afae-1861934fc678 stroke:#2c3143,stroke-width:4px;\n  4[\"Bandage image: Flye assembly\"];\n  1 -->|assembly_gfa| 4;\n  e66bd129-146f-48dc-95b8-39a2a1ffb68d[\"Output\\nBandage Image on input dataset(s): Assembly Graph Image\"];\n  4 --> e66bd129-146f-48dc-95b8-39a2a1ffb68d;\n  style e66bd129-146f-48dc-95b8-39a2a1ffb68d stroke:#2c3143,stroke-width:4px;\n  5[\"Bar chart: show contig sizes\"];\n  1 -->|assembly_info| 5;\n  6d0a4e23-d631-4e37-8930-3d22fc91369b[\"Output\\nBar chart showing contig sizes\"];\n  5 --> 6d0a4e23-d631-4e37-8930-3d22fc91369b;\n  style 6d0a4e23-d631-4e37-8930-3d22fc91369b stroke:#2c3143,stroke-width:4px;"
     },
     {
@@ -148,7 +148,7 @@
       "name": "Assess genome quality - upgraded",
       "title": "Assess genome quality - upgraded",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPolished assembly\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Busco: assess assembly\"];\n  0 -->|output| 2;\n  219e4952-36e0-4b01-a407-e774b5b02dca[\"Output\\nBusco short summary\"];\n  2 --> 219e4952-36e0-4b01-a407-e774b5b02dca;\n  style 219e4952-36e0-4b01-a407-e774b5b02dca stroke:#2c3143,stroke-width:4px;\n  3[\"Quast: assess assembly\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  77ab0186-4cfd-460f-b71e-39a923414ef4[\"Output\\nQuast on input dataset(s):  HTML report\"];\n  3 --> 77ab0186-4cfd-460f-b71e-39a923414ef4;\n  style 77ab0186-4cfd-460f-b71e-39a923414ef4 stroke:#2c3143,stroke-width:4px;"
     },
     {
@@ -170,7 +170,7 @@
       "name": "Combined workflows for large genome assembly - upgraded ",
       "title": "Combined workflows for large genome assembly - upgraded ",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nR1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nR2\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\nminimap settings for long reads\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nReference genome for Quast\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"🛠️ Subworkflow\\nkmer counting - meryl - upgraded\"];\n  style 5 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 5;\n  6[\"🛠️ Subworkflow\\nData QC - upgraded\"];\n  style 6 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 6;\n  2 -->|output| 6;\n  0 -->|output| 6;\n  7[\"🛠️ Subworkflow\\nTrim and filter reads - fastp - upgraded \"];\n  style 7 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 7;\n  2 -->|output| 7;\n  0 -->|output| 7;\n  8[\"🛠️ Subworkflow\\nAssembly with Flye - upgraded\"];\n  style 8 fill:#edd,stroke:#900,stroke-width:4px;\n  7 -->|fastp filtered long reads| 8;\n  9[\"🛠️ Subworkflow\\nAssembly polishing - upgraded\"];\n  style 9 fill:#edd,stroke:#900,stroke-width:4px;\n  8 -->|Flye assembly on input datasets consensus| 9;\n  7 -->|fastp filtered R1 reads| 9;\n  7 -->|fastp filtered long reads| 9;\n  3 -->|output| 9;\n  10[\"🛠️ Subworkflow\\nAssess genome quality - upgraded\"];\n  style 10 fill:#edd,stroke:#900,stroke-width:4px;\n  9 -->|Assembly polished by long reads using Medaka| 10;\n  4 -->|output| 10;"
     },
     {
@@ -192,7 +192,7 @@
       "name": "Data QC - upgraded",
       "title": "Data QC - upgraded",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput file: long reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput file: Illumina reads R1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput file: Illumina reads R2\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Nanoplot: long reads\"];\n  0 -->|output| 3;\n  73d0e4cf-366e-41c1-810a-b269638826b3[\"Output\\nNanoPlot on input dataset(s): HTML report\"];\n  3 --> 73d0e4cf-366e-41c1-810a-b269638826b3;\n  style 73d0e4cf-366e-41c1-810a-b269638826b3 stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC on R1\"];\n  1 -->|output| 4;\n  5[\"FastQC on R2\"];\n  2 -->|output| 5;\n  6[\"MultiQC: combine fastQC reports\"];\n  4 -->|text_file| 6;\n  5 -->|text_file| 6;\n  8baf8700-876e-4a74-ad99-6e656f3ba618[\"Output\\nMultiQC on input dataset(s): Webpage\"];\n  6 --> 8baf8700-876e-4a74-ad99-6e656f3ba618;\n  style 8baf8700-876e-4a74-ad99-6e656f3ba618 stroke:#2c3143,stroke-width:4px;"
     },
     {
@@ -214,7 +214,7 @@
       "name": "Racon polish with Illumina reads (R1 only), x2 - upgraded",
       "title": "Racon polish with Illumina reads (R1 only), x2 - upgraded",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAssembly to be polished\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nIllumina reads, R1, in fastq.gz format\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Minimap2 round 1: map reads to assembly\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Racon round 1: polish assembly\"];\n  0 -->|output| 3;\n  2 -->|alignment_output| 3;\n  1 -->|output| 3;\n  4[\"Minimap2 round 2: map reads to assembly\"];\n  1 -->|output| 4;\n  3 -->|consensus| 4;\n  5[\"Racon round 2: polish assembly\"];\n  3 -->|consensus| 5;\n  4 -->|alignment_output| 5;\n  1 -->|output| 5;\n  594819c3-668e-4575-b9a6-4459ffacf952[\"Output\\nAssembly polished by short reads using Racon\"];\n  5 --> 594819c3-668e-4575-b9a6-4459ffacf952;\n  style 594819c3-668e-4575-b9a6-4459ffacf952 stroke:#2c3143,stroke-width:4px;"
     },
     {
@@ -236,7 +236,7 @@
       "name": "Racon polish with long reads, x4 - upgraded",
       "title": "Racon polish with long reads, x4 - upgraded",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAssembly to be polished\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nminimap setting for long reads \"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"Minimap2: map long reads to assembly\"];\n  2 -->|output| 3;\n  1 -->|output| 3;\n  0 -->|output| 3;\n  4[\"Racon: polish 1\"];\n  0 -->|output| 4;\n  3 -->|alignment_output| 4;\n  1 -->|output| 4;\n  5[\"Minimap2: map long reads to polished assembly 1\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  4 -->|consensus| 5;\n  6[\"Racon: polish 2\"];\n  4 -->|consensus| 6;\n  5 -->|alignment_output| 6;\n  1 -->|output| 6;\n  7[\"Minimap2: map long reads to polished assembly 2\"];\n  2 -->|output| 7;\n  1 -->|output| 7;\n  6 -->|consensus| 7;\n  8[\"Racon: polish 3\"];\n  6 -->|consensus| 8;\n  7 -->|alignment_output| 8;\n  1 -->|output| 8;\n  9[\"Minimap2: map long reads to polished assembly 3\"];\n  2 -->|output| 9;\n  1 -->|output| 9;\n  8 -->|consensus| 9;\n  10[\"Racon: polish 4\"];\n  8 -->|consensus| 10;\n  9 -->|alignment_output| 10;\n  1 -->|output| 10;\n  bcf0f03c-5951-46a7-aa38-545aed9bc183[\"Output\\nAssembly polished by long reads using Racon\"];\n  10 --> bcf0f03c-5951-46a7-aa38-545aed9bc183;\n  style bcf0f03c-5951-46a7-aa38-545aed9bc183 stroke:#2c3143,stroke-width:4px;"
     },
     {
@@ -258,7 +258,7 @@
       "name": "Trim and filter reads - fastp - upgraded ",
       "title": "Trim and filter reads - fastp - upgraded ",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nIllumina reads R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nIllumina reads R2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"fastp on short reads\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  656e4138-41ab-4561-8989-33de9ac9a2f3[\"Output\\nfastp report on short reads html\"];\n  3 --> 656e4138-41ab-4561-8989-33de9ac9a2f3;\n  style 656e4138-41ab-4561-8989-33de9ac9a2f3 stroke:#2c3143,stroke-width:4px;\n  0d53f347-0368-47cb-953a-2e4dac57e013[\"Output\\nfastp filtered R1 reads\"];\n  3 --> 0d53f347-0368-47cb-953a-2e4dac57e013;\n  style 0d53f347-0368-47cb-953a-2e4dac57e013 stroke:#2c3143,stroke-width:4px;\n  10fbe1e5-400c-4ffe-8794-9b776b0d7322[\"Output\\nfastp report on short reads json\"];\n  3 --> 10fbe1e5-400c-4ffe-8794-9b776b0d7322;\n  style 10fbe1e5-400c-4ffe-8794-9b776b0d7322 stroke:#2c3143,stroke-width:4px;\n  639ed3f7-0e51-4e5d-b6f8-081378962109[\"Output\\nfastp filtered R2 reads\"];\n  3 --> 639ed3f7-0e51-4e5d-b6f8-081378962109;\n  style 639ed3f7-0e51-4e5d-b6f8-081378962109 stroke:#2c3143,stroke-width:4px;\n  4[\"fastp on long reads\"];\n  2 -->|output| 4;\n  5e0d2c3d-41a4-4823-ae9c-b1e4d2826541[\"Output\\nfastp report on long reads html\"];\n  4 --> 5e0d2c3d-41a4-4823-ae9c-b1e4d2826541;\n  style 5e0d2c3d-41a4-4823-ae9c-b1e4d2826541 stroke:#2c3143,stroke-width:4px;\n  e6018ad6-86f4-4e78-8cf2-ccc8b97022fe[\"Output\\nfastp filtered long reads\"];\n  4 --> e6018ad6-86f4-4e78-8cf2-ccc8b97022fe;\n  style e6018ad6-86f4-4e78-8cf2-ccc8b97022fe stroke:#2c3143,stroke-width:4px;\n  69f8383b-a1be-4a74-95f4-3dba35e01426[\"Output\\nfastp report on long reads json\"];\n  4 --> 69f8383b-a1be-4a74-95f4-3dba35e01426;\n  style 69f8383b-a1be-4a74-95f4-3dba35e01426 stroke:#2c3143,stroke-width:4px;"
     },
     {
@@ -280,7 +280,7 @@
       "name": "kmer counting - meryl - upgraded",
       "title": "kmer counting - meryl - upgraded",
       "test_results": null,
-      "modified": "2024-05-15 00:05:07 +0000",
+      "modified": "2024-05-15 07:49:37 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nIllumina reads R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Meryl - count kmers\"];\n  0 -->|output| 1;\n  899ddd93-4c0f-4f81-a973-8120494ed983[\"Output\\nMeryl on input dataset(s): read-db.meryldb\"];\n  1 --> 899ddd93-4c0f-4f81-a973-8120494ed983;\n  style 899ddd93-4c0f-4f81-a973-8120494ed983 stroke:#2c3143,stroke-width:4px;\n  2[\"Meryl - generate histogram\"];\n  1 -->|read_db| 2;\n  3[\"Genomescope\"];\n  2 -->|read_db_hist| 3;\n  efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac[\"Output\\nGenomeScope on input dataset(s) Transformed log plot\"];\n  3 --> efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac;\n  style efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac stroke:#2c3143,stroke-width:4px;\n  701df341-5767-44bc-ade2-6af498ab7467[\"Output\\nGenomeScope on input dataset(s) Transformed linear plot\"];\n  3 --> 701df341-5767-44bc-ade2-6af498ab7467;\n  style 701df341-5767-44bc-ade2-6af498ab7467 stroke:#2c3143,stroke-width:4px;\n  85fa4004-b351-47b3-84aa-6788d338037a[\"Output\\nGenomeScope on input dataset(s) Log plot\"];\n  3 --> 85fa4004-b351-47b3-84aa-6788d338037a;\n  style 85fa4004-b351-47b3-84aa-6788d338037a stroke:#2c3143,stroke-width:4px;\n  c71ce055-98f0-4354-9397-2f8833b90cc4[\"Output\\nGenomeScope on input dataset(s) Linear plot\"];\n  3 --> c71ce055-98f0-4354-9397-2f8833b90cc4;\n  style c71ce055-98f0-4354-9397-2f8833b90cc4 stroke:#2c3143,stroke-width:4px;"
     }
   ],
