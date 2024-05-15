@@ -91,7 +91,7 @@ After installing all the packages and importing necessary Python packages, prote
 ### Define configurations for LoRA and transformer (T5) model
 The protein large language model (ProtT5) used in this tutorial has over 1.2 billion parameters (1,209,193,474) and it is impossible to train such a large model on any commercial GPU having 15GB of memory. To make fine tuning process feasible on such GPUs, low ranking adaption (LoRA) technique has been devised. LoRA learns low rank matrices and when these are multiplied, they take the shape of matrix of original large language model. While fine tuning, the weight matrices of the original large language model are kept frozen (not updated) and only these low rank matrices are updated. Once fine-tuning is finished, these low rank matrices are combined with the original frozen weight matrices to update the model. Essentially, all the knowledge obtained by fine-tuning on a small dataset is contained in the low rank matrices. This approach help retain the original knowledge of the model while adding the additional knowledge from the fine tuning dataset. When LoRA is applied to the ProtT5 model, the trainable parameters become little over 3 million (3,559,426) making it possible to fine-tune on a commercial GPU with at least around 10 GB of memory. The following figure shows a comparison between fine-tuning with and without LoRA. Fine tuning without LoRA requires additional weight matrices to be of the same size as the original model which needs large amount of computational resources compared to using LoRA where much small sized weight matrices are learned.
 
-    ![lora](images/lora.png "Low ranking adaptation (LoRA).")
+![lora_non_lora](images/lora.png "Low ranking adaptations (LoRA).")
 
 ### Create T5 model
 
