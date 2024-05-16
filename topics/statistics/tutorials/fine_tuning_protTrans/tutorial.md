@@ -29,7 +29,6 @@ tags:
 - fine-tuning
 - dephosphorylation-site-prediction
 contributors:
-- sheetkulkarni01
 - anuprulez
 
 ---
