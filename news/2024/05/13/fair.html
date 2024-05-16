@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Perfectly FAIR Training!</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@584070d4dd7f3ebcb1114b7367fadd1598dfb83c",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2024/05/13/fair.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ef2bff8a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Perfectly FAIR Training!">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-05-16 14:36:15 +0000">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="We are happy to report that over the years of our fruitful collaboration with ELIXIR TeSS, all GTN materials should receive a perfect score on the FAIR-Checker. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Perfectly FAIR Training!">
+        <meta property="og:description" content="We are happy to report that over the years of our fruitful collaboration with ELIXIR TeSS, all GTN materials should receive a perfect score on the FAIR-Checker. ">
+        
+        <meta property="og:image" content="/training-materialnews/images/FAIR-Checker-us.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2024-05-13-fair.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2024/05/13/fair.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>Perfectly FAIR Training!</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people managed and provided infrastructure to the GTN or for training purposes">Infrastructure</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></td>
+	</tr>
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+<span class="label label-default tutorial_tag" id="gtn infrastructure" style="--color-primary: #00e38a; --color-darker: #00ca7b; --color-dimmed: #00d683;">gtn infrastructure</span>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 13 May 2024</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>We are happy to report that over the years of our fruitful collaboration with ELIXIR TeSS, all GTN materials should receive a perfect score on the <a href="https://fair-checker.france-bioinformatique.fr/check">FAIR-Checker</a>.</p>
+
+<p>This achievement is a reflection of our long standing and ongoing commitment to ensuring all of the materials you share with others via the GTN are automatically FAIR: Findable, Accessible, Interoperable, and Reusable. Of course the GTN goes further meeting criteria for FAIR/O, as all of our resources are shared with the community under an Open License.</p>
+
+<h2 id="why-the-gtn">Why the GTN?</h2>
+
+<p>Amongst other competitors in the bioinformatics training material repository space the GTN is unique, we are the only one (which we’re aware of!) receiving a perfect score on the FAIR-Checker.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="/training-material/news/images/FAIR-Checker-others.png" alt="two more radar plots, each receive approximately half the score. a few have axes they they are perfect on, but no one is perfect on all axes, unlike us." width="939" height="425" loading="lazy" /><a target="_blank" href="/training-material/news/images/FAIR-Checker-others.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Other platforms are still working towards FAIRness</figcaption></figure>
+
+<h2 id="for-tutorial-authors">For Tutorial Authors</h2>
+
+<p>We have made <em>no new requirements</em> for tutorial authors, simply by contributing a tutorial to the GTN which passes our linting, you can be sure it meets all relevant FAIR criteria due to our infrastructure and automation.</p>
+
+<h2 id="for-trainers">For Trainers</h2>
+
+<p>If you’re a trainer, you can be confident that all GTN materials you use in your training are FAIR. Please let your funders know you are meeting these criteria as well!</p>
+
+
+    
+
+    
+    <a href="/training-material/faqs/gtn/fair_training.html" class="btn btn-primary">View Material</a>
+    
+
+    
+
+    
+    
+
+    
+  </div>
+
+  <div class="col-md-4">
+    <img alt="A screenshot of a radar plot visibly from fair-checker's site showing a perfect score." src="/training-material/news/images/FAIR-Checker-us.png" width="300"/>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2024/05/13/fair.html",
+  "name": "Perfectly FAIR Training!",
+  "headline": "<p>We are happy to report that over the years of our fruitful collaboration with ELIXIR TeSS, all GTN",
+  "keywords": [
+    "gtn infrastructure"
+  ],
+  "description": "<p>We are happy to report that over the years of our fruitful collaboration with ELIXIR TeSS, all GTN",
+  "articleBody": "<p>We are happy to report that over the years of our fruitful collaboration with ELIXIR TeSS, all GTN materials should receive a perfect score on the <a href=\"https://fair-checker.france-bioinformatique.fr/check\">FAIR-Checker</a>.</p>\n\n<p>This achievement is a reflection of our long standing and ongoing commitment to ensuring all of the materials you share with others via the GTN are automatically FAIR: Findable, Accessible, Interoperable, and Reusable. Of course the GTN goes further meeting criteria for FAIR/O, as all of our resources are shared with the community under an Open License.</p>\n\n<h2 id=\"why-the-gtn\">Why the GTN?</h2>\n\n<p>Amongst other competitors in the bioinformatics training material repository space the GTN is unique, we are the only one (which we’re aware of!) receiving a perfect score on the FAIR-Checker.</p>\n\n<figure id=\"figure-1\" style=\"max-width: 90%;\"><img src=\"/training-material/news/images/FAIR-Checker-others.png\" alt=\"two more radar plots, each receive approximately half the score. a few have axes they they are perfect on, but no one is perfect on all axes, unlike us.\" width=\"939\" height=\"425\" loading=\"lazy\" /><a target=\"_blank\" href=\"/training-material/news/images/FAIR-Checker-others.png\" rel=\"noopener noreferrer\"><small>Open image in new tab</small></a><br /><br /><figcaption><span class=\"figcaption-prefix\"><strong>Figure 1</strong>:</span> Other platforms are still working towards FAIRness</figcaption></figure>\n\n<h2 id=\"for-tutorial-authors\">For Tutorial Authors</h2>\n\n<p>We have made <em>no new requirements</em> for tutorial authors, simply by contributing a tutorial to the GTN which passes our linting, you can be sure it meets all relevant FAIR criteria due to our infrastructure and automation.</p>\n\n<h2 id=\"for-trainers\">For Trainers</h2>\n\n<p>If you’re a trainer, you can be confident that all GTN materials you use in your training are FAIR. Please let your funders know you are meeting these criteria as well!</p>\n",
+  "datePublished": "2024-05-13 00:00:00 +0000",
+  "dateModified": "2024-05-16 14:36:15 +0000",
+  "author": [
+    "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"http://purl.org/dc/terms/conformsTo\": {\n    \"@id\": \"https://bioschemas.org/profiles/Person/0.3-DRAFT\",\n    \"@type\": \"CreativeWork\"\n  },\n  \"url\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"mainEntityOfPage\": \"https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/\",\n  \"name\": \"Helena Rasche\",\n  \"image\": \"https://avatars.githubusercontent.com/hexylena\",\n  \"description\": \"A contributor to the GTN project.\",\n  \"memberOf\": [\n    {\n      \"@type\": \"Organization\",\n      \"http://purl.org/dc/terms/conformsTo\": {\n        \"@id\": \"https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19\",\n        \"@type\": \"Organization\"\n      },\n      \"email\": \"galaxytrainingnetwork@gmail.com\",\n      \"name\": \"Galaxy Training Network\",\n      \"legalName\": \"Galaxy Training Network\",\n      \"alternateName\": \"GTN\",\n      \"url\": \"https://training.galaxyproject.org\",\n      \"logo\": \"https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png\",\n      \"fundingModel\": \"The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.\",\n      \"keywords\": [\n        \"galaxy\",\n        \"bioinformatics\",\n        \"training\",\n        \"fair\",\n        \"accessible\"\n      ],\n      \"status\": \"active\",\n      \"foundingDate\": \"2015-06-29\",\n      \"socialMedia\": \"https://mstdn.science/@gtn\",\n      \"type\": \"project\"\n    }\n  ],\n  \"identifier\": \"https://orcid.org/0000-0001-9760-8992\",\n  \"orcid\": \"https://orcid.org/0000-0001-9760-8992\"\n}"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2024/05/13/fair.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/05/15/galaxy-europe-freiburg-job.html">Open Galaxy Position at Galaxy Europe Team, University of Freiburg</a>
+	</h3>
+	<p>
+	15 May 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e462; --color-darker: #00cb56; --color-dimmed: #00d85c;">jobs</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffaaf7; --color-darker: #ff81f5; --color-dimmed: #ff96f6;">freiburg</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffb1c4; --color-darker: #ff8eae; --color-dimmed: #ffa0b9;">eu</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Description
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/04/24/galaxy-australia-jobs.html">Open Galaxy Positions at Melbourne Bioinformatics</a>
+	</h3>
+	<p>
+	24 April 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e462; --color-darker: #00cb56; --color-dimmed: #00d85c;">jobs</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #78df00; --color-darker: #6ac600; --color-dimmed: #70d300;">australia</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Melbourne Bioinformatics is expanding their team and recruiting three new roles to work on bioinformatics training, outreach, and research.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/03/28/by-covid-pathways.html">Learn to use MINERVA Platform's COVID-19 Disease Map with Galaxy</a>
+	</h3>
+	<p>
+	28 March 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f3aeff; --color-darker: #ef89ff; --color-dimmed: #f19cff;">by-covid</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f4c000; --color-darker: #d9aa00; --color-dimmed: #e6b500;">pathways</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00dfc1; --color-darker: #00c7ab; --color-dimmed: #00d3b6;">minerva</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e38a; --color-darker: #00ca7b; --color-dimmed: #00d683;">gtn infrastructure</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c0c1ff; --color-darker: #a6a9ff; --color-dimmed: #b3b5ff;">new feature</span>
+	
+	</p>
+	<p class="card-text">
+		
+		As part of the work of BeYond COVID, we have developed a new integration between the MINERVA Platform’s COVID-19 Disease Map and Galaxy! Datasets created within Galaxy can now be seamlessly visualized in the MINERVA Platform, allowing you to explore your data in the context of the COVID-19 Disease Map.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/03/26/FAIR-pointers.html">New Learning Pathway for FAIR Data Management developed by ELIXIR-UK Data Stewardship Fellows and Experts</a>
+	</h3>
+	<p>
+	26 March 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b4d400; --color-darker: #a0bc00; --color-dimmed: #aac800;">fair</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00dce0; --color-darker: #00c4c7; --color-dimmed: #00d0d4;">dmp</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d9fe; --color-darker: #00c1e2; --color-dimmed: #00cdf0;">data stewardship</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fcbc00; --color-darker: #e0a700; --color-dimmed: #eeb200;">data management</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffb2bc; --color-darker: #ff90a1; --color-dimmed: #ffa1ae;">new learning pathway</span>
+	
+	</p>
+	<p class="card-text">
+		
+		ELIXIR-UK’s Data Stewardship Fellowship is excited to announce a new learning pathway focused on FAIR Data Management! This program equips researchers and research support staff with the skills to effectively manage their research data.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/03/18/url-persistence.html">Cool URLs Don't Change, GTN URLs don't either.</a>
+	</h3>
+	<p>
+	18 March 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00e38a; --color-darker: #00ca7b; --color-dimmed: #00d683;">gtn infrastructure</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c0c1ff; --color-darker: #a6a9ff; --color-dimmed: #b3b5ff;">new feature</span>
+	
+	</p>
+	<p class="card-text">
+		
+		At the Galaxy Training Network we are really committed to ensuring our training materials are Findable, Accessible, Interoperable, and Reusable.
+This means that we want to make sure that the URLs to our training materials are persistent and don’t change.
+The GTN wants you to be able to rely on our URLs once you’ve added them to a poster or training material, without having to worry about them breaking in the future.
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/584070d4dd7f3ebcb1114b7367fadd1598dfb83c">584070d</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2024-05-13-fair.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ef2bff8a.js'></script>
+
+	
+	
+
+    </body>
+</html>
