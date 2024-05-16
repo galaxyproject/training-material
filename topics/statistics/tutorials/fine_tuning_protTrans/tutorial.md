@@ -19,7 +19,7 @@ requirements:
     type: internal
     topic_name: statistics
     tutorials:
-      - fine_tune_large_protein_models
+      - gpu_jupyter_lab
 time_estimation: 1H
 tags:
 - interactive-tools
