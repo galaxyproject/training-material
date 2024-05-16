@@ -5,7 +5,8 @@ tags:
 - jobs
 - freiburg
 - eu
-contributors:
+contributions:
+  authorship:
   - bgruening
   - erxleben
   - sebastian-schaaf
@@ -79,14 +80,15 @@ We are particularly pleased to receive applications from women for the position 
 
 Please send your application in English including supporting documents mentioned above citing the reference number 00003737, **by June 10th 2024 at the latest**. Please send your application to the following address in written or electronic form:
 
->University of Freiburg  
->Institut für Informatik, Bioinformatik  
->Dr. Björn Grüning  
->Head of Freiburg Galaxy Team  
->Georges-​Köhler-Allee 106  
->79110 Freiburg  
->Germany  
->Email: bioinf-​jobs@informatik.uni-​freiburg.de
+> University of Freiburg  
+> Institut für Informatik, Bioinformatik  
+> Dr. Björn Grüning  
+> Head of Freiburg Galaxy Team  
+> Georges-​Köhler-Allee 106  
+> 79110 Freiburg  
+> Germany  
+> Email: [bioinf-​jobs@informatik.uni-​freiburg.de](mailto:bioinf-​jobs@informatik.uni-​freiburg.de)
+{: .quote}
 
 For further information, please contact Dr. Anika Erxleben-​Eggenhofer on the phone number +49 761 203-​54130 or E-​Mail erxleben@informatik.uni-​freiburg.de.
 
