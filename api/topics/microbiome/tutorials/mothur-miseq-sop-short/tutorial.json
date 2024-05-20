@@ -145,7 +145,7 @@
       "name": "Workflow 1: Quality Control [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "title": "Workflow 1: Quality Control [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "test_results": null,
-      "modified": "2024-05-19 00:08:26 +0000",
+      "modified": "2024-05-20 00:08:08 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nContigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGroups\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Summary.seqs\"];\n  0 -->|output| 2;\n  3[\"Screen.seqs\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Summary.seqs\"];\n  3 -->|fasta_out| 4;\n  5[\"Unique.seqs\"];\n  3 -->|fasta_out| 5;\n  6[\"Count.seqs\"];\n  3 -->|groups_out| 6;\n  5 -->|out_names| 6;"
     },
     {
@@ -167,7 +167,7 @@
       "name": "Workflow 2: Data Cleaning And Chimera Removal [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "title": "Workflow 2: Data Cleaning And Chimera Removal [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "test_results": null,
-      "modified": "2024-05-19 00:08:26 +0000",
+      "modified": "2024-05-20 00:08:08 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAligned Sequences\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nCount Table\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Summary.seqs\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Screen.seqs\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  4[\"Filter.seqs\"];\n  3 -->|fasta_out| 4;\n  5[\"Unique.seqs\"];\n  4 -->|filteredfasta| 5;\n  3 -->|count_out| 5;\n  6[\"Pre.cluster\"];\n  5 -->|out_fasta| 6;\n  5 -->|out_count| 6;\n  7[\"Summary.seqs\"];\n  6 -->|count_out| 7;\n  6 -->|fasta_out| 7;\n  a0bbcba1-40f9-4678-9c47-8bdb4e0b7f6d[\"Output\\nSummary.seqs on input dataset(s): summary\"];\n  7 --> a0bbcba1-40f9-4678-9c47-8bdb4e0b7f6d;\n  style a0bbcba1-40f9-4678-9c47-8bdb4e0b7f6d stroke:#2c3143,stroke-width:4px;\n  8[\"Chimera.vsearch\"];\n  6 -->|fasta_out| 8;\n  6 -->|count_out| 8;\n  9[\"Remove.seqs\"];\n  8 -->|out_accnos| 9;\n  8 -->|out_count| 9;\n  6 -->|fasta_out| 9;\n  10[\"Summary.seqs\"];\n  9 -->|count_out| 10;\n  9 -->|fasta_out| 10;"
     },
     {
@@ -189,7 +189,7 @@
       "name": "Workflow 3: Classification [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "title": "Workflow 3: Classification [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "test_results": null,
-      "modified": "2024-05-19 00:08:26 +0000",
+      "modified": "2024-05-20 00:08:08 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nCleaned Sequences\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nCount Table\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nTraining set FASTA\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nTraining set Taxonomy\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Classify.seqs\"];\n  2 -->|output| 4;\n  1 -->|output| 4;\n  0 -->|output| 4;\n  3 -->|output| 4;\n  5[\"Remove.lineage\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  4 -->|taxonomy_out| 5;\n  6[\"Summary.seqs\"];\n  5 -->|count_out| 6;\n  5 -->|fasta_out| 6;"
     },
     {
@@ -211,7 +211,7 @@
       "name": "Workflow 4: Mock OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "title": "Workflow 4: Mock OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "test_results": null,
-      "modified": "2024-05-19 00:08:26 +0000",
+      "modified": "2024-05-20 00:08:08 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nMock Count Table\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nMock Sequences\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Dist.seqs\"];\n  1 -->|output| 2;\n  3[\"Cluster\"];\n  0 -->|output| 3;\n  2 -->|out_dist| 3;\n  4[\"Make.shared\"];\n  0 -->|output| 4;\n  3 -->|otulist| 4;\n  5[\"Rarefaction.single\"];\n  4 -->|shared| 5;"
     },
     {
@@ -233,7 +233,7 @@
       "name": "Workflow 5: OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "title": "Workflow 5: OTU Clustering [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "test_results": null,
-      "modified": "2024-05-19 00:08:26 +0000",
+      "modified": "2024-05-20 00:08:08 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSequences\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nCount Table\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nTaxonomy\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Remove.groups\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output| 3;\n  4[\"Cluster.split\"];\n  3 -->|fasta_out| 4;\n  3 -->|count_out| 4;\n  3 -->|taxonomy_out| 4;\n  5[\"Make.shared\"];\n  3 -->|count_out| 5;\n  4 -->|otulist| 5;\n  6[\"Classify.otu\"];\n  3 -->|count_out| 6;\n  4 -->|otulist| 6;\n  3 -->|taxonomy_out| 6;\n  7[\"Count.groups\"];\n  5 -->|shared| 7;\n  8[\"Sub.sample\"];\n  5 -->|shared| 8;"
     },
     {
@@ -255,7 +255,7 @@
       "name": "Workflow 6: Alpha Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "title": "Workflow 6: Alpha Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "test_results": null,
-      "modified": "2024-05-19 00:08:26 +0000",
+      "modified": "2024-05-20 00:08:08 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nShared file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Rarefaction.single\"];\n  0 -->|output| 1;\n  2[\"Summary.single\"];\n  0 -->|output| 2;\n  3[\"Plotting tool\"];\n  1 -->|rarefactioncurves| 3;"
     },
     {
@@ -277,7 +277,7 @@
       "name": "Workflow7: Beta Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "title": "Workflow7: Beta Diversity [Galaxy Training: 16S Microbial Analysis With Mothur]",
       "test_results": null,
-      "modified": "2024-05-19 00:08:26 +0000",
+      "modified": "2024-05-20 00:08:08 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nShared file from Make.shared\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nSub.sample shared\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Dist.shared\"];\n  0 -->|output| 2;\n  3[\"Collapse Collection\"];\n  1 -->|output| 3;\n  4[\"Heatmap.sim\"];\n  2 -->|distfiles| 4;\n  5[\"Tree.shared\"];\n  2 -->|distfiles| 5;\n  6[\"Venn\"];\n  3 -->|output| 6;\n  7[\"Newick Display\"];\n  5 -->|tre| 7;"
     }
   ],
