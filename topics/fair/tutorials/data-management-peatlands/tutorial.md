@@ -43,7 +43,7 @@ This tutorial is a short introduction to writing a Data Management Plan (DMP) wi
 
 You can find more information on DMPs in the [Research Data Management Toolkit for Life Sciences]( https://rdmkit.elixir-europe.org/)
 
-> <agenda-title>Agenda</agenda-title>
+> <agenda-title></agenda-title>
 >
 > In this tutorial we will cover:
 >
@@ -90,7 +90,7 @@ There are several ways to set up FAIR (Findable, Accessible, Interoperable, Reus
 * Interoperable (I): Documentation and data quality, and community standards for data exchange (e.g. tab-delimited text).
 * Reusable (R): Storage and backup supported by legal and ethical requirements, as well as data release policies.
 
-More information is available in the [FAIR data management tutorial](https://training.galaxyproject.org/training-material/topics/fair/tutorials/data-management/tutorial.html)
+More information is available in the [FAIR data management tutorial]({% link topics/fair/tutorials/data-management/tutorial.md %})
 
 # Conclusion
 
@@ -101,8 +101,8 @@ Creating a DMP will allow you and your institution to make the most of your peat
 
 
 ##  Suggested reading
-* [FAIR in a nutshell](https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html) 
-* [The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016)](https://doi.org/10.1038/sdata.2016.18)
+* [FAIR in a nutshell]({% link topics/fair/tutorials/fair-intro/tutorial.md %}) 
+* [The published FAIR Guiding Principles: Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and stewardship. Sci Data 3, 160018 (2016)]({% cite Wilkinson2016 %})
 * [Recipes for data FAIRification, written by domain experts giving real-world examples: FAIR Cookbook](https://faircookbook.elixir-europe.org/content/home.html)
 * [Documentation and frameworks for data FAIRification. Each of the 15 FAIR principles is put into context with real data examples: GO FAIR](https://www.go-fair.org/fair-principles)
 * [FAIR walkthrough using examples from across all academic disciplines: How to FAIR](https://howtofair.dk/)
