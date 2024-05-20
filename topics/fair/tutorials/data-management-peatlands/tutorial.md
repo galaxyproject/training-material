@@ -3,14 +3,13 @@ layout: tutorial_hands_on
 title: Introduction to Data Management Plan (DMP) for Peatland Research and PeatDataHub
 level: Introductory
 abbreviations:
-  
   DMP: Data Management Plan
   FAIR: Findable, Accessible, Interoperable, Reusable
 zenodo_link: ''
 questions:
 - Why create a DMP for peatland research?
 - How to apply FAIR data management solutions for peatland research?
-Objectives:
+objectives:
 - Understand the importance of data management in peatland research.
 - Learn how to create a data management plan (DMP) for peatland research
 - Create a first draft of a data management plan for peatland research
@@ -37,8 +36,6 @@ subtopic: fair-data
 
 ---
 
-
-# Introduction
 
 Peatland monitoring and research generates data that is used for management, conservation and policy related to these ecosystems. To ensure that your project data is collected systematically and can be analysed, shared, and re-used it is important to have a data management plan.
 
