@@ -179,8 +179,8 @@ We will use docker and docker-compose for this step. If you don't have it instal
 > >  ]
 > >});
 > > ```
-> This will add a user account with read-only permision to beacon database. This is important to avoid unwanted modefications to the Beacon database. 
-> To know more about MongoDB please read the [MongoDB documentation](https://www.mongodb.com/docs/)
+> This will add a user (user name query_user and password querypassword) account with read-only permision to beacon database. This is important to avoid unwanted modefications to the Beacon database. 
+> To know more about MongoDB please read the [MongoDB documentation](https://www.mongodb.com/docs/),
 > 10. Run the tool `$docker-compose` with the following parameters
 > ```bash
 > docker-compose up -d
@@ -205,107 +205,191 @@ We will use docker and docker-compose for this step. If you don't have it instal
 {: .hands_on}
 
 
-# prepare the Data
 
-We will preprocess the genomic variant data and convert it from VCF format into JSON format.
+# Data Preparation
+First, start with uploading and preparing the input data to import them itno beacon database. The datasets were optained from [1000genomes-dragen](https://us-west-2.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&tab=objects). 
 
-We will start with preparing the environment by installing the tools. The tutorial was made to create a Beacon for a structural variant sample from the 1000 human genome project using the LINUX Ubuntu 20.04 system. Please modify the scripts for your system if required.
+| Name | Format | Data size (MB) |
+| ---- | ----- | ------------ |
+| HG00096.cnv.vcf | vcf | HG00096.cnv.vcf KB |
+| igsr-1000-genomes-30x-on-grch38.tsv | tsv | 405.7 KB |
 
+## Get data
 
-## Setting up the local environment
-
-> <hands-on-title>Prepare the local environment</hands-on-title>
+> <hands-on-title>Data upload</hands-on-title>
 >
-> 1. Create a directory in your local environment and give it a suitable name
-> ```bash
-> mkdir <directory_name>
-> ```
-> 2. Use the shell `$cd` command to move to the created directory
-> ```bash
-> cd <directory_name>
-> ```
-> 3. Create three directories inside the previously created directory and name them as **inputs**, **output** and **scripts**
-> ```bash
-> mkdir inputs
-> mkdir outputs
-> mkdir scripts
-> ```
-> 4. Create a conda environment and give it a suitable name
-> ```bash
-> conda create -n <enviroment name>
-> ```
-> 5. Activate the conda environment
-> ```bash
-> conda activate <enviroment name>
-> ``` 
-> 6. Add the bioconda channel to your channels list
-> ```bash
-> conda config --add channels defaults
-> conda config --add channels bioconda
-> conda config --add channels conda-forge
-> conda config --set channel_priority strict
-> ``` 
-> 7. Move to the scripts directory and install vcf2json.py, phenopacket.py tools from [Zenodo](https://zenodo.org/records/10658688) using the `$wget` tool. 
-> ```bash
-> cd scripts
-> wget https://zenodo.org/records/10657357/files/phenopacket.py
-> wget https://zenodo.org/records/10657357/files/vcf2json.py
-> ```
+> 1. For this tutorial, make a new history.
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
+> 2. Import the data files from
+>    [Zenodo](https://zenodo.org/records/10658688):
+>
+>    ```
+>    https://zenodo.org/records/10658688/files/HG00096.cnv.vcf
+>    https://zenodo.org/records/10658688/files/igsr-1000-genomes-30x-on-grch38.tsv
+>    ```
+>   This will download the strucral varient and the metadata file.
+> 
+>    In some cases the same dataset can be found in the Galaxy shared data library. 
+>    Ask the instructor for more details about this.
+>
+>    The dat aset can also be downloaded a local storage.  
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 4. Give the data meaningful names and tags to facilitate analysis.
+>     
+>
+>    When uploading data from a link, Galaxy names the files after the link address.
+>    It might be useful to change or modify the name to something more meaningful.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+>
+> 5. To track the data in the history, it is recommended to tag the datasets by attaching a meaningful tag '#'
+>    to them. The tagging will automatically be attached to any file generated
+>    from the original tagged dataset.
+>   *e.g.*, `#genomicvariants` for structural varients VCF file and
+>   *e.g.*, `#phenopacket` metadata tsv file.
+>
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+>
 {: .hands_on}
-
 
 
 ## Convert the Genomic Variants VCF file into JSON
+We will preprocess the genomic variant data and convert it from VCF format into JSON format.
 
-> <hands-on-title>Convert VCF file into JSON</hands-on-title>
+> <hands-on-title>Convert the Genomic Variants VCF file into JSON</hands-on-title>
+> 1. Run {% tool [ CNV VCF2JSON](toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.0.4+galaxy0) %} on the structural variants VCF file
+>       - {% icon param-files %} *"CNV VCF file"*: `HG00096.cnv.vcf` file
 >
-> 1. Change the directory to the inputs directory
-> ```bash
-> cd path/to/the/inputs
-> ```
-> 2. Install the genomic variants file from [Zenodo](https://zenodo.org/records/10658688)
-> ```bash
-> wget https://zenodo.org/records/10657357/files/HG00096.cnv.vcf
-> ``` 
-> 3. Run the tool `$vcf2json.py` tool
-> ```bash
-> python path/to/tools/vcf2json.py -i path/to/inputs/HG00096.cnv.vcf -o path/to/outputs/HG00096.json
-> ```
-> This will converth the genomic variations VCF file into JSON file
+>
+>
+> 2. Inspect the *JSON* output produced by the tool
+>
+>    > <question-title></question-title>
+>    >
+>    > In the inpected JSON file, what are the key variables and why are they important for genomic analysis?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. **biosampleId**: This variable represents the unique identifier for the biological sample being analyzed.
+>    > >    Understanding the biosample allows researchers to trace the origins of the genetic data and contextualize its
+>    > >    relevance within a specific study or experiment.
+>    > >
+>    > > 2. **assemblyId**: The assemblyId denotes the reference genome assembly against which the genetic variants are aligned. 
+>    > >    This is crucial for ensuring consistency and accuracy in genomic analyses, as different assemblies may produce varying results.
+>    > >
+>    > > 3. **variantInternalId**: This identifier specifies the genomic location and type of the variant, providing a standardized format for 
+>    > >    referencing genetic variations. It enables researchers to precisely locate and identify specific genetic alterations within the genome.
+>    > >
+>    > > 4. **variantType**: The variantType indicates the type of genetic variant being described, such as deletion (DEL), insertion (INS), or substitution (SNP). 
+>    > >    Understanding the variant type is essential for interpreting its potential impact on gene function and phenotype.
+>    > >
+>    > > 5. **variantId**: This variable serves as a unique identifier for the variant, often referencing external databases or ontologies. 
+>    > >    It facilitates data integration and interoperability across different genomic datasets and analysis platforms.
+>    > >
+>    > >
+>    > > 6. **start** and **end**: These values specify the genomic coordinates of the variant, delineating its precise location within the reference genome. 
+>    > >    Knowing the start and end positions is crucial for accurately defining the boundaries of the variant and assessing its potential functional consequences.
+>    > >
+>    > > 7. **referenceName**: The referenceName indicates the chromosome or genomic contig on which the variant is located. It provides crucial 
+>    > >    contextual information for interpreting the genomic coordinates and understanding the genetic context of the variant.
+>    > >
+>    > >
+>    > > 8. **info**: This section contains additional information related to the variant, such as legacy identifiers, copy number counts (cnCount), 
+>    > >    and copy number values (cnValue). These supplementary details can provide insights into the structural and functional 
+>    > >    implications of the variant within the genome.
+>    > >
+>    > >
+>    > >    Understanding these key variables is essential for conducting effective genomic analyses, as they provide critical information 
+>    > >    about the genetic variants under investigation and enable researchers to interpret their biological significance accurately.
+>    > >
+>    > {: .solution}
+>    {: .question}
 {: .hands_on}
 
 
 
-## Preprosses the Metadata Files
+
+
+## Phenopacket Schema
 
 To help us better understand, diagnose, and treat both common and unusual diseases, the Phenopacket Schema is an open standard for exchanging disease and phenotypic data. Building more comprehensive 
 disease models is made possible for physicians, biologists, and researchers studying disease and drugs by using Phenopackets, which connect comprehensive phenotype descriptions with patient, disease, 
 and genetic data. 
 
-
-![v2.0 phenopacket schema](../../images/phenopacket-schema-v2-overview.png "Overview of v2.0 of the schema optained from Phenopacket Schema Documentation")
-
 We are using the Biosamles phenopacket, This is a biological material unit from which the substrate molecules (genomic DNA, RNA, proteins, etc.) are extracted for molecular analyses 
 (mass spectrometry, array hybridization, sequencing, etc.). Tissue biopsies, single cells from cultures used for single-cell genome sequencing, and protein fractions from gradient centrifugations are a 
 few examples. The same Biosample may be referred to by many instances (e.g., technical replicates) or types of research (e.g., both RNA-seq and genomic array experiments).
 
-> <hands-on-title>JSON Phemopacket Metadata preparation</hands-on-title>
->
-> 1. Change the directory to the inputs directory
-> ```bash
-> cd path/to/inputs
-> ```
-> 2. Install the Phenopacket metadata from [Zenodo](https://zenodo.org/records/10658688)
-> ```bash
-> wget https://zenodo.org/records/10657357/files/igsr-1000-genomes-30x-on-grch38.tsv
-> ``` 
-> 3. Run the tool `$phenopacket.py` with the following parameters
-> ```bash
-> python path/to/tools/phenopacket.py -i path/to/inputs/igsr-1000-genomes-30x-on-grch38.tsv -o path/to/outputs/phenopacket.json
-> ```
-> The tool will extract the information we need from the TSV file and create a phenopacket JSON file from them following a modified biosample schema.
-{: .hands_on}
+![v2.0 phenopacket schema](../../images/phenopacket-schema-v2-overview.png "Overview of v2.0 of the schema optained from Phenopacket Schema Documentation")
 
+
+> <hands-on-title>Create Phenopacket Schema json file from Metadata</hands-on-title>
+> 1. Run {% tool [ CNV Phenopacket](toolshed.g2.bx.psu.edu/repos/iuc/cnv_phenopacket/cnv_phenopacket/1.0.2+galaxy0) %} on the structural variants VCF file
+>       - {% icon param-files %} *"Metadata file"*: `igsr-1000-genomes-30x-on-grch38.tsv` file
+>
+>
+>
+> 2. Inspect the *JSON* output produced by the tool
+>
+>    > <question-title></question-title>
+>    >
+>    > In the inpected JSON file, what are the key variables and why are they important for genomic analysis?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. **id**: The id field serves as a unique identifier for the individual described in the Phenopacket. This 
+>    > >    identifier allows researchers to track and reference specific individuals across different datasets 
+>    > >    and analyses.
+>    > >
+>    > > 2. **individualId**: This variable represents the individual's unique identifier within the dataset or 
+>    > >    study. It helps maintain data integrity and consistency by ensuring accurate identification of the 
+>    > >    individual across various analyses and datasets.
+>    > >
+>    > > 3. **sex**: The sex field specifies the biological sex of the individual, providing important demographic
+>    > >    information for genomic analyses. Understanding the individual's sex is crucial for interpreting 
+>    > >    genetic variations and assessing their potential relevance to sex-specific traits or diseases.
+>    > >
+>    > > 4. **description**: This field provides additional information about the individual, such as their 
+>    > >    participation in specific genomic projects or studies. It offers context for the individual's 
+>    > >    genomic data and helps researchers understand the sources and potential biases of the data.
+>    > >
+>    > > 5. **procedure**: The procedure field contains information about the procedures or protocols used to 
+>    > >    generate the genomic data associated with the individual. This includes codes or identifiers that 
+>    > >    reference specific methodologies or experimental protocols, ensuring transparency and 
+>    > >    reproducibility in genomic analyses.
+>    > >
+>    > >
+>    > > 6. **files**: This section contains details about the genomic data files associated with the individual. It 
+>    > >    includes information such as file identifiers and attributes like the data format (htsFormat) and 
+>    > >    genome assembly (genomeAssembly). Understanding these file attributes is essential for 
+>    > >    accessing and interpreting the individual's genomic data effectively.
+>    > >
+>    > > 7. **htsFormat**: The htsFormat field specifies the format of the genomic data files, such as Variant 
+>    > >    Call Format (VCF). Knowing the data format is crucial for selecting appropriate analysis tools 
+>    > >    and pipelines and ensuring compatibility with downstream analysis workflows.
+>    > >
+>    > > 8. **genomeAssembly**: This variable denotes the reference genome assembly used for aligning and
+>    > >    interpreting the individual's genomic data. It ensures consistency and accuracy in genomic 
+>    > >    analyses by specifying the genomic reference against which genetic variants are annotated and interpreted.
+>    > >
+>    > >
+>    > >    By understanding these key variables in the Phenopacket schema, researchers can effectively interpret and analyze the genomic profile 
+>    > >    of the individual described, facilitating insights into genetic variations and their potential implications for health and disease.
+>    > >
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
 
 
 
