@@ -117,67 +117,49 @@
   },
   "hands_on": true,
   "slides": false,
-  "mod_date": "2024-03-05 11:50:50 +0000",
+  "mod_date": "2024-05-17 08:16:07 +0000",
   "pub_date": "2020-04-30 14:15:23 +0000",
-  "version": 18,
+  "version": 20,
   "workflows": [
     {
       "workflow": "ml_classification.ga",
-      "tests": false,
+      "tests": true,
       "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_machinelearning/workflows/ml_classification.ga",
       "path": "topics/statistics/tutorials/classification_machinelearning/workflows/ml_classification.ga",
       "wfid": "statistics-classification_machinelearning",
       "wfname": "ml_classification",
       "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification",
-      "license": null,
+      "license": "MIT",
       "creators": [
-
+        {
+          "class": "Organization",
+          "identifier": "https://orcid.org/0000-0002-2068-4695",
+          "name": "Anup Kumar"
+        }
       ],
       "name": "ml_classification",
       "title": "ml_classification",
       "test_results": null,
-      "modified": "2024-05-21 10:37:54 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ntrain_rows.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\ntest_rows_labels.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Generalized linear models\"];\n  2 -->|output| 10;\n  4 -->|outfile_fit| 10;\n  11[\"Nearest Neighbors Classification\"];\n  2 -->|output| 11;\n  5 -->|outfile_fit| 11;\n  12[\"Support vector machines SVMs\"];\n  2 -->|output| 12;\n  6 -->|outfile_fit| 12;\n  13[\"Ensemble methods\"];\n  2 -->|output| 13;\n  7 -->|outfile_fit| 13;\n  14[\"Hyperparameter Search\"];\n  0 -->|output| 14;\n  0 -->|output| 14;\n  3 -->|outfile| 14;\n  9 -->|outfile| 14;\n  15[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  8 -->|out_file1| 15;\n  10 -->|outfile_predict| 15;\n  4 -->|outfile_fit| 15;\n  16[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  1 -->|output| 16;\n  11 -->|outfile_predict| 16;\n  5 -->|outfile_fit| 16;\n  17[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  1 -->|output| 17;\n  12 -->|outfile_predict| 17;\n  6 -->|outfile_fit| 17;\n  18[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  1 -->|output| 18;\n  13 -->|outfile_predict| 18;\n  7 -->|outfile_fit| 18;\n  19[\"Ensemble methods\"];\n  2 -->|output| 19;\n  14 -->|outfile_object| 19;\n  2[\"ℹ️ Input Dataset\\ntest_rows.csv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  20[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  1 -->|output| 20;\n  19 -->|outfile_predict| 20;\n  14 -->|outfile_object| 20;\n  3[\"Pipeline Builder\"];\n  4[\"Generalized linear models\"];\n  0 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Nearest Neighbors Classification\"];\n  0 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Support vector machines SVMs\"];\n  0 -->|output| 6;\n  0 -->|output| 6;\n  7[\"Ensemble methods\"];\n  0 -->|output| 7;\n  0 -->|output| 7;\n  8[\"Remove beginning\"];\n  1 -->|output| 8;\n  9[\"Estimator attributes\"];\n  3 -->|outfile| 9;"
+      "modified": "2024-05-21 10:42:16 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ntrain_rows.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\ntest_rows_labels.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\ntest_rows.csv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Pipeline Builder\"];\n  4[\"Generalized linear models\"];\n  0 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Nearest Neighbors Classification\"];\n  0 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Support vector machines SVMs\"];\n  0 -->|output| 6;\n  0 -->|output| 6;\n  7[\"Ensemble methods\"];\n  0 -->|output| 7;\n  0 -->|output| 7;\n  8[\"Remove beginning\"];\n  1 -->|output| 8;\n  9[\"Hyperparameter Search\"];\n  3 -->|outfile| 9;\n  0 -->|output| 9;\n  0 -->|output| 9;\n  10[\"Generalized linear models\"];\n  2 -->|output| 10;\n  4 -->|outfile_fit| 10;\n  11[\"Nearest Neighbors Classification\"];\n  2 -->|output| 11;\n  5 -->|outfile_fit| 11;\n  12[\"Support vector machines SVMs\"];\n  2 -->|output| 12;\n  6 -->|outfile_fit| 12;\n  13[\"Ensemble methods\"];\n  2 -->|output| 13;\n  7 -->|outfile_fit| 13;\n  14[\"Ensemble methods\"];\n  2 -->|output| 14;\n  9 -->|outfile_object| 14;\n  15[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  8 -->|out_file1| 15;\n  10 -->|outfile_predict| 15;\n  4 -->|outfile_fit| 15;\n  16[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  1 -->|output| 16;\n  11 -->|outfile_predict| 16;\n  5 -->|outfile_fit| 16;\n  17[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  1 -->|output| 17;\n  12 -->|outfile_predict| 17;\n  6 -->|outfile_fit| 17;\n  18[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  1 -->|output| 18;\n  13 -->|outfile_predict| 18;\n  7 -->|outfile_fit| 18;\n  19[\"Plot confusion matrix, precision, recall and ROC and AUC curves\"];\n  1 -->|output| 19;\n  14 -->|outfile_predict| 19;\n  9 -->|outfile_object| 19;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/classification_machinelearning/tutorial.json",
   "tools": [
     "Remove beginning1",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.4",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_estimator_attributes/sklearn_estimator_attributes/1.0.8.2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.4",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.2",
-    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.4"
+    "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.11.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.11.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.11.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.11.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.11.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.11.0"
   ],
   "supported_servers": {
     "exact": [
       {
-        "url": "https://usegalaxy.cz/",
-        "name": "UseGalaxy.cz",
-        "usegalaxy": false
-      },
-      {
         "url": "https://usegalaxy.eu",
         "name": "UseGalaxy.eu",
-        "usegalaxy": true
-      },
-      {
-        "url": "https://usegalaxy.no/",
-        "name": "UseGalaxy.no",
-        "usegalaxy": false
-      },
-      {
-        "url": "https://usegalaxy.org",
-        "name": "UseGalaxy.org (Main)",
         "usegalaxy": true
       },
       {
@@ -191,6 +173,21 @@
         "url": "https://usegalaxy.be/",
         "name": "UseGalaxy.be",
         "usegalaxy": false
+      },
+      {
+        "url": "https://usegalaxy.cz/",
+        "name": "UseGalaxy.cz",
+        "usegalaxy": false
+      },
+      {
+        "url": "https://usegalaxy.no/",
+        "name": "UseGalaxy.no",
+        "usegalaxy": false
+      },
+      {
+        "url": "https://usegalaxy.org",
+        "name": "UseGalaxy.org (Main)",
+        "usegalaxy": true
       }
     ]
   },
@@ -203,104 +200,55 @@
       {
         "name": "plotly_ml_performance_plots",
         "owner": "bgruening",
-        "revisions": "62e3a4e8c54c",
+        "revisions": "1c5dcef5ce0f",
         "tool_panel_section_label": "Graph/Display Data",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "sklearn_build_pipeline",
         "owner": "bgruening",
-        "revisions": "9c3e1d3235c8",
-        "tool_panel_section_label": "Machine Learning",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "sklearn_build_pipeline",
-        "owner": "bgruening",
-        "revisions": "b1eda492f063",
+        "revisions": "4c4ec859c31a",
         "tool_panel_section_label": "Machine Learning",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "sklearn_ensemble",
         "owner": "bgruening",
-        "revisions": "841a6cc5fc58",
-        "tool_panel_section_label": "Machine Learning",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "sklearn_ensemble",
-        "owner": "bgruening",
-        "revisions": "a07ab242b0b5",
-        "tool_panel_section_label": "Machine Learning",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "sklearn_estimator_attributes",
-        "owner": "bgruening",
-        "revisions": "07843f917990",
+        "revisions": "060ca94ac049",
         "tool_panel_section_label": "Machine Learning",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "sklearn_generalized_linear",
         "owner": "bgruening",
-        "revisions": "40f4447733b2",
-        "tool_panel_section_label": "Machine Learning",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "sklearn_generalized_linear",
-        "owner": "bgruening",
-        "revisions": "dc4b5fd604a6",
+        "revisions": "d4808d5b83da",
         "tool_panel_section_label": "Machine Learning",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "sklearn_nn_classifier",
         "owner": "bgruening",
-        "revisions": "cd02bf168d23",
-        "tool_panel_section_label": "Machine Learning",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "sklearn_nn_classifier",
-        "owner": "bgruening",
-        "revisions": "2c58b83c9bad",
+        "revisions": "8b1b2b91f8d0",
         "tool_panel_section_label": "Machine Learning",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "sklearn_searchcv",
         "owner": "bgruening",
-        "revisions": "e5a5ad882f1f",
-        "tool_panel_section_label": "Machine Learning",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "sklearn_searchcv",
-        "owner": "bgruening",
-        "revisions": "301e07345c93",
+        "revisions": "7626ea9c2e1b",
         "tool_panel_section_label": "Machine Learning",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
         "name": "sklearn_svm_classifier",
         "owner": "bgruening",
-        "revisions": "02d2be90dedb",
-        "tool_panel_section_label": "Machine Learning",
-        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-      },
-      {
-        "name": "sklearn_svm_classifier",
-        "owner": "bgruening",
-        "revisions": "b7c3e9a3b954",
+        "revisions": "80852884053f",
         "tool_panel_section_label": "Machine Learning",
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: plotly_ml_performance_plots\n  owner: bgruening\n  revisions: 62e3a4e8c54c\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_build_pipeline\n  owner: bgruening\n  revisions: 9c3e1d3235c8\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_build_pipeline\n  owner: bgruening\n  revisions: b1eda492f063\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_ensemble\n  owner: bgruening\n  revisions: 841a6cc5fc58\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_ensemble\n  owner: bgruening\n  revisions: a07ab242b0b5\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_estimator_attributes\n  owner: bgruening\n  revisions: '07843f917990'\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_generalized_linear\n  owner: bgruening\n  revisions: 40f4447733b2\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_generalized_linear\n  owner: bgruening\n  revisions: dc4b5fd604a6\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_nn_classifier\n  owner: bgruening\n  revisions: cd02bf168d23\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_nn_classifier\n  owner: bgruening\n  revisions: 2c58b83c9bad\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_searchcv\n  owner: bgruening\n  revisions: e5a5ad882f1f\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_searchcv\n  owner: bgruening\n  revisions: 301e07345c93\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_svm_classifier\n  owner: bgruening\n  revisions: 02d2be90dedb\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_svm_classifier\n  owner: bgruening\n  revisions: b7c3e9a3b954\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: plotly_ml_performance_plots\n  owner: bgruening\n  revisions: 1c5dcef5ce0f\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_build_pipeline\n  owner: bgruening\n  revisions: 4c4ec859c31a\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_ensemble\n  owner: bgruening\n  revisions: 060ca94ac049\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_generalized_linear\n  owner: bgruening\n  revisions: d4808d5b83da\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_nn_classifier\n  owner: bgruening\n  revisions: 8b1b2b91f8d0\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_searchcv\n  owner: bgruening\n  revisions: 7626ea9c2e1b\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_svm_classifier\n  owner: bgruening\n  revisions: 80852884053f\n  tool_panel_section_label: Machine Learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {

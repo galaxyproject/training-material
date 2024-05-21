@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@64b796e249a4f1d4ad24500c73b708259f7f31c7",
+		release: "galaxy-training-network@c28da569d523eb1872813ad01ae502c3960acc03",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -232,10 +232,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<h5 class="card-title">ml_classification</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
 				
+				Anup Kumar
+				
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated Apr 30, 2020</small>
+				<small class="text-muted">Last updated May 21, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification">Launch in Tutorial Mode</span>
@@ -245,11 +247,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 			License: 
 				
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
 				<br/>
-			Tests: ❌
+			Tests: ✅
 			Results: Not yet automated
 			</p>
 <div class="dropdown">
@@ -260,13 +261,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_machinelearning/workflows/ml_classification.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-classification_machinelearning/versions/ml_classification"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -278,6 +279,27 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   style 0 stroke:#2c3143,stroke-width:4px;
   1["ℹ️ Input Dataset\ntest_rows_labels.csv"];
   style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\ntest_rows.csv"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["Pipeline Builder"];
+  4["Generalized linear models"];
+  0 -->|output| 4;
+  0 -->|output| 4;
+  5["Nearest Neighbors Classification"];
+  0 -->|output| 5;
+  0 -->|output| 5;
+  6["Support vector machines SVMs"];
+  0 -->|output| 6;
+  0 -->|output| 6;
+  7["Ensemble methods"];
+  0 -->|output| 7;
+  0 -->|output| 7;
+  8["Remove beginning"];
+  1 -->|output| 8;
+  9["Hyperparameter Search"];
+  3 -->|outfile| 9;
+  0 -->|output| 9;
+  0 -->|output| 9;
   10["Generalized linear models"];
   2 -->|output| 10;
   4 -->|outfile_fit| 10;
@@ -290,11 +312,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   13["Ensemble methods"];
   2 -->|output| 13;
   7 -->|outfile_fit| 13;
-  14["Hyperparameter Search"];
-  0 -->|output| 14;
-  0 -->|output| 14;
-  3 -->|outfile| 14;
-  9 -->|outfile| 14;
+  14["Ensemble methods"];
+  2 -->|output| 14;
+  9 -->|outfile_object| 14;
   15["Plot confusion matrix, precision, recall and ROC and AUC curves"];
   8 -->|out_file1| 15;
   10 -->|outfile_predict| 15;
@@ -311,32 +331,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   1 -->|output| 18;
   13 -->|outfile_predict| 18;
   7 -->|outfile_fit| 18;
-  19["Ensemble methods"];
-  2 -->|output| 19;
-  14 -->|outfile_object| 19;
-  2["ℹ️ Input Dataset\ntest_rows.csv"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  20["Plot confusion matrix, precision, recall and ROC and AUC curves"];
-  1 -->|output| 20;
-  19 -->|outfile_predict| 20;
-  14 -->|outfile_object| 20;
-  3["Pipeline Builder"];
-  4["Generalized linear models"];
-  0 -->|output| 4;
-  0 -->|output| 4;
-  5["Nearest Neighbors Classification"];
-  0 -->|output| 5;
-  0 -->|output| 5;
-  6["Support vector machines SVMs"];
-  0 -->|output| 6;
-  0 -->|output| 6;
-  7["Ensemble methods"];
-  0 -->|output| 7;
-  0 -->|output| 7;
-  8["Remove beginning"];
-  1 -->|output| 8;
-  9["Estimator attributes"];
-  3 -->|outfile| 9;
+  19["Plot confusion matrix, precision, recall and ROC and AUC curves"];
+  1 -->|output| 19;
+  14 -->|outfile_predict| 19;
+  9 -->|outfile_object| 19;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -366,7 +364,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/64b796e249a4f1d4ad24500c73b708259f7f31c7">64b796e</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c28da569d523eb1872813ad01ae502c3960acc03">c28da56</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
