@@ -436,7 +436,7 @@ The visualization tool creates the following ROC plot:
 
 # Create data processing pipeline
 
-At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a zipped file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
+At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a `h5mlm` file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
 
 > <hands-on-title>Create pipeline</hands-on-title>
 >
@@ -499,7 +499,7 @@ Using the **Hyperparameter search** tool, we found the best model, based on the 
 >
 > 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
->        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
+>        - {% icon param-files %} *"Models"*: `h5mlm` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
 >

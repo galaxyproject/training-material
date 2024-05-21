@@ -334,10 +334,9 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 >
 > {% tool [Hyperparameter search](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.11.0) %}:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
->        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
+>        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `h5mlm` file (output of **Pipeline builder** {% icon tool %})
 >        - *"Is the estimator a deep learning model?"*: `No`
 >        - In *"Search parameters Builder"*:
->             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (the other output of **Pipeline builder** {% icon tool %})
 >             - In *"Parameter settings for search"*:
 >                 - {% icon param-repeat %} *"1: Parameter settings for search"*
 >                    - *"Choose a parameter name (with current value)"*: `n_estimators: 100`
@@ -395,7 +394,7 @@ Using the **Hyperparameter search** tool, we optimized our model, based on the t
 >
 > 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
->        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
+>        - {% icon param-files %} *"Models"*: `h5mlm` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
 >
