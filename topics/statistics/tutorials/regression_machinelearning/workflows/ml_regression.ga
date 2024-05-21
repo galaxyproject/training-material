@@ -2,8 +2,16 @@
     "a_galaxy_workflow": "true",
     "annotation": "Regression in Machine Learning",
     "comments": [],
+    "creator": [
+        {
+            "class": "Organization",
+            "identifier": "https://orcid.org/0000-0002-2068-4695",
+            "name": "Anup Kumar"
+        }
+    ],
     "format-version": "0.1",
-    "name": "Regression (from training material) (imported from uploaded file)",
+    "license": "MIT",
+    "name": "ml_regression",
     "steps": {
         "0": {
             "annotation": "",
@@ -156,7 +164,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"train\", \"__current_case__\": 1, \"selected_algorithms\": {\"selected_algorithm\": \"LinearRegression\", \"__current_case__\": 2, \"input_options\": {\"selected_input\": \"tabular\", \"__current_case__\": 0, \"infile1\": {\"__class__\": \"RuntimeValue\"}, \"header1\": true, \"column_selector_options_1\": {\"selected_column_selector_option\": \"all_but_by_header_name\", \"__current_case__\": 3, \"col1\": \"Age\"}, \"infile2\": {\"__class__\": \"RuntimeValue\"}, \"header2\": true, \"column_selector_options_2\": {\"selected_column_selector_option2\": \"by_header_name\", \"__current_case__\": 2, \"col2\": \"Age\"}}, \"options\": {\"fit_intercept\": true, \"normalize\": false, \"copy_X\": true}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"train\", \"__current_case__\": 1, \"selected_algorithms\": {\"selected_algorithm\": \"LinearRegression\", \"__current_case__\": 2, \"input_options\": {\"selected_input\": \"tabular\", \"__current_case__\": 0, \"infile1\": {\"__class__\": \"ConnectedValue\"}, \"header1\": true, \"column_selector_options_1\": {\"selected_column_selector_option\": \"all_but_by_header_name\", \"__current_case__\": 3, \"col1\": \"Age\"}, \"infile2\": {\"__class__\": \"ConnectedValue\"}, \"header2\": true, \"column_selector_options_2\": {\"selected_column_selector_option2\": \"by_header_name\", \"__current_case__\": 2, \"col2\": \"Age\"}}, \"options\": {\"fit_intercept\": true, \"normalize\": false, \"copy_X\": true}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.11.0",
             "type": "tool",
             "uuid": "850e67d5-59a8-487c-96d5-cc87302a498c",
@@ -199,7 +207,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"train\", \"__current_case__\": 1, \"selected_algorithms\": {\"selected_algorithm\": \"GradientBoostingRegressor\", \"__current_case__\": 5, \"input_options\": {\"selected_input\": \"tabular\", \"__current_case__\": 0, \"infile1\": {\"__class__\": \"RuntimeValue\"}, \"header1\": true, \"column_selector_options_1\": {\"selected_column_selector_option\": \"all_but_by_header_name\", \"__current_case__\": 3, \"col1\": \"Age\"}, \"infile2\": {\"__class__\": \"RuntimeValue\"}, \"header2\": true, \"column_selector_options_2\": {\"selected_column_selector_option2\": \"by_header_name\", \"__current_case__\": 2, \"col2\": \"Age\"}}, \"options\": {\"loss\": \"ls\", \"learning_rate\": \"0.1\", \"n_estimators\": \"100\", \"max_depth\": \"3\", \"criterion\": \"friedman_mse\", \"min_samples_split\": \"2.0\", \"min_samples_leaf\": \"1.0\", \"min_weight_fraction_leaf\": \"0.0\", \"subsample\": \"1.0\", \"select_max_features\": {\"max_features\": \"auto\", \"__current_case__\": 0}, \"max_leaf_nodes\": null, \"min_impurity_decrease\": \"0.0\", \"alpha\": \"0.9\", \"verbose\": \"0\", \"warm_start\": false, \"random_state\": null}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"train\", \"__current_case__\": 1, \"selected_algorithms\": {\"selected_algorithm\": \"GradientBoostingRegressor\", \"__current_case__\": 5, \"input_options\": {\"selected_input\": \"tabular\", \"__current_case__\": 0, \"infile1\": {\"__class__\": \"ConnectedValue\"}, \"header1\": true, \"column_selector_options_1\": {\"selected_column_selector_option\": \"all_but_by_header_name\", \"__current_case__\": 3, \"col1\": \"Age\"}, \"infile2\": {\"__class__\": \"ConnectedValue\"}, \"header2\": true, \"column_selector_options_2\": {\"selected_column_selector_option2\": \"by_header_name\", \"__current_case__\": 2, \"col2\": \"Age\"}}, \"options\": {\"loss\": \"ls\", \"learning_rate\": \"0.1\", \"n_estimators\": \"100\", \"max_depth\": \"3\", \"criterion\": \"friedman_mse\", \"min_samples_split\": \"2.0\", \"min_samples_leaf\": \"1.0\", \"min_weight_fraction_leaf\": \"0.0\", \"subsample\": \"1.0\", \"select_max_features\": {\"max_features\": \"auto\", \"__current_case__\": 0}, \"max_leaf_nodes\": null, \"min_impurity_decrease\": \"0.0\", \"alpha\": \"0.9\", \"verbose\": \"0\", \"warm_start\": false, \"random_state\": null}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.11.0",
             "type": "tool",
             "uuid": "e912b6ac-1e0f-484a-94cd-17a87d83ca41",
@@ -261,10 +269,6 @@
             "inputs": [
                 {
                     "description": "runtime parameter for tool Hyperparameter Search",
-                    "name": "infile_estimator"
-                },
-                {
-                    "description": "runtime parameter for tool Hyperparameter Search",
                     "name": "input_options"
                 },
                 {
@@ -296,7 +300,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"infile_estimator\": {\"__class__\": \"RuntimeValue\"}, \"input_options\": {\"selected_input\": \"tabular\", \"__current_case__\": 0, \"infile1\": {\"__class__\": \"RuntimeValue\"}, \"header1\": true, \"column_selector_options_1\": {\"selected_column_selector_option\": \"all_but_by_header_name\", \"__current_case__\": 3, \"col1\": \"Age\"}, \"infile2\": {\"__class__\": \"RuntimeValue\"}, \"header2\": true, \"column_selector_options_2\": {\"selected_column_selector_option2\": \"by_header_name\", \"__current_case__\": 2, \"col2\": \"Age\"}}, \"is_deep_learning\": false, \"options\": {\"scoring\": {\"primary_scoring\": \"default\", \"__current_case__\": 0}, \"cv_selector\": {\"selected_cv\": \"default\", \"__current_case__\": 0, \"n_splits\": \"5\"}, \"verbose\": \"0\", \"error_score\": true, \"return_train_score\": false}, \"outer_split\": {\"split_mode\": \"no\", \"__current_case__\": 0}, \"save\": \"save_estimator\", \"search_algos\": {\"selected_search_algo\": \"GridSearchCV\", \"__current_case__\": 0}, \"search_params_builder\": {\"param_set\": [{\"__index__\": 0, \"sp_name\": null, \"sp_list\": \"\"}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"infile_estimator\": {\"__class__\": \"ConnectedValue\"}, \"input_options\": {\"selected_input\": \"tabular\", \"__current_case__\": 0, \"infile1\": {\"__class__\": \"ConnectedValue\"}, \"header1\": true, \"column_selector_options_1\": {\"selected_column_selector_option\": \"all_but_by_header_name\", \"__current_case__\": 3, \"col1\": \"Age\"}, \"infile2\": {\"__class__\": \"ConnectedValue\"}, \"header2\": true, \"column_selector_options_2\": {\"selected_column_selector_option2\": \"by_header_name\", \"__current_case__\": 2, \"col2\": \"Age\"}}, \"is_deep_learning\": false, \"options\": {\"scoring\": {\"primary_scoring\": \"default\", \"__current_case__\": 0}, \"cv_selector\": {\"selected_cv\": \"default\", \"__current_case__\": 0, \"n_splits\": \"5\"}, \"verbose\": \"0\", \"error_score\": true, \"return_train_score\": false}, \"outer_split\": {\"split_mode\": \"no\", \"__current_case__\": 0}, \"save\": \"save_estimator\", \"search_algos\": {\"selected_search_algo\": \"GridSearchCV\", \"__current_case__\": 0}, \"search_params_builder\": {\"param_set\": [{\"__index__\": 0, \"sp_name\": null, \"sp_list\": \"\"}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.11.0",
             "type": "tool",
             "uuid": "02300171-df76-434c-b7ba-568123c5ae24",
@@ -338,7 +342,7 @@
             ],
             "position": {
                 "left": 662.9939365671642,
-                "top": 0.0
+                "top": 0
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.11.0",
@@ -348,7 +352,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"load\", \"__current_case__\": 0, \"infile_model\": {\"__class__\": \"RuntimeValue\"}, \"infile_data\": {\"__class__\": \"RuntimeValue\"}, \"header\": true, \"prediction_options\": {\"prediction_option\": \"predict\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"load\", \"__current_case__\": 0, \"infile_model\": {\"__class__\": \"ConnectedValue\"}, \"infile_data\": {\"__class__\": \"ConnectedValue\"}, \"header\": true, \"prediction_options\": {\"prediction_option\": \"predict\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.11.0",
             "type": "tool",
             "uuid": "9f696fe3-f0aa-4185-bc8d-82e55b66795f",
@@ -400,7 +404,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"load\", \"__current_case__\": 0, \"infile_model\": {\"__class__\": \"RuntimeValue\"}, \"infile_data\": {\"__class__\": \"RuntimeValue\"}, \"header\": true, \"prediction_options\": {\"prediction_option\": \"predict\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"load\", \"__current_case__\": 0, \"infile_model\": {\"__class__\": \"ConnectedValue\"}, \"infile_data\": {\"__class__\": \"ConnectedValue\"}, \"header\": true, \"prediction_options\": {\"prediction_option\": \"predict\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.11.0",
             "type": "tool",
             "uuid": "588ab4b8-ce98-4db4-a98d-668d8507e2e4",
@@ -452,7 +456,7 @@
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"load\", \"__current_case__\": 0, \"infile_model\": {\"__class__\": \"RuntimeValue\"}, \"infile_data\": {\"__class__\": \"RuntimeValue\"}, \"header\": true, \"prediction_options\": {\"prediction_option\": \"predict\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"selected_tasks\": {\"selected_task\": \"load\", \"__current_case__\": 0, \"infile_model\": {\"__class__\": \"ConnectedValue\"}, \"infile_data\": {\"__class__\": \"ConnectedValue\"}, \"header\": true, \"prediction_options\": {\"prediction_option\": \"predict\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.11.0",
             "type": "tool",
             "uuid": "1b46047f-699e-4b03-b994-71d2738ad420",
@@ -618,6 +622,6 @@
         "regression",
         "ml"
     ],
-    "uuid": "78fafecb-d9a2-45cc-942b-26feda6ae5c1",
-    "version": 2
+    "uuid": "fb950c81-0737-4876-92cd-189a74901bcf",
+    "version": 3
 }
