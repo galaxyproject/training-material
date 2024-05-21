@@ -765,6 +765,7 @@ To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for f
 >
 > 2. Rename the output collection `AMRs`
 {: .hands-on}
+</div>
 
 > <question-title></question-title>
 >
