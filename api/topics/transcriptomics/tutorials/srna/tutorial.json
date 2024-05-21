@@ -66,7 +66,7 @@
       "name": "sRNA Seq Step 1: Read Pre Processing And Removal Of Artifacts (no Grooming)",
       "title": "sRNA Seq Step 1: Read Pre Processing And Removal Of Artifacts (no Grooming)",
       "test_results": null,
-      "modified": "2024-05-21 10:26:27 +0000",
+      "modified": "2024-05-21 10:38:13 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nrRNA reference FASTA\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nmiRNA hairpin reference FASTA\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"FastQC\"];\n  0 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  5[\"FastQC\"];\n  4 -->|trimmed_reads_single| 5;\n  6[\"HISAT\"];\n  4 -->|trimmed_reads_single| 6;\n  1 -->|output| 6;\n  7[\"Filter SAM or BAM, output SAM or BAM\"];\n  6 -->|output_alignments| 7;\n  8[\"Convert from BAM to FastQ\"];\n  7 -->|output1| 8;\n  9[\"HISAT\"];\n  8 -->|output| 9;\n  2 -->|output| 9;\n  10[\"Filter SAM or BAM, output SAM or BAM\"];\n  9 -->|output_alignments| 10;\n  11[\"Convert from BAM to FastQ\"];\n  10 -->|output1| 11;\n  12[\"Manipulate FASTQ\"];\n  11 -->|output| 12;\n  13[\"Manipulate FASTQ\"];\n  11 -->|output| 13;\n  14[\"FastQC\"];\n  12 -->|output_file| 14;\n  15[\"FastQC\"];\n  13 -->|output_file| 15;"
     },
     {
@@ -84,7 +84,7 @@
       "name": "sRNA Seq Step 2: Salmon And DESeq2",
       "title": "sRNA Seq Step 2: Salmon And DESeq2",
       "test_results": null,
-      "modified": "2024-05-21 10:26:27 +0000",
+      "modified": "2024-05-21 10:38:13 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nDataset collection - Control\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nDataset - Ref Txome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Collection\\nDataset collection - Case\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Salmon\"];\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Salmon\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Salmon\"];\n  1 -->|output| 6;\n  2 -->|output| 6;\n  7[\"Salmon\"];\n  1 -->|output| 7;\n  2 -->|output| 7;\n  8[\"DESeq2\"];\n  6 -->|output_quant| 8;\n  4 -->|output_quant| 8;\n  3 -->|output| 8;\n  9[\"DESeq2\"];\n  7 -->|output_quant| 9;\n  5 -->|output_quant| 9;\n  3 -->|output| 9;\n  10[\"Filter\"];\n  8 -->|deseq_out| 10;\n  11[\"Filter\"];\n  9 -->|deseq_out| 11;"
     }
   ],
