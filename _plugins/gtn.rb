@@ -783,11 +783,11 @@ Jekyll::Hooks.register :site, :pre_render do |site|
       # This would also need to modify the box types themselves, not sure how is best to do that.
       page.content = page.content.gsub(/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/) do |match|
         if match =~ /(CAUTION|WARNING)/
-          "> <warning-title></warning-title>"
+          '> <warning-title></warning-title>'
         elsif match =~ /TIP/
-          "> <tip-title></tip-title>"
+          '> <tip-title></tip-title>'
         else
-          "> <comment-title></comment-title>"
+          '> <comment-title></comment-title>'
         end
       end
     end
@@ -861,13 +861,13 @@ Jekyll::Hooks.register :site, :post_read do |site|
     event_start = page.data['date_start']
     event_end = (page.data['date_end'] || page.data['date_start'])
 
-    if Date.today < event_start
-      page.data['event_state'] = 'upcoming'
-    elsif (event_start - 3) < Date.today && Date.today < (event_end + 3) # Some lee way
-      page.data['event_state'] = 'ongoing'
-    else
-      page.data['event_state'] = 'ended'
-    end
+    page.data['event_state'] = if Date.today < event_start
+                                 'upcoming'
+                               elsif (event_start - 3) < Date.today && Date.today < (event_end + 3) # Some lee way
+                                 'ongoing'
+                               else
+                                 'ended'
+                               end
 
     page.data['duration'] = if page.data['date_end'].nil?
                               1

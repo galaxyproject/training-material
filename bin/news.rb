@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require './_plugins/util.rb'
+require './_plugins/util'
 require 'json'
 require 'kramdown'
 require 'uri'
@@ -119,14 +119,14 @@ data = {
        .select { |x| onlyEnabled(x) }
        .map { |x| printableMaterial(x) },
     news: addedfiles
-      .grep(%r{news/_posts/.*\.md})
-      .map { |x| printableMaterial(x) }
-      .map { |n| fixNews(n) },
+       .grep(%r{news/_posts/.*\.md})
+       .map { |x| printableMaterial(x) }
+       .map { |n| fixNews(n) },
     events: addedfiles
-      .grep(%r{events/.*\.md})
-      .reject { |n| isDraft(n) }
-      .map { |x| printableMaterial(x) }
-      .map{ |n| fixEvents(n) },
+       .grep(%r{events/.*\.md})
+       .reject { |n| isDraft(n) }
+       .map { |x| printableMaterial(x) }
+       .map { |n| fixEvents(n) },
   },
   modified: {
     slides: mfiles
@@ -205,7 +205,6 @@ def build_news(data, filter: nil, updates: true, only_news: false)
   )
   output += o
   newsworthy |= o.length.positive?
-
 
   o = format_tutorials(
     data[:added][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },

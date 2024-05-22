@@ -1,9 +1,7 @@
 def safe_load_yaml(file)
-  begin
-    YAML.load_file(file)
-  rescue
-    YAML.load_file(file, permitted_classes:[Date])
-  end
+  YAML.load_file(file)
+rescue StandardError
+  YAML.load_file(file, permitted_classes: [Date])
 end
 
 def collapse_event_date_pretty(event)
