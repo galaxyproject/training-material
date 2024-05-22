@@ -355,12 +355,13 @@ subsites: [all]
 			{% include _includes/contributor-badge-inline.html id=org %}
 		{% endfor %}
 
+        {% if event.contributions.funding %}
 		<hr />
 		<b>In collaboration with</b><br/>
 		{% for org in event.contributions.funding %}
 			{% include _includes/contributor-badge-inline.html id=org %}
 		{% endfor %}
-
+        {% endif %}
 
 	</div>
 </div><!-- row -->
