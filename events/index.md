@@ -1,6 +1,8 @@
 ---
 layout: page
 title: GTN Event Horizon
+description: |
+  This page lists all past and upcoming GTN-related events organised by members of the community.
 ---
 
 ![Logo with a woman standing in front of a globe with multiple location pins in it]({% link assets/images/events.svg %}){: style="float:right; width:25%;"}
