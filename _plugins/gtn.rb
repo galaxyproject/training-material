@@ -858,6 +858,17 @@ Jekyll::Hooks.register :site, :post_read do |site|
     page.data['not_started'] = page.data['date_start'] > Date.today
     page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
 
+    event_start = page.data['date_start']
+    event_end = (page.data['date_end'] || page.data['date_start'])
+
+    if Date.today < event_start
+      page.data['event_state'] = 'upcoming'
+    elsif (event_start - 3) < Date.today && Date.today < (event_end + 3) # Some lee way
+      page.data['event_state'] = 'ongoing'
+    else
+      page.data['event_state'] = 'ended'
+    end
+
     page.data['duration'] = if page.data['date_end'].nil?
                               1
                             else
