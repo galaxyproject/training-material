@@ -13,11 +13,14 @@ layout: base
 <section class="event">
     <hgroup>
       <h1>{{ event.title }}</h1>
-      {% if event.location.name == "Online" %}
-      <p>Virtual course</p>
-      {% else %}
-      <p>In-person course</p>
-      {% endif %}
+      <p>
+        {% if event.async %}Asynchronous, {% endif %}
+        {% if event.location.name == "Online" %}
+        Virtual course
+        {% else %}
+        In-person course
+        {% endif %}
+      </p>
     </hgroup>
 
     {% if event.status == 'wip' %}

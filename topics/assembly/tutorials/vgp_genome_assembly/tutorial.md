@@ -324,6 +324,10 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 {: .comment}
 
+In order to identify some key characteristics of the genome, we do genome profile analysis. To do this, we start by generating a histogram of the *k*-mer distribution in the raw reads (the *k*-mer spectrum). Then, GenomeScope creates a model fitting the spectrum that allows for estimation of genome characteristics. We work in parallel on each set of raw reads, creating a database of each file's *k*-mer counts, and then merge the databases of counts in order to build the histogram.
+
+![Workflow of Kmer counting parallelization, described in the figure caption.](../../images/vgp_assembly/meryl_collections.png "K-mer counting is first done on the collection of FASTA files. Because these data are stored in a collection, a separate `count` job is launched for each FASTA file, thus parallelizing our work. After that, the collection of count datasets is merged into one dataset, which we can use to generate the histogram input needed for GenomeScope.")
+
 > <hands-on-title>Generate <i>k</i>-mers count distribution</hands-on-title>
 >
 >**Step 1**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
@@ -1033,9 +1037,13 @@ Now let's parse the `transition between haploid & diploid` and `upper bound for 
 
 An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in downstream analysis, such as scaffolding, gene annotation and read mapping in general ({% cite Small2007 %}, {% cite Guan2019 %}, {% cite Roach2018 %}). In order to solve this problem, we are going to use purge_dups; this tool will allow us to identify and reassign allelic contigs.
 
-This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8).
+This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8). This is meant to try to resolve the {false duplications} depicted in **Figure 1**. 
 
 ![Post-processing with purge_dups](../../images/vgp_assembly/purge_dupspipeline.png "Purge_dups pipeline. Adapted from github.com/dfguan/purge_dups. Purge_dups is integrated in a multi-step pipeline consisting in three main substages. Red indicates the steps which require to use Minimap2.")
+
+Purging may be used in the VGP pipeline when there are suspicions of false duplications (Figure 1). In such cases, we start by purging the **primary assembly**, resulting in a clean (purged) primary assembly and a set of contigs that were *removed* from those contigs. These removed contigs will often contain haplotigs representing alternate alleles. We would like to keep that in the alternate assembly, so the next step is adding (concatenating) this file to the original alternate assembly. To make sure we don't introduce redundancies in the alternate assembly that way, we then purge that alternate assembly, which will also remove any junk or overlaps.
+
+![Purge_dups workflow in VGP pipeline](../../images/vgp_assembly/purge_dups.png "Purge_dups pipeline as implemented in the VGP pipeline. This consists of first purging the primary contigs, then adding the removed haplotigs to the alternate contigs, and then purging that to get the final alternate assembly.")
 
 ### Read-depth analysis
 
@@ -1291,7 +1299,7 @@ At this point, we have a set of contigs, which may or may not be fully phased, d
 
 > <comment-title>What assembly am I scaffolding??</comment-title>
 >
->  For the purposes of this tutorial, the scaffolding hands-on exercises will be <b>referring to a Hap1 assembly</b> produced with Hi-C mode of hifiasm. If you have hap1 contigs or hap2 contigs, then you can also follow along just using Primary purged contigs or Alternate purged contigs. <b>Wherever the tutorial refers to primary contigs, just replace it with whichever haplotype you are scaffolding.</b>
+>  For the purposes of this tutorial, the scaffolding hands-on exercises will be <b>referring to a Hap1 assembly</b> produced with the Hi-C mode of hifiasm. You can try the tutorial on hap2, if you want. And if you have a pseudohaplotype assembly, then you can also follow along with your purged (if necessary) primary contigs. (NB: The alternate assembly *is not* scaffolded, as it is an incomplete assembly.) <b>Either way, wherever the tutorial refers to hap1 contigs, just replace that with whichever haplotype you are scaffolding.</b>
 >
 {: .comment}
 
@@ -1332,9 +1340,8 @@ Before we begin, we need to upload BioNano data:
 >**Step 2**: Upload datasets into Galaxy
 >    - set the datatype to `cmap`
 >
->The box below explains how to upload data if you forgot. Just make sure you set dataset type to `cmap`.
 >
-> {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
+> {% snippet faqs/galaxy/datasets_import_via_link.md format="cmap" %}
 >
 {: .hands_on}
 

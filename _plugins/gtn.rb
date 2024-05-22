@@ -11,6 +11,7 @@ require './_plugins/gtn/scholar'
 require './_plugins/gtn/supported'
 require './_plugins/gtn/toolshed'
 require './_plugins/gtn/usegalaxy'
+require './_plugins/util'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
@@ -626,26 +627,7 @@ module Jekyll
     end
 
     def collapse_date_pretty(event)
-      s = event['date_start']
-      e = if event['date_end'].nil?
-            s
-          else
-            event['date_end']
-          end
-      # want dates like "Mar 22-25, 2024" or "Mar 22-May 1, 2024"
-      if s.year == e.year
-        if s.month == e.month
-          if s.day == e.day
-            "#{s.strftime('%B')} #{s.day}, #{s.year}"
-          else
-            "#{s.strftime('%B')} #{s.day}-#{e.day}, #{s.year}"
-          end
-        else
-          "#{s.strftime('%B')} #{s.day}-#{e.strftime('%B')} #{e.day}, #{s.year}"
-        end
-      else
-        "#{s.strftime('%B')} #{s.day}, #{s.year}-#{e.strftime('%B')} #{e.day}, #{e.year}"
-      end
+      collapse_event_date_pretty(event)
     end
 
     ##
@@ -797,6 +779,17 @@ Jekyll::Hooks.register :site, :pre_render do |site|
           match
         end
       end
+
+      # This would also need to modify the box types themselves, not sure how is best to do that.
+      page.content = page.content.gsub(/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/) do |match|
+        if match =~ /(CAUTION|WARNING)/
+          "> <warning-title></warning-title>"
+        elsif match =~ /TIP/
+          "> <tip-title></tip-title>"
+        else
+          "> <comment-title></comment-title>"
+        end
+      end
     end
   end
 end
@@ -864,6 +857,17 @@ Jekyll::Hooks.register :site, :post_read do |site|
   site.pages.select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }.each do |page|
     page.data['not_started'] = page.data['date_start'] > Date.today
     page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
+
+    event_start = page.data['date_start']
+    event_end = (page.data['date_end'] || page.data['date_start'])
+
+    if Date.today < event_start
+      page.data['event_state'] = 'upcoming'
+    elsif (event_start - 3) < Date.today && Date.today < (event_end + 3) # Some lee way
+      page.data['event_state'] = 'ongoing'
+    else
+      page.data['event_state'] = 'ended'
+    end
 
     page.data['duration'] = if page.data['date_end'].nil?
                               1

@@ -13,39 +13,28 @@ Anybody is welcome to add their events here.
 
 <a href="TODO"><button type="button" class="btn btn-success">Add your own event!</button></a>
 
-# Training Events
+{% assign upcoming_events = site.pages| where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'upcoming' " | sort: 'date_start' | reverse %}
+{% assign ongoing_events = site.pages | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ongoing'  " | sort: 'date_start' | reverse %}
+{% assign past_events = site.pages    | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ended'    " | sort: 'date_start' | reverse %}
+{% assign upcoming_length = upcoming_events | size %}
+{% assign ongoing_length = ongoing_events | size %}
 
-{% assign events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | sort: 'date_start' | reverse %}
+{% if ongoing_length >0 %}
 
+# Current Events
 
-<table class="eventtable table table-striped">
- <thead>
-  <tr>
-   <th>Date</th>
-   <th>Event</th>
-   <th>Location</th>
-   <th>Contact</th>
-  </tr>
- </thead>
- <tbody>
- {% for event in events %}
- {% unless event.draft and jekyll.environment == "production" %}
- <tr>
-  <td class="eventtable-date"> {{event | collapse_date_pretty }} </td>
-  <td>
+{% include _includes/event-table.html events=ongoing_events %}
 
-   <a class="eventtable-title" href="{% if event.external %}{{event.external}}{% else %}{{site.baseurl}}{{event.url}}{% endif %}">{{event.title}}{% if event.draft %} (draft, will be hidden) {% endif %}</a>
-   <div class="eventtable-description"> {{event.description}} </div>
-  </td>
-  <td> {{event.location | format_location_short }} </td>
-  <td> {% for org in event.contributions.organisers %}
-			{% include _includes/contributor-badge-inline.html id=org %}
-		{% endfor %}
-  </td>
- </tr>
- {% endunless %}
- {% endfor %}
- </tbody>
-</table>
+{% endif %}
 
+# Upcoming Events
 
+{% if upcoming_length == 0 %}
+  <p>No known upcoming events. Check out <a href="https://tess.elixir-europe.org/events?q=galaxy">ELIXIR's TeSS</a> or the <a href="https://galaxyproject.org/events/">Hub</a> for other Galaxy events going on!</p>
+{% else %}
+  {% include _includes/event-table.html events=upcoming_events %}
+{% endif %}
+
+# Past Events
+
+{% include _includes/event-table.html events=past_events %}
