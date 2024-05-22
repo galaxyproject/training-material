@@ -250,6 +250,25 @@ layout: base
 {% endif %}
 </code></pre></div>      </div>
 
+<h3> Also add your event to the Galaxy Hub </h3>
+<p>
+To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
+</p>
+
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code>---
+title: "{{event.title}}"
+date: '{{event.date_start}}'
+days: 2
+tease: {{event.description}}
+#continent: EU
+location: "{{event.location.name}},{{event.location.city}}, {{event.location.country}}"
+external_url: "{{site.baseurl}}{{ page.url }}"
+gtn: true
+contact: "{{event.contact_email}}"
+subsites: [all]
+---
+</code></pre></div></div>
 
 	<h3>Get Set Up</h3>
 	<p>
