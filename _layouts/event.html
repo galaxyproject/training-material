@@ -20,6 +20,12 @@ layout: base
       {% endif %}
     </hgroup>
 
+    {% if event.status == 'wip' %}
+    <div class="alert alert-warning">
+    {% icon warning %}<strong> Warning: </strong>  This page is currently <b>under construction</b>, the program and descriptions may still change. Please check back later for the finalized information.
+    </div>
+    {% endif %}
+
     <div class="row">
 	    <div class="col-md-9">
 
@@ -28,7 +34,7 @@ layout: base
     <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Course Overview</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Programme</button>
+    <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Program</button>
   </li>
   <li class="nav-item" role="presentation">
      <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false">Setup</button>
