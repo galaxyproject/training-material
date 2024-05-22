@@ -114,10 +114,12 @@ layout: base
        For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
     {% else %}
 
+    {% if event.infrastructure %}
     Before starting the course, make sure to follow the setup instructions
     <br><br>
 
     <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
+    {% endif %}
 
     {% for section in event.program %}
         {% if section.subsection %}
