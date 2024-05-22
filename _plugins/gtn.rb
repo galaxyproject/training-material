@@ -25,6 +25,8 @@ puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if vers
 module Jekyll
   # The main GTN function library
   module GtnFunctions
+    # rubocop:disable Naming/PredicateName
+
     def self.cache
       @@cache ||= Jekyll::Cache.new('GtnFunctions')
     end
@@ -737,6 +739,7 @@ module Jekyll
     def group_icons(icons)
       icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
     end
+    # rubocop:enable Naming/PredicateName
   end
 end
 
@@ -859,7 +862,7 @@ Jekyll::Hooks.register :site, :post_read do |site|
     page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
 
     event_start = page.data['date_start']
-    event_end = (page.data['date_end'] || page.data['date_start'])
+    event_end = page.data['date_end'] || page.data['date_start']
 
     page.data['event_state'] = if Date.today < event_start
                                  'upcoming'
