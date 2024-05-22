@@ -115,7 +115,11 @@ layout: base
     <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
 
     {% for section in event.program %}
+        {% if section.subsection %}
+        <h4 id="{{ section.section | slugify }}">{{ section.section }}</h4>
+        {% else %}
         <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
+        {% endif %}
         <p>{{ section.description | markdownify }}</p>
 
 	{% if section.tutorials %}
