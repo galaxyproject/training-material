@@ -28,6 +28,7 @@ View all upcoming and past events on the brand-new [GTN Events page]({% link eve
 - We are happy to help announce your event on social media
 - Already have a course webpage? No problem! you can still add your event to the GTN and we will simply to your event webpage.
 
+![screenshot of a galaxy event page, tab with the full program]({% link news/images/gtn-event-screenshot.png %})
 
 ## Adding your event
 
@@ -35,32 +36,6 @@ GTN events are defined in similar was as learning pathways, just with some addit
 
 Have a look at [this FAQ]({% link faqs/gtn/gtn_events_create.md %}) for detailed instructions for adding an event.
 
-
-## Adding an external event
-Already have a course webpage? No problem! you can still add your event to the GTN and we will simply to your event webpage. In this case, you only have to provide the basic information about your course (title, desciption, dates, location)
-
-
-```
----
-layout: event-external
-title: My External Training Event Title
-
-external: "https://galaxyproject.org/events/"
-description:
-
-date_start:
-data_end
-
-location:
-  name:
-  city:
-  country:
-
-contributions:
-  organisers:
-    - name1
-    - name2
-```
-
+<a class="btn btn-primary" href="{% link faqs/gtn/gtn_event_create.md %}">Add your event now!</a>
 
 
