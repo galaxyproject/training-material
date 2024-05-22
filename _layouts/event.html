@@ -344,7 +344,9 @@ subsites: [all]
 			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
 			<tr><td>{% icon event-location %}</td><td>{{ event.location | format_location }}</td></tr>
 			<tr><td>{% icon event-cost %}</td><td>{{ event.cost }}</td></tr>
+			{% if event.contact_email %}
 			<tr><td>{% icon email %}</td><td><a href="mailto:{{ event.contact_email }}?subject={{ event.title | uri_escape }}">{{event.contact_email}}</a></td></tr>
+			{% endif %}
 		</table>
 
 		<hr />
