@@ -11,6 +11,7 @@ require './_plugins/gtn/scholar'
 require './_plugins/gtn/supported'
 require './_plugins/gtn/toolshed'
 require './_plugins/gtn/usegalaxy'
+require './_plugins/util'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
@@ -626,26 +627,7 @@ module Jekyll
     end
 
     def collapse_date_pretty(event)
-      s = event['date_start']
-      e = if event['date_end'].nil?
-            s
-          else
-            event['date_end']
-          end
-      # want dates like "Mar 22-25, 2024" or "Mar 22-May 1, 2024"
-      if s.year == e.year
-        if s.month == e.month
-          if s.day == e.day
-            "#{s.strftime('%B')} #{s.day}, #{s.year}"
-          else
-            "#{s.strftime('%B')} #{s.day}-#{e.day}, #{s.year}"
-          end
-        else
-          "#{s.strftime('%B')} #{s.day}-#{e.strftime('%B')} #{e.day}, #{s.year}"
-        end
-      else
-        "#{s.strftime('%B')} #{s.day}, #{s.year}-#{e.strftime('%B')} #{e.day}, #{e.year}"
-      end
+      collapse_event_date_pretty(event)
     end
 
     ##
