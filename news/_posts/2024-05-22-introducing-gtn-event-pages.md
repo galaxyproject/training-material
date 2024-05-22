@@ -22,11 +22,13 @@ View all upcoming and past events on the brand-new [GTN Events page]({% link eve
   - Course overview
   - Course handbook with your full program including links to all materials participants will need on the day
   - Setup instructions for participants
+  - Instructor Zone page with handy links and tips for course organizers
   - See [this example event]({% link events/2024-04-01-example-event.md %})
 
 - Your event is advertised on the GTN Event page
 - We are happy to help announce your event on social media
-- Already have a course webpage? No problem! you can still add your event to the GTN and we will simply to your event webpage.
+
+**Already have a course webpage?** No problem! you can still add your event to the GTN and we will simply to your event webpage.
 
 ![screenshot of a galaxy event page, tab with the full program]({% link news/images/gtn-event-screenshot.png %})
 
