@@ -86,20 +86,6 @@ module Gtn
     end
 
     ##
-    # Returns event instructors/helpers
-    # Params:
-    # +data+:: +Hash+ of the YAML frontmatter from a material
-    # Returns:
-    # +Array+ of contributor IDs
-    def self.get_instructors(data)
-      if data.key?('contributions') && data['contributions'].key?('instructors')
-        data['contributions']['instructors']
-      else
-        []
-      end
-    end
-
-    ##
     # Get the funders of a material.
     # Params:
     # +data+:: +Hash+ of the YAML frontmatter from a material
