@@ -122,7 +122,12 @@ program:
         time: "09:00 - 10:00"
       - type: custom
         name: "Wrap-up"
-
+  - section: "Afternoon"
+    subsection: true  # will treat this section as a subsection of the previous (i.e. smaller heading), useful to split day into tracks
+    description: "blabla"
+    tutorials:
+      - name: mothur-miseq-sop-short
+        topic: microbiome
 
 ---
 
