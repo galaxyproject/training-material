@@ -262,8 +262,8 @@ date: '{{event.date_start}}'
 days: {{event.duration}}
 tease: {{event.description}}
 #continent: EU
-location: "{{event.location.name}},{{event.location.city}}, {{event.location.country}}"
-external_url: "{{site.baseurl}}{{ page.url }}"
+location: "{{event.location.name}}{%if event.location.city %},{{event.location.city}}{%endif%}{% if event.location.coutnry %}, {{event.location.country}}{% endif %}"
+external_url: "{{site.url}}{{site.baseurl}}{{ page.url }}"
 gtn: true
 contact: "{{event.contact_email}}"
 subsites: [all]
