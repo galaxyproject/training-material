@@ -21,6 +21,9 @@ contributions:
   - hexylena
 
 location:
+  geo:
+    lat: 47.9960901
+    lon: 7.8494005
   name: University Freiburg    # can be e.g. "Online" for online events (and leave the rest empty)
   city: Freiburg
   country: Germany
