@@ -36,7 +36,7 @@ View all upcoming and past events on the brand-new [GTN Events page]({% link eve
 
 GTN events are defined in similar was as learning pathways, just with some additional practical information (dates/times, location, registration etc)
 
-Have a look at [this FAQ]({% link faqs/gtn/gtn_events_create.md %}) for detailed instructions for adding an event.
+Have a look at [this FAQ]({% link faqs/gtn/gtn_event_create.md %}) for detailed instructions for adding an event.
 
 <a class="btn btn-primary" href="{% link faqs/gtn/gtn_event_create.md %}">Add your event now!</a>
 
