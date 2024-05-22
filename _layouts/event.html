@@ -39,9 +39,11 @@ layout: base
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Program</button>
   </li>
+  {% if event.infrastructure %}
   <li class="nav-item" role="presentation">
      <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false">Setup</button>
   </li>
+  {% endif %}
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Instructor Zone</button>
   </li>
@@ -135,6 +137,7 @@ layout: base
 
 
   <!-- Setup Tab -->
+  {% if event.infrastructure %}
   <div class="tab-pane " id="setup" role="tabpanel" aria-labelledby="setup-tab">
 
     <h3>Get set up for the course!</h3>
@@ -236,6 +239,7 @@ layout: base
 
 
   </div><!-- end setup tab -->
+  {% endif %}
 
 
   <div class="tab-pane " id="contact" role="tabpanel" aria-labelledby="contact-tab">
