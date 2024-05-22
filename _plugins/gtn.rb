@@ -864,6 +864,12 @@ Jekyll::Hooks.register :site, :post_read do |site|
   site.pages.select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }.each do |page|
     page.data['not_started'] = page.data['date_start'] > Date.today
     page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
+
+    page.data['duration'] = if page.data['date_end'].nil?
+                              1
+                            else
+                              (page.data['date_end'] - page.data['date_start']).to_i + 1
+                            end
   end
 end
 
