@@ -116,13 +116,18 @@ program:
   - section: "Tuesday: An advanced look at .."
     description: |
       Short description of the program for this section.
+
+  - section: "Track 1"
+    subsection: true  # will treat this section as a subsection of the previous (i.e. smaller heading), useful to split day into tracks
+    description: "you can further subdivide into multiple subsections/tracks as well"
     tutorials:
       - name: galaxy-intro-short
         topic: introduction
         time: "09:00 - 10:00"
       - type: custom
         name: "Wrap-up"
-  - section: "Afternoon"
+
+  - section: "Track 2"
     subsection: true  # will treat this section as a subsection of the previous (i.e. smaller heading), useful to split day into tracks
     description: "blabla"
     tutorials:
