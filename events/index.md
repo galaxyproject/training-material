@@ -16,6 +16,7 @@ Anybody is welcome to add their events here.
 {% assign upcoming_events = site.pages| where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'upcoming' " | sort: 'date_start' | reverse %}
 {% assign ongoing_events = site.pages | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ongoing'  " | sort: 'date_start' | reverse %}
 {% assign past_events = site.pages    | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ended'    " | sort: 'date_start' | reverse %}
+{% assign upcoming_length = upcoming_events | size %}
 {% assign ongoing_length = ongoing_events | size %}
 
 {% if ongoing_length >0 %}
@@ -28,7 +29,11 @@ Anybody is welcome to add their events here.
 
 # Upcoming Events
 
-{% include _includes/event-table.html events=upcoming_events %}
+{% if upcoming_length == 0 %}
+  <p>No known upcoming events. Check out <a href="https://tess.elixir-europe.org/events?q=galaxy">ELIXIR's TeSS</a> or the <a href="https://galaxyproject.org/events/">Hub</a> for other Galaxy events going on!</p>
+{% else %}
+  {% include _includes/event-table.html events=upcoming_events %}
+{% endif %}
 
 # Past Events
 
