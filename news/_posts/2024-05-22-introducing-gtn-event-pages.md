@@ -26,11 +26,14 @@ View all upcoming and past events on the brand-new [GTN Events page]({% link eve
 
 - Your event is advertised on the GTN Event page
 - We are happy to help announce your event on social media
+- Already have a course webpage? No problem! you can still add your event to the GTN and we will simply to your event webpage.
 
 
 ## Adding your event
 
-Create a file
+GTN events are defined in similar was as learning pathways, just with some additional practical information (dates/times, location, registration etc)
+
+Have a look at [this FAQ]({% link faqs/gtn/gtn_events_create.md %}) for detailed instructions for adding an event.
 
 
 ## Adding an external event
