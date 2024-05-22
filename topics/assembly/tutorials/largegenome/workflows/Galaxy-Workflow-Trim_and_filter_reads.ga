@@ -1,6 +1,7 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "",
+    "comments": [],
     "creator": [
         {
             "class": "Person",
@@ -9,7 +10,8 @@
         }
     ],
     "format-version": "0.1",
-    "name": "Trim and filter reads - fastp",
+    "license": "GPL-3.0-or-later",
+    "name": "Trim and filter reads - fastp - upgraded ",
     "report": {
         "markdown": "\n# Workflow for Trim and Filter Reads\n\n## Workflow steps\n```galaxy\nworkflow_display()\n```\n\n\n\n\n"
     },
@@ -30,20 +32,15 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "bottom": 307.96310008655894,
-                "height": 89.45140075683594,
-                "left": 376.649336381392,
-                "right": 596.6493516401811,
-                "top": 218.511699329723,
-                "width": 220.00001525878906,
-                "x": 376.649336381392,
-                "y": 218.511699329723
+                "left": 0,
+                "top": 29.045160466974437
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
             "uuid": "00a54054-e3f7-4e4f-9195-563e54df899a",
+            "when": null,
             "workflow_outputs": []
         },
         "1": {
@@ -62,20 +59,15 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "bottom": 423.95268804376775,
-                "height": 89.45140075683594,
-                "left": 376.649336381392,
-                "right": 596.6493516401811,
-                "top": 334.5012872869318,
-                "width": 220.00001525878906,
-                "x": 376.649336381392,
-                "y": 334.5012872869318
+                "left": 0,
+                "top": 145.03474842418325
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
             "uuid": "14062fd8-1aa9-4a18-94d8-bbbb0e1a9262",
+            "when": null,
             "workflow_outputs": []
         },
         "2": {
@@ -94,25 +86,20 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "bottom": 292.4214394309304,
-                "height": 67.451416015625,
-                "left": 953.1597345525568,
-                "right": 1173.159810846502,
-                "top": 224.97002341530538,
-                "width": 220.0000762939453,
-                "x": 953.1597345525568,
-                "y": 224.97002341530538
+                "left": 576.5103981711648,
+                "top": 35.50348455255681
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
             "uuid": "08eeb0d3-6ad6-4e7f-ac6a-d00c8e87fd08",
+            "when": null,
             "workflow_outputs": []
         },
         "3": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.19.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0",
             "errors": null,
             "id": 3,
             "input_connections": {
@@ -125,7 +112,16 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool fastp",
+                    "name": "single_paired"
+                },
+                {
+                    "description": "runtime parameter for tool fastp",
+                    "name": "single_paired"
+                }
+            ],
             "label": "fastp on short reads",
             "name": "fastp",
             "outputs": [
@@ -147,14 +143,8 @@
                 }
             ],
             "position": {
-                "bottom": 533.1401533647017,
-                "height": 343.6736145019531,
-                "left": 667.1875554865056,
-                "right": 887.1875707452947,
-                "top": 189.46653886274856,
-                "width": 220.00001525878906,
-                "x": 667.1875554865056,
-                "y": 189.46653886274856
+                "left": 290.5382191051136,
+                "top": 0
             },
             "post_job_actions": {
                 "DeleteIntermediatesActionout1": {
@@ -191,23 +181,19 @@
                     "output_name": "report_json"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.19.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "1d8fe9bc4cb0",
+                "changeset_revision": "c59d48774d03",
                 "name": "fastp",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"filter_options\": {\"quality_filtering_options\": {\"disable_quality_filtering\": \"false\", \"qualified_quality_phred\": null, \"unqualified_percent_limit\": null, \"n_base_limit\": null}, \"length_filtering_options\": {\"disable_length_filtering\": \"false\", \"length_required\": null}, \"low_complexity_filter\": {\"enable_low_complexity_filter\": \"false\", \"complexity_threshold\": null}}, \"output_options\": {\"report_html\": \"true\", \"report_json\": \"true\"}, \"overrepresented_sequence_analysis\": {\"overrepresentation_analysis\": \"false\", \"overrepresentation_sampling\": null}, \"read_mod_options\": {\"polyg_tail_trimming\": {\"trimming_select\": \"\", \"__current_case__\": 1, \"poly_g_min_len\": null}, \"polyx_tail_trimming\": {\"polyx_trimming_select\": \"\", \"__current_case__\": 1}, \"umi_processing\": {\"umi\": \"false\", \"umi_loc\": \"\", \"umi_len\": null, \"umi_prefix\": \"\"}, \"cutting_by_quality_options\": {\"cut_by_quality5\": \"false\", \"cut_by_quality3\": \"false\", \"cut_window_size\": null, \"cut_mean_quality\": null}, \"base_correction_options\": {\"correction\": \"false\"}}, \"single_paired\": {\"single_paired_selector\": \"paired\", \"__current_case__\": 1, \"in1\": {\"__class__\": \"ConnectedValue\"}, \"in2\": {\"__class__\": \"ConnectedValue\"}, \"adapter_trimming_options\": {\"disable_adapter_trimming\": \"false\", \"adapter_sequence1\": \"\", \"adapter_sequence2\": \"\"}, \"global_trimming_options\": {\"trim_front1\": null, \"trim_tail1\": null, \"trim_front2\": null, \"trim_tail2\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.19.5+galaxy1",
+            "tool_state": "{\"filter_options\": {\"quality_filtering_options\": {\"disable_quality_filtering\": false, \"qualified_quality_phred\": null, \"unqualified_percent_limit\": null, \"n_base_limit\": null}, \"length_filtering_options\": {\"disable_length_filtering\": false, \"length_required\": null, \"length_limit\": null}, \"low_complexity_filter\": {\"enable_low_complexity_filter\": false, \"complexity_threshold\": null}}, \"output_options\": {\"report_html\": true, \"report_json\": true}, \"overrepresented_sequence_analysis\": {\"overrepresentation_analysis\": false, \"overrepresentation_sampling\": null}, \"read_mod_options\": {\"polyg_tail_trimming\": {\"trimming_select\": \"\", \"__current_case__\": 1, \"poly_g_min_len\": null}, \"polyx_tail_trimming\": {\"polyx_trimming_select\": \"\", \"__current_case__\": 1}, \"umi_processing\": {\"umi\": false, \"umi_loc\": \"\", \"umi_len\": null, \"umi_prefix\": \"\"}, \"cutting_by_quality_options\": {\"cut_by_quality5\": false, \"cut_by_quality3\": false, \"cut_window_size\": null, \"cut_mean_quality\": null}, \"base_correction_options\": {\"correction\": false}}, \"single_paired\": {\"single_paired_selector\": \"paired\", \"__current_case__\": 1, \"in1\": {\"__class__\": \"ConnectedValue\"}, \"in2\": {\"__class__\": \"ConnectedValue\"}, \"adapter_trimming_options\": {\"disable_adapter_trimming\": false, \"adapter_sequence1\": \"\", \"adapter_sequence2\": \"\"}, \"global_trimming_options\": {\"trim_front1\": null, \"trim_tail1\": null, \"trim_front2\": null, \"trim_tail2\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.23.4+galaxy0",
             "type": "tool",
             "uuid": "c38e84b3-771c-428e-9d2d-ce84d5e1153c",
+            "when": null,
             "workflow_outputs": [
-                {
-                    "label": "fastp filtered R2 reads",
-                    "output_name": "out2",
-                    "uuid": "639ed3f7-0e51-4e5d-b6f8-081378962109"
-                },
                 {
                     "label": "fastp report on short reads html",
                     "output_name": "report_html",
@@ -222,12 +208,17 @@
                     "label": "fastp report on short reads json",
                     "output_name": "report_json",
                     "uuid": "10fbe1e5-400c-4ffe-8794-9b776b0d7322"
+                },
+                {
+                    "label": "fastp filtered R2 reads",
+                    "output_name": "out2",
+                    "uuid": "639ed3f7-0e51-4e5d-b6f8-081378962109"
                 }
             ]
         },
         "4": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.19.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0",
             "errors": null,
             "id": 4,
             "input_connections": {
@@ -236,7 +227,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool fastp",
+                    "name": "single_paired"
+                }
+            ],
             "label": "fastp on long reads",
             "name": "fastp",
             "outputs": [
@@ -254,14 +250,8 @@
                 }
             ],
             "position": {
-                "bottom": 467.62281521883875,
-                "height": 255.6736297607422,
-                "left": 1180.659845525568,
-                "right": 1400.659860784357,
-                "top": 211.94918545809657,
-                "width": 220.00001525878906,
-                "x": 1180.659845525568,
-                "y": 211.94918545809657
+                "left": 804.010509144176,
+                "top": 22.482646595348
             },
             "post_job_actions": {
                 "DeleteIntermediatesActionout1": {
@@ -291,17 +281,18 @@
                     "output_name": "report_json"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.19.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "1d8fe9bc4cb0",
+                "changeset_revision": "c59d48774d03",
                 "name": "fastp",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"filter_options\": {\"quality_filtering_options\": {\"disable_quality_filtering\": \"true\", \"qualified_quality_phred\": null, \"unqualified_percent_limit\": null, \"n_base_limit\": null}, \"length_filtering_options\": {\"disable_length_filtering\": \"true\", \"length_required\": null}, \"low_complexity_filter\": {\"enable_low_complexity_filter\": \"false\", \"complexity_threshold\": null}}, \"output_options\": {\"report_html\": \"true\", \"report_json\": \"true\"}, \"overrepresented_sequence_analysis\": {\"overrepresentation_analysis\": \"false\", \"overrepresentation_sampling\": null}, \"read_mod_options\": {\"polyg_tail_trimming\": {\"trimming_select\": \"-G\", \"__current_case__\": 2}, \"polyx_tail_trimming\": {\"polyx_trimming_select\": \"\", \"__current_case__\": 1}, \"umi_processing\": {\"umi\": \"false\", \"umi_loc\": \"\", \"umi_len\": null, \"umi_prefix\": \"\"}, \"cutting_by_quality_options\": {\"cut_by_quality5\": \"false\", \"cut_by_quality3\": \"false\", \"cut_window_size\": null, \"cut_mean_quality\": null}, \"base_correction_options\": {\"correction\": \"false\"}}, \"single_paired\": {\"single_paired_selector\": \"single\", \"__current_case__\": 0, \"in1\": {\"__class__\": \"ConnectedValue\"}, \"adapter_trimming_options\": {\"disable_adapter_trimming\": \"true\", \"adapter_sequence1\": \"\"}, \"global_trimming_options\": {\"trim_front1\": null, \"trim_tail1\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.19.5+galaxy1",
+            "tool_state": "{\"filter_options\": {\"quality_filtering_options\": {\"disable_quality_filtering\": true, \"qualified_quality_phred\": null, \"unqualified_percent_limit\": null, \"n_base_limit\": null}, \"length_filtering_options\": {\"disable_length_filtering\": true, \"length_required\": null, \"length_limit\": null}, \"low_complexity_filter\": {\"enable_low_complexity_filter\": false, \"complexity_threshold\": null}}, \"output_options\": {\"report_html\": true, \"report_json\": true}, \"overrepresented_sequence_analysis\": {\"overrepresentation_analysis\": false, \"overrepresentation_sampling\": null}, \"read_mod_options\": {\"polyg_tail_trimming\": {\"trimming_select\": \"-G\", \"__current_case__\": 2}, \"polyx_tail_trimming\": {\"polyx_trimming_select\": \"\", \"__current_case__\": 1}, \"umi_processing\": {\"umi\": false, \"umi_loc\": \"\", \"umi_len\": null, \"umi_prefix\": \"\"}, \"cutting_by_quality_options\": {\"cut_by_quality5\": false, \"cut_by_quality3\": false, \"cut_window_size\": null, \"cut_mean_quality\": null}, \"base_correction_options\": {\"correction\": false}}, \"single_paired\": {\"single_paired_selector\": \"single\", \"__current_case__\": 0, \"in1\": {\"__class__\": \"ConnectedValue\"}, \"adapter_trimming_options\": {\"disable_adapter_trimming\": true, \"adapter_sequence1\": \"\"}, \"global_trimming_options\": {\"trim_front1\": null, \"trim_tail1\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.23.4+galaxy0",
             "type": "tool",
             "uuid": "93602736-2d22-43e4-a53a-803326ccab9e",
+            "when": null,
             "workflow_outputs": [
                 {
                     "label": "fastp report on long reads html",
@@ -322,8 +313,9 @@
         }
     },
     "tags": [
-        "LG-WF"
+        "LG-WF",
+        "GTN"
     ],
-    "uuid": "1b6f873d-b2a4-4619-951d-40605f22d43b",
-    "version": 3
+    "uuid": "e3f03097-58c0-42b7-aed4-09ff483cacbc",
+    "version": 5
 }

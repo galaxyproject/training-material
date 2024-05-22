@@ -14,6 +14,18 @@ redirect_from:
 questions:
   - I have some single cell FASTQ files I want to analyse. Where do I start?
 
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+    date: 2024-05-01
+  - label: "Older Alevin version"
+    history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+    date: 2024-01-01
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+
 objectives:
   - Generate a cellxgene matrix for droplet-based single cell sequencing data
   - Interpret quality control (QC) plots to make informed decisions on cell thresholds
