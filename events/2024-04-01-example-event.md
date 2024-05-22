@@ -1,9 +1,9 @@
 ---
 layout: event
 
-# Status of this page
+# Status of this page, remove these lines when ready
 draft: true  # will hide your event from the GTN events list
-status: wip  # will show your event, but add a banner that the contents of the page are still subject to change
+status: wip  # add a banner that warns that the contents of the page are still subject to change
 
 
 # Description of your event
@@ -11,28 +11,27 @@ title: My Training Event Title
 description: |
   Short description of the event (one or two sentences).
   A longer description can be placed at the bottom of this document.
-
-cover-image:         # you can add an image for your course, if empty, the GTN logo will be used
+cover-image:         # image for your corse, put in 'events/images' folder
 cover-image-alt:     # supply alt text describing your image
-tags: [Topic 1, Topic 2, 5-day course]
 
 
 # Practical Information
 date_start: 1970-04-01
 date_end: 1970-04-02 # optional, if event is more than one day
 
-cost: free # Or, e.g. 150 EUR, must be space separated, must include a currency in ISO 4217 format
+cost: free # Or, e.g. 150 EUR
 audience: This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
 contact_email: organisers@example.com
 async: false # if asynchronous, we will not display the time columns on the program
 mode: online # In-person
+
 registration:
   link: https://example.org
   deadline: 2024-01-01
 
 
 # Location of the event
-# For online events, only the 'name' fields needs to be filled in
+# For online events, just the 'name' is enough
 location:
   name: Erasmus Medical Center    # can be e.g. "Online" for online
   address: Dr. Molewaterplein 40
@@ -62,6 +61,7 @@ contributions:
 # This will be used to create the setup instructions for participants
 infrastructure:
   tiaas: true    # tiaas = Training Infrastructure as a Service, and can be requested (for free) from all major Galaxies
+
   servers:
     - server: https://usegalaxy.eu
       name: Galaxy EU
@@ -69,9 +69,10 @@ infrastructure:
     - server: https://usegalaxy.org
       name: Galaxy Main
       tiaas_link:
-  support: # remove this entire section if you don't wish to use online support platform (e.g. for in-person training)
+
+  support: # optional, remove if not using online support
      platform: Slack
-     join_link:  # GTN Slack by default
+     join_link:    # invite link; GTN Slack by default
      channel: "#my-event" # instructors can create channels on the GTN slack themselves.
      link: "https://gtnsmrgsbord.slack.com/archives/C032C2MRHAS" # will use the #general channel on GTN slack by default.
 
@@ -81,7 +82,9 @@ infrastructure:
 # For non-GTN sessions, add a "type:custom" session and description
 program:
   - section: "Monday: Introduction"
-    description: Short description of the program in this section.
+    description: |
+      Short description of the program in this section.
+      Markdown formatted
     tutorials:
       - name: galaxy-intro-short
         topic: introduction
@@ -111,7 +114,8 @@ program:
           Time for some well-deserved drinks and socializing!
 
   - section: "Tuesday: An advanced look at .."
-    description: Short description of the program for this section.
+    description: |
+      Short description of the program for this section.
     tutorials:
       - name: galaxy-intro-short
         topic: introduction
