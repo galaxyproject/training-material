@@ -9,7 +9,7 @@ description: |
 
 This page lists all past and upcoming GTN-related events organised by members of the community.
 
-For a complete list of all Galaxy-related events, please also see the [Galaxy Event Horizon](https://galaxyproject.org/events/)
+For a complete list of all Galaxy-related events, please also see the [Galaxy Event Horizon](https://galaxyproject.org/events/) and [ELIXIR's TeSS](https://tess.elixir-europe.org/events?q=galaxy).
 
 Anybody is welcome to add their events here.
 
