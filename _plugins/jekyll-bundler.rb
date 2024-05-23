@@ -103,9 +103,9 @@ module Jekyll
       raise "Bundle #{name} not found in site config" if bundle.nil?
 
       baseurl = @context.registers[:site].config['baseurl']
-      attrs = ""
-      attrs += " async" if bundle['async']
-      attrs += " defer" if bundle['defer']
+      attrs = ''
+      attrs += ' async' if bundle['async']
+      attrs += ' defer' if bundle['defer']
       bundle_path = "#{baseurl}#{bundle['path']}"
       "<script #{attrs} src='#{bundle_path}'></script>"
     end
