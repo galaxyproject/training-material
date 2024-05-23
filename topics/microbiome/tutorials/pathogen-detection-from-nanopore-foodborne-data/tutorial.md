@@ -1149,13 +1149,10 @@ With these two types of visualizations we can have an overview of all samples an
 > > 1. Import all tabular and FASTA files needed for this section via link from [Zenodo]({{ page.zenodo_link }}) to the new created history:
 > >
 > >    ```text
-> >    From **Preprocessing** workflow
 > >    {{ page.zenodo_link }}/files/removed_hosts_percentage_tabular.tabular
-> >    From **Allele-based pathogen identification** workflow
 > >    {{ page.zenodo_link }}/files/mapping_coverage_percentage_per_sample.tabular
 > >    {{ page.zenodo_link }}/files/mapping_mean_depth_per_sample.tabular
 > >    {{ page.zenodo_link }}/files/number_of_variants_per_sample.tabular
-> >    From **Gene-based pathogen identification** workflow
 > >    {{ page.zenodo_link }}/files/amr_identified_by_ncbi_barcode10.tabular
 > >    {{ page.zenodo_link }}/files/amr_identified_by_ncbi_barcode11.tabular
 > >    {{ page.zenodo_link }}/files/vfs_of_genes_identified_by_vfdb_barcode10.tabular
