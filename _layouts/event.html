@@ -321,6 +321,7 @@ subsites: [all]
 	<h4>TIaaS</h4>
 	<p>Training Infrastructure as a Service (TIaaS) is a service that allows you to request space for your course on a server, it helps ensure courses run smoothly by separating your trainee's jobs into a separate queue. <a href="{% link topics/teaching/tutorials/setup-tiaas-for-training/tutorial.md %}">Learn more about TIaaS in our tutorial</a>.</p>
 	<p>The following links will open a (mostly) pre-filled out TIaaS form, <emph>if that server supports TIaaS</emph>. Otherwise you might see "page not found".</p>
+	<p>Once you receive a URL from the admins, please set it as a <code>tiaas_link</code> in your event metadata.</p>
 	{%- capture org0 -%}{{ event.contributions.organisers[0] }}{%- endcapture -%}
 	<ul>
 	{% for server in event.infrastructure.servers %}
@@ -333,7 +334,7 @@ subsites: [all]
 &end={{ event.date_end }}
 &website={{ site.url }}{{ site.baseurl }}{{ page.url }}
 &use_gtn=true&gtn_links={{ 'See course event' | uri_escape }}
-&training_identifier={{ server.tiaas | uri_escape }}
+&training_identifier={{ server.tiaas_link | split:'/' | last | uri_escape }}
 {%- endcapture -%}
 		<li>
 			<a href="{{ server.server }}/tiaas/new/{{ urlparams }}">Request TIaaS @ {{ server.server }}</a>
