@@ -13,7 +13,7 @@ contributions:
     - shiltemann
     - hexylena
 cover: news/images/gtn-event-screenshot.png
-cover_alt: A screenshot of a GTN event page showing the program tab. It looks very similar to GTN topic pages.
+coveralt: A screenshot of a GTN event page showing the program tab. It looks very similar to GTN topic pages.
 ---
 
 Are you organizing a training event using GTN materials? You can now add your event directly to the GTN!

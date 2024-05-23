@@ -41,12 +41,12 @@
         <meta property="og:description" content="{{ og_desc }}">
 
         {%- if page.cover %}{% assign coverimage = page.cover %}
-        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
-        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
-        {%- elsif page.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
-        {%- else %}{% assign coverimage = "/assets/images/GTNLogo1000.png" %}{% endif %}
-        {% assign og_image = page.og_image | default: page['cover-image'] | default: topic.og_image | default: coverimage | default: "/assets/images/GTNLogo1000.png" %}
-        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
+        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "assets/images/cofest.png" %}
+        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "assets/images/GalaxyNews.png" %}
+        {%- elsif page.tags contains "gat" %}{% assign coverimage = "assets/images/gat.png" %}
+        {%- else %}{% assign coverimage = "assets/images/GTNLogo1000.png" %}{% endif %}
+        {% assign og_image = page.og_image | default: page['cover-image'] | default: topic.og_image | default: coverimage | default: "assets/images/GTNLogo1000.png" %}
+	<meta property="og:image" content="{% if og_image contains 'https://' %}{{ og_image }}{% else %}{{ site.baseurl }}/{{ og_image }}{% endif %}">
 
         {%- if page.layout == "tutorial_hands_on" -%}
         <script type="application/ld+json">
