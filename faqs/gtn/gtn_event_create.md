@@ -11,19 +11,18 @@ To add your event to the GTN, you will need to supply your course information (d
 Your event will also be shown on the [GTN event horizon]({% link events/index.md %}) and on the homepage. We are also happy to advertise your event on social media and Matrix channels.
 
 
-
-Already have your own event page? No problem! You can add your event as and external event and we will simply link to your page.
+**Already have your own event page?** No problem! You can add your event as and external event and we will simply link to your page.
 
 To add your event to the GTN, please:
 
 1. Create a page in the `events/` folder of the GTN repository
 2. Have a look at example event definitions in this folder:
-   - [`2024-04-01-example-event.md`](https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event.md)
-   - or [`2024-04-01-example-event-external.md`](https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event-external.md) if you already have an event page elsewhere
+   - [2024-04-01-example-event.md](https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event.md)
+   - or [2024-04-01-example-event-external.md](https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event-external.md) if you already have an event page elsewhere
 3. Adapt one of these example pages to fit your event
 4. Create a pull request on the GTN
 
-We are also happy to help you with this process, please [contact us on Matrix](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im) to discuss the details of your course with us.
+**We are also happy to help you** to add your event, please [contact us on Matrix](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im) to discuss the details of your course with us.
 
 Please also feel free to contact us with ideas for improvements! We know that training comes in many different forms, so if something in your event is not yet supported, let us know and we are happy to add it!
 
