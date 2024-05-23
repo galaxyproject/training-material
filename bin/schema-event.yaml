@@ -90,6 +90,11 @@ mapping:
         type: bool
         description: |
             `true` to hide your event. This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+    status:
+        type: str
+        enum:
+          - wip
+        description: "The status of the event. `wip` for work in progress, otherwise, do not set this key."
     description:
         type: str
         required: true
@@ -220,6 +225,9 @@ mapping:
               section:
                 type: str
                 required: true
+              subsection:
+                type: bool
+                description: "Treat this section as a subsection of the previous item"
               description:
                 type: str
               tutorials:
@@ -241,11 +249,33 @@ mapping:
                         type: str
                         enum:
                           - custom
+
     infrastructure:
         description: |
             Link to the feedback form
         type: map
         mapping:
+          tiaas:
+            type: bool
+            description: Indicate that you will be using TIaaS for this event
+          support:
+            type: map
+            mapping:
+              platform:
+                type: str
+                description: |
+                  The name of the platform
+                enum:
+                  - Slack
+              join_link:
+                type: str
+                description: Invite link for the platform, GTN slack by default
+              channel:
+                type: str
+                description: A channel identifier for the platform, instructors can create channels on the GTN slack themselves.
+              link:
+                type: str
+                description: Link to the channel
           servers:
             type: seq
             sequence:
@@ -255,10 +285,25 @@ mapping:
                     type: str
                     description: |
                       The URL of the server
-                  tiaas:
+                  name:
                     type: str
                     description: |
-                      The TIaaS identifier. If you don't have one officially yet, just set it provisionally (we'll generate a link which will make it easier to request it!)
+                      A human readable name for the server
+                  tiaas_link:
+                    type: str
+                    description: |
+                      The TIaaS URL. If you don't have one officially yet, just set it provisionally (we'll generate a link which will make it easier to request it!)
+          custom:
+            type: map
+            mapping:
+              description:
+                type: str
+                description: |
+                  Custom markdown formatted text to display. Note that Jekyll things like `{% snippet %}` or `{% include %}` will not work here.
+          no_galaxy:
+            type: bool
+            description: |
+              Set to `true` to disable the automatic "register for a galaxy account" card.
     tags:
         type: seq
         sequence:

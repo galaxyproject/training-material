@@ -146,6 +146,7 @@ layout: base
     <p>Follow the steps below to get set up with everything you need to participate in the course!</p>
 
     <!-- Galaxy setup -->
+    {% unless event.infrastructure.no_galaxy %}
     <div class="card setup-card">
 	  <div class="row no-gutters">
 		<div class="col-sm-3">
@@ -172,6 +173,7 @@ layout: base
 		</div>
 	  </div>
 	</div>
+	{% endunless %}
 
     <!-- TIaaS setup -->
     {% if event.infrastructure.tiaas %}
