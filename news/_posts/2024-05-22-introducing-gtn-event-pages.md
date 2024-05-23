@@ -9,7 +9,11 @@ tags:
 contributions:
   authorship:
     - shiltemann
+  infrastructure:
+    - shiltemann
     - hexylena
+cover: news/images/gtn-event-screenshot.png
+cover_alt: A screenshot of a GTN event page showing the program tab. It looks very similar to GTN topic pages.
 ---
 
 Are you organizing a training event using GTN materials? You can now add your event directly to the GTN!
@@ -18,19 +22,22 @@ View all upcoming and past events on the brand-new [GTN Events page]({% link eve
 
 ## What you will get
 
-- Full event webpage complete with
+- Full featured event webpage complete with
   - Course overview
   - Course handbook with your full program including links to all materials participants will need on the day
   - Setup instructions for participants
   - Instructor Zone page with handy links and tips for course organizers
-  - See [this example event]({% link events/2024-04-01-example-event.md %})
 
 - Your event is advertised on the GTN Event page
 - We are happy to help announce your event on social media
 
+See [this example event]({% link events/2024-04-01-example-event.md %}) to get an idea of what your event page could look like. Or check out one of the [past events]({% link events/2023-04-17-gat-gent.md %}) to see the full capabilities of the event pages.
+
+Our event pages are based on what we have learned from years of organizing and running training events. Additionally our experiences across the last three GTN Smörgåsbords significantly informed the event pages we present today, so we know they're capable of everything you'll want to do!
+
 **Already have a course webpage?** No problem! you can still add your event to the GTN and we will simply to your event webpage.
 
-![screenshot of a galaxy event page, tab with the full program]({% link news/images/gtn-event-screenshot.png %})
+![screenshot of a galaxy event page, showing the main page including a map, several sponsors, and more in an attractive tabbed layout]({% link news/images/gtn-event-screenshot2.png %})
 
 ## Adding your event
 
