@@ -424,7 +424,7 @@ $('#myTab button').click(function(e) {
 // store the currently selected tab in the hash value
 $("ul.nav-tabs > li > button").on("shown.bs.tab", function(e) {
   var id = $(e.target).attr('data-target').substr(1);
-	window.history.pushState(null, null, '#' + id);
+	window.history.replaceState(null, null, '#'+id);
 });
 
 // on load of the page: switch to the currently selected tab
@@ -439,6 +439,6 @@ $('#myTab button[data-target="' + hash + '"]').tab('show');
 
 <style>
 :target {
-    scroll-margin-top: 20em;
+    scroll-margin-top: 24em;
 }
 </style>
