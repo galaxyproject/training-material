@@ -74,7 +74,10 @@
     <li ><a href="#method-c-funder-3F">::funder?</a>
     <li ><a href="#method-c-get_authors">::get_authors</a>
     <li ><a href="#method-c-get_contributors">::get_contributors</a>
+    <li ><a href="#method-c-get_funders">::get_funders</a>
+    <li ><a href="#method-c-get_instructors">::get_instructors</a>
     <li ><a href="#method-c-get_non_authors">::get_non_authors</a>
+    <li ><a href="#method-c-get_organisers">::get_organisers</a>
     <li ><a href="#method-c-list">::list</a>
     <li ><a href="#method-c-person-3F">::person?</a>
   </ul>
@@ -116,7 +119,7 @@
           <p>Convenience method to allow us to handle nil sites, and load directly from disk ourselves.</p>
 
           <div class="method-source-code" id="_load_file-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 62</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">_load_file</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">category</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;[GTN/Contributor] Loading #{category} from disk, this access could be improved&quot;</span>
@@ -151,7 +154,7 @@
 <p>Returns: <code>Hash</code> of contributor information <code>String</code> type of contributor (e.g. &#39;contributor&#39;, &#39;organisation&#39;, &#39;funder&#39;)</p>
 
           <div class="method-source-code" id="fetch-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 79</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">_load_file</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;contributors&#39;</span>).<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">c</span>)
     <span class="ruby-keyword">return</span> [<span class="ruby-string">&#39;contributor&#39;</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>][<span class="ruby-identifier">c</span>]]
@@ -191,7 +194,7 @@
 <p>Returns: <code>Hash</code> of contributor information</p>
 
           <div class="method-source-code" id="fetch_contributor-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 100</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)[<span class="ruby-value">1</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -218,7 +221,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a funder or not</p>
 
           <div class="method-source-code" id="fetch_funding_url-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 154</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch_funding_url</span>(<span class="ruby-identifier">contributor</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">contributor</span>[<span class="ruby-string">&#39;funding_id&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">contributor</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;funding_system&#39;</span>)
 
@@ -260,7 +263,7 @@
 <p>Returns: <code>String</code> of contributor name</p>
 
           <div class="method-source-code" id="fetch_name-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 111</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch_name</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)[<span class="ruby-value">1</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;name&#39;</span>, <span class="ruby-identifier">c</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -287,7 +290,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a funder or not</p>
 
           <div class="method-source-code" id="funder-3F-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 144</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">funder?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funders&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">c</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -320,9 +323,9 @@
     <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>)
     <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-string">&#39;authorship&#39;</span>]
-  <span class="ruby-keyword">else</span>
-    {}
   <span class="ruby-keyword">end</span>
+
+  []
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -352,9 +355,71 @@
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
     <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>)
-    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-identifier">k</span>] }.<span class="ruby-identifier">flatten</span>
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">values</span>.<span class="ruby-identifier">flatten</span>
   <span class="ruby-keyword">else</span>
-    {}
+    []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-get_funders" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">get_funders</span><span
+            class="method-args">(data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Get the funders of a material. Params:</p>
+<dl class="rdoc-list note-list"><dt><code>data</code>
+<dd>
+<p><code>Hash</code> of the YAML frontmatter from a material</p>
+</dd></dl>
+
+<p>Returns: <code>Array</code> of contributor IDs</p>
+
+          <div class="method-source-code" id="get_funders-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_funders</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;funding&#39;</span>)
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-string">&#39;funding&#39;</span>]
+  <span class="ruby-keyword">else</span>
+    []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-get_instructors" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">get_instructors</span><span
+            class="method-args">(data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns event instructors Params:</p>
+<dl class="rdoc-list note-list"><dt><code>data</code>
+<dd>
+<p><code>Hash</code> of the YAML frontmatter from a material</p>
+</dd></dl>
+
+<p>Returns: <code>Array</code> of contributor IDs</p>
+
+          <div class="method-source-code" id="get_instructors-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_instructors</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;instructors&#39;</span>)
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-string">&#39;instructors&#39;</span>]
+  <span class="ruby-keyword">else</span>
+    []
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -380,7 +445,7 @@
 <p>Returns: <code>Array</code> of contributor IDs</p>
 
           <div class="method-source-code" id="get_non_authors-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 47</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_non_authors</span>(<span class="ruby-identifier">material</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
     []
@@ -389,6 +454,37 @@
       .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;funding&#39;</span> }
       .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;authorship&#39;</span> }
       .<span class="ruby-identifier">values</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-keyword">else</span>
+    []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-get_organisers" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">get_organisers</span><span
+            class="method-args">(data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns event organisers Params:</p>
+<dl class="rdoc-list note-list"><dt><code>data</code>
+<dd>
+<p><code>Hash</code> of the YAML frontmatter from a material</p>
+</dd></dl>
+
+<p>Returns: <code>Array</code> of contributor IDs</p>
+
+          <div class="method-source-code" id="get_organisers-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_organisers</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;organisers&#39;</span>)
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-string">&#39;organisers&#39;</span>]
   <span class="ruby-keyword">else</span>
     []
   <span class="ruby-keyword">end</span>
@@ -416,7 +512,7 @@
 <p>Returns: <code>Hash</code> of contributors, funders, organisations merged together</p>
 
           <div class="method-source-code" id="list-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 121</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
       .<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funders&#39;</span>])
@@ -446,7 +542,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a contributor or not</p>
 
           <div class="method-source-code" id="person-3F-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 134</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">person?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">c</span>)
 <span class="ruby-keyword">end</span></pre>

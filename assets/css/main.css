@@ -21078,21 +21078,21 @@ blockquote.feedback > .box-title button {
   white-space: pre-wrap;
 }
 
-.card {
+.card:not(.setup-card) {
   background: transparent;
   border: 1px solid var(--border-light);
 }
-.card .card-title {
+.card:not(.setup-card) .card-title {
   background: var(--brand-color);
   border-bottom: 1px solid var(--border-light);
   padding: 1.25rem;
   color: var(--brand-color-contrast);
 }
-.card .card-body {
+.card:not(.setup-card) .card-body {
   padding: 0em;
   flex: 0 1 auto;
 }
-.card .card-body > :not(.card-title, canvas) {
+.card:not(.setup-card) .card-body > :not(.card-title, canvas) {
   margin-left: 1em;
   margin-right: 1em;
 }
@@ -21493,6 +21493,40 @@ nav[data-toggle=toc] .nav li a:hover, nav[data-toggle=toc] .nav li a:focus, nav[
   width: 1em !important;
   border-radius: 50%;
   margin: 0 0.25em 0 0;
+}
+
+.funder-badge {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid var(--hyperlink);
+  color: var(--text-color);
+  max-width: 24em;
+  height: 8em;
+  margin-inline-end: 1em;
+  margin-bottom: 1em;
+}
+.funder-badge div.avatar {
+  display: flex;
+  align-items: center;
+}
+.funder-badge div.avatar img.funder-avatar {
+  margin: 0;
+  max-height: 8em;
+  min-width: 8em;
+  max-width: 8em;
+  margin-inline-end: 1em;
+}
+.funder-badge div.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.funder-badge div.info div.name {
+  font-size: 1.2rem;
+}
+.funder-badge div.info div.description {
+  overflow-y: hidden;
+  font-size: 0.9rem;
 }
 
 table.contributions tr td:nth-child(1) {
@@ -21987,6 +22021,56 @@ figure > a[target=_blank]::after {
 
 section#tutorial-content {
   margin-top: 2rem;
+}
+
+.eventtable th {
+  font-weight: bold;
+}
+.eventtable .eventtable-date {
+  white-space: nowrap;
+}
+.eventtable .eventtable-title {
+  font-weight: bold;
+}
+.eventtable .eventtable-description {
+  margin-top: 0.25 rem;
+  font-size: 80%;
+}
+
+section.event .event-image {
+  margin-bottom: 1em;
+}
+section.event hgroup {
+  border: 1px solid var(--border-light);
+  box-shadow: 0 0 5px var(--border-light);
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+}
+section.event hgroup h1 {
+  font-weight: 900;
+}
+section.event hgroup p {
+  text-transform: uppercase;
+  color: var(--text-color-muted);
+}
+section.event .nav-tabs .nav-item {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+section.event .nav-tabs button.nav-link {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  font-weight: 800;
+}
+section.event .nav-tabs button.nav-link:hover {
+  color: var(--hyperlink-hover);
+}
+section.event .nav-tabs button.nav-link.active {
+  background: var(--overview-color);
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */

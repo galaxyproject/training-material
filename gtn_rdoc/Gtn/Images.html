@@ -185,7 +185,7 @@
           <div class="method-source-code" id="html_image_dimensions-source">
             <pre><span class="ruby-comment"># File _plugins/gtn/images.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">html_image_dimensions</span>(<span class="ruby-identifier">tuto_dir</span>, <span class="ruby-identifier">url</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">FASTIMAGE_AVAILABLE</span> <span class="ruby-keyword">or</span> <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;development&#39;</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">FASTIMAGE_AVAILABLE</span> <span class="ruby-operator">||</span> (<span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;development&#39;</span>)
 
   (<span class="ruby-identifier">width</span>, <span class="ruby-identifier">height</span>), <span class="ruby-identifier">path</span> = <span class="ruby-identifier">get_image_dimensions</span>(<span class="ruby-identifier">tuto_dir</span>, <span class="ruby-identifier">url</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">width</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">height</span>

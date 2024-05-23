@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@408fd00900d24b4a68f3934328b5952dcb291251",
+		release: "galaxy-training-network@3817a2171d827be491305bb9230f1102d48eb4e2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -73,7 +73,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<meta property="og:title" content="Galaxy Training!">
         <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
         
-        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -103,9 +103,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     </li>
 
                     <li class="nav-item">
+                        
                         <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
                            <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
                         </a>
+                        
                     </li>
 
                     <li class="nav-item dropdown">
@@ -1247,14 +1249,43 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
 	    -->
                 <!-- GTN news  -->
-            <div class="col-12" id="news">
+            <div id="events">
+                 <h2><a href="/training-material/events/index.html">Upcoming Events</a></h2>
+                 <p> Check out upcoming events around the Galaxy! </p>
+
+                <div class="newstable">
+                <div class="list-group">
+                 
+                 
+                 
+                 <p>No known upcoming events.</p>
+                 
+                </div>
+                </div>
+                 <p>
+                 <a class="btn btn-primary"  href="/training-material/events/index.html">See all events</a>
+                 <a class="btn btn-primary" href="/training-material/faqs/gtn/gtn_event_create.html">Add your event!</a>
+                 </p>
+            </div>
+
+            <div id="news">
                  <h2><a href="/training-material/news.html">The latest GTN news</a> <a class="float-right" href="/training-material/feed.xml"><i class="fas fa-rss" aria-hidden="true"></i><span class="visually-hidden">rss-feed</span></a></h2>
                  <p> Read about new tutorials, features, events and more! </p>
-                 
+                 <p>
 
 <div class="newstable">
 <div class="list-group">
  
+ 
+ <a class="list-group-item" href="/training-material/news/2024/05/22/introducing-gtn-event-pages.html">
+   <p class="list-group-item-text">May 22, 2024</p>
+   <div class="list-group-item-heading">
+   
+   
+   <i class="fas fa-bullhorn" aria-hidden="true"></i>
+   
+   Introducing GTN Event Pages </div>
+ </a>
  
  <a class="list-group-item" href="/training-material/news/2024/05/15/galaxy-europe-freiburg-job.html">
    <p class="list-group-item-text">May 15, 2024</p>
@@ -1296,21 +1327,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
    Learn to use MINERVA Platform&#39;s COVID-19 Disease Map with Galaxy </div>
  </a>
  
- <a class="list-group-item" href="/training-material/news/2024/03/26/FAIR-pointers.html">
-   <p class="list-group-item-text">Mar 26, 2024</p>
-   <div class="list-group-item-heading">
-   
-   
-   
-   
-   New Learning Pathway for FAIR Data Management developed by ELIXIR-UK Data Stewardship Fellows and Experts </div>
- </a>
- 
 </div>
 </div>
+</p>
 
-                 <p><a href="/training-material/news.html">See all news</a>
+                 <p>
+
+                 <a class="btn btn-primary"  href="/training-material/news.html">See all news</a>
+                 <a class="btn btn-primary" href="/training-material/faqs/gtn/gtn_news_create_post.html">Add your news!</a>
+                 </p>
+
             </div>
+
+
+
                 <!-- Galaxy community video  -->
 			<!--
                 <div class="col-12">
@@ -1923,6 +1953,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		</figcaption>
 	</figure>
 	
+	<figure>
+		
+			<a class="logo" href="https://jetstream-cloud.org/">
+				<img loading="lazy" src="https://jetstream-cloud.org/images/home/jetstream-2.png" alt="jetstream2">
+			</a>
+		
+		<figcaption>
+			
+			<a href="https://jetstream-cloud.org/">
+				JetStream
+			</a>
+			
+		</figcaption>
+	</figure>
+	
      </div>
     </div>
 </section>
@@ -1941,7 +1986,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/408fd00900d24b4a68f3934328b5952dcb291251">408fd00</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3817a2171d827be491305bb9230f1102d48eb4e2">3817a21</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

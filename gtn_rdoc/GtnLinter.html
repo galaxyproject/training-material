@@ -476,7 +476,7 @@
           <div class="method-source-code" id="check_bad_trs_link-source">
             <pre><span class="ruby-comment"># File bin/lint.rb, line 614</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_bad_trs_link</span>(<span class="ruby-identifier">contents</span>)
-  <span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/snippet faqs\/galaxy\/workflows_run_trs.md path=&quot;([^&quot;]*)&quot;/i</span>)
+  <span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">%r{snippet faqs/galaxy/workflows_run_trs.md path=&quot;([^&quot;]*)&quot;}i</span>)
     .<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">_text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">path</span> = <span class="ruby-identifier">selected</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>)
