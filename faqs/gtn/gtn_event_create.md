@@ -15,7 +15,7 @@ Your event will also be shown on the [GTN event horizon]({% link events/index.md
 
 To add your event to the GTN, please:
 
-1. Create a page in the `events/` folder of the GTN repository
+1. Create a page in the `events/` folder of the [GTN repository](https://github.com/galaxyproject/training-material)
 2. Have a look at example event definitions in this folder:
    - [2024-04-01-example-event.md](https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event.md)
    - or [2024-04-01-example-event-external.md](https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event-external.md) if you already have an event page elsewhere
