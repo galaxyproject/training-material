@@ -28,7 +28,7 @@ Please also feel free to contact us with ideas for improvements! We know that tr
 
 
 ## External events
-Already have a course webpage? Great! In this case, you only have to provide the most basic information about your course (title, desciption, dates, location). See also [`2024-04-01-example-event-external.md`]((https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event-external.md) for an example definition.
+Already have a course webpage? Great! In this case, you only have to provide the most basic information about your course (title, desciption, dates, location). See also [2024-04-01-example-event-external.md](https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event-external.md) for an example definition.
 
 ```
 ---
