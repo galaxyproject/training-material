@@ -73,9 +73,14 @@ infrastructure:
   support: # optional, remove if not using online support
      platform: Slack
      join_link:    # invite link; GTN Slack by default
-     channel: "#my-event" # instructors can create channels on the GTN slack themselves.
+     channel: my-event  # instructors can create channels on the GTN slack themselves.
      link: "https://gtnsmrgsbord.slack.com/archives/C032C2MRHAS" # will use the #general channel on GTN slack by default.
 
+  custom:  # optional, any other setup instructions you want to add to the "Setup" tab
+    description: |
+      Before joining the course, please make sure to:
+        - Bring a laptop with at least 8GB of RAM.
+        - Do the [Intro to Galaxy](http://training.galaxyproject.org/topics/introduction/tutorials/galaxy-intro-short/tutorial.html) tutorial if you are not yet familiar with Galaxy
 
 # Program of your course
 # Add GTN tutorials by supplying the topic and tutorial name

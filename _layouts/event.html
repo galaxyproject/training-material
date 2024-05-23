@@ -227,7 +227,7 @@ layout: base
 
             <ol>
               <li>Join {{support.platform}} via this <a href="{{support.join_link | default: site.slack.invite }}">Invite Link</a></li>
-              <li>Join the event channel: <a href="{{support.link | default: site.slack.general_channel}}">{{event.infrastructure.support.channel | default: "#general"}}</a></li>
+              <li>Join the event channel: <a href="{{support.link | default: site.slack.general_channel}}">#{{event.infrastructure.support.channel | default: "#general"}}</a></li>
               <li>Introduce yourself here!</li>
             </ol>
 
@@ -237,6 +237,28 @@ layout: base
 	  </div>
 	</div>
     {% endif %}
+
+
+    <!-- Custom Setup Instructions -->
+    {% if event.infrastructure.custom %}
+    <div class="card setup-card">
+      <div class="row no-gutters">
+        <div class="col-sm-3">
+          <img src="{% link assets/images/galaxy-for-admins.svg %}" class="card-img" alt="Galaxy logo">
+        </div>
+        <div class="col-sm-9">
+          <div class="card-body">
+            <h5 class="card-title">Prepare for the Course</h5>
+            <p class="card-text">
+              {{ event.infrastructure.custom.description | markdownify }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+
 
 
 
