@@ -34,22 +34,22 @@ layout: base
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Course Overview</button>
+    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Course Overview</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Program</button>
+    <button class="nav-link" id="program-tab" data-toggle="tab" data-target="#program" type="button" role="tab" aria-controls="program" aria-selected="false">Program</button>
   </li>
   {% if event.infrastructure %}
   <li class="nav-item" role="presentation">
-     <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false">Setup</button>
+     <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false" >Setup</button>
   </li>
   {% endif %}
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Instructor Zone</button>
+    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#instructors" type="button" role="tab" aria-controls="instructors" aria-selected="false">Instructor Zone</button>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+  <div class="tab-pane show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
     <p>{{ event.description | markdownify }}</p>
     <p>{{ content | markdownify }}</p>
 
@@ -108,7 +108,7 @@ layout: base
   </div>
 
   <!-- Programme Tab -->
-  <div class="tab-pane " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
     <h2> Program </h2>
     {% if event.external %}
        For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
@@ -268,7 +268,7 @@ layout: base
   {% endif %}
 
 
-  <div class="tab-pane " id="contact" role="tabpanel" aria-labelledby="contact-tab">
+  <div class="tab-pane " id="instructors" role="tabpanel" aria-labelledby="instructors-tab">
 <section>
 	<h2>Instructor Zone</h2>
 
@@ -401,4 +401,37 @@ subsites: [all]
 </section>
 
 
+<script>
+(function (window, document) {
+    function onDocumentReady(fn) {
+        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
 
+    onDocumentReady(function () {
+
+
+$('#myTab button').click(function(e) {
+  console.log("bla");
+  e.preventDefault();
+  $(this).tab('show');
+});
+
+// store the currently selected tab in the hash value
+$("ul.nav-tabs > li > button").on("shown.bs.tab", function(e) {
+  var id = $(e.target).attr('data-target').substr(1);
+  window.location.hash = id;
+});
+
+// on load of the page: switch to the currently selected tab
+var hash = window.location.hash;
+$('#myTab button[data-target="' + hash + '"]').tab('show');
+
+});
+})(window, document);
+
+
+</script>
