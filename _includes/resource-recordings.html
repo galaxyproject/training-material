@@ -21,7 +21,7 @@
   <ul class="dropdown-menu">
     {% for rec in include.material.slides_recordings %}
     <li><a class="dropdown-item" href="https://youtu.be/{{rec.youtube_id}}" title="View recording for this lecture on YouTube">
-                {% icon video %} Lecture ({{rec.date | date: "%B %Y" }}, {{rec.length | downcase }})</a>
+                {% icon video %} Lecture ({{rec.date | date: "%B %Y" }}) - {{rec.length | downcase }}</a>
     </li>
     {% endfor %}
 
@@ -29,7 +29,7 @@
       {% assign type = 'Tutorial' %}
       {% if page.layout == 'tutorial_slides' or page.layout == 'base_slides' %} {% assign type = 'Lecture' %}{% endif %}
     <li><a class="dropdown-item" href="https://youtu.be/{{rec.youtube_id}}" title="View recording for this material on YouTube">
-                {% icon video %} {{type}} ({{rec.date | date: "%B %Y" }}, {{rec.length | downcase }})</a>
+                {% icon video %} {{type}} ({{rec.date | date: "%B %Y" }}) - {{rec.length | downcase }}</a>
     </li>
     {% endfor %}
 
