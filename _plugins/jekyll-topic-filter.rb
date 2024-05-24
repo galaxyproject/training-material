@@ -497,16 +497,6 @@ module TopicFilter
     page_obj['ref'] = page_ref
 
     id = page_obj['id']
-    page_obj['video_library'] = {}
-
-    if site.data.key?('video-library')
-      page_obj['video_library']['tutorial'] = site.data['video-library']["#{id}/tutorial"]
-      page_obj['video_library']['slides'] = site.data['video-library']["#{id}/slides"]
-      page_obj['video_library']['demo'] = site.data['video-library']["#{id}/demo"]
-      page_obj['video_library']['both'] = site.data['video-library'][id]
-    end
-
-    page_obj['video_library']['session'] = site.data['session-library'][id] if site.data.key?('session-library')
 
     # Sometimes `hands_on` is set to something like `external`, in which
     # case it is important to not override it. So we only do that if the

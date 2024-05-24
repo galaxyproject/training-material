@@ -141,7 +141,7 @@ module GtnLinter
         match_end: selected.end(0) + 1,
         replacement: '',
         message: 'Instead of embedding IFrames to YouTube contents, consider adding this video to the ' \
-                 '[GTN Video Library](https://github.com/gallantries/video-library/issues/) where it will ' \
+                 'GTN tutorial "recordings" metadata where it will ' \
                  'be more visible for others.',
         code: 'GTN:002'
       )
