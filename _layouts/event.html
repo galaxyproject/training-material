@@ -71,15 +71,14 @@ layout: base
 	<h3 id="location">Event Location</h3>
 
 	<script src="{% link assets/js/leaflet-1.9.3.js %}"></script>
+	<script src="{% link assets/js/protomaps-leaflet.min.js %}"></script>
 	<div id="map" style="width: 100%; height: 300px"></div>
 
 	<script>
 	const map = L.map('map').setView([{{ event.location.geo.lat }}, {{ event.location.geo.lon }}], 14);
-	var OPNVKarte = L.tileLayer('https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png', {
-		maxZoom: 18,
-		attribution: 'Map <a href="https://memomaps.de/">memomaps.de</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-	});
-	OPNVKarte.addTo(map);
+
+	var layer = protomapsL.leafletLayer({url: "{{ page.url | prepend: site.baseurl | replace: 'html', 'pmtiles' }}",theme:"light"})
+	layer.addTo(map);
 	L.marker([{{ event.location.geo.lat }}, {{ event.location.geo.lon }}]).addTo(map)
 		.bindPopup('{{ event.title }}')
 		.openPopup();
@@ -432,7 +431,4 @@ $('#myTab button[data-target="' + hash + '"]').tab('show');
 </script>
 
 <style>
-:target {
-    scroll-margin-top: 24em;
-}
 </style>

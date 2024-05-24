@@ -64,4 +64,17 @@ events.each do |event|
       File.open(event, 'w') { |file| file.puts contents }
     end
   end
+
+  # Now it has a geocode
+  pmtiles_output = event.gsub(/md$/, 'pmtiles')
+  bbox = [
+    event_data['location']['geo']['lon'].to_f - 0.03,
+    event_data['location']['geo']['lat'].to_f - 0.01,
+    event_data['location']['geo']['lon'].to_f + 0.03,
+    event_data['location']['geo']['lat'].to_f + 0.01,
+  ].join(',')
+  # if ! File.exist?(pmtiles_output)
+    puts "./pmtiles extract https://build.protomaps.com/20240520.pmtiles #{pmtiles_output} --bbox=#{bbox} --maxzoom=15 --minzoom=10"
+    puts `./pmtiles extract https://build.protomaps.com/20240520.pmtiles #{pmtiles_output} --bbox=#{bbox} --maxzoom=15 --minzoom=10`
+  # end
 end
