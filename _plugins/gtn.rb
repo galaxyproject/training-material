@@ -931,7 +931,7 @@ Jekyll::Hooks.register :site, :post_read do |site|
     end
 
     # If it's an 'upcoming event'
-    if Date.today < deadline - 30
+    if deadline - 30 <= Date.today && Date.today <= deadline
       page.data['event_upcoming'] = true
     end
 
