@@ -268,12 +268,44 @@ layout: base
 
 	<h3>Promote the Event</h3>
 
-	<p>Tootable/Tweetable version:</p>
+	<p><abbr title="Tooting is the verb used when posting to mastodon or the fediverse, which are like open source twitter.">Tootable</abbr>/Tweetable version:</p>
 <div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 {{ event.title }}! 📢
 
 {{ page.description }}
 
+📅 {{ event | collapse_date_pretty }}
+➡️ {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+📝 Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+	<p>Slack-compatible version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+:calendar: {{ event | collapse_date_pretty }}
+:arrow_right: {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+:pencil: Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+	<p>Version with schedule:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+**Agenda**:
+{% for section in event.program -%}
+{%- unless section.subsection -%}
+- {{ section.section }}
+{% endunless -%}
+{%- endfor %}
 📅 {{ event | collapse_date_pretty }}
 ➡️ {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
 {%- if event.registration.link %}
