@@ -60,27 +60,15 @@ Dephosphorylation is a biochemical process (post-translational modification) inv
 > <hands-on-title>GPU-enabled Interactive Jupyter Notebook for Machine Learning</hands-on-title>
 >
 > - {% tool [GPU-enabled Interactive Jupyter Notebook for Machine Learning](interactive_tool_ml_jupyter_notebook) %}
->    - *"Do you already have a notebook?"*: `Start with default notebooks`
+>    - *"Do you already have a notebook?"*: `Start with a code repository`
+>    - *"Online code repository (Git-based) URL"*: `https://github.com/anuprulez/fine-tune-protTrans-repository` 
 >    - Click *"Run Tool"*
 >
 >    > <comment-title></comment-title>
+>    > The above step automatically fetches the notebook and datasets from the provided GitHub URL and initiates a JupyterLab.
 >    >  If you do not have access to this resource in Galaxy Europe, please apply for it at: [Access GPU-JupyterLab](http://usegalaxy.eu/gpu-request). It may take a day or two to receive access.
 >    >
 >    {: .comment}
-{: .hands_on}
-
-
-### Fetch notebook and protein sequences
-
-> <hands-on-title>Fetch data from Zenodo</hands-on-title>
->
-> 1. Create a new folder named `fine-tuning` alongside other folders such as "data", "outputs", "elyra" or you can use your favourite folder name.
-> 2. Inside the created folder, clone a code repository by clicking on "Git" icon.
-> 3. In the shown popup, provide the repository path as shown below and then, click on "clone":
->    ```
->    https://github.com/anuprulez/fine-tune-protTrans-repository
->    ```
->
 {: .hands_on}
 
 
