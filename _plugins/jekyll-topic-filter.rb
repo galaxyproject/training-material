@@ -466,12 +466,14 @@ module TopicFilter
     page = nil
 
     slide_has_video = false
+    slide_has_recordings = false
     slide_translations = []
     page_ref = nil
 
     if slides.length.positive?
       page = slides.min { |a, b| a[1].path <=> b[1].path }[1]
       slide_has_video = page.data.fetch('video', false)
+      slide_has_recordings = page.data.fetch('recordings', false)
       slide_translations = page.data.fetch('translations', [])
       page_ref = page
     end
@@ -630,6 +632,7 @@ module TopicFilter
 
     page_obj['tours'] = tours.length.positive?
     page_obj['video'] = slide_has_video
+    page_obj['slides_recordings'] = slide_has_recordings
     page_obj['translations'] = {}
     page_obj['translations']['tutorial'] = tutorial_translations
     page_obj['translations']['slides'] = slide_translations
