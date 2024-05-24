@@ -11,6 +11,7 @@ require './_plugins/gtn/scholar'
 require './_plugins/gtn/supported'
 require './_plugins/gtn/toolshed'
 require './_plugins/gtn/usegalaxy'
+require './_plugins/util'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
@@ -24,6 +25,8 @@ puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if vers
 module Jekyll
   # The main GTN function library
   module GtnFunctions
+    # rubocop:disable Naming/PredicateName
+
     def self.cache
       @@cache ||= Jekyll::Cache.new('GtnFunctions')
     end
@@ -332,6 +335,10 @@ module Jekyll
         if m.key?('name') && m.key?('topic')
           found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])
           Jekyll.logger.warn "Could not find material #{m['topic']}/#{m['name']} in the site data" if found.nil?
+
+          if m.key?('time')
+            found['time'] = m['time']
+          end
           found
         elsif m.key?('external') && m['external']
           {
@@ -340,6 +347,14 @@ module Jekyll
             'title' => m['name'],
             'hands_on' => 'external',
             'hands_on_url' => m['link'],
+          }
+        elsif m.key?('type') && m['type'] == 'custom'
+          {
+            'layout' => 'custom',
+            'name' => m['name'],
+            'title' => m['name'],
+            'description' => m['description'],
+            'time' => m['time'],
           }
         else
           Jekyll.logger.warn "[GTN] Unsure how to render #{m}"
@@ -542,6 +557,81 @@ module Jekyll
       end
     end
 
+    def format_location(location)
+      url = 'https://www.openstreetmap.org/search?query='
+      # location:
+      #   name: Bioinf Dept
+      #   address: 42 E Main St.
+      #   city: Reyjkjavik
+      #   country: Iceland
+      #   #region: # optional
+      #   postcode: 912NM
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil)
+      ].compact
+
+      if loc.length > 1
+        "<a href=\"#{url}#{loc.join(', ')}\">#{loc.join(', ')}</a>"
+      else
+        # Just e.g. the name
+        loc.join(', ')
+      end
+    end
+
+    def format_location_simple(location)
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil)
+      ].compact
+
+      loc.join(', ')
+    end
+
+    def format_location_short(location)
+      url = 'https://www.openstreetmap.org/search?query='
+      # location:
+      #   name: Bioinf Dept
+      #   address: 42 E Main St.
+      #   city: Reyjkjavik
+      #   country: Iceland
+      #   #region: # optional
+      #   postcode: 912NM
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil)
+      ].compact
+
+      loc2 = [
+        location.fetch('name', nil),
+        location.fetch('city', nil),
+        location.fetch('country', nil)
+      ].compact
+
+      if loc.length > 1
+        "<a href=\"#{url}#{loc.join(', ')}\">#{loc2.join(', ')}</a>"
+      else
+        # Just e.g. the name
+        loc.join(', ')
+      end
+    end
+
+    def collapse_date_pretty(event)
+      collapse_event_date_pretty(event)
+    end
+
     ##
     # Get the topic of a page's path
     # Params:
@@ -558,6 +648,16 @@ module Jekyll
 
     def shuffle(array)
       array.shuffle
+    end
+
+    def is_date_passed(date)
+      if date.nil?
+        false
+      elsif date.is_a?(String)
+        Date.parse(date) < Date.today
+      else
+        date < Date.today
+      end
     end
 
     def get_og_desc(site, page); end
@@ -639,6 +739,7 @@ module Jekyll
     def group_icons(icons)
       icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
     end
+    # rubocop:enable Naming/PredicateName
   end
 end
 
@@ -685,11 +786,11 @@ Jekyll::Hooks.register :site, :pre_render do |site|
       # This would also need to modify the box types themselves, not sure how is best to do that.
       page.content = page.content.gsub(/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/) do |match|
         if match =~ /(CAUTION|WARNING)/
-          "> <warning-title></warning-title>"
+          '> <warning-title></warning-title>'
         elsif match =~ /TIP/
-          "> <tip-title></tip-title>"
+          '> <tip-title></tip-title>'
         else
-          "> <comment-title></comment-title>"
+          '> <comment-title></comment-title>'
         end
       end
     end
@@ -734,6 +835,48 @@ Jekyll::Hooks.register :site, :post_read do |site|
         end
       end
     end
+  end
+
+  # Add shortlinks
+  Jekyll.logger.info '[GTN] Loading shortlinks'
+  shortlinks = site.data['shortlinks']
+  shortlinks_reversed = shortlinks['id'].invert
+
+  posts = if site.posts.respond_to?(:docs)
+            site.posts.docs
+          else
+            site.posts
+          end
+
+  posts.each do |post|
+    post.data['short_id'] = shortlinks_reversed[post.url]
+  end
+
+  site.pages.each do |page|
+    page.data['short_id'] = shortlinks_reversed[page.url]
+  end
+
+  Jekyll.logger.info '[GTN] Annotating events'
+  site.pages.select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }.each do |page|
+    page.data['not_started'] = page.data['date_start'] > Date.today
+    page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
+
+    event_start = page.data['date_start']
+    event_end = page.data['date_end'] || page.data['date_start']
+
+    page.data['event_state'] = if Date.today < event_start
+                                 'upcoming'
+                               elsif (event_start - 3) < Date.today && Date.today < (event_end + 3) # Some lee way
+                                 'ongoing'
+                               else
+                                 'ended'
+                               end
+
+    page.data['duration'] = if page.data['date_end'].nil?
+                              1
+                            else
+                              (page.data['date_end'] - page.data['date_start']).to_i + 1
+                            end
   end
 end
 

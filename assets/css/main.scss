@@ -710,7 +710,7 @@ blockquote {
     white-space: pre-wrap;
 }
 
-.card {
+.card:not(.setup-card){
 	background: transparent;
 	border: 1px solid var(--border-light);
 	.card-title {
@@ -1203,6 +1203,44 @@ nav[data-toggle='toc'] {
         border-radius: 50%;
         margin: 0 0.25em 0 0;
     }
+}
+
+.funder-badge {
+	display: flex;
+	flex-direction: row;
+	border: 1px solid var(--hyperlink);
+	color: var(--text-color);
+	max-width: 24em;
+	height: 8em;
+	margin-inline-end: 1em;
+	margin-bottom: 1em;
+
+	div.avatar {
+		display: flex;
+		align-items: center;
+
+		img.funder-avatar {
+			margin: 0;
+			max-height: 8em;
+			min-width: 8em;
+			max-width: 8em;
+			margin-inline-end: 1em;
+		}
+	}
+
+	div.info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		div.name {
+			font-size: 1.2rem;
+		}
+		div.description {
+			overflow-y: hidden;
+			font-size: 0.9rem;
+		}
+	}
 }
 
 table.contributions{
@@ -1777,4 +1815,67 @@ figure > a[target="_blank"]::after {
 
 section#tutorial-content {
 	margin-top: 2rem;
+}
+
+.eventtable {
+  th {
+    font-weight: bold;
+  }
+  .eventtable-date{
+      white-space: nowrap;
+  }
+  .eventtable-title {
+    font-weight: bold;
+  }
+  .eventtable-description{
+    margin-top: 0.25 rem;
+    font-size: 80%;
+  }
+}
+
+section.event {
+    .event-image{
+      margin-bottom: 1em;
+    }
+
+	hgroup {
+		border: 1px solid var(--border-light);
+		box-shadow: 0 0 5px var(--border-light);
+		padding: 0 1rem;
+		margin-bottom: 2rem;
+
+		h1 {
+			font-weight: 900;
+		}
+
+		p {
+			text-transform: uppercase;
+			color: var(--text-color-muted);
+		}
+	}
+
+	.nav-tabs {
+		.nav-item {
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+
+		button.nav-link{
+			border: none;
+			background: none;
+			font-size: 1.2rem;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			font-weight: 800;
+
+			&:hover {
+				color: var(--hyperlink-hover);
+			}
+
+			&.active {
+				background: var(--overview-color);
+				color: white;
+			}
+		}
+	}
 }

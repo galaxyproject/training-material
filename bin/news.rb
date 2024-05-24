@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require './_plugins/util'
 require 'json'
 require 'kramdown'
 require 'uri'
@@ -51,9 +52,10 @@ mfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=M #{opt
 # --diff-filter=M #{options[:previousCommit]}`.split("\n")
 
 NOW = Time.now
-CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
-ORGANISATIONS = YAML.load_file('ORGANISATIONS.yaml')
-FUNDERS = YAML.load_file('FUNDERS.yaml')
+
+CONTRIBUTORS = safe_load_yaml('CONTRIBUTORS.yaml')
+ORGANISATIONS = safe_load_yaml('ORGANISATIONS.yaml')
+FUNDERS = safe_load_yaml('FUNDERS.yaml')
 
 # new   news
 # new   slidevideos
@@ -70,11 +72,11 @@ def filterSlides(x)
 end
 
 def onlyEnabled(x)
-  tutorial_meta = YAML.load_file(x)
+  tutorial_meta = safe_load_yaml(x)
   tutorial_enabled = tutorial_meta.fetch('enable', true)
 
   topic = x.split('/')[1]
-  topic_meta = YAML.load_file("metadata/#{topic}.yaml")
+  topic_meta = safe_load_yaml("metadata/#{topic}.yaml")
   topic_enabled = topic_meta.fetch('enable', true)
 
   tutorial_enabled and topic_enabled
@@ -85,7 +87,7 @@ def linkify(text, path)
 end
 
 def printableMaterial(path)
-  d = YAML.load_file(path)
+  d = safe_load_yaml(path)
   { md: linkify(d['title'], path.gsub(/.md/, '.html')),
     path: path }
 end
@@ -93,6 +95,17 @@ end
 def fixNews(n)
   # news/_posts/2021-11-10-api.html => news/2021/11/10/api.html
   n[:md].gsub(%r{news/_posts/(....)-(..)-(..)-(.*.html)}, 'news/\1/\2/\3/\4')
+end
+
+def fixEvents(n)
+  # news/_posts/2021-11-10-api.html => news/2021/11/10/api.html
+  meta = safe_load_yaml(n[:path])
+  n[:md] += " (#{collapse_event_date_pretty(meta)})"
+end
+
+def isDraft(n)
+  meta = safe_load_yaml(n)
+  meta.fetch('draft', false)
 end
 
 data = {
@@ -105,7 +118,15 @@ data = {
        .select { |x| filterTutorials(x) }
        .select { |x| onlyEnabled(x) }
        .map { |x| printableMaterial(x) },
-    news: addedfiles.grep(%r{news/_posts/.*\.md}).map { |x| printableMaterial(x) }.map { |n| fixNews(n) }
+    news: addedfiles
+       .grep(%r{news/_posts/.*\.md})
+       .map { |x| printableMaterial(x) }
+       .map { |n| fixNews(n) },
+    events: addedfiles
+       .grep(%r{events/.*\.md})
+       .reject { |n| isDraft(n) }
+       .map { |x| printableMaterial(x) }
+       .map { |n| fixEvents(n) },
   },
   modified: {
     slides: mfiles
@@ -134,6 +155,15 @@ def format_news(news)
   if news.length.positive?
     output += "\n\n## Big News!\n\n"
     output += news.join("\n").gsub(/^/, '- ')
+  end
+  output
+end
+
+def format_events(events)
+  output = ''
+  if events.length.positive?
+    output += "\n\n## 📆 New Events!\n\n"
+    output += events.join("\n").gsub(/^/, '- ')
   end
   output
 end
@@ -170,6 +200,11 @@ def build_news(data, filter: nil, updates: true, only_news: false)
     return [output, newsworthy]
   end
 
+  o = format_events(
+    data[:added][:events].select { |n| filter.nil? || safe_load_yaml(n[:path])['tags'].include?(filter) }
+  )
+  output += o
+  newsworthy |= o.length.positive?
 
   o = format_tutorials(
     data[:added][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
@@ -253,9 +288,9 @@ def send_news(output, options, channel: 'default')
       end
     end
   else
-    puts '=============='
+    puts '===== NEWS START ====='
     puts output
-    puts '=============='
+    puts '===== NEWS END ====='
   end
 end
 

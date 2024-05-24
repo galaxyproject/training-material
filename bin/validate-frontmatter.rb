@@ -14,7 +14,7 @@ module SchemaValidator
   @TOPIC_SCHEMA_UNSAFE = YAML.load_file('bin/schema-topic.yaml')
   begin
     @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml', aliases: true)
-  rescue
+  rescue StandardError
     @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml')
   end
   @SLIDES_SCHEMA_UNSAFE = YAML.load_file('bin/schema-slides.yaml')
@@ -110,8 +110,8 @@ module SchemaValidator
   def self.lintable?(fn)
     begin
       begin
-        data = YAML.load_file(fn, permitted_classes:[Date])
-      rescue
+        data = YAML.load_file(fn, permitted_classes: [Date])
+      rescue StandardError
         data = YAML.load_file(fn)
       end
     rescue StandardError => e
