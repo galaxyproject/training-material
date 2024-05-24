@@ -612,7 +612,7 @@ module GtnLinter
   end
 
   def self.check_bad_trs_link(contents)
-    find_matching_texts(contents, /snippet faqs\/galaxy\/workflows_run_trs.md path="([^"]*)"/i)
+    find_matching_texts(contents, %r{snippet faqs/galaxy/workflows_run_trs.md path="([^"]*)"}i)
       .map do |idx, _text, selected|
       path = selected[1].to_s.strip
       if !File.exist?(path)
