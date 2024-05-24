@@ -519,6 +519,24 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 		    {% endfor %}
 		</blockquote>
 
+		
+
+
+		{% assign upcoming_events = site | get_upcoming_events_for_this: new_material %}
+		{% assign upcoming_event_count = upcoming_events | size %}
+		{% if upcoming_event_count > 0 %}
+		<blockquote class="details hide-when-printing" id="upcoming-events">
+                  <div id="upcoming-events-c" class="box-title">
+                    <button type="button" aria-controls="upcoming-events-c" aria-expanded="false">
+                      <i class="fas fa-calendar" aria-hidden="true"></i>
+                      Upcoming events which cover this topic<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>Want to learn more with a live instructor? Check out these upcoming events:</p>
+		   {% include _includes/event-table.html events=upcoming_events campaign="via-tutorial" %}
+		</blockquote>
+		{% endif %}
 
                 </section>
 
