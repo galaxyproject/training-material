@@ -1,0 +1,35 @@
+{% assign locale = site.data.lang[page.lang] %}
+
+{% assign tuto_recordings = include.material.recordings | default: page.recordings %}
+
+{% if tuto_recordings or include.material.slides_recordings %}
+
+{% if include.wrapper %}
+<li class="btn btn-default supporting_material">
+{% else %}
+<div class="btn-group">
+{% endif %}
+  <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        {% icon video %}{% if include.label %}&nbsp;Recordings{% endif %}
+  </a>
+
+
+  <ul class="dropdown-menu">
+    {% for rec in include.material.slides_recordings %}
+    <li><a class="dropdown-item" href="https://youtu.be/{{rec.youtube_id}}" title="View recording for this lecture on YouTube">
+                {% icon video %} Lecture ({{rec.date | date: "%B %Y" }})</a>
+    </li>
+    {% endfor %}
+
+    {% for rec in tuto_recordings %}
+    <li><a class="dropdown-item" href="https://youtu.be/{{rec.youtube_id}}" title="View recording for this tutorial on YouTube">
+                {% icon video %} Tutorial ({{rec.date | date: "%B %Y" }})</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% if include.wrapper %}
+</li>
+  {% else %}
+</div>
+  {% endif %}
+{% endif %}
