@@ -417,7 +417,6 @@ In the previous section we ran **Kraken2** along with the **Kalamari** database,
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-files %} *"Collection of preprocessed samples"*: `collection of preprocessed samples` collection, output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preproceesing workflow
 >    - *"Kraken database"*: `Prebuilt Refseq indexes:  PlusPF (Standard plus protozoa and fungi) (Version:  2022-06-07 - Downloaded: 2022-09-04T165121Z)`
->    - *"Sample Metadata"*: Leave empty
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
