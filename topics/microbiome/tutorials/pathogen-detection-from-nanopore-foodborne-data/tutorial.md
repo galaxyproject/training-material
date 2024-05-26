@@ -410,7 +410,7 @@ In the previous section we ran **Kraken2** along with the **Kalamari** database,
 > <hands-on-title>Taxonomy Profiling and visualisation</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/taxonomy_profiling_and_visualization.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/taxonomy_profiling_and_visualisation_with_krona.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 > 2. Run **Workflow 2: Taxonomy Profiling and Visualization with Krona** {% icon workflow %} using the following parameters:
@@ -523,7 +523,7 @@ As outputs, we will get our **FASTA** and **Tabular** files to track genes and v
 > <hands-on-title>Gene based Pathogenic Identification</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Gene_based_pathogenic_Identification.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/gene_based_pathogen_identification.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
@@ -887,7 +887,7 @@ In this training, we are testing _Salmonella enterica_, with different strains o
 > <hands-on-title>Allele based Pathogenic Identification</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_allele_based_pathogenetic_identification.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_allele_based_pathogen_identification.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
