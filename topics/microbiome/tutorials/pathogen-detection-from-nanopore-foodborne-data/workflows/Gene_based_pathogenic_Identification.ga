@@ -1,6 +1,6 @@
 {
     "a_galaxy_workflow": "true",
-    "annotation": "Nanopore datasets analysis - Phylogenetic Identification - ST - antibiotic resistance genes detection and contigs building",
+    "annotation": "Nanopore datasets analysis - Phylogenetic Identification - antibiotic resistance genes detection and contigs building",
     "comments": [
         {
             "child_steps": [
@@ -111,10 +111,10 @@
     ],
     "format-version": "0.1",
     "license": "MIT",
-    "release": "0.1",    
+    "release": "0.1",
     "name": "Gene-based Pathogen Identification",
     "report": {
-        "markdown": "# Nanopore Pathogen Detection - Gene based pathogenic identification Workflow Report\nBelow are the results for the Gene based pathogenic identification Workflow\n\nThis workflow was run on:\n\n```galaxy\ngenerate_time()\n```\n\nWith Galaxy version:\n\n```galaxy\ngenerate_galaxy_version()\n```\n\n## Workflow Inputs\nThe per-processing workflow main output (All samples reads after quality retaining and hosts filtering), and the MLST header report\n\n## Workflow Output\n\r\n```galaxy\ninvocation_outputs()\n```\r\n"
+        "markdown": "# Gene based Pathogen Identification Workflow Report\n\nBelow are the results for the Gene based Pathogen Identification Workflow\n\nThis workflow was run on:\n\n```galaxy\ngenerate_time()\n```\n\nWith Galaxy version:\n\n```galaxy\ngenerate_galaxy_version()\n```\n\n## Workflow Inputs\nThe Perprocessing workflow main output (Collection of all samples reads after quality retaining and hosts filtering)\n\n## Workflow Output\n\n### Identified contigs per sample\n\n```galaxy\nhistory_dataset_display(output=\"contigs\")\n```\n\n### Identified pathogenic genes per sample\n\n```galaxy\nhistory_dataset_display(output=\"vfs\")\n```\n\n### Identified Antimicrobial Resistance genes per sample\n\n```galaxy\nhistory_dataset_display(output=\"amrs\")\n```\n"
     },
     "steps": {
         "0": {
@@ -382,11 +382,6 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "flye_assembly_info_tabular",
-                    "output_name": "assembly_info",
-                    "uuid": "3f297aed-7cee-4999-bbf4-69d84de6b64f"
-                },
-                {
                     "label": "flye_consensus_fasta",
                     "output_name": "consensus",
                     "uuid": "ff0d8c7b-2ac7-4c6d-a110-f71418dad938"
@@ -400,6 +395,11 @@
                     "label": "flye_assembly_gfa",
                     "output_name": "assembly_gfa",
                     "uuid": "0e42ce51-c46b-45d8-baa4-45c0e98ac712"
+                },
+                {
+                    "label": "flye_assembly_info_tabular",
+                    "output_name": "assembly_info",
+                    "uuid": "3f297aed-7cee-4999-bbf4-69d84de6b64f"
                 }
             ]
         },
@@ -545,11 +545,6 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "medaka_log_file",
-                    "output_name": "out_log",
-                    "uuid": "fcbd3e3f-2e93-4798-b696-dad7db9f2efd"
-                },
-                {
                     "label": "medaka_propability_h5_file",
                     "output_name": "out_probs",
                     "uuid": "60656aac-ad2a-4c9b-9a68-b9fb18ae5595"
@@ -568,6 +563,11 @@
                     "label": "medaka_gaps_in_draft_bed_file",
                     "output_name": "out_gaps",
                     "uuid": "9e5ad6ec-b408-4132-ba07-dec9fa626923"
+                },
+                {
+                    "label": "medaka_log_file",
+                    "output_name": "out_log",
+                    "uuid": "fcbd3e3f-2e93-4798-b696-dad7db9f2efd"
                 }
             ]
         },
@@ -1053,6 +1053,6 @@
         "name:IWC",
         "name:microGalaxy"
     ],
-    "uuid": "aab3b78c-d0b3-4ea9-9225-47b395b52e34",
-    "version": 130
+    "uuid": "99635f92-f694-4a3e-bf28-411c0973dc6a",
+    "version": 132
 }

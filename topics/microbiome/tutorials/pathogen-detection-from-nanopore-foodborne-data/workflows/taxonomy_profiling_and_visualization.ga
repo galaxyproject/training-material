@@ -4,6 +4,27 @@
     "comments": [
         {
             "child_steps": [
+                1,
+                2,
+                3
+            ],
+            "color": "red",
+            "data": {
+                "title": "Taxonomy Profiling"
+            },
+            "id": 0,
+            "position": [
+                4.800000000000011,
+                165.01666564941405
+            ],
+            "size": [
+                663.2,
+                295.6
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
                 4
             ],
             "color": "red",
@@ -18,27 +39,6 @@
             "size": [
                 236,
                 191
-            ],
-            "type": "frame"
-        },
-        {
-            "child_steps": [
-                2,
-                3,
-                1
-            ],
-            "color": "red",
-            "data": {
-                "title": "Taxonomy Profiling"
-            },
-            "id": 0,
-            "position": [
-                4.800000000000011,
-                165.01666564941405
-            ],
-            "size": [
-                663.2,
-                295.6
             ],
             "type": "frame"
         }
@@ -67,7 +67,7 @@
     "release": "0.1",
     "name": "Taxonomy Profiling and Visualization with Krona",
     "report": {
-        "markdown": "# Nanopore Pathogen Detection - Taxonomy Profiling Workflow Report\n\nIn this workflow you can identify your microbial community, but identifying all possible Taxon found in your samples, from the kingdom level down to the species level. In the application of the pathogen detection, this workflow gives an overview of the possible bacterial found in samples and what might be a possible suspect for pathogenicity.\n\nThe workflow uses Kraken2 tool and allow the user to choose any Kraken2 database or other added ones depending on the user application or the input samples. All Kraken2 tool databases are available in Galaxy. More description about these databases can be found [here](https://benlangmead.github.io/aws-indexes/k2). Other databases can be also added to the tool, just contact us anytime for that. We recommend using StandardPF database.\n\nVisualization is done using Krona Pie Chart, and you can replace it with any other tool. e.g. Phinch interactive tool, which is also available in Galaxy\n\n## Workflow Inputs:\n\nThe per-processing workflow main output (All samples reads after quality retaining and hosts filtering)\n\n## Workflow Outputs are:\n\n### Taxonomy Tabular Report\n\nThe report shows the abundance of every taxon from the kingdom level down to the species level\n\n```galaxy\nhistory_dataset_display(output=\"converted_kraken_report\")\n```\n\n### Taxonomy Profiling Visualization with Krona\nAn interactive Pie chart showing the different identified taxons along with their percentages, which is one of the ways to visualize the previous taxonomy tabular\n\n```galaxy\nhistory_dataset_as_image(output=\"krona_pie_chart\")\n```\n"
+        "markdown": "# Taxonomy Profiling and Visualisation with Krona Workflow Report\n\nIn this workflow you can identify your microbial community, but identifying all possible Taxon found in your samples, from the kingdom level down to the species level. In the application of the pathogen detection, this workflow gives an overview of the possible bacterial found in samples and what might be a possible suspect for pathogenicity.\n\nThe workflow uses Kraken2 tool and allow the user to choose any Kraken2 database or other added ones depending on the user application or the input samples. All Kraken2 tool databases are available in Galaxy. More description about these databases can be found [here](https://benlangmead.github.io/aws-indexes/k2). Other databases can be also added to the tool, just contact us anytime for that. We recommend using StandardPF database.\n\nVisualization is done using Krona Pie Chart, and you can replace it with any other tool. e.g. Phinch interactive tool, which is also available in Galaxy\n\n## Workflow Inputs:\n\nThe per-processing workflow main output (Collection of all samples reads after quality retaining and hosts filtering)\n\n## Workflow Outputs are:\n\n### Taxonomy Tabular Report\n\nThe report shows the abundance of every taxon from the kingdom level down to the species level\n\n```galaxy\nhistory_dataset_display(output=\"converted_kraken_report\")\n```\n\n### Taxonomy Profiling Visualization with Krona\nAn interactive Pie chart showing the different identified taxons along with their percentages, which is one of the ways to visualize the previous taxonomy tabular\n\n```galaxy\nhistory_dataset_as_image(output=\"krona_pie_chart\")\n```\n"
     },
     "steps": {
         "0": {
@@ -122,13 +122,7 @@
             "type": "parameter_input",
             "uuid": "cc59191c-1bc9-4007-b88c-8765ff2dfefd",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "1df2131b-e565-4bac-8c5e-a02b63be7a2e"
-                }
-            ]
+            "workflow_outputs": []
         },
         "2": {
             "annotation": "",
@@ -197,14 +191,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "kraken2_with_pluspf_database_output_report",
-                    "output_name": "report_output",
-                    "uuid": "f2ddd05b-66a0-4cea-9da6-ed107eecbe1b"
-                },
-                {
                     "label": "kraken2_with_pluspf_database_output",
                     "output_name": "output",
                     "uuid": "26f9041f-d8a4-4f64-8a53-404d5c7e2f61"
+                },
+                {
+                    "label": "kraken2_with_pluspf_database_output_report",
+                    "output_name": "report_output",
+                    "uuid": "f2ddd05b-66a0-4cea-9da6-ed107eecbe1b"
                 }
             ]
         },
@@ -326,6 +320,6 @@
         "name:PathoGFAIR",
         "name:IWC"
     ],
-    "uuid": "dac976b7-4710-4b9b-a94c-e5f9b86ea183",
-    "version": 52
+    "uuid": "b6080167-f9c6-47c9-9d62-89dae16a852f",
+    "version": 54
 }

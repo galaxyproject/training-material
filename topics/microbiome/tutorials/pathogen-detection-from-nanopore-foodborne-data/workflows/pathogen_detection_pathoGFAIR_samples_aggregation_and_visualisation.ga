@@ -4,50 +4,6 @@
     "comments": [
         {
             "child_steps": [
-                18,
-                24,
-                25,
-                30,
-                36,
-                37,
-                42,
-                47,
-                51,
-                54,
-                57,
-                60,
-                69,
-                8,
-                19,
-                9,
-                31,
-                43,
-                48,
-                52,
-                55,
-                58,
-                61,
-                63,
-                65,
-                67
-            ],
-            "color": "yellow",
-            "data": {
-                "title": "VFs Phylogenetic Tree for all samples and Phylogenetic trees for each VF genes across all samples"
-            },
-            "id": 5,
-            "position": [
-                14,
-                2110.3
-            ],
-            "size": [
-                4170,
-                620.4
-            ],
-            "type": "frame"
-        },
-        {
-            "child_steps": [
                 23,
                 35,
                 68,
@@ -134,11 +90,11 @@
         },
         {
             "child_steps": [
-                27,
                 39,
                 49,
-                21,
-                33
+                33,
+                27,
+                21
             ],
             "color": "yellow",
             "data": {
@@ -179,6 +135,50 @@
                 209.1
             ],
             "type": "frame"
+        },
+        {
+            "child_steps": [
+                18,
+                24,
+                25,
+                30,
+                36,
+                37,
+                42,
+                47,
+                51,
+                54,
+                57,
+                60,
+                69,
+                8,
+                19,
+                9,
+                31,
+                43,
+                48,
+                52,
+                55,
+                58,
+                61,
+                63,
+                65,
+                67
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "VFs Phylogenetic Tree for all samples and Phylogenetic trees for each VF genes across all samples"
+            },
+            "id": 5,
+            "position": [
+                14,
+                2110.3
+            ],
+            "size": [
+                4170,
+                620.4
+            ],
+            "type": "frame"
         }
     ],
     "creator": [
@@ -204,6 +204,9 @@
     "license": "MIT",
     "release": "0.1",
     "name": "Pathogen Detection PathoGFAIR Samples Aggregation and Visualisation",
+    "report": {
+        "markdown": "# Pathogen Detection - PathoGFAIR Samples Aggregation and Visualisation workflow Report\nBelow are the results for the PathoGFAIR Samples Aggregation and Visualisation Workflow\n\nThis workflow was run on:\n\n```galaxy\ngenerate_time()\n```\n\nWith Galaxy version:\n\n```galaxy\ngenerate_galaxy_version()\n```\n\n## Workflow Inputs\nTabular files and a FASTA file from the Gene based Pathogenic Identification workflow, four other tabular files from Nanopore Preprocessing and Nanopore - Allele bases Pathogen Identification workflow, and an optional Metadata tabular file with more sample information:\n\nFrom Gene based Pathogenic Identification workflow: \n- contigs, FASTA file\n- vfs, Tabular file\n- vfs_of_genes_identified_by_vfdb, Tabular file\n- amrs, Tabular file\n- amr_identified_by_ncbi, Tabular file\n\nFrom Nanopore - Allele bases Pathogen Identification workflow: \n- number_of_variants_per_sample, Tabular file\n- mapping_mean_depth_per_sample, Tabular file\n- mapping_coverage_percentage_per_sample, Tabular file\n\nFrom Nanopore Preprocessing: \n- removed_hosts_percentage_tabular, Tabular file\n\n## Some of the Workflow Outputs\n\n1- All Samples VFs Heatmap\n\n```galaxy\nhistory_dataset_as_image(output=\"heatmap_png\")\n```\n\n2- All samples phylogenetic tree VFs based\n\n```galaxy\nhistory_dataset_as_image(output=\"all_samples_phylogenetic_tree_based_vfs\")\n```\n\n3- All samples Phylogenetic tree AMR based \n\n```galaxy\nhistory_dataset_as_image(output=\"all_samples_phylogenetic_tree_based_amrs\")\n```\n\n4- Barplot for the Number of reads before and after host sequences removal per sample, performed in the Nanopore - Preprocessing workflow\n\n```galaxy\nhistory_dataset_as_image(output=\"number_of_read_before_and_after_host_removal_fig\")\n```\n\n5- Barplot for the total number of removed host sequences per sample\n\n```galaxy\nhistory_dataset_as_image(output=\"removed_host_percentage_fig\")\n```\n \n6- Barplot for the Mapping mean depth per sample\n\n```galaxy\nhistory_dataset_as_image(output=\"mapping_mean_depth_per_sample_fig\")\n```\n\n6- Barplot for the Mapping coverage percentage per sample\n\n```galaxy\nhistory_dataset_as_image(output=\"mapping_coverage_percentage_per_sample_fig\")\n```\n\n7- Barplot for the total number of variants and SNPs identified per sample\n\n```galaxy\nhistory_dataset_as_image(output=\"number_of_Variants_and_SNPs_indentified_fig\")\n```\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    },
     "steps": {
         "0": {
             "annotation": "output_of_abricate_with_amrfinderncbi",
@@ -284,13 +287,7 @@
             "type": "data_input",
             "uuid": "f4765d9d-b134-4462-bae6-9695c95ae596",
             "when": null,
-            "workflow_outputs": [
-                {
-                    "label": null,
-                    "output_name": "output",
-                    "uuid": "13b09122-3d52-4443-8908-3c601c4f96ff"
-                }
-            ]
+            "workflow_outputs": []
         },
         "3": {
             "annotation": "removed_hosts_percentage_tabular",
@@ -2021,14 +2018,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "heatmap_pdf",
-                    "output_name": "output2",
-                    "uuid": "c0417c91-a513-4c6a-9a62-3aac2f1f8e85"
-                },
-                {
                     "label": "heatmap_png",
                     "output_name": "output1",
                     "uuid": "97816bc2-fd0c-4077-a721-8dd1470879d1"
+                },
+                {
+                    "label": "heatmap_pdf",
+                    "output_name": "output2",
+                    "uuid": "c0417c91-a513-4c6a-9a62-3aac2f1f8e85"
                 }
             ]
         },
@@ -3115,6 +3112,6 @@
         "name:PathoGFAIR",
         "name:IWC"
     ],
-    "uuid": "4520dc77-dd38-439f-9ca0-29f8dd03531d",
-    "version": 36
+    "uuid": "c76ea37b-d609-4889-bf00-31e331ded670",
+    "version": 37
 }

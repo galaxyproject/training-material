@@ -4,9 +4,54 @@
     "comments": [
         {
             "child_steps": [
+                10,
+                16,
+                23,
+                13,
+                21,
+                22
+            ],
+            "color": "green",
+            "data": {
+                "title": "Creating a table for samples reads count before and after hosts sequences removal and the percentage of found hosts sequences"
+            },
+            "id": 7,
+            "position": [
+                2025.8999999999999,
+                798.6999999999999
+            ],
+            "size": [
+                1403,
+                223
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                12,
+                15,
+                18
+            ],
+            "color": "green",
+            "data": {
+                "title": "Hosts Sequences Identification and Removal (Kraken Technique)"
+            },
+            "id": 6,
+            "position": [
+                1407.3,
+                410.5
+            ],
+            "size": [
+                709.1,
+                300
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
                 7,
                 8,
-                10
+                24
             ],
             "color": "green",
             "data": {
@@ -67,11 +112,11 @@
             "child_steps": [
                 6,
                 9,
-                12,
-                15,
-                18,
-                21,
-                20
+                11,
+                14,
+                17,
+                20,
+                19
             ],
             "color": "green",
             "data": {
@@ -123,51 +168,6 @@
                 228
             ],
             "type": "markdown"
-        },
-        {
-            "child_steps": [
-                13,
-                16,
-                19
-            ],
-            "color": "green",
-            "data": {
-                "title": "Hosts Sequences Identification and Removal (Kraken Technique)"
-            },
-            "id": 6,
-            "position": [
-                1407.3,
-                410.5
-            ],
-            "size": [
-                709.1,
-                300
-            ],
-            "type": "frame"
-        },
-        {
-            "child_steps": [
-                22,
-                11,
-                17,
-                24,
-                14,
-                23
-            ],
-            "color": "green",
-            "data": {
-                "title": "Creating a table for samples reads count before and after hosts sequences removal and the percentage of found hosts sequences"
-            },
-            "id": 7,
-            "position": [
-                2025.8999999999999,
-                798.6999999999999
-            ],
-            "size": [
-                1403,
-                223
-            ],
-            "type": "frame"
         }
     ],
     "creator": [
@@ -193,6 +193,9 @@
     "license": "MIT",
     "release": "0.1",
     "name": "Nanopore Preprocessing",
+    "report": {
+        "markdown": "# Nanopore - Preprocessing Workflow Report\nBelow are the results of the Preprocessing  Workflow\n\nThis workflow was run on:\n\n```galaxy\ngenerate_time()\n```\n\nWith Galaxy version:\n\n```galaxy\ngenerate_galaxy_version()\n```\n\n## Workflow Inputs\nA collection of all sample reads (all in the same sequence file format, e.g.: Fastq, Fastq.gz, Fastqsanger, etc.)\n\n## Workflow Outputs\n\n### Multi QC Report of all samples before reads quality retaining\n\n```galaxy\nhistory_dataset_as_image(output=\"multiQC_html_report_before_preprocessing\")\n```\n### Multi QC Report of all samples after reads quality retaining\n\n```galaxy\nhistory_dataset_as_image(output=\"multiQC_html_report_after_preprocessing\")\n```\n\n### Percentages of removed host sequences in every sample\n\n```galaxy\nhistory_dataset_display(output=\"removed_hosts_percentage_tabular\")\n```\n"
+    },
     "steps": {
         "0": {
             "annotation": "Nanopore reads of each sample are all in a single fastq or fastq.gz file",
@@ -357,6 +360,11 @@
             "when": null,
             "workflow_outputs": [
                 {
+                    "label": "nanoplot_on_reads_before_preprocessing_nanostats_post_filtering",
+                    "output_name": "nanostats_post_filtering",
+                    "uuid": "304110f9-60d0-4ba2-8b3b-fae0e2a49554"
+                },
+                {
                     "label": "nanoplot_qc_on_reads_before_preprocessing_html_report",
                     "output_name": "output_html",
                     "uuid": "f2bd0a1f-cd60-4a36-a7d0-8025cc19ea2e"
@@ -365,11 +373,6 @@
                     "label": "nanoplot_qc_on_reads_before_preprocessing_nanostats",
                     "output_name": "nanostats",
                     "uuid": "15ecf5b1-e0eb-405a-ac3a-359feb66d4cd"
-                },
-                {
-                    "label": "nanoplot_on_reads_before_preprocessing_nanostats_post_filtering",
-                    "output_name": "nanostats_post_filtering",
-                    "uuid": "304110f9-60d0-4ba2-8b3b-fae0e2a49554"
                 }
             ]
         },
@@ -444,14 +447,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_quality_check_before_preprocessing_html_file",
-                    "output_name": "html_file",
-                    "uuid": "d0a64624-05d0-4068-835b-a025fc011760"
-                },
-                {
                     "label": "fastqc_quality_check_before_preprocessing_text_file",
                     "output_name": "text_file",
                     "uuid": "e61fef5d-1bc8-4c8e-be6a-f74e210e9920"
+                },
+                {
+                    "label": "fastqc_quality_check_before_preprocessing_html_file",
+                    "output_name": "html_file",
+                    "uuid": "d0a64624-05d0-4068-835b-a025fc011760"
                 }
             ]
         },
@@ -518,14 +521,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "nanopore_sequenced_reads_processed_with_fastp_after_host_removal_html_report",
-                    "output_name": "report_html",
-                    "uuid": "2a9a8b4d-458b-40e7-9a21-fb7108d5bbe4"
-                },
-                {
                     "label": "nanopore_sequenced_reads_processed_with_fastp_after_host_removal",
                     "output_name": "out1",
                     "uuid": "a2219483-50b7-4aed-98dd-333ad2e12eb8"
+                },
+                {
+                    "label": "nanopore_sequenced_reads_processed_with_fastp_after_host_removal_html_report",
+                    "output_name": "report_html",
+                    "uuid": "2a9a8b4d-458b-40e7-9a21-fb7108d5bbe4"
                 }
             ]
         },
@@ -587,14 +590,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "multiQC_stats_before_preprocessing",
-                    "output_name": "stats",
-                    "uuid": "ebffe782-a56c-431f-8af4-c0cb8d7a02fc"
-                },
-                {
                     "label": "multiQC_html_report_before_preprocessing",
                     "output_name": "html_report",
                     "uuid": "0f92196d-047d-4918-819d-c0ff7cd3ae85"
+                },
+                {
+                    "label": "multiQC_stats_before_preprocessing",
+                    "output_name": "stats",
+                    "uuid": "ebffe782-a56c-431f-8af4-c0cb8d7a02fc"
                 }
             ]
         },
@@ -739,9 +742,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "nanoplot_on_reads_after_preprocessing_nanostats_post_filtering",
-                    "output_name": "nanostats_post_filtering",
-                    "uuid": "949bfdf5-3d79-4dad-bdd8-c3a25e6af4cf"
+                    "label": "nanoplot_qc_on_reads_after_preprocessing_nanostats",
+                    "output_name": "nanostats",
+                    "uuid": "42db7f93-919e-4bbb-81a1-06411a9da410"
                 },
                 {
                     "label": "nanoplot_qc_on_reads_after_preprocessing_html_report",
@@ -749,9 +752,9 @@
                     "uuid": "b5899290-4c57-4662-ad22-860654652ade"
                 },
                 {
-                    "label": "nanoplot_qc_on_reads_after_preprocessing_nanostats",
-                    "output_name": "nanostats",
-                    "uuid": "42db7f93-919e-4bbb-81a1-06411a9da410"
+                    "label": "nanoplot_on_reads_after_preprocessing_nanostats_post_filtering",
+                    "output_name": "nanostats_post_filtering",
+                    "uuid": "949bfdf5-3d79-4dad-bdd8-c3a25e6af4cf"
                 }
             ]
         },
@@ -826,14 +829,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_quality_check_after_preprocessing_text_file",
-                    "output_name": "text_file",
-                    "uuid": "09306471-afa0-4106-9cc7-259b93dfc862"
-                },
-                {
                     "label": "fastqc_quality_check_after_preprocessing_html_file",
                     "output_name": "html_file",
                     "uuid": "084f982f-20f1-457e-8012-91ebbb85633d"
+                },
+                {
+                    "label": "fastqc_quality_check_after_preprocessing_text_file",
+                    "output_name": "text_file",
+                    "uuid": "09306471-afa0-4106-9cc7-259b93dfc862"
                 }
             ]
         },
@@ -907,79 +910,10 @@
             ]
         },
         "10": {
-            "annotation": "Quality Control Before and After Preprocessing\n\n",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
-            "errors": null,
-            "id": 10,
-            "input_connections": {
-                "results_0|software_cond|output_0|input": {
-                    "id": 8,
-                    "output_name": "text_file"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "MultiQC",
-            "outputs": [
-                {
-                    "name": "stats",
-                    "type": "input"
-                },
-                {
-                    "name": "html_report",
-                    "type": "html"
-                }
-            ],
-            "position": {
-                "left": 1241.3867206791317,
-                "top": 975.3576882745778
-            },
-            "post_job_actions": {
-                "RenameDatasetActionhtml_report": {
-                    "action_arguments": {
-                        "newname": "multiQC_html_report_after_preprocessing"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "html_report"
-                },
-                "RenameDatasetActionstats": {
-                    "action_arguments": {
-                        "newname": "multiQC_stats_after_preprocessing"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "stats"
-                }
-            },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
-            "tool_shed_repository": {
-                "changeset_revision": "abfd8a6544d7",
-                "name": "multiqc",
-                "owner": "iuc",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}], \"saveLog\": false, \"title\": \"MultiQC Report After PreProcessing\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.11+galaxy1",
-            "type": "tool",
-            "uuid": "df53a320-802c-459a-a4cb-fd41aac4af92",
-            "when": null,
-            "workflow_outputs": [
-                {
-                    "label": "multiQC_stats_after_preprocessing",
-                    "output_name": "stats",
-                    "uuid": "13cbf6c7-6954-4458-aa66-a5b020c63822"
-                },
-                {
-                    "label": "multiQC_html_report_after_preprocessing",
-                    "output_name": "html_report",
-                    "uuid": "0b1b5a73-36ee-42a2-a220-1ced6ec7378b"
-                }
-            ]
-        },
-        "11": {
             "annotation": "",
             "content_id": "Grep1",
             "errors": null,
-            "id": 11,
+            "id": 10,
             "input_connections": {
                 "input": {
                     "id": 8,
@@ -1022,11 +956,11 @@
                 }
             ]
         },
-        "12": {
+        "11": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.15.1+galaxy2",
             "errors": null,
-            "id": 12,
+            "id": 11,
             "input_connections": {
                 "input": {
                     "id": 9,
@@ -1082,11 +1016,11 @@
                 }
             ]
         },
-        "13": {
+        "12": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.15.1+galaxy2",
             "errors": null,
-            "id": 13,
+            "id": 12,
             "input_connections": {
                 "input": {
                     "id": 9,
@@ -1142,14 +1076,14 @@
                 }
             ]
         },
-        "14": {
+        "13": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "errors": null,
-            "id": 14,
+            "id": 13,
             "input_connections": {
                 "input_list": {
-                    "id": 11,
+                    "id": 10,
                     "output_name": "out_file1"
                 }
             },
@@ -1181,14 +1115,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "15": {
+        "14": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
             "errors": null,
-            "id": 15,
+            "id": 14,
             "input_connections": {
                 "input_file": {
-                    "id": 12,
+                    "id": 11,
                     "output_name": "output"
                 }
             },
@@ -1252,25 +1186,25 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "hosts_qc_html",
-                    "output_name": "html_file",
-                    "uuid": "b72ff57b-0921-43bf-a817-6cd444c8f3cb"
-                },
-                {
                     "label": "hosts_qc_text_file",
                     "output_name": "text_file",
                     "uuid": "b0ee6e31-0eb1-437d-8c04-fc3640b9a0b7"
+                },
+                {
+                    "label": "hosts_qc_html",
+                    "output_name": "html_file",
+                    "uuid": "b72ff57b-0921-43bf-a817-6cd444c8f3cb"
                 }
             ]
         },
-        "16": {
+        "15": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
             "errors": null,
-            "id": 16,
+            "id": 15,
             "input_connections": {
                 "single_paired|input_sequences": {
-                    "id": 13,
+                    "id": 12,
                     "output_name": "output"
                 }
             },
@@ -1337,14 +1271,14 @@
                 }
             ]
         },
-        "17": {
+        "16": {
             "annotation": "",
             "content_id": "Cut1",
             "errors": null,
-            "id": 17,
+            "id": 16,
             "input_connections": {
                 "input": {
-                    "id": 14,
+                    "id": 13,
                     "output_name": "output"
                 }
             },
@@ -1358,8 +1292,8 @@
                 }
             ],
             "position": {
-                "left": 2509.989052854138,
-                "top": 841.9355612507526
+                "left": 2500.9833374023438,
+                "top": 850.933349609375
             },
             "post_job_actions": {
                 "RenameDatasetActionout_file1": {
@@ -1384,14 +1318,14 @@
                 }
             ]
         },
-        "18": {
+        "17": {
             "annotation": "",
             "content_id": "Grep1",
             "errors": null,
-            "id": 18,
+            "id": 17,
             "input_connections": {
                 "input": {
-                    "id": 15,
+                    "id": 14,
                     "output_name": "text_file"
                 }
             },
@@ -1431,22 +1365,22 @@
                 }
             ]
         },
-        "19": {
+        "18": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/krakentools_extract_kraken_reads/krakentools_extract_kraken_reads/1.2+galaxy1",
             "errors": null,
-            "id": 19,
+            "id": 18,
             "input_connections": {
                 "library|input_1": {
                     "id": 4,
                     "output_name": "out1"
                 },
                 "report": {
-                    "id": 16,
+                    "id": 15,
                     "output_name": "report_output"
                 },
                 "results": {
-                    "id": 16,
+                    "id": 15,
                     "output_name": "output"
                 }
             },
@@ -1497,14 +1431,14 @@
                 }
             ]
         },
-        "20": {
+        "19": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "errors": null,
-            "id": 20,
+            "id": 19,
             "input_connections": {
                 "input_list": {
-                    "id": 18,
+                    "id": 17,
                     "output_name": "out_file1"
                 }
             },
@@ -1536,14 +1470,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "21": {
+        "20": {
             "annotation": "",
             "content_id": "Cut1",
             "errors": null,
-            "id": 21,
+            "id": 20,
             "input_connections": {
                 "input": {
-                    "id": 20,
+                    "id": 19,
                     "output_name": "output"
                 }
             },
@@ -1583,19 +1517,19 @@
                 }
             ]
         },
-        "22": {
+        "21": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
             "errors": null,
-            "id": 22,
+            "id": 21,
             "input_connections": {
                 "input_tabular": [
                     {
-                        "id": 17,
+                        "id": 16,
                         "output_name": "out_file1"
                     },
                     {
-                        "id": 21,
+                        "id": 20,
                         "output_name": "out_file1"
                     }
                 ]
@@ -1628,14 +1562,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "23": {
+        "22": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0",
             "errors": null,
-            "id": 23,
+            "id": 22,
             "input_connections": {
                 "input": {
-                    "id": 22,
+                    "id": 21,
                     "output_name": "tabular_output"
                 }
             },
@@ -1667,14 +1601,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "24": {
+        "23": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
             "errors": null,
-            "id": 24,
+            "id": 23,
             "input_connections": {
                 "input": {
-                    "id": 23,
+                    "id": 22,
                     "output_name": "out_file1"
                 }
             },
@@ -1719,6 +1653,79 @@
                     "uuid": "470892ee-dab9-48d7-ad97-45dbd52afaa7"
                 }
             ]
+        },
+        "24": {
+            "annotation": "Quality Control Before and After Preprocessing\n\n",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "results_0|software_cond|output_0|input": {
+                    "id": 8,
+                    "output_name": "text_file"
+                },
+                "results_1|software_cond|input": {
+                    "id": 23,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MultiQC",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "input"
+                },
+                {
+                    "name": "html_report",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1241.3867206791317,
+                "top": 975.3576882745778
+            },
+            "post_job_actions": {
+                "RenameDatasetActionhtml_report": {
+                    "action_arguments": {
+                        "newname": "multiQC_html_report_after_preprocessing"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "html_report"
+                },
+                "RenameDatasetActionstats": {
+                    "action_arguments": {
+                        "newname": "multiQC_stats_after_preprocessing"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "stats"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "abfd8a6544d7",
+                "name": "multiqc",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"RuntimeValue\"}}]}}, {\"__index__\": 1, \"software_cond\": {\"software\": \"custom_content\", \"__current_case__\": 32, \"plot_type\": \"table\", \"section_name\": \"Host Sequences Removal\", \"title\": \"Host Sequences\", \"description\": null, \"xlab\": null, \"ylab\": null, \"input\": {\"__class__\": \"RuntimeValue\"}}}], \"saveLog\": false, \"title\": \"MultiQC Report After PreProcessing\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.11+galaxy1",
+            "type": "tool",
+            "uuid": "df53a320-802c-459a-a4cb-fd41aac4af92",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "multiQC_stats_after_preprocessing",
+                    "output_name": "stats",
+                    "uuid": "13cbf6c7-6954-4458-aa66-a5b020c63822"
+                },
+                {
+                    "label": "multiQC_html_report_after_preprocessing",
+                    "output_name": "html_report",
+                    "uuid": "0b1b5a73-36ee-42a2-a220-1ced6ec7378b"
+                }
+            ]
         }
     },
     "tags": [
@@ -1728,6 +1735,6 @@
         "name:Nanopore",
         "name:IWC"
     ],
-    "uuid": "91bd803c-119e-4653-9d13-72e9010a451f",
-    "version": 165
+    "uuid": "4c99865a-bcd1-4384-a731-b56f7772e1d7",
+    "version": 170
 }

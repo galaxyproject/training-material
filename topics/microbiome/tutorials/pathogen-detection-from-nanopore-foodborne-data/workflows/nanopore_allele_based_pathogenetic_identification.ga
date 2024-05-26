@@ -102,6 +102,9 @@
     "license": "MIT",
     "release": "0.1",
     "name": "Nanopore Allele-based Pathogen Identification",
+    "report": {
+        "markdown": "# Nanopore - Allele based Pathogen Identification Workflow Report\nBelow are the results for the Allele based Pathogenic Identification Workflow\n\nThis workflow was run on:\n\n```galaxy\ngenerate_time()\n```\n\nWith Galaxy version:\n\n```galaxy\ngenerate_galaxy_version()\n```\n\n## Workflow Inputs\nThe Perprocessing workflow main output (Collection of all samples reads after quality retaining and hosts filtering), and a FASTA file of the reference genome of the main Pathogen identified in the Gene based Pathogen Identification workflow, or per-known to the user.\n\n## Workflow Output: \n\n### All variants found per sample against the reference genome\n\n```galaxy\nhistory_dataset_display(output=\"extracted_fields_from_the_vcf_output\")\n```\n\n### Number of variants per sample\n\n```galaxy\nhistory_dataset_display(output=\"number_of_variants_per_sample\")\n```\n\n### Mapping mean depth per sample\n\n```galaxy\nhistory_dataset_display(output=\"mapping_mean_depth_per_sample\")\n```\n\n### Mapping coverage per sample\n\n```galaxy\nhistory_dataset_display(output=\"mapping_coverage_percentage_per_sample\")\n```\n"
+    },
     "steps": {
         "0": {
             "annotation": "Output collection from the Nanopore Preprocessing workflow",
@@ -355,9 +358,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "clair3_merged_output",
-                    "output_name": "merge_output",
-                    "uuid": "fab82215-f59a-43b1-92d7-37629a1fdb65"
+                    "label": "clair3_pileup_vcf",
+                    "output_name": "pileup",
+                    "uuid": "1cf1ee6c-4cb7-45e3-9c7b-88a1b678dd53"
                 },
                 {
                     "label": "clair3_full_alignment_vcf",
@@ -365,9 +368,9 @@
                     "uuid": "987f9145-83ab-44f1-801a-b0d527ecbce8"
                 },
                 {
-                    "label": "clair3_pileup_vcf",
-                    "output_name": "pileup",
-                    "uuid": "1cf1ee6c-4cb7-45e3-9c7b-88a1b678dd53"
+                    "label": "clair3_merged_output",
+                    "output_name": "merge_output",
+                    "uuid": "fab82215-f59a-43b1-92d7-37629a1fdb65"
                 }
             ]
         },
@@ -1257,6 +1260,6 @@
         "name:Nanopore",
         "name:IWC"
     ],
-    "uuid": "fd37c867-e932-47ff-9246-48d181beb7af",
-    "version": 64
+    "uuid": "aab68abd-f5bc-4d2b-bbbb-ec80dab94a02",
+    "version": 65
 }
