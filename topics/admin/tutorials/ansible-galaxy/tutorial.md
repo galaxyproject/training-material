@@ -52,7 +52,9 @@ edam_ontology:
 - topic_3071 # Data Management
 ---
 
-This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks.  If not, please consider following our [Ansible Tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %}) first. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
+This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks.  If not, please consider following our [Ansible Tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %}) first.
+
+Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
 > An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems
 {: .quote cite="https://en.wikipedia.org/wiki/Ansible"}
