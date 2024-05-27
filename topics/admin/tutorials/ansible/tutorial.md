@@ -11,7 +11,7 @@ questions:
 objectives:
   - Learn Ansible basics
   - Write a simple role
-  - Install a role from Ansible Galaxy
+  - Install a role from Ansible Galaxy (repository unrelated to the Galaxy Project)
 time_estimation: "60m"
 key_points:
   - Ansible lets you do system administration at scale
@@ -27,7 +27,7 @@ tags:
 
 # Overview
 
-In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Maybe even [install Galaxy using Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) or contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible).
+In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Maybe even [install Galaxy using Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) or contribute to the [Galaxy Project's Ansible roles](https://github.com/galaxyproject?q=ansible).
 
 This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.
 
@@ -56,7 +56,7 @@ Task
 :    A call to an Ansible module that should be executed and the configuration for this module.
 
 Role
-:    A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/).
+:    A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/) (repository unrelated to the Galaxy Project).
 
 Playbook
 :    A YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
@@ -132,7 +132,7 @@ Folder    | Usage
 defaults  | Default values for variables the user can set (e.g. "version of software to install").
 files     | These are files which should be copied as-is over to the remote location.
 handlers  | This is typically used for restarting processes.
-meta      | Only needed to publish your role to Ansible Galaxy.
+meta      | Only needed to publish your role to Ansible Galaxy (repository unrelated to the Galaxy Project).
 tasks     | **Always start reading here**. This is the most important folder and the best place to start when trying to understand what an unfamiliar role does. Anything that is loaded will be referenced here (e.g. variables to load, handlers, files, templates).
 templates | Files that are templated out with variables before being copied.
 vars      | Default values for variables the user should normally not change (e.g. name of a package in different Linux distributions).
@@ -592,7 +592,7 @@ Templates give you greater control over the files you are deploying to the targe
 
 # Ansible Galaxy
 
-Now that you've built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.
+Now that you've built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy (repository unrelated to the Galaxy Project) is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.
 
 **Warning**: This will install Memcached on the target machine.
 
