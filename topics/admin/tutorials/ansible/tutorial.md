@@ -27,7 +27,7 @@ tags:
 
 # Overview
 
-In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible).
+In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Maybe even [install Galaxy using Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) or contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible).
 
 This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.
 
