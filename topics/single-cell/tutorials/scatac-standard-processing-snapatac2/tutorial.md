@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: scATAC-seq standard processing with SnapATAC2
+title: Single-cell ATAC-seq standard processing with SnapATAC2
 zenodo_link: https://zenodo.org/records/11369811
 questions:
 - Which biological questions are addressed by the tutorial?
@@ -18,8 +18,8 @@ key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 contributors:
-- contributor1
-- contributor2
+- timonschlegel
+
 
 ---
 
