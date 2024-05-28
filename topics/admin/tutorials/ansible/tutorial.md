@@ -295,7 +295,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >       > ```
 >       {: .solution }
 >
->       > <details-title>For your own infrastructure, do you connect with a different user? Password? SSH key?</details-title>
+>       > <details-title>For your own infra, do you connect as a different user? Password? SSH key?</details-title>
 >       > For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html).
 >       {: .details}
 >
