@@ -16,9 +16,12 @@ time_estimation: "60m"
 key_points:
   - Ansible lets you do system administration at scale
   - Many system administration, software installation, and software management tasks are already available as Ansible tasks or roles
-contributors:
+contributions:
+  authorship:
   - hexylena
   - shiltemann
+  testing:
+  - vladvisan
 subtopic: core
 tags:
   - ansible
