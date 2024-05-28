@@ -193,7 +193,7 @@ And an inline style.
 {% raw %}- package name={{ package_name }} state={{ package_state }}{% endraw %}
 ```
 
-Some groups prefer one style or another. You can mix both of these but you probably shouldn't. In the YAML style the templated value needs to be quoted if the value after the colon starts with a `{` (see https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#when-to-quote-variables-a-yaml-gotcha ). The inline style does not require quoting of templated values.
+Some groups prefer one style or another. You can mix both of these but you probably shouldn't. In the YAML style the templated value needs to be quoted if the value after the colon starts with a `{` (see https://docs.ansible.com/ansible/9/playbook_guide/playbooks_variables.html#when-to-quote-variables-a-yaml-gotcha ). The inline style does not require quoting of templated values.
 
 ## Playbooks
 
