@@ -257,7 +257,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > <comment-title>Requirements for Running This Tutorial</comment-title>
 >
-> 1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
+> 1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine you will run this tutorial from
 >
 >    > <comment-title>Running Ansible on remote machine</comment-title>
 >    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
@@ -278,7 +278,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 3. **Create a directory named `intro` and `cd` into it.**
 >
->    It's good practice to keep your deployments separated, and later on we'll be deploying Galaxy with ansible in a separate directory.
+>    It's good practice to keep your deployments separated.
 >
 > 4. Create your inventory file (named `hosts`) in this folder
 >
