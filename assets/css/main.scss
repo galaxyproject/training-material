@@ -217,17 +217,17 @@ body {
     & > h3 ,
     > .box-title {
         font-size: $font-size + 3;
-        margin-left: -$tutorial-box-spacing;
-        margin-right: -$tutorial-box-spacing;
+        margin-inline-start: -$tutorial-box-spacing;
+        margin-inline-end: -$tutorial-box-spacing;
         margin-top: -3.30rem;
         padding-top: calc($tutorial-box-spacing / 2);
         padding-bottom: calc($tutorial-box-spacing / 2);
-        padding-left: $tutorial-box-spacing;
-        padding-right: $tutorial-box-spacing;
+        padding-inline-start: $tutorial-box-spacing;
+        padding-inline-end: $tutorial-box-spacing;
         background-color: $bg-color;
         color: var(--text-color-boxtitle);
         vertical-align: 1em;
-        float: left;
+        float: inline-start;
         border: 1px solid $bg-color;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
@@ -334,7 +334,7 @@ div#theme-selector,div#lang-selector,div#archive-selector {
 	flex-wrap: wrap;
 	width: 200px;
 	justify-content: flex-start;
-	margin-left: 1em;
+	margin-inline-start: 1em;
 
 	label.btn,a.btn,button.btn {
 		margin: 0.1em;
@@ -682,8 +682,8 @@ blockquote {
     }
 
     &.quote {
-        border-left: 5px solid var(--brand-color);
-        padding-left: 1em;
+        border-inline-start: 5px solid var(--brand-color);
+        padding-inline-start: 1em;
     }
 
     &.spoken {
@@ -704,7 +704,7 @@ blockquote {
 }
 
 .fold-unfold {
-    margin-left: $tutorial-box-spacing;
+    margin-inline-start: $tutorial-box-spacing;
 }
 .pre-break-lines code {
     white-space: pre-wrap;
@@ -1107,7 +1107,7 @@ nav[data-toggle='toc'] {
 	.nav-link.active:focus,
 	.nav-link.active:hover {
 		color: var(--hyperlink);
-		border-left: 2px solid var(--hyperlink);
+		border-inline-start: 2px solid var(--hyperlink);
 	}
 
 
@@ -1115,13 +1115,13 @@ nav[data-toggle='toc'] {
         li {
             a {
 		color: var(--text-color-muted);
-                padding-left: 0px;
+                padding-inline-start: 0px;
                 &:hover,
                 &:focus,
                 &:active {
-                    padding-left: 0px;
+                    padding-inline-start: 0px;
                     color: var(--hyperlink);
-                    border-left: none;
+                    border-inline-start: none;
                 }
             }
         }
@@ -1129,7 +1129,7 @@ nav[data-toggle='toc'] {
 }
 
 .col-sm-2 {
-    padding-left: 0px;
+    padding-inline-start: 0px;
 }
 
 /* small screens */
@@ -1283,7 +1283,7 @@ div.highlight:hover .btn,div.highlight .btn:focus{
         display: inline;
     }
     .search_box {
-        float: right;
+        float: inline-end;
         i {padding-right: .5rem;}
     }
     #clear_search{
@@ -1293,10 +1293,10 @@ div.highlight:hover .btn,div.highlight .btn:focus{
 
 ul.supporting_material{
     .btn{
-        padding-left: 0px;
+        padding-inline-start: 0px;
         padding-top: 0px;
         padding-bottom: 0px;
-        padding-right: 10px;
+        padding-inline-end: 10px;
         font-size: 15px;
     }
 }
@@ -1319,7 +1319,7 @@ li {
             width: 47.5%;
         }
         .code-out {
-            margin-left: 5%;
+            margin-inline-start: 5%;
             width: 47.5%;
         }
     }
@@ -1466,7 +1466,7 @@ div.contributors-line {
       font-weight: initial;
     }
     dd {
-      margin-left: auto;
+      margin-inline-start: auto;
       width: calc(100% - 9em);
       display: flex;
     }
@@ -1640,19 +1640,9 @@ $btn-pink: var(--keypoints-color);
 	padding: 0rem;
 }
 
-/*
-Maybe something like this for the case where they do not select anything?
-.openstack {
-	border-left: 2px solid red;
-}
-.digitalocean {
-	border-left: 2px solid blue;
-}
-*/
-
 ul.text-list, ol.text-list {
     list-style: none;
-	  padding-left: 0;
+	  padding-inline-start: 0;
 
     li {
         display: inline;
@@ -1720,7 +1710,7 @@ ol.breadcrumb {
 a[target="_blank"]::after {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==) " (opens in new tab)";
   display: inline-block;
-  margin-left: 0.2em;
+  margin-inline-start: 0.2em;
   height: 1em;
 }
 
