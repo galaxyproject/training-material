@@ -160,11 +160,9 @@ We will run all these steps using a single workflow, then discuss each step and 
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **Workflow 1: Nanopore Preprocessing** {% icon workflow %} using the following parameters
->
->    {% snippet faqs/galaxy/workflows_run.md %}
->
 >    - {% icon param-files %} *"1: Collection of all samples"*: `Samples` collection created from the imported Fastq.qz files
 >
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
@@ -350,7 +348,7 @@ In this tutorial we use:
 
     <div class="Long-Version" markdown="1">
 
-    > <hands-on-title> Host read filtering </hands-on-title> 
+    > <hands-on-title> Host read filtering </hands-on-title>
     >
     > 1. {% tool [Krakentools: Extract Kraken Reads By ID](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_extract_kraken_reads/krakentools_extract_kraken_reads/1.2+galaxy1) %} with the following parameters:
     >    - *"Single or paired reads?"*: `Single`
@@ -477,7 +475,7 @@ In order to view the taxonomy profiling produced by **Kraken2** tool, there are 
 </div>
 
 
-Now let's explore the **Krona pie chart** output for `Barcode11` 
+Now let's explore the **Krona pie chart** output for `Barcode11`
 
 > <question-title></question-title>
 >
@@ -516,7 +514,7 @@ To look for these genes and determine the strain of the bacteria we are testing 
 1. Genome assembly to get contigs, i.e. longer sequences, using **metaflye** ({% cite flye %})  then assembly polishing using [__medaka consensus pipeline__](https://github.com/nanoporetech/medaka) and visualizing the assembly graph using **Bandage Image** ({% cite Wick2015 %})
 2. Generate reports with **AMR** genes and **VF** using [__ABRicate__](https://github.com/tseemann/abricate)
 
-As outputs, we will get our **FASTA** and **Tabular** files to track genes and visualize our pathogenic identification. 
+As outputs, we will get our **FASTA** and **Tabular** files to track genes and visualize our pathogenic identification.
 
 <div class="Short-Version" markdown="1">
 
@@ -740,7 +738,7 @@ The outputs of **ABRicate** is a tabular file with different columns:
 {: .hands-on}
 
 </div>-->
-To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for further analysis in the **Pathogen Detection Samples Aggregation and Visualisation** section, tabular manipulation tools such as **Replace**{% icon tool %} is used. We mainly use it to add the sample ID along with which contig at which exact location. 
+To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for further analysis in the **Pathogen Detection Samples Aggregation and Visualisation** section, tabular manipulation tools such as **Replace**{% icon tool %} is used. We mainly use it to add the sample ID along with which contig at which exact location.
 
 <div class="Long-Version" markdown="1">
 
@@ -831,7 +829,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 > {: .solution}
 {: .question}
 
-To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for further analysis in the **Pathogen Detection Samples Aggregation and Visualisation** section, tabular manipulation tools such as **Replace**{% icon tool %} is used. We mainly use it to add the sample ID along with which contig at which exact location. 
+To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for further analysis in the **Pathogen Detection Samples Aggregation and Visualisation** section, tabular manipulation tools such as **Replace**{% icon tool %} is used. We mainly use it to add the sample ID along with which contig at which exact location.
 
 <div class="Long-Version" markdown="1">
 
@@ -1022,7 +1020,7 @@ To identify variants, we
 
 Mapping depth and coverage are essential metrics in variant calling because they ensure comprehensive analysis and accuracy in genomic studies. Mapping coverage indicates the percentage of the reference genome covered by sequencing reads, ensuring that the majority of the genome is analyzed to detect variants accurately. Mapping depth, on the other hand, refers to the number of times each base is sequenced, providing confidence in variant calls by distinguishing true variants from sequencing errors and enabling the detection of low-frequency variants. Both metrics are crucial for quality control, resource allocation, and reliable interpretation of genomic data, ensuring that important variants are not missed and reducing the risk of false positives or negatives.
 
-For this step we run [__Samtools depth__](http://www.htslib.org/doc/samtools-depth.html) and [__Samtools coverage__](http://www.htslib.org/doc/samtools-coverage.html) 
+For this step we run [__Samtools depth__](http://www.htslib.org/doc/samtools-depth.html) and [__Samtools coverage__](http://www.htslib.org/doc/samtools-coverage.html)
 
 <div class="Long-Version" markdown="1">
 
@@ -1095,7 +1093,7 @@ For this step we run [__bcftools consensus__](https://samtools.github.io/bcftool
 
 > <comment-title></comment-title>
 >
-> If you did not get your **Gene-based pathogen identification** section output files needed yet or you got an error for some reason, you can go on and download them all or the ones missing from Zenodo so you can start this workflow, please don't forget to create the collections for them as explained in the pervious hands-on. 
+> If you did not get your **Gene-based pathogen identification** section output files needed yet or you got an error for some reason, you can go on and download them all or the ones missing from Zenodo so you can start this workflow, please don't forget to create the collections for them as explained in the pervious hands-on.
 >
 > > <hands-on-title>Optional Data upload</hands-on-title>
 > >
@@ -1126,7 +1124,7 @@ With these two types of visualizations we can have an overview of all samples an
 >
 > Follow these steps only if you imported the datasets, but if your **Gene-based Pathogen Identification** part is already finished correctly then skip the following 3 steps.
 >
-> 1. Create a collection named `VFs` with `VFs` files 
+> 1. Create a collection named `VFs` with `VFs` files
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -1180,7 +1178,7 @@ With the visualizations types in this workflow, e.g. Heatmaps, Phylogenetic tree
 >
 > Follow these steps only if you imported the datasets, but if your **Gene-based Pathogen Identification** part is already finished correctly then skip the following 5 steps.
 >
-> 1. Create a collection named `VFs` with `VFs` files 
+> 1. Create a collection named `VFs` with `VFs` files
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -1242,11 +1240,11 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
     >    - In *"Operation"*:
     >        - {% icon param-repeat %} *"Insert Operation"*
     >            - *"Type"*: `Count`
-    >            - *"On column"*: `c6`    
+    >            - *"On column"*: `c6`
     >
     > 3. {% tool [Filter empty datasets](__FILTER_EMPTY_DATASETS__) %} with the following parameters:
     >    - {% icon param-file %} *"Input Collection"*: `out_file1` (output of **Group** {% icon tool %})
-    >   
+    >
     > 4. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
     >    - {% icon param-file %} *"Tabular files"*: `output` (output of **Filter empty datasets** {% icon tool %})
     >    - *"Fill character"*: `0`
@@ -1296,8 +1294,8 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 > > 2. Both samples were spiked with the same pathogen species, _S. enterica_, but not the same strain:
 > >
 > >    - `Barcode10` sample is spiked with _S. enterica subsp. enterica_ strain
-> >    - `Barcode11` sample is spiked with _S. enterica subsp. houtenae_ strain. 
-> > 
+> >    - `Barcode11` sample is spiked with _S. enterica subsp. houtenae_ strain.
+> >
 > >    This can be the main cause of the big similarities and the few differences of the bacteria pathogen **VF** gene products found between both of the two samples.
 > >    Other factors such as the **time** and **location** of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
 > >
