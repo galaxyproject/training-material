@@ -668,7 +668,7 @@ module Jekyll
 
       if site.data.key?(topic_id)
         if site.data[topic_id].is_a?(Hash) && site.data[topic_id].key?('title')
-          og_title = [site.data[topic_id]['title']]
+          og_title = [site.data[topic_id]['title'].clone]
         else
           Jekyll.logger.warn "Missing title for #{topic_id}"
         end
@@ -701,9 +701,9 @@ module Jekyll
       when 'learning-pathway'
         og_title.push "Learning Pathway: #{page['title']}"
       when 'tutorial_hands_on'
-        og_title[-1]&.prepend 'Hands-on: '
+        og_title.push "Hands-on: #{page['title']}"
       when /slides/
-        og_title[-1]&.prepend 'Slide Deck: '
+        og_title.push "Slides: #{page['title']}"
       else
         og_title.push page['title']
       end
