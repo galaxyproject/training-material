@@ -266,6 +266,63 @@ layout: base
 <section>
 	<h2>Instructor Zone</h2>
 
+	<p>
+	Check out our checklists for
+	</p>
+	<ul>
+		<li><a href="{% link topics/teaching/tutorials/organize-workshop/tutorial.md %}">Organising a Workshop</a> to check that you haven't forgotten any important step.</li>
+		<li><a href="{% link topics/teaching/tutorials/running-workshop/tutorial.md %}">Running a Workshop</a>, helpful reminders closer to your event.</li>
+	</ul>
+
+
+	{% if event.infrastructure %}
+	<h4>Request TIaaS</h4>
+	<p>Training Infrastructure as a Service (TIaaS) is a service that allows you to request space for your course on a server, it helps ensure courses run smoothly by separating your trainee's jobs into a separate queue. <a href="{% link topics/teaching/tutorials/setup-tiaas-for-training/tutorial.md %}">Learn more about TIaaS in our tutorial</a>.</p>
+	<p>The following links will open a (mostly) pre-filled out TIaaS form, <emph>if that server supports TIaaS</emph>. Otherwise you might see "page not found".</p>
+	<p>Once you receive a URL from the admins, please set it as a <code>tiaas_link</code> in your event metadata.</p>
+	{%- capture org0 -%}{{ event.contributions.organisers[0] }}{%- endcapture -%}
+	<ul>
+	{% for server in event.infrastructure.servers %}
+{%- capture urlparams -%}
+?name={{ site.data.contributors[org0].name | uri_escape}}
+&email={{ site.data.contributors[org0].email | uri_escape }}
+&title={{ event.title | uri_escape }}
+&description={{ event.description | uri_escape }}
+&start={{ event.date_start }}
+&end={{ event.date_end }}
+&website={{ site.url }}{{ site.baseurl }}{{ page.url }}
+&use_gtn=true&gtn_links={{ 'See course event' | uri_escape }}
+&training_identifier={{ server.tiaas_link | split:'/' | last | uri_escape }}
+{%- endcapture -%}
+		<li>
+			<a href="{{ server.server }}/tiaas/new/{{ urlparams }}">Request TIaaS @ {{ server.server }}</a>
+		</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
+
+
+<h3> Add your event to the Galaxy Hub Event Horizon </h3>
+<p>
+To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
+</p>
+
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code>---
+title: "{{event.title}}"
+date: '{{event.date_start}}'
+days: {{event.duration}}
+tease: {{event.description}}
+#continent: EU
+location: "{{event.location.name}}{%if event.location.city %},{{event.location.city}}{%endif%}{% if event.location.coutnry %}, {{event.location.country}}{% endif %}"
+external_url: "{{site.url}}{{site.baseurl}}{{ page.url }}"
+gtn: true
+contact: "{{event.contact_email}}"
+subsites: [all]
+---
+</code></pre></div></div>
+
+
 	<h3>Promote the Event</h3>
 
 	<p><abbr title="Tooting is the verb used when posting to mastodon or the fediverse, which are like open source twitter.">Tootable</abbr>/Tweetable version:</p>
@@ -313,61 +370,7 @@ layout: base
 {% endif %}
 </code></pre></div>      </div>
 
-<h3> Also add your event to the Galaxy Hub </h3>
-<p>
-To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
-</p>
 
-<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
-<code>---
-title: "{{event.title}}"
-date: '{{event.date_start}}'
-days: {{event.duration}}
-tease: {{event.description}}
-#continent: EU
-location: "{{event.location.name}}{%if event.location.city %},{{event.location.city}}{%endif%}{% if event.location.coutnry %}, {{event.location.country}}{% endif %}"
-external_url: "{{site.url}}{{site.baseurl}}{{ page.url }}"
-gtn: true
-contact: "{{event.contact_email}}"
-subsites: [all]
----
-</code></pre></div></div>
-
-	<h3>Get Set Up</h3>
-	<p>
-	Check out our checklists for
-	</p>
-	<ul>
-		<li><a href="{% link topics/teaching/tutorials/organize-workshop/tutorial.md %}">Organising a Workshop</a> to check that you haven't forgotten any important step.</li>
-		<li><a href="{% link topics/teaching/tutorials/running-workshop/tutorial.md %}">Running a Workshop</a>, helpful reminders closer to your event.</li>
-	</ul>
-
-
-	{% if event.infrastructure %}
-	<h4>TIaaS</h4>
-	<p>Training Infrastructure as a Service (TIaaS) is a service that allows you to request space for your course on a server, it helps ensure courses run smoothly by separating your trainee's jobs into a separate queue. <a href="{% link topics/teaching/tutorials/setup-tiaas-for-training/tutorial.md %}">Learn more about TIaaS in our tutorial</a>.</p>
-	<p>The following links will open a (mostly) pre-filled out TIaaS form, <emph>if that server supports TIaaS</emph>. Otherwise you might see "page not found".</p>
-	<p>Once you receive a URL from the admins, please set it as a <code>tiaas_link</code> in your event metadata.</p>
-	{%- capture org0 -%}{{ event.contributions.organisers[0] }}{%- endcapture -%}
-	<ul>
-	{% for server in event.infrastructure.servers %}
-{%- capture urlparams -%}
-?name={{ site.data.contributors[org0].name | uri_escape}}
-&email={{ site.data.contributors[org0].email | uri_escape }}
-&title={{ event.title | uri_escape }}
-&description={{ event.description | uri_escape }}
-&start={{ event.date_start }}
-&end={{ event.date_end }}
-&website={{ site.url }}{{ site.baseurl }}{{ page.url }}
-&use_gtn=true&gtn_links={{ 'See course event' | uri_escape }}
-&training_identifier={{ server.tiaas_link | split:'/' | last | uri_escape }}
-{%- endcapture -%}
-		<li>
-			<a href="{{ server.server }}/tiaas/new/{{ urlparams }}">Request TIaaS @ {{ server.server }}</a>
-		</li>
-	{% endfor %}
-	</ul>
-	{% endif %}
 </section>
 
   </div>
