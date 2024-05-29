@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slide Deck: Slide Deck: Hands-on: Pre-processing of Single-Cell RNA Data / Single Cell</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Dealing with Cross-Contamination in Fixed Barcode Protocols / Pre-processing of Single-Cell RNA Data / Single Cell</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@342364a9bb55f3c74eb9f9172e91ce575d44dc81",
+		release: "galaxy-training-network@5333ff5b08e1897809d13f9af71e045bc3ff2ea3",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="2023-10-09 16:30:03 +0000"><meta name="description" content="### Fixed Barcode Protocols and Multiplexing   The main contending questions are:   1. How large is each batch?  ??? How many slots in a batch that we need to barcode for  --   2. How many batches on a plate?  --   3. Should each batch use the same barcodes?  --   4. What **constraints** are there on the plate?    ??? A technician always has to balance quality against cost, and this is illustrated in the following examples:  ---  ### Example Setup  .pull-left[ * Barcodes:   * 24 unique barcodes, with an edit distance of E=2:               AAA ACC AGG TTT TAA TCC              ATT CCC CAA TGG NAA NCC              CGG CTT GGG NGG NTT ANN              GAA GCC GTT CNN GNN TNN  ] -- .pull-right[ * Plates and Batches:   * 12 slots per lane (3x4)   * 4 batches per plate  * Constraints   * Only 2 batches sequenced at the same time     * i.e. half the plate is sequenced at the same time ]  ??? Here we use N as an extra base just for example purposes, but you do sometimes see this in other bar...">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Single Cell / Slide Deck: Hands-on: Pre-processing of Single-Cell RNA Data">
+	<meta property="og:title" content="Single Cell / Pre-processing of Single-Cell RNA Data / Slides: Dealing with Cross-Contamination in Fixed Barcode Protocols">
         <meta property="og:description" content="### Fixed Barcode Protocols and Multiplexing   The main contending questions are:   1. How large is each batch?  ??? How many slots in a batch that we need to barcode for  --   2. How many batches on a plate?  --   3. Should each batch use the same barcodes?  --   4. What **constraints** are there on the plate?    ??? A technician always has to balance quality against cost, and this is illustrated in the following examples:  ---  ### Example Setup  .pull-left[ * Barcodes:   * 24 unique barcodes, with an edit distance of E=2:               AAA ACC AGG TTT TAA TCC              ATT CCC CAA TGG NAA NCC              CGG CTT GGG NGG NTT ANN              GAA GCC GTT CNN GNN TNN  ] -- .pull-right[ * Plates and Batches:   * 12 slots per lane (3x4)   * 4 batches per plate  * Constraints   * Only 2 batches sequenced at the same time     * i.e. half the plate is sequenced at the same time ]  ??? Here we use N as an extra base just for example purposes, but you do sometimes see this in other bar...">
         
 	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
@@ -264,94 +264,89 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<h2>Requirements</h2>
 		<ul>
 		
+
 		
-    <li>
     
         
         
-        <a href="/training-material/topics/single-cell">Single Cell</a>
         
-            <ul>
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
                 
                     
                         
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                            
-                            <li> Slide Deck: Slide Deck: Plates, Batches, and Barcodes:
-                            
-                                <a href="/training-material/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
-                                
-                            
-                            
+                            <li>
+                              <a href="/training-material/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Plates, Batches, and Barcodes</a>
                             </li>
                         
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                 
-            </ul>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
         
     
-    </li>
+
 
 		</ul>
 		
@@ -763,7 +758,7 @@ Tutorial Content is licensed under
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/342364a9bb55f3c74eb9f9172e91ce575d44dc81">342364a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5333ff5b08e1897809d13f9af71e045bc3ff2ea3">5333ff5</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slide Deck: Slide Deck: Hands-on: Running Jobs on Remote Resources with Pulsar / Galaxy Server administration</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Running Jobs on Remote Resources with Pulsar / Running Jobs on Remote Resources with Pulsar / Galaxy Server administration</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@342364a9bb55f3c74eb9f9172e91ce575d44dc81",
+		release: "galaxy-training-network@5333ff5b08e1897809d13f9af71e045bc3ff2ea3",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="2021-04-06 11:50:17 +0000"><meta name="description" content="# What are heterogenous compute resources?  Differences in: - Operating system or version - Users/groups - Data accessibility - Administrative control - Physical Location (i.e. Cities)  Galaxy expects: - One OS, version (dependencies) - Shared filesystem w/ fixed paths  --- # Example - Australia  ![australia_locations.png](../../images/australia_locations.png)  --- # Partial solution - CLI job runner  SSH to remote, submit jobs with CLI `sbatch`, `qsub`, etc.  Still depends on shared FS  --- # Pulsar  ![pulsar_logo.png](../../images/pulsar_logo.png)  Galaxy's remote job management system  * Can run jobs on any(?) OS including Windows  * Multiple modes of operation for every environment  --- # Pulsar - Architecture  * Pulsar server runs on remote resource (e.g. cluster head node)  * Galaxy Pulsar job runner is Pulsar client  * Communication is via HTTP or AMQP, language is JSON  * File transport is dependent on communication method  --- # Pulsar - Architecture  ![pulsar_schematic.png...">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Galaxy Server administration / Slide Deck: Hands-on: Running Jobs on Remote Resources with Pulsar">
+	<meta property="og:title" content="Galaxy Server administration / Running Jobs on Remote Resources with Pulsar / Slides: Running Jobs on Remote Resources with Pulsar">
         <meta property="og:description" content="# What are heterogenous compute resources?  Differences in: - Operating system or version - Users/groups - Data accessibility - Administrative control - Physical Location (i.e. Cities)  Galaxy expects: - One OS, version (dependencies) - Shared filesystem w/ fixed paths  --- # Example - Australia  ![australia_locations.png](../../images/australia_locations.png)  --- # Partial solution - CLI job runner  SSH to remote, submit jobs with CLI `sbatch`, `qsub`, etc.  Still depends on shared FS  --- # Pulsar  ![pulsar_logo.png](../../images/pulsar_logo.png)  Galaxy's remote job management system  * Can run jobs on any(?) OS including Windows  * Multiple modes of operation for every environment  --- # Pulsar - Architecture  * Pulsar server runs on remote resource (e.g. cluster head node)  * Galaxy Pulsar job runner is Pulsar client  * Communication is via HTTP or AMQP, language is JSON  * File transport is dependent on communication method  --- # Pulsar - Architecture  ![pulsar_schematic.png...">
         
 	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
@@ -260,247 +260,244 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<h2>Requirements</h2>
 		<ul>
 		
-		
-    <li>
-    
-        
-        
-        <a href="/training-material/topics/admin">Galaxy Server administration</a>
-        
-            <ul>
-                
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                            
-                            <li> Slide Deck: Slide Deck: Hands-on: Hands-on: Ansible:
-                            
-                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
-                                
-                            
-                            
-                                
-                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
-                                
-                            
-                            </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                            
-                            <li> Slide Deck: Slide Deck: Hands-on: Hands-on: Galaxy Installation with Ansible:
-                            
-                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
-                                
-                            
-                            
-                                
-                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
-                                
-                            
-                            </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                
-            </ul>
-        
-    
-    </li>
 
-    <li>
+		
     
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Ansible</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Ansible</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Galaxy Installation with Ansible</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Galaxy Installation with Ansible</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+      <li>
         A server/VM on which to deploy Pulsar
+      </li>
     
-    </li>
+
 
 		</ul>
 		
@@ -744,7 +741,7 @@ Tutorial Content is licensed under
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/342364a9bb55f3c74eb9f9172e91ce575d44dc81">342364a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5333ff5b08e1897809d13f9af71e045bc3ff2ea3">5333ff5</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

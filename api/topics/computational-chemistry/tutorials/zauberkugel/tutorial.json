@@ -89,7 +89,7 @@
       "name": "Zauberkugel",
       "title": "Zauberkugel",
       "test_results": null,
-      "modified": "2024-05-29 08:06:40 +0000",
+      "modified": "2024-05-29 10:06:39 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nQuery ligand\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPharmacophore library\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Ligand ionization state generation\"];\n  0 -->|output| 2;\n  3[\"Splitting ePharmaLib into individual pharmacophores\"];\n  1 -->|output| 3;\n  4[\" Low-energy ligand conformer search\"];\n  2 -->|outfile| 4;\n  5[\"Pharmacophore alignment\"];\n  4 -->|outfile| 5;\n  3 -->|list_output_generic| 5;\n  6[\"Concatenating the pharmacophore alignment scores\"];\n  5 -->|score_result_file| 6;\n  7[\"Ranking the predicted protein targets according to the Tversky index 10th column\"];\n  6 -->|out_file1| 7;"
     }
   ],

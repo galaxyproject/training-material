@@ -887,7 +887,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">topic_id</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_id</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_id</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;title&#39;</span>)
-      <span class="ruby-identifier">og_title</span> = [<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_id</span>][<span class="ruby-string">&#39;title&#39;</span>]]
+      <span class="ruby-identifier">og_title</span> = [<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic_id</span>][<span class="ruby-string">&#39;title&#39;</span>].<span class="ruby-identifier">clone</span>]
     <span class="ruby-keyword">else</span>
       <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Missing title for #{topic_id}&quot;</span>
     <span class="ruby-keyword">end</span>
@@ -920,9 +920,9 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;learning-pathway&#39;</span>
     <span class="ruby-identifier">og_title</span>.<span class="ruby-identifier">push</span> <span class="ruby-node">&quot;Learning Pathway: #{page[&#39;title&#39;]}&quot;</span>
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;tutorial_hands_on&#39;</span>
-    <span class="ruby-identifier">og_title</span>[<span class="ruby-value">-1</span>]&amp;.<span class="ruby-identifier">prepend</span> <span class="ruby-string">&#39;Hands-on: &#39;</span>
+    <span class="ruby-identifier">og_title</span>.<span class="ruby-identifier">push</span> <span class="ruby-node">&quot;Hands-on: #{page[&#39;title&#39;]}&quot;</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/slides/</span>
-    <span class="ruby-identifier">og_title</span>[<span class="ruby-value">-1</span>]&amp;.<span class="ruby-identifier">prepend</span> <span class="ruby-string">&#39;Slide Deck: &#39;</span>
+    <span class="ruby-identifier">og_title</span>.<span class="ruby-identifier">push</span> <span class="ruby-node">&quot;Slides: #{page[&#39;title&#39;]}&quot;</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">og_title</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;title&#39;</span>]
   <span class="ruby-keyword">end</span>

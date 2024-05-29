@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slide Deck: Slide Deck: Hands-on: Galaxy Monitoring with gxadmin / Galaxy Server administration</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Galaxy Monitoring with gxadmin / Galaxy Monitoring with gxadmin / Galaxy Server administration</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@342364a9bb55f3c74eb9f9172e91ce575d44dc81",
+		release: "galaxy-training-network@5333ff5b08e1897809d13f9af71e045bc3ff2ea3",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="2021-04-06 11:50:17 +0000"><meta name="description" content="# Database Queries  Sometimes it's the best way to get the exact data you need  Can be very useful for: - Debugging - Reporting - Analytics  But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL  ???  - Admins often need to run database queries. - Debugging the live application in production is difficult, but running queries is easy. - Additionally running SQL queries is commonly used for debuggin and reporting and analytics. - The community collects queries we commonly use in a program called gxadmin.  --- # Database Queries   Can you send me the number of jobs per day/state from Main in September and October?   ```sql SELECT   date_trunc('month', j.create_time) AS month,   j.state,   COUNT(j.state) AS job_count FROM job j LEFT OUTER JOIN galaxy_user u   ON j.user_id = u.id WHERE u.email != 'monitor@bx.psu.edu' GROUP BY month,          j.state HAVING date_trunc('month', j.create_time) >= '2016-09-01' AND date_trunc('month', j.create_time) `  ```con...">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Galaxy Server administration / Slide Deck: Hands-on: Galaxy Monitoring with gxadmin">
+	<meta property="og:title" content="Galaxy Server administration / Galaxy Monitoring with gxadmin / Slides: Galaxy Monitoring with gxadmin">
         <meta property="og:description" content="# Database Queries  Sometimes it's the best way to get the exact data you need  Can be very useful for: - Debugging - Reporting - Analytics  But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL  ???  - Admins often need to run database queries. - Debugging the live application in production is difficult, but running queries is easy. - Additionally running SQL queries is commonly used for debuggin and reporting and analytics. - The community collects queries we commonly use in a program called gxadmin.  --- # Database Queries   Can you send me the number of jobs per day/state from Main in September and October?   ```sql SELECT   date_trunc('month', j.create_time) AS month,   j.state,   COUNT(j.state) AS job_count FROM job j LEFT OUTER JOIN galaxy_user u   ON j.user_id = u.id WHERE u.email != 'monitor@bx.psu.edu' GROUP BY month,          j.state HAVING date_trunc('month', j.create_time) >= '2016-09-01' AND date_trunc('month', j.create_time) `  ```con...">
         
 	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
@@ -617,7 +617,7 @@ Tutorial Content is licensed under
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/342364a9bb55f3c74eb9f9172e91ce575d44dc81">342364a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5333ff5b08e1897809d13f9af71e045bc3ff2ea3">5333ff5</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
