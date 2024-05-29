@@ -66,6 +66,17 @@ follow_up_training:
     topic_name: single-cell
     tutorials:
         - scrna-case_alevin-combine-datasets
+
+recordings:
+- captioners:
+  - nomadscientist
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: 3ytm2AU6QUc
+  speakers:
+  - nomadscientist
+
 ---
 
 
@@ -250,7 +261,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 >     >   >    - In *"Extra output files"*:
 >     >   >        - {% icon param-check %} `Salmon Quant log file`
 >     >   >        - {% icon param-check %} `Features used by the CB classification and their counts at each cell level (--dumpFeatures)`
->     >   >        
+>     >   >
 >     >   >        - Of course you are welcome to select more options and explore the output files ({% icon warning %} warning: *"Per cell level parsimonious Umi graph (--dumpUmiGraph)"* will generate over 2 thousand single files), but for this tutorial you will only need to select those specified.
 >     >   >    - In *"Advanced options"*:
 >     >   >        - *"Dump cell v transcripts count matrix in MTX format"*: {% icon galaxy-toggle%} `Yes`

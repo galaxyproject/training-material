@@ -23,6 +23,18 @@ contributors:
 - chrisbarnettster
 - bgruening
 
+
+recordings:
+- captioners:
+  - simonbray
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H40M
+  youtube_id: LjW3nES04bI
+  speakers:
+  - simonbray
+  - chrisbarnettster
+
 ---
 
 This tutorial provides an introduction to using high-throughput molecular dynamics to study protein-ligand interaction, as applied to the N-terminal domain of Hsp90 (heat shock protein 90).

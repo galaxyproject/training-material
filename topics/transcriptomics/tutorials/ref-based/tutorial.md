@@ -57,6 +57,27 @@ contributions:
     - lldelisle
   editing:
     - hexylena
+
+recordings:
+- youtube_id: AeiW3IItO_c
+  speakers:
+  - lldelisle
+  captioners:
+  - lldelisle
+  date: '2023-05-15'
+  galaxy_version: '23.01'
+  length: 2H50M
+  cyoa: true
+- captioners:
+  - hexylena
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 2H30M
+  youtube_id: j4onRSN650A
+  speakers:
+  - bebatut
+
 ---
 
 

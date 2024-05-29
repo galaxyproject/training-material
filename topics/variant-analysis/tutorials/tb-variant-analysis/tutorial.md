@@ -31,6 +31,19 @@ edam_ontology:
 - topic_0199 # Genetic variation
 - topic_3305 # Public health and epidemiology
 - topic_3324 # Infectious disease
+
+recordings:
+- captioners:
+  - pvanheus
+  - nagoue
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 40M
+  youtube_id: G1DmquX6Wh8
+  speakers:
+  - pvanheus
+
 ---
 
 

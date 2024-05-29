@@ -53,6 +53,25 @@ recordings:
 
 
 
+
+recordings:
+- youtube_id: CGSBeCW3rpA
+  speakers:
+  - shiltemann
+  captioners:
+  - shiltemann
+  date: '2023-05-19'
+  length: 1H37M
+  galaxy_version: '23.01'
+- captioners:
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H40M
+  youtube_id: mto4Nl-q7Kk
+  speakers:
+  - shiltemann
+
 ---
 
 {% include topics/microbiome/tutorials/mothur-miseq-sop/content.md short=true %}

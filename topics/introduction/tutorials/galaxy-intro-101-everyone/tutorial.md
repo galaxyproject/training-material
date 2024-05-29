@@ -31,6 +31,26 @@ contributors:
   - olanag1
   - tnabtaf
   - shiltemann
+
+recordings:
+- captioners:
+  - astrovsky01
+  date: '2023-05-01'
+  length: 20M
+  galaxy_version: '23.0'
+  youtube_id: 64oS5uXVRV0
+  speakers:
+  - astrovsky01
+- captioners:
+  - tnabtaf
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H15M
+  youtube_id: dguN6Xw2Azs
+  speakers:
+  - annefou
+  - rwinand
+
 ---
 
 

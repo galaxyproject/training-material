@@ -56,6 +56,24 @@ follow_up_training:
     topic_name: single-cell
     tutorials:
         - scrna-case_basic-pipeline
+
+recordings:
+- youtube_id: 22t-4qvHnow
+  length: 11M
+  date: '2023-05-09'
+  speakers:
+  - hrukkudyr
+  captioners:
+  - hrukkudyr
+- captioners:
+  - nomadscientist
+  date: '2021-02-15'
+  galaxy_version: '21.09'
+  length: 11M
+  youtube_id: U8pVa6csmUE
+  speakers:
+  - nomadscientist
+
 ---
 
 

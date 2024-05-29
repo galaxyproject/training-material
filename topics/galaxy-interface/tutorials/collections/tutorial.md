@@ -22,6 +22,24 @@ contributors:
   - nekrut
 
 subtopic: manage
+
+recordings:
+- youtube_id: uN6nP3I7QLE
+  captioners:
+  - delphine-l
+  date: '2023-05-09'
+  length: 13M
+  speakers:
+  - delphine-l
+- captioners:
+  - annefou
+  - mariipia10
+  date: '2021-08-09'
+  length: 11M
+  youtube_id: uZUt9XIHUQo
+  speakers:
+  - nekrut
+
 ---
 
 {% snippet faqs/gtn/galaxy_tested_with.md version="22.01" %}

@@ -47,6 +47,17 @@ notebook:
   language: python
   snippet: topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/preamble.md
 
+
+recordings:
+- captioners:
+  - nomadscientist
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 10M
+  youtube_id: VEyTmwDIgPI
+  speakers:
+  - nomadscientist
+
 ---
 
 # Run the tutorial!
