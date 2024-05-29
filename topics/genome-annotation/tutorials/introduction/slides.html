@@ -161,7 +161,7 @@ Models:
 - Integration of evidence and *ab initio* predictions
 - "Consensus" of multiple sources
 - Automated pipelines
-  - [**Maker**]({% link topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.md %}), **Braker**, [**Funannotate**]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}), **Pasa**, **Prokka**, ...
+  - [**Maker**]({% link topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.md %}), **Braker**, **Braker3**, [**Funannotate**]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}), **Helixer** **Pasa**, **Prokka**, ...
   - Align evidences (or use pre-aligned)
   - Run *ab initio* predictors
   - Reconciliate gene models
@@ -203,6 +203,28 @@ Source: [Maker documentation](http://weatherby.genetics.utah.edu/MAKER/wiki/inde
 
 ---
 
+### Evaluation of annotation: Compleasm
+
+* A faster and more accurate reimplementation of BUSCO
+* Expected to be found in a good annotation
+* 
+* Similar results to BUSCO:
+  * Found genes
+  * Fragmented genes
+  * Duplicated genes
+
+---
+
+### Evaluation of proteome: OMArk
+
+* Assign proteins to HOGs using k-mer composition
+* HOG = Hierarchical Orthologous Groups (gene families from OMA db)
+* Differences vs BUSCO:
+  * Completeness: also considers conserved genes in multiple copies
+  * Consistency: checks if (all) proteins matches the selected lineage or not
+
+---
+
 ### Visualisation of Results
 
 Genome Browsers (JBrowse, UCSC, ...)
@@ -223,6 +245,7 @@ Genome Browsers (JBrowse, UCSC, ...)
   - [RepeatMasker]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %})
   - RepeatModeler
   - REPET
+  - Red
 - Databases of repeated elements
   - Can be used by pipelines
   - Dfam
@@ -249,6 +272,14 @@ Genome Browsers (JBrowse, UCSC, ...)
   - Missing/incomplete genes
   - Split/fused genes
   - Pseudogenes
+
+---
+
+### Helixer
+
+- Annotation based on the development and use of a cross-species deep learning model
+- Ab-initio annotation of core genes between species of large eukaryotic genomes
+- Model capable of differentiating between different intergenic regions
 
 ---
 
@@ -381,6 +412,7 @@ Various sources
   - For each protein (or CDS) of the annotation, tag with GO terms
 
 ---
+
 
 ### Orthology
 
