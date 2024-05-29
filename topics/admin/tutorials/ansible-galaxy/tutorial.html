@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@bc270926b2343c9bb9a63310978c38d42a6e68cf",
+		release: "galaxy-training-network@342364a9bb55f3c74eb9f9172e91ce575d44dc81",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hands-on: Hands-on: Galaxy Installation with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-21 13:51:43 +0000"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
+<meta name="DC.date" content="2024-05-27 14:47:09 +0000"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Hands-on: Galaxy Installation with Ansible">
         <meta property="og:description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
@@ -206,7 +206,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-21 13:51:43 +0000",
+  "dateModified": "2024-05-27 14:47:09 +0000",
   "datePublished": "2019-01-28 10:40:06 +0000",
   "identifier": "https://gxy.io/GTN:T00001",
   "accessMode": [
@@ -235,7 +235,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on: Hands-on: Galaxy Installation with Ansible",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
-  "version": 372,
+  "version": 376,
   "timeRequired": "PT2H30M",
   "teaches": "Have an understanding of how Galaxy's Ansible roles are structured and interact with one another\n - Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes",
   "keywords": [
@@ -1072,7 +1072,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "git-gat"
     }
   ],
-  "abstract": "This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:"
+  "abstract": "This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks.  If not, please consider following our [Ansible Tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %}) first."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1571,7 +1571,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 28, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 21, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 27, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1591,7 +1591,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.1</a> (0 recent ratings, 34 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 372 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 376 </div>
 
     </blockquote>
     </section>
@@ -1606,7 +1606,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <p>This tutorial assumes you have some familiarity with <a href="https://www.ansible.com/resources/get-started">Ansible</a> and are comfortable with writing and running playbooks. Here we’ll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:</p>
+                <p>This tutorial assumes you have some familiarity with <a href="https://www.ansible.com/resources/get-started">Ansible</a> and are comfortable with writing and running playbooks.  If not, please consider following our <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">Ansible Tutorial</a> first.</p>
+
+<p>Here we’ll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:</p>
 
 <blockquote class="quote" cite="https://en.wikipedia.org/wiki/Ansible">
   <p>An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems</p>
@@ -4829,7 +4831,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/bc270926b2343c9bb9a63310978c38d42a6e68cf">bc27092</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/342364a9bb55f3c74eb9f9172e91ce575d44dc81">342364a</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
