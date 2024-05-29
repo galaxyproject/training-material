@@ -1297,7 +1297,7 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 > > 2. Both samples were spiked with the same pathogen species, _S. enterica_, but not the same strain:
 > >
 > >    - `Barcode10` sample is spiked with _S. enterica subsp. enterica_ strain
-> >    - `Barcode11` sample is spiked with _S. enterica subsp. houtenae_ strain. 
+> >    - `Barcode11` sample is spiked with _S. enterica subsp. houtenae_ strain.
 > >
 > >    This can be the main cause of the big similarities and the few differences of the bacteria pathogen **VF** gene products found between both of the two samples.
 > >    Other factors such as the **time** and **location** of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
