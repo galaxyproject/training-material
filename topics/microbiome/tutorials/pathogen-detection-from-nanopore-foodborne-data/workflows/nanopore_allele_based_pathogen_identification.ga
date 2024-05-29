@@ -4,18 +4,18 @@
     "comments": [
         {
             "child_steps": [
-                3,
                 4,
-                7,
-                10,
-                13,
+                5,
+                8,
+                11,
                 14,
-                24,
-                16,
-                18,
-                20,
-                22,
-                23
+                15,
+                25,
+                17,
+                19,
+                21,
+                23,
+                24
             ],
             "color": "pink",
             "data": {
@@ -34,34 +34,12 @@
         },
         {
             "child_steps": [
-                21,
-                5,
-                8,
-                11
-            ],
-            "color": "pink",
-            "data": {
-                "title": "Mapping mean depth"
-            },
-            "id": 1,
-            "position": [
-                888,
-                577.9
-            ],
-            "size": [
-                1586,
-                239.4
-            ],
-            "type": "frame"
-        },
-        {
-            "child_steps": [
-                17,
-                6,
-                9,
-                12,
-                15,
-                19
+                18,
+                7,
+                10,
+                13,
+                16,
+                20
             ],
             "color": "pink",
             "data": {
@@ -75,6 +53,28 @@
             "size": [
                 1400,
                 237.8
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                22,
+                6,
+                9,
+                12
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Mapping mean depth"
+            },
+            "id": 1,
+            "position": [
+                888,
+                577.9
+            ],
+            "size": [
+                1586,
+                239.4
             ],
             "type": "frame"
         }
@@ -134,10 +134,37 @@
             "workflow_outputs": []
         },
         "1": {
-            "annotation": "Can be built in the tool later",
+            "annotation": "based on the lab preparation of the samples during sequencing, there should be a sample profile better than the other, to be chosen as an optional input to Minimap2. e.g. PacBio/Oxford Nanpore\n\nFor more details check: https://github.com/lh3/minimap2?tab=readme-ov-file#use-cases",
             "content_id": null,
             "errors": null,
             "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "based on the lab preparation of the samples during sequencing, there should be a sample profile better than the other, to be chosen as an optional input to Minimap2. e.g. PacBio/Oxford Nanpore\n\nFor more details check: https://github.com/lh3/minimap2?tab=readme-ov-file#use-cases",
+                    "name": "samples_profile"
+                }
+            ],
+            "label": "samples_profile",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 260,
+                "top": 35
+            },
+            "tool_id": null,
+            "tool_state": "{\"restrictOnConnections\": true, \"parameter_type\": \"text\", \"optional\": true}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "d28b9bed-c674-406c-b58b-165bcc8eec17",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Can be built in the tool later",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
             "input_connections": {},
             "inputs": [
                 {
@@ -160,14 +187,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "2": {
+        "3": {
             "annotation": "",
             "content_id": "CONVERTER_gz_to_uncompressed",
             "errors": null,
-            "id": 2,
+            "id": 3,
             "input_connections": {
                 "input1": {
-                    "id": 1,
+                    "id": 2,
                     "output_name": "output"
                 }
             },
@@ -214,22 +241,30 @@
                 }
             ]
         },
-        "3": {
+        "4": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0",
             "errors": null,
-            "id": 3,
+            "id": 4,
             "input_connections": {
+                "fastq_input|analysis_type_selector": {
+                    "id": 1,
+                    "output_name": "output"
+                },
                 "fastq_input|fastq_input1": {
                     "id": 0,
                     "output_name": "output"
                 },
                 "reference_source|ref_file": {
-                    "id": 2,
+                    "id": 3,
                     "output_name": "output1"
                 }
             },
             "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with minimap2",
+                    "name": "fastq_input"
+                },
                 {
                     "description": "runtime parameter for tool Map with minimap2",
                     "name": "fastq_input"
@@ -267,7 +302,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": null}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"BAM\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"RuntimeValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"BAM\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.24+galaxy0",
             "type": "tool",
             "uuid": "6da37636-966d-4975-bce3-d650feaeb17c",
@@ -280,18 +315,18 @@
                 }
             ]
         },
-        "4": {
+        "5": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0",
             "errors": null,
-            "id": 4,
+            "id": 5,
             "input_connections": {
                 "bam_input": {
-                    "id": 3,
+                    "id": 4,
                     "output_name": "alignment_output"
                 },
                 "ref_source|ref_fasta": {
-                    "id": 2,
+                    "id": 3,
                     "output_name": "output1"
                 }
             },
@@ -374,14 +409,14 @@
                 }
             ]
         },
-        "5": {
+        "6": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_depth/samtools_depth/1.15.1+galaxy2",
             "errors": null,
-            "id": 5,
+            "id": 6,
             "input_connections": {
                 "input_bams": {
-                    "id": 3,
+                    "id": 4,
                     "output_name": "alignment_output"
                 }
             },
@@ -413,14 +448,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "6": {
+        "7": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_coverage/samtools_coverage/1.15.1+galaxy2",
             "errors": null,
-            "id": 6,
+            "id": 7,
             "input_connections": {
                 "condition_input|input": {
-                    "id": 3,
+                    "id": 4,
                     "output_name": "alignment_output"
                 }
             },
@@ -457,18 +492,18 @@
             "when": null,
             "workflow_outputs": []
         },
-        "7": {
+        "8": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
             "errors": null,
-            "id": 7,
+            "id": 8,
             "input_connections": {
                 "input_file": {
-                    "id": 4,
+                    "id": 5,
                     "output_name": "merge_output"
                 },
                 "reference_source|fasta_ref": {
-                    "id": 2,
+                    "id": 3,
                     "output_name": "output1"
                 }
             },
@@ -519,14 +554,14 @@
                 }
             ]
         },
-        "8": {
+        "9": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
             "errors": null,
-            "id": 8,
+            "id": 9,
             "input_connections": {
                 "input": {
-                    "id": 5,
+                    "id": 6,
                     "output_name": "output"
                 }
             },
@@ -558,14 +593,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "9": {
+        "10": {
             "annotation": "",
             "content_id": "Remove beginning1",
             "errors": null,
-            "id": 9,
+            "id": 10,
             "input_connections": {
                 "input": {
-                    "id": 6,
+                    "id": 7,
                     "output_name": "output"
                 }
             },
@@ -591,14 +626,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "10": {
+        "11": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1",
             "errors": null,
-            "id": 10,
+            "id": 11,
             "input_connections": {
                 "input": {
-                    "id": 7,
+                    "id": 8,
                     "output_name": "output_file"
                 }
             },
@@ -644,14 +679,14 @@
                 }
             ]
         },
-        "11": {
+        "12": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
             "errors": null,
-            "id": 11,
+            "id": 12,
             "input_connections": {
                 "singtabop|input": {
-                    "id": 8,
+                    "id": 9,
                     "output_name": "output"
                 }
             },
@@ -688,14 +723,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "12": {
+        "13": {
             "annotation": "",
             "content_id": "Cut1",
             "errors": null,
-            "id": 12,
+            "id": 13,
             "input_connections": {
                 "input": {
-                    "id": 9,
+                    "id": 10,
                     "output_name": "out_file1"
                 }
             },
@@ -721,14 +756,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "13": {
+        "14": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
             "errors": null,
-            "id": 13,
+            "id": 14,
             "input_connections": {
                 "input": {
-                    "id": 10,
+                    "id": 11,
                     "output_name": "output"
                 }
             },
@@ -774,18 +809,18 @@
                 }
             ]
         },
-        "14": {
+        "15": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy1",
             "errors": null,
-            "id": 14,
+            "id": 15,
             "input_connections": {
                 "input_file": {
-                    "id": 10,
+                    "id": 11,
                     "output_name": "output"
                 },
                 "reference_source|fasta_ref": {
-                    "id": 2,
+                    "id": 3,
                     "output_name": "output1"
                 }
             },
@@ -840,14 +875,14 @@
                 }
             ]
         },
-        "15": {
+        "16": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/9.3+galaxy1",
             "errors": null,
-            "id": 15,
+            "id": 16,
             "input_connections": {
                 "infile": {
-                    "id": 12,
+                    "id": 13,
                     "output_name": "out_file1"
                 }
             },
@@ -879,14 +914,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "16": {
+        "17": {
             "annotation": "",
             "content_id": "Remove beginning1",
             "errors": null,
-            "id": 16,
+            "id": 17,
             "input_connections": {
                 "input": {
-                    "id": 13,
+                    "id": 14,
                     "output_name": "output"
                 }
             },
@@ -912,14 +947,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "17": {
+        "18": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "errors": null,
-            "id": 17,
+            "id": 18,
             "input_connections": {
                 "input_list": {
-                    "id": 15,
+                    "id": 16,
                     "output_name": "outfile"
                 }
             },
@@ -965,14 +1000,14 @@
                 }
             ]
         },
-        "18": {
+        "19": {
             "annotation": "",
             "content_id": "Count1",
             "errors": null,
-            "id": 18,
+            "id": 19,
             "input_connections": {
                 "input": {
-                    "id": 16,
+                    "id": 17,
                     "output_name": "out_file1"
                 }
             },
@@ -998,14 +1033,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "19": {
+        "20": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
             "errors": null,
-            "id": 19,
+            "id": 20,
             "input_connections": {
                 "input": {
-                    "id": 17,
+                    "id": 18,
                     "output_name": "output"
                 }
             },
@@ -1037,14 +1072,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "20": {
+        "21": {
             "annotation": "",
             "content_id": "Cut1",
             "errors": null,
-            "id": 20,
+            "id": 21,
             "input_connections": {
                 "input": {
-                    "id": 18,
+                    "id": 19,
                     "output_name": "out_file1"
                 }
             },
@@ -1070,18 +1105,18 @@
             "when": null,
             "workflow_outputs": []
         },
-        "21": {
+        "22": {
             "annotation": "",
             "content_id": "Paste1",
             "errors": null,
-            "id": 21,
+            "id": 22,
             "input_connections": {
                 "input1": {
-                    "id": 19,
+                    "id": 20,
                     "output_name": "output"
                 },
                 "input2": {
-                    "id": 11,
+                    "id": 12,
                     "output_name": "table"
                 }
             },
@@ -1121,14 +1156,14 @@
                 }
             ]
         },
-        "22": {
+        "23": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/9.3+galaxy1",
             "errors": null,
-            "id": 22,
+            "id": 23,
             "input_connections": {
                 "infile": {
-                    "id": 20,
+                    "id": 21,
                     "output_name": "out_file1"
                 }
             },
@@ -1160,14 +1195,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "23": {
+        "24": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "errors": null,
-            "id": 23,
+            "id": 24,
             "input_connections": {
                 "input_list": {
-                    "id": 22,
+                    "id": 23,
                     "output_name": "outfile"
                 }
             },
@@ -1199,14 +1234,14 @@
             "when": null,
             "workflow_outputs": []
         },
-        "24": {
+        "25": {
             "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
             "errors": null,
-            "id": 24,
+            "id": 25,
             "input_connections": {
                 "input": {
-                    "id": 23,
+                    "id": 24,
                     "output_name": "output"
                 }
             },
@@ -1260,6 +1295,6 @@
         "name:Nanopore",
         "name:IWC"
     ],
-    "uuid": "aab68abd-f5bc-4d2b-bbbb-ec80dab94a02",
-    "version": 65
+    "uuid": "34e3f52d-531d-4ef4-916d-a988098c1914",
+    "version": 67
 }
