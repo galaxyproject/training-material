@@ -2,27 +2,47 @@
 layout: tutorial_hands_on
 
 title: Single-cell ATAC-seq standard processing with SnapATAC2
+level: Intermediate
 zenodo_link: https://zenodo.org/records/11369811
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- What does ATAC-seq data tell us about the cell?
+- Which steps are necessary for clustering of single-cell ATAC-seq data?
+- Why is dimension reduction important for analysis of single-cell data?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- Learn how ATAC-seq works
+- Create a count-matrix from a 10X fragment file
+- Perform filtering, dimension reduction and clustering on AnnData matrices
+- Generate and filter a cell-by-gene matrix
+- Identify marker genes for the clusters
+time_estimation: 2H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Single-cell ATAC-seq can identify open chromatin-sites  
+- Clustering groups similar cells together which can then be annotated to cell-types
+requirements:
+-
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scatac-preprocessing-tenx
+tags:
+- 10x
+- epigenetics
+abbreviations:
+    ATAC-seq: Assay for Transposase-Accessible Chromatin using sequencing
+    PBMC: peripheral blood mononuclear cell
+
 contributors:
 - timonschlegel
+gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 ---
 
+
+
+Single-cell ATAC-seq (Assay for Transposase-Accessible Chromatin using sequencing) analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin. 
+By analyzing which genomic sites have an _open_ chromatin state, cell-type specific patterns of gene accessibility can be determined. 
+Single cell ATAC-seq is particularily usefull for analyzing tissue containing different cell populations, such as peripheral blood mononuclear cells (PBMC's). 
 
 
 General introduction about the topic and then an introduction of the
