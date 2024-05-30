@@ -154,14 +154,14 @@ Models:
 
 ---
 
-### Data Reconcilliation
+### Data Reconciliation
 
 .pull-left[
 
 - Integration of evidence and *ab initio* predictions
 - "Consensus" of multiple sources
 - Automated pipelines
-  - [**Maker**]({% link topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.md %}), **Braker**, **Braker3**, [**Funannotate**]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}), **Helixer** **Pasa**, **Prokka**, ...
+  - [**Maker**]({% link topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.md %}), **Braker**, **Braker3**, [**Funannotate**]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}), **Pasa**, **Prokka**, ...
   - Align evidences (or use pre-aligned)
   - Run *ab initio* predictors
   - Reconciliate gene models
@@ -204,24 +204,21 @@ Source: [Maker documentation](http://weatherby.genetics.utah.edu/MAKER/wiki/inde
 ---
 
 ### Evaluation of annotation: Compleasm
-
-* A faster and more accurate reimplementation of BUSCO
-* Expected to be found in a good annotation
-* 
-* Similar results to BUSCO:
+* "A faster and more accurate reimplementation of BUSCO" 
+* Similar results as BUSCO:
   * Found genes
   * Fragmented genes
   * Duplicated genes
 
 ---
 
-### Evaluation of proteome: OMArk
+### Evaluation of annotation: OMArk
 
 * Assign proteins to HOGs using k-mer composition
 * HOG = Hierarchical Orthologous Groups (gene families from OMA db)
 * Differences vs BUSCO:
-  * Completeness: also considers conserved genes in multiple copies
-  * Consistency: checks if (all) proteins matches the selected lineage or not
+  * Completeness: also considers genes conserved in multiple copies
+  * Consistency: checks if (all) proteins matches the auto-detected lineage or not
 
 ---
 
@@ -275,12 +272,15 @@ Genome Browsers (JBrowse, UCSC, ...)
 
 ---
 
-### Helixer
+### Helixer: a new and different approach
 
+#### Why is this approach so different? 
+
+- Using GPUs
+- Fast runtime
+- Gene prediction without evidences 
 - Annotation based on the development and use of a cross-species deep learning model
 - Ab-initio annotation of core genes between species of large eukaryotic genomes
-- Model capable of differentiating between different intergenic regions
-
 ---
 
 ## Manual Annotation
@@ -412,7 +412,6 @@ Various sources
   - For each protein (or CDS) of the annotation, tag with GO terms
 
 ---
-
 
 ### Orthology
 
