@@ -189,11 +189,19 @@ Since we have **paired-end** data, each sample consist of two separate FASTQ fil
 
 We can recognize the pairing from the file names, which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming convention, so that our tools will know which files belong together. We do this by building a **List of Dataset Pairs**
 
-> <hands-on-title>Organizing our data into a paired collection</hands-on-title>
+> <hands-on-title>Organizing our data into a sorted paired collection</hands-on-title>
 >
 > 1. Create a paired collection named `Raw Reads`, rename your pairs with the sample name
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>
+> 2. {% tool [Sort collection](__SORTLIST__) %} with the following parameters:
+>    - {% icon param-collection %} *"Input Collection"*: `Raw Reads`
+>
+> 3. Rename output collection to `Sorted Raw Reads`
+>
+>    {% snippet faqs/galaxy/collections_rename.md %}
+>
 {: .hands_on}
 
 We can now start processing the reads using **DADA2**.
@@ -254,7 +262,7 @@ We start by visualizing the quality profiles of the forward reads:
 >    - *"Processing mode"*: `Joint`
 >        - *"Paired reads"*: `paired - in a data set pair`
 >            - {% icon param-collection %} *"Paired short read data"*: `Raw Reads`
->        - *"Aggregate data"*: `Yes`
+>        - *"Aggregate data"*: `No`
 >    - *"sample number"*: `10000000`
 >
 > 2. Inspect forward read output
@@ -368,7 +376,7 @@ To better see the impact of filtering and trimming, we can inspect the read qual
 >    - *"Processing mode"*: `Joint`
 >        - *"Paired reads"*: `paired - in a data set pair`
 >            - {% icon param-collection %} *"Paired short read data"*: `Paired reads` output of **dada2: filterAndTrim**
->        - *"Aggregate data"*: `Yes`
+>        - *"Aggregate data"*: `No`
 >    - *"sample number"*: `10000000`
 >
 {: .hands_on}
@@ -492,17 +500,24 @@ In this step, the core sample inference algorithm ({% cite Callahan_2016 %}) is 
 
 </div>
 
-**TODO**: see how many true sequence variants from unique sequences have been inferred by DADA2
+We can look at the number of true sequence variants from unique sequences have been inferred by **DADA2**.
+
+> <hands-on-title> Inspect number of true sequence variants from unique sequences </hands-on-title>
+>
+> 1. Click one output collection of **dada2: dada**
+> 2. Click on {% icon details %} *Show Details*
+> 2. Expant *Tool Standard Output*
+{: .hands_on}
 
 > <question-title></question-title>
 >
 > 1. How many unique sequences are in forward reads for sample F3D0?
-> 2. How many true sequence variants from unique sequences have been inferred by DADA2 for this data?
+> 2. How many true sequence variants from unique sequences have been inferred by DADA2 for this dataset?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 7113 reads in 1979 unique sequences
+> > 2. 128 sequence variants were inferred from 1979 input unique sequences.
 > >
 > {: .solution}
 >
@@ -528,19 +543,34 @@ We now merge the forward and reverse reads together to obtain the full denoised 
 >      > Non-overlapping reads are supported, but not recommended. In this case, *"Concatenated rather than merge"* should be `Yes`.
 >      > 
 >      {: .comment}
+>
+>    - *"Output detailed table"*: `Yes`
 {: .hands_on}
 
 </div>
 
-**TODO** Inspect the merger data from the first sample
+Let's inspect the merged data, more specifically the table in `details` collection
 
 > <question-title></question-title>
 >
-> 1. 
+> 1. How many reads have been merged?
+> 2. What are the different columns in the detail table for F3D0?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 
+> > 1. The detail table for F3D0 has 108 lines including a header. So 107 reads (over 128) have been merged
+> > 2. The table contains:
+> >    1. merged sequence,
+> >    2. its abundance,
+> >    3. the indices of the forward sequence variants that were merged
+> >    4. the indices of the reverse sequence variants that were merged
+> >    5. number of match in the alignment between forward and reverse
+> >    6. number of mismatch in the alignment between forward and reverse
+> >    7. number of indels in the alignment between forward and reverse
+> >    8. prefer
+> >    9. status to accept
+> >   
+> >    Paired reads that did not exactly overlap were removed by mergePairs, further reducing spurious output.
 > >
 > {: .solution}
 >
@@ -874,7 +904,7 @@ We now construct a phyloseq object directly with it and the DADA2 outputs and la
 > 2. {% tool [Phyloseq](interactive_tool_phyloseq) %} with the following parameters:
 >    - {% icon param-file %} *"Phyloseq R object"*: output of **Create phyloseq object from dada2**
 >
->     {% snippet faqs/galaxy/interactive_tools_open.md %}
+>    {% snippet faqs/galaxy/interactive_tools_open.md %}
 >
 {: .hands_on}
 
