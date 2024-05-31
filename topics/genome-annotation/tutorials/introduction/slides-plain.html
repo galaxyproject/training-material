@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c61f6708f66b9bf14792b31d0f72fb9332054677",
+		release: "galaxy-training-network@439bd52371c8f64be93a82cd0400f25bbc0b36dc",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Introduction to Genome Annotation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-01-12 09:58:34 +0000"><meta name="description" content="# Genome Annotation  **Structural Annotation**  Positions of genomic features along the genome  **Functional Annotation**  Assigning functions to those features  ???  Two parts, structural and function. Structural can come from ab-initio predictions or structural data. Functional annotation often comes from analysis of protein domains or in rare cases from experimental data.  ---  ## Structural Annotation  Types of elements:  - genes - regulatory regions - ncRNA - repeat elements - pseudogenes and paralogs  ---  ### Structural Annotation: Why?  ![Screenshot of apollo, with genome sequence at the top, and several gene models shown below. These gene models are coding sequences + protein sequences.](../../images/intro-structural-annotation.png)  ---  ### Structural Annotation: Why?  Locate your favorite gene + see what's next to it  Basis for other analysis, e.g.:  - Transcriptomic data (count reads mapping inside exons) - Variants detection (SNP, indels, …) and their effects - Epigeno...">
+<meta name="DC.date" content="2024-05-31 10:49:19 +0000"><meta name="description" content="# Genome Annotation  **Structural Annotation**  Positions of genomic features along the genome  **Functional Annotation**  Assigning functions to those features  ???  Two parts, structural and function. Structural can come from ab-initio predictions or structural data. Functional annotation often comes from analysis of protein domains or in rare cases from experimental data.  ---  ## Structural Annotation  Types of elements:  - genes - regulatory regions - ncRNA - repeat elements - pseudogenes and paralogs  ---  ### Structural Annotation: Why?  ![Screenshot of apollo, with genome sequence at the top, and several gene models shown below. These gene models are coding sequences + protein sequences.](../../images/intro-structural-annotation.png)  ---  ### Structural Annotation: Why?  Locate your favorite gene + see what's next to it  Basis for other analysis, e.g.:  - Transcriptomic data (count reads mapping inside exons) - Variants detection (SNP, indels, …) and their effects - Epigeno...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Genome Annotation / Introduction to Genome Annotation / Slides: Introduction to Genome Annotation">
         <meta property="og:description" content="# Genome Annotation  **Structural Annotation**  Positions of genomic features along the genome  **Functional Annotation**  Assigning functions to those features  ???  Two parts, structural and function. Structural can come from ab-initio predictions or structural data. Functional annotation often comes from analysis of protein domains or in rare cases from experimental data.  ---  ## Structural Annotation  Types of elements:  - genes - regulatory regions - ncRNA - repeat elements - pseudogenes and paralogs  ---  ### Structural Annotation: Why?  ![Screenshot of apollo, with genome sequence at the top, and several gene models shown below. These gene models are coding sequences + protein sequences.](../../images/intro-structural-annotation.png)  ---  ### Structural Annotation: Why?  Locate your favorite gene + see what's next to it  Basis for other analysis, e.g.:  - Transcriptomic data (count reads mapping inside exons) - Variants detection (SNP, indels, …) and their effects - Epigeno...">
@@ -224,7 +224,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> May 13, 2019 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Jan 12, 2023 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> May 31, 2024 </div>
 
 	<hr />
 
@@ -387,7 +387,7 @@ Predictions using:</p>
 
 <hr />
 
-<h3 id="data-reconcilliation">Data Reconcilliation</h3>
+<h3 id="data-reconciliation">Data Reconciliation</h3>
 
 <p>.pull-left[</p>
 
@@ -396,7 +396,7 @@ Predictions using:</p>
   <li>“Consensus” of multiple sources</li>
   <li>Automated pipelines
     <ul>
-      <li><a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.html"><strong>Maker</strong></a>, <strong>Braker</strong>, <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html"><strong>Funannotate</strong></a>, <strong>Pasa</strong>, <strong>Prokka</strong>, …</li>
+      <li><a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.html"><strong>Maker</strong></a>, <strong>Braker</strong>, <strong>Braker3</strong>, <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html"><strong>Funannotate</strong></a>, <strong>Pasa</strong>, <strong>Prokka</strong>, …</li>
       <li>Align evidences (or use pre-aligned)</li>
       <li>Run <em>ab initio</em> predictors</li>
       <li>Reconciliate gene models
@@ -462,6 +462,35 @@ Source: <a href="http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_T
 
 <hr />
 
+<h3 id="evaluation-of-annotation-compleasm">Evaluation of annotation: Compleasm</h3>
+<ul>
+  <li>“A faster and more accurate reimplementation of BUSCO”</li>
+  <li>Similar results as BUSCO:
+    <ul>
+      <li>Found genes</li>
+      <li>Fragmented genes</li>
+      <li>Duplicated genes</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="evaluation-of-annotation-omark">Evaluation of annotation: OMArk</h3>
+
+<ul>
+  <li>Assign proteins to HOGs using k-mer composition</li>
+  <li>HOG = Hierarchical Orthologous Groups (gene families from OMA db)</li>
+  <li>Differences vs BUSCO:
+    <ul>
+      <li>Completeness: also considers genes conserved in multiple copies</li>
+      <li>Consistency: checks if (all) proteins matches the auto-detected lineage or not</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
 <h3 id="visualisation-of-results">Visualisation of Results</h3>
 
 <p>Genome Browsers (JBrowse, UCSC, …)</p>
@@ -484,6 +513,7 @@ Source: <a href="http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_T
       <li><a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker</a></li>
       <li>RepeatModeler</li>
       <li>REPET</li>
+      <li>Red</li>
     </ul>
   </li>
   <li>Databases of repeated elements
@@ -528,6 +558,19 @@ Source: <a href="http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_T
 </ul>
 
 <hr />
+
+<h3 id="helixer-a-new-and-different-approach">Helixer: a new and different approach</h3>
+
+<h4 id="why-is-this-approach-so-different">Why is this approach so different?</h4>
+
+<ul>
+  <li>Ab-initio annotation of genes in large eukaryotic genomes</li>
+  <li>Based on a cross-species deep learning model</li>
+  <li>No need for any evidences (RNASeq, aligments, etc)</li>
+  <li>
+    <h2 id="uses-gpus-fast-runtime-few-hours-max">Uses GPUs, fast runtime (few hours max)</h2>
+  </li>
+</ul>
 
 <h2 id="manual-annotation">Manual Annotation</h2>
 
@@ -852,7 +895,7 @@ Tutorial Content is licensed under
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c61f6708f66b9bf14792b31d0f72fb9332054677">c61f670</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/439bd52371c8f64be93a82cd0400f25bbc0b36dc">439bd52</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
