@@ -14,6 +14,8 @@ require './_plugins/gtn/usegalaxy'
 require './_plugins/util'
 require './_plugins/jekyll-topic-filter'
 require 'time'
+require 'net/http'
+
 
 puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
 version_parts = RUBY_VERSION.split('.')
@@ -66,6 +68,15 @@ module Jekyll
     # +String+:: The name of the node
     def elixirnode2name(name)
       ELIXIR_NODES[name]
+    end
+
+    def url_exists(url)
+      uri = URI.parse(url)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.scheme == 'https'
+      response = http.request_head(uri.path)
+      Jekyll.logger.warn response
+      response.code == '200'
     end
 
     ##
