@@ -11,22 +11,21 @@ layout: base
 <section class="tutorial">
     <h1 data-toc-skip>Recordings - {{ material.title }} </h1>
 
-    <p>These recordings are associated with the tutorial <a href="../tutorial.html">{{ material.title }}</a></p>
-    <p>This is a collection of recordings from various training events where this tutorial was taught.</p>
+    <p>This is a collection of recordings from various training events where the  <a href="../tutorial.html">{{ material.title }}</a> tutorial was taught by members of the GTN community. The tutorial may have changed after the recording was made; below each video you will find a link to the tutorial as it appeared at the time of recording.</p>
 
-    <p>Want to add your own recording? TODO: button linking to instructions </p>
-
-    <div class="alert alert-warning" role="alert">
-	{% icon warning %}<strong>Warning: </strong> Please be aware that these videos are a snapshot, and as such <strong>may use an outdated version</strong> of the tutorial and/or Galaxy. Below the video you will find links to the tutorials as they appeared at the time of recording.
-    </div>
-
+    <p><b>Want to add your own recording?</b> We would love to have it to our library! TODO: button linking to instructions </p>
 
     {% for recording in recordings %}
-    {{recording}}
     <h2> Tutorial Recording - {{ recording.date | date: "%-d %B %Y"  }} </h2>
-    {% include _includes/youtube.html id=recording.youtube_id %}
-    <table class="table table-striped video-metadata">
+    <div class="recording">
 
+    <div class="recording-video">
+    {% include _includes/youtube.html id=recording.youtube_id %}
+    </div>
+
+    <div class="recording-metadata">
+    <table class="table table-striped">
+    <tbody>
     <!-- description -->
     {% if recording.description %}
     <tr>
@@ -95,8 +94,11 @@ layout: base
       <td><strong>Archived tutorial</strong></td>
       <td><a href="{{archiveurl}}">View tutorial at time of recording</a></td>
     </tr>
-
+    </tbody>
     </table>
+    </div>
+    </div>
+    <br><br>
 
     {% endfor %}
 
