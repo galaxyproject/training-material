@@ -46,31 +46,14 @@ recordings:
     date: '2021-02-15'
     speakers:
       - shiltemann
-    captions:
+    captioners:
       - shiltemann
     galaxy_version: '21.01'
     length: 1H40M
+    description: This recording was created as part of the Smörgåsbord 2023 event.
+    type: Lecture & Tutorial
+    archive-id: smorgasbord2023
 
-
-
-
-recordings:
-- youtube_id: CGSBeCW3rpA
-  speakers:
-  - shiltemann
-  captioners:
-  - shiltemann
-  date: '2023-05-19'
-  length: 1H37M
-  galaxy_version: '23.01'
-- captioners:
-  - shiltemann
-  date: '2021-02-15'
-  galaxy_version: '21.01'
-  length: 1H40M
-  youtube_id: mto4Nl-q7Kk
-  speakers:
-  - shiltemann
 
 ---
 
