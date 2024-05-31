@@ -274,6 +274,8 @@ module TopicFilter
       material['type'] = 'rmd'
     elsif parts[4] == 'workflows'
       material['type'] = 'workflow'
+    elsif parts[4] == 'recordings'
+      material['type'] = 'recordings'
     elsif parts[4] == 'tours'
       material['type'] = 'tour'
     elsif parts[-1] == 'index.md'
