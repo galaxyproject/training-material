@@ -124,7 +124,7 @@
       "name": "metaQuantome_datacreation_workflow",
       "title": "metaQuantome_datacreation_workflow",
       "test_results": null,
-      "modified": "2024-05-29 14:12:22 +0000",
+      "modified": "2024-05-31 00:05:40 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nExperiment_Design\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nFASTA_db\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"mzml to mgf\"];\n  0 -->|output| 3;\n  4[\"Search GUI\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  5[\"Peptide Shaker\"];\n  4 -->|searchgui_results| 5;\n  6[\"Replace Text\"];\n  5 -->|output_psm| 6;\n  7[\"Remove beginning\"];\n  5 -->|output_peptides| 7;\n  8[\"Unipept_lca\"];\n  5 -->|output_peptides| 8;\n  9[\"FlashLFQ\"];\n  1 -->|output| 9;\n  6 -->|outfile| 9;\n  0 -->|output| 9;\n  10[\"Unipept_peptinfo\"];\n  7 -->|out_file1| 10;\n  11[\"Replace Text\"];\n  8 -->|output_tsv| 11;\n  12[\"Regex Find And Replace\"];\n  9 -->|quantifiedPeptides| 12;\n  13[\"selecting EC column\"];\n  10 -->|output_ec_tsv| 13;\n  14[\"filter 5% All_funct\"];\n  10 -->|output_go_tsv| 14;\n  15[\"GO_EC\"];\n  13 -->|out_file1| 15;\n  16[\"GO_BP\"];\n  14 -->|output| 16;\n  17[\"GO_CC\"];\n  14 -->|output| 17;\n  18[\"GO_MF\"];\n  14 -->|output| 18;"
     }
   ],
