@@ -55,7 +55,7 @@ recordings:
   date: '2021-02-15'
   galaxy_version: '21.01'
   length: 6M
-  link: 7CYI5yw9MN8
+  youtube_id: 7CYI5yw9MN8
   speakers:
   - hexylena
 

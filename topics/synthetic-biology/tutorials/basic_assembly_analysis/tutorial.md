@@ -31,7 +31,7 @@ recordings:
   youtube_id: 0ItpHuSM7t0
   speakers:
   - breakthewall
-  title: Demo
+  type: Demo
 
 ---
 

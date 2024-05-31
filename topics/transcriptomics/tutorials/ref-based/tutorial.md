@@ -67,7 +67,6 @@ recordings:
   date: '2023-05-15'
   galaxy_version: '23.01'
   length: 2H50M
-  cyoa: true
 - captioners:
   - hexylena
   - shiltemann

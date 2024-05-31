@@ -35,7 +35,7 @@ abbreviations:
 
 recordings:
 - youtube_id: rFPtDmq7uO8
-  date: 2024-01-26
+  date: "2024-01-26"
   length: 22M
   speakers:
   - leandro-liborio

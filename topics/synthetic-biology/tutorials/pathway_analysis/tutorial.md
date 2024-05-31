@@ -27,7 +27,7 @@ recordings:
   youtube_id: 240oxe8unnU
   speakers:
   - breakthewall
-  title: Demo
+  type: Demo
 
 ---
 
