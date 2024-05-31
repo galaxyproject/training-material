@@ -1,0 +1,103 @@
+---
+layout: base
+---
+
+{% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
+{% assign recordings = material.recordings | sort: 'date' | reverse  %}
+
+
+
+
+<section class="tutorial">
+    <h1 data-toc-skip>Recordings - {{ material.title }} </h1>
+
+    <p>These recordings are associated with the tutorial <a href="../tutorial.html">{{ material.title }}</a></p>
+    <p>This is a collection of recordings from various training events where this tutorial was taught.</p>
+
+    <p>Want to add your own recording? TODO: button linking to instructions </p>
+
+    <div class="alert alert-warning" role="alert">
+	{% icon warning %}<strong>Warning: </strong> Please be aware that these videos are a snapshot, and as such <strong>may use an outdated version</strong> of the tutorial and/or Galaxy. Below the video you will find links to the tutorials as they appeared at the time of recording.
+    </div>
+
+
+    {% for recording in recordings %}
+    {{recording}}
+    <h2> Tutorial Recording - {{ recording.date | date: "%-d %B %Y"  }} </h2>
+    {% include _includes/youtube.html id=recording.youtube_id %}
+    <table class="table table-striped video-metadata">
+
+    <!-- description -->
+    {% if recording.description %}
+    <tr>
+      <td><strong>Description:</strong></td>
+      <td>{{ recording.description | markdownify }}</td>
+    </tr>
+    {% endif %}
+
+    <!-- type of video, e.g. 'demo', 'lecture & video', 'background' -->
+    {% if recording.type %}
+    <tr>
+      <td><strong>Type:</strong></td>
+      <td>{{ recording.type }}</td>
+    </tr>
+    {% endif %}
+
+    <!-- speakers -->
+    <tr>
+      <td><strong>Speaker{% if recordings.speakers.size > 1 %}s{% endif %}:</strong></td>
+      <td>{% for speaker in recording.speakers %}{% include _includes/contributor-badge-inline.html id=speaker %}{% endfor %}</td>
+    </tr>
+
+    <!-- captioners -->
+    <tr>
+      <td><strong>Captioner{% if recordings.captioners.size > 1 %}s{% endif %}:</strong></td>
+      <td>{% for captioner in recording.captioners %}{% include _includes/contributor-badge-inline.html id=captioner %}{% endfor %}</td>
+    </tr>
+
+    <!-- length -->
+    <tr>
+      <td><strong>Length:</strong></td>
+      <td>{{ recording.length | duration_to_human }}</td>
+    </tr>
+
+    <!-- date -->
+    <tr>
+      <td><strong>Created:</strong></td>
+      <td>{{ recording.date | date: "%-d %B %Y" }}</td>
+    </tr>
+
+      <!-- link tutorial at time of recording -->
+      <!-- determine the next archived version of tutorial -->
+      {% assign archivemonth = recording.date | date: "%m" | modulo: 12 | prepend: '00' | slice: -2, 2 %}
+      {% assign archiveyear = recording.date | date: "%Y" %}
+      {% if archivemonth == '01' %}{% assign archiveyear = archiveyear | plus: 1 %}{% endif %}
+      {%- capture archive -%}{{archiveyear}}-{{archivemonth}}-01{%- endcapture -%}
+
+     <!-- Check if url exists in archive, else redirect_from metadata to find url of tutorial at time of archive -->
+     {% capture url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}/topics/{{ page.topic_name }}/tutorials/{{page.tutorial_name}}/tutorial.html{% endcapture %}
+
+     {% assign exists = url | url_exists %}
+     {% if exists %}
+       {% assign archiveurl = url %}
+     {% else %}
+       {% for r in material.redirect_from %}
+         {% capture url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}{{r}}.html{% endcapture %}
+         {% assign exists = url | url_exists %}
+         {% if exists %}
+           {% assign archiveurl = url %}
+           {% break %}
+         {% endif %}
+       {% endfor %}
+     {% endif %}
+
+     <tr>
+      <td><strong>Archived tutorial</strong></td>
+      <td><a href="{{archiveurl}}">View tutorial at time of recording</a></td>
+    </tr>
+
+    </table>
+
+    {% endfor %}
+
+</section>
