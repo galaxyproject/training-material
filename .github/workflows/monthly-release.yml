@@ -67,10 +67,12 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Build Site
+      - name: List Tags
         run: |
           git tag -l
-          git checkout ${SOURCE_TAG}
+
+      - name: Build Site
+        run: |
           gem install bundler
           bundle config path vendor/bundle
           sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
