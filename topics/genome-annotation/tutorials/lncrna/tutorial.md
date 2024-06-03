@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Long non-coding RNAs (lncRNAs) annotation with FEELnc
-zenodo_link: https://zenodo.org/record/7107050
+zenodo_link: https://zenodo.org/records/11367439
 tags:
   - eukaryote
 questions:
@@ -89,9 +89,9 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/7107050/files/genome_assembly.fasta
->    https://zenodo.org/record/7107050/files/genome_annotation.gff3
->    https://zenodo.org/record/7107050/files/all_RNA_mapped.bam
+>    https://zenodo.org/records/11367439/files/genome_assembly.fasta
+>    https://zenodo.org/records/11367439/files/genome_annotation.gff3
+>    https://zenodo.org/records/11367439/files/SRR8534859_RNASeq_mapped.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -111,7 +111,7 @@ A reference annotation file in GTF or GFF3 format can be provided to StringTie w
 >
 > {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.1.7+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
->    - {% icon param-file %} *"Input short mapped reads"*: `all_RNA_mapped.bam`
+>    - {% icon param-file %} *"Input short mapped reads"*: `SRR8534859_RNASeq_mapped.bam`
 >    - *"Specify strand information"*: Unstranded
 >    - *"Use a reference file to guide assembly?"*: Use reference GTF/GFF3
 >    - *"Reference file"*: Use a file from history
@@ -172,11 +172,11 @@ FEELnc provides also summary file in stdout.
 >
 > > <solution-title></solution-title>
 > >
-> > The summary file indicates 104 {lncRNAs} and 0 new {mRNAs} were annotated by FEELnc. The initial annotation contains 13,795 {mRNAs} annotated. Therefore, a total of 13,898 RNAs are currently annotated.
+> > The summary file indicates 268 {lncRNAs} and 0 new {mRNAs} were annotated by FEELnc. The initial annotation contains 13,795 {mRNAs} annotated. Therefore, a total of 14,063 RNAs are currently annotated.
 > >
-> > The summary file indicates 652 interactions between {lncRNAs} and {mRNAs}. These interactions are described in the Classifier output file.
+> > The summary file indicates 772 interactions between {lncRNAs} and {mRNAs}. These interactions are described in the Classifier output file.
 > >
-> > The different types of {lncRNAs} (intergenic (sense and antisense), intragenic (sense)) are described in the Classifier output file. We observe that the majority of the {lncRNAs} are intergenic. These {lncRNAs} can each have interactions with several {mRNAs}. Only 7 {lncRNAs} are genic. These {lncRNAs} have only one interaction with the mRNA that contains it.
+> > The different types of {lncRNAs} (intergenic (sense and antisense), intragenic (sense)) are described in the Classifier output file. We observe that the majority of the {lncRNAs} are intergenic. These {lncRNAs} can each have interactions with several {mRNAs}. Only 5 {lncRNAs} are genic. These {lncRNAs} have only one interaction with the mRNA that contains it.
 > >
 > {: .solution}
 >
