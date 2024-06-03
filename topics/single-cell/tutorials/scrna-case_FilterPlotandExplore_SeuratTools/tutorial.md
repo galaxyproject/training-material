@@ -38,7 +38,7 @@ contributions:
   editing:
     - pavanvidem
     - hexylena
-  infastracture: 
+  infrastructure: 
     - pcm32
     
 answer_histories: 
