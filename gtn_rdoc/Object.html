@@ -469,18 +469,19 @@
         <span class="ruby-identifier">event</span>[<span class="ruby-string">&#39;date_end&#39;</span>]
       <span class="ruby-keyword">end</span>
   <span class="ruby-comment"># want dates like &quot;Mar 22-25, 2024&quot; or &quot;Mar 22-May 1, 2024&quot;</span>
+  <span class="ruby-identifier">dash</span> = <span class="ruby-string">&quot; – &quot;</span> <span class="ruby-comment"># thin space, en dash, thin space</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">year</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">year</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">month</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">month</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">day</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">day</span>
         <span class="ruby-node">&quot;#{s.strftime(&#39;%B&#39;)} #{s.day}, #{s.year}&quot;</span>
       <span class="ruby-keyword">else</span>
-        <span class="ruby-node">&quot;#{s.strftime(&#39;%B&#39;)} #{s.day}-#{e.day}, #{s.year}&quot;</span>
+        <span class="ruby-node">&quot;#{s.strftime(&#39;%B&#39;)} #{s.day}#{dash}#{e.day}, #{s.year}&quot;</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-node">&quot;#{s.strftime(&#39;%B&#39;)} #{s.day}-#{e.strftime(&#39;%B&#39;)} #{e.day}, #{s.year}&quot;</span>
+      <span class="ruby-node">&quot;#{s.strftime(&#39;%B&#39;)} #{s.day}#{dash}#{e.strftime(&#39;%B&#39;)} #{e.day}, #{s.year}&quot;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-node">&quot;#{s.strftime(&#39;%B&#39;)} #{s.day}, #{s.year}-#{e.strftime(&#39;%B&#39;)} #{e.day}, #{e.year}&quot;</span>
+    <span class="ruby-node">&quot;#{s.strftime(&#39;%B&#39;)} #{s.day}, #{s.year}#{dash}#{e.strftime(&#39;%B&#39;)} #{e.day}, #{e.year}&quot;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

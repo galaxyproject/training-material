@@ -1,4 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="https://training.galaxyproject.org/training-material/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://training.galaxyproject.org/training-material/feed.xml" rel="self" type="application/atom+xml" /><link href="https://training.galaxyproject.org/training-material/" rel="alternate" type="text/html" /><updated>2024-06-03T14:18:46+00:00</updated><id>https://training.galaxyproject.org/training-material/feed.xml</id><title type="html">Galaxy Training!</title><subtitle>A collection of tutorials generated and maintained by Galaxy Community Members across the world</subtitle><entry><title type="html">Introducing GTN Event Pages</title><link href="https://training.galaxyproject.org/training-material/news/2024/05/22/introducing-gtn-event-pages.html" rel="alternate" type="text/html" title="Introducing GTN Event Pages" /><published>2024-05-22T00:00:00+00:00</published><updated>2024-05-22T00:00:00+00:00</updated><id>https://training.galaxyproject.org/training-material/news/2024/05/22/introducing-gtn-event-pages</id><content type="html" xml:base="https://training.galaxyproject.org/training-material/news/2024/05/22/introducing-gtn-event-pages.html"><![CDATA[<p>Are you organizing a training event using GTN materials? You can now add your event directly to the GTN!</p>
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="https://training.galaxyproject.org/training-material/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://training.galaxyproject.org/training-material/feed.xml" rel="self" type="application/atom+xml" /><link href="https://training.galaxyproject.org/training-material/" rel="alternate" type="text/html" /><updated>2024-06-03T14:21:22+00:00</updated><id>https://training.galaxyproject.org/training-material/feed.xml</id><title type="html">Galaxy Training!</title><subtitle>A collection of tutorials generated and maintained by Galaxy Community Members across the world</subtitle><entry><title type="html">All GTN training data are now automatically mirrored via Onedata</title><link href="https://training.galaxyproject.org/training-material/news/2024/06/03/onedata.html" rel="alternate" type="text/html" title="All GTN training data are now automatically mirrored via Onedata" /><published>2024-06-03T00:00:00+00:00</published><updated>2024-06-03T00:00:00+00:00</updated><id>https://training.galaxyproject.org/training-material/news/2024/06/03/onedata</id><content type="html" xml:base="https://training.galaxyproject.org/training-material/news/2024/06/03/onedata.html"><![CDATA[<p>As part of the <a href="https://eurosciencegateway.eu/">EuroScienceGateway</a> and in cooperation with <a href="https://onedata.org">Onedata</a> and <a href="https://www.egi.eu/">EGI</a> we are providing all <a href="https://training.galaxyproject.org/">GTN</a> training data on a publicly accessible <a href="https://datahub.egi.eu/share/2697e33bd34f1870b0961414b8c77753chf583">cloud storage</a>.
+Those training datasets are curated, small but meaningful for educational purposes and contain 1530 files with a total size of 170Gb.
+An invaluable set of resources for everyone dealing with data science and training.
+Please thank the more than <a href="/training-material/hall-of-fame.html">350 contributors to GTN</a>.</p>
+
+<h2 id="what-does-this-mean-for-you">What does this mean for you?</h2>
+
+<ul>
+  <li>Teachers: if you’re a teacher contributing to the GTN, you can now be sure that the datasets you use in your materials are even more accessible and easier to use.</li>
+  <li>GTN Users: When following training materials, it’ll now be easier to access those same datasets in new locations.</li>
+  <li>Galaxy Admins: If you’re running a Galaxy server, you can now more easily integrate the GTN data into your server without taking up unnecessary storage space, and still making it available to all your users.</li>
+</ul>
+
+<h2 id="accessing-gtn-data-in-the-cloud">Accessing GTN Data in the Cloud</h2>
+
+<p>GTN training data is always accessible, annotated and linked for every tutorial. Usually, it’s stored in Zenodo, referenced via a DOI.
+You can access all GTN training data using several methods:</p>
+
+<ol>
+  <li>
+    <p><strong>Onedata Share</strong> — access without authentication:</p>
+
+    <p>a. Visit the <a href="https://datahub.egi.eu/share/2697e33bd34f1870b0961414b8c77753chf583">public share link</a>
+    to browse and download the data via the Onedata Web UI.</p>
+
+    <p>b. Use the public <a href="https://onedata.org/#/home/api/stable/onezone?anchor=operation/get_shared_data">REST API</a>
+    to access the data; on the share page (see above) you will find ready-to-use <code class="language-plaintext highlighter-rouge">curl</code> examples by right-clicking on a file/directory and choosing the <strong>Information</strong> context menu.</p>
+  </li>
+  <li>
+    <p><strong>Galaxy Server integration</strong>: access the data on the <a href="https://usegalaxy.eu/">European Galaxy server</a>. Go to the “Upload data” button, select “Choose remote files,” and navigate to the GTN repository.</p>
+  </li>
+  <li>
+    <p><strong>Configure your own Galaxy server</strong>: to include the GTN data in your Galaxy server, use the following configuration:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">onedata</span>
+   <span class="na">id</span><span class="pi">:</span> <span class="s">gtn_public_onedata</span>
+   <span class="na">label</span><span class="pi">:</span> <span class="s">GTN training data</span>
+   <span class="na">doc</span><span class="pi">:</span> <span class="s">Training data from the Galaxy Training Network (powered by Onedata)</span>
+   <span class="c1"># The following token is a public, read-only token that can be shared.</span>
+   <span class="na">accessToken</span><span class="pi">:</span> <span class="s2">"</span><span class="s">MDAxY2xvY2F00aW9uIGRhdGFodWIuZWdpLmV1CjAwNmJpZGVudGlmaWVyIDIvbm1kL3Vzci00yNmI4ZTZiMDlkNDdjNGFkN2E3NTU00YzgzOGE3MjgyY2NoNTNhNS9hY3QvMGJiZmY1NWU4NDRiMWJjZGEwNmFlODViM2JmYmRhNjRjaDU00YjYKMDAxNmNpZCBkYXRhLnJlYWRvbmx5CjAwNDljaWQgZGF00YS5wYXRoID00gTHpaa1pUTTROMkl4WmpjMllXVmpOMlU00WWpreU5XWmtNV00ZpT1RKbU1ETXlZMmhoWTJReAowMDJmc2lnbmF00dXJlIIQvnXp01Oey02LnaNwEkFJAyArzhHN8SlXSYFsBbSkqdqCg"</span>
+   <span class="na">onezoneDomain</span><span class="pi">:</span> <span class="s2">"</span><span class="s">datahub.egi.eu"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Onedata clients</strong> — access the data using the public read-only access token and
+<a href="https://www.onedata.org/#/home/documentation/21.02/user-guide/oneclient.html">Oneclient</a> (local POSIX mount)
+or <a href="https://onedata.org/#/home/documentation/21.02/user-guide/onedatafs.html">OnedataFS</a> 
+(<a href="https://www.pyfilesystem.org/">PyFilesystem</a> interface), e.g.:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">mkdir</span> ~/oneclient
+ oneclient <span class="se">\</span>
+     <span class="nt">-H</span> plg-cyfronet-01.datahub.egi.eu <span class="se">\</span>
+     <span class="nt">-t</span> MDAxY2xvY2F00aW9uIGRhdGFodWIuZWdpLmV1CjAwNmJpZGVudGlmaWVyIDIvbm1kL3Vzci00yNmI4ZTZiMDlkNDdjNGFkN2E3NTU00YzgzOGE3MjgyY2NoNTNhNS9hY3QvMGJiZmY1NWU4NDRiMWJjZGEwNmFlODViM2JmYmRhNjRjaDU00YjYKMDAxNmNpZCBkYXRhLnJlYWRvbmx5CjAwNDljaWQgZGF00YS5wYXRoID00gTHpaa1pUTTROMkl4WmpjMllXVmpOMlU00WWpreU5XWmtNV00ZpT1RKbU1ETXlZMmhoWTJReAowMDJmc2lnbmF00dXJlIIQvnXp01Oey02LnaNwEkFJAyArzhHN8SlXSYFsBbSkqdqCg <span class="se">\</span>
+     ~/oneclient
+ <span class="nb">ls</span> ~/oneclient/GTN<span class="se">\ </span>data
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="what-is-the-gtn-downloader">What is the GTN Downloader?</h2>
+
+<p><a href="https://github.com/usegalaxy-eu/gtn-downloader">GTN-Downloader</a> makes it easier for users to access and organize data from the <a href="https://training.galaxyproject.org/">Galaxy Training Network (GTN)</a>.
+The GTN Downloader is a Python script that automates the download of data from GTN tutorials. It goes through the tutorials in the GTN repository, finds <code class="language-plaintext highlighter-rouge">data-library.yaml</code> files,
+and creates a structured directory based on the tutorial names and file contents.</p>
+
+<h3 id="key-features">Key Features:</h3>
+<ul>
+  <li><strong>Automated Data Download</strong>: The script finds <code class="language-plaintext highlighter-rouge">data-library.yaml</code> files in the GTN repository and downloads the associated data files.</li>
+  <li><strong>Structured Organization</strong>: It creates directories based on the tutorial names and the information in the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> files, so the files are organized.</li>
+  <li><strong>Download Summary</strong>: It generates a <code class="language-plaintext highlighter-rouge">download-summary.tsv</code> file, which includes metadata about the downloaded files, a download report (error, success, already downloaded), and the overall size of the files.</li>
+</ul>
+
+<h2 id="seamless-integration-with-onedata">Seamless Integration with Onedata</h2>
+
+<p>In addition to local downloads, the GTN Downloader can upload data to <a href="https://onedata.org">Onedata</a>, a distributed data management platform. This integration ensures that the latest GTN data is always available to users.</p>
+
+<h3 id="automated-workflow-with-github-cicd">Automated Workflow with GitHub CI/CD:</h3>
+<ul>
+  <li><strong>Automated Workflow</strong>: A GitHub Actions workflow runs once a week on weekends to download the latest data from the GTN tutorials and upload it to Onedata.</li>
+  <li><strong>Environment Setup</strong>: The workflow sets up necessary environment variables and installs dependencies, including Oneclient, the Onedata POSIX client.</li>
+  <li><strong>Data Upload</strong>: After downloading the data, the workflow uploads it to Onedata, making it publicly accessible.</li>
+</ul>]]></content><author><name></name></author><category term="news" /><category term="esg-wp4" /><category term="esg" /><summary type="html"><![CDATA[As part of the EuroScienceGateway and in cooperation with Onedata and EGI we are providing all GTN training data on a publicly accessible cloud storage. Those training datasets are curated, small but meaningful for educational purposes and contain 1530 files with a total size of 170Gb. An invaluable set of resources for everyone dealing with data science and training. Please thank the more than 350 contributors to GTN.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://training.galaxyproject.org/training-material/news/images/galaxy-data-upload.png" /><media:content medium="image" url="https://training.galaxyproject.org/training-material/news/images/galaxy-data-upload.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introducing GTN Event Pages</title><link href="https://training.galaxyproject.org/training-material/news/2024/05/22/introducing-gtn-event-pages.html" rel="alternate" type="text/html" title="Introducing GTN Event Pages" /><published>2024-05-22T00:00:00+00:00</published><updated>2024-05-22T00:00:00+00:00</updated><id>https://training.galaxyproject.org/training-material/news/2024/05/22/introducing-gtn-event-pages</id><content type="html" xml:base="https://training.galaxyproject.org/training-material/news/2024/05/22/introducing-gtn-event-pages.html"><![CDATA[<p>Are you organizing a training event using GTN materials? You can now add your event directly to the GTN!</p>
 
 <p>View all upcoming and past events on the brand-new <a href="/training-material/events/index.html">GTN Events page</a>.</p>
 
@@ -242,44 +323,4 @@ If they aren’t, the merge will fail and the contributor will need to fix the U
  has some ideas about a Chado tutorial using the new <a href="https://github.com/electric-sql/pglite"><code class="language-plaintext highlighter-rouge">pglite</code></a> project, and perhaps <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge-inline contributor-abretaud">
   <img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
   Anthony Bretaudeau</a>
- will contribute a Tripal tutorial!</p>]]></content><author><name></name></author><category term="news" /><category term="new topic" /><category term="new feature" /><category term="genome annotation" /><summary type="html"><![CDATA[Building upon the work previously done for the SARS-Cov-2 Topic we have further expanded the ‘tag based topics’ to support a new GMOD topic.]]></summary></entry><entry><title type="html">🪐📲 Hosting Galaxy at the Edge: Directly in Your Pocket!</title><link href="https://training.galaxyproject.org/training-material/news/2024/01/31/postmarketos.html" rel="alternate" type="text/html" title="🪐📲 Hosting Galaxy at the Edge: Directly in Your Pocket!" /><published>2024-01-31T00:00:00+00:00</published><updated>2024-01-31T00:00:00+00:00</updated><id>https://training.galaxyproject.org/training-material/news/2024/01/31/postmarketos</id><content type="html" xml:base="https://training.galaxyproject.org/training-material/news/2024/01/31/postmarketos.html"><![CDATA[<p>Hey Galaxy admins! Have you ever wanted to administer your own instance from
-the luxury of your pocket?</p>
-
-<p>Now you can, with <strong>Galaxy In Your Pocket™!</strong></p>
-
-<h2 id="why">Why?</h2>
-
-<p>Run your instance without having to worry about the usual concerns: a
-noisy server, too many cables, bad internet, or just a plain
-unwillingness to spend time away from a screen.</p>
-
-<p>Having <em>Galaxy In Your Pocket™</em>, you can run and administer your own
-instance all from the same portable device that you use to ignore your
-loved ones with!</p>
-
-<h2 id="how">How?</h2>
-
-<p>With <a href="https://gitlab.com/-/snippets/3644481">just a few steps</a>, you
-can have Galaxy running on a mobile ARM device of your own.</p>
-
-<figure id="figure-1" style="max-width: 90%;"><img src="/training-material/news/images/2024-01-31-postmarket-phone.jpg" alt="Galaxy running on an Alcatel Idol 347. " width="1816" height="1435" loading="lazy" /><a target="_blank" href="/training-material/news/images/2024-01-31-postmarket-phone.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy running on an Alcatel Idol 347</figcaption></figure>
-
-<p>Above is an image of Galaxy running within
-<a href="https://wiki.postmarketos.org/wiki/Phosh">Phosh UI</a> in <em>PostmarketOS</em> on an old
-<a href="https://wiki.postmarketos.org/wiki/Alcatel_Idol_3_4.7%22_(alcatel-idol347)">Alcatel Idol 347</a>,
-using a Quad-core 1.2 GHz Cortex-A53 CPU and 1.3GB of RAM, with a 5GB swap mounted.</p>
-
-<p>Galaxy appears to use around ~1 GB RAM, and the phone still has enough
-memory to spare to access the Galaxy UI via Firefox.</p>
-
-<h2 id="really-why">Really, why?</h2>
-
-<p>Just imagine: <em>Galaxy In Your Pocket™</em>! A united Galaxy Client and
-Galaxy Server running on your phone 📲, which you can then access using
-that same phone’s web browser.</p>
-
-<p>It’s the perfect setup that only a <em>true and dedicated</em> Galaxy Admin
-such as yourself can dream about.</p>
-
-<p>Or if you’re not buying any of this, then it’s for those emergency
-situations where you forgot your laptop and need to solve a bioinformatics crisis on the go 🧬🌄</p>]]></content><author><name></name></author><category term="news" /><category term="fun" /><category term="system administrators" /><category term="developers" /><category term="humour" /><summary type="html"><![CDATA[Hey Galaxy admins! Have you ever wanted to administer your own instance from the luxury of your pocket?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://training.galaxyproject.org/training-material/news/images/2024-01-31-postmarket-phone-cover.jpg" /><media:content medium="image" url="https://training.galaxyproject.org/training-material/news/images/2024-01-31-postmarket-phone-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+ will contribute a Tripal tutorial!</p>]]></content><author><name></name></author><category term="news" /><category term="new topic" /><category term="new feature" /><category term="genome annotation" /><summary type="html"><![CDATA[Building upon the work previously done for the SARS-Cov-2 Topic we have further expanded the ‘tag based topics’ to support a new GMOD topic.]]></summary></entry></feed>
