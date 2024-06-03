@@ -27,35 +27,35 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 	<thead>
 		<tr>
 			<th>Item</th>
-			<th>Description</th>
 			<th>Status</th>
+			<th>Why you should do this</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>Summary</td>
-			<td>Provide a sufficiently detailed summary of the topic.</td>
 			<td>{% if topic.summary %} Done ✅ {% else %} Pending ❌ {% endif %}</td>
+			<td>Provide a sufficiently detailed summary of the topic to let learners know what they're learning about in this topic.</td>
 		</tr>
 		<tr>
 			<td>Sufficient Editorial Board Members</td>
-			<td>Having multiple people sharing the burden of being responsible for a specific topic can reduce board member burn-out in the long term.</td>
 			<td>{% if editorial_board_count > 2 %} Done ✅ ({{ editorial_board_count }} members){% else %} More required ❌ {% endif %}</td>
+			<td>Having multiple people sharing the burden of being responsible for a specific topic can reduce board member burn-out in the long term.</td>
 		</tr>
 		<tr>
 			<td>Enable Subtopics</td>
-			<td>Subtopics help organize the content and make it easier to navigate.</td>
 			<td>{% if topic.subtopics %} Done ✅ {% else %} Pending ❌ {% endif %}</td>
+			<td>Subtopics help organize the content and make it easier to navigate.</td>
 		</tr>
 		<tr>
 			<td>Annotate Funders</td>
-			<td>By annotating the funders of your topic's materials, you make it easier to write your grant reports later</td>
 			<td>{% if funders_count > 0 %} Done ✅ ({{ funders_count }} funders){% else %} Pending ❌ {% endif %}</td>
+			<td>By annotating the funders of your topic's materials, you make it easier to write your grant reports later</td>
 		</tr>
 		<tr>
 			<td>Learning Pathway CTA</td>
-			<td>By providing a Learning Pathway CTA, we can help guide learners to the best resources for learning about this topic.</td>
 			<td>{% if topic.learning_path_cta %} Done ✅ {% else %} Pending ❌ {% endif %}</td>
+			<td>By providing a Learning Pathway CTA, we can help guide learners to the best resources for learning about this topic.</td>
 		</tr>
 	</tbody>
 </table>
