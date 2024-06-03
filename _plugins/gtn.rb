@@ -646,6 +646,51 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
+    ##
+    # Get the list of 'upcoming' events (i.e. reg deadline or start is 30 days away.)
+    # Params:
+    # +site+:: The site object
+    # Returns:
+    # +Array+:: List of events
+    #
+    # Example:
+    #  {{ site | get_upcoming_events }}
+    def get_upcoming_events(site)
+      cache.getset('upcoming-events') do
+        upcoming_events = site.pages
+          .select{|p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }
+          .reject{|p| p.data['program'].nil? } # Only those with programs
+          .select{|p| p.data['event_upcoming'] == true } # Only those coming soon
+          .map{|p| 
+            materials = p.data['program']
+                         .map{|section| section['tutorials']}
+                         .flatten
+                         .reject{|x| x.nil?} # Remove nil entries
+                         .reject{|x| x.fetch('type', nil) == 'custom'} # Remove custom entries
+                         .map{|x| "#{x['topic']}/#{x['name']}"} # Just the material IDs.
+                         .sort.uniq
+            [p, materials]
+          }
+      end
+    end
+
+
+    ##
+    # Get the list of 'upcoming' events that include this material's ID
+    # Params:
+    # +site+:: The site object
+    # +material+:: The 'material' to get the topic of, it will inspect page.id (use new_material)
+    # Returns:
+    # +Array+:: List of events
+    #
+    # Example:
+    #  {{ site | get_upcoming_events }}
+    def get_upcoming_events_for_this(site, material)
+      get_upcoming_events(site)
+        .select{|p, materials| materials.include? material['id']}
+        .map{|p, materials| p}
+    end
+
     def shuffle(array)
       array.shuffle
     end
@@ -901,6 +946,19 @@ Jekyll::Hooks.register :site, :post_read do |site|
                             else
                               (page.data['date_end'] - page.data['date_start']).to_i + 1
                             end
+
+    # reg deadline
+    if page.data.key?('registration') && page.data['registration'].key?('deadline')
+      deadline = page.data['registration']['deadline']
+    else
+      deadline = page.data['date_start']
+    end
+
+    # If it's an 'upcoming event'
+    if deadline - 30 <= Date.today && Date.today <= deadline
+      page.data['event_upcoming'] = true
+    end
+
   end
 end
 
