@@ -40,33 +40,23 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 
-Single-cell ATAC-seq (Assay for Transposase-Accessible Chromatin using sequencing) analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin. 
+Single-cell {ATAC-seq} (scATAC-seq) analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin. 
 By analyzing which genomic sites have an _open_ chromatin state, cell-type specific patterns of gene accessibility can be determined. 
-Single cell ATAC-seq is particularily usefull for analyzing tissue containing different cell populations, such as peripheral blood mononuclear cells (PBMC's). 
+Single cell ATAC-seq is particularly usefull for analyzing tissue containing different cell populations, such as peripheral blood mononuclear cells (PBMC's). 
 
+In this tutorial we will analyze single-cell ATAC-seq data using the tool suites [SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/index.html) ({% cite Zhang2024 %}) and [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}). 
+With both of these tool suites we will perform preprocessing, clustering and identification of single-cell ATAC-seq datasets from [10x Genomics](https://www.10xgenomics.com/products/single-cell-atac). The analysis will be performed using a dataset of {PBMC}'s containing ~4,620 single nuclei. 
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
 
 <!-- This is a comment. -->
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+
+> <comment-title></comment-title>
+>
+> This tutorial is significantly based on ["Standard pipeline" tutorial from SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/tutorials/pbmc.html), and can be seen as the scATAC-seq counterpart to the scRNA-seq tutorial [Clustering 3K PBMCs with Scanpy]( {% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %} ).
+>
+{: .comment}
+
 
 > <agenda-title></agenda-title>
 >
@@ -77,15 +67,43 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Data
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+The 5k {PBMC} dataset for this tutorial is available for free from [10X Genomics](https://www.10xgenomics.com/datasets/5-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-next-gem-v-1-1-1-1-standard-2-0-0). The blood samples were collected from a healthy donor and were prepared following the Chromium Next GEM scATAC-seq protocol. After sequencing on Illumina NovaSeq, the reads were processed by the **Cell Ranger ATAC 2.0.0** pipeline from 10X to generate a [*Fragments File*](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/output/fragments). 
 
-## Title for a subsection
+> <details-title>Fragments File </details-title>
+>
+>   The Fragments File is a tabular file in a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1)-like format, containing information about the position of the read on the chromosome. A Fragments File is created as part of the tutorial ["Pre-processing of 10X Single-Cell ATAC-seq Datasets"]( {% link topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.md %} )
+>
+{: .details}
+SnapATAC2 requires 3 input files for the standard pathway of processing:
+- `fragments_file.tsv`: A tabular file containing the chromosome positions of the reads and their corresponding 10X cell barcodes. 
+- `chrom_sizes.txt`: A tabular file of the number of bases of a chromosome
+- `gene_annotation.gtf.gz`: A tabular file listing genomic features of the human genome (GENCODE GRCh38)
+
+## Data upload
 Section and subsection titles will be displayed in the tutorial index on the left side of
 the page, so try to make them informative and concise!
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the `genes.tsv`, `barcodes.tsv` and `matrix.mtx` from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
+>
+>Warning! Insert correct files
+>    ```
+>    {{ page.zenodo_link }}/files/genes.tsv
+>    {{ page.zenodo_link }}/files/barcodes.tsv
+>    {{ page.zenodo_link }}/files/matrix.mtx
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 3. Rename the datasets
+> 4. Inspect the `matrix` file
+{: .hands_on}
+
 
 # Hands-on Sections
 Below are a series of hand-on boxes, one for each tool in your workflow file.
