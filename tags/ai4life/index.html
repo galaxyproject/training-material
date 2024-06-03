@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -274,7 +274,8 @@ nav.navbar a, nav.navbar input {
 
         
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -291,7 +292,7 @@ nav.navbar a, nav.navbar input {
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -316,14 +317,14 @@ nav.navbar a, nav.navbar input {
             
             
               
-              <a href="/training-material/search?query=bioimageio" class="label label-default tutorial_tag" style="--color-primary: #00e1a4; --color-darker: #00c992; --color-dimmed: #00d59b;" title="Click to show all tutorials tagged bioimageio">bioimageio</a>
+              <a href="/training-material/search?query=bioimageio" class="label label-default tutorial_tag" style="--color-primary: #00f4b2; --color-darker: #00d99e; --color-dimmed: #00e7a8;" title="Click to show all tutorials tagged bioimageio">bioimageio</a>
               
-              <a href="/training-material/search?query=image analysis" class="label label-default tutorial_tag" style="--color-primary: #00e387; --color-darker: #00ca78; --color-dimmed: #00d680;" title="Click to show all tutorials tagged image analysis">image analysis</a>
+              <a href="/training-material/search?query=image analysis" class="label label-default tutorial_tag" style="--color-primary: #00f693; --color-darker: #00db82; --color-dimmed: #00e88a;" title="Click to show all tutorials tagged image analysis">image analysis</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -594,14 +595,14 @@ nav.navbar a, nav.navbar input {
             
             
               
-              <a href="/training-material/search?query=bioimageio" class="label label-default tutorial_tag" style="--color-primary: #00e1a4; --color-darker: #00c992; --color-dimmed: #00d59b;" title="Click to show all tutorials tagged bioimageio">bioimageio</a>
+              <a href="/training-material/search?query=bioimageio" class="label label-default tutorial_tag" style="--color-primary: #00f4b2; --color-darker: #00d99e; --color-dimmed: #00e7a8;" title="Click to show all tutorials tagged bioimageio">bioimageio</a>
               
-              <a href="/training-material/search?query=image analysis" class="label label-default tutorial_tag" style="--color-primary: #00e387; --color-darker: #00ca78; --color-dimmed: #00d680;" title="Click to show all tutorials tagged image analysis">image analysis</a>
+              <a href="/training-material/search?query=image analysis" class="label label-default tutorial_tag" style="--color-primary: #00f693; --color-darker: #00db82; --color-dimmed: #00e88a;" title="Click to show all tutorials tagged image analysis">image analysis</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -872,14 +873,14 @@ nav.navbar a, nav.navbar input {
             
             
               
-              <a href="/training-material/search?query=bioimageio" class="label label-default tutorial_tag" style="--color-primary: #00e1a4; --color-darker: #00c992; --color-dimmed: #00d59b;" title="Click to show all tutorials tagged bioimageio">bioimageio</a>
+              <a href="/training-material/search?query=bioimageio" class="label label-default tutorial_tag" style="--color-primary: #00f4b2; --color-darker: #00d99e; --color-dimmed: #00e7a8;" title="Click to show all tutorials tagged bioimageio">bioimageio</a>
               
-              <a href="/training-material/search?query=image analysis" class="label label-default tutorial_tag" style="--color-primary: #00e387; --color-darker: #00ca78; --color-dimmed: #00d680;" title="Click to show all tutorials tagged image analysis">image analysis</a>
+              <a href="/training-material/search?query=image analysis" class="label label-default tutorial_tag" style="--color-primary: #00f693; --color-darker: #00db82; --color-dimmed: #00e88a;" title="Click to show all tutorials tagged image analysis">image analysis</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -1133,6 +1134,22 @@ nav.navbar a, nav.navbar input {
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
     
@@ -1160,10 +1177,15 @@ nav.navbar a, nav.navbar input {
     <a href="/training-material/hall-of-fame/cfusterbarcelo/" class="contributor-badge contributor-cfusterbarcelo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/cfusterbarcelo?s=36" alt="Caterina Fuster-Barceló avatar" width="36" class="avatar" />
     Caterina Fuster-Barceló</a>
 
-    <h2 id="funders">Funders</h2>
-    <p>This material was funded by:</p>
+	<h2 id="funding">Funding</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
     
     
+<div class="d-flex flex-wrap">
+
+</div>
+
+
 
     
 </section>
@@ -1182,7 +1204,7 @@ nav.navbar a, nav.navbar input {
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0">c27eb6b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/87c870c337cd584b8d1b7586fc4924c5bfc28c69">87c870c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

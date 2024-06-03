@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -90,7 +90,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -107,7 +108,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -132,24 +133,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=GIS" class="label label-default tutorial_tag" style="--color-primary: #00daf7; --color-darker: #00c2dc; --color-dimmed: #00cee9;" title="Click to show all tutorials tagged GIS">GIS</a>
+              <a href="/training-material/search?query=GIS" class="label label-default tutorial_tag" style="--color-primary: #75e7ff; --color-darker: #00d2ee; --color-dimmed: #00dffd;" title="Click to show all tutorials tagged GIS">GIS</a>
               
-              <a href="/training-material/search?query=Geographical Information System" class="label label-default tutorial_tag" style="--color-primary: #c6cf00; --color-darker: #b0b800; --color-dimmed: #bbc400;" title="Click to show all tutorials tagged Geographical Information System">Geographical Information System</a>
+              <a href="/training-material/search?query=Geographical Information System" class="label label-default tutorial_tag" style="--color-primary: #d6e100; --color-darker: #bec800; --color-dimmed: #cad400;" title="Click to show all tutorials tagged Geographical Information System">Geographical Information System</a>
               
-              <a href="/training-material/search?query=WFS" class="label label-default tutorial_tag" style="--color-primary: #ffb3af; --color-darker: #ff928b; --color-dimmed: #ffa39e;" title="Click to show all tutorials tagged WFS">WFS</a>
+              <a href="/training-material/search?query=WFS" class="label label-default tutorial_tag" style="--color-primary: #ffcbc8; --color-darker: #ffa9a4; --color-dimmed: #ffbab7;" title="Click to show all tutorials tagged WFS">WFS</a>
               
-              <a href="/training-material/search?query=Spatial data" class="label label-default tutorial_tag" style="--color-primary: #d0bcff; --color-darker: #bfa0ff; --color-dimmed: #c8aeff;" title="Click to show all tutorials tagged Spatial data">Spatial data</a>
+              <a href="/training-material/search?query=Spatial data" class="label label-default tutorial_tag" style="--color-primary: #ded0ff; --color-darker: #cbb3ff; --color-dimmed: #d4c2ff;" title="Click to show all tutorials tagged Spatial data">Spatial data</a>
               
-              <a href="/training-material/search?query=QGIS" class="label label-default tutorial_tag" style="--color-primary: #90db00; --color-darker: #80c300; --color-dimmed: #88cf00;" title="Click to show all tutorials tagged QGIS">QGIS</a>
+              <a href="/training-material/search?query=QGIS" class="label label-default tutorial_tag" style="--color-primary: #9ded00; --color-darker: #8bd300; --color-dimmed: #94e000;" title="Click to show all tutorials tagged QGIS">QGIS</a>
               
-              <a href="/training-material/search?query=Maps" class="label label-default tutorial_tag" style="--color-primary: #ffb0c7; --color-darker: #ff8eb2; --color-dimmed: #ff9fbd;" title="Click to show all tutorials tagged Maps">Maps</a>
+              <a href="/training-material/search?query=Maps" class="label label-default tutorial_tag" style="--color-primary: #ffc9d8; --color-darker: #ffa5c1; --color-dimmed: #ffb8cc;" title="Click to show all tutorials tagged Maps">Maps</a>
               
-              <a href="/training-material/search?query=OGC" class="label label-default tutorial_tag" style="--color-primary: #ffb4ad; --color-darker: #ff9287; --color-dimmed: #ffa39b;" title="Click to show all tutorials tagged OGC">OGC</a>
+              <a href="/training-material/search?query=OGC" class="label label-default tutorial_tag" style="--color-primary: #ffcbc7; --color-darker: #ffa9a1; --color-dimmed: #ffbab4;" title="Click to show all tutorials tagged OGC">OGC</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -363,6 +364,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 

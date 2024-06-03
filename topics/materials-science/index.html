@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -259,7 +259,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -276,7 +277,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -312,7 +313,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -600,6 +601,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
     
@@ -643,16 +660,37 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/patrick-austin/" class="contributor-badge contributor-patrick-austin"><img src="https://avatars.githubusercontent.com/patrick-austin?s=36" alt="Patrick Austin avatar" width="36" class="avatar" />
-    Patrick Austin</a><a href="/training-material/hall-of-fame/elichad/" class="contributor-badge contributor-elichad"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/elichad?s=36" alt="Eli Chadwick avatar" width="36" class="avatar" />
+    <a href="/training-material/hall-of-fame/elichad/" class="contributor-badge contributor-elichad"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/elichad?s=36" alt="Eli Chadwick avatar" width="36" class="avatar" />
     Eli Chadwick</a><a href="/training-material/hall-of-fame/leandro-liborio/" class="contributor-badge contributor-leandro-liborio"><img src="https://avatars.githubusercontent.com/leandro-liborio?s=36" alt="Leandro Liborio avatar" width="36" class="avatar" />
-    Leandro Liborio</a>
+    Leandro Liborio</a><a href="/training-material/hall-of-fame/patrick-austin/" class="contributor-badge contributor-patrick-austin"><img src="https://avatars.githubusercontent.com/patrick-austin?s=36" alt="Patrick Austin avatar" width="36" class="avatar" />
+    Patrick Austin</a>
 
-    <h2 id="funders">Funders</h2>
-    <p>This material was funded by:</p>
+	<h2 id="funding">Funding</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
     
-    <a href="/training-material/hall-of-fame/eurosciencegateway/" class="contributor-badge contributor-eurosciencegateway"><img src="/training-material/assets/images/eurosciencegateway.png" alt="EuroScienceGateway avatar" width="36" class="avatar" />
-    EuroScienceGateway</a>
+    
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/eurosciencegateway/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/eurosciencegateway.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">EuroScienceGateway</div>
+			<div class="description">
+			EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.
+
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
 
     
 </section>
@@ -671,7 +709,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0">c27eb6b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/87c870c337cd584b8d1b7586fc4924c5bfc28c69">87c870c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

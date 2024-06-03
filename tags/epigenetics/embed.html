@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -90,7 +90,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -107,7 +108,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -133,7 +134,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -626,7 +627,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -873,12 +874,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=ChIP-seq" class="label label-default tutorial_tag" style="--color-primary: #ffaedd; --color-darker: #ff89d1; --color-dimmed: #ff9cd7;" title="Click to show all tutorials tagged ChIP-seq">ChIP-seq</a>
+              <a href="/training-material/search?query=ChIP-seq" class="label label-default tutorial_tag" style="--color-primary: #ffc7e7; --color-darker: #ffa2d9; --color-dimmed: #ffb5e0;" title="Click to show all tutorials tagged ChIP-seq">ChIP-seq</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -1270,7 +1271,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -1520,12 +1521,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=ChIP-seq" class="label label-default tutorial_tag" style="--color-primary: #ffaedd; --color-darker: #ff89d1; --color-dimmed: #ff9cd7;" title="Click to show all tutorials tagged ChIP-seq">ChIP-seq</a>
+              <a href="/training-material/search?query=ChIP-seq" class="label label-default tutorial_tag" style="--color-primary: #ffc7e7; --color-darker: #ffa2d9; --color-dimmed: #ffb5e0;" title="Click to show all tutorials tagged ChIP-seq">ChIP-seq</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -1773,7 +1774,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -2165,7 +2166,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -2417,7 +2418,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -2651,6 +2652,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 
@@ -2661,7 +2678,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -2678,7 +2696,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -2703,14 +2721,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffb2bd; --color-darker: #ff90a2; --color-dimmed: #ffa1b0;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffcad1; --color-darker: #ffa7b5; --color-dimmed: #ffb9c3;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=epigenetics" class="label label-default tutorial_tag" style="--color-primary: #94db00; --color-darker: #83c300; --color-dimmed: #8bcf00;" title="Click to show all tutorials tagged epigenetics">epigenetics</a>
+              <a href="/training-material/search?query=epigenetics" class="label label-default tutorial_tag" style="--color-primary: #a0ed00; --color-darker: #8ed300; --color-dimmed: #97e000;" title="Click to show all tutorials tagged epigenetics">epigenetics</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -2940,6 +2958,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 

@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -90,7 +90,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -107,7 +108,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -142,18 +143,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #f7be00; --color-darker: #dca900; --color-dimmed: #e9b400;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffd175; --color-darker: #eeb700; --color-dimmed: #fcc300;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=eukaryote" class="label label-default tutorial_tag" style="--color-primary: #4fe300; --color-darker: #45ca00; --color-dimmed: #4ad700;" title="Click to show all tutorials tagged eukaryote">eukaryote</a>
+              <a href="/training-material/search?query=eukaryote" class="label label-default tutorial_tag" style="--color-primary: #56f600; --color-darker: #4bdb00; --color-dimmed: #51e900;" title="Click to show all tutorials tagged eukaryote">eukaryote</a>
               
-              <a href="/training-material/search?query=maker" class="label label-default tutorial_tag" style="--color-primary: #fface7; --color-darker: #ff86de; --color-dimmed: #ff9ae2;" title="Click to show all tutorials tagged maker">maker</a>
+              <a href="/training-material/search?query=maker" class="label label-default tutorial_tag" style="--color-primary: #ffc6ed; --color-darker: #ffa1e4; --color-dimmed: #ffb4e8;" title="Click to show all tutorials tagged maker">maker</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eeb0ff; --color-darker: #e98dff; --color-dimmed: #ec9fff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f3c9ff; --color-darker: #eda5ff; --color-dimmed: #f0b8ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -410,18 +411,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #f7be00; --color-darker: #dca900; --color-dimmed: #e9b400;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffd175; --color-darker: #eeb700; --color-dimmed: #fcc300;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=eukaryote" class="label label-default tutorial_tag" style="--color-primary: #4fe300; --color-darker: #45ca00; --color-dimmed: #4ad700;" title="Click to show all tutorials tagged eukaryote">eukaryote</a>
+              <a href="/training-material/search?query=eukaryote" class="label label-default tutorial_tag" style="--color-primary: #56f600; --color-darker: #4bdb00; --color-dimmed: #51e900;" title="Click to show all tutorials tagged eukaryote">eukaryote</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eeb0ff; --color-darker: #e98dff; --color-dimmed: #ec9fff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f3c9ff; --color-darker: #eda5ff; --color-dimmed: #f0b8ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search?query=maker" class="label label-default tutorial_tag" style="--color-primary: #fface7; --color-darker: #ff86de; --color-dimmed: #ff9ae2;" title="Click to show all tutorials tagged maker">maker</a>
+              <a href="/training-material/search?query=maker" class="label label-default tutorial_tag" style="--color-primary: #ffc6ed; --color-darker: #ffa1e4; --color-dimmed: #ffb4e8;" title="Click to show all tutorials tagged maker">maker</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -651,6 +652,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -233,7 +233,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:P00018">https://gxy.io/GTN:P00018</a>
     </hgroup>
 
-    <!--SNIPPET--><blockquote class="comment">   <div class="box-title comment-title" id="comment-what-is-a-learning-pathway"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is a Learning Pathway?</div>   <div style="display:inline-block;vertical-align:top;width:10%"> <img src="/training-material/assets/images/learning-pathway.png" alt="A graphic depicting a winding path from a start symbol to a trophy, with tutorials along the way" /> </div>   <div style="display:inline-block; margin-left: 2em; width:70%"> We recommend you follow the tutorials in the order presented on this page. They have been selected to fit together and build up your knowledge step by step. If a lesson has both slides and a tutorial, we recommend you start with the slides, then proceed with the tutorial. </div> </blockquote> <!--END_SNIPPET-->
+    <!--SNIPPET--><blockquote class="comment">   <div class="box-title comment-title" id="comment-what-is-a-learning-pathway"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is a Learning Pathway?</div>   <div style="display:inline-block;vertical-align:top;width:10%"> <img src="/training-material/assets/images/learning-pathway.png" alt="A graphic depicting a winding path from a start symbol to a trophy, with tutorials along the way" class="invert-safe" /> </div>   <div style="display:inline-block; margin-left: 2em; width:70%"> We recommend you follow the tutorials in the order presented on this page. They have been selected to fit together and build up your knowledge step by step. If a lesson has both slides and a tutorial, we recommend you start with the slides, then proceed with the tutorial. </div> </blockquote> <!--END_SNIPPET-->
 
     <p><p>This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy.</p>
 </p>
@@ -254,7 +254,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
 	
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -268,7 +269,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -303,16 +304,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffba43; --color-darker: #e8a400; --color-dimmed: #f6ae00;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcf95; --color-darker: #fbb200; --color-dimmed: #ffc062;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffbb03; --color-darker: #e3a600; --color-dimmed: #f1b000;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffcf8c; --color-darker: #f6b400; --color-dimmed: #ffc14b;" title="Click to show all tutorials tagged bacteria">bacteria</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d4cb00; --color-darker: #bcb500; --color-dimmed: #c8c000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -508,6 +509,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 	
@@ -520,7 +537,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
 	
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -534,7 +552,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -559,16 +577,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffba43; --color-darker: #e8a400; --color-dimmed: #f6ae00;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcf95; --color-darker: #fbb200; --color-dimmed: #ffc062;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffaedb; --color-darker: #ff89ce; --color-dimmed: #ff9cd4;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc7e5; --color-darker: #ffa3d7; --color-dimmed: #ffb6de;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d4cb00; --color-darker: #bcb500; --color-dimmed: #c8c000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -791,22 +809,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #90cdff; --color-darker: #47baff; --color-dimmed: #72c3ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #b6dbff; --color-darker: #7dc6ff; --color-dimmed: #9cd1ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffaedb; --color-darker: #ff89ce; --color-dimmed: #ff9cd4;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc7e5; --color-darker: #ffa3d7; --color-dimmed: #ffb6de;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #b0c6ff; --color-darker: #8dafff; --color-dimmed: #9fbaff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c9d6ff; --color-darker: #a5beff; --color-dimmed: #b7caff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #f7be00; --color-darker: #dca900; --color-dimmed: #e9b400;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffd175; --color-darker: #eeb700; --color-dimmed: #fcc300;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eeb0ff; --color-darker: #e98dff; --color-dimmed: #ec9fff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f3c9ff; --color-darker: #eda5ff; --color-dimmed: #f0b8ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d4cb00; --color-darker: #bcb500; --color-dimmed: #c8c000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -1002,6 +1020,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 	
@@ -1014,7 +1048,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
 	
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -1028,7 +1063,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -1063,20 +1098,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #f7be00; --color-darker: #dca900; --color-dimmed: #e9b400;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffd175; --color-darker: #eeb700; --color-dimmed: #fcc300;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffba43; --color-darker: #e8a400; --color-dimmed: #f6ae00;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcf95; --color-darker: #fbb200; --color-dimmed: #ffc062;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffbb03; --color-darker: #e3a600; --color-dimmed: #f1b000;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffcf8c; --color-darker: #f6b400; --color-dimmed: #ffc14b;" title="Click to show all tutorials tagged bacteria">bacteria</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d4cb00; --color-darker: #bcb500; --color-dimmed: #c8c000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eeb0ff; --color-darker: #e98dff; --color-dimmed: #ec9fff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f3c9ff; --color-darker: #eda5ff; --color-dimmed: #f0b8ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -1272,6 +1307,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 	
@@ -1284,7 +1335,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
 	
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -1298,7 +1350,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -1333,22 +1385,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #f7be00; --color-darker: #dca900; --color-dimmed: #e9b400;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffd175; --color-darker: #eeb700; --color-dimmed: #fcc300;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffba43; --color-darker: #e8a400; --color-dimmed: #f6ae00;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcf95; --color-darker: #fbb200; --color-dimmed: #ffc062;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #b0c6ff; --color-darker: #8dafff; --color-dimmed: #9fbaff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c9d6ff; --color-darker: #a5beff; --color-dimmed: #b7caff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #8ddc00; --color-darker: #7dc400; --color-dimmed: #85d000;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #99ee00; --color-darker: #88d400; --color-dimmed: #90e100;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eeb0ff; --color-darker: #e98dff; --color-dimmed: #ec9fff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f3c9ff; --color-darker: #eda5ff; --color-dimmed: #f0b8ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d4cb00; --color-darker: #bcb500; --color-dimmed: #c8c000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -1544,6 +1596,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 	
@@ -1556,7 +1624,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
 	
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -1570,7 +1639,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -1605,22 +1674,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d4cb00; --color-darker: #bcb500; --color-dimmed: #c8c000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search?query=Nanopore data analysis" class="label label-default tutorial_tag" style="--color-primary: #00ddde; --color-darker: #00c4c5; --color-dimmed: #00d0d1;" title="Click to show all tutorials tagged Nanopore data analysis">Nanopore data analysis</a>
+              <a href="/training-material/search?query=Nanopore data analysis" class="label label-default tutorial_tag" style="--color-primary: #00eff0; --color-darker: #00d5d6; --color-dimmed: #00e2e3;" title="Click to show all tutorials tagged Nanopore data analysis">Nanopore data analysis</a>
               
-              <a href="/training-material/search?query=Pathogens detection" class="label label-default tutorial_tag" style="--color-primary: #9dd900; --color-darker: #8bc100; --color-dimmed: #94cd00;" title="Click to show all tutorials tagged Pathogens detection">Pathogens detection</a>
+              <a href="/training-material/search?query=Pathogens detection" class="label label-default tutorial_tag" style="--color-primary: #abeb00; --color-darker: #97d100; --color-dimmed: #a1de00;" title="Click to show all tutorials tagged Pathogens detection">Pathogens detection</a>
               
-              <a href="/training-material/search?query=Phylogenetic tree" class="label label-default tutorial_tag" style="--color-primary: #00e473; --color-darker: #00cb65; --color-dimmed: #00d76c;" title="Click to show all tutorials tagged Phylogenetic tree">Phylogenetic tree</a>
+              <a href="/training-material/search?query=Phylogenetic tree" class="label label-default tutorial_tag" style="--color-primary: #00f77d; --color-darker: #00dc6e; --color-dimmed: #00e976;" title="Click to show all tutorials tagged Phylogenetic tree">Phylogenetic tree</a>
               
-              <a href="/training-material/search?query=Heatmap" class="label label-default tutorial_tag" style="--color-primary: #ffade2; --color-darker: #ff87d8; --color-dimmed: #ff9bdd;" title="Click to show all tutorials tagged Heatmap">Heatmap</a>
+              <a href="/training-material/search?query=Heatmap" class="label label-default tutorial_tag" style="--color-primary: #ffc7ea; --color-darker: #ffa1de; --color-dimmed: #ffb5e4;" title="Click to show all tutorials tagged Heatmap">Heatmap</a>
               
-              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #fface9; --color-darker: #ff86e2; --color-dimmed: #ff9ae5;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffc6ef; --color-darker: #ffa0e7; --color-dimmed: #ffb4eb;" title="Click to show all tutorials tagged cyoa">cyoa</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -1816,6 +1885,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 	
@@ -1832,11 +1917,32 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     Bérénice Batut</a>
 
 	
-	<h2 id="funders">Funders</h2>
-	<p>This material was funded by:</p>
+	<h2 id="funding">Funding</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
 	
-	<a href="/training-material/hall-of-fame/abromics/" class="contributor-badge contributor-abromics"><img src="/training-material/assets/images/abromics.png" alt="ABRomics avatar" width="36" class="avatar" />
-    ABRomics</a>
+	
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/abromics/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/abromics.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">ABRomics</div>
+			<div class="description">
+			
+
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
 	
 
 </section>
@@ -1855,7 +1961,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0">c27eb6b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/87c870c337cd584b8d1b7586fc4924c5bfc28c69">87c870c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

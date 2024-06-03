@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -237,7 +237,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -254,7 +255,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -279,14 +280,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=FAIR" class="label label-default tutorial_tag" style="--color-primary: #c9beff; --color-darker: #b5a4ff; --color-dimmed: #bfb1ff;" title="Click to show all tutorials tagged FAIR">FAIR</a>
+              <a href="/training-material/search?query=FAIR" class="label label-default tutorial_tag" style="--color-primary: #d9d2ff; --color-darker: #c3b6ff; --color-dimmed: #cec4ff;" title="Click to show all tutorials tagged FAIR">FAIR</a>
               
-              <a href="/training-material/search?query=ENA" class="label label-default tutorial_tag" style="--color-primary: #00ddd6; --color-darker: #00c5bf; --color-dimmed: #00d1ca;" title="Click to show all tutorials tagged ENA">ENA</a>
+              <a href="/training-material/search?query=ENA" class="label label-default tutorial_tag" style="--color-primary: #00f0e8; --color-darker: #00d5cf; --color-dimmed: #00e2dc;" title="Click to show all tutorials tagged ENA">ENA</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -500,6 +501,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
     
@@ -524,17 +541,38 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/smza/" class="contributor-badge contributor-smza"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/smza?s=36" alt="Munazah Andrabi avatar" width="36" class="avatar" />
-    Munazah Andrabi</a><a href="/training-material/hall-of-fame/sonalhenson/" class="contributor-badge contributor-sonalhenson"><img src="https://avatars.githubusercontent.com/sonalhenson?s=36" alt="Sonal Henson avatar" width="36" class="avatar" />
+    <a href="/training-material/hall-of-fame/sonalhenson/" class="contributor-badge contributor-sonalhenson"><img src="https://avatars.githubusercontent.com/sonalhenson?s=36" alt="Sonal Henson avatar" width="36" class="avatar" />
     Sonal Henson</a><a href="/training-material/hall-of-fame/poterlowicz-lab/" class="contributor-badge contributor-poterlowicz-lab"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/poterlowicz-lab?s=36" alt="Krzysztof Poterlowicz avatar" width="36" class="avatar" />
-    Krzysztof Poterlowicz</a><a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
+    Krzysztof Poterlowicz</a><a href="/training-material/hall-of-fame/smza/" class="contributor-badge contributor-smza"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/smza?s=36" alt="Munazah Andrabi avatar" width="36" class="avatar" />
+    Munazah Andrabi</a><a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
     Katarzyna Kamieniecka</a>
 
-    <h2 id="funders">Funders</h2>
-    <p>This material was funded by:</p>
+	<h2 id="funding">Funding</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
     
-    <a href="/training-material/hall-of-fame/elixir-uk-dash/" class="contributor-badge contributor-elixir-uk-dash"><img src="/training-material/shared/images/dash.png" alt="DASH UK avatar" width="36" class="avatar" />
-    DASH UK</a>
+    
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/elixir-uk-dash/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/dash.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">DASH UK</div>
+			<div class="description">
+			This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.
+
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
 
     
 </section>
@@ -553,7 +591,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0">c27eb6b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/87c870c337cd584b8d1b7586fc4924c5bfc28c69">87c870c</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

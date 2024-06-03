@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -90,7 +90,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -107,7 +108,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -142,22 +143,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #72e000; --color-darker: #65c700; --color-dimmed: #6cd300;" title="Click to show all tutorials tagged bulk">bulk</a>
+              <a href="/training-material/search?query=bulk" class="label label-default tutorial_tag" style="--color-primary: #7cf200; --color-darker: #6ed700; --color-dimmed: #75e500;" title="Click to show all tutorials tagged bulk">bulk</a>
               
-              <a href="/training-material/search?query=rna-seq" class="label label-default tutorial_tag" style="--color-primary: #ffb689; --color-darker: #ff972d; --color-dimmed: #ffa767;" title="Click to show all tutorials tagged rna-seq">rna-seq</a>
+              <a href="/training-material/search?query=rna-seq" class="label label-default tutorial_tag" style="--color-primary: #ffcdb2; --color-darker: #ffac74; --color-dimmed: #ffbd96;" title="Click to show all tutorials tagged rna-seq">rna-seq</a>
               
-              <a href="/training-material/search?query=collections" class="label label-default tutorial_tag" style="--color-primary: #ffb2ba; --color-darker: #ff909d; --color-dimmed: #ffa1ac;" title="Click to show all tutorials tagged collections">collections</a>
+              <a href="/training-material/search?query=collections" class="label label-default tutorial_tag" style="--color-primary: #ffcacf; --color-darker: #ffa7b1; --color-dimmed: #ffb9c0;" title="Click to show all tutorials tagged collections">collections</a>
               
-              <a href="/training-material/search?query=drosophila" class="label label-default tutorial_tag" style="--color-primary: #90cdff; --color-darker: #47baff; --color-dimmed: #72c3ff;" title="Click to show all tutorials tagged drosophila">drosophila</a>
+              <a href="/training-material/search?query=drosophila" class="label label-default tutorial_tag" style="--color-primary: #b6dbff; --color-darker: #7dc6ff; --color-dimmed: #9cd1ff;" title="Click to show all tutorials tagged drosophila">drosophila</a>
               
-              <a href="/training-material/search?query=QC" class="label label-default tutorial_tag" style="--color-primary: #ffb3b3; --color-darker: #ff9192; --color-dimmed: #ffa2a3;" title="Click to show all tutorials tagged QC">QC</a>
+              <a href="/training-material/search?query=QC" class="label label-default tutorial_tag" style="--color-primary: #ffcaca; --color-darker: #ffa8a9; --color-dimmed: #ffbaba;" title="Click to show all tutorials tagged QC">QC</a>
               
-              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #fface9; --color-darker: #ff86e2; --color-dimmed: #ff9ae5;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffc6ef; --color-darker: #ffa0e7; --color-dimmed: #ffb4eb;" title="Click to show all tutorials tagged cyoa">cyoa</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -445,6 +446,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 

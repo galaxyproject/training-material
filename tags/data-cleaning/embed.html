@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c27eb6bd2853b6891eaf8cd6a950c620ab04f4d0",
+		release: "galaxy-training-network@87c870c337cd584b8d1b7586fc4924c5bfc28c69",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -90,7 +90,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-<table class="table table-responsive table-striped">
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       
@@ -107,7 +108,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   
   
@@ -132,16 +133,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gbif" class="label label-default tutorial_tag" style="--color-primary: #ffb3b4; --color-darker: #ff9194; --color-dimmed: #ffa2a4;" title="Click to show all tutorials tagged gbif">gbif</a>
+              <a href="/training-material/search?query=gbif" class="label label-default tutorial_tag" style="--color-primary: #ffcacb; --color-darker: #ffa8aa; --color-dimmed: #ffb9bb;" title="Click to show all tutorials tagged gbif">gbif</a>
               
-              <a href="/training-material/search?query=data management" class="label label-default tutorial_tag" style="--color-primary: #fcbc00; --color-darker: #e0a700; --color-dimmed: #eeb200;" title="Click to show all tutorials tagged data management">data management</a>
+              <a href="/training-material/search?query=data management" class="label label-default tutorial_tag" style="--color-primary: #ffd084; --color-darker: #f3b500; --color-dimmed: #ffc133;" title="Click to show all tutorials tagged data management">data management</a>
               
-              <a href="/training-material/search?query=data cleaning" class="label label-default tutorial_tag" style="--color-primary: #00e55b; --color-darker: #00cc50; --color-dimmed: #00d855;" title="Click to show all tutorials tagged data cleaning">data cleaning</a>
+              <a href="/training-material/search?query=data cleaning" class="label label-default tutorial_tag" style="--color-primary: #00f863; --color-darker: #00dd57; --color-dimmed: #00ea5d;" title="Click to show all tutorials tagged data cleaning">data cleaning</a>
               
             
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               
 
@@ -363,6 +364,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </table>
 
 
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
 
 
 
