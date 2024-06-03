@@ -3,10 +3,6 @@ layout: base
 ---
 
 {% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
-{% assign recordings = material.recordings | sort: 'date' | reverse  %}
-
-
-
 
 <section class="tutorial">
     <h1 data-toc-skip>Recordings - {{ material.title }} </h1>
@@ -15,6 +11,8 @@ layout: base
 
     <p><b>Want to add your own recording?</b> We would love to have it to our library! TODO: button linking to instructions </p>
 
+    {% if material.recordings %}
+    {% assign recordings = material.recordings | sort: 'date' | reverse  %}
     {% for recording in recordings %}
     <h2> Tutorial Recording - {{ recording.date | date: "%-d %B %Y"  }} </h2>
     <div class="recording">
@@ -102,4 +100,7 @@ layout: base
 
     {% endfor %}
 
+{% endif %}
 </section>
+
+
