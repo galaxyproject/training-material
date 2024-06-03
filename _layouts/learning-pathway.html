@@ -73,8 +73,8 @@ layout: base
 	{% include _includes/contributor-list.html contributors=editorial_board badge=true %}
 
 	{% if pathway.funding %}
-	<h2 id="funders">Funders</h2>
-	<p>This material was funded by:</p>
+	<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
 	{% assign funders = pathway.funding | sorted %}
 	{% include _includes/funding-statement.md funders=funders %}
 	{% endif %}

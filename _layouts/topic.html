@@ -90,8 +90,8 @@ layout: base
     {% assign contributors_list_sorted = topic_material | identify_contributors: site %}
     {% include _includes/contributor-list.html contributors=contributors_list_sorted badge=true %}
 
-    <h2 id="funders">Funders</h2>
-    <p>This material was funded by:</p>
+	<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
     {% assign funders_list_sorted = topic_material | identify_funders: site %}
     {% include _includes/funding-statement.md funders=funders_list_sorted %}
 
