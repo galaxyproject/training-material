@@ -2,10 +2,11 @@
 layout: tutorial_hands_on
 
 title: "Chloroplast genome assembly"
-zenodo_link: "http://doi.org/10.5281/zenodo.3567224"
+zenodo_link: "https://doi.org/10.5281/zenodo.3567224"
 tags:
   - plants
   - nanopore
+  - jbrowse1
 questions:
   - "How can we assemble a chloroplast genome?"
 objectives:
@@ -89,7 +90,7 @@ We will look at the quality of the nanopore reads.
 > > <solution-title></solution-title>
 > > This will depend on the aim of your analysis, but usually:
 > > * **Sequencing depth** (the number of reads covering each base position; also called "coverage"). Higher depth is usually better, but at very high depths it may be better to subsample the reads, as errors can swamp the assembly graph.
-> > * **Sequencing quality** (the quality score indicates probability of base call being correct). You may trim or filter reads on quality. Phred quality scores are logarithmic: phred quality 10 = 90% chance of base call being correct; phred quality 20 = 99% chance of base call being correct. More detail [here](https://en.wikipedia.org/wiki/Phred_quality_score).
+> > * **Sequencing quality** (the quality score indicates probability of base call being correct). You may trim or filter reads on quality. Phred quality scores are logarithmic: phred quality 10 = 90% chance of base call being correct; phred quality 20 = 99% chance of base call being correct. More detail [on Wikipedia](https://en.wikipedia.org/wiki/Phred_quality_score).
 > > * **Read lengths** (read lengths histogram, and reads lengths vs. quality plots). Your analysis or assembly may need reads of a certain length.
 > {: .solution}
 {: .question}

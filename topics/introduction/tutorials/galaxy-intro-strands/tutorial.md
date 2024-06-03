@@ -16,7 +16,7 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
-subtopic: core
+subtopic: next-steps
 contributors:
   - tnabtaf
   - gallardoalba
@@ -407,15 +407,15 @@ Galaxy excels at answering questions about genomic intervals and different sets 
 
 > <hands-on-title>Genomic Interval Tools</hands-on-title>
 >
-> * The next step is finding overlapping intervals, so type `interval` in the tool search box. There are many results from this search, so you might want to click the *Show sections* button (available on Galaxy servers) to see which sections the tools are organised into.
+> * The next step is finding overlapping intervals, so type `interval` in the tool search box. There are many results from this search, so you might want to click the *Show sections* button to see which sections the tools are organised into.
 > * *Explore* the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.
 {: .hands_on}
 
-Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and particularly **Intersect** have the most promise.  Let's try **Intersect**.
+Although there are the bedtools (section **BED**) and a section **Operate on Genomic Intervals** offering promising tools, the simple **Intersect** tool under **Text Manipulation** appears sufficient.  Let's try **Intersect**.
 
 > <hands-on-title>Genomic Interval Tools</hands-on-title>
 >
-> 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/0.0.1) %} with the following parameters:
+> 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} with the following parameters:
 >     - *"Return"*:  `Overlapping Intervals`.
 >       This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
 >     - {% icon param-files %}*"of"*:  `Genes, forward strand` (the first dataset)

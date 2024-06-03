@@ -21,7 +21,7 @@ end
 def fetch_workflows(server)
   begin
     response = request("#{server}/api/workflows/")
-  rescue
+  rescue StandardError
     puts "ERROR: Failed to fetch workflows from #{server}"
     return []
   end

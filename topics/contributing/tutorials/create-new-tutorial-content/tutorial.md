@@ -349,6 +349,8 @@ Surround your math expression with two `$` signs on each side (like in LaTeX mat
 
    $$ 5 + 5 $$
 
+- Note: if inline mode is not working correctly, you can force it by using the following delimiters instead of dollar signs: `\\( 5 +5 \\)`
+
 Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
 
 
@@ -919,6 +921,27 @@ The alternative is to figure out the ID for the tool you want to use:
 
 ![Finding the tool ID](../../images/tool-id.png)
 
+## Example Histories
+
+If you have example input histories for your tutorial, perhaps for specific servers where trainees will often follow a tutorial but want to skip a slow input step, then you can provide example histories as part of your tutorial.
+
+> <code-in-title>Tutorial Frontmatter</code-in-title>
+> ```yaml
+> answer_histories:
+>   - label: "UseGalaxy.eu"
+>     history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+>   - label: "Older Alevin version"
+>     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+>     date: 2024-01-01
+> input_histories:
+>   - label: "UseGalaxy.eu"
+>     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+> ```
+{: .code-in}
+
+> <code-out-title>Rendered Tutorial</code-out-title>
+> ![a screenshot of the GTN metadata box showing a dropdown for input histories and answer histories. The answer histories features two examples one on UseGalaxy.eu and an older alevin one, each with a date. In the dropdown is also a link to an FAQ titled how to use this](images/example-histories.png)
+{: .code-out}
 
 ## Workflows
 
@@ -1194,6 +1217,25 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 {: .code-2col}
 
 This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
+
+> <tip-title>Multiple, Disconnected CYOAs</tip-title>
+> If you wish to have multiple CYOAs in a single tutorial, you are free to do that! However you must:
+>
+> 1. Ensure that all options are disjoint, there should not be any shared terms! (I.e if the both CYOAs need to use "STAR", please find a different way to phrase it, or even use "STAR ", it just needs to be different.)
+> 2. Provide a disambiguation term for them, passed as a parameter to all, or all but one, includes.
+>
+> This disambiguation term will affect the URL parameter, which will become `?gtn-cyoa{term}={value}`
+>
+> E.g.:
+>
+> ```
+> {% raw %}
+> {% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
+> {% include _includes/cyoa-choices.html option1="Yes" option2="No" text="Do the thing?" disambiguation="english" %}
+> {% endraw %}
+> ```
+{: .tip}
+
 
 ### URL Parameter
 

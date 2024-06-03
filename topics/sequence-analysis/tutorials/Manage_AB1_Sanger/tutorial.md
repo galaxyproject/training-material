@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Clean and manage Sanger sequences from raw files to aligned consensus'
-zenodo_link: https://zenodo.org/records/7104640/files/AOPEP_and_CHD8_sequences_20220907.zip?download=1
+zenodo_link: https://zenodo.org/records/7104640
 questions:
 - How to clean Sanger sequencing files?
 objectives:
@@ -80,7 +80,7 @@ Authors of {% cite Garavaglia2022 %} have shared openly their raw AB1 files on Z
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) :
 >
 >    ```
->    https://zenodo.org/records/7104640/files/AOPEP_and_CHD8_sequences_20220907.zip?download=1
+>    https://zenodo.org/records/7104640/files/AOPEP_and_CHD8_sequences_20220907.zip
 >    ```
 >    
 >    Change **Type (set all):** from "Auto-detect" to `zip` and click **Start**

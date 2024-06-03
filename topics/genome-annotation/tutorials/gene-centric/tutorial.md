@@ -35,6 +35,11 @@ requirements:
 abbreviations:
   ORF: Open Reading Frame
 priority: 2
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
+- topic_0084 # Phylogeny
 ---
 
 Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are interested in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...

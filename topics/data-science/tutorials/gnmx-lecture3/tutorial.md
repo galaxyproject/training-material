@@ -17,6 +17,8 @@ contributions:
   authorship:
   - nekrut
 
+priority: 3
+
 subtopic: gnmx
 draft: true
 

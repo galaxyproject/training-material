@@ -118,6 +118,8 @@ You can also pull the data from publicly available [Single Cell Expression Atlas
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
+
 # Filtering
 
 You have generated an annotated AnnData object from your raw scRNA-seq fastq files. However, you have only completed a 'rough' filter of your dataset - there will still be a number of 'cells' that are actually just background from empty droplets or simply low-quality. There will also be genes that could be sequencing artifacts or that appear with such low frequency that statistical tools will fail to analyse them. This background garbage of both cells and genes not only makes it harder to distinguish real biological information from the noise, but also makes it computationally heavy to analyse. These spurious reads take a lot of computational power to analyse! First on our agenda is to filter this matrix to give us cleaner data to extract meaningful insight from, and to allow faster analysis.

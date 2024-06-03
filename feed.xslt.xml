@@ -33,7 +33,11 @@
   </xsl:template>
 
   <xsl:template match="atom:feed">
-    <h1>Galaxy Training Network Feed Preview</h1>
+    <h1><xsl:value-of select="atom:title"/> (Feed Preview)</h1>
+    <xsl:if test="atom:subtitle">
+      <p><strong><xsl:value-of select="atom:subtitle"/></strong></p>
+    </xsl:if>
+
     <p>This RSS feed provides the latest posts from the Galaxy Training Network!
 
     <a class="head_link" target="_blank">
@@ -48,9 +52,9 @@
     <h2>What is an RSS feed?</h2>
     <p>An RSS feed is a data format that contains the latest content from a website, blog, or podcast. You can use feeds to <strong>subscribe</strong> to websites and get the <strong>latest content in one place</strong>.</p>
     <ul>
-    	<li><strong>Feeds put you in control.</strong> Unlike social media apps, there is no algorithm deciding what you see or read. You always get the latest content from the creators you care about.</li>
-    	<li><strong>Feed are private by design.</strong> No one owns web feeds, so no one is harvesting your personal information and profiting by selling it to advertisers.</li>
-    	<li><strong>Feeds are spam-proof.</strong> Had enough? Easy, just unsubscribe from the feed.</li>
+        <li><strong>Feeds put you in control.</strong> Unlike social media apps, there is no algorithm deciding what you see or read. You always get the latest content from the creators you care about.</li>
+        <li><strong>Feed are private by design.</strong> No one owns web feeds, so no one is harvesting your personal information and profiting by selling it to advertisers.</li>
+        <li><strong>Feeds are spam-proof.</strong> Had enough? Easy, just unsubscribe from the feed.</li>
     </ul>
     <p>All you need to do to get started is to add the URL (web address) for this feed to a special app called a newsreader. Visit <a href="https://aboutfeeds.com/">About Feeds</a> to get started with newsreaders and subscribing. It’s free. </p>
   </xsl:template>
@@ -65,12 +69,28 @@
           <xsl:value-of select="atom:title"/>
         </a>
       </h3>
-      <p class="authors"><xsl:value-of select="atom:author" /></p>
+      <p class="authors">
+         <xsl:for-each select="atom:author">
+           <a href="{atom:uri}">
+             <xsl:value-of select="atom:name" />
+           </a>
+           <xsl:if test="position() != last()">
+             <xsl:text>, </xsl:text>
+           </xsl:if>
+         </xsl:for-each>
+      </p>
       <p>
         <xsl:value-of select="atom:summary"  disable-output-escaping="yes" />
       </p>
       <small>
-        Published: <xsl:value-of select="atom:updated" />
+        Published: <xsl:value-of select="atom:updated" /> <br/>
+        Tags:
+        <xsl:for-each select="atom:category">
+          <xsl:value-of select="@term" />
+          <xsl:if test="position() != last()">
+            <xsl:text>, </xsl:text>
+          </xsl:if>
+        </xsl:for-each>
       </small>
     </div>
   </xsl:template>

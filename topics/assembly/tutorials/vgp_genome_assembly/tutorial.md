@@ -120,22 +120,22 @@ The {VGP} assembly pipeline has a modular organization, consisting of ten workfl
 |  Input data | Assembly quality  | Analysis trajectory <br>([Fig. 2)](#figure-2)|
 |------|---------------|-----|
 | HiFi | The minimum requirement | A |
-| HiFi + HiC| Better continuity | B |
-| HiFi + BioNano | Better continuity | C |
-| HiFi + Hi-C + BioNano | Even better continuity | D |
-| HiFi + parental data| Better haplotype resolution | E |
-| HiFi + parental data + Hi-C| Better haplotype resolution and improved continuity | F |
-| HiFi + parental + BioNano | Better haplotype resolution and improved continuity | G |
-| HiFi + parental data + Hi-C + BioNano | Better haplotype resolution and ultimate continuity | H |
+| HiFi + HiC | Better haplotype resolution (less haplotype switches) | B |
+| HiFi + BioNano | Better contiguity | C |
+| HiFi + Hi-C + BioNano | Even better contiguity | D |
+| HiFi + parental data | Properly phased | E |
+| HiFi + parental data + Hi-C | Better haplotype resolution | F |
+| HiFi + parental + BioNano | Properly phased with improved contiguity | G |
+| HiFi + parental data + Hi-C + BioNano | Properly phased with even more improved contiguity | H |
 
-If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high-coverage Illumina data derived from the parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
+In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** *HiFi* and *Hi-C* are derived from the individual whose genome is being assembled. (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage Illumina data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. 
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 <br>
-The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using *k*-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
+The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate. **This is useful for getting an idea of the genome that lies within your reads, and is also useful for necessary for parameterizing downstream workflows.** The generation of *k*-mer counts can be done from HiFi data only (Workflow 1), or include data from parental reads for trio-based phasing (Workflow 2), if one wants to generate *k*-mer spectra for the individual's parents, as well. The second stage is contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases contiguity and the quality of the final assembly. The purging stage is generally unnecessary for trio data, as haplotype resolution is attained using set operations done on parental *k*-mers. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7, with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional)) and Hi-C (Workflow 8, with [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms). A final stage of decontamination (Workflow 9) removes non-target sequences (e.g., contamination as well as mitochondrial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
 
 > <comment-title>A note on data quality</comment-title>
-> We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
+> For diploids, we suggest at least 30✕ PacBio HiFi coverage & around 60✕ Hi-C coverage, and up to 60✕ HiFi coverage to accurately assemble highly repetitive regions.
 {: .comment}
 This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contiging or solo w/HiC contiging.
 
@@ -171,11 +171,11 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 
 > <hands-on-title><b>Uploading <tt>FASTA</tt> datasets from Zenodo</b></hands-on-title>
 >
->**Step 1**: Create a new history for this tutorial
+> 1. Create a new history for this tutorial
 >
-> {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
->**Step 2**: Copy the following URLs into the clipboard.
+> 2. Copy the following URLs into the clipboard.
 >    - you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
@@ -184,7 +184,7 @@ The following two steps demonstrate how to upload three PacBio {HiFi} datasets i
 >    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
 >    ```
 >
->**Step 3**: Upload datasets into Galaxy.
+> 3. Upload datasets into Galaxy.
 >    - set the datatype to `fasta`
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
@@ -203,18 +203,18 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 > <hands-on-title><b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></hands-on-title>
 >
->**Step 1**: Copy the following URLs into the clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
+> 1. Copy the following URLs into the clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
 >    https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
 >    https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 >    ```
 >
->**Step 2**: Upload datasets into Galaxy and set the datatype to `fastqsanger.gz`
+> 2. Upload datasets into Galaxy and set the datatype to `fastqsanger.gz`
 >
-> {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
 >
-> {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
+>    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
 {: .hands_on}
 
@@ -324,6 +324,10 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 >
 {: .comment}
 
+In order to identify some key characteristics of the genome, we do genome profile analysis. To do this, we start by generating a histogram of the *k*-mer distribution in the raw reads (the *k*-mer spectrum). Then, GenomeScope creates a model fitting the spectrum that allows for estimation of genome characteristics. We work in parallel on each set of raw reads, creating a database of each file's *k*-mer counts, and then merge the databases of counts in order to build the histogram.
+
+![Workflow of Kmer counting parallelization, described in the figure caption.](../../images/vgp_assembly/meryl_collections.png "K-mer counting is first done on the collection of FASTA files. Because these data are stored in a collection, a separate `count` job is launched for each FASTA file, thus parallelizing our work. After that, the collection of count datasets is merged into one dataset, which we can use to generate the histogram input needed for GenomeScope.")
+
 > <hands-on-title>Generate <i>k</i>-mers count distribution</hands-on-title>
 >
 >**Step 1**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
@@ -385,13 +389,8 @@ Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters 
 
 ![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 25✕ corresponds to the heterozygous peak. The second peak at coverage 50✕, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes information about the inferred total genome length (len), genome unique length percent ('uniq'), overall heterozygosity rate ('ab'), mean *k*-mer coverage for heterozygous bases ('kcov'), read error rate ('err'), and average rate of read duplications ('dup'). It also reports the user-given parameters of *k*-mer size ('k') and ploidy ('p')."){:width="65%"}
 
-This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%.
+This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%. Some of these parameters can be used later on to parameterize running `purge_dups`. This is covered in the [**solo** contiging section](#solo_hic_switch) section of the tutorial. 
 
-> <comment-title>Are you expecting to purge your assembly?</comment-title>
-> This tutorial covers purging using the program **purge_dups**. purge_dups has some default options and can try to detect coverage-based cutoffs automatically, but the VGP pipeline prefers to define these cutoffs using parameters derived from the GenomeScope2 output.
->
-> _If you expect you need to purge your genome, please see the [**solo** contiging section](#solo_hic_switch) of the tutorial for details on parsing the GenomeScope2 output for purging cutoffs._
-{: .comment}
 
 # Assembly with **hifiasm**
 
@@ -918,19 +917,13 @@ Now that we have looked at our primary assembly with multiple {QC} metrics, we k
 
 Before proceeding to purging, we need to carry out some text manipulation operations on the output generated by GenomeScope2 to make it compatible with downstream tools. The goal is to extract some parameters which at a later stage will be used by **purge_dups**.
 
-### Parsing **purge_dups** cutoffs from **GenomeScope2** output
+### Getting **purge_dups** cutoffs from **GenomeScope2** output
 
 The first relevant parameter is the `estimated genome size`.
 
 > <hands-on-title>Get estimated genome size</hands-on-title>
 >
->**Step 1**: Open {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %}
-><br>
->**Step 2**: Scroll down to find *"+ Insert Find and Replace"* button and click it.
-><br>
->**Step 3**: Scroll down again to find *"+ Insert Find and Replace"* button and click it again. After this you should have *"Find and Replace"* panel repeated three times: *"1: Find and Replace"*, *"2: Find and Replace"*, and *"3: Find and Replace"*. 
-><br>
->**Step 4**: In {% icon param-file %} *"File to process"*: Select `GenomeScope summary` output (generated during *k*-mer profiling [step](#genome-profiling-with-genomescope2)). The input file should have content that looks like this (it may not be exactly like this):
+>**Step 1**: Look at the `GenomeScope summary` output (generated during *k*-mer profiling [step](#genome-profiling-with-genomescope2)). The file should have content that looks like this (it may not be exactly like this):
 > ```
 > GenomeScope version 2.0
 > input file = ....
@@ -948,23 +941,22 @@ The first relevant parameter is the `estimated genome size`.
 > Model Fit                     92.5159%          96.5191%          
 > Read Error Rate               0.000943206%      0.000943206%   
 >``` 
->
->**Step 5**: In the first Find and Replace panel *"1: Find and Replace"* set the following parameters:  
-> 1. *"Find pattern"*: `^(?!Genome Haploid Length).*\n`
-> 2. *"Find-Pattern is a regular expression"*: Toggle to `Yes`
->
 ><br>
->**Step 6**: In the second Find and Replace panel *"2: Find and Replace"* set the following parameters:  
-> 1. *"Find pattern"*: `Genome Haploid Length\s+(\d{1,3}(?:,\d{3})*\s+bp)\s+(\d{1,3}(?:,\d{3})*)\s+bp`
-> 2. *"Replace with"*: `$2`
-> 3. *"Find-Pattern is a regular expression"*: Toggle to `Yes`
+>**Step 2**: Copy the number value for the maximum Genome Haploid Length to your clipboard (CTRL + C on Windows; CMD + C on MacOS).
 >
-><br>
->**Step 7**: In the third Find and Replace panel *"3: Find and Replace"* set the following parameters:  
->*"Find pattern"*: `,` (Yes, just a comma)
+>**Step 3**: Click on "Upload Data" in the toolbox on the left.
 >
-><br>
->**Step 8**: Rename the output as `Estimated genome size`.
+>**Step 4**: Click on "Paste/Fetch data".
+>
+>**Step 5**: Change `New File` to `Estimated genome size`.
+>
+>**Step 6**: Paste the maximum Genome Haploid Length into the text box.
+>
+>**Step 7**: Remove the commas from the number! We only want integers.
+>
+>**Step 8**: Click "Start".
+>
+> ![Image showing where to click to upload data as pasted data.](../../images/vgp_assembly/paste_data_to_upload.png "Use the 'paste data' dialog to upload a file with the estimated genome size.")
 >
 > > <question-title></question-title>
 > >
@@ -1045,9 +1037,13 @@ Now let's parse the `transition between haploid & diploid` and `upper bound for 
 
 An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in downstream analysis, such as scaffolding, gene annotation and read mapping in general ({% cite Small2007 %}, {% cite Guan2019 %}, {% cite Roach2018 %}). In order to solve this problem, we are going to use purge_dups; this tool will allow us to identify and reassign allelic contigs.
 
-This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8).
+This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8). This is meant to try to resolve the {false duplications} depicted in **Figure 1**. 
 
 ![Post-processing with purge_dups](../../images/vgp_assembly/purge_dupspipeline.png "Purge_dups pipeline. Adapted from github.com/dfguan/purge_dups. Purge_dups is integrated in a multi-step pipeline consisting in three main substages. Red indicates the steps which require to use Minimap2.")
+
+Purging may be used in the VGP pipeline when there are suspicions of false duplications (Figure 1). In such cases, we start by purging the **primary assembly**, resulting in a clean (purged) primary assembly and a set of contigs that were *removed* from those contigs. These removed contigs will often contain haplotigs representing alternate alleles. We would like to keep that in the alternate assembly, so the next step is adding (concatenating) this file to the original alternate assembly. To make sure we don't introduce redundancies in the alternate assembly that way, we then purge that alternate assembly, which will also remove any junk or overlaps.
+
+![Purge_dups workflow in VGP pipeline](../../images/vgp_assembly/purge_dups.png "Purge_dups pipeline as implemented in the VGP pipeline. This consists of first purging the primary contigs, then adding the removed haplotigs to the alternate contigs, and then purging that to get the final alternate assembly.")
 
 ### Read-depth analysis
 
@@ -1303,7 +1299,7 @@ At this point, we have a set of contigs, which may or may not be fully phased, d
 
 > <comment-title>What assembly am I scaffolding??</comment-title>
 >
->  For the purposes of this tutorial, the scaffolding hands-on exercises will be <b>referring to a Hap1 assembly</b> produced with Hi-C mode of hifiasm. If you have hap1 contigs or hap2 contigs, then you can also follow along just using Primary purged contigs or Alternate purged contigs. <b>Wherever the tutorial refers to primary contigs, just replace it with whichever haplotype you are scaffolding.</b>
+>  For the purposes of this tutorial, the scaffolding hands-on exercises will be <b>referring to a Hap1 assembly</b> produced with the Hi-C mode of hifiasm. You can try the tutorial on hap2, if you want. And if you have a pseudohaplotype assembly, then you can also follow along with your purged (if necessary) primary contigs. (NB: The alternate assembly *is not* scaffolded, as it is an incomplete assembly.) <b>Either way, wherever the tutorial refers to hap1 contigs, just replace that with whichever haplotype you are scaffolding.</b>
 >
 {: .comment}
 
@@ -1338,15 +1334,14 @@ Before we begin, we need to upload BioNano data:
 >**Step 1**: Copy the following URLs into clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
->    https://zenodo.org/records/5887339/files/bionano.cmap
+>https://zenodo.org/records/5887339/files/bionano.cmap
 >    ```
 >
 >**Step 2**: Upload datasets into Galaxy
 >    - set the datatype to `cmap`
 >
->The box below explains how to upload data if you forgot. Just make sure you set dataset type to `cmap`.
 >
-> {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
+> {% snippet faqs/galaxy/datasets_import_via_link.md format="cmap" %}
 >
 {: .hands_on}
 

@@ -33,7 +33,7 @@ contributions:
     - kkamieniecka
     - poterlowicz-lab
   funding:
-      - ELIXIR-UK-DaSH
+    - elixir-uk-dash
 subtopic: fair-data
 
 requirements:
@@ -287,7 +287,7 @@ Start with the details of the equipment for the Instrument Attributes. If this i
 >   </tr>
 >   <tr>
 >     <th>Objective</th>
->     <td>Cos-7 cells cultured in DMEM medium, and then plated on #1 coverslips and imaged live in L-15 medium</td>
+>     <td>20x</td>
 >   </tr>
 >   <tr>
 >     <th>Excitation Wavelength</th>

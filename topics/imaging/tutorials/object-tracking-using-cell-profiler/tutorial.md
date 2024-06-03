@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Object tracking using CellProfiler
-zenodo_link: http://doi.org/10.5281/zenodo.4567084
+zenodo_link: https://doi.org/10.5281/zenodo.4567084
 requirements:
   -
     type: "internal"

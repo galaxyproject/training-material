@@ -25,7 +25,8 @@ key_points:
   - "View the output files by clicking on the eye icon."
   - "View all your histories and move files between them. Switch to a different history."
   - "Log out of your Galaxy server. When you log back in (to the same server), your histories will all be there."
-subtopic: core
+subtopic: first
+priority: 2
 translations:
   - es
 contributions:
@@ -180,6 +181,8 @@ Let's look at the quality of the reads in this file.
 {: .hands_on}
 
 This tool will run and two new output datasets will appear at the top of your history panel.
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
 
 ## View results
 

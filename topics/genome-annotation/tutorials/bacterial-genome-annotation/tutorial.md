@@ -16,18 +16,26 @@ key_points:
 - Bakta is a powerful tool to annotate a bacterial genome
 - Annotation can be easily visualized to understand the genomic context and help making sense of the annotations
 tags:
+- gmod
 - illumina
 - bacteria
 - microgalaxy
+- jbrowse1
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
+- topic_3673 # Whole genome sequencing
+- topic_0085 # Functional genomics
+- topic_0798 # Mobile genetic elements
 level: Introductory
-
 contributions:
   authorship:
   - bebatut
   funding:
   - abromics
-
 follow_up_training:
 - type: "internal"
   topic_name: genome-annotation
@@ -42,7 +50,6 @@ follow_up_training:
   topic_name: galaxy-interface
   tutorials:
   - history-to-workflow
-
 ---
 
 After sequencing and assembly, a genome can be annotated. It is an essential step to describe the genome. 
@@ -563,11 +570,10 @@ If it takes too long to build the JBrowse instance, you can view an embedded one
 
 {% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" loc="contig00019:1..30347" tracks="DNA,7e37ab7a5f0a1610de9d213b6a714666_0,dd555b269a8894688c3c7551d0d6a868_0,e1c36f2c4382e60836c6c4b4d8026fa5_0" %}
 
-> <comment></comment>
->
+> <comment-title></comment-title>
 > 1. It is ok to have the message stating `Error reading from name store.`.
 > 2. The feature name search will not work.
-> {: .comment}
+{: .comment}
 
 > <question-title></question-title>
 >

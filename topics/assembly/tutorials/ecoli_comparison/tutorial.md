@@ -10,8 +10,14 @@ requirements:
     tutorials:
       - unicycler-assembly
 tags:
+  - gmod
   - prokaryote
   - microgalaxy
+  - jbrowse1
+edam_ontology:
+  - topic_0196 # Sequence Assembly
+  - topic_0622 # Genomics
+  - topic_3301 # Microbiology
 questions:
   - "I just assembled a genome. How does it compare with already sequenced genomes?"
   - "How do I find rearranged, inserted, or deleted regions?"

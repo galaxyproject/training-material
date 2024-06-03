@@ -84,7 +84,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -88,6 +88,9 @@ galaxy_config:
+>    @@ -91,6 +91,9 @@ galaxy_config:
 >         # Tool Dependencies
 >         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >         container_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"

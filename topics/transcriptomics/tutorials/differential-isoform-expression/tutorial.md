@@ -956,8 +956,8 @@ As result, we will have two new FASTA files, one of them corresponding to long n
 > 1. {% tool [CPAT](toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Query nucletide sequences"*: `Nucleotide sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >    - {% icon param-file %} *"Reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
->    - {% icon param-file %} *"Coding sequences file"*: `lncRNA.fasta`
->    - {% icon param-file %} *"Non coding sequeces file"*: `coding.fasta`
+>    - {% icon param-file %} *"Coding sequences file"*: `coding.fasta`
+>    - {% icon param-file %} *"Non coding sequeces file"*: `lncRNA.fasta`
 >
 {: .hands_on}
 

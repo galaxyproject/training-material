@@ -1,7 +1,7 @@
 <div markdown="0">
 {% if include.page.contributors %}
 	<div class="contributors-line">
-		{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=include.page.contributors badge=true newcontributors=include.newcontributors %}
+		{% unless include.authorsonly %}{{ locale['authors'] | default: "Authors" }}: {% endunless %}{% include _includes/contributor-list.html contributors=include.page.contributors badge=true newcontributors=include.newcontributors %}
 	</div>
 {% elsif include.page.contributions %}
 	<div class="contributors-line">

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Regional GAM
-zenodo_link: "https://zenodo.org/record/1324204#.W2BmRn7fNE4"
+zenodo_link: "https://zenodo.org/record/1324204"
 edam_ontology: ["topic_0610"]
 questions:
     - "What are abundance and trends of a butterfly species?"
@@ -178,9 +178,9 @@ As the dataset is quite big and may contain heterogeneous information, we need t
 >
 > To test these steps, you can use the following dataset:
 >
->   ```
->   https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
->   ```
+> ```
+> https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
+> ```
 >
 > > <question-title></question-title>
 > >

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome Assembly of a bacterial genome (MRSA) sequenced using Illumina MiSeq Data
-zenodo_link: 'https://zenodo.org/record/4534098'
+zenodo_link: 'https://zenodo.org/record/10669812'
 questions:
 - How to check the quality of the MiSeq data?
 - How to perform an assembly of a bacterial genome with MiSeq data?
@@ -22,7 +22,12 @@ tags:
 - illumina
 - assembly
 - microgalaxy
-
+edam_ontology:
+- topic_0196 # Sequence Assembly
+- topic_3673 # Whole genome sequencing
+- topic_3305 # Public health and epidemiology
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
 contributions:
   authorship:
   - bazante1
