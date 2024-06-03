@@ -395,7 +395,7 @@ This is an important step to set up our data for further dimensionality reductio
 > - *"Vars to regress"*: `nCount_RNA`
 > - *"Statistical model"*: `Linear model`
 > 
-> **Rename** {% icon galaxy-pencil %} output `Preprocessed Seurat Object`
+> **Rename** {% icon galaxy-pencil %} output `Scaled, Preprocessed Seurat Object`
 {: .hands_on}
 
 You now have a preprocessed Seurat object! 
@@ -424,9 +424,11 @@ We can calculate the first handful of principal components in our data to drasti
 > <hands-on-title>Run PCA </hands-on-title>
 >
 > Run{% tool [Seurat RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_pca/seurat_run_pca/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat RunPCA** {% icon tool%})
+> - *"RDS file"*: `Scaled, Preprocessed Seurat Object` (output of **Seurat ScaleData** {% icon tool%})
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 > - *"Genes to scale"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
+> 
+> **Rename** {% icon galaxy-pencil %} RDS output `PCA Processed Seurat Object`
 {: .hands_on}
 
 This tool will output you with four new datasets into your history: 
@@ -459,10 +461,12 @@ Let's now use the 15 PC threshold we chose from the Elbowplot and apply it to fi
 > <hands-on-title>Find Neighbors </hands-on-title>
 >
 > Run{% tool [Seurat FindNeighbours](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_neighbours/seurat_find_neighbours/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat RunPCA** {% icon tool %})
+> - *"RDS file"*: `PCA Processed Seurat Object` (output of **Seurat RunPCA** {% icon tool %})
 > - *"Reduction"*: `pca`
 > - *"Dimensions"*: `1,2,3,4,5,6,7,8,9,10,11,12,13,14,15`
 > - *"Assay"*: `RNA`
+> 
+> **Rename** {% icon galaxy-pencil %} output `Preprocessed Seurat Object with Neighbors`
 {: .hands_on}
 
 Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another: we can identify and label clusters: 
@@ -470,9 +474,11 @@ Now we can use the neighborhood graph to identify clusters of cells whose transc
 > <hands-on-title>Find Clusters </hands-on-title>
 >
 > Run{% tool [Seurat FindClusters](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat FindNeighbors** {% icon tool %})
+> - *"RDS file"*: `Preprocessed Seurat Object with Neighbors` (output of **Seurat FindNeighbors** {% icon tool %})
 > - In *"Advanced Options "*
 >   - *"Resolution"*: `0.5`
+> 
+> **Rename** {% icon galaxy-pencil %} output `Preprocessed Seurat Object with Clusters`
 {: .hands_on}
 
 This tool will output two new datasets: as usual, a new Seurat object which includes a metadata column denoting which cluster each cell was assigned to, and a csv file of the same information. 
@@ -499,7 +505,7 @@ Now that we have made note within our object of which cells cluster together, we
 > <hands-on-title>Run UMAP </hands-on-title>
 >
 > Run{% tool [Seurat UMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat FIndClusters** {% icon tool %})
+> - *"RDS file"*: `Preprocessed Seurat Object with Clusters` (output of **Seurat FindClusters** {% icon tool %})
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 > - *"Dims"*: `1:15`
 > 
