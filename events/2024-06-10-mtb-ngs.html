@@ -1,0 +1,3776 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Mycobacterium tuberculosis complex NGS made easy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@e1bf173e46113071a002da66b851495217e5efbf",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ef2bff8a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Mycobacterium tuberculosis complex NGS made easy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-06-03 08:58:10 +0000"><meta name="description" content="These series of webinars and tutorials aim at improving basic and applied knowledge associated with next-generation sequencing (NGS) technologies and their applications in the field of Tuberculosis (TB). ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Mycobacterium tuberculosis complex NGS made easy">
+        <meta property="og:description" content="These series of webinars and tutorials aim at improving basic and applied knowledge associated with next-generation sequencing (NGS) technologies and their applications in the field of Tuberculosis (TB). ">
+        
+	<meta property="og:image" content="/training-material//events/images/TBCAPT_NGS_Training_banner.jpg"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/events/index.html" title="Events">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> GTN Events
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/events/2024-06-10-mtb-ngs.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/events/2024-06-10-mtb-ngs.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html",
+  "name": "Mycobacterium tuberculosis complex NGS made easy",
+  "keywords": [
+
+  ],
+  "description": "These series of webinars and tutorials aim at improving basic and\napplied knowledge associated with next-generation sequencing (NGS)\ntechnologies and their applications in the field of Tuberculosis (TB).\n",
+  "about": [
+    "topic_0622",
+    "topic_3301",
+    "topic_0196",
+    "topic_0199",
+    "topic_3305",
+    "topic_3324",
+    "topic_2885",
+    "topic_0084"
+  ],
+  "audience": "Open for all, but target audience is clinicians and researchers using MTBC sequencing data.",
+  "courseMode": "online",
+  "startDate": "2024-06-10",
+  "endDate": "2024-06-14",
+  "organizer": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dbrites/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dbrites/",
+      "name": "Daniela Brites",
+      "image": "https://avatars.githubusercontent.com/dbrites",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "teaches": [
+    "Learn how to upload a file",
+    "Learn how to use a tool",
+    "Learn how to view results",
+    "Learn how to view histories",
+    "Learn how to extract and run a workflow",
+    "Learn how to share a history",
+    "Familiarize yourself with the basics of Galaxy",
+    "Learn how to obtain data from external sources",
+    "Learn how to run tools",
+    "Learn how histories work",
+    "Learn how to create a workflow",
+    "Learn how to share your work",
+    "How should we filter those variants",
+    "How can we predict drug resistance from those variants",
+    "How do we annotate those variants",
+    "Create a SNP alignment",
+    "Calculate pairwise SNP distances between MTB samples",
+    "Identify transmission clusters based on SNP distances",
+    "Study the emergence and spread of drug resistance based on transmission analysis.",
+    "Understand the basic concepts behind phylogenetic trees, as applied to *Mycobacterium tuberculosis*",
+    "Be able to read and interrogate a phylogeny encountered in the literature"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "funder": [
+
+  ],
+  "funding": [
+
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": "There were unusually high rates of TB cases in your country this year. To characterize the underlying\nbacterial strains driving the epidemic, isolates have been sent for whole-genome sequencing.  Doctors and public\nhealth authorities request information in order to take decisions. In this course it will be demonstrated how\nyou would make use of NGS to answer several questions relevant for patient and public health system management\nsuch as:\n  - Are there cases of drug resistant bacteria?\n  - Is there transmission of drug resistance?\n  - Is there evidence of de novo emergence of resistance?\n  - Are there multiple infections per patient?\n  - Do we have on-going transmission?\n\nWe hope that at the end of the different training sessions you can answer this question on your own and can apply what you have learnt to your own data!\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": "The 20 strains isolated in your country have been sequenced with\nIllumina technology to obtain whole-genome sequences. In this part\nof the workshop you will learn how to analyse those sequences.\n\nIn a typical bioinformatic pipeline you would store your sequences\nin a computer server where all necessary software would be\ninstalled. This would be a server running the operating system\nLINUX, which is the most efficient way to run bioinformatics\npipelines (more on this on Day 4). You will be running your\nanalysis in a LINUX server from Galaxy, but instead of writing\ndirectly commands to execute operations in the server, you will be\nexecuting operations through a Galaxy graphical interface. This\nallows you to have access to a LINUX server and to run workflows\nwithout knowing LINUX. Importantly, for training purposes it also\nallows you to dedicate more attention in trying to understand what\nis being done in each of the steps without having to understand the\nprograming behind. This being said, working directly on a LINUX\ncluster provides you always more flexibility, but if you don’t have\naccess to one, Galaxy is a very good alternative for data analysis.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": "You will need to understand how to use Galaxy to run all the hands-\non tutorials and therefore is highly recommended that you follow\nthe next webinar and hands-on on Galaxy. The good thing about this\nis that once you know how it works, you can use it to run your own\nanalysis with your own data.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": "Let us imagine that you have received the sequences of the 20 strains, the first step is to assess the quality of sequencing. Once we are sure that the sequencing worked well, we typically compare our sequencing results to a reference genome (re-sequencing approach) by using a bioinformatics procedure usually called mapping. After, we will identify the genomic variants in our sequences with respect to the reference genome, a bioinformatics procedure called, variant calling. Once we are certain of the variants we have identified, usually we are interested in determining to what genes they belong, to what pathways, or for instance if they are likely to disrupt protein function. This procedure is called annotation. Once we have gone through each of these steps we are ready to analyse drug resistant patterns, draw phylogenetic relationships or identify clusters of transmission of M. tuberculosis.\n\nYou are now ready for performing bioinformatic analysis in Galaxy. Before we start we would like you to watch a short video on how Illumina sequencing works. Following that video we have prepared a webinar on mapping and variant calling of Illumina applied to MTBC. After watching it you will be hopefully able to know; how a reference genome is chosen, why we typically ignore some regions of the MTBC genomes or what is the difference between a fixed and a variable SNP and why do we care about it (among other things).\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": "We are ready to analyse drug resistant patterns, draw phylogenetic relationships or\nidentify recent transmission among the isolates we have sampled in our population. Before\ndelving into the analysis of the genomes we would like to share with you some notions\nimportant to the inference of direct transmission and to the interpretation of drug\nresistant patterns.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": "The use of whole-genome sequencing (WGS) for antibiotic resistance prediction and routine\ntyping of bacterial isolates has increased substantially in recent years. To date a\nmultitude of solutions for analyzing WGS data of the Mycobacterium tuberculosis complex\n(MTBC) data have been developed. In the first part of the 4th day of this workshop, we\nintroduce some freely available webtools and open source pipelines designed to analyze\nMTBC sequence data and we’ll provide some examples of how these tools work and how to\ninterpret the results.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": "On Day 2 and 3 you have learned how you could use galaxy for analysing your own data.\nEstablishing your own workflows in galaxy would allow you combining different tools and\nbuild your own pipeline without having to know how to program. If you are not so\ninterested in having your own pipeline, webtools for WGS analysis can be very useful, as\nwe have shown in the previous session.\n\nHowever, in the last part of the training we would like to convey to you what it would\ntake if would want to run Linux via the command line.  The Linux operating system will be\nintroduced, how to perform basic tasks using the Unix shell and how to install and run\npipelines on the command line. You will learn the power of the Unix shell in performing\ncomplex and powerful tasks, often with just a few keystrokes or lines of code. In fact,\nUnix shell helps users automate repetitive tasks and easily combine smaller tasks into\nlarger, more powerful workflows (i.e. pipelines). Use of the shell is fundamental to a\nwide range of advanced computing tasks, including high-performance computing. These\nwebinars will introduce you to this powerful tool. Which approach to choose, Galaxy\nworkflows, Webtools or native Linux depends on your needs, your interests and what\ncomputer resources you have available.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": null,
+      "description": "Today all experts will  be available to answer your questions and discuss any\nof the tutorials, webinars, or questions related to your own data. Meet with us at the\nzoom link!\n"
+    }
+  ],
+  "dateModified": "2024-06-03 08:58:10 +0000",
+  "datePublished": "2024-06-03 09:32:41 +0000",
+  "isAccessibleForFree": true,
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "instructor": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dbrites/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dbrites/",
+          "name": "Daniela Brites",
+          "image": "https://avatars.githubusercontent.com/dbrites",
+          "description": "A contributor to the GTN project.",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cstritt/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cstritt/",
+          "name": "Christoph Stritt",
+          "image": "https://avatars.githubusercontent.com/cstritt",
+          "description": "A contributor to the GTN project.",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/andreacabibbe/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/andreacabibbe/",
+          "name": "Andrea Cabibbe",
+          "image": "https://avatars.githubusercontent.com/andreacabibbe",
+          "description": "A contributor to the GTN project.",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+                "@type": "CreativeWork"
+              },
+              "id": "https://training.galaxyproject.org/training-material/hall-of-fame/irccs/",
+              "name": "IRCCS Ospedale San Raffaele",
+              "description": "An organization supporting the Galaxy Training Network",
+              "url": "https://www.hsr.it/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/arashghodousi/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/arashghodousi/",
+          "name": "Arash Ghodousi",
+          "image": "https://avatars.githubusercontent.com/arashghodousi",
+          "description": "A contributor to the GTN project.",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+                "@type": "CreativeWork"
+              },
+              "id": "https://training.galaxyproject.org/training-material/hall-of-fame/irccs/",
+              "name": "IRCCS Ospedale San Raffaele",
+              "description": "An organization supporting the Galaxy Training Network",
+              "url": "https://www.hsr.it/"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+                "@type": "CreativeWork"
+              },
+              "id": "https://training.galaxyproject.org/training-material/hall-of-fame/san-raffaele-uni/",
+              "name": "Università Vita-Salute San Raffaele",
+              "description": "An organization supporting the Galaxy Training Network",
+              "url": "https://www.unisr.it/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/federicodimarco/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/federicodimarco/",
+          "name": "Federico DiMarco",
+          "image": "https://avatars.githubusercontent.com/federicodimarco",
+          "description": "A contributor to the GTN project.",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+                "@type": "CreativeWork"
+              },
+              "id": "https://training.galaxyproject.org/training-material/hall-of-fame/irccs/",
+              "name": "IRCCS Ospedale San Raffaele",
+              "description": "An organization supporting the Galaxy Training Network",
+              "url": "https://www.hsr.it/"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/",
+          "name": "Peter van Heusden",
+          "image": "https://avatars.githubusercontent.com/pvanheus",
+          "description": "Research at the South African National Bioinformatics Institute",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            }
+          ],
+          "identifier": "https://orcid.org/0000-0001-6553-5274",
+          "orcid": "https://orcid.org/0000-0001-6553-5274"
+        }
+      ],
+      "isAccessibleForFree": true,
+      "courseSchedule": {
+        "@type": "Schedule",
+        "startDate": "2024-06-10",
+        "endDate": "2024-06-14",
+        "repeatCount": 4,
+        "repeatFrequency": "daily"
+      },
+      "courseWorkload": "P4D"
+    }
+  ],
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ]
+}
+</script>
+
+
+<section class="event">
+    <hgroup>
+      <h1>Mycobacterium tuberculosis complex NGS made easy</h1>
+      <p>
+        
+        
+        Virtual course
+        
+      </p>
+    </hgroup>
+
+    
+
+    <div class="row">
+	    <div class="col-md-9">
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Course Overview</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="program-tab" data-toggle="tab" data-target="#program" type="button" role="tab" aria-controls="program" aria-selected="false">Program</button>
+  </li>
+  
+  <li class="nav-item" role="presentation">
+     <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false" >Setup</button>
+  </li>
+  
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#instructors" type="button" role="tab" aria-controls="instructors" aria-selected="false">Instructor Zone</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
+    <p><p>These series of webinars and tutorials aim at improving basic and
+applied knowledge associated with next-generation sequencing (NGS)
+technologies and their applications in the field of Tuberculosis (TB).</p>
+</p>
+    <p><p><a href="/training-material/events/images/TBCAPT_NGS_Training_banner.jpg" rel="noopener noreferrer"><img src="/training-material/events/images/TBCAPT_NGS_Training_banner.jpg" alt="banner for course. " width="1023" height="539" loading="lazy" /></a></p>
+
+<p>These series of webinars and tutorials aim at improving basic and applied knowledge associated with next-generation sequencing (NGS) technologies and their applications in the field of Tuberculosis (TB).</p>
+
+<p>The trainings will introduce scalable and reproducible data analysis with Galaxy of <em>Mycobacterium tuberculosis</em> complex (MTBC) genomes.</p>
+
+<p>A series of pre-recorded sessions and hands-on tutorials will show:</p>
+<ul>
+  <li>How to differentiate sequencing technologies and which ones are most commonly applied in TB and how <strong>(Day 1)</strong></li>
+  <li>How NGS can be implement into TB laboratories <strong>(Day 1)</strong></li>
+  <li>How to do mapping and variant calling <strong>(Day 2)</strong></li>
+  <li>How to detect drug resistance conferring mutations, build phylogenetic trees and infer tuberculosis transmission <strong>(Day 3)</strong></li>
+  <li>How to use different web tools dedicated to targeted analysis and what it takes to do bioinformatics <strong>(Day 4)</strong>.</li>
+</ul>
+
+<p>After the trainings all participants are expected to:</p>
+<ul>
+  <li>Describe how NGS is being used in TB research and clinical pratice</li>
+  <li>Extract MTBC genomic variants from short sequencing reads</li>
+  <li>Identify drug resistant mutations</li>
+  <li>Identify genetic relationships and interpret a phylogenetic trees</li>
+  <li>Use web applications designed for M. tuberculosis</li>
+</ul>
+
+<h2 id="communication">Communication</h2>
+
+<p>A Slack channel will allow participants to communicate in real-time via chat. The channel should be used to troubleshoot and to get to know each other.
+There will be scheduled zoom sessions (Q&amp;A) every day where you can meet the experts, discuss and ask questions (check the program for know the time and be aware of the difference in time zone).
+If you are in Asia you can attend the zoom sessions in the morning, if you are in America you can attend the sessions in the afternoon, no need to be there all the time.</p>
+
+<h2 id="certificates">Certificates</h2>
+
+<p>Requirements for acquiring a certificate:</p>
+<ul>
+  <li>Being registered in the training</li>
+  <li>Join us on Slack! (see “Setup” for instructions)</li>
+  <li>Answer the assessments of days 1,2 and 3</li>
+  <li>Fill the <a href="https://forms.gle/6Xn8WudBvr3NMC3W7">Feedback Survey</a></li>
+  <li>As you finish the hands-on tutorials share your Galaxy history with us. See <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/histories_sharing.html">how to do this here</a> and copy the url link in <a href="https://docs.google.com/document/d/1K2k_yzk14VIHjsedfHaUFJnLgq6JTweG2tqxmIKUM2M/edit?usp=sharing">this table</a></li>
+</ul>
+
+<h2 id="start-the-course">Start the Course</h2>
+
+<p>On the day of the course, just go to the <strong>Program</strong> tab and follow the instructions! Make sure to follow the <strong>Setup</strong> instructions before starting!</p>
+
+<p><button id="setup-button" class="btn btn-info" onclick="$('#setup-tab').tab('show');">View Setup Instructions</button></p>
+
+<p><button id="setup-button" class="btn btn-info" onclick="$('#program-tab').tab('show');">Start the course!</button></p>
+
+</p>
+
+    <h3>Who is this course for?</h3>
+    Open for all, but target audience is clinicians and researchers using MTBC sequencing data.
+
+    
+
+
+<section>
+	
+
+
+	<!-- Maintained by -->
+	<h3 id="Organisers">Organisers & Instructors</h3>
+	<p>This event is brought to you by:</p>
+	
+<table class="contributions">
+	
+
+
+	
+	<tr>
+		<td><abbr title="These were responsible for organisation of this event">Organisers(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/dbrites/" class="contributor-badge contributor-dbrites"><img src="https://avatars.githubusercontent.com/dbrites?s=36" alt="Daniela Brites avatar" width="36" class="avatar" />
+    Daniela Brites</a>
+		</td>
+	</tr>
+	
+
+	
+	<tr>
+		<td><abbr title="These folks either taught at the event or supported its instruction">Instructor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/dbrites/" class="contributor-badge contributor-dbrites"><img src="https://avatars.githubusercontent.com/dbrites?s=36" alt="Daniela Brites avatar" width="36" class="avatar" />
+    Daniela Brites</a><a href="/training-material/hall-of-fame/cstritt/" class="contributor-badge contributor-cstritt"><img src="https://avatars.githubusercontent.com/cstritt?s=36" alt="Christoph Stritt avatar" width="36" class="avatar" />
+    Christoph Stritt</a><a href="/training-material/hall-of-fame/andreacabibbe/" class="contributor-badge contributor-andreacabibbe"><img src="/training-material/assets/images/avatar.png" alt="Andrea Cabibbe avatar" width="36" class="avatar" />
+    Andrea Cabibbe</a><a href="/training-material/hall-of-fame/arashghodousi/" class="contributor-badge contributor-arashghodousi"><img src="https://avatars.githubusercontent.com/arashghodousi?s=36" alt="Arash Ghodousi avatar" width="36" class="avatar" />
+    Arash Ghodousi</a><a href="/training-material/hall-of-fame/federicodimarco/" class="contributor-badge contributor-federicodimarco"><img src="https://avatars.githubusercontent.com/federicodimarco?s=36" alt="Federico DiMarco avatar" width="36" class="avatar" />
+    Federico DiMarco</a><a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge contributor-pvanheus"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pvanheus?s=36" alt="Peter van Heusden avatar" width="36" class="avatar" />
+    Peter van Heusden</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+
+
+	
+
+</section>
+
+  </div>
+
+  <!-- Programme Tab -->
+  <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
+    <h2> Program </h2>
+    
+
+    
+    Before starting the course, make sure to follow the setup instructions
+    <br><br>
+
+    <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
+    
+
+    
+        
+        <h3 id="day-1-overview-of-ngs-technologies-tb-specific-ngs-solutions">Day 1: Overview of NGS technologies & TB specific NGS solutions</h3>
+        
+        <p><p>There were unusually high rates of TB cases in your country this year. To characterize the underlying
+bacterial strains driving the epidemic, isolates have been sent for whole-genome sequencing.  Doctors and public
+health authorities request information in order to take decisions. In this course it will be demonstrated how
+you would make use of NGS to answer several questions relevant for patient and public health system management
+such as:</p>
+<ul>
+  <li>Are there cases of drug resistant bacteria?</li>
+  <li>Is there transmission of drug resistance?</li>
+  <li>Is there evidence of de novo emergence of resistance?</li>
+  <li>Are there multiple infections per patient?</li>
+  <li>Do we have on-going transmission?</li>
+</ul>
+
+<p>We hope that at the end of the different training sessions you can answer this question on your own and can apply what you have learnt to your own data!</p>
+</p>
+
+	
+        
+	
+
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list tutorials-list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Icebreaker </td>
+            <td colspan="3"> <p>Introduce yourself on Slack and tell us one fun fact about yourself.
+Post your answer to the <a href="https://gtnsmrgsbord.slack.com/archives/event-mtb-ngs">#event-mtb-ngs</a>
+Please feel free to respond to each other here, this channel is for troubleshooting but also for getting to know each other! :)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Overview of NGS technologies & TB specific NGS solutions </td>
+            <td colspan="3"> <p>This <a href="https://www.youtube.com/watch?v=BcfBjCJRmUs">webinar</a> will introduce different sequencing technologies
+and what applies best to what kind of problem.</p>
+
+<p>Assessement*: Share your thoughts with us
+<a href="https://docs.google.com/document/d/1Rd72luHh1Z33O-Le-FpEuPWi7X5yaBPTuVyB-oCSMQw/edit">here</a></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Implementation of NGS for TB- WHO documents and other considerations </td>
+            <td colspan="3"> <p><a href="https://youtu.be/eSWnPange8w">This webinar</a> will summarize the recommendations and considerations
+available from the WHO documents on the use of NGS for TB</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>14:00-16:00 Central European Time</td>
+          
+
+           <!-- e.g. for events -->
+            <td> Meet the experts: Q&A session </td>
+            <td colspan="3"> <p>We would like to hear your opinion on the following questions
+and promote discussion in this Q&amp;A session. Please let us know your thoughts on one or more of the following
+questions in the shared notes (link below);</p>
+
+<ol>
+  <li>How do I choose the right sequencing technology for my samples?</li>
+  <li>What is needed for NGS?</li>
+  <li>Why is NGS better for drug resistance and outbreak analysis?</li>
+</ol>
+
+<p>Also take the chance to ask us or write down in the shared notes other questions you might have.</p>
+
+<ul>
+  <li>Zoom: <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0THUxMXoxNUNkdz09">link</a></li>
+  <li>Shared Notes*: <a href="https://docs.google.com/document/d/1VtGho4Zz0qFp5tzqD8rl7NU83xtYb4tCkLDitC3DrhQ/edit#heading=h.e69aqv1nq3gw">link</a></li>
+</ul>
+
+<p><em>Note: The completion of this assessment is a requirement for the certificate of attendance.</em></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+	
+    
+        
+        <h3 id="day-2-mapping-and-variant-calling">Day 2: Mapping and variant calling</h3>
+        
+        <p><p>The 20 strains isolated in your country have been sequenced with
+Illumina technology to obtain whole-genome sequences. In this part
+of the workshop you will learn how to analyse those sequences.</p>
+
+<p>In a typical bioinformatic pipeline you would store your sequences
+in a computer server where all necessary software would be
+installed. This would be a server running the operating system
+LINUX, which is the most efficient way to run bioinformatics
+pipelines (more on this on Day 4). You will be running your
+analysis in a LINUX server from Galaxy, but instead of writing
+directly commands to execute operations in the server, you will be
+executing operations through a Galaxy graphical interface. This
+allows you to have access to a LINUX server and to run workflows
+without knowing LINUX. Importantly, for training purposes it also
+allows you to dedicate more attention in trying to understand what
+is being done in each of the steps without having to understand the
+programing behind. This being said, working directly on a LINUX
+cluster provides you always more flexibility, but if you don’t have
+access to one, Galaxy is a very good alternative for data analysis.</p>
+</p>
+
+	
+        
+	
+
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list tutorials-list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Icebreaker </td>
+            <td colspan="3"> <p>Come say Hi in Slack! Let us know you are joining today and are getting started!
+Today’s icebreaker question:</p>
+<ul>
+  <li><strong>What is your favorite dish (food or drink)? Bonus points for recipes!</strong></li>
+</ul>
+
+<p>Post your answers in <a href="https://gtnsmrgsbord.slack.com/archives/C035Q01UA2F">#event-mtb-ngs</a> on Slack!</p>
+
+<p>Please feel free to respond to each other here, this channel is for socializing and getting to know each other! :)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+	
+    
+        
+        <h4 id="session-1-learning-galaxy">Session 1: Learning Galaxy</h4>
+        
+        <p><p>You will need to understand how to use Galaxy to run all the hands-
+on tutorials and therefore is highly recommended that you follow
+the next webinar and hands-on on Galaxy. The good thing about this
+is that once you know how it works, you can use it to run your own
+analysis with your own data.</p>
+</p>
+
+	
+        
+	
+
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list tutorials-list">
+
+  
+  
+        <!-- MAT: introduction/galaxy-intro-short -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>09:00 - 10:00</td>
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html">
+                A short introduction to Galaxy
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00e1d6; --color-darker: #00c8be; --color-dimmed: #00d4ca;" title="Click to show all tutorials tagged español">español</a>
+              
+            
+            </div>
+
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+		   <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides_ES.html" title="es">
+                Español
+            </a>
+			</li>
+           
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+  <!-- add dropdown with links to different languages for the video-->
+  <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </a>
+  <ul class="dropdown-menu">
+
+    <div class="dropdown-item"><strong>Video Languages</strong></div>
+      
+      <a class="dropdown-item" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides_ES" title="es">
+         
+      </a>
+      
+  </ul>
+  
+
+</div>
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+		   <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides_ES.html" title="es">
+                Español
+            </a>
+			</li>
+           
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+  <!-- add dropdown with links to different languages for the video-->
+  <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </a>
+  <ul class="dropdown-menu">
+
+    <div class="dropdown-item"><strong>Video Languages</strong></div>
+      
+      <a class="dropdown-item" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides_ES" title="es">
+         
+      </a>
+      
+  </ul>
+  
+
+</div>
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: introduction/galaxy-intro-101 -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">
+                Galaxy Basics for genomics
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+            </div>
+
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- GTN Video Library  -->
+  
+<div class="btn-group">
+  
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+    </a>
+    <ul class="dropdown-menu">
+        
+        
+
+        
+        
+        
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/introduction/galaxy-intro-101/tutorial" title="View GTN Video Library for this Tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (July 2021)
+            </a>
+        </li>
+        
+        
+        
+        
+    </ul>
+  
+</div>
+  
+   
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- GTN Video Library  -->
+  
+<div class="btn-group">
+  
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+    </a>
+    <ul class="dropdown-menu">
+        
+        
+
+        
+        
+        
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/introduction/galaxy-intro-101/tutorial" title="View GTN Video Library for this Tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (July 2021)
+            </a>
+        </li>
+        
+        
+        
+        
+    </ul>
+  
+</div>
+  
+   
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+	
+    
+        
+        <h4 id="session-2-mapping-and-variant-calling-of-short-mtbc-reads">Session 2: Mapping and Variant calling of short MTBC reads </h4>
+        
+        <p><p>Let us imagine that you have received the sequences of the 20 strains, the first step is to assess the quality of sequencing. Once we are sure that the sequencing worked well, we typically compare our sequencing results to a reference genome (re-sequencing approach) by using a bioinformatics procedure usually called mapping. After, we will identify the genomic variants in our sequences with respect to the reference genome, a bioinformatics procedure called, variant calling. Once we are certain of the variants we have identified, usually we are interested in determining to what genes they belong, to what pathways, or for instance if they are likely to disrupt protein function. This procedure is called annotation. Once we have gone through each of these steps we are ready to analyse drug resistant patterns, draw phylogenetic relationships or identify clusters of transmission of M. tuberculosis.</p>
+
+<p>You are now ready for performing bioinformatic analysis in Galaxy. Before we start we would like you to watch a short video on how Illumina sequencing works. Following that video we have prepared a webinar on mapping and variant calling of Illumina applied to MTBC. After watching it you will be hopefully able to know; how a reference genome is chosen, why we typically ignore some regions of the MTBC genomes or what is the difference between a fixed and a variable SNP and why do we care about it (among other things).</p>
+</p>
+
+	
+        
+	
+
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list tutorials-list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Illumina sequencing </td>
+            <td colspan="3"> <p>Please watch <a href="https://youtu.be/fCd6B5HRaZ8">this 5-minute video</a> about the principles behind Illumina sequencing</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Mapping and Variant calling </td>
+            <td colspan="3"> <p>Main bioinformatics steps involved in mapping and variant calling from Illumina short reads applied to MTBC.</p>
+
+<p><a href="https://youtu.be/38GUBKwWXv8">Watch Webinar</a> (45 minutes)</p>
+
+<p>Assessment*: Share your thoughts with us <a href="https://docs.google.com/document/d/18y0PScnbA0GuLKjITzIr01wyLVWH6RYPAE5RWkwlfNA/edit#heading=h.bs9dcv9mioqd">here</a></p>
+
+<p><em>The completion of this assessment is a requirement for the certificate of attendance.</em></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>11:30-12:30 Central European Time</td>
+          
+
+           <!-- e.g. for events -->
+            <td> Meet the experts: Q&A session </td>
+            <td colspan="3"> <p>Meet the experts! Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0THUxMXoxNUNkdz09">Zoom</a>.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: variant-analysis/tb-variant-analysis -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">
+                M. tuberculosis Variant Analysis
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #cbc2ff; --color-darker: #b6a8ff; --color-dimmed: #c0b5ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #8fdf00; --color-darker: #7fc600; --color-dimmed: #87d200;" title="Click to show all tutorials tagged one-health">one-health</a>
+              
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d6ce00; --color-darker: #bfb700; --color-dimmed: #cbc300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              
+            
+            </div>
+
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- GTN Video Library  -->
+  
+<div class="btn-group">
+  
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+    </a>
+    <ul class="dropdown-menu">
+        
+        
+
+        
+        
+        
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/variant-analysis/tb-variant-analysis/tutorial" title="View GTN Video Library for this Tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021)
+            </a>
+        </li>
+        
+        
+          
+          
+          
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/variant-analysis/tb-variant-analysis/slides" title="View GTN Video Library for these Slides">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021)
+            </a>
+        </li>
+        
+        
+        
+    </ul>
+  
+</div>
+  
+   
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- GTN Video Library  -->
+  
+<div class="btn-group">
+  
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+    </a>
+    <ul class="dropdown-menu">
+        
+        
+
+        
+        
+        
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/variant-analysis/tb-variant-analysis/tutorial" title="View GTN Video Library for this Tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021)
+            </a>
+        </li>
+        
+        
+          
+          
+          
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/variant-analysis/tb-variant-analysis/slides" title="View GTN Video Library for these Slides">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021)
+            </a>
+        </li>
+        
+        
+        
+    </ul>
+  
+</div>
+  
+   
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>16:30-17:30 CET</td>
+          
+
+           <!-- e.g. for events -->
+            <td> Meet the experts: Q&A session </td>
+            <td colspan="3"> <p>Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0THUxMXoxNUNkdz09">Zoom</a>.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+	
+    
+        
+        <h3 id="day-3-evolutionary-epidemiology-using-phylogenetics-to-understand-dr-emergence-and-mtb-transmission">Day 3: Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission</h3>
+        
+        <p><p>We are ready to analyse drug resistant patterns, draw phylogenetic relationships or
+identify recent transmission among the isolates we have sampled in our population. Before
+delving into the analysis of the genomes we would like to share with you some notions
+important to the inference of direct transmission and to the interpretation of drug
+resistant patterns.</p>
+</p>
+
+	
+    
+        
+        <h4 id="evolutionary-epidemiology-using-phylogenetics-to-understand-dr-emergence-and-mtb-transmission">Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission</h4>
+        
+        <p>
+</p>
+
+	
+        
+	
+
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list tutorials-list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Icebreaker </td>
+            <td colspan="3"> <p>Come say Hi in Slack! Let us know you are joining today and are getting started!
+Today’s icebreaker question:</p>
+<ul>
+  <li><strong>What is the coolest, most mind blowing fact (nature/people/animal etc.) you know?</strong></li>
+</ul>
+
+<p>Post your answers in <a href="https://gtnsmrgsbord.slack.com/archives/C035Q01UA2F">#event-mtb-ngs</a> on Slack!</p>
+
+<p>Please feel free to respond to each other here, this channel is for socializing and getting to know each other! :)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Drug resistance prediction </td>
+            <td colspan="3"> <p>Principles of drug resistance detection from genomic data</p>
+
+<p><a href="https://youtu.be/dL06GTNFRgc">Watch Webinar</a> (20 minutes)</p>
+
+<p>Assessment*: Share your thoughts with us <a href="https://docs.google.com/document/d/1zkZaq-cCqRaibep_npiiq7gvpQtlkOozixVC5KOc49I/edit">here</a></p>
+
+<p><em>The completion of this assessment is a requirement for the certificate of attendance.</em></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: "Phylogenetic" mutations </td>
+            <td colspan="3"> <p>This video will introduce one special type of mutations to take into account when studying
+drug resistance patterns</p>
+
+<p><a href="https://youtu.be/i-JK-UdMscI">Watch Webinar</a> (15 minutes)</p>
+
+<p>Assessment*: Share your thoughts with us <a href="https://docs.google.com/document/d/167DXUopX_EtuMDXpvafsRmB49oJqjjsNIACvFU_bPYc/edit">here</a></p>
+
+<p><em>The completion of this assessment is a requirement for the certificate of attendance.</em></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Webinar: The concept of clustering </td>
+            <td colspan="3"> <p>Main aspects of clustering analysis to infer transmission in MTBC</p>
+
+<p><a href="https://youtu.be/l4cPUECJ7VU">Watch Webinar</a> (15 minutes)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Webinar: Genetic distance thresholds </td>
+            <td colspan="3"> <p>Clustering as an approximation to infer transmission</p>
+
+<p><a href="https://youtu.be/kKNgmpy1N94">Watch Webinar</a> (15 minutes)</p>
+
+<p>Assessement: Share your thoughts with us <a href="https://docs.google.com/document/d/1Q4mw-y3FZrGvmz3VNQrLkLslsi5QoTgDxwhAYYYdvjI/edit#heading=h.bs9dcv9mioqd">here</a></p>
+
+<p><em>The completion of this assessment is a requirement for the certificate of attendance.</em></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: evolution/mtb_transmission -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">
+                Identifying tuberculosis transmission links: from SNPs to transmission clusters
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #cbc2ff; --color-darker: #b6a8ff; --color-dimmed: #c0b5ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #8fdf00; --color-darker: #7fc600; --color-dimmed: #87d200;" title="Click to show all tutorials tagged one-health">one-health</a>
+              
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d6ce00; --color-darker: #bfb700; --color-dimmed: #cbc300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              
+            
+            </div>
+
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>11:30-12:30 Central European timeT</td>
+          
+
+           <!-- e.g. for events -->
+            <td> Q&A session </td>
+            <td colspan="3"> <p>Discussion with the experts! Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0THUxMXoxNUNkdz09">Zoom</a>.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Introduction to phylogenetics </td>
+            <td colspan="3"> <p>Have a look at <a href="https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/">this EMBL-EBI course</a>.
+Recommended to those wanting to learn more about phylogenetics.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: evolution/mtb_phylogeny -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html">
+                Tree thinking for tuberculosis evolution and epidemiology
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #cbc2ff; --color-darker: #b6a8ff; --color-dimmed: #c0b5ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #8fdf00; --color-darker: #7fc600; --color-dimmed: #87d200;" title="Click to show all tutorials tagged one-health">one-health</a>
+              
+              <a href="/training-material/search?query=phylogenetics" class="label label-default tutorial_tag" style="--color-primary: #00e85c; --color-darker: #00cf51; --color-dimmed: #00db57;" title="Click to show all tutorials tagged phylogenetics">phylogenetics</a>
+              
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d6ce00; --color-darker: #bfb700; --color-dimmed: #cbc300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              
+            
+            </div>
+
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Check what you have learnt! </td>
+            <td colspan="3"> <p>We hope that you are enjoying the training, and that many things that you are learning will be useful for your research! We would like you to answer some questions, so both you and us, can assess whether the main concepts covered in the hands-on tutorials on Mtb NGS data analysis were understood. For that please follow the link bellow. If you are interested in knowing what we think about these questions join us on Day 5”</p>
+
+<p><a href="https://docs.google.com/document/d/1mT6z84iA2-E2D834lH1B6fJrWwfXYBKDkPrKCFAdwqk/edit#">Assessment*</a></p>
+
+<p><em>The completion of this assessment is a requirement for the certificate of attendance.</em></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>16:30-17:30 Central European Time</td>
+          
+
+           <!-- e.g. for events -->
+            <td> Q&A session </td>
+            <td colspan="3"> <p>Discussion with the experts! Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0THUxMXoxNUNkdz09">Zoom</a>.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+	
+    
+        
+        <h3 id="day-4-webtools-dedicated-to-mtbc-bioinformatics-be-a-bioinformatician-in-the-jungle-optional">Day 4: Webtools dedicated to MTBC bioinformatics & Be a bioinformatician in the jungle (optional)</h3>
+        
+        <p>
+</p>
+
+	
+    
+        
+        <h4 id="session-1-webtools-dedicated-to-mtbc-bioinformatics">Session 1: Webtools dedicated to MTBC bioinformatics</h4>
+        
+        <p><p>The use of whole-genome sequencing (WGS) for antibiotic resistance prediction and routine
+typing of bacterial isolates has increased substantially in recent years. To date a
+multitude of solutions for analyzing WGS data of the Mycobacterium tuberculosis complex
+(MTBC) data have been developed. In the first part of the 4th day of this workshop, we
+introduce some freely available webtools and open source pipelines designed to analyze
+MTBC sequence data and we’ll provide some examples of how these tools work and how to
+interpret the results.</p>
+</p>
+
+	
+        
+	
+
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list tutorials-list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Icebreaker </td>
+            <td colspan="3"> <p>Come say Hi in Slack! Let us know you are joining today and are getting started!
+Today’s icebreaker question:</p>
+
+<ul>
+  <li><strong>“What is a book, film, tv show or game that you’ve enjoyed recently?”</strong></li>
+</ul>
+
+<p>Post your answers in <a href="https://gtnsmrgsbord.slack.com/archives/C035Q01UA2F">#event-mtb-ngs</a> on Slack!</p>
+
+<p>Please feel free to respond to each other here, this channel is for socializing and getting to know each other! :)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Web tools for analysis of MTBC sequenced data </td>
+            <td colspan="3"> <p>Introduction to most common web tools for fast identification of bacterial species from raw sequencing reads</p>
+
+<p><a href="https://youtu.be/HVQaq2GXCAc">Watch Webinar</a> (50 minutes)</p>
+
+<p>Assessment*: Share your thoughts with us <a href="https://docs.google.com/document/d/1QRnuHYXWGQnvf8fX5v6EIaynJh6AxkoOktS3VgL0Y8Q/edit">here</a></p>
+
+<p><em>The completion of this assessment is a requirement for the certificate of attendance.</em></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Introduction to the MTBseq pipeline </td>
+            <td colspan="3"> <p>Introduction to MTBseq pipeline, an automated pipeline for mapping, variant calling and detection of resistance mediating and phylogenetic variants from whole genome sequence data of MTBC</p>
+
+<p><a href="https://youtu.be/ob29WYXwLxo">Watch Webinar</a> (30 minutes)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>11:30-12:30 Central European Time</td>
+          
+
+           <!-- e.g. for events -->
+            <td> Q&A session </td>
+            <td colspan="3"> <p>Discussion with the experts! Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0THUxMXoxNUNkdz09">Zoom</a>.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+	
+    
+        
+        <h4 id="session-2-be-a-bioinformatician-in-the-jungle-optional">Session 2: Be a bioinformatician in the jungle (optional)</h4>
+        
+        <p><p>On Day 2 and 3 you have learned how you could use galaxy for analysing your own data.
+Establishing your own workflows in galaxy would allow you combining different tools and
+build your own pipeline without having to know how to program. If you are not so
+interested in having your own pipeline, webtools for WGS analysis can be very useful, as
+we have shown in the previous session.</p>
+
+<p>However, in the last part of the training we would like to convey to you what it would
+take if would want to run Linux via the command line.  The Linux operating system will be
+introduced, how to perform basic tasks using the Unix shell and how to install and run
+pipelines on the command line. You will learn the power of the Unix shell in performing
+complex and powerful tasks, often with just a few keystrokes or lines of code. In fact,
+Unix shell helps users automate repetitive tasks and easily combine smaller tasks into
+larger, more powerful workflows (i.e. pipelines). Use of the shell is fundamental to a
+wide range of advanced computing tasks, including high-performance computing. These
+webinars will introduce you to this powerful tool. Which approach to choose, Galaxy
+workflows, Webtools or native Linux depends on your needs, your interests and what
+computer resources you have available.</p>
+</p>
+
+	
+        
+	
+
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list tutorials-list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Introduction to Linux </td>
+            <td colspan="3"> <p>Introduction to Linux OS: installation and usage”</p>
+
+<p><a href="https://youtu.be/N8rW07ByQOE">Watch Webinar</a> (35 minutes)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: How to run programs (Python, Docker, Nextflow) </td>
+            <td colspan="3"> <p>Learning how to install and use programs to analyze data</p>
+
+<p><a href="https://youtu.be/feYweAQNGS8">Watch Webinar</a> (35 minutes)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Webinar: Demo on how to run the Linux command line </td>
+            <td colspan="3"> <p>Demo video on how to use the shell commands</p>
+
+<p><a href="https://youtu.be/7V7LCjUEg1c">Watch Webinar</a> (20 minutes)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td></td>
+          
+
+           <!-- e.g. for events -->
+            <td> Hands-on: The Unix Shell </td>
+            <td colspan="3"> <p>Recommended tutorial from software carpentries to those wanting to learn Linux.</p>
+
+<p><a href="https://swcarpentry.github.io/shell-novice/">View Carpentries Tutorial</a> (4 hours)</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>16:30-17:30 Central European time</td>
+          
+
+           <!-- e.g. for events -->
+            <td> Q&A session </td>
+            <td colspan="3"> <p>Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0THUxMXoxNUNkdz09">Zoom</a>.</p>
+
+<p>If you have questions about web tools or what is the best way to become a bioinformatian, or if there are aspects of the webinars and tutorial that you would like to discuss in with the experts, please join the Q&amp;A session. Fill free to write down in the <a href="https://docs.google.com/document/d/1FbjtNZOkND1ziRPr7KCumqryeQJ76ZZx-ZAgjydCZho/edit">shared notes</a> those questions as well as that can help the experts to struture the discussion.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+	
+    
+        
+        <h3 id="day-5-live-discussion">Day 5: Live Discussion</h3>
+        
+        <p><p>Today all experts will  be available to answer your questions and discuss any
+of the tutorials, webinars, or questions related to your own data. Meet with us at the
+zoom link!</p>
+</p>
+
+	
+        
+	
+
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list tutorials-list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          <td>11:30-12:30 Central European Time</td>
+          
+
+           <!-- e.g. for events -->
+            <td> Q&A session </td>
+            <td colspan="3"> <p>Discussion with the experts! Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0THUxMXoxNUNkdz09">Zoom</a>.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+	
+    
+    
+  </div><!-- end programme tab -->
+
+
+  <!-- Setup Tab -->
+  
+  <div class="tab-pane " id="setup" role="tabpanel" aria-labelledby="setup-tab">
+
+    <h3>Get set up for the course!</h3>
+    <p>Follow the steps below to get set up with everything you need to participate in the course!</p>
+
+    <!-- Galaxy setup -->
+    
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="/training-material/assets/images/galaxylogo.png" class="card-img" alt="Galaxy logo" style="width: 70%">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Create a Galaxy Account</h5>
+			<p class="card-text">
+              Create an account on one of the following Galaxy servers:
+              <ul>
+              
+              <li><a href="https://usegalaxy.eu">Galaxy EU</a></li>
+              
+              </ul>
+            </p>
+            <p class="card-text">
+              You will get an email with <b>activation link</b>. It may end up in your junk folder.
+            </p>
+			<p class="card-text text-muted">
+              Note: If you already have a Galaxy account you can skip this step and just log in to your existing account.
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+
+    <!-- TIaaS setup -->
+    
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="/training-material/assets/images/galaxy-for-trainers.svg" class="card-img" alt="TIaaS" style="width:70%">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Join Galaxy Training Group (TIaaS)</h5>
+			<p class="card-text">
+            Join TIaaS by clicking on the link below matching your Galaxy server:
+            <ul>
+              
+              
+              <li><a href="https://usegalaxy.eu/join-training/mtb-ngs-2024">Galaxy EU TIaaS</a></li>
+              
+              
+            </ul>
+            </p>
+            <p class="card-text">
+            This will give your analysis jobs <b>priority on Galaxy</b> for the duration of the event. Make sure you are <b>logged in</b> before clicking the link.
+            You should see a <b>green message box</b> if all went well.
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    
+
+
+    <!-- Support setup -->
+    
+    
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="/training-material/assets/images/galaxy-for-developers.svg" class="card-img" alt="Galaxy logo">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Join Slack!</h5>
+			<p class="card-text">
+
+            We will provide support via Slack. Here you can <b>ask any questions</b> you may have during the course,
+            and <b>socialize</b> with your fellow participants and instructors.
+
+            The following steps will get you set up with Slack:
+
+
+            <ol>
+              <li>Join Slack via this <a href="https://join.slack.com/t/gtnsmrgsbord/shared_invite/zt-1vuywk2t2-5FFAfFU1JImaulNGz4DMcw">Invite Link</a></li>
+              <li>Join the event channel: <a href="https://gtnsmrgsbord.slack.com/archives/C01MNM98X9V">#event-mtb-ngs</a></li>
+              <li>Introduce yourself here!</li>
+            </ol>
+
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    
+
+
+    <!-- Custom Setup Instructions -->
+    
+
+
+
+
+
+  </div><!-- end setup tab -->
+  
+
+
+  <div class="tab-pane " id="instructors" role="tabpanel" aria-labelledby="instructors-tab">
+<section>
+	<h2>Instructor Zone</h2>
+
+	<p>
+	Check out our checklists for
+	</p>
+	<ul>
+		<li><a href="/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html">Organising a Workshop</a> to check that you haven't forgotten any important step.</li>
+		<li><a href="/training-material/topics/teaching/tutorials/running-workshop/tutorial.html">Running a Workshop</a>, helpful reminders closer to your event.</li>
+	</ul>
+
+
+	
+	<h4>Request TIaaS</h4>
+	<p>Training Infrastructure as a Service (TIaaS) is a service that allows you to request space for your course on a server, it helps ensure courses run smoothly by separating your trainee's jobs into a separate queue. <a href="/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html">Learn more about TIaaS in our tutorial</a>.</p>
+	<p>The following links will open a (mostly) pre-filled out TIaaS form, <emph>if that server supports TIaaS</emph>. Otherwise you might see "page not found".</p>
+	<p>Once you receive a URL from the admins, please set it as a <code>tiaas_link</code> in your event metadata.</p><ul>
+	<li>
+			<a href="https://usegalaxy.eu/tiaas/new/?name=Daniela%20Brites
+&email=
+&title=Mycobacterium%20tuberculosis%20complex%20NGS%20made%20easy
+&description=These%20series%20of%20webinars%20and%20tutorials%20aim%20at%20improving%20basic%20and%0Aapplied%20knowledge%20associated%20with%20next-generation%20sequencing%20(NGS)%0Atechnologies%20and%20their%20applications%20in%20the%20field%20of%20Tuberculosis%20(TB).%0A
+&start=2024-06-10
+&end=2024-06-14
+&website=https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html
+&use_gtn=true&gtn_links=See%20course%20event
+&training_identifier=mtb-ngs-2024">Request TIaaS @ https://usegalaxy.eu</a>
+		</li>
+	
+	</ul>
+	
+
+
+<h3> Add your event to the Galaxy Hub Event Horizon </h3>
+<p>
+To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
+</p>
+
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code>---
+title: "Mycobacterium tuberculosis complex NGS made easy"
+date: '2024-06-10'
+days: 5
+tease: These series of webinars and tutorials aim at improving basic and
+applied knowledge associated with next-generation sequencing (NGS)
+technologies and their applications in the field of Tuberculosis (TB).
+
+#continent: EU
+location: "Online"
+external_url: "https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html"
+gtn: true
+contact: "d.brites@swisstph.ch"
+subsites: [all]
+---
+</code></pre></div></div>
+
+
+	<h3>Promote the Event</h3>
+
+	<p><abbr title="Tooting is the verb used when posting to mastodon or the fediverse, which are like open source twitter.">Tootable</abbr>/Tweetable version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Mycobacterium tuberculosis complex NGS made easy! 📢
+
+These series of webinars and tutorials aim at improving basic and
+applied knowledge associated with next-generation sequencing (NGS)
+technologies and their applications in the field of Tuberculosis (TB).
+
+
+📅 June 10-14, 2024
+➡️ https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html
+</code></pre></div>      </div>
+
+	<p>Slack-compatible version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Mycobacterium tuberculosis complex NGS made easy! 📢
+
+These series of webinars and tutorials aim at improving basic and
+applied knowledge associated with next-generation sequencing (NGS)
+technologies and their applications in the field of Tuberculosis (TB).
+
+
+:calendar: June 10-14, 2024
+:arrow_right: https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html
+</code></pre></div>      </div>
+
+	<p>Version with schedule:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Mycobacterium tuberculosis complex NGS made easy! 📢
+
+These series of webinars and tutorials aim at improving basic and
+applied knowledge associated with next-generation sequencing (NGS)
+technologies and their applications in the field of Tuberculosis (TB).
+
+
+**Agenda**:
+- Day 1: Overview of NGS technologies & TB specific NGS solutions
+- Day 2: Mapping and variant calling
+- Day 3: Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission
+- Day 4: Webtools dedicated to MTBC bioinformatics & Be a bioinformatician in the jungle (optional)
+- Day 5: Live Discussion
+
+📅 June 10-14, 2024
+➡️ https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html
+</code></pre></div>      </div>
+
+
+</section>
+
+  </div>
+</div>
+
+	</div> <!-- col-md-9 -->
+	<div class="col-md-3">
+
+        <img class="event-image" src="/training-material//events/images/TBCAPT_NGS_Training_banner.jpg" alt="banner for the course">
+        
+		
+		
+          
+		  
+          
+          <span class="btn btn-primary btn-lg btn-block disabled">Registration is closed</span>
+          
+		
+
+		<hr/>
+
+		<table>
+			<tr><td style="min-width: 2rem"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">event-date</span></td><td>June 10-14, 2024</td></tr>
+			<tr><td><i class="fas fa-location-dot" aria-hidden="true"></i><span class="visually-hidden">event-location</span></td><td>Online</td></tr>
+			<tr><td><i class="fas fa-tag" aria-hidden="true"></i><span class="visually-hidden">event-cost</span></td><td>free</td></tr>
+			
+			<tr><td><i class="far fa-envelope" aria-hidden="true"></i><span class="visually-hidden">email</span></td><td><a href="mailto:d.brites@swisstph.ch?subject=Mycobacterium%20tuberculosis%20complex%20NGS%20made%20easy">d.brites@swisstph.ch</a></td></tr>
+			
+		</table>
+
+		<hr />
+        <b> Add this event to your calendar </b>
+
+           
+
+
+
+
+
+<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240610%2F20240614&details=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html&location=Online&text=Mycobacterium tuberculosis complex NGS made easy" class="btn btn-info btn-sm" alt="Add to Google Calendar">Google</a>
+
+<a href="https://outlook.live.com/calendar/0/deeplink/compose?body=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html&enddt=2024-06-14&location=Online&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2024-06-10&subject=Mycobacterium tuberculosis complex NGS made easy" class="btn btn-info btn-sm">Outlook</a>
+
+<a href="https://outlook.office.com/calendar/0/deeplink/compose/?body=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html&enddt=2024-06-14&allday=true&location=Online&path=%2fcalendar%2faction%2fcompose&rru=addevent&startdt=2024-06-10&subject=Mycobacterium tuberculosis complex NGS made easy" class="btn btn-info btn-sm">Office 365</a>
+
+
+		<hr />
+
+		<b>Organisers</b><br/>
+		
+			<a href="/training-material/hall-of-fame/dbrites/" class="contributor-badge-inline contributor-dbrites">
+  <img src="https://avatars.githubusercontent.com/dbrites?s=36" alt="Daniela Brites avatar" width="36" class="avatar" />
+  Daniela Brites</a>
+
+		
+
+        
+
+	</div>
+</div><!-- row -->
+
+</section>
+
+
+<script>
+(function (window, document) {
+    function onDocumentReady(fn) {
+        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    onDocumentReady(function () {
+
+
+$('#myTab button').click(function(e) {
+  console.log("bla");
+  e.preventDefault();
+  $(this).tab('show');
+});
+
+// store the currently selected tab in the hash value
+$("ul.nav-tabs > li > button").on("shown.bs.tab", function(e) {
+  var id = $(e.target).attr('data-target').substr(1);
+	window.history.replaceState(null, null, '#'+id);
+});
+
+// on load of the page: switch to the currently selected tab
+var hash = window.location.hash;
+$('#myTab button[data-target="' + hash + '"]').tab('show');
+
+});
+})(window, document);
+
+
+</script>
+
+<style>
+:target {
+    scroll-margin-top: 24em;
+}
+</style>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e1bf173e46113071a002da66b851495217e5efbf">e1bf173</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/events/2024-06-10-mtb-ngs.html" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ef2bff8a.js'></script>
+
+	
+	
+
+    </body>
+</html>
