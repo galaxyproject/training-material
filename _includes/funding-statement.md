@@ -1,10 +1,10 @@
-{% if include.contributions.funding %}
+{% if include.funders %}
 <div markdown="1">
 <h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
 <p>These individuals or organisations provided funding support for the development of this resource</p>
 
 <div class="d-flex flex-wrap">
-{% for id in include.contributions.funding %}
+{% for id in include.funders %}
 	{% assign name = site.data.contributors[id].name | default: id -%}
 	<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="funder-badge">
 		{% assign pfo = site.data.funders[id] | default: site.data.organisations[id] | default: site.data.contributors[id] | default: nil %}
