@@ -35,11 +35,12 @@ tags:
 contributions:
   authorship:
     - Camila-goclowski
+  infrastructure: 
+    - pcm32
   editing:
     - pavanvidem
     - hexylena
-  infrastructure: 
-    - pcm32
+  
     
 answer_histories: 
     - label: "singlecell.usegalaxy.eu"
