@@ -739,6 +739,30 @@ module Jekyll
     def group_icons(icons)
       icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
     end
+
+    def materials_for_pathway(page)
+      if page.is_a?(Jekyll::Page)
+        d = page.data.fetch('pathway', [])
+      else
+        d = page.fetch('pathway', [])
+      end
+
+      d.map do |m|
+        m.fetch('tutorials', [])
+          .select { |t| t.has_key?('name') && t.has_key?('topic') }
+          .map {|t| [t['topic'], t['name']] }
+      end.flatten.compact.sort.uniq
+    end
+
+    def find_learningpaths_including_topic(site, topic_id)
+      site.pages
+        .select{|p| p['layout'] == 'learning-pathway'}
+        .select do |p|
+          materials_for_pathway(p)
+            .map{|topic, _tutorial| topic}
+            .include?(topic_id)
+        end
+    end
     # rubocop:enable Naming/PredicateName
   end
 end
