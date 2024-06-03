@@ -710,16 +710,20 @@ blockquote {
     white-space: pre-wrap;
 }
 
-.card:not(.setup-card){
+.card{
 	background: transparent;
 	border: 1px solid var(--border-light);
 	.card-title {
-		background: var(--brand-color);
-		border-bottom: 1px solid var(--border-light);
-		padding: 1.25rem;
 		color: var(--brand-color-contrast);
 		// margin-left: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
 		// margin-right: -15px;
+	}
+}
+
+.card:not(.setup-card){
+	.card-title {
+		background: var(--brand-color);
+		padding: 1.25rem;
 	}
 
 	.card-body {
@@ -1827,6 +1831,8 @@ section.event {
 
 }
 .nav-tabs {
+	// Tabs default to a text colour that isn't overridden somewhere else.
+
 	.nav-item {
 		margin-bottom: 0;
 		padding-bottom: 0;
@@ -1838,6 +1844,7 @@ section.event {
 		}
 
 		button.nav-link{
+			color: var(--text-color);
 			cursor: pointer;
 			background: none;
 			font-size: 1.2rem;
@@ -1850,9 +1857,11 @@ section.event {
 
 			&.active {
 				background: var(--overview-color);
+				border: 1px solid var(--overview-color);
 				color: white;
 			}
 		}
 	}
 
 }
+
