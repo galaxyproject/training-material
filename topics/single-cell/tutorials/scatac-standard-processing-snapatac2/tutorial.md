@@ -114,7 +114,7 @@ the page, so try to make them informative and concise!
 >
 > > <solution-title></solution-title>
 > >
-> > 1. asdfThere are 2,286,884 (2.6%) non-zero values for the 88,392,600 possible counts of the 32,738 genes (rows) and 2,700 cells (columns).
+> > 1. There are 2,286,884 (2.6%) non-zero values for the 88,392,600 possible counts of the 32,738 genes (rows) and 2,700 cells (columns).
 > > 2. 10 counts are found for the 32,706th row and 1st column.
 > >
 > {: .solution}
