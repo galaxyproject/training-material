@@ -1,6 +1,7 @@
 {% assign page = include.page %}
+{% assign responsive = include.responsive | default:true %}
 
-<table class="table table-responsive table-striped">
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
       {% if page.layout == 'event' and page.async != true %}
@@ -21,7 +22,7 @@
       {% endif %}
     </tr>
   </thead>
-  <tbody class="list tutorials-list">
+  <tbody class="list">
 
   {% assign subtopic_materials = include.sub[1].materials | default: include.sub %}
   {% for material in subtopic_materials %}
@@ -64,7 +65,7 @@
             {% endif %}
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               {% include _includes/resource-slides.html material=material topic=topic.name %}
               {% include _includes/resource-handson.html material=material topic=topic.name %}
@@ -101,5 +102,21 @@
   </tbody>
 </table>
 
-
-
+{% if responsive %}
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+{% endif %}
