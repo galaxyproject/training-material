@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>FAIR data management in single-cell analysis</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@e5c88887c797629a51dada01a8a2855bd91188fe",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/events/2024-06-18-FAIR-data-management.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ef2bff8a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="FAIR data management in single-cell analysis">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-06-04 15:08:48 +0000"><meta name="description" content="This course will introduce the Galaxy Platform, covering the basic functionality for single-cell data processing. It will include an overview of various common single-cell datatypes used in bioinformatics. Participants will gain hands-on experience loading single-cell data from external resources into Galaxy, parsing academic literature to find relevant metadata, and converting the data into the common AnnData format, ready for further analysis in Galaxy. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="FAIR data management in single-cell analysis">
+        <meta property="og:description" content="This course will introduce the Galaxy Platform, covering the basic functionality for single-cell data processing. It will include an overview of various common single-cell datatypes used in bioinformatics. Participants will gain hands-on experience loading single-cell data from external resources into Galaxy, parsing academic literature to find relevant metadata, and converting the data into the common AnnData format, ready for further analysis in Galaxy. ">
+        
+	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/events/2024-06-18-FAIR-data-management.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/events/2024-06-18-FAIR-data-management.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+<section class="event">
+    <hgroup>
+      <h1>FAIR data management in single-cell analysis</h1>
+      <p>
+        
+        
+        Virtual course
+        
+      </p>
+    </hgroup>
+
+    
+
+    <div class="zrow">
+	    <div class="zcol-md-9">
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Course Overview</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="program-tab" data-toggle="tab" data-target="#program" type="button" role="tab" aria-controls="program" aria-selected="false">Program</button>
+  </li>
+  
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#instructors" type="button" role="tab" aria-controls="instructors" aria-selected="false">Instructor Zone</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
+    <p><p>This course will introduce the Galaxy Platform, covering the basic functionality for single-cell data processing. It will include an overview of various common single-cell datatypes used in bioinformatics. Participants will gain hands-on experience loading single-cell data from external resources into Galaxy, parsing academic literature to find relevant metadata, and converting the data into the common AnnData format, ready for further analysis in Galaxy.</p>
+</p>
+    <p>
+</p>
+
+    <h3>Who is this course for?</h3>
+    
+
+    
+
+
+<section>
+	
+
+
+	<!-- Maintained by -->
+	<h3 id="Organisers">Organisers & Instructors</h3>
+	<p>This event is brought to you by:</p>
+	
+<table class="contributions">
+	
+
+
+	
+	<tr>
+		<td><abbr title="These were responsible for organisation of this event">Organisers(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
+    Katarzyna Kamieniecka</a><a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-hexhowells"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" />
+    Morgan Howells</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+
+
+	
+
+</section>
+
+  </div>
+
+  <!-- Programme Tab -->
+  <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
+
+
+    
+       For details about the course, please vist the <a href="https://elixiruknode.org/event/fair-single-cell-analysis/">Course Page</a>
+    
+  </div><!-- end programme tab -->
+
+
+  <!-- Setup Tab -->
+  
+
+
+  <div class="tab-pane " id="instructors" role="tabpanel" aria-labelledby="instructors-tab">
+<section>
+	<h2>Instructor Zone</h2>
+
+	<p>
+	Check out our checklists for
+	</p>
+	<ul>
+		<li><a href="/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html">Organising a Workshop</a> to check that you haven't forgotten any important step.</li>
+		<li><a href="/training-material/topics/teaching/tutorials/running-workshop/tutorial.html">Running a Workshop</a>, helpful reminders closer to your event.</li>
+	</ul>
+
+
+	
+
+
+<h3> Add your event to the Galaxy Hub Event Horizon </h3>
+<p>
+To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
+</p>
+
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code>---
+title: "FAIR data management in single-cell analysis"
+date: '2024-06-18'
+days: 1
+tease: This course will introduce the Galaxy Platform, covering the basic functionality for single-cell data processing. It will include an overview of various common single-cell datatypes used in bioinformatics. Participants will gain hands-on experience loading single-cell data from external resources into Galaxy, parsing academic literature to find relevant metadata, and converting the data into the common AnnData format, ready for further analysis in Galaxy.
+
+#continent: EU
+location: "Online"
+external_url: "https://training.galaxyproject.org/training-material/events/2024-06-18-FAIR-data-management.html"
+gtn: true
+contact: ""
+subsites: [all]
+---
+</code></pre></div></div>
+
+
+	<h3>Promote the Event</h3>
+
+	<p><abbr title="Tooting is the verb used when posting to mastodon or the fediverse, which are like open source twitter.">Tootable</abbr>/Tweetable version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+FAIR data management in single-cell analysis! 📢
+
+This course will introduce the Galaxy Platform, covering the basic functionality for single-cell data processing. It will include an overview of various common single-cell datatypes used in bioinformatics. Participants will gain hands-on experience loading single-cell data from external resources into Galaxy, parsing academic literature to find relevant metadata, and converting the data into the common AnnData format, ready for further analysis in Galaxy.
+
+
+📅 June 18, 2024
+➡️ https://training.galaxyproject.org/training-material/events/2024-06-18-FAIR-data-management.html
+</code></pre></div>      </div>
+
+	<p>Slack-compatible version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+FAIR data management in single-cell analysis! 📢
+
+This course will introduce the Galaxy Platform, covering the basic functionality for single-cell data processing. It will include an overview of various common single-cell datatypes used in bioinformatics. Participants will gain hands-on experience loading single-cell data from external resources into Galaxy, parsing academic literature to find relevant metadata, and converting the data into the common AnnData format, ready for further analysis in Galaxy.
+
+
+:calendar: June 18, 2024
+:arrow_right: https://training.galaxyproject.org/training-material/events/2024-06-18-FAIR-data-management.html
+</code></pre></div>      </div>
+
+	<p>Version with schedule:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+FAIR data management in single-cell analysis! 📢
+
+This course will introduce the Galaxy Platform, covering the basic functionality for single-cell data processing. It will include an overview of various common single-cell datatypes used in bioinformatics. Participants will gain hands-on experience loading single-cell data from external resources into Galaxy, parsing academic literature to find relevant metadata, and converting the data into the common AnnData format, ready for further analysis in Galaxy.
+
+
+**Agenda**:
+
+📅 June 18, 2024
+➡️ https://training.galaxyproject.org/training-material/events/2024-06-18-FAIR-data-management.html
+</code></pre></div>      </div>
+
+
+</section>
+
+  </div>
+</div>
+
+	</div> <!-- col-md-9 -->
+	<div class="zcol-md-3">
+
+        <img class="event-image" src="/training-material//assets/images/GTN-event-logo.png" alt="event logo">
+        
+		
+
+        
+		<hr/>
+
+		<table>
+			<tr><td style="min-width: 2rem"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">event-date</span></td><td>June 18, 2024</td></tr>
+			<tr><td><i class="fas fa-location-dot" aria-hidden="true"></i><span class="visually-hidden">event-location</span></td><td>Online</td></tr>
+			<tr><td><i class="fas fa-tag" aria-hidden="true"></i><span class="visually-hidden">event-cost</span></td><td></td></tr>
+			
+		</table>
+
+		<hr />
+        <b> Add this event to your calendar </b>
+
+           
+
+
+
+
+
+<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240618%2F20240618&details=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-06-18-FAIR-data-management.html&location=Online&text=FAIR data management in single-cell analysis" class="btn btn-info btn-sm" alt="Add to Google Calendar">Google</a>
+
+<a href="https://outlook.live.com/calendar/0/deeplink/compose?body=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-06-18-FAIR-data-management.html&enddt=2024-06-18&location=Online&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2024-06-18&subject=FAIR data management in single-cell analysis" class="btn btn-info btn-sm">Outlook</a>
+
+<a href="https://outlook.office.com/calendar/0/deeplink/compose/?body=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-06-18-FAIR-data-management.html&enddt=2024-06-18&allday=true&location=Online&path=%2fcalendar%2faction%2fcompose&rru=addevent&startdt=2024-06-18&subject=FAIR data management in single-cell analysis" class="btn btn-info btn-sm">Office 365</a>
+
+
+		<hr />
+
+		<b>Organisers</b><br/>
+		
+			<a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge-inline contributor-kkamieniecka">
+  <img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
+  Katarzyna Kamieniecka</a>
+
+		
+			<a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge-inline contributor-hexhowells">
+  <img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" />
+  Morgan Howells</a>
+
+		
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge-inline contributor-nomadscientist">
+  <img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+  Wendi Bacon</a>
+
+		
+
+        
+
+	</div>
+</div><!-- row -->
+
+</section>
+
+
+<script>
+(function (window, document) {
+    function onDocumentReady(fn) {
+        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    onDocumentReady(function () {
+
+
+$('#myTab button').click(function(e) {
+  console.log("bla");
+  e.preventDefault();
+  $(this).tab('show');
+});
+
+// store the currently selected tab in the hash value
+$("ul.nav-tabs > li > button").on("shown.bs.tab", function(e) {
+  var id = $(e.target).attr('data-target').substr(1);
+	window.history.replaceState(null, null, '#'+id);
+});
+
+// on load of the page: switch to the currently selected tab
+var hash = window.location.hash;
+$('#myTab button[data-target="' + hash + '"]').tab('show');
+
+});
+})(window, document);
+
+
+</script>
+
+<style>
+:target {
+    scroll-margin-top: 24em;
+}
+
+
+.zrow {
+	display: grid;
+	grid-template-rows: 1fr;
+	gap: 1em 1em;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-areas:
+	  "Main Main Main Meta";
+}
+@media (max-width: 768px) {
+	.zrow {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+		  "Meta"
+		  "Main";
+	}
+}
+
+.zcol-md-9 { grid-area: Main; }
+.zcol-md-3 { grid-area: Meta; }
+
+
+</style>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e5c88887c797629a51dada01a8a2855bd91188fe">e5c8888</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/events/2024-06-18-FAIR-data-management.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ef2bff8a.js'></script>
+
+	
+	
+
+    </body>
+</html>
