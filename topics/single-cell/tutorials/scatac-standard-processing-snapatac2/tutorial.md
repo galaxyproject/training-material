@@ -38,9 +38,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
-
-
-sdfsfSingle-cell {ATAC-seq} (scATAC-seq) analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin. 
+Single-cell {ATAC-seq} (scATAC-seq) analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin. 
 By analyzing which genomic sites have an _open_ chromatin state, cell-type specific patterns of gene accessibility can be determined. 
 Single cell ATAC-seq is particularly usefull for analyzing tissue containing different cell populations, such as peripheral blood mononuclear cells (PBMC's). 
 
