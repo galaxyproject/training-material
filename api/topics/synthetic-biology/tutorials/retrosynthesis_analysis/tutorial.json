@@ -146,7 +146,7 @@
       "name": "RetroSynthesis",
       "title": "RetroSynthesis",
       "test_results": null,
-      "modified": "2024-06-04 15:46:50 +0000",
+      "modified": "2024-06-04 16:10:02 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nTarget to produce\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"Pick SBML Model\"];\n  dc7acc73-6d5a-4cbb-a8a2-d10a8bd38914[\"Output\\nPick SBML Model - iML1515\"];\n  1 --> dc7acc73-6d5a-4cbb-a8a2-d10a8bd38914;\n  style dc7acc73-6d5a-4cbb-a8a2-d10a8bd38914 stroke:#2c3143,stroke-width:4px;\n  2[\"RRules Parser\"];\n  9fc1e94f-34ea-4173-bdb1-3ecbef49efe3[\"Output\\nRRules Parser(retro, d=['2', '4', '6', '8', '10', '12', '14', '16'])\"];\n  2 --> 9fc1e94f-34ea-4173-bdb1-3ecbef49efe3;\n  style 9fc1e94f-34ea-4173-bdb1-3ecbef49efe3 stroke:#2c3143,stroke-width:4px;\n  3[\"Sink from SBML\"];\n  1 -->|sbml_model| 3;\n  4[\"RetroPath2.0\"];\n  2 -->|out_rules| 4;\n  3 -->|sink| 4;\n  0 -->|output| 4;\n  5[\"RP2paths\"];\n  4 -->|Reaction_Network| 5;\n  6[\"Complete Reactions\"];\n  4 -->|Reaction_Network| 6;\n  5 -->|compounds| 6;\n  5 -->|master_pathways| 6;\n  3 -->|sink| 6;"
     }
   ],
