@@ -87,13 +87,13 @@ the page, so try to make them informative and concise!
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the `genes.tsv`, `barcodes.tsv` and `matrix.mtx` from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
+> 2. Import the `fragments_file.tsv`, `chrom_sizes.txt` and `gene_annotation.gtf.gz` from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
 >
->Warning! Insert correct files
+>
 >    ```
->    {{ page.zenodo_link }}/files/genes.tsv
->    {{ page.zenodo_link }}/files/barcodes.tsv
->    {{ page.zenodo_link }}/files/matrix.mtx
+>    {{ page.zenodo_link }}/files/atac_pbmc_5k_nextgem_fragments.tsv
+>    {{ page.zenodo_link }}/files/chrom_sizes.txt
+>    {{ page.zenodo_link }}/files/gencode.v46.annotation.gtf.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -101,9 +101,35 @@ the page, so try to make them informative and concise!
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Inspect the `matrix` file
+>
+> <details-title>Renaming the input datasets </details-title>
+> - {% icon galaxy-pencil %}**Rename** the file "atac_pbmc_5k_nextgem_fragments.tsv" to "fragments_file.tsv"
+>- {% icon galaxy-pencil %}**Rename** the file "gencode.v46.annotation.gtf.gz" to "gene_annotation.gtf.gz"
+>{: .details}
+> 4. Inspect the `fragments_file` 
 {: .hands_on}
 
+> <question-title></question-title>
+>
+> ```
+> 32738	2700	2286884
+> 32709	1	4
+> 32707	1	1
+> 32706	1	10
+> 32704	1	1
+> ```
+>
+> 1. How many non-zero values are in the matrix?
+> 2. How many counts are found for the 32,706th gene in the 1st cell?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. There are 2,286,884 (2.6%) non-zero values for the 88,392,600 possible counts of the 32,738 genes (rows) and 2,700 cells (columns).
+> > 2. 10 counts are found for the 32,706th row and 1st column.
+> >
+> {: .solution}
+>
+{: .question}
 
 # Hands-on Sections
 Below are a series of hand-on boxes, one for each tool in your workflow file.
