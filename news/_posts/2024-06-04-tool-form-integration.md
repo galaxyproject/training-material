@@ -6,6 +6,7 @@ contributions:
 tags:
   - gtn
   - new feature
+  - already-on-hub
 abbreviations:
   GTN: Galaxy Training Network
 cover: news/images/2024-06-04-tool-form-integration.png

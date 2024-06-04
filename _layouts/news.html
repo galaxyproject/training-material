@@ -23,7 +23,9 @@ layout: page
 {% include _includes/contributors-line.html page=page %}
 
 {% for tag in page.tags %}
+{% if tag != "already-on-hub" %}
 <span class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+{% endif %}
 {% endfor %}
 
 <hr/>
