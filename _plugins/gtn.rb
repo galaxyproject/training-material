@@ -646,6 +646,51 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
+    ##
+    # Get the list of 'upcoming' events (i.e. reg deadline or start is 30 days away.)
+    # Params:
+    # +site+:: The site object
+    # Returns:
+    # +Array+:: List of events
+    #
+    # Example:
+    #  {{ site | get_upcoming_events }}
+    def get_upcoming_events(site)
+      cache.getset('upcoming-events') do
+        upcoming_events = site.pages
+          .select{|p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }
+          .reject{|p| p.data['program'].nil? } # Only those with programs
+          .select{|p| p.data['event_upcoming'] == true } # Only those coming soon
+          .map{|p| 
+            materials = p.data['program']
+                         .map{|section| section['tutorials']}
+                         .flatten
+                         .reject{|x| x.nil?} # Remove nil entries
+                         .reject{|x| x.fetch('type', nil) == 'custom'} # Remove custom entries
+                         .map{|x| "#{x['topic']}/#{x['name']}"} # Just the material IDs.
+                         .sort.uniq
+            [p, materials]
+          }
+      end
+    end
+
+
+    ##
+    # Get the list of 'upcoming' events that include this material's ID
+    # Params:
+    # +site+:: The site object
+    # +material+:: The 'material' to get the topic of, it will inspect page.id (use new_material)
+    # Returns:
+    # +Array+:: List of events
+    #
+    # Example:
+    #  {{ site | get_upcoming_events }}
+    def get_upcoming_events_for_this(site, material)
+      get_upcoming_events(site)
+        .select{|p, materials| materials.include? material['id']}
+        .map{|p, materials| p}
+    end
+
     def shuffle(array)
       array.shuffle
     end
@@ -668,7 +713,7 @@ module Jekyll
 
       if site.data.key?(topic_id)
         if site.data[topic_id].is_a?(Hash) && site.data[topic_id].key?('title')
-          og_title = [site.data[topic_id]['title']]
+          og_title = [site.data[topic_id]['title'].clone]
         else
           Jekyll.logger.warn "Missing title for #{topic_id}"
         end
@@ -701,9 +746,9 @@ module Jekyll
       when 'learning-pathway'
         og_title.push "Learning Pathway: #{page['title']}"
       when 'tutorial_hands_on'
-        og_title[-1]&.prepend 'Hands-on: '
+        og_title.push "Hands-on: #{page['title']}"
       when /slides/
-        og_title[-1]&.prepend 'Slide Deck: '
+        og_title.push "Slides: #{page['title']}"
       else
         og_title.push page['title']
       end
@@ -738,6 +783,30 @@ module Jekyll
 
     def group_icons(icons)
       icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
+    end
+
+    def materials_for_pathway(page)
+      if page.is_a?(Jekyll::Page)
+        d = page.data.fetch('pathway', [])
+      else
+        d = page.fetch('pathway', [])
+      end
+
+      d.map do |m|
+        m.fetch('tutorials', [])
+          .select { |t| t.has_key?('name') && t.has_key?('topic') }
+          .map {|t| [t['topic'], t['name']] }
+      end.flatten.compact.sort.uniq
+    end
+
+    def find_learningpaths_including_topic(site, topic_id)
+      site.pages
+        .select{|p| p['layout'] == 'learning-pathway'}
+        .select do |p|
+          materials_for_pathway(p)
+            .map{|topic, _tutorial| topic}
+            .include?(topic_id)
+        end
     end
     # rubocop:enable Naming/PredicateName
   end
@@ -877,6 +946,19 @@ Jekyll::Hooks.register :site, :post_read do |site|
                             else
                               (page.data['date_end'] - page.data['date_start']).to_i + 1
                             end
+
+    # reg deadline
+    if page.data.key?('registration') && page.data['registration'].key?('deadline')
+      deadline = page.data['registration']['deadline']
+    else
+      deadline = page.data['date_start']
+    end
+
+    # If it's an 'upcoming event'
+    if deadline - 30 <= Date.today && Date.today <= deadline
+      page.data['event_upcoming'] = true
+    end
+
   end
 end
 

@@ -18,6 +18,10 @@ module Jekyll
     end
 
     def render(context)
+      if Jekyll.env != 'production'
+        Jekyll.logger.info '[GTN/Search] Skipping search generation in development'
+        return
+      end
       Jekyll.logger.info '[GTN/Search]'
 
       site = context.registers[:site]
