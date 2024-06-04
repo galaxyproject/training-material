@@ -15,7 +15,7 @@ tags:
 abbreviations:
   GTN: Galaxy Training Network
 cover: news/images/2024-06-04-tool-form-integration.png
-cover-alt: section in the Galaxy Tool Form titled "Tutorials" listing all 13 GTN tutorials which use the cat tool
+coveralt: section in the Galaxy Tool Form titled "Tutorials" listing all 13 GTN tutorials which use the cat tool
 ---
 
 For many tools in Galaxy, the GTN offers a variety of guides, practical examples, and help throughout it's many tutorials.
