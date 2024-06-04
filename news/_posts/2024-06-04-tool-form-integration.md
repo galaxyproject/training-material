@@ -2,7 +2,12 @@
 title: Integrating the Galaxy Training Network into the Tool Form
 layout: news
 contributions:
-  authorship: ElectronicBlueberry
+  authorship:
+  - ElectronicBlueberry
+  editing:
+  - dannon
+  infrastructure:
+  - ElectronicBlueberry
 tags:
   - gtn
   - new feature
