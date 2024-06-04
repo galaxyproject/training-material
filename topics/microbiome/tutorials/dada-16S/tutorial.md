@@ -47,7 +47,7 @@ edam_ontology:
 
 The investigation of environmental microbial communities and microbiomes has been revolutionized by the 
 development of high-throughput amplicon sequencing. In amplicon sequencing a particular genetic locus, 
-for example the 16S rRNA gene in bacteria, is amplified from DNA extracted from the community of interest, 
+for example the 16S rRNA gene (or a part of it) in bacteria, is amplified from DNA extracted from the community of interest, 
 and then sequenced on a next-generation sequencing platform. This technique removes the need to culture 
 microbes in order to detect their presence, and cost-effectively provides a deep census of a microbial community.
 
@@ -276,7 +276,7 @@ We start by visualizing the quality profiles of the forward reads:
 > 1. Inspect **plotQualityProfile** forward read output
 {: .hands_on}
 
-![Quality Profiles for every samples with read length on the X-axis and Quality score on the Y-axis](./images/plotQualityProfile_forward.png)
+![Quality Profiles for the forward reads of all samples with read length on the X-axis and Quality score on the Y-axis](./images/plotQualityProfile_forward.png)
 
 In gray-scale is a heatmap of the frequency of each quality score at each base position. The mean quality score at each position is shown by the green line, and the quartiles of the quality score distribution by the orange lines. The red line shows the scaled proportion of reads that extend to at least that position (this is more useful for other sequencing technologies, as Illumina reads are typically all the same length, hence the flat red line).
 
@@ -293,7 +293,7 @@ In gray-scale is a heatmap of the frequency of each quality score at each base p
 > > 2. These quality profiles do not suggest that any additional trimming is needed. We will truncate the forward reads at position 240 (trimming the last 10 nucleotides).
 > > 3. The reverse reads are of significantly worse quality, especially at the end, which is common in Illumina sequencing. This isn’t too worrisome, as DADA2 incorporates quality information into its error model which makes the algorithm robust to lower quality sequence, but trimming as the average qualities crash will improve the algorithm’s sensitivity to rare sequence variants.
 > > 
-> >    ![Quality Profiles for every samples with read length on the X-axis and Quality score on the Y-axis](./images/plotQualityProfile_reverse.png)
+> >    ![Quality Profiles for the reverse reads of all samples with read length on the X-axis and Quality score on the Y-axis](./images/plotQualityProfile_reverse.png)
 > >    
 > > 4. Based on the profiles, we will truncate the reverse reads at position 160 where the quality distribution crashes.
 > > 
@@ -525,7 +525,7 @@ We can look at the number of true sequence variants from unique sequences have b
 
 ## Merge paired reads
 
-We now merge the forward and reverse reads together to obtain the full denoised sequences. Merging is performed by aligning the denoised forward reads with the reverse-complement of the corresponding denoised reverse reads, and then constructing the merged "contig" sequences. By default, merged sequences are only output if the forward and reverse reads overlap by at least 12 bases, and are identical to each other in the overlap region (but these conditions can be changed via function arguments).
+We now merge the forward and reverse reads together to obtain the full denoised sequences. Merging is performed by aligning the denoised forward reads with the reverse-complement of the corresponding denoised reverse reads, and then constructing the merged "contig" sequences. By default, merged sequences are only output if the forward and reverse reads overlap by at least 12 bases, and are identical to each other in the overlap region (but these conditions can be changed via tool parameters).
 
 <div class="Step-by-step" markdown="1">
 
