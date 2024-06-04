@@ -18,7 +18,7 @@ key_points:
 - with enough metadata the data can be visualised w.r.t. groups and facets 
 contributors:
 - lenaarenot
-- contributor2
+- paulzierep
 
 ---
 
