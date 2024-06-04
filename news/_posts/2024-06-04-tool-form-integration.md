@@ -23,5 +23,4 @@ For an example check out the [Concatenate Datasets tool](https://usegalaxy.eu/?t
 
 If this section does not appear on your Galaxy server, there may be no tutorials available for the tool you are currently using, or this feature may not be enabled.
 
-The GTN integration does not have to use the official GTN.
-Set-up correctly, it can also point to an internal help-site or wiki.
+The GTN integration doesn't need to use the official GTN. Configuration settings are available to allow it to link to an internal help site or wiki.
