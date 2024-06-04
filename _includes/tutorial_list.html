@@ -1,6 +1,12 @@
-<table class="table table-responsive table-striped">
+{% assign page = include.page %}
+{% assign responsive = include.responsive | default:true %}
+
+<table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
+      {% if page.layout == 'event' and page.async != true %}
+      <th scope="col">Time</th>
+      {% endif %}
       <th scope="col">Lesson</th>
       <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
       <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
@@ -25,6 +31,14 @@
       <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
 
         <tr>
+          {% if page.layout == 'event' and page.async != true %}
+          <td>{{material.time}}</td>
+          {% endif %}
+
+          {% if material.layout == 'custom' %} <!-- e.g. for events -->
+            <td> {{material.title}} </td>
+            <td colspan="3"> {{material.description | markdownify }}</td>
+          {% else %}
           <td class="tutorial_title">
             {% assign default_resource_url = material | get_default_link %}
             {% if default_resource_url %}
@@ -51,7 +65,7 @@
             {% endif %}
             </div>
 
-            <div class="duplicate">
+            <div class="duplicate" style="display: none;">
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               {% include _includes/resource-slides.html material=material topic=topic.name %}
               {% include _includes/resource-handson.html material=material topic=topic.name %}
@@ -81,11 +95,28 @@
           {% if instances[topic.name].supported %}
           <td> {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %} </td>
           {% endif %}
+         {% endif %} <!-- not custom session -->
          </tr>
        {% endif %}
     {% endfor %}
   </tbody>
 </table>
 
-
-
+{% if responsive %}
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+{% endif %}
