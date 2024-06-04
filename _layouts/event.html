@@ -118,8 +118,8 @@ layout: base
     {% for section in event.program %}
         {% if section.subsection %}
         <h4 id="{{ section.section | slugify }}">{{ section.section }}</h4>
-        {% else %}
-        <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
+        {% elsif section.section != nil %}
+        <h3 id="{{ section.section | slugify }}">{{ section.section | inspect }}</h3>
         {% endif %}
         <p>{{ section.description | markdownify }}</p>
 
