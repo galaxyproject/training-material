@@ -103,17 +103,20 @@ layout: base
 
   <!-- Programme Tab -->
   <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
-    <h2> Program </h2>
+
+
     {% if event.external %}
        For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
     {% else %}
 
-    {% if event.infrastructure %}
-    Before starting the course, make sure to follow the setup instructions
-    <br><br>
+     {% if event.infrastructure %}
+     <h3> Before you start </h3>
+     <p>Before starting the course, make sure to follow the setup instructions</p>
 
     <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
+    <h3> Start the Course </h3>
     {% endif %}
+
 
     {% for section in event.program %}
         {% if section.subsection %}
