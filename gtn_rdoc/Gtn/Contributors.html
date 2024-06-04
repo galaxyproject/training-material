@@ -320,12 +320,12 @@
             <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_authors</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
-    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>] <span class="ruby-operator">||</span> []
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>)
-    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-string">&#39;authorship&#39;</span>]
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-string">&#39;authorship&#39;</span>] <span class="ruby-operator">||</span> []
+  <span class="ruby-keyword">else</span>
+    []
   <span class="ruby-keyword">end</span>
-
-  []
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
