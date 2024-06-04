@@ -102,10 +102,10 @@ the page, so try to make them informative and concise!
 >
 > 3. Rename the datasets
 >
-> <details-title>Renaming the input datasets </details-title>
-> - {% icon galaxy-pencil %}**Rename** the file "atac_pbmc_5k_nextgem_fragments.tsv" to "fragments_file.tsv"
->- {% icon galaxy-pencil %}**Rename** the file "gencode.v46.annotation.gtf.gz" to "gene_annotation.gtf.gz"
->{: .details}
+ > <details-title>Renaming the input datasets </details-title>
+ > - {% icon galaxy-pencil %}**Rename** the file "atac_pbmc_5k_nextgem_fragments.tsv" to "fragments_file.tsv"
+> > - {% icon galaxy-pencil %}**Rename** the file "gencode.v46.annotation.gtf.gz" to "gene_annotation.gtf.gz"
+> > {: .details}
 > 4. Inspect the `fragments_file` 
 {: .hands_on}
 
