@@ -234,7 +234,7 @@ layout: base
 
                 <div class="newstable">
                 <div class="list-group">
-                 {% assign events = site.pages |  where: "layout", "event" | where: "not_started", true %}
+                 {% assign events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where: "not_started", true | sort: 'date_start' %}
                  {% assign events_length = events | size %}
                  {% if events_length == 0 %}
                  <p>No known upcoming events.</p>
