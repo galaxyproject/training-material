@@ -815,17 +815,6 @@ end
 Liquid::Template.register_filter(Jekyll::GtnFunctions)
 
 ##
-# This does post-modification to every page
-# Mapping the authors to their human names, and copying the cover (when present) to 'image'
-#
-# This exists because the jekyll-feed plugin expects those fields to look like that.
-Jekyll::Hooks.register :posts, :pre_render do |post, _out|
-  post.data['author'] = Gtn::Contributors.get_authors(post.data).map do |c|
-    Gtn::Contributors.fetch_name(post.site, c)
-  end.join(', ')
-  post.data['image'] = post.data['cover']
-end
-
 # We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
 Jekyll::Hooks.register :site, :pre_render do |site|
   site.posts.docs.each do |post|
@@ -959,6 +948,16 @@ Jekyll::Hooks.register :site, :post_read do |site|
       page.data['event_upcoming'] = true
     end
 
+  end
+
+  # This exists because the jekyll-feed plugin expects those fields to look like that.
+  posts.each do |post|
+    post.data['author'] = Gtn::Contributors.get_authors(post.data).map do |c|
+      Gtn::Contributors.fetch_name(post.site, c)
+    end.join(', ')
+    if post.data.key? 'cover'
+      post.data['image'] = post.data['cover']
+    end
   end
 end
 

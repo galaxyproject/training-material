@@ -30,12 +30,12 @@ module Gtn
     # +Array+ of contributor IDs
     def self.get_authors(data)
       if data.key?('contributors')
-        data['contributors']
+        data['contributors'] || []
       elsif data.key?('contributions')
-        data['contributions']['authorship']
+        data['contributions']['authorship'] || []
+      else
+        []
       end
-
-      []
     end
 
     ##
