@@ -170,14 +170,14 @@ def generate_event_feeds(site)
             xml.georss('point', "#{lat} #{lon}")
           end
 
-          Gtn::Contributors.get_authors(page.data).each do |c|
+          Gtn::Contributors.get_organisers(page.data).each do |c|
             xml.author do
               xml.name(Gtn::Contributors.fetch_name(site, c))
               xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
             end
           end
 
-          Gtn::Contributors.get_non_authors(page.data).each do |c|
+          Gtn::Contributors.get_instructors(page.data).each do |c|
             xml.contributor do
               xml.name(Gtn::Contributors.fetch_name(site, c))
               xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
