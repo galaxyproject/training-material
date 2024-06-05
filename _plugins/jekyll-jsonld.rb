@@ -349,7 +349,7 @@ module Jekyll
         endDate: page['date_end'],
         organizer: organisers, # TeSS only, US spelling, non-standard
 
-        # location: nil, # TODO, TeSS location
+        location: page['location'], # TODO, TeSS location
         teaches: learning_objectives, # TeSS, "learning objectives"
         # timeRequired: 'P1D', # TeSS, "duration", TODO: calculate from start/end date, not implemented in scraper currently.
 
