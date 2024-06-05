@@ -466,6 +466,145 @@ module Jekyll
     end
 
     ##
+    # Generate the JSON-LD metadata for a learning pathway
+    # Parameters:
+    # +page+:: The page object.
+    # +site+:: The +Jekyll::Site+ site object.
+    # Returns:
+    # +Hash+:: The JSON-LD metadata.
+    def generate_learning_pathway_jsonld(page, site)
+      materials = []
+      page['pathway'].each do |section|
+        if !section.key? 'tutorials'
+          next
+        end
+
+        section['tutorials'].each do |tutorial|
+          if tutorial.key?('custom')
+            next
+          end
+
+          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+          materials.push(material)
+        end
+      end
+      materials.compact!
+
+      # Extract EDAM terms from all materials
+      edam_terms = materials.map do |material|
+        material.fetch('edam_ontology', []).map do |term|
+          {
+            '@type': 'DefinedTerm',
+            '@id': "http://edamontology.org/#{term}",
+            inDefinedTermSet: 'http://edamontology.org',
+            termCode: term,
+          }
+        end
+      end.flatten.uniq
+
+      learning_objectives = materials.map do |material|
+        material.fetch('objectives', [])
+      end.flatten.compact
+
+      # TODO: add topic edam terms too? Not sure.
+      parts = []
+      materials.each do |material|
+        mat = generate_material_jsonld(material, site['data'][material['topic_name']], site)
+        if !mat.nil? && !mat.empty?
+          parts.push(mat)
+        end
+      end
+
+      syllab = page['pathway'].reject { |s| s['section'].nil? }.map do |section|
+        {
+          '@type': 'Syllabus',
+          name: section['section'],
+          description: section.fetch('description', nil),
+        }
+      end
+
+      data = {
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        url: "#{site['url']}#{site['baseurl']}#{page['url']}",
+        name: "Learning Pathway " + page['title'],
+        keywords: page['tags'] || [],
+        description: page['description'],
+        about: edam_terms, # TeSS, "scientific topics".
+        audience: page['audience'], # TeSS: target audience
+        teaches: learning_objectives, # TeSS, "learning objectives"
+        availableLanguage: ['en'], # TODO: support other languages
+        inLanguage: ['en'], # TODO: support other languages
+        # courseCode
+        # coursePrerequisites
+        # educationalCredentialAwarded
+        # financialAidEligible
+        # hasCourseInstance
+        # numberOfCredits
+        # occupationalCredentialAwarded
+        # syllabusSections
+        # totalHistoricalEnrollment
+
+        # assesses
+        # competencyRequired
+        # educationalAlignment
+        # educationalLevel
+        # educationalUse
+        # learningResourceType
+        # teaches
+
+        # funder: funders, # Org or person
+        # funding: funding, # Grant
+        publisher: GTN,
+        provider: GTN,
+        syllabusSections: syllab,
+        # Session materials
+        # TODO: not currently parsed by TeSS, google just complains about it, so we're leaving it out.
+        # hasPart: parts,
+      }
+
+      begin
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page.path)
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page.path)
+      rescue StandardError
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page['path'])
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page['path'])
+      end
+
+      if page['cover']
+        data['image'] = if page['cover'] =~ /^http/
+                          [page['cover']]
+                        else
+                          ["#{site['url']}#{site['baseurl']}#{page['cover']}"]
+                        end
+      end
+
+      # We CANNOT guarantee A11Y
+      # data.update(A11Y)
+      data['isAccessibleForFree'] = true
+      offer = {
+        '@type': 'Offer',
+        price: 0,
+        priceCurrency: 'EUR',
+        category: 'Free',
+        isAccessibleForFree: true,
+      }
+      data['offers'] = [offer]
+
+      # TODO: this is basically just wrong.
+      data['hasCourseInstance'] = [
+        {
+          '@type': 'CourseInstance',
+          courseMode: "online",
+          offers: offer,
+          isAccessibleForFree: data['isAccessibleForFree'],
+        }
+      ]
+
+      JSON.pretty_generate(data)
+    end
+
+    ##
     # Convert a material to JSON-LD, intended to be used in Jekyll Liquid templates.
     # Parameters:
     # +material+:: The material object.
