@@ -15,12 +15,17 @@ on:
       - 'learning-pathways/*'
       - 'faqs/**'
       - 'news/**'
+      - 'events/**'
+      - CONTRIBUTORS.yaml
+      - FUNDERS.yaml
+      - ORGANISATIONS.yaml
+
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
@@ -29,14 +34,14 @@ jobs:
           reviewdog_version: latest
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.7'
+          python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/cache@v2
+          ruby-version: "3.2"
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle

@@ -29,8 +29,8 @@ layout: base
     </div>
     {% endif %}
 
-    <div class="row">
-	    <div class="col-md-9">
+    <div class="zrow">
+	    <div class="zcol-md-9">
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
@@ -94,7 +94,7 @@ layout: base
 
 
 	{% if event.contributions.funding %}
-	{% include _includes/funding-statement.md contributions=page.contributions %}
+	{% include _includes/funding-statement.md funders=page.contributions.funding %}
 	{% endif %}
 
 </section>
@@ -103,29 +103,32 @@ layout: base
 
   <!-- Programme Tab -->
   <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
-    <h2> Program </h2>
+
+
     {% if event.external %}
        For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
     {% else %}
 
-    {% if event.infrastructure %}
-    Before starting the course, make sure to follow the setup instructions
-    <br><br>
+     {% if event.infrastructure %}
+     <h3> Before you start </h3>
+     <p>Before starting the course, make sure to follow the setup instructions</p>
 
     <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
     {% endif %}
 
+
     {% for section in event.program %}
         {% if section.subsection %}
         <h4 id="{{ section.section | slugify }}">{{ section.section }}</h4>
-        {% else %}
+        {% elsif section.section != nil %}
         <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
         {% endif %}
         <p>{{ section.description | markdownify }}</p>
 
 	{% if section.tutorials %}
+        {% assign hidetimes= section.async | default: page.async %}
         {% assign material_list = site | convert_to_material_list: section.tutorials %}
-	{% include _includes/tutorial_list.html sub=material_list page=page %}
+	{% include _includes/tutorial_list.html sub=material_list page=page responsive=false async=hidetimes customheader=section.custom %}
 	{% endif %}
     {% endfor %}
     {% endif %}
@@ -144,7 +147,7 @@ layout: base
     <div class="card setup-card">
 	  <div class="row no-gutters">
 		<div class="col-sm-3">
-		  <img src="{% link assets/images/galaxylogo.png %}" class="card-img" alt="Galaxy logo" style="width: 70%">
+		  <img src="{% link assets/images/galaxylogo.png %}" class="card-img" alt="Galaxy logo" style="max-height: 10em">
 		</div>
 		<div class="col-sm-9">
 		  <div class="card-body">
@@ -174,7 +177,7 @@ layout: base
     <div class="card setup-card">
 	  <div class="row no-gutters">
 		<div class="col-sm-3">
-		  <img src="{% link assets/images/galaxy-for-trainers.svg %}" class="card-img" alt="TIaaS" style="width:70%">
+		  <img src="{% link assets/images/galaxy-for-trainers.svg %}" class="card-img" alt="cartoon of a person standing in front of a blackboard" style="max-height: 10em">
 		</div>
 		<div class="col-sm-9">
 		  <div class="card-body">
@@ -208,7 +211,7 @@ layout: base
     <div class="card setup-card">
 	  <div class="row no-gutters">
 		<div class="col-sm-3">
-		  <img src="{% link assets/images/galaxy-for-developers.svg %}" class="card-img" alt="Galaxy logo">
+		  <img src="{% link assets/images/galaxy-for-developers.svg %}" class="card-img" alt="cartoon of a person leaning against a laptop" style="max-height:10em">
 		</div>
 		<div class="col-sm-9">
 		  <div class="card-body">
@@ -266,42 +269,6 @@ layout: base
 <section>
 	<h2>Instructor Zone</h2>
 
-	<h3>Promote the Event</h3>
-
-	<p>Tootable/Tweetable version:</p>
-<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-{{ event.title }}! 📢
-
-{{ page.description }}
-
-📅 {{ event | collapse_date_pretty }}
-➡️ {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
-{%- if event.registration.link %}
-📝 Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
-{% endif %}
-</code></pre></div>      </div>
-
-<h3> Also add your event to the Galaxy Hub </h3>
-<p>
-To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
-</p>
-
-<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
-<code>---
-title: "{{event.title}}"
-date: '{{event.date_start}}'
-days: {{event.duration}}
-tease: {{event.description}}
-#continent: EU
-location: "{{event.location.name}}{%if event.location.city %},{{event.location.city}}{%endif%}{% if event.location.coutnry %}, {{event.location.country}}{% endif %}"
-external_url: "{{site.url}}{{site.baseurl}}{{ page.url }}"
-gtn: true
-contact: "{{event.contact_email}}"
-subsites: [all]
----
-</code></pre></div></div>
-
-	<h3>Get Set Up</h3>
 	<p>
 	Check out our checklists for
 	</p>
@@ -312,7 +279,7 @@ subsites: [all]
 
 
 	{% if event.infrastructure %}
-	<h4>TIaaS</h4>
+	<h4>Request TIaaS</h4>
 	<p>Training Infrastructure as a Service (TIaaS) is a service that allows you to request space for your course on a server, it helps ensure courses run smoothly by separating your trainee's jobs into a separate queue. <a href="{% link topics/teaching/tutorials/setup-tiaas-for-training/tutorial.md %}">Learn more about TIaaS in our tutorial</a>.</p>
 	<p>The following links will open a (mostly) pre-filled out TIaaS form, <emph>if that server supports TIaaS</emph>. Otherwise you might see "page not found".</p>
 	<p>Once you receive a URL from the admins, please set it as a <code>tiaas_link</code> in your event metadata.</p>
@@ -336,17 +303,91 @@ subsites: [all]
 	{% endfor %}
 	</ul>
 	{% endif %}
+
+
+<h3> Add your event to the Galaxy Hub Event Horizon </h3>
+<p>
+To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
+</p>
+
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code>---
+title: "{{event.title}}"
+date: '{{event.date_start}}'
+days: {{event.duration}}
+tease: {{event.description}}
+#continent: EU
+location: "{{event.location.name}}{%if event.location.city %},{{event.location.city}}{%endif%}{% if event.location.coutnry %}, {{event.location.country}}{% endif %}"
+external_url: "{{site.url}}{{site.baseurl}}{{ page.url }}"
+gtn: true
+contact: "{{event.contact_email}}"
+subsites: [all]
+---
+</code></pre></div></div>
+
+
+	<h3>Promote the Event</h3>
+
+	<p><abbr title="Tooting is the verb used when posting to mastodon or the fediverse, which are like open source twitter.">Tootable</abbr>/Tweetable version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+📅 {{ event | collapse_date_pretty }}
+➡️ {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+📝 Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+	<p>Slack-compatible version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+:calendar: {{ event | collapse_date_pretty }}
+:arrow_right: {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+:pencil: Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+	<p>Version with schedule:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+**Agenda**:
+{% for section in event.program -%}
+{%- unless section.subsection -%}
+- {{ section.section }}
+{% endunless -%}
+{%- endfor %}
+📅 {{ event | collapse_date_pretty }}
+➡️ {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+📝 Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+
 </section>
 
   </div>
 </div>
 
 	</div> <!-- col-md-9 -->
-	<div class="col-md-3">
+	<div class="zcol-md-3">
 
         <img class="event-image" src="{{site.baseurl}}/{{event.cover-image | default: '/assets/images/GTN-event-logo.png' }}" alt="{{event.cover-image-alt | default: 'event logo' }}">
         {% assign enddate = event.date_end | default: event.date_start %}
 		{% assign passed = enddate | is_date_passed %}
+
+        {% unless event.external %}
+
 		{% if passed %}
 		<span class="btn btn-primary btn-lg btn-block disabled">Event is Over</span>
 		{% else %}
@@ -358,7 +399,7 @@ subsites: [all]
 		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
           {% endif %}
 		{% endif %}
-
+        {% endunless %}
 		<hr/>
 
 		<table>
@@ -381,6 +422,14 @@ subsites: [all]
 		{% for org in event.contributions.organisers %}
 			{% include _includes/contributor-badge-inline.html id=org %}
 		{% endfor %}
+
+        {% if event.contributions.instructors.size < 10 %}
+        <br/><br/><b>Instructors</b><br/>
+            {% for instructor in event.contributions.instructors %}
+			{% include _includes/contributor-badge-inline.html id=instructor %}
+		{% endfor %}
+
+        {% endif %}
 
         {% if event.contributions.funding %}
 		<hr />
@@ -432,7 +481,25 @@ $('#myTab button[data-target="' + hash + '"]').tab('show');
 </script>
 
 <style>
-:target {
-    scroll-margin-top: 24em;
+.zrow {
+	display: grid;
+	grid-template-rows: 1fr;
+	gap: 1em 1em;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-areas:
+	  "Main Main Main Meta";
 }
+@media (max-width: 768px) {
+	.zrow {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+		  "Meta"
+		  "Main";
+	}
+}
+
+.zcol-md-9 { grid-area: Main; }
+.zcol-md-3 { grid-area: Meta; }
+
+
 </style>

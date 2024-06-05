@@ -234,13 +234,13 @@ layout: base
 
                 <div class="newstable">
                 <div class="list-group">
-                 {% assign events = site.pages |  where: "layout", "event" | where: "not_started", true %}
+                 {% assign events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where: "not_started", true | sort: 'date_start' %}
                  {% assign events_length = events | size %}
                  {% if events_length == 0 %}
                  <p>No known upcoming events.</p>
                  {% else %}
                  {% for event in events limit: 5 %}
-                 <a class="list-group-item" href="{{ event.url | prepend: site.baseurl }}">
+                 <a class="list-group-item" href="{% if event.external %}{{event.external}}{% else %}{{event.url | prepend: site.baseurl }}{% endif %}">
                    <p class="list-group-item-text">{{ event | collapse_date_pretty }}</p>
                    <div class="list-group-item-heading"> {{ event.title | escape }} </div>
                  </a>
