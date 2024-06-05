@@ -11,6 +11,8 @@ contributions:
     - hexylena
 ---
 
+<!-- GTN:IGNORE:003 -->
+
 The GTN loves leveraging existing standards for both old and new purposes. One of our favourite standards that we adhere to is providing an RSS/Atom news feed for sharing news and events and updates!
 
 ## Why RSS/Atom?
