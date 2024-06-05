@@ -240,7 +240,7 @@ layout: base
                  <p>No known upcoming events.</p>
                  {% else %}
                  {% for event in events limit: 5 %}
-                 <a class="list-group-item" href="{{ event.url | prepend: site.baseurl }}">
+                 <a class="list-group-item" href="{% if event.external %}{{event.external}}{% else %}{{event.url | prepend: site.baseurl }}{% endif %}">
                    <p class="list-group-item-text">{{ event | collapse_date_pretty }}</p>
                    <div class="list-group-item-heading"> {{ event.title | escape }} </div>
                  </a>
