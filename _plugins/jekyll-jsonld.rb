@@ -299,7 +299,6 @@ module Jekyll
 
       # Extract EDAM terms from all materials
       edam_terms = materials.map do |material|
-
         material.fetch('edam_ontology', []).map do |term|
           {
             '@type': 'DefinedTerm',
@@ -323,7 +322,7 @@ module Jekyll
         end
       end
 
-      syllab = page['program'].reject{|s| s['section'].nil?}.map do |section|
+      syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
         {
           '@type': 'Syllabus',
           name: section['section'],

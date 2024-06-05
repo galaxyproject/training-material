@@ -18,7 +18,7 @@ Jekyll::Hooks.register :site, :post_read do |site|
 
       Jekyll.logger.info "[GTN/Bundler] Analysing JS Bundle #{name} => #{bundle_timestamp} / #{hash}"
     else
-      Jekyll.logger.info "[GTN/Bundler] Serving plain JS"
+      Jekyll.logger.info '[GTN/Bundler] Serving plain JS'
     end
   end
 end
@@ -92,6 +92,7 @@ module Jekyll
     def load_bundle_dev(name)
       bundle = @context.registers[:site].config['javascript_bundles'][name]
       raise "Bundle #{name} not found in site config" if bundle.nil?
+
       Jekyll.logger.debug "[GTN/Bundler] Bundle #{bundle}"
 
       baseurl = @context.registers[:site].config['baseurl']

@@ -12,7 +12,7 @@ def collapse_event_date_pretty(event)
         event['date_end']
       end
   # want dates like "Mar 22-25, 2024" or "Mar 22-May 1, 2024"
-  dash = " – " # thin space, en dash, thin space
+  dash = ' – ' # thin space, en dash, thin space
   if s.year == e.year
     if s.month == e.month
       if s.day == e.day
