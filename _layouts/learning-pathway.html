@@ -12,23 +12,8 @@ layout: base
 {% endif %}
 
 <script type="application/ld+json">
-{
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "{{ pathway.title }}",
-	"description": "{{ pathway.description }}",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
-}
+{{ page | generate_learning_pathway_jsonld: site }}
 </script>
-
-
 
 <section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
     <hgroup>

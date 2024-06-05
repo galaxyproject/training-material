@@ -157,7 +157,13 @@ def generate_event_feeds(site)
 
           # This is a feed of only NEW tutorials, so we only include publication times.
           # xml.published(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
+          xml.published(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
           xml.updated(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
+
+          # TODO: find a better solution maybe with namespaces?
+          # xml.category(term: "starts:#{page.data['date_start'].to_datetime.rfc3339}")
+          # xml.category(term: "ends:#{(page.data['date_end'] || page.data['date_start']).to_datetime.rfc3339}")
+          # xml.category(term: "days:#{page.data['duration']}")
 
           # xml.path(page.path)
           xml.category(term: "new #{page['layout']}")
@@ -170,14 +176,17 @@ def generate_event_feeds(site)
             xml.georss('point', "#{lat} #{lon}")
           end
 
-          Gtn::Contributors.get_authors(page.data).each do |c|
+          Gtn::Contributors.get_organisers(page.data).each do |c|
             xml.author do
               xml.name(Gtn::Contributors.fetch_name(site, c))
               xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+              if page.data['contact_email']
+                xml.email(page.data['contact_email'])
+              end
             end
           end
 
-          Gtn::Contributors.get_non_authors(page.data).each do |c|
+          Gtn::Contributors.get_instructors(page.data).each do |c|
             xml.contributor do
               xml.name(Gtn::Contributors.fetch_name(site, c))
               xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")

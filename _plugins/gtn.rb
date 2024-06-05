@@ -15,9 +15,10 @@ require './_plugins/util'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
-puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
+Jekyll.logger.info "[GTN] Jekyll env: #{Jekyll.env}"
+Jekyll.logger.info "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
 version_parts = RUBY_VERSION.split('.')
-puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if version_parts[0].to_i < 3
+Jekyll.logger.warn '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if version_parts[0].to_i < 3
 
 ##
 # This module contains functions that are used in the GTN, our internal functions that is.
