@@ -232,7 +232,22 @@
                 "left": 840,
                 "top": 215
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "TagDatasetActionforward": {
+                    "action_arguments": {
+                        "tags": "name:forward"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "forward"
+                },
+                "TagDatasetActionreverse": {
+                    "action_arguments": {
+                        "tags": "name:reverse"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "reverse"
+                }
+            },
             "tool_id": "__UNZIP_COLLECTION__",
             "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
@@ -312,22 +327,7 @@
                 "left": 1120,
                 "top": 118
             },
-            "post_job_actions": {
-                "RenameDatasetActionerrors": {
-                    "action_arguments": {
-                        "newname": "errors for forward reads"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "errors"
-                },
-                "RenameDatasetActionplot": {
-                    "action_arguments": {
-                        "newname": "error rates plot for forward reads"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "plot"
-                }
-            },
+            "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/dada2_learnerrors/dada2_learnErrors/1.30.0+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "5fe3edf19b9c",
@@ -370,22 +370,7 @@
                 "left": 1120,
                 "top": 335
             },
-            "post_job_actions": {
-                "RenameDatasetActionerrors": {
-                    "action_arguments": {
-                        "newname": "errors for reverse reads"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "errors"
-                },
-                "RenameDatasetActionplot": {
-                    "action_arguments": {
-                        "newname": "error rates plot for reverse reads"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "plot"
-                }
-            },
+            "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/dada2_learnerrors/dada2_learnErrors/1.30.0+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "5fe3edf19b9c",
@@ -433,15 +418,7 @@
                 "left": 1400,
                 "top": 107
             },
-            "post_job_actions": {
-                "RenameDatasetActiondata_collection": {
-                    "action_arguments": {
-                        "newname": "sample inference for forward reads"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "data_collection"
-                }
-            },
+            "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/dada2_dada/dada2_dada/1.30.0+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "00f5005840fa",
@@ -489,15 +466,7 @@
                 "left": 1400,
                 "top": 324
             },
-            "post_job_actions": {
-                "RenameDatasetActiondata_collection": {
-                    "action_arguments": {
-                        "newname": "sample inference for reverse reads"
-                    },
-                    "action_type": "RenameDatasetAction",
-                    "output_name": "data_collection"
-                }
-            },
+            "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/dada2_dada/dada2_dada/1.30.0+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "00f5005840fa",
@@ -535,24 +504,7 @@
                     "output_name": "reverse"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool dada2: mergePairs",
-                    "name": "dadaF"
-                },
-                {
-                    "description": "runtime parameter for tool dada2: mergePairs",
-                    "name": "dadaR"
-                },
-                {
-                    "description": "runtime parameter for tool dada2: mergePairs",
-                    "name": "derepF"
-                },
-                {
-                    "description": "runtime parameter for tool dada2: mergePairs",
-                    "name": "derepR"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "dada2: mergePairs",
             "outputs": [
@@ -577,7 +529,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"dadaF\": {\"__class__\": \"RuntimeValue\"}, \"dadaR\": {\"__class__\": \"RuntimeValue\"}, \"derepF\": {\"__class__\": \"RuntimeValue\"}, \"derepR\": {\"__class__\": \"RuntimeValue\"}, \"justConcatenate\": false, \"maxMismatch\": \"0\", \"minOverlap\": \"12\", \"output_details\": true, \"trimOverhang\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"dadaF\": {\"__class__\": \"ConnectedValue\"}, \"dadaR\": {\"__class__\": \"ConnectedValue\"}, \"derepF\": {\"__class__\": \"ConnectedValue\"}, \"derepR\": {\"__class__\": \"ConnectedValue\"}, \"justConcatenate\": false, \"maxMismatch\": \"0\", \"minOverlap\": \"12\", \"output_details\": true, \"trimOverhang\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.30.0+galaxy0",
             "type": "tool",
             "uuid": "15c001b7-504d-40e5-b5a9-c3d4ea5b6c69",
@@ -1091,6 +1043,6 @@
     "tags": [
         "microbiome"
     ],
-    "uuid": "2f14f9f1-2425-42b7-8da9-3314b8b9ecf1",
-    "version": 10
+    "uuid": "a5166e87-4839-4359-974c-e480e90ab581",
+    "version": 12
 }

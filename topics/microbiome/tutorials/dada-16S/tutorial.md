@@ -261,11 +261,9 @@ We start by visualizing the quality profiles of the forward reads:
 > 1. {% tool [dada2: plotQualityProfile](toolshed.g2.bx.psu.edu/repos/iuc/dada2_plotqualityprofile/dada2_plotQualityProfile/1.28+galaxy0) %} with the following parameters:
 >    - *"Processing mode"*: `Joint`
 >        - *"Paired reads"*: `paired - in a data set pair`
->            - {% icon param-collection %} *"Paired short read data"*: `Raw Reads`
+>            - {% icon param-collection %} *"Paired short read data"*: `Sorted Raw Reads`
 >        - *"Aggregate data"*: `No`
 >    - *"sample number"*: `10000000`
->
-> 2. Inspect forward read output
 {: .hands_on}
 </div>
 
@@ -303,7 +301,7 @@ In gray-scale is a heatmap of the frequency of each quality score at each base p
 
 > <comment-title>Considerations for your own data</comment-title>
 >
-> Your reads must still overlap after truncation in order to merge them later! The tutorial is using 2x250 V4 sequence data, so the forward and reverse reads almost completely overlap and our trimming can be completely guided by the quality scores. If you are using a less-overlapping primer set, like V1-V2 or V3-V4, your truncated length must be large enough to maintain $$ 20 + biological.length.variation $$ nucleotides of overlap between them.
+> Your reads must still overlap after truncation in order to merge them later! The tutorial is using 2x250 V4 (expected size, 270 bp–387 bp) sequence data, so the forward and reverse reads almost completely overlap and our trimming can be completely guided by the quality scores. If you are using a less-overlapping primer set, like V1-V2 or V3-V4, your truncated length must be large enough to maintain $$ 20 + biological.length.variation $$ nucleotides of overlap between them.
 >
 {: .comment}
 
@@ -317,7 +315,7 @@ Let's now trim and filter the reads:
 >
 > 1. {% tool [dada2: filterAndTrim](toolshed.g2.bx.psu.edu/repos/iuc/dada2_filterandtrim/dada2_filterAndTrim/1.28+galaxy0) %} with the following parameters:
 >    - *"Paired reads"*: `paired - in a data set pair`
->        - {% icon param-collection %} *"Paired short read data"*: `Raw Reads`
+>        - {% icon param-collection %} *"Paired short read data"*: `Sorted Raw Reads`
 >    - In *"Trimming parameters"*:
 >        - *"Truncate read length"*: `240`
 >    - In *"Filtering parameters"*:
@@ -389,9 +387,9 @@ To better see the impact of filtering and trimming, we can inspect the read qual
 > 
 > {% snippet faqs/galaxy/features_scratchbook.md %}
 >
-> ![Quality Profiles for every samples with read length on the X-axis and Quality score on the Y-axis](./images/plotQualityProfile_reverse.png "Quality profiles for reverse reads before trimming and filtering")
+> ![Quality Profiles for forward reads of all samples with read length on the X-axis and Quality score on the Y-axis](./images/plotQualityProfile_reverse.png "Quality profiles for reverse reads before trimming and filtering")
 >
-> ![Quality Profiles for every samples with read length on the X-axis and Quality score on the Y-axis](./images/plotQualityProfile_reverse_after_filter_trim.png "Quality profiles for reverse reads after trimming and filtering")
+> ![Quality Profiles for reverse reads of all samples with read length on the X-axis and Quality score on the Y-axis](./images/plotQualityProfile_reverse_after_filter_trim.png "Quality profiles for reverse reads after trimming and filtering")
 >
 > How did trimming and filtering change the quality profiles for reverse reads?
 >
@@ -416,6 +414,11 @@ The DADA2 algorithm makes use of a parametric error model (`err`) and every ampl
 > 1. {% tool [Unzip collection](__UNZIP_COLLECTION__) %} with the following parameters:
 >    - {% icon param-file %} *"Paired input to unzip"*: `Paired reads` output of **dada2: filterAndTrim**
 >
+> 2. Tag the `(forward)` collection with `#forward`
+>
+>    {% snippet faqs/galaxy/collections_add_tag.md tag="#forward" %}
+>
+> 3. Tag the `(reverse)` collection with `#reverse`
 {: .hands_on}
 
 Let's now run **dada2: learnErrors** on both collections.
@@ -424,17 +427,9 @@ Let's now run **dada2: learnErrors** on both collections.
 >
 > 1. {% tool [dada2: learnErrors](toolshed.g2.bx.psu.edu/repos/iuc/dada2_learnerrors/dada2_learnErrors/1.28+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Short read data"*: `forward` output of **Unzip collection**
->
-> 2. Rename outputs:
->    - `dada2: learnErrors on data X, data Y, and others` to `errors for forward reads`
->    - `dada2: learnErrors on data X, data Y, and others: error rates plot` to `error rates plot for forward reads`
 >   
 > 3. {% tool [dada2: learnErrors](toolshed.g2.bx.psu.edu/repos/iuc/dada2_learnerrors/dada2_learnErrors/1.28+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Short read data"*: `reverse` output of **Unzip collection**
->
-> 4. Rename outputs:
->    - `dada2: learnErrors on data X, data Y, and others` to `errors for reverse reads`
->    - `dada2: learnErrors on data X, data Y, and others: error rates plot` to `error rates plot for reverse reads`
 >   
 {: .hands_on}
 
@@ -471,7 +466,19 @@ In this step, the core sample inference algorithm ({% cite Callahan_2016 %}) is 
 >
 > 1. {% tool [dada2: dada](toolshed.g2.bx.psu.edu/repos/iuc/dada2_dada/dada2_dada/1.28+galaxy0) %} with the following parameters:
 >    - *"Process samples in batches"*: `no`
->        - {% icon param-file %} *"Reads"*: `forward` output of **Unzip collection**
+>
+>      > <comment-title>Process samples in batches or not</comment-title>
+>      >
+>      > Choosing `yes` for *"Process samples in batches"* gives identical results as `no` if samples are not pooled.
+>      >
+>      > - `no`: a single Galaxy job is started where the samples are processed sequentially
+>      > - `yes`: a separate Galaxy job is started for each sample (given compute resources, this can be much faster)
+>      >
+>      > If `yes`, the sorting of the collection is not needed.
+>      >
+>      {: .comment}
+>
+>        - {% icon param-file %} *"Reads"*: output of **Unzip collection** with `#forward` tag
 >        - *"Pool samples"*: `process samples individually`
 >
 >           > <comment-title>Sample pooling</comment-title>
@@ -483,19 +490,13 @@ In this step, the core sample inference algorithm ({% cite Callahan_2016 %}) is 
 >           >
 >           {: .comment}
 >
->    - {% icon param-file %} *"Error rates"*: `errors for forward reads`
->
-> 2. Rename output collection to `sample inference for forward reads`
->
->    {% snippet faqs/galaxy/collections_rename.md %}
+>    - {% icon param-file %} *"Error rates"*: output of **dada2: learnErrors** with `#forward` tag
 >
 > 3. {% tool [dada2: dada](toolshed.g2.bx.psu.edu/repos/iuc/dada2_dada/dada2_dada/1.28+galaxy0) %} with the following parameters:
 >    - *"Process samples in batches"*: `no`
->        - {% icon param-file %} *"Reads"*: `reverse` output of **Unzip collection**
+>        - {% icon param-file %} *"Reads"*: output of **Unzip collection** with `#reverse` tag
 >        - *"Pool samples"*: `process samples individually`
->    - {% icon param-file %} *"Error rates"*: `errors for reverse reads`
->
-> 4. Rename output collection to `sample inference for reverse reads`
+>    - {% icon param-file %} *"Error rates"*: output of **dada2: learnErrors** with `#reverse` tag
 {: .hands_on}
 
 </div>
@@ -532,10 +533,10 @@ We now merge the forward and reverse reads together to obtain the full denoised 
 > <hands-on-title> Merge paired reads </hands-on-title>
 >
 > 1. {% tool [dada2: mergePairs](toolshed.g2.bx.psu.edu/repos/iuc/dada2_mergepairs/dada2_mergePairs/1.28+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Dada results for forward reads"*: `sample inference for forward reads`
->    - {% icon param-file %} *"Forward reads"*: `forward` output of **Unzip collection**
->    - {% icon param-file %} *"Dada results for reverse reads"*: `sample inference for reverse reads`
->    - {% icon param-file %} *"Reverse reads"*: `reverse` output of **Unzip collection**
+>    - {% icon param-file %} *"Dada results for forward reads"*: output of **dada2: dada** with `#forward` tag
+>    - {% icon param-file %} *"Forward reads"*: output of **Unzip collection** with `#forward` tag
+>    - {% icon param-file %} *"Dada results for reverse reads"*:  output of **dada2: dada** with `#reverse` tag
+>    - {% icon param-file %} *"Reverse reads"*: output of **Unzip collection** with `#forward` tag
 >    - *"Concatenated rather than merge"*: `No`
 >
 >      > <comment-title>Non-overlapping reads</comment-title>
@@ -686,10 +687,10 @@ As a final check of our progress, we’ll look at the number of reads that made 
 >            - {% icon param-collection %} *"Dataset(s)"*: output of **dada2: filterAndTrim**
 >            - *"name"*: `FiltTrim`
 >        - {% icon param-repeat %} *"Insert data sets"*
->            - {% icon param-collection %} *"Dataset(s)"*: `sample inference for forward reads`
+>            - {% icon param-collection %} *"Dataset(s)"*: output of **dada2: dada** with `#forward` tag
 >            - *"name"*: `Dada Forward`
 >        - {% icon param-repeat %} *"Insert data sets"*
->            - {% icon param-collection %} *"Dataset(s)"*: `sample inference for reverse reads`
+>            - {% icon param-collection %} *"Dataset(s)"*: output of **dada2: dada** with `#reverse` tag
 >            - *"name"*: `Dada Reverse`
 >        - {% icon param-repeat %} *"Insert data sets"*
 >            - {% icon param-collection %} *"Dataset(s)"*: output of **dada2: mergePairs**
@@ -1015,7 +1016,7 @@ Let's plot an abundance stacked barplot at the family level.
 
 ![Stacked barplot with sample on X-axis and abundance on Y-axis. Each bar represent the different families (in different colors) for the sample](./images/barplot1.png)
 
-The barplot is hard to read here: too many families in white that we can distinguish for each other. We need to filter to data to display only the most abundant families. We will select only taxa with more than 500 counts.
+The barplot is hard to read here: many families are in white because the color palette is reduced and we can not distinguish them. We need to filter to data to display only the most abundant families. We will select only taxa with more than 500 counts.
 
 > <hands-on-title> Filter and Plot abundance stacked barplot </hands-on-title>
 >
@@ -1042,6 +1043,12 @@ The barplot is hard to read here: too many families in white that we can disting
 > > Not really
 > >
 > {: .solution}
+>
+{: .question}
+
+> <comment-title>Using ampvis2 for heatmap instead of a barplot</comment-title>
+>
+> ampvis2 ({% cite Andersen_2018 %}) team suggests [not using stacked bar charts but heatmaps to represent community diversity](http://albertsenlab.org/ampvis2-heatmap/). You can do that in Galaxy as ampvis2 is available as a tool.
 >
 {: .question}
 
