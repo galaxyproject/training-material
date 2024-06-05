@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: Single-cell ATAC-seq standard processing with SnapATAC2
+subtopic: scmultiomics
+priority: 2
 level: Intermediate
 zenodo_link: https://zenodo.org/records/11369811
 questions:
