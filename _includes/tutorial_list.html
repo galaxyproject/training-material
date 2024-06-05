@@ -40,7 +40,7 @@
         <tr>
           {% assign hidetime = material.async | default: async%}
           {% if page.layout == 'event' and hidetimes != true %}
-          <td>{{material.time}}</td>
+          <td>{{material.time | markdownify }}</td>
           {% endif %}
 
           {% if material.layout == 'custom' %} <!-- e.g. for events -->
