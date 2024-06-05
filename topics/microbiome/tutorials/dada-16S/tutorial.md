@@ -829,6 +829,7 @@ We will construct a simple sample table from the information encoded in the file
 >            - *"Find pattern"*: `(.)(.)D(.*)`
 >            - *"Replace with"*: `\1\2D\3\t\1\t\2\t\3`
 >
+>    The given pattern `..D.` will be applied to the identifiers, where `.` will match any single character and `.*` any number of any character. The additional parentheses will record the matched character such that it can be used in the replacement (e.g. `\1` will refer to the content that matched the pattern in the 1st pair of parentheses)
 >     This step creates 3 additional columns with the gender, the mouse subject number and the day post-weaning
 >
 > 3. Change the datatype to `tabular`
