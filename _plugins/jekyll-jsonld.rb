@@ -315,10 +315,10 @@ module Jekyll
         end
       end
 
-      syllab = page['program'].map do |section|
+      syllab = page['program'].reject{|s| s['section'].nil?}.map do |section|
         {
           '@type': 'Syllabus',
-          name: section['title'],
+          name: section['section'],
           description: section.fetch('description', nil),
         }
       end
