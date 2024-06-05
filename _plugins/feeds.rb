@@ -180,7 +180,9 @@ def generate_event_feeds(site)
             xml.author do
               xml.name(Gtn::Contributors.fetch_name(site, c))
               xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
-              xml.email(page.data['contact_email'])
+              if page.data['contact_email']
+                xml.email(page.data['contact_email'])
+              end
             end
           end
 
