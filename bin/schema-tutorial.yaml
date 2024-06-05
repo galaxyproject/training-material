@@ -465,4 +465,31 @@ mapping:
             link to the external tutorial
         examples:
             - "https://docs.qiime2.org/jupyterbooks/cancer-microbiome-intervention-tutorial/index.html#"
-
+    answer_histories:
+        type: seq
+        examples: |
+          - label: "UseGalaxy.eu"
+            history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+          - label: "Older Alevin version"
+            history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+        sequence:
+          - type: map
+            mapping: &answer_histories
+              label:
+                type: str
+                required: true
+              history:
+                type: str
+                required: true
+              date:
+                type: date
+                pattern: /[0-9]{4,}-[0-9]{2}-[0-9]{2}/
+    input_histories:
+        type: seq
+        examples: |
+          input_histories:
+            - label: "UseGalaxy.eu"
+              history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+        sequence:
+          - type: map
+            mapping: *answer_histories

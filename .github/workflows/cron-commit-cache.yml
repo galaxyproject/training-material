@@ -49,11 +49,16 @@ jobs:
 
           bundle exec ruby bin/commit-cache-update.rb
 
+      - name: Update geocoding of events
+        id: generate
+        run: |
+          bundle exec ruby bin/geocode.rb
+
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
         uses: peter-evans/create-pull-request@v3
         with:
           title: Update Cached Commit Data
-          branch-suffix: commitcache
+          branch-suffix: timestamp
           commit-message: Update Cached Commit Data
-          add-paths: metadata/
+          add-paths: metadata/,events/

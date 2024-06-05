@@ -1,4 +1,3 @@
-
 Jekyll::Hooks.register :pages, :post_init do |page|
   page.data['js_requirements'] = {
     'mathjax' => page.content =~ /\$\$/ || page.content =~ /\\\(/,

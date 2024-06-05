@@ -228,12 +228,47 @@ layout: base
             </div>
 	    -->
                 <!-- GTN news  -->
-            <div class="col-12" id="news">
+            <div id="events">
+                 <h2><a href="{% link events/index.md %}">Upcoming Events</a></h2>
+                 <p> Check out upcoming events around the Galaxy! </p>
+
+                <div class="newstable">
+                <div class="list-group">
+                 {% assign events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where: "not_started", true | sort: 'date_start' %}
+                 {% assign events_length = events | size %}
+                 {% if events_length == 0 %}
+                 <p>No known upcoming events.</p>
+                 {% else %}
+                 {% for event in events limit: 5 %}
+                 <a class="list-group-item" href="{% if event.external %}{{event.external}}{% else %}{{event.url | prepend: site.baseurl }}{% endif %}">
+                   <p class="list-group-item-text">{{ event | collapse_date_pretty }}</p>
+                   <div class="list-group-item-heading"> {{ event.title | escape }} </div>
+                 </a>
+                 {% endfor %}
+                 {% endif %}
+                </div>
+                </div>
+                 <p>
+                 <a class="btn btn-primary"  href="{% link events/index.md %}">See all events</a>
+                 <a class="btn btn-primary" href="{% link faqs/gtn/gtn_event_create.md %}">Add your event!</a>
+                 </p>
+            </div>
+
+            <div id="news">
                  <h2><a href="{% link news.md %}">The latest GTN news</a> <a class="float-right" href="{{ "/feed.xml" | prepend: site.baseurl }}">{% icon rss-feed %}</a></h2>
                  <p> Read about new tutorials, features, events and more! </p>
-                 {% include _includes/newslist.html %}
-                 <p><a href="{% link news.md %}">See all news</a>
+                 <p>{% include _includes/newslist.html %}</p>
+
+                 <p>
+
+                 <a class="btn btn-primary"  href="{% link news.md %}">See all news</a>
+                 <a class="btn btn-primary" href="{% link faqs/gtn/gtn_news_create_post.md %}">Add your news!</a>
+                 </p>
+
             </div>
+
+
+
                 <!-- Galaxy community video  -->
 			<!--
                 <div class="col-12">
