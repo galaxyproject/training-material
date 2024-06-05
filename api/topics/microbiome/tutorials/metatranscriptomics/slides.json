@@ -119,7 +119,7 @@
       "name": "Main Metatranscriptomics Analysis",
       "title": "Main Metatranscriptomics Analysis",
       "test_results": null,
-      "modified": "2024-06-05 00:05:21 +0000",
+      "modified": "2024-06-05 07:55:41 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nT1A_forward\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nT1A_reverse\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"🛠️ Subworkflow\\nWorkflow 1: Preprocessing\"];\n  style 2 fill:#edd,stroke:#900,stroke-width:4px;\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"🛠️ Subworkflow\\nWorkflow 2: Community Profile\"];\n  style 3 fill:#edd,stroke:#900,stroke-width:4px;\n  2 -->|Cutadapt on input datasets: Read 1 Output| 3;\n  2 -->|Cutadapt on input datasets: Read 2 Output| 3;\n  4[\"🛠️ Subworkflow\\nWorkflow 3: Functional Information\"];\n  style 4 fill:#edd,stroke:#900,stroke-width:4px;\n  2 -->|FASTQ interlacer pairs from input datasets| 4;\n  3 -->|MetaPhlAn on input datasets: Predicted taxon relative abundances| 4;"
     }
   ],
