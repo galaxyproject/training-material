@@ -92,7 +92,7 @@
       "name": "From BAMs to drug resistance prediction with TB-profiler",
       "title": "From BAMs to drug resistance prediction with TB-profiler",
       "test_results": null,
-      "modified": "2024-06-05 07:58:56 +0000",
+      "modified": "2024-06-05 10:28:24 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nMTB single-end BAMs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nMTB paired-end BAMs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Merge collections\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Samtools view BAM > SAM\"];\n  2 -->|output| 3;\n  aa220027-9d10-4328-b2c2-e4d139d5d5bd[\"Output\\nSamtools view on input dataset(s): filtered alignments\"];\n  3 --> aa220027-9d10-4328-b2c2-e4d139d5d5bd;\n  style aa220027-9d10-4328-b2c2-e4d139d5d5bd stroke:#2c3143,stroke-width:4px;\n  4[\"Sed MTB_anc to Chromosome\"];\n  3 -->|outputsam| 4;\n  5[\"Samtools view SAM > BAM\"];\n  4 -->|output| 5;\n  6[\"TB-profiler\"];\n  5 -->|outputsam| 6;\n  7[\"Get drug resistance profile\"];\n  6 -->|output_txt| 7;\n  8[\"Add Sample Name\"];\n  7 -->|output| 8;\n  9[\"Concatenate DR profiles in a single table\"];\n  8 -->|output| 9;\n  10[\"Cleanup the table\"];\n  9 -->|out_file1| 10;"
     },
     {
@@ -110,7 +110,7 @@
       "name": "From Fastqs to VCFs and BAMs",
       "title": "From Fastqs to VCFs and BAMs",
       "test_results": null,
-      "modified": "2024-06-05 07:58:56 +0000",
+      "modified": "2024-06-05 10:28:24 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nSingle-End FASTQs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nPaired-End FASTQs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nMycobacterium_tuberculosis_ancestral_reference.gbk\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Trimmomatic\"];\n  0 -->|output| 3;\n  4[\"Trimmomatic\"];\n  1 -->|output| 4;\n  5[\"Mapping and variant calling of SINGLE END FASTQs with snippy\"];\n  3 -->|fastq_out| 5;\n  2 -->|output| 5;\n  6[\"Mapping and variant calling of PAIRED END FASTQs with snippy\"];\n  4 -->|fastq_out_paired| 6;\n  2 -->|output| 6;\n  7[\"Merge PE/SE VCFs in a single collection with all samples\"];\n  5 -->|snpvcf| 7;\n  6 -->|snpvcf| 7;\n  8[\"Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler\"];\n  5 -->|snpsbam| 8;\n  6 -->|snpsbam| 8;\n  9[\"TB Variant Filter\"];\n  7 -->|output| 9;"
     },
     {
@@ -128,7 +128,7 @@
       "name": "From VCFs to SNP distance matrix",
       "title": "From VCFs to SNP distance matrix",
       "test_results": null,
-      "modified": "2024-06-05 07:58:56 +0000",
+      "modified": "2024-06-05 10:28:24 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nCollection of VCFs to analyze\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome of the MTBC ancestor\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter TB variants\"];\n  0 -->|output| 2;\n  3[\"Generate the complete genome of each of the samples\"];\n  2 -->|output1| 3;\n  1 -->|output| 3;\n  ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a[\"Output\\n#{input_file}\"];\n  3 --> ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a;\n  style ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a stroke:#2c3143,stroke-width:4px;\n  4[\"Concatenate genomes to build a MSA\"];\n  3 -->|output_file| 4;\n  5[\"Keep only variable positions\"];\n  4 -->|out_file1| 5;\n  6[\"Calculate SNP distances\"];\n  5 -->|output_fasta| 6;"
     }
   ],
