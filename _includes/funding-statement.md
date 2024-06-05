@@ -18,6 +18,7 @@
 			<div class="name">{{ pfo.short_name | default: pfo.name | default: id }}</div>
 			<div class="description">
 			{{ site.data.funders[id].funding_statement | markdownify | strip_html }}
+            {{ pfo.description }}
 			</div>
 		</div>
 	</a>

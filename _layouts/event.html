@@ -424,6 +424,14 @@ subsites: [all]
 			{% include _includes/contributor-badge-inline.html id=org %}
 		{% endfor %}
 
+        {% if event.contributions.instructors.size < 10 %}
+        <br/><br/><b>Instructors</b><br/>
+            {% for instructor in event.contributions.instructors %}
+			{% include _includes/contributor-badge-inline.html id=instructor %}
+		{% endfor %}
+
+        {% endif %}
+
         {% if event.contributions.funding %}
 		<hr />
 		<b>In collaboration with</b><br/>
