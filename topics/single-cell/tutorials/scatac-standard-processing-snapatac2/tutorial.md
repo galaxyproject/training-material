@@ -4,6 +4,8 @@ layout: tutorial_hands_on
 title: Single-cell ATAC-seq standard processing with SnapATAC2
 subtopic: scmultiomics
 priority: 2
+redirect_from:
+  - /topics/transcriptomics/tutorials/scatac-standard-processing-snapatac2/tutorial
 level: Intermediate
 zenodo_link: https://zenodo.org/records/11369811
 questions:
@@ -30,8 +32,8 @@ tags:
 - 10x
 - epigenetics
 abbreviations:
-    ATAC-seq: Assay for Transposase-Accessible Chromatin using sequencing
-    PBMC: peripheral blood mononuclear cell
+    scATAC-seq: Single-cell Assay for Transposase-Accessible Chromatin using sequencing
+    PBMC's: peripheral blood mononuclear cells
 
 contributors:
 - timonschlegel
@@ -40,12 +42,12 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
-Single-cell {ATAC-seq} (scATAC-seq) analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin. 
+{scATAC-seq} analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin. 
 By analyzing which genomic sites have an _open_ chromatin state, cell-type specific patterns of gene accessibility can be determined. 
-Single cell ATAC-seq is particularly usefull for analyzing tissue containing different cell populations, such as peripheral blood mononuclear cells (PBMC's). 
+{scATAC-seq} is particularly usefull for analyzing tissue containing different cell populations, such as {PBMC's}. 
 
-In this tutorial we will analyze single-cell ATAC-seq data using the tool suites [SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/index.html) ({% cite Zhang2024 %}) and [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}). 
-With both of these tool suites we will perform preprocessing, clustering and identification of single-cell ATAC-seq datasets from [10x Genomics](https://www.10xgenomics.com/products/single-cell-atac). The analysis will be performed using a dataset of {PBMC}'s containing ~4,620 single nuclei. 
+In this tutorial we will analyze {scATAC-seq} data using the tool suites [SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/index.html) ({% cite Zhang2024 %}) and [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}). 
+With both of these tool suites we will perform preprocessing, clustering and identification of {scATAC-seq} datasets from [10x Genomics](https://www.10xgenomics.com/products/single-cell-atac). The analysis will be performed using a dataset of {PBMC's} containing ~4,620 single nuclei. 
 
 
 <!-- This is a comment. -->
@@ -53,7 +55,7 @@ With both of these tool suites we will perform preprocessing, clustering and ide
 
 > <comment-title></comment-title>
 >
-> This tutorial is significantly based on ["Standard pipeline" tutorial from SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/tutorials/pbmc.html), and can be seen as the scATAC-seq counterpart to the scRNA-seq tutorial [Clustering 3K PBMCs with Scanpy]( {% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %} ).
+> This tutorial is significantly based on ["Standard pipeline" tutorial from SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/tutorials/pbmc.html), and can be seen as the {scATAC-seq} counterpart to the scRNA-seq tutorial [Clustering 3K PBMCs with Scanpy]( {% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %} ).
 >
 {: .comment}
 
@@ -67,9 +69,15 @@ With both of these tool suites we will perform preprocessing, clustering and ide
 >
 {: .agenda}
 
+# {scATAC-seq} with 10X Genomics
+ATAC-seq utilizes a hyperactive Tn5 transposase ({% cite Kia2017 %}) to ligate adaptors to genome fragments, created by the transposase. Performing ATAC-seq on individual cells used to be an expensive and time consuming labour. The 10X Chromium NextGEM system made {scATAC-seq} a cost-effective method for gaining high-resolution data with a simple protocol. 
+After transposition of nuclei in bulk, the nuclei are put into Gel beads in Emulsion (GEM), containing unique 10x cell barcodes and sequencing adaptors for Illumina sequencing. 
+![Library Preparation]({% link topics/single-cell/images/scatac-pre-processing/tenx_libprep_scatac.png %} "An overview of the 10X single-nuclei ATAC-seq library preparation")
+
+
 # Data
 
-The 5k {PBMC} dataset for this tutorial is available for free from [10X Genomics](https://www.10xgenomics.com/datasets/5-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-next-gem-v-1-1-1-1-standard-2-0-0). The blood samples were collected from a healthy donor and were prepared following the Chromium Next GEM scATAC-seq protocol. After sequencing on Illumina NovaSeq, the reads were processed by the **Cell Ranger ATAC 2.0.0** pipeline from 10X to generate a [*Fragments File*](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/output/fragments). 
+The 5k {PBMC's} dataset for this tutorial is available for free from [10X Genomics](https://www.10xgenomics.com/datasets/5-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-next-gem-v-1-1-1-1-standard-2-0-0). The blood samples were collected from a healthy donor and were prepared following the Chromium Next GEM scATAC-seq protocol. After sequencing on Illumina NovaSeq, the reads were processed by the **Cell Ranger ATAC 2.0.0** pipeline from 10X to generate a [*Fragments File*](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/output/fragments). 
 
 > <details-title>Fragments File </details-title>
 >
@@ -103,71 +111,36 @@ the page, so try to make them informative and concise!
 > 3. Rename the datasets
 >
 >    > <details-title>Renaming the input datasets </details-title>
->    >- {% icon galaxy-pencil %} **Rename** the file "atac_pbmc_5k_nextgem_fragments.tsv" to "fragments_file.tsv"
->    >- {% icon galaxy-pencil %} **Rename** the file "gencode.v46.annotation.gtf.gz" to "gene_annotation.gtf.gz"
+>    >- {% icon galaxy-pencil %} **Rename** the file `atac_pbmc_5k_nextgem_fragments.tsv` to `fragments_file.tsv`
+>    >- {% icon galaxy-pencil %} **Rename** the file `gencode.v46.annotation.gtf.gz` to `gene_annotation.gtf.gz`
 >    {: .details}
 > 
-> 4. Inspect the `fragments_file` 
+> 4. Inspect `chrom_sizes` and `fragments_file` 
 {: .hands_on}
 > <question-title></question-title>
 >
-> 1. How many non-zero values are in the matrix?
-> 2. How many counts are found for the 32,706th gene in the 1st cell?
+> 1. How many chromosomes are in `chrom_sizes`?
+> 2. In which column are the cell barcodes stored in the `fragments_file`?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. There are 2,286,884 (2.6%) non-zero values for the 88,392,600 possible counts of the 32,738 genes (rows) and 2,700 cells (columns).
-> > 2. 10 counts are found for the 32,706th row and 1st column.
+> > 1. There are 25 chromosomes. The 22 autosomes (Chr. 1-22), both sex chromosomes (Chr. X and Y) and the small circular mitochondrial chromosome (Chr. M). 
+> > 2. The cell barcodes are unique 16 bp oligos, located in the column `Name`.  
 > >
 > {: .solution}
 >
 {: .question}
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+# Preprocessing
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+Preprocessing of the scATAC-seq data contained in the `fragments_file` with SnapATAC2 begins with importing the files and computing basic quality control (QC) metrics. 
 
-have fun!
+SnapATAC2 compresses and stores the fragments into an `AnnData` object. 
 
-## Get data
+## AnnData
+The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially developed for the [`Scanpy`](https://scanpy.readthedocs.io/en/stable/index.html) package and is now a widely accepted data format to store annotated data matrices in a space efficient manner. 
 
-> <hands-on-title> Data Upload </hands-on-title>
->
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
->
->    ```
->    https://zenodo.org/api/records/11369811/files/atac_pbmc_5k_nextgem_fragments.tsv/content
->    https://zenodo.org/api/records/11369811/files/gencode.v46.annotation.gtf.gz/content
->    https://zenodo.org/api/records/11369811/files/chrom_sizes.txt/content
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
-{: .hands_on}
-
-# Title of the section usually corresponding to a big step in the analysis
+![Anndata format]({% link topics/single-cell/images/scatac-standard-snapatac2/anndata_schema.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
