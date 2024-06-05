@@ -837,7 +837,7 @@ We will construct a simple sample table from the information encoded in the file
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 5. {% tool [Select first lines](cat1) %} to remove the last line
->    - {% icon param-file %} *"File to select"*: output of **Concatenate datasets**
+>    - {% icon param-file %} *"File to select"*: output of **Replace Text**
 >    - *"Operation"*: `Remove last lines`
 >    - *"Number of lines"*: `1`
 >
@@ -888,11 +888,12 @@ We will construct a simple sample table from the information encoded in the file
 > 6. Rename the output to `Metadata table`
 {: .hands_on}
 
-We have now a metadata table with four columns:
+We have now a metadata table with five columns:
 1. Sample
 2. Gender
 3. Mouse subject
 4. Day post-weaning 
+5. When
 
 We now construct a phyloseq object directly with it and the DADA2 outputs and launch Shiny-phyloseq ({% cite mcmurdie2015shiny %}) to explore the phyloseq object.
 
@@ -920,7 +921,7 @@ Related to ecology, the term **diversity** describes the number of different spe
 
 The **α diversity** describes the diversity within a community. It considers the number of different species in an environment (also referred to as species **richness**). Additionally, it can take the abundance of each species into account to measure how evenly individuals are distributed across the sample (also referred to as species **evenness**).
 
-There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity. 
+There are several different indices used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity. 
 
 ![Explanation of the α diversity](./images/alphadiversity_metrics.png "<a href="https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36">Source</a>")
 
