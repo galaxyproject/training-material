@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,23 +209,182 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "Introductory Python",
-	"description": "This is an introductory course of Python, as it was taught in [Avans Hogeschool](https://www.avans.nl/) in the Netherlands.
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/python.html",
+  "name": "Learning Pathway Introductory Python",
+  "keywords": [
+    "python",
+    "real-course"
+  ],
+  "description": "This is an introductory course of Python, as it was taught in [Avans Hogeschool](https://www.avans.nl/) in the Netherlands.\n",
+  "about": [
+
+  ],
+  "audience": null,
+  "teaches": [
+    "Understand the fundamentals of object assignment and math in python and can write simple statements and execute calcualtions in order to be able to summarize the results of calculations and classify valid and invalid statements.",
+    "Translate some known math functions (e.g. euclidean distance, root algorithm) into python to transfer concepts from mathematics lessons directly into Python.",
+    "Understand the structure of a \"function\" in order to be able to construct their own functions and predict which functions will not work.",
+    "Explain key differences between integers and floating point numbers.",
+    "Explain key differences between numbers and character strings.",
+    "Use built-in functions to convert between integers, floating point numbers, and strings.",
+    "Explain why programs need collections of values.",
+    "Write programs that create flat lists, index them, slice them, and modify them through assignment and method calls.",
+    "Write conditional statements including `if`, `elif`, and `else` branches.",
+    "Correctly evaluate expressions containing `and` and `or`.",
+    "Explain what for loops are normally used for.",
+    "Trace the execution of a simple (unnested) loop and correctly state the values of variables in each iteration.",
+    "Write for loops that use the Accumulator pattern to aggregate values.",
+    "catch an exception",
+    "raise your own exception",
+    "Read data from a file",
+    "Write new data to a file",
+    "Use `with` to ensure the file is closed properly.",
+    "Use the CSV module to parse comma and tab separated datasets.",
+    "Recap all previous modules.",
+    "Use exercises to ensure that all previous knowledge is sufficiently covered.",
+    "Use glob to collect a list of files",
+    "Learn about the potential pitfalls of glob",
+    "Learn how sys.argv works",
+    "Write a simple command line program that sums some numbers",
+    "Use argparse to make it nicer.",
+    "Run a command in a subprocess.",
+    "Learn about `check_call` and `check_output` and when to use each of these.",
+    "Read it's output.",
+    "Set up a Python virtual environment for our software project using `venv` and `pip`.",
+    "Run our software from the command line.",
+    "Set up a Conda environment for our software project using `conda`.",
+    "Run our software from the command line."
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Week 1: Python is a Calculator",
+      "description": "Python can work a lot like a desktop calculator! A lot of mathematical expressions one is used to from maths classes are the same or very similar in Python. Functional notation is also introduced."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Week 2: Python is a Database",
+      "description": "Today we introduce basic types (integers, floats, booleans, lists, and dictionaries) that allow you to store data."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Week 3: Python is a Computer",
+      "description": "Once you've covered basic datatypes, let's do interesting things with Python like Loops! And Flow Control! Python lets you automate calculations and tasks and we'll learn about that building block this week."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Week 4: Python is a Programming Language",
+      "description": "Now that we've covered 90% of what you will write when you write a programming language, let's look at the last 10%, reading and writing files and handling exceptional circumstances."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Week 5: Recap",
+      "description": "You're now a Python Programmer! This week we'll go over everything you learned and work on some exercises that require putting together all of your new skills."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Week 6: Python is a Command Line Interface",
+      "description": "Here we'll move into some more advanced topics that will make you a better python programmer!"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Week 7: Python is a Workflow Engine",
+      "description": "Cont."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Week 8: Review Period",
+      "description": "This course is an extremely fast 8 weeks, so this last week is spent on helping students debug problems in-person"
+    }
+  ],
+  "dateModified": "2023-10-23 09:44:54 +0000",
+  "datePublished": "2023-09-13 07:55:29 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -3560,9 +3719,9 @@ designed to be as modular as possible.</p>
             
             
               
-              <a href="/training-material/search?query=conda" class="label label-default tutorial_tag" style="--color-primary: #00ed7d; --color-darker: #00d36e; --color-dimmed: #00e076;" title="Click to show all tutorials tagged conda">conda</a>
+              <a href="/training-material/search?query=conda" class="label label-default tutorial_tag" style="--color-primary: #00d46f; --color-darker: #00bd62; --color-dimmed: #00c869;" title="Click to show all tutorials tagged conda">conda</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00e4f6; --color-darker: #00cbdb; --color-dimmed: #00d7e9;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00ccdc; --color-darker: #00b6c4; --color-dimmed: #00c1d0;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -3867,7 +4026,7 @@ designed to be as modular as possible.</p>
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

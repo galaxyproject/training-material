@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,23 +209,252 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "Detection of AMR genes in bacterial genomes",
-	"description": "This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy.
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/amr-gene-detection.html",
+  "name": "Learning Pathway Detection of AMR genes in bacterial genomes",
+  "keywords": [
+    "amr",
+    "bacteria",
+    "microgalaxy",
+    "one-health"
+  ],
+  "description": "This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy.\n",
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3673",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3673"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0622"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3301"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3697",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3697"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0196",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0196"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3305"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_4013",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_4013"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0623",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0623"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0085",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0085"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0798",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0798"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3324"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0637",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0637"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0634",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0634"
+    }
+  ],
+  "audience": null,
+  "teaches": [
+    "Run a series of tool to identify species in bacterial isolate sequencing data",
+    "Visualize the species abundance",
+    "Run tools to evaluate sequencing data on quality and quantity",
+    "Process the output of quality control tools",
+    "Improve the quality of sequencing data",
+    "Run a tool to assemble a bacterial genome using short reads",
+    "Run tools to assess the quality of an assembly",
+    "Understand the outputs of tools to assess the quality of an assembly",
+    "Run tools to evaluate sequencing data on quality and quantity",
+    "Process the output of quality control tools",
+    "Improve the quality of sequencing data",
+    "Run a tool to assemble a bacterial genome using short reads",
+    "Run tools to assess the quality of an assembly",
+    "Understand the outputs of tools to assess the quality of an assembly",
+    "Run a series of tool to annotate a draft bacterial genome for different types of genomic components",
+    "Evaluate the annotation",
+    "Process the outputs to formate them for visualization needs",
+    "Visualize a draft bacterial genome and its annotations",
+    "Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)",
+    "Get information about ARGs",
+    "Visualize the ARGs and plasmid genes in their genomic context",
+    "Check quality reports generated by FastQC and NanoPlot for metagenomics Nanopore data",
+    "Preprocess the sequencing data to remove adapters, poor quality base content and host/contaminating reads",
+    "Perform taxonomy profiling indicating and visualizing up to species level in the samples",
+    "Identify pathogens based on the found virulence factor gene products via assembly, identify strains and indicate all antimicrobial resistance genes in samples",
+    "Identify pathogens via SNP calling and build the consensus gemone of the samples",
+    "Relate all samples' pathogenic genes for tracking pathogens via phylogenetic trees and heatmaps"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Module: Species and contamination checking",
+      "description": "Taxonomic assignation is useful in AMR detection to check contamination and confirm species\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module: Assembly",
+      "description": "Assembly is a major step in the process of detecting AMR genes as it combines sequenced reads into contigs, longer sequences where it will be easier to identify genes and in particular AMR genes\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module: Genome annotation",
+      "description": "The generated contigs can be annotated to detect genes, potential plasmids, etc. This will help the AMR gene detection process, especially the verification and visualization\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module: AMR gene detection",
+      "description": "AMR gene content can be assessed from the contigs to detect known resistance mechanisms and potentially identify novel mechanisms.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Recommended follow-up tutorials",
+      "description": null
+    }
+  ],
+  "dateModified": "2024-02-29 13:14:47 +0000",
+  "datePublished": "2024-01-23 16:20:06 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -308,11 +537,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffc474; --color-darker: #f1ab00; --color-dimmed: #ffb61d;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #f3ab00; --color-darker: #d89800; --color-dimmed: #e5a200;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffc564; --color-darker: #edad00; --color-dimmed: #fbb800;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #eeae00; --color-darker: #d49b00; --color-dimmed: #e1a400;" title="Click to show all tutorials tagged bacteria">bacteria</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -585,11 +814,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffc474; --color-darker: #f1ab00; --color-dimmed: #ffb61d;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #f3ab00; --color-darker: #d89800; --color-dimmed: #e5a200;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbbe0; --color-darker: #ff96d2; --color-dimmed: #ffa9d9;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ff97d3; --color-darker: #ff71c8; --color-dimmed: #ff85cd;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -818,17 +1047,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #a4d4ff; --color-darker: #66c0ff; --color-dimmed: #88caff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #69c1ff; --color-darker: #00aff8; --color-dimmed: #3cb8ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbbe0; --color-darker: #ff96d2; --color-dimmed: #ffa9d9;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ff97d3; --color-darker: #ff71c8; --color-dimmed: #ff85cd;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #bdceff; --color-darker: #9ab7ff; --color-dimmed: #acc2ff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #9bb8ff; --color-darker: #77a3ff; --color-dimmed: #89adff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffc72f; --color-darker: #e5b000; --color-dimmed: #f3bb00;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #e6b100; --color-darker: #cd9e00; --color-dimmed: #daa700;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f0bdff; --color-darker: #eb9aff; --color-dimmed: #eeacff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eb9bff; --color-darker: #e677ff; --color-dimmed: #e98aff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -1111,15 +1340,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffc72f; --color-darker: #e5b000; --color-dimmed: #f3bb00;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #e6b100; --color-darker: #cd9e00; --color-dimmed: #daa700;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffc474; --color-darker: #f1ab00; --color-dimmed: #ffb61d;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #f3ab00; --color-darker: #d89800; --color-dimmed: #e5a200;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffc564; --color-darker: #edad00; --color-dimmed: #fbb800;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #eeae00; --color-darker: #d49b00; --color-dimmed: #e1a400;" title="Click to show all tutorials tagged bacteria">bacteria</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f0bdff; --color-darker: #eb9aff; --color-dimmed: #eeacff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eb9bff; --color-darker: #e677ff; --color-dimmed: #e98aff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
             
             </div>
@@ -1402,17 +1631,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffc72f; --color-darker: #e5b000; --color-dimmed: #f3bb00;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #e6b100; --color-darker: #cd9e00; --color-dimmed: #daa700;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffc474; --color-darker: #f1ab00; --color-dimmed: #ffb61d;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #f3ab00; --color-darker: #d89800; --color-dimmed: #e5a200;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #bdceff; --color-darker: #9ab7ff; --color-dimmed: #acc2ff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #9bb8ff; --color-darker: #77a3ff; --color-dimmed: #89adff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #93e500; --color-darker: #82cc00; --color-dimmed: #8ad800;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #83cd00; --color-darker: #74b600; --color-dimmed: #7bc100;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f0bdff; --color-darker: #eb9aff; --color-dimmed: #eeacff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eb9bff; --color-darker: #e677ff; --color-dimmed: #e98aff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -1695,17 +1924,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search?query=Nanopore data analysis" class="label label-default tutorial_tag" style="--color-primary: #00e6e7; --color-darker: #00cdce; --color-dimmed: #00d9da;" title="Click to show all tutorials tagged Nanopore data analysis">Nanopore data analysis</a>
+              <a href="/training-material/search?query=Nanopore data analysis" class="label label-default tutorial_tag" style="--color-primary: #00cdce; --color-darker: #00b7b8; --color-dimmed: #00c2c3;" title="Click to show all tutorials tagged Nanopore data analysis">Nanopore data analysis</a>
               
-              <a href="/training-material/search?query=Pathogens detection" class="label label-default tutorial_tag" style="--color-primary: #a4e200; --color-darker: #91c900; --color-dimmed: #9bd500;" title="Click to show all tutorials tagged Pathogens detection">Pathogens detection</a>
+              <a href="/training-material/search?query=Pathogens detection" class="label label-default tutorial_tag" style="--color-primary: #92ca00; --color-darker: #82b400; --color-dimmed: #8abf00;" title="Click to show all tutorials tagged Pathogens detection">Pathogens detection</a>
               
-              <a href="/training-material/search?query=Phylogenetic tree" class="label label-default tutorial_tag" style="--color-primary: #00ed78; --color-darker: #00d36a; --color-dimmed: #00e071;" title="Click to show all tutorials tagged Phylogenetic tree">Phylogenetic tree</a>
+              <a href="/training-material/search?query=Phylogenetic tree" class="label label-default tutorial_tag" style="--color-primary: #00d46b; --color-darker: #00bd5e; --color-dimmed: #00c964;" title="Click to show all tutorials tagged Phylogenetic tree">Phylogenetic tree</a>
               
-              <a href="/training-material/search?query=Heatmap" class="label label-default tutorial_tag" style="--color-primary: #ffbae6; --color-darker: #ff95db; --color-dimmed: #ffa8e0;" title="Click to show all tutorials tagged Heatmap">Heatmap</a>
+              <a href="/training-material/search?query=Heatmap" class="label label-default tutorial_tag" style="--color-primary: #ff96db; --color-darker: #ff6fd3; --color-dimmed: #ff84d7;" title="Click to show all tutorials tagged Heatmap">Heatmap</a>
               
-              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffb9ec; --color-darker: #ff93e4; --color-dimmed: #ffa7e8;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ff95e4; --color-darker: #ff6cde; --color-dimmed: #ff82e1;" title="Click to show all tutorials tagged cyoa">cyoa</a>
               
             
             </div>
@@ -1983,7 +2212,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

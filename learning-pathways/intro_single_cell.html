@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,24 +209,152 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "Introduction to Galaxy and Single Cell RNA Sequence analysis",
-	"description": "This learning path aims to teach you the basics of Galaxy and analysis of Single Cell RNA-seq data.
-You will learn how to use Galaxy for analysis, and an important Galaxy feature for iterative single cell analysis. You'll tbe guided through the general theory of single analysis and then perform a basic analysis of 10X chromium data. For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions!
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/intro_single_cell.html",
+  "name": "Learning Pathway Introduction to Galaxy and Single Cell RNA Sequence analysis",
+  "keywords": [
+    "beginner"
+  ],
+  "description": "This learning path aims to teach you the basics of Galaxy and analysis of Single Cell RNA-seq data.\nYou will learn how to use Galaxy for analysis, and an important Galaxy feature for iterative single cell analysis. You'll tbe guided through the general theory of single analysis and then perform a basic analysis of 10X chromium data. For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions!\n",
+  "about": [
+
+  ],
+  "audience": null,
+  "teaches": [
+    "Learn how to upload a file",
+    "Learn how to use a tool",
+    "Learn how to view results",
+    "Learn how to view histories",
+    "Learn how to extract and run a workflow",
+    "Learn how to share a history",
+    "Learn how to set name tags",
+    "Learn how they are propagated",
+    "To understand the pitfalls in scRNA-seq sequencing and amplification, and how they are overcome.",
+    "Know the types of variation in an analysis and how to control for them.",
+    "Grasp what dimension reduction is, and how it might be performed.",
+    "Be familiarised with the main types of clustering techniques and when to use them.",
+    "Demultiplex single-cell FASTQ data from 10X Genomics",
+    "Learn about transparent matrix formats",
+    "Understand the importance of high and low quality cells",
+    "Describe an AnnData object to store single-cell data",
+    "Explain the preprocessing steps for single-cell data",
+    "Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC",
+    "Execute data normalization and scaling",
+    "Identify highly variable genes",
+    "Construct and run a dimensionality reduction using Principal Component Analysis",
+    "Perform a graph-based clustering for cells",
+    "Identify marker genes for the clusters",
+    "Construct and run a cell type annotation for the clusters"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Module 1: Introduction to Galaxy",
+      "description": "Get a first look at the Galaxy platform for data analysis. We start with a\nshort introduction (video slides & practical) to familiarize you with the Galaxy\ninterface, and then proceed with a short tutorial of how to tag - and organise! - your history.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 2: Theory of Single-Cell RNA-seq",
+      "description": "When analysing sequencing data, you should always start with a quality control step to clean your data and make sure your data is good enough to answer your research question. After this step, you will often proceed with a mapping (alignment) or genome assembly step, depending on whether you have a reference genome to work with.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 3: Time to analyse data!",
+      "description": "It's time to apply your skills! You'll now analyse some clean data from the 10X Chromium platform.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "The End!",
+      "description": "And now you're done! There are still loads of resources to take you from basic analysis to more difficult decision-making, deconvolution, multiomics, or ingesting from different data sources. See the [Galaxy Single Cell Training page](/training-material/topics/single-cell/index.html) for more!\n"
+    }
+  ],
+  "dateModified": "2023-10-05 07:26:31 +0000",
+  "datePublished": "2023-10-04 16:02:12 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -312,7 +440,7 @@ interface, and then proceed with a short tutorial of how to tag - and organise! 
             
             
               
-              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00e7dc; --color-darker: #00cdc3; --color-dimmed: #00dacf;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00cec4; --color-darker: #00b8af; --color-dimmed: #00c3b9;" title="Click to show all tutorials tagged español">español</a>
               
             
             </div>
@@ -1471,7 +1599,7 @@ interface, and then proceed with a short tutorial of how to tag - and organise! 
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffbec7; --color-darker: #ff9cab; --color-dimmed: #ffadb9;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ff9dac; --color-darker: #ff7a93; --color-dimmed: #ff8ca0;" title="Click to show all tutorials tagged 10x">10x</a>
               
             
             </div>
@@ -1748,7 +1876,7 @@ interface, and then proceed with a short tutorial of how to tag - and organise! 
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffbec7; --color-darker: #ff9cab; --color-dimmed: #ffadb9;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ff9dac; --color-darker: #ff7a93; --color-dimmed: #ff8ca0;" title="Click to show all tutorials tagged 10x">10x</a>
               
             
             </div>
@@ -2207,7 +2335,7 @@ interface, and then proceed with a short tutorial of how to tag - and organise! 
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,25 +209,251 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "Metagenomics data processing and analysis for microbiome",
-	"description": "This learning path aims to teach you the basics of Galaxy and analysis of metagenomics data.
-You will learn how to use Galaxy for analysis, and will be guided through the common
-steps of microbiome data analysis: quality control, taxonomic profiling, taxonomic binning, assembly, functional profiling, and also some applications
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/metagenomics.html",
+  "name": "Learning Pathway Metagenomics data processing and analysis for microbiome",
+  "keywords": [
+    "microbiome"
+  ],
+  "description": "This learning path aims to teach you the basics of Galaxy and analysis of metagenomics data.\nYou will learn how to use Galaxy for analysis, and will be guided through the common\nsteps of microbiome data analysis: quality control, taxonomic profiling, taxonomic binning, assembly, functional profiling, and also some applications\n",
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0196",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0196"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3697",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3697"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0637",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0637"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3941",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3941"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_1775",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_1775"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3305"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0634",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0634"
+    }
+  ],
+  "audience": null,
+  "teaches": [
+    "Learn how to upload a file",
+    "Learn how to use a tool",
+    "Learn how to view results",
+    "Learn how to view histories",
+    "Learn how to extract and run a workflow",
+    "Learn how to share a history",
+    "Familiarize yourself with the basics of Galaxy",
+    "Learn how to obtain data from external sources",
+    "Learn how to run tools",
+    "Learn how histories work",
+    "Learn how to create a workflow",
+    "Learn how to share your work",
+    "Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC",
+    "Assess long reads FASTQ quality using Nanoplot and PycoQC",
+    "Perform quality correction with Cutadapt (short reads)",
+    "Summarise quality metrics MultiQC",
+    "Process single-end and paired-end data",
+    "Describe what an assembly is",
+    "Describe what de-replication is",
+    "Explain the difference between co-assembly and individual assembly",
+    "Explain the difference between reads, contigs and scaffolds",
+    "Explain how tools based on De Bruijn graph work",
+    "Apply appropriate tools for analyzing the quality of metagenomic data",
+    "Construct and apply simple assembly pipelines on short read data",
+    "Apply appropriate tools for analyzing the quality of metagenomic assembly",
+    "Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Genome",
+    "Explain what taxonomic assignment is",
+    "Explain how taxonomic assignment works",
+    "Apply Kraken and MetaPhlAn to assign taxonomic labels",
+    "Apply Krona and Pavian to visualize results of assignment and understand the output",
+    "Identify taxonomic classification tool that fits best depending on their data",
+    "Inspect metagenomics data",
+    "Run metagenomics tools",
+    "Identify yeast species contained in a sequenced beer sample using DNA",
+    "Visualize the microbiome community of a beer sample",
+    "Describe what metagenomics binning is",
+    "Describe common problems in metagenomics binning",
+    "What software tools are available for metagenomics binning",
+    "Binning of contigs into metagenome-assembled genomes (MAGs) using MetaBAT 2 software",
+    "Evaluation of MAG quality and completeness using CheckM software",
+    "Choose the best approach to analyze metatranscriptomics data",
+    "Understand the functional microbiome characterization using metatranscriptomic results",
+    "Understand where metatranscriptomics fits in 'multi-omic' analysis of microbiomes",
+    "Visualise a community structure",
+    "Check quality reports generated by FastQC and NanoPlot for metagenomics Nanopore data",
+    "Preprocess the sequencing data to remove adapters, poor quality base content and host/contaminating reads",
+    "Perform taxonomy profiling indicating and visualizing up to species level in the samples",
+    "Identify pathogens based on the found virulence factor gene products via assembly, identify strains and indicate all antimicrobial resistance genes in samples",
+    "Identify pathogens via SNP calling and build the consensus gemone of the samples",
+    "Relate all samples' pathogenic genes for tracking pathogens via phylogenetic trees and heatmaps"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Module 1: Introduction to metagenomics",
+      "description": "Why study the microbiome? What are the different approaches for metagenomics? This module will give you a short introduction to metagenomics."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 2: Introduction to Galaxy",
+      "description": "Get a first look at the Galaxy platform for data analysis. We start with a\nshort introduction (video slides & practical) to familiarize you with the Galaxy\ninterface, and then proceed with a slightly longer introduction tutorials where\nyou perform a first, very simple, analysis.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 3: Quality control",
+      "description": "When analysing sequencing data, you should always start with a quality control step to clean your data and make sure your data is good enough to answer your research question."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 4: Assembly",
+      "description": "This module covers the following questions:\n- Why metagenomic data should be assembled?\n- What is the difference between co-assembly and individual assembly?\n- What is the difference between reads, contigs and scaffolds?\n- How tools based on De Bruijn graph work?\n- How to assess the quality of metagenomic data assembly?\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 5: Community taxonomic profiling",
+      "description": "This module covers the following questions:\n- Which species (or genera, families, ...) are present in my sample?\n- What are the different approaches and tools to get the community profile of my sample?\n- How can we visualize and compare community profiles?\n\nThis module will cover taxonomic profiling in theory and also with an example tutorial.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 6: Taxonomic binning",
+      "description": "This module covers the process used to classify DNA sequences obtained from metagenomic sequencing into discrete groups, or bins, based on their similarity to each other.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 8: Applying concepts to metatranscriptomics data",
+      "description": "This module covers the following questions:\n- How to analyze metatranscriptomics data?\n- What information can be extracted of metatranscriptomics data?\n- How to assign taxa and function to the identified sequences?\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Recommended follow-up tutorials",
+      "description": null
+    }
+  ],
+  "dateModified": "2024-01-11 10:48:02 +0000",
+  "datePublished": "2023-06-27 16:00:51 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -604,7 +830,7 @@ you perform a first, very simple, analysis.</p>
             
             
               
-              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00e7dc; --color-darker: #00cdc3; --color-dimmed: #00dacf;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00cec4; --color-darker: #00b8af; --color-dimmed: #00c3b9;" title="Click to show all tutorials tagged español">español</a>
               
             
             </div>
@@ -1910,11 +2136,11 @@ you perform a first, very simple, analysis.</p>
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbbe0; --color-darker: #ff96d2; --color-dimmed: #ffa9d9;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ff97d3; --color-darker: #ff71c8; --color-dimmed: #ff85cd;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #eacf00; --color-darker: #d0b800; --color-dimmed: #ddc400;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #d1b900; --color-darker: #baa500; --color-dimmed: #c6af00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -2204,11 +2430,11 @@ you perform a first, very simple, analysis.</p>
             
             
               
-              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #eacf00; --color-darker: #d0b800; --color-dimmed: #ddc400;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #d1b900; --color-darker: #baa500; --color-dimmed: #c6af00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
-              <a href="/training-material/search?query=taxonomic profiling" class="label label-default tutorial_tag" style="--color-primary: #ffb9f2; --color-darker: #ff92ec; --color-dimmed: #ffa6ef;" title="Click to show all tutorials tagged taxonomic profiling">taxonomic profiling</a>
+              <a href="/training-material/search?query=taxonomic profiling" class="label label-default tutorial_tag" style="--color-primary: #ff93ed; --color-darker: #ff69e9; --color-dimmed: #ff80eb;" title="Click to show all tutorials tagged taxonomic profiling">taxonomic profiling</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -2437,15 +2663,15 @@ you perform a first, very simple, analysis.</p>
             
             
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #a4d4ff; --color-darker: #66c0ff; --color-dimmed: #88caff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #69c1ff; --color-darker: #00aff8; --color-dimmed: #3cb8ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search?query=beer" class="label label-default tutorial_tag" style="--color-primary: #00e6e4; --color-darker: #00cdcb; --color-dimmed: #00d9d8;" title="Click to show all tutorials tagged beer">beer</a>
+              <a href="/training-material/search?query=beer" class="label label-default tutorial_tag" style="--color-primary: #00cecc; --color-darker: #00b7b6; --color-dimmed: #00c2c1;" title="Click to show all tutorials tagged beer">beer</a>
               
-              <a href="/training-material/search?query=citizen science" class="label label-default tutorial_tag" style="--color-primary: #39ee00; --color-darker: #31d400; --color-dimmed: #35e100;" title="Click to show all tutorials tagged citizen science">citizen science</a>
+              <a href="/training-material/search?query=citizen science" class="label label-default tutorial_tag" style="--color-primary: #31d500; --color-darker: #2bbe00; --color-dimmed: #2ec900;" title="Click to show all tutorials tagged citizen science">citizen science</a>
               
-              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #eacf00; --color-darker: #d0b800; --color-dimmed: #ddc400;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #d1b900; --color-darker: #baa500; --color-dimmed: #c6af00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -2728,11 +2954,11 @@ you perform a first, very simple, analysis.</p>
             
             
               
-              <a href="/training-material/search?query=binning" class="label label-default tutorial_tag" style="--color-primary: #ffbbe3; --color-darker: #ff95d7; --color-dimmed: #ffa9dd;" title="Click to show all tutorials tagged binning">binning</a>
+              <a href="/training-material/search?query=binning" class="label label-default tutorial_tag" style="--color-primary: #ff97d7; --color-darker: #ff70cd; --color-dimmed: #ff85d2;" title="Click to show all tutorials tagged binning">binning</a>
               
-              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #eacf00; --color-darker: #d0b800; --color-dimmed: #ddc400;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #d1b900; --color-darker: #baa500; --color-dimmed: #c6af00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -3020,9 +3246,9 @@ you perform a first, very simple, analysis.</p>
             
             
               
-              <a href="/training-material/search?query=metatranscriptomics" class="label label-default tutorial_tag" style="--color-primary: #ebbfff; --color-darker: #e39dff; --color-dimmed: #e7aeff;" title="Click to show all tutorials tagged metatranscriptomics">metatranscriptomics</a>
+              <a href="/training-material/search?query=metatranscriptomics" class="label label-default tutorial_tag" style="--color-primary: #e39fff; --color-darker: #dd7dff; --color-dimmed: #e08eff;" title="Click to show all tutorials tagged metatranscriptomics">metatranscriptomics</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -3449,17 +3675,17 @@ you perform a first, very simple, analysis.</p>
             
             
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search?query=Nanopore data analysis" class="label label-default tutorial_tag" style="--color-primary: #00e6e7; --color-darker: #00cdce; --color-dimmed: #00d9da;" title="Click to show all tutorials tagged Nanopore data analysis">Nanopore data analysis</a>
+              <a href="/training-material/search?query=Nanopore data analysis" class="label label-default tutorial_tag" style="--color-primary: #00cdce; --color-darker: #00b7b8; --color-dimmed: #00c2c3;" title="Click to show all tutorials tagged Nanopore data analysis">Nanopore data analysis</a>
               
-              <a href="/training-material/search?query=Pathogens detection" class="label label-default tutorial_tag" style="--color-primary: #a4e200; --color-darker: #91c900; --color-dimmed: #9bd500;" title="Click to show all tutorials tagged Pathogens detection">Pathogens detection</a>
+              <a href="/training-material/search?query=Pathogens detection" class="label label-default tutorial_tag" style="--color-primary: #92ca00; --color-darker: #82b400; --color-dimmed: #8abf00;" title="Click to show all tutorials tagged Pathogens detection">Pathogens detection</a>
               
-              <a href="/training-material/search?query=Phylogenetic tree" class="label label-default tutorial_tag" style="--color-primary: #00ed78; --color-darker: #00d36a; --color-dimmed: #00e071;" title="Click to show all tutorials tagged Phylogenetic tree">Phylogenetic tree</a>
+              <a href="/training-material/search?query=Phylogenetic tree" class="label label-default tutorial_tag" style="--color-primary: #00d46b; --color-darker: #00bd5e; --color-dimmed: #00c964;" title="Click to show all tutorials tagged Phylogenetic tree">Phylogenetic tree</a>
               
-              <a href="/training-material/search?query=Heatmap" class="label label-default tutorial_tag" style="--color-primary: #ffbae6; --color-darker: #ff95db; --color-dimmed: #ffa8e0;" title="Click to show all tutorials tagged Heatmap">Heatmap</a>
+              <a href="/training-material/search?query=Heatmap" class="label label-default tutorial_tag" style="--color-primary: #ff96db; --color-darker: #ff6fd3; --color-dimmed: #ff84d7;" title="Click to show all tutorials tagged Heatmap">Heatmap</a>
               
-              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffb9ec; --color-darker: #ff93e4; --color-dimmed: #ffa7e8;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ff95e4; --color-darker: #ff6cde; --color-dimmed: #ff82e1;" title="Click to show all tutorials tagged cyoa">cyoa</a>
               
             
             </div>
@@ -3739,7 +3965,7 @@ you perform a first, very simple, analysis.</p>
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

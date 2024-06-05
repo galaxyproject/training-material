@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -216,14 +216,54 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   ],
   "description": "These series of webinars and tutorials aim at improving basic and\napplied knowledge associated with next-generation sequencing (NGS)\ntechnologies and their applications in the field of Tuberculosis (TB).\n",
   "about": [
-    "topic_0622",
-    "topic_3301",
-    "topic_0196",
-    "topic_0199",
-    "topic_3305",
-    "topic_3324",
-    "topic_2885",
-    "topic_0084"
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0622"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3301"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0196",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0196"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0199"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3305",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3305"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3324",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3324"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2885",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2885"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0084",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0084"
+    }
   ],
   "audience": "Open for all, but target audience is clinicians and researchers using MTBC sequencing data.",
   "courseMode": "online",
@@ -272,6 +312,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       ]
     }
   ],
+  "location": {
+    "name": "Online"
+  },
   "teaches": [
     "Learn how to upload a file",
     "Learn how to use a tool",
@@ -362,52 +405,52 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "syllabusSections": [
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Day 1: Overview of NGS technologies & TB specific NGS solutions",
       "description": "There were unusually high rates of TB cases in your country this year. To characterize the underlying\nbacterial strains driving the epidemic, isolates have been sent for whole-genome sequencing.  Doctors and public\nhealth authorities request information in order to take decisions. In this course it will be demonstrated how\nyou would make use of NGS to answer several questions relevant for patient and public health system management\nsuch as:\n  - Are there cases of drug resistant bacteria?\n  - Is there transmission of drug resistance?\n  - Is there evidence of de novo emergence of resistance?\n  - Are there multiple infections per patient?\n  - Do we have on-going transmission?\n\nWe hope that at the end of the different training sessions you can answer this question on your own and can apply what you have learnt to your own data!\n"
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Day 2: Mapping and variant calling",
       "description": "The 20 strains isolated in your country have been sequenced with\nIllumina technology to obtain whole-genome sequences. In this part\nof the workshop you will learn how to analyse those sequences.\n\nIn a typical bioinformatic pipeline you would store your sequences\nin a computer server where all necessary software would be\ninstalled. This would be a server running the operating system\nLINUX, which is the most efficient way to run bioinformatics\npipelines (more on this on Day 4). You will be running your\nanalysis in a LINUX server from Galaxy, but instead of writing\ndirectly commands to execute operations in the server, you will be\nexecuting operations through a Galaxy graphical interface. This\nallows you to have access to a LINUX server and to run workflows\nwithout knowing LINUX. Importantly, for training purposes it also\nallows you to dedicate more attention in trying to understand what\nis being done in each of the steps without having to understand the\nprograming behind. This being said, working directly on a LINUX\ncluster provides you always more flexibility, but if you don’t have\naccess to one, Galaxy is a very good alternative for data analysis.\n\nYou will need to understand how to use Galaxy to run all the hands-\non tutorials and therefore is highly recommended that you follow\nthe next webinar and hands-on on Galaxy. The good thing about this\nis that once you know how it works, you can use it to run your own\nanalysis with your own data.\n"
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Session 1: Learning Galaxy",
       "description": null
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Session 2: Mapping and Variant calling of short MTBC reads ",
       "description": "Let us imagine that you have received the sequences of the 20 strains, the first step is to assess the quality of sequencing. Once we are sure that the sequencing worked well, we typically compare our sequencing results to a reference genome (re-sequencing approach) by using a bioinformatics procedure usually called mapping. After, we will identify the genomic variants in our sequences with respect to the reference genome, a bioinformatics procedure called, variant calling. Once we are certain of the variants we have identified, usually we are interested in determining to what genes they belong, to what pathways, or for instance if they are likely to disrupt protein function. This procedure is called annotation. Once we have gone through each of these steps we are ready to analyse drug resistant patterns, draw phylogenetic relationships or identify clusters of transmission of M. tuberculosis.\n\nYou are now ready for performing bioinformatic analysis in Galaxy. Before we start we would like you to watch a short video on how Illumina sequencing works. Following that video we have prepared a webinar on mapping and variant calling of Illumina applied to MTBC. After watching it you will be hopefully able to know; how a reference genome is chosen, why we typically ignore some regions of the MTBC genomes or what is the difference between a fixed and a variable SNP and why do we care about it (among other things).\n"
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Day 3: Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission",
       "description": "We are ready to analyse drug resistant patterns, draw phylogenetic relationships or\nidentify recent transmission among the isolates we have sampled in our population. Before\ndelving into the analysis of the genomes we would like to share with you some notions\nimportant to the inference of direct transmission and to the interpretation of drug\nresistant patterns.\n"
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission",
       "description": null
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Day 4: Webtools dedicated to MTBC bioinformatics & Be a bioinformatician in the jungle (optional)",
       "description": null
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Session 1: Webtools dedicated to MTBC bioinformatics",
       "description": "The use of whole-genome sequencing (WGS) for antibiotic resistance prediction and routine\ntyping of bacterial isolates has increased substantially in recent years. To date a\nmultitude of solutions for analyzing WGS data of the Mycobacterium tuberculosis complex\n(MTBC) data have been developed. In the first part of the 4th day of this workshop, we\nintroduce some freely available webtools and open source pipelines designed to analyze\nMTBC sequence data and we’ll provide some examples of how these tools work and how to\ninterpret the results.\n"
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Session 2: Be a bioinformatician in the jungle (optional)",
       "description": "On Day 2 and 3 you have learned how you could use galaxy for analysing your own data.\nEstablishing your own workflows in galaxy would allow you combining different tools and\nbuild your own pipeline without having to know how to program. If you are not so\ninterested in having your own pipeline, webtools for WGS analysis can be very useful, as\nwe have shown in the previous session.\n\nHowever, in the last part of the training we would like to convey to you what it would\ntake if would want to run Linux via the command line.  The Linux operating system will be\nintroduced, how to perform basic tasks using the Unix shell and how to install and run\npipelines on the command line. You will learn the power of the Unix shell in performing\ncomplex and powerful tasks, often with just a few keystrokes or lines of code. In fact,\nUnix shell helps users automate repetitive tasks and easily combine smaller tasks into\nlarger, more powerful workflows (i.e. pipelines). Use of the shell is fundamental to a\nwide range of advanced computing tasks, including high-performance computing. These\nwebinars will introduce you to this powerful tool. Which approach to choose, Galaxy\nworkflows, Webtools or native Linux depends on your needs, your interests and what\ncomputer resources you have available.\n"
     },
     {
       "@type": "Syllabus",
-      "name": null,
+      "name": "Day 5: Live Discussion",
       "description": "Today all experts will  be available to answer your questions and discuss any\nof the tutorials, webinars, or questions related to your own data. Meet with us at the\nzoom link!\n"
     }
   ],
@@ -667,7 +710,6 @@ technologies and their applications in the field of Tuberculosis (TB).</p>
      <p>Before starting the course, make sure to follow the setup instructions</p>
 
     <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
-    <h3> Start the Course </h3>
     
 
 
@@ -1022,7 +1064,7 @@ Today’s icebreaker question:</p>
             
             
               
-              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00e7dc; --color-darker: #00cdc3; --color-dimmed: #00dacf;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search?query=español" class="label label-default tutorial_tag" style="--color-primary: #00cec4; --color-darker: #00b8af; --color-dimmed: #00c3b9;" title="Click to show all tutorials tagged español">español</a>
               
             
             </div>
@@ -1894,11 +1936,11 @@ Today’s icebreaker question:</p>
             
             
               
-              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #d0c8ff; --color-darker: #baaeff; --color-dimmed: #c5bbff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #bbafff; --color-darker: #a896ff; --color-dimmed: #b1a2ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #93e500; --color-darker: #82cc00; --color-dimmed: #8ad800;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #83cd00; --color-darker: #74b600; --color-dimmed: #7bc100;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -2425,11 +2467,11 @@ drug resistance patterns</p>
             
             
               
-              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #d0c8ff; --color-darker: #baaeff; --color-dimmed: #c5bbff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #bbafff; --color-darker: #a896ff; --color-dimmed: #b1a2ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #93e500; --color-darker: #82cc00; --color-dimmed: #8ad800;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #83cd00; --color-darker: #74b600; --color-dimmed: #7bc100;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -2699,13 +2741,13 @@ Recommended to those wanting to learn more about phylogenetics.</p>
             
             
               
-              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #d0c8ff; --color-darker: #baaeff; --color-dimmed: #c5bbff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #bbafff; --color-darker: #a896ff; --color-dimmed: #b1a2ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #93e500; --color-darker: #82cc00; --color-dimmed: #8ad800;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #83cd00; --color-darker: #74b600; --color-dimmed: #7bc100;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search?query=phylogenetics" class="label label-default tutorial_tag" style="--color-primary: #00ee5f; --color-darker: #00d454; --color-dimmed: #00e15a;" title="Click to show all tutorials tagged phylogenetics">phylogenetics</a>
+              <a href="/training-material/search?query=phylogenetics" class="label label-default tutorial_tag" style="--color-primary: #00d554; --color-darker: #00be4a; --color-dimmed: #00c94f;" title="Click to show all tutorials tagged phylogenetics">phylogenetics</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -3736,11 +3778,6 @@ $('#myTab button[data-target="' + hash + '"]').tab('show');
 </script>
 
 <style>
-:target {
-    scroll-margin-top: 24em;
-}
-
-
 .zrow {
 	display: grid;
 	grid-template-rows: 1fr;
@@ -3778,7 +3815,7 @@ $('#myTab button[data-target="' + hash + '"]').tab('show');
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

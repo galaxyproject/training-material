@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,23 +209,174 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "Genome annotation for prokaryotes",
-	"description": "Learn how to annotate a prokaryotic genome sequence: find the position and function of genes, and even set up a manual curation environment with Apollo.
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/genome-annotation-prokaryote.html",
+  "name": "Learning Pathway Genome annotation for prokaryotes",
+  "keywords": [
+    "genome annotation",
+    "prokaryote"
+  ],
+  "description": "Learn how to annotate a prokaryotic genome sequence: find the position and function of genes, and even set up a manual curation environment with Apollo.\n",
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0622",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0622"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3301",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3301"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0623",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0623"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3673",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3673"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0085",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0085"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0798",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0798"
+    }
+  ],
+  "audience": null,
+  "teaches": [
+    "Run a series of tool to annotate a draft bacterial genome for different types of genomic components",
+    "Evaluate the annotation",
+    "Process the outputs to formate them for visualization needs",
+    "Visualize a draft bacterial genome and its annotations",
+    "Load a genome into Galaxy",
+    "View annotations in JBrowse",
+    "Learn how to load JBrowse data into Apollo",
+    "Learn how to manually refine genome annotations within Apollo",
+    "Export refined genome annotations"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Module 1: Introduction",
+      "description": "General introduction to genome annotation\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 2: Gene calling and functional annotation",
+      "description": "In this module you will learn to run tools to find the position of genes and other genomic components and to functionally annotate them\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 3: Manual curation",
+      "description": "Automatic annotation is rarely perfect, in this module you will learn how to start a collaborative manual curation project using Galaxy and Apollo\n"
+    }
+  ],
+  "dateModified": "2024-01-31 15:00:25 +0000",
+  "datePublished": "2023-06-27 16:08:20 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -607,15 +758,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffc72f; --color-darker: #e5b000; --color-dimmed: #f3bb00;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #e6b100; --color-darker: #cd9e00; --color-dimmed: #daa700;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffc474; --color-darker: #f1ab00; --color-dimmed: #ffb61d;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #f3ab00; --color-darker: #d89800; --color-dimmed: #e5a200;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffc564; --color-darker: #edad00; --color-dimmed: #fbb800;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              <a href="/training-material/search?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #eeae00; --color-darker: #d49b00; --color-dimmed: #e1a400;" title="Click to show all tutorials tagged bacteria">bacteria</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f0bdff; --color-darker: #eb9aff; --color-dimmed: #eeacff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eb9bff; --color-darker: #e677ff; --color-dimmed: #e98aff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
             
             </div>
@@ -898,15 +1049,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffc72f; --color-darker: #e5b000; --color-dimmed: #f3bb00;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #e6b100; --color-darker: #cd9e00; --color-dimmed: #daa700;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #d0c8ff; --color-darker: #baaeff; --color-dimmed: #c5bbff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #bbafff; --color-darker: #a896ff; --color-dimmed: #b1a2ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
-              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #ddd400; --color-darker: #c4bc00; --color-dimmed: #d0c800;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f0bdff; --color-darker: #eb9aff; --color-dimmed: #eeacff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eb9bff; --color-darker: #e677ff; --color-dimmed: #e98aff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search?query=apollo2" class="label label-default tutorial_tag" style="--color-primary: #b7cfff; --color-darker: #8fb9ff; --color-dimmed: #a4c4ff;" title="Click to show all tutorials tagged apollo2">apollo2</a>
+              <a href="/training-material/search?query=apollo2" class="label label-default tutorial_tag" style="--color-primary: #91baff; --color-darker: #65a6ff; --color-dimmed: #7db0ff;" title="Click to show all tutorials tagged apollo2">apollo2</a>
               
             
             </div>
@@ -1446,7 +1597,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

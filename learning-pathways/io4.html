@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,23 +209,148 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "Gallantries Grant - Intellectual Output 4 - Data analysis and modelling for evidence and hypothesis generation and knowledge discovery",
-	"description": "This Learning Pathway collects the results of Intellectual Output 4 in the Gallantries Project
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/io4.html",
+  "name": "Learning Pathway Gallantries Grant - Intellectual Output 4 - Data analysis and modelling for evidence and hypothesis generation and knowledge discovery",
+  "keywords": [
+    "beginner"
+  ],
+  "description": "This Learning Pathway collects the results of Intellectual Output 4 in the Gallantries Project\n",
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610"
+    }
+  ],
+  "audience": null,
+  "teaches": [
+    "Upload data from DATRAS portal of ICES",
+    "Pre-process population data with Galaxy",
+    "Learning how to use an ecological analysis workflow from raw data to graphical representations",
+    "Learning how to construct a Generalized Linear (Mixed) Model from a usual ecological question",
+    "Learning how to interpret a Generalized Linear (Mixed) Model",
+    "Obtain and filter/manipulate occurrence data",
+    "Compute and visualize phenology of a species through the years",
+    "Compute temporal abundance trends",
+    "Explore Biodiversity data with taxonomic, temporal and geographical informations",
+    "Have an idea about quality content of the data regarding statistical tests like normality or homoscedasticity and coverage like temporal or geographical coverage",
+    "Get occurrence data on a species",
+    "Visualize the data to understand them",
+    "Clean GBIF dataset for further analyses",
+    "Deal with paired-end data to create consensus sequences",
+    "Clean, filter and anlayse data to obtain strong results",
+    "Find and download occurrences data from GBIF",
+    "Find and download environmental data",
+    "Process both occurrences and environmental data",
+    "Partition occurrence data",
+    "Model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Year 1: Biodiversity data handling and visualisation",
+      "description": "learners will understand how to handle biodiversity data and analyse it, as well as elements of visualisation, identifying the optimal visualisation for a dataset. [SC1.1,SC1.4, SC2.1, SC2.3, SC4.1-3]\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Year 2: Metabarcoding and environmental DNA data analysis",
+      "description": "analysis of environmental DNA samples requires integrative analysis of highly diversified samples, and new techniques to scale with the data [SC1.4, SC1.5, SC2.1, SC3.1, SC4.1-4]\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Year 3: Species distribution modeling",
+      "description": "As an application of data modeling, we will use species migration and biodiversity to teach learners how to build models for complex data and visualise the results. [SC1.1, SC2.4, SC4.1-4]\n"
+    }
+  ],
+  "dateModified": "2024-05-23 13:53:50 +0000",
+  "datePublished": "2023-11-02 09:28:11 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -304,15 +429,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=Species population EBV class" class="label label-default tutorial_tag" style="--color-primary: #00e7d6; --color-darker: #00cebf; --color-dimmed: #00dbca;" title="Click to show all tutorials tagged Species population EBV class">Species population EBV class</a>
+              <a href="/training-material/search?query=Species population EBV class" class="label label-default tutorial_tag" style="--color-primary: #00cfc0; --color-darker: #00b8ab; --color-dimmed: #00c3b5;" title="Click to show all tutorials tagged Species population EBV class">Species population EBV class</a>
               
-              <a href="/training-material/search?query=Community composition EBV class" class="label label-default tutorial_tag" style="--color-primary: #a8d3ff; --color-darker: #6fbfff; --color-dimmed: #8ec9ff;" title="Click to show all tutorials tagged Community composition EBV class">Community composition EBV class</a>
+              <a href="/training-material/search?query=Community composition EBV class" class="label label-default tutorial_tag" style="--color-primary: #71c0ff; --color-darker: #00aefd; --color-dimmed: #4db7ff;" title="Click to show all tutorials tagged Community composition EBV class">Community composition EBV class</a>
               
-              <a href="/training-material/search?query=EBV dataset" class="label label-default tutorial_tag" style="--color-primary: #e9c0ff; --color-darker: #df9fff; --color-dimmed: #e4b0ff;" title="Click to show all tutorials tagged EBV dataset">EBV dataset</a>
+              <a href="/training-material/search?query=EBV dataset" class="label label-default tutorial_tag" style="--color-primary: #e0a0ff; --color-darker: #d880ff; --color-dimmed: #dc91ff;" title="Click to show all tutorials tagged EBV dataset">EBV dataset</a>
               
-              <a href="/training-material/search?query=EBV workflow" class="label label-default tutorial_tag" style="--color-primary: #00e9c1; --color-darker: #00cfac; --color-dimmed: #00dcb7;" title="Click to show all tutorials tagged EBV workflow">EBV workflow</a>
+              <a href="/training-material/search?query=EBV workflow" class="label label-default tutorial_tag" style="--color-primary: #00d0ad; --color-darker: #00ba9a; --color-dimmed: #00c5a3;" title="Click to show all tutorials tagged EBV workflow">EBV workflow</a>
               
-              <a href="/training-material/search?query=modeling" class="label label-default tutorial_tag" style="--color-primary: #dbc5ff; --color-darker: #caa8ff; --color-dimmed: #d2b7ff;" title="Click to show all tutorials tagged modeling">modeling</a>
+              <a href="/training-material/search?query=modeling" class="label label-default tutorial_tag" style="--color-primary: #cba9ff; --color-darker: #bd8eff; --color-dimmed: #c49cff;" title="Click to show all tutorials tagged modeling">modeling</a>
               
             
             </div>
@@ -589,13 +714,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=Species populations EBV class" class="label label-default tutorial_tag" style="--color-primary: #00e7d6; --color-darker: #00cebf; --color-dimmed: #00dbca;" title="Click to show all tutorials tagged Species populations EBV class">Species populations EBV class</a>
+              <a href="/training-material/search?query=Species populations EBV class" class="label label-default tutorial_tag" style="--color-primary: #00cfc0; --color-darker: #00b8ab; --color-dimmed: #00c3b5;" title="Click to show all tutorials tagged Species populations EBV class">Species populations EBV class</a>
               
-              <a href="/training-material/search?query=Species traits EBV class" class="label label-default tutorial_tag" style="--color-primary: #c4ccff; --color-darker: #a7b3ff; --color-dimmed: #b6c0ff;" title="Click to show all tutorials tagged Species traits EBV class">Species traits EBV class</a>
+              <a href="/training-material/search?query=Species traits EBV class" class="label label-default tutorial_tag" style="--color-primary: #a8b4ff; --color-darker: #8c9eff; --color-dimmed: #9aa9ff;" title="Click to show all tutorials tagged Species traits EBV class">Species traits EBV class</a>
               
-              <a href="/training-material/search?query=EBV dataset" class="label label-default tutorial_tag" style="--color-primary: #e9c0ff; --color-darker: #df9fff; --color-dimmed: #e4b0ff;" title="Click to show all tutorials tagged EBV dataset">EBV dataset</a>
+              <a href="/training-material/search?query=EBV dataset" class="label label-default tutorial_tag" style="--color-primary: #e0a0ff; --color-darker: #d880ff; --color-dimmed: #dc91ff;" title="Click to show all tutorials tagged EBV dataset">EBV dataset</a>
               
-              <a href="/training-material/search?query=EBV workflow" class="label label-default tutorial_tag" style="--color-primary: #00e9c1; --color-darker: #00cfac; --color-dimmed: #00dcb7;" title="Click to show all tutorials tagged EBV workflow">EBV workflow</a>
+              <a href="/training-material/search?query=EBV workflow" class="label label-default tutorial_tag" style="--color-primary: #00d0ad; --color-darker: #00ba9a; --color-dimmed: #00c5a3;" title="Click to show all tutorials tagged EBV workflow">EBV workflow</a>
               
             
             </div>
@@ -814,9 +939,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=taxonomic data" class="label label-default tutorial_tag" style="--color-primary: #71ea00; --color-darker: #64d000; --color-dimmed: #6bdd00;" title="Click to show all tutorials tagged taxonomic data">taxonomic data</a>
+              <a href="/training-material/search?query=taxonomic data" class="label label-default tutorial_tag" style="--color-primary: #65d100; --color-darker: #59ba00; --color-dimmed: #5fc500;" title="Click to show all tutorials tagged taxonomic data">taxonomic data</a>
               
-              <a href="/training-material/search?query=data quality" class="label label-default tutorial_tag" style="--color-primary: #ffbbdc; --color-darker: #ff97cd; --color-dimmed: #ffaad4;" title="Click to show all tutorials tagged data quality">data quality</a>
+              <a href="/training-material/search?query=data quality" class="label label-default tutorial_tag" style="--color-primary: #ff98ce; --color-darker: #ff73c1; --color-dimmed: #ff86c7;" title="Click to show all tutorials tagged data quality">data quality</a>
               
             
             </div>
@@ -1093,11 +1218,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=gbif" class="label label-default tutorial_tag" style="--color-primary: #ffbfc0; --color-darker: #ff9d9f; --color-dimmed: #ffaeb0;" title="Click to show all tutorials tagged gbif">gbif</a>
+              <a href="/training-material/search?query=gbif" class="label label-default tutorial_tag" style="--color-primary: #ff9ea0; --color-darker: #ff7c80; --color-dimmed: #ff8e90;" title="Click to show all tutorials tagged gbif">gbif</a>
               
-              <a href="/training-material/search?query=data management" class="label label-default tutorial_tag" style="--color-primary: #ffc655; --color-darker: #eaae00; --color-dimmed: #f8b900;" title="Click to show all tutorials tagged data management">data management</a>
+              <a href="/training-material/search?query=data management" class="label label-default tutorial_tag" style="--color-primary: #ebaf00; --color-darker: #d19c00; --color-dimmed: #dea500;" title="Click to show all tutorials tagged data management">data management</a>
               
-              <a href="/training-material/search?query=data cleaning" class="label label-default tutorial_tag" style="--color-primary: #00ee5f; --color-darker: #00d454; --color-dimmed: #00e15a;" title="Click to show all tutorials tagged data cleaning">data cleaning</a>
+              <a href="/training-material/search?query=data cleaning" class="label label-default tutorial_tag" style="--color-primary: #00d554; --color-darker: #00be4a; --color-dimmed: #00c94f;" title="Click to show all tutorials tagged data cleaning">data cleaning</a>
               
             
             </div>
@@ -1370,17 +1495,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=Genetic composition EBV class" class="label label-default tutorial_tag" style="--color-primary: #ffbec7; --color-darker: #ff9cab; --color-dimmed: #ffadb9;" title="Click to show all tutorials tagged Genetic composition EBV class">Genetic composition EBV class</a>
+              <a href="/training-material/search?query=Genetic composition EBV class" class="label label-default tutorial_tag" style="--color-primary: #ff9dac; --color-darker: #ff7a93; --color-dimmed: #ff8ca0;" title="Click to show all tutorials tagged Genetic composition EBV class">Genetic composition EBV class</a>
               
-              <a href="/training-material/search?query=Community composition EBV class" class="label label-default tutorial_tag" style="--color-primary: #a8d3ff; --color-darker: #6fbfff; --color-dimmed: #8ec9ff;" title="Click to show all tutorials tagged Community composition EBV class">Community composition EBV class</a>
+              <a href="/training-material/search?query=Community composition EBV class" class="label label-default tutorial_tag" style="--color-primary: #71c0ff; --color-darker: #00aefd; --color-dimmed: #4db7ff;" title="Click to show all tutorials tagged Community composition EBV class">Community composition EBV class</a>
               
-              <a href="/training-material/search?query=EBV dataset" class="label label-default tutorial_tag" style="--color-primary: #e9c0ff; --color-darker: #df9fff; --color-dimmed: #e4b0ff;" title="Click to show all tutorials tagged EBV dataset">EBV dataset</a>
+              <a href="/training-material/search?query=EBV dataset" class="label label-default tutorial_tag" style="--color-primary: #e0a0ff; --color-darker: #d880ff; --color-dimmed: #dc91ff;" title="Click to show all tutorials tagged EBV dataset">EBV dataset</a>
               
-              <a href="/training-material/search?query=EBV workflow" class="label label-default tutorial_tag" style="--color-primary: #00e9c1; --color-darker: #00cfac; --color-dimmed: #00dcb7;" title="Click to show all tutorials tagged EBV workflow">EBV workflow</a>
+              <a href="/training-material/search?query=EBV workflow" class="label label-default tutorial_tag" style="--color-primary: #00d0ad; --color-darker: #00ba9a; --color-dimmed: #00c5a3;" title="Click to show all tutorials tagged EBV workflow">EBV workflow</a>
               
-              <a href="/training-material/search?query=eDNA" class="label label-default tutorial_tag" style="--color-primary: #fdfa00; --color-darker: #e0de00; --color-dimmed: #eeec00;" title="Click to show all tutorials tagged eDNA">eDNA</a>
+              <a href="/training-material/search?query=eDNA" class="label label-default tutorial_tag" style="--color-primary: #f7f500; --color-darker: #dbd900; --color-dimmed: #e9e700;" title="Click to show all tutorials tagged eDNA">eDNA</a>
               
-              <a href="/training-material/search?query=Metabarcoding" class="label label-default tutorial_tag" style="--color-primary: #ffc72f; --color-darker: #e5b000; --color-dimmed: #f3bb00;" title="Click to show all tutorials tagged Metabarcoding">Metabarcoding</a>
+              <a href="/training-material/search?query=Metabarcoding" class="label label-default tutorial_tag" style="--color-primary: #e6b100; --color-darker: #cd9e00; --color-dimmed: #daa700;" title="Click to show all tutorials tagged Metabarcoding">Metabarcoding</a>
               
             
             </div>
@@ -1711,13 +1836,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffc1ac; --color-darker: #ffa078; --color-dimmed: #ffb193;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffa17a; --color-darker: #ff822a; --color-dimmed: #ff925b;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=modeling" class="label label-default tutorial_tag" style="--color-primary: #dbc5ff; --color-darker: #caa8ff; --color-dimmed: #d2b7ff;" title="Click to show all tutorials tagged modeling">modeling</a>
+              <a href="/training-material/search?query=modeling" class="label label-default tutorial_tag" style="--color-primary: #cba9ff; --color-darker: #bd8eff; --color-dimmed: #c49cff;" title="Click to show all tutorials tagged modeling">modeling</a>
               
-              <a href="/training-material/search?query=gbif" class="label label-default tutorial_tag" style="--color-primary: #ffbfc0; --color-darker: #ff9d9f; --color-dimmed: #ffaeb0;" title="Click to show all tutorials tagged gbif">gbif</a>
+              <a href="/training-material/search?query=gbif" class="label label-default tutorial_tag" style="--color-primary: #ff9ea0; --color-darker: #ff7c80; --color-dimmed: #ff8e90;" title="Click to show all tutorials tagged gbif">gbif</a>
               
-              <a href="/training-material/search?query=species populations EBV class" class="label label-default tutorial_tag" style="--color-primary: #ded300; --color-darker: #c6bc00; --color-dimmed: #d2c700;" title="Click to show all tutorials tagged species populations EBV class">species populations EBV class</a>
+              <a href="/training-material/search?query=species populations EBV class" class="label label-default tutorial_tag" style="--color-primary: #c7bc00; --color-darker: #b1a800; --color-dimmed: #bcb200;" title="Click to show all tutorials tagged species populations EBV class">species populations EBV class</a>
               
             
             </div>
@@ -1998,7 +2123,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

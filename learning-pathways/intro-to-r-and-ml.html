@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,26 +209,131 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "From R to Machine Learning; an introductory course",
-	"description": "This learning path aims to teach you the basics of Machine Learning using R.
-Initially you will learn how to code in R within the Galaxy platform, gaining some
-familiarity into how to wrangle and analyze data. Then, you will be guided through
-the various types of Machine Learning techniques, developing some simple models using R.
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/intro-to-r-and-ml.html",
+  "name": "Learning Pathway From R to Machine Learning; an introductory course",
+  "keywords": [
+    "beginner"
+  ],
+  "description": "This learning path aims to teach you the basics of Machine Learning using R.\nInitially you will learn how to code in R within the Galaxy platform, gaining some\nfamiliarity into how to wrangle and analyze data. Then, you will be guided through\nthe various types of Machine Learning techniques, developing some simple models using R.\n",
+  "about": [
+
+  ],
+  "audience": null,
+  "teaches": [
+    "Know advantages of analyzing data using R within Galaxy.",
+    "Compose an R script file containing comments, commands, objects, and functions.",
+    "Be able to work with objects (i.e. applying mathematical and logical operators, subsetting, retrieving values, etc).",
+    "Be able to load and explore the shape and contents of a tabular dataset using base R functions.",
+    "Understand factors and how they can be used to store and work with categorical data.",
+    "Apply common `dplyr` functions to manipulate data in R.",
+    "Employ the ‘pipe’ operator to link together a sequence of functions.",
+    "Understand the ML taxonomy and the commonly used machine learning algorithms for analysing -omics data",
+    "Understand differences between ML algorithms categories and to which kind of problem they can be applied",
+    "Understand different applications of ML in different -omics studies",
+    "Use some basic, widely used R packages for ML",
+    "Interpret and visualize the results obtained from ML analyses on omics datasets",
+    "Apply the ML techniques to analyse their own datasets"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Module 1: R in Galaxy",
+      "description": "Get a first understanding of how to code using R fully using the Galaxy infrastructure.\nThe first part will introduce the basic concepts of R, whereas the second part will focus\non providing some advanced concepts around data manipulation.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 2: Machine Learning using R",
+      "description": "Having some foundational understanding of how to code in R, this module will provide initially\nan overview of the different types of Machine Learning, and then will provide some practical, hands-on\nexamples of creating ML models.\n"
+    }
+  ],
+  "dateModified": "2023-10-23 09:44:54 +0000",
+  "datePublished": "2023-06-27 15:59:26 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -316,9 +421,9 @@ on providing some advanced concepts around data manipulation.</p>
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffc1ac; --color-darker: #ffa078; --color-dimmed: #ffb193;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffa17a; --color-darker: #ff822a; --color-dimmed: #ff925b;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #aae100; --color-darker: #97c800; --color-dimmed: #a0d400;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #97c900; --color-darker: #86b300; --color-dimmed: #8fbe00;" title="Click to show all tutorials tagged R">R</a>
               
             
             </div>
@@ -605,7 +710,7 @@ on providing some advanced concepts around data manipulation.</p>
             
             
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #aae100; --color-darker: #97c800; --color-dimmed: #a0d400;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #97c900; --color-darker: #86b300; --color-dimmed: #8fbe00;" title="Click to show all tutorials tagged R">R</a>
               
             
             </div>
@@ -948,7 +1053,7 @@ examples of creating ML models.</p>
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffc1ac; --color-darker: #ffa078; --color-dimmed: #ffb193;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffa17a; --color-darker: #ff822a; --color-dimmed: #ff925b;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -1286,7 +1391,7 @@ examples of creating ML models.</p>
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

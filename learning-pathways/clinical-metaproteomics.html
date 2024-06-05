@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,23 +209,144 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "Clinical metaproteomics workflows within Galaxy",
-	"description": "This learning path aims to teach you the basics of how to perform metaproteomics analysis of the clinical data within the Galaxy platform. You will learn how to use Galaxy for analysis, and will be guided through the most common first steps of any metaproteomics database generation to searching the database, verifying the proteins/peptides, and data analysis.
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/clinical-metaproteomics.html",
+  "name": "Learning Pathway Clinical metaproteomics workflows within Galaxy",
+  "keywords": [
+    "beginner"
+  ],
+  "description": "This learning path aims to teach you the basics of how to perform metaproteomics analysis of the clinical data within the Galaxy platform. You will learn how to use Galaxy for analysis, and will be guided through the most common first steps of any metaproteomics database generation to searching the database, verifying the proteins/peptides, and data analysis.\n",
+  "about": [
+
+  ],
+  "audience": null,
+  "teaches": [
+    "Downloading databases related to 16SrRNA data",
+    "For better identification results, combine host and microbial proteins.",
+    "Reduced database provides better FDR stats.",
+    "Perform Database searching using two algorithms",
+    "Extract confident peptides and proteins",
+    "Generate a microbial peptide panel for verification",
+    "Verification of peptides helps in confirming the presence of the peptides in our samplle",
+    "Perform quantitation using MaxQuant and extract microbial and human proteins and peptides.",
+    "Perform group comparison analysis.",
+    "Analyze significant proteins",
+    "Look at the taxonomic distribution of the quantified peptides"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Module 1: Database generation",
+      "description": "Get a first look at the Galaxy platform for data analysis. We start with a\nshort introduction to familiarize you with the Galaxy\ninterface, and then proceed with understanding how to generate a customized database for clinical metaproteomics\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 2: Discovery",
+      "description": "This section helps to guide the users through MSMS dataset search against the compact database generated in the first module.\nThe identified peptides and proteins from various softwares will be combined later to perform verification.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 3: Verification",
+      "description": "Here we use the PepQuery tool to verify the presence of the peptides as well as validate that the peptides/proteins \nidentified are indeed of microbial origin.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 4: Quantitation",
+      "description": "In this module, we perform quantitative analysis of our data using MaxQuant. Quantitative analysis will help us identify \ndifferertially abundant proteins present in the sample and their abundance in various conditions.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 5: Data Interpretation",
+      "description": "We perform statistical analysis of the quantified peptides using MS stats and also used Unipept to perform taxonomic classification.\n"
+    }
+  ],
+  "dateModified": "2024-02-29 12:49:34 +0000",
+  "datePublished": "2024-02-12 13:08:44 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -301,7 +422,7 @@ interface, and then proceed with understanding how to generate a customized data
             
             
               
-              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ffbae4; --color-darker: #ff95d8; --color-dimmed: #ffa8de;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
+              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ff97d8; --color-darker: #ff70cf; --color-dimmed: #ff84d4;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
               
             
             </div>
@@ -575,7 +696,7 @@ The identified peptides and proteins from various softwares will be combined lat
             
             
               
-              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ffbae4; --color-darker: #ff95d8; --color-dimmed: #ffa8de;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
+              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ff97d8; --color-darker: #ff70cf; --color-dimmed: #ff84d4;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
               
             
             </div>
@@ -849,7 +970,7 @@ identified are indeed of microbial origin.</p>
             
             
               
-              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ffbae4; --color-darker: #ff95d8; --color-dimmed: #ffa8de;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
+              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ff97d8; --color-darker: #ff70cf; --color-dimmed: #ff84d4;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
               
             
             </div>
@@ -1123,7 +1244,7 @@ differertially abundant proteins present in the sample and their abundance in va
             
             
               
-              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ffbae4; --color-darker: #ff95d8; --color-dimmed: #ffa8de;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
+              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ff97d8; --color-darker: #ff70cf; --color-dimmed: #ff84d4;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
               
             
             </div>
@@ -1396,7 +1517,7 @@ differertially abundant proteins present in the sample and their abundance in va
             
             
               
-              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ffbae4; --color-darker: #ff95d8; --color-dimmed: #ffa8de;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
+              <a href="/training-material/search?query=label-TMT11" class="label label-default tutorial_tag" style="--color-primary: #ff97d8; --color-darker: #ff70cf; --color-dimmed: #ff84d4;" title="Click to show all tutorials tagged label-TMT11">label-TMT11</a>
               
             
             </div>
@@ -1646,7 +1767,7 @@ differertially abundant proteins present in the sample and their abundance in va
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

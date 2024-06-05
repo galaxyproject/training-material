@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d3ff75c0b22961a6f0b293f4984409e604912e1f",
+		release: "galaxy-training-network@3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -209,27 +209,152 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <script type="application/ld+json">
 {
-	"@context": "https://schema.org",
-	"@type": "Course",
-	"name": "Applying single-cell RNA-seq analysis",
-	"description": "Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will be introduced to a few more tools available for scRNA-seq in Galaxy. Finally, if our tool offerings are not enough for you, you will be directed towards how to use coding notebooks within Galaxy, setting you up to analyse scRNA-seq in R or python notebooks.
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/learning-pathways/beyond_single_cell.html",
+  "name": "Learning Pathway Applying single-cell RNA-seq analysis",
+  "keywords": [
+    "intermediate"
+  ],
+  "description": "Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will be introduced to a few more tools available for scRNA-seq in Galaxy. Finally, if our tool offerings are not enough for you, you will be directed towards how to use coding notebooks within Galaxy, setting you up to analyse scRNA-seq in R or python notebooks.\n\nThe data is messy. The decisions are tough. The interpretation is meaningful. Come here to advance your single cell skills! Note that you get two options for inferring trajectories.\n\nFor support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions!\n",
+  "about": [
 
-The data is messy. The decisions are tough. The interpretation is meaningful. Come here to advance your single cell skills! Note that you get two options for inferring trajectories.
-
-For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions!
-",
-	"provider": {
-		"@type": "Organization",
-		"email": "galaxytrainingnetwork@gmail.com",
-		"name": "Galaxy Training Network",
-		"url": "https://training.galaxyproject.org",
-		"logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
-		"sameAs": "https://training.galaxyproject.org"
-	}
+  ],
+  "audience": null,
+  "teaches": [
+    "Generate a cellxgene matrix for droplet-based single cell sequencing data",
+    "Interpret quality control (QC) plots to make informed decisions on cell thresholds",
+    "Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata",
+    "Combine data matrices from different samples in the same experiment",
+    "Label the metadata for downstream processing",
+    "Interpret quality control plots to direct parameter decisions",
+    "Repeat analysis from matrix to clustering",
+    "Identify decision-making points",
+    "Appraise data outputs and decisions",
+    "Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process",
+    "Execute multiple plotting methods designed to identify lineage relationships between cells",
+    "Interpret these plots",
+    "Identify which operations to perform on an AnnData object to obtain the files needed for Monocle",
+    "Follow the Monocle3 workflow and choose the right parameter values",
+    "Compare the outputs from Scanpy and Monocle",
+    "Interpet trajectory analysis results",
+    "Launch JupyterLab in Galaxy",
+    "Start a notebook",
+    "Import libraries",
+    "Use get() to import datasets from your history to the notebook",
+    "Use put() to export datasets from the notebook to your history",
+    "Save your notebook into your history",
+    "Learn about the Jupyter Interactive Environment",
+    "Launch RStudio in Galaxy"
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": [
+    {
+      "@type": "Syllabus",
+      "name": "Module 1: Case study",
+      "description": "These tutorials take you from raw scRNA sequencing reads to cell cluster plots to replicate a published analysis.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 2: Inferring trajectories",
+      "description": "This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset.  Note that you get two options for inferring trajectories, you can choose either.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 3: Moving into coding environments",
+      "description": "Did you know Galaxy can host coding environments? They don't have the same level of computational power as the easy-to-use Galaxy tools, but you can unlock the full freedom in your data analysis. You can install your favourite single-cell tool suite that is not available on Galaxy, export your data into these coding environments and run your analysis there. If you want your favourite tool suite as a Galaxy tool, you can always request [here](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing). Let's start with the basics of running these environments in Galaxy.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "The End!",
+      "description": "And now you're done! If you are interested in trying out the case study analyses in a coding environment, try out our [\"Case study: Reloaded\" series](/training-material/topics/single-cell#st-single-cell-cs-code) next! Otherwise, you will find more features, tips and tricks in our general [Galaxy Single-cell Training page](/training-material/topics/single-cell/index.html).\n"
+    }
+  ],
+  "dateModified": "2024-03-07 16:12:02 +0000",
+  "datePublished": "2024-03-07 16:22:08 +0000",
+  "isAccessibleForFree": true,
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "EUR",
+      "category": "Free",
+      "isAccessibleForFree": true
+    }
+  ],
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "EUR",
+        "category": "Free",
+        "isAccessibleForFree": true
+      },
+      "isAccessibleForFree": true
+    }
+  ]
 }
 </script>
-
-
 
 <section class="tutorials-list  topic-type-">
     <hgroup>
@@ -306,9 +431,9 @@ For support throughout these tutorials, join our Galaxy [single cell chat group 
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffbec7; --color-darker: #ff9cab; --color-dimmed: #ffadb9;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ff9dac; --color-darker: #ff7a93; --color-dimmed: #ff8ca0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00e6e3; --color-darker: #00cdca; --color-dimmed: #00d9d6;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00cecb; --color-darker: #00b7b5; --color-dimmed: #00c2c0;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -585,9 +710,9 @@ For support throughout these tutorials, join our Galaxy [single cell chat group 
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffbec7; --color-darker: #ff9cab; --color-dimmed: #ffadb9;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ff9dac; --color-darker: #ff7a93; --color-dimmed: #ff8ca0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00e6e3; --color-darker: #00cdca; --color-dimmed: #00d9d6;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00cecb; --color-darker: #00b7b5; --color-dimmed: #00c2c0;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -864,9 +989,9 @@ For support throughout these tutorials, join our Galaxy [single cell chat group 
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffbec7; --color-darker: #ff9cab; --color-dimmed: #ffadb9;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ff9dac; --color-darker: #ff7a93; --color-dimmed: #ff8ca0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00e6e3; --color-darker: #00cdca; --color-dimmed: #00d9d6;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00cecb; --color-darker: #00b7b5; --color-dimmed: #00c2c0;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
             
             </div>
@@ -1197,7 +1322,7 @@ For support throughout these tutorials, join our Galaxy [single cell chat group 
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffbec7; --color-darker: #ff9cab; --color-dimmed: #ffadb9;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ff9dac; --color-darker: #ff7a93; --color-dimmed: #ff8ca0;" title="Click to show all tutorials tagged 10x">10x</a>
               
             
             </div>
@@ -1416,11 +1541,11 @@ For support throughout these tutorials, join our Galaxy [single cell chat group 
             
             
               
-              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffbec7; --color-darker: #ff9cab; --color-dimmed: #ffadb9;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ff9dac; --color-darker: #ff7a93; --color-dimmed: #ff8ca0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00e6e3; --color-darker: #00cdca; --color-dimmed: #00d9d6;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00cecb; --color-darker: #00b7b5; --color-dimmed: #00c2c0;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #aae100; --color-darker: #97c800; --color-dimmed: #a0d400;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #97c900; --color-darker: #86b300; --color-dimmed: #8fbe00;" title="Click to show all tutorials tagged R">R</a>
               
             
             </div>
@@ -1751,7 +1876,7 @@ For support throughout these tutorials, join our Galaxy [single cell chat group 
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffc1ac; --color-darker: #ffa078; --color-dimmed: #ffb193;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffa17a; --color-darker: #ff822a; --color-dimmed: #ff925b;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -2185,7 +2310,7 @@ For support throughout these tutorials, join our Galaxy [single cell chat group 
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffc1ac; --color-darker: #ffa078; --color-dimmed: #ffb193;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffa17a; --color-darker: #ff822a; --color-dimmed: #ff925b;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -2443,7 +2568,7 @@ For support throughout these tutorials, join our Galaxy [single cell chat group 
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d3ff75c0b22961a6f0b293f4984409e604912e1f">d3ff75c</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3c8f065ea3cdcaa69e53d06b5b775a72c6167bf7">3c8f065</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
