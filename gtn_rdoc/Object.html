@@ -172,7 +172,7 @@
         <dt id="GTN_CACHE">GTN_CACHE
         <dd>
         <dt id="NOW">NOW
-        <dd><p>modifiedfiles = `git diff –cached –name-only –ignore-all-space –diff-filter=M #{<a href=":previousCommit">options</a>}`.split(“n”)</p>
+        <dd><p>modifiedfiles = ‘git diff –cached –name-only –ignore-all-space –diff-filter=M #{<a href=":previousCommit">options</a>}`.split(“n”)</p>
         <dt id="ORGANISATIONS">ORGANISATIONS
         <dd>
         <dt id="ORGANISATIONS_SCHEMA">ORGANISATIONS_SCHEMA
@@ -200,10 +200,12 @@
        </header>
 
       <div id="method-i-automagic_loading" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">automagic_loading</span><span
-            class="method-args">(f)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">automagic_loading</span><span
+              class="method-args">(f)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -241,17 +243,19 @@
       </div>
 
       <div id="method-i-build_news" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">build_news</span><span
-            class="method-args">(data, filter: nil, updates: true, only_news: false)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">build_news</span><span
+              class="method-args">(data, filter: nil, updates: true, only_news: false)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="build_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 189</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_news</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">filter:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">only_news:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">infix</span> = <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">titleize</span>(<span class="ruby-identifier">filter</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;# GTN #{infix} News for #{NOW.strftime(&#39;%b %d&#39;)}&quot;</span>
@@ -267,7 +271,7 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">o</span> = <span class="ruby-identifier">format_events</span>(
-    <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:events</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>])[<span class="ruby-string">&#39;tags&#39;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filter</span>) }
+    <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:events</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>]).<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>,[]).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filter</span>) }
   )
   <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">o</span>
   <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -317,10 +321,12 @@
       </div>
 
       <div id="method-i-call_engine" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">call_engine</span><span
-            class="method-args">(engine, line, mp3, voice, lang, neural)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">call_engine</span><span
+              class="method-args">(engine, line, mp3, voice, lang, neural)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -368,10 +374,12 @@
       </div>
 
       <div id="method-i-check_indent" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">check_indent</span><span
-            class="method-args">(file)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">check_indent</span><span
+              class="method-args">(file)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -410,10 +418,12 @@
       </div>
 
       <div id="method-i-collapse_date_pretty" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">collapse_date_pretty</span><span
-            class="method-args">(event)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">collapse_date_pretty</span><span
+              class="method-args">(event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -450,10 +460,12 @@
       </div>
 
       <div id="method-i-collapse_event_date_pretty" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">collapse_event_date_pretty</span><span
-            class="method-args">(event)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">collapse_event_date_pretty</span><span
+              class="method-args">(event)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -491,10 +503,12 @@
       </div>
 
       <div id="method-i-correct" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">correct</span><span
-            class="method-args">(uncorrected_line)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">correct</span><span
+              class="method-args">(uncorrected_line)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -520,10 +534,12 @@
       </div>
 
       <div id="method-i-data_library_for_tutorial" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">data_library_for_tutorial</span><span
-            class="method-args">(path)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">data_library_for_tutorial</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -541,10 +557,12 @@
       </div>
 
       <div id="method-i-fetch_toolcats" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">fetch_toolcats</span><span
-            class="method-args">(server)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fetch_toolcats</span><span
+              class="method-args">(server)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -577,10 +595,12 @@
       </div>
 
       <div id="method-i-fetch_workflowhub" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">fetch_workflowhub</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fetch_workflowhub</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -645,10 +665,12 @@
       </div>
 
       <div id="method-i-fetch_workflows" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">fetch_workflows</span><span
-            class="method-args">(server)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fetch_workflows</span><span
+              class="method-args">(server)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -680,10 +702,12 @@
       </div>
 
       <div id="method-i-filterSlides" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">filterSlides</span><span
-            class="method-args">(x)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filterSlides</span><span
+              class="method-args">(x)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -701,10 +725,12 @@
       </div>
 
       <div id="method-i-filterTutorials" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">filterTutorials</span><span
-            class="method-args">(x)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">filterTutorials</span><span
+              class="method-args">(x)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -722,10 +748,12 @@
       </div>
 
       <div id="method-i-find_duration" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">find_duration</span><span
-            class="method-args">(mp3)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">find_duration</span><span
+              class="method-args">(mp3)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -746,10 +774,12 @@
       </div>
 
       <div id="method-i-fixEvents" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">fixEvents</span><span
-            class="method-args">(n)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fixEvents</span><span
+              class="method-args">(n)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -761,6 +791,7 @@
   <span class="ruby-comment"># news/_posts/2021-11-10-api.html =&gt; news/2021/11/10/api.html</span>
   <span class="ruby-identifier">meta</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>])
   <span class="ruby-identifier">n</span>[<span class="ruby-value">:md</span>] <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; (#{collapse_event_date_pretty(meta)})&quot;</span>
+  <span class="ruby-identifier">n</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -769,10 +800,12 @@
       </div>
 
       <div id="method-i-fixNews" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">fixNews</span><span
-            class="method-args">(n)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fixNews</span><span
+              class="method-args">(n)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -791,17 +824,19 @@
       </div>
 
       <div id="method-i-format_events" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">format_events</span><span
-            class="method-args">(events)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">format_events</span><span
+              class="method-args">(events)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="format_events-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 162</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_events</span>(<span class="ruby-identifier">events</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">events</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -817,17 +852,19 @@
       </div>
 
       <div id="method-i-format_news" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">format_news</span><span
-            class="method-args">(news)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">format_news</span><span
+              class="method-args">(news)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="format_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 153</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_news</span>(<span class="ruby-identifier">news</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">news</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -843,17 +880,19 @@
       </div>
 
       <div id="method-i-format_tutorials" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">format_tutorials</span><span
-            class="method-args">(added, modified, kind: &#39;tutorials&#39;, updates: true)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">format_tutorials</span><span
+              class="method-args">(added, modified, kind: &#39;tutorials&#39;, updates: true)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="format_tutorials-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 171</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_tutorials</span>(<span class="ruby-identifier">added</span>, <span class="ruby-identifier">modified</span>, <span class="ruby-value">kind:</span> <span class="ruby-string">&#39;tutorials&#39;</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-identifier">count</span> = <span class="ruby-identifier">added</span>.<span class="ruby-identifier">length</span>
@@ -878,10 +917,12 @@
       </div>
 
       <div id="method-i-generate_event_feeds" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">generate_event_feeds</span><span
-            class="method-args">(site)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_event_feeds</span><span
+              class="method-args">(site)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -986,10 +1027,12 @@
       </div>
 
       <div id="method-i-generate_topic_feeds" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">generate_topic_feeds</span><span
-            class="method-args">(site)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_topic_feeds</span><span
+              class="method-args">(site)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1093,17 +1136,19 @@
       </div>
 
       <div id="method-i-isDraft" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">isDraft</span><span
-            class="method-args">(n)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">isDraft</span><span
+              class="method-args">(n)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="isDraft-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 106</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">isDraft</span>(<span class="ruby-identifier">n</span>)
   <span class="ruby-identifier">meta</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">n</span>)
   <span class="ruby-identifier">meta</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;draft&#39;</span>, <span class="ruby-keyword">false</span>)
@@ -1115,10 +1160,12 @@
       </div>
 
       <div id="method-i-json_boxify" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">json_boxify</span><span
-            class="method-args">(h, page)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">json_boxify</span><span
+              class="method-args">(h, page)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1164,10 +1211,12 @@
       </div>
 
       <div id="method-i-jupyter_post_write" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">jupyter_post_write</span><span
-            class="method-args">(site)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">jupyter_post_write</span><span
+              class="method-args">(site)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1191,10 +1240,12 @@
       </div>
 
       <div id="method-i-jupyter_pre_render" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">jupyter_pre_render</span><span
-            class="method-args">(site)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">jupyter_pre_render</span><span
+              class="method-args">(site)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1290,10 +1341,12 @@
       </div>
 
       <div id="method-i-linkify" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">linkify</span><span
-            class="method-args">(text, path)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">linkify</span><span
+              class="method-args">(text, path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1311,24 +1364,26 @@
       </div>
 
       <div id="method-i-lookup_topic" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">lookup_topic</span><span
-            class="method-args">(topic_id)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">lookup_topic</span><span
+              class="method-args">(topic_id)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="lookup_topic-source">
-            <pre><span class="ruby-comment"># File bin/prepare_feedback.rb, line 54</span>
+            <pre><span class="ruby-comment"># File bin/prepare_feedback.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lookup_topic</span>(<span class="ruby-identifier">topic_id</span>)
   <span class="ruby-ivar">@cache</span> <span class="ruby-operator">||=</span> {}
   <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">topic_id</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">file</span> = <span class="ruby-node">&quot;metadata/#{topic_id}.yaml&quot;</span>
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
 
-    <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">file</span>)
+    <span class="ruby-identifier">data</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">file</span>)
     <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>]
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1339,17 +1394,19 @@
       </div>
 
       <div id="method-i-lookup_tuto" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">lookup_tuto</span><span
-            class="method-args">(topic_id, tuto_id)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">lookup_tuto</span><span
+              class="method-args">(topic_id, tuto_id)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="lookup_tuto-source">
-            <pre><span class="ruby-comment"># File bin/prepare_feedback.rb, line 33</span>
+            <pre><span class="ruby-comment"># File bin/prepare_feedback.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lookup_tuto</span>(<span class="ruby-identifier">topic_id</span>, <span class="ruby-identifier">tuto_id</span>)
   <span class="ruby-ivar">@cache</span> <span class="ruby-operator">||=</span> {}
   <span class="ruby-ivar">@cache</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{topic_id}/#{tuto_id}&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
@@ -1357,12 +1414,12 @@
 
     <span class="ruby-identifier">file</span> = <span class="ruby-node">&quot;topics/#{topic_id}/tutorials/#{tuto_id}/tutorial.md&quot;</span>
     <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
-      <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">file</span>)
+      <span class="ruby-identifier">data</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">file</span>)
       <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>]
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">file</span> = <span class="ruby-node">&quot;topics/#{topic_id}/tutorials/#{tuto_id}/slides.html&quot;</span>
       <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
-        <span class="ruby-identifier">data</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">file</span>)
+        <span class="ruby-identifier">data</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">file</span>)
         <span class="ruby-ivar">@cache</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>]
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;No file for #{topic_id}/#{tuto_id}&quot;</span>
@@ -1377,10 +1434,12 @@
       </div>
 
       <div id="method-i-onlyEnabled" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">onlyEnabled</span><span
-            class="method-args">(x)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">onlyEnabled</span><span
+              class="method-args">(x)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1405,10 +1464,12 @@
       </div>
 
       <div id="method-i-parseOptions" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">parseOptions</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parseOptions</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1484,10 +1545,12 @@
       </div>
 
       <div id="method-i-parse_metadata" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">parse_metadata</span><span
-            class="method-args">(path)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_metadata</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1511,10 +1574,12 @@
       </div>
 
       <div id="method-i-parse_tutorial_for_zenodo_link" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">parse_tutorial_for_zenodo_link</span><span
-            class="method-args">(path)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_tutorial_for_zenodo_link</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1534,10 +1599,12 @@
       </div>
 
       <div id="method-i-parse_zenodo_id_formats" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">parse_zenodo_id_formats</span><span
-            class="method-args">(link)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_zenodo_id_formats</span><span
+              class="method-args">(link)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1569,10 +1636,12 @@
       </div>
 
       <div id="method-i-printableMaterial" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">printableMaterial</span><span
-            class="method-args">(path)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">printableMaterial</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1592,10 +1661,12 @@
       </div>
 
       <div id="method-i-request" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">request</span><span
-            class="method-args">(url)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">request</span><span
+              class="method-args">(url)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1621,10 +1692,12 @@
       </div>
 
       <div id="method-i-safe_load_yaml" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">safe_load_yaml</span><span
-            class="method-args">(file)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">safe_load_yaml</span><span
+              class="method-args">(file)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1644,17 +1717,19 @@
       </div>
 
       <div id="method-i-send_news" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">send_news</span><span
-            class="method-args">(output, options, channel: &#39;default&#39;)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">send_news</span><span
+              class="method-args">(output, options, channel: &#39;default&#39;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="send_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 248</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 250</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_news</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>, <span class="ruby-value">channel:</span> <span class="ruby-string">&#39;default&#39;</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:postToMatrix</span>]
     <span class="ruby-comment"># rubocop:disable Style/GlobalVars</span>
@@ -1710,10 +1785,12 @@
       </div>
 
       <div id="method-i-show_errors" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">show_errors</span><span
-            class="method-args">(file, errs)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">show_errors</span><span
+              class="method-args">(file, errs)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1740,10 +1817,12 @@
       </div>
 
       <div id="method-i-split_sentence" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">split_sentence</span><span
-            class="method-args">(sentence, timing)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">split_sentence</span><span
+              class="method-args">(sentence, timing)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1768,10 +1847,12 @@
       </div>
 
       <div id="method-i-synthesize" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">synthesize</span><span
-            class="method-args">(uncorrected_line, engine, voice: &#39;Amy&#39;, lang: &#39;en-GB&#39;, neural: true, output: nil)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">synthesize</span><span
+              class="method-args">(uncorrected_line, engine, voice: &#39;Amy&#39;, lang: &#39;en-GB&#39;, neural: true, output: nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1841,10 +1922,12 @@
       </div>
 
       <div id="method-i-test_workflow" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">test_workflow</span><span
-            class="method-args">(workflow_file, galaxy_id)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">test_workflow</span><span
+              class="method-args">(workflow_file, galaxy_id)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1885,10 +1968,12 @@
       </div>
 
       <div id="method-i-timefmt" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">timefmt</span><span
-            class="method-args">(t, fmt)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">timefmt</span><span
+              class="method-args">(t, fmt)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1919,17 +2004,19 @@
       </div>
 
       <div id="method-i-titleize" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">titleize</span><span
-            class="method-args">(t)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">titleize</span><span
+              class="method-args">(t)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
           
 
           <div class="method-source-code" id="titleize-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 149</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">titleize</span>(<span class="ruby-identifier">t</span>)
   <span class="ruby-identifier">t</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\w+/</span>, <span class="ruby-operator">&amp;</span><span class="ruby-value">:capitalize</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1940,10 +2027,12 @@
       </div>
 
       <div id="method-i-translate" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">translate</span><span
-            class="method-args">(word)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">translate</span><span
+              class="method-args">(word)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -1981,10 +2070,12 @@
       </div>
 
       <div id="method-i-update_data_library" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">update_data_library</span><span
-            class="method-args">(path, topic, tutorial, zenodo_record)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">update_data_library</span><span
+              class="method-args">(path, topic, tutorial, zenodo_record)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -2052,10 +2143,12 @@
       </div>
 
       <div id="method-i-update_tutorial" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">update_tutorial</span><span
-            class="method-args">(path, zenodo_id)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">update_tutorial</span><span
+              class="method-args">(path, zenodo_id)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -2076,10 +2169,12 @@
       </div>
 
       <div id="method-i-validate_document" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">validate_document</span><span
-            class="method-args">(document, validator)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">validate_document</span><span
+              class="method-args">(document, validator)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -2100,10 +2195,12 @@
       </div>
 
       <div id="method-i-write_data_library" class="method-detail ">
-        <div class="method-heading">
-          <span class="method-name">write_data_library</span><span
-            class="method-args">(path, topic, tutorial, tutorial_zenodo_id, force)</span>
-          <span class="method-click-advice">click to toggle source</span>
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">write_data_library</span><span
+              class="method-args">(path, topic, tutorial, tutorial_zenodo_id, force)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
         </div>
 
         <div class="method-description">
@@ -2154,7 +2251,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.4.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.1.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
