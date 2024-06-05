@@ -86,7 +86,7 @@ infrastructure:
 # Add GTN tutorials by supplying the topic and tutorial name
 # For non-GTN sessions, add a "type:custom" session and description
 program:
-  - section: "Monday: Introduction"
+  - section: "Monday: Introduction"  # section title is optional
     description: |
       Short description of the program in this section.
       Markdown formatted
