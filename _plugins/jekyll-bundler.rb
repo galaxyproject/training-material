@@ -16,7 +16,9 @@ Jekyll::Hooks.register :site, :post_read do |site|
       site.config['javascript_bundles'][name]['hash'] = hash
       site.config['javascript_bundles'][name]['path'] = "/assets/js/bundle.#{name}.#{hash}.js"
 
-      Jekyll.logger.info "Analysing JS Bundle #{name} => #{bundle_timestamp} / #{hash}"
+      Jekyll.logger.info "[GTN/Bundler] Analysing JS Bundle #{name} => #{bundle_timestamp} / #{hash}"
+    else
+      Jekyll.logger.info "[GTN/Bundler] Serving plain JS"
     end
   end
 end
@@ -29,7 +31,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
   site.config['javascript_bundles'].each do |name, resources|
     if Jekyll.env == 'production'
       bundle_path = "#{site.dest}#{resources['path']}"
-      Jekyll.logger.info "Building JS bundle #{name} => #{bundle_path}"
+      Jekyll.logger.info "[GTN/Bundler] Building JS bundle #{name} => #{bundle_path}"
 
       # Just concatenate them all together
       bundle = resources['resources'].map { |f| File.read(f) }.join("\n")
@@ -80,16 +82,17 @@ module Jekyll
     # Example:
     # {{ 'main' | load_bundle }}
     def load_bundle(name)
-      if Jekyll.env == 'development'
-        load_bundle_dev(name)
-      else
+      if Jekyll.env == 'production'
         load_bundle_production(name)
+      else
+        load_bundle_dev(name)
       end
     end
 
     def load_bundle_dev(name)
       bundle = @context.registers[:site].config['javascript_bundles'][name]
       raise "Bundle #{name} not found in site config" if bundle.nil?
+      Jekyll.logger.debug "[GTN/Bundler] Bundle #{bundle}"
 
       baseurl = @context.registers[:site].config['baseurl']
 
