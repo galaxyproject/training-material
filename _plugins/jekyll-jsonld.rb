@@ -299,7 +299,15 @@ module Jekyll
 
       # Extract EDAM terms from all materials
       edam_terms = materials.map do |material|
-        material.fetch('edam_ontology', [])
+
+        material.fetch('edam_ontology', []).map do |term|
+          {
+            '@type': 'DefinedTerm',
+            '@id': "http://edamontology.org/#{term}",
+            inDefinedTermSet: 'http://edamontology.org',
+            termCode: term,
+          }
+        end
       end.flatten.uniq
 
       learning_objectives = materials.map do |material|
