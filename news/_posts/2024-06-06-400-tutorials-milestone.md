@@ -20,13 +20,13 @@ The GTN was established to provide comprehensive and accessible training materia
 
 ![2 graphs representing the increase over times of (left) Materials (Tutorials + Slides) and (right) Contributors to the Galaxy Training Network]({{site.baseurl}}/news/images/2024-06-06-contributions.png)
 
-### A Journey of Knowledge and Collaboration
+## A Journey of Knowledge and Collaboration
 
 From its inception, the GTN has been driven by the goal of making high-quality, user-friendly tutorials available to everyone. The diverse range of tutorials covers topics from basic Galaxy usage to advanced bioinformatics analyses, catering to both beginners and seasoned researchers.
 
 This 400th tutorial represents more than just a number; it embodies the collaborative spirit and the shared pursuit of knowledge that defines the Galaxy community. Each tutorial is meticulously crafted by experts who not only have a deep understanding of their subject matter but also a passion for teaching and community building.
 
-### Highlights of Our Tutorials
+## Highlights of Our Tutorials
 
 Our tutorials span a wide array of scientific domains and technical skills (30+ topics), including:
 
@@ -38,11 +38,11 @@ Our tutorials span a wide array of scientific domains and technical skills (30+ 
 
 Each tutorial is designed to be interactive, with hands-on exercises that allow users to apply what they've learned in real-world scenarios. Moreover, the tutorials are continuously updated to incorporate the latest advancements and tools in the field.
 
-### The Power of Community
+## The Power of Community
 
 The GTN's success is a direct result of the vibrant and collaborative Galaxy community. Contributors from around the globe share their expertise, review content, and provide feedback to ensure the tutorials remain accurate and relevant. This collective effort has created a rich repository of knowledge that is freely accessible to anyone, anywhere. **We thank everyone who contributed!**
 
-### Looking Ahead
+## Looking Ahead
 
 As we celebrate this milestone, we remain committed to expanding and enhancing our training materials. The journey doesn't end here—there are many more tutorials to create, more innovations to integrate, and more minds to inspire. We invite you to explore our tutorials, join our community, and contribute to the ever-growing Galaxy Training Network.
 
