@@ -47,7 +47,3 @@ The GTN's success is a direct result of the vibrant and collaborative Galaxy com
 As we celebrate this milestone, we remain committed to expanding and enhancing our training materials. We have recently expanded beyond Galaxy into Data Science and command line analyses, and we look forward to expanding to even more new life science topics going forward.
 
 Here's to the next 400 tutorials and beyond—together, we are advancing science and education, one tutorial at a time!
-
----
-
-Whether you're a seasoned researcher or a newcomer to the field, the Galaxy Training Network is here to support your learning journey. Visit our [website]({% link index.md %}) to explore our tutorials and become part of our global community.
