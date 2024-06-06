@@ -35,6 +35,8 @@ abbreviations:
     scATAC-seq: Single-cell Assay for Transposase-Accessible Chromatin using sequencing
     PBMC's: peripheral blood mononuclear cells
     QC: quality control
+    TSSe: transcription start site enrichment
+    TSS: transcription start sites
 
 contributors:
 - timonschlegel
@@ -73,7 +75,7 @@ With both of these tool suites we will perform preprocessing, clustering and ide
 # {scATAC-seq} with 10X Genomics
 ATAC-seq utilizes a hyperactive Tn5 transposase ({% cite Kia2017 %}) to ligate adaptors to genome fragments, created by the transposase. Performing ATAC-seq on individual cells used to be an expensive and time consuming labour. The 10X Chromium NextGEM system made {scATAC-seq} a cost-effective method for gaining high-resolution data with a simple protocol. 
 After transposition of nuclei in bulk, individual nuclei are put into Gel beads in Emulsion (GEM), containing unique 10x cell barcodes and sequencing adaptors for Illumina sequencing. 
-![Library Preparation]({% link topics/single-cell/images/scatac-pre-processing/tenx_libprep_scatac.png %} "An overview of the 10X single-nuclei ATAC-seq library preparation")
+![Library Preparation]({% link topics/single-cell/images/scatac-standard-snapatac2/tenx_libprep_scatac.png %} "An overview of the 10X single-nuclei ATAC-seq library preparation")
 
 
 # Data
@@ -216,6 +218,8 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > * In such cases and for more specific queries, {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0) %} is required.
 >    {: .comment}
 >
+{: .hands_on}
+
 
 ## Calculate and visualize {QC} metrics
 
@@ -250,187 +254,137 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >
 {: .question}
 
-## Sub-step with **SnapATAC2 Preprocessing**
+The {TSSe} is also an important {QC} metric. Nucleosome-free fragments are expected to be enriched at {TSS}. TSSe shows increased fragmentation of chromatin around the TSS. This suggests open and accessible nucleosome-free chromatin. 
 
-> <hands-on-title> Task description </hands-on-title>
+{TSSe} is used as a QC metric, since an increased enrichment around TSS regions suggest that the experiment has captured biological meaningful genomic features. 
+TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tsse()* function. 
+
+> <hands-on-title> Calculate and Plot TSSe </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Compute the TSS enrichment score (TSSe) for each cell, using 'metrics.tsse'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
->        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC` (output of **pp.import_data** {% icon tool %})
+>        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `gene_annotation.gtf.gz` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Rename the generated file to `Anndata 5k PBMC TSSe` or add tag `TSSe` to the dataset:
+> 
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
->    ***TODO***: *Consider adding a comment or tip box*
 >
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Plotting**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
+> 3. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the TSS enrichment vs. number of fragments density figure, using 'pl.tsse'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC TSSe` (output of **metrics.tsse** {% icon tool %})
+> 4. {% icon galaxy-eye %} Inspect the `.png` output
+> 
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![TSSe plot against number of unique fragments]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.tsse.png %})
+High-quality cells can be identified in the plot of {TSSe} scores against number of unique fragments for each cell. 
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Where are high-quality cells located in the plot?
+> 2. Based on this plot, how should the filter be set?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The cells in the upper right are high-quality cells, enriched for {TSS}. Fragments in the lower left represent low-quality cells or empty droplets and should be filtered out. 
+> > 2. Setting the minimum number of counts at 5,000 and the minimum TSS enrichment to 10.0 is an adequate filter. 
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **SnapATAC2 Preprocessing**
+## Filtering
+Based on the {TSSe} plot the cells can be filtered by TSSe and fragment counts.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Filter cells </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC TSSe` (output of **metrics.tsse** {% icon tool %})
 >        - *"Minimum number of counts required for a cell to pass filtering"*: `5000`
 >        - *"Minimum TSS enrichemnt score required for a cell to pass filtering"*: `10.0`
 >        - *"Maximum number of counts required for a cell to pass filtering"*: `100000`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Rename the generated file to `Anndata 5k PBMC TSSe filtered` or add the tag `filtered` to the dataset
+> 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <question-title></question-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    > ```
+>    > AnnData object with n_obs × n_vars = 4564 × 0
+>    >  obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse'
+>    >  uns: 'reference_sequences'
+>    >  obsm: 'fragment_paired'
+>    > ```
+>    >
+>    > 1. How have the observations changed, compared to the first `Anndata 5k PBMC` AnnData file?
+>    > 2. What does this tell us about the quality of the data?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. There are only 4564 observations, compared to the initial 14232 observations. 
+>    > >    
+>    > >    And the `obs: 'tsse'` has been added (but already during **metrics.tsse**{% icon tool %})
+>    > > 2. The empty droplets and low-quality cells have been filtered out, leaving us with 4564 high-quality cells. 
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+> 
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Feature selection
+Currently, our AnnData matrix does not contain any variables. The variables will be added in the following step with the function *pp.add_tile_matrix()*. This creates a cell by bin matrix containing insertion counts across genome-wide 500-bp bins. 
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
+After creating the variables, the most accessible features are selected. 
+> <hands-on-title> Select features </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Generate cell by bin count matrix, using 'pp.add_tile_matrix'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC TSSe filtered` (output of **pp.filter_cells** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Perform feature selection, using 'pp.select_features'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `tile_matrix` (output of **pp.add_tile_matrix** {% icon tool %})
 >        - *"Number of features to keep"*: `250000`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Select features </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > - Including more features improves resolution and can reveal finer details, but it may also introduce noise. 
+>    >    - To optimize results, experiment with the `n_features` parameter to find the most appropriate value for your dataset. 
+>    > - At this step you can provide a blacklist or whitelist to specifically select relevant features. 
+>    >    - For example the [**ENCODE Blacklist**](https://github.com/Boyle-Lab/Blacklist) ({% cite Amemiya2019 %}) can be applied here.  
 >    {: .comment}
+>
+> 3. Rename the generated file to `Anndata 5k PBMC select_features` or add the tag `select_features` to the dataset
+> 4. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
+>  ``` 
+>   AnnData object with n_obs × n_vars = 4564 × 6062095
+>    obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse'
+>    var: 'count', 'selected'
+>    uns: 'reference_sequences'
+>    obsm: 'fragment_paired'
+>  ``` 
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How did `n_vars` change compared to `Anndata 5k PBMC TSSe filtered`
+> 2. Where are the selected features stored in the count matrix?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. There are 6,062,095 variables, compared to 0 in `TSSe filtered`. 
+> > 2. Selected features are stored in `var: 'selected'`. 
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **SnapATAC2 Preprocessing**
+## Doublet removal
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -465,7 +419,6 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >
 {: .question}
 
-## Sub-step with **SnapATAC2 Preprocessing**
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -500,7 +453,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >
 {: .question}
 
-## Sub-step with **SnapATAC2 Clustering**
+# Clustering
 
 > <hands-on-title> Task description </hands-on-title>
 >
