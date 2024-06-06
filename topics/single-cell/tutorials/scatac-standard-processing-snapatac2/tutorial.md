@@ -438,11 +438,11 @@ Dimension reduction is a very important step during the analysis of single cell 
 > - Dimension reduction algorithms can be either linear or non-linear. 
 > - Linear methods are computationally efficient and well scalable. 
 >   A popular linear dimension reduction algorithm is: 
->     - **PCA** (Principle Component Analysis), implemented in **Scanpy** (please check out our [Scanpy](topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md) tutorial for an explanation). 
+>     - **PCA** (Principle Component Analysis), implemented in **Scanpy** (please check out our [Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial for an explanation). 
 > - Nonlinear methods however are well suited for multimodal and complex datasets. 
->     - As such, they are implemented in many algorithms to visualize the data in 2 dimensions (f.ex. *UMAP-embedding*).
-> - The nonlinear dimension reduction algorithm, through *spectral embedding*, used in SnapATAC2 {% cite Zhang2024%} is currently the fastest and most memory efficient non-linear algorithm available. 
->     - **Spectral embedding** utilizes a matrix-free solution to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of the imaginary matrix. 
+>     - As such, they are implemented in many algorithms to visualize the data in 2 dimensions (f.ex. **UMAP** embedding).
+> - The nonlinear dimension reduction algorithm, through *spectral embedding*, used in SnapATAC2 is currently the fastest and most memory efficient non-linear algorithm available ({% cite Zhang2024%}). 
+>     - **Spectral embedding** utilizes an iterative algorithm to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of a matrix without computing the matrix itself. 
 {: .details}
 
 > <hands-on-title> Spectral embedding </hands-on-title>
@@ -450,11 +450,7 @@ Dimension reduction is a very important step during the analysis of single cell 
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Perform dimension reduction using Laplacian Eigenmap, using 'tl.spectral'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
+> 
 >    > <comment-title> short description </comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
