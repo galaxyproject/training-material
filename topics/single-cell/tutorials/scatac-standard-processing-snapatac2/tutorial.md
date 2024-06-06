@@ -175,7 +175,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC`
 >    - *"What to inspect?"*: `General information about the object`
 >
-> 2. Inspect the generated file
+> 2. {% icon galaxy-eye %} Inspect the generated file
 >
 >    > <question-title></question-title>
 >    >
@@ -235,26 +235,27 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >        - *"Change the y-axis (fragment counts) to log scale"*: `Yes`
 > 4. {% icon galaxy-eye %} Inspect the `.png` output
 >
+>
+>  ![fragment_size_distribution]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.frag_size.png %})
+>
+>  ![log_fragment_size_distribution]({% link topics/single-cell/images/scatac-standard-snapatac2/log_pl.frag_size.png %})
+> > <question-title></question-title>
+> >
+> > 1. What distinct features do the plots have? And what do they represent?
+> > 2. Which fragments are generally from open chromatin?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. 3 peaks are clearly visible (at <100-bp, ~200-bp and ~400-bp). The smallest fragments are from nucleosome-free regions, while the larger peaks (200- and 400-bp) contain mono- and di-nucleosom fragments, respectively. 
+> > > 2. The small fragments (<100-bp) are open chromatin reads, since the Tn5 transposase could easily access the loosely packed DNA ({% cite Yan2020 %}). 
+> > > 
+> > {: .solution}
+> >
+> {: .question}
 {: .hands_on}
 
-![fragment_size_distribution]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.frag_size.png %})
 
-![log_fragment_size_distribution]({% link topics/single-cell/images/scatac-standard-snapatac2/log_pl.frag_size.png %})
-> <question-title></question-title>
->
-> 1. What distinct features do the plots have? And what do they represent?
-> 2. Which fragments are generally from open chromatin?
->
-> > <solution-title></solution-title>
-> >
-> > 1. 3 peaks are clearly visible (at <100-bp, ~200-bp and ~400-bp). The smallest fragments are from nucleosome-free regions, while the larger peaks (200- and 400-bp) contain mono- and di-nucleosom fragments, respectively. 
-> > 2. The small fragments (<100-bp) are open chromatin reads, since the Tn5 transposase could easily access the loosely packed DNA ({% cite Yan2020 %}). 
-> >
-> {: .solution}
->
-{: .question}
-
-The {TSSe} is also an important {QC} metric. Nucleosome-free fragments are expected to be enriched at {TSS}. TSSe shows increased fragmentation of chromatin around the TSS. This suggests open and accessible nucleosome-free chromatin. 
+The {TSSe} is another important {QC} metric. Nucleosome-free fragments are expected to be enriched at {TSS}. TSSe shows increased fragmentation of chromatin around the TSS. This suggests open and accessible nucleosome-free chromatin. 
 
 {TSSe} is used as a QC metric, since an increased enrichment around TSS regions suggest that the experiment has captured biological meaningful genomic features. 
 TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tsse()* function. 
@@ -276,24 +277,24 @@ TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tss
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC TSSe` (output of **metrics.tsse** {% icon tool %})
 > 4. {% icon galaxy-eye %} Inspect the `.png` output
 > 
-{: .hands_on}
-
-![TSSe plot against number of unique fragments]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.tsse.png %})
+>
+> ![TSSe plot against number of unique fragments]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.tsse.png %})
 High-quality cells can be identified in the plot of {TSSe} scores against number of unique fragments for each cell. 
-
-> <question-title></question-title>
 >
-> 1. Where are high-quality cells located in the plot?
-> 2. Based on this plot, how should the filter be set?
->
-> > <solution-title></solution-title>
+> > <question-title></question-title>
 > >
-> > 1. The cells in the upper right are high-quality cells, enriched for {TSS}. Fragments in the lower left represent low-quality cells or empty droplets and should be filtered out. 
-> > 2. Setting the minimum number of counts at 5,000 and the minimum TSS enrichment to 10.0 is an adequate filter. 
+> > 1. Where are high-quality cells located in the plot?
+> > 2. Based on this plot, how should the filter be set?
 > >
-> {: .solution}
->
-{: .question}
+> > > <solution-title></solution-title>
+> > >
+> > > 1. The cells in the upper right are high-quality cells, enriched for {TSS}. Fragments in the lower left represent low-quality cells or empty droplets and should be filtered out. 
+> > > 2. Setting the minimum number of counts at 5,000 and the minimum TSS enrichment to 10.0 is an adequate filter. 
+> > >
+> > {: .solution}
+> >
+> {: .question}
+{: .hands_on}
 
 ## Filtering
 Based on the {TSSe} plot the cells can be filtered by TSSe and fragment counts.
@@ -347,7 +348,7 @@ After creating the variables, the most accessible features are selected.
 >
 > 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Perform feature selection, using 'pp.select_features'`
->        - {% icon param-file %} *"Annotated data matrix"*: `tile_matrix` (output of **pp.add_tile_matrix** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata tile_matrix` (output of **pp.add_tile_matrix** {% icon tool %})
 >        - *"Number of features to keep"*: `250000`
 >
 >    > <comment-title> Select features </comment-title>
@@ -361,101 +362,90 @@ After creating the variables, the most accessible features are selected.
 > 3. Rename the generated file to `Anndata 5k PBMC select_features` or add the tag `select_features` to the dataset
 > 4. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
+>
+>    > <question-title></question-title>
+>    >
+>    > ```
+>    > AnnData object with n_obs × n_vars = 4564 × 6062095
+>    >  obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse'
+>    >  var: 'count', 'selected'
+>    >  uns: 'reference_sequences'
+>    >  obsm: 'fragment_paired'
+>    > ```
+>    >
+>    > 1. How did `n_vars` change compared to `Anndata 5k PBMC TSSe filtered`
+>    > 2. Where are the selected features stored in the count matrix?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. There are 6,062,095 variables, compared to 0 in `TSSe filtered`. 
+>    > > 2. Selected features are stored in `var: 'selected'`. 
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
 {: .hands_on}
 
-> <question-title></question-title>
->  ``` 
->   AnnData object with n_obs × n_vars = 4564 × 6062095
->    obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse'
->    var: 'count', 'selected'
->    uns: 'reference_sequences'
->    obsm: 'fragment_paired'
->  ``` 
->
-> 1. How did `n_vars` change compared to `Anndata 5k PBMC TSSe filtered`
-> 2. Where are the selected features stored in the count matrix?
->
-> > <solution-title></solution-title>
-> >
-> > 1. There are 6,062,095 variables, compared to 0 in `TSSe filtered`. 
-> > 2. Selected features are stored in `var: 'selected'`. 
-> >
-> {: .solution}
->
-{: .question}
 
 ## Doublet removal
 
-> <hands-on-title> Task description </hands-on-title>
+Doublets are removed by calling a customized [**scrublet**](https://github.com/swolock/scrublet) algorithm. *pp.scrublet()* will identify potential doublets and the function *pp.filter_doublets* removes them. 
+> <hands-on-title> Scrublet </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Compute probability of being a doublet using the scrublet algorithm, using 'pp.scrublet'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC select_features` (output of **pp.select_features** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Remove doublets according to the doublet probability or doublet score, using 'pp.filter_doublets'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata scrublet` (output of **pp.scrublet** {% icon tool %})
+> 3. Rename the generated file to `Anndata 5k PBMC filter_doublets` or add the tag `filter_doublets` to the dataset
+> 4. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <question-title></question-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > ```
+>    > AnnData object with n_obs × n_vars = 4430 × 6062095
+>    >  obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score'
+>    >  var: 'count', 'selected'
+>    >  uns: 'doublet_rate', 'reference_sequences', 'scrublet_sim_doublet_score'
+>    >  obsm: 'fragment_paired'
+>    > ```
+>    >
+>    > 1. What was removed by **pp.filter_doublets**?
+>    > 2. Where are the new annotations stored?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. Cell doublets were removed. `n_obs` was reduced from 4564 to 4430 cells. 
+>    > > 2. The outputs of **pp.scrublet** are stored in observations `obs: 'doublet_probability', 'doublet_score'` and in unstructured annotations `uns: 'scrublet_sim_doublet_score'`. The output of **pp.filter_doublets** is stored in `uns: 'doublet_rate'`. 
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Dimension reduction
 
-# Clustering
+Dimension reduction is a very important step during the analysis of single cell data. During this, the complex multi-dimensional data is projected into lower-dimensional space, while retaining as much information as possible. Dimension reduction enables quicker downstream analysis, since the data is more simplified and thus the memory usage is reduced. 
 
-> <hands-on-title> Task description </hands-on-title>
+> <details-title>Dimension reduction with SnapATAC2</details-title>
+>
+> - Dimension reduction algorithms can be either linear or non-linear. 
+> - Linear methods are computationally efficient and well scalable. 
+>   A popular linear dimension reduction algorithm is: 
+>     - **PCA** (Principle Component Analysis), implemented in **Scanpy** (please check out our [Scanpy](topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md) tutorial for an explanation). 
+> - Nonlinear methods however are well suited for multimodal and complex datasets. 
+>     - As such, they are implemented in many algorithms to visualize the data in 2 dimensions (f.ex. *UMAP-embedding*).
+> - The nonlinear dimension reduction algorithm, through *spectral embedding*, used in SnapATAC2 {% cite Zhang2024%} is currently the fastest and most memory efficient non-linear algorithm available. 
+>     - **Spectral embedding** utilizes a matrix-free solution to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of the imaginary matrix. 
+{: .details}
+
+> <hands-on-title> Spectral embedding </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Perform dimension reduction using Laplacian Eigenmap, using 'tl.spectral'`
