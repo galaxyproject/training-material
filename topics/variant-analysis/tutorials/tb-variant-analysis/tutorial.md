@@ -74,13 +74,13 @@ Detecting some other, more severe problems early on may at least save you a lot
 of time spent on analyzing low-quality data that is not worth the effort.
 
 Here, we will perform a standard quality check on our input data and only point
-out a few interesting aspects about that data. For a more thorough explanation
+out a few interesting aspects of that data. For a more thorough explanation
 of NGS data quality control, you may want to have a look at the dedicated
 tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > <hands-on-title>Quality control of the input datasets</hands-on-title>
 >
-> 1. Execute {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} on both of your fastq datasets
+> 1. Execute {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} on both of your fastq datasets
 >
 >       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
 >
@@ -123,7 +123,7 @@ While one could examine the quality control report for each set of reads (forwar
 >    > >    consider trimming the 3' ends of reads (base qualities decline
 >    > >    slightly towards the 3' ends) or to filter out the small fraction
 >    > >    of reads with a mean base quality < 5.
->    > >    We will run **Trimmomatic** {% icon tool %} on the
+>    > >    We will run **fastp** {% icon tool %} on the
 >    > >    fastq datasets in the next step
 >    > >
 >    > {: .solution}
@@ -131,46 +131,51 @@ While one could examine the quality control report for each set of reads (forwar
 >
 {: .hands_on}
 
-As these reads look like they need a bit of trimming, we can turn to the **Trimmomatic** tool to clean up our data.
+As these reads look like they need a bit of trimming, we can turn to the **fastp** tool to clean up our data.
 
 > <hands-on-title>Quality trimming</hands-on-title>
-> 1. Use {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1) %} to clean up the reads and remove the poor quality sections.
->       - *"Single-end or paired-end reads?"*: `Paired End (two separate input files)`
->       - {% icon param-files %} *"Input FASTQ file (R1/first of pair)"*: `004-2_1.fastq.gz`
->       - {% icon param-files %} *"Input FASTQ file (R2/second of pair)"*: `004-2_2.fastq.gz`
->       - *"Select Trimmomatic operation to perform"*
->           - Keep the default value of `Sliding window trimming` but set
->           - *"Average quality required"*: `30`
->       - *"+Insert Trimmomatic Operation"*
->           - *"Select Trimmomatic operation to perform"*: `Drop reads below a specified length (MINLEN)`
->           - *"Minimum length of reads to be kept"*: `20`
+> 1. Use {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0) %} to clean up the reads and remove the poor quality sections.
+>       - *"Single-end or paired-end reads?"*: `Paired`
+>       - {% icon param-files %} *"Input 1"*: `004-2_1.fastq.gz`
+>       - {% icon param-files %} *"Input 2"*: `004-2_2.fastq.gz`
 >
-> 2. Inspect the output produced by Trimmomatic
+>
+> 2. Inspect the output produced by **fastp**
 >
 >    > <question-title></question-title>
->    >
->    > 1. Why are there 4 output read files instead of 2?
+>     >
+>    > 1. Was there a difference in file size of the reads before and after trimming? Is the difference the same between both sets of reads?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. There are 4 output files: Forwards paired and single reads and reverse paired and single reads. The single reads come about when one read in a pair of reads has failed the quality checks and so is deleted. The other half of the pair may still be good and so it is put into the single reads file for the appropriate direction. While un-paired reads might sometimes be useful, paired reads are more useful because both their sequence and the gap between them (the "insert size") can be used for further analysis. In a typical analysis, only the paired reads are used.
+>    > > 1. After processing by **fastp** the output files are about 80 MB smaller than the inputs. The change in size is similar for both files.
 >    > >
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
-*Note:* We would normally examine our trimmed reads with **FastQC** and **MultiQC** again to see if the quality trimming has been successful, but in this tutorial we will move straight on to save time.
+*Note:* We would normally examine our trimmed reads with **FastQC** and **MultiQC** again to see if the quality trimming has been successful, but in this tutorial, we will move straight on to save time.
 
-# Look for contamination with Kraken2 (optional)
+The next section, on looking for contamination in our data using Kraken2, takes a long time to run and can be skipped and perhaps
+run later if you prefer.
 
-We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our SNP analysis. **Kraken2** is an effective way of looking at which species is represented in our reads and so we can easily spot possible contamination of our sample. Unfortunately the tool uses a lot of RAM (typically 50GB when used with the *Standard* database), so you might want to skip this step if your environment doesn't have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use **Kraken2** as part of its analysis, see the optional section on analysing *SRR12416842* at the end of this tutorial.
+{% include _includes/cyoa-choices.html option1="Skip-Kraken2" option2="Run-Kraken2" default="Skip-Kraken2" %}
+
+<div class="Skip-Kraken2" markdown="1" >
+</div>
+
+<div class="Run-Kraken2" markdown="1" >
+
+# Look for contamination with Kraken2
+
+We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertently get mixed in with our sample. Any reads from non-sample sources will confound our SNP analysis. **Kraken2** is an effective way of looking at which species is represented in our reads so we can easily spot possible contamination of our sample. Unfortunately, the tool uses a lot of RAM (typically 50GB when used with the *Standard* database), so you might want to skip this step if your environment doesn't have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use **Kraken2** as part of its analysis, see the optional section on analysing *SRR12416842* at the end of this tutorial.
 
 > <hands-on-title>Run Kraken2</hands-on-title>
 >
 > 1. Execute {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters
 >   - *"Single or paired reads"*: `Paired`
->       - *"Forward Strand"*: `Trimmomatic on X (R1 paired)`
->       - *"Reverse Strand"*: `Trimmomatic on X (R2 paired)`
+>       - *"Forward Strand"*: `fastp on X: Read 1 output`
+>       - *"Reverse Strand"*: `fastp on X: Read 2 output`
 >
 >   - *"Print scientific names instead of just taxids"*: `Yes`
 >   - *"Enable quick operation"*: `Yes`
@@ -192,11 +197,13 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 >    {: .question}
 {: .hands_on}
 
+</div>
+
 # Find variants with Snippy
 
 We will now run the Snippy tool on our reads, comparing them to the reference.
 
-Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (SNPs) and insertions/deletions (indels).
+[Snippy](https://github.com/tseemann/snippy) is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (SNPs) and insertions/deletions (indels).
 
 If we give Snippy an annotated reference in Genbank format, it will run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.
 
@@ -209,8 +216,8 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >   - *"Use the following dataset as the reference sequence"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >   - *"Single or Paired-end reads"*: `Paired`
->       - *"Select first set of reads"*: `Trimmomatic on X (R1 paired)`
->       - *"Select second set of reads"*: `Trimmomatic on X (R2 paired)`
+>       - *"Select first set of reads"*: `fastp on X: Read 1 output`
+>       - *"Select second set of reads"*: `fastp on X: Read 2 output`
 >
 >   - Under *"Advanced parameters"*
 >       - *"Minimum proportion for variant evidence"*: `0.1` (This is so we can see possible rare variants in our sample)
@@ -251,9 +258,9 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 
 # Further variant filtering and TB-profiling
 
-We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
+We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally, where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
 
-> <hands-on-title>Run Snippy</hands-on-title>
+> <hands-on-title>Run TB Variant Filter</hands-on-title>
 > 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.4.0+galaxy0) %} with the following parameters
 >   - *"VCF file to be filter"*: `snippy on data XX, data XX, and data XX mapped reads vcf file`
 >   - *"Filters to apply"*: Select `Filter variants by region` and `Filter sites by read alignment depth`.
@@ -295,12 +302,12 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 > evolutionary history to "free standing" SNVs/SNPs, so the "close to indel filter" is still available in TB Variant Filter in case such SNPs/SNVs should be filtered out.
 {: .details}
 
-Now that we have a collection of *high quality variants* we can search them against variants known to be associated with drug resistance. The *TB Profiler* tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.
+Now that we have a collection of *high-quality variants* we can search them against variants known to be associated with drug resistance. The *TB Profiler* tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.
 
-Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
+Finally, TB Variant Report uses the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
 > <hands-on-title>Run TB Profiler and TB Variant Report</hands-on-title>
-> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0) %} with the following parameters
+> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.2.1+galaxy0) %} with the following parameters
 >   - *"Input File Type"*: `BAM`
 >       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
 >
@@ -314,7 +321,7 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 >       - *"File to process"*: `TB Variant Filter on data XX`
 >       - *"SED Program"*: `s/GENE_//g`
 > 
-> 3. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.10+galaxy0) %} with the following parameters
+> 3. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.0+galaxy0) %} with the following parameters
 >   - *"Input SnpEff annotated M.tuberculosis VCF(s)"*: `Text transformation on data XX`
 >   - *"TBProfiler Drug Resistance Report (Optional)"*: `TB-Profiler Profile on data XX: Results.json`
 >
@@ -328,7 +335,7 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. `4`
+>    > > 1. `4` with sublineage `4.4.1.1.1`.
 >    > >
 >    > > 2. Yes, resistance to isoniazid, rifampicin, ethambutol, pyrazinamide and streptomycin as well as to the flouroquinolines (amikacin, capreomycin and kanamycin) is predicted from mutations in the katG, rpoB, embB, pncA, rpsL and rrs (ribosomal RNA) genes respectively.
 >    > >
@@ -336,9 +343,15 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 >    {: .question}
 {: .hands_on}
 
+At this point we have a drug resistance report from **TB Profiler**, aligned reads from **snippy** and variants both in VCF format
+and in the easier-to-read format produced by **TB Variant report**. Often this is enough information on a sample, and we might end
+our analysis here, especially if we are processing many samples together, as is described towards the end of this tutorial.
+
+We will, however, spend some time examining this data in more detail in the next section.
+
 # View Snippy output in JBrowse
 
-We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.
+We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. A genome viewer, such as JBrowse, can be used within Galaxy to display the _M. tuberculosis_ genome and the data from our analysis.
 
 > <hands-on-title>Run JBrowse</hands-on-title>
 > 
@@ -389,6 +402,13 @@ We could go through all of the variants in the VCF files and read them out of a 
 A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the {% icon galaxy-eye %} (eye) icon of the `JBrowse on data XX and data XX - Complete` dataset. The JBrowse window will appear in the centre Galaxy panel.
 
 You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
+
+An alternative to running JBrowse within Galaxy is to install [IGV](https://igv.org/) and use Galaxy's built-in support for visualising BAM files with IGV.
+
+{% snippet  topics/galaxy-interface/faqs/visualisations_igv.md %}
+
+This requires more setup for the user, for example loading the FASTA file of the genome into IGV and downloading any annotation GFF3 files you want to use with IGV. On the other hand, running IGV locally is often faster than using JBrowse in Galaxy.
+
 
 # Different samples, different stories (optional)
 
@@ -456,7 +476,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > {: .solution}
 >    {: .question}
 >
-> 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4) %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
+> 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.5) %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
 >
 > 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0) %} on the mapped reads BAM file that you got from **snippy** using the FASTA format reference you made with **seqret** as the reference.
 >
@@ -484,5 +504,9 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 {: .hands_on}
 
 There is something clearly wrong with sample SRR12416842, perhaps indicating sample contamination. This example of a sample that doesn't map to the reference genome illustrates that even when sequence quality is good, sequence data problems can become apparent in later steps of analysis and it is important to always have a sense of what results to expect. You can develop a better sense of what quality control results to expect by first practicing techniques with known data before analysing new samples.
+
+# Processing many samples at once: Collections and Workflows
+
+TODO: complete this section
 
 We hope you enjoyed this tutorial!
