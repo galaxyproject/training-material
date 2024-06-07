@@ -167,7 +167,7 @@ As these reads look like they need a bit of trimming, we can turn to the **fastp
 The next section, on looking for contamination in our data using Kraken2, takes a long time to run and can be skipped and perhaps
 run later if you prefer.
 
-{% include _includes/cyoa-choices.html option1="Skip-Kraken2" option2="Run-Kraken2" default="Skip-Kraken2" %}
+{% include _includes/cyoa-choices.html option1="Skip Kraken2" option2="Run Kraken2" default="Skip-Kraken2" %}
 
 <div class="Skip-Kraken2" markdown="1" >
 </div>
