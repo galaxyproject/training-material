@@ -409,6 +409,10 @@ We could go through all of the variants in the VCF files and read them out of a 
 
 A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the {% icon galaxy-eye %} (eye) icon of the `JBrowse on data XX and data XX - Complete` dataset. The JBrowse window will appear in the centre Galaxy panel.
 
+What you should see is something like this:
+
+{% snippet topics/visualisation/faqs/visualizations_jbrowse.html loc="Chromosome:761005..761306" datadir="data" %}
+
 You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
 
 An alternative to running JBrowse within Galaxy is to install [IGV](https://igv.org/) and use Galaxy's built-in support for visualising BAM files with IGV.
@@ -521,17 +525,13 @@ If you are new to collections, you can learn more about them in [this tutorial](
 
 If you have followed all of the steps of this tutorial, you will have two samples, one named *004-2* and another *SRR12416842*. Create a collection of lists of pairs from these samples and call the collection `samples`.
 
+You can now run the **TB Variant Analysis**, launching it directly from WorkflowHub.eu on several of the public Galaxy servers.
+
+{% snippet faqs/galaxy/workflows_run_wfh.md title="TB Variant Analysis v1.0" wfhub_id="1035" %}
+
 > <hands-on-title>Analysing samples with the TB Variant Reporting workflow</hands-on-title>
 >
-> 1. **Import the Workflow** into Galaxy 
->    - If you are are on <https://usegalaxy.eu> you can find the workflow in the *Public workflow* section of the *Workflows* tab. Just search for `tuberculosis` and select the workflow by `pvanheus`. If you are on a different server, follow the steps below.
->    - Copy the URL (e.g. via right-click) of [the workflow]({{ site.baseurl }}{{ page.dir }}workflows/tb-variant-analysis.ga) or download it to your computer.
->    - Import the workflow into Galaxy
->
->    {% snippet faqs/galaxy/workflows_import.md %}
->
->
-> 2. **Run the TB Variant Analysis workflow** {% icon workflow %} using the following parameters
+> **Run the TB Variant Analysis workflow** {% icon workflow %} using the following parameters
 >    - {% icon param-files %} *Reads* the `samples` collection of your input reads
 >
 >    - {% icon param-files %} *Reference Genome* the `Mycobacterium_tuberculosis_ancestral_reference.gbk` reference genome
