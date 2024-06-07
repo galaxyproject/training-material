@@ -262,7 +262,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 The {TSSe} is another important {QC} metric. Nucleosome-free fragments are expected to be enriched at {TSS}. TSSe shows increased fragmentation of chromatin around the TSS. This suggests open and accessible nucleosome-free chromatin. 
 
 {TSSe} is used as a QC metric, since an increased enrichment around TSS regions suggest that the experiment has captured biological meaningful genomic features. 
-TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tsse()* function. 
+TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tsse* function. 
 
 > <hands-on-title> Calculate and Plot TSSe </hands-on-title>
 >
@@ -341,7 +341,7 @@ Based on the {TSSe} plot the cells can be filtered by TSSe and fragment counts.
 {: .hands_on}
 
 ## Feature selection
-Currently, our AnnData matrix does not contain any variables. The variables will be added in the following step with the function *pp.add_tile_matrix()*. This creates a cell by bin matrix containing insertion counts across genome-wide 500-bp bins. 
+Currently, our AnnData matrix does not contain any variables. The variables will be added in the following step with the function *pp.add_tile_matrix*. This creates a cell by bin matrix containing insertion counts across genome-wide 500-bp bins. 
 
 After creating the variables, the most accessible features are selected. 
 > <hands-on-title> Select features </hands-on-title>
@@ -394,7 +394,7 @@ After creating the variables, the most accessible features are selected.
 
 ## Doublet removal
 
-Doublets are removed by calling a customized [**scrublet**](https://github.com/swolock/scrublet) algorithm. *pp.scrublet()* will identify potential doublets and the function *pp.filter_doublets* removes them. 
+Doublets are removed by calling a customized [**scrublet**](https://github.com/swolock/scrublet) algorithm. *pp.scrublet* will identify potential doublets and the function *pp.filter_doublets* removes them. 
 > <hands-on-title> Scrublet </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
@@ -472,11 +472,11 @@ The dimension reduction, produced by the algorithm *tl.spectral*, is required fo
 >    >  obsm: 'fragment_paired', 'X_spectral'
 >    > ```
 >    >
->    > 1. Where are the new annotations stored?
+>    > - Where are the new annotations stored?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. The outputs of **tl.spectral** are stored in unstructured annotations `uns: 'spectral_eigenvalue'` and as multidimensional observations `obsm: 'X_spectral'`. 
+>    > > - The outputs of **tl.spectral** are stored in unstructured annotations `uns: 'spectral_eigenvalue'` and as multidimensional observations `obsm: 'X_spectral'`. 
 >    > >
 >    > {: .solution}
 >    >
@@ -492,13 +492,13 @@ With the already reduced dimensionality of the data stored in `X_spectral`, the 
 >    - *"Dimension reduction and Clustering"*: `Compute Umap, using 'tl.umap'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC spectral` (output of **tl.spectral** {% icon tool %})
 >
-> 2. Rename the generated file to `Anndata 5k PBMC umap` or add the tag `umap` to the dataset
+> 2. Rename the generated file to `Anndata 5k PBMC UMAP` or add the tag `UMAP` to the dataset
 {: .hands_on}
 
 # Clustering
 During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* method. This method takes the results of k-nearest neighbor (KNN) method as input data and produces well-connected communities. 
 
-## Clustering
+## Community clustering
 
 > <hands-on-title> Clustering analysis </hands-on-title>
 >
@@ -517,6 +517,28 @@ During clustering, cells that share similar accessibility profiles are organized
 >    > 
 >    {: .comment}
 > 2. Rename the generated file to `Anndata 5k PBMC leiden` or add the tag `leiden` to the dataset
+> 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
+>
+>    > <question-title></question-title>
+>    >
+>    > ```
+>    > AnnData object with n_obs × n_vars = 4564 × 6062095
+>    >  obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
+>    >  var: 'count', 'selected'
+>    >  uns: 'doublet_rate', 'reference_sequences', 'scrublet_sim_doublet_score', 'spectral_eigenvalue'
+>    >  obsm: 'X_spectral', 'X_umap', 'fragment_paired'
+>    >  obsp: 'distances'
+>    > ```
+>    >
+>    > - Where are the **leiden** clusters stored in the AnnData?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > - The clusters are stored in `obs: 'leiden'`
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 > 
 {: .hands_on}
 
@@ -551,272 +573,173 @@ During clustering, cells that share similar accessibility profiles are organized
 
 # Cell cluster annotation
 
-> <tip-title>Removing tags</tip-title>
->
-> - If you have added propagating tags (tags starting with `#`) these should be removed in the following datasets.
-> - Tags can be removed by expanding the dataset with a tag and clicking the `x` next to the tag. 
-{: .tip}
+After clustering the cells, they must be annotated. This categorizes the clusters into known cell types. **Manual Cell Annotation** requires known marker genes and varying expression profiles of the marker genes among clusters. As marker genes for {PBMC's} are [known](https://panglaodb.se/markers.html) ({% cite Franzn2019 %}), we can annotate our clusters manually. 
 
-## Sub-step with **SnapATAC2 Preprocessing**
+## Gene matrix
+Since our data currently doesn't contain gene information, we have to create a cell by gene activity matrix using the function *pp.make_gene_matrix*. 
+
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Generate cell by gene activity matrix, using 'pp.make_gene_matrix'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
->        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC leiden` (output of **tl.leiden** {% icon tool %})
+>        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `gene_annotation.gtf.gz` (Input dataset)
+> 2. Rename the generated file to `Anndata 5k PBMC gene_matrix` or add the tag `gene_matrix` to the dataset
+>    > <tip-title> Gene matrix </tip-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > - Please note that *pp.make_gene_matrix* removes all annotations except those stored in `n_obs`. 
+>    > - Therefore it might be necessary to remove propagating tags (tags starting with `#`) from `Anndata 5k PBMC gene_matrix`. 
+>    >    - Tags can be removed by expanding the dataset with a tag and clicking the `x` next to the tag.
+>    {: .tip}
+>
+> 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
+>
+>    > <question-title></question-title>
+>    >
+>    > ```
+>    > AnnData object with n_obs × n_vars = 4430 × 60606
+>    >  obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
+>    > ```
+>    >
+>    > - What does `n_vars` represent in `Anndata 5k PBMC gene_matrix` and what did it represent in `Anndata 5k PBMC leiden`?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > - The variables now represent accessible genes. There are `60606` accessible genes in our samples. In `Anndata 5k PBMC leiden` and all earlier AnnData the variables represented fixed-sized genomic bins. 
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Imputation with scanpy
+Similar to scRNA-seq data, the cell by gene activity matrix is very sparse. Additionally, high gene variance between cells, due to technical confounders, could impact the downstream analysis. In scRNA-seq, filtering and normalization are therefore required to produce a high-quality gene matrix. 
 
-## Sub-step with **Filter**
+Since the cell by gene activity matrix resembles the cell by gene expression matrix of scRNA-seq, we can use the tools of the [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}) toolsuite to continue with our data. 
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Filter and normalize </hands-on-title>
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix` (output of **pp.make_gene_matrix** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Normalize**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
+> 
+> 2. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata filter_genes` (output of **pp.filter_genes** {% icon tool %})
 >    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
->        - *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
+>    - {% icon param-toggle %} *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Inspect and manipulate**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Normalize** {% icon tool %})
+> 3. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata normalize` (output of **Normalize** {% icon tool %})
 >    - *"Method used for inspecting"*: `Logarithmize the data matrix, using 'pp.log1p'`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Normalize**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
+> 
+> 4. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata log1p` (output of **log1p** {% icon tool %})
 >    - *"Method used for normalization"*: `Denoising using Markov Affinity-based Graph Imputation of Cells (MAGIC) API 'external.pp.magic'`
 >        - *"Denoised genes to return"*: `PCA only`
 >        - *"Which solver to use"*: `"approximate", is faster that performs imputation in the PCA space and then projects back to the gene space`
 >
->    ***TODO***: *Check parameter descriptions*
+>   > <warning-title>Large output files!</warning-title>
+>   >   - The settings are important for this step!
+>   >   - The setting `Denoised genes to return: 'All genes'` produces a very large output file
+>   >      - **57.4 GB** compared to **1.5 GB** with `PCA only`
+>   >   - The compute time for `Which solver to use: 'exact'` is very long and not necessary for our purposes. 
+>   >
+>   {: .warning}
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic` or add the tag `magic` to the dataset
 >
->    > <comment-title> short description </comment-title>
+> 6. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
+>
+>
+>    > <question-title></question-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > ```
+>    > AnnData object with n_obs × n_vars = 4430 × 55106
+>    >  obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
+>    >  var: 'n_cells'
+>    >  uns: 'reference_sequences'
+>    >  obsm: 'log1p'
+>    > ```
+>    >
+>    > 1. How did `n_vars` change, compared to `Anndata 5k PBMC gene_matrix`?
+>    > 2. Which data was 'lost', compared to `Anndata 5k PBMC leiden`, and must be added to the file in order to produce **UMAP** plots?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. The number of accessible genes was reduced from 60606 to 55106 by the filtering. And additional annotations were added, such as: `var: 'n_cells'`, `uns: 'reference_sequences'` and `obsm: 'log1p'`
+>    > > 2. The UMAP embeddings `obsm: 'X_umap'` are missing and should be added to the Anndata in the next step. 
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Copy-over embeddings
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **AnnData Operations**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Copy UMAP embedding </hands-on-title>
 >
 > 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `anndata_out` (output of **Normalize** {% icon tool %})
->    - *"Copy embeddings (such as UMAP, tSNE)"*: `Yes`
+>    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Anndata 5k PBMC gene_matrix magic` (output of **external.pp.magic** {% icon tool %})
+>    - {% icon param-toggle} *"Copy embeddings (such as UMAP, tSNE)"*: `Yes`
+>       - *"Keys from embeddings to copy"*: `X_umap`
+>       - {% icon param-file %} *"IAnnData objects with embeddings to copy"*: `Anndata 5k PBMC leiden`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Annotations to copy </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > - This tutorial only focuses on producing an **UMAP** plot with marker-genes. 
+>    > - If further analysis, with tools requiring more annotations, is intended, these can be added in a similar way as shown above.  
+>    >     - f.ex. *Peak and Motif Analysis* with {% tool [Snapatac2 peaks and motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.5.3+galaxy1) %} requires annotations from `uns`. 
+>    > - It is also possible to leave the input *"Keys from embeddings to copy"* empty, to copy all `obsm`. 
 >    {: .comment}
+>
+> 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic UMAP` or add the tag `UMAP` to the dataset
+>
+> 6. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output, to check if `obsm` contains `X_umap`
+>  
+>   ```
+>   AnnData object with n_obs × n_vars = 4430 × 55106
+>    obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
+>    var: 'n_cells'
+>    uns: 'reference_sequences'
+>    obsm: 'log1p'
+>   ```
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Visualize gene activity of marker genes
+The gene activity of selected marker genes can now be visualized with Scanpy. 
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Plot marker genes </hands-on-title>
 >
 > 1. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
->        - *"Keys for annotations of observations/cells or variables/genes"*: `{'id': 3, 'output_name': 'output'}`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, MS4A1, CD3D, LEF1, NKG7, TREM1, LYZ, PPBP`
 >        - *"Show edges?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
+>  ![umap_leiden_marker_gene_clustering]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.umap.png %})
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> > <question-title></question-title>
+> >
+> > 1. Are the marker genes selectively expressed in the clusters?
+> > 2. Which marker genes have overlapping expression profiles? And what could that imply?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. Answer 1
+> > > 2. Answer 2
+> > > 
+> > {: .solution}
+> >
+> {: .question}
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
