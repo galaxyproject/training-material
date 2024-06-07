@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@108b95d5548a3f2cfa11fe808619fba05b287925",
+		release: "galaxy-training-network@7767347324e0fd530e5f3a44ffca81fd9f5068ac",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -235,7 +235,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated May 26, 2024</small>
+				<small class="text-muted">Last updated Jun 6, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification">Launch in Tutorial Mode</span>
@@ -259,13 +259,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/gene_based_pathogen_identification.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -312,6 +312,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   6["medaka consensus pipeline"];
   4 -->|consensus| 6;
   0 -->|output| 6;
+  9e5ad6ec-b408-4132-ba07-dec9fa626923["Output\nmedaka_gaps_in_draft_bed_file"];
+  6 --> 9e5ad6ec-b408-4132-ba07-dec9fa626923;
+  style 9e5ad6ec-b408-4132-ba07-dec9fa626923 stroke:#2c3143,stroke-width:4px;
+  fcbd3e3f-2e93-4798-b696-dad7db9f2efd["Output\nmedaka_log_file"];
+  6 --> fcbd3e3f-2e93-4798-b696-dad7db9f2efd;
+  style fcbd3e3f-2e93-4798-b696-dad7db9f2efd stroke:#2c3143,stroke-width:4px;
   60656aac-ad2a-4c9b-9a68-b9fb18ae5595["Output\nmedaka_propability_h5_file"];
   6 --> 60656aac-ad2a-4c9b-9a68-b9fb18ae5595;
   style 60656aac-ad2a-4c9b-9a68-b9fb18ae5595 stroke:#2c3143,stroke-width:4px;
@@ -321,12 +327,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   df361e19-b6d1-405b-96cc-b48c1ab7c604["Output\nsample_all_contigs"];
   6 --> df361e19-b6d1-405b-96cc-b48c1ab7c604;
   style df361e19-b6d1-405b-96cc-b48c1ab7c604 stroke:#2c3143,stroke-width:4px;
-  9e5ad6ec-b408-4132-ba07-dec9fa626923["Output\nmedaka_gaps_in_draft_bed_file"];
-  6 --> 9e5ad6ec-b408-4132-ba07-dec9fa626923;
-  style 9e5ad6ec-b408-4132-ba07-dec9fa626923 stroke:#2c3143,stroke-width:4px;
-  fcbd3e3f-2e93-4798-b696-dad7db9f2efd["Output\nmedaka_log_file"];
-  6 --> fcbd3e3f-2e93-4798-b696-dad7db9f2efd;
-  style fcbd3e3f-2e93-4798-b696-dad7db9f2efd stroke:#2c3143,stroke-width:4px;
   7["Bandage Image"];
   4 -->|assembly_gfa| 7;
   9612a851-1f94-4d54-b001-5d082bcc9055["Output\nbandage_assembly_graph_image"];
@@ -392,7 +392,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated May 29, 2024</small>
+				<small class="text-muted">Last updated Jun 6, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification">Launch in Tutorial Mode</span>
@@ -416,13 +416,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_allele_based_pathogen_identification.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -544,7 +544,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated May 29, 2024</small>
+				<small class="text-muted">Last updated Jun 6, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing">Launch in Tutorial Mode</span>
@@ -572,9 +572,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -593,15 +593,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   style 34ea26db-11cb-41ee-85c3-75af8a53a2c0 stroke:#2c3143,stroke-width:4px;
   3["NanoPlot"];
   1 -->|output| 3;
+  15ecf5b1-e0eb-405a-ac3a-359feb66d4cd["Output\nnanoplot_qc_on_reads_before_preprocessing_nanostats"];
+  3 --> 15ecf5b1-e0eb-405a-ac3a-359feb66d4cd;
+  style 15ecf5b1-e0eb-405a-ac3a-359feb66d4cd stroke:#2c3143,stroke-width:4px;
   304110f9-60d0-4ba2-8b3b-fae0e2a49554["Output\nnanoplot_on_reads_before_preprocessing_nanostats_post_filtering"];
   3 --> 304110f9-60d0-4ba2-8b3b-fae0e2a49554;
   style 304110f9-60d0-4ba2-8b3b-fae0e2a49554 stroke:#2c3143,stroke-width:4px;
   f2bd0a1f-cd60-4a36-a7d0-8025cc19ea2e["Output\nnanoplot_qc_on_reads_before_preprocessing_html_report"];
   3 --> f2bd0a1f-cd60-4a36-a7d0-8025cc19ea2e;
   style f2bd0a1f-cd60-4a36-a7d0-8025cc19ea2e stroke:#2c3143,stroke-width:4px;
-  15ecf5b1-e0eb-405a-ac3a-359feb66d4cd["Output\nnanoplot_qc_on_reads_before_preprocessing_nanostats"];
-  3 --> 15ecf5b1-e0eb-405a-ac3a-359feb66d4cd;
-  style 15ecf5b1-e0eb-405a-ac3a-359feb66d4cd stroke:#2c3143,stroke-width:4px;
   4["FastQC"];
   1 -->|output| 4;
   d0a64624-05d0-4068-835b-a025fc011760["Output\nfastqc_quality_check_before_preprocessing_html_file"];
@@ -620,12 +620,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   style 2a9a8b4d-458b-40e7-9a21-fb7108d5bbe4 stroke:#2c3143,stroke-width:4px;
   6["MultiQC"];
   4 -->|text_file| 6;
-  0f92196d-047d-4918-819d-c0ff7cd3ae85["Output\nmultiQC_html_report_before_preprocessing"];
-  6 --> 0f92196d-047d-4918-819d-c0ff7cd3ae85;
-  style 0f92196d-047d-4918-819d-c0ff7cd3ae85 stroke:#2c3143,stroke-width:4px;
   ebffe782-a56c-431f-8af4-c0cb8d7a02fc["Output\nmultiQC_stats_before_preprocessing"];
   6 --> ebffe782-a56c-431f-8af4-c0cb8d7a02fc;
   style ebffe782-a56c-431f-8af4-c0cb8d7a02fc stroke:#2c3143,stroke-width:4px;
+  0f92196d-047d-4918-819d-c0ff7cd3ae85["Output\nmultiQC_html_report_before_preprocessing"];
+  6 --> 0f92196d-047d-4918-819d-c0ff7cd3ae85;
+  style 0f92196d-047d-4918-819d-c0ff7cd3ae85 stroke:#2c3143,stroke-width:4px;
   7["Map with minimap2"];
   0 -->|output| 7;
   5 -->|out1| 7;
@@ -637,12 +637,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   b5899290-4c57-4662-ad22-860654652ade["Output\nnanoplot_qc_on_reads_after_preprocessing_html_report"];
   8 --> b5899290-4c57-4662-ad22-860654652ade;
   style b5899290-4c57-4662-ad22-860654652ade stroke:#2c3143,stroke-width:4px;
-  42db7f93-919e-4bbb-81a1-06411a9da410["Output\nnanoplot_qc_on_reads_after_preprocessing_nanostats"];
-  8 --> 42db7f93-919e-4bbb-81a1-06411a9da410;
-  style 42db7f93-919e-4bbb-81a1-06411a9da410 stroke:#2c3143,stroke-width:4px;
   949bfdf5-3d79-4dad-bdd8-c3a25e6af4cf["Output\nnanoplot_on_reads_after_preprocessing_nanostats_post_filtering"];
   8 --> 949bfdf5-3d79-4dad-bdd8-c3a25e6af4cf;
   style 949bfdf5-3d79-4dad-bdd8-c3a25e6af4cf stroke:#2c3143,stroke-width:4px;
+  42db7f93-919e-4bbb-81a1-06411a9da410["Output\nnanoplot_qc_on_reads_after_preprocessing_nanostats"];
+  8 --> 42db7f93-919e-4bbb-81a1-06411a9da410;
+  style 42db7f93-919e-4bbb-81a1-06411a9da410 stroke:#2c3143,stroke-width:4px;
   9["FastQC"];
   5 -->|out1| 9;
   09306471-afa0-4106-9cc7-259b93dfc862["Output\nfastqc_quality_check_after_preprocessing_text_file"];
@@ -653,12 +653,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   style 084f982f-20f1-457e-8012-91ebbb85633d stroke:#2c3143,stroke-width:4px;
   10["Split BAM by reads mapping status"];
   7 -->|alignment_output| 10;
-  3b1e626f-6bc1-484c-be01-366534361b73["Output\nhost_sequences_bam"];
-  10 --> 3b1e626f-6bc1-484c-be01-366534361b73;
-  style 3b1e626f-6bc1-484c-be01-366534361b73 stroke:#2c3143,stroke-width:4px;
   14a53fe2-f296-43aa-86b7-243278c1050c["Output\nnon_host_sequences_bam"];
   10 --> 14a53fe2-f296-43aa-86b7-243278c1050c;
   style 14a53fe2-f296-43aa-86b7-243278c1050c stroke:#2c3143,stroke-width:4px;
+  3b1e626f-6bc1-484c-be01-366534361b73["Output\nhost_sequences_bam"];
+  10 --> 3b1e626f-6bc1-484c-be01-366534361b73;
+  style 3b1e626f-6bc1-484c-be01-366534361b73 stroke:#2c3143,stroke-width:4px;
   11["Select"];
   9 -->|text_file| 11;
   a809853b-119f-44d2-986b-8d2006439fbe["Output\ntotal_sequences_before_hosts_sequences_removal"];
@@ -731,12 +731,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   26["MultiQC"];
   9 -->|text_file| 26;
   25 -->|out_file1| 26;
-  13cbf6c7-6954-4458-aa66-a5b020c63822["Output\nmultiQC_stats_after_preprocessing"];
-  26 --> 13cbf6c7-6954-4458-aa66-a5b020c63822;
-  style 13cbf6c7-6954-4458-aa66-a5b020c63822 stroke:#2c3143,stroke-width:4px;
   0b1b5a73-36ee-42a2-a220-1ced6ec7378b["Output\nmultiQC_html_report_after_preprocessing"];
   26 --> 0b1b5a73-36ee-42a2-a220-1ced6ec7378b;
   style 0b1b5a73-36ee-42a2-a220-1ced6ec7378b stroke:#2c3143,stroke-width:4px;
+  13cbf6c7-6954-4458-aa66-a5b020c63822["Output\nmultiQC_stats_after_preprocessing"];
+  26 --> 13cbf6c7-6954-4458-aa66-a5b020c63822;
+  style 13cbf6c7-6954-4458-aa66-a5b020c63822 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -757,7 +757,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated May 26, 2024</small>
+				<small class="text-muted">Last updated Jun 6, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation">Launch in Tutorial Mode</span>
@@ -781,13 +781,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/pathogen_detection_pathoGFAIR_samples_aggregation_and_visualisation.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -815,15 +815,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   style 8 stroke:#2c3143,stroke-width:4px;
   9["ℹ️ Input Collection\nvfs"];
   style 9 stroke:#2c3143,stroke-width:4px;
-  10["Remove beginning"];
+  10["Filter failed datasets"];
   0 -->|output| 10;
-  11["Remove beginning"];
+  11["Filter failed datasets"];
   1 -->|output| 11;
   12["Bar chart"];
   3 -->|output| 12;
-  6336d1be-9000-490c-a43e-1014ec0f8be7["Output\nnumber_of_read_before_and_after_host_removal_fig"];
-  12 --> 6336d1be-9000-490c-a43e-1014ec0f8be7;
-  style 6336d1be-9000-490c-a43e-1014ec0f8be7 stroke:#2c3143,stroke-width:4px;
+  0961166e-38b6-44e3-93db-100d821b0070["Output\nnumber_of_reads_before_host_removal_and_number_of_host_reads_found_per_sample_fig"];
+  12 --> 0961166e-38b6-44e3-93db-100d821b0070;
+  style 0961166e-38b6-44e3-93db-100d821b0070 stroke:#2c3143,stroke-width:4px;
   13["Bar chart"];
   3 -->|output| 13;
   548975e5-4619-49fc-9e95-4d7f4d761dfd["Output\nremoved_host_percentage_fig"];
@@ -846,21 +846,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   68c76f06-d2ea-4280-9e6f-a7b4f1568389["Output\nnumber_of_Variants_and_SNPs_indentified_fig"];
   17 --> 68c76f06-d2ea-4280-9e6f-a7b4f1568389;
   style 68c76f06-d2ea-4280-9e6f-a7b4f1568389 stroke:#2c3143,stroke-width:4px;
-  18["Collapse Collection"];
+  18["Filter failed datasets"];
   8 -->|output| 18;
-  86910e39-57bf-4a76-ac4c-739340fd2387["Output\nall_samples_contigs_in_one_fasta_file"];
-  18 --> 86910e39-57bf-4a76-ac4c-739340fd2387;
-  style 86910e39-57bf-4a76-ac4c-739340fd2387 stroke:#2c3143,stroke-width:4px;
   19["Filter failed datasets"];
   9 -->|output| 19;
-  20["Count"];
-  10 -->|out_file1| 20;
-  21["Count"];
-  11 -->|out_file1| 21;
-  22["Group"];
-  11 -->|out_file1| 22;
-  23["Remove beginning"];
-  15 -->|output| 23;
+  20["Remove beginning"];
+  10 -->|output| 20;
+  21["Remove beginning"];
+  11 -->|output| 21;
+  22["Remove beginning"];
+  15 -->|output| 22;
+  23["Collapse Collection"];
+  18 -->|output| 23;
+  86910e39-57bf-4a76-ac4c-739340fd2387["Output\nall_samples_contigs_in_one_fasta_file"];
+  23 --> 86910e39-57bf-4a76-ac4c-739340fd2387;
+  style 86910e39-57bf-4a76-ac4c-739340fd2387 stroke:#2c3143,stroke-width:4px;
   24["Collapse Collection"];
   19 -->|output| 24;
   02b996c6-a912-4e4e-b3ec-49601faaa452["Output\nall_vfs_in_one_tabular"];
@@ -868,14 +868,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   style 02b996c6-a912-4e4e-b3ec-49601faaa452 stroke:#2c3143,stroke-width:4px;
   25["Remove beginning"];
   19 -->|output| 25;
-  26["Cut"];
+  26["Count"];
   20 -->|out_file1| 26;
-  27["Cut"];
+  27["Count"];
   21 -->|out_file1| 27;
-  28["Filter empty datasets"];
-  22 -->|out_file1| 28;
+  28["Group"];
+  21 -->|out_file1| 28;
   29["Unique"];
-  23 -->|out_file1| 29;
+  22 -->|out_file1| 29;
   30["Split by group"];
   24 -->|output| 30;
   59f8cb09-424b-47b1-b94b-a612c2610cab["Output\nsplit_by_group_collection"];
@@ -883,12 +883,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   style 59f8cb09-424b-47b1-b94b-a612c2610cab stroke:#2c3143,stroke-width:4px;
   31["Unique"];
   25 -->|out_file1| 31;
-  32["Collapse Collection"];
+  32["Cut"];
   26 -->|out_file1| 32;
-  33["Collapse Collection"];
+  33["Cut"];
   27 -->|out_file1| 33;
-  34["Column join"];
-  28 -->|output| 34;
+  34["Filter empty datasets"];
+  28 -->|out_file1| 34;
   35["Cut"];
   29 -->|outfile| 35;
   36["Cut"];
@@ -898,23 +898,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   style eeb25a51-ea21-4a19-a196-55d5bd919b10 stroke:#2c3143,stroke-width:4px;
   37["Cut"];
   31 -->|outfile| 37;
-  38["Column Regex Find And Replace"];
-  32 -->|output| 38;
-  4809c36b-31ef-4664-8e4e-47f0f72152de["Output\namrs_count"];
-  38 --> 4809c36b-31ef-4664-8e4e-47f0f72152de;
-  style 4809c36b-31ef-4664-8e4e-47f0f72152de stroke:#2c3143,stroke-width:4px;
-  39["Column Regex Find And Replace"];
-  33 -->|output| 39;
-  87efc81d-4d84-4af3-831f-dfe033c59f78["Output\nvfs_count"];
-  39 --> 87efc81d-4d84-4af3-831f-dfe033c59f78;
-  style 87efc81d-4d84-4af3-831f-dfe033c59f78 stroke:#2c3143,stroke-width:4px;
-  40["Column Regex Find And Replace"];
-  34 -->|tabular_output| 40;
-  f5c221e3-00ef-4834-9a5f-a94c97fd6764["Output\nheatmap_table"];
-  40 --> f5c221e3-00ef-4834-9a5f-a94c97fd6764;
-  style f5c221e3-00ef-4834-9a5f-a94c97fd6764 stroke:#2c3143,stroke-width:4px;
+  38["Collapse Collection"];
+  32 -->|out_file1| 38;
+  39["Collapse Collection"];
+  33 -->|out_file1| 39;
+  40["Column join"];
+  34 -->|output| 40;
   41["bedtools getfasta"];
-  18 -->|output| 41;
+  23 -->|output| 41;
   35 -->|out_file1| 41;
   42["Remove beginning"];
   36 -->|out_file1| 42;
@@ -922,94 +913,113 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   42 --> aaaa4446-0817-4e5c-aa1b-9ec384f2a363;
   style aaaa4446-0817-4e5c-aa1b-9ec384f2a363 stroke:#2c3143,stroke-width:4px;
   43["bedtools getfasta"];
-  18 -->|output| 43;
+  23 -->|output| 43;
   37 -->|out_file1| 43;
-  44["Multi-Join"];
-  39 -->|out_file1| 44;
-  38 -->|out_file1| 44;
-  45["Heatmap w ggplot"];
-  40 -->|out_file1| 45;
-  97816bc2-fd0c-4077-a721-8dd1470879d1["Output\nheatmap_png"];
-  45 --> 97816bc2-fd0c-4077-a721-8dd1470879d1;
-  style 97816bc2-fd0c-4077-a721-8dd1470879d1 stroke:#2c3143,stroke-width:4px;
-  c0417c91-a513-4c6a-9a62-3aac2f1f8e85["Output\nheatmap_pdf"];
-  45 --> c0417c91-a513-4c6a-9a62-3aac2f1f8e85;
-  style c0417c91-a513-4c6a-9a62-3aac2f1f8e85 stroke:#2c3143,stroke-width:4px;
-  46["Regex Find And Replace"];
-  41 -->|output| 46;
-  47["bedtools getfasta"];
-  18 -->|output| 47;
-  42 -->|out_file1| 47;
+  44["Column Regex Find And Replace"];
+  38 -->|output| 44;
+  4809c36b-31ef-4664-8e4e-47f0f72152de["Output\namrs_count"];
+  44 --> 4809c36b-31ef-4664-8e4e-47f0f72152de;
+  style 4809c36b-31ef-4664-8e4e-47f0f72152de stroke:#2c3143,stroke-width:4px;
+  45["Column Regex Find And Replace"];
+  39 -->|output| 45;
+  87efc81d-4d84-4af3-831f-dfe033c59f78["Output\nvfs_count"];
+  45 --> 87efc81d-4d84-4af3-831f-dfe033c59f78;
+  style 87efc81d-4d84-4af3-831f-dfe033c59f78 stroke:#2c3143,stroke-width:4px;
+  46["Column Regex Find And Replace"];
+  40 -->|tabular_output| 46;
+  f5c221e3-00ef-4834-9a5f-a94c97fd6764["Output\nheatmap_table"];
+  46 --> f5c221e3-00ef-4834-9a5f-a94c97fd6764;
+  style f5c221e3-00ef-4834-9a5f-a94c97fd6764 stroke:#2c3143,stroke-width:4px;
+  47["Regex Find And Replace"];
+  41 -->|output| 47;
+  48["bedtools getfasta"];
+  23 -->|output| 48;
+  42 -->|out_file1| 48;
   82ce2107-89a3-438c-95bb-dc871b5258b7["Output\nfiltered_sequences_with_vfs_fasta"];
-  47 --> 82ce2107-89a3-438c-95bb-dc871b5258b7;
+  48 --> 82ce2107-89a3-438c-95bb-dc871b5258b7;
   style 82ce2107-89a3-438c-95bb-dc871b5258b7 stroke:#2c3143,stroke-width:4px;
-  48["Regex Find And Replace"];
-  43 -->|output| 48;
-  49["Replace Text"];
-  44 -->|outfile| 49;
-  91745da0-0b8d-4a7a-b927-b36107f17ec5["Output\nvfs_amrs_count_table"];
-  49 --> 91745da0-0b8d-4a7a-b927-b36107f17ec5;
-  style 91745da0-0b8d-4a7a-b927-b36107f17ec5 stroke:#2c3143,stroke-width:4px;
-  50["FASTA-to-Tabular"];
-  46 -->|out_file1| 50;
-  51["ClustalW"];
-  47 -->|output| 51;
-  6af20322-24da-4036-80de-37bed2d25848["Output\nclustalw_on_input_clustal"];
-  51 --> 6af20322-24da-4036-80de-37bed2d25848;
-  style 6af20322-24da-4036-80de-37bed2d25848 stroke:#2c3143,stroke-width:4px;
+  49["Regex Find And Replace"];
+  43 -->|output| 49;
+  50["Multi-Join"];
+  45 -->|out_file1| 50;
+  44 -->|out_file1| 50;
+  51["Heatmap w ggplot"];
+  46 -->|out_file1| 51;
+  c0417c91-a513-4c6a-9a62-3aac2f1f8e85["Output\nheatmap_pdf"];
+  51 --> c0417c91-a513-4c6a-9a62-3aac2f1f8e85;
+  style c0417c91-a513-4c6a-9a62-3aac2f1f8e85 stroke:#2c3143,stroke-width:4px;
+  97816bc2-fd0c-4077-a721-8dd1470879d1["Output\nheatmap_png"];
+  51 --> 97816bc2-fd0c-4077-a721-8dd1470879d1;
+  style 97816bc2-fd0c-4077-a721-8dd1470879d1 stroke:#2c3143,stroke-width:4px;
+  52["Filter empty datasets"];
+  47 -->|out_file1| 52;
+  53["ClustalW"];
+  48 -->|output| 53;
   9b7bd78c-f112-480b-a7df-c10711af254c["Output\nclustalw_on_input_dnd"];
-  51 --> 9b7bd78c-f112-480b-a7df-c10711af254c;
+  53 --> 9b7bd78c-f112-480b-a7df-c10711af254c;
   style 9b7bd78c-f112-480b-a7df-c10711af254c stroke:#2c3143,stroke-width:4px;
-  52["FASTA-to-Tabular"];
-  48 -->|out_file1| 52;
-  53["Cut"];
-  50 -->|output| 53;
+  6af20322-24da-4036-80de-37bed2d25848["Output\nclustalw_on_input_clustal"];
+  53 --> 6af20322-24da-4036-80de-37bed2d25848;
+  style 6af20322-24da-4036-80de-37bed2d25848 stroke:#2c3143,stroke-width:4px;
   54["Filter empty datasets"];
-  51 -->|output| 54;
+  49 -->|out_file1| 54;
+  55["Replace Text"];
+  50 -->|outfile| 55;
+  91745da0-0b8d-4a7a-b927-b36107f17ec5["Output\nvfs_amrs_count_table"];
+  55 --> 91745da0-0b8d-4a7a-b927-b36107f17ec5;
+  style 91745da0-0b8d-4a7a-b927-b36107f17ec5 stroke:#2c3143,stroke-width:4px;
+  56["FASTA-to-Tabular"];
+  52 -->|output| 56;
+  57["Filter empty datasets"];
+  53 -->|output| 57;
   32d00c1d-68c4-4069-8d5d-023aabdfadbe["Output\nfiltered_empty_datasets"];
-  54 --> 32d00c1d-68c4-4069-8d5d-023aabdfadbe;
+  57 --> 32d00c1d-68c4-4069-8d5d-023aabdfadbe;
   style 32d00c1d-68c4-4069-8d5d-023aabdfadbe stroke:#2c3143,stroke-width:4px;
-  55["Cut"];
-  52 -->|output| 55;
-  56["Group"];
-  53 -->|out_file1| 56;
-  57["FASTTREE"];
-  54 -->|output| 57;
-  aacdfe45-eb0c-4f6e-a479-eeb170774757["Output\nfasttree_nhx"];
-  57 --> aacdfe45-eb0c-4f6e-a479-eeb170774757;
-  style aacdfe45-eb0c-4f6e-a479-eeb170774757 stroke:#2c3143,stroke-width:4px;
-  58["Group"];
-  55 -->|out_file1| 58;
-  59["Tabular-to-FASTA"];
-  56 -->|out_file1| 59;
-  60["Newick Display"];
+  58["FASTA-to-Tabular"];
+  54 -->|output| 58;
+  59["Cut"];
+  56 -->|output| 59;
+  60["FASTTREE"];
   57 -->|output| 60;
+  aacdfe45-eb0c-4f6e-a479-eeb170774757["Output\nfasttree_nhx"];
+  60 --> aacdfe45-eb0c-4f6e-a479-eeb170774757;
+  style aacdfe45-eb0c-4f6e-a479-eeb170774757 stroke:#2c3143,stroke-width:4px;
+  61["Cut"];
+  58 -->|output| 61;
+  62["Group"];
+  59 -->|out_file1| 62;
+  63["Newick Display"];
+  60 -->|output| 63;
   0c22178c-dc85-4137-80e2-f3040b92bd20["Output\nnewick_genes_tree_graphs_collection"];
-  60 --> 0c22178c-dc85-4137-80e2-f3040b92bd20;
+  63 --> 0c22178c-dc85-4137-80e2-f3040b92bd20;
   style 0c22178c-dc85-4137-80e2-f3040b92bd20 stroke:#2c3143,stroke-width:4px;
-  61["Tabular-to-FASTA"];
-  58 -->|out_file1| 61;
-  62["FASTA Merge Files and Filter Unique Sequences"];
-  59 -->|output| 62;
-  63["FASTA Merge Files and Filter Unique Sequences"];
-  61 -->|output| 63;
-  64["ClustalW"];
-  62 -->|output| 64;
-  65["ClustalW"];
-  63 -->|output| 65;
-  66["FASTTREE"];
-  64 -->|output| 66;
-  67["FASTTREE"];
+  64["Group"];
+  61 -->|out_file1| 64;
+  65["Tabular-to-FASTA"];
+  62 -->|out_file1| 65;
+  66["Tabular-to-FASTA"];
+  64 -->|out_file1| 66;
+  67["FASTA Merge Files and Filter Unique Sequences"];
   65 -->|output| 67;
-  68["Newick Display"];
+  68["FASTA Merge Files and Filter Unique Sequences"];
   66 -->|output| 68;
-  1f9cb2cf-219f-48de-8058-d6d45f3b3158["Output\nall_samples_phylogenetic_tree_based_amrs"];
-  68 --> 1f9cb2cf-219f-48de-8058-d6d45f3b3158;
-  style 1f9cb2cf-219f-48de-8058-d6d45f3b3158 stroke:#2c3143,stroke-width:4px;
-  69["Newick Display"];
+  69["ClustalW"];
   67 -->|output| 69;
+  70["ClustalW"];
+  68 -->|output| 70;
+  71["FASTTREE"];
+  69 -->|output| 71;
+  72["FASTTREE"];
+  70 -->|output| 72;
+  73["Newick Display"];
+  71 -->|output| 73;
+  1f9cb2cf-219f-48de-8058-d6d45f3b3158["Output\nall_samples_phylogenetic_tree_based_amrs"];
+  73 --> 1f9cb2cf-219f-48de-8058-d6d45f3b3158;
+  style 1f9cb2cf-219f-48de-8058-d6d45f3b3158 stroke:#2c3143,stroke-width:4px;
+  74["Newick Display"];
+  72 -->|output| 74;
   6bb4b32b-7cca-4e04-8120-be9f64ccba39["Output\nall_samples_phylogenetic_tree_based_vfs"];
-  69 --> 6bb4b32b-7cca-4e04-8120-be9f64ccba39;
+  74 --> 6bb4b32b-7cca-4e04-8120-be9f64ccba39;
   style 6bb4b32b-7cca-4e04-8120-be9f64ccba39 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
@@ -1031,7 +1041,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated May 26, 2024</small>
+				<small class="text-muted">Last updated Jun 6, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona">Launch in Tutorial Mode</span>
@@ -1055,13 +1065,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/taxonomy_profiling_and_visualisation_with_krona.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -1121,7 +1131,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/108b95d5548a3f2cfa11fe808619fba05b287925">108b95d</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/7767347324e0fd530e5f3a44ffca81fd9f5068ac">7767347</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
