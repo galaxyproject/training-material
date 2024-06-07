@@ -37,6 +37,7 @@ abbreviations:
     QC: quality control
     TSSe: transcription start site enrichment
     TSS: transcription start sites
+    UMAP: Uniform Manifold Approximation and Projection
 
 contributors:
 - timonschlegel
@@ -52,9 +53,12 @@ By analyzing which genomic sites have an _open_ chromatin state, cell-type speci
 In this tutorial we will analyze {scATAC-seq} data using the tool suites [SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/index.html) ({% cite Zhang2024 %}) and [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}). 
 With both of these tool suites we will perform preprocessing, clustering and identification of {scATAC-seq} datasets from [10x Genomics](https://www.10xgenomics.com/products/single-cell-atac). The analysis will be performed using a dataset of {PBMC's} containing ~4,620 single nuclei. 
 
+{% snippet topics/single-cell/faqs/single_cell_omics.md %}
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 
 <!-- This is a comment. -->
-
 
 > <comment-title></comment-title>
 >
@@ -152,7 +156,7 @@ The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially 
 ![Anndata format]({% link topics/single-cell/images/scatac-standard-snapatac2/anndata_schema.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
 
 
-## Importing files
+## Import files to SnapATAC2
 
 > <hands-on-title> Create an AnnData object </hands-on-title>
 >
@@ -160,7 +164,7 @@ The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially 
 >    - *"Method used for preprocessing"*: `Import data fragment files and compute basic QC metrics, using 'pp.import_data'`
 >        - {% icon param-file %} *"Fragment file, optionally compressed with gzip or zstd"*: `fragments_file.tsv` (Input dataset)
 >        - {% icon param-file %} *"A tabular file containing chromosome names and sizes"*: `chrom_sizes.txt` (Input dataset)
->        - *"Whether the fragment file has been sorted by cell barcodes"*: `no` 
+>        - {% icon param-toggle %} *"Whether the fragment file has been sorted by cell barcodes"*: `No` 
 > 
 > 2. Rename the generated file to `Anndata 5k PBMC`
 >
@@ -431,7 +435,7 @@ Doublets are removed by calling a customized [**scrublet**](https://github.com/s
 
 # Dimension reduction
 
-Dimension reduction is a very important step during the analysis of single cell data. During this, the complex multi-dimensional data is projected into lower-dimensional space, while retaining as much information as possible. Dimension reduction enables quicker downstream analysis, since the data is more simplified and thus the memory usage is reduced. 
+Dimension reduction (also known as embedding) is a very important step during the analysis of single cell data. During this, the complex multi-dimensional data is projected into lower-dimensional space, while retaining as much information as possible. Dimension reduction enables quicker downstream analysis, since the data is more simplified and thus the memory usage is reduced. 
 
 > <details-title>Dimension reduction with SnapATAC2</details-title>
 >
@@ -445,176 +449,113 @@ Dimension reduction is a very important step during the analysis of single cell 
 >     - **Spectral embedding** utilizes an iterative algorithm to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of a matrix without computing the matrix itself. 
 {: .details}
 
+## Spectral embedding
+The dimension reduction, produced by the algorithm *tl.spectral*, is required for later steps, such as plotting and clustering. 
+
 > <hands-on-title> Spectral embedding </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Perform dimension reduction using Laplacian Eigenmap, using 'tl.spectral'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
-> 
->    > <comment-title> short description </comment-title>
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC filter_doublets` (output of **pp.filter_doublets** {% icon tool %})
+>        - *"Distance metric"*: `cosine` 
+>
+> 2. Rename the generated file to `Anndata 5k PBMC spectral` or add the tag `spectral` to the dataset
+> 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
+>
+>    > <question-title></question-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > ```
+>    > AnnData object with n_obs × n_vars = 4430 × 6062095
+>    >  obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score'
+>    >  var: 'count', 'selected'
+>    >  uns: 'doublet_rate', 'reference_sequences', 'scrublet_sim_doublet_score', 'spectral_eigenvalue'
+>    >  obsm: 'fragment_paired', 'X_spectral'
+>    > ```
+>    >
+>    > 1. Where are the new annotations stored?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. The outputs of **tl.spectral** are stored in unstructured annotations `uns: 'spectral_eigenvalue'` and as multidimensional observations `obsm: 'X_spectral'`. 
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 {: .hands_on}
+## UMAP embedding
+With the already reduced dimensionality of the data stored in `X_spectral`, the cells can be further embedded (i.e. transformed into lower dimensions) with {UMAP}. UMAP projects the cells and their relationship to each other into 2-dimensional space, which can be easily visualized. 
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Clustering**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> UMAP embedding </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute Umap, using 'tl.umap'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC spectral` (output of **tl.spectral** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Rename the generated file to `Anndata 5k PBMC umap` or add the tag `umap` to the dataset
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Clustering
+During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* method. This method takes the results of k-nearest neighbor (KNN) method as input data and produces well-connected communities. 
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Clustering
 
-## Sub-step with **SnapATAC2 Clustering**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Clustering analysis </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute a neighborhood graph of observations, using 'pp.knn'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC umap` (output of **tl.umap** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Clustering**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Cluster cells into subgroups, using 'tl.leiden'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata knn` (output of **pp.knn** {% icon tool %})
+>        - *"Whether to use the Constant Potts Model (CPM) or modularity"*: `modularity` 
+> 
+>    > <comment-title> CPM or modularity </comment-title>
+>    > - make sure you selected `modularity`
+>    > - the clusters produced by `CPM` are not represented well in the UMAP projections
+>    > 
 >    {: .comment}
->
+> 2. Rename the generated file to `Anndata 5k PBMC leiden` or add the tag `leiden` to the dataset
+> 
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Plotting of clusters
 
-## Sub-step with **SnapATAC2 Plotting**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Plotting the clusters </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the UMAP embedding, using 'pl.umap'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC leiden` (output of **tl.leiden** {% icon tool %})
 >        - *"Color"*: `leiden`
 >        - *"Height of the plot"*: `500`
+> 4. {% icon galaxy-eye %} Inspect the `.png` output
 >
->    ***TODO***: *Check parameter descriptions*
+>  ![umap_leiden_clustering]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.umap.png %})
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> > <question-title></question-title>
+> >
+> > 1. How many leiden clusters were discovered?
+> > 2. What does the distance of clusters to each other tell us about their chromatin states?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. There are 12 leiden clusters. 
+> > > 2. Clusters in close proximity (f.ex. clusters 0 and 5) share a similar chromatin accessibility profile, compared to a cluster further away (f.ex. cluster 9). 
+> > > 
+> > {: .solution}
+> >
+> {: .question}
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Cell cluster annotation
 
-> <question-title></question-title>
+> <tip-title>Removing tags</tip-title>
 >
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+> - If you have added propagating tags (tags starting with `#`) these should be removed in the following datasets.
+> - Tags can be removed by expanding the dataset with a tag and clicking the `x` next to the tag. 
+{: .tip}
 
 ## Sub-step with **SnapATAC2 Preprocessing**
 
