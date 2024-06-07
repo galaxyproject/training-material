@@ -15,7 +15,8 @@ level: Intermediate
 key_points:
   - variants in *M. tuberculosis* sequencing data can be discovered using common microbial bioinformatics tools
   - it is not enough to just call variants, variant calling involves multiple quality control steps
-  - the choice of reference genome and some quality control procedures are species specific, and require knowledge of the organism in question
+  - the choice of reference genome and some quality control procedures are species-specific, and require knowledge of the organism in question
+  - batches of samples can be processed using Galaxy dataset collections and workflows
 contributors:
   - pvanheus
   - slugger70
@@ -24,6 +25,7 @@ tags:
   - prokaryote
   - one-health
   - microgalaxy
+  - tuberculosis
 edam_ontology:
 - topic_0622 # Genomics
 - topic_3301 # Microbiology
@@ -35,17 +37,17 @@ edam_ontology:
 
 
 Tuberculosis (TB) is an infectious disease caused by the bacterium *Mycobacterium tuberculosis*. According to the [WHO](https://www.who.int/tb/publications/global_report/en/), in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world's most deadly infectious disease. The [publication](https://www.ncbi.nlm.nih.gov/pubmed/9634230) of the genome of *M. tuberculosis H37Rv* in 1998 gave researchers a powerful new tool in understanding this pathogen. This genome has been revised since then, with the latest version being available
-as RefSeq entry [NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/). The genome comprises a single circular chromosome of some 4.4 megabases. The H37Rv strain that the genome was sequenced from is a long-preserved laboratory strain, originally [isolated](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2132400) from a patient in 1905 and [named](https://journals.sagepub.com/doi/abs/10.3181/00379727-33-8330P) as H37Rv in 1935. It is notably different in some genomic [regions](https://www.sciencedirect.com/science/article/pii/S0888754317300617?via%3Dihub) from some modern clinical strains but remains the standard reference sequence for *M. tuberculosis* (Mtb). In a larger context *M. tuberculosis* is a prominent member of the Mycobacterium Tuberculosis Complex (MTBC).
+as RefSeq entry [NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/). The genome comprises a single circular chromosome of some 4.4 megabases. The H37Rv strain that the genome was sequenced from is a long-preserved laboratory strain, originally [isolated](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2132400) from a patient in 1905 and [named](https://journals.sagepub.com/doi/abs/10.3181/00379727-33-8330P) as H37Rv in 1935. It is notably different in some genomic [regions](https://www.sciencedirect.com/science/article/pii/S0888754317300617?via%3Dihub) from some modern clinical strains but remains the standard reference sequence for *M. tuberculosis* (Mtb). In a larger context, _M. tuberculosis_* is a prominent member of the Mycobacterium Tuberculosis Complex (MTBC).
 
-This group of related species comprises of the [8](https://www.nature.com/articles/s41467-020-16626-6) [lineages](https://www.ncbi.nlm.nih.gov/pubmed/29456241) of human-infecting *M. tuberculosis* as well as predominantly animal-infecting species such as *M. bovis* and *M. pinnipedii*. Two other close relatives of Mtb, *M. leprae* and *M. lepromatosis* circulate between humans, causing the disease leprosy. Finally amongst the Mycobacteria there are several other species that live in the environment and can cause human disease. These are the [Nontuberculous Mycobacteria](https://www.ncbi.nlm.nih.gov/pubmed/28345639).
+This group of related species comprises of the [8](https://www.nature.com/articles/s41467-020-16626-6) [lineages](https://www.ncbi.nlm.nih.gov/pubmed/29456241) of human-infecting *M. tuberculosis* as well as predominantly animal-infecting species such as *M. bovis* and *M. pinnipedii*. Two other close relatives of Mtb, *M. leprae* and *M. lepromatosis* circulate between humans, causing the disease leprosy. Finally, amongst the Mycobacteria there are several other species that live in the environment and can cause human disease. These are the [Nontuberculous Mycobacteria](https://www.ncbi.nlm.nih.gov/pubmed/28345639).
 
-Variation in the genome of *M. tuberculosis* (Mtb) is associated with changes in phenotype, for example [drug resistance](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8) and virulence. It is also useful for [outbreak investigation](https://www.frontiersin.org/articles/10.3389/fpubh.2019.00087/full) as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.
+Variation in the genome of *M. tuberculosis* (Mtb) is associated with changes in phenotype, for example, [drug resistance](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8)](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8) and virulence. It is also useful for [outbreak investigation](https://www.frontiersin.org/articles/10.3389/fpubh.2019.00087/full) as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.
 
 This tutorial will focus on identifying genomic variation in Mtb and using that to explore drug resistance and other aspects of the bacteria.
 
 # Get your data
 
-The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529) from a [southern African patient](https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4). In addition to the bacterial sequence sample we will work with a Genbank format version of the genome of the [inferred](https://www.nature.com/articles/ng.590) most recent common [ancestor](https://zenodo.org/record/3497110) of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome ([NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3)) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.
+The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529) from a [southern African patient](https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4). In addition to the bacterial sequence sample, we will work with a Genbank format version of the genome of the [inferred](https://www.nature.com/articles/ng.590) most recent common [ancestor](https://zenodo.org/record/3497110) of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome ([NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3)) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.
 
 > <hands-on-title>Get the data</hands-on-title>
 >
@@ -108,7 +110,7 @@ While one could examine the quality control report for each set of reads (forwar
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-files %} *"FastQC output"*: both *RawData*
->             outputs of **FastQC** {% icon tool %})
+>             outputs of **FastQC** {% icon tool %}
 >
 > 2. Using the {% icon galaxy-eye %} button, inspect the *Webpage* output produced by the tool
 >
@@ -116,6 +118,8 @@ While one could examine the quality control report for each set of reads (forwar
 >    >
 >    > 1. Based on the report, do you think preprocessing of the reads
 >    >    (trimming and/or filtering) will be necessary before mapping?
+>    >
+>    >  1. What is the average GC content of the data (known as GC%) in the `004-2_1` dataset?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
@@ -125,6 +129,10 @@ While one could examine the quality control report for each set of reads (forwar
 >    > >    of reads with a mean base quality < 5.
 >    > >    We will run **fastp** {% icon tool %} on the
 >    > >    fastq datasets in the next step
+>    > >
+>    > > 1. The GC% is 66%, which is close to the 65.6% that one expects from a _M. tuberculosis_ sample. 
+>    > >    Examining the GC% is a quick way to check that the sample you have sequenced contains reads
+>    > >    from the organism that you expect.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -256,7 +264,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 3. Appropriate choice of a reference genome: we used a genome that is inferred to be ancestral to all *M. tuberculosis* for our analysis and the diversity within Mtb is limited enough for us to rely on a single reference genome for the entire species.
 4. Quality filtering in the mapping and variant calling stage: Internally `snippy` uses tools like `bwa-mem` and `freebayes` that judge the quality of their predictions. `snippy` then uses this information to perform some filtering on variant calling predictions.
 
-# Further variant filtering and TB-profiling
+# Further variant filtering and drug resistance profiling
 
 We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally, where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
 
@@ -321,7 +329,7 @@ Finally, TB Variant Report uses the COMBAT-TB [eXplorer](https://explorer.sanbi.
 >       - *"File to process"*: `TB Variant Filter on data XX`
 >       - *"SED Program"*: `s/GENE_//g`
 > 
-> 3. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.0+galaxy0) %} with the following parameters
+> 3. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.1+galaxy0) %} with the following parameters
 >   - *"Input SnpEff annotated M.tuberculosis VCF(s)"*: `Text transformation on data XX`
 >   - *"TBProfiler Drug Resistance Report (Optional)"*: `TB-Profiler Profile on data XX: Results.json`
 >
@@ -408,7 +416,6 @@ An alternative to running JBrowse within Galaxy is to install [IGV](https://igv.
 {% snippet  topics/galaxy-interface/faqs/visualisations_igv.md %}
 
 This requires more setup for the user, for example loading the FASTA file of the genome into IGV and downloading any annotation GFF3 files you want to use with IGV. On the other hand, running IGV locally is often faster than using JBrowse in Galaxy.
-
 
 # Different samples, different stories (optional)
 
@@ -505,8 +512,49 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 
 There is something clearly wrong with sample SRR12416842, perhaps indicating sample contamination. This example of a sample that doesn't map to the reference genome illustrates that even when sequence quality is good, sequence data problems can become apparent in later steps of analysis and it is important to always have a sense of what results to expect. You can develop a better sense of what quality control results to expect by first practicing techniques with known data before analysing new samples.
 
-# Processing many samples at once: Collections and Workflows
+# Processing many samples at once: Collections and Workflows (optional)
 
-TODO: complete this section
+In the tutorial thus far we have focused on processing single samples, where two read datasets (forward and reverse reads) are associated with a single sample. In practice, sequence analysis typically involves analysing batches of samples and we run the same
+analysis steps for each sample in the batch. Galaxy supports working with batches using collections and workflows. 
 
-We hope you enjoyed this tutorial!
+If you are new to collections, you can learn more about them in [this tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
+
+If you have followed all of the steps of this tutorial, you will have two samples, one named *004-2* and another *SRR12416842*. Create a collection of lists of pairs from these samples and call the collection `samples`.
+
+> <hands-on-title>Analysing samples with the TB Variant Reporting workflow</hands-on-title>
+>
+> 1. **Import the Workflow** into Galaxy 
+>    - If you are are on <https://usegalaxy.eu> you can find the workflow in the *Public workflow* section of the *Workflows* tab. Just search for `tuberculosis` and select the workflow by `pvanheus`. If you are on a different server, follow the steps below.
+>    - Copy the URL (e.g. via right-click) of [the workflow]({{ site.baseurl }}{{ page.dir }}workflows/tb-variant-analysis.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+>
+> 2. **Run the TB Variant Analysis workflow** {% icon workflow %} using the following parameters
+>    - {% icon param-files %} *Reads* the `samples` collection of your input reads
+>
+>    - {% icon param-files %} *Reference Genome* the `Mycobacterium_tuberculosis_ancestral_reference.gbk` reference genome
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+{: .hands_on}
+
+The workflow will produce a series of collections, with the most important outputs being tagged with dataset tags.
+
+* The **MultiQC report** tagged *qc_report* contains information on `fastp` read trimming and `BamQC` mapping statistics.
+
+* The filtered VCF is transformed with `sed` and tagged as *annotated_vcf*
+
+* The TB-Profiler drug resistance report is tagged with *drug_resistance_report*
+
+* The TB VCF Report outputs are tagged with *variant_report*
+
+* For each sample a consensus genome is created by inserting the single nucleotide variants into the reference genome. This is tagged as *consensus_genome* and is intended for use in building a phylogenetic tree.
+
+* The Kraken2 report (to check for contamination) is tagged with *kraken_report*
+
+The workflow also produces a Workflow Invocation Report that summarises the outputs of the workflow. This can be found on the Workflow Invocation menu which is either in the User menu or on the History menu depending on which version of Galaxy you are using.
+
+# Conclusion
+
+Thank you for coming to the end of this tutorial. After completing this tutorial you might want to follow some of the other tutorials in the Galaxy Training Network on analysing _M. tuberculosis_ data. Just search for *tuberculosis* in the search bar. Enjoy the rest of your day!
