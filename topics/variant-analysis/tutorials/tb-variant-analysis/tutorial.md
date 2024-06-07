@@ -5,7 +5,7 @@ title: "M. tuberculosis Variant Analysis"
 subtopic: one-health
 zenodo_link: https://doi.org/10.5281/zenodo.3496437
 questions:
-  - "How do we detect differences between a set of reads from *M. tuberculosis* (Mtb) and the Mtb reference genome"
+  - "How do we detect differences between a set of reads from _M. tuberculosis_ (Mtb) and the Mtb reference genome"
 objectives:
   - "How should we filter those variants"
   - "How can we predict drug resistance from those variants"
@@ -13,7 +13,7 @@ objectives:
 time_estimation: "2h"
 level: Intermediate
 key_points:
-  - variants in *M. tuberculosis* sequencing data can be discovered using common microbial bioinformatics tools
+  - variants in _M. tuberculosis_ sequencing data can be discovered using common microbial bioinformatics tools
   - it is not enough to just call variants, variant calling involves multiple quality control steps
   - the choice of reference genome and some quality control procedures are species-specific, and require knowledge of the organism in question
   - batches of samples can be processed using Galaxy dataset collections and workflows
@@ -36,18 +36,18 @@ edam_ontology:
 ---
 
 
-Tuberculosis (TB) is an infectious disease caused by the bacterium *Mycobacterium tuberculosis*. According to the [WHO](https://www.who.int/tb/publications/global_report/en/), in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world's most deadly infectious disease. The [publication](https://www.ncbi.nlm.nih.gov/pubmed/9634230) of the genome of *M. tuberculosis H37Rv* in 1998 gave researchers a powerful new tool in understanding this pathogen. This genome has been revised since then, with the latest version being available
-as RefSeq entry [NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/). The genome comprises a single circular chromosome of some 4.4 megabases. The H37Rv strain that the genome was sequenced from is a long-preserved laboratory strain, originally [isolated](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2132400) from a patient in 1905 and [named](https://journals.sagepub.com/doi/abs/10.3181/00379727-33-8330P) as H37Rv in 1935. It is notably different in some genomic [regions](https://www.sciencedirect.com/science/article/pii/S0888754317300617?via%3Dihub) from some modern clinical strains but remains the standard reference sequence for *M. tuberculosis* (Mtb). In a larger context, _M. tuberculosis_* is a prominent member of the Mycobacterium Tuberculosis Complex (MTBC).
+Tuberculosis (TB) is an infectious disease caused by the bacterium _Mycobacterium tuberculosis_. According to the [WHO](https://www.who.int/tb/publications/global_report/en/), in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world's most deadly infectious disease. The [publication](https://www.ncbi.nlm.nih.gov/pubmed/9634230) of the genome of _M. tuberculosis H37Rv_ in 1998 gave researchers a powerful new tool for understanding this pathogen. This genome has been revised since then, with the latest version being available
+as RefSeq entry [NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/). The genome comprises a single circular chromosome of some 4.4 megabases. The H37Rv strain that the genome was sequenced from is a long-preserved laboratory strain, originally [isolated](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2132400) from a patient in 1905 and [named](https://journals.sagepub.com/doi/abs/10.3181/00379727-33-8330P) as H37Rv in 1935. It is notably different in some genomic [regions](https://www.sciencedirect.com/science/article/pii/S0888754317300617?via%3Dihub) from some modern clinical strains but remains the standard reference sequence for _M. tuberculosis_ (Mtb). In a larger context, _M. tuberculosis_ is a prominent member of the Mycobacterium Tuberculosis Complex (MTBC).
 
-This group of related species comprises of the [8](https://www.nature.com/articles/s41467-020-16626-6) [lineages](https://www.ncbi.nlm.nih.gov/pubmed/29456241) of human-infecting *M. tuberculosis* as well as predominantly animal-infecting species such as *M. bovis* and *M. pinnipedii*. Two other close relatives of Mtb, *M. leprae* and *M. lepromatosis* circulate between humans, causing the disease leprosy. Finally, amongst the Mycobacteria there are several other species that live in the environment and can cause human disease. These are the [Nontuberculous Mycobacteria](https://www.ncbi.nlm.nih.gov/pubmed/28345639).
+This group of related species comprises the [10](https://wwwnc.cdc.gov/eid/article/30/3/23-1466_article) [lineages](https://www.ncbi.nlm.nih.gov/pubmed/29456241) of human-infecting _M. tuberculosis_ as well as predominantly animal-infecting species such as *M. bovis* and *M. pinnipedii*. Two other close relatives of Mtb, _M. leprae_ and _M. lepromatosis_ circulate between humans, causing the disease leprosy. Finally, amongst the Mycobacteria there are several other species that live in the environment and can cause human disease. These are the [Nontuberculous Mycobacteria](https://www.ncbi.nlm.nih.gov/pubmed/28345639).
 
-Variation in the genome of *M. tuberculosis* (Mtb) is associated with changes in phenotype, for example, [drug resistance](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8)](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8) and virulence. It is also useful for [outbreak investigation](https://www.frontiersin.org/articles/10.3389/fpubh.2019.00087/full) as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.
+Variation in the genome of _M. tuberculosis_ (Mtb) is associated with changes in phenotype, for example, [drug resistance](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8) and [virulence](https://www.jci.org/articles/view/173156). It is also useful for [outbreak investigation](https://www.frontiersin.org/articles/10.3389/fpubh.2019.00087/full) as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.
 
 This tutorial will focus on identifying genomic variation in Mtb and using that to explore drug resistance and other aspects of the bacteria.
 
 # Get your data
 
-The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529) from a [southern African patient](https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4). In addition to the bacterial sequence sample, we will work with a Genbank format version of the genome of the [inferred](https://www.nature.com/articles/ng.590) most recent common [ancestor](https://zenodo.org/record/3497110) of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome ([NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3)) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.
+The data for today is a sample of _M. tuberculosis_ [collected](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529) from a [southern African patient](https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4). In addition to the bacterial sequence sample, we will work with a Genbank format version of the genome of the [inferred](https://www.nature.com/articles/ng.590) most recent common [ancestor](https://zenodo.org/record/3497110) of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome ([NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3)) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.
 
 > <hands-on-title>Get the data</hands-on-title>
 >
@@ -215,7 +215,7 @@ We will now run the Snippy tool on our reads, comparing them to the reference.
 
 If we give Snippy an annotated reference in Genbank format, it will run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.
 
-We have an annotated reference built from the inferred *M. tuberculosis* [ancestral reference genome](https://zenodo.org/record/3497110) and the
+We have an annotated reference built from the inferred _M. tuberculosis_ [ancestral reference genome](https://zenodo.org/record/3497110) and the
 gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3) so will use it in this case.
 
 > <hands-on-title>Run Snippy</hands-on-title>
@@ -251,7 +251,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > >
 >    > > 2. According to SnpEff, it's a Synonymous change in Rv0002.
 >    > >
->    > > 3. 1086 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or how many lines (excluding the header) there are in the VCF file. This is quite typical for *M. tuberculosis*.
+>    > > 3. 1086 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or how many lines (excluding the header) there are in the VCF file. This is quite typical for _M. tuberculosis_.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -261,12 +261,12 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 
 1. Sequencing errors: these were addressed by the quality trimming step
 2. Sample contamination: we used **Kraken2** to assess the extent of this problem in our sample
-3. Appropriate choice of a reference genome: we used a genome that is inferred to be ancestral to all *M. tuberculosis* for our analysis and the diversity within Mtb is limited enough for us to rely on a single reference genome for the entire species.
+3. Appropriate choice of a reference genome: we used a genome that is inferred to be ancestral to all _M. tuberculosis_ for our analysis and the diversity within Mtb is limited enough for us to rely on a single reference genome for the entire species.
 4. Quality filtering in the mapping and variant calling stage: Internally `snippy` uses tools like `bwa-mem` and `freebayes` that judge the quality of their predictions. `snippy` then uses this information to perform some filtering on variant calling predictions.
 
 # Further variant filtering and drug resistance profiling
 
-We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally, where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
+We still cannot entirely trust the proposed variants. In particular, there are regions of the _M. tuberculosis_ genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally, where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
 
 > <hands-on-title>Run TB Variant Filter</hands-on-title>
 > 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.4.0+galaxy0) %} with the following parameters
@@ -312,7 +312,7 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 
 Now that we have a collection of *high-quality variants* we can search them against variants known to be associated with drug resistance. The *TB Profiler* tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.
 
-Finally, TB Variant Report uses the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
+Finally, TB Variant Report uses the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of _M. tuberculosis_ genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
 > <hands-on-title>Run TB Profiler and TB Variant Report</hands-on-title>
 > 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.2.1+galaxy0) %} with the following parameters
@@ -420,7 +420,7 @@ This requires more setup for the user, for example loading the FASTA file of the
 # Different samples, different stories (optional)
 
 In [Zenodo](https://doi.org/10.5281/zenodo.3960260) we have included sample *18-1* from the same study (aka. [ERR1750907](https://www.ebi.ac.uk/ena/browser/view/ERR1750907)). This is also a southern African
-*M. tuberculosis* sample, but in some ways quite different from the sample we have analysed in the tutorial thus
+_M. tuberculosis_ sample, but in some ways quite different from the sample we have analysed in the tutorial thus
 far.
 
 > <hands-on-title>Take a closer look at sample 18-1</hands-on-title>
@@ -467,7 +467,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >
 > 3. Perform quality trimming with {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1) %}
 >
-> 4. Map the samples to the *M. tuberculosis* reference genome with {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %}
+> 4. Map the samples to the _M. tuberculosis_ reference genome with {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %}
 >
 >    > <question-title></question-title>
 >    >
@@ -479,7 +479,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > >
 >    > > 1. The **FastQC** result shows that while there is some dropoff in sequence quality (especially towards the end of the reads from the second dataset), the sequences are of good enough quality to analyse.
 >    > >
->    > > 2. **snippy* discovered more than 15,000 variants. This is unusual for a *M. tuberculosis* sample where we expect at most a few thousand variants across the length of the genome.
+>    > > 2. **snippy* discovered more than 15,000 variants. This is unusual for a _M. tuberculosis_ sample where we expect at most a few thousand variants across the length of the genome.
 >    > {: .solution}
 >    {: .question}
 >
@@ -501,7 +501,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > >
 >    > > ![BAM Coverage Plot of SRR12416842 showing few reads mapped](../../images/mtb_poor_mapping.png)
 >    > >
->    > > By contrast, reads from the `004-02` map evenly across the *M. tuberculosis* genome, with an average depth of over 100 reads, as shown in this output from **BAM Coverage Plotter**:
+>    > > By contrast, reads from the `004-02` map evenly across the _M. tuberculosis_ genome, with an average depth of over 100 reads, as shown in this output from **BAM Coverage Plotter**:
 >    > >
 >    > > ![BAM Coverage Plot of 004-02 showing reads mapped evenly](../../images/mtb_good_mapping.png)
 >    > >
