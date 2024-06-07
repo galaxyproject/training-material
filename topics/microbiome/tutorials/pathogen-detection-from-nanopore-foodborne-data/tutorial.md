@@ -825,7 +825,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 178
+> > 1. 188
 > > 2. 287
 > >
 > {: .solution}
