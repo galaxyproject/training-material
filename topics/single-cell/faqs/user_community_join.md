@@ -6,9 +6,7 @@ layout: faq
 contributors: [nomadscientist]
 ---
 
-To discuss with like-minded scientists, join our Matrix/Element chatroom to discuss with fellow users of Galaxy single cell analysis tools!
-
-[![Matrix](/training-material/topics/single-cell/images/matrix-badge.svg)](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im)
+{% icon feedback %} To discuss with like-minded scientists, join our [Galaxy Training Network chatspace in Slack](http://gxy.io/gtn-slack) and discuss with fellow users of Galaxy single cell analysis tools on [#single-cell-users](https://gtnsmrgsbord.slack.com/archives/C06PBRR40D7)
 
 We also post new tutorials / workflows there from time to time, as well as any other news.
 
