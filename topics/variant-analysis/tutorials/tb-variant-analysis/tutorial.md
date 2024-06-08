@@ -531,12 +531,13 @@ You can now run the **TB Variant Analysis**, launching it directly from Workflow
 
 > <hands-on-title>Analysing samples with the TB Variant Reporting workflow</hands-on-title>
 >
-> **Run the TB Variant Analysis workflow** {% icon workflow %} using the following parameters
+> 1. **Run the TB Variant Analysis workflow** {% icon workflow %} using the following parameters
 >    - {% icon param-files %} *Reads* the `samples` collection of your input reads
 >
 >    - {% icon param-files %} *Reference Genome* the `Mycobacterium_tuberculosis_ancestral_reference.gbk` reference genome
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
+>
 {: .hands_on}
 
 The workflow will produce a series of collections, with the most important outputs being tagged with dataset tags.
