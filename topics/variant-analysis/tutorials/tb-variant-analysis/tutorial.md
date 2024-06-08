@@ -536,7 +536,7 @@ You can now run the **TB Variant Analysis**, launching it directly from Workflow
 >
 >    - {% icon param-files %} *Reference Genome* the `Mycobacterium_tuberculosis_ancestral_reference.gbk` reference genome
 >
->    {% snippet faqs/galaxy/workflows_run.md %}
+> 2. Click the **Run Workflow button** at the top-right of the screen
 >
 {: .hands_on}
 
