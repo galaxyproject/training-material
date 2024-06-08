@@ -12,4 +12,6 @@ To discuss with like-minded scientists, join our Matrix/Element chatroom to disc
 
 We also post new tutorials / workflows there from time to time, as well as any other news.
 
-If you'd like to contribute ideas, requests or feedback as part of the wider community building single-cell and spatial resources within Galaxy, you can also join our [Single cell & sPatial Omics Community of Practice](https://galaxyproject.org/community/sig/singlecell/).
+{% icon point-right %} If you'd like to contribute ideas, requests or feedback as part of the wider community building single-cell and spatial resources within Galaxy, you can also join our [Single cell & sPatial Omics Community of Practice](https://galaxyproject.org/community/sig/singlecell/).
+
+{% icon tool %} You can request tools here on our [Single Cell and Spatial Omics Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing)
