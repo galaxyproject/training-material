@@ -742,7 +742,7 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 
 ## Manual cluster annotation
 Comparison of marker gene expression in our clusters with a table of canonical marker genes, enables us to annotate the clusters manually. 
-['MS4A1', 'CD3D', 'LEF1', 'NKG7', 'TREM1', 'LYZ', 'PPBP']
+
 Cell type | Marker genes
 --- | ---
 memory T cells | CD3D
@@ -771,8 +771,11 @@ Cluster | Cell type
 11 | B cells
 12 | Megakaryocytes
 
-Note that some clusters contain subtypes (f.ex. the annotated T cell clusters contain both CD4+ and CD8+ T cells). The cell-type annotation can be refined by choosing more specific marker genes. 
+> <comment-title></comment-title>
+> Note that some clusters contain subtypes (f.ex. the annotated T cell clusters contain both CD4+ and CD8+ T cells). The cell-type annotation can be refined by choosing more specific marker genes. 
 Hands-on: manually annotate the clusters
+{: .comment}
+
 
 # Conclusion
 {% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/timn/h/test-of-5k-pbmc-tutorial-workflow), or check out the [full workflow](https://singlecell.usegalaxy.eu/u/timn/w/2combined-snapatac2) for this tutorial.
