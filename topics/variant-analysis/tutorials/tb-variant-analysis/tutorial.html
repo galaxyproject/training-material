@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@adf127f9e9b9f9204d6ec98a5809b86e1902a45e",
+		release: "galaxy-training-network@5449d9016a5a3686cb2c2decb8829e9145a251bb",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="M. tuberculosis Variant Analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-14 16:51:53 +0000">
+<meta name="DC.date" content="2024-06-10 13:19:51 +0000">
 <meta name="DC.creator" content="Peter van Heusden">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Thoba Lose"><meta name="description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-03-14 16:51:53 +0000",
+  "dateModified": "2024-06-10 13:19:51 +0000",
   "datePublished": "2020-07-25 20:58:54 +0000",
   "identifier": "https://gxy.io/GTN:T00319",
   "accessMode": [
@@ -238,16 +238,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "M. tuberculosis Variant Analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html",
-  "version": 62,
+  "version": 70,
   "timeRequired": "PT2H",
   "teaches": "How should we filter those variants\n - How can we predict drug resistance from those variants\n - How do we annotate those variants",
   "keywords": [
     "Variant Analysis",
     "prokaryote",
     "one-health",
-    "microgalaxy"
+    "microgalaxy",
+    "tuberculosis"
   ],
-  "description": "The questions this  addresses are:\n - How do we detect differences between a set of reads from *M. tuberculosis* (Mtb) and the Mtb reference genome\n\n\nThe objectives are:\n - How should we filter those variants\n - How can we predict drug resistance from those variants\n - How do we annotate those variants\n\n",
+  "description": "The questions this  addresses are:\n - How do we detect differences between a set of reads from _M. tuberculosis_ (Mtb) and the Mtb reference genome\n\n\nThe objectives are:\n - How should we filter those variants\n - How can we predict drug resistance from those variants\n - How do we annotate those variants\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -620,9 +621,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     {
       "@type": "Thing",
       "name": "microgalaxy"
+    },
+    {
+      "@type": "Thing",
+      "name": "tuberculosis"
     }
   ],
-  "abstract": "Tuberculosis (TB) is an infectious disease caused by the bacterium *Mycobacterium tuberculosis*. According to the [WHO](https://www.who.int/tb/publications/global_report/en/), in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world's most deadly infectious disease. The [publication](https://www.ncbi.nlm.nih.gov/pubmed/9634230) of the genome of *M. tuberculosis H37Rv* in 1998 gave researchers a powerful new tool in understanding this pathogen. This genome has been revised since then, with the latest version being available"
+  "abstract": "Tuberculosis (TB) is an infectious disease caused by the bacterium _Mycobacterium tuberculosis_. According to the [WHO](https://www.who.int/tb/publications/global_report/en/), in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world's most deadly infectious disease. The [publication](https://www.ncbi.nlm.nih.gov/pubmed/9634230) of the genome of _M. tuberculosis H37Rv_ in 1998 gave researchers a powerful new tool for understanding this pathogen. This genome has been revised since then, with the latest version being available"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1072,7 +1077,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 25, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 10, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1092,7 +1097,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (1 recent ratings, 18 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 62 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 70 </div>
 
     </blockquote>
     </section>
@@ -1107,18 +1112,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <p>Tuberculosis (TB) is an infectious disease caused by the bacterium <em>Mycobacterium tuberculosis</em>. According to the <a href="https://www.who.int/tb/publications/global_report/en/">WHO</a>, in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world’s most deadly infectious disease. The <a href="https://www.ncbi.nlm.nih.gov/pubmed/9634230">publication</a> of the genome of <em>M. tuberculosis H37Rv</em> in 1998 gave researchers a powerful new tool in understanding this pathogen. This genome has been revised since then, with the latest version being available
-as RefSeq entry <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/">NC_000962.3</a>. The genome comprises a single circular chromosome of some 4.4 megabases. The H37Rv strain that the genome was sequenced from is a long-preserved laboratory strain, originally <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2132400">isolated</a> from a patient in 1905 and <a href="https://journals.sagepub.com/doi/abs/10.3181/00379727-33-8330P">named</a> as H37Rv in 1935. It is notably different in some genomic <a href="https://www.sciencedirect.com/science/article/pii/S0888754317300617?via%3Dihub">regions</a> from some modern clinical strains but remains the standard reference sequence for <em>M. tuberculosis</em> (Mtb). In a larger context <em>M. tuberculosis</em> is a prominent member of the Mycobacterium Tuberculosis Complex (MTBC).</p>
+                <p>Tuberculosis (TB) is an infectious disease caused by the bacterium <em>Mycobacterium tuberculosis</em>. According to the <a href="https://www.who.int/tb/publications/global_report/en/">WHO</a>, in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world’s most deadly infectious disease. The <a href="https://www.ncbi.nlm.nih.gov/pubmed/9634230">publication</a> of the genome of <em>M. tuberculosis H37Rv</em> in 1998 gave researchers a powerful new tool for understanding this pathogen. This genome has been revised since then, with the latest version being available
+as RefSeq entry <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/">NC_000962.3</a>. The genome comprises a single circular chromosome of some 4.4 megabases. The H37Rv strain that the genome was sequenced from is a long-preserved laboratory strain, originally <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2132400">isolated</a> from a patient in 1905 and <a href="https://journals.sagepub.com/doi/abs/10.3181/00379727-33-8330P">named</a> as H37Rv in 1935. It is notably different in some genomic <a href="https://www.sciencedirect.com/science/article/pii/S0888754317300617?via%3Dihub">regions</a> from some modern clinical strains but remains the standard reference sequence for <em>M. tuberculosis</em> (Mtb). In a larger context, <em>M. tuberculosis</em> is a prominent member of the Mycobacterium Tuberculosis Complex (MTBC).</p>
 
-<p>This group of related species comprises of the <a href="https://www.nature.com/articles/s41467-020-16626-6">8</a> <a href="https://www.ncbi.nlm.nih.gov/pubmed/29456241">lineages</a> of human-infecting <em>M. tuberculosis</em> as well as predominantly animal-infecting species such as <em>M. bovis</em> and <em>M. pinnipedii</em>. Two other close relatives of Mtb, <em>M. leprae</em> and <em>M. lepromatosis</em> circulate between humans, causing the disease leprosy. Finally amongst the Mycobacteria there are several other species that live in the environment and can cause human disease. These are the <a href="https://www.ncbi.nlm.nih.gov/pubmed/28345639">Nontuberculous Mycobacteria</a>.</p>
+<p>This group of related species comprises the <a href="https://wwwnc.cdc.gov/eid/article/30/3/23-1466_article">10</a> <a href="https://www.ncbi.nlm.nih.gov/pubmed/29456241">lineages</a> of human-infecting <em>M. tuberculosis</em> as well as predominantly animal-infecting species such as <em>M. bovis</em> and <em>M. pinnipedii</em>. Two other close relatives of Mtb, <em>M. leprae</em> and <em>M. lepromatosis</em> circulate between humans, causing the disease leprosy. Finally, amongst the Mycobacteria there are several other species that live in the environment and can cause human disease. These are the <a href="https://www.ncbi.nlm.nih.gov/pubmed/28345639">Nontuberculous Mycobacteria</a>.</p>
 
-<p>Variation in the genome of <em>M. tuberculosis</em> (Mtb) is associated with changes in phenotype, for example <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8">drug resistance</a> and virulence. It is also useful for <a href="https://www.frontiersin.org/articles/10.3389/fpubh.2019.00087/full">outbreak investigation</a> as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.</p>
+<p>Variation in the genome of <em>M. tuberculosis</em> (Mtb) is associated with changes in phenotype, for example, <a href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8">drug resistance</a> and <a href="https://www.jci.org/articles/view/173156">virulence</a>. It is also useful for <a href="https://www.frontiersin.org/articles/10.3389/fpubh.2019.00087/full">outbreak investigation</a> as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.</p>
 
 <p>This tutorial will focus on identifying genomic variation in Mtb and using that to explore drug resistance and other aspects of the bacteria.</p>
 
 <h1 id="get-your-data">Get your data</h1>
 
-<p>The data for today is a sample of <em>M. tuberculosis</em> <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529">collected</a> from a <a href="https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4">southern African patient</a>. In addition to the bacterial sequence sample we will work with a Genbank format version of the genome of the <a href="https://www.nature.com/articles/ng.590">inferred</a> most recent common <a href="https://zenodo.org/record/3497110">ancestor</a> of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome (<a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3">NC_000962.3</a>) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.</p>
+<p>The data for today is a sample of <em>M. tuberculosis</em> <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529">collected</a> from a <a href="https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4">southern African patient</a>. In addition to the bacterial sequence sample, we will work with a Genbank format version of the genome of the <a href="https://www.nature.com/articles/ng.590">inferred</a> most recent common <a href="https://zenodo.org/record/3497110">ancestor</a> of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome (<a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3">NC_000962.3</a>) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the data</div>
@@ -1154,7 +1159,7 @@ Detecting some other, more severe problems early on may at least save you a lot
 of time spent on analyzing low-quality data that is not worth the effort.</p>
 
 <p>Here, we will perform a standard quality check on our input data and only point
-out a few interesting aspects about that data. For a more thorough explanation
+out a few interesting aspects of that data. For a more thorough explanation
 of NGS data quality control, you may want to have a look at the dedicated
 tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control”</a>.</p>
 
@@ -1163,7 +1168,7 @@ tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quali
 
   <ol>
     <li>
-      <p>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span> on both of your fastq datasets</p>
+      <p>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.74+galaxy0)</span> on both of your fastq datasets</p>
 
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: select both FASTQ datasets.</li>
@@ -1202,7 +1207,7 @@ dataset) will get added to your history.</p>
               <ul>
                 <li><em>“Type of FastQC output?”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code></li>
                 <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQC output”</em>: both <em>RawData</em>
-outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               </ul>
             </li>
           </ul>
@@ -1216,20 +1221,32 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
         <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
-          <li>Based on the report, do you think preprocessing of the reads
-(trimming and/or filtering) will be necessary before mapping?</li>
+          <li>
+            <p>Based on the report, do you think preprocessing of the reads
+(trimming and/or filtering) will be necessary before mapping?</p>
+          </li>
+          <li>
+            <p>What is the average GC content of the data (known as GC%) in the <code class="language-plaintext highlighter-rouge">004-2_1</code> dataset?</p>
+          </li>
         </ol>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
-            <li>Sequence quality is quite good overall. If anything you might
+            <li>
+              <p>Sequence quality is quite good overall. If anything you might
 consider trimming the 3’ ends of reads (base qualities decline
 slightly towards the 3’ ends) or to filter out the small fraction
 of reads with a mean base quality &lt; 5.
-We will run <strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the
-fastq datasets in the next step</li>
+We will run <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the
+fastq datasets in the next step</p>
+            </li>
+            <li>
+              <p>The GC% is 66%, which is close to the 65.6% that one expects from a <em>M. tuberculosis</em> sample. 
+Examining the GC% is a quick way to check that the sample you have sequenced contains reads
+from the organism that you expect.</p>
+            </li>
           </ol>
 
         </blockquote>
@@ -1239,45 +1256,33 @@ fastq datasets in the next step</li>
 
 </blockquote>
 
-<p>As these reads look like they need a bit of trimming, we can turn to the <strong>Trimmomatic</strong> tool to clean up our data.</p>
+<p>As these reads look like they need a bit of trimming, we can turn to the <strong>fastp</strong> tool to clean up our data.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-quality-trimming"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality trimming</div>
   <ol>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.1)</span> to clean up the reads and remove the poor quality sections.
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0" title="fastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.4+galaxy0)</span> to clean up the reads and remove the poor quality sections.
       <ul>
-        <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired End (two separate input files)</code></li>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file (R1/first of pair)”</em>: <code class="language-plaintext highlighter-rouge">004-2_1.fastq.gz</code></li>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file (R2/second of pair)”</em>: <code class="language-plaintext highlighter-rouge">004-2_2.fastq.gz</code></li>
-        <li><em>“Select Trimmomatic operation to perform”</em>
-          <ul>
-            <li>Keep the default value of <code class="language-plaintext highlighter-rouge">Sliding window trimming</code> but set</li>
-            <li><em>“Average quality required”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
-          </ul>
-        </li>
-        <li><em>“+Insert Trimmomatic Operation”</em>
-          <ul>
-            <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Drop reads below a specified length (MINLEN)</code></li>
-            <li><em>“Minimum length of reads to be kept”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
-          </ul>
-        </li>
+        <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input 1”</em>: <code class="language-plaintext highlighter-rouge">004-2_1.fastq.gz</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input 2”</em>: <code class="language-plaintext highlighter-rouge">004-2_2.fastq.gz</code></li>
       </ul>
     </li>
     <li>
-      <p>Inspect the output produced by Trimmomatic</p>
+      <p>Inspect the output produced by <strong>fastp</strong></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
-          <li>Why are there 4 output read files instead of 2?</li>
+          <li>Was there a difference in file size of the reads before and after trimming? Is the difference the same between both sets of reads?</li>
         </ol>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
-            <li>There are 4 output files: Forwards paired and single reads and reverse paired and single reads. The single reads come about when one read in a pair of reads has failed the quality checks and so is deleted. The other half of the pair may still be good and so it is put into the single reads file for the appropriate direction. While un-paired reads might sometimes be useful, paired reads are more useful because both their sequence and the gap between them (the “insert size”) can be used for further analysis. In a typical analysis, only the paired reads are used.</li>
+            <li>After processing by <strong>fastp</strong> the output files are about 80 MB smaller than the inputs. The change in size is similar for both files.</li>
           </ol>
 
         </blockquote>
@@ -1286,67 +1291,105 @@ fastq datasets in the next step</li>
   </ol>
 </blockquote>
 
-<p><em>Note:</em> We would normally examine our trimmed reads with <strong>FastQC</strong> and <strong>MultiQC</strong> again to see if the quality trimming has been successful, but in this tutorial we will move straight on to save time.</p>
+<p>The next section, on looking for contamination in our data using Kraken2, takes a long time to run and can be skipped and perhaps
+run later if you prefer.</p>
 
-<h1 id="look-for-contamination-with-kraken2-optional">Look for contamination with Kraken2 (optional)</h1>
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Skip-Kraken2" onclick="cyoaChoice('Skip-Kraken2', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Skip Kraken2</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Run-Kraken2" onclick="cyoaChoice('Run-Kraken2', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Run Kraken2</label>
+	
+	
+	
 
-<p>We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our SNP analysis. <strong>Kraken2</strong> is an effective way of looking at which species is represented in our reads and so we can easily spot possible contamination of our sample. Unfortunately the tool uses a lot of RAM (typically 50GB when used with the <em>Standard</em> database), so you might want to skip this step if your environment doesn’t have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use <strong>Kraken2</strong> as part of its analysis, see the optional section on analysing <em>SRR12416842</em> at the end of this tutorial.</p>
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Skip-Kraken2", "gtn-cyoa");
+		})
+	</script>
+	
+</blockquote>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Kraken2</div>
+<div class="Skip-Kraken2"></div>
 
-  <ol>
-    <li>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Kraken2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1+galaxy1)</span> with the following parameters
-      <ul>
-        <li><em>“Single or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
-      </ul>
-      <ul>
-        <li><em>“Forward Strand”</em>: <code class="language-plaintext highlighter-rouge">Trimmomatic on X (R1 paired)</code></li>
-        <li><em>“Reverse Strand”</em>: <code class="language-plaintext highlighter-rouge">Trimmomatic on X (R2 paired)</code></li>
-      </ul>
-    </li>
-  </ol>
+<div class="Run-Kraken2">
 
-  <ul>
-    <li><em>“Print scientific names instead of just taxids”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-    <li><em>“Enable quick operation”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-    <li>Under <em>“Create report”</em>:
-      <ul>
-        <li><em>“Print a report with aggregrate counts/clade to file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-      </ul>
-    </li>
-    <li><em>“Select a Kraken2 database”</em>: <code class="language-plaintext highlighter-rouge">Standard</code></li>
-  </ul>
+  <h1 id="look-for-contamination-with-kraken2">Look for contamination with Kraken2</h1>
 
-  <ol>
-    <li>
-      <p>Inspect the report produced by Kraken</p>
+  <p>We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertently get mixed in with our sample. Any reads from non-sample sources will confound our SNP analysis. <strong>Kraken2</strong> is an effective way of looking at which species is represented in our reads so we can easily spot possible contamination of our sample. Unfortunately, the tool uses a lot of RAM (typically 50GB when used with the <em>Standard</em> database), so you might want to skip this step if your environment doesn’t have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use <strong>Kraken2</strong> as part of its analysis, see the optional section on analysing <em>SRR12416842</em> at the end of this tutorial.</p>
 
-      <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-run-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Kraken2</div>
 
-        <ol>
-          <li>Was there any significant contamination of the sample?</li>
-        </ol>
+    <ol>
+      <li>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Kraken2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1+galaxy1)</span> with the following parameters
+        <ul>
+          <li><em>“Single or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
+        </ul>
+        <ul>
+          <li><em>“Forward Strand”</em>: <code class="language-plaintext highlighter-rouge">fastp on X: Read 1 output</code></li>
+          <li><em>“Reverse Strand”</em>: <code class="language-plaintext highlighter-rouge">fastp on X: Read 2 output</code></li>
+        </ul>
+      </li>
+    </ol>
 
-        <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ul>
+      <li><em>“Print scientific names instead of just taxids”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      <li><em>“Enable quick operation”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      <li>Under <em>“Create report”</em>:
+        <ul>
+          <li><em>“Print a report with aggregrate counts/clade to file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><em>“Select a Kraken2 database”</em>: <code class="language-plaintext highlighter-rouge">Standard</code></li>
+    </ul>
+
+    <ol>
+      <li>
+        <p>Inspect the report produced by Kraken</p>
+
+        <blockquote class="question">
+          <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
-            <li>Over 85% of the reads here have been positively identified as <em>Mycobacterium</em> (the precise % will differ depending on which version of the Kraken database you are using). The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.</li>
+            <li>Was there any significant contamination of the sample?</li>
           </ol>
 
+          <blockquote class="solution">
+            <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+            <ol>
+              <li>Over 85% of the reads here have been positively identified as <em>Mycobacterium</em> (the precise % will differ depending on which version of the Kraken database you are using). The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.</li>
+            </ol>
+
+          </blockquote>
         </blockquote>
-      </blockquote>
-    </li>
-  </ol>
-</blockquote>
+      </li>
+    </ol>
+  </blockquote>
+
+</div>
 
 <h1 id="find-variants-with-snippy">Find variants with Snippy</h1>
 
 <p>We will now run the Snippy tool on our reads, comparing them to the reference.</p>
 
-<p>Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (SNPs) and insertions/deletions (indels).</p>
+<p><a href="https://github.com/tseemann/snippy">Snippy</a> is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (SNPs) and insertions/deletions (indels).</p>
 
 <p>If we give Snippy an annotated reference in Genbank format, it will run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.</p>
 
@@ -1364,8 +1407,8 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
         <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
       </ul>
       <ul>
-        <li><em>“Select first set of reads”</em>: <code class="language-plaintext highlighter-rouge">Trimmomatic on X (R1 paired)</code></li>
-        <li><em>“Select second set of reads”</em>: <code class="language-plaintext highlighter-rouge">Trimmomatic on X (R2 paired)</code></li>
+        <li><em>“Select first set of reads”</em>: <code class="language-plaintext highlighter-rouge">fastp on X: Read 1 output</code></li>
+        <li><em>“Select second set of reads”</em>: <code class="language-plaintext highlighter-rouge">fastp on X: Read 2 output</code></li>
       </ul>
     </li>
   </ol>
@@ -1435,12 +1478,12 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
   <li>Quality filtering in the mapping and variant calling stage: Internally <code class="language-plaintext highlighter-rouge">snippy</code> uses tools like <code class="language-plaintext highlighter-rouge">bwa-mem</code> and <code class="language-plaintext highlighter-rouge">freebayes</code> that judge the quality of their predictions. <code class="language-plaintext highlighter-rouge">snippy</code> then uses this information to perform some filtering on variant calling predictions.</li>
 </ol>
 
-<h1 id="further-variant-filtering-and-tb-profiling">Further variant filtering and TB-profiling</h1>
+<h1 id="further-variant-filtering-and-drug-resistance-profiling">Further variant filtering and drug resistance profiling</h1>
 
-<p>We still cannot entirely trust the proposed variants. In particular, there are regions of the <em>M. tuberculosis</em> genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The <code class="language-plaintext highlighter-rouge">TB Variant Filter</code> can help filter out variants based on a variety of criteria, including those listed above.</p>
+<p>We still cannot entirely trust the proposed variants. In particular, there are regions of the <em>M. tuberculosis</em> genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally, where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The <code class="language-plaintext highlighter-rouge">TB Variant Filter</code> can help filter out variants based on a variety of criteria, including those listed above.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-snippy-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Snippy</div>
+  <div class="box-title hands-on-title" id="hands-on-run-tb-variant-filter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run TB Variant Filter</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.4.0+galaxy0" title="TB Variant Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB Variant Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4.0+galaxy0)</span> with the following parameters
       <ul>
@@ -1495,14 +1538,14 @@ call insertions and deletions (indels) but more recent tools (e.g. GATK v4 and t
 evolutionary history to “free standing” SNVs/SNPs, so the “close to indel filter” is still available in TB Variant Filter in case such SNPs/SNVs should be filtered out.</p>
 </blockquote>
 
-<p>Now that we have a collection of <em>high quality variants</em> we can search them against variants known to be associated with drug resistance. The <em>TB Profiler</em> tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.</p>
+<p>Now that we have a collection of <em>high-quality variants</em> we can search them against variants known to be associated with drug resistance. The <em>TB Profiler</em> tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.</p>
 
-<p>Finally, TB Variant Report use the COMBAT-TB <a href="https://explorer.sanbi.ac.za">eXplorer</a> <a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700">database</a> of <em>M. tuberculosis</em> genome annotation to annotate variants in Mtb. It also takes the output of <em>TB Profiler</em> and produces a neat report that is easy to browse and search.</p>
+<p>Finally, TB Variant Report uses the COMBAT-TB <a href="https://explorer.sanbi.ac.za">eXplorer</a> <a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700">database</a> of <em>M. tuberculosis</em> genome annotation to annotate variants in Mtb. It also takes the output of <em>TB Profiler</em> and produces a neat report that is easy to browse and search.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-run-tb-profiler-and-tb-variant-report"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run TB Profiler and TB Variant Report</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0" title="TB-Profiler profile tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB-Profiler profile</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.4.1+galaxy0)</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.2.1+galaxy0" title="TB-Profiler profile tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB-Profiler profile</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.2.1+galaxy0)</span> with the following parameters
       <ul>
         <li><em>“Input File Type”</em>: <code class="language-plaintext highlighter-rouge">BAM</code></li>
       </ul>
@@ -1522,7 +1565,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
         <li><em>“SED Program”</em>: <code class="language-plaintext highlighter-rouge">s/GENE_//g</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.10+galaxy0" title="TB Variant Report tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB Variant Report</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.10+galaxy0)</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.1+galaxy0" title="TB Variant Report tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB Variant Report</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1+galaxy0)</span> with the following parameters
       <ul>
         <li><em>“Input SnpEff annotated M.tuberculosis VCF(s)”</em>: <code class="language-plaintext highlighter-rouge">Text transformation on data XX</code></li>
         <li><em>“TBProfiler Drug Resistance Report (Optional)”</em>: <code class="language-plaintext highlighter-rouge">TB-Profiler Profile on data XX: Results.json</code></li>
@@ -1548,7 +1591,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
 
           <ol>
             <li>
-              <p><code class="language-plaintext highlighter-rouge">4</code></p>
+              <p><code class="language-plaintext highlighter-rouge">4</code> with sublineage <code class="language-plaintext highlighter-rouge">4.4.1.1.1</code>.</p>
             </li>
             <li>
               <p>Yes, resistance to isoniazid, rifampicin, ethambutol, pyrazinamide and streptomycin as well as to the flouroquinolines (amikacin, capreomycin and kanamycin) is predicted from mutations in the katG, rpoB, embB, pncA, rpsL and rrs (ribosomal RNA) genes respectively.</p>
@@ -1561,9 +1604,15 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
   </ol>
 </blockquote>
 
+<p>At this point we have a drug resistance report from <strong>TB Profiler</strong>, aligned reads from <strong>snippy</strong> and variants both in VCF format
+and in the easier-to-read format produced by <strong>TB Variant report</strong>. Often this is enough information on a sample, and we might end
+our analysis here, especially if we are processing many samples together, as is described towards the end of this tutorial.</p>
+
+<p>We will, however, spend some time examining this data in more detail in the next section.</p>
+
 <h1 id="view-snippy-output-in-jbrowse">View Snippy output in JBrowse</h1>
 
-<p>We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn’t really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.</p>
+<p>We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn’t really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. A genome viewer, such as JBrowse, can be used within Galaxy to display the <em>M. tuberculosis</em> genome and the data from our analysis.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-run-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run JBrowse</div>
@@ -1602,7 +1651,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
                   <ul>
                     <li>“Track Type” to <code class="language-plaintext highlighter-rouge">BAM Pileups</code></li>
                     <li>“BAM Track Data” to <code class="language-plaintext highlighter-rouge">snippy on data XX, data XX, and data XX mapped reads (bam)</code></li>
-                    <li>“Autogenerate SNP Track” to <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li>“Autogenerate SNP Track” to <code class="language-plaintext highlighter-rouge">No</code></li>
                     <li>“Track Visibility” to <code class="language-plaintext highlighter-rouge">On for new users</code></li>
                   </ul>
                 </li>
@@ -1645,7 +1694,56 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
 
 <p>A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the <code class="language-plaintext highlighter-rouge">JBrowse on data XX and data XX - Complete</code> dataset. The JBrowse window will appear in the centre Galaxy panel.</p>
 
+<p>What you should see is something like this:</p>
+
+<!--SNIPPET-->
+<iframe id="embedded_jbrowse" src="/training-material/assets/jbrowse/index.html?loc=Chromosome:761005..761306&amp;data=/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/data&amp;trackList=0" border="0" width="100%" height="500px"></iframe>
+<p><a href="/training-material/assets/jbrowse/index.html?loc=Chromosome:761005..761306&amp;data=/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/data" target="_blank" style="padding: 0.5rem 1rem; background-color: #dfe5f9;border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">Open JBrowse in a new tab</a></p>
+<p><!--END_SNIPPET--></p>
+
 <p>You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-using-jbrowse-to-examine-a-known-variant"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Using JBrowse to examine a known variant</div>
+
+  <ol>
+    <li>
+      <p>Paste <code class="language-plaintext highlighter-rouge">Chromosome:761009..761310</code> into the JBrowse location bar and click <strong>Go</strong>. Ensure that the BAM and VCF tracks are set to visible. What is the meaning of the red column that shows up in the middle of the display of reads (the BAM track)?</p>
+    </li>
+    <li>
+      <p>What change happened at position 761155 in the genome, according to the read and variant data displayed?</p>
+    </li>
+    <li>
+      <p>How did this change impact the <em>rpoB</em> gene, the gene that is found on the forward strand overlapping this position?</p>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p>The red column is a variant that is present in almost all of the reads aligning to the genome at position 761155.</p>
+      </li>
+      <li>
+        <p>Examining the VCF track the variant is shown as a mutation from C to T.</p>
+      </li>
+      <li>
+        <p>The “frame” of the codons in this gene can be determined by navigating to where the <em>rpoB</em> gene, the second horizontal bar in the annotation track, starts (position 759807). This gene is in frame 0 on the forward strand, the top frame in the display. Navigating back to position 761155, the amino acid encoded in the reference genome is S, that is serine. The mutation from a C to a T changes the codon at this position to L, leucine, and is associated with resistance to the drug rifampicin.</p>
+      </li>
+    </ol>
+
+    <p>While the rifampicin resistance mutation being examined here is already reported by <strong>TB-Profiler</strong>, JBrowse allows us to examine the evidence underlying this mutation in more detail.</p>
+  </blockquote>
+</blockquote>
+
+<p>An alternative to running JBrowse within Galaxy is to install <a href="https://igv.org/">IGV</a> and use Galaxy’s built-in support for visualising BAM files with IGV.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-igv-with-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-igv-with-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Using IGV with Galaxy</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>You can send data from your Galaxy history to IGV for viewing as follows:</p>   <ol>   <li>Install IGV on your computer (<a href="https://software.broadinstitute.org/software/igv/download">IGV download page</a>)</li>   <li>Start IGV</li>   <li>In recent versions of IGV, you will have to enable the port:     <ul>       <li>In IGV, go to <code class="language-plaintext highlighter-rouge">View &gt; Preferences &gt; Advanced</code></li>       <li>Check the box <code class="language-plaintext highlighter-rouge">Enable Port</code></li>     </ul>   </li>   <li>In Galaxy, expand the dataset you would like to view in IGV     <ul>       <li>Make sure you have set a reference genome/database correctly (dbkey) (<a href="/training-material/faqs/galaxy/datasets_change_dbkey.html">instructions</a>)</li>       <li>Under <code class="language-plaintext highlighter-rouge">display in IGV</code>, click on <code class="language-plaintext highlighter-rouge">local</code></li>     </ul>   </li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>This requires more setup for the user, for example loading the FASTA file of the genome into IGV and downloading any annotation GFF3 files you want to use with IGV. On the other hand, running IGV locally is often faster than using JBrowse in Galaxy.</p>
 
 <h1 id="different-samples-different-stories-optional">Different samples, different stories (optional)</h1>
 
@@ -1681,7 +1779,7 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1698,7 +1796,7 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
   </ol>
 </blockquote>
 
-<p>As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using <strong>Trimmomatic</strong>, <strong>fastp</strong> or <strong>cutadapt</strong>) and perhaps use the <strong>Kraken2</strong> output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.</p>
+<p>As you can see, the quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using <strong>Trimmomatic</strong>, <strong>fastp</strong> or <strong>cutadapt</strong>) and perhaps use the <strong>Kraken2</strong> output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.</p>
 
 <p>The next example is <em>SRR12416842</em> from an Indonesia <a href="https://www.microbiologyresearch.org/content/journal/jmm/10.1099/jmm.0.001221">study</a> of multi-drug resistant (MDR) tuberculosis.</p>
 
@@ -1712,13 +1810,10 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Examine the sequence quality with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span>.</p>
+      <p>Perform quality trimming with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0" title="fastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.4+galaxy0)</span> and examine it’s <em>HTML</em> output to see quality before and after trimming.</p>
     </li>
     <li>
-      <p>Perform quality trimming with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.1)</span></p>
-    </li>
-    <li>
-      <p>Map the samples to the <em>M. tuberculosis</em> reference genome with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0" title="Snippy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Snippy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.6.0+galaxy0)</span></p>
+      <p>Map the samples to the <em>M. tuberculosis</em> reference genome with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0" title="Snippy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Snippy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.6.0+galaxy0)</span>. Make sure to select the BAM output as one of the outputs.</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1733,21 +1828,21 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
-              <p>The <strong>FastQC</strong> result shows that while there is some dropoff in sequence quality (especially towards the end of the reads from the second dataset), the sequences are of good enough quality to analyse.</p>
+              <p>The <strong>fastp</strong> result shows that while there is some dropoff in sequence quality (especially towards the end of the reads from the second dataset), the sequences are of good enough quality to analyse.</p>
             </li>
             <li>
-              <p><em>*snippy</em> discovered more than 15,000 variants. This is unusual for a <em>M. tuberculosis</em> sample where we expect at most a few thousand variants across the length of the genome.</p>
+              <p><strong>snippy</strong> discovered more than 15,000 variants. This is unusual for a <em>M. tuberculosis</em> sample where we expect at most a few thousand variants across the length of the genome.</p>
             </li>
           </ol>
         </blockquote>
       </blockquote>
     </li>
     <li>
-      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4" title="samtools stats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>samtools stats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.4)</span> on the <em>snippy on data XX, data XX, and data XX mapped reads (bam)</em> file. In the output, pay attention to the <em>sequences</em>, <em>reads mapped</em> and <em>reads unmapped</em> results.</p>
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.5" title="samtools stats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>samtools stats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.5)</span> on the <em>snippy on data XX, data XX, and data XX mapped reads (bam)</em> file. In the output, pay attention to the <em>sequences</em>, <em>reads mapped</em> and <em>reads unmapped</em> results.</p>
     </li>
     <li>
       <p>Run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0" title="BAM Coverage Plotter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BAM Coverage Plotter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 20201223+galaxy0)</span> on the mapped reads BAM file that you got from <strong>snippy</strong> using the FASTA format reference you made with <strong>seqret</strong> as the reference.</p>
@@ -1765,7 +1860,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1791,7 +1886,70 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
 
 <p>There is something clearly wrong with sample SRR12416842, perhaps indicating sample contamination. This example of a sample that doesn’t map to the reference genome illustrates that even when sequence quality is good, sequence data problems can become apparent in later steps of analysis and it is important to always have a sense of what results to expect. You can develop a better sense of what quality control results to expect by first practicing techniques with known data before analysing new samples.</p>
 
-<p>We hope you enjoyed this tutorial!</p>
+<h1 id="processing-many-samples-at-once-collections-and-workflows-optional">Processing many samples at once: Collections and Workflows (optional)</h1>
+
+<p>In the tutorial thus far we have focused on processing single samples, where two read datasets (forward and reverse reads) are associated with a single sample. In practice, sequence analysis typically involves analysing batches of samples and we run the same
+analysis steps for each sample in the batch. Galaxy supports working with batches using collections and workflows.</p>
+
+<p>If you have followed all of the steps of this tutorial, you will have two useable samples, one named <em>004-2</em> and another <em>018-1</em>. Create a list of dataset pairs from these samples and call the collection <code class="language-plaintext highlighter-rouge">samples</code>.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a paired collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>You can now run the <strong>TB Variant Analysis</strong>, launching it directly from WorkflowHub.eu on several of the public Galaxy servers.</p>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflowhub-eu-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a WorkflowHub.eu Workflow</div>   <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/1035/versions/1">Launch <strong>TB Variant Analysis v1.0</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> (<a href="https://workflowhub.eu/workflows/1035?version=1">View on WorkflowHub</a>) </div>   <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id=1035%26trs_version=1">Launch <strong>TB Variant Analysis v1.0</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a> (<a href="https://workflowhub.eu/workflows/1035?version=1">View on WorkflowHub</a>) </div> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-analysing-samples-with-the-tb-variant-reporting-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Analysing samples with the TB Variant Reporting workflow</div>
+
+  <ol>
+    <li><strong>Run the TB Variant Analysis workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters
+      <ul>
+        <li>
+          <p><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>Reads</em> the <code class="language-plaintext highlighter-rouge">samples</code> collection of your input reads</p>
+        </li>
+        <li>
+          <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Reference Genome</em> the <code class="language-plaintext highlighter-rouge">Mycobacterium_tuberculosis_ancestral_reference.gbk</code> reference genome</p>
+        </li>
+      </ul>
+    </li>
+    <li>Click the <strong>Run Workflow button</strong> at the top-right of the screen</li>
+  </ol>
+
+</blockquote>
+
+<p>The workflow will produce a series of collections, with the most important outputs being tagged with dataset tags.</p>
+
+<ul>
+  <li>
+    <p>The <strong>MultiQC report</strong> tagged <em>qc_report</em> contains information on <code class="language-plaintext highlighter-rouge">fastp</code> read trimming and <code class="language-plaintext highlighter-rouge">BamQC</code> mapping statistics.</p>
+  </li>
+  <li>
+    <p>The filtered VCF is transformed with <code class="language-plaintext highlighter-rouge">sed</code> and tagged as <em>annotated_vcf</em></p>
+  </li>
+  <li>
+    <p>The TB-Profiler drug resistance report is tagged with <em>drug_resistance_report</em></p>
+  </li>
+  <li>
+    <p>The TB VCF Report outputs are tagged with <em>variant_report</em></p>
+  </li>
+  <li>
+    <p>For each sample a consensus genome is created by inserting the single nucleotide variants into the reference genome. This is tagged as <em>consensus_genome</em> and is intended for use in building a phylogenetic tree.</p>
+  </li>
+  <li>
+    <p>The Kraken2 report (to check for contamination) is tagged with <em>kraken_report</em></p>
+  </li>
+</ul>
+
+<p>The workflow also produces a Workflow Invocation Report that summarises the outputs of the workflow. This can be found on the Workflow Invocation menu which is either in the User menu or on the History menu depending on which version of Galaxy you are using.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Thank you for coming to the end of this tutorial. After completing this tutorial you might want to follow some of the other tutorials in the Galaxy Training Network on analysing <em>M. tuberculosis</em> data. Just search for <em>tuberculosis</em> in the search bar. Enjoy the rest of your day!</p>
 
                 </section>
 
@@ -1826,7 +1984,10 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
                         <li><p>it is not enough to just call variants, variant calling involves multiple quality control steps</p>
 </li>
                         
-                        <li><p>the choice of reference genome and some quality control procedures are species specific, and require knowledge of the organism in question</p>
+                        <li><p>the choice of reference genome and some quality control procedures are species-specific, and require knowledge of the organism in question</p>
+</li>
+                        
+                        <li><p>batches of samples can be processed using Galaxy dataset collections and workflows</p>
 </li>
                         
                     </ul>
@@ -1952,18 +2113,48 @@ install_resolver_dependencies: true
 tools:
 - name: text_processing
   owner: bgruening
+  revisions: fbf99087e067
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
   revisions: d698c222f354
   tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: fbf99087e067
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: emboss_5
+  owner: devteam
+  revisions: 63dd26468588
+  tool_panel_section_label: EMBOSS
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: fastqc
   owner: devteam
   revisions: 3d0c7bdf12f5
   tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastqc
+  owner: devteam
+  revisions: 5ec9f6bceaee
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: samtools_stats
   owner: devteam
-  revisions: 3a0efe14891f
+  revisions: fed4aa48ba09
   tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bcftools_consensus
+  owner: iuc
+  revisions: 147de996e34f
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastp
+  owner: iuc
+  revisions: c59d48774d03
+  tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: jbrowse
   owner: iuc
@@ -1980,15 +2171,20 @@ tools:
   revisions: 20e2f64aa1fe
   tool_panel_section_label: Metagenomic Analysis
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: multiqc
+- name: mosdepth
   owner: iuc
-  revisions: 9a913cdee30e
-  tool_panel_section_label: Quality Control
+  revisions: 5854d0da92b4
+  tool_panel_section_label: SAM/BAM
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: multiqc
   owner: iuc
   revisions: abfd8a6544d7
   tool_panel_section_label: Quality Control
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: qualimap_bamqc
+  owner: iuc
+  revisions: 4a89c6f84425
+  tool_panel_section_label: SAM/BAM
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: snippy
   owner: iuc
@@ -1997,28 +2193,23 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: tb_variant_filter
   owner: iuc
-  revisions: ee4a90760848
-  tool_panel_section_label: Annotation
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: tb_variant_filter
-  owner: iuc
   revisions: 32f14a2723ec
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: tbprofiler
   owner: iuc
-  revisions: d03af1c7002c
+  revisions: 4839e590cb26
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: tbvcfreport
   owner: iuc
-  revisions: 4934c0ac6197
+  revisions: 42818629ec4c
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: trimmomatic
-  owner: pjbriggs
-  revisions: d94aff5ee623
-  tool_panel_section_label: FASTA/FASTQ
+- name: tbvcfreport
+  owner: iuc
+  revisions: 9793bc5d741b
+  tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
                 </blockquote>
@@ -2180,7 +2371,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/adf127f9e9b9f9204d6ec98a5809b86e1902a45e">adf127f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5449d9016a5a3686cb2c2decb8829e9145a251bb">5449d90</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
