@@ -162,8 +162,6 @@ As these reads look like they need a bit of trimming, we can turn to the **fastp
 >    {: .question}
 {: .hands_on}
 
-*Note:* We would normally examine our trimmed reads with **FastQC** and **MultiQC** again to see if the quality trimming has been successful, but in this tutorial, we will move straight on to save time.
-
 The next section, on looking for contamination in our data using Kraken2, takes a long time to run and can be skipped and perhaps
 run later if you prefer.
 
@@ -387,7 +385,7 @@ We could go through all of the variants in the VCF files and read them out of a 
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `BAM Pileups`
 >               - "BAM Track Data" to `snippy on data XX, data XX, and data XX mapped reads (bam)`
->               - "Autogenerate SNP Track" to `Yes`
+>               - "Autogenerate SNP Track" to `No`
 >               - "Track Visibility" to `On for new users`
 >       - **Track 2 - variants**: Click on `Insert Track Group` and fill it with
 >           - "Track Category" to `variants`
@@ -414,6 +412,26 @@ What you should see is something like this:
 {% snippet topics/visualisation/faqs/visualizations_jbrowse.html loc="Chromosome:761005..761306" datadir="data" %}
 
 You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
+
+> <question-title>Using JBrowse to examine a known variant</question-title>
+> 
+> 1. Paste `Chromosome:761009..761310` into the JBrowse location bar and click **Go**. Ensure that the BAM and VCF tracks are set to visible. What is the meaning of the red column that shows up in the middle of the display of reads (the BAM track)?
+> 
+> 2. What change happened at position 761155 in the genome, according to the read and variant data displayed?
+>
+> 3. How did this change impact the *rpoB* gene, the gene that is found on the forward strand overlapping this position?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The red column is a variant that is present in almost all of the reads aligning to the genome at position 761155.
+> >
+> > 2. Examining the VCF track the variant is shown as a mutation from C to T.
+> >
+> > 3. The "frame" of the codons in this gene can be determined by navigating to where the *rpoB* gene, the second horizontal bar in the annotation track, starts (position 759807). This gene is in frame 0 on the forward strand, the top frame in the display. Navigating back to position 761155, the amino acid encoded in the reference genome is S, that is serine. The mutation from a C to a T changes the codon at this position to L, leucine, and is associated with resistance to the drug rifampicin. 
+> >
+> >  While the rifampicin resistance mutation being examined here is already reported by **TB-Profiler**, JBrowse allows us to examine the evidence underlying this mutation in more detail.
+> {: .solution}
+{: .question}
 
 An alternative to running JBrowse within Galaxy is to install [IGV](https://igv.org/) and use Galaxy's built-in support for visualising BAM files with IGV.
 
@@ -455,7 +473,7 @@ far.
 >    {: .question}
 {: .hands_on}
 
-As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using **Trimmomatic**, **fastp** or **cutadapt**) and perhaps use the **Kraken2** output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.
+As you can see, the quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using **Trimmomatic**, **fastp** or **cutadapt**) and perhaps use the **Kraken2** output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.
 
 The next example is *SRR12416842* from an Indonesia [study](https://www.microbiologyresearch.org/content/journal/jmm/10.1099/jmm.0.001221) of multi-drug resistant (MDR) tuberculosis.
 
@@ -467,11 +485,9 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
 >```
 >
-> 2. Examine the sequence quality with {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}.
+> 2. Perform quality trimming with {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0) %} and examine it's *HTML* output to see quality before and after trimming.
 >
-> 3. Perform quality trimming with {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1) %}
->
-> 4. Map the samples to the _M. tuberculosis_ reference genome with {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %}
+> 4. Map the samples to the _M. tuberculosis_ reference genome with {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %}. Make sure to select the BAM output as one of the outputs.
 >
 >    > <question-title></question-title>
 >    >
@@ -481,9 +497,9 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. The **FastQC** result shows that while there is some dropoff in sequence quality (especially towards the end of the reads from the second dataset), the sequences are of good enough quality to analyse.
+>    > > 1. The **fastp** result shows that while there is some dropoff in sequence quality (especially towards the end of the reads from the second dataset), the sequences are of good enough quality to analyse.
 >    > >
->    > > 2. **snippy* discovered more than 15,000 variants. This is unusual for a _M. tuberculosis_ sample where we expect at most a few thousand variants across the length of the genome.
+>    > > 2. **snippy** discovered more than 15,000 variants. This is unusual for a _M. tuberculosis_ sample where we expect at most a few thousand variants across the length of the genome.
 >    > {: .solution}
 >    {: .question}
 >
@@ -521,9 +537,10 @@ There is something clearly wrong with sample SRR12416842, perhaps indicating sam
 In the tutorial thus far we have focused on processing single samples, where two read datasets (forward and reverse reads) are associated with a single sample. In practice, sequence analysis typically involves analysing batches of samples and we run the same
 analysis steps for each sample in the batch. Galaxy supports working with batches using collections and workflows. 
 
-If you are new to collections, you can learn more about them in [this tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
 
-If you have followed all of the steps of this tutorial, you will have two samples, one named *004-2* and another *SRR12416842*. Create a collection of lists of pairs from these samples and call the collection `samples`.
+If you have followed all of the steps of this tutorial, you will have two useable samples, one named *004-2* and another *018-1*. Create a list of dataset pairs from these samples and call the collection `samples`.
+
+{% snippet faqs/galaxy/collections_build_list_paired.md %}
 
 You can now run the **TB Variant Analysis**, launching it directly from WorkflowHub.eu on several of the public Galaxy servers.
 
@@ -532,9 +549,9 @@ You can now run the **TB Variant Analysis**, launching it directly from Workflow
 > <hands-on-title>Analysing samples with the TB Variant Reporting workflow</hands-on-title>
 >
 > 1. **Run the TB Variant Analysis workflow** {% icon workflow %} using the following parameters
->    - {% icon param-files %} *Reads* the `samples` collection of your input reads
+>    - {% icon param-collection %} *Reads* the `samples` collection of your input reads
 >
->    - {% icon param-files %} *Reference Genome* the `Mycobacterium_tuberculosis_ancestral_reference.gbk` reference genome
+>    - {% icon param-file %} *Reference Genome* the `Mycobacterium_tuberculosis_ancestral_reference.gbk` reference genome
 >
 > 2. Click the **Run Workflow button** at the top-right of the screen
 >

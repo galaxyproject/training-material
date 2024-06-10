@@ -429,14 +429,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "output",
-                    "output_name": "output",
-                    "uuid": "083a0e51-7780-4c91-a071-dc0e4641d060"
-                },
-                {
                     "label": "report_output",
                     "output_name": "report_output",
                     "uuid": "c7abf2bf-ed4c-433e-a695-9eca61282bb5"
+                },
+                {
+                    "label": "output",
+                    "output_name": "output",
+                    "uuid": "083a0e51-7780-4c91-a071-dc0e4641d060"
                 }
             ]
         },
@@ -761,8 +761,8 @@
             "workflow_outputs": []
         },
         "15": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1",
+            "annotation": "bcftools consensus requires a region file of low coverage regions in 1 based coordinates, mosdepth produces one in BED format with LOW and PASS for low coverage and non-low coverage regions. This converts from the one format to the other.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
             "errors": null,
             "id": 15,
             "input_connections": {
@@ -771,37 +771,42 @@
                     "output_name": "output_quantized_bed"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Text reformatting",
+                    "name": "infile"
+                }
+            ],
             "label": null,
-            "name": "Search in textfiles",
+            "name": "Text reformatting",
             "outputs": [
                 {
-                    "name": "output",
+                    "name": "outfile",
                     "type": "input"
                 }
             ],
             "position": {
-                "left": 1109.0947296922677,
-                "top": 1071.128618917327
+                "left": 1145.2913123013832,
+                "top": 1091.060842506465
             },
             "post_job_actions": {
-                "HideDatasetActionoutput": {
+                "HideDatasetActionoutfile": {
                     "action_arguments": {},
                     "action_type": "HideDatasetAction",
-                    "output_name": "output"
+                    "output_name": "outfile"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
             "tool_shed_repository": {
                 "changeset_revision": "fbf99087e067",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"case_sensitive\": \"-i\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-P\", \"url_paste\": \"LOW\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"code\": \"$4 == \\\"LOW\\\" {start = $2+1; print \\\"$1\\\\t\\\" start \\\"\\\\t$3\\\"}\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "9.3+galaxy1",
             "type": "tool",
-            "uuid": "8a91a44c-ea87-4a82-b8f7-ecff8a03f94e",
+            "uuid": "4778f600-d435-4ca0-a4f2-45fbd3aeceeb",
             "when": null,
             "workflow_outputs": []
         },
@@ -940,7 +945,7 @@
                 },
                 "sec_default|mask": {
                     "id": 15,
-                    "output_name": "output"
+                    "output_name": "outfile"
                 }
             },
             "inputs": [
@@ -1090,6 +1095,6 @@
         "pathogen",
         "tuberculosis"
     ],
-    "uuid": "a3b1f165-176f-46d2-838d-66ae8d0cef45",
-    "version": 32
+    "uuid": "51874605-ed85-447b-a13c-d542418990e7",
+    "version": 33
 }
