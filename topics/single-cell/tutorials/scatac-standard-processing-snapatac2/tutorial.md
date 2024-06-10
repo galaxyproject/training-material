@@ -164,7 +164,7 @@ The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially 
 >    - *"Method used for preprocessing"*: `Import data fragment files and compute basic QC metrics, using 'pp.import_data'`
 >        - {% icon param-file %} *"Fragment file, optionally compressed with gzip or zstd"*: `fragments_file.tsv` (Input dataset)
 >        - {% icon param-file %} *"A tabular file containing chromosome names and sizes"*: `chrom_sizes.txt` (Input dataset)
->        - {% icon galaxy-toggle %} *"Whether the fragment file has been sorted by cell barcodes"*: `No` 
+>        - {% icon param-toggle %} *"Whether the fragment file has been sorted by cell barcodes"*: `No` 
 > 
 > 2. Rename the generated file to `Anndata 5k PBMC`
 >
@@ -631,7 +631,7 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 > 2. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata filter_genes` (output of **pp.filter_genes** {% icon tool %})
 >    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
->    - {% icon galaxy-toggle %} *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
+>    - {% icon param-toggle %} *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
 >
 > 3. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata normalize` (output of **Normalize** {% icon tool %})
@@ -686,7 +686,7 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 >
 > 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Anndata 5k PBMC gene_matrix magic` (output of **external.pp.magic** {% icon tool %})
->    - {% icon galaxy-toggle} *"Copy embeddings (such as UMAP, tSNE)"*: `Yes`
+>    - {% icon param-toggle} *"Copy embeddings (such as UMAP, tSNE)"*: `Yes`
 >       - *"Keys from embeddings to copy"*: `X_umap`
 >       - {% icon param-file %} *"IAnnData objects with embeddings to copy"*: `Anndata 5k PBMC leiden`
 >
