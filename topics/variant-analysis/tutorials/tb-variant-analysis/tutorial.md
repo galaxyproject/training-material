@@ -245,7 +245,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. Substitution of a `C` to a `T`. This variant is supported by 134 reads.
+>    > > 1. Substitution of a `C` to a `T`. This variant is supported by 197 reads.
 >    > >
 >    > > 2. According to SnpEff, it's a Synonymous change in Rv0002.
 >    > >
