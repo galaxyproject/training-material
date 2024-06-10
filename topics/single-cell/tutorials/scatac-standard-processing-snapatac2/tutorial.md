@@ -164,7 +164,7 @@ The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially 
 >    - *"Method used for preprocessing"*: `Import data fragment files and compute basic QC metrics, using 'pp.import_data'`
 >        - {% icon param-file %} *"Fragment file, optionally compressed with gzip or zstd"*: `fragments_file.tsv` (Input dataset)
 >        - {% icon param-file %} *"A tabular file containing chromosome names and sizes"*: `chrom_sizes.txt` (Input dataset)
->        - *"Whether the fragment file has been sorted by cell barcodes"*: `No` 
+>        - {% icon param-toggle %} *"Whether the fragment file has been sorted by cell barcodes"*: `No` 
 > 
 > 2. Rename the generated file to `Anndata 5k PBMC`
 >
@@ -472,11 +472,11 @@ The dimension reduction, produced by the algorithm *tl.spectral*, is required fo
 >    >  obsm: 'fragment_paired', 'X_spectral'
 >    > ```
 >    >
->    > - Where are the new annotations stored?
+>    > Where are the new annotations stored?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > - The outputs of **tl.spectral** are stored in unstructured annotations `uns: 'spectral_eigenvalue'` and as multidimensional observations `obsm: 'X_spectral'`. 
+>    > > The outputs of **tl.spectral** are stored in unstructured annotations `uns: 'spectral_eigenvalue'` and as multidimensional observations `obsm: 'X_spectral'`. 
 >    > >
 >    > {: .solution}
 >    >
@@ -530,11 +530,11 @@ During clustering, cells that share similar accessibility profiles are organized
 >    >  obsp: 'distances'
 >    > ```
 >    >
->    > - Where are the **leiden** clusters stored in the AnnData?
+>    > Where are the **leiden** clusters stored in the AnnData?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > - The clusters are stored in `obs: 'leiden'`
+>    > > The clusters are stored in `obs: 'leiden'`
 >    > >
 >    > {: .solution}
 >    >
@@ -602,7 +602,7 @@ Since our data currently doesn't contain gene information, we have to create a c
 >    >  obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
 >    > ```
 >    >
->    > - What does `n_vars` represent in `Anndata 5k PBMC gene_matrix` and what did it represent in `Anndata 5k PBMC leiden`?
+>    > What does `n_vars` represent in `Anndata 5k PBMC gene_matrix` and what did it represent in `Anndata 5k PBMC leiden`?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
@@ -625,13 +625,13 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix` (output of **pp.make_gene_matrix** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
->        - *"Filter"*: `Minimum number of cells expressed`
+>        - {% icon param-select %} *"Filter"*: `Minimum number of cells expressed`
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
 > 
 > 2. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata filter_genes` (output of **pp.filter_genes** {% icon tool %})
 >    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
->    - *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
+>    - {% icon param-toggle %} *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
 >
 > 3. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata normalize` (output of **Normalize** {% icon tool %})
@@ -643,13 +643,13 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 >        - *"Denoised genes to return"*: `PCA only`
 >        - *"Which solver to use"*: `"approximate", is faster that performs imputation in the PCA space and then projects back to the gene space`
 >
->   > <warning-title>Large output files!</warning-title>
->   >   - The settings are important for this step!
->   >   - The setting `Denoised genes to return: 'All genes'` produces a very large output file
->   >      - **57.4 GB** compared to **1.5 GB** with `PCA only`
->   >   - The compute time for `Which solver to use: 'exact'` is very long and not necessary for our purposes. 
->   >
->   {: .warning}
+>    > <warning-title>Large output files!</warning-title>
+>     >   - The settings are important for this step!
+>     >   - The setting `Denoised genes to return: 'All genes'` produces a very large output file
+>     >      - **57.4 GB** compared to **1.5 GB** with `PCA only`
+>     >   - The compute time for `Which solver to use: 'exact'` is very long and not necessary for our purposes. 
+>     >
+>     {: .warning}
 >
 > 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic` or add the tag `magic` to the dataset
 >
@@ -721,7 +721,7 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, MS4A1, CD3D, LEF1, NKG7, TREM1, LYZ, PPBP`
->        - *"Show edges?"*: `No`
+>        - {% icon param-toggle %} *"Show edges?"*: `No`
 >
 >  ![umap_leiden_marker_gene_clustering]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.umap.png %})
 >
@@ -740,8 +740,53 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 > {: .question}
 {: .hands_on}
 
+## Manual cluster annotation
+Comparison of marker gene expression in our clusters with a table of canonical marker genes, enables us to annotate the clusters manually. 
+['MS4A1', 'CD3D', 'LEF1', 'NKG7', 'TREM1', 'LYZ', 'PPBP']
+Cell type | Marker genes
+--- | ---
+memory T cells | CD3D
+naive T cells | LEF1
+Monocytes | LYZ
+B cells | MS4A1
+Natural killer (NK) cells | NKG7
+Dendritic Cells | TREM1
+Megakaryocytes | PPBP
+
+These canonical marker genes can easily match the clusters to known cell types:
+
+Cluster | Cell type
+--- | ---
+0 | Dendritic cells
+1 | memory T cells
+2 | memory T cells
+3 | Dendritic cells
+4 | naive T cells
+5 | Monocytes
+6 | B cells
+7 | naive T cells
+8 | naive T cells
+9 | NK cells
+10 | Dendritic cells
+11 | B cells
+12 | Megakaryocytes
+
+Note that some clusters contain subtypes (f.ex. the annotated T cell clusters contain both CD4+ and CD8+ T cells). The cell-type annotation can be refined by choosing more specific marker genes. 
+Hands-on: manually annotate the clusters
 
 # Conclusion
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/timn/h/test-of-5k-pbmc-tutorial-workflow), or check out the [full workflow](https://singlecell.usegalaxy.eu/u/timn/w/2combined-snapatac2) for this tutorial.
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial we produced a count matrix of {scATAC-seq} reads in the `AnnData` format and performed: 
+1. Preprocessing: 
+   1. Plotting the fragment-size distributions
+   2. Calculating and plotting {TSSe} scores
+   3. Filtering cells and selecting features (fixed-size genomic bins)
+2. Dimension reduction through **Spectral embedding** and **{UMAP}**
+3. Clustering of cells via the *Leiden* method
+4. Cluster annotation
+   1. Producing and filtering a cell by gene activity matrix
+   2. Data normalization and imputation with **Scanpy**
+   3. Visualizing marker genes in the clusters
+   4. Manually annotating the cell types
+
