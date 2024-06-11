@@ -102,9 +102,7 @@ SnapATAC2 requires 3 input files for the standard pathway of processing:
 > - To learn how to get a `fragments_file` or `.bam` file from raw `.FASTQ`-reads, please check out the tutorial ["Pre-processing of 10X Single-Cell ATAC-seq Datasets"]( {% link topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.md %} )
 {: .comment}
 
-## Data upload
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+## Get Data
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
@@ -202,7 +200,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    >
 >    {: .question}
 >
->    > <comment-title>Faster Method for General Information</comment-title>
+>    > <tip-title>Faster Method for General Information</tip-title>
 >    > * Many toolsets producing outputs in *AnnData* formats in Galaxy, provide the general information by default:
 >    >    * Click on the name of the dataset in the history to expand it.
 >    >    * General Anndata information would be given in the expanded box:
@@ -220,7 +218,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    >      -    1 × 1
 >    >      ```
 >    > * In such cases and for more specific queries, {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0) %} is required.
->    {: .comment}
+>    {: .tip}
 >
 {: .hands_on}
 
@@ -250,8 +248,8 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. 3 peaks are clearly visible (at <100-bp, ~200-bp and ~400-bp). The smallest fragments are from nucleosome-free regions, while the larger peaks (200- and 400-bp) contain mono- and di-nucleosom fragments, respectively. 
-> > > 2. The small fragments (<100-bp) are open chromatin reads, since the Tn5 transposase could easily access the loosely packed DNA ({% cite Yan2020 %}). 
+> > > 1. 3 peaks are clearly visible (at <100-bp, ~200-bp and ~400-bp). The smallest fragments are from nucleosome-free regions, while the larger peaks (200- and 400-bp) contain mono- and di-nucleosome fragments, respectively. 
+> > > 2. The small fragments (<100-bp) are from open chromatin reads, since the Tn5 transposase could easily access the loosely packed DNA ({% cite Yan2020 %}). 
 > > > 
 > > {: .solution}
 > >
@@ -271,7 +269,7 @@ TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tss
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC` (output of **pp.import_data** {% icon tool %})
 >        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `gene_annotation.gtf.gz` (Input dataset)
 >
-> 2. Rename the generated file to `Anndata 5k PBMC TSSe` or add tag `TSSe` to the dataset:
+> 2. Rename the generated file to `Anndata 5k PBMC TSSe` or add the tag {% icon galaxy-tags %} `TSSe` to the dataset:
 > 
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -312,7 +310,7 @@ Based on the {TSSe} plot the cells can be filtered by TSSe and fragment counts.
 >        - *"Minimum TSS enrichemnt score required for a cell to pass filtering"*: `10.0`
 >        - *"Maximum number of counts required for a cell to pass filtering"*: `100000`
 >
-> 2. Rename the generated file to `Anndata 5k PBMC TSSe filtered` or add the tag `filtered` to the dataset
+> 2. Rename the generated file to `Anndata 5k PBMC TSSe filtered` or add the tag {% icon galaxy-tags %} `filtered` to the dataset
 > 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
 >    > <question-title></question-title>
@@ -363,7 +361,7 @@ After creating the variables, the most accessible features are selected.
 >    >    - For example the [**ENCODE Blacklist**](https://github.com/Boyle-Lab/Blacklist) ({% cite Amemiya2019 %}) can be applied here.  
 >    {: .comment}
 >
-> 3. Rename the generated file to `Anndata 5k PBMC select_features` or add the tag `select_features` to the dataset
+> 3. Rename the generated file to `Anndata 5k PBMC select_features` or add the tag {% icon galaxy-tags %} `select_features` to the dataset
 > 4. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
 >
@@ -404,7 +402,7 @@ Doublets are removed by calling a customized [**scrublet**](https://github.com/s
 > 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Remove doublets according to the doublet probability or doublet score, using 'pp.filter_doublets'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata scrublet` (output of **pp.scrublet** {% icon tool %})
-> 3. Rename the generated file to `Anndata 5k PBMC filter_doublets` or add the tag `filter_doublets` to the dataset
+> 3. Rename the generated file to `Anndata 5k PBMC filter_doublets` or add the tag {% icon galaxy-tags %} `filter_doublets` to the dataset
 > 4. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
 >    > <question-title></question-title>
@@ -459,7 +457,7 @@ The dimension reduction, produced by the algorithm *tl.spectral*, is required fo
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC filter_doublets` (output of **pp.filter_doublets** {% icon tool %})
 >        - *"Distance metric"*: `cosine` 
 >
-> 2. Rename the generated file to `Anndata 5k PBMC spectral` or add the tag `spectral` to the dataset
+> 2. Rename the generated file to `Anndata 5k PBMC spectral` or add the tag {% icon galaxy-tags %} `spectral` to the dataset
 > 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
 >    > <question-title></question-title>
@@ -492,7 +490,7 @@ With the already reduced dimensionality of the data stored in `X_spectral`, the 
 >    - *"Dimension reduction and Clustering"*: `Compute Umap, using 'tl.umap'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC spectral` (output of **tl.spectral** {% icon tool %})
 >
-> 2. Rename the generated file to `Anndata 5k PBMC UMAP` or add the tag `UMAP` to the dataset
+> 2. Rename the generated file to `Anndata 5k PBMC UMAP` or add the tag  {% icon galaxy-tags %} `UMAP` to the dataset
 {: .hands_on}
 
 # Clustering
@@ -516,7 +514,7 @@ During clustering, cells that share similar accessibility profiles are organized
 >    > - the clusters produced by `CPM` are not represented well in the UMAP projections
 >    > 
 >    {: .comment}
-> 2. Rename the generated file to `Anndata 5k PBMC leiden` or add the tag `leiden` to the dataset
+> 2. Rename the generated file to `Anndata 5k PBMC leiden` or add the tag {% icon galaxy-tags %} `leiden` to the dataset
 > 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
 >    > <question-title></question-title>
@@ -544,6 +542,7 @@ During clustering, cells that share similar accessibility profiles are organized
 
 
 ## Plotting of clusters
+Now that we have produced **UMAP** embeddings of our cells and have organized the cells into **leiden** clusters, we can now visualize this information with *pl.umap*. 
 
 > <hands-on-title> Plotting the clusters </hands-on-title>
 >
@@ -563,8 +562,8 @@ During clustering, cells that share similar accessibility profiles are organized
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. There are 12 leiden clusters. 
-> > > 2. Clusters in close proximity (f.ex. clusters 0 and 5) share a similar chromatin accessibility profile, compared to a cluster further away (f.ex. cluster 9). 
+> > > 1. There are 13 leiden clusters. 
+> > > 2. Clusters in close proximity (f.ex. clusters 0 and 5) share a similar chromatin accessibility profile (and very likely also a similar cell type), compared to a cluster further away (f.ex. cluster 9). 
 > > > 
 > > {: .solution}
 > >
@@ -573,11 +572,12 @@ During clustering, cells that share similar accessibility profiles are organized
 
 # Cell cluster annotation
 
-After clustering the cells, they must be annotated. This categorizes the clusters into known cell types. **Manual Cell Annotation** requires known marker genes and varying expression profiles of the marker genes among clusters. As marker genes for {PBMC's} are [known](https://panglaodb.se/markers.html) ({% cite Franzn2019 %}), we can annotate our clusters manually. 
+After clustering the cells, they must be annotated. This categorizes the clusters into known cell types. **Manual Cell Annotation** requires known marker genes and varying expression profiles of the marker genes among clusters. 
+
+Luckily, the marker genes for {PBMC's} are known and can be found in databases such as [PanglaoDB](https://panglaodb.se/markers.html) ({% cite Franzn2019 %}). Thus, we can annotate our clusters manually using known marker genes. 
 
 ## Gene matrix
 Since our data currently doesn't contain gene information, we have to create a cell by gene activity matrix using the function *pp.make_gene_matrix*. 
-
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -585,11 +585,11 @@ Since our data currently doesn't contain gene information, we have to create a c
 >    - *"Method used for preprocessing"*: `Generate cell by gene activity matrix, using 'pp.make_gene_matrix'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC leiden` (output of **tl.leiden** {% icon tool %})
 >        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `gene_annotation.gtf.gz` (Input dataset)
-> 2. Rename the generated file to `Anndata 5k PBMC gene_matrix` or add the tag `gene_matrix` to the dataset
+> 2. Rename the generated file to `Anndata 5k PBMC gene_matrix` or add the tag {% icon galaxy-tags %} `gene_matrix` to the dataset
 >    > <tip-title> Gene matrix </tip-title>
 >    >
->    > - Please note that *pp.make_gene_matrix* removes all annotations except those stored in `n_obs`. 
->    > - Therefore it might be necessary to remove propagating tags (tags starting with `#`) from `Anndata 5k PBMC gene_matrix`. 
+>    > - Please note that *pp.make_gene_matrix* removes all annotations except those stored in `obs`. 
+>    > - Therefore it might be necessary to remove propagating tags {% icon galaxy-tags %} (tags starting with `#`) from `Anndata 5k PBMC gene_matrix`. 
 >    >    - Tags can be removed by expanding the dataset with a tag and clicking the `x` next to the tag.
 >    {: .tip}
 >
@@ -599,14 +599,14 @@ Since our data currently doesn't contain gene information, we have to create a c
 >    >
 >    > ```
 >    > AnnData object with n_obs × n_vars = 4430 × 60606
->    >  obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
+>    >  obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
 >    > ```
 >    >
 >    > What does `n_vars` represent in `Anndata 5k PBMC gene_matrix` and what did it represent in `Anndata 5k PBMC leiden`?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > - The variables now represent accessible genes. There are `60606` accessible genes in our samples. In `Anndata 5k PBMC leiden` and all earlier AnnData the variables represented fixed-sized genomic bins. 
+>    > > - The variables now represent accessible genes. There are 60606 accessible genes in our samples. In `Anndata 5k PBMC leiden` and all earlier AnnData the variables represented the 6062095 fixed-sized genomic bins. 
 >    > >
 >    > {: .solution}
 >    >
@@ -629,7 +629,7 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
 > 
 > 2. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Anndata filter_genes` (output of **pp.filter_genes** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata filter_genes` (output of **Filter** {% icon tool %})
 >    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
 >    - {% icon param-toggle %} *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
 >
@@ -651,7 +651,7 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 >     >
 >     {: .warning}
 >
-> 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic` or add the tag `magic` to the dataset
+> 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic` or add the tag {% icon galaxy-tags %} `magic` to the dataset
 >
 > 6. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
@@ -660,8 +660,8 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 >    >
 >    > ```
 >    > AnnData object with n_obs × n_vars = 4430 × 55106
->    >  obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
->    >  var: 'n_cells'
+>    >  obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden', 'n_genes', 'n_counts'
+>    >  var: 'n_cells', 'n_counts'
 >    >  uns: 'reference_sequences'
 >    >  obsm: 'log1p'
 >    > ```
@@ -671,8 +671,8 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. The number of accessible genes was reduced from 60606 to 55106 by the filtering. And additional annotations were added, such as: `var: 'n_cells'`, `uns: 'reference_sequences'` and `obsm: 'log1p'`
->    > > 2. The UMAP embeddings `obsm: 'X_umap'` are missing and should be added to the Anndata in the next step. 
+>    > > 1. The number of genes was reduced from 60606 to 55106 by the filtering. And additional annotations were added, such as: `obs: 'n_genes', 'n_counts'`, `var: 'n_cells', 'n_counts'` and `uns: 'log1p'`.
+>    > > 2. The UMAP embeddings `obsm: 'X_umap'` are missing and should be added to the Anndata in the next step. Without `X_umap` it won't be possible to visualize the plots. 
 >    > >
 >    > {: .solution}
 >    >
@@ -695,19 +695,19 @@ Since the cell by gene activity matrix resembles the cell by gene expression mat
 >    > - This tutorial only focuses on producing an **UMAP** plot with marker-genes. 
 >    > - If further analysis, with tools requiring more annotations, is intended, these can be added in a similar way as shown above.  
 >    >     - f.ex. *Peak and Motif Analysis* with {% tool [Snapatac2 peaks and motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.5.3+galaxy1) %} requires annotations from `uns`. 
->    > - It is also possible to leave the input *"Keys from embeddings to copy"* empty, to copy all `obsm`. 
+>    > - It is also possible to leave the input *"Keys from embeddings to copy"* empty, to copy all annotations of a given category such as `obsm`. 
 >    {: .comment}
 >
-> 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic UMAP` or add the tag `UMAP` to the dataset
+> 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic UMAP` or add the tag {% icon galaxy-tags %} `UMAP` to the dataset
 >
 > 6. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output, to check if `obsm` contains `X_umap`
 >  
 >   ```
 >   AnnData object with n_obs × n_vars = 4430 × 55106
->    obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden'
->    var: 'n_cells'
->    uns: 'reference_sequences'
->    obsm: 'log1p'
+>    obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden', 'n_genes', 'n_counts'
+>    var: 'n_cells', 'n_counts'
+>    uns: 'log1p'
+>    obsm: 'X_umap'
 >   ```
 >
 {: .hands_on}
@@ -773,29 +773,30 @@ Cluster | Cell type
 
 > <comment-title></comment-title>
 > Note that some clusters contain subtypes (f.ex. the annotated T cell clusters contain both CD4+ and CD8+ T cells). The cell-type annotation can be refined by choosing more specific marker genes. 
-Hands-on: manually annotate the clusters
 {: .comment}
 
 To manually annotate the *Leiden* clusters, we will need to perform multiple steps: 
-    1. **Inspect** the key-indexed observations of `Anndata 5k PBMC gene_matrix magic UMAP` 
-    2. **Cut** the *Leiden* annotations out of the table
-    3. Make a *replace file* containing the new cell type annotations for the *Leiden* clusters
-    4. **Replace** the values of the cluster annotation with cell type annotation
-    5. **Add** the cell type annotation to the AnnData
-    6. **Plot** the annotated cell types
+
+1. **Inspect** the key-indexed observations of `Anndata 5k PBMC gene_matrix magic UMAP` 
+2. **Cut** the *Leiden* annotations out of the table
+3. **Upload** a *replace file* containing the new cell type annotations for the *Leiden* clusters
+4. **Replace** the values of the cluster annotation with cell type annotation
+5. **Add** the cell type annotation to the AnnData
+6. **Plot** the annotated cell types
 
 > <hands-on-title> Manual annotation </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic UMAP`
 >    - *"What to inspect?"*: `Key-indexed observations annotation`
-> 2. {% icon galaxy-eye %} Inspect the generated file
+> 2. Rename the generated file to `5k PBMC observations`
+> 3. {% icon galaxy-eye %} Inspect the generated file
 >
 >    > <question-title></question-title>
 >    > In which column is the `Leiden` annotation located?
 >    > > <solution-title></solution-title>
 >    > > The `Leiden` annotation is in column 8. 
->    > > ```
+>    > > 
 >    > > Column 1 | Column 2 | Column 3 | Column 4 | Column 5 | Column 6 | Column 7 | Column 8 | Column 9 | Column 10
 >    > > --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 >    > > "" | n_fragment | frac_dup | frac_mito | tsse | doublet_probability | doublet_score | leiden | n_genes | n_counts
@@ -803,14 +804,12 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    > > AAACGAAAGATTGACA-1 | 10500 | 0.5345125681606597 | 0.0 | 29.10551296093465 | 0.004668403569267374 | 0.001088139281828074 | 1 | 54501 | 15020.42495602328
 >    > > AAACGAAAGGGTCCCT-1 | 19201 | 0.5101785714285714 | 0.0 | 19.90011850347046 | 0.004634433324822066 | 0.009276437847866418 | 5 | 54212 | 16294.751533305309
 >    > > AAACGAACAATTGTGC-1 | 13242 | 0.487399837417257 | 0.0 | 29.060913705583758 | 0.004660125753854076 | 0.0022172949002217295 | 7 | 53530 | 15456.629863655084
->    > > ``` 
+>    > > 
 >    > {: .solution}
 >    >
 >    {: .question}
 >
-> 3. Rename the generated file to `5k PBMC observations` or add the tag `obs` to the dataset
 >
-> {% snippet  faqs/galaxy/analysis_cut.md %}
 > 4. {% tool [Cut columns](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns/Cut1/1.0.2) %} with the following parameters:
 >    - {% icon param-select %} *"Cut columns"*: `c8`
 >    - {% icon param-file %} *"From"*: `5k PBMC observations` (output of **Inspect AnnData** {% icon tool %})
@@ -844,13 +843,13 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    - {% icon param-file %} *"File in which you want to replace some values"*: `Cut columns leiden` (output of **Cut columns** {% icon tool %})
 >    - {% icon param-file %} *"Replace information file"*: `replace_file` 
 >    - *"Which column should be replaced?*: `Column: 1`
-> 7. {% icon galaxy-eye %} Inspect the generated file to check if the replacement was successful
+> 7. Rename the generated file to `Cell type annotation` and {% icon galaxy-eye %} inspect the file to check if the replacement was successful
 > 8. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic UMAP`
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >        - *"What to annotate"*: `Observations (obs)`
->        - {% icon param-file %} *"Table with new annotations"*: `Replace column`(output of **Replace column** {% icon tool %})
-> 9. Rename the generated file to `Anndata 5k PBMC gene_matrix magic cell_type` or add the tag `cell_type` to the dataset
+>        - {% icon param-file %} *"Table with new annotations"*: `Cell type annotation`(output of **Replace column** {% icon tool %})
+> 9. Rename the generated file to `Anndata 5k PBMC gene_matrix magic cell_type` or add the tag {% icon galaxy-tags %} `cell_type` to the dataset
 >
 > 10. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic cell_type` (output of **Replace column** {% icon tool %})
