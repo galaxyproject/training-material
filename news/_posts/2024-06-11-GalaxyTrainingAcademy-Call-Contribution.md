@@ -11,9 +11,9 @@ contributions:
 We are happy to announce the Galaxy Training Academy 2024, a global online training event, where learners can get to know Galaxy and learn how to analyze data for various research topics.
 
 
-**Dates**: October 07-11, 2024
-**Location**: Global online
-**Registration deadline**: July the 12th
+- **Dates**: October 07-11, 2024
+- **Location**: Global online
+- **Registration deadline**: July the 12th
 
 ## The event
 
