@@ -22,35 +22,14 @@ The event will provide a self-paced online learning experience for learners who 
 ### Initial Program:
 
 
-<style>
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 8px;
-  }
-</style>
-
-<table>
-  <tr>
-    <th>Day</th>
-    <th>Program</th>
-  </tr>
-  <tr>
-    <td>Monday</td>
-    <td>Galaxy Introduction</td>
-  </tr>
-  <tr>
-    <td>Tuesday-Thursday</td>
-    <td>Different Tracks: Proteomics, Assembly, Transcriptomics, Microbiome, Machine Learning</td>
-  </tr>
-  <tr>
-    <td>Friday</td>
-    <td>Choose from a variety of different topics</td>
-  </tr>
-</table>
+Day | Program
+--- | ---
+Monday | Galaxy Introduction
+Tuesday-Thurday | Different Track
+Friday |Choose from a variety of different topics
     
 
-
+**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID 
 
 
 ## Your contribution
