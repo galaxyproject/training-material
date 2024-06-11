@@ -31,7 +31,7 @@ The event will provide a self-paced online learning experience for learners who 
 |Friday  |Choose from a variety of different topics&nbsp; |
 {: .table-striped}
 
-(*)**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID
+(*)**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Machine Learning, BY-COVID
 
 
 
