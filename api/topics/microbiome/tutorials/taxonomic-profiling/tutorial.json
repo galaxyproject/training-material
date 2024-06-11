@@ -62,7 +62,36 @@
   "symlink": null,
   "id": "microbiome/taxonomic-profiling",
   "video_library": {
-    "tutorial": null,
+    "tutorial": {
+      "description": null,
+      "materials": [
+        {
+          "link": "topics/microbiome/tutorials/taxonomic-profiling/tutorial.html",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "metagenomics",
+        "microbiome"
+      ],
+      "versions": [
+        {
+          "link": "jszMnBKm6ig",
+          "speakers": [
+            "bebatut"
+          ],
+          "captions": [
+            "sophia120199"
+          ],
+          "date": "2023-05-16",
+          "length": "1H15M",
+          "galaxy_version": "23.01"
+        }
+      ],
+      "gtn_id": "microbiome/taxonomic-profiling",
+      "title": "Taxonomic Profiling and Visualization of Metagenomic Data",
+      "captioned": true
+    },
     "slides": null,
     "demo": null,
     "both": null,
@@ -93,8 +122,8 @@
       "name": "Taxonomic Profiling and Visualization of Metagenomic Data",
       "title": "Taxonomic Profiling and Visualization of Metagenomic Data",
       "test_results": null,
-      "modified": "2024-06-11 15:08:38 +0000",
-      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nraw-reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmetadata\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Unzip collection\"];\n  0 -->|output| 2;\n  3[\"Kraken2\"];\n  0 -->|output| 3;\n  69dc41c5-f6d3-4340-b48f-9fec5055c79b[\"Output\\nkraken_report\"];\n  3 --> 69dc41c5-f6d3-4340-b48f-9fec5055c79b;\n  style 69dc41c5-f6d3-4340-b48f-9fec5055c79b stroke:#2c3143,stroke-width:4px;\n  4[\"MetaPhlAn\"];\n  2 -->|forward| 4;\n  2 -->|reverse| 4;\n  fa470805-129e-473a-b94f-d994f536adee[\"Output\\nmetaphlan_output\"];\n  4 --> fa470805-129e-473a-b94f-d994f536adee;\n  style fa470805-129e-473a-b94f-d994f536adee stroke:#2c3143,stroke-width:4px;\n  5[\"Krakentools: Convert kraken report file\"];\n  3 -->|report_output| 5;\n  ac5f8058-1780-46d2-9028-0afa6e0af1bc[\"Output\\nkrakentool_report\"];\n  5 --> ac5f8058-1780-46d2-9028-0afa6e0af1bc;\n  style ac5f8058-1780-46d2-9028-0afa6e0af1bc stroke:#2c3143,stroke-width:4px;\n  6[\"Kraken-biom\"];\n  3 -->|report_output| 6;\n  1 -->|output| 6;\n  7[\"Pavian\"];\n  3 -->|report_output| 7;\n  8[\"Estimate Abundance at Taxonomic Level\"];\n  3 -->|report_output| 8;\n  9[\"Krona pie chart\"];\n  4 -->|krona_output_file| 9;\n  10[\"Krona pie chart\"];\n  5 -->|output| 10;\n  11[\"Phinch Visualisation\"];\n  6 -->|biomOutput| 11;"
+      "modified": "2024-06-11 15:23:22 +0000",
+      "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nraw-reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmetadata\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Unzip collection\"];\n  0 -->|output| 2;\n  3[\"Kraken2\"];\n  0 -->|output| 3;\n  8d781f62-123d-4d5d-a70e-bb42c12ea508[\"Output\\nkraken_report\"];\n  3 --> 8d781f62-123d-4d5d-a70e-bb42c12ea508;\n  style 8d781f62-123d-4d5d-a70e-bb42c12ea508 stroke:#2c3143,stroke-width:4px;\n  4[\"MetaPhlAn\"];\n  2 -->|forward| 4;\n  2 -->|reverse| 4;\n  98ea5129-cfed-42a3-90b9-f17a2ca6016e[\"Output\\nmetaphlan_output\"];\n  4 --> 98ea5129-cfed-42a3-90b9-f17a2ca6016e;\n  style 98ea5129-cfed-42a3-90b9-f17a2ca6016e stroke:#2c3143,stroke-width:4px;\n  5[\"Krakentools: Convert kraken report file\"];\n  3 -->|report_output| 5;\n  ecdeeb08-26ad-4dfa-8003-9eb7806edd60[\"Output\\nkrakentool_report\"];\n  5 --> ecdeeb08-26ad-4dfa-8003-9eb7806edd60;\n  style ecdeeb08-26ad-4dfa-8003-9eb7806edd60 stroke:#2c3143,stroke-width:4px;\n  6[\"Kraken-biom\"];\n  3 -->|report_output| 6;\n  1 -->|output| 6;\n  7[\"Pavian\"];\n  3 -->|report_output| 7;\n  8[\"Estimate Abundance at Taxonomic Level\"];\n  3 -->|report_output| 8;\n  9[\"Krona pie chart\"];\n  4 -->|krona_output_file| 9;\n  10[\"Krona pie chart\"];\n  5 -->|output| 10;\n  11[\"Phinch Visualisation\"];\n  6 -->|biomOutput| 11;"
     }
   ],
   "api": "https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/taxonomic-profiling/tutorial.json",
