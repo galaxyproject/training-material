@@ -103,11 +103,20 @@ layout: base
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% raw %}{% snippet  {% endraw %}{{ page.path }}{% raw %} %}{% endraw %}
 </code></pre></div></div>
 
-	  {% if page.parameters %}
-	  <h5>Parameters</h5>
+	  {% if page.required_parameters %}
+	  <h5>Mandatory Parameters</h5>
 	  <ul>
-	  {% for parameter in page.parameters %}
-	  <li><code>{{ parameter[0] }}</code>: {{ parameter[1]}}</li>
+	  {% for parameter in page.required_parameters %}
+	  <li><code>{{ parameter[0] }}</code>: {{ parameter[1] }}</li>
+	  {% endfor %}
+	  </ul>
+	  {% endif %}
+
+	  {% if page.optional_parameters %}
+	  <h5>Optional Parameters</h5>
+	  <ul>
+	  {% for parameter in page.optional_parameters %}
+	  <li><code>{{ parameter[0] }}</code>: {{ parameter[1] }}</li>
 	  {% endfor %}
 	  </ul>
 	  {% endif %}
@@ -120,6 +129,9 @@ layout: base
 </code></pre></div></div>
 {% endfor %}
 {% endif %}
+
+<h5>See other uses</h5>
+<a href="https://github.com/search?q=repo%3Agalaxyproject%2Ftraining-material+{{ page.path }}&type=code">Search on GitHub (must be logged in)</a>
 
       </div>
       <div class="modal-footer">

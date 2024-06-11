@@ -70,4 +70,34 @@ mapping:
             If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
         examples:
         - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
+    required_parameters:
+        type: map
+        mapping:
+          "=":
+            type: str
+        description: |
+          A list of parameters that are required to be set when invoking the FAQ, otherwise the FAQ will not render correctly (e.g. in the FAQ list!)
+        examples: |
+          name: The name of the dataset
+    optional_parameters:
+        type: map
+        mapping:
+          "=":
+            type: str
+        description: |
+          Optional parameters that can enhance the experience of the learner if set correctly
+        examples: |
+          format: the format they should change it to
+    examples:
+        type: map
+        mapping:
+          '=':
+            type: map
+            mapping:
+              '=': {type: str}
+        description: |
+          A list of examples that can be used to illustrate the FAQ's invocation
+        examples: |
+          A very basic included version: {}
+          A more complex example: {name: "Phages", format: "genbank"}
 ---
