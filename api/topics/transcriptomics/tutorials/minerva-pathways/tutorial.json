@@ -100,7 +100,7 @@
       "name": "mRNA-Seq BY-COVID Pipeline: Analysis",
       "title": "mRNA-Seq BY-COVID Pipeline: Analysis",
       "test_results": null,
-      "modified": "2024-06-11 07:29:45 +0000",
+      "modified": "2024-06-11 08:50:14 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nfeatureCounts: Counts\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nfactordata\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Collection\\nfeatureCounts: Lengths\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Column join\"];\n  0 -->|output| 3;\n  4[\"Extract dataset\"];\n  2 -->|output| 4;\n  5[\"countdata\"];\n  3 -->|tabular_output| 5;\n  e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5[\"Output\\ncount_data\"];\n  5 --> e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5;\n  style e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5 stroke:#2c3143,stroke-width:4px;\n  6[\"annodata\"];\n  3 -->|tabular_output| 6;\n  7[\"Replace Text\"];\n  5 -->|outfile| 7;\n  8[\"limma DEG analysis\"];\n  6 -->|out_tab| 8;\n  7 -->|outfile| 8;\n  1 -->|output| 8;\n  1c8d7950-1003-4c86-9986-c6ed1264cd8b[\"Output\\nlimma_report\"];\n  8 --> 1c8d7950-1003-4c86-9986-c6ed1264cd8b;\n  style 1c8d7950-1003-4c86-9986-c6ed1264cd8b stroke:#2c3143,stroke-width:4px;\n  9[\"Extract dataset\"];\n  8 -->|outTables| 9;\n  10[\"MINERVA Formatting\"];\n  9 -->|output| 10;\n  9ce4f48b-e742-4b7c-9bde-5d51f11068d3[\"Output\\nminerva_table\"];\n  10 --> 9ce4f48b-e742-4b7c-9bde-5d51f11068d3;\n  style 9ce4f48b-e742-4b7c-9bde-5d51f11068d3 stroke:#2c3143,stroke-width:4px;\n  11[\"Join two Datasets\"];\n  9 -->|output| 11;\n  4 -->|output| 11;\n  12[\"Compute\"];\n  11 -->|out_file1| 12;\n  13[\"Cut\"];\n  12 -->|out_file1| 13;\n  14[\"Unique\"];\n  13 -->|out_file1| 14;\n  15[\"Cut\"];\n  14 -->|outfile| 15;\n  16[\"Cut\"];\n  14 -->|outfile| 16;\n  17[\"goseq\"];\n  15 -->|out_file1| 17;\n  16 -->|out_file1| 17;"
     },
     {
@@ -131,7 +131,7 @@
       "name": "mRNA-Seq BY-COVID Pipeline: Counts",
       "title": "mRNA-Seq BY-COVID Pipeline: Counts",
       "test_results": null,
-      "modified": "2024-06-11 07:29:45 +0000",
+      "modified": "2024-06-11 08:50:14 +0000",
       "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nmRNA-Seq Reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nUCSC Genome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"Cutadapt\"];\n  0 -->|output| 3;\n  4[\"FastQC\"];\n  3 -->|out1| 4;\n  5[\"HISAT2\"];\n  3 -->|out1| 5;\n  6[\"featureCounts\"];\n  5 -->|output_alignments| 6;\n  5cb5bd5d-df81-4463-8002-e89551780f01[\"Output\\noutput_feature_lengths\"];\n  6 --> 5cb5bd5d-df81-4463-8002-e89551780f01;\n  style 5cb5bd5d-df81-4463-8002-e89551780f01 stroke:#2c3143,stroke-width:4px;\n  5dec13e1-0011-472c-a72d-6715fe55c23c[\"Output\\noutput_short\"];\n  6 --> 5dec13e1-0011-472c-a72d-6715fe55c23c;\n  style 5dec13e1-0011-472c-a72d-6715fe55c23c stroke:#2c3143,stroke-width:4px;\n  7[\"Read Distribution\"];\n  5 -->|output_alignments| 7;\n  1 -->|output| 7;\n  8[\"Gene Body Coverage BAM\"];\n  5 -->|output_alignments| 8;\n  1 -->|output| 8;\n  9[\"Multi QC raw reads\"];\n  2 -->|text_file| 9;\n  4 -->|text_file| 9;\n  3 -->|report| 9;\n  5 -->|summary_file| 9;\n  7 -->|output| 9;\n  8 -->|outputtxt| 9;\n  6 -->|output_summary| 9;\n  9217af4e-e34c-4a49-9d67-4b3df511ac2c[\"Output\\nhtml_report\"];\n  9 --> 9217af4e-e34c-4a49-9d67-4b3df511ac2c;\n  style 9217af4e-e34c-4a49-9d67-4b3df511ac2c stroke:#2c3143,stroke-width:4px;"
     }
   ],
@@ -158,11 +158,6 @@
   ],
   "supported_servers": {
     "exact": [
-      {
-        "url": "https://usegalaxy.cz/",
-        "name": "UseGalaxy.cz",
-        "usegalaxy": false
-      },
       {
         "url": "https://usegalaxy.eu",
         "name": "UseGalaxy.eu",

@@ -166,7 +166,7 @@
           "name": "Intro to Genome Assembly",
           "title": "Intro to Genome Assembly",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmutant_R1.fastq\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmutant_R2.fastq\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nwildtype.fna\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"FastQC\"];\n  0 -->|output| 3;\n  22a51e6e-2e5f-4415-a127-e0b1c179a1b1[\"Output\\nfastqc_html\"];\n  3 --> 22a51e6e-2e5f-4415-a127-e0b1c179a1b1;\n  style 22a51e6e-2e5f-4415-a127-e0b1c179a1b1 stroke:#2c3143,stroke-width:4px;\n  51ec8c05-eb47-4359-9120-0eca1a6d5c2f[\"Output\\nfastqc_txt\"];\n  3 --> 51ec8c05-eb47-4359-9120-0eca1a6d5c2f;\n  style 51ec8c05-eb47-4359-9120-0eca1a6d5c2f stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"FASTQ interlacer\"];\n  0 -->|output| 5;\n  1 -->|output| 5;\n  225edf5f-3b90-4f84-a38a-5c786000a3fc[\"Output\\noutput_pairs\"];\n  5 --> 225edf5f-3b90-4f84-a38a-5c786000a3fc;\n  style 225edf5f-3b90-4f84-a38a-5c786000a3fc stroke:#2c3143,stroke-width:4px;\n  dae90093-ae96-4bb2-824d-c92b61585096[\"Output\\noutput_singles\"];\n  5 --> dae90093-ae96-4bb2-824d-c92b61585096;\n  style dae90093-ae96-4bb2-824d-c92b61585096 stroke:#2c3143,stroke-width:4px;\n  6[\"MultiQC\"];\n  3 -->|text_file| 6;\n  4 -->|text_file| 6;\n  85e3704a-859d-4657-b3d7-9b67e4981d21[\"Output\\nmultiqc_stats\"];\n  6 --> 85e3704a-859d-4657-b3d7-9b67e4981d21;\n  style 85e3704a-859d-4657-b3d7-9b67e4981d21 stroke:#2c3143,stroke-width:4px;\n  fab7e06a-604e-4432-b0ed-b63157a8643b[\"Output\\nmultiqc_report\"];\n  6 --> fab7e06a-604e-4432-b0ed-b63157a8643b;\n  style fab7e06a-604e-4432-b0ed-b63157a8643b stroke:#2c3143,stroke-width:4px;\n  7[\"velveth\"];\n  5 -->|outfile_pairs| 7;\n  607a214d-9137-4e73-9b73-954c79678937[\"Output\\nvelveth_out\"];\n  7 --> 607a214d-9137-4e73-9b73-954c79678937;\n  style 607a214d-9137-4e73-9b73-954c79678937 stroke:#2c3143,stroke-width:4px;\n  8[\"velvetg\"];\n  7 -->|out_file1| 8;\n  b0cf3779-6199-42c9-963f-a733559f90bb[\"Output\\nvelvet_contigs\"];\n  8 --> b0cf3779-6199-42c9-963f-a733559f90bb;\n  style b0cf3779-6199-42c9-963f-a733559f90bb stroke:#2c3143,stroke-width:4px;\n  54926701-ccae-4143-b649-b7e08e1c6a8e[\"Output\\nvelvet_stats\"];\n  8 --> 54926701-ccae-4143-b649-b7e08e1c6a8e;\n  style 54926701-ccae-4143-b649-b7e08e1c6a8e stroke:#2c3143,stroke-width:4px;\n  9[\"Quast\"];\n  2 -->|output| 9;\n  8 -->|contigs| 9;\n  0babe959-4d63-4838-9e18-4526b3dd0db5[\"Output\\nquast_report_html\"];\n  9 --> 0babe959-4d63-4838-9e18-4526b3dd0db5;\n  style 0babe959-4d63-4838-9e18-4526b3dd0db5 stroke:#2c3143,stroke-width:4px;\n  f41c43c4-763c-42bc-b36e-9ea76e7752c2[\"Output\\nquast_report_pdf\"];\n  9 --> f41c43c4-763c-42bc-b36e-9ea76e7752c2;\n  style f41c43c4-763c-42bc-b36e-9ea76e7752c2 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -206,11 +206,6 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
             "usegalaxy": false
           },
           {
@@ -487,7 +482,7 @@
           "name": "Genome Assembly Quality Control",
           "title": "Genome Assembly Quality Control",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nGCA_000146045.2_genomic.fna\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nScerevisiae-INSC1019.flye.30x.fa\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nScerevisiae-INSC1019.hifiasm.30x.fa\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nSRR13577847_subreads.30x.fastq.gz\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Busco\"];\n  0 -->|output| 4;\n  5[\"Busco\"];\n  1 -->|output| 5;\n  6[\"Quast\"];\n  0 -->|output| 6;\n  1 -->|output| 6;\n  2 -->|output| 6;\n  7[\"Busco\"];\n  2 -->|output| 7;\n  8[\"Chromeister\"];\n  0 -->|output| 8;\n  2 -->|output| 8;\n  9[\"Meryl\"];\n  3 -->|output| 9;\n  10[\"Merqury\"];\n  0 -->|output| 10;\n  9 -->|read_db| 10;\n  11[\"Merqury\"];\n  1 -->|output| 11;\n  9 -->|read_db| 11;\n  12[\"Merqury\"];\n  2 -->|output| 12;\n  9 -->|read_db| 12;"
         }
       ],
@@ -518,11 +513,7 @@
           }
         ],
         "inexact": [
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          }
+
         ]
       },
       "topic_name_human": "Assembly",
@@ -741,7 +732,7 @@
           "name": "VGP assembly: training workflow",
           "title": "VGP assembly: training workflow",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nBionano_dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nHi-C_dataset_R\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nHi-C_dataset_F\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"GFA to FASTA\"];\n  5[\"GFA to FASTA\"];\n  6[\"Cutadapt\"];\n  3 -->|output| 6;\n  7[\"Busco\"];\n  4 -->|out_fa| 7;\n  8[\"Busco\"];\n  5 -->|out_fa| 8;\n  9[\"Purge overlaps\"];\n  5 -->|out_fa| 9;\n  10[\"Collapse Collection\"];\n  6 -->|out1| 10;\n  11[\"Meryl\"];\n  6 -->|out1| 11;\n  12[\"Map with minimap2\"];\n  6 -->|out1| 12;\n  5 -->|out_fa| 12;\n  13[\"Quast\"];\n  5 -->|out_fa| 13;\n  4 -->|out_fa| 13;\n  6 -->|out1| 13;\n  14[\"Map with minimap2\"];\n  9 -->|split_fasta| 14;\n  9 -->|split_fasta| 14;\n  15[\"Meryl\"];\n  11 -->|read_db| 15;\n  16[\"Purge overlaps\"];\n  12 -->|alignment_output| 16;\n  17[\"Meryl\"];\n  15 -->|read_db| 17;\n  18[\"Merqury\"];\n  5 -->|out_fa| 18;\n  4 -->|out_fa| 18;\n  15 -->|read_db| 18;\n  19[\"Purge overlaps\"];\n  16 -->|pbcstat_cov| 19;\n  16 -->|calcuts_cutoff| 19;\n  14 -->|alignment_output| 19;\n  20[\"GenomeScope\"];\n  17 -->|read_db_hist| 20;\n  21[\"Purge overlaps\"];\n  19 -->|purge_dups_bed| 21;\n  5 -->|out_fa| 21;\n  22[\"Replace\"];\n  20 -->|summary| 22;\n  23[\"Compute\"];\n  20 -->|model_params| 23;\n  24[\"Bionano Hybrid Scaffold\"];\n  0 -->|output| 24;\n  21 -->|get_seqs_purged| 24;\n  25[\"Concatenate datasets\"];\n  21 -->|get_seqs_hap| 25;\n  4 -->|out_fa| 25;\n  26[\"Busco\"];\n  21 -->|get_seqs_purged| 26;\n  27[\"Replace\"];\n  22 -->|outfile| 27;\n  28[\"Compute\"];\n  23 -->|out_file1| 28;\n  29[\"Concatenate datasets\"];\n  24 -->|ngs_contigs_scaffold_trimmed| 29;\n  24 -->|ngs_contigs_not_scaffolded_trimmed| 29;\n  30[\"Purge overlaps\"];\n  25 -->|out_file1| 30;\n  31[\"Map with minimap2\"];\n  10 -->|output| 31;\n  25 -->|out_file1| 31;\n  32[\"Search in textfiles\"];\n  27 -->|outfile| 32;\n  33[\"Advanced Cut\"];\n  28 -->|out_file1| 33;\n  34[\"Advanced Cut\"];\n  28 -->|out_file1| 34;\n  35[\"BWA-MEM2\"];\n  1 -->|output| 35;\n  29 -->|out_file1| 35;\n  36[\"BWA-MEM2\"];\n  2 -->|output| 36;\n  29 -->|out_file1| 36;\n  37[\"Replace\"];\n  29 -->|out_file1| 37;\n  38[\"Quast\"];\n  29 -->|out_file1| 38;\n  10 -->|output| 38;\n  39[\"Busco\"];\n  29 -->|out_file1| 39;\n  40[\"Map with minimap2\"];\n  30 -->|split_fasta| 40;\n  30 -->|split_fasta| 40;\n  41[\"Purge overlaps\"];\n  31 -->|alignment_output| 41;\n  42[\"Convert\"];\n  32 -->|output| 42;\n  43[\"Filter and merge\"];\n  36 -->|bam_output| 43;\n  35 -->|bam_output| 43;\n  44[\"Purge overlaps\"];\n  41 -->|pbcstat_cov| 44;\n  41 -->|calcuts_cutoff| 44;\n  40 -->|alignment_output| 44;\n  45[\"Advanced Cut\"];\n  42 -->|out_file1| 45;\n  46[\"bedtools BAM to BED\"];\n  43 -->|outfile| 46;\n  47[\"PretextMap\"];\n  43 -->|outfile| 47;\n  48[\"Purge overlaps\"];\n  44 -->|purge_dups_bed| 48;\n  25 -->|out_file1| 48;\n  49[\"Sort\"];\n  46 -->|output| 49;\n  50[\"Pretext Snapshot\"];\n  47 -->|pretext_map_out| 50;\n  51[\"Busco\"];\n  48 -->|get_seqs_purged| 51;\n  52[\"Quast\"];\n  21 -->|get_seqs_purged| 52;\n  48 -->|get_seqs_purged| 52;\n  10 -->|output| 52;\n  53[\"SALSA\"];\n  49 -->|out_file1| 53;\n  37 -->|outfile| 53;\n  54[\"BWA-MEM2\"];\n  1 -->|output| 54;\n  53 -->|scaffolds_fasta| 54;\n  55[\"BWA-MEM2\"];\n  2 -->|output| 55;\n  53 -->|scaffolds_fasta| 55;\n  56[\"Busco\"];\n  53 -->|scaffolds_fasta| 56;\n  57[\"Quast\"];\n  53 -->|scaffolds_fasta| 57;\n  10 -->|output| 57;\n  58[\"Filter and merge\"];\n  55 -->|bam_output| 58;\n  54 -->|bam_output| 58;\n  59[\"PretextMap\"];\n  58 -->|outfile| 59;\n  60[\"Pretext Snapshot\"];\n  59 -->|pretext_map_out| 60;"
         }
       ],
@@ -1215,7 +1206,7 @@
           "name": "Debruijn Graph",
           "title": "Debruijn Graph",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmutant_R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmutant_R2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"VelvetOptimiser\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"SPAdes\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Fasta Statistics\"];\n  2 -->|contigs| 4;\n  dacb84a5-5482-4ab0-81ad-e92af21636cd[\"Output\\nfasta_stats_velvet\"];\n  4 --> dacb84a5-5482-4ab0-81ad-e92af21636cd;\n  style dacb84a5-5482-4ab0-81ad-e92af21636cd stroke:#2c3143,stroke-width:4px;\n  5[\"Fasta Statistics\"];\n  3 -->|out_contigs| 5;\n  ff376be9-7361-48c6-b1c8-d9f951b9c6fa[\"Output\\nfasta_stats_spades\"];\n  5 --> ff376be9-7361-48c6-b1c8-d9f951b9c6fa;\n  style ff376be9-7361-48c6-b1c8-d9f951b9c6fa stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -1259,11 +1250,7 @@
           }
         ],
         "inexact": [
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          }
+
         ]
       },
       "topic_name_human": "Assembly",
@@ -1452,7 +1439,7 @@
           "name": "assembly_with_preprocessing",
           "title": "assembly_with_preprocessing",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nCollection of paired short-reads data\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nCollection of long-reads data\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Samtools fastx\"];\n  7 -->|outputsam| 10;\n  11[\"Samtools fastx\"];\n  9 -->|outputsam| 11;\n  12[\"Collapse Collection\"];\n  10 -->|nonspecific| 12;\n  13[\"Zip Collection\"];\n  11 -->|forward| 13;\n  11 -->|reverse| 13;\n  14[\"Collapse Collection\"];\n  11 -->|forward| 14;\n  15[\"Collapse Collection\"];\n  11 -->|reverse| 15;\n  16[\"seqtk_sample\"];\n  14 -->|output| 16;\n  17[\"seqtk_sample\"];\n  15 -->|output| 17;\n  18[\"Create assemblies with Unicycler\"];\n  12 -->|output| 18;\n  16 -->|default| 18;\n  17 -->|default| 18;\n  19[\"Bandage Info\"];\n  18 -->|assembly_graph| 19;\n  2[\"fastp: Trimmed Illumina Reads\"];\n  0 -->|output| 2;\n  20[\"Filter sequences by length\"];\n  18 -->|assembly| 20;\n  21[\"Bandage Image\"];\n  18 -->|assembly_graph| 21;\n  3[\"NanoPlot\"];\n  1 -->|output| 3;\n  4[\"Map with minimap2\"];\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  2 -->|report_json| 5;\n  6[\"Bowtie2\"];\n  2 -->|output_paired_coll| 6;\n  7[\"Samtools view\"];\n  4 -->|alignment_output| 7;\n  8[\"Samtools stats\"];\n  4 -->|alignment_output| 8;\n  9[\"Samtools view\"];\n  6 -->|output| 9;"
         },
         {
@@ -1470,7 +1457,7 @@
           "name": "assembly_with_preprocessing_and_sra_download",
           "title": "assembly_with_preprocessing_and_sra_download",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nList of Illumina accessions\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nList of ONT accessions\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Samtools stats\"];\n  6 -->|alignment_output| 10;\n  11[\"Samtools view\"];\n  8 -->|output| 11;\n  12[\"Samtools fastx\"];\n  9 -->|outputsam| 12;\n  13[\"Samtools fastx\"];\n  11 -->|outputsam| 13;\n  14[\"Collapse Collection\"];\n  12 -->|nonspecific| 14;\n  15[\"Zip Collection\"];\n  13 -->|forward| 15;\n  13 -->|reverse| 15;\n  16[\"Collapse Collection\"];\n  13 -->|forward| 16;\n  17[\"Collapse Collection\"];\n  13 -->|reverse| 17;\n  18[\"seqtk_sample\"];\n  16 -->|output| 18;\n  19[\"seqtk_sample\"];\n  17 -->|output| 19;\n  2[\"Illumina data\"];\n  0 -->|output| 2;\n  20[\"Create assemblies with Unicycler\"];\n  14 -->|output| 20;\n  18 -->|default| 20;\n  19 -->|default| 20;\n  21[\"Bandage Info\"];\n  20 -->|assembly_graph| 21;\n  22[\"Bandage Image\"];\n  20 -->|assembly_graph| 22;\n  23[\"Filter sequences by length\"];\n  20 -->|assembly| 23;\n  3[\"ONT data\"];\n  1 -->|output| 3;\n  4[\"fastp: Trimmed Illumina Reads\"];\n  2 -->|list_paired| 4;\n  5[\"NanoPlot\"];\n  3 -->|output_collection| 5;\n  6[\"Map with minimap2\"];\n  3 -->|output_collection| 6;\n  7[\"MultiQC\"];\n  4 -->|report_json| 7;\n  8[\"Bowtie2\"];\n  4 -->|output_paired_coll| 8;\n  9[\"Samtools view\"];\n  6 -->|alignment_output| 9;"
         }
       ],
@@ -1515,11 +1502,6 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
             "usegalaxy": false
           },
           {
@@ -1793,7 +1775,7 @@
           "name": "Genome Assembly of MRSA using Oxford Nanopore MinION (and Illumina data if available)",
           "title": "Genome Assembly of MRSA using Oxford Nanopore MinION (and Illumina data if available)",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNanopore raw reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nIllumina forward raw reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nIllumina reverse raw reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Convert compressed file to uncompressed.\"];\n  0 -->|output| 3;\n  4[\"FastQC\"];\n  0 -->|output| 4;\n  5[\"fastp\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  6[\"NanoPlot\"];\n  3 -->|output1| 6;\n  a97e6f33-8182-4a33-86dd-6cfbb83a842d[\"Output\\nnanoplot_before_filtering\"];\n  6 --> a97e6f33-8182-4a33-86dd-6cfbb83a842d;\n  style a97e6f33-8182-4a33-86dd-6cfbb83a842d stroke:#2c3143,stroke-width:4px;\n  7[\"filtlong\"];\n  5 -->|out1| 7;\n  5 -->|out2| 7;\n  0 -->|output| 7;\n  8[\"Flye\"];\n  7 -->|outfile| 8;\n  f12e718f-1bd5-490d-bd41-f0747aaa41a6[\"Output\\nflye_assembly_info\"];\n  8 --> f12e718f-1bd5-490d-bd41-f0747aaa41a6;\n  style f12e718f-1bd5-490d-bd41-f0747aaa41a6 stroke:#2c3143,stroke-width:4px;\n  9[\"NanoPlot\"];\n  7 -->|outfile| 9;\n  89524090-f590-434d-89e2-66f0b1a23c7c[\"Output\\nnanoplot_after_filtering\"];\n  9 --> 89524090-f590-434d-89e2-66f0b1a23c7c;\n  style 89524090-f590-434d-89e2-66f0b1a23c7c stroke:#2c3143,stroke-width:4px;\n  10[\"Bandage Image\"];\n  8 -->|assembly_gfa| 10;\n  11[\"BWA-MEM2\"];\n  5 -->|out2| 11;\n  8 -->|consensus| 11;\n  12[\"Quast\"];\n  8 -->|consensus| 12;\n  dabfb8fd-8791-4959-a9dc-9b3c1e57a69c[\"Output\\nquast_report_before_polishing\"];\n  12 --> dabfb8fd-8791-4959-a9dc-9b3c1e57a69c;\n  style dabfb8fd-8791-4959-a9dc-9b3c1e57a69c stroke:#2c3143,stroke-width:4px;\n  13[\"BWA-MEM2\"];\n  5 -->|out1| 13;\n  8 -->|consensus| 13;\n  14[\"Polypolish\"];\n  8 -->|consensus| 14;\n  13 -->|bam_output| 14;\n  11 -->|bam_output| 14;\n  15[\"Quast\"];\n  14 -->|polished_fasta| 15;\n  8 -->|consensus| 15;\n  4e465b51-68bf-4203-9a7c-897f46c70277[\"Output\\nquast_report_after_polishing\"];\n  15 --> 4e465b51-68bf-4203-9a7c-897f46c70277;\n  style 4e465b51-68bf-4203-9a7c-897f46c70277 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -1822,11 +1804,7 @@
           }
         ],
         "inexact": [
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          }
+
         ]
       },
       "topic_name_human": "Assembly",
@@ -2180,7 +2158,7 @@
           "name": "Assembly polishing - upgraded",
           "title": "Assembly polishing - upgraded",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAssembly to be polished\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nminimap setting for long reads\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nIllumina reads R1\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"🛠️ Subworkflow\\nRacon polish with long reads, x4 - upgraded\"];\n  style 4 fill:#edd,stroke:#900,stroke-width:4px;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  2 -->|output| 4;\n  5[\"Medaka polish\"];\n  4 -->|Assembly polished by long reads using Racon| 5;\n  1 -->|output| 5;\n  e3136060-bce7-4af3-87c4-9dcbb0d1f531[\"Output\\nAssembly polished by long reads using Medaka\"];\n  5 --> e3136060-bce7-4af3-87c4-9dcbb0d1f531;\n  style e3136060-bce7-4af3-87c4-9dcbb0d1f531 stroke:#2c3143,stroke-width:4px;\n  6[\"Fasta statistics after Racon long read polish\"];\n  4 -->|Assembly polished by long reads using Racon| 6;\n  7[\"Fasta statistics after Medaka polish\"];\n  5 -->|out_consensus| 7;\n  8[\"🛠️ Subworkflow\\nRacon polish with Illumina reads R1 only, x2 - upgraded\"];\n  style 8 fill:#edd,stroke:#900,stroke-width:4px;\n  5 -->|out_consensus| 8;\n  3 -->|output| 8;\n  9[\"Fasta statistics after Racon short read polish\"];\n  8 -->|Assembly polished by short reads using Racon| 9;"
         },
         {
@@ -2202,7 +2180,7 @@
           "name": "Assembly with Flye - upgraded",
           "title": "Assembly with Flye - upgraded",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Flye: assembly\"];\n  0 -->|output| 1;\n  3960e31d-7a9e-400c-bb21-f6e47b75e649[\"Output\\nFlye assembly on input dataset(s) (consensus)\"];\n  1 --> 3960e31d-7a9e-400c-bb21-f6e47b75e649;\n  style 3960e31d-7a9e-400c-bb21-f6e47b75e649 stroke:#2c3143,stroke-width:4px;\n  e524f295-a957-4c91-838c-f8e98e809b6c[\"Output\\nFlye assembly on input dataset(s) (assembly_graph)\"];\n  1 --> e524f295-a957-4c91-838c-f8e98e809b6c;\n  style e524f295-a957-4c91-838c-f8e98e809b6c stroke:#2c3143,stroke-width:4px;\n  48b854e2-dd6e-4345-8d05-09abca6659da[\"Output\\nFlye assembly on input dataset(s) (Graphical Fragment Assembly)\"];\n  1 --> 48b854e2-dd6e-4345-8d05-09abca6659da;\n  style 48b854e2-dd6e-4345-8d05-09abca6659da stroke:#2c3143,stroke-width:4px;\n  8672c172-71a7-432c-9679-a8e37f36cf53[\"Output\\nFlye assembly on input dataset(s) (assembly_info)\"];\n  1 --> 8672c172-71a7-432c-9679-a8e37f36cf53;\n  style 8672c172-71a7-432c-9679-a8e37f36cf53 stroke:#2c3143,stroke-width:4px;\n  2[\"Fasta statistics\"];\n  1 -->|consensus| 2;\n  3[\"Quast genome report\"];\n  1 -->|consensus| 3;\n  17cdf8e0-8ad4-4570-afae-1861934fc678[\"Output\\nQuast on input dataset(s):  HTML report\"];\n  3 --> 17cdf8e0-8ad4-4570-afae-1861934fc678;\n  style 17cdf8e0-8ad4-4570-afae-1861934fc678 stroke:#2c3143,stroke-width:4px;\n  4[\"Bandage image: Flye assembly\"];\n  1 -->|assembly_gfa| 4;\n  e66bd129-146f-48dc-95b8-39a2a1ffb68d[\"Output\\nBandage Image on input dataset(s): Assembly Graph Image\"];\n  4 --> e66bd129-146f-48dc-95b8-39a2a1ffb68d;\n  style e66bd129-146f-48dc-95b8-39a2a1ffb68d stroke:#2c3143,stroke-width:4px;\n  5[\"Bar chart: show contig sizes\"];\n  1 -->|assembly_info| 5;\n  6d0a4e23-d631-4e37-8930-3d22fc91369b[\"Output\\nBar chart showing contig sizes\"];\n  5 --> 6d0a4e23-d631-4e37-8930-3d22fc91369b;\n  style 6d0a4e23-d631-4e37-8930-3d22fc91369b stroke:#2c3143,stroke-width:4px;"
         },
         {
@@ -2224,7 +2202,7 @@
           "name": "Assess genome quality - upgraded",
           "title": "Assess genome quality - upgraded",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPolished assembly\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Busco: assess assembly\"];\n  0 -->|output| 2;\n  219e4952-36e0-4b01-a407-e774b5b02dca[\"Output\\nBusco short summary\"];\n  2 --> 219e4952-36e0-4b01-a407-e774b5b02dca;\n  style 219e4952-36e0-4b01-a407-e774b5b02dca stroke:#2c3143,stroke-width:4px;\n  3[\"Quast: assess assembly\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  77ab0186-4cfd-460f-b71e-39a923414ef4[\"Output\\nQuast on input dataset(s):  HTML report\"];\n  3 --> 77ab0186-4cfd-460f-b71e-39a923414ef4;\n  style 77ab0186-4cfd-460f-b71e-39a923414ef4 stroke:#2c3143,stroke-width:4px;"
         },
         {
@@ -2246,7 +2224,7 @@
           "name": "Combined workflows for large genome assembly - upgraded ",
           "title": "Combined workflows for large genome assembly - upgraded ",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nR1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nR2\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\nminimap settings for long reads\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nReference genome for Quast\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"🛠️ Subworkflow\\nkmer counting - meryl - upgraded\"];\n  style 5 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 5;\n  6[\"🛠️ Subworkflow\\nData QC - upgraded\"];\n  style 6 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 6;\n  2 -->|output| 6;\n  0 -->|output| 6;\n  7[\"🛠️ Subworkflow\\nTrim and filter reads - fastp - upgraded \"];\n  style 7 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 7;\n  2 -->|output| 7;\n  0 -->|output| 7;\n  8[\"🛠️ Subworkflow\\nAssembly with Flye - upgraded\"];\n  style 8 fill:#edd,stroke:#900,stroke-width:4px;\n  7 -->|fastp filtered long reads| 8;\n  9[\"🛠️ Subworkflow\\nAssembly polishing - upgraded\"];\n  style 9 fill:#edd,stroke:#900,stroke-width:4px;\n  8 -->|Flye assembly on input datasets consensus| 9;\n  7 -->|fastp filtered R1 reads| 9;\n  7 -->|fastp filtered long reads| 9;\n  3 -->|output| 9;\n  10[\"🛠️ Subworkflow\\nAssess genome quality - upgraded\"];\n  style 10 fill:#edd,stroke:#900,stroke-width:4px;\n  9 -->|Assembly polished by long reads using Medaka| 10;\n  4 -->|output| 10;"
         },
         {
@@ -2268,7 +2246,7 @@
           "name": "Data QC - upgraded",
           "title": "Data QC - upgraded",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput file: long reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput file: Illumina reads R1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput file: Illumina reads R2\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Nanoplot: long reads\"];\n  0 -->|output| 3;\n  73d0e4cf-366e-41c1-810a-b269638826b3[\"Output\\nNanoPlot on input dataset(s): HTML report\"];\n  3 --> 73d0e4cf-366e-41c1-810a-b269638826b3;\n  style 73d0e4cf-366e-41c1-810a-b269638826b3 stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC on R1\"];\n  1 -->|output| 4;\n  5[\"FastQC on R2\"];\n  2 -->|output| 5;\n  6[\"MultiQC: combine fastQC reports\"];\n  4 -->|text_file| 6;\n  5 -->|text_file| 6;\n  8baf8700-876e-4a74-ad99-6e656f3ba618[\"Output\\nMultiQC on input dataset(s): Webpage\"];\n  6 --> 8baf8700-876e-4a74-ad99-6e656f3ba618;\n  style 8baf8700-876e-4a74-ad99-6e656f3ba618 stroke:#2c3143,stroke-width:4px;"
         },
         {
@@ -2290,7 +2268,7 @@
           "name": "Racon polish with Illumina reads (R1 only), x2 - upgraded",
           "title": "Racon polish with Illumina reads (R1 only), x2 - upgraded",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAssembly to be polished\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nIllumina reads, R1, in fastq.gz format\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Minimap2 round 1: map reads to assembly\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Racon round 1: polish assembly\"];\n  0 -->|output| 3;\n  2 -->|alignment_output| 3;\n  1 -->|output| 3;\n  4[\"Minimap2 round 2: map reads to assembly\"];\n  1 -->|output| 4;\n  3 -->|consensus| 4;\n  5[\"Racon round 2: polish assembly\"];\n  3 -->|consensus| 5;\n  4 -->|alignment_output| 5;\n  1 -->|output| 5;\n  594819c3-668e-4575-b9a6-4459ffacf952[\"Output\\nAssembly polished by short reads using Racon\"];\n  5 --> 594819c3-668e-4575-b9a6-4459ffacf952;\n  style 594819c3-668e-4575-b9a6-4459ffacf952 stroke:#2c3143,stroke-width:4px;"
         },
         {
@@ -2312,7 +2290,7 @@
           "name": "Racon polish with long reads, x4 - upgraded",
           "title": "Racon polish with long reads, x4 - upgraded",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAssembly to be polished\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nminimap setting for long reads \"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"Minimap2: map long reads to assembly\"];\n  2 -->|output| 3;\n  1 -->|output| 3;\n  0 -->|output| 3;\n  4[\"Racon: polish 1\"];\n  0 -->|output| 4;\n  3 -->|alignment_output| 4;\n  1 -->|output| 4;\n  5[\"Minimap2: map long reads to polished assembly 1\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  4 -->|consensus| 5;\n  6[\"Racon: polish 2\"];\n  4 -->|consensus| 6;\n  5 -->|alignment_output| 6;\n  1 -->|output| 6;\n  7[\"Minimap2: map long reads to polished assembly 2\"];\n  2 -->|output| 7;\n  1 -->|output| 7;\n  6 -->|consensus| 7;\n  8[\"Racon: polish 3\"];\n  6 -->|consensus| 8;\n  7 -->|alignment_output| 8;\n  1 -->|output| 8;\n  9[\"Minimap2: map long reads to polished assembly 3\"];\n  2 -->|output| 9;\n  1 -->|output| 9;\n  8 -->|consensus| 9;\n  10[\"Racon: polish 4\"];\n  8 -->|consensus| 10;\n  9 -->|alignment_output| 10;\n  1 -->|output| 10;\n  bcf0f03c-5951-46a7-aa38-545aed9bc183[\"Output\\nAssembly polished by long reads using Racon\"];\n  10 --> bcf0f03c-5951-46a7-aa38-545aed9bc183;\n  style bcf0f03c-5951-46a7-aa38-545aed9bc183 stroke:#2c3143,stroke-width:4px;"
         },
         {
@@ -2334,7 +2312,7 @@
           "name": "Trim and filter reads - fastp - upgraded ",
           "title": "Trim and filter reads - fastp - upgraded ",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nIllumina reads R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nIllumina reads R2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nlong reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"fastp on short reads\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  656e4138-41ab-4561-8989-33de9ac9a2f3[\"Output\\nfastp report on short reads html\"];\n  3 --> 656e4138-41ab-4561-8989-33de9ac9a2f3;\n  style 656e4138-41ab-4561-8989-33de9ac9a2f3 stroke:#2c3143,stroke-width:4px;\n  0d53f347-0368-47cb-953a-2e4dac57e013[\"Output\\nfastp filtered R1 reads\"];\n  3 --> 0d53f347-0368-47cb-953a-2e4dac57e013;\n  style 0d53f347-0368-47cb-953a-2e4dac57e013 stroke:#2c3143,stroke-width:4px;\n  10fbe1e5-400c-4ffe-8794-9b776b0d7322[\"Output\\nfastp report on short reads json\"];\n  3 --> 10fbe1e5-400c-4ffe-8794-9b776b0d7322;\n  style 10fbe1e5-400c-4ffe-8794-9b776b0d7322 stroke:#2c3143,stroke-width:4px;\n  639ed3f7-0e51-4e5d-b6f8-081378962109[\"Output\\nfastp filtered R2 reads\"];\n  3 --> 639ed3f7-0e51-4e5d-b6f8-081378962109;\n  style 639ed3f7-0e51-4e5d-b6f8-081378962109 stroke:#2c3143,stroke-width:4px;\n  4[\"fastp on long reads\"];\n  2 -->|output| 4;\n  5e0d2c3d-41a4-4823-ae9c-b1e4d2826541[\"Output\\nfastp report on long reads html\"];\n  4 --> 5e0d2c3d-41a4-4823-ae9c-b1e4d2826541;\n  style 5e0d2c3d-41a4-4823-ae9c-b1e4d2826541 stroke:#2c3143,stroke-width:4px;\n  e6018ad6-86f4-4e78-8cf2-ccc8b97022fe[\"Output\\nfastp filtered long reads\"];\n  4 --> e6018ad6-86f4-4e78-8cf2-ccc8b97022fe;\n  style e6018ad6-86f4-4e78-8cf2-ccc8b97022fe stroke:#2c3143,stroke-width:4px;\n  69f8383b-a1be-4a74-95f4-3dba35e01426[\"Output\\nfastp report on long reads json\"];\n  4 --> 69f8383b-a1be-4a74-95f4-3dba35e01426;\n  style 69f8383b-a1be-4a74-95f4-3dba35e01426 stroke:#2c3143,stroke-width:4px;"
         },
         {
@@ -2356,7 +2334,7 @@
           "name": "kmer counting - meryl - upgraded",
           "title": "kmer counting - meryl - upgraded",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nIllumina reads R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Meryl - count kmers\"];\n  0 -->|output| 1;\n  899ddd93-4c0f-4f81-a973-8120494ed983[\"Output\\nMeryl on input dataset(s): read-db.meryldb\"];\n  1 --> 899ddd93-4c0f-4f81-a973-8120494ed983;\n  style 899ddd93-4c0f-4f81-a973-8120494ed983 stroke:#2c3143,stroke-width:4px;\n  2[\"Meryl - generate histogram\"];\n  1 -->|read_db| 2;\n  3[\"Genomescope\"];\n  2 -->|read_db_hist| 3;\n  efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac[\"Output\\nGenomeScope on input dataset(s) Transformed log plot\"];\n  3 --> efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac;\n  style efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac stroke:#2c3143,stroke-width:4px;\n  701df341-5767-44bc-ade2-6af498ab7467[\"Output\\nGenomeScope on input dataset(s) Transformed linear plot\"];\n  3 --> 701df341-5767-44bc-ade2-6af498ab7467;\n  style 701df341-5767-44bc-ade2-6af498ab7467 stroke:#2c3143,stroke-width:4px;\n  85fa4004-b351-47b3-84aa-6788d338037a[\"Output\\nGenomeScope on input dataset(s) Log plot\"];\n  3 --> 85fa4004-b351-47b3-84aa-6788d338037a;\n  style 85fa4004-b351-47b3-84aa-6788d338037a stroke:#2c3143,stroke-width:4px;\n  c71ce055-98f0-4354-9397-2f8833b90cc4[\"Output\\nGenomeScope on input dataset(s) Linear plot\"];\n  3 --> c71ce055-98f0-4354-9397-2f8833b90cc4;\n  style c71ce055-98f0-4354-9397-2f8833b90cc4 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -2392,11 +2370,7 @@
           }
         ],
         "inexact": [
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          }
+
         ]
       },
       "topic_name_human": "Assembly",
@@ -2632,7 +2606,7 @@
           "name": "Unicycler training",
           "title": "Unicycler training",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nForward reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReverse Reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nLong Reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"FastQC\"];\n  0 -->|output| 3;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Create assemblies with Unicycler\"];\n  2 -->|output| 5;\n  0 -->|output| 5;\n  1 -->|output| 5;\n  6[\"MultiQC\"];\n  3 -->|text_file| 6;\n  4 -->|text_file| 6;\n  7[\"Quast\"];\n  5 -->|assembly| 7;\n  8[\"Prokka\"];\n  5 -->|assembly| 8;\n  0d6b33c9-b105-4997-9045-b86e52f00156[\"Output\\ntbl\"];\n  8 --> 0d6b33c9-b105-4997-9045-b86e52f00156;\n  style 0d6b33c9-b105-4997-9045-b86e52f00156 stroke:#2c3143,stroke-width:4px;\n  8e08b54d-87e1-4269-9b96-8ebf1a9bb4ab[\"Output\\ngbk\"];\n  8 --> 8e08b54d-87e1-4269-9b96-8ebf1a9bb4ab;\n  style 8e08b54d-87e1-4269-9b96-8ebf1a9bb4ab stroke:#2c3143,stroke-width:4px;\n  65e4ddf9-f5bc-4078-8b4e-37b332e12ece[\"Output\\nffn\"];\n  8 --> 65e4ddf9-f5bc-4078-8b4e-37b332e12ece;\n  style 65e4ddf9-f5bc-4078-8b4e-37b332e12ece stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -2681,11 +2655,6 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
             "usegalaxy": false
           },
           {
@@ -2836,8 +2805,8 @@
       },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-06-11 07:29:43 +0000",
-      "pub_date": "2024-06-11 07:29:43 +0000",
+      "mod_date": "2024-06-11 08:50:12 +0000",
+      "pub_date": "2024-06-11 08:50:12 +0000",
       "version": 0,
       "workflows": [
         {
@@ -2855,7 +2824,7 @@
           "name": "Metagenomics assembly tutorial workflow",
           "title": "Metagenomics assembly tutorial workflow",
           "test_results": null,
-          "modified": "2024-06-11 07:29:43 +0000",
+          "modified": "2024-06-11 08:50:12 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"metaSPAdes\"];\n  0 -->|output| 1;\n  833d79ff-e16f-414c-9c41-db8dbfa8ed6b[\"Output\\nmetaSPAdes on input dataset(s): Scaffolds\"];\n  1 --> 833d79ff-e16f-414c-9c41-db8dbfa8ed6b;\n  style 833d79ff-e16f-414c-9c41-db8dbfa8ed6b stroke:#2c3143,stroke-width:4px;\n  10319152-d2f9-47d8-be41-f956a57e86d3[\"Output\\nmetaSPAdes on input dataset(s): Assembly graph\"];\n  1 --> 10319152-d2f9-47d8-be41-f956a57e86d3;\n  style 10319152-d2f9-47d8-be41-f956a57e86d3 stroke:#2c3143,stroke-width:4px;\n  b1ffc3a4-8e39-4255-ac57-fd7cfb9c1633[\"Output\\nmetaSPAdes on input dataset(s): Assembly graph with scaffolds\"];\n  1 --> b1ffc3a4-8e39-4255-ac57-fd7cfb9c1633;\n  style b1ffc3a4-8e39-4255-ac57-fd7cfb9c1633 stroke:#2c3143,stroke-width:4px;\n  b6b74c9d-5a16-4725-a1d1-11c1f05ee909[\"Output\\nmetaSPAdes on input dataset(s): Contigs\"];\n  1 --> b6b74c9d-5a16-4725-a1d1-11c1f05ee909;\n  style b6b74c9d-5a16-4725-a1d1-11c1f05ee909 stroke:#2c3143,stroke-width:4px;\n  2[\"MEGAHIT\"];\n  0 -->|output| 2;\n  3[\"Bowtie2\"];\n  0 -->|output| 3;\n  2 -->|output| 3;\n  4[\"megahit contig2fastg\"];\n  2 -->|output| 4;\n  5[\"Quast\"];\n  2 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Bandage Image\"];\n  4 -->|fastg| 6;\n  7[\"Bandage Info\"];\n  4 -->|fastg| 7;\n  8[\"Column join\"];\n  7 -->|outfile| 8;"
         },
         {
@@ -2873,7 +2842,7 @@
           "name": "workflow-generate-dataset-for-assembly-tutorial",
           "title": "workflow-generate-dataset-for-assembly-tutorial",
           "test_results": null,
-          "modified": "2024-06-11 07:29:43 +0000",
+          "modified": "2024-06-11 08:50:12 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nERR2231567_1.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nERR2231567_2.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Cutadapt\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"MEGAHIT\"];\n  2 -->|out1| 3;\n  2 -->|out2| 3;\n  4[\"Bowtie2\"];\n  2 -->|out1| 4;\n  2 -->|out2| 4;\n  3 -->|output| 4;\n  5[\"BAM filter\"];\n  4 -->|output| 5;\n  6[\"BAM filter\"];\n  4 -->|output| 6;\n  7[\"Convert, Merge, Randomize\"];\n  5 -->|outfile| 7;\n  8[\"Convert, Merge, Randomize\"];\n  6 -->|outfile| 8;\n  9[\"Select random lines\"];\n  7 -->|out_file1| 9;\n  10[\"Select random lines\"];\n  8 -->|out_file1| 10;\n  11[\"Filter Tabular\"];\n  9 -->|out_file1| 11;\n  12[\"Filter Tabular\"];\n  10 -->|out_file1| 12;\n  13[\"Unique\"];\n  11 -->|output| 13;\n  14[\"Unique\"];\n  12 -->|output| 14;\n  15[\"Concatenate datasets\"];\n  13 -->|outfile| 15;\n  14 -->|outfile| 15;\n  16[\"seqtk_subseq\"];\n  2 -->|out1| 16;\n  15 -->|out_file1| 16;\n  17[\"seqtk_subseq\"];\n  2 -->|out2| 17;\n  15 -->|out_file1| 17;\n  18[\"FastQC\"];\n  16 -->|default| 18;\n  19[\"FastQC\"];\n  17 -->|default| 19;"
         }
       ],
@@ -2906,11 +2875,6 @@
 
         ],
         "inexact": [
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          },
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
@@ -3270,7 +3234,7 @@
           "name": "Ecoli Comparison",
           "title": "Ecoli Comparison",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Collapse Collection\"];\n  6 -->|output| 10;\n  11[\"Text transformation\"];\n  7 -->|output| 11;\n  12[\"Add column\"];\n  8 -->|out_file1| 12;\n  13[\"LASTZ\"];\n  9 -->|output| 13;\n  3 -->|output| 13;\n  14[\"random_lines1\"];\n  10 -->|output| 14;\n  15[\"Filter\"];\n  10 -->|output| 15;\n  16[\"Search in textfiles\"];\n  11 -->|output| 16;\n  17[\"Concatenate datasets\"];\n  11 -->|output| 17;\n  9 -->|output| 17;\n  18[\"Cut\"];\n  12 -->|out_file1| 18;\n  19[\"Text transformation\"];\n  13 -->|output| 19;\n  2[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  20[\"Datamash\"];\n  15 -->|out_file1| 20;\n  21[\"Compute sequence length\"];\n  17 -->|out_file1| 21;\n  22[\"Collapse Collection\"];\n  18 -->|out_file1| 22;\n  23[\"Merge Columns\"];\n  19 -->|output| 23;\n  24[\"Select\"];\n  20 -->|out_file| 24;\n  25[\"Sort\"];\n  21 -->|output| 25;\n  26[\"Collapse Collection\"];\n  23 -->|out_file1| 26;\n  27[\"Cut\"];\n  26 -->|output| 27;\n  28[\"Cut\"];\n  26 -->|output| 28;\n  29[\"Concatenate datasets\"];\n  27 -->|out_file1| 29;\n  28 -->|out_file1| 29;\n  3[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  30[\"SortBED\"];\n  29 -->|out_file1| 30;\n  31[\"ComplementBed\"];\n  25 -->|outfile| 31;\n  30 -->|output| 31;\n  32[\"Filter\"];\n  31 -->|output| 32;\n  33[\"Filter\"];\n  32 -->|out_file1| 33;\n  34[\"Intersect intervals\"];\n  33 -->|out_file1| 34;\n  22 -->|output| 34;\n  35[\"Join two Datasets\"];\n  34 -->|output| 35;\n  1 -->|output| 35;\n  4[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"Filter sequences by length\"];\n  0 -->|output| 5;\n  6[\"LASTZ\"];\n  2 -->|output| 6;\n  0 -->|output| 6;\n  7[\"Collapse Collection\"];\n  3 -->|output| 7;\n  8[\"Select\"];\n  4 -->|output| 8;\n  9[\"Text transformation\"];\n  5 -->|output| 9;"
         }
       ],
@@ -3627,11 +3591,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -3813,7 +3772,7 @@
           "name": "Chloroplast-genome-assembly-and-annotation",
           "title": "Chloroplast-genome-assembly-and-annotation",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nIllumina_reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nNanopore_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nTiny_set_illumina_read\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nTiny_set_nanopore_reads\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Flye assembly\"];\n  1 -->|output| 4;\n  5[\"NanoPlot\"];\n  1 -->|output| 5;\n  6[\"Map with BWA-MEM\"];\n  0 -->|output| 6;\n  4 -->|consensus| 6;\n  7[\"Fasta Statistics\"];\n  4 -->|consensus| 7;\n  8[\"Bandage Info\"];\n  4 -->|assembly_gfa| 8;\n  9[\"Bandage Image\"];\n  4 -->|assembly_gfa| 9;\n  10[\"pilon\"];\n  6 -->|bam_output| 10;\n  4 -->|consensus| 10;\n  11[\"Fasta Statistics\"];\n  10 -->|output_fasta| 11;\n  12[\"Map with BWA-MEM\"];\n  2 -->|output| 12;\n  10 -->|output_fasta| 12;\n  13[\"Map with BWA-MEM\"];\n  3 -->|output| 13;\n  10 -->|output_fasta| 13;\n  14[\"Prokka\"];\n  10 -->|output_fasta| 14;\n  15[\"JBrowse\"];\n  10 -->|output_fasta| 15;\n  12 -->|bam_output| 15;\n  13 -->|bam_output| 15;\n  16[\"JBrowse\"];\n  10 -->|output_fasta| 16;\n  14 -->|out_gff| 16;"
         }
       ],
@@ -3851,11 +3810,6 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
             "usegalaxy": false
           },
           {
@@ -4167,7 +4121,7 @@
           "name": "Genome Assembly using PacBio data",
           "title": "Genome Assembly using PacBio data",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPacBio reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Flye\"];\n  0 -->|output| 2;\n  d7badcb2-4d38-4dda-b89b-b4bd3ffbc64a[\"Output\\nFlye on input dataset(s): assembly info\"];\n  2 --> d7badcb2-4d38-4dda-b89b-b4bd3ffbc64a;\n  style d7badcb2-4d38-4dda-b89b-b4bd3ffbc64a stroke:#2c3143,stroke-width:4px;\n  c8f96c22-e06e-4fec-bbfa-d993b7b103eb[\"Output\\nFlye on input dataset(s): consensus\"];\n  2 --> c8f96c22-e06e-4fec-bbfa-d993b7b103eb;\n  style c8f96c22-e06e-4fec-bbfa-d993b7b103eb stroke:#2c3143,stroke-width:4px;\n  a288fb93-5aa5-4231-89e4-958c57106978[\"Output\\nFlye on input dataset(s): graphical fragment assembly\"];\n  2 --> a288fb93-5aa5-4231-89e4-958c57106978;\n  style a288fb93-5aa5-4231-89e4-958c57106978 stroke:#2c3143,stroke-width:4px;\n  0e064181-5cd4-42c8-98f9-fe417303956c[\"Output\\nFlye on input dataset(s): assembly graph\"];\n  2 --> 0e064181-5cd4-42c8-98f9-fe417303956c;\n  style 0e064181-5cd4-42c8-98f9-fe417303956c stroke:#2c3143,stroke-width:4px;\n  3[\"Fasta Statistics\"];\n  1 -->|output| 3;\n  4[\"Busco\"];\n  1 -->|output| 4;\n  5[\"Fasta Statistics\"];\n  2 -->|consensus| 5;\n  6[\"Quast\"];\n  1 -->|output| 6;\n  2 -->|consensus| 6;\n  bea191cb-f88d-4103-b8fa-b3683d77cc93[\"Output\\nQuast on input dataset(s):  HTML report\"];\n  6 --> bea191cb-f88d-4103-b8fa-b3683d77cc93;\n  style bea191cb-f88d-4103-b8fa-b3683d77cc93 stroke:#2c3143,stroke-width:4px;\n  7[\"Busco\"];\n  2 -->|consensus| 7;"
         }
       ],
@@ -4216,11 +4170,6 @@
           {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
             "usegalaxy": false
           }
         ]
@@ -4369,7 +4318,7 @@
           "name": "Post-assembly workflow",
           "title": "Post-assembly workflow",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
+          "modified": "2024-06-11 08:50:09 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nMetadata file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nNCBI taxonomic ID\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nNCBI taxdump directory\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Collection\\nFASTQ files\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Parameter\\nPloidy for model to use\"];\n  style 4 fill:#ded,stroke:#393,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nPrimary genome assembly file fasta\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nDIAMOND database\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Collection\\nHi-C reverse\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Collection\\nHi-C forward\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"Meryl\"];\n  3 -->|output| 9;\n  10[\"Collapse Collection\"];\n  3 -->|output| 10;\n  11[\"Create BlobtoolKit\"];\n  5 -->|output| 11;\n  0 -->|output| 11;\n  2 -->|output| 11;\n  1 -->|output| 11;\n  12[\"gfastats\"];\n  5 -->|output| 12;\n  13[\"Convert compressed file to uncompressed.\"];\n  5 -->|output| 13;\n  14[\"gfastats\"];\n  5 -->|output| 14;\n  15[\"Diamond\"];\n  5 -->|output| 15;\n  6 -->|output| 15;\n  16[\"Collapse Collection\"];\n  7 -->|output| 16;\n  17[\"Collapse Collection\"];\n  8 -->|output| 17;\n  18[\"Meryl\"];\n  9 -->|read_db| 18;\n  19[\"HISAT2\"];\n  10 -->|output| 19;\n  5 -->|output| 19;\n  20[\"Smudgeplot\"];\n  10 -->|output| 20;\n  21[\"Replace\"];\n  13 -->|output1| 21;\n  22[\"Bandage Image\"];\n  14 -->|output| 22;\n  23[\"BWA-MEM2\"];\n  16 -->|output| 23;\n  5 -->|output| 23;\n  24[\"BWA-MEM2\"];\n  17 -->|output| 24;\n  5 -->|output| 24;\n  25[\"Merqury\"];\n  5 -->|output| 25;\n  18 -->|read_db| 25;\n  c2fe83a3-754a-4544-bb87-df16f3537ab4[\"Output\\nMerqury on input dataset(s): stats\"];\n  25 --> c2fe83a3-754a-4544-bb87-df16f3537ab4;\n  style c2fe83a3-754a-4544-bb87-df16f3537ab4 stroke:#2c3143,stroke-width:4px;\n  8f08d8f6-7615-420c-8a15-201a61b5d3bb[\"Output\\nMerqury on input dataset(s): plots\"];\n  25 --> 8f08d8f6-7615-420c-8a15-201a61b5d3bb;\n  style 8f08d8f6-7615-420c-8a15-201a61b5d3bb stroke:#2c3143,stroke-width:4px;\n  7a8d951a-6a31-4b02-aeba-0eb3061f85ce[\"Output\\nMerqury on input dataset(s): QV stats\"];\n  25 --> 7a8d951a-6a31-4b02-aeba-0eb3061f85ce;\n  style 7a8d951a-6a31-4b02-aeba-0eb3061f85ce stroke:#2c3143,stroke-width:4px;\n  26[\"Meryl\"];\n  18 -->|read_db| 26;\n  27[\"Samtools stats\"];\n  19 -->|output_alignments| 27;\n  28[\"Busco\"];\n  21 -->|outfile| 28;\n  1d4e4542-8bf1-4e32-890b-2e18df95a0de[\"Output\\nBusco on input dataset(s): full table\"];\n  28 --> 1d4e4542-8bf1-4e32-890b-2e18df95a0de;\n  style 1d4e4542-8bf1-4e32-890b-2e18df95a0de stroke:#2c3143,stroke-width:4px;\n  680b8177-3653-4630-ab99-c1d2304dc485[\"Output\\nBusco on input dataset(s): short summary\"];\n  28 --> 680b8177-3653-4630-ab99-c1d2304dc485;\n  style 680b8177-3653-4630-ab99-c1d2304dc485 stroke:#2c3143,stroke-width:4px;\n  29[\"Filter and merge\"];\n  24 -->|bam_output| 29;\n  23 -->|bam_output| 29;\n  30[\"Merqury plot 2\"];\n  25 -->|png_files| 30;\n  31[\"Merqury plot 1\"];\n  25 -->|png_files| 31;\n  32[\"Merqury plot 3\"];\n  25 -->|png_files| 32;\n  33[\"Merqury plot 5\"];\n  25 -->|png_files| 33;\n  34[\"Merqury plot 4\"];\n  25 -->|png_files| 34;\n  35[\"GenomeScope\"];\n  26 -->|read_db_hist| 35;\n  4 -->|output| 35;\n  36[\"BlobToolKit\"];\n  15 -->|blast_tabular| 36;\n  11 -->|blobdir| 36;\n  28 -->|busco_table| 36;\n  19 -->|output_alignments| 36;\n  37[\"PretextMap\"];\n  29 -->|outfile| 37;\n  38[\"Interactive BlobToolKit\"];\n  36 -->|blobdir| 38;\n  39[\"Pretext Snapshot\"];\n  37 -->|pretext_map_out| 39;"
         }
       ],
@@ -4684,8 +4633,8 @@
           "name": "Genome Assembly of MRSA using Illumina MiSeq Data",
           "title": "Genome Assembly of MRSA using Illumina MiSeq Data",
           "test_results": null,
-          "modified": "2024-06-11 07:29:40 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nDRR187559_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nDRR187559_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  69ccaa02-4fcd-49a7-be22-46ffa6ed921d[\"Output\\nfastp_json\"];\n  3 --> 69ccaa02-4fcd-49a7-be22-46ffa6ed921d;\n  style 69ccaa02-4fcd-49a7-be22-46ffa6ed921d stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Shovill\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  6ffebf69-cec1-4e7d-974f-95407104d2bc[\"Output\\nshovill_log\"];\n  5 --> 6ffebf69-cec1-4e7d-974f-95407104d2bc;\n  style 6ffebf69-cec1-4e7d-974f-95407104d2bc stroke:#2c3143,stroke-width:4px;\n  6[\"Quast\"];\n  5 -->|contigs| 6;\n  786e0a88-513e-41f8-8f3b-ba3470785f88[\"Output\\nquast_output\"];\n  6 --> 786e0a88-513e-41f8-8f3b-ba3470785f88;\n  style 786e0a88-513e-41f8-8f3b-ba3470785f88 stroke:#2c3143,stroke-width:4px;\n  7[\"Bandage Image\"];\n  5 -->|contigs_graph| 7;\n  8[\"Bandage Info\"];\n  5 -->|contigs_graph| 8;\n  b5ff53aa-df67-4bb3-ab20-061ed5c54c9c[\"Output\\nbandage_info_output\"];\n  8 --> b5ff53aa-df67-4bb3-ab20-061ed5c54c9c;\n  style b5ff53aa-df67-4bb3-ab20-061ed5c54c9c stroke:#2c3143,stroke-width:4px;"
+          "modified": "2024-06-11 08:50:09 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nDRR187559_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nDRR187559_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  1 -->|output| 3;\n  0 -->|output| 3;\n  2216c166-98d1-4b93-8994-0128008e2bfe[\"Output\\nfastp_json\"];\n  3 --> 2216c166-98d1-4b93-8994-0128008e2bfe;\n  style 2216c166-98d1-4b93-8994-0128008e2bfe stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  5[\"Shovill\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  e74fb7e9-ec01-405b-b116-686b86b83a72[\"Output\\nshovill_log\"];\n  5 --> e74fb7e9-ec01-405b-b116-686b86b83a72;\n  style e74fb7e9-ec01-405b-b116-686b86b83a72 stroke:#2c3143,stroke-width:4px;\n  6[\"Quast\"];\n  5 -->|contigs| 6;\n  cd09b899-480c-4e49-b8cb-24205d96a836[\"Output\\nquast_output\"];\n  6 --> cd09b899-480c-4e49-b8cb-24205d96a836;\n  style cd09b899-480c-4e49-b8cb-24205d96a836 stroke:#2c3143,stroke-width:4px;\n  7[\"Bandage Image\"];\n  5 -->|contigs_graph| 7;\n  8[\"Bandage Info\"];\n  5 -->|contigs_graph| 8;\n  99c86938-c549-45d8-86d9-94e307942c05[\"Output\\nbandage_info_output\"];\n  8 --> 99c86938-c549-45d8-86d9-94e307942c05;\n  style 99c86938-c549-45d8-86d9-94e307942c05 stroke:#2c3143,stroke-width:4px;"
         }
       ],
       "api": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/mrsa-illumina/tutorial.json",
@@ -4701,11 +4650,6 @@
       ],
       "supported_servers": {
         "exact": [
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          },
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
