@@ -542,9 +542,17 @@ If you have followed all of the steps of this tutorial, you will have two useabl
 
 {% snippet faqs/galaxy/collections_build_list_paired.md %}
 
-You can now run the **TB Variant Analysis**, launching it directly from WorkflowHub.eu on several of the public Galaxy servers.
+The workflow that we are going to use is published on [WorkflowHub.eu](https://workflowhub.eu/workflows/1035) and you can run it directly on Galaxy servers using the link below:
 
 {% snippet faqs/galaxy/workflows_run_wfh.md title="TB Variant Analysis v1.0" wfhub_id="1035" %}
+
+If the text above doesn't show a text to run or if you are not on one of the public "usegalaxy.*" servers that integrate with WorkflowHub.eu:
+
+1. Copy the URL of [this link]({{ site.baseurl }}{{ page.dir }}workflows/tb-variant-analysis.ga) (e.g. via right click) or save it to your computer and 
+2. Import the workflow into Galaxy
+3. Click the run icon (it is a small white right-pointing triangle on a blue background)
+
+{% snippet faqs/galaxy/workflows_import.md %}
 
 > <hands-on-title>Analysing samples with the TB Variant Reporting workflow</hands-on-title>
 >
