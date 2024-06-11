@@ -29,27 +29,7 @@ Tuesday-Thursday | Different Tracks(*)
 Friday  |Choose from a variety of different topics
     
 
-(*)**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID 
-
-
-<table>
-  <tr>
-    <th>Day</th>
-    <th>Program</th>
-  </tr>
-  <tr>
-    <td>Monday</td>
-    <td>Galaxy Introduction</td>
-  </tr>
-  <tr>
-    <td>Tue-Thu</td>
-    <td>Different Tracks</td>
-  </tr>
-  <tr>
-    <td>Friday</td>
-    <td>Choose from a variety of different topics</td>
-  </tr>
-</table>
+- (*)**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID 
 
 
 
