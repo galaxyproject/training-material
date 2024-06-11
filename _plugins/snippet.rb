@@ -63,10 +63,10 @@ module Jekyll
 
             # Allow overriding the title with an include parameter
             title = if !p.nil? && p['title']
-                         p['title']
-                       else
+                      p['title']
+                    else
                          metadata['title']
-                       end
+                    end
 
             if context.registers[:page]&.key?('lang')
               lang = context.registers[:page].fetch('lang', 'en')
