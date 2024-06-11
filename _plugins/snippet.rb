@@ -65,7 +65,7 @@ module Jekyll
             title = if !p.nil? && p['title']
                       p['title']
                     else
-                         metadata['title']
+                      metadata['title']
                     end
 
             if context.registers[:page]&.key?('lang')
