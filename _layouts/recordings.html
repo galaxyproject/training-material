@@ -5,23 +5,31 @@ layout: base
 {% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
 
 <section class="tutorial">
-    <h1 data-toc-skip>Recordings - {{ material.title }} </h1>
+  <h1 data-toc-skip>Recordings - {{ material.title }} </h1>
 
-    <p>This is a collection of recordings from various training events where the  <a href="../tutorial.html">{{ material.title }}</a> tutorial was taught by members of the GTN community. The tutorial may have changed after the recording was made; below each video you will find a link to the tutorial as it appeared at the time of recording.</p>
+  <p>This is a collection of recordings from various training events where the  <a href="../tutorial.html">{{ material.title }}</a> tutorial was taught by members of the GTN community. The tutorial may have changed after the recording was made; below each video you will find a link to the tutorial as it appeared at the time of recording.</p>
 
-    <p><b>Want to add your own recording?</b> We would love to have it to our library! TODO: button linking to instructions </p>
+  <p><b>Want to add your own recording?</b> We would love to have it to our library! TODO: button linking to instructions </p>
 
-    {% if material.recordings %}
-    {% assign recordings = material.recordings | sort: 'date' | reverse  %}
-    {% for recording in recordings %}
-    <h2> Tutorial Recording - {{ recording.date | date: "%-d %B %Y"  }} </h2>
-    <div class="recording">
+  {% if material.recordings %}
+  {% assign recordings = material.recordings | sort: 'date' | reverse  %}
 
-    <div class="recording-video">
-    {% include _includes/youtube.html id=recording.youtube_id %}
+  Available Recordings:
+  <ul>
+  {% for recording in recordings %}
+    <li> <a href="#tutorial-recording-{{ recording.date | date: "%-d %B %Y" | slugify }}">{{ recording.date | date: "%-d %B %Y"  }}</a></li>
+  {% endfor %}
+    </ul>
+
+  {% for recording in recordings %}
+  <h2> Tutorial Recording - {{ recording.date | date: "%-d %B %Y"  }} </h2>
+  <div class="row recording">
+
+    <div class="col-md-6 recording-video">
+    {% include _includes/youtube.html id=recording.youtube_id width="100%" height="100%" %}
     </div>
 
-    <div class="recording-metadata">
+    <div class="col-md-6 recording-metadata">
     <table class="table table-striped">
     <tbody>
     <!-- description -->
@@ -94,11 +102,12 @@ layout: base
     </tr>
     </tbody>
     </table>
-    </div>
-    </div>
-    <br><br>
+    </div> <!-- end metadata table div -->
 
-    {% endfor %}
+  </div> <!-- end row div -->
+  <br><br>
+
+  {% endfor %}
 
 {% endif %}
 </section>
