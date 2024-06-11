@@ -4,6 +4,11 @@ area: workflows
 box_type: hands_on
 layout: faq
 contributors: [hexylena]
+parameters:
+  dockstore_id: The Dockstore ID of the workflow you want to import
+  title: The title of the workflow you want to import, can be any text
+examples:
+  Load a workflow by Dockstore ID: {dockstore_id: "github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow", title: "My Cool Workflow"}
 ---
 
 {% if include.dockstore_id %}
