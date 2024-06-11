@@ -228,13 +228,20 @@
                    <span class="ruby-identifier">metadata</span>[<span class="ruby-string">&#39;box_type&#39;</span>]
                  <span class="ruby-keyword">end</span>
 
+      <span class="ruby-comment"># Allow overriding the title with an include parameter</span>
+      <span class="ruby-identifier">title</span> = <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">p</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;override_title&#39;</span>]
+                <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;override_title&#39;</span>]
+              <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">metadata</span>[<span class="ruby-string">&#39;title&#39;</span>]
+              <span class="ruby-keyword">end</span>
+
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>]&amp;.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;lang&#39;</span>)
         <span class="ruby-identifier">lang</span> = <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;lang&#39;</span>, <span class="ruby-string">&#39;en&#39;</span>)
         <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lang</span>.<span class="ruby-identifier">nil?</span>
       <span class="ruby-keyword">end</span>
       <span class="ruby-identifier">lang</span> = <span class="ruby-string">&#39;en&#39;</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">lang</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;en&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">lang</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;es&#39;</span>)
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">box_type</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;none&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">box_type</span>.<span class="ruby-identifier">nil?</span>
-        <span class="ruby-identifier">_box_id</span>, <span class="ruby-identifier">box_title</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Boxify</span>.<span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">metadata</span>[<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-identifier">lang</span>,
+        <span class="ruby-identifier">_box_id</span>, <span class="ruby-identifier">box_title</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Boxify</span>.<span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>,
                                                         <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:page</span>][<span class="ruby-string">&#39;path&#39;</span>])
         <span class="ruby-identifier">box_start</span> = <span class="ruby-node">&quot;&gt; #{box_title}&quot;</span>
         <span class="ruby-identifier">box_end</span> = <span class="ruby-node">&quot;\n{: .#{box_type}}&quot;</span>

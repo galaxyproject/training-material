@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d342fa8af3054d6d9c1a14d6e96c42a7931fe4a0",
+		release: "galaxy-training-network@669adffba4db4602678dcbbd25609e2a3824b52c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,13 +70,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Importing a workflow">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-27 16:46:13 +0000">
+<meta name="DC.date" content="2024-06-11 09:30:03 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Maria Doyle">
-<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="- Click on *Workflow* on the top menu bar of Galaxy. You will see a list of all your workflows. - Click on {% icon galaxy-upload %} **Import** at the top-right of the screen - Provide your workflow   - Option 1: Paste the URL of the workflow into the box labelled * Archived Workflow URL *   - Option 2: Upload the workflow file in the box labelled * Archived Workflow File * - Click the **Import workflow** button  Below is a short video demonstrating how to import a workflow from GitHub using this procedure:    ">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="- Click on *Workflow* on the top menu bar of Galaxy. You will see a list of all your workflows. - Click on {% icon galaxy-upload %} **Import** at the top-right of the screen - {% if include.import_url %}Paste the following URL into the box labelled * Archived Workflow URL *: `{{ include.import_url }}`{% else %}Provide your workflow   - Option 1: Paste the URL of the workflow into the box labelled * Archived Workflow URL *   - Option 2: Upload the workflow file in the box labelled * Archived Workflow File *{% endif %} - Click the **Import workflow** button  Below is a short video demonstrating how to import a workflow from GitHub using this procedure:  {% include _includes/youtube.html id= hoP36Te5wko  title= Importing a workflow from URL  %} ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Importing a workflow">
-        <meta property="og:description" content="- Click on *Workflow* on the top menu bar of Galaxy. You will see a list of all your workflows. - Click on {% icon galaxy-upload %} **Import** at the top-right of the screen - Provide your workflow   - Option 1: Paste the URL of the workflow into the box labelled * Archived Workflow URL *   - Option 2: Upload the workflow file in the box labelled * Archived Workflow File * - Click the **Import workflow** button  Below is a short video demonstrating how to import a workflow from GitHub using this procedure:    ">
+        <meta property="og:description" content="- Click on *Workflow* on the top menu bar of Galaxy. You will see a list of all your workflows. - Click on {% icon galaxy-upload %} **Import** at the top-right of the screen - {% if include.import_url %}Paste the following URL into the box labelled * Archived Workflow URL *: `{{ include.import_url }}`{% else %}Provide your workflow   - Option 1: Paste the URL of the workflow into the box labelled * Archived Workflow URL *   - Option 2: Upload the workflow file in the box labelled * Archived Workflow File *{% endif %} - Click the **Import workflow** button  Below is a short video demonstrating how to import a workflow from GitHub using this procedure:  {% include _includes/youtube.html id= hoP36Te5wko  title= Importing a workflow from URL  %} ">
         
 	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -258,7 +258,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>
 
-<p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe></p>
+<figure>
+<iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe>
+<figcaption>
+  <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption>
+</figure>
 
         </div>
         <div class="col-md-4">
@@ -331,7 +335,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d342fa8af3054d6d9c1a14d6e96c42a7931fe4a0">d342fa8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/669adffba4db4602678dcbbd25609e2a3824b52c">669adff</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
