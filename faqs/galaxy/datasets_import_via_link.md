@@ -16,12 +16,12 @@ optional_parameters:
   collection_name_convention: Suggests a naming convention for the collection
 examples:
   Import a list of files:
-    collection: true
+    collection: 'true'
     collection_type: List
     collection_name: raw_files
     format: thermo.raw
   Create a paired collection with a given naming scheme:
-    collection: true
+    collection: 'true'
     collection_type: Paired
     collection_name_convention: "'&lt;name&gt;_&lt;plate&gt;_&lt;batch&gt;' to preserve the sample names, sequencing plate number and batch number."
     collection_name: "Here we will write 'C57_P1_B1'"
