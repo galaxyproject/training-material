@@ -8,8 +8,6 @@ contributions:
     - teresa-m
 ---
 
-# Open Call for Trainers for the Galaxy Training Academy
-
 We are happy to announce the Galaxy Training Academy 2024, a global online training event, where learners can get to know Galaxy and learn how to analyze data for various research topics.
 
 
