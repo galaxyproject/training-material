@@ -245,11 +245,11 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. Substitution of a `C` to a `T`. This variant is supported by 134 reads.
+>    > > 1. Substitution of a `C` to a `T`. This variant is supported by 197 reads.
 >    > >
 >    > > 2. According to SnpEff, it's a Synonymous change in Rv0002.
 >    > >
->    > > 3. 1086 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or how many lines (excluding the header) there are in the VCF file. This is quite typical for _M. tuberculosis_.
+>    > > 3. 1098 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or how many lines (excluding the header) there are in the VCF file. This is quite typical for _M. tuberculosis_.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -279,7 +279,7 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. `159` (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)
+>    > > 1. `131` (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)
 >    > >
 >    > {: .solution}
 >    {: .question}
