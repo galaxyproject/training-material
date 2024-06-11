@@ -24,14 +24,14 @@ The event will provide a self-paced online learning experience for learners who 
 ### Initial Program:
 
 
-Day     | Program
-------- | ------
-Monday  | Galaxy Introduction
-Tuesday-Thursday | Different Tracks(*)
-Friday  |Choose from a variety of different topics
-    
+| Day    | Program |
+|------- | ------- |
+|Monday  | Galaxy Introduction |
+|Tuesday-Thursday&nbsp;&nbsp;&nbsp; | Different Tracks(*) |
+|Friday  |Choose from a variety of different topics&nbsp; |
+{: .table-striped}
 
-- (*)**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID 
+(*)**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID
 
 
 
@@ -53,4 +53,4 @@ Even if you don't have a tutorial in mind, your support in any of the above capa
 
 Are you interested? [Register now](https://forms.gle/B554dNtN5HEuC5XY9)
 
-We leave the call open until July the 12th. 
+We leave the call open until July the 12th.
