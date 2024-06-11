@@ -25,11 +25,11 @@ The event will provide a self-paced online learning experience for learners who 
 Day | Program
 --- | ---
 Monday | Galaxy Introduction
-Tuesday-Thurday | Different Track
+Tue-Thu | Different Tracks(*)
 Friday |Choose from a variety of different topics
     
 
-**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID 
+(*)**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID 
 
 
 ## Your contribution
