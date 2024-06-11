@@ -1,6 +1,6 @@
 ---
-layout: news
 title: "Open Call for Trainers for the Galaxy Training Academy"
+layout: news
 tags:
   - gtn
 contributions:
