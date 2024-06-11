@@ -717,7 +717,7 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 
 > <hands-on-title> Plot marker genes </hands-on-title>
 >
-> 1. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy2) %} with the following parameters:
+> 1. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, MS4A1, CD3D, LEF1, NKG7, TREM1, LYZ, PPBP`
@@ -775,6 +775,104 @@ Cluster | Cell type
 > Note that some clusters contain subtypes (f.ex. the annotated T cell clusters contain both CD4+ and CD8+ T cells). The cell-type annotation can be refined by choosing more specific marker genes. 
 Hands-on: manually annotate the clusters
 {: .comment}
+
+To manually annotate the *Leiden* clusters, we will need to perform multiple steps: 
+    1. **Inspect** the key-indexed observations of `Anndata 5k PBMC gene_matrix magic UMAP` 
+    2. **Cut** the *Leiden* annotations out of the table
+    3. Make a *replace file* containing the new cell type annotations for the *Leiden* clusters
+    4. **Replace** the values of the cluster annotation with cell type annotation
+    5. **Add** the cell type annotation to the AnnData
+    6. **Plot** the annotated cell types
+
+> <hands-on-title> Manual annotation </hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic UMAP`
+>    - *"What to inspect?"*: `Key-indexed observations annotation`
+> 2. {% icon galaxy-eye %} Inspect the generated file
+>
+>    > <question-title></question-title>
+>    > In which column is the `Leiden` annotation located?
+>    > > <solution-title></solution-title>
+>    > > The `Leiden` annotation is in column 8. 
+>    > > ```
+>    > > Column 1 | Column 2 | Column 3 | Column 4 | Column 5 | Column 6 | Column 7 | Column 8 | Column 9 | Column 10
+>    > > --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+>    > > "" | n_fragment | frac_dup | frac_mito | tsse | doublet_probability | doublet_score | leiden | n_genes | n_counts
+>    > > AAACGAAAGACGTCAG-1 | 22070 | 0.5219425551271499 | 0.0 | 30.43315066436454 | 0.004634433324822066 | 0.009276437847866418 | 8 | 52303 | 16521.599844068267
+>    > > AAACGAAAGATTGACA-1 | 10500 | 0.5345125681606597 | 0.0 | 29.10551296093465 | 0.004668403569267374 | 0.001088139281828074 | 1 | 54501 | 15020.42495602328
+>    > > AAACGAAAGGGTCCCT-1 | 19201 | 0.5101785714285714 | 0.0 | 19.90011850347046 | 0.004634433324822066 | 0.009276437847866418 | 5 | 54212 | 16294.751533305309
+>    > > AAACGAACAATTGTGC-1 | 13242 | 0.487399837417257 | 0.0 | 29.060913705583758 | 0.004660125753854076 | 0.0022172949002217295 | 7 | 53530 | 15456.629863655084
+>    > > ``` 
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+> 3. Rename the generated file to `5k PBMC observations` or add the tag `obs` to the dataset
+>
+> {% snippet  faqs/galaxy/analysis_cut.md %}
+> 4. {% tool [Cut columns](toolshed.g2.bx.psu.edu/repos/devteam/cut_columns/Cut1/1.0.2) %} with the following parameters:
+>    - {% icon param-select %} *"Cut columns"*: `c8`
+>    - {% icon param-file %} *"From"*: `5k PBMC observations` (output of **Inspect AnnData** {% icon tool %})
+>
+> 5. Create a new **.csv** file from the following
+>    ```
+>    leiden, cell_type
+>    0, Dendritic_cells
+>    1, memory_Tcells
+>    2, memory_Tcells
+>    3, Dendritic_cells
+>    4, naive_Tcells
+>    5, Monocytes
+>    6, Bcells
+>    7, naive_Tcells
+>    8, naive_Tcells
+>    9, NKcells
+>    10, Dendritic_cells
+>    11, Bcells
+>    12, Megakaryocytes
+>    ```
+>    {% snippet faqs/galaxy/datasets_create_new_file.md format="csv" name="replace_file"%}
+> 
+>    > <details-title>Replace file</details-title>
+>    >
+>    > - The first column of the replace file contains the "old" annotations and the second column contains the "new" annotation. 
+>    > - {% icon warning %} Spaces between entries can lead to errors. Please use underscores (`_`) instead. 
+>    >
+>    {: .details}
+> 6. {% tool [Replace column](toolshed.g2.bx.psu.edu/repos/bgruening/replace_column_by_key_value_file/replace_column_with_key_value_file/0.2) %} with the following parameters:
+>    - {% icon param-file %} *"File in which you want to replace some values"*: `Cut columns leiden` (output of **Cut columns** {% icon tool %})
+>    - {% icon param-file %} *"Replace information file"*: `replace_file` 
+>    - *"Which column should be replaced?*: `Column: 1`
+> 7. {% icon galaxy-eye %} Inspect the generated file to check if the replacement was successful
+> 8. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic UMAP`
+>    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
+>        - *"What to annotate"*: `Observations (obs)`
+>        - {% icon param-file %} *"Table with new annotations"*: `Replace column`(output of **Replace column** {% icon tool %})
+> 9. Rename the generated file to `Anndata 5k PBMC gene_matrix magic cell_type` or add the tag `cell_type` to the dataset
+>
+> 10. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic cell_type` (output of **Replace column** {% icon tool %})
+>    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `cell_type`
+>        - {% icon param-toggle %} *"Show edges?"*: `No`
+>        - In *"Plot attributes"*
+>           - *"Location of legend"*: `on data`
+>           - {% icon param-toggle %} *"Draw a frame around the scatter plot?"*: `No`
+> 6. {% icon galaxy-eye %} Inspect the `.png` output
+>
+>
+>    > <question-title></question-title>
+>    > 1. Question
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. solution
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+{: .hands_on}
 
 
 # Conclusion
