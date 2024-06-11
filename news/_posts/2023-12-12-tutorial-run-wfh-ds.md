@@ -15,6 +15,10 @@ We've added two snippets which make that easier than ever:
 
 And one for Dockstore:
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+
+And one for workflows hosted natively in the GTN:
+
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" title="Galaxy Workflow Data QC" %}
 
 You can read more about these snippets and how to use them yourself in your tutorials in the [GTN Contribution Guide section on Workflows]({% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %}#workflows).

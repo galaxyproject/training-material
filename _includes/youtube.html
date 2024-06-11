@@ -1,3 +1,4 @@
+<figure>
 <iframe
     credentialless
     allowfullscreen
@@ -7,8 +8,11 @@
     csp="sandbox allow-scripts allow-same-origin;"
     width="560"
     height="315"
-    src="https://www.youtube-nocookie.com/embed/{{ include.id }}"
+    src="https://www.youtube-nocookie.com/embed/{{ include.id }}{% if include.start %}?start={{ include.start }}{% endif %}"
     title="{{ include.title }}"
     frameborder="0"
     loading="lazy"
 ></iframe>
+<figcaption>
+  <span class="figcaption-prefix"><strong>Video</strong>:</span> {{ include.title }}</figcaption>
+</figure>
