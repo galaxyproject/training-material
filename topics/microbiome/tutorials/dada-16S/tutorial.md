@@ -902,7 +902,7 @@ We now construct a phyloseq object directly with it and the DADA2 outputs and la
 > 1. {% tool [Create phyloseq object from dada2](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_dada2/phyloseq_from_dada2/1.46.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence table"*: output of **dada2: removeBimeraDenovo**
 >    - {% icon param-file %} *"Taxonomy table"*: output of **dada2: assignTaxonomy and addSpecies**
->    - {% icon param-file %} *"Taxonomy table"*: `Metadata table`
+>    - {% icon param-file %} *"Sample table"*: `Metadata table`
 >
 > 2. {% tool [Phyloseq](interactive_tool_phyloseq) %} with the following parameters:
 >    - {% icon param-file %} *"Phyloseq R object"*: output of **Create phyloseq object from dada2**
