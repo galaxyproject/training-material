@@ -76,7 +76,7 @@ module Jekyll
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true if uri.scheme == 'https'
       response = http.request_head(uri.path)
-      Jekyll.logger.warn response
+      #Jekyll.logger.warn response
       response.code == '200'
     end
 
