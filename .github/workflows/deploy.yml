@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository_owner == 'galaxyproject'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           # Avg commits between successive monday:
           #  Min.   :  2.0
@@ -26,17 +26,17 @@ jobs:
           fetch-depth: 400
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.7'
+          python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/setup-node@v2
+          ruby-version: "3.2"
+      - uses: actions/setup-node@v4
         with:
           node-version: '19'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -74,6 +74,7 @@ jobs:
         run: |
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
           cp metadata/feedback.csv _site/training-material/api/feedback.csv
+          cp metadata/feedback2.yaml _site/training-material/api/feedback2.yaml
         env:
           GTN_FORK: ${{ github.repository_owner }}
 

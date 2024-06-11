@@ -217,17 +217,17 @@ body {
     & > h3 ,
     > .box-title {
         font-size: $font-size + 3;
-        margin-left: -$tutorial-box-spacing;
-        margin-right: -$tutorial-box-spacing;
+        margin-inline-start: -$tutorial-box-spacing;
+        margin-inline-end: -$tutorial-box-spacing;
         margin-top: -3.30rem;
         padding-top: calc($tutorial-box-spacing / 2);
         padding-bottom: calc($tutorial-box-spacing / 2);
-        padding-left: $tutorial-box-spacing;
-        padding-right: $tutorial-box-spacing;
+        padding-inline-start: $tutorial-box-spacing;
+        padding-inline-end: $tutorial-box-spacing;
         background-color: $bg-color;
         color: var(--text-color-boxtitle);
         vertical-align: 1em;
-        float: left;
+        float: inline-start;
         border: 1px solid $bg-color;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
@@ -334,7 +334,7 @@ div#theme-selector,div#lang-selector,div#archive-selector {
 	flex-wrap: wrap;
 	width: 200px;
 	justify-content: flex-start;
-	margin-left: 1em;
+	margin-inline-start: 1em;
 
 	label.btn,a.btn,button.btn {
 		margin: 0.1em;
@@ -382,6 +382,9 @@ figure {
   margin: 2rem;
   border: thin silver solid;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
 
   & > img {
       margin-bottom: 1rem;
@@ -679,8 +682,8 @@ blockquote {
     }
 
     &.quote {
-        border-left: 5px solid var(--brand-color);
-        padding-left: 1em;
+        border-inline-start: 5px solid var(--brand-color);
+        padding-inline-start: 1em;
     }
 
     &.spoken {
@@ -701,22 +704,26 @@ blockquote {
 }
 
 .fold-unfold {
-    margin-left: $tutorial-box-spacing;
+    margin-inline-start: $tutorial-box-spacing;
 }
 .pre-break-lines code {
     white-space: pre-wrap;
 }
 
-.card {
+.card{
 	background: transparent;
 	border: 1px solid var(--border-light);
 	.card-title {
-		background: var(--brand-color);
-		border-bottom: 1px solid var(--border-light);
-		padding: 1.25rem;
 		color: var(--brand-color-contrast);
 		// margin-left: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
 		// margin-right: -15px;
+	}
+}
+
+.card:not(.setup-card){
+	.card-title {
+		background: var(--brand-color);
+		padding: 1.25rem;
 	}
 
 	.card-body {
@@ -1104,7 +1111,7 @@ nav[data-toggle='toc'] {
 	.nav-link.active:focus,
 	.nav-link.active:hover {
 		color: var(--hyperlink);
-		border-left: 2px solid var(--hyperlink);
+		border-inline-start: 2px solid var(--hyperlink);
 	}
 
 
@@ -1112,13 +1119,13 @@ nav[data-toggle='toc'] {
         li {
             a {
 		color: var(--text-color-muted);
-                padding-left: 0px;
+                padding-inline-start: 0px;
                 &:hover,
                 &:focus,
                 &:active {
-                    padding-left: 0px;
+                    padding-inline-start: 0px;
                     color: var(--hyperlink);
-                    border-left: none;
+                    border-inline-start: none;
                 }
             }
         }
@@ -1126,7 +1133,7 @@ nav[data-toggle='toc'] {
 }
 
 .col-sm-2 {
-    padding-left: 0px;
+    padding-inline-start: 0px;
 }
 
 /* small screens */
@@ -1202,6 +1209,46 @@ nav[data-toggle='toc'] {
     }
 }
 
+.funder-badge {
+	display: flex;
+	flex-direction: row;
+	border: 1px solid var(--hyperlink);
+	color: var(--text-color);
+	max-width: 24em;
+	height: 8em;
+	margin-inline-end: 1em;
+	margin-bottom: 1em;
+    padding: 1em;
+
+	div.avatar {
+		display: flex;
+		align-items: center;
+
+		img.funder-avatar {
+			margin: 0;
+            padding: 0.5em;
+			max-height: 8em;
+			min-width: 8em;
+			max-width: 8em;
+			margin-inline-end: 1em;
+		}
+	}
+
+	div.info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		div.name {
+			font-size: 1.2rem;
+		}
+		div.description {
+			overflow-y: hidden;
+			font-size: 0.9rem;
+		}
+	}
+}
+
 table.contributions{
     tr td:nth-child(1) {
         display: flex;
@@ -1242,7 +1289,7 @@ div.highlight:hover .btn,div.highlight .btn:focus{
         display: inline;
     }
     .search_box {
-        float: right;
+        float: inline-end;
         i {padding-right: .5rem;}
     }
     #clear_search{
@@ -1252,10 +1299,10 @@ div.highlight:hover .btn,div.highlight .btn:focus{
 
 ul.supporting_material{
     .btn{
-        padding-left: 0px;
+        padding-inline-start: 0px;
         padding-top: 0px;
         padding-bottom: 0px;
-        padding-right: 10px;
+        padding-inline-end: 10px;
         font-size: 15px;
     }
 }
@@ -1278,7 +1325,7 @@ li {
             width: 47.5%;
         }
         .code-out {
-            margin-left: 5%;
+            margin-inline-start: 5%;
             width: 47.5%;
         }
     }
@@ -1425,7 +1472,7 @@ div.contributors-line {
       font-weight: initial;
     }
     dd {
-      margin-left: auto;
+      margin-inline-start: auto;
       width: calc(100% - 9em);
       display: flex;
     }
@@ -1599,19 +1646,9 @@ $btn-pink: var(--keypoints-color);
 	padding: 0rem;
 }
 
-/*
-Maybe something like this for the case where they do not select anything?
-.openstack {
-	border-left: 2px solid red;
-}
-.digitalocean {
-	border-left: 2px solid blue;
-}
-*/
-
 ul.text-list, ol.text-list {
     list-style: none;
-	  padding-left: 0;
+	  padding-inline-start: 0;
 
     li {
         display: inline;
@@ -1679,38 +1716,13 @@ ol.breadcrumb {
 a[target="_blank"]::after {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==) " (opens in new tab)";
   display: inline-block;
-  margin-left: 0.2em;
+  margin-inline-start: 0.2em;
   height: 1em;
 }
 
 /* Not for figures where it's duplicated */
 figure > a[target="_blank"]::after {
 	content: unset;
-}
-
-.tutorials-list {
-/* Big */
-@media (min-width:768px) {
-    .duplicate {
-        display: none;
-    }
-}
-
-/* Skinny */
-@media (max-width:767px) {
-    table.table.table-responsive {
-        display: inline-table;
-    }
-    tr th:not(:first-child) {
-        display: none;
-    }
-    tr td:not(:first-child) {
-        display: none;
-    }r
-    .duplicate {
-        display: unset;
-    }
-}
 }
 
 // For the git-gat learning pathway boxes
@@ -1774,4 +1786,89 @@ figure > a[target="_blank"]::after {
 
 section#tutorial-content {
 	margin-top: 2rem;
+}
+
+.eventtable {
+  th {
+    font-weight: bold;
+  }
+  .eventtable-date{
+      white-space: nowrap;
+  }
+  .eventtable-title {
+    font-weight: bold;
+  }
+  .eventtable-description{
+    margin-top: 0.25 rem;
+    font-size: 80%;
+  }
+}
+
+section.event {
+    .event-image{
+      margin-bottom: 1em;
+    }
+
+	hgroup {
+		border: 1px solid var(--border-light);
+		box-shadow: 0 0 5px var(--border-light);
+		padding: 0 1rem;
+		margin-bottom: 2rem;
+
+		h1 {
+			font-weight: 900;
+		}
+
+		p {
+			text-transform: uppercase;
+			color: var(--text-color-muted);
+		}
+	}
+
+	.nav-tabs {
+		button.nav-link {
+			font-weight: 800;
+		}
+	}
+
+}
+.nav-tabs {
+	// Tabs default to a text colour that isn't overridden somewhere else.
+
+	.nav-item {
+		margin-bottom: 0;
+		padding-bottom: 0;
+		border: 1px solid transparent;
+
+		&:hover {
+			color: var(--hyperlink-hover);
+			border: 1px solid var(--hyperlink-hover);
+		}
+
+		button.nav-link{
+			color: var(--text-color);
+			cursor: pointer;
+			background: none;
+			font-size: 1.2rem;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+
+			&:hover {
+				color: var(--hyperlink-hover);
+			}
+
+			&.active {
+				background: var(--overview-color);
+				border: 1px solid var(--overview-color);
+				color: white;
+			}
+		}
+	}
+
+}
+
+body[data-brightness="dark"] {
+	img.invert-safe {
+		filter: invert(1);
+	}
 }

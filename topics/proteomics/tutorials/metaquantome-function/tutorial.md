@@ -39,6 +39,12 @@ requirements:
       - metaquantome-data-creation
 subtopic: multi-omics
 tags: [microgalaxy]
+edam_ontology:
+- topic_0121 # Proteomics
+- topic_3922 # Proteogenomics
+- topic_3941 # Metatranscriptomics
+- topic_3697 # Microbial ecology
+- topic_3174 # Metagenomics
 ---
 
 

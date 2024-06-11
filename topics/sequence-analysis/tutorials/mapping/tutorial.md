@@ -8,8 +8,9 @@ questions:
   - What two things are crucial for a correct mapping?
   - What is BAM?
 objectives:
-  - You will learn what mapping is
-  - A genome browser is shown that helps you to understand your data
+  - Run a tool to map reads to a reference genome
+  - Explain what is a BAM file and what it contains
+  - Use genome browser to understand your data
 time_estimation: "1h"
 key_points:
   - Know your data!
@@ -32,6 +33,9 @@ follow_up_training:
     topic_name: epigenetics
     tutorials:
       - formation_of_super-structures_on_xi
+level: Introductory
+edam_ontology: 
+  - topic_0102 # Mapping
 contributors:
   - joachimwolff
   - bebatut
@@ -40,7 +44,7 @@ contributors:
 
 Sequencing produces a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. Mapping the reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.
 
-The short reads do not come with position information, so we do not know what part of the genome they came from. We need to use the sequence of the read itself to find the corresponding region in the reference sequence. But the reference sequence can be quite long (~3 billion bases for human), making it a daunting task to find a matching region. Since our reads are short, there may be several, equally likely places in the reference sequence from which they could have been read. This is especially true for repetitive regions.
+The reads do not come with position information, so we do not know what part of the genome they came from. We need to use the sequence of the read itself to find the corresponding region in the reference sequence. But the reference sequence can be quite long (~3 billion bases for human), making it a daunting task to find a matching region. Since our reads are short, there may be several, equally likely places in the reference sequence from which they could have been read. This is especially true for repetitive regions.
 
 In principle, we could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. We would need to do that for each of the millions of reads in our sequencing data. Aligning millions of short sequences this way may, however, take a couple of weeks. And we do not care about the exact base to base correspondence (alignment). What we are interested in is "where these reads came from". This approach is called **mapping**.
 
@@ -121,26 +125,28 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 >
 > 2. Inspect the `mapping stats` file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
->    > <question-title></question-title>
->    >
->    > 1. What information is provided here?
->    > 2. How many reads have been mapped exactly 1 time?
->    > 3. How many reads have been mapped more than 1 time? How is it possible? What should we do with them?
->    > 4. How many pair of reads have not been mapped? What are the causes?
->    >
->    > > <solution-title></solution-title>
->    > > 1. The information given here is a quantity one. We can see how many sequences are aligned. It does not tell us something about the quality.
->    > > 2. ~90% reads have been aligned exactly 1 time
->    > > 3. ~7% reads have been aligned concordantly >1 times. These are called multi-mapped reads. It can happen because of repetitions in the reference genome (multiple copies of a gene for example), particularly when the reads are small. It is difficult to decide where these sequences come from and therefore most of the pipelines ignore them. Always check the statistics there to be sure of not discarding too much information in any downstream analyses.
->    > > 4. ~3% pair of reads have not been mapped because
->    > >     - both reads in the pair aligned but their positions do not concord with pair of reads (`aligned discordantly 1 time`)
->    > >     - reads of these pairs are multi-mapped (`aligned >1 times` in `pairs aligned 0 times concordantly or discordantly`)
->    > >     - one read of these pairs are mapped but not the paired read (`aligned exactly 1 time` in `pairs aligned 0 times concordantly or discordantly`)
->    > >     - the rest are not mapped at all
->    >  {: .solution }
->    {: .question}
+>    
 >
 {: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. What information is provided here?
+> 2. How many reads have been mapped exactly 1 time?
+> 3. How many reads have been mapped more than 1 time? How is it possible? What should we do with them?
+> 4. How many pair of reads have not been mapped? What are the causes?
+>
+> > <solution-title></solution-title>
+> > 1. The information given here is a quantity one. We can see how many sequences are aligned. It does not tell us something about the quality.
+> > 2. ~90% reads have been aligned exactly 1 time
+> > 3. ~7% reads have been aligned concordantly >1 times. These are called multi-mapped reads. It can happen because of repetitions in the reference genome (multiple copies of a gene for example), particularly when the reads are small. It is difficult to decide where these sequences come from and therefore most of the pipelines ignore them. Always check the statistics there to be sure of not discarding too much information in any downstream analyses.
+> > 4. ~3% pair of reads have not been mapped because
+> >     - both reads in the pair aligned but their positions do not concord with pair of reads (`aligned discordantly 1 time`)
+> >     - reads of these pairs are multi-mapped (`aligned >1 times` in `pairs aligned 0 times concordantly or discordantly`)
+> >     - one read of these pairs are mapped but not the paired read (`aligned exactly 1 time` in `pairs aligned 0 times concordantly or discordantly`)
+> >     - the rest are not mapped at all
+>  {: .solution }
+{: .question}
 
 Checking the mapping statistics is an important step to do before continuing any analyses. There are several potential sources for errors in mapping, including (but not limited to):
 
@@ -166,42 +172,43 @@ The BAM file includes a lot of information about each read, particularly the qua
 >
 > 2. Inspect the {% icon param-file %} `Stats` file
 >
->    > <question-title></question-title>
->    >
->    > 1. What is the proportion of mismatches in the mapped reads when aligned to the reference genome?
->    > 2. What does the error rate represent?
->    > 3. What is the average quality? How is it represented?
->    > 4. What is the insert size average?
->    > 5. How many reads have a mapping quality score below 20?
->    >
->    > > <solution-title></solution-title>
->    > > 1. There are ~21,900 mismatches for ~4,753,900 bases mapped which on average produces ~0.005 mismatches per mapped bases.
->    > > 2. The error rate is the proportion of mismatches per mapped bases, so the ratio computed right before.
->    > > 3. The average quality is the mean quality score of the mapping. It is a Phred score like the one used in the FASTQ file for each nucleotide. But here the score is not per nucleotide, but per read and it represents the probability of mapping quality.
->    > > 4. The insert size is the distance between the two reads in the pairs.
->    > > 5. To get the info:
->    > >      1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with a filter to keep only the reads with a mapping quality >= 20
->    > >      2. **Samtools Stats** {% icon tool %} on the output of **Filter**
->    > >
->    > >    Before filtering: 95,412 reads and after filtering: 89,664 reads.
->    >  {: .solution }
->    {: .question}
 {: .hands_on}
 
-# Visualization using a Genome Browser (IGV)
+> <question-title></question-title>
+>
+> 1. What is the proportion of mismatches in the mapped reads when aligned to the reference genome?
+> 2. What does the error rate represent?
+> 3. What is the average quality? How is it represented?
+> 4. What is the insert size average?
+> 5. How many reads have a mapping quality score below 20?
+>
+> > <solution-title></solution-title>
+> > 1. There are ~21,900 mismatches for ~4,753,900 bases mapped which on average produces ~0.005 mismatches per mapped bases.
+> > 2. The error rate is the proportion of mismatches per mapped bases, so the ratio computed right before.
+> > 3. The average quality is the mean quality score of the mapping. It is a Phred score like the one used in the FASTQ file for each nucleotide. But here the score is not per nucleotide, but per read and it represents the probability of mapping quality.
+> > 4. The insert size is the distance between the two reads in the pairs.
+> > 5. To get the info:
+> >      1. {% tool [Filter BAM](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2) %} with a filter to keep only the reads with a mapping quality >= 20
+> >      2. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.5) %} on the output of **Filter**
+> >
+> >    Before filtering: 95,412 reads and after filtering: 89,664 reads.
+>  {: .solution }
+{: .question}
+
+# Visualization using a Genome Browser
+
+## IGV
 
 The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following, we will use it to visualize the mapped reads.
 
 {% include topics/sequence-analysis/tutorials/mapping/igv.md tool="Bowtie2" region_to_zoom="chr2:98,666,236-98,667,473" %}
 
-# Visualization using a Genome Browser (JBrowse)
+## JBrowse
 
 {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0) %} is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
 
 {% include topics/sequence-analysis/tutorials/mapping/jbrowse.md tool="Bowtie2" region_to_zoom="chr2:98,666,236-98,667,473" %}
 
-
 # Conclusion
-
 
 After quality control, mapping is an important step of most analyses of sequencing data (RNA-Seq, ChIP-Seq, etc) to determine where in the genome our reads originated from and use this information for downstream analyses.

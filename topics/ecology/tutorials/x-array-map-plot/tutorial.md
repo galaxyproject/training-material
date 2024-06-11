@@ -78,9 +78,9 @@ It is beginner friendly and does not require much knowledge about the tool.
 >
 >    **or**, if this is not available, you can import from [Zenodo]({{page.zenodo_link}}):
 >
->     ```
->     https://zenodo.org/record/6621460/files/air_temperature_at_2_metres.netcdf
->     ```
+>    ```
+>    https://zenodo.org/record/6621460/files/air_temperature_at_2_metres.netcdf
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >

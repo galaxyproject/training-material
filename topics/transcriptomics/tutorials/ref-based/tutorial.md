@@ -934,9 +934,8 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
 
 ## Counting reads per genes
 
-In order to count the number of reads per gene, we offer a parallel tutorial for the 2 methods (STAR and featureCounts) which give very similar results.
 
-{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
+{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" text="In order to count the number of reads per gene, we offer a parallel tutorial for the 2 methods (STAR and featureCounts) which give very similar results. Which methods would you prefer to use?" disambiguation="tool"%}
 
 <div class="featureCounts" markdown="1">
 
@@ -1163,10 +1162,6 @@ To be able to identify differential gene expression induced by PS depletion, all
 >    {{ page.zenodo_link }}/files/GSM461182_untreat_single_featureCounts.counts
 >    ```
 >
-> 3. Create a collection list with all these counts that you label `all counts`. Rename each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
->
->    {% snippet faqs/galaxy/collections_build_list.md %}
->
 {: .hands_on}
 
 You might think we can just compare the count values in the files directly and calculate the extent of differential gene expression. However, it is not that simple.
@@ -1201,7 +1196,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 > - sequencing depth (the "Million" part)
 > - gene length (the "Kilobase" part)
 >
-> Let's use the previous example to explain RPK, FPKM and TPM.
+> Let's use the previous example to explain RPKM, FPKM and TPM.
 >
 > For **RPKM** (Reads Per Kilobase Million),
 >
@@ -1438,16 +1433,60 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > We recommend that you add all factors you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), other batch effects, etc...
 {: .comment}
 
+If you have only one or two factors with few number of biological replicates, the basic setup of **DESeq2** is enough. In the case of a complex experimental setup with a large number of biological replicates, tag-based collections are appropriate. Both approaches give the same results. The Tag-based approach requires a few additional steps before running the **DESeq2** tool but it will payoff when working with a complex experimental setup.
+
+{% include _includes/cyoa-choices.html option1="Basic" option2="Tag-based" default="Basic" text="Which approach would you prefer to use?" disambiguation="deseq"%}
+
+<div class="Basic" markdown="1">
+
+We can now run **DESeq2**:
+
+> <hands-on-title>Determine differentially expressed features</hands-on-title>
+>
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2) %} with the following parameters:
+>    - *"how"*: `Select datasets per level`
+>        - In *"Factor"*:
+>           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Treatment`
+>           - In *"1: Factor level"*:
+>               - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `treated`
+>               - In *"Count file(s)"*: `Select all the treated count files (GSM461179, GSM461180, GSM461181)`
+>           - In *"2: Factor level"*:
+>               - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `untreated`
+>               - In *"Count file(s)"*: `Select all the untreated count files (GSM461176, GSM461177, GSM461178, GSM461182)`
+>       - {% icon param-repeat %} *"Insert Factor"*
+>           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Sequencing`
+>               - In *"Factor level"*:
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
+>                        - In *"Count file(s)"*: `Select all the paired-end count files (GSM461177, GSM461178, GSM461180, GSM461181)`
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
+>                        - In *"Count file(s)"*: `Select all the single-end count files (GSM461176, GSM461179, GSM461182)`
+>    - *"Files have header?"*: `Yes`
+>    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Output options"*:
+>        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
+>
+{: .hands_on}
+
+</div>
+
+<div class="Tag-based" markdown="1">
+
 DESeq2 requires to provide for each factor, counts of samples in each category. We will thus use tags on our collection of counts to easily select all samples belonging to the same category. For more information about alternative ways to set group tags, please see [this tutorial]({% link topics/galaxy-interface/tutorials/group-tags/tutorial.md %}).
 
 > <hands-on-title>Add tags to your collection for each of these factors</hands-on-title>
 >
-> 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+> 1. Create a collection list with all these counts that you label `all counts`. Rename each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+> 2. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `all counts`
 >
 >    We will now extract from the names the factors:
 >
-> 2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %}
+> 3. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %}
 >      - {% icon param-file %} *"File to process"*: output of **Extract element identifiers** {% icon tool %}
 >      - In *"Replacement"*:
 >         - In *"1: Replacement"*
@@ -1456,25 +1495,25 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >
 >     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements from file](__TAG_FROM_FILE__) %} tool
 >
-> 3. Change the datatype to `tabular`
+> 4. Change the datatype to `tabular`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 4. {% tool [Tag elements](__TAG_FROM_FILE__) %}
+> 5. {% tool [Tag elements](__TAG_FROM_FILE__) %}
 >      - {% icon param-collection %} *"Input Collection"*: `all counts`
 >      - {% icon param-file %} *"Tag collection elements according to this file"*: output of **Replace Text** {% icon tool %}
 >
-> 5. Inspect the new collection
+> 6. Inspect the new collection
 >
 >    > <tip-title>You cannot see the changes?</tip-title>
 >    >
->    > You may not see it at first glance as the names are the same. However if you click on one and click on {% icon galaxy-tags %} **Edit dataset tags**, you should see 2 tags which start with 'group:'. This keyword will allow to use these tags in DESeq2.
+>    > You may not see it at first glance as the names are the same. However if you click on one and click on {% icon galaxy-tags %} **Edit dataset tags**, you should see 2 tags which start with 'group:'. This keyword will allow to use these tags in **DESeq2**.
 >     >
 >     {: .tip}
 >
 {: .hands_on}
 
-We can now run DESeq2:
+We can now run **DESeq2**:
 
 > <hands-on-title>Determine differentially expressed features</hands-on-title>
 >
@@ -1506,6 +1545,8 @@ We can now run DESeq2:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
 >
 {: .hands_on}
+
+</div>
 
 **DESeq2** generated 3 outputs:
 

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Filter, plot and explore single-cell RNA-seq data (Scanpy)
+title: Filter, plot and explore single-cell RNA-seq data with Scanpy
 subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
@@ -117,6 +117,8 @@ You can also pull the data from publicly available [Single Cell Expression Atlas
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
+
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 # Filtering
 

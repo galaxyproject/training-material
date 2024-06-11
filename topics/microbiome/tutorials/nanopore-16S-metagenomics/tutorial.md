@@ -16,11 +16,19 @@ key_points:
 - We preprocessed Nanopore sequences in order to improve their quality
 contributors:
 - gallardoalba
+subtopic: metabarcoding
 tags:
+  - metabarcoding
+  - 16S
   - nanopore
   - microgalaxy
 redirect_from:
   - /topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial
+edam_ontology:
+- topic_3697 # Microbial ecology
+- topic_0637 # Taxonomy
+- topic_0080 # Sequence analysis
+- topic_4038 # Metabarcoding
 ---
 
 
@@ -88,17 +96,18 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 >    - Click of the **Paste/Fetch** button
 >    - Paste the Zenodo links and press <kbd>Start</kbd> and <kbd>Build</kbd>
 >
->     ```
->     https://zenodo.org/record/4274812/files/bulk_bottom.fastq.gz
->     https://zenodo.org/record/4274812/files/bulk_top.fastq.gz
->     https://zenodo.org/record/4274812/files/rhizosphere_bottom.fastq.gz
->     https://zenodo.org/record/4274812/files/rhizosphere_top.fastq.gz
->     ```
->     - Assign a name to the new collection: `soil collection`
+>      ```
+>      https://zenodo.org/record/4274812/files/bulk_bottom.fastq.gz
+>      https://zenodo.org/record/4274812/files/bulk_top.fastq.gz
+>      https://zenodo.org/record/4274812/files/rhizosphere_bottom.fastq.gz
+>      https://zenodo.org/record/4274812/files/rhizosphere_top.fastq.gz
+>      ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    - Assign a name to the new collection: `soil collection`
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+> {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
 {: .hands_on}
