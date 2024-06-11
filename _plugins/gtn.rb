@@ -538,8 +538,10 @@ module Jekyll
     def tutorials_over_time_bar_chart(site)
       graph = Hash.new(0)
       TopicFilter.list_all_materials(site).each do |material|
-        yymm = material['pub_date'].strftime('%Y-%m')
-        graph[yymm] += 1
+        if material['pub_date']
+          yymm = material['pub_date'].strftime('%Y-%m')
+          graph[yymm] += 1
+        end
       end
 
       # Cumulative over time
@@ -673,7 +675,7 @@ module Jekyll
           .select{|p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }
           .reject{|p| p.data['program'].nil? } # Only those with programs
           .select{|p| p.data['event_upcoming'] == true } # Only those coming soon
-          .map{|p| 
+          .map{|p|
             materials = p.data['program']
                          .map{|section| section['tutorials']}
                          .flatten
