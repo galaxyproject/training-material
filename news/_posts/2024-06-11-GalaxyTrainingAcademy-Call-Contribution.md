@@ -25,7 +25,7 @@ The event will provide a self-paced online learning experience for learners who 
 Day     | Program
 ------- | ------
 Monday  | Galaxy Introduction
-Tue-Thu | Different Tracks(*)
+Tuesday-Thursday | Different Tracks(*)
 Friday  |Choose from a variety of different topics
     
 
@@ -42,7 +42,7 @@ Friday  |Choose from a variety of different topics
     <td>Galaxy Introduction</td>
   </tr>
   <tr>
-    <td>Tuesday-Thursday</td>
+    <td>Tue-Thu</td>
     <td>Different Tracks</td>
   </tr>
   <tr>
