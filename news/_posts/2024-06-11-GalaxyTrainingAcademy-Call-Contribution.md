@@ -22,6 +22,14 @@ The event will provide a self-paced online learning experience for learners who 
 ### Initial Program:
 
 
+<style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 8px;
+  }
+</style>
+
 <table>
   <tr>
     <th>Day</th>
@@ -39,7 +47,8 @@ The event will provide a self-paced online learning experience for learners who 
     <td>Friday</td>
     <td>Choose from a variety of different topics</td>
   </tr>
-</table>    
+</table>
+    
 
 
 
