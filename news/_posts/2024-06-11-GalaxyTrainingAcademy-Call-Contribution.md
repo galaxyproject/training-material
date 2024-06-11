@@ -6,6 +6,8 @@ tags:
 contributions:
   authorship:
     - teresa-m
+  editing:
+    - hexylena
 ---
 
 We are happy to announce the Galaxy Training Academy 2024, a global online training event, where learners can get to know Galaxy and learn how to analyze data for various research topics.
