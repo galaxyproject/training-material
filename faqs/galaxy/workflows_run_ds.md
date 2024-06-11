@@ -23,7 +23,7 @@ contributors: [hexylena]
 
 </div>
 
-{% snippet faqs/galaxy/workflows_import_from_dockstore.md title="If this does not work" dockstore_id=include.dockstore_id %}
+{% snippet faqs/galaxy/workflows_import_from_dockstore.md override_title="If this does not work" dockstore_id=include.dockstore_id %}
 
 {% else %}
 

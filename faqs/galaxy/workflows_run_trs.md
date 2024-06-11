@@ -23,8 +23,9 @@ Click to
 (<a href="https://github.com/galaxyproject/training-material/blob/main/{{ include.path }}">View on GitHub</a>, <a href="https://training.galaxyproject.org/training-material/{{ include.path }}">Download workflow</a>)
 
 </div>
+
 {% capture import_url %}https://training.galaxyproject.org/training-material/{{ include.path }}{% endcapture %}
-{% snippet faqs/galaxy/workflows_import.md title="If this does not work" import_url=import_url %}
+{% snippet faqs/galaxy/workflows_import.md override_title="If this does not work" import_url=import_url %}
 
 {% else %}
 

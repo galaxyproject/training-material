@@ -23,7 +23,7 @@ contributors: [hexylena]
 </div>
 
 {% capture filter %}name:"{{ include.title }}"{% endcapture %}
-{% snippet faqs/galaxy/workflows_import_from_workflowhub.md title="If this does not work" filter=filter %}
+{% snippet faqs/galaxy/workflows_import_from_workflowhub.md override_title="If this does not work" filter=filter %}
 
 {% else %}
 

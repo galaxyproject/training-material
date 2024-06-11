@@ -62,8 +62,8 @@ module Jekyll
                        end
 
             # Allow overriding the title with an include parameter
-            title = if !p.nil? && p['title']
-                      p['title']
+            title = if !p.nil? && p['override_title']
+                      p['override_title']
                     else
                       metadata['title']
                     end
