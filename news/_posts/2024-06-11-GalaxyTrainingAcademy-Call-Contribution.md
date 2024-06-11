@@ -32,6 +32,27 @@ Friday  |Choose from a variety of different topics
 (*)**Tracks**: Proteomics, Assembly, Transcriptomics, Microbiome, Learning, BY-COVID 
 
 
+<table>
+  <tr>
+    <th>Day</th>
+    <th>Program</th>
+  </tr>
+  <tr>
+    <td>Monday</td>
+    <td>Galaxy Introduction</td>
+  </tr>
+  <tr>
+    <td>Tuesday-Thursday</td>
+    <td>Different Tracks</td>
+  </tr>
+  <tr>
+    <td>Friday</td>
+    <td>Choose from a variety of different topics</td>
+  </tr>
+</table>
+
+
+
 ## Your contribution
 
 We want to provide a high-quality learning experience and are seeking out for contributors, who will help to make this experience possible. We offer three distinct ways for you to contribute:
