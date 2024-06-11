@@ -21,7 +21,7 @@ objectives:
 time_estimation: 2H
 key_points:
 - Single-cell ATAC-seq can identify open chromatin-sites  
-- Clustering groups similar cells together which can then be annotated to cell-types
+- Clusters of similar cells can be annotated to different cell-types
 requirements:
   -
     type: "internal"
@@ -722,8 +722,10 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, MS4A1, CD3D, LEF1, NKG7, TREM1, LYZ, PPBP`
 >        - {% icon param-toggle %} *"Show edges?"*: `No`
+>        - In *"Plot attributes"*
+>           - *"Number of panels per row"*: `2`
 >
->  ![umap_leiden_marker_gene_clustering]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.umap.png %})
+>  ![umap_leiden_marker_gene_clustering]({% link topics/single-cell/images/scatac-standard-snapatac2/umap_leiden_marker-genes.png %})
 >
 > > <question-title></question-title>
 > >
@@ -732,8 +734,8 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. Answer 1
-> > > 2. Answer 2
+> > > 1. Some marker genes, such as `MS4A1` or `LEF1`, are only expressed in a few clusters (clusters 6+11 and clusters 4+7, respectively). 
+> > > 2. The marker genes `TREM1`, `LYZ` and `PPBP` are all expressed in the same clusters (0, 3, 5, 10 and 12). Overlapping expression profiles imply similar cell types, since similar cell types have similar marker genes upregulated. The low expression of `PPBP` in particular will make cell type annotation with this marker gene difficult. 
 > > > 
 > > {: .solution}
 > >
@@ -753,7 +755,7 @@ Natural killer (NK) cells | NKG7
 Dendritic Cells | TREM1
 Megakaryocytes | PPBP
 
-These canonical marker genes can easily match the clusters to known cell types:
+These canonical marker genes can match the clusters to known cell types:
 
 Cluster | Cell type
 --- | ---
@@ -793,9 +795,9 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 > 3. {% icon galaxy-eye %} Inspect the generated file
 >
 >    > <question-title></question-title>
->    > In which column is the `Leiden` annotation located?
+>    > In which column is the **Leiden** annotation located?
 >    > > <solution-title></solution-title>
->    > > The `Leiden` annotation is in column 8. 
+>    > > The **Leiden** annotation is in column 8. 
 >    > > 
 >    > > Column 1 | Column 2 | Column 3 | Column 4 | Column 5 | Column 6 | Column 7 | Column 8 | Column 9 | Column 10
 >    > > --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
@@ -859,14 +861,15 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >        - In *"Plot attributes"*
 >           - *"Location of legend"*: `on data`
 >           - {% icon param-toggle %} *"Draw a frame around the scatter plot?"*: `No`
-> 6. {% icon galaxy-eye %} Inspect the `.png` output
+> 11. {% icon galaxy-eye %} Inspect the `.png` output
 >
+>  ![UMAP annotated cell types]({% linktopics/single-cell/images/scatac-standard-snapatac2/umap_cell-types.png %})
 >
 >    > <question-title></question-title>
->    > 1. Question
+>    > Are clusters with the same assigned cell type located close to each other?
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. solution
+>    > > Yes. B-cells are far away from NK and T cells. Only the myeloid lineage of monocytes, dendritic cells and megakaryocytes are located close each other. This might be due to a common progenitor cell and thus a similar chromatin profile.  
 >    > {: .solution}
 >    >
 >    {: .question}
@@ -888,5 +891,5 @@ In this tutorial we produced a count matrix of {scATAC-seq} reads in the `AnnDat
    1. Producing and filtering a cell by gene activity matrix
    2. Data normalization and imputation with **Scanpy**
    3. Visualizing marker genes in the clusters
-   4. Manually annotating the cell types
+   4. Manually annotating the cell types with selected marker genes
 
