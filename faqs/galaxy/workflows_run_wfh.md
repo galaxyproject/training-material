@@ -22,6 +22,9 @@ contributors: [hexylena]
 
 </div>
 
+{% capture filter %}name:"{{ include.title }}"{% endcapture %}
+{% snippet faqs/galaxy/workflows_import_from_workflowhub.md title="If this does not work" filter=filter %}
+
 {% else %}
 
 1. Go to [Workflow → Import](https://my.galaxy.training/?path=/workflows/import) in your Galaxy
