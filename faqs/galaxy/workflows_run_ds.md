@@ -4,7 +4,7 @@ area: workflows
 box_type: hands_on
 layout: faq
 contributors: [hexylena]
-parameters:
+optional_parameters:
   dockstore_id: The Dockstore ID of the workflow you want to import
   title: The title of the workflow you want to import, can be any text
 examples:

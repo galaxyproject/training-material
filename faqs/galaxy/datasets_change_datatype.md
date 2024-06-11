@@ -5,7 +5,7 @@ area: datasets
 box_type: tip
 layout: faq
 contributors: [bebatut,nsoranzo,hexylena,shiltemann,ajadi-abiola,lldelisle,nekrut]
-parameters:
+optional_parameters:
   datatype: A string representing the Galaxy datatype
 examples:
   Assign datatype without specifying the datatype: {}
