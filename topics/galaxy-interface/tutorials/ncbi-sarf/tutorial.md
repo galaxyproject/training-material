@@ -30,7 +30,7 @@ requirements:
 recordings:
 - captioners:
   - prodromus
-  date: '2021-02-15'
+  date: '2021-05-15'
   galaxy_version: '21.01'
   length: 40M
   youtube_id: ogu-NBTP-DM
