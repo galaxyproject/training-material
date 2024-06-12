@@ -10,17 +10,18 @@ level: Intermediate
 zenodo_link: https://zenodo.org/records/11369811
 questions:
 - What does ATAC-seq data tell us about the cell?
-- Which steps are necessary for clustering of single-cell ATAC-seq data?
+- Which steps are necessary to cluster the cells of single-cell ATAC-seq data?
 - Why is dimension reduction important for analysis of single-cell data?
 objectives:
-- Learn how ATAC-seq works
+- Learn how single-cell ATAC-seq data is processed 
 - Create a count-matrix from a 10X fragment file
 - Perform filtering, dimension reduction and clustering on AnnData matrices
 - Generate and filter a cell-by-gene matrix
-- Identify marker genes for the clusters
+- Identify marker genes for the clusters and annotate clusters
 time_estimation: 2H
 key_points:
-- Single-cell ATAC-seq can identify open chromatin-sites  
+- Single-cell ATAC-seq can identify open chromatin-sites
+- Dimension reduction is required to simplify the data while preserving important information about relationships of cells to each other.   
 - Clusters of similar cells can be annotated to different cell-types
 requirements:
   -
@@ -102,6 +103,33 @@ SnapATAC2 requires 3 input files for the standard pathway of processing:
 > - To learn how to get a `fragments_file` or `.bam` file from raw `.FASTQ`-reads, please check out the tutorial ["Pre-processing of 10X Single-Cell ATAC-seq Datasets"]( {% link topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.md %} )
 {: .comment}
 
+{% include _includes/cyoa-choices.html option1="Begin with `.bam` file" option2="fragments_file" default="fragments_file"
+       text="This tutorial starts with a `fragments_file`. If you would like to begin with a `.bam` file you can select it here." %}
+
+<div class="Begin with `.bam` file" markdown="1">
+- Start with bam file here
+## Import files to SnapATAC2
+
+> <hands-on-title> Create an AnnData object </hands-on-title>
+>
+> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
+>    - *"Method used for preprocessing"*: `Import data fragment files and compute basic QC metrics, using 'pp.import_data'`
+>        - {% icon param-file %} *"Fragment file, optionally compressed with gzip or zstd"*: `fragments_file.tsv` (Input dataset)
+>        - {% icon param-file %} *"A tabular file containing chromosome names and sizes"*: `chrom_sizes.txt` (Input dataset)
+>        - {% icon param-toggle %} *"Whether the fragment file has been sorted by cell barcodes"*: `Yes` 
+>        > <comment-title> Select features </comment-title>
+>        > SnapATAC2's **pp.make_fragment_file** {% icon tool %} already sorted the fragment file. It is therefore possible to enter `Yes`. 
+>    {: .comment}
+> 2. Rename the generated file to `Anndata 5k PBMC`
+>
+> 3. Check that the format is `h5ad`
+{: .hands_on}
+
+</div>
+
+<div class="fragments_file" markdown="1">
+
+
 ## Get Data
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -168,6 +196,7 @@ The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially 
 >
 > 3. Check that the format is `h5ad`
 {: .hands_on}
+</div>
 
 Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary format, an `AnnData` object can not be inspected directly in Galaxy by clicking on the {% icon galaxy-eye %} (**View data**) icon. Instead we need to use a dedicated tool from the **AnnData** suite.
 
@@ -752,8 +781,8 @@ naive T cells | LEF1
 Monocytes | LYZ
 B cells | MS4A1
 Natural killer (NK) cells | NKG7
-Dendritic Cells | TREM1
-Megakaryocytes | PPBP
+Dendritic cells | TREM1
+Dendritic cells | PPBP
 
 These canonical marker genes can match the clusters to known cell types:
 
@@ -846,6 +875,9 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    - {% icon param-file %} *"Replace information file"*: `replace_file` 
 >    - *"Which column should be replaced?*: `Column: 1`
 > 7. Rename the generated file to `Cell type annotation` and {% icon galaxy-eye %} inspect the file to check if the replacement was successful
+>    - check if the datatype is set to `tabular`
+>    - you may need to change the datatype manually
+>      {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular"%}
 > 8. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic UMAP`
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
