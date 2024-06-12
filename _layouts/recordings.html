@@ -4,13 +4,12 @@ layout: base
 
 {% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
 
-
 <section class="tutorial">
   <h1 data-toc-skip>Recordings - {{ material.title }} </h1>
 
   <div class="row">
   <div class="col-md-10">
-  <p>This is a collection of recordings from various training events where the  <a href="../tutorial.html">{{ material.title }}</a> tutorial was taught by members of the GTN community. The tutorial may have changed after the recording was made; below each video you will find a link to the tutorial as it appeared at the time of recording.</p>
+  <p>This is a collection of recordings from various training events where the  <b>{{ material.title }}</b> tutorial was taught by members of the GTN community. The tutorial may have changed after the recording was made; below each video you will find a link to the tutorial as it appeared at the time of recording.</p>
 
   <p><b>Want to add your own recording?</b> We would love to have it to our library!</p>
 
@@ -68,6 +67,10 @@ layout: base
     <div class="col-md-6 recording-metadata">
     <table class="table table-striped">
     <tbody>
+    <tr>
+      <th colspan="2" style="text-align: center"> About this Recording </th>
+    </tr>
+
     <!-- description -->
     {% if recording.description %}
     <tr>
@@ -148,7 +151,7 @@ layout: base
      {% endif %}
 
      <tr>
-      <td><strong>Archived tutorial</strong></td>
+      <td><strong>Archive: </strong></td>
       <td><a href="{{archiveurl | default: url }}">View {{t}} at time of recording</a></td>
     </tr>
     </tbody>
