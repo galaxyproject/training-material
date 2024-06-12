@@ -51,7 +51,7 @@ layout: base
   <div class="row recording">
 
     <div class="col-md-6 recording-video">
-    {% include _includes/youtube.html id=recording.youtube_id width="100%" height="100%" %}
+    {% include _includes/youtube.html id=recording.youtube_id width="100%" height="100%" nofigure=true%}
     </div>
 
     <div class="col-md-6 recording-metadata">
@@ -75,13 +75,13 @@ layout: base
 
     <!-- speakers -->
     <tr>
-      <td><strong>Speaker{% if recordings.speakers.size > 1 %}s{% endif %}:</strong></td>
+      <td><strong>Speaker{% if recording.speakers.size > 1 %}s{% endif %}:</strong></td>
       <td>{% for speaker in recording.speakers %}{% include _includes/contributor-badge-inline.html id=speaker %}{% endfor %}</td>
     </tr>
 
     <!-- captioners -->
     <tr>
-      <td><strong>Captioner{% if recordings.captioners.size > 1 %}s{% endif %}:</strong></td>
+      <td><strong>Captioner{% if recording.captioners.size > 1 %}s{% endif %}:</strong></td>
       <td>{% for captioner in recording.captioners %}{% include _includes/contributor-badge-inline.html id=captioner %}{% endfor %}</td>
     </tr>
 
