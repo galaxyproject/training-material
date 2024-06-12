@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Inferring single cell trajectories (Monocle3)'
+title: 'Inferring single cell trajectories with Monocle3'
 subtopic: single-cell-CS
 priority: 5
 zenodo_link: 'https://zenodo.org/records/10397366'

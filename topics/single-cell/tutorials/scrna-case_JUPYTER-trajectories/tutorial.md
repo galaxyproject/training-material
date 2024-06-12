@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Inferring single cell trajectories (Scanpy, Python)
+title: Inferring single cell trajectories with Scanpy (Python)
 subtopic: single-cell-CS-code
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7075718'
