@@ -671,23 +671,22 @@ module Jekyll
     #  {{ site | get_upcoming_events }}
     def get_upcoming_events(site)
       cache.getset('upcoming-events') do
-        upcoming_events = site.pages
-          .select{|p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }
-          .reject{|p| p.data['program'].nil? } # Only those with programs
-          .select{|p| p.data['event_upcoming'] == true } # Only those coming soon
-          .map{|p|
-            materials = p.data['program']
-                         .map{|section| section['tutorials']}
-                         .flatten
-                         .reject{|x| x.nil?} # Remove nil entries
-                         .reject{|x| x.fetch('type', nil) == 'custom'} # Remove custom entries
-                         .map{|x| "#{x['topic']}/#{x['name']}"} # Just the material IDs.
-                         .sort.uniq
-            [p, materials]
-          }
+        site.pages
+            .select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }
+            .reject { |p| p.data['program'].nil? } # Only those with programs
+            .select { |p| p.data['event_upcoming'] == true } # Only those coming soon
+            .map do |p|
+          materials = p.data['program']
+                       .map { |section| section['tutorials'] }
+                       .flatten
+                       .compact # Remove nil entries
+                       .reject { |x| x.fetch('type', nil) == 'custom' } # Remove custom entries
+                       .map { |x| "#{x['topic']}/#{x['name']}" } # Just the material IDs.
+                       .sort.uniq
+          [p, materials]
+        end
       end
     end
-
 
     ##
     # Get the list of 'upcoming' events that include this material's ID
@@ -701,8 +700,8 @@ module Jekyll
     #  {{ site | get_upcoming_events }}
     def get_upcoming_events_for_this(site, material)
       get_upcoming_events(site)
-        .select{|p, materials| materials.include? material['id']}
-        .map{|p, materials| p}
+        .select { |_p, materials| materials.include? material['id'] }
+        .map { |p, _materials| p }
     end
 
     def shuffle(array)
@@ -800,27 +799,27 @@ module Jekyll
     end
 
     def materials_for_pathway(page)
-      if page.is_a?(Jekyll::Page)
-        d = page.data.fetch('pathway', [])
-      else
-        d = page.fetch('pathway', [])
-      end
+      d = if page.is_a?(Jekyll::Page)
+            page.data.fetch('pathway', [])
+          else
+            page.fetch('pathway', [])
+          end
 
       d.map do |m|
         m.fetch('tutorials', [])
-          .select { |t| t.has_key?('name') && t.has_key?('topic') }
-          .map {|t| [t['topic'], t['name']] }
+         .select { |t| t.key?('name') && t.key?('topic') }
+         .map { |t| [t['topic'], t['name']] }
       end.flatten.compact.sort.uniq
     end
 
     def find_learningpaths_including_topic(site, topic_id)
       site.pages
-        .select{|p| p['layout'] == 'learning-pathway'}
-        .select do |p|
-          materials_for_pathway(p)
-            .map{|topic, _tutorial| topic}
-            .include?(topic_id)
-        end
+          .select { |p| p['layout'] == 'learning-pathway' }
+          .select do |p|
+        materials_for_pathway(p)
+          .map { |topic, _tutorial| topic }
+          .include?(topic_id)
+      end
     end
     # rubocop:enable Naming/PredicateName
   end
@@ -951,17 +950,16 @@ Jekyll::Hooks.register :site, :post_read do |site|
                             end
 
     # reg deadline
-    if page.data.key?('registration') && page.data['registration'].key?('deadline')
-      deadline = page.data['registration']['deadline']
-    else
-      deadline = page.data['date_start']
-    end
+    deadline = if page.data.key?('registration') && page.data['registration'].key?('deadline')
+                 page.data['registration']['deadline']
+               else
+                 page.data['date_start']
+               end
 
     # If it's an 'upcoming event'
     if deadline - 30 <= Date.today && Date.today <= deadline
       page.data['event_upcoming'] = true
     end
-
   end
 
   # This exists because the jekyll-feed plugin expects those fields to look like that.

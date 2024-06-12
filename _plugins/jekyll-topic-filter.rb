@@ -497,6 +497,8 @@ module TopicFilter
     page_obj = page.data.dup
     page_obj['id'] = "#{page['topic_name']}/#{page['tutorial_name']}"
     page_obj['ref'] = page_ref
+    page_obj['ref_tutorials'] = tutorials.map { |a| a[1] }
+    page_obj['ref_slides'] = slides.map { |a| a[1] }
 
     id = page_obj['id']
 

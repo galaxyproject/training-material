@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+OUR_PATH = __dir__
+# two directories up
+ROOT_PATH = File.expand_path(File.join(OUR_PATH, '..', '..'))
+
 module Gtn
   # Module for obtaining modification times of files.
   # It walks the git history to record the last time a file was modified.
@@ -71,6 +75,8 @@ module Gtn
     def self.clean_path(f)
       if f =~ %r{^\./}
         f[2..]
+      elsif f =~ %r{^/}
+        f.gsub(ROOT_PATH, '')
       else
         f
       end
@@ -186,6 +192,8 @@ module Gtn
     def self.clean_path(f)
       if f =~ %r{^\./}
         f[2..]
+      elsif f =~ %r{^/}
+        f.gsub(ROOT_PATH, '')
       else
         f
       end
