@@ -95,13 +95,13 @@ layout: base
     </tr>
 
       <!-- link tutorial at time of recording -->
-      <!-- determine the next archived version of tutorial -->
-      {% assign archivemonth = recording.date | date: "%m" | modulo: 12 | prepend: '00' | slice: -2, 2 %}
+      <!-- determine the first archived version after date of the video -->
+      {% assign archivemonth = recording.date | date: "%m" | plus: 1 | modulo: 12 | prepend: '00' | slice: -2, 2 %}
       {% assign archiveyear = recording.date | date: "%Y" %}
       {% if archivemonth == '01' %}{% assign archiveyear = archiveyear | plus: 1 %}{% endif %}
       {%- capture archive -%}{{archiveyear}}-{{archivemonth}}-01{%- endcapture -%}
 
-     <!-- Check if url exists in archive, else redirect_from metadata to find url of tutorial at time of archive -->
+     <!-- Check if url exists in archive, else check the redirect_from metadata to find url of tutorial at time of archive -->
      {% capture url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}/topics/{{ page.topic_name }}/tutorials/{{page.tutorial_name}}/tutorial.html{% endcapture %}
 
      {% assign exists = url | url_exists %}
@@ -118,9 +118,10 @@ layout: base
        {% endfor %}
      {% endif %}
 
+
      <tr>
       <td><strong>Archived tutorial</strong></td>
-      <td><a href="{{archiveurl}}">View tutorial at time of recording</a></td>
+      <td><a href="{{archiveurl | default: url }}">View tutorial at time of recording</a></td>
     </tr>
     </tbody>
     </table>
