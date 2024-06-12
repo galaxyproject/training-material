@@ -234,7 +234,10 @@ layout: base
 
                 <div class="newstable">
                 <div class="list-group">
-                 {% assign events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where: "not_started", true | sort: 'date_start' %}
+                 {% assign upcoming_events = site.pages |  where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where: "not_started", true  %}
+                 {% assign ongoing_events = site.pages | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ongoing'  " %}
+
+                 {% assign events = ongoing_events | concat: upcoming_events | sort: 'date_start' %}
                  {% assign events_length = events | size %}
                  {% if events_length == 0 %}
                  <p>No known upcoming events.</p>
@@ -248,6 +251,7 @@ layout: base
                  {% endif %}
                 </div>
                 </div>
+                 <br>
                  <p>
                  <a class="btn btn-primary"  href="{% link events/index.md %}">See all events</a>
                  <a class="btn btn-primary" href="{% link faqs/gtn/gtn_event_create.md %}">Add your event!</a>
