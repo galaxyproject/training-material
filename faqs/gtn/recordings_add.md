@@ -13,7 +13,7 @@ For some tips and tricks about recording the video itself, please see
 <a href="{% link faqs/gtn/recordings_create.md %}"><button type="button" class="btn btn-info">Recording Tips & Tricks</button></a>
 
 
-## Submission process
+#### Submission process
 
 The process of adding recordings to the GTN is as follows:
 
@@ -28,7 +28,7 @@ The process of adding recordings to the GTN is as follows:
 9. Done! Your recording will now show up on the tutorial for anybody to use and re-use
 
 
-## Recordings Metadata
+#### Recordings Metadata
 
 Our bot will add some metadata about your recording to the tutorial or slide deck in question, and looks as follows:
 
@@ -57,7 +57,7 @@ recordings:
 
 ```
 
-## Misc
+#### Misc
 
 **Note:** If your videos are already uploaded to YouTube, for example as part of a different project's account, you can add this metadata to the tutorial or slides manually, without using our submission form.
 Note that we do require all videos to have good-quality English captions, and we will not be able to help you configure these on other YouTube accounts.
