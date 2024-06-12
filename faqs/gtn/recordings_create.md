@@ -16,7 +16,7 @@ Both the GTN tutorial and Galaxy itself change significantly over time, and havi
 <a href="{% link faqs/gtn/recordings_add.md %}"><button type="button" class="btn btn-info">Submitting Recordings to the GTN</button></a>
 
 
-### Video content
+## Video content
 
 1. **Start of video**
   - **Introduce yourself**
@@ -56,7 +56,7 @@ Both the GTN tutorial and Galaxy itself change significantly over time, and havi
 7. If you are doing both a lecture and a hands-on training, please create 2 separate videos
 
 
-### Technical Guidelines
+## Technical Guidelines
 
 1. Start a [Zoom](https://zoom.us/) call with yourself, record that.
    - For Mac users, QuickTime Player is also a nice option.
@@ -77,17 +77,17 @@ Both the GTN tutorial and Galaxy itself change significantly over time, and havi
   - Feel free to ask us for help if you need!
 
 
-### Standards
+## Standards
 
 1. **Zoom in**, in every interface you're covering! Many people will be watching the video while they're doing the activity, and won't have significant monitor space. Which video below would you rather be trying to follow?
 
    Bad | Good 😍
    --- | ---
-   ![default size screenshot of usegalaxy.eu](./images/bad.png) | ![zoomed in screenshot of usegalaxy.eu, now much more legible](./images/good.png)
+   ![default size screenshot of usegalaxy.eu]({% link faqs/gtn/images/bad.png %}) | ![zoomed in screenshot of usegalaxy.eu, now much more legible]({% link faqs/gtn/images/good.png %})
 
    Bad | Good 🤩
    --- | ---
-   ![green text on black background console with tiny font](./images/bad-console.png) | ![zoomed in screenshot of a console with high contrast black and white content](./images/good-console.png)
+   ![green text on black background console with tiny font]({% link faqs/gtn/images/bad-console.png %}) | ![zoomed in screenshot of a console with high contrast black and white content]({% link faqs/gtn/images/good-console.png %})
 
 2. (Especially for introductory videos!) Clearly call out what you're doing, especially on the first occurrence
 
@@ -108,7 +108,7 @@ Both the GTN tutorial and Galaxy itself change significantly over time, and havi
 
 3. Consider using a pointer that is more visually highlighted.
 
-   ![mouse pointer with circle around it that follows it around](./images/mouse.png)
+   ![mouse pointer with circle around it that follows it around]({% link faqs/gtn/images/mouse.png %})
 
    There are themes available for your mouse pointer that you can temporarily use while recording that can make it easier for watchers to see what you're doing.
 
