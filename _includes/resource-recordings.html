@@ -25,11 +25,13 @@
     {% endfor %}
 
     {% for rec in tuto_recordings %}
+      {% unless include.material.slides_recordings contains rec %}
       {% assign type = rec.type | default: 'Tutorial' %}
       {% if page.layout == 'tutorial_slides' or page.layout == 'base_slides' %} {% assign type = 'Lecture' %}{% endif %}
     <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/index.html#{{type | downcase}}-recording-{{rec.date | date: "%-d %B %Y" | slugify}}" title="View the recording for this tutorial">
                 {% icon video %} {{type}} ({{rec.date | date: "%B %Y" }}) - {{rec.length | downcase }}</a>
     </li>
+      {% endunless %}
     {% endfor %}
     <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/" title="View all recordings for this tutorial">
                 {% icon video %} View All</a>
