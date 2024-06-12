@@ -116,7 +116,20 @@ layout: base
       {%- capture archive -%}{{archiveyear}}-{{archivemonth}}-01{%- endcapture -%}
 
      <!-- Check if url exists in archive, else check the redirect_from metadata to find url of tutorial at time of archive -->
-     {% capture url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}/topics/{{ page.topic_name }}/tutorials/{{page.tutorial_name}}/tutorial.html{% endcapture %}
+
+     {% capture tutorial_url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}/topics/{{ page.topic_name }}/tutorials/{{page.tutorial_name}}/tutorial.html{% endcapture %}
+
+     {% capture slides_url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}/topics/{{ page.topic_name }}/tutorials/{{page.tutorial_name}}/slides.html{% endcapture %}
+
+     {% if material.slides_recordings contains recording %}
+       {% assign url = slides_url %}
+       {% assign t = "slides" %}
+     {% else %}
+       {% assign url = tutorial_url %}
+       {% assign t = "tutorial" %}
+     {% endif %}
+
+     {% if jekyll.environment == "production "%}
 
      {% assign exists = url | url_exists %}
      {% if exists %}
@@ -132,10 +145,11 @@ layout: base
        {% endfor %}
      {% endif %}
 
+     {% endif %}
 
      <tr>
       <td><strong>Archived tutorial</strong></td>
-      <td><a href="{{archiveurl | default: url }}">View tutorial at time of recording</a></td>
+      <td><a href="{{archiveurl | default: url }}">View {{t}} at time of recording</a></td>
     </tr>
     </tbody>
     </table>
