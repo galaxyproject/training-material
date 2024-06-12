@@ -9,7 +9,9 @@ layout: base
 
   <p>This is a collection of recordings from various training events where the  <a href="../tutorial.html">{{ material.title }}</a> tutorial was taught by members of the GTN community. The tutorial may have changed after the recording was made; below each video you will find a link to the tutorial as it appeared at the time of recording.</p>
 
-  <p><b>Want to add your own recording?</b> We would love to have it to our library! TODO: button linking to instructions </p>
+  <p><b>Want to add your own recording?</b> We would love to have it to our library!</p>
+
+  <a href="{% link faqs/gtn/recordings_add.md %}"><button type="button" class="btn btn-info">Add your Recording!</button></a>
 
   {% if material.recordings %}
     {% assign recordings = material.recordings %}
@@ -20,10 +22,10 @@ layout: base
     {% assign recordings = material.recordings %}
   {% endif %}
 
-
   {% if recordings %}
   {% assign recordings =  recordings | sort: 'date' | reverse %}
 
+<!-- an index for when list of recordings becomes very long?
   Available Recordings:
   <ul>
   {% for recording in recordings %}
@@ -36,6 +38,7 @@ layout: base
     <li> <a href="#{{recording.type | default: default_type | downcase }}-recording-{{ recording.date | date: "%-d %B %Y" | slugify }}">{{ recording.date | date: "%-d %B %Y"  }}</a></li>
   {% endfor %}
     </ul>
+-->
 
   {% for recording in recordings %}
 
