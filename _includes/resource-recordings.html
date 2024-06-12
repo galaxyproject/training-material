@@ -19,15 +19,15 @@
 
   <ul class="dropdown-menu">
     {% for rec in include.material.slides_recordings %}
-    <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{page.topic_name}}/tutorials/{{page.tutorial_name}}/recordings/#lecture-recording-{{rec.date | date: "%-d %B %Y" | slugify}}" title="View recording for this lecture">
+    <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/#lecture-recording-{{rec.date | date: "%-d %B %Y" | slugify}}" title="View recording for this lecture">
                 {% icon video %} Lecture ({{rec.date | date: "%B %Y" }}) - {{rec.length | downcase }}</a>
     </li>
     {% endfor %}
 
     {% for rec in tuto_recordings %}
-      {% assign type = 'Tutorial' %}
+      {% assign type = rec.type | default: 'Tutorial' %}
       {% if page.layout == 'tutorial_slides' or page.layout == 'base_slides' %} {% assign type = 'Lecture' %}{% endif %}
-    <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/#tutorial-recording-{{rec.date | date: "%-d %B %Y" | slugify}}" title="View the recording for this tutorial">
+    <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/#{{type | downcase}}-recording-{{rec.date | date: "%-d %B %Y" | slugify}}" title="View the recording for this tutorial">
                 {% icon video %} {{type}} ({{rec.date | date: "%B %Y" }}) - {{rec.length | downcase }}</a>
     </li>
     {% endfor %}
