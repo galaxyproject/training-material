@@ -308,6 +308,13 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
                   end
                 end
               end
+
+              if group_by != 'day'
+                xml.small do
+                  xml.span "Powered by "
+                  xml.a("GTN RSS Feeds", href: "https://training.galaxyproject.org/training-material/news/2024/06/04/gtn-standards-rss.html")
+                end
+              end
             end
           end
 
