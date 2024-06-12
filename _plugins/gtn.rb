@@ -72,12 +72,14 @@ module Jekyll
     end
 
     def url_exists(url)
-      uri = URI.parse(url)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true if uri.scheme == 'https'
-      response = http.request_head(uri.path)
-      #Jekyll.logger.warn response
-      response.code == '200'
+      cache.getset("url-exists-#{url}") do
+        uri = URI.parse(url)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true if uri.scheme == 'https'
+        response = http.request_head(uri.path)
+        #Jekyll.logger.warn response
+        response.code == '200'
+      end
     end
 
     ##
