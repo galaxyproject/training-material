@@ -122,7 +122,7 @@ data = {
     events: addedfiles
        .grep(%r{events/.*\.md})
        .reject { |n| isDraft(n) }
-       .reject { |n| n =~ /index.md/ }
+       .grep_v(/index.md/)
        .map { |x| printableMaterial(x) }
        .map { |n| fixEvents(n) },
   },
@@ -199,7 +199,7 @@ def build_news(data, filter: nil, updates: true, only_news: false)
   end
 
   o = format_events(
-    data[:added][:events].select { |n| filter.nil? || safe_load_yaml(n[:path]).fetch('tags',[]).include?(filter) }
+    data[:added][:events].select { |n| filter.nil? || safe_load_yaml(n[:path]).fetch('tags', []).include?(filter) }
   )
   output += o
   newsworthy |= o.length.positive?

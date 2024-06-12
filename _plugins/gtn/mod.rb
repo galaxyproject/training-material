@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-OUR_PATH = File.expand_path(File.dirname(__FILE__))
+OUR_PATH = __dir__
 # two directories up
 ROOT_PATH = File.expand_path(File.join(OUR_PATH, '..', '..'))
 

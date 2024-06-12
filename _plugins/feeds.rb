@@ -117,11 +117,11 @@ def generate_topic_feeds(site)
   nil
 end
 
-def generate_tag_topic_feeds(site)
+def generate_tag_topic_feeds(_site)
   # Any new materials in a topic with the equivalent tag
   # Any new materials tagged with that tag
   # Any news by tag
-  ""
+  ''
 end
 
 def all_date_sorted_materials(site)
@@ -129,66 +129,65 @@ def all_date_sorted_materials(site)
   materials = TopicFilter.list_all_materials(site).reject { |k, _v| k['draft'] }
   news = site.posts.select { |x| x['layout'] == 'news' }
 
-  bucket = events.map{|e|
+  bucket = events.map do |e|
     [Gtn::PublicationTimes.obtain_time(e.path).to_datetime, 'events', e, ['event'] + e.data.fetch('tags', [])]
-  }
+  end
 
-  materials.each{|m|
+  materials.each do |m|
     tags = [m['topic_name']] + (m['tags'] || [])
-    bucket += m['ref_tutorials'].map{|t|
+    bucket += m['ref_tutorials'].map do |t|
       [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
-    }
+    end
 
-    bucket += m['ref_slides'].reject{|s| s.url =~ /-plain.html/}.map{|s|
+    bucket += m['ref_slides'].reject { |s| s.url =~ /-plain.html/ }.map do |s|
       [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
-    }
-  }
+    end
+  end
 
-  bucket += news.map{|n|
+  bucket += news.map do |n|
     [n.date.to_datetime, 'news', n, ['news'] + n.data.fetch('tags', [])]
-  }
+  end
 
-  bucket += site.data['contributors'].map{|k, v|
-    [DateTime.parse(v['joined'] + '-01'), 'contributors', k, ['contributor']]
-  }
-  bucket += site.data['funders'].map{|k, v|
+  bucket += site.data['contributors'].map do |k, v|
+    [DateTime.parse("#{v['joined']}-01"), 'contributors', k, ['contributor']]
+  end
+  bucket += site.data['funders'].map do |k, v|
     # TODO: backdate funders, organisations
     if v['joined']
-    [DateTime.parse(v['joined'] + '-01'), 'funders', k, ['funder']]
+      [DateTime.parse("#{v['joined']}-01"), 'funders', k, ['funder']]
     end
-  }.compact
-  bucket += site.data['organisations'].map{|k, v|
+  end.compact
+  bucket += site.data['organisations'].map do |k, v|
     if v['joined']
-    [DateTime.parse(v['joined'] + '-01'), 'organisations', k, ['organisation']]
+      [DateTime.parse("#{v['joined']}-01"), 'organisations', k, ['organisation']]
     end
-  }.compact
+  end.compact
 
-  bucket.sort_by{|x| x[0]}.reverse
+  bucket.sort_by { |x| x[0] }.reverse
 end
 
 def group_bucket_by(bucket, group_by: 'day')
-  if group_by == 'day'
+  case group_by
+  when 'day'
     bucket
-      .group_by{|x| x[0].strftime('%Y-%m-%d')}
-      .map{|k,v| [v.map{|x| x[0]}.min, v]}.to_h
-  elsif group_by == 'week'
+      .group_by { |x| x[0].strftime('%Y-%m-%d') }
+      .to_h { |_k, v| [v.map { |x| x[0] }.min, v] }
+  when 'week'
     bucket
-      .group_by{|x| x[0].strftime('%Y-%W')}
-      .map{|k,v| [v.map{|x| x[0]}.min, v]}.to_h
-  elsif group_by == 'month'
+      .group_by { |x| x[0].strftime('%Y-%W') }
+      .to_h { |_k, v| [v.map { |x| x[0] }.min, v] }
+  when 'month'
     bucket
-      .group_by{|x| x[0].strftime('%Y-%m')}
-      .map{|k,v| [v.map{|x| x[0]}.min, v]}.to_h
+      .group_by { |x| x[0].strftime('%Y-%m') }
+      .to_h { |_k, v| [v.map { |x| x[0] }.min, v] }
   else
     raise "Unknown group_by: #{group_by}"
   end
 end
 
-
 def format_contents(xml, site, parts, title, group_by: 'day')
-    # output += '<div xmlns="http://www.w3.org/1999/xhtml">'
+  # output += '<div xmlns="http://www.w3.org/1999/xhtml">'
 end
-
 
 # Our old style matrix bot postsx
 def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
@@ -196,18 +195,19 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
   # new funders/contributors/orgs
   # new news posts(?)
   filter_title = nil
-  if ! filter_by.nil?
-    mats = mats.select{|x| x[3].include?(filter_by)}
+  if !filter_by.nil?
+    mats = mats.select { |x| x[3].include?(filter_by) }
     filter_title = filter_by.gsub('-', ' ').capitalize
   end
 
-  if group_by == 'day'
+  case group_by
+  when 'day'
     # Reject anything that is today
-    mats = mats.reject{|x| x[0].strftime('%Y-%m-%d') == Date.today.strftime('%Y-%m-%d')}
-  elsif group_by == 'week'
-    mats = mats.reject{|x| x[0].strftime('%Y-%W') == Date.today.strftime('%Y-%W')}
-  elsif group_by == 'month'
-    mats = mats.reject{|x| x[0].strftime('%Y-%m') == Date.today.strftime('%Y-%m')}
+    mats = mats.reject { |x| x[0].strftime('%Y-%m-%d') == Date.today.strftime('%Y-%m-%d') }
+  when 'week'
+    mats = mats.reject { |x| x[0].strftime('%Y-%W') == Date.today.strftime('%Y-%W') }
+  when 'month'
+    mats = mats.reject { |x| x[0].strftime('%Y-%m') == Date.today.strftime('%Y-%m') }
   end
 
   bucket = group_bucket_by(mats, group_by: group_by)
@@ -239,17 +239,18 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       # convert '2024-01-01' to date
       xml.updated(DateTime.now.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
-      title_parts = ['GTN', filter_title, lookup[group_by] + " Updates"].compact
+      title_parts = ['GTN', filter_title, "#{lookup[group_by]} Updates"].compact
       xml.title(title_parts.join(' — '))
       xml.subtitle('An RSS feed with the latest materials, events, news in the GTN.')
 
       bucket.each do |date, parts|
         xml.entry do
-          if group_by == 'day'
+          case group_by
+          when 'day'
             title = "GTN #{lookup[group_by]} updates for #{date.strftime('%B %d, %Y')}"
-          elsif group_by == 'week'
+          when 'week'
             title = "GTN #{lookup[group_by]} updates for #{date.strftime('W%W, %Y')}"
-          elsif group_by == 'month'
+          when 'month'
             title = "GTN #{lookup[group_by]} updates for #{date.strftime('%B %Y')}"
           end
           xml.title(title)
@@ -257,12 +258,12 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
           xml.id("#{site.config['url']}#{site.baseurl}/#{group_by}/#{date.strftime('%Y-%m-%d')}")
 
           # This is a feed of only NEW tutorials, so we only include publication times.
-          xml.published(parts.map{|x|x[0]}.min.to_datetime.rfc3339)
-          xml.updated(parts.map{|x|x[0]}.max.to_datetime.rfc3339)
+          xml.published(parts.map { |x| x[0] }.min.to_datetime.rfc3339)
+          xml.updated(parts.map { |x| x[0] }.max.to_datetime.rfc3339)
 
           # xml.category(term: "new #{type}")
-          xml.content(type: "xhtml") do
-            xml.div(xmlns: "http://www.w3.org/1999/xhtml") do
+          xml.content(type: 'xhtml') do
+            xml.div(xmlns: 'http://www.w3.org/1999/xhtml') do
               # xml.h4 title
 
               icon_for = {
@@ -285,11 +286,11 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
                 'slides' => 3,
               }
 
-              parts.group_by{|x| x[1]}.sort_by{|x|prio[x[1]]}.each do |type, items|
+              parts.group_by { |x| x[1] }.sort_by { |x| prio[x[1]] }.each do |type, items|
                 xml.h4 "#{icon_for[type]} #{type.capitalize}"
                 if items.length.positive?
                   xml.ul do
-                    items.each do |date, type, page, tags|
+                    items.each do |date, _type, page, _tags|
                       xml.li do
                         if page.is_a?(String)
                           href = "#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/"
@@ -311,15 +312,15 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
 
               if group_by != 'day'
                 xml.small do
-                  xml.span "Powered by "
-                  xml.a("GTN RSS Feeds", href: "https://training.galaxyproject.org/training-material/news/2024/06/04/gtn-standards-rss.html")
+                  xml.span 'Powered by '
+                  xml.a('GTN RSS Feeds', href: 'https://training.galaxyproject.org/training-material/news/2024/06/04/gtn-standards-rss.html')
                 end
               end
             end
           end
 
           xml.author do
-            xml.name("GTN")
+            xml.name('GTN')
             xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/")
           end
         end

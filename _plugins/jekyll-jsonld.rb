@@ -527,7 +527,7 @@ module Jekyll
         '@context': 'https://schema.org',
         '@type': 'Course',
         url: "#{site['url']}#{site['baseurl']}#{page['url']}",
-        name: "Learning Pathway " + page['title'],
+        name: "Learning Pathway #{page['title']}",
         keywords: page['tags'] || [],
         description: page['description'],
         about: edam_terms, # TeSS, "scientific topics".
@@ -595,7 +595,7 @@ module Jekyll
       data['hasCourseInstance'] = [
         {
           '@type': 'CourseInstance',
-          courseMode: "online",
+          courseMode: 'online',
           offers: offer,
           isAccessibleForFree: data['isAccessibleForFree'],
         }
