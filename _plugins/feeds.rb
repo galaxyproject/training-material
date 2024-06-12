@@ -191,14 +191,13 @@ end
 
 
 # Our old style matrix bot postsx
-def generate_matrix_feed(site, group_by: 'day', filter_by: nil)
+def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
   # new materials (tut + sli)
   # new funders/contributors/orgs
   # new news posts(?)
-  mats = all_date_sorted_materials(site)
   filter_title = nil
   if ! filter_by.nil?
-    mats.select!{|x| x[3].include?(filter_by)}
+    mats = mats.select{|x| x[3].include?(filter_by)}
     filter_title = filter_by.gsub('-', ' ').capitalize
   end
 
@@ -429,11 +428,13 @@ Jekyll::Hooks.register :site, :post_write do |site|
     generate_topic_feeds(site)
     generate_event_feeds(site)
 
-    generate_matrix_feed(site, group_by: 'day')
-    generate_matrix_feed(site, group_by: 'week')
-    generate_matrix_feed(site, group_by: 'month')
-    generate_matrix_feed(site, group_by: 'month', filter_by: 'single-cell')
-    generate_matrix_feed(site, group_by: 'month', filter_by: 'genome-annotation')
-    generate_matrix_feed(site, group_by: 'month', filter_by: 'one-health')
+    bucket = all_date_sorted_materials(site)
+    bucket.freeze
+    generate_matrix_feed(site, bucket, group_by: 'day')
+    generate_matrix_feed(site, bucket, group_by: 'week')
+    generate_matrix_feed(site, bucket, group_by: 'month')
+    generate_matrix_feed(site, bucket, group_by: 'month', filter_by: 'single-cell')
+    generate_matrix_feed(site, bucket, group_by: 'month', filter_by: 'genome-annotation')
+    generate_matrix_feed(site, bucket, group_by: 'month', filter_by: 'one-health')
   end
 end
