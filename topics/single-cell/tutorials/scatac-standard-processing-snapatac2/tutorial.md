@@ -771,7 +771,7 @@ Cluster | Cell type
 9 | NK cells
 10 | Dendritic cells
 11 | B cells
-12 | Megakaryocytes
+12 | Dendritic cells
 
 > <comment-title></comment-title>
 > Note that some clusters contain subtypes (f.ex. the annotated T cell clusters contain both CD4+ and CD8+ T cells). The cell-type annotation can be refined by choosing more specific marker genes. 
@@ -827,11 +827,11 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    5, Monocytes
 >    6, Bcells
 >    7, naive_Tcells
->    8, naive_Tcells
+>    8, memory_Tcells
 >    9, NKcells
 >    10, Dendritic_cells
 >    11, Bcells
->    12, Megakaryocytes
+>    12, Dendritic_cells
 >    ```
 >    {% snippet faqs/galaxy/datasets_create_new_file.md format="csv" name="replace_file"%}
 > 
@@ -854,22 +854,22 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 > 9. Rename the generated file to `Anndata 5k PBMC gene_matrix magic cell_type` or add the tag {% icon galaxy-tags %} `cell_type` to the dataset
 >
 > 10. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic cell_type` (output of **Replace column** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic cell_type` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `cell_type`
 >        - {% icon param-toggle %} *"Show edges?"*: `No`
 >        - In *"Plot attributes"*
 >           - *"Location of legend"*: `on data`
->           - {% icon param-toggle %} *"Draw a frame around the scatter plot?"*: `No`
+>           - {% icon param-toggle %} *"Draw a frame around the scatter plot?"*: `Yes`
 > 11. {% icon galaxy-eye %} Inspect the `.png` output
 >
->  ![UMAP annotated cell types]({% linktopics/single-cell/images/scatac-standard-snapatac2/umap_cell-types.png %})
+>  ![UMAP annotated cell types]({% link topics/single-cell/images/scatac-standard-snapatac2/umap_cell-types.png %})
 >
 >    > <question-title></question-title>
 >    > Are clusters with the same assigned cell type located close to each other?
 >    > > <solution-title></solution-title>
 >    > >
->    > > Yes. B-cells are far away from NK and T cells. Only the myeloid lineage of monocytes, dendritic cells and megakaryocytes are located close each other. This might be due to a common progenitor cell and thus a similar chromatin profile.  
+>    > > Yes. B-cells are far away from NK and T cells. Only the myeloid lineage of monocytes and dendritic cells are located close to each other. This might be due to the common progenitor cell lineage and thus a similar chromatin profile.  
 >    > {: .solution}
 >    >
 >    {: .question}
