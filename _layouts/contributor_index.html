@@ -231,15 +231,13 @@ layout: base
 
 
 				{% if page.news_count > 0 %}
-                <h3>News</h3>
-                <div class="newslist">
-                {% assign news_sorted = page.news | sort: 'date' | reverse %}
-                {% for n in news_sorted %}
-                   {% include _includes/news-card.html news=n %}
-                {% endfor %}
-                </div>
+				<h3>News</h3>
+				<div class="newslist">
+				{% for n in page.news %}
+					{% include _includes/news-card.html news=n %}
+				{% endfor %}
+				</div>
 				{% endif %}
-
 			</div>
 
 			<div class="col-md-3">
