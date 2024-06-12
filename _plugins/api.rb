@@ -219,6 +219,8 @@ module Jekyll
           page6 = PageWithoutAFile.new(site, '', 'api/topics/', "#{q['url'][7..-6]}.json")
           # Delete the ref to avoid including it by accident
           q.delete('ref')
+          q.delete('ref_tutorials')
+          q.delete('ref_slides')
           page6.content = JSON.pretty_generate(q)
           page6.data['layout'] = nil
           site.pages << page6
@@ -277,36 +279,6 @@ module Jekyll
       site.pages << page2
 
       Jekyll.logger.debug '[GTN/API] Tutorial and Slide pages'
-
-      TopicFilter.list_all_materials(site).each do |material|
-        directory = material['dir']
-
-        if material['slides']
-          page5 = PageWithoutAFile.new(site, '', 'api/', "#{directory}/slides.json")
-          p = material.dup
-          p.delete('ref')
-          p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
-
-          # Here we un-do the tutorial metadata priority, and overwrite with
-          # slides metadata when available.
-          slides_data = site.pages.select { |p2| p2.url == "/#{directory}/slides.html" }[0]
-          p.update(slides_data.data) if slides_data&.data
-
-          page5.content = JSON.pretty_generate(p)
-          page5.data['layout'] = nil
-          site.pages << page5
-        end
-
-        if material['hands_on']
-          page5 = PageWithoutAFile.new(site, '', 'api/', "#{directory}/tutorial.json")
-          p = material.dup
-          p.delete('ref')
-          p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
-          page5.content = JSON.pretty_generate(p)
-          page5.data['layout'] = nil
-          site.pages << page5
-        end
-      end
 
       # Deploy the feedback file as well
       page2 = PageWithoutAFile.new(site, '', 'api/', 'feedback.json')
@@ -398,6 +370,33 @@ Jekyll::Hooks.register :site, :post_write do |site|
     else
       Jekyll.logger.debug '[GTN/API/PSL] PSL Dataset not available, are you in a CI environment?'
     end
+
+    TopicFilter.list_all_materials(site).each do |material|
+      directory = material['dir']
+
+      if material['slides']
+        path = File.join(site.dest, 'api', directory, 'slides.json')
+        p = material.dup
+        p.delete('ref')
+        p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
+
+        # Here we un-do the tutorial metadata priority, and overwrite with
+        # slides metadata when available.
+        slides_data = site.pages.select { |p2| p2.url == "/#{directory}/slides.html" }[0]
+        p.update(slides_data.data) if slides_data&.data
+
+        File.write(path, JSON.generate(p))
+      end
+
+      if material['hands_on']
+        path = File.join(site.dest, 'api', directory, 'tutorial.json')
+        p = material.dup
+        p.delete('ref')
+        p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
+        File.write(path, JSON.generate(p))
+      end
+    end
+
 
     # ro-crate-metadata.json
     TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
