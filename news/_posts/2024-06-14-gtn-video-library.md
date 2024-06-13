@@ -5,7 +5,7 @@ tags:
   - gtn
 
 cover: "assets/images/gtn-videolibrary-logo.png"
-cover_alt: The GTN logo with an icon of a video camera overlaid
+coveralt: The GTN logo with an icon of a video camera overlaid
 contributions:
   authorship:
     - shiltemann
