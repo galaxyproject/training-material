@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d19bd01f9c8ec7cd73c885d48c8b829833264c77",
+		release: "galaxy-training-network@29909ff88bf30002106b7374eddeac53c920e23f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -223,20 +223,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<div class="col-md-6">
 		<div class="card">
 		<div class="card-body">
-			<h5 class="card-title">Generating a single cell matrix using Alevin 1.9</h5>
+			<h5 class="card-title">Generating a single cell matrix using Alevin</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
 				
-				Wendi Bacon, 
+				Julia Jakiela, 
 				
-				Julia Jakiela
+				Wendi Bacon
 				
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated May 15, 2023</small>
+				<small class="text-muted">Last updated Mar 22, 2024</small>
 			</p>
 			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin-1.9">Launch in Tutorial Mode</span>
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin">Launch in Tutorial Mode</span>
 			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
 			<br/>
 
@@ -254,124 +254,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     Import or Download
   </button>
   <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/workflows/Generating-a-single-cell-matrix-using-Alevin-1.9.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin-1.9" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin-1.9" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin-1.9" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin-1.9" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin-1.9"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
-
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nRead 1 - containing cell barcode & UMI"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nRead 2 - containing transcript"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nMus_musculus.GRCm38.cdna.all.fa"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Dataset\nMus_musculus.GRCm38.100.gtf.gz"];
-  style 3 stroke:#2c3143,stroke-width:4px;
-  4["Transcript-gene mapping"];
-  2 -->|output| 4;
-  3 -->|output| 4;
-  5["Gene information"];
-  3 -->|output| 5;
-  6["Alevin  Processed"];
-  0 -->|output| 6;
-  1 -->|output| 6;
-  4 -->|fasta_output| 6;
-  4 -->|feature_annotation| 6;
-  7["Alevin - no processing"];
-  0 -->|output| 7;
-  1 -->|output| 7;
-  4 -->|fasta_output| 7;
-  4 -->|feature_annotation| 7;
-  8["Droplet rank plot - Alevin barcodes"];
-  6 -->|quants_mat_mtx| 8;
-  9["Droplet rank plot - raw barcodes"];
-  6 -->|raw_cb_frequency_txt| 9;
-  10["salmonKallistoMtxTo10x"];
-  7 -->|quants_mat_rows_txt| 10;
-  7 -->|quants_mat_cols_txt| 10;
-  7 -->|quants_mat_mtx| 10;
-  11["Join two Datasets"];
-  10 -->|genes_out| 11;
-  5 -->|feature_annotation| 11;
-  12["Annotated Gene Table"];
-  11 -->|out_file1| 12;
-  13["DropletUtils Read10x"];
-  10 -->|barcodes_out| 13;
-  12 -->|out_file1| 13;
-  10 -->|matrix_out| 13;
-  14["DropletUtils emptyDrops"];
-  13 -->|output_rds| 14;
-  68411264-f6f7-4e38-9a83-de6df68bd01d["Output\nEmptied-Object"];
-  14 --> 68411264-f6f7-4e38-9a83-de6df68bd01d;
-  style 68411264-f6f7-4e38-9a83-de6df68bd01d stroke:#2c3143,stroke-width:4px;
-  7a1fd602-7564-43b9-9cf4-bb84f4cc7cce["Output\nEmptied-Tabular Output"];
-  14 --> 7a1fd602-7564-43b9-9cf4-bb84f4cc7cce;
-  style 7a1fd602-7564-43b9-9cf4-bb84f4cc7cce stroke:#2c3143,stroke-width:4px;
-  15["N701-400k-AnnData"];
-  14 -->|output_rdata| 15;
-  95846470-be60-462a-8660-d46eedff7746["Output\nN701-400k-AnnData"];
-  15 --> 95846470-be60-462a-8660-d46eedff7746;
-  style 95846470-be60-462a-8660-d46eedff7746 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">CS1_Generating a single cell matrix using Alevin</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Wendi Bacon
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Nov 12, 2022</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
-				
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
-				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
 			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/workflows/Generating-a-single-cell-matrix-using-Alevin.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_alevin/versions/generating-a-single-cell-matrix-using-alevin"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -379,41 +271,73 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nRead 1 - containing cell barcode & UMI"];
+  0["ℹ️ Input Dataset\nGTF file"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nRead 2 - containing transcript"];
+  1["ℹ️ Input Dataset\nReference FASTA"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nMus_musculus.GRCm38.cdna.all.fa"];
+  2["ℹ️ Input Dataset\nRead 1 - containing cell barcode & UMI"];
   style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Dataset\nMus_musculus.GRCm38.100.gtf.gz"];
+  3["ℹ️ Input Dataset\nRead 2 - containing transcript"];
   style 3 stroke:#2c3143,stroke-width:4px;
-  4["Transcript-gene mapping"];
-  2 -->|output| 4;
-  3 -->|output| 4;
-  5["Gene information"];
-  3 -->|output| 5;
-  6["Alevin  Processed"];
-  0 -->|output| 6;
+  4["GTF2GeneList"];
+  0 -->|output| 4;
+  5["Transcript-gene mapping"];
+  1 -->|output| 5;
+  0 -->|output| 5;
+  773cb4ae-56c3-49c0-b582-ee69d620def3["Output\nfasta_output"];
+  5 --> 773cb4ae-56c3-49c0-b582-ee69d620def3;
+  style 773cb4ae-56c3-49c0-b582-ee69d620def3 stroke:#2c3143,stroke-width:4px;
+  a30424b5-1ddc-4324-9ff6-dc5883adcce0["Output\nfeature_annotation"];
+  5 --> a30424b5-1ddc-4324-9ff6-dc5883adcce0;
+  style a30424b5-1ddc-4324-9ff6-dc5883adcce0 stroke:#2c3143,stroke-width:4px;
+  6["Alevin Processed"];
+  2 -->|output| 6;
+  3 -->|output| 6;
+  5 -->|fasta_output| 6;
   1 -->|output| 6;
-  4 -->|fasta_output| 6;
-  4 -->|feature_annotation| 6;
+  5 -->|feature_annotation| 6;
+  a87beb55-1baf-458e-bd09-bb5ac6ea6e9a["Output\nraw_cb_frequency_txt"];
+  6 --> a87beb55-1baf-458e-bd09-bb5ac6ea6e9a;
+  style a87beb55-1baf-458e-bd09-bb5ac6ea6e9a stroke:#2c3143,stroke-width:4px;
+  c9390a50-775c-4f0f-88e5-0984d570902c["Output\nsalmon_quant_log"];
+  6 --> c9390a50-775c-4f0f-88e5-0984d570902c;
+  style c9390a50-775c-4f0f-88e5-0984d570902c stroke:#2c3143,stroke-width:4px;
+  2cebc438-ddc0-41e0-89ba-49b4bd3e2160["Output\nquants_mat_mtx"];
+  6 --> 2cebc438-ddc0-41e0-89ba-49b4bd3e2160;
+  style 2cebc438-ddc0-41e0-89ba-49b4bd3e2160 stroke:#2c3143,stroke-width:4px;
+  89fa1aad-9ec6-4351-97d5-f05cac09e08e["Output\nquants_mat_cols_txt"];
+  6 --> 89fa1aad-9ec6-4351-97d5-f05cac09e08e;
+  style 89fa1aad-9ec6-4351-97d5-f05cac09e08e stroke:#2c3143,stroke-width:4px;
+  3b3dda80-5d35-4c51-9ca0-90a2f909755f["Output\nquants_mat_rows_txt"];
+  6 --> 3b3dda80-5d35-4c51-9ca0-90a2f909755f;
+  style 3b3dda80-5d35-4c51-9ca0-90a2f909755f stroke:#2c3143,stroke-width:4px;
   7["Alevin - no processing"];
-  0 -->|output| 7;
+  2 -->|output| 7;
+  3 -->|output| 7;
+  5 -->|fasta_output| 7;
   1 -->|output| 7;
-  4 -->|fasta_output| 7;
-  4 -->|feature_annotation| 7;
-  8["Droplet rank plot - Alevin barcodes"];
-  6 -->|quants_mat_mtx| 8;
-  9["Droplet rank plot - raw barcodes"];
-  6 -->|raw_cb_frequency_txt| 9;
+  5 -->|feature_annotation| 7;
+  25d4d8f6-d166-4470-80fe-d0fdb0702371["Output\nquants_mat_rows_txt_1"];
+  7 --> 25d4d8f6-d166-4470-80fe-d0fdb0702371;
+  style 25d4d8f6-d166-4470-80fe-d0fdb0702371 stroke:#2c3143,stroke-width:4px;
+  d9ed1457-792b-4eaf-a9fc-2407bcd90da7["Output\nquants_mat_mtx_1"];
+  7 --> d9ed1457-792b-4eaf-a9fc-2407bcd90da7;
+  style d9ed1457-792b-4eaf-a9fc-2407bcd90da7 stroke:#2c3143,stroke-width:4px;
+  40df6aa8-3dfa-4946-bbc8-cacf4ca2a20e["Output\nquants_mat_cols_txt_1"];
+  7 --> 40df6aa8-3dfa-4946-bbc8-cacf4ca2a20e;
+  style 40df6aa8-3dfa-4946-bbc8-cacf4ca2a20e stroke:#2c3143,stroke-width:4px;
+  8["Droplet rank plot - raw barcodes"];
+  6 -->|raw_cb_frequency_txt| 8;
+  9["Droplet rank plot - Alevin barcodes"];
+  6 -->|quants_mat_mtx| 9;
   10["salmonKallistoMtxTo10x"];
   7 -->|quants_mat_rows_txt| 10;
   7 -->|quants_mat_cols_txt| 10;
   7 -->|quants_mat_mtx| 10;
   11["Join two Datasets"];
   10 -->|genes_out| 11;
-  5 -->|feature_annotation| 11;
-  12["Annotated Gene Table"];
+  4 -->|feature_annotation| 11;
+  12["Cut"];
   11 -->|out_file1| 12;
   13["DropletUtils Read10x"];
   10 -->|barcodes_out| 13;
@@ -421,14 +345,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   10 -->|matrix_out| 13;
   14["DropletUtils emptyDrops"];
   13 -->|output_rds| 14;
-  8247429c-afeb-4640-94df-1d3f9eb261d9["Output\nStringent-Object"];
-  14 --> 8247429c-afeb-4640-94df-1d3f9eb261d9;
-  style 8247429c-afeb-4640-94df-1d3f9eb261d9 stroke:#2c3143,stroke-width:4px;
-  15["N701-400k-AnnData"];
+  15["SCEasy Converter"];
   14 -->|output_rdata| 15;
-  95846470-be60-462a-8660-d46eedff7746["Output\nN701-400k-AnnData"];
-  15 --> 95846470-be60-462a-8660-d46eedff7746;
-  style 95846470-be60-462a-8660-d46eedff7746 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -458,7 +376,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/d19bd01f9c8ec7cd73c885d48c8b829833264c77">d19bd01</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/29909ff88bf30002106b7374eddeac53c920e23f">29909ff</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
