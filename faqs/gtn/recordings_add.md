@@ -28,6 +28,8 @@ The process of adding recordings to the GTN is as follows:
 9. Done! Your recording will now show up on the tutorial for anybody to use and re-use
 
 
+**Note:** If you are submitting a video to use in an event, please submit your recording **2 weeks before the start of your course** to allow ample time to complete the submission process.
+
 #### Recordings Metadata
 
 Our bot will add some metadata about your recording to the tutorial or slide deck in question, and looks as follows:
