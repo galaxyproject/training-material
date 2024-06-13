@@ -8,61 +8,62 @@ require './_plugins/gtn/scholar'
 require './_plugins/gtn/git'
 require './_plugins/gtn'
 
+##
+# Use Jekyll's Markdown converter to convert text to HTML
+# Params:
+# +site+:: +Jekyll::Site+ object
+# +text+:: +String+ of text to convert
+# Returns:
+# +String+ of markdown text
+def markdownify(site, text)
+  site.find_converter_instance(
+    Jekyll::Converters::Markdown
+  ).convert(text.to_s)
+end
+
+##
+# Recursively visit a hash and markdownify all strings inside
+# Params:
+# +site+:: +Jekyll::Site+ object
+# +f+:: +Hash+ to visit
+# Returns:
+# +Hash+ with all strings markdownified
+def visitAndMarkdownify(site, f)
+  case f
+  when Array
+    f.map! { |x| visitAndMarkdownify(site, x) }
+  when Hash
+    f = f.transform_values do |v|
+      visitAndMarkdownify(site, v)
+    end
+  when String
+    f = markdownify(site, f).strip.gsub(/<p>/, '').gsub(%r{</p>}, '')
+  end
+  f
+end
+
+##
+# Map a contributor ID to a JSON object which includes links to their profile page and API endpoint
+# Params:
+# +site+:: +Jekyll::Site+ object
+# +c+:: +String+ of contributor ID
+# Returns:
+# +Hash+ of contributor information
+def mapContributor(site, c)
+  contrib_type, contrib = Gtn::Contributors.fetch(site, c)
+  x = contrib
+      .merge({
+               'id' => c,
+               'url' => site.config['url'] + site.config['baseurl'] + "/api/#{contrib_type}s/#{c}.json",
+               'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
+             })
+  visitAndMarkdownify(site, x)
+end
+
 module Jekyll
   ##
   # This class generates the GTN's "api" by writing out a folder full of JSON files.
   class APIGenerator < Generator
-    ##
-    # Use Jekyll's Markdown converter to convert text to HTML
-    # Params:
-    # +site+:: +Jekyll::Site+ object
-    # +text+:: +String+ of text to convert
-    # Returns:
-    # +String+ of markdown text
-    def markdownify(site, text)
-      site.find_converter_instance(
-        Jekyll::Converters::Markdown
-      ).convert(text.to_s)
-    end
-
-    ##
-    # Recursively visit a hash and markdownify all strings inside
-    # Params:
-    # +site+:: +Jekyll::Site+ object
-    # +f+:: +Hash+ to visit
-    # Returns:
-    # +Hash+ with all strings markdownified
-    def visitAndMarkdownify(site, f)
-      case f
-      when Array
-        f.map! { |x| visitAndMarkdownify(site, x) }
-      when Hash
-        f = f.transform_values do |v|
-          visitAndMarkdownify(site, v)
-        end
-      when String
-        f = markdownify(site, f).strip.gsub(/<p>/, '').gsub(%r{</p>}, '')
-      end
-      f
-    end
-
-    ##
-    # Map a contributor ID to a JSON object which includes links to their profile page and API endpoint
-    # Params:
-    # +site+:: +Jekyll::Site+ object
-    # +c+:: +String+ of contributor ID
-    # Returns:
-    # +Hash+ of contributor information
-    def mapContributor(site, c)
-      contrib_type, contrib = Gtn::Contributors.fetch(site, c)
-      x = contrib
-          .merge({
-                   'id' => c,
-                   'url' => site.config['url'] + site.config['baseurl'] + "/api/#{contrib_type}s/#{c}.json",
-                   'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
-                 })
-      visitAndMarkdownify(site, x)
-    end
 
     ##
     # Generates /api/configuration.json
