@@ -10,8 +10,8 @@ from_google_form: true
 contributions:
   authorship:
   - burkemlou
-cover_image: https://drive.google.com/file/d/1h28_aUoez27VTW0-zP6HN6TF7nLAThXm/view?usp=sharing
-cover_image_alt: Hand drawn sketch of a phylogenetic tree from Charles Darwin's notebook
+cover: https://drive.google.com/file/d/1h28_aUoez27VTW0-zP6HN6TF7nLAThXm/view?usp=sharing
+cover_alt: Hand drawn sketch of a phylogenetic tree from Charles Darwin's notebook
 tutorial: https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo/tutorial.html
 link: https://www.biocommons.org.au/news/phylo-gtn
 ---
