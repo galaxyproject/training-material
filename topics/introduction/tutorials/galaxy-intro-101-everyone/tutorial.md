@@ -387,9 +387,9 @@ In our dataset, we have the following features measured for each sample:
 > 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `iris tabular`
 >    - *"Group by fields"*: `5`
+>    - *"Sort input"*: `Yes`
 >    - *"Input file has a header line"*: `Yes`
 >    - *"Print header line"*: `Yes`
->    - *"Sort input"*: `Yes`
 >    - "Print all fields from input file": `No`
 >    - *"Ignore case when grouping"*: `Yes`
 >    - In *"Operation to perform on each group"*:
