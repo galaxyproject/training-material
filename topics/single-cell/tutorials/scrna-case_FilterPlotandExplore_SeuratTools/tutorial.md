@@ -6,11 +6,6 @@ subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
 
-answer_histories:
-  - label: "UseGalaxy.eu"
-    history: https://usegalaxy.eu/u/.......
-    date: YYYY-MM-DD
-
 input_histories:
   - label: "UseGalaxy.eu"
     history: https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data
