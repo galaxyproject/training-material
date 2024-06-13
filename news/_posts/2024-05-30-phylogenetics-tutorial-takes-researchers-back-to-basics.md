@@ -1,5 +1,5 @@
 ---
-title: Phylogenetics tutorial takes researchers back to basics
+title: Phylogenetics tutorial takes researchers back to basics!
 layout: news
 tags:
 - Phylogenetics
