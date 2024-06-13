@@ -16,8 +16,8 @@ questions:
 
 answer_histories:
   - label: "UseGalaxy.eu"
-    history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
-    date: 2024-05-01
+    history: https://usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-alevin
+    date: 2024-03-22
   - label: "Older Alevin version"
     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
     date: 2024-01-01
