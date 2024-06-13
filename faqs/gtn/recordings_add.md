@@ -18,7 +18,7 @@ For some tips and tricks about recording the video itself, please see
 The process of adding recordings to the GTN is as follows:
 
 1. **Instructor:** Record video ([tips & tricks]({% link faqs/gtn/recordings_create.md %}))
-2. **Instructor:** Submit your video using this [Google Form](TODO)
+2. **Instructor:** Submit your video using this [Google Form](https://forms.gle/qNG8FkTN1yRZPNZY6)
 3. **GTN:** A [GTN GitHub pull request (PR)](https://github.com/galaxyproject/training-material/pulls) will be made by our bot based on the form.
 4. **GTN:**: We will upload your video to the [GalaxyProject YouTube channel](https://www.youtube.com/c/galaxyproject)
 5. **GTN:**: We will put the auto-generated captions from YouTube into a Google Doc
