@@ -30,7 +30,8 @@ contributions:
     - gallantries
 level: Introductory
 
-subtopic: olympics
+priority: 4
+subtopic: next-steps
 ---
 
 

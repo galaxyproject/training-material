@@ -11,12 +11,14 @@ require './_plugins/gtn/scholar'
 require './_plugins/gtn/supported'
 require './_plugins/gtn/toolshed'
 require './_plugins/gtn/usegalaxy'
+require './_plugins/util'
 require './_plugins/jekyll-topic-filter'
 require 'time'
 
-puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
+Jekyll.logger.info "[GTN] Jekyll env: #{Jekyll.env}"
+Jekyll.logger.info "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
 version_parts = RUBY_VERSION.split('.')
-puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if version_parts[0].to_i < 3
+Jekyll.logger.warn '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if version_parts[0].to_i < 3
 
 ##
 # This module contains functions that are used in the GTN, our internal functions that is.
@@ -24,6 +26,8 @@ puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if vers
 module Jekyll
   # The main GTN function library
   module GtnFunctions
+    # rubocop:disable Naming/PredicateName
+
     def self.cache
       @@cache ||= Jekyll::Cache.new('GtnFunctions')
     end
@@ -169,6 +173,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the topic has been mentioned
     def how_many_topic_feedbacks(feedback, name)
+      if feedback.nil?
+        return 0
+      end
+
       feedback.select { |x| x['topic'] == name }.length
     end
 
@@ -180,6 +188,10 @@ module Jekyll
     # Returns:
     # +Integer+:: The number of times the tutorial has been mentioned
     def how_many_tutorial_feedbacks(feedback, name)
+      if feedback.nil?
+        return 0
+      end
+
       feedback.select { |x| x['tutorial'] == name }.length
     end
 
@@ -324,6 +336,10 @@ module Jekyll
         if m.key?('name') && m.key?('topic')
           found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])
           Jekyll.logger.warn "Could not find material #{m['topic']}/#{m['name']} in the site data" if found.nil?
+
+          if m.key?('time')
+            found['time'] = m['time']
+          end
           found
         elsif m.key?('external') && m['external']
           {
@@ -332,6 +348,14 @@ module Jekyll
             'title' => m['name'],
             'hands_on' => 'external',
             'hands_on_url' => m['link'],
+          }
+        elsif m.key?('type') && m['type'] == 'custom'
+          {
+            'layout' => 'custom',
+            'name' => m['name'],
+            'title' => m['name'],
+            'description' => m['description'],
+            'time' => m['time'],
           }
         else
           Jekyll.logger.warn "[GTN] Unsure how to render #{m}"
@@ -534,6 +558,81 @@ module Jekyll
       end
     end
 
+    def format_location(location)
+      url = 'https://www.openstreetmap.org/search?query='
+      # location:
+      #   name: Bioinf Dept
+      #   address: 42 E Main St.
+      #   city: Reyjkjavik
+      #   country: Iceland
+      #   #region: # optional
+      #   postcode: 912NM
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil)
+      ].compact
+
+      if loc.length > 1
+        "<a href=\"#{url}#{loc.join(', ')}\">#{loc.join(', ')}</a>"
+      else
+        # Just e.g. the name
+        loc.join(', ')
+      end
+    end
+
+    def format_location_simple(location)
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil)
+      ].compact
+
+      loc.join(', ')
+    end
+
+    def format_location_short(location)
+      url = 'https://www.openstreetmap.org/search?query='
+      # location:
+      #   name: Bioinf Dept
+      #   address: 42 E Main St.
+      #   city: Reyjkjavik
+      #   country: Iceland
+      #   #region: # optional
+      #   postcode: 912NM
+      loc = [
+        location.fetch('name', nil),
+        location.fetch('address', nil),
+        location.fetch('city', nil),
+        location.fetch('region', nil),
+        location.fetch('country', nil),
+        location.fetch('postcode', nil)
+      ].compact
+
+      loc2 = [
+        location.fetch('name', nil),
+        location.fetch('city', nil),
+        location.fetch('country', nil)
+      ].compact
+
+      if loc.length > 1
+        "<a href=\"#{url}#{loc.join(', ')}\">#{loc2.join(', ')}</a>"
+      else
+        # Just e.g. the name
+        loc.join(', ')
+      end
+    end
+
+    def collapse_date_pretty(event)
+      collapse_event_date_pretty(event)
+    end
+
     ##
     # Get the topic of a page's path
     # Params:
@@ -548,8 +647,62 @@ module Jekyll
       page['path'].split('/')[1]
     end
 
+    ##
+    # Get the list of 'upcoming' events (i.e. reg deadline or start is 30 days away.)
+    # Params:
+    # +site+:: The site object
+    # Returns:
+    # +Array+:: List of events
+    #
+    # Example:
+    #  {{ site | get_upcoming_events }}
+    def get_upcoming_events(site)
+      cache.getset('upcoming-events') do
+        site.pages
+            .select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }
+            .reject { |p| p.data['program'].nil? } # Only those with programs
+            .select { |p| p.data['event_upcoming'] == true } # Only those coming soon
+            .map do |p|
+          materials = p.data['program']
+                       .map { |section| section['tutorials'] }
+                       .flatten
+                       .compact # Remove nil entries
+                       .reject { |x| x.fetch('type', nil) == 'custom' } # Remove custom entries
+                       .map { |x| "#{x['topic']}/#{x['name']}" } # Just the material IDs.
+                       .sort.uniq
+          [p, materials]
+        end
+      end
+    end
+
+    ##
+    # Get the list of 'upcoming' events that include this material's ID
+    # Params:
+    # +site+:: The site object
+    # +material+:: The 'material' to get the topic of, it will inspect page.id (use new_material)
+    # Returns:
+    # +Array+:: List of events
+    #
+    # Example:
+    #  {{ site | get_upcoming_events }}
+    def get_upcoming_events_for_this(site, material)
+      get_upcoming_events(site)
+        .select { |_p, materials| materials.include? material['id'] }
+        .map { |p, _materials| p }
+    end
+
     def shuffle(array)
       array.shuffle
+    end
+
+    def is_date_passed(date)
+      if date.nil?
+        false
+      elsif date.is_a?(String)
+        Date.parse(date) < Date.today
+      else
+        date < Date.today
+      end
     end
 
     def get_og_desc(site, page); end
@@ -560,7 +713,7 @@ module Jekyll
 
       if site.data.key?(topic_id)
         if site.data[topic_id].is_a?(Hash) && site.data[topic_id].key?('title')
-          og_title = [site.data[topic_id]['title']]
+          og_title = [site.data[topic_id]['title'].clone]
         else
           Jekyll.logger.warn "Missing title for #{topic_id}"
         end
@@ -593,14 +746,12 @@ module Jekyll
       when 'learning-pathway'
         og_title.push "Learning Pathway: #{page['title']}"
       when 'tutorial_hands_on'
-        og_title[-1]&.prepend 'Hands-on: '
+        og_title.push "Hands-on: #{page['title']}"
       when /slides/
-        og_title[-1]&.prepend 'Slide Deck: '
+        og_title.push "Slides: #{page['title']}"
       else
         og_title.push page['title']
       end
-
-      Jekyll.logger.debug "Material #{page['layout']} :: #{page['path']} => #{topic_id}/#{material_id} => #{og_title}"
 
       if reverse.to_s == 'true'
         og_title.compact.reverse.join(' / ').gsub(/Hands-on: Hands-on:/, 'Hands-on:')
@@ -633,23 +784,37 @@ module Jekyll
     def group_icons(icons)
       icons.group_by { |_k, v| v }.transform_values { |v| v.map { |z| z[0] } }.invert
     end
+
+    def materials_for_pathway(page)
+      d = if page.is_a?(Jekyll::Page)
+            page.data.fetch('pathway', [])
+          else
+            page.fetch('pathway', [])
+          end
+
+      d.map do |m|
+        m.fetch('tutorials', [])
+         .select { |t| t.key?('name') && t.key?('topic') }
+         .map { |t| [t['topic'], t['name']] }
+      end.flatten.compact.sort.uniq
+    end
+
+    def find_learningpaths_including_topic(site, topic_id)
+      site.pages
+          .select { |p| p['layout'] == 'learning-pathway' }
+          .select do |p|
+        materials_for_pathway(p)
+          .map { |topic, _tutorial| topic }
+          .include?(topic_id)
+      end
+    end
+    # rubocop:enable Naming/PredicateName
   end
 end
 
 Liquid::Template.register_filter(Jekyll::GtnFunctions)
 
 ##
-# This does post-modification to every page
-# Mapping the authors to their human names, and copying the cover (when present) to 'image'
-#
-# This exists because the jekyll-feed plugin expects those fields to look like that.
-Jekyll::Hooks.register :posts, :pre_render do |post, _out|
-  post.data['author'] = Gtn::Contributors.get_authors(post.data).map do |c|
-    Gtn::Contributors.fetch_name(post.site, c)
-  end.join(', ')
-  post.data['image'] = post.data['cover']
-end
-
 # We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
 Jekyll::Hooks.register :site, :pre_render do |site|
   site.posts.docs.each do |post|
@@ -673,6 +838,17 @@ Jekyll::Hooks.register :site, :pre_render do |site|
           "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
         else
           match
+        end
+      end
+
+      # This would also need to modify the box types themselves, not sure how is best to do that.
+      page.content = page.content.gsub(/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/) do |match|
+        if match =~ /(CAUTION|WARNING)/
+          '> <warning-title></warning-title>'
+        elsif match =~ /TIP/
+          '> <tip-title></tip-title>'
+        else
+          '> <comment-title></comment-title>'
         end
       end
     end
@@ -716,6 +892,70 @@ Jekyll::Hooks.register :site, :post_read do |site|
           site.data['funders'][affiliation]['former_members'] << name
         end
       end
+    end
+  end
+
+  # Add shortlinks
+  Jekyll.logger.info '[GTN] Loading shortlinks'
+  shortlinks = site.data['shortlinks']
+  shortlinks_reversed = shortlinks['id'].invert
+
+  posts = if site.posts.respond_to?(:docs)
+            site.posts.docs
+          else
+            site.posts
+          end
+
+  posts.each do |post|
+    post.data['short_id'] = shortlinks_reversed[post.url]
+  end
+
+  site.pages.each do |page|
+    page.data['short_id'] = shortlinks_reversed[page.url]
+  end
+
+  Jekyll.logger.info '[GTN] Annotating events'
+  site.pages.select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }.each do |page|
+    page.data['not_started'] = page.data['date_start'] > Date.today
+    page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
+
+    event_start = page.data['date_start']
+    event_end = page.data['date_end'] || page.data['date_start']
+
+    page.data['event_state'] = if Date.today < event_start
+                                 'upcoming'
+                               elsif (event_start - 3) < Date.today && Date.today < (event_end + 3) # Some lee way
+                                 'ongoing'
+                               else
+                                 'ended'
+                               end
+
+    page.data['duration'] = if page.data['date_end'].nil?
+                              1
+                            else
+                              (page.data['date_end'] - page.data['date_start']).to_i + 1
+                            end
+
+    # reg deadline
+    deadline = if page.data.key?('registration') && page.data['registration'].key?('deadline')
+                 page.data['registration']['deadline']
+               else
+                 page.data['date_start']
+               end
+
+    # If it's an 'upcoming event'
+    if deadline - 30 <= Date.today && Date.today <= deadline
+      page.data['event_upcoming'] = true
+    end
+  end
+
+  # This exists because the jekyll-feed plugin expects those fields to look like that.
+  posts.each do |post|
+    post.data['author'] = Gtn::Contributors.get_authors(post.data).map do |c|
+      Gtn::Contributors.fetch_name(post.site, c)
+    end.join(', ')
+    if post.data.key? 'cover'
+      post.data['image'] = post.data['cover']
     end
   end
 end

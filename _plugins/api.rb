@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'securerandom'
 require 'json'
-require 'zip'
 
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn/metrics'
@@ -10,61 +8,62 @@ require './_plugins/gtn/scholar'
 require './_plugins/gtn/git'
 require './_plugins/gtn'
 
+##
+# Use Jekyll's Markdown converter to convert text to HTML
+# Params:
+# +site+:: +Jekyll::Site+ object
+# +text+:: +String+ of text to convert
+# Returns:
+# +String+ of markdown text
+def markdownify(site, text)
+  site.find_converter_instance(
+    Jekyll::Converters::Markdown
+  ).convert(text.to_s)
+end
+
+##
+# Recursively visit a hash and markdownify all strings inside
+# Params:
+# +site+:: +Jekyll::Site+ object
+# +f+:: +Hash+ to visit
+# Returns:
+# +Hash+ with all strings markdownified
+def visitAndMarkdownify(site, f)
+  case f
+  when Array
+    f.map! { |x| visitAndMarkdownify(site, x) }
+  when Hash
+    f = f.transform_values do |v|
+      visitAndMarkdownify(site, v)
+    end
+  when String
+    f = markdownify(site, f).strip.gsub(/<p>/, '').gsub(%r{</p>}, '')
+  end
+  f
+end
+
+##
+# Map a contributor ID to a JSON object which includes links to their profile page and API endpoint
+# Params:
+# +site+:: +Jekyll::Site+ object
+# +c+:: +String+ of contributor ID
+# Returns:
+# +Hash+ of contributor information
+def mapContributor(site, c)
+  contrib_type, contrib = Gtn::Contributors.fetch(site, c)
+  x = contrib
+      .merge({
+               'id' => c,
+               'url' => site.config['url'] + site.config['baseurl'] + "/api/#{contrib_type}s/#{c}.json",
+               'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
+             })
+  visitAndMarkdownify(site, x)
+end
+
 module Jekyll
   ##
   # This class generates the GTN's "api" by writing out a folder full of JSON files.
   class APIGenerator < Generator
-    ##
-    # Use Jekyll's Markdown converter to convert text to HTML
-    # Params:
-    # +site+:: +Jekyll::Site+ object
-    # +text+:: +String+ of text to convert
-    # Returns:
-    # +String+ of markdown text
-    def markdownify(site, text)
-      site.find_converter_instance(
-        Jekyll::Converters::Markdown
-      ).convert(text.to_s)
-    end
-
-    ##
-    # Recursively visit a hash and markdownify all strings inside
-    # Params:
-    # +site+:: +Jekyll::Site+ object
-    # +f+:: +Hash+ to visit
-    # Returns:
-    # +Hash+ with all strings markdownified
-    def visitAndMarkdownify(site, f)
-      case f
-      when Array
-        f.map! { |x| visitAndMarkdownify(site, x) }
-      when Hash
-        f = f.transform_values do |v|
-          visitAndMarkdownify(site, v)
-        end
-      when String
-        f = markdownify(site, f).strip.gsub(/<p>/, '').gsub(%r{</p>}, '')
-      end
-      f
-    end
-
-    ##
-    # Map a contributor ID to a JSON object which includes links to their profile page and API endpoint
-    # Params:
-    # +site+:: +Jekyll::Site+ object
-    # +c+:: +String+ of contributor ID
-    # Returns:
-    # +Hash+ of contributor information
-    def mapContributor(site, c)
-      contrib_type, contrib = Gtn::Contributors.fetch(site, c)
-      x = contrib
-          .merge({
-                   'id' => c,
-                   'url' => site.config['url'] + site.config['baseurl'] + "/api/#{contrib_type}s/#{c}.json",
-                   'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
-                 })
-      visitAndMarkdownify(site, x)
-    end
 
     ##
     # Generates /api/configuration.json
@@ -221,6 +220,8 @@ module Jekyll
           page6 = PageWithoutAFile.new(site, '', 'api/topics/', "#{q['url'][7..-6]}.json")
           # Delete the ref to avoid including it by accident
           q.delete('ref')
+          q.delete('ref_tutorials')
+          q.delete('ref_slides')
           page6.content = JSON.pretty_generate(q)
           page6.data['layout'] = nil
           site.pages << page6
@@ -279,36 +280,6 @@ module Jekyll
       site.pages << page2
 
       Jekyll.logger.debug '[GTN/API] Tutorial and Slide pages'
-
-      TopicFilter.list_all_materials(site).each do |material|
-        directory = material['dir']
-
-        if material['slides']
-          page5 = PageWithoutAFile.new(site, '', 'api/', "#{directory}/slides.json")
-          p = material.dup
-          p.delete('ref')
-          p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
-
-          # Here we un-do the tutorial metadata priority, and overwrite with
-          # slides metadata when available.
-          slides_data = site.pages.select { |p2| p2.url == "/#{directory}/slides.html" }[0]
-          p.update(slides_data.data) if slides_data&.data
-
-          page5.content = JSON.pretty_generate(p)
-          page5.data['layout'] = nil
-          site.pages << page5
-        end
-
-        if material['hands_on']
-          page5 = PageWithoutAFile.new(site, '', 'api/', "#{directory}/tutorial.json")
-          p = material.dup
-          p.delete('ref')
-          p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
-          page5.content = JSON.pretty_generate(p)
-          page5.data['layout'] = nil
-          site.pages << page5
-        end
-      end
 
       # Deploy the feedback file as well
       page2 = PageWithoutAFile.new(site, '', 'api/', 'feedback.json')
@@ -373,152 +344,186 @@ end
 
 # Basically like `PageWithoutAFile`, we just write out the ones we'd created earlier.
 Jekyll::Hooks.register :site, :post_write do |site|
-  dir = File.join(site.dest, 'api', 'workflows')
+  # No need to run this except in prod.
+  if Jekyll.env == 'production'
+    # Import on-demand
+    require 'securerandom'
+    require 'zip'
 
-  # Public tool listing: reorganised
-  if site.data['public-server-tools'] && site.data['public-server-tools']['tools']
-    site.data['public-server-tools']['tools'].each do |tool, version_data|
-      path = File.join(site.dest, 'api', 'psl', "#{tool}.json")
-      dir = File.dirname(path)
-      FileUtils.mkdir_p(dir) unless File.directory?(dir)
+    dir = File.join(site.dest, 'api', 'workflows')
 
-      d = version_data.dup
-      d.each_key do |k|
-        # Replace the indexes with the server URLs from site['public-server-tools']['servers']
-        d[k] = d[k].map { |v| site.data['public-server-tools']['servers'][v] }
-      end
+    # Public tool listing: reorganised
+    if site.data['public-server-tools'] && site.data['public-server-tools']['tools']
+      site.data['public-server-tools']['tools'].each do |tool, version_data|
+        path = File.join(site.dest, 'api', 'psl', "#{tool}.json")
+        dir = File.dirname(path)
+        FileUtils.mkdir_p(dir) unless File.directory?(dir)
 
-      File.write(path, JSON.generate(d))
-    end
-    Jekyll.logger.debug '[GTN/API/PSL] PSL written'
-  else
-    Jekyll.logger.debug '[GTN/API/PSL] PSL Dataset not available, are you in a CI environment?'
-  end
-
-  # ro-crate-metadata.json
-  TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
-    material['workflows'].each do |workflow|
-      wfid = workflow['wfid']
-      wfname = workflow['wfname']
-      # {"workflow"=>"galaxy-workflow-mouse_novel_peptide_analysis.ga",
-      # "tests"=>false,
-      # "url"=>
-      # "http://0.0.0.0:4002/training-material/topics/.../workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
-      # "path"=>
-      # "topics/proteomics/tutorials/.../galaxy-workflow-mouse_novel_peptide_analysis.ga",
-      # "wfid"=>"proteomics-proteogenomics-novel-peptide-analysis",
-      # "wfname"=>"galaxy-workflow-mouse_novel_peptide_analysis",
-      # "trs_endpoint"=>
-      # "http://0.0.0.0:4002/training-material/api/.../versions/galaxy-workflow-mouse_novel_peptide_analysis",
-      # "license"=>nil,
-      # "creators"=>[],
-      # "name"=>"GTN Proteogemics3 Novel Peptide Analysis",
-      # "test_results"=>nil,
-      # "modified"=>2023-06-07 12:09:36.12 +0200}
-
-      wfdir = File.join(dir, wfid, wfname)
-      FileUtils.mkdir_p(wfdir)
-      path = File.join(wfdir, 'ro-crate-metadata.json')
-      Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
-
-      uuids = workflow['creators'].map do |c|
-        if c.key?('identifier') && !c['identifier'].empty?
-          "https://orcid.org/#{c['identifier']}"
-        else
-          "##{SecureRandom.uuid}"
+        d = version_data.dup
+        d.each_key do |k|
+          # Replace the indexes with the server URLs from site['public-server-tools']['servers']
+          d[k] = d[k].map { |v| site.data['public-server-tools']['servers'][v] }
         end
-      end
-      author_uuids = uuids.map { |u| { '@id' => u.to_s } }
-      author_linked = workflow['creators'].map.with_index do |c, i|
-        {
-          '@id' => (uuids[i]).to_s,
-          '@type' => c['class'],
-          'name' => c['name'],
-        }
-      end
-      license = workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0'
 
-      crate = {
-        '@context' => 'https://w3id.org/ro/crate/1.1/context',
-        '@graph' => [
-          # {
-          #   '@id': './',
-          #   '@type': 'Dataset',
-          #   datePublished: workflow['modified'],
-          # },
+        File.write(path, JSON.generate(d))
+      end
+      Jekyll.logger.debug '[GTN/API/PSL] PSL written'
+    else
+      Jekyll.logger.debug '[GTN/API/PSL] PSL Dataset not available, are you in a CI environment?'
+    end
+
+    TopicFilter.list_all_materials(site).each do |material|
+      directory = material['dir']
+
+      if material['slides']
+        path = File.join(site.dest, 'api', directory, 'slides.json')
+        p = material.dup
+        p.delete('ref')
+        p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
+
+        # Here we un-do the tutorial metadata priority, and overwrite with
+        # slides metadata when available.
+        slides_data = site.pages.select { |p2| p2.url == "/#{directory}/slides.html" }[0]
+        p.update(slides_data.data) if slides_data&.data
+
+        File.write(path, JSON.generate(p))
+      end
+
+      if material['hands_on']
+        path = File.join(site.dest, 'api', directory, 'tutorial.json')
+        p = material.dup
+        p.delete('ref')
+        p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
+        File.write(path, JSON.generate(p))
+      end
+    end
+
+
+    # ro-crate-metadata.json
+    TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
+      material['workflows'].each do |workflow|
+        wfid = workflow['wfid']
+        wfname = workflow['wfname']
+        # {"workflow"=>"galaxy-workflow-mouse_novel_peptide_analysis.ga",
+        # "tests"=>false,
+        # "url"=>
+        # "http://0.0.0.0:4002/training-material/topics/.../workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
+        # "path"=>
+        # "topics/proteomics/tutorials/.../galaxy-workflow-mouse_novel_peptide_analysis.ga",
+        # "wfid"=>"proteomics-proteogenomics-novel-peptide-analysis",
+        # "wfname"=>"galaxy-workflow-mouse_novel_peptide_analysis",
+        # "trs_endpoint"=>
+        # "http://0.0.0.0:4002/training-material/api/.../versions/galaxy-workflow-mouse_novel_peptide_analysis",
+        # "license"=>nil,
+        # "creators"=>[],
+        # "name"=>"GTN Proteogemics3 Novel Peptide Analysis",
+        # "test_results"=>nil,
+        # "modified"=>2023-06-07 12:09:36.12 +0200}
+
+        wfdir = File.join(dir, wfid, wfname)
+        FileUtils.mkdir_p(wfdir)
+        path = File.join(wfdir, 'ro-crate-metadata.json')
+        Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
+
+        uuids = workflow['creators'].map do |c|
+          if c.key?('identifier') && !c['identifier'].empty?
+            "https://orcid.org/#{c['identifier']}"
+          else
+            "##{SecureRandom.uuid}"
+          end
+        end
+        author_uuids = uuids.map { |u| { '@id' => u.to_s } }
+        author_linked = workflow['creators'].map.with_index do |c, i|
           {
-            '@id': 'ro-crate-metadata.json',
-            '@type': 'CreativeWork',
-            about: {
-              '@id': './'
-            },
-            conformsTo: [
-              {
-                '@id': 'https://w3id.org/ro/crate/1.1'
-              },
-              {
-                '@id': 'https://about.workflowhub.eu/Workflow-RO-Crate/'
-              }
-            ]
-          },
-          {
-            '@id': './',
-            '@type': 'Dataset',
-            datePublished: workflow['modified'].strftime('%Y-%m-%dT%H:%M:%S.%L%:z'),
-            # hasPart: [
-            #   {
-            #     '@id': '#assembly-assembly-quality-control'
-            #   }
-            # ],
-            mainEntity: {
-              '@id': "#{wfname}.ga"
-            }
-          },
-          {
-            '@id': "#{wfname}.ga",
-            '@type': %w[
-              File
-              SoftwareSourceCode
-              ComputationalWorkflow
-            ],
-            author: author_uuids,
-            license: {
-              '@id': license,
-            },
-            name: workflow['name'],
-            version: Gtn::ModificationTimes.obtain_modification_count(workflow['path']),
-            programmingLanguage: {
-              '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy'
-            }
-          },
-          {
-            '@id': license,
-            '@type': 'CreativeWork',
-            name: workflow['license'],
-          },
-          {
-            '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy',
-            '@type': 'ComputerLanguage',
-            identifier: {
-              '@id': 'https://galaxyproject.org/'
-            },
-            name: 'Galaxy',
-            url: {
-              '@id': 'https://galaxyproject.org/'
-            },
-            version: '23.1'
+            '@id' => (uuids[i]).to_s,
+            '@type' => c['class'],
+            'name' => c['name'],
           }
-        ]
-      }
-      crate['@graph'] += author_linked
-      File.write(path, JSON.pretty_generate(crate))
+        end
+        license = workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0'
 
-      zip_path = File.join(wfdir, 'rocrate.zip')
-      Zip::File.open(zip_path, create: true) do |zipfile|
-        # - The name of the file as it will appear in the archive
-        # - The original file, including the path to find it
-        zipfile.add('ro-crate-metadata.json', path)
-        zipfile.add("#{wfname}.ga", workflow['path'])
+        crate = {
+          '@context' => 'https://w3id.org/ro/crate/1.1/context',
+          '@graph' => [
+            # {
+            #   '@id': './',
+            #   '@type': 'Dataset',
+            #   datePublished: workflow['modified'],
+            # },
+            {
+              '@id': 'ro-crate-metadata.json',
+              '@type': 'CreativeWork',
+              about: {
+                '@id': './'
+              },
+              conformsTo: [
+                {
+                  '@id': 'https://w3id.org/ro/crate/1.1'
+                },
+                {
+                  '@id': 'https://about.workflowhub.eu/Workflow-RO-Crate/'
+                }
+              ]
+            },
+            {
+              '@id': './',
+              '@type': 'Dataset',
+              datePublished: workflow['modified'].strftime('%Y-%m-%dT%H:%M:%S.%L%:z'),
+              # hasPart: [
+              #   {
+              #     '@id': '#assembly-assembly-quality-control'
+              #   }
+              # ],
+              mainEntity: {
+                '@id': "#{wfname}.ga"
+              }
+            },
+            {
+              '@id': "#{wfname}.ga",
+              '@type': %w[
+                File
+                SoftwareSourceCode
+                ComputationalWorkflow
+              ],
+              author: author_uuids,
+              license: {
+                '@id': license,
+              },
+              name: workflow['name'],
+              version: Gtn::ModificationTimes.obtain_modification_count(workflow['path']),
+              programmingLanguage: {
+                '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy'
+              }
+            },
+            {
+              '@id': license,
+              '@type': 'CreativeWork',
+              name: workflow['license'],
+            },
+            {
+              '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy',
+              '@type': 'ComputerLanguage',
+              identifier: {
+                '@id': 'https://galaxyproject.org/'
+              },
+              name: 'Galaxy',
+              url: {
+                '@id': 'https://galaxyproject.org/'
+              },
+              version: '23.1'
+            }
+          ]
+        }
+        crate['@graph'] += author_linked
+        File.write(path, JSON.pretty_generate(crate))
+
+        zip_path = File.join(wfdir, 'rocrate.zip')
+        Zip::File.open(zip_path, create: true) do |zipfile|
+          # - The name of the file as it will appear in the archive
+          # - The original file, including the path to find it
+          zipfile.add('ro-crate-metadata.json', path)
+          zipfile.add("#{wfname}.ga", workflow['path'])
+        end
       end
     end
   end

@@ -1,7 +1,7 @@
 ---
 layout: learning-pathway
 
-title: FAIR Training
+title: FAIR Data Management
 description: |
   The FAIR data management training learning pathway teaches you how to organise, describe, and store research data according to the FAIR principles (Findable, Accessible, Interoperable, Reusable).
 tags: [fair, dmp, data management, data stewardship]
@@ -15,7 +15,7 @@ editorial_board:
   - poterlowicz-lab
 
 funding:
-  - ELIXIR-UK-DaSH
+  - elixir-uk-dash
 
 pathway:
   - section: "Module 1: FAIR Data Management"

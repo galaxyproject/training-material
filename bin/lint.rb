@@ -611,6 +611,24 @@ module GtnLinter
     end
   end
 
+  def self.check_bad_trs_link(contents)
+    find_matching_texts(contents, %r{snippet faqs/galaxy/workflows_run_trs.md path="([^"]*)"}i)
+      .map do |idx, _text, selected|
+      path = selected[1].to_s.strip
+      if !File.exist?(path)
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: "The linked file (`#{path}`) could not be found.",
+          code: 'GTN:036'
+        )
+      end
+    end
+  end
+
   def self.check_looks_like_heading(contents)
     # TODO: we should remove this someday, but, we need to have a good solution
     # and we're still a ways from that.
@@ -763,6 +781,22 @@ module GtnLinter
     end
   end
 
+  def self.nonsemantic_list(contents)
+    find_matching_texts(contents, />\s*(\*\*\s*[Ss]tep)/)
+      .map do |idx, _text, selected|
+      ReviewDogEmitter.error(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: nil,
+        message: 'This is a non-semantic list which is bad for accessibility and bad for screenreaders. ' \
+                 'It results in poorly structured HTML and as a result is not allowed.',
+        code: 'GTN:035'
+      )
+    end
+  end
+
   def self.fix_md(contents)
     [
       *fix_notoc(contents),
@@ -789,7 +823,9 @@ module GtnLinter
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
       *zenodo_api(contents),
-      *empty_alt_text(contents)
+      *empty_alt_text(contents),
+      *check_bad_trs_link(contents),
+      *nonsemantic_list(contents)
     ]
   end
 

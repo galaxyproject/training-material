@@ -14,6 +14,7 @@ module Jekyll
         '@id': 'https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19',
         '@type': 'Organization'
       },
+      id: 'https://training.galaxyproject.org',
       email: 'galaxytrainingnetwork@gmail.com',
       name: 'Galaxy Training Network',
       legalName: 'Galaxy Training Network',
@@ -109,6 +110,12 @@ module Jekyll
     #  }
     #
     def generate_person_jsonld(id, contributor, site)
+      member_of = Gtn::Contributors.fetch_contributor(site, id)['affiliations'] || []
+      member_of = member_of.map do |org_id|
+        org = Gtn::Contributors.fetch_contributor(site, org_id)
+        generate_org_jsonld(org_id, org, site)
+      end
+
       person = {
         '@context': 'https://schema.org',
         '@type': 'Person',
@@ -128,7 +135,7 @@ module Jekyll
                        contributor.fetch('bio',
                                          'A contributor to the GTN project.')
                      end,
-        memberOf: [GTN],
+        memberOf: [GTN] + member_of,
       }
       if !contributor.nil? && contributor.key?('orcid') && contributor['orcid']
         person['identifier'] = "https://orcid.org/#{contributor['orcid']}"
@@ -146,6 +153,7 @@ module Jekyll
           '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
           '@type': 'CreativeWork'
         },
+        id: "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
         name: Gtn::Contributors.fetch_name(site, id),
         description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
       }
@@ -156,36 +164,31 @@ module Jekyll
     end
 
     def generate_funder_jsonld(id, contributor, site)
-      organization = [
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          'http://purl.org/dc/terms/conformsTo': {
-            '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
-            '@type': 'CreativeWork'
-          },
-          name: Gtn::Contributors.fetch_name(site, id),
-          description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
-          url: contributor.fetch('url', "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/"),
-          logo: contributor.fetch('avatar', "https://github.com/#{id}.png"),
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        'http://purl.org/dc/terms/conformsTo': {
+          '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
+          '@type': 'CreativeWork'
         },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Grant',
-          identifier: contributor['funding_id'],
-          url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
-          funder: {
-            '@type': 'Organization',
-            name: contributor['funder_name'],
-            description: contributor.fetch('funding_statement',
-                                           'An organization supporting the Galaxy Training Network'),
-            url: Gtn::Contributors.fetch_funding_url(contributor),
-          }
-        }
-      ]
+        name: Gtn::Contributors.fetch_name(site, id),
+        description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
+        url: contributor.fetch('url', "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/"),
+        logo: contributor.fetch('avatar', "https://github.com/#{id}.png"),
+      }
+    end
 
-      organization[1]['startDate'] = contributor['start_date'] if contributor.key?('start_date')
-      organization[1]['endDate'] = contributor['end_date'] if contributor.key?('end_date')
+    def generate_funding_jsonld(id, contributor, site)
+      organization = {
+        '@context': 'https://schema.org',
+        '@type': 'Grant',
+        identifier: contributor['funding_id'],
+        url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
+        funder: generate_funder_jsonld(id, contributor, site)
+      }
+
+      organization['startDate'] = contributor['start_date'] if contributor.key?('start_date')
+      organization['endDate'] = contributor['end_date'] if contributor.key?('end_date')
 
       organization
     end
@@ -198,14 +201,20 @@ module Jekyll
     # +site+:: The site object.
     # Returns:
     # +String+:: The JSON-LD metadata.
-    def to_pfo_jsonld(id, site)
+    def to_pfo_jsonld(id, site, json: true)
       contributor = Gtn::Contributors.fetch_contributor(site, id)
-      if Gtn::Contributors.person?(site, id)
-        JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
-      elsif Gtn::Contributors.funder?(site, id)
-        JSON.pretty_generate(generate_funder_jsonld(id, contributor, site))
+      d = if Gtn::Contributors.person?(site, id)
+            generate_person_jsonld(id, contributor, site)
+          elsif Gtn::Contributors.funder?(site, id)
+            generate_funder_jsonld(id, contributor, site)
+          else
+            generate_org_jsonld(id, contributor, site)
+          end
+
+      if json
+        JSON.pretty_generate(d)
       else
-        JSON.pretty_generate(generate_org_jsonld(id, contributor, site))
+        d
       end
     end
 
@@ -218,7 +227,7 @@ module Jekyll
     # +Hash+:: The JSON-LD metadata.
     def generate_news_jsonld(page, site)
       authors = Gtn::Contributors.get_authors(page.to_h).map do |x|
-        to_pfo_jsonld(x, site)
+        to_pfo_jsonld(x, site, json: false)
       end
 
       data = {
@@ -251,7 +260,352 @@ module Jekyll
     end
 
     ##
-    # Convert a material to JSON-LD.
+    # Generate the JSON-LD metadata for an event
+    # Parameters:
+    # +page+:: The page object.
+    # +site+:: The +Jekyll::Site+ site object.
+    # Returns:
+    # +Hash+:: The JSON-LD metadata.
+    def generate_event_jsonld(page, site)
+      organisers = Gtn::Contributors.get_organisers(page.to_h).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+      instructors = Gtn::Contributors.get_instructors(page.to_h).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+      funders = Gtn::Contributors.get_funders(page.to_h).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+      funding = Gtn::Contributors.get_funders(page.to_h).map do |x|
+        generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+      end
+
+      materials = []
+      page['program'].each do |section|
+        if !section.key? 'tutorials'
+          next
+        end
+
+        section['tutorials'].each do |tutorial|
+          if tutorial.key?('custom')
+            next
+          end
+
+          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+          materials.push(material)
+        end
+      end
+      materials.compact!
+
+      # Extract EDAM terms from all materials
+      edam_terms = materials.map do |material|
+        material.fetch('edam_ontology', []).map do |term|
+          {
+            '@type': 'DefinedTerm',
+            '@id': "http://edamontology.org/#{term}",
+            inDefinedTermSet: 'http://edamontology.org',
+            termCode: term,
+          }
+        end
+      end.flatten.uniq
+
+      learning_objectives = materials.map do |material|
+        material.fetch('objectives', [])
+      end.flatten.compact
+
+      # TODO: add topic edam terms too? Not sure.
+      parts = []
+      materials.each do |material|
+        mat = generate_material_jsonld(material, site['data'][material['topic_name']], site)
+        if !mat.nil? && !mat.empty?
+          parts.push(mat)
+        end
+      end
+
+      syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
+        {
+          '@type': 'Syllabus',
+          name: section['section'],
+          description: section.fetch('description', nil),
+        }
+      end
+
+      data = {
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        url: "#{site['url']}#{site['baseurl']}#{page['url']}",
+        name: page['title'],
+        keywords: page['tags'] || [],
+        description: page['description'],
+
+        about: edam_terms, # TeSS, "scientific topics".
+        audience: page['audience'], # TeSS: target audience
+        # If 'online' is present in the mode, the course is online.
+        # Will fail on "this is NOT an online course"
+        # Acceptable.
+        courseMode: page['mode'],
+        startDate: page['date_start'],
+        endDate: page['date_end'],
+        organizer: organisers, # TeSS only, US spelling, non-standard
+
+        location: page['location'], # TODO, TeSS location
+        teaches: learning_objectives, # TeSS, "learning objectives"
+        # timeRequired: 'P1D', # TeSS, "duration", TODO: calculate from start/end date, not implemented in scraper currently.
+
+        availableLanguage: ['en'], # TODO: support other languages
+        inLanguage: ['en'], # TODO: support other languages
+        # courseCode
+        # coursePrerequisites
+        # educationalCredentialAwarded
+        # financialAidEligible
+        # hasCourseInstance
+        # numberOfCredits
+        # occupationalCredentialAwarded
+        # syllabusSections
+        # totalHistoricalEnrollment
+
+        # assesses
+        # competencyRequired
+        # educationalAlignment
+        # educationalLevel
+        # educationalUse
+        # learningResourceType
+        # teaches
+
+        funder: funders, # Org or person
+        funding: funding, # Grant
+        publisher: GTN,
+        provider: GTN,
+        syllabusSections: syllab,
+        # Session materials
+        # TODO: not currently parsed by TeSS, google just complains about it, so we're leaving it out.
+        # hasPart: parts,
+      }
+
+      begin
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page.path)
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page.path)
+      rescue StandardError
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page['path'])
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page['path'])
+      end
+
+      if page['cover']
+        data['image'] = if page['cover'] =~ /^http/
+                          [page['cover']]
+                        else
+                          ["#{site['url']}#{site['baseurl']}#{page['cover']}"]
+                        end
+      end
+
+      # We CANNOT guarantee A11Y
+      # data.update(A11Y)
+      if page['cost'].downcase == 'free'
+        data['isAccessibleForFree'] = true
+        offer = {
+          '@type': 'Offer',
+          price: 0,
+          priceCurrency: 'EUR',
+          category: 'Free',
+          isAccessibleForFree: true,
+        }
+      else
+        data['isAccessibleForFree'] = false
+        offer = {
+          '@type': 'Offer',
+          price: page['cost'].split[0],
+          priceCurrency: page['cost'].split[1],
+          isAccessibleForFree: false,
+          category: 'Paid',
+          # TODO: this can be more advanced but we need to collect start/end times, and timezone.
+        }
+      end
+
+      # TODO: this is wrong in a whole host of scenarios like incl weekends.
+      course_days = (page.fetch('date_end', page['date_start']) - page['date_start']).to_i
+      if course_days < 1
+        course_days = 1
+      end
+      data['hasCourseInstance'] = [
+        {
+          '@type': 'CourseInstance',
+          courseMode: page['mode'],
+          # courseWorkload: "A daily course running from #{page['date_start']} to #{page['date_end']}",
+          offers: offer,
+          instructor: instructors,
+          isAccessibleForFree: data['isAccessibleForFree'],
+          courseSchedule: {
+            '@type': 'Schedule',
+            startDate: page['date_start'],
+            endDate: page.fetch('date_end', page['date_start']),
+            repeatCount: course_days,
+            repeatFrequency: 'daily', # Contrary to schema.org spec, this is what Google wants.
+          },
+          courseWorkload: "P#{course_days}D",
+        }
+      ]
+
+      data['offers'] = [offer]
+
+      if page.key?('location') && page['location'].keys.length > 1
+        data['location'] = {
+          '@type': 'Place',
+          name: page['location']['name'],
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: page['location'].fetch('address', nil),
+            addressLocality: page['location'].fetch('city', nil),
+            addressRegion: page['location'].fetch('region', nil),
+            postalCode: page['location'].fetch('postcode', nil),
+            addressCountry: page['location'].fetch('country', nil)
+          }
+        }
+      end
+
+      JSON.pretty_generate(data)
+    end
+
+    ##
+    # Generate the JSON-LD metadata for a learning pathway
+    # Parameters:
+    # +page+:: The page object.
+    # +site+:: The +Jekyll::Site+ site object.
+    # Returns:
+    # +Hash+:: The JSON-LD metadata.
+    def generate_learning_pathway_jsonld(page, site)
+      materials = []
+      page['pathway'].each do |section|
+        if !section.key? 'tutorials'
+          next
+        end
+
+        section['tutorials'].each do |tutorial|
+          if tutorial.key?('custom')
+            next
+          end
+
+          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+          materials.push(material)
+        end
+      end
+      materials.compact!
+
+      # Extract EDAM terms from all materials
+      edam_terms = materials.map do |material|
+        material.fetch('edam_ontology', []).map do |term|
+          {
+            '@type': 'DefinedTerm',
+            '@id': "http://edamontology.org/#{term}",
+            inDefinedTermSet: 'http://edamontology.org',
+            termCode: term,
+          }
+        end
+      end.flatten.uniq
+
+      learning_objectives = materials.map do |material|
+        material.fetch('objectives', [])
+      end.flatten.compact
+
+      # TODO: add topic edam terms too? Not sure.
+      parts = []
+      materials.each do |material|
+        mat = generate_material_jsonld(material, site['data'][material['topic_name']], site)
+        if !mat.nil? && !mat.empty?
+          parts.push(mat)
+        end
+      end
+
+      syllab = page['pathway'].reject { |s| s['section'].nil? }.map do |section|
+        {
+          '@type': 'Syllabus',
+          name: section['section'],
+          description: section.fetch('description', nil),
+        }
+      end
+
+      data = {
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        url: "#{site['url']}#{site['baseurl']}#{page['url']}",
+        name: "Learning Pathway #{page['title']}",
+        keywords: page['tags'] || [],
+        description: page['description'],
+        about: edam_terms, # TeSS, "scientific topics".
+        audience: page['audience'], # TeSS: target audience
+        teaches: learning_objectives, # TeSS, "learning objectives"
+        availableLanguage: ['en'], # TODO: support other languages
+        inLanguage: ['en'], # TODO: support other languages
+        # courseCode
+        # coursePrerequisites
+        # educationalCredentialAwarded
+        # financialAidEligible
+        # hasCourseInstance
+        # numberOfCredits
+        # occupationalCredentialAwarded
+        # syllabusSections
+        # totalHistoricalEnrollment
+
+        # assesses
+        # competencyRequired
+        # educationalAlignment
+        # educationalLevel
+        # educationalUse
+        # learningResourceType
+        # teaches
+
+        # funder: funders, # Org or person
+        # funding: funding, # Grant
+        publisher: GTN,
+        provider: GTN,
+        syllabusSections: syllab,
+        # Session materials
+        # TODO: not currently parsed by TeSS, google just complains about it, so we're leaving it out.
+        # hasPart: parts,
+      }
+
+      begin
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page.path)
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page.path)
+      rescue StandardError
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page['path'])
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page['path'])
+      end
+
+      if page['cover']
+        data['image'] = if page['cover'] =~ /^http/
+                          [page['cover']]
+                        else
+                          ["#{site['url']}#{site['baseurl']}#{page['cover']}"]
+                        end
+      end
+
+      # We CANNOT guarantee A11Y
+      # data.update(A11Y)
+      data['isAccessibleForFree'] = true
+      offer = {
+        '@type': 'Offer',
+        price: 0,
+        priceCurrency: 'EUR',
+        category: 'Free',
+        isAccessibleForFree: true,
+      }
+      data['offers'] = [offer]
+
+      # TODO: this is basically just wrong.
+      data['hasCourseInstance'] = [
+        {
+          '@type': 'CourseInstance',
+          courseMode: 'online',
+          offers: offer,
+          isAccessibleForFree: data['isAccessibleForFree'],
+        }
+      ]
+
+      JSON.pretty_generate(data)
+    end
+
+    ##
+    # Convert a material to JSON-LD, intended to be used in Jekyll Liquid templates.
     # Parameters:
     # +material+:: The material object.
     # +topic+:: The topic object.
@@ -260,6 +614,19 @@ module Jekyll
     # Returns:
     # +String+:: The JSON-LD metadata.
     def to_jsonld(material, topic, site)
+      JSON.pretty_generate(generate_material_jsonld(material, topic, site))
+    end
+
+    ##
+    # Convert a material to JSON-LD.
+    # Parameters:
+    # +material+:: The material object.
+    # +topic+:: The topic object.
+    # +site+:: The +Jekyll::Site+ site object.
+    #
+    # Returns:
+    # +Hash+:: The JSON-LD metadata.
+    def generate_material_jsonld(material, topic, site)
       langCodeMap = {
         en: 'English',
         es: 'Español',
@@ -322,8 +689,6 @@ module Jekyll
         # "correction":,
         # "creator":,
         # "dateCreated":,
-        dateModified: Gtn::ModificationTimes.obtain_time(material['path']),
-        datePublished: Gtn::PublicationTimes.obtain_time(material['path']),
         # "datePublished":,
         discussionUrl: site['gitter_url'],
         # "editor":,
@@ -395,6 +760,19 @@ module Jekyll
         workTranslation: [],
         creativeWorkStatus: material['draft'] ? 'Draft' : 'Active',
       }
+
+      if material.key?('pub_date')
+        data['dateModified'] = material['mod_date']
+        data['datePublished'] = material['pub_date']
+      else
+        begin
+          data['dateModified'] = Gtn::ModificationTimes.obtain_time(material.path)
+          data['datePublished'] = Gtn::PublicationTimes.obtain_time(material.path)
+        rescue StandardError
+          data['dateModified'] = Gtn::ModificationTimes.obtain_time(material['path'])
+          data['datePublished'] = Gtn::PublicationTimes.obtain_time(material['path'])
+        end
+      end
 
       data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}" if material.key?('short_id')
 
@@ -588,9 +966,9 @@ module Jekyll
 
       data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
       data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x } }
-      data['abstract'] = material['content'].split("\n").first
+      data['abstract'] = material.fetch('content', '').split("\n").first
 
-      JSON.pretty_generate(data)
+      data
     end
   end
 end

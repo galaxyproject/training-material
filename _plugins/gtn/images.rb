@@ -19,7 +19,7 @@ module Gtn
     end
 
     def self.html_image_dimensions(tuto_dir, url)
-      return '' if !FASTIMAGE_AVAILABLE
+      return '' if !FASTIMAGE_AVAILABLE || (Jekyll.env == 'development')
 
       (width, height), path = get_image_dimensions(tuto_dir, url)
       return unless width && height

@@ -127,6 +127,8 @@ You can access the data for this tutorial in multiple ways:
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
+
 ## Concatenating objects
 
 > <hands-on-title>Concatenating AnnData objects</hands-on-title>

@@ -3,6 +3,7 @@
 require 'json'
 require 'yaml'
 require './_plugins/gtn'
+require 'securerandom'
 
 # The main GTN module to parse tutorials and topics into useful lists of things that can bes shown on topic pages
 module TopicFilter
@@ -345,14 +346,8 @@ module TopicFilter
     shortlinks = site.data['shortlinks']
     shortlinks_reversed = shortlinks['id'].invert
 
-    get_posts(site).each do |post|
-      post.data['short_id'] = shortlinks_reversed[post.url]
-    end
-
     interesting = {}
     pages.each do |page|
-      page.data['short_id'] = shortlinks_reversed[page.url]
-
       # Skip anything outside of topics.
       next if !page.url.include?('/topics/')
 
@@ -498,6 +493,8 @@ module TopicFilter
     page_obj = page.data.dup
     page_obj['id'] = "#{page['topic_name']}/#{page['tutorial_name']}"
     page_obj['ref'] = page_ref
+    page_obj['ref_tutorials'] = tutorials.map { |a| a[1] }
+    page_obj['ref_slides'] = slides.map { |a| a[1] }
 
     id = page_obj['id']
     page_obj['video_library'] = {}
@@ -1042,6 +1039,19 @@ module Jekyll
 
     def list_draft_materials(site)
       TopicFilter.list_all_materials(site).select { |k, _v| k['draft'] }
+    end
+
+    def to_material(site, page)
+      topic = page['path'].split('/')[1]
+      material = page['path'].split('/')[3]
+      ret = TopicFilter.fetch_tutorial_material(site, topic, material)
+      Jekyll.logger.warn "Could not find material #{topic} #{material}" if ret.nil?
+      ret
+    end
+
+    def get_workflow(site, page, workflow)
+      mat = to_material(site, page)
+      mat['workflows'].select { |w| w['workflow'] == workflow }[0]
     end
   end
 end

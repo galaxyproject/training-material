@@ -13,6 +13,7 @@ time_estimation: 30M
 key_points:
   - 'Galaxy is an excellent tool for quickly QCing your data'
 subtopic: core
+priority: 10
 contributors:
   - nekrut
 draft: true
@@ -199,7 +200,7 @@ This tutorial provides two sample datasets: one generated with Illumina and the 
 >
 > 4. Create a paired collection from your data (relevant part beging at 0:57 and and the case of this tutorial we have 4 datasets): 
 >
->    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/uZUt9XIHUQo?si=F0qUj76L_lrM7R2j&amp;start=57" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+>    {% include _includes/youtube.html id="uZUt9XIHUQo" title="Create a paired collection tutorial" start=57 %}
 >
 {: .hands_on}
 

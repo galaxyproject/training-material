@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Inferring single cell trajectories (Scanpy)
+title: Inferring single cell trajectories with Scanpy
 subtopic: single-cell-CS
 priority: 4
 zenodo_link: "https://zenodo.org/record/7075718"
@@ -63,6 +63,8 @@ We will use the same sample from the previous three tutorials, which contains la
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
+
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 # Prepare datasets
 
