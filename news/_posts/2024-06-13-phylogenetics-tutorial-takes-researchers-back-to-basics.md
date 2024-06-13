@@ -12,8 +12,9 @@ contributions:
   - burkemlou
 cover: news/images/darwin_tree.png
 coveralt: Hand drawn sketch of a phylogenetic tree from Charles Darwin's notebook
-tutorial: https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo/tutorial.html
+tutorial: topics/evolution/tutorials/abc_intro_phylo/tutorial.html
 link: https://www.biocommons.org.au/news/phylo-gtn
+
 ---
 A new Galaxy Training Network tutorial has been created to take researchers back to basics to uncover the principles of phylogenetics and how tree-building methods work. A longstanding collaboration between Professor Michael Charleston from the University of Tasmania and Australian BioCommons has delivered this self-guided tutorial featuring videos and hands-on exercises. To maximise its impact, the resource was tailored specifically to be shared globally via the Galaxy Training Network, and will form the basis of an upcoming live training workshop.
 
