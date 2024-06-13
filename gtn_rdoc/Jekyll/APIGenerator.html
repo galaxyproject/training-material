@@ -76,9 +76,6 @@
     <li ><a href="#method-i-generateConfiguration">#generateConfiguration</a>
     <li ><a href="#method-i-generateLibrary">#generateLibrary</a>
     <li ><a href="#method-i-generateVersion">#generateVersion</a>
-    <li ><a href="#method-i-mapContributor">#mapContributor</a>
-    <li ><a href="#method-i-markdownify">#markdownify</a>
-    <li ><a href="#method-i-visitAndMarkdownify">#visitAndMarkdownify</a>
   </ul>
 </div>
 
@@ -124,7 +121,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 117</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">generateConfiguration</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-comment"># For some reason the templating isn&#39;t working right here.</span>
@@ -230,6 +227,8 @@
       <span class="ruby-identifier">page6</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/topics/&#39;</span>, <span class="ruby-node">&quot;#{q[&#39;url&#39;][7..-6]}.json&quot;</span>)
       <span class="ruby-comment"># Delete the ref to avoid including it by accident</span>
       <span class="ruby-identifier">q</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;ref&#39;</span>)
+      <span class="ruby-identifier">q</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;ref_tutorials&#39;</span>)
+      <span class="ruby-identifier">q</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;ref_slides&#39;</span>)
       <span class="ruby-identifier">page6</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">q</span>)
       <span class="ruby-identifier">page6</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-keyword">nil</span>
       <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page6</span>
@@ -288,36 +287,6 @@
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
 
   <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&#39;[GTN/API] Tutorial and Slide pages&#39;</span>
-
-  <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_all_materials</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">material</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">directory</span> = <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;dir&#39;</span>]
-
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;slides&#39;</span>]
-      <span class="ruby-identifier">page5</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-node">&quot;#{directory}/slides.json&quot;</span>)
-      <span class="ruby-identifier">p</span> = <span class="ruby-identifier">material</span>.<span class="ruby-identifier">dup</span>
-      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;ref&#39;</span>)
-      <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;contributors&#39;</span>] = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">p</span>).<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>) }
-
-      <span class="ruby-comment"># Here we un-do the tutorial metadata priority, and overwrite with</span>
-      <span class="ruby-comment"># slides metadata when available.</span>
-      <span class="ruby-identifier">slides_data</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p2</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p2</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">==</span> <span class="ruby-node">&quot;/#{directory}/slides.html&quot;</span> }[<span class="ruby-value">0</span>]
-      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">slides_data</span>.<span class="ruby-identifier">data</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">slides_data</span>&amp;.<span class="ruby-identifier">data</span>
-
-      <span class="ruby-identifier">page5</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">p</span>)
-      <span class="ruby-identifier">page5</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-keyword">nil</span>
-      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page5</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;hands_on&#39;</span>]
-      <span class="ruby-identifier">page5</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-node">&quot;#{directory}/tutorial.json&quot;</span>)
-      <span class="ruby-identifier">p</span> = <span class="ruby-identifier">material</span>.<span class="ruby-identifier">dup</span>
-      <span class="ruby-identifier">p</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;ref&#39;</span>)
-      <span class="ruby-identifier">p</span>[<span class="ruby-string">&#39;contributors&#39;</span>] = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">p</span>).<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>) }
-      <span class="ruby-identifier">page5</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">p</span>)
-      <span class="ruby-identifier">page5</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-keyword">nil</span>
-      <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page5</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Deploy the feedback file as well</span>
   <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-string">&#39;feedback.json&#39;</span>)
@@ -402,7 +371,7 @@
 <p>Returns: nil</p>
 
           <div class="method-source-code" id="generateConfiguration-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 73</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generateConfiguration</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-string">&#39;configuration.json&#39;</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">update</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">discover</span>)
@@ -437,7 +406,7 @@
 <p>Returns: nil</p>
 
           <div class="method-source-code" id="generateLibrary-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 102</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generateLibrary</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/API] Data Library&#39;</span>
   <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-string">&#39;data-library.yaml&#39;</span>)
@@ -473,127 +442,12 @@
 <p>Returns: nil</p>
 
           <div class="method-source-code" id="generateVersion-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 89</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generateVersion</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-string">&#39;version.json&#39;</span>)
   <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">discover</span>)
   <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-        </div>
-
-
-      </div>
-
-      <div id="method-i-mapContributor" class="method-detail ">
-        <div class="method-header">
-          <div class="method-heading">
-            <span class="method-name">mapContributor</span><span
-              class="method-args">(site, c)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-        </div>
-
-        <div class="method-description">
-          <p>Map a contributor ID to a JSON object which includes links to their profile page and API endpoint Params:</p>
-<dl class="rdoc-list note-list"><dt><code>site</code>
-<dd>
-<p><code>Jekyll::Site</code> object</p>
-</dd><dt><code>c</code>
-<dd>
-<p><code>String</code> of contributor ID</p>
-</dd></dl>
-
-<p>Returns: <code>Hash</code> of contributor information</p>
-
-          <div class="method-source-code" id="mapContributor-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 56</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
-  <span class="ruby-identifier">contrib_type</span>, <span class="ruby-identifier">contrib</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
-  <span class="ruby-identifier">x</span> = <span class="ruby-identifier">contrib</span>
-      .<span class="ruby-identifier">merge</span>({
-               <span class="ruby-string">&#39;id&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">c</span>,
-               <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/api/#{contrib_type}s/#{c}.json&quot;</span>,
-               <span class="ruby-string">&#39;page&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/hall-of-fame/#{c}/&quot;</span>,
-             })
-  <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-        </div>
-
-
-      </div>
-
-      <div id="method-i-markdownify" class="method-detail ">
-        <div class="method-header">
-          <div class="method-heading">
-            <span class="method-name">markdownify</span><span
-              class="method-args">(site, text)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-        </div>
-
-        <div class="method-description">
-          <p>Use Jekyll’s Markdown converter to convert text to HTML Params:</p>
-<dl class="rdoc-list note-list"><dt><code>site</code>
-<dd>
-<p><code>Jekyll::Site</code> object</p>
-</dd><dt><code>text</code>
-<dd>
-<p><code>String</code> of text to convert</p>
-</dd></dl>
-
-<p>Returns: <code>String</code> of markdown text</p>
-
-          <div class="method-source-code" id="markdownify-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">text</span>)
-  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">find_converter_instance</span>(
-    <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span><span class="ruby-operator">::</span><span class="ruby-constant">Markdown</span>
-  ).<span class="ruby-identifier">convert</span>(<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_s</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-        </div>
-
-
-      </div>
-
-      <div id="method-i-visitAndMarkdownify" class="method-detail ">
-        <div class="method-header">
-          <div class="method-heading">
-            <span class="method-name">visitAndMarkdownify</span><span
-              class="method-args">(site, f)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-        </div>
-
-        <div class="method-description">
-          <p>Recursively visit a hash and markdownify all strings inside Params:</p>
-<dl class="rdoc-list note-list"><dt><code>site</code>
-<dd>
-<p><code>Jekyll::Site</code> object</p>
-</dd><dt><code>f</code>
-<dd>
-<p><code>Hash</code> to visit</p>
-</dd></dl>
-
-<p>Returns: <code>Hash</code> with all strings markdownified</p>
-
-          <div class="method-source-code" id="visitAndMarkdownify-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">f</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
-    <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>) }
-  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
-    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">transform_values</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">v</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
-    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;p&gt;/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{&lt;/p&gt;}</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">f</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

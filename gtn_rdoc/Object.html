@@ -72,6 +72,7 @@
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
+    <li ><a href="#method-i-all_date_sorted_materials">#all_date_sorted_materials</a>
     <li ><a href="#method-i-automagic_loading">#automagic_loading</a>
     <li ><a href="#method-i-build_news">#build_news</a>
     <li ><a href="#method-i-call_engine">#call_engine</a>
@@ -88,11 +89,15 @@
     <li ><a href="#method-i-find_duration">#find_duration</a>
     <li ><a href="#method-i-fixEvents">#fixEvents</a>
     <li ><a href="#method-i-fixNews">#fixNews</a>
+    <li ><a href="#method-i-format_contents">#format_contents</a>
     <li ><a href="#method-i-format_events">#format_events</a>
     <li ><a href="#method-i-format_news">#format_news</a>
     <li ><a href="#method-i-format_tutorials">#format_tutorials</a>
     <li ><a href="#method-i-generate_event_feeds">#generate_event_feeds</a>
+    <li ><a href="#method-i-generate_matrix_feed">#generate_matrix_feed</a>
+    <li ><a href="#method-i-generate_tag_topic_feeds">#generate_tag_topic_feeds</a>
     <li ><a href="#method-i-generate_topic_feeds">#generate_topic_feeds</a>
+    <li ><a href="#method-i-group_bucket_by">#group_bucket_by</a>
     <li ><a href="#method-i-isDraft">#isDraft</a>
     <li ><a href="#method-i-json_boxify">#json_boxify</a>
     <li ><a href="#method-i-jupyter_post_write">#jupyter_post_write</a>
@@ -100,6 +105,8 @@
     <li ><a href="#method-i-linkify">#linkify</a>
     <li ><a href="#method-i-lookup_topic">#lookup_topic</a>
     <li ><a href="#method-i-lookup_tuto">#lookup_tuto</a>
+    <li ><a href="#method-i-mapContributor">#mapContributor</a>
+    <li ><a href="#method-i-markdownify">#markdownify</a>
     <li ><a href="#method-i-onlyEnabled">#onlyEnabled</a>
     <li ><a href="#method-i-parseOptions">#parseOptions</a>
     <li ><a href="#method-i-parse_metadata">#parse_metadata</a>
@@ -119,6 +126,7 @@
     <li ><a href="#method-i-update_data_library">#update_data_library</a>
     <li ><a href="#method-i-update_tutorial">#update_tutorial</a>
     <li ><a href="#method-i-validate_document">#validate_document</a>
+    <li ><a href="#method-i-visitAndMarkdownify">#visitAndMarkdownify</a>
     <li ><a href="#method-i-write_data_library">#write_data_library</a>
   </ul>
 </div>
@@ -179,8 +187,12 @@
         <dd>
         <dt id="ORGANISATIONS_SCHEMA_UNSAFE">ORGANISATIONS_SCHEMA_UNSAFE
         <dd>
+        <dt id="OUR_PATH">OUR_PATH
+        <dd>
         <dt id="PUNCTUATION">PUNCTUATION
         <dd>
+        <dt id="ROOT_PATH">ROOT_PATH
+        <dd><p>two directories up</p>
         <dt id="TEST_PHRASES">TEST_PHRASES
         <dd>
         <dt id="TITLE_TOPIC">TITLE_TOPIC
@@ -198,6 +210,67 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+      <div id="method-i-all_date_sorted_materials" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">all_date_sorted_materials</span><span
+              class="method-args">(site)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="all_date_sorted_materials-source">
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_date_sorted_materials</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">events</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;event&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;event-external&#39;</span> }
+  <span class="ruby-identifier">materials</span> = <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_all_materials</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">_v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>[<span class="ruby-string">&#39;draft&#39;</span>] }
+  <span class="ruby-identifier">news</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">posts</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;news&#39;</span> }
+
+  <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">events</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    [<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">PublicationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_datetime</span>, <span class="ruby-string">&#39;events&#39;</span>, <span class="ruby-identifier">e</span>, [<span class="ruby-string">&#39;event&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, [])]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tags</span> = [<span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]] <span class="ruby-operator">+</span> (<span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;tags&#39;</span>] <span class="ruby-operator">||</span> [])
+    <span class="ruby-identifier">bucket</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;ref_tutorials&#39;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+      [<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">PublicationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">t</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_datetime</span>, <span class="ruby-string">&#39;tutorials&#39;</span>, <span class="ruby-identifier">t</span>, <span class="ruby-identifier">tags</span>]
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">bucket</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">m</span>[<span class="ruby-string">&#39;ref_slides&#39;</span>].<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/-plain.html/</span> }.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+      [<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">PublicationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">s</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_datetime</span>, <span class="ruby-string">&#39;slides&#39;</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">tags</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">bucket</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">news</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+    [<span class="ruby-identifier">n</span>.<span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_datetime</span>, <span class="ruby-string">&#39;news&#39;</span>, <span class="ruby-identifier">n</span>, [<span class="ruby-string">&#39;news&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, [])]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">bucket</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    [<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{v[&#39;joined&#39;]}-01&quot;</span>), <span class="ruby-string">&#39;contributors&#39;</span>, <span class="ruby-identifier">k</span>, [<span class="ruby-string">&#39;contributor&#39;</span>]]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">bucket</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funders&#39;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># TODO: backdate funders, organisations</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;joined&#39;</span>]
+      [<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{v[&#39;joined&#39;]}-01&quot;</span>), <span class="ruby-string">&#39;funders&#39;</span>, <span class="ruby-identifier">k</span>, [<span class="ruby-string">&#39;funder&#39;</span>]]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">compact</span>
+  <span class="ruby-identifier">bucket</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;organisations&#39;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;joined&#39;</span>]
+      [<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{v[&#39;joined&#39;]}-01&quot;</span>), <span class="ruby-string">&#39;organisations&#39;</span>, <span class="ruby-identifier">k</span>, [<span class="ruby-string">&#39;organisation&#39;</span>]]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">compact</span>
+
+  <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] }.<span class="ruby-identifier">reverse</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
 
       <div id="method-i-automagic_loading" class="method-detail ">
         <div class="method-header">
@@ -255,7 +328,7 @@
           
 
           <div class="method-source-code" id="build_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 191</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_news</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">filter:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">only_news:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">infix</span> = <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">titleize</span>(<span class="ruby-identifier">filter</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;# GTN #{infix} News for #{NOW.strftime(&#39;%b %d&#39;)}&quot;</span>
@@ -271,7 +344,7 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">o</span> = <span class="ruby-identifier">format_events</span>(
-    <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:events</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>]).<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>,[]).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filter</span>) }
+    <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:events</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>]).<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, []).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filter</span>) }
   )
   <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">o</span>
   <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -714,7 +787,7 @@
           
 
           <div class="method-source-code" id="filterSlides-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 70</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filterSlides</span>(<span class="ruby-identifier">x</span>)
   <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/.*/tutorials/.*/slides.*\.html}</span>
 <span class="ruby-keyword">end</span></pre>
@@ -737,7 +810,7 @@
           <p>new   news new   slidevideos new   contributors   Done new   tutorials      Done new   slides         Done</p>
 
           <div class="method-source-code" id="filterTutorials-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 66</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filterTutorials</span>(<span class="ruby-identifier">x</span>)
   <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/.*/tutorials/.*/tutorial.*\.md}</span>
 <span class="ruby-keyword">end</span></pre>
@@ -786,7 +859,7 @@
           
 
           <div class="method-source-code" id="fixEvents-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 100</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fixEvents</span>(<span class="ruby-identifier">n</span>)
   <span class="ruby-comment"># news/_posts/2021-11-10-api.html =&gt; news/2021/11/10/api.html</span>
   <span class="ruby-identifier">meta</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>])
@@ -812,10 +885,33 @@
           
 
           <div class="method-source-code" id="fixNews-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 95</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fixNews</span>(<span class="ruby-identifier">n</span>)
   <span class="ruby-comment"># news/_posts/2021-11-10-api.html =&gt; news/2021/11/10/api.html</span>
   <span class="ruby-identifier">n</span>[<span class="ruby-value">:md</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{news/_posts/(....)-(..)-(..)-(.*.html)}</span>, <span class="ruby-string">&#39;news/\1/\2/\3/\4&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-format_contents" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">format_contents</span><span
+              class="method-args">(xml, site, parts, title, group_by: &#39;day&#39;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="format_contents-source">
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_contents</span>(<span class="ruby-identifier">xml</span>, <span class="ruby-identifier">site</span>, <span class="ruby-identifier">parts</span>, <span class="ruby-identifier">title</span>, <span class="ruby-value">group_by:</span> <span class="ruby-string">&#39;day&#39;</span>)
+  <span class="ruby-comment"># output += &#39;&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -836,7 +932,7 @@
           
 
           <div class="method-source-code" id="format_events-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 164</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_events</span>(<span class="ruby-identifier">events</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">events</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -864,7 +960,7 @@
           
 
           <div class="method-source-code" id="format_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 155</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_news</span>(<span class="ruby-identifier">news</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">news</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -892,7 +988,7 @@
           
 
           <div class="method-source-code" id="format_tutorials-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 173</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 169</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_tutorials</span>(<span class="ruby-identifier">added</span>, <span class="ruby-identifier">modified</span>, <span class="ruby-value">kind:</span> <span class="ruby-string">&#39;tutorials&#39;</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-identifier">count</span> = <span class="ruby-identifier">added</span>.<span class="ruby-identifier">length</span>
@@ -929,7 +1025,7 @@
           
 
           <div class="method-source-code" id="generate_event_feeds-source">
-            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 120</span>
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 342</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_event_feeds</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">events</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;event&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;event-external&#39;</span> }
   <span class="ruby-identifier">feed_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">dest</span>, <span class="ruby-string">&#39;events&#39;</span>, <span class="ruby-string">&#39;feed.xml&#39;</span>)
@@ -1019,6 +1115,200 @@
   )
   <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">add_previous_sibling</span> <span class="ruby-identifier">pi</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">feed_path</span>, <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">to_xml</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_matrix_feed" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_matrix_feed</span><span
+              class="method-args">(site, mats, group_by: &#39;day&#39;, filter_by: nil)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Our old style matrix bot postsx</p>
+
+          <div class="method-source-code" id="generate_matrix_feed-source">
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_matrix_feed</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">mats</span>, <span class="ruby-value">group_by:</span> <span class="ruby-string">&#39;day&#39;</span>, <span class="ruby-value">filter_by:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-comment"># new materials (tut + sli)</span>
+  <span class="ruby-comment"># new funders/contributors/orgs</span>
+  <span class="ruby-comment"># new news posts(?)</span>
+  <span class="ruby-identifier">filter_title</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">filter_by</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">mats</span> = <span class="ruby-identifier">mats</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">filter_by</span>) }
+    <span class="ruby-identifier">filter_title</span> = <span class="ruby-identifier">filter_by</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">capitalize</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">group_by</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;day&#39;</span>
+    <span class="ruby-comment"># Reject anything that is today</span>
+    <span class="ruby-identifier">mats</span> = <span class="ruby-identifier">mats</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m-%d&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m-%d&#39;</span>) }
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;week&#39;</span>
+    <span class="ruby-identifier">mats</span> = <span class="ruby-identifier">mats</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%W&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%W&#39;</span>) }
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;month&#39;</span>
+    <span class="ruby-identifier">mats</span> = <span class="ruby-identifier">mats</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m&#39;</span>) }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">bucket</span> = <span class="ruby-identifier">group_bucket_by</span>(<span class="ruby-identifier">mats</span>, <span class="ruby-value">group_by:</span> <span class="ruby-identifier">group_by</span>)
+  <span class="ruby-identifier">lookup</span> = {
+    <span class="ruby-string">&#39;day&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;Daily&#39;</span>,
+    <span class="ruby-string">&#39;week&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;Weekly&#39;</span>,
+    <span class="ruby-string">&#39;month&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;Monthly&#39;</span>
+  }
+
+  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;feeds/matrix-#{group_by}.xml&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter_by</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;feeds/#{filter_by}-#{group_by}.xml&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">feed_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">dest</span>, <span class="ruby-identifier">path</span>)
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/Feeds] Generating matrix feed&#39;</span>
+
+  <span class="ruby-identifier">dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">feed_path</span>)
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">dir</span>)
+
+  <span class="ruby-comment"># Group by days</span>
+
+  <span class="ruby-identifier">builder</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">encoding:</span> <span class="ruby-string">&#39;UTF-8&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">xml</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># Set stylesheet</span>
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">feed</span>(<span class="ruby-value">xmlns:</span> <span class="ruby-string">&#39;http://www.w3.org/2005/Atom&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-comment"># Set generator also needs a URI attribute</span>
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">generator</span>(<span class="ruby-string">&#39;Jekyll&#39;</span>, <span class="ruby-value">uri:</span> <span class="ruby-string">&#39;https://jekyllrb.com/&#39;</span>)
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">link</span>(<span class="ruby-value">href:</span> <span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/#{path}&quot;</span>, <span class="ruby-value">rel:</span> <span class="ruby-string">&#39;self&#39;</span>)
+      <span class="ruby-comment"># convert &#39;2024-01-01&#39; to date</span>
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">updated</span>(<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">rfc3339</span>)
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">id</span>(<span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/#{path}&quot;</span>)
+      <span class="ruby-identifier">title_parts</span> = [<span class="ruby-string">&#39;GTN&#39;</span>, <span class="ruby-identifier">filter_title</span>, <span class="ruby-node">&quot;#{lookup[group_by]} Updates&quot;</span>].<span class="ruby-identifier">compact</span>
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">title_parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; — &#39;</span>))
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">subtitle</span>(<span class="ruby-string">&#39;An RSS feed with the latest materials, events, news in the GTN.&#39;</span>)
+
+      <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">date</span>, <span class="ruby-identifier">parts</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">entry</span> <span class="ruby-keyword">do</span>
+          <span class="ruby-keyword">case</span> <span class="ruby-identifier">group_by</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;day&#39;</span>
+            <span class="ruby-identifier">title</span> = <span class="ruby-node">&quot;GTN #{lookup[group_by]} updates for #{date.strftime(&#39;%B %d, %Y&#39;)}&quot;</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;week&#39;</span>
+            <span class="ruby-identifier">title</span> = <span class="ruby-node">&quot;GTN #{lookup[group_by]} updates for #{date.strftime(&#39;W%W, %Y&#39;)}&quot;</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;month&#39;</span>
+            <span class="ruby-identifier">title</span> = <span class="ruby-node">&quot;GTN #{lookup[group_by]} updates for #{date.strftime(&#39;%B %Y&#39;)}&quot;</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">title</span>)
+          <span class="ruby-comment"># Our IDs should be stable</span>
+          <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">id</span>(<span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/#{group_by}/#{date.strftime(&#39;%Y-%m-%d&#39;)}&quot;</span>)
+
+          <span class="ruby-comment"># This is a feed of only NEW tutorials, so we only include publication times.</span>
+          <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">published</span>(<span class="ruby-identifier">parts</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] }.<span class="ruby-identifier">min</span>.<span class="ruby-identifier">to_datetime</span>.<span class="ruby-identifier">rfc3339</span>)
+          <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">updated</span>(<span class="ruby-identifier">parts</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] }.<span class="ruby-identifier">max</span>.<span class="ruby-identifier">to_datetime</span>.<span class="ruby-identifier">rfc3339</span>)
+
+          <span class="ruby-comment"># xml.category(term: &quot;new #{type}&quot;)</span>
+          <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">content</span>(<span class="ruby-value">type:</span> <span class="ruby-string">&#39;xhtml&#39;</span>) <span class="ruby-keyword">do</span>
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">div</span>(<span class="ruby-value">xmlns:</span> <span class="ruby-string">&#39;http://www.w3.org/1999/xhtml&#39;</span>) <span class="ruby-keyword">do</span>
+              <span class="ruby-comment"># xml.h4 title</span>
+
+              <span class="ruby-identifier">icon_for</span> = {
+                <span class="ruby-string">&#39;contributors&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;🧑‍🏫&#39;</span>,
+                <span class="ruby-string">&#39;funders&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;💰&#39;</span>,
+                <span class="ruby-string">&#39;organisations&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;🏢&#39;</span>,
+                <span class="ruby-string">&#39;events&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;📅&#39;</span>,
+                <span class="ruby-string">&#39;tutorials&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;📚&#39;</span>,
+                <span class="ruby-string">&#39;slides&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;🖼️&#39;</span>,
+                <span class="ruby-string">&#39;news&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;📰&#39;</span>,
+              }
+
+              <span class="ruby-identifier">prio</span> = {
+                <span class="ruby-string">&#39;news&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0</span>,
+                <span class="ruby-string">&#39;events&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">1</span>,
+                <span class="ruby-string">&#39;contributors&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">4</span>,
+                <span class="ruby-string">&#39;funders&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">5</span>,
+                <span class="ruby-string">&#39;organisations&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">6</span>,
+                <span class="ruby-string">&#39;tutorials&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">2</span>,
+                <span class="ruby-string">&#39;slides&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">3</span>,
+              }
+
+              <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">group_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>] }.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">prio</span>[<span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>]] }.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">items</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">h4</span> <span class="ruby-node">&quot;#{icon_for[type]} #{type.capitalize}&quot;</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">items</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
+                  <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">ul</span> <span class="ruby-keyword">do</span>
+                    <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">date</span>, <span class="ruby-identifier">_type</span>, <span class="ruby-identifier">page</span>, <span class="ruby-identifier">_tags</span><span class="ruby-operator">|</span>
+                      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">li</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+                          <span class="ruby-identifier">href</span> = <span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.config[&#39;baseurl&#39;]}/hall-of-fame/#{page}/&quot;</span>
+                          <span class="ruby-identifier">text</span> = <span class="ruby-node">&quot;@#{page}&quot;</span>
+                        <span class="ruby-keyword">else</span>
+                          <span class="ruby-identifier">text</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;title&#39;</span>]
+                          <span class="ruby-identifier">href</span> = <span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.config[&#39;baseurl&#39;]}#{page.url}&quot;</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">group_by</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;day&#39;</span>
+                          <span class="ruby-identifier">text</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; (#{date.strftime(&#39;%B %d, %Y&#39;)})&quot;</span>
+                        <span class="ruby-keyword">end</span>
+
+                        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">a</span>(<span class="ruby-identifier">text</span>, <span class="ruby-value">href:</span> <span class="ruby-identifier">href</span>)
+                      <span class="ruby-keyword">end</span>
+                    <span class="ruby-keyword">end</span>
+                  <span class="ruby-keyword">end</span>
+                <span class="ruby-keyword">end</span>
+              <span class="ruby-keyword">end</span>
+
+              <span class="ruby-keyword">if</span> <span class="ruby-identifier">group_by</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;day&#39;</span>
+                <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">small</span> <span class="ruby-keyword">do</span>
+                  <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">span</span> <span class="ruby-string">&#39;Powered by &#39;</span>
+                  <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">a</span>(<span class="ruby-string">&#39;GTN RSS Feeds&#39;</span>, <span class="ruby-value">href:</span> <span class="ruby-string">&#39;https://training.galaxyproject.org/training-material/news/2024/06/04/gtn-standards-rss.html&#39;</span>)
+                <span class="ruby-keyword">end</span>
+              <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+
+          <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">author</span> <span class="ruby-keyword">do</span>
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">name</span>(<span class="ruby-string">&#39;GTN&#39;</span>)
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">uri</span>(<span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/hall-of-fame/&quot;</span>)
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># The builder won&#39;t let you add a processing instruction, so we have to</span>
+  <span class="ruby-comment"># serialise it to a string and then parse it again. Ridiculous.</span>
+  <span class="ruby-identifier">finalised</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span> <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">to_xml</span>
+  <span class="ruby-identifier">pi</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">ProcessingInstruction</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-identifier">finalised</span>, <span class="ruby-string">&#39;xml-stylesheet&#39;</span>,
+    <span class="ruby-node">%(type=&quot;text/xml&quot; href=&quot;#{site.config[&#39;url&#39;]}#{site.baseurl}/feed-html.xslt.xml&quot;)</span>
+  )
+  <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">add_previous_sibling</span> <span class="ruby-identifier">pi</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">feed_path</span>, <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">to_xml</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-generate_tag_topic_feeds" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_tag_topic_feeds</span><span
+              class="method-args">(_site)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_tag_topic_feeds-source">
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_tag_topic_feeds</span>(<span class="ruby-identifier">_site</span>)
+  <span class="ruby-comment"># Any new materials in a topic with the equivalent tag</span>
+  <span class="ruby-comment"># Any new materials tagged with that tag</span>
+  <span class="ruby-comment"># Any news by tag</span>
+  <span class="ruby-string">&#39;&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -1135,6 +1425,44 @@
 
       </div>
 
+      <div id="method-i-group_bucket_by" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">group_bucket_by</span><span
+              class="method-args">(bucket, group_by: &#39;day&#39;)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="group_bucket_by-source">
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">group_bucket_by</span>(<span class="ruby-identifier">bucket</span>, <span class="ruby-value">group_by:</span> <span class="ruby-string">&#39;day&#39;</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">group_by</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;day&#39;</span>
+    <span class="ruby-identifier">bucket</span>
+      .<span class="ruby-identifier">group_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m-%d&#39;</span>) }
+      .<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] }.<span class="ruby-identifier">min</span>, <span class="ruby-identifier">v</span>] }
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;week&#39;</span>
+    <span class="ruby-identifier">bucket</span>
+      .<span class="ruby-identifier">group_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%W&#39;</span>) }
+      .<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] }.<span class="ruby-identifier">min</span>, <span class="ruby-identifier">v</span>] }
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;month&#39;</span>
+    <span class="ruby-identifier">bucket</span>
+      .<span class="ruby-identifier">group_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m&#39;</span>) }
+      .<span class="ruby-identifier">to_h</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">v</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] }.<span class="ruby-identifier">min</span>, <span class="ruby-identifier">v</span>] }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown group_by: #{group_by}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-isDraft" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
@@ -1148,7 +1476,7 @@
           
 
           <div class="method-source-code" id="isDraft-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 107</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">isDraft</span>(<span class="ruby-identifier">n</span>)
   <span class="ruby-identifier">meta</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">n</span>)
   <span class="ruby-identifier">meta</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;draft&#39;</span>, <span class="ruby-keyword">false</span>)
@@ -1353,7 +1681,7 @@
           
 
           <div class="method-source-code" id="linkify-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 85</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linkify</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-node">&quot;[#{text.gsub(&#39;|&#39;, &#39;-&#39;)}](https://training.galaxyproject.org/training-material/#{path}?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news)&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1433,6 +1761,79 @@
 
       </div>
 
+      <div id="method-i-mapContributor" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">mapContributor</span><span
+              class="method-args">(site, c)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Map a contributor ID to a JSON object which includes links to their profile page and API endpoint Params:</p>
+<dl class="rdoc-list note-list"><dt><code>site</code>
+<dd>
+<p><code>Jekyll::Site</code> object</p>
+</dd><dt><code>c</code>
+<dd>
+<p><code>String</code> of contributor ID</p>
+</dd></dl>
+
+<p>Returns: <code>Hash</code> of contributor information</p>
+
+          <div class="method-source-code" id="mapContributor-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
+  <span class="ruby-identifier">contrib_type</span>, <span class="ruby-identifier">contrib</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
+  <span class="ruby-identifier">x</span> = <span class="ruby-identifier">contrib</span>
+      .<span class="ruby-identifier">merge</span>({
+               <span class="ruby-string">&#39;id&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">c</span>,
+               <span class="ruby-string">&#39;url&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/api/#{contrib_type}s/#{c}.json&quot;</span>,
+               <span class="ruby-string">&#39;page&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;baseurl&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-node">&quot;/hall-of-fame/#{c}/&quot;</span>,
+             })
+  <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-markdownify" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">markdownify</span><span
+              class="method-args">(site, text)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Use Jekyll’s Markdown converter to convert text to HTML Params:</p>
+<dl class="rdoc-list note-list"><dt><code>site</code>
+<dd>
+<p><code>Jekyll::Site</code> object</p>
+</dd><dt><code>text</code>
+<dd>
+<p><code>String</code> of text to convert</p>
+</dd></dl>
+
+<p>Returns: <code>String</code> of markdown text</p>
+
+          <div class="method-source-code" id="markdownify-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">text</span>)
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">find_converter_instance</span>(
+    <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">Converters</span><span class="ruby-operator">::</span><span class="ruby-constant">Markdown</span>
+  ).<span class="ruby-identifier">convert</span>(<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-onlyEnabled" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
@@ -1446,7 +1847,7 @@
           
 
           <div class="method-source-code" id="onlyEnabled-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 74</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">onlyEnabled</span>(<span class="ruby-identifier">x</span>)
   <span class="ruby-identifier">tutorial_meta</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">x</span>)
   <span class="ruby-identifier">tutorial_enabled</span> = <span class="ruby-identifier">tutorial_meta</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;enable&#39;</span>, <span class="ruby-keyword">true</span>)
@@ -1648,7 +2049,7 @@
           
 
           <div class="method-source-code" id="printableMaterial-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 89</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">printableMaterial</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">d</span> = <span class="ruby-identifier">safe_load_yaml</span>(<span class="ruby-identifier">path</span>)
   { <span class="ruby-value">md:</span> <span class="ruby-identifier">linkify</span>(<span class="ruby-identifier">d</span>[<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.md/</span>, <span class="ruby-string">&#39;.html&#39;</span>)),
@@ -1729,7 +2130,7 @@
           
 
           <div class="method-source-code" id="send_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 250</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_news</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>, <span class="ruby-value">channel:</span> <span class="ruby-string">&#39;default&#39;</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:postToMatrix</span>]
     <span class="ruby-comment"># rubocop:disable Style/GlobalVars</span>
@@ -2016,7 +2417,7 @@
           
 
           <div class="method-source-code" id="titleize-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 151</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">titleize</span>(<span class="ruby-identifier">t</span>)
   <span class="ruby-identifier">t</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\w+/</span>, <span class="ruby-operator">&amp;</span><span class="ruby-value">:capitalize</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -2187,6 +2588,48 @@
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">errors</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">errors</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
 
   []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-visitAndMarkdownify" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">visitAndMarkdownify</span><span
+              class="method-args">(site, f)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Recursively visit a hash and markdownify all strings inside Params:</p>
+<dl class="rdoc-list note-list"><dt><code>site</code>
+<dd>
+<p><code>Jekyll::Site</code> object</p>
+</dd><dt><code>f</code>
+<dd>
+<p><code>Hash</code> to visit</p>
+</dd></dl>
+
+<p>Returns: <code>Hash</code> with all strings markdownified</p>
+
+          <div class="method-source-code" id="visitAndMarkdownify-source">
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">f</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-identifier">f</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>) }
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">transform_values</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">visitAndMarkdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">v</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">f</span> = <span class="ruby-identifier">markdownify</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">f</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;p&gt;/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{&lt;/p&gt;}</span>, <span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">f</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
