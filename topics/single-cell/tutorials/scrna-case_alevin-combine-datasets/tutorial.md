@@ -13,6 +13,20 @@ questions:
 redirect_from:
   - /topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial
 
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-key-history
+    date: 2024-03-26
+  - label: "All total samples - processed after Alevin into single object (UseGalaxy.eu)"
+    history: https://usegalaxy.eu/u/j.jakiela/h/all-total-samples-processed-after-alevin-into-single-object
+    date: 2024-03-26
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-input
+  - label: "UseGalaxy.org"
+    history: https://usegalaxy.org/u/juliajot/h/combining-datasets-input
+
 objectives:
   - Combine data matrices from different samples in the same experiment
   - Label the metadata for downstream processing
