@@ -11,9 +11,9 @@ tags:
 from_google_form: true
 contributions:
   authorship:
-  - camila-goclowski
+  - Camila-goclowski
   editing:
-  - wendi-bacon
+  - nomadscientist
 tutorial: topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio
 ---
 With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet lab scientists hoping to analyze their own data. With long term intentions of increasing access to bioinformatic analyses, the Galaxy Training Network (GTN) creates a safe space where non-computer-scientists may analyze their own data and even learn to code: an invaluable skill in today’s scientific world. Galaxy introduced me to brand new skills as an undergraduate and ultimately changed the trajectory of my career. Here is my story as a biology undergraduate with no coding experience turned GTN contributor &, eventually, coding bioinformatician: thanks to Galaxy.
