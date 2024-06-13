@@ -19,6 +19,6 @@ A new Galaxy Training Network tutorial has been created to take researchers back
 
 Using real-life data, tools available in Galaxy and SplitsTree, the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data. With a conversational style Michael discusses why phylogenetics is important, unpicks phylogenetics terminology from the roots to the tips and explains concepts such as multiple sequence alignment, how alignments are used to build trees, and phylogenetic networks.
 
-Try out the [Phylogenetics: back to basics tutorial in the Galaxy Training Network](https://training.galaxyproject.org/training-material/topics/evolution/tutorials/abc_intro_phylo/tutorial.html).
+Try out the [Phylogenetics: back to basics tutorial in the Galaxy Training Network]({% link topics/evolution/tutorials/abc_intro_phylo/tutorial.md %}).
 
 Read more about the collaboration and upcoming live workshop on the [BioCommons website](https://www.biocommons.org.au/news/phylo-gtn).
