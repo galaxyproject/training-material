@@ -9,6 +9,19 @@ zenodo_link: 'https://zenodo.org/record/7053673'
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial
 - /topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial
+
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/j.jakiela/h/filter-plot-and-explore-single-cell-rna-seq-data-updated
+    date: 2023-10-10
+  - label: "Older version"
+    history: https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2
+    date: 2024-02-28
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/j.jakiela/h/filter-plot-explore-tutorial-input
+
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
