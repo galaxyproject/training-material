@@ -6,12 +6,10 @@ subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
 
-{% comment %} 
 answer_histories:
   - label: "UseGalaxy.eu"
     history: https://usegalaxy.eu/u/.......
     date: YYYY-MM-DD
-{% endcomment %}
 
 input_histories:
   - label: "UseGalaxy.eu"
