@@ -38,8 +38,6 @@ data.each do |row|
   # 29/01/2024 14:04:47
   submission_date = DateTime.strptime(row['Timestamp'], '%d/%m/%Y %H:%M:%S')
 
-  puts "#{row}"
-
   # extract metadata from Google form
   length = row[col_length]
   galaxy_version= row[col_galaxyversion]
@@ -48,30 +46,44 @@ data.each do |row|
 
   material_file = row[col_material].gsub("tutorial.html","tutorial.md").gsub("https://training.galaxyproject.org/","").gsub("training-material/","")
 
-
+  bot_timestamp = submission_date.to_time.to_i
   recording_metadata = {"youtube_id" => "TODO",
                         "length" => length,
                         "galaxy_version" => galaxy_version,
                         "date" => "'#{date}'",
                         "speakers" => "[#{speakers}]",
-                        "captioners" => "[#{speakers}]"}
+                        "captioners" => "[#{speakers}]",
+                        "bot-timestamp" => bot_timestamp }
 
   # append metadata into GTN material
   material_metadata = YAML.load_file(material_file)
   puts recording_metadata.to_yaml
 
   if material_metadata["recordings"]
-    material_metadata["recordings"].push(recording_metadata)
+    # check the "bot_timestamp"
+    exists = false
+    for rec in material_metadata["recordings"]
+      puts rec["bot-timestamp"]
+      if rec["bot-timestamp"].to_s == bot_timestamp.to_s
+        exists = true
+      end
+    end
+
+    if exists
+      puts "recording already added, skipping"
+    else
+      puts "new recording, adding"
+      material_metadata["recordings"].push(recording_metadata)
+    end
   else
+    puts "first recording, adding"
     material_metadata["recordings"] = [recording_metadata]
   end
 
-  pp material_metadata
+  #pp material_metadata
 
   # write to file
   material_original = File.open(material_file,"r").read.split("---\n",3)
-
-  puts material_original[1]
 
   outfile = File.open(material_file,"w")
   outfile.write("#{material_metadata.to_yaml}\n\n---\n\n#{material_original[2]}")
