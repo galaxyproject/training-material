@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>From GTN Intern to Tutorial Author to Bioinformatician</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@d19bd01f9c8ec7cd73c885d48c8b829833264c77",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ef2bff8a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="From GTN Intern to Tutorial Author to Bioinformatician">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-06-13 09:48:21 +0000">
+<meta name="DC.creator" content="Camila Goclowski"><meta name="description" content="With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet lab scientists hoping to analyze their own data. With long term intentions of increasing access to bioinformatic analyses, the Galaxy Training Network (GTN) creates a safe space where non-computer-scientists may analyze their own data and even learn to code: an invaluable skill in today’s scientific world. Galaxy introduced me to brand new skills as an undergraduate and ultimately changed the trajectory of my career. Here is my story as a biology undergraduate with no coding experience turned GTN contributor &amp;, eventually, coding bioinformatician: thanks to Galaxy. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="From GTN Intern to Tutorial Author to Bioinformatician">
+        <meta property="og:description" content="With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet lab scientists hoping to analyze their own data. With long term intentions of increasing access to bioinformatic analyses, the Galaxy Training Network (GTN) creates a safe space where non-computer-scientists may analyze their own data and even learn to code: an invaluable skill in today’s scientific world. Galaxy introduced me to brand new skills as an undergraduate and ultimately changed the trajectory of my career. Here is my story as a biology undergraduate with no coding experience turned GTN contributor &amp;, eventually, coding bioinformatician: thanks to Galaxy. ">
+        
+	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2024-06-13-from-gtn-intern-to-tutorial-author-to-bioinformatician.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>From GTN Intern to Tutorial Author to Bioinformatician</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Camila-goclowski/" class="contributor-badge contributor-Camila-goclowski"><img src="https://avatars.githubusercontent.com/Camila-goclowski?s=36" alt="Camila Goclowski avatar" width="36" class="avatar" />
+    Camila Goclowski</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+
+<span class="label label-default tutorial_tag" id="single-cell" style="--color-primary: #00cfbe; --color-darker: #00b8aa; --color-dimmed: #00c4b4;">single-cell</span>
+
+
+
+<span class="label label-default tutorial_tag" id="training" style="--color-primary: #ff92f0; --color-darker: #ff68ed; --color-dimmed: #ff7fee;">training</span>
+
+
+
+<span class="label label-default tutorial_tag" id="education" style="--color-primary: #00ceca; --color-darker: #00b7b4; --color-dimmed: #00c3bf;">education</span>
+
+
+
+<span class="label label-default tutorial_tag" id="trajectory" style="--color-primary: #00cfba; --color-darker: #00b9a5; --color-dimmed: #00c4af;">trajectory</span>
+
+
+
+<span class="label label-default tutorial_tag" id="user" style="--color-primary: #c9aaff; --color-darker: #bb8fff; --color-dimmed: #c29cff;">user</span>
+
+
+
+<span class="label label-default tutorial_tag" id="contributor" style="--color-primary: #ff93ed; --color-darker: #ff69e9; --color-dimmed: #ff80eb;">contributor</span>
+
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 13 June 2024</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet lab scientists hoping to analyze their own data. With long term intentions of increasing access to bioinformatic analyses, the Galaxy Training Network (GTN) creates a safe space where non-computer-scientists may analyze their own data and even learn to code: an invaluable skill in today’s scientific world. Galaxy introduced me to brand new skills as an undergraduate and ultimately changed the trajectory of my career. Here is my story as a biology undergraduate with no coding experience turned GTN contributor &amp;, eventually, coding bioinformatician: thanks to Galaxy.</p>
+
+<p>My introduction to Galaxy came from Dr. Wendi Bacon of the Open University. Dr. Bacon has spearheaded efforts to expand upon the GTN’s currently available single-cell tools and tutorials. I was taken on as an intern in the fall of 2021 to support these efforts–mainly focused on the development of single-cell RNA sequencing (scRNA-seq) analysis tutorials using Seurat. Although I had officially become a bioinformatics intern, I still had little to no experience with coding and none with scRNA-seq data.</p>
+
+<p>Dr. Bacon started me out kindly with introductory tutorials already available on the GTN while I learned what this data looks like and how to analyze it. While waiting for tools to become available, I began using RStudio and learned how to translate the Scanpy buttons tutorial into a Seurat RStudio one. This task proved to be more difficult than initially believed: me, with no coding experience, trying to translate wrapped Python tools into raw R code. After many months of trial and error, I drafted the first Seurat based tutorial hosted by the GTN. I quickly realized I had taught myself to code–or at the very least, learned to teach myself to code via pattern recognition and repetition.</p>
+
+<p>The trajectory of my career thus far has been heavily driven by a love for bioinformatics that was founded thanks to Galaxy. I have since begun conducting research as a technician at the University of Utah (USA), and will soon begin a PhD program leveraging my computational skills and interests. I have spearheaded multiple scRNA-seq projects my current lab studying development of the diaphragm (an essential mammalian organ), a common birth defect associated with aberrant diaphragm development (CDH), and retinoic acid’s role in both. Leveraging what I learned via Galaxy, I am answering increasingly complex biological questions.</p>
+
+<p>The GTN contributes to the scientific world something that is crucial for successful integration of bench and computational biology. The ability for scientists to produce and analyze their own datasets allows for more scientific hypotheses to be formed and questions to be answered. These facts have been integral to my success as a scientist and for that I am grateful for Galaxy, the GTN, and the community at large.</p>
+
+
+
+    
+
+    
+    <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html" class="btn btn-primary">View Material</a>
+    
+
+    
+
+    
+    
+    
+  </div>
+
+  <div class="col-md-4">
+    <a href="/training-material//assets/images/GTNLogo1000.png">
+      <img alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" src="/training-material//assets/images/GTNLogo1000.png" width="300"/>
+    </a>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html",
+  "name": "From GTN Intern to Tutorial Author to Bioinformatician",
+  "headline": "<p>With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet l",
+  "keywords": [
+    "single-cell",
+    "training",
+    "education",
+    "trajectory",
+    "user",
+    "contributor"
+  ],
+  "description": "<p>With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet l",
+  "articleBody": "<p>With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet lab scientists hoping to analyze their own data. With long term intentions of increasing access to bioinformatic analyses, the Galaxy Training Network (GTN) creates a safe space where non-computer-scientists may analyze their own data and even learn to code: an invaluable skill in today’s scientific world. Galaxy introduced me to brand new skills as an undergraduate and ultimately changed the trajectory of my career. Here is my story as a biology undergraduate with no coding experience turned GTN contributor &amp;, eventually, coding bioinformatician: thanks to Galaxy.</p>\n\n<p>My introduction to Galaxy came from Dr. Wendi Bacon of the Open University. Dr. Bacon has spearheaded efforts to expand upon the GTN’s currently available single-cell tools and tutorials. I was taken on as an intern in the fall of 2021 to support these efforts–mainly focused on the development of single-cell RNA sequencing (scRNA-seq) analysis tutorials using Seurat. Although I had officially become a bioinformatics intern, I still had little to no experience with coding and none with scRNA-seq data.</p>\n\n<p>Dr. Bacon started me out kindly with introductory tutorials already available on the GTN while I learned what this data looks like and how to analyze it. While waiting for tools to become available, I began using RStudio and learned how to translate the Scanpy buttons tutorial into a Seurat RStudio one. This task proved to be more difficult than initially believed: me, with no coding experience, trying to translate wrapped Python tools into raw R code. After many months of trial and error, I drafted the first Seurat based tutorial hosted by the GTN. I quickly realized I had taught myself to code–or at the very least, learned to teach myself to code via pattern recognition and repetition.</p>\n\n<p>The trajectory of my career thus far has been heavily driven by a love for bioinformatics that was founded thanks to Galaxy. I have since begun conducting research as a technician at the University of Utah (USA), and will soon begin a PhD program leveraging my computational skills and interests. I have spearheaded multiple scRNA-seq projects my current lab studying development of the diaphragm (an essential mammalian organ), a common birth defect associated with aberrant diaphragm development (CDH), and retinoic acid’s role in both. Leveraging what I learned via Galaxy, I am answering increasingly complex biological questions.</p>\n\n<p>The GTN contributes to the scientific world something that is crucial for successful integration of bench and computational biology. The ability for scientists to produce and analyze their own datasets allows for more scientific hypotheses to be formed and questions to be answered. These facts have been integral to my success as a scientist and for that I am grateful for Galaxy, the GTN, and the community at large.</p>\n\n",
+  "datePublished": "2024-06-13 00:00:00 +0000",
+  "dateModified": "2024-06-13 09:48:21 +0000",
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/",
+      "name": "Camila Goclowski",
+      "image": "https://avatars.githubusercontent.com/Camila-goclowski",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/13/phylogenetics-tutorial-takes-researchers-back-to-basics.html">Phylogenetics tutorial takes researchers back to basics!</a>
+	</h3>
+	<p>
+	13 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00c9f6; --color-darker: #00b3dc; --color-dimmed: #00bee9;">Phylogenetics</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #7bce00; --color-darker: #6db700; --color-dimmed: #75c300;">Tutorial</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ff96dd; --color-darker: #ff6ed4; --color-dimmed: #ff83d8;">GTN</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #91baff; --color-darker: #65a6ff; --color-dimmed: #7db0ff;">Australian BioCommons</span>
+	
+	</p>
+	<p class="card-text">
+		
+		A new Galaxy Training Network tutorial has been created to take researchers back to basics to uncover the principles of phylogenetics and how tree-building methods work. A longstanding collaboration between Professor Michael Charleston from the University of Tasmania and Australian BioCommons has delivered this self-guided tutorial featuring videos and hands-on exercises. To maximise its impact, the resource was tailored specifically to be shared globally via the Galaxy Training Network, and will form the basis of an upcoming live training workshop.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/11/GalaxyTrainingAcademy-Call-Contribution.html">Open Call for Trainers for the Galaxy Training Academy</a>
+	</h3>
+	<p>
+	11 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We are happy to announce the Galaxy Training Academy 2024, a global online training event, where learners can get to know Galaxy and learn how to analyze data for various research topics.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/06/dada2-tutorial.html">New Galaxy training: Building an amplicon sequence variant (ASV) table from 16S data using DADA2</a>
+	</h3>
+	<p>
+	6 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fda700; --color-darker: #e29400; --color-dimmed: #ef9d00;">new tutorial</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN hosts its 400th tutorial: Building an amplicon sequence variant (ASV) table from 16S data using DADA2
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/06/400-tutorials-milestone.html">Celebrating the Milestone: 400 Tutorials on the Galaxy Training Network!</a>
+	</h3>
+	<p>
+	6 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The Galaxy Training Network (GTN) has reached an exciting milestone: our 400th tutorial! This achievement is a testament to the dedication and hard work of our community of educators, researchers, and developers over the last 9 years.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/04/tool-form-integration.html">Integrating the Galaxy Training Network into the Tool Form</a>
+	</h3>
+	<p>
+	4 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffef8b; --color-darker: #e9d500; --color-dimmed: #f8e200;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b0b2ff; --color-darker: #989bff; --color-dimmed: #a4a7ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffecb3; --color-darker: #f3d100; --color-dimmed: #ffde4f;">already-on-hub</span>
+	
+	</p>
+	<p class="card-text">
+		
+		For many tools in Galaxy, the GTN offers a variety of guides, practical examples, and help throughout it’s many tutorials.
+Often times when using a tool, such information can be very useful, but hard to discover.
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/d19bd01f9c8ec7cd73c885d48c8b829833264c77">d19bd01</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2024-06-13-from-gtn-intern-to-tutorial-author-to-bioinformatician.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ef2bff8a.js'></script>
+
+	
+	
+
+    </body>
+</html>
