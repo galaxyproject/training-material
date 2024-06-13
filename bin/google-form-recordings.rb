@@ -10,6 +10,7 @@ require 'yaml'
 # Fetch data from a google sheet
 url = 'https://docs.google.com/spreadsheets/d/1iXjLlMEH5QMAMyUMHi1c_Lb7OiJhL_9hgJrtAsBoZ-Y/export?format=tsv'
 data = `curl -sL "#{url}"`
+new_recordings = false
 
 data = CSV.parse(data, col_sep: "\t", headers: true, quote_char: '|')
 count = 0
@@ -57,7 +58,6 @@ data.each do |row|
 
   # append metadata into GTN material
   material_metadata = YAML.load_file(material_file)
-  puts recording_metadata.to_yaml
 
   if material_metadata["recordings"]
     # check the "bot_timestamp"
@@ -69,15 +69,13 @@ data.each do |row|
       end
     end
 
-    if exists
-      puts "recording already added, skipping"
-    else
-      puts "new recording, adding"
+    if !exists
       material_metadata["recordings"].push(recording_metadata)
+      new_recordings = true
     end
   else
-    puts "first recording, adding"
     material_metadata["recordings"] = [recording_metadata]
+    new_recordings = true
   end
 
   #pp material_metadata
@@ -89,3 +87,5 @@ data.each do |row|
   outfile.write("#{material_metadata.to_yaml}\n\n---\n\n#{material_original[2]}")
 
 end
+
+puts new_recordings
