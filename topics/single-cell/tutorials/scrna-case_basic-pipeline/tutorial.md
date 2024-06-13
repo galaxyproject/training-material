@@ -9,6 +9,19 @@ zenodo_link: 'https://zenodo.org/record/7053673'
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial
 - /topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial
+
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/j.jakiela/h/filter-plot-and-explore-single-cell-rna-seq-data-updated
+    date: 2023-10-10
+  - label: "Older version"
+    history: https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2
+    date: 2024-02-28
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/j.jakiela/h/filter-plot-explore-tutorial-input
+
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
@@ -74,15 +87,15 @@ You've done all the work to make a single cell matrix, with gene counts and mito
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) if you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) if you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/j.jakiela/h/filter-plot-explore-tutorial-input) or download from Zenodo below.
 
 You can access the data for this tutorial in multiple ways:
 
-1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/j.jakiela/h/all-total-samples-processed-after-alevin-into-single-object)), then you can use those! Be careful, in the previous tutorials we worked on downsampled datasets, but here we start with the object containing total data from all the samples! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history:
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
-2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey)
+2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/j.jakiela/h/filter-plot-explore-tutorial-input)
 
    {% snippet faqs/galaxy/histories_import.md %}
 
