@@ -832,12 +832,13 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 ##
 # We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
 Jekyll::Hooks.register :site, :pre_render do |site|
+  pfo_keys = site.data['contributors'].keys + site.data['funders'].keys + site.data['organisations'].keys
   site.posts.docs.each do |post|
     if post.content
       post.content = post.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
         # Get first capture
         name = match.gsub('@gtn:', '')
-        if site.data['contributors'].key?(name)
+        if pfo_keys.include?(name)
           "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
         else
           match
@@ -849,7 +850,7 @@ Jekyll::Hooks.register :site, :pre_render do |site|
     if page.content
       page.content = page.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
         name = match.gsub('@gtn:', '')
-        if site.data['contributors'].key?(name)
+        if pfo_keys.include?(name)
           "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
         else
           match
