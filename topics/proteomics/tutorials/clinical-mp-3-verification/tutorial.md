@@ -92,7 +92,16 @@ Interestingly, the PepQuery tool does not rely on searching peptides against a r
 > 6. Users can create a database collection of the MGF files.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
+> 
+{: .hands_on}
+
+# Import Workflow
+> <hands-on-title>Running the Workflow</hands-on-title>
 >
+> 1. **Import the workflow** into Galaxy:
+>
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="`https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow`" title="Pretreatments" %}
+> 2. Import and Run the workflow.
 {: .hands_on}
 
 # Extraction of Microbial Peptides from SearchGUI/PeptideShaker and MaxQuant
@@ -272,8 +281,9 @@ We will use the Query Tabular tool {% cite Johnson2019 %} to search the PepQuery
 >
 > > <comment-title>SQL Query information</comment-title>
 > >  The query input files are the list of peptides and the peptide report we obtained from MaxQuant and SGPS. The query is matching each peptide (m.pep) from the PepQuery results to the peptide reports so that each verified peptide has its protein/protein group assigned to it.
-> {: .comment}
-> 
+{: .comment}
+{: .hands_on}
+
 > <hands-on-title> Remove Header with Remove beginning </hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
@@ -332,8 +342,9 @@ Again, we will use the Query Tabular tool to retrieve UniProt IDs (accession num
 >                - *"Use first line as column names"*: `Yes`
 >                - *"Specify Column Names (comma-separated list)"*: `pep,prot`
 >    ` *"SQL Query to generate tabular output"*: `SELECT distinct(prot) AS Accession 
->     from t1`
->     *"include query result column headers"*: `No`
+>       from t1`
+>
+>            - *"include query result column headers"*: `No`
 >
 >
 {: .hands_on}
