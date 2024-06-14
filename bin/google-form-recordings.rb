@@ -45,6 +45,11 @@ data.each do |row|
   speakers = row[col_speakers]
   date = submission_date.strftime('%Y-%m-%d')
 
+  if row[col_material] == 'TESTING'
+    STDERR.puts "Skipping #{filename} as it is a test"
+    next
+  end
+
   material_file = row[col_material].gsub("tutorial.html","tutorial.md").gsub("https://training.galaxyproject.org/","").gsub("training-material/","")
 
   bot_timestamp = submission_date.to_time.to_i
