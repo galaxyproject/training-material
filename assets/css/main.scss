@@ -445,7 +445,6 @@ div.language-diff .p {
 
 body > footer {
     margin-top: 5em;
-    text-align: center;
 }
 
 footer {
@@ -486,7 +485,7 @@ nav.navbar {
     }
 
     a.navbar-brand {
-	padding-right: 0.5em; // the image seems to work poorly with parent size calculations.
+	padding-right: 2.5em; // the image seems to work poorly with parent size calculations.
     }
 
     // Text decoration not necessary for accessibility here.
@@ -1655,9 +1654,13 @@ $btn-pink: var(--keypoints-color);
 	padding: 0rem;
 }
 
+ul.no-bullets {
+	list-style: none;
+	padding-inline-start: 0;
+}
 ul.text-list, ol.text-list {
-    list-style: none;
-	  padding-inline-start: 0;
+	list-style: none;
+	padding-inline-start: 0;
 
     li {
         display: inline;
@@ -1879,6 +1882,20 @@ section.event {
 body[data-brightness="dark"] {
 	img.invert-safe {
 		filter: invert(1);
+	}
+
+	.modal-content {
+		button.close {
+			filter: invert(1);
+		}
+	}
+}
+
+.modal-dialog {
+	border: 1px solid var(--border);
+
+	.modal-content {
+		background: var(--color-background);
 	}
 }
 
