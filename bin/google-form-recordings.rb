@@ -5,7 +5,6 @@ require 'yaml'
 require 'net/http'
 require 'csv'
 require 'date'
-require 'yaml'
 
 # Fetch data from a google sheet
 url = 'https://docs.google.com/spreadsheets/d/1iXjLlMEH5QMAMyUMHi1c_Lb7OiJhL_9hgJrtAsBoZ-Y/export?format=tsv'
@@ -68,7 +67,6 @@ data.each do |row|
     # check the "bot_timestamp"
     exists = false
     for rec in material_metadata["recordings"]
-      puts rec["bot-timestamp"]
       if rec["bot-timestamp"].to_s == bot_timestamp.to_s
         exists = true
       end
