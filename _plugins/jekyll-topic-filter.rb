@@ -1032,6 +1032,26 @@ module Jekyll
       TopicFilter.identify_funders(materials, site)
     end
 
+    def list_videos(site)
+      TopicFilter.list_all_materials(site)
+        .select { |k, _v| k['recordings'] || k['slides_recordings'] }
+        .map { |k, _v| (k['recordings'] || []) + (k['slides_recordings'] || []) }
+        .flatten
+    end
+
+    def findDuration(duration)
+      if ! duration.nil?
+        eval(duration.gsub(/H/, ' * 3600 + ').gsub(/M/, ' * 60 + ').gsub(/S/, ' + ') + " 0")
+      else
+        0
+      end
+    end
+
+    def list_videos_total_time(site)
+      vids = list_videos(site)
+      vids.map { |v| findDuration(v['length']) }.sum / 3600.0
+    end
+
     def list_draft_materials(site)
       TopicFilter.list_all_materials(site).select { |k, _v| k['draft'] }
     end
