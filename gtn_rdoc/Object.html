@@ -289,7 +289,7 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">automagic_loading</span>(<span class="ruby-identifier">f</span>)
   <span class="ruby-comment"># Remove our documentation</span>
   <span class="ruby-identifier">f</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;description&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) }
-  <span class="ruby-identifier">f</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;examples&#39;</span> }
+  <span class="ruby-identifier">f</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;_examples&#39;</span> }
 
   <span class="ruby-comment"># Auto-replace CONTRIBUTORS in enums.</span>
   <span class="ruby-identifier">f</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>

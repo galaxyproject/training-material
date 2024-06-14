@@ -137,7 +137,7 @@ title:
     required: true
     description: |
         Title of the FAQ
-    examples:
+    _examples:
         - How does the GTN implement the &#39;Ten simple rules for collaborative lesson development&#39;
         - How can I give feedback?
         - Ways to use Galaxy
@@ -146,7 +146,7 @@ description:
     required: false
     description: |
         A short, one line description to provide additional context of the FAQ
-    examples:
+    _examples:
     - Galaxy may have several reference genomes built-in, but you can also create your own.
     - Quickly learn what the identifiers are in any **BAM** dataset that is the result from mapping
     - Finding and Correcting Metadata
@@ -155,7 +155,7 @@ area:
     required: false
     description: |
         A text key used for sorting related FAQs together in the visual interface for users.
-    examples:
+    _examples:
         - contributors
         - learners
         - features
@@ -177,7 +177,7 @@ contributors:
     required: true
     description: |
         Who contributed to this FAQ
-    examples:
+    _examples:
         - shiltemann
         - hexylena
     sequence:
@@ -192,8 +192,38 @@ redirect_from:
         - type: str
     description: |
         If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
-    examples:
-    - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial</pre>
+    _examples:
+    - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
+required_parameters:
+    type: map
+    mapping:
+      &quot;=&quot;:
+        type: str
+    description: |
+      A list of parameters that are required to be set when invoking the FAQ, otherwise the FAQ will not render correctly (e.g. in the FAQ list!)
+    _examples: |
+      name: The name of the dataset
+optional_parameters:
+    type: map
+    mapping:
+      &quot;=&quot;:
+        type: str
+    description: |
+      Optional parameters that can enhance the experience of the learner if set correctly
+    _examples: |
+      format: the format they should change it to
+examples:
+    type: map
+    mapping:
+      &#39;=&#39;:
+        type: map
+        mapping:
+          &#39;=&#39;: {type: str}
+    description: |
+      A list of _examples that can be used to illustrate the FAQ&#39;s invocation
+    _examples: |
+      A very basic included version: {}
+      A more complex example: {name: &quot;Phages&quot;, format: &quot;genbank&quot;}</pre>
 <hr>
 
 </main>
