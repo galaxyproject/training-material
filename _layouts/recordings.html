@@ -2,7 +2,11 @@
 layout: base
 ---
 
-{% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
+{% comment %}
+ These variables are set in _plugins/generator-recordings.rb
+{% endcomment %}
+
+{% assign material = page.material %}
 
 <section class="tutorial">
   <h1 data-toc-skip>Recordings - {{ material.title }} </h1>
