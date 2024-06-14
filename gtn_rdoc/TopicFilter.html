@@ -191,6 +191,8 @@
     <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;rmd&#39;</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;workflows&#39;</span>
     <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;workflow&#39;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;recordings&#39;</span>
+    <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;recordings&#39;</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;tours&#39;</span>
     <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;type&#39;</span>] = <span class="ruby-string">&#39;tour&#39;</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;index.md&#39;</span>
@@ -261,7 +263,7 @@
 }</pre>
 
           <div class="method-source-code" id="collate_materials-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 343</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 345</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">collate_materials</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">pages</span>)
   <span class="ruby-comment"># In order to speed up queries later, we&#39;ll store a set of &quot;interesting&quot;</span>
   <span class="ruby-comment"># pages (i.e. things that are under `topic_name`)</span>
@@ -471,7 +473,7 @@
           
 
           <div class="method-source-code" id="filter_by_tag-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 745</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 740</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filter_by_tag</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
   <span class="ruby-comment"># Here we make a (cached) call to load materials into memory and sort them</span>
   <span class="ruby-comment"># properly.</span>
@@ -509,7 +511,7 @@
           
 
           <div class="method-source-code" id="filter_by_topic-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 724</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 719</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
   <span class="ruby-comment"># Here we make a (cached) call to load materials into memory and sort them</span>
   <span class="ruby-comment"># properly.</span>
@@ -549,7 +551,7 @@
           <p>Filter a list of materials by topic and subtopic.</p>
 
           <div class="method-source-code" id="filter_by_topic_subtopic-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 766</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 761</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filter_by_topic_subtopic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>, <span class="ruby-identifier">subtopic_id</span>)
   <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">filter_by_topic</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic_name</span>)
 
@@ -593,7 +595,7 @@
 <p>This is a transition period function that can later be removed. It is added because with the jekyll version we’re using, site.posts is an iterable in prod+dev (_config-dev.yml) modes, however! If we access site.posts.docs in prod it’s fine, while in dev mode, site.posts claims to be an Array (rather than I guess a ‘posts’ object with a docs method). So we check if it has docs and use that, otherwise just site.posts should be iterable.</p>
 
           <div class="method-source-code" id="get_posts-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 302</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 304</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_posts</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-comment"># Handle the transition period</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">posts</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:docs</span>)
@@ -633,7 +635,7 @@
 <p>Examples: <a href="TopicFilter.html#method-c-get_version"><code>get_version</code></a>(“toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0”) =&gt; “1.0.0”</p>
 
           <div class="method-source-code" id="get_version-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 816</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 811</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_version</span>(<span class="ruby-identifier">tool</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
     <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>]
@@ -670,7 +672,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="identify_contributors-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 785</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 780</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">identify_contributors</span>(<span class="ruby-identifier">materials</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">materials</span>
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;materials&#39;</span>] }.<span class="ruby-identifier">flatten</span>
@@ -707,7 +709,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="identify_funders-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 799</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 794</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">identify_funders</span>(<span class="ruby-identifier">materials</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">materials</span>
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;materials&#39;</span>] }.<span class="ruby-identifier">flatten</span>
@@ -734,7 +736,7 @@
           <p>This is a helper function to get all the materials in a site.</p>
 
           <div class="method-source-code" id="list_all_materials-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 699</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 694</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_all_materials</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -769,7 +771,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="list_all_tags-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 719</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 714</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_all_tags</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">materials</span> = <span class="ruby-identifier">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>)
   (<span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;tags&#39;</span>] <span class="ruby-operator">||</span> [] }.<span class="ruby-identifier">flatten</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">list_topics</span>(<span class="ruby-identifier">site</span>)).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
@@ -808,7 +810,7 @@
 <p>}</p>
 
           <div class="method-source-code" id="list_materials_by_tool-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 850</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 845</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_materials_by_tool</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">tool_map</span> = {}
 
@@ -1066,7 +1068,7 @@
           <p>This is a helper function to get all the materials in a site.</p>
 
           <div class="method-source-code" id="list_videos-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 705</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 700</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_videos</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">materials</span> = <span class="ruby-identifier">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>)
   <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;video&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> }
@@ -1090,7 +1092,7 @@
           
 
           <div class="method-source-code" id="mermaid-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 389</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 391</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">mermaid</span>(<span class="ruby-identifier">wf</span>)
   <span class="ruby-comment"># We&#39;re converting it to Mermaid.js</span>
   <span class="ruby-comment"># flowchart TD</span>
@@ -1173,7 +1175,7 @@
           
 
           <div class="method-source-code" id="mermaid_safe_label-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 381</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 383</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">mermaid_safe_label</span>(<span class="ruby-identifier">label</span>)
   (<span class="ruby-identifier">label</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>)
     .<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;(&#39;</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;)&#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
@@ -1200,7 +1202,7 @@
           
 
           <div class="method-source-code" id="process_pages-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 654</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 649</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">pages</span>)
   <span class="ruby-comment"># eww.</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cache_processed_pages&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;cache_processed_pages&#39;</span>)
@@ -1262,7 +1264,7 @@
           
 
           <div class="method-source-code" id="resolve_material-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 453</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 455</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">resolve_material</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>)
   <span class="ruby-comment"># We&#39;ve already</span>
   <span class="ruby-comment"># looked in every /topic/*/tutorials/* folder, and turn these disparate</span>
@@ -1279,12 +1281,14 @@
   <span class="ruby-identifier">page</span> = <span class="ruby-keyword">nil</span>
 
   <span class="ruby-identifier">slide_has_video</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">slide_has_recordings</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">slide_translations</span> = []
   <span class="ruby-identifier">page_ref</span> = <span class="ruby-keyword">nil</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">slides</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
     <span class="ruby-identifier">page</span> = <span class="ruby-identifier">slides</span>.<span class="ruby-identifier">min</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">path</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">path</span> }[<span class="ruby-value">1</span>]
     <span class="ruby-identifier">slide_has_video</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;video&#39;</span>, <span class="ruby-keyword">false</span>)
+    <span class="ruby-identifier">slide_has_recordings</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;recordings&#39;</span>, <span class="ruby-keyword">false</span>)
     <span class="ruby-identifier">slide_translations</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;translations&#39;</span>, [])
     <span class="ruby-identifier">page_ref</span> = <span class="ruby-identifier">page</span>
   <span class="ruby-keyword">end</span>
@@ -1310,16 +1314,6 @@
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;ref_slides&#39;</span>] = <span class="ruby-identifier">slides</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>] }
 
   <span class="ruby-identifier">id</span> = <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;id&#39;</span>]
-  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>] = {}
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;video-library&#39;</span>)
-    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&#39;tutorial&#39;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;video-library&#39;</span>][<span class="ruby-node">&quot;#{id}/tutorial&quot;</span>]
-    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&#39;slides&#39;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;video-library&#39;</span>][<span class="ruby-node">&quot;#{id}/slides&quot;</span>]
-    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&#39;demo&#39;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;video-library&#39;</span>][<span class="ruby-node">&quot;#{id}/demo&quot;</span>]
-    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&#39;both&#39;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;video-library&#39;</span>][<span class="ruby-identifier">id</span>]
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video_library&#39;</span>][<span class="ruby-string">&#39;session&#39;</span>] = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;session-library&#39;</span>][<span class="ruby-identifier">id</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;session-library&#39;</span>)
 
   <span class="ruby-comment"># Sometimes `hands_on` is set to something like `external`, in which</span>
   <span class="ruby-comment"># case it is important to not override it. So we only do that if the</span>
@@ -1445,6 +1439,7 @@
 
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tours&#39;</span>] = <span class="ruby-identifier">tours</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;video&#39;</span>] = <span class="ruby-identifier">slide_has_video</span>
+  <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;slides_recordings&#39;</span>] = <span class="ruby-identifier">slide_has_recordings</span>
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;translations&#39;</span>] = {}
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;translations&#39;</span>][<span class="ruby-string">&#39;tutorial&#39;</span>] = <span class="ruby-identifier">tutorial_translations</span>
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;translations&#39;</span>][<span class="ruby-string">&#39;slides&#39;</span>] = <span class="ruby-identifier">slide_translations</span>
@@ -1494,7 +1489,7 @@
 <p>Examples: <a href="TopicFilter.html#method-c-short_tool"><code>short_tool</code></a>(“toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0”) =&gt; “galaxyp/regex1”</p>
 
           <div class="method-source-code" id="short_tool-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 833</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 828</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">short_tool</span>(<span class="ruby-identifier">tool</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
     <span class="ruby-node">&quot;#{tool.split(&#39;/&#39;)[2]}/#{tool.split(&#39;/&#39;)[4]}&quot;</span>

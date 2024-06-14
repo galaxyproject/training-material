@@ -136,13 +136,6 @@
       "dir": "topics/variant-analysis/tutorials/pox-tiled-amplicon",
       "symlink": null,
       "id": "variant-analysis/pox-tiled-amplicon",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2024-03-20 15:09:06 +0000",
@@ -173,7 +166,7 @@
           "name": "pox-virus-tiled-amplicon-ref-masking",
           "title": "pox-virus-tiled-amplicon-ref-masking",
           "test_results": null,
-          "modified": "2024-06-14 07:36:59 +0000",
+          "modified": "2024-06-14 09:58:06 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPrimer Scheme\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference FASTA\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select pool1 primers\"];\n  0 -->|output| 2;\n  3[\"Select pool2 primers\"];\n  0 -->|output| 3;\n  4[\"Compute sequence length\"];\n  1 -->|output| 4;\n  5[\"Datamash\"];\n  2 -->|out_file1| 5;\n  6[\"Datamash\"];\n  3 -->|out_file1| 6;\n  7[\"Cut\"];\n  4 -->|output| 7;\n  8[\"Compute\"];\n  5 -->|out_file| 8;\n  9[\"Get start position of Pool2\"];\n  6 -->|out_file| 9;\n  10[\"Get end position of sequence\"];\n  7 -->|out_file1| 10;\n  11[\"Get end position of Pool1\"];\n  8 -->|out_file1| 11;\n  12[\"Compose text parameter value\"];\n  9 -->|text_param| 12;\n  13[\"Compose text parameter value\"];\n  11 -->|text_param| 13;\n  10 -->|text_param| 13;\n  14[\"Mask Reference for Pool2\"];\n  1 -->|output| 14;\n  12 -->|out1| 14;\n  af755a5e-2b20-49bc-9d52-34781f937f48[\"Output\\nmasked_ref_pool2\"];\n  14 --> af755a5e-2b20-49bc-9d52-34781f937f48;\n  style af755a5e-2b20-49bc-9d52-34781f937f48 stroke:#2c3143,stroke-width:4px;\n  15[\"Mask Reference for Pool1\"];\n  1 -->|output| 15;\n  13 -->|out1| 15;\n  0c3b5b20-c426-428c-a08b-c835a82477c1[\"Output\\nmasked_ref_pool1\"];\n  15 --> 0c3b5b20-c426-428c-a08b-c835a82477c1;\n  style 0c3b5b20-c426-428c-a08b-c835a82477c1 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -341,6 +334,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: column_maker\n  owner: devteam\n  revisions: 6595517c2dd8\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: emboss_5\n  owner: devteam\n  revisions: 63dd26468588\n  tool_panel_section_label: EMBOSS\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fasta_compute_length\n  owner: devteam\n  revisions: 7d37cfda8e00\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: compose_text_param\n  owner: iuc\n  revisions: e188c9826e0f\n  tool_panel_section_label: Expression Tools\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_ops\n  owner: iuc\n  revisions: 746e8e4bf929\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: 65b93b623c77\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ivar_consensus\n  owner: iuc\n  revisions: 40737febe339\n  tool_panel_section_label: Virology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ivar_trim\n  owner: iuc\n  revisions: 86a20ae274fc\n  tool_panel_section_label: Virology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qualimap_bamqc\n  owner: iuc\n  revisions: 19ece8afbaab\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_merge\n  owner: iuc\n  revisions: 36677f429310\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 5826298f6a73\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ucsc_fatovcf\n  owner: iuc\n  revisions: 78df8fc2b3ab\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fasta_regex_finder\n  owner: mbernt\n  revisions: 9a811adb714f\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mafft\n  owner: rnateam\n  revisions: bf28a8cff401\n  tool_panel_section_label: Multiple Alignments\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mimodd_main\n  owner: wolma\n  revisions: f0f2795de2c7\n  tool_panel_section_label: MiModD\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -509,6 +503,34 @@
         "topic_3305",
         "topic_3324"
       ],
+      "recordings": [
+        {
+          "captioners": [
+            "pvanheus",
+            "nagoue",
+            "hexylena"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "40M",
+          "youtube_id": "G1DmquX6Wh8",
+          "speakers": [
+            "pvanheus"
+          ]
+        },
+        {
+          "captioners": [
+            "pvanheus"
+          ],
+          "date": "2024-06-11",
+          "galaxy_version": "24.0",
+          "length": "1H17M",
+          "youtube_id": "-nJPngFk36c",
+          "speakers": [
+            "pvanheus"
+          ]
+        }
+      ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -520,99 +542,11 @@
       "dir": "topics/variant-analysis/tutorials/tb-variant-analysis",
       "symlink": null,
       "id": "variant-analysis/tb-variant-analysis",
-      "video_library": {
-        "tutorial": {
-          "description": "Variation in the genome of M. tuberculosis (Mtb) is associated with changes in phenotype, for example drug resistance and virulence. It is also useful for outbreak investigation as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.",
-          "materials": [
-            {
-              "link": "topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "variant-analysis",
-            "tuberculosis"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "pvanheus",
-                "nagoue",
-                "hexylena"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "40M",
-              "link": "G1DmquX6Wh8",
-              "speakers": [
-                "pvanheus"
-              ]
-            },
-            {
-              "captions": [
-                "pvanheus"
-              ],
-              "date": "2024-06-11",
-              "galaxy_version": "24.0",
-              "length": "1H17M",
-              "link": "-nJPngFk36c",
-              "speakers": [
-                "pvanheus"
-              ]
-            }
-          ],
-          "gtn_id": "variant-analysis/tb-variant-analysis",
-          "title": "M. tuberculosis Variant Analysis",
-          "captioned": true
-        },
-        "slides": {
-          "description": "Tuberculosis (TB) is an infectious disease caused by the bacterium Mycobacterium tuberculosis. According to the WHO, in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world’s most deadly infectious disease.",
-          "materials": [
-            {
-              "external": true,
-              "link": "https://docs.google.com/presentation/d/16XTMh2fRrl73WVaezNAFWET0IIMXBv0MCI2engFtdQs/edit#slide=id.g6231f48ea2_0_34",
-              "type": "Slides"
-            }
-          ],
-          "tags": [
-            "variant-analysis"
-          ],
-          "type": "Lecture",
-          "versions": [
-            {
-              "captions": [
-                "shiltemann"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "20M",
-              "link": "yCC9EmLuyJg",
-              "speakers": [
-                "pvanheus"
-              ]
-            }
-          ],
-          "gtn_id": "variant-analysis/tb-variant-analysis",
-          "title": "M. tuberculosis Variant Analysis",
-          "captioned": true
-        },
-        "demo": null,
-        "both": null,
-        "session": {
-          "title": "Tuberculosis Variant Analysis",
-          "description": "Variation in the genome of M. tuberculosis (Mtb) is associated with changes in phenotype, for example drug resistance and virulence. It is also useful for outbreak investigation as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.",
-          "videos": [
-            "variant-analysis/tb-variant-analysis/slides",
-            "variant-analysis/tb-variant-analysis/tutorial"
-          ]
-        }
-      },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-06-11 07:12:43 +0000",
+      "mod_date": "2024-06-12 13:17:26 +0000",
       "pub_date": "2020-07-25 20:58:54 +0000",
-      "version": 73,
+      "version": 75,
       "workflows": [
         {
           "workflow": "tb-variant-analysis.ga",
@@ -633,7 +567,7 @@
           "name": "TB Variant Analysis v1.0",
           "title": "TB Variant Analysis v1.0",
           "test_results": null,
-          "modified": "2024-06-14 07:36:59 +0000",
+          "modified": "2024-06-14 09:58:06 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nReads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference Genome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nMinimum depth of coverage\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\nMinimum variant allele frequency\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"ℹ️ Input Parameter\\nAdditional BWA-MEM options\"];\n  style 4 fill:#ded,stroke:#393,stroke-width:4px;\n  5[\"fastp\"];\n  0 -->|output| 5;\n  6[\"seqret\"];\n  1 -->|output| 6;\n  7[\"snippy\"];\n  4 -->|output| 7;\n  2 -->|output| 7;\n  3 -->|output| 7;\n  5 -->|output_paired_coll| 7;\n  1 -->|output| 7;\n  8[\"Kraken2\"];\n  5 -->|output_paired_coll| 8;\n  c7abf2bf-ed4c-433e-a695-9eca61282bb5[\"Output\\nreport_output\"];\n  8 --> c7abf2bf-ed4c-433e-a695-9eca61282bb5;\n  style c7abf2bf-ed4c-433e-a695-9eca61282bb5 stroke:#2c3143,stroke-width:4px;\n  083a0e51-7780-4c91-a071-dc0e4641d060[\"Output\\noutput\"];\n  8 --> 083a0e51-7780-4c91-a071-dc0e4641d060;\n  style 083a0e51-7780-4c91-a071-dc0e4641d060 stroke:#2c3143,stroke-width:4px;\n  9[\"QualiMap BamQC\"];\n  7 -->|snpsbam| 9;\n  10[\"mosdepth\"];\n  2 -->|output| 10;\n  7 -->|snpsbam| 10;\n  11[\"TB Variant Filter\"];\n  7 -->|snpvcf| 11;\n  12[\"TB-Profiler Profile\"];\n  7 -->|snpsbam| 12;\n  335635b4-a4de-4980-ad02-68f0035daeaa[\"Output\\noutput_txt\"];\n  12 --> 335635b4-a4de-4980-ad02-68f0035daeaa;\n  style 335635b4-a4de-4980-ad02-68f0035daeaa stroke:#2c3143,stroke-width:4px;\n  13[\"TB Variant Filter\"];\n  7 -->|snpvcf| 13;\n  14[\"Flatten collection\"];\n  9 -->|raw_data| 14;\n  15[\"Text reformatting\"];\n  10 -->|output_quantized_bed| 15;\n  16[\"Text transformation\"];\n  11 -->|output1| 16;\n  007df8c2-bd13-495f-8904-abf31d4594d0[\"Output\\nFinal annotated VCF\"];\n  16 --> 007df8c2-bd13-495f-8904-abf31d4594d0;\n  style 007df8c2-bd13-495f-8904-abf31d4594d0 stroke:#2c3143,stroke-width:4px;\n  17[\"MultiQC\"];\n  5 -->|report_json| 17;\n  14 -->|output| 17;\n  59528235-7525-4ef9-8810-36f1ed0f01f6[\"Output\\nhtml_report\"];\n  17 --> 59528235-7525-4ef9-8810-36f1ed0f01f6;\n  style 59528235-7525-4ef9-8810-36f1ed0f01f6 stroke:#2c3143,stroke-width:4px;\n  18[\"bcftools consensus\"];\n  13 -->|output1| 18;\n  6 -->|out_file1| 18;\n  15 -->|outfile| 18;\n  c71b135d-35f9-44d0-a20e-f25528e518af[\"Output\\nconsensus_genome\"];\n  18 --> c71b135d-35f9-44d0-a20e-f25528e518af;\n  style c71b135d-35f9-44d0-a20e-f25528e518af stroke:#2c3143,stroke-width:4px;\n  19[\"TB Variant Report\"];\n  16 -->|output| 19;\n  12 -->|results_json| 19;\n  959528d2-f8f2-4440-99cf-44fddd6c5069[\"Output\\ndrug_resistance_report_html\"];\n  19 --> 959528d2-f8f2-4440-99cf-44fddd6c5069;\n  style 959528d2-f8f2-4440-99cf-44fddd6c5069 stroke:#2c3143,stroke-width:4px;\n  4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0[\"Output\\nvariants_report_html\"];\n  19 --> 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0;\n  style 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -822,6 +756,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: fbf99087e067\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: fbf99087e067\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: emboss_5\n  owner: devteam\n  revisions: 63dd26468588\n  tool_panel_section_label: EMBOSS\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 3d0c7bdf12f5\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 5ec9f6bceaee\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_stats\n  owner: devteam\n  revisions: fed4aa48ba09\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_consensus\n  owner: iuc\n  revisions: 147de996e34f\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: c59d48774d03\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jbrowse\n  owner: iuc\n  revisions: a6e57ff585c0\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jvarkit_wgscoverageplotter\n  owner: iuc\n  revisions: ac048a34cac3\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: kraken2\n  owner: iuc\n  revisions: 20e2f64aa1fe\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mosdepth\n  owner: iuc\n  revisions: 5854d0da92b4\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: abfd8a6544d7\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qualimap_bamqc\n  owner: iuc\n  revisions: 4a89c6f84425\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snippy\n  owner: iuc\n  revisions: d220115f882b\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tb_variant_filter\n  owner: iuc\n  revisions: 32f14a2723ec\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tbprofiler\n  owner: iuc\n  revisions: 4839e590cb26\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tbvcfreport\n  owner: iuc\n  revisions: 42818629ec4c\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tbvcfreport\n  owner: iuc\n  revisions: 9793bc5d741b\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -895,6 +830,30 @@
         "virology",
         "one-health"
       ],
+      "recordings": [
+        {
+          "youtube_id": "hjlmCWQhBvI",
+          "date": "2023-05-10",
+          "speakers": [
+            "wm75"
+          ],
+          "captioners": [
+            "wm75"
+          ],
+          "length": "55M"
+        },
+        {
+          "captioners": [
+            "hexylena"
+          ],
+          "date": "2021-08-09",
+          "length": "1H30M",
+          "youtube_id": "vnFQ2fR_fzw",
+          "speakers": [
+            "wm75"
+          ]
+        }
+      ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -906,56 +865,11 @@
       "dir": "topics/variant-analysis/tutorials/sars-cov-2-variant-discovery",
       "symlink": null,
       "id": "variant-analysis/sars-cov-2-variant-discovery",
-      "video_library": {
-        "tutorial": {
-          "materials": [
-            {
-              "link": "topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "variant-analysis"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "link": "hjlmCWQhBvI",
-              "date": "2023-05-10",
-              "speakers": [
-                "wm75"
-              ],
-              "captions": [
-                "wm75"
-              ],
-              "length": "55M"
-            },
-            {
-              "captions": [
-                "hexylena"
-              ],
-              "date": "2021-08-09",
-              "length": "1H30M",
-              "link": "vnFQ2fR_fzw",
-              "speakers": [
-                "wm75"
-              ]
-            }
-          ],
-          "gtn_id": "variant-analysis/sars-cov-2-variant-discovery",
-          "title": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2023-11-03 14:30:27 +0000",
+      "mod_date": "2024-05-29 14:28:52 +0000",
       "pub_date": "2021-06-30 06:20:05 +0000",
-      "version": 34,
+      "version": 35,
       "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json",
       "tools": [
         "Filter1",
@@ -1026,6 +940,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: datamash_ops\n  owner: iuc\n  revisions: 4c07ddedc198\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nextclade\n  owner: iuc\n  revisions: 4f6349228462\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pangolin\n  owner: iuc\n  revisions: 03ed9524dcd1\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fasta_regex_finder\n  owner: mbernt\n  revisions: 9a811adb714f\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1164,6 +1079,20 @@
           "wm75"
         ]
       },
+      "recordings": [
+        {
+          "captioners": [
+            "nekrut"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "15M",
+          "youtube_id": "9mIL0tIfZ_o",
+          "speakers": [
+            "nekrut"
+          ]
+        }
+      ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -1175,48 +1104,11 @@
       "dir": "topics/variant-analysis/tutorials/sars-cov-2",
       "symlink": null,
       "id": "variant-analysis/sars-cov-2",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": "A demo of SARS-CoV-2 sequencing data analysis from sequenced reads in NCBI's SRA to called and annotated mutations for a batch of viral samples.",
-          "materials": [
-            {
-              "link": "topics/variant-analysis/tutorials/sars-cov-2/tutorial.html",
-              "title": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "variant-analysis"
-          ],
-          "type": "Demo",
-          "versions": [
-            {
-              "captions": [
-                "nekrut"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "15M",
-              "link": "9mIL0tIfZ_o",
-              "speakers": [
-                "nekrut"
-              ]
-            }
-          ],
-          "gtn_id": "variant-analysis/sars-cov-2",
-          "title": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
-          "captioned": true
-        },
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2023-11-03 14:30:27 +0000",
+      "mod_date": "2024-05-29 15:37:52 +0000",
       "pub_date": "2020-06-24 15:38:29 +0000",
-      "version": 44,
+      "version": 45,
       "workflows": [
         {
           "workflow": "main_workflow.ga",
@@ -1233,7 +1125,7 @@
           "name": "Simple COVID-19 - PE Variation",
           "title": "Simple COVID-19 - PE Variation",
           "test_results": null,
-          "modified": "2024-06-14 07:36:59 +0000",
+          "modified": "2024-06-14 09:58:06 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNC_045512.2 fasta file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRA Manifest\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  0 -->|output| 4;\n  5[\"MarkDuplicates\"];\n  4 -->|bam_output| 5;\n  6[\"Realign reads\"];\n  5 -->|outFile| 6;\n  0 -->|output| 6;\n  7[\"Samtools stats\"];\n  5 -->|outFile| 7;\n  8[\"Insert indel qualities\"];\n  6 -->|realigned| 8;\n  0 -->|output| 8;\n  2ca7c89b-999f-41dc-8037-e54e25959a7e[\"Output\\nRealigned Alignments with Indel Qualities\"];\n  8 --> 2ca7c89b-999f-41dc-8037-e54e25959a7e;\n  style 2ca7c89b-999f-41dc-8037-e54e25959a7e stroke:#2c3143,stroke-width:4px;\n  9[\"Call variants\"];\n  8 -->|output| 9;\n  0 -->|output| 9;\n  10[\"SnpEff eff:\"];\n  9 -->|variants| 10;\n  11[\"SnpSift Extract Fields\"];\n  10 -->|snpeff_output| 11;\n  06259137-eaa5-404a-923c-70ee5f1d89d4[\"Output\\nSnpSift tabular output\"];\n  11 --> 06259137-eaa5-404a-923c-70ee5f1d89d4;\n  style 06259137-eaa5-404a-923c-70ee5f1d89d4 stroke:#2c3143,stroke-width:4px;\n  12[\"MultiQC\"];\n  3 -->|report_json| 12;\n  7 -->|output| 12;\n  5 -->|metrics_file| 12;\n  10 -->|csvFile| 12;\n  758ffde5-7ddd-482a-88b2-1504f8335488[\"Output\\nMultiQC Report PE\"];\n  12 --> 758ffde5-7ddd-482a-88b2-1504f8335488;\n  style 758ffde5-7ddd-482a-88b2-1504f8335488 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -1403,6 +1295,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 3fe632431b68\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: picard\n  owner: devteam\n  revisions: a1f0b3f4b781\n  tool_panel_section_label: Picard\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_stats\n  owner: devteam\n  revisions: 145f6d74ff5e\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: dbf9c561ef29\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_call\n  owner: iuc\n  revisions: 65432c3abf6c\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_indelqual\n  owner: iuc\n  revisions: 426d707dfc47\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: lofreq_viterbi\n  owner: iuc\n  revisions: aa35ee7f3ab2\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: bf675f34b056\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff_sars_cov_2\n  owner: iuc\n  revisions: 2a3a00c1fa0a\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpsift\n  owner: iuc\n  revisions: 5fab4f81391d\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sra_tools\n  owner: iuc\n  revisions: 494b2ec08162\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sra_tools\n  owner: iuc\n  revisions: 4df8de2d0e48\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1550,13 +1443,6 @@
       "dir": "topics/genome-annotation/tutorials/amr-gene-detection",
       "symlink": null,
       "id": "genome-annotation/amr-gene-detection",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2024-03-13 15:45:16 +0000",
@@ -1587,8 +1473,8 @@
           "name": "mrsa AMR gene detection",
           "title": "mrsa AMR gene detection",
           "test_results": null,
-          "modified": "2024-06-14 07:36:56 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"staramr\"];\n  0 -->|output| 3;\n  75ea1744-ccef-42d0-ab13-954ee106a91a[\"Output\\nstararm_detailed_summary\"];\n  3 --> 75ea1744-ccef-42d0-ab13-954ee106a91a;\n  style 75ea1744-ccef-42d0-ab13-954ee106a91a stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  790f1114-eb5f-4327-b90e-dcf624de4ce6[\"Output\\nbakta_annotation_summary\"];\n  4 --> 790f1114-eb5f-4327-b90e-dcf624de4ce6;\n  style 790f1114-eb5f-4327-b90e-dcf624de4ce6 stroke:#2c3143,stroke-width:4px;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  e29824da-4685-4072-95c5-42758626529e[\"Output\\nbowtie_mapping_stats\"];\n  5 --> e29824da-4685-4072-95c5-42758626529e;\n  style e29824da-4685-4072-95c5-42758626529e stroke:#2c3143,stroke-width:4px;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n  640a96c7-cb66-4b2b-8300-32bcaa7c47b2[\"Output\\njbrowse_output\"];\n  8 --> 640a96c7-cb66-4b2b-8300-32bcaa7c47b2;\n  style 640a96c7-cb66-4b2b-8300-32bcaa7c47b2 stroke:#2c3143,stroke-width:4px;"
+          "modified": "2024-06-14 09:58:03 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"staramr\"];\n  0 -->|output| 3;\n  fc05cc3a-373c-4586-bbdd-0e5d76a98cd3[\"Output\\nstararm_detailed_summary\"];\n  3 --> fc05cc3a-373c-4586-bbdd-0e5d76a98cd3;\n  style fc05cc3a-373c-4586-bbdd-0e5d76a98cd3 stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  7ed322a2-bd2b-4475-939c-7daf04b1acc0[\"Output\\nbakta_annotation_summary\"];\n  4 --> 7ed322a2-bd2b-4475-939c-7daf04b1acc0;\n  style 7ed322a2-bd2b-4475-939c-7daf04b1acc0 stroke:#2c3143,stroke-width:4px;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  872846f6-913a-4d42-ab84-fc856d9e9505[\"Output\\nbowtie_mapping_stats\"];\n  5 --> 872846f6-913a-4d42-ab84-fc856d9e9505;\n  style 872846f6-913a-4d42-ab84-fc856d9e9505 stroke:#2c3143,stroke-width:4px;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n  b9996a40-c91a-43fb-9352-ea5678f8f2ed[\"Output\\njbrowse_output\"];\n  8 --> b9996a40-c91a-43fb-9352-ea5678f8f2ed;\n  style b9996a40-c91a-43fb-9352-ea5678f8f2ed stroke:#2c3143,stroke-width:4px;"
         }
       ],
       "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.json",
@@ -1673,6 +1559,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bowtie2\n  owner: devteam\n  revisions: 03e9b2fbc005\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bakta\n  owner: iuc\n  revisions: 728dacaf08a9\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jbrowse\n  owner: iuc\n  revisions: a6e57ff585c0\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tbl2gff3\n  owner: iuc\n  revisions: 4a7f4b0cc0a3\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: staramr\n  owner: nml\n  revisions: 3b22de20bd4b\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1888,13 +1775,6 @@
       "dir": "topics/computational-chemistry/tutorials/covid19-docking",
       "symlink": null,
       "id": "computational-chemistry/covid19-docking",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-03 14:30:27 +0000",
@@ -1916,7 +1796,7 @@
           "name": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "title": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "test_results": null,
-          "modified": "2024-06-14 07:36:54 +0000",
+          "modified": "2024-06-14 09:58:01 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nCandidates\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nMpro-x0195_0_apo-desolv.pdb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nhits.sdf\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Enumerate changes\"];\n  0 -->|output| 3;\n  4[\"Compound conversion\"];\n  1 -->|output| 4;\n  5[\"Create Frankenstein ligand\"];\n  2 -->|output| 5;\n  6[\"Compound conversion\"];\n  3 -->|output| 6;\n  7[\"rDock cavity definition\"];\n  4 -->|outfile| 7;\n  5 -->|outfile| 7;\n  8[\"Split file\"];\n  6 -->|outfile| 8;\n  9[\"rDock docking\"];\n  4 -->|outfile| 9;\n  8 -->|list_output_sdf| 9;\n  7 -->|activesite| 9;\n  10[\"Collapse Collection\"];\n  9 -->|output| 10;\n  11[\"XChem TransFS pose scoring\"];\n  1 -->|output| 11;\n  10 -->|output| 11;\n  12[\"Max SuCOS score\"];\n  11 -->|output| 12;\n  2 -->|output| 12;"
         }
       ],
@@ -2071,6 +1951,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: ctb_frankenstein_ligand\n  owner: bgruening\n  revisions: 8e214e52e461\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ctb_frankenstein_ligand\n  owner: bgruening\n  revisions: 7255688c77f3\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: enumerate_charges\n  owner: bgruening\n  revisions: 2a868592ebcb\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: enumerate_charges\n  owner: bgruening\n  revisions: 67ee76f0e497\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_compound_convert\n  owner: bgruening\n  revisions: b59c91adeac1\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_compound_convert\n  owner: bgruening\n  revisions: e2c36f62e22f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rdock_rbcavity\n  owner: bgruening\n  revisions: 744a777e9f90\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rdock_rbdock\n  owner: bgruening\n  revisions: a22969b08177\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rxdock_rbcavity\n  owner: bgruening\n  revisions: 7fac8e7a12d5\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rxdock_rbdock\n  owner: bgruening\n  revisions: 6fe6b0e10ed6\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: split_file_to_collection\n  owner: bgruening\n  revisions: '0046692724f9'\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: split_file_to_collection\n  owner: bgruening\n  revisions: 6cbe2f30c2d7\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sucos_max_score\n  owner: bgruening\n  revisions: d4c67ced6abc\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sucos_max_score\n  owner: bgruening\n  revisions: 9b48456a96fe\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xchem_transfs_scoring\n  owner: bgruening\n  revisions: f6f9b47d02b6\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 830961c48e42\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2150,13 +2031,6 @@
       "dir": "topics/evolution/tutorials/mtb_phylogeny",
       "symlink": null,
       "id": "evolution/mtb_phylogeny",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-02-15 00:53:30 +0000",
@@ -2178,7 +2052,7 @@
           "name": "Mtb phylogeny",
           "title": "Mtb phylogeny",
           "test_results": null,
-          "modified": "2024-06-14 07:36:56 +0000",
+          "modified": "2024-06-14 09:58:03 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput alignment\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"RStudio\"];\n  2[\"Estimate phylogeny with RAxML\"];\n  0 -->|output| 2;\n  9f8ae577-c583-4a2d-b64d-14c25fb859d9[\"Output\\nBest-scoring ML Tree\"];\n  2 --> 9f8ae577-c583-4a2d-b64d-14c25fb859d9;\n  style 9f8ae577-c583-4a2d-b64d-14c25fb859d9 stroke:#2c3143,stroke-width:4px;\n  bdb8cf2f-b553-4a96-8b55-38b4b499ab88[\"Output\\nInfo\"];\n  2 --> bdb8cf2f-b553-4a96-8b55-38b4b499ab88;\n  style bdb8cf2f-b553-4a96-8b55-38b4b499ab88 stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -2235,6 +2109,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: raxml\n  owner: iuc\n  revisions: ea30d3089354\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: raxml\n  owner: iuc\n  revisions: 73a469f7dc96\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2357,13 +2232,6 @@
       "dir": "topics/evolution/tutorials/mtb_transmission",
       "symlink": null,
       "id": "evolution/mtb_transmission",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2024-03-12 15:54:16 +0000",
@@ -2385,7 +2253,7 @@
           "name": "From BAMs to drug resistance prediction with TB-profiler",
           "title": "From BAMs to drug resistance prediction with TB-profiler",
           "test_results": null,
-          "modified": "2024-06-14 07:36:56 +0000",
+          "modified": "2024-06-14 09:58:03 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nMTB single-end BAMs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nMTB paired-end BAMs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Merge collections\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Samtools view BAM > SAM\"];\n  2 -->|output| 3;\n  aa220027-9d10-4328-b2c2-e4d139d5d5bd[\"Output\\nSamtools view on input dataset(s): filtered alignments\"];\n  3 --> aa220027-9d10-4328-b2c2-e4d139d5d5bd;\n  style aa220027-9d10-4328-b2c2-e4d139d5d5bd stroke:#2c3143,stroke-width:4px;\n  4[\"Sed MTB_anc to Chromosome\"];\n  3 -->|outputsam| 4;\n  5[\"Samtools view SAM > BAM\"];\n  4 -->|output| 5;\n  6[\"TB-profiler\"];\n  5 -->|outputsam| 6;\n  7[\"Get drug resistance profile\"];\n  6 -->|output_txt| 7;\n  8[\"Add Sample Name\"];\n  7 -->|output| 8;\n  9[\"Concatenate DR profiles in a single table\"];\n  8 -->|output| 9;\n  10[\"Cleanup the table\"];\n  9 -->|out_file1| 10;"
         },
         {
@@ -2403,7 +2271,7 @@
           "name": "From Fastqs to VCFs and BAMs",
           "title": "From Fastqs to VCFs and BAMs",
           "test_results": null,
-          "modified": "2024-06-14 07:36:56 +0000",
+          "modified": "2024-06-14 09:58:03 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nSingle-End FASTQs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nPaired-End FASTQs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nMycobacterium_tuberculosis_ancestral_reference.gbk\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Trimmomatic\"];\n  0 -->|output| 3;\n  4[\"Trimmomatic\"];\n  1 -->|output| 4;\n  5[\"Mapping and variant calling of SINGLE END FASTQs with snippy\"];\n  3 -->|fastq_out| 5;\n  2 -->|output| 5;\n  6[\"Mapping and variant calling of PAIRED END FASTQs with snippy\"];\n  4 -->|fastq_out_paired| 6;\n  2 -->|output| 6;\n  7[\"Merge PE/SE VCFs in a single collection with all samples\"];\n  5 -->|snpvcf| 7;\n  6 -->|snpvcf| 7;\n  8[\"Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler\"];\n  5 -->|snpsbam| 8;\n  6 -->|snpsbam| 8;\n  9[\"TB Variant Filter\"];\n  7 -->|output| 9;"
         },
         {
@@ -2421,7 +2289,7 @@
           "name": "From VCFs to SNP distance matrix",
           "title": "From VCFs to SNP distance matrix",
           "test_results": null,
-          "modified": "2024-06-14 07:36:56 +0000",
+          "modified": "2024-06-14 09:58:03 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nCollection of VCFs to analyze\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome of the MTBC ancestor\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter TB variants\"];\n  0 -->|output| 2;\n  3[\"Generate the complete genome of each of the samples\"];\n  2 -->|output1| 3;\n  1 -->|output| 3;\n  ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a[\"Output\\n#{input_file}\"];\n  3 --> ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a;\n  style ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a stroke:#2c3143,stroke-width:4px;\n  4[\"Concatenate genomes to build a MSA\"];\n  3 -->|output_file| 4;\n  5[\"Keep only variable positions\"];\n  4 -->|out_file1| 5;\n  6[\"Calculate SNP distances\"];\n  5 -->|output_fasta| 6;"
         }
       ],
@@ -2628,6 +2496,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_consensus\n  owner: iuc\n  revisions: 147de996e34f\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_consensus\n  owner: iuc\n  revisions: a87ae767b01d\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 0dbf49c414ae\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snippy\n  owner: iuc\n  revisions: c9a8ef2aa380\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snippy\n  owner: iuc\n  revisions: d220115f882b\n  tool_panel_section_label: Variant Calling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snp_dists\n  owner: iuc\n  revisions: 1959cc43b414\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snp_dists\n  owner: iuc\n  revisions: f78492521996\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snp_sites\n  owner: iuc\n  revisions: 5804f786060d\n  tool_panel_section_label: Phylogenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tb_variant_filter\n  owner: iuc\n  revisions: 3b1e7c170b10\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tb_variant_filter\n  owner: iuc\n  revisions: e7aff4a85df5\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tb_variant_filter\n  owner: iuc\n  revisions: ee4a90760848\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tbprofiler\n  owner: iuc\n  revisions: 809dfc93d593\n  tool_panel_section_label: Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: add_input_name_as_column\n  owner: mvdbeek\n  revisions: 3284b72eef56\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 90981f86000f\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2741,13 +2610,6 @@
       "dir": "topics/variant-analysis/tutorials/aiv-analysis",
       "symlink": null,
       "id": "variant-analysis/aiv-analysis",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2024-03-20 15:09:06 +0000",
@@ -2888,6 +2750,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bamtools_split_ref\n  owner: iuc\n  revisions: 9b520009db81\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: 65b93b623c77\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: iqtree\n  owner: iuc\n  revisions: 24d024316465\n  tool_panel_section_label: Evolution\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ivar_consensus\n  owner: iuc\n  revisions: 40737febe339\n  tool_panel_section_label: Virology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qualimap_bamqc\n  owner: iuc\n  revisions: 19ece8afbaab\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 5826298f6a73\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: vapor\n  owner: iuc\n  revisions: 244812f5bd1f\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 90981f86000f\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mafft\n  owner: rnateam\n  revisions: bf28a8cff401\n  tool_panel_section_label: Multiple Alignments\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 

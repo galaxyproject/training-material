@@ -207,6 +207,20 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/"
         }
       ],
+      "recordings": [
+        {
+          "captioners": [
+            "EngyNasr"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "42M",
+          "youtube_id": "Vw9h5kvRH2k",
+          "speakers": [
+            "bebatut"
+          ]
+        }
+      ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -218,53 +232,11 @@
       "dir": "topics/contributing/tutorials/create-new-tutorial",
       "symlink": null,
       "id": "contributing/create-new-tutorial",
-      "video_library": {
-        "tutorial": {
-          "description": "This tutorial will go through all of the steps of creating a simple tutorial and contributing it to the GTN.",
-          "materials": [
-            {
-              "link": "topics/contributing/tutorials/create-new-tutorial/tutorial.html",
-              "title": "Creating a new tutorial",
-              "type": "Tutorial"
-            },
-            {
-              "link": "topics/contributing/tutorials/create-new-tutorial-content/tutorial.html",
-              "title": "Creating content in Markdown",
-              "type": "Related tutorial"
-            }
-          ],
-          "tags": [
-            "contributing"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "EngyNasr"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "42M",
-              "link": "Vw9h5kvRH2k",
-              "speakers": [
-                "bebatut"
-              ]
-            }
-          ],
-          "gtn_id": "contributing/create-new-tutorial",
-          "title": "Creating a new tutorial",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2023-11-03 14:30:27 +0000",
+      "mod_date": "2024-05-29 14:28:52 +0000",
       "pub_date": "2018-06-20 10:15:12 +0000",
-      "version": 48,
+      "version": 49,
       "workflows": [
         {
           "workflow": "Galaxy-Workflow-MakeAFakeInput.ga",
@@ -281,7 +253,7 @@
           "name": "MakeAFakeInput",
           "title": "MakeAFakeInput",
           "test_results": null,
-          "modified": "2024-06-14 07:36:54 +0000",
+          "modified": "2024-06-14 09:58:01 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSRR891268_R1_20M.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRR891268_R2_20M.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Unique\"];\n  9 -->|out_file1| 10;\n  11[\"Text transformation\"];\n  10 -->|outfile| 11;\n  12[\"Concatenate datasets\"];\n  6 -->|out_file1| 12;\n  11 -->|output| 12;\n  13[\"Unique\"];\n  12 -->|out_file1| 13;\n  14[\"seqtk_subseq\"];\n  0 -->|output| 14;\n  13 -->|outfile| 14;\n  15[\"Text transformation\"];\n  13 -->|outfile| 15;\n  16[\"seqtk_subseq\"];\n  1 -->|output| 16;\n  15 -->|output| 16;\n  2[\"FASTQ to Tabular\"];\n  0 -->|output| 2;\n  3[\"Cutadapt\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Cut\"];\n  2 -->|output_file| 4;\n  5[\"Bowtie2\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  6[\"Select random lines\"];\n  4 -->|output| 6;\n  7[\"BAM-to-SAM\"];\n  5 -->|output| 7;\n  8[\"Filter\"];\n  7 -->|output1| 8;\n  9[\"Cut\"];\n  8 -->|out_file1| 9;"
         },
         {
@@ -299,7 +271,7 @@
           "name": "Retrieve climate data from Copernicus",
           "title": "Retrieve climate data from Copernicus",
           "test_results": null,
-          "modified": "2024-06-14 07:36:54 +0000",
+          "modified": "2024-06-14 09:58:01 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAPI Request file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Copernicus Climate Data Store\"];\n  0 -->|output| 1;"
         }
       ],
@@ -403,6 +375,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: ddf54b12c295\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: c3s\n  owner: climate\n  revisions: 250554670f72\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bam_to_sam\n  owner: devteam\n  revisions: 88eedb4abea0\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bowtie2\n  owner: devteam\n  revisions: 017aba02828d\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_to_tabular\n  owner: devteam\n  revisions: 614a63f14adf\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 49370cb85f0f\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -468,13 +441,6 @@
       "dir": "topics/contributing/tutorials/introduction",
       "symlink": null,
       "id": "contributing/introduction",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": false,
       "slides": true,
       "mod_date": "2023-01-12 10:45:52 +0000",
@@ -499,6 +465,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -586,13 +553,6 @@
       "dir": "topics/contributing/tutorials/github-command-line-contribution",
       "symlink": null,
       "id": "contributing/github-command-line-contribution",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": true,
       "mod_date": "2023-11-03 14:30:27 +0000",
@@ -617,6 +577,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -741,6 +702,20 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
         }
       ],
+      "recordings": [
+        {
+          "captioners": [
+            "shiltemann"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "5M",
+          "youtube_id": "Gm1MKAwuLxg",
+          "speakers": [
+            "awspolly"
+          ]
+        }
+      ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -752,48 +727,11 @@
       "dir": "topics/contributing/tutorials/create-new-tutorial-slides",
       "symlink": null,
       "id": "contributing/create-new-tutorial-slides",
-      "video_library": {
-        "tutorial": null,
-        "slides": {
-          "description": "This lecture goes through the process of how to create a slide deck, common things you should bear in mind while you're writing them, and how to enable the amazing slides-to-video features for your slide decks! This video itself was produced automatically from the GTN's slide decks, anyone making edits to these slides will cause them to be rebuilt, making organising videos for events easier than ever.\n",
-          "materials": [
-            {
-              "link": "topics/contributing/tutorials/create-new-tutorial-slides/slides.html",
-              "title": "Creating Slides for the GTN",
-              "type": "Slides"
-            }
-          ],
-          "tags": [
-            "contributing"
-          ],
-          "type": "Lecture",
-          "versions": [
-            {
-              "captions": [
-                "galaxycommunity"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "5M",
-              "link": "Gm1MKAwuLxg",
-              "speakers": [
-                "awspolly"
-              ]
-            }
-          ],
-          "gtn_id": "contributing/create-new-tutorial-slides",
-          "title": "Creating Slides",
-          "captioned": true
-        },
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": false,
       "slides": true,
-      "mod_date": "2022-09-20 08:18:53 +0000",
+      "mod_date": "2024-05-31 14:27:26 +0000",
       "pub_date": "2018-06-13 06:55:39 +0000",
-      "version": 38,
+      "version": 40,
       "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/create-new-tutorial-slides/tutorial.json",
       "tools": [
 
@@ -812,6 +750,20 @@
       },
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
+      "slides_recordings": [
+        {
+          "captioners": [
+            "shiltemann"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "5M",
+          "youtube_id": "Gm1MKAwuLxg",
+          "speakers": [
+            "awspolly"
+          ]
+        }
+      ],
       "translations": {
         "tutorial": [
 
@@ -875,6 +827,20 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
         }
       ],
+      "recordings": [
+        {
+          "captioners": [
+            "shiltemann"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "20M",
+          "youtube_id": "_-wnsPttBCo",
+          "speakers": [
+            "shiltemann"
+          ]
+        }
+      ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -886,48 +852,11 @@
       "dir": "topics/contributing/tutorials/gitpod",
       "symlink": null,
       "id": "contributing/gitpod",
-      "video_library": {
-        "tutorial": {
-          "description": "This tutorial will show you how you can preview your contributions to the GTN online using GitPod.",
-          "materials": [
-            {
-              "link": "topics/contributing/tutorials/gitpod/tutorial.html",
-              "title": "Running the GTN website online using GitPod",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "contributing"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "shiltemann"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "20M",
-              "link": "_-wnsPttBCo",
-              "speakers": [
-                "shiltemann"
-              ]
-            }
-          ],
-          "gtn_id": "contributing/gitpod",
-          "title": "Running the GTN website online using GitPod",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2023-11-03 14:30:27 +0000",
+      "mod_date": "2024-05-29 14:28:52 +0000",
       "pub_date": "2021-06-24 18:48:57 +0000",
-      "version": 10,
+      "version": 11,
       "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/gitpod/tutorial.json",
       "tools": [
 
@@ -947,6 +876,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1018,13 +948,6 @@
       "dir": "topics/contributing/tutorials/create-new-tutorial-quiz",
       "symlink": null,
       "id": "contributing/create-new-tutorial-quiz",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2022-10-18 08:58:35 +0000",
@@ -1059,6 +982,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1121,13 +1045,6 @@
       "dir": "topics/contributing/tutorials/create-new-tutorial-content",
       "symlink": null,
       "id": "contributing/create-new-tutorial-content",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2024-06-11 09:30:03 +0000",
@@ -1159,6 +1076,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: multiqc\n  owner: iuc\n  revisions: bf675f34b056\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1381,13 +1299,6 @@
       "dir": "topics/contributing/tutorials/design",
       "symlink": null,
       "id": "contributing/design",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-03 14:30:27 +0000",
@@ -1446,6 +1357,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1672,13 +1584,6 @@
       "dir": "topics/contributing/tutorials/create-new-tutorial-tours",
       "symlink": null,
       "id": "contributing/create-new-tutorial-tours",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-03 14:30:27 +0000",
@@ -1703,6 +1608,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1835,13 +1741,6 @@
       "dir": "topics/contributing/tutorials/running-jekyll",
       "symlink": null,
       "id": "contributing/running-jekyll",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-03 14:30:27 +0000",
@@ -1866,6 +1765,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -1941,13 +1841,6 @@
       "dir": "topics/contributing/tutorials/slides-with-video",
       "symlink": null,
       "id": "contributing/slides-with-video",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-09 16:40:43 +0000",
@@ -1972,6 +1865,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2022,13 +1916,6 @@
       "dir": "topics/contributing/tutorials/create-new-topic",
       "symlink": null,
       "id": "contributing/create-new-topic",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2024-02-29 13:02:42 +0000",
@@ -2053,6 +1940,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2279,13 +2167,6 @@
       "dir": "topics/contributing/tutorials/create-new-tutorial-technical",
       "symlink": null,
       "id": "contributing/create-new-tutorial-technical",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2024-03-18 09:29:54 +0000",
@@ -2310,6 +2191,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2378,13 +2260,6 @@
       "dir": "topics/contributing/tutorials/generating-pdf",
       "symlink": null,
       "id": "contributing/generating-pdf",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-03 14:30:27 +0000",
@@ -2409,6 +2284,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2467,13 +2343,6 @@
       "dir": "topics/contributing/tutorials/python",
       "symlink": null,
       "id": "contributing/python",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-23 09:08:56 +0000",
@@ -2498,6 +2367,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2619,13 +2489,6 @@
       "dir": "topics/contributing/tutorials/schemas",
       "symlink": null,
       "id": "contributing/schemas",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2024-04-15 11:11:18 +0000",
@@ -2650,6 +2513,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2723,13 +2587,6 @@
       "dir": "topics/contributing/tutorials/github-interface-contribution",
       "symlink": null,
       "id": "contributing/github-interface-contribution",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-03 14:30:27 +0000",
@@ -2754,6 +2611,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2828,13 +2686,6 @@
       "dir": "topics/contributing/tutorials/admin-knitting",
       "symlink": null,
       "id": "contributing/admin-knitting",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-21 13:51:43 +0000",
@@ -2859,6 +2710,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -2920,13 +2772,6 @@
       "dir": "topics/contributing/tutorials/learning-principles",
       "symlink": null,
       "id": "contributing/learning-principles",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-21 13:51:43 +0000",
@@ -2993,6 +2838,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 
@@ -3176,17 +3022,10 @@
       "dir": "topics/contributing/tutorials/fair-gtn",
       "symlink": true,
       "id": "contributing/fair-gtn",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-06-14 07:36:56 +0000",
-      "pub_date": "2024-06-14 07:36:56 +0000",
+      "mod_date": "2024-06-14 09:58:03 +0000",
+      "pub_date": "2024-06-14 09:58:03 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/fair-gtn/tutorial.json",
       "tools": [
@@ -3207,6 +3046,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 

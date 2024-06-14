@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@911e29812e4f31337b1c9e3c2406fd3eeabdce0a",
+		release: "galaxy-training-network@13f2db192f20c449b201776dd1fd06c1d09d3111",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="RO-Crate - Introduction">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-22 11:12:28 +0000">
+<meta name="DC.date" content="2024-05-29 15:49:56 +0000">
 <meta name="DC.creator" content="Stian Soiland-Reyes">
 <meta name="DC.creator" content="Peter Sefton"><meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -208,7 +208,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-02-22 11:12:28 +0000",
+  "dateModified": "2024-05-29 15:49:56 +0000",
   "datePublished": "2023-05-23 10:15:15 +0000",
   "identifier": "https://gxy.io/GTN:T00348",
   "accessMode": [
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "RO-Crate - Introduction",
   "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html",
-  "version": 9,
+  "version": 10,
   "timeRequired": "PT30M",
   "teaches": "Construct an RO-Crate by hand using JSON\n - Describe each part of the Research Object\n - Learn basic JSON-LD to create FAIR metadata\n - Connect different parts of the Research Object using identifiers",
   "keywords": [
@@ -833,9 +833,38 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
+<li class="btn btn-default supporting_material">
 
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/fair/tutorials/ro-crate-intro/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/fair/tutorials/ro-crate-intro/recordings/index.html#tutorial-recording-14-april-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (April 2023) - 17m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/fair/tutorials/ro-crate-intro/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
 
   
+</li>
+  
+
+
 
 
 
@@ -893,7 +922,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 23, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 22, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 29, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
 		© Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors.
@@ -913,7 +942,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
 
     </blockquote>
     </section>
@@ -1025,7 +1054,7 @@ Create the file <code class="language-plaintext highlighter-rouge">ro-crate-meta
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
+    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
 
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1053,7 +1082,7 @@ Create the file <code class="language-plaintext highlighter-rouge">ro-crate-meta
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example crate"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I created this example by following the tutorial"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"datePublished"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-05-22T12:03:00+0100"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">}</span><span class="w">  
+  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
   </blockquote>
@@ -1061,11 +1090,11 @@ Create the file <code class="language-plaintext highlighter-rouge">ro-crate-meta
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-license-identifiers"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-license-identifiers" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: License identifiers</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>In the above solution, the identifier for CC0-1.0 <a href="http://spdx.org/licenses/CC0-1.0">http://spdx.org/licenses/CC0-1.0</a> is slightly 
-different from their listed web page URI <a href="https://spdx.org/licenses/CC0-1.0.html">https://spdx.org/licenses/CC0-1.0.html</a> – the former 
+  <p>In the above solution, the identifier for CC0-1.0 <a href="http://spdx.org/licenses/CC0-1.0">http://spdx.org/licenses/CC0-1.0</a> is slightly
+different from their listed web page URI <a href="https://spdx.org/licenses/CC0-1.0.html">https://spdx.org/licenses/CC0-1.0.html</a> – the former
 is chosen to align with <a href="https://github.com/spdx/license-list-data/tree/main/jsonld">SPDX JSON-LD identifiers</a>,
-which unfortunately are not shown directly on their website as <em>permalinks</em>. 
-It is not a requirement in RO-Crate to use permalinks for <code class="language-plaintext highlighter-rouge">@id</code> of entities like licenses, 
+which unfortunately are not shown directly on their website as <em>permalinks</em>.
+It is not a requirement in RO-Crate to use permalinks for <code class="language-plaintext highlighter-rouge">@id</code> of entities like licenses,
 it is nevertheless best practice to propagate permalinks where known.</p>
 </blockquote>
 
@@ -1091,8 +1120,8 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
-      </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">}</span><span class="w"> 
+    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"…"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1115,8 +1144,8 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LearningResource"</span><span class="p">],</span><span class="w">
-    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> 
-      </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">}</span><span class="w"> 
+    </span><span class="nl">"hasPart"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"…"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1154,7 +1183,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall Katoomba 2022-02"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall data for Katoomba, NSW Australia February 2022"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"encodingFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/csv"</span><span class="w">
-</span><span class="p">}</span><span class="err">,</span><span class="w">  
+</span><span class="p">}</span><span class="err">,</span><span class="w">
 </span></code></pre></div>    </div>
 
   </blockquote>
@@ -1181,7 +1210,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rainfall data for Katoomba, NSW Australia February 2022"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"encodingFormat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/csv"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/licenses/by-nc-sa/4.0/"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="err">,</span><span class="w">  
+</span><span class="p">}</span><span class="err">,</span><span class="w">
 </span></code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1213,14 +1242,14 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC BY-NC-SA 4.0 International"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International"</span><span class="w">
-</span><span class="p">}</span><span class="err">,</span><span class="w">    
+</span><span class="p">}</span><span class="err">,</span><span class="w">
 </span><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC0-1.0"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creative Commons Zero v1.0 Universal"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/publicdomain/zero/1.0/"</span><span class="w">
-</span><span class="p">}</span><span class="err">,</span><span class="w">  
+</span><span class="p">}</span><span class="err">,</span><span class="w">
 </span></code></pre></div>    </div>
   </blockquote>
 </blockquote>
@@ -1251,7 +1280,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 </span><span class="p">}</span><span class="err">,</span><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Josiah Carberry"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"affiliation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brown University"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1276,7 +1305,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
     <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Josiah Carberry"</span><span class="w">
 </span><span class="p">}</span><span class="err">,</span><span class="w">
 </span><span class="p">{</span><span class="w">
@@ -1315,7 +1344,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 
 <p>As we made this RO-Crate Metadata File by hand, it’s good to check for any JSON errors, such as missing/extra <code class="language-plaintext highlighter-rouge">,</code> or unclosed <code class="language-plaintext highlighter-rouge">"</code> quotes. Try pasting the file content into the <a href="https://json-ld.org/playground/">JSON-LD Playground</a>. It should show up any errors, for example:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JSON markup - SyntaxError: JSON.parse: expected `','` or `']'` after array element 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JSON markup - SyntaxError: JSON.parse: expected `','` or `']'` after array element
 at line 29 column 5 of the JSON data
 </code></pre></div></div>
 
@@ -1471,17 +1500,17 @@ docker run <span class="nt">-v</span> <span class="si">$(</span><span class="nb"
       </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC BY-NC-SA 4.0 International"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International"</span><span class="w">
-    </span><span class="p">},</span><span class="w">    
+    </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://spdx.org/licenses/CC0-1.0"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CC0-1.0"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Creative Commons Zero v1.0 Universal"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/publicdomain/zero/1.0/"</span><span class="w">
-    </span><span class="p">},</span><span class="w">    
+    </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w"> 
+      </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Josiah Carberry"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"affiliation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://ror.org/05gq02987"</span><span class="w">
@@ -1760,7 +1789,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/911e29812e4f31337b1c9e3c2406fd3eeabdce0a">911e298</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/13f2db192f20c449b201776dd1fd06c1d09d3111">13f2db1</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

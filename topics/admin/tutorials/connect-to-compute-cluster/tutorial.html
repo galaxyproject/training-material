@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@911e29812e4f31337b1c9e3c2406fd3eeabdce0a",
+		release: "galaxy-training-network@13f2db192f20c449b201776dd1fd06c1d09d3111",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Connecting Galaxy to a compute cluster">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-01-31 16:33:56 +0000">
+<meta name="DC.date" content="2024-05-31 14:27:26 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-01-31 16:33:56 +0000",
+  "dateModified": "2024-05-31 14:27:26 +0000",
   "datePublished": "2018-01-07 13:46:01 +0000",
   "identifier": "https://gxy.io/GTN:T00002",
   "accessMode": [
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Connecting Galaxy to a compute cluster",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
-  "version": 139,
+  "version": 142,
   "timeRequired": "PT1H",
   "teaches": "Be familiar with the basics of installing, configuring, and using Slurm\n - Understand all components of the Galaxy job running stack\n - Understand how the job conf controls Galaxy's jobs subsystem\n - Have a strong understanding of Galaxy job destinations\n - Understand the purpose and function of Galaxy job metrics",
   "keywords": [
@@ -1220,9 +1220,46 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
+<li class="btn btn-default supporting_material">
 
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 6m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 31m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
 
   
+</li>
+  
+
+
 
 
 
@@ -1232,7 +1269,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 7, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 31, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 31, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1252,7 +1289,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.7</a> (0 recent ratings, 15 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 139 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 142 </div>
 
     </blockquote>
     </section>
@@ -1375,8 +1412,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 </span><span class="p">@@ -194,6 +194,16 @@</span> nginx_ssl_role: usegalaxy_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
-    
-<span class="gi">+# Slurm
+<span class="err">
+</span><span class="gi">+# Slurm
 +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 +slurm_nodes:
 +- name: localhost # Name of our host
@@ -2279,7 +2316,7 @@ tools: []
 		    <ul>
 				
 				<li>
-					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
 					<b>Liked</b>: Very clear explanations
 					
 				</li>
@@ -2290,31 +2327,31 @@ tools: []
 		    <ul>
 				
 				<li>
-					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
 					<b>Liked</b>: Easy and useful
 					<b>Disliked</b>: Regarding 'expose_potentially_sensitive_job_metrics' , is there an option to expose different metrics for admins and general users? For example, creating different profiles in templates/galaxy/config/job_metrics_conf.xml.j2 
 				</li>
 				
 				<li>
-					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
 					<b>Liked</b>: I really need this knowledge. 
 					<b>Disliked</b>: I have stuck in the part of editing templates/galaxy/config/job_conf.xml.j2 because some lines differ from the resulting file from previous session (namely singularity was set as default) and I had to compare the file showed in the video with the file I had. I took some time, but it worked at the end.  It seems not so complicated now, but it will be when connecting to a living cluster. What happens when I have SLURM already configured at the server? And MUNGE (this guy made some nodes crash here because of very large log files), do I need to configure it in the cluster? It was not clear.
 				</li>
 				
 				<li>
-					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
 					<b>Liked</b>: Easily digestible
 					
 				</li>
 				
 				<li>
-					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
 					<b>Liked</b>: fantastic, incredibly helpful. trainer is really great.
 					<b>Disliked</b>: Would like info on adding to existing clusters (ie., SGE, etc)
 				</li>
 				
 				<li>
-					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
 					<b>Liked</b>: Just the right amount of content, Slurm is so large it would have been easy to get over complicated
 					<b>Disliked</b>: Minor: the references to pulsar in the examples could be confusing, might be worth adding a warning for anyone who is going through this tutorial before the pulsar tutorial
 				</li>
@@ -2354,7 +2391,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/911e29812e4f31337b1c9e3c2406fd3eeabdce0a">911e298</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/13f2db192f20c449b201776dd1fd06c1d09d3111">13f2db1</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

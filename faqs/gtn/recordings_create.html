@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>FAQ: Recording a video tutorial</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@13f2db192f20c449b201776dd1fd06c1d09d3111",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/faqs/gtn/recordings_create.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ef2bff8a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+	<link rel="alternate" type="application/json+oembed" href="https://oembed.apps.galaxyproject.eu/oembed?format=json&url=https://training.galaxyproject.org/training-material/faqs/gtn/recordings_create.html" title="oEmbed Profile" />
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Recording a video tutorial">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-06-14 09:14:44 +0000">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="This FAQ describes some **general guidelines** for recording your video  **Anybody is welcome to record one of the GTN tutorials**, even if another recording already exists! Both the GTN tutorial and Galaxy itself change significantly over time, and having regular and/or multiple recordings of tutorials is great!  **Done with your recording?** Check out the instructions for adding it to the GTN:  Submitting Recordings to the GTN   #### Video content  1. **Start of video**   - **Introduce yourself**   - Discuss the **questions and learning objectives** of the tutorial   - Give a **basic introducion about the topic**, many participants will be novices  2. **Guide the learners through the tutorial step by step**    - Explain the scientific background of the analysis    - Explain where you are clicking in Galaxy    - Explain what tool parameters mean    - Explain what the tool does    - Discuss the output files    - Discuss how to interpret the results    - Discuss question boxes from t...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="FAQ: Recording a video tutorial">
+        <meta property="og:description" content="This FAQ describes some **general guidelines** for recording your video  **Anybody is welcome to record one of the GTN tutorials**, even if another recording already exists! Both the GTN tutorial and Galaxy itself change significantly over time, and having regular and/or multiple recordings of tutorials is great!  **Done with your recording?** Check out the instructions for adding it to the GTN:  Submitting Recordings to the GTN   #### Video content  1. **Start of video**   - **Introduce yourself**   - Discuss the **questions and learning objectives** of the tutorial   - Give a **basic introducion about the topic**, many participants will be novices  2. **Guide the learners through the tutorial step by step**    - Explain the scientific background of the analysis    - Explain where you are clicking in Galaxy    - Explain what tool parameters mean    - Explain what the tool does    - Discuss the output files    - Discuss how to interpret the results    - Discuss question boxes from t...">
+        
+	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/faqs/gtn/recordings_create.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/faqs/gtn/recordings_create.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <div itemscope itemtype="https://schema.org/FAQPage">
+
+<section class="tutorial" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/training-material/faqs">All FAQs</a></li>
+
+      
+      <li class="breadcrumb-item"><a href="/training-material/faqs/gtn/">GTN FAQs</a></li>
+      
+
+      <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+
+    </ol>
+  </nav>
+  <h1 itemprop="name">Recording a video tutorial</h1>
+
+    
+    <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    <hr>
+    
+
+    <div class="container">
+      <div class="row" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div class="col-md-8" itemprop="text">
+           
+
+
+           
+
+<p>This FAQ describes some <strong>general guidelines</strong> for recording your video</p>
+
+<p><strong>Anybody is welcome to record one of the GTN tutorials</strong>, even if another recording already exists!
+Both the GTN tutorial and Galaxy itself change significantly over time, and having regular and/or multiple recordings of tutorials is great!</p>
+
+<p><strong>Done with your recording?</strong> Check out the instructions for adding it to the GTN:</p>
+
+<p><a href="/training-material/faqs/gtn/recordings_add.html"><button type="button" class="btn btn-info">Submitting Recordings to the GTN</button></a></p>
+
+<h4 id="video-content">Video content</h4>
+
+<ol>
+  <li><strong>Start of video</strong>
+    <ul>
+      <li><strong>Introduce yourself</strong></li>
+      <li>Discuss the <strong>questions and learning objectives</strong> of the tutorial</li>
+      <li>Give a <strong>basic introducion about the topic</strong>, many participants will be novices</li>
+    </ul>
+  </li>
+  <li><strong>Guide the learners through the tutorial step by step</strong>
+    <ul>
+      <li>Explain the scientific background of the analysis</li>
+      <li>Explain where you are clicking in Galaxy</li>
+      <li>Explain what tool parameters mean</li>
+      <li>Explain what the tool does</li>
+      <li>Discuss the output files</li>
+      <li>Discuss how to interpret the results</li>
+      <li>Discuss question boxes from the tutorial</li>
+    </ul>
+  </li>
+  <li><strong>Speak slowly and clearly</strong>
+    <ul>
+      <li>Take your time, we are not in a hurry</li>
+      <li>It is often a lot of new information for participants, give them a chance to process all of it</li>
+      <li>Speaking slowly and clearly will improve the quality of the auto-generated captions, and will be less work for you to fix captions.</li>
+    </ul>
+  </li>
+  <li><strong>If things go wrong that is OK!</strong>
+    <ul>
+      <li>It’s a great teaching moment!</li>
+      <li>Explain the steps you are taking to determine what went wrong, and how you are fixing it.</li>
+      <li>It makes participants feel less bad if things go wrong for them</li>
+    </ul>
+  </li>
+  <li><strong>If your tutorial is long</strong>
+    <ul>
+      <li>Indicate good places for people to take a break</li>
+      <li>e.g. when a tool takes a while to run</li>
+    </ul>
+  </li>
+  <li><strong>End of video</strong>
+    <ul>
+      <li>Go over some of the <strong>take-home messages (key-points)</strong> of the tutorial</li>
+      <li>Remind viewers about the <strong>feedback form</strong> embedded at the end of the tutorial</li>
+      <li>Share your recommendations for <strong>follow-up tutorials</strong></li>
+      <li>Share any other tips for where to learn more about the topic</li>
+      <li>Share <strong>how to connect with the community</strong> (e.g. Matrix, Help Forum, social media, etc)</li>
+    </ul>
+  </li>
+  <li>If you are doing both a lecture and a hands-on training, please create 2 separate videos</li>
+</ol>
+
+<h4 id="technical-guidelines">Technical Guidelines</h4>
+
+<ol>
+  <li>Start a <a href="https://zoom.us/">Zoom</a> call with yourself, record that.
+    <ul>
+      <li>For Mac users, QuickTime Player is also a nice option.</li>
+      <li>Have another preference like OBS? Totally OK too!</li>
+      <li>We recommend zoom to folks new to video production as it is the easiest to get started and produces quite small file sizes.</li>
+    </ul>
+  </li>
+  <li>Do a short <strong>test recording</strong> first
+    <ul>
+      <li>Is the <strong>audio quality</strong> good enough?
+        <ul>
+          <li>Wearing a headset often improves the audio quality.</li>
+        </ul>
+      </li>
+      <li><strong>Screen sharing:</strong> is your screen readable?
+        <ul>
+          <li>Make sure you <strong>zoom in</strong> enough for it to be clearly visible what you are doing in Galaxy.</li>
+          <li>Test watching the video in a non-maximised window. Is it still legible?</li>
+          <li>If the participant is using 50% of their screen for the video, 50% for Galaxy, will it be legible?</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Need to edit your video after recording?
+    <ul>
+      <li>For example to merge multiple videos together?</li>
+      <li>Software like <a href="https://kdenlive.org/en/">KDEnlive</a> can help here.</li>
+      <li>Feel free to ask us for help if you need!</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="standards">Standards</h4>
+
+<ol>
+  <li>
+    <p><strong>Zoom in</strong>, in every interface you’re covering! Many people will be watching the video while they’re doing the activity, and won’t have significant monitor space. Which video below would you rather be trying to follow?</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Bad</th>
+          <th>Good 😍</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="/training-material/faqs/gtn/images/bad.png" alt="default size screenshot of usegalaxy.eu" /></td>
+          <td><img src="/training-material/faqs/gtn/images/good.png" alt="zoomed in screenshot of usegalaxy.eu, now much more legible" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Bad</th>
+          <th>Good 🤩</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="/training-material/faqs/gtn/images/bad-console.png" alt="green text on black background console with tiny font" /></td>
+          <td><img src="/training-material/faqs/gtn/images/good-console.png" alt="zoomed in screenshot of a console with high contrast black and white content" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>(Especially for introductory videos!) Clearly call out what you’re doing, especially on the first occurrence</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Bad</th>
+          <th>Good</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>“Re-run the job”</td>
+          <td>“We need to re-run the job which we can do by first clicking to expand the dataset, and then using the re-run job button which looks like a refresh icon.”</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Bad</th>
+          <th>Good</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>“As you can see here the report says X”</td>
+          <td>“I’m going to view the output of this tool, click on the eyeball icon, and as you can see the report says X.”</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>But the same goes for terminal aliases, please disable all of your favourite terminal aliases and quick shortcuts that you’re used to using, disable your bashrc, etc. These are all things students will try and type, and will fail in doing so. We need to be very clear and explicit because people will type exactly what is on the screen, and their environment should at minimum match yours.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Bad</th>
+          <th>Good</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">lg file</code></td>
+          <td><code class="language-plaintext highlighter-rouge">ls -al | grep file</code></td>
+        </tr>
+        <tr>
+          <td><code class="language-plaintext highlighter-rouge">z galaxy</code></td>
+          <td><code class="language-plaintext highlighter-rouge">cd path/to/the/galaxy</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Consider using a pointer that is more visually highlighted.</p>
+
+    <p><img src="/training-material/faqs/gtn/images/mouse.png" alt="mouse pointer with circle around it that follows it around" /></p>
+
+    <p>There are themes available for your mouse pointer that you can temporarily use while recording that can make it easier for watchers to see what you’re doing.</p>
+
+    <ul>
+      <li><a href="https://www.microsoft.com/en-us/p/mouse-pointer-highlight/9p7sb9s4rq7z?activetab=pivot:overviewtab">Windows</a></li>
+      <li><a href="https://askubuntu.com/questions/777896/how-do-i-highlight-my-mouse-pointer-while-screen-recording/917587#917587">Linux</a></li>
+    </ul>
+  </li>
+</ol>
+
+        </div>
+        <div class="col-md-4">
+          <h5>Still have questions?</h5>
+
+          <!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+
+
+
+<a href="https://gitter.im/Galaxy-Training-Network/Lobby" class="btn btn-square-medium btn-yellow"><div>Gitter Chat Support</div></a>
+
+
+          <!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+
+
+
+<a href="https://help.galaxyproject.org" class="btn btn-square-medium btn-purple"><div>Galaxy Help Forum</div></a>
+
+
+
+          <h5>Want to embed this snippet (FAQ) in your GTN Tutorial?</h5>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet  faqs/gtn/recordings_create.md %}
+</code></pre></div></div>
+
+	  
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+
+</section>
+</div>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/13f2db192f20c449b201776dd1fd06c1d09d3111">13f2db1</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/faqs/gtn/recordings_create.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ef2bff8a.js'></script>
+
+	
+	
+
+    </body>
+</html>

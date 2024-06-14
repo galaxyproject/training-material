@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@911e29812e4f31337b1c9e3c2406fd3eeabdce0a",
+		release: "galaxy-training-network@13f2db192f20c449b201776dd1fd06c1d09d3111",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Finding the muon stopping site with pymuon-suite in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-01-22 17:23:27 +0000">
+<meta name="DC.date" content="2024-05-31 14:27:26 +0000">
 <meta name="DC.creator" content="Leandro Liborio">
 <meta name="DC.creator" content="Eli Chadwick">
 <meta name="DC.creator" content="Patrick Austin"><meta name="description" content="Modelling, simulation and analysis for the material science domain.">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-01-22 17:23:27 +0000",
+  "dateModified": "2024-05-31 14:27:26 +0000",
   "datePublished": "2024-01-22 20:44:48 +0000",
   "identifier": "https://gxy.io/GTN:T00402",
   "accessMode": [
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Finding the muon stopping site with pymuon-suite in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html",
-  "version": 12,
+  "version": 14,
   "timeRequired": "PT1H",
   "teaches": "Understand why finding stopping sites is useful\n - Use pymuon-suite in Galaxy to find stopping sites\n - Understand the limitations of these tools and techniques",
   "keywords": [
@@ -808,38 +808,38 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-
-
-  
-<!-- GTN Video Library true -->
-  
 <li class="btn btn-default supporting_material">
-  
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
         <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
-    </a>
-    <ul class="dropdown-menu">
-        
-        
-        
-        
+  </a>
 
-        <li>
 
-            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/materials-science/muon-stopping-sites-muairss-uep" title="View GTN Video Library for this Tutorial">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture & Tutorial (January 2024)
-            </a>
-        </li>
-        
-        
-        
-        
-        
-    </ul>
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/recordings/index.html#tutorial-recording-26-january-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (January 2024) - 22m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
   
 </li>
   
-   
+
+
 
 
 
@@ -898,7 +898,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 22, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 22, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 31, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -916,7 +916,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
 
     </blockquote>
     </section>
@@ -932,16 +932,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>The problem of identifying the stopping site of the muon is often key in the
-interpretation of muon experimental results. As it was mentioned in the lecture, 
+interpretation of muon experimental results. As it was mentioned in the lecture,
 the problem of finding the muon stopping site has been previously
 tackled using computational tools, and one of the most common methods is the so-called
-Unperturbed Electrostatic Potential (UEP) method, which identifies proposes that 
+Unperturbed Electrostatic Potential (UEP) method, which identifies proposes that
 the muon stops at the minima of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> of a crystalline host material.</p>
 
 <p>pymuon-suite in Galaxy implements a variant of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr>, that allows the
-users to efficiently scan the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> of the host material and use a clustering procedure 
-to classify those minima as potential stopping sites. But, before moving into the details 
-of how the method works, it is useful to revisit some of the key assumptions 
+users to efficiently scan the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> of the host material and use a clustering procedure
+to classify those minima as potential stopping sites. But, before moving into the details
+of how the method works, it is useful to revisit some of the key assumptions
 behind what happens in a muon experiment.</p>
 
 <p>At the atomic level, muon spectroscopy experiments go something like this:</p>
@@ -949,7 +949,7 @@ behind what happens in a muon experiment.</p>
 <ul>
   <li>A spin-polarized muon beam of positive muons is fired at the sample</li>
   <li>Through inelastic collisions with the atoms of the crystalline host material,
- muons shed their kinetic energy, which turns into heat or causes small amounts 
+ muons shed their kinetic energy, which turns into heat or causes small amounts
  of damage to the crystal. This continues until the muons’ kinetic energy becomes low enough
 that it is comparable to their potential energy in the electrostatic potential
 generated by electrons and nuclei alike.</li>
@@ -963,18 +963,18 @@ the rest of its time in that position until it decays.</li>
 <p><a href="../../images/muon_spectroscopy_diagram.png" rel="noopener noreferrer"><img src="../../images/muon_spectroscopy_diagram.png" alt="Graphical illustration of muons being implanted in a sample, then decaying to a positron and being detected. " width="957" height="478" loading="lazy" /></a></p>
 
 <p>Where these minima of the potential actually are isn’t always obvious and,
-although the our version of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> method has proven to be quite efficient and useful, 
- there are certain crystalline materials where predicting the minima of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> 
- potential can be a lot harder. For instance, in lithium fluoride <span class="citation"><a href="#Liborio2018">Liborio <i>et al.</i> 2018</a></span>, 
+although the our version of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> method has proven to be quite efficient and useful,
+ there are certain crystalline materials where predicting the minima of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr>
+ potential can be a lot harder. For instance, in lithium fluoride <span class="citation"><a href="#Liborio2018">Liborio <i>et al.</i> 2018</a></span>,
  the potential’s minima are flat and
-wide and current computer simulations fail to predict the muon stopping site. 
+wide and current computer simulations fail to predict the muon stopping site.
 Hence, users must exercise scientific criteria when analyzing results form the method</p>
 
-<p>This tutorial goes into the details of how to estimate the muon stopping 
+<p>This tutorial goes into the details of how to estimate the muon stopping
 site in crystalline copper, as described in the lecture, and it assumes
  that some basic Galaxy concepts such as: how to upload a file;
 how to use a Galaxy tool; how to create, view and share a history and how to extract
- and run a Galaxy workflow, are known. Hence, 
+ and run a Galaxy workflow, are known. Hence,
 as stated in the requirements at the beginning of this tutorial please, before starting
  have a look at this: <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html">A short introduction to Galaxy</a></p>
 
@@ -997,20 +997,20 @@ as stated in the requirements at the beginning of this tutorial please, before s
 </blockquote>
 
 <h1 id="workflow-for-finding-the-µ-stopping-site">Workflow for Finding the µ+ stopping site</h1>
-<p>As described in the lecture, the full workflow associated with finding 
+<p>As described in the lecture, the full workflow associated with finding
 potential muon stopping sites in crystalline copper is shown in the figure below:</p>
 
 <p><a href="../../images/Workflow_for_finding_mu+.png" rel="noopener noreferrer"><img src="../../images/Workflow_for_finding_mu+.png" alt="Graphical illustration of the steps in finding the muon stopping site for a Silicon crystal lattice. (1) Start with a pure host, (2) randomly populate with muons, (3) relax electrostatic forces, (4) cluster structures to give the stopping site in either (5) a conventional unit cell or (6) a supercell." width="720" height="405" loading="lazy" /></a></p>
 
-<p>It comprises 6 steps that will be described in detail in the next sections.  Steps 1 and 6 
+<p>It comprises 6 steps that will be described in detail in the next sections.  Steps 1 and 6
 are performed outside of the Galaxy platform, usually in an external computer cluster that can
-run the necessary Density Functional Theory (DFT) simulations. Steps 2, 3, 4, and 5 of this workflow are are carried out 
+run the necessary Density Functional Theory (DFT) simulations. Steps 2, 3, 4, and 5 of this workflow are are carried out
 in Galaxy using two Galaxy tools: <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS UEP Optimise</code> and <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS Cluster</code>.</p>
 
 <p><a href="../../images/2GalaxyTools.png" rel="noopener noreferrer"><img src="../../images/2GalaxyTools.png" alt="Screenshots of the Galaxy UI showing the two tools, PyMuonSuite AIRSS UEP Optimise and PyMuonSuite AIRSS Cluster, and which steps of the described process they correspond to (1,2,3 and 4,5,6 respectively)." width="720" height="405" loading="lazy" /></a></p>
 
-<p>Hence, there is a difference between the full workflow and the specific Galaxy part of this workflow, which can be 
-saved, shared and edited in the Galaxy platform. For the case of finding potential muon stopping sites in 
+<p>Hence, there is a difference between the full workflow and the specific Galaxy part of this workflow, which can be
+saved, shared and edited in the Galaxy platform. For the case of finding potential muon stopping sites in
 crystalline Cu, the components of Galaxy workflow are shown below:</p>
 
 <p><a href="../../images/GalaxyWorkflow.png" rel="noopener noreferrer"><img src="../../images/GalaxyWorkflow.png" alt="Screenshot of the Galaxy workflow editor showing the three input files (Copper-out.cell, Copper.den_fmt, Copper.castep) needed for the tool PyMuonSuite AIRSS UEP Optimise, and how that output connects to the PyMuonSuite AIRSS Cluster tool." width="985" height="406" loading="lazy" /></a></p>
@@ -1033,14 +1033,14 @@ tools in workflow. If this is not the case a dialogue box will warn you.</li>
 
 <h2 id="dft-calculation-of-the-pure-host-material"><abbr title="Density Functional Theory">DFT</abbr> calculation of the Pure Host Material</h2>
 
-<p>This method requires only a single <abbr title="Density Functional Theory">DFT</abbr> calculation for the host material.<br />
- This calculation could be a geometry optimisation, which uses 
- a self-consistent methodology to estimate the electronic 
- structure of the material and relax the structure. Pymuon_suite uses the 
+<p>This method requires only a single <abbr title="Density Functional Theory">DFT</abbr> calculation for the host material.
+ This calculation could be a geometry optimisation, which uses
+ a self-consistent methodology to estimate the electronic
+ structure of the material and relax the structure. Pymuon_suite uses the
  CASTEP code for running its <abbr title="Density Functional Theory">DFT</abbr> calculations, and some basic information
   about how to run a geometry optimisation is available in the <a href="https://castep-docs.github.io/castep-docs/">CASTEP documentation</a>.</p>
 
-<p>Once the relaxed structure and its corresponding electronic structure are obtained, 
+<p>Once the relaxed structure and its corresponding electronic structure are obtained,
 a set of CASTEP output files is generated. We need to load just three of these files
 into Galaxy.  These are the relaxed CASTEP structural file <code class="language-plaintext highlighter-rouge">*-out.cell</code>, the
 charge density file <code class="language-plaintext highlighter-rouge">*.den_fmt</code> and the CASTEP output file <code class="language-plaintext highlighter-rouge">*.castep</code>.</p>
@@ -1050,10 +1050,10 @@ but in general you would need to create these yourself by running CASTEP simulat
 outside of Galaxy.</p>
 
 <p>To run the first part of the workflow, on the left menu of the Galaxy web-page
-we look for the <code class="language-plaintext highlighter-rouge">FIND MUON STOPPING SITES</code> header and first click on <code class="language-plaintext highlighter-rouge">UEP method</code> and then 
-select the <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS UEP Optimise</code> Galaxy tool. This brings up the central panel of the Galaxy 
+we look for the <code class="language-plaintext highlighter-rouge">FIND MUON STOPPING SITES</code> header and first click on <code class="language-plaintext highlighter-rouge">UEP method</code> and then
+select the <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS UEP Optimise</code> Galaxy tool. This brings up the central panel of the Galaxy
 web-page, where can load the CASTEP files; complete the <em>Generation</em> parameters to set up the
-creation of randomly populated muonated structures; and complete the <em>Optimisation</em> parameters to set up the relaxation the 
+creation of randomly populated muonated structures; and complete the <em>Optimisation</em> parameters to set up the relaxation the
 electrostatic forces of the muon in each of the randomly populated muonated structures.</p>
 
 <h3 id="how-to-load-castep-files-into-galaxy">How to load CASTEP files into Galaxy</h3>
@@ -1068,9 +1068,9 @@ electrostatic forces of the muon in each of the randomly populated muonated stru
 the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">materials-science</code>
  -&gt; <code class="language-plaintext highlighter-rouge">Finding the muon stopping site with pymuon-suite in Galaxy</code>):</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/10219558/files/Cu-out.cell 
-https://zenodo.org/records/10219558/files/Cu.castep 
-https://zenodo.org/records/10219558/files/Cu.den_fmt 
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/10219558/files/Cu-out.cell
+https://zenodo.org/records/10219558/files/Cu.castep
+https://zenodo.org/records/10219558/files/Cu.den_fmt
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1095,42 +1095,42 @@ https://zenodo.org/records/10219558/files/Cu.den_fmt
 
 <h2 id="create-randomly-populated-muonated-structures">Create Randomly Populated Muonated Structures</h2>
 
-<p>The first step within the Galaxy platform is the population of the 
-host material’s interstitial spaces with muons that are 
+<p>The first step within the Galaxy platform is the population of the
+host material’s interstitial spaces with muons that are
 randomly distributed in accordance with certain physical constraints.</p>
 
 <p><a href="../../images/Create-random-structures.png" rel="noopener noreferrer"><img src="../../images/Create-random-structures.png" alt="Graphical illustration of how the parameters Gaussian Width affects the potential of atoms, Van der Waals Scale increases the distance between atoms and muons, and Poisson Radius increases the starting distance between muons." width="720" height="405" loading="lazy" /></a></p>
 
-<p>Essentially, the muons are randomly distributed while respecting 
-a minimum distance between them and between the atoms 
+<p>Essentially, the muons are randomly distributed while respecting
+a minimum distance between them and between the atoms
 in the host material. The <code class="language-plaintext highlighter-rouge">Poisson radius</code> parameter sets the minimum spacing
 between the muons that are randomly implanted in the sample, while the
 <code class="language-plaintext highlighter-rouge">Van der Waals scale</code> parameter sets the minimum spacing between randomly
-implanted muons and the atoms in the host material.  Two of the images in the figure 
-above show how the density of distributed muons changes for different values of 
-the Poisson radius. These images are just for visualization purposes, what 
-the method really does is generate a set of muonated structures, where each one has a muon 
+implanted muons and the atoms in the host material.  Two of the images in the figure
+above show how the density of distributed muons changes for different values of
+the Poisson radius. These images are just for visualization purposes, what
+the method really does is generate a set of muonated structures, where each one has a muon
 in a different place, and place each muonated structure in a corresponding folder.</p>
 
 <h2 id="relax-electrostatic-forces-on-muons">Relax Electrostatic Forces on Muons</h2>
 
-<p>As stated in the lecture, the method minimizes the electrostatic forces acting on the muon in each of the 
-muonated structures generated in the previous step.  In this relaxation procedure, 
-the forces are calculated analytically using data obtained from the <abbr title="Density Functional Theory">DFT</abbr> simulation of the unperturbed host material: 
+<p>As stated in the lecture, the method minimizes the electrostatic forces acting on the muon in each of the
+muonated structures generated in the previous step.  In this relaxation procedure,
+the forces are calculated analytically using data obtained from the <abbr title="Density Functional Theory">DFT</abbr> simulation of the unperturbed host material:
 the charge density file <code class="language-plaintext highlighter-rouge">*.den_fmt</code>, the relaxed CASTEP structural file <code class="language-plaintext highlighter-rouge">*-out.cell</code>, the and the CASTEP output file <code class="language-plaintext highlighter-rouge">*.castep</code>,
-and then the muon is displaced in a direction 
-that minimizes the forces acting upon it. This is a self-consistent procedure, which is repeated until the 
-forces on each muon are below the value specified in the <code class="language-plaintext highlighter-rouge">geometry optimisation tolerance</code> parameter, or until 
+and then the muon is displaced in a direction
+that minimizes the forces acting upon it. This is a self-consistent procedure, which is repeated until the
+forces on each muon are below the value specified in the <code class="language-plaintext highlighter-rouge">geometry optimisation tolerance</code> parameter, or until
 the maximum number of <code class="language-plaintext highlighter-rouge">geometry optimisation steps</code> is reached.</p>
 
 <p><a href="../../images/relax_electrostatic_forces_on_muons.png" rel="noopener noreferrer"><img src="../../images/relax_electrostatic_forces_on_muons.png" alt="Graphical illustration of how muon positions might move during geometry optimisation to concentrate in one or more areas in the structure, and the equation defining the electrostatics of this process." width="720" height="405" loading="lazy" /></a></p>
 
-<p>This workflow’s step could be computationally expensive. The larger the 
+<p>This workflow’s step could be computationally expensive. The larger the
 the size of the host material’s unit cell, and the smaller the values of <code class="language-plaintext highlighter-rouge">Poisson radius</code> and
-<code class="language-plaintext highlighter-rouge">Van der Waals scale</code> parameters, the larger number of muonated structures created, and the 
-more expensive this step will be.  In any case: the relaxation procedure is run in the Galaxy 
-server, so the user can just start it and leave it running in the Galaxy instance. The status of 
-the relaxation will be indicated in the history panel on the right menu of the Galaxy web-page, where 
+<code class="language-plaintext highlighter-rouge">Van der Waals scale</code> parameters, the larger number of muonated structures created, and the
+more expensive this step will be.  In any case: the relaxation procedure is run in the Galaxy
+server, so the user can just start it and leave it running in the Galaxy instance. The status of
+the relaxation will be indicated in the history panel on the right menu of the Galaxy web-page, where
 all the processes run by the Galaxy instance are numbered.</p>
 
 <p>Below, a hands-on example on how to run these workflow steps.</p>
@@ -1171,29 +1171,29 @@ all the processes run by the Galaxy instance are numbered.</p>
 <h2 id="cluster-relaxed-structures---µ-stopping-sites">Cluster Relaxed Structures - µ+ Stopping Sites</h2>
 
 <p>Once the relaxation is over, there will appear a new item on the history panel denominated
-<em>PyMuonSuite AIRSS UEP Optimise on data X, data Y and data Z</em>. This item 
-contains a <code class="language-plaintext highlighter-rouge">*.zip</code> file with all the optimised muonated structures, where <em>X</em>, <em>Y</em> and <em>Z</em> are 
-the numbers of the processes, in the history panel, that were used for running the relaxation 
+<em>PyMuonSuite AIRSS UEP Optimise on data X, data Y and data Z</em>. This item
+contains a <code class="language-plaintext highlighter-rouge">*.zip</code> file with all the optimised muonated structures, where <em>X</em>, <em>Y</em> and <em>Z</em> are
+the numbers of the processes, in the history panel, that were used for running the relaxation
 of the electrostatic forces on muons.</p>
 
 <p><a href="../../images/cluster_relaxed_structures_mu+_stopping_sites.png" rel="noopener noreferrer"><img src="../../images/cluster_relaxed_structures_mu+_stopping_sites.png" alt="Graphical illustration of muons clustered in two possible sites for a structure, how this is represented in the tool output report, and the original structure within that cluster which has minimal energy." width="720" height="405" loading="lazy" /></a></p>
 
 <p>The first step for running the clustering procedure is to select the <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS Cluster</code> Galaxy tool on
-the left menu of the Galaxy web-page . This brings up the corresponding central panel of the Galaxy 
-web-page, where can load the optimised muonated structures <code class="language-plaintext highlighter-rouge">*.zip</code> contained in the 
+the left menu of the Galaxy web-page . This brings up the corresponding central panel of the Galaxy
+web-page, where can load the optimised muonated structures <code class="language-plaintext highlighter-rouge">*.zip</code> contained in the
 <em>PyMuonSuite AIRSS UEP Optimise on data X, data Y and data Z</em> item.</p>
 
-<p>Then we need to select the <em>clustering method</em> and it corresponding parameters. There are two clustering methodologies 
-available: <code class="language-plaintext highlighter-rouge">hierarchical</code> and <code class="language-plaintext highlighter-rouge">k-means</code> clustering. We recommend using the hierarchical clustering first, choosing different 
-values of the <code class="language-plaintext highlighter-rouge">t parameter for hierarchical clustering</code>, until a consistent number of clusters is found.  Once that 
-number is found, we can perform a k-means clustering analysis, using the number of hierarchical clustering clusters as 
+<p>Then we need to select the <em>clustering method</em> and it corresponding parameters. There are two clustering methodologies
+available: <code class="language-plaintext highlighter-rouge">hierarchical</code> and <code class="language-plaintext highlighter-rouge">k-means</code> clustering. We recommend using the hierarchical clustering first, choosing different
+values of the <code class="language-plaintext highlighter-rouge">t parameter for hierarchical clustering</code>, until a consistent number of clusters is found.  Once that
+number is found, we can perform a k-means clustering analysis, using the number of hierarchical clustering clusters as
 the value for the <code class="language-plaintext highlighter-rouge">Number of clusters for k-means clustering</code> parameter.</p>
 
-<p>Finally, we need to choose the <em>Clustering Save Format</em>. This allows for the visualisation of the potential stopping sites 
-associated to each of the clusters found, but it can also be used to prepare the <code class="language-plaintext highlighter-rouge">*.cell</code> supercell file that is needed to 
+<p>Finally, we need to choose the <em>Clustering Save Format</em>. This allows for the visualisation of the potential stopping sites
+associated to each of the clusters found, but it can also be used to prepare the <code class="language-plaintext highlighter-rouge">*.cell</code> supercell file that is needed to
 run the last step of the workflow: the <abbr title="Density Functional Theory">DFT</abbr> relaxation of each of the muonated structures associated to each of
-the potential stopping sites.  The <code class="language-plaintext highlighter-rouge">*.cell</code> supercell file can then be downloaded from Galaxy and used to run 
-a CASTEP <abbr title="Density Functional Theory">DFT</abbr> simulation, which can be used to analyse things such as the distortions caused by the muon in the host 
+the potential stopping sites.  The <code class="language-plaintext highlighter-rouge">*.cell</code> supercell file can then be downloaded from Galaxy and used to run
+a CASTEP <abbr title="Density Functional Theory">DFT</abbr> simulation, which can be used to analyse things such as the distortions caused by the muon in the host
 material.</p>
 
 <p><a href="../../images/DFT_supercell_muonated_structures.png" rel="noopener noreferrer"><img src="../../images/DFT_supercell_muonated_structures.png" alt="Graphical illustration of how a muon within a conventional unit cell can be converted to a larger 3 by 3 by 3 supercell, still containing only one muon but with more of the original atoms of the lattice." width="720" height="405" loading="lazy" /></a></p>
@@ -1227,8 +1227,8 @@ material.</p>
 <h3 id="analysis-of-the-cluster-report">Analysis of the Cluster report</h3>
 
 <p>Once the clustering procedure is over, there will appear a new item on the history panel denominated
-<em>Cluster report for PyMuonSuite AIRSS UEP Optimise on data X, data Y, and data Z</em>, which contains a 
-human-readable summary of the clustering results, with the underlying raw data also provided. The top of the 
+<em>Cluster report for PyMuonSuite AIRSS UEP Optimise on data X, data Y, and data Z</em>, which contains a
+human-readable summary of the clustering results, with the underlying raw data also provided. The top of the
 report contains a summary of the settings used to run the clustering, and when it was run.</p>
 
 <blockquote class="code-out">
@@ -1252,13 +1252,13 @@ Clustering method: Hierarchical
 </code></pre></div>  </div>
 </blockquote>
 
-<p>The remainder of the report details the clusters and the individual muonated 
+<p>The remainder of the report details the clusters and the individual muonated
 structures composing each cluster. In
 addition to showing the relative numbers of structures forming each cluster,
-we also report the structure with the minimum energy, the average energy for all the structures 
-and the corresponding standard deviation for that average energy. By analysing of these 
-quantities for different values of the <code class="language-plaintext highlighter-rouge">Poisson radius</code>, <code class="language-plaintext highlighter-rouge">Van der Waals scale</code> and 
-<code class="language-plaintext highlighter-rouge">t parameter for hierarchical clustering</code> parameters, we can determine which 
+we also report the structure with the minimum energy, the average energy for all the structures
+and the corresponding standard deviation for that average energy. By analysing of these
+quantities for different values of the <code class="language-plaintext highlighter-rouge">Poisson radius</code>, <code class="language-plaintext highlighter-rouge">Van der Waals scale</code> and
+<code class="language-plaintext highlighter-rouge">t parameter for hierarchical clustering</code> parameters, we can determine which
 are the “stable” clusters, which are the ones associated to potential stopping sites.</p>
 
 <blockquote class="code-out">
@@ -1281,8 +1281,8 @@ CALCULATOR: uep
 
 
 	Structure list:
-	struct_1	struct_3	struct_5	struct_6	
-	struct_7	struct_8	struct_12	
+	struct_1	struct_3	struct_5	struct_6
+	struct_7	struct_8	struct_12
 
 	-----------
 	Cluster 2
@@ -1297,8 +1297,8 @@ CALCULATOR: uep
 
 
 	Structure list:
-	struct_2	struct_4	struct_9	struct_10	
-	struct_11	struct_13	struct_14	
+	struct_2	struct_4	struct_9	struct_10
+	struct_11	struct_13	struct_14
 
 	----------
 
@@ -1309,11 +1309,11 @@ CALCULATOR: uep
 </code></pre></div>  </div>
 </blockquote>
 
-<p>The classical <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> method scans the electrostatic potential looking for minima in it, which 
-are associated to potential muon stopping sites. This method further classifies those minima 
-by estimating their “attractor size”.  If you look at the picture in the figure below, the two 
-minima have similar values, but the capacity to “attract” a muon is greater for the minima on the left, 
-which makes it more likely to be a muon stopping site. The probability of a potential stopping site is 
+<p>The classical <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> method scans the electrostatic potential looking for minima in it, which
+are associated to potential muon stopping sites. This method further classifies those minima
+by estimating their “attractor size”.  If you look at the picture in the figure below, the two
+minima have similar values, but the capacity to “attract” a muon is greater for the minima on the left,
+which makes it more likely to be a muon stopping site. The probability of a potential stopping site is
 given by the size of the cluster that forms around its associated minima.</p>
 
 <p><a href="../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png" rel="noopener noreferrer"><img src="../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png" alt="Graphical illustration of how muons may be clustered in two different potential minima that have similar energies with a simple 1D plot, and two real examples (CaF and YF3) showing the potential energy in a 3D structure." width="720" height="405" loading="lazy" /></a></p>
@@ -1582,7 +1582,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/911e29812e4f31337b1c9e3c2406fd3eeabdce0a">911e298</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/13f2db192f20c449b201776dd1fd06c1d09d3111">13f2db1</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

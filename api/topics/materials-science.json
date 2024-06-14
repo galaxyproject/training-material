@@ -79,6 +79,19 @@
         "DFT": "Density Functional Theory",
         "UEP": "Unperturbed Electrostatic Potential"
       },
+      "recordings": [
+        {
+          "youtube_id": "rFPtDmq7uO8",
+          "date": "2024-01-26",
+          "length": "22M",
+          "speakers": [
+            "leandro-liborio"
+          ],
+          "captioners": [
+            "leandro-liborio"
+          ]
+        }
+      ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -90,46 +103,11 @@
       "dir": "topics/materials-science/tutorials/muon-stopping-sites-muairss-uep",
       "symlink": null,
       "id": "materials-science/muon-stopping-sites-muairss-uep",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": null,
-          "materials": [
-            {
-              "link": "topics/materials-science/tutorials/muon-stopping-sites-muairss-uep/tutorial.html",
-              "title": "Finding the muon stopping site with pymuon-suite in Galaxy",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "materials-science"
-          ],
-          "versions": [
-            {
-              "link": "rFPtDmq7uO8",
-              "date": "2024-01-26",
-              "length": "22M",
-              "speakers": [
-                "leandro-liborio"
-              ],
-              "captions": [
-                "leandro-liborio"
-              ]
-            }
-          ],
-          "gtn_id": "materials-science/muon-stopping-sites-muairss-uep",
-          "title": "Finding the muon stopping site with pymuon-suite in Galaxy",
-          "captioned": true
-        },
-        "session": null
-      },
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-01-22 17:23:27 +0000",
+      "mod_date": "2024-05-31 14:27:26 +0000",
       "pub_date": "2024-01-22 20:44:48 +0000",
-      "version": 12,
+      "version": 14,
       "workflows": [
         {
           "workflow": "muairss-uep.ga",
@@ -150,7 +128,7 @@
           "name": "Finding the Muon Stopping Site: pymuon-suite in Galaxy",
           "title": "Finding the Muon Stopping Site: pymuon-suite in Galaxy",
           "test_results": null,
-          "modified": "2024-06-14 07:36:56 +0000",
+          "modified": "2024-06-14 09:58:03 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nCopper-out.cell\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nCopper.den_fmt\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nCopper.castep\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"PyMuonSuite AIRSS UEP Optimise\"];\n  2 -->|output| 3;\n  1 -->|output| 3;\n  0 -->|output| 3;\n  f3be7cd2-3974-49f2-aa0e-96c79b4ab34c[\"Output\\nAll muons in host material\"];\n  3 --> f3be7cd2-3974-49f2-aa0e-96c79b4ab34c;\n  style f3be7cd2-3974-49f2-aa0e-96c79b4ab34c stroke:#2c3143,stroke-width:4px;\n  4[\"PyMuonSuite AIRSS Cluster\"];\n  3 -->|uep_results| 4;"
         }
       ],
@@ -201,6 +179,7 @@
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: pm_muairss_read\n  owner: muon-spectroscopy-computational-project\n  revisions: 40071ff77285\n  tool_panel_section_label: Muon Spectroscopy\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pm_uep_opt\n  owner: muon-spectroscopy-computational-project\n  revisions: eea73e1f65cb\n  tool_panel_section_label: Muon Spectroscopy\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
+      "slides_recordings": false,
       "translations": {
         "tutorial": [
 

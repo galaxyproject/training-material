@@ -21,7 +21,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@911e29812e4f31337b1c9e3c2406fd3eeabdce0a",
+		release: "galaxy-training-network@13f2db192f20c449b201776dd1fd06c1d09d3111",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Code Architecture">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-07-19 15:02:04 +0000">
+<meta name="DC.date" content="2024-05-29 15:37:52 +0000">
 <meta name="DC.creator" content="John Chilton">
 <meta name="DC.creator" content="Björn Grüning">
 
@@ -217,7 +217,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2022-07-19 15:02:04 +0000",
+  "dateModified": "2024-05-29 15:37:52 +0000",
   "datePublished": "2017-06-20 21:12:27 +0000",
   "identifier": "https://gxy.io/GTN:S00043",
   "accessMode": [
@@ -246,7 +246,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "slides",
   "name": "Galaxy Code Architecture",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html",
-  "version": 56,
+  "version": 57,
   "timeRequired": "PT150M",
   "teaches": "Explore various aspects of the Galaxy codebase.\n - Understand the various top-level files and modules in Galaxy.\n - Understand how dependencies work in Galaxy's frontend and backend.",
   "keywords": [
@@ -520,10 +520,16 @@ class: center, middle, inverse
 
 
 <!-- other slide formats (video and plain-text) -->
-<div class="footnote" style="bottom: 6em;">
+<div class="footnote" style="bottom: 5em;">
 
 
-  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
 </div>
 
 
@@ -1085,7 +1091,7 @@ Part of the Galaxy CI process includes linting and checking the format of both t
 This linting process captures many common problems as well as enforcing a common code style.
 
 The output reports from the CI process are relatively straightforward, but it is a good process
-to lint changes and formatting your code before opening pull requests for them. 
+to lint changes and formatting your code before opening pull requests for them.
 
 Execute the `format` make command to format the backend code and then use `tox`
 to lint the formatted code.

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@911e29812e4f31337b1c9e3c2406fd3eeabdce0a",
+		release: "galaxy-training-network@13f2db192f20c449b201776dd1fd06c1d09d3111",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Debugging Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2024-05-29 15:37:52 +0000">
 <meta name="DC.creator" content="Assunta DeSanto">
 <meta name="DC.creator" content="John Davis">
 <meta name="DC.creator" content="John Chilton"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2024-05-29 15:37:52 +0000",
   "datePublished": "2021-06-15 10:13:45 +0000",
   "identifier": "https://gxy.io/GTN:T00115",
   "accessMode": [
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Debugging Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html",
-  "version": 42,
+  "version": 43,
   "timeRequired": "PT4H",
   "teaches": "Fix a broken branch\n - Interpret the results of failed tests on GitHub\n - Run individual tests locally\n - Fix errors identified by failing tests\n - Debug simple runtime errors using the Python debugger\n - Write tests exposing the identified bug",
   "keywords": [
@@ -795,48 +795,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-
-  
-<!-- GTN Video Library true -->
-  
-<li class="btn btn-default supporting_material">
-  
-    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
-        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
-    </a>
-    <ul class="dropdown-menu">
-        
-        
-        
-        
-        
-          
-          
-          
-          
-
-        <li>
-            <a class="dropdown-item" href="https://gallantries.github.io/video-library/sessions/dev/debugging/tutorial" title="View GTN Video Library session for this tutorial ">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Multi-video Tutorial (February 2021)
-
-            </a>
-        </li>
-        
-    </ul>
-  
-</li>
-  
-   
-
-
-
             
                 
             
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 15, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 29, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -856,7 +821,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.0</a> (1 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 42 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 43 </div>
 
     </blockquote>
     </section>
@@ -1271,7 +1236,7 @@ In the file <code class="language-plaintext highlighter-rouge">src/components/Ru
   <ol>
     <li>
       <p><strong>Finding the failing test on GitHub</strong>
-In this section we, again, can’t demonstrate the remote output, so we descibe it instead. 
+In this section we, again, can’t demonstrate the remote output, so we descibe it instead.
 One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicking on Details beside that failure, will open up a the terminal output from that test. Here you should be able to see what test is failing.</p>
 
       <blockquote class="solution">
@@ -1940,7 +1905,7 @@ tools: []
 		    <ul>
 				
 				<li>
-					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>: 
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
 					<b>Liked</b>: Good tutorial, but it is outdated. There is no training branch to be found on the galaxy Github (no old training, no new training2022 or the like).  I managed to find the branch here: https://github.com/galaxyproject/galaxy/pull/14339 and cloned https://github.com/jdavcs/galaxy/tree/training2022  which made me able to do the training. But I believe that is the reason there were minor differences furtherdown the tutorial as it is a year old so I think this is the problem that would fix the rest.
 					<b>Disliked</b>: Updating to latest changes
 				</li>
@@ -1980,7 +1945,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/911e29812e4f31337b1c9e3c2406fd3eeabdce0a">911e298</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/13f2db192f20c449b201776dd1fd06c1d09d3111">13f2db1</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

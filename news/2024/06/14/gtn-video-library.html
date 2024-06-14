@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>GTN Video Library 2.0: 107 hours of learning across 154 videos</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@13f2db192f20c449b201776dd1fd06c1d09d3111",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2024/06/14/gtn-video-library.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ef2bff8a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="GTN Video Library 2.0: 107 hours of learning across 154 videos">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-06-14 09:21:31 +0000">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Many GTN tutorials already have recordings. These recordings were made by members of the community for a variety of (online) training events. Up until now, this video library were part of the Gallantries Project. We have now integrated this video library directly into the GTN, and made it even easier to add video recordings to GTN tutorials or slide decks! Just use a Google Form to submit your video recordings! ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="GTN Video Library 2.0: 107 hours of learning across 154 videos">
+        <meta property="og:description" content="Many GTN tutorials already have recordings. These recordings were made by members of the community for a variety of (online) training events. Up until now, this video library were part of the Gallantries Project. We have now integrated this video library directly into the GTN, and made it even easier to add video recordings to GTN tutorials or slide decks! Just use a Google Form to submit your video recordings! ">
+        
+	<meta property="og:image" content="/training-material/assets/images/video-library.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2024-06-14-gtn-video-library.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2024/06/14/gtn-video-library.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>GTN Video Library 2.0: 107 hours of learning across 154 videos</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people managed and provided infrastructure to the GTN or for training purposes">Infrastructure</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a></td>
+	</tr>
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+
+<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 14 June 2024</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>Many GTN tutorials already have recordings. These recordings were made by members of the community for a variety of (online) training events.
+Up until now, this video library were part of the <a href="https://gallantries.github.io/">Gallantries Project</a>.
+We have now integrated this video library directly into the GTN, and made it even <strong>easier to add video recordings</strong> to GTN tutorials or slide decks! Just use a Google Form to submit your video recordings!</p>
+
+<p>Want to record one of our tutorials? <strong>We welcome video recordings from everybody!</strong><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></p>
+
+<p>Please checkout out our FAQs with instructions for adding your own recordings:</p>
+
+<p><a href="/training-material/faqs/gtn/recordings_add.html"><button type="button" class="btn btn-info">Submitting Recordings to the GTN</button></a></p>
+
+<p><a href="/training-material/faqs/gtn/recordings_create.html"><button type="button" class="btn btn-info">Recording Tips &amp; Tricks</button></a></p>
+
+<h2 id="what-this-means-for">What this means for…</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>What’s new?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Instructors</td>
+      <td>Just fill out an updated Google Form and we’ll take care of the rest. The google form is now more easily discoverable, as are the recording instructions which provide a best practice guide for doing screen recordings of tutorials. We have updated documentation on recording best practices that are easy to follow.</td>
+    </tr>
+    <tr>
+      <td>Event Organisers &amp; Teachers</td>
+      <td>Easily discover our large library of both human and automated video recordings to use in your training materials. All videos are licensed CC-BY so you can use them in your own training materials or even embed them in your course websites (Moodle, Blackboard, etc).</td>
+    </tr>
+    <tr>
+      <td>GTN Editors &amp; Maintainers</td>
+      <td>When a recording is submitted, a pull request will be opened with the appropriate metadata in the correct location and an easy checklist to follow to make sure everyone’s video is processed efficiently with every step taken care of.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="video-library-10">Video Library 1.0</h2>
+
+<p>This work is based on the work done during the <a href="/training-material/hall-of-fame/gallantries/" class="contributor-badge-inline contributor-gallantries">
+  <img src="https://gallantries.github.io/assets/images/gallantries-logo.png" alt="Gallantries: Bridging Training Communities in Life Science, Environment and Health avatar" width="36" class="avatar" />
+  Gallantries</a>
+ project and the <a href="/training-material/news/2021/11/23/video-library.html">Video Library 1.0</a>. As that project ended, the features developed during that time have now been rolled into the GTN to ensure their long term sustainability</p>
+
+<p>The number of videos and hours is slightly lower in the GTN version as we have not yet imported every recording, currently we are missing some recordings which are not directly associated with a GTN material (e.g. webinars).</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>They must be a recording of a GTN tutorial being taught. We are not accepting recordings of other training events at this time. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+    
+
+    
+
+    
+
+    
+    
+	<h2 id="funding">Funding</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
+    
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/gallantries/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://gallantries.github.io/assets/images/gallantries-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Gallantries</div>
+			<div class="description">
+			This project (2020-1-NL01-KA203-064717) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+
+
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+    
+    
+  </div>
+
+  <div class="col-md-4">
+    <a href="/training-material/assets/images/video-library.png">
+      <img alt="Screenshot of the GTN Video Library showing a tutorial recording with a large youtube player and extensive metadata about who created the video (Natalie Kucher) and when, how long, etc." src="/training-material/assets/images/video-library.png" width="300"/>
+    </a>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2024/06/14/gtn-video-library.html",
+  "name": "GTN Video Library 2.0: 107 hours of learning across 154 videos",
+  "headline": "<p>Many GTN tutorials already have recordings. These recordings were made by members of the community",
+  "keywords": [
+    "gtn"
+  ],
+  "description": "<p>Many GTN tutorials already have recordings. These recordings were made by members of the community",
+  "articleBody": "<p>Many GTN tutorials already have recordings. These recordings were made by members of the community for a variety of (online) training events.\nUp until now, this video library were part of the <a href=\"https://gallantries.github.io/\">Gallantries Project</a>.\nWe have now integrated this video library directly into the GTN, and made it even <strong>easier to add video recordings</strong> to GTN tutorials or slide decks! Just use a Google Form to submit your video recordings!</p>\n\n<p>Want to record one of our tutorials? <strong>We welcome video recordings from everybody!</strong><sup id=\"fnref:1\" role=\"doc-noteref\"><a href=\"#fn:1\" class=\"footnote\" rel=\"footnote\">1</a></sup></p>\n\n<p>Please checkout out our FAQs with instructions for adding your own recordings:</p>\n\n<p><a href=\"/training-material/faqs/gtn/recordings_add.html\"><button type=\"button\" class=\"btn btn-info\">Submitting Recordings to the GTN</button></a></p>\n\n<p><a href=\"/training-material/faqs/gtn/recordings_create.html\"><button type=\"button\" class=\"btn btn-info\">Recording Tips &amp; Tricks</button></a></p>\n\n<h2 id=\"what-this-means-for\">What this means for…</h2>\n\n<table class=\"table table-striped\">\n  <thead>\n    <tr>\n      <th>Group</th>\n      <th>What’s new?</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Instructors</td>\n      <td>Just fill out an updated Google Form and we’ll take care of the rest. The google form is now more easily discoverable, as are the recording instructions which provide a best practice guide for doing screen recordings of tutorials. We have updated documentation on recording best practices that are easy to follow.</td>\n    </tr>\n    <tr>\n      <td>Event Organisers &amp; Teachers</td>\n      <td>Easily discover our large library of both human and automated video recordings to use in your training materials. All videos are licensed CC-BY so you can use them in your own training materials or even embed them in your course websites (Moodle, Blackboard, etc).</td>\n    </tr>\n    <tr>\n      <td>GTN Editors &amp; Maintainers</td>\n      <td>When a recording is submitted, a pull request will be opened with the appropriate metadata in the correct location and an easy checklist to follow to make sure everyone’s video is processed efficiently with every step taken care of.</td>\n    </tr>\n  </tbody>\n</table>\n\n<h2 id=\"video-library-10\">Video Library 1.0</h2>\n\n<p>This work is based on the work done during the <a href=\"/training-material/hall-of-fame/gallantries/\" class=\"contributor-badge-inline contributor-gallantries\">\n  <img src=\"https://gallantries.github.io/assets/images/gallantries-logo.png\" alt=\"Gallantries: Bridging Training Communities in Life Science, Environment and Health avatar\" width=\"36\" class=\"avatar\" />\n  Gallantries</a>\n project and the <a href=\"/training-material/news/2021/11/23/video-library.html\">Video Library 1.0</a>. As that project ended, the features developed during that time have now been rolled into the GTN to ensure their long term sustainability</p>\n\n<p>The number of videos and hours is slightly lower in the GTN version as we have not yet imported every recording, currently we are missing some recordings which are not directly associated with a GTN material (e.g. webinars).</p>\n\n<div class=\"footnotes\" role=\"doc-endnotes\">\n  <ol>\n    <li id=\"fn:1\" role=\"doc-endnote\">\n      <p>They must be a recording of a GTN tutorial being taught. We are not accepting recordings of other training events at this time. <a href=\"#fnref:1\" class=\"reversefootnote\" role=\"doc-backlink\">&#8617;</a></p>\n    </li>\n  </ol>\n</div>\n",
+  "datePublished": "2024-06-14 00:00:00 +0000",
+  "dateModified": "2024-06-14 09:21:31 +0000",
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/CINECA-Project/",
+          "name": "Common Infrastructure for National Cohorts in Europe, Canada, and Africa",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.cineca-project.eu"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)\n![erasmus plus logo](https://www.erasmusplus.nl/assets/images/logo.png)\n",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusmc/",
+          "name": "ErasmusMC",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusmc.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)\n![erasmus plus logo](https://www.erasmusplus.nl/assets/images/logo.png)\n",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/",
+          "name": "BeYond-COVID",
+          "description": "BY-COVID is an EC funded project that tackles the data challenges that can hinder effective pandemic response.\n\nThis project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement № 101046203 (BY-COVID)\n",
+          "url": "https://by-covid.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusmc/",
+          "name": "ErasmusMC",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusmc.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-converge/",
+          "name": "ELIXIR-CONVERGE",
+          "description": "ELIXIR CONVERGE is connecting and align ELIXIR Nodes to deliver sustainable FAIR life-science data management services. This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement № 871075\n",
+          "url": "https://elixir-europe.org/about-us/how-funded/eu-projects/converge"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2024/06/14/gtn-video-library.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/13/phylogenetics-tutorial-takes-researchers-back-to-basics.html">Phylogenetics tutorial takes researchers back to basics!</a>
+	</h3>
+	<p>
+	13 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b4e7ff; --color-darker: #56d5ff; --color-dimmed: #8ddeff;">Phylogenetics</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #96f900; --color-darker: #85dd00; --color-dimmed: #8eeb00;">Tutorial</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffd3ef; --color-darker: #ffade3; --color-dimmed: #ffc1e9;">GTN</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #d2e0ff; --color-darker: #aac7ff; --color-dimmed: #bed4ff;">Australian BioCommons</span>
+	
+	</p>
+	<p class="card-text">
+		
+		A new Galaxy Training Network tutorial has been created to take researchers back to basics to uncover the principles of phylogenetics and how tree-building methods work. A longstanding collaboration between Professor Michael Charleston from the University of Tasmania and Australian BioCommons has delivered this self-guided tutorial featuring videos and hands-on exercises. To maximise its impact, the resource was tailored specifically to be shared globally via the Galaxy Training Network, and will form the basis of an upcoming live training workshop.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html">From GTN Intern to Tutorial Author to Bioinformatician</a>
+	</h3>
+	<p>
+	13 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00fae7; --color-darker: #00decd; --color-dimmed: #00ecda;">single-cell</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffd2f8; --color-darker: #ffabf3; --color-dimmed: #ffbff5;">training</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00f9f4; --color-darker: #00ddd9; --color-dimmed: #00ebe7;">education</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00fbe1; --color-darker: #00dfc8; --color-dimmed: #00edd4;">trajectory</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #e6daff; --color-darker: #d3bbff; --color-dimmed: #ddcbff;">user</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffd2f6; --color-darker: #ffacf0; --color-dimmed: #ffbff3;">contributor</span>
+	
+	</p>
+	<p class="card-text">
+		
+		With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet lab scientists hoping to analyze their own data. With long term intentions of increasing access to bioinformatic analyses, the Galaxy Training Network (GTN) creates a safe space where non-computer-scientists may analyze their own data and even learn to code: an invaluable skill in today’s scientific world. Galaxy introduced me to brand new skills as an undergraduate and ultimately changed the trajectory of my career. Here is my story as a biology undergraduate with no coding experience turned GTN contributor &amp;, eventually, coding bioinformatician: thanks to Galaxy.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/11/GalaxyTrainingAcademy-Call-Contribution.html">Open Call for Trainers for the Galaxy Training Academy</a>
+	</h3>
+	<p>
+	11 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We are happy to announce the Galaxy Training Academy 2024, a global online training event, where learners can get to know Galaxy and learn how to analyze data for various research topics.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/06/dada2-tutorial.html">New Galaxy training: Building an amplicon sequence variant (ASV) table from 16S data using DADA2</a>
+	</h3>
+	<p>
+	6 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffd8ba; --color-darker: #ffb96c; --color-dimmed: #ffc998;">new tutorial</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN hosts its 400th tutorial: Building an amplicon sequence variant (ASV) table from 16S data using DADA2
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2024/06/06/400-tutorials-milestone.html">Celebrating the Milestone: 400 Tutorials on the Galaxy Training Network!</a>
+	</h3>
+	<p>
+	6 June 2024 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The Galaxy Training Network (GTN) has reached an exciting milestone: our 400th tutorial! This achievement is a testament to the dedication and hard work of our community of educators, researchers, and developers over the last 9 years.
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/13f2db192f20c449b201776dd1fd06c1d09d3111">13f2db1</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2024-06-14-gtn-video-library.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ef2bff8a.js'></script>
+
+	
+	
+
+    </body>
+</html>
