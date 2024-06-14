@@ -91,4 +91,5 @@ data.each do |row|
 
 end
 
+STDERR.puts "new recordings: #{new_recordings}"
 puts new_recordings
