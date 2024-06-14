@@ -14,12 +14,14 @@ module Jekyll
     # +site+:: The site object
     def generate(site)
       Jekyll.logger.info "[GTN/Videos] Generating recording pages"
-      materials_with_videos = TopicFilter
+      materials = TopicFilter
         .list_all_materials(site)
+
+      with_video = materials
         .select{|m| m.has_key? 'recordings' or m.has_key? 'slide_recordings'}
 
-      Jekyll.logger.info "[GTN/Videos] #{materials_with_videos.length} materials with recordings found."
-      materials_with_videos.each do |material|
+      Jekyll.logger.info "[GTN/Videos] #{with_video.length} materials with recordings found."
+      materials.each do |material|
         page2 = PageWithoutAFile.new(site, '', material['dir'], 'recordings/index.html')
         page2.content = nil
         page2.data['layout'] = 'recordings'
