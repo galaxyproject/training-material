@@ -61,7 +61,7 @@ layout: base
       {% assign default_type = "Tutorial" %}
     {% endif %}
   {% assign recording-type = recording.type | default: default_type %}
-  <h2 id="{{recording-type | downcase }}-recording-{{ recording.date | date: "%-d %B %Y" | slugify }}"> {{recording-type }} Recording - {{ recording.date | date: "%-d %B %Y"  }} </h2>
+  <h2 id="{{recording-type | downcase }}-recording-{{ recording.date | date: "%-d %B %Y" | slugify }}"> {{recording-type }} {% if recording.youtube_id contains 'videoseries' %}Playlist{% else %}Recording{% endif %} - {{ recording.date | date: "%-d %B %Y"  }} </h2>
   <div class="row recording">
 
     <div class="col-md-6 recording-video">
