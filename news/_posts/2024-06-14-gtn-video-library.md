@@ -10,6 +10,9 @@ contributions:
   authorship:
     - shiltemann
     - hexylena
+  infrastructure:
+    - shiltemann
+    - hexylena
   funding:
   - gallantries
 ---
