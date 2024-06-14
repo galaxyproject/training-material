@@ -44,7 +44,7 @@ jobs:
         # If it's not a Pull Request then commit any changes as a new PR.
         if: |
           github.event_name != 'pull_request' &&
-          steps.generate.outputs.new_recordings == 'true'
+          steps.recordings.outputs.new_recordings == 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           title: "[Google Form] New Recording Submission!"
