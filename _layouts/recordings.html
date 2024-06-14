@@ -78,7 +78,7 @@ layout: base
     <!-- description -->
     {% if recording.description %}
     <tr>
-      <td><strong>Description:</strong></td>
+      <td><strong>Description</strong></td>
       <td>{{ recording.description | markdownify }}</td>
     </tr>
     {% endif %}
@@ -86,32 +86,32 @@ layout: base
     <!-- type of video, e.g. 'demo', 'lecture & video', 'background' -->
     {% if recording.type %}
     <tr>
-      <td><strong>Type:</strong></td>
+      <td><strong>Type</strong></td>
       <td>{{ recording.type }}</td>
     </tr>
     {% endif %}
 
     <!-- speakers -->
     <tr>
-      <td><strong>Speaker{% if recording.speakers.size > 1 %}s{% endif %}:</strong></td>
+      <td><strong>Speaker{% if recording.speakers.size > 1 %}s{% endif %}</strong></td>
       <td>{% for speaker in recording.speakers %}{% include _includes/contributor-badge-inline.html id=speaker %}{% endfor %}</td>
     </tr>
 
     <!-- captioners -->
     <tr>
-      <td><strong>Captioner{% if recording.captioners.size > 1 %}s{% endif %}:</strong></td>
+      <td><strong>Captioner{% if recording.captioners.size > 1 %}s{% endif %}</strong></td>
       <td>{% for captioner in recording.captioners %}{% include _includes/contributor-badge-inline.html id=captioner %}{% endfor %}</td>
     </tr>
 
     <!-- length -->
     <tr>
-      <td><strong>Length:</strong></td>
+      <td><strong>Length</strong></td>
       <td>{{ recording.length | duration_to_human }}</td>
     </tr>
 
     <!-- date -->
     <tr>
-      <td><strong>Created:</strong></td>
+      <td><strong>Created</strong></td>
       <td>{{ recording.date | date: "%-d %B %Y" }}</td>
     </tr>
 
@@ -155,9 +155,15 @@ layout: base
      {% endif %}
 
      <tr>
-      <td><strong>Archive: </strong></td>
+      <td><strong>Archive</strong></td>
       <td><a href="{{archiveurl | default: url }}">View {{t}} at time of recording</a></td>
     </tr>
+
+    <tr>
+      <td><strong>License</strong></td>
+      <td><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a></td>
+    </tr>
+
     </tbody>
     </table>
     </div> <!-- end metadata table div -->
