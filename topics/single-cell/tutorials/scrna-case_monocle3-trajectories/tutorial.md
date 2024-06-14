@@ -59,6 +59,16 @@ contributions:
     - nomadscientist
   funding:
     - epsrc-training-grant
+
+recordings:
+- youtube_id: Espl6qSbu3Y
+  date: '2023-04-11'
+  length: 15M
+  speakers:
+  - wee-snufkin
+  captioners:
+  - wee-snufkin
+
 ---
 
 

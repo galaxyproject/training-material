@@ -113,12 +113,20 @@ class: center, middle, inverse
 
 
 <!-- other slide formats (video and plain-text) -->
-<div class="footnote" style="bottom: 6em;">
+<div class="footnote" style="bottom: 5em;">
 {% if page.video %}
   {% icon video-slides %} <a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{{locale['video-slides'] | default: "Video slides"}}</a> |
 {% endif %}
 
-  {% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a>
+{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a> |
+
+{% if page.recordings %}
+{% include _includes/resource-recordings.html label="Recordings" %}
+{% endif %}
+
+
+
+
 </div>
 
 

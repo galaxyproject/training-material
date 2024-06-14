@@ -135,11 +135,11 @@ def all_date_sorted_materials(site)
 
   materials.each do |m|
     tags = [m['topic_name']] + (m['tags'] || [])
-    bucket += m['ref_tutorials'].map do |t|
+    bucket += m.fetch('ref_tutorials', []).map do |t|
       [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
     end
 
-    bucket += m['ref_slides'].reject { |s| s.url =~ /-plain.html/ }.map do |s|
+    bucket += m.fetch('ref_tutorials', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
       [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
     end
   end

@@ -493,3 +493,41 @@ mapping:
         sequence:
           - type: map
             mapping: *answer_histories
+    recordings:
+        type: seq
+        sequence:
+        - type: map
+          mapping:
+            captioners:
+              type: seq
+              sequence:
+               - type: str
+                 enum:
+                 - CONTRIBUTORS
+            speakers:
+              type: seq
+              sequence:
+              - type: str
+                enum:
+                - CONTRIBUTORS
+            bot-timestamp:
+               type: int
+            date:
+              type: str
+              required: true
+              pattern: /[0-9]{4}-[0-9]{2}-[0-9]{2}/
+            galaxy_version:
+              type: str
+              pattern: /[0-9]{2}\.[0-9]{1,2}/
+            length:
+              type: str
+              pattern: /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/
+            youtube_id:
+              type: str
+              pattern: /[A-Za-z0-9_-]{9,13}/
+            type:
+              type: str
+            archive-id:
+              type: str
+            description:
+              type: str

@@ -147,7 +147,7 @@ We should ONLY be using new_material (if at all possible.)
             {% endif %}
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
-            {% include _includes/resource-video-library.html label=true wrapper=true %}
+            {% include _includes/resource-recordings.html label=true wrapper=true %}
 
 
             {% if tuto_has_docker %}
@@ -512,7 +512,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 		    <ul>
 				{% for feed in feedback[1] %}
 				<li>
-					{{ feed.rating | to_stars }}: 
+					{{ feed.rating | to_stars }}:
 					{% if feed.pro %}<b>Liked</b>: {{ feed.pro }}{% endif %}
 					{% if feed.con %}<b>Disliked</b>: {{ feed.con }}{% endif %}
 				</li>

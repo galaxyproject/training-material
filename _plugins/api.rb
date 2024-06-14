@@ -386,6 +386,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
         slides_data = site.pages.select { |p2| p2.url == "/#{directory}/slides.html" }[0]
         p.update(slides_data.data) if slides_data&.data
 
+        if !Dir.exist?(File.dirname(path))
+          FileUtils.mkdir_p(File.dirname(path))
+        end
         File.write(path, JSON.generate(p))
       end
 
@@ -394,6 +397,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
         p = material.dup
         p.delete('ref')
         p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
+        if !Dir.exist?(File.dirname(path))
+          FileUtils.mkdir_p(File.dirname(path))
+        end
         File.write(path, JSON.generate(p))
       end
     end

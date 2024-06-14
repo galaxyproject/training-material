@@ -66,6 +66,17 @@ follow_up_training:
     tutorials:
         - scrna-case_JUPYTER-trajectories
         - scrna-case_monocle3-trajectories
+
+recordings:
+- captioners:
+  - nomadscientist
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: M6iepSJh0EQ
+  speakers:
+  - nomadscientist
+
 ---
 
 

@@ -33,6 +33,27 @@ edam_ontology:
 - topic_0199 # Genetic variation
 - topic_3305 # Public health and epidemiology
 - topic_3324 # Infectious disease
+
+recordings:
+- captioners:
+  - pvanheus
+  - nagoue
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 40M
+  youtube_id: G1DmquX6Wh8
+  speakers:
+  - pvanheus
+- captioners:
+  - pvanheus
+  date: '2024-06-11'
+  galaxy_version: '24.0'
+  length: 1H17M
+  youtube_id: "-nJPngFk36c"
+  speakers:
+  - pvanheus
+
 ---
 
 
@@ -286,14 +307,14 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 {: .hands_on}
 
 > <details-title>Which filters to apply?</details-title>
-> 
+>
 > TB Variant Filter tries to provide reasonable defaults for filtering
 > variants predicted in the M. tuberculosis
 > genome, using multiple different strategies.
 > Firstly, certain regions of the Mtb genome
 > contain repetitive sequences, e.g. from
 > the PE/PPE gene family. Historically all of the genomic regions corresponding to
-> those genes were filtered out but 
+> those genes were filtered out but
 > the new default draws on work from
 > Maximillian Marin and others. This
 > list of "refined low confidence" (RLC)
@@ -360,7 +381,7 @@ We will, however, spend some time examining this data in more detail in the next
 We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. A genome viewer, such as JBrowse, can be used within Galaxy to display the _M. tuberculosis_ genome and the data from our analysis.
 
 > <hands-on-title>Run JBrowse</hands-on-title>
-> 
+>
 > <!-- GTN:IGNORE:006 -->
 > 1. Use {% tool [seqret](toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:%20seqret84/5.0.0) %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
 >    - *"Sequences"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`

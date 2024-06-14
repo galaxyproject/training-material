@@ -14,6 +14,8 @@ require './_plugins/gtn/usegalaxy'
 require './_plugins/util'
 require './_plugins/jekyll-topic-filter'
 require 'time'
+require 'net/http'
+
 
 Jekyll.logger.info "[GTN] Jekyll env: #{Jekyll.env}"
 Jekyll.logger.info "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
@@ -67,6 +69,17 @@ module Jekyll
     # +String+:: The name of the node
     def elixirnode2name(name)
       ELIXIR_NODES[name]
+    end
+
+    def url_exists(url)
+      cache.getset("url-exists-#{url}") do
+        uri = URI.parse(url)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true if uri.scheme == 'https'
+        response = http.request_head(uri.path)
+        #Jekyll.logger.warn response
+        response.code == '200'
+      end
     end
 
     ##
@@ -527,8 +540,10 @@ module Jekyll
     def tutorials_over_time_bar_chart(site)
       graph = Hash.new(0)
       TopicFilter.list_all_materials(site).each do |material|
-        yymm = material['pub_date'].strftime('%Y-%m')
-        graph[yymm] += 1
+        if material['pub_date']
+          yymm = material['pub_date'].strftime('%Y-%m')
+          graph[yymm] += 1
+        end
       end
 
       # Cumulative over time
@@ -817,12 +832,13 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 ##
 # We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
 Jekyll::Hooks.register :site, :pre_render do |site|
+  pfo_keys = site.data['contributors'].keys + site.data['funders'].keys + site.data['organisations'].keys
   site.posts.docs.each do |post|
     if post.content
       post.content = post.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
         # Get first capture
         name = match.gsub('@gtn:', '')
-        if site.data['contributors'].key?(name)
+        if pfo_keys.include?(name)
           "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
         else
           match
@@ -834,7 +850,7 @@ Jekyll::Hooks.register :site, :pre_render do |site|
     if page.content
       page.content = page.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
         name = match.gsub('@gtn:', '')
-        if site.data['contributors'].key?(name)
+        if pfo_keys.include?(name)
           "{% include _includes/contributor-badge-inline.html id=\"#{name}\" %}"
         else
           match

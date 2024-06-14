@@ -28,6 +28,15 @@ time_estimation: 2H
 contributors:
 - kxk302
 
+recordings:
+- captioners:
+  - kxk302
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 50M
+  youtube_id: 1dwzEhjOAmw
+  speakers:
+  - kxk302
 ---
 
 
