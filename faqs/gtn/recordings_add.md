@@ -10,7 +10,7 @@ contributors: [shiltemann]
 
 For some tips and tricks about recording the video itself, please see
 
-<a href="{% link faqs/gtn/recordings_create.md %}"><button type="button" class="btn btn-info">Recording Tips & Tricks</button></a>
+<a href="{% link faqs/gtn/recordings_create.md %}"><button type="button" class="btn btn-info">Recording Tips & Tricks</button></a> <a href="https://forms.gle/qNG8FkTN1yRZPNZY6"><button type="button" class="btn btn-info">Submit a Recording</button></a>
 
 
 #### Submission process

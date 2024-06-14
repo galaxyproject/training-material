@@ -3,7 +3,7 @@ title: Recording a video tutorial
 area: contributors
 layout: faq
 box_type: tip
-contributors: [shiltemann]
+contributors: [shiltemann, hexylena]
 ---
 
 This FAQ describes some **general guidelines** for recording your video
