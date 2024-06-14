@@ -52,10 +52,10 @@ jobs:
           title: "[Google Form] New News Post!"
           add-paths: news/_posts/
 
-     - name: Update recordings from Google Form
+      - name: Update recordings from Google Form
         id: recordings
         run: |
-          echo "new_recordings=$(bundle exec ruby bin/google-form-recordings.rb)" >> $GITHUB_OUTPUT
+           echo "new_recordings=$(bundle exec ruby bin/google-form-recordings.rb)" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request for Recordings
         # If it's not a Pull Request then commit any changes as a new PR.
