@@ -4,8 +4,8 @@ layout: news
 tags:
   - gtn
 
-cover: "assets/images/gtn-videolibrary-logo.png"
-coveralt: The GTN logo with an icon of a video camera overlaid
+cover: "assets/images/video-library.png"
+coveralt: Screenshot of the GTN Video Library showing a tutorial recording with a large youtube player and extensive metadata about who created the video (Natalie Kucher) and when, how long, etc.
 contributions:
   authorship:
     - shiltemann
