@@ -42,6 +42,16 @@ contributors:
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
+
+recordings:
+- captioners:
+  - hrhotz
+  date: '2021-03-18'
+  length: 45M
+  youtube_id: nefB35Bi1l4
+  speakers:
+  - nomadscientist
+
 ---
 
 

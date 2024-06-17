@@ -4,6 +4,11 @@ area: utilities
 box_type: comment
 layout: faq
 contributors: [hexylena]
+required_parameters:
+  step: The GIT-GAT step number
+examples:
+  Link to step 2:
+    step: '2'
 ---
 
 {% assign prevStep = include.step | plus: -1 %}

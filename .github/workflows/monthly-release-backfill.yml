@@ -13,23 +13,23 @@ jobs:
     if: github.repository_owner == 'galaxyproject'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: "${{ github.event.inputs.selected_tag }}"
           fetch-depth: 0
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/setup-node@v2
+          ruby-version: "3.2"
+      - uses: actions/setup-node@v4
         with:
           node-version: '19'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -69,8 +69,6 @@ jobs:
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
           SOURCE_TAG: ${{ github.event.inputs.selected_tag }}

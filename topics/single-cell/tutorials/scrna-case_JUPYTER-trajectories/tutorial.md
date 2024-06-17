@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Inferring single cell trajectories (Scanpy, Python)
+title: Inferring single cell trajectories with Scanpy (Python)
 subtopic: single-cell-CS-code
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7075718'
@@ -46,6 +46,17 @@ contributions:
 notebook:
   language: python
   snippet: topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/preamble.md
+
+
+recordings:
+- captioners:
+  - nomadscientist
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 10M
+  youtube_id: VEyTmwDIgPI
+  speakers:
+  - nomadscientist
 
 ---
 

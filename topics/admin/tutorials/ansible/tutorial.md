@@ -26,6 +26,17 @@ subtopic: core
 tags:
   - ansible
 
+
+recordings:
+- captioners:
+  - martenson
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 61M
+  youtube_id: 2KdT0sYKUeE
+  speakers:
+  - martenson
+
 ---
 
 # Overview

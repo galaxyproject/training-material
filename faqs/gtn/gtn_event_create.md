@@ -39,7 +39,7 @@ external: "https://galaxyproject.org/events/"
 description:
 
 date_start:
-data_end
+date_end:  # optional, for multi-day events
 
 location:
   name:

@@ -35,8 +35,10 @@
         {% include _includes/contributors-line.html page=n %}
 
         {% for tag in n.tags %}
+        {% unless tag == 'already-on-hub' %}
 <span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag  }}</span>
-{% endfor %}
+        {% endunless %}
+        {% endfor %}
     <hr/>
     <p class="card-text">
       {% if n.external %}

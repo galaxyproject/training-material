@@ -103,29 +103,32 @@ layout: base
 
   <!-- Programme Tab -->
   <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
-    <h2> Program </h2>
+
+
     {% if event.external %}
        For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
     {% else %}
 
-    {% if event.infrastructure %}
-    Before starting the course, make sure to follow the setup instructions
-    <br><br>
+     {% if event.infrastructure %}
+     <h3> Before you start </h3>
+     <p>Before starting the course, make sure to follow the setup instructions</p>
 
     <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
     {% endif %}
 
+
     {% for section in event.program %}
         {% if section.subsection %}
         <h4 id="{{ section.section | slugify }}">{{ section.section }}</h4>
-        {% else %}
+        {% elsif section.section != nil %}
         <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
         {% endif %}
         <p>{{ section.description | markdownify }}</p>
 
 	{% if section.tutorials %}
+        {% assign hidetimes= section.async | default: page.async %}
         {% assign material_list = site | convert_to_material_list: section.tutorials %}
-	{% include _includes/tutorial_list.html sub=material_list page=page responsive=false %}
+	{% include _includes/tutorial_list.html sub=material_list page=page responsive=false async=hidetimes customheader=section.custom %}
 	{% endif %}
     {% endfor %}
     {% endif %}
@@ -382,6 +385,9 @@ subsites: [all]
         <img class="event-image" src="{{site.baseurl}}/{{event.cover-image | default: '/assets/images/GTN-event-logo.png' }}" alt="{{event.cover-image-alt | default: 'event logo' }}">
         {% assign enddate = event.date_end | default: event.date_start %}
 		{% assign passed = enddate | is_date_passed %}
+
+        {% unless event.external %}
+
 		{% if passed %}
 		<span class="btn btn-primary btn-lg btn-block disabled">Event is Over</span>
 		{% else %}
@@ -393,7 +399,7 @@ subsites: [all]
 		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
           {% endif %}
 		{% endif %}
-
+        {% endunless %}
 		<hr/>
 
 		<table>
@@ -416,6 +422,14 @@ subsites: [all]
 		{% for org in event.contributions.organisers %}
 			{% include _includes/contributor-badge-inline.html id=org %}
 		{% endfor %}
+
+        {% if event.contributions.instructors.size < 10 %}
+        <br/><br/><b>Instructors</b><br/>
+            {% for instructor in event.contributions.instructors %}
+			{% include _includes/contributor-badge-inline.html id=instructor %}
+		{% endfor %}
+
+        {% endif %}
 
         {% if event.contributions.funding %}
 		<hr />
@@ -467,11 +481,6 @@ $('#myTab button[data-target="' + hash + '"]').tab('show');
 </script>
 
 <style>
-:target {
-    scroll-margin-top: 24em;
-}
-
-
 .zrow {
 	display: grid;
 	grid-template-rows: 1fr;

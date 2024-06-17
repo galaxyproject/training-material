@@ -38,6 +38,17 @@ requirements:
 contributors:
   - fubar2
 
+
+recordings:
+- captioners:
+  - fubar2
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 7M
+  youtube_id: DK1eKz5TRs4
+  speakers:
+  - fubar2
+
 ---
 
 > <agenda-title></agenda-title>
