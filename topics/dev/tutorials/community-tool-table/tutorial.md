@@ -106,41 +106,31 @@ Once the Pull Request is merged, the interactive table will be created and made 
 
 The interactive table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community. 
 
-Galaxy Tool Metadata Extractor provides 2 optional filters for tools:
-- A list of tools to exclude
-- A list of tools that should definitely be kept.
+Galaxy Tool Metadata Extractor provides an optional filter for tools, that can be defined by the community curator (maybe that is you !).
 
-## Add a list of tools to exclude
+## Add a tools status list 
 
-> <hands-on-title>Add a list of tools to exclude</hands-on-title>
+Have a look on the [microGalaxy tool stats TSV](https://github.com/galaxyproject/galaxy_tool_metadata_extractor/blob/main/data/communities/microgalaxy/tool_status.tsv) for 
+an example of the file that is used to manually filter the tools for a community.
+
+> <hands-on-title>Add a tools status list</hands-on-title>
 >
 > 1. Open your interactive table
 > 2. Search for some tools to exclude
 > 3. Go to your community folder on [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor)
 > 4. Click on **Add file** drop-down menu on the top
 > 5. Select **Create a new file**
-> 6. Fill in `tools_to_exclude` in `Name of your file`
+> 6. Fill in `tools_status.tsv` in `Name of your file`
 > 7. Add the `Galaxy wrapper id` of the tools to exclude, with 1 tool identifier per row
-> 8. Submit your changes as before
-> 9. Wait for the Pull Request to be merged
+> 8. Add one column (tab seperated) after the tool id to state if the tool should be kept or removed from the final list (TRUE / FALSE)
+> 9. Add one more column (tab seperated) to state if the tool is deprecated (TRUE / FALSE)
+> 10. Submit your changes as before
+> 11. Wait for the Pull Request to be merged
+> 12. The new table `https://galaxyproject.github.io/galaxy_tool_metadata_extractor/<your community>` will only show tool that should be kept
 >
 {: .hands_on}
 
-## Add a list of tools to keep
 
-> <hands-on-title>Add a list of tools to keep</hands-on-title>
->
-> 1. Open your interactive table
-> 2. Search for some tools to keep
-> 3. Go to your community folder on [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor)
-> 4. Click on **Add file** drop-down menu on the top
-> 5. Select **Create a new file**
-> 6. Fill in `tools_to_keep` in `Name of your file`
-> 7. Add the `Galaxy wrapper id` of the tools to keep, with 1 tool identifier per row
-> 8. Submit your changes as before
-> 9. Wait for the Pull Request to be merged
->
-{: .hands_on}
 
 ## Review all tools in your table
 
@@ -151,19 +141,12 @@ Once the required filters have been implemented, you can review the full list of
 > 1. Download the `tools.tsv` file in `results/<your community>`
 > 2. Open `tools.tsv` with a Spreadsheet Software
 > 3. Review each line corresponding to a tool
->    1. Change the value in the `Reviewed` column from `False` to `True`
->    2. Add `True` to the `To keep` column if the tool should be kept, and `False` if not
-> 4. Extract the list of tools to keep
->    1. Create a sheet for the list of tools to keep to
->       1. Filter on the `To keep` column to keep value `True`
->       2. Keep only the `Galaxy wrapper id` column
->    2. Add this list of `Galaxy wrapper id` to the `tools_to_keep` file
-> 5. Extract the list of tools to exclude
->    1. Create a sheet for the list of tools to keep to
->       1. Filter on the `To keep` column to keep value `False`
->       2. Keep only the `Galaxy wrapper id` column
->    2. Add this list of `Galaxy wrapper id` to the `tools_to_exclude` file
-> 6. Submit the changes
+>    1. Change the value in the `Reviewed` column from `FALSE` to `TRUE`
+>    2. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not
+>    3. Add `TRUE` or `FALSE` also to the `Deprecated` column 
+> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` column in a new table (in that order).
+> 5. Export the new table as TSV.
+> 6. Submit the TSV as `tools_status.tsv` in your community folder
 > 7. Wait for the Pull Request to be merged
 >
 {: .hands_on}
