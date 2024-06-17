@@ -38,6 +38,26 @@ contributors:
   - gallantries
   - neoformit
 
+
+recordings:
+- youtube_id: coaMGvZazoc
+  length: 50M
+  speakers:
+  - LonsBio
+  captioners:
+  - LonsBio
+  date: '2023-05-19'
+- captioners:
+  - bebatut
+  - nagoue
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H10M
+  youtube_id: QJRlX2hWDKM
+  speakers:
+  - heylf
+
 ---
 
 

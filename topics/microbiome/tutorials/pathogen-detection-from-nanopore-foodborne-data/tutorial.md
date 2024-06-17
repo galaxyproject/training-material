@@ -44,6 +44,17 @@ edam_ontology:
 - topic_0196 # Sequence assembly
 - topic_0634 # Pathology
 - topic_0080 # Sequence analysis
+
+recordings:
+- youtube_id: gQHb_jkj-Z0
+  date: '2023-05-01'
+  galaxy_version: '23.01'
+  length: 1H45M
+  speakers:
+  - EngyNasr
+  captioners:
+  - EngyNasr
+
 ---
 
 
@@ -825,7 +836,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 178
+> > 1. 188
 > > 2. 287
 > >
 > {: .solution}

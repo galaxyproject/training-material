@@ -274,6 +274,8 @@ module TopicFilter
       material['type'] = 'rmd'
     elsif parts[4] == 'workflows'
       material['type'] = 'workflow'
+    elsif parts[4] == 'recordings'
+      material['type'] = 'recordings'
     elsif parts[4] == 'tours'
       material['type'] = 'tour'
     elsif parts[-1] == 'index.md'
@@ -466,12 +468,14 @@ module TopicFilter
     page = nil
 
     slide_has_video = false
+    slide_has_recordings = false
     slide_translations = []
     page_ref = nil
 
     if slides.length.positive?
       page = slides.min { |a, b| a[1].path <=> b[1].path }[1]
       slide_has_video = page.data.fetch('video', false)
+      slide_has_recordings = page.data.fetch('recordings', false)
       slide_translations = page.data.fetch('translations', [])
       page_ref = page
     end
@@ -493,18 +497,10 @@ module TopicFilter
     page_obj = page.data.dup
     page_obj['id'] = "#{page['topic_name']}/#{page['tutorial_name']}"
     page_obj['ref'] = page_ref
+    page_obj['ref_tutorials'] = tutorials.map { |a| a[1] }
+    page_obj['ref_slides'] = slides.map { |a| a[1] }
 
     id = page_obj['id']
-    page_obj['video_library'] = {}
-
-    if site.data.key?('video-library')
-      page_obj['video_library']['tutorial'] = site.data['video-library']["#{id}/tutorial"]
-      page_obj['video_library']['slides'] = site.data['video-library']["#{id}/slides"]
-      page_obj['video_library']['demo'] = site.data['video-library']["#{id}/demo"]
-      page_obj['video_library']['both'] = site.data['video-library'][id]
-    end
-
-    page_obj['video_library']['session'] = site.data['session-library'][id] if site.data.key?('session-library')
 
     # Sometimes `hands_on` is set to something like `external`, in which
     # case it is important to not override it. So we only do that if the
@@ -630,6 +626,7 @@ module TopicFilter
 
     page_obj['tours'] = tours.length.positive?
     page_obj['video'] = slide_has_video
+    page_obj['slides_recordings'] = slide_has_recordings
     page_obj['translations'] = {}
     page_obj['translations']['tutorial'] = tutorial_translations
     page_obj['translations']['slides'] = slide_translations
@@ -1033,6 +1030,26 @@ module Jekyll
 
     def identify_funders(materials, site)
       TopicFilter.identify_funders(materials, site)
+    end
+
+    def list_videos(site)
+      TopicFilter.list_all_materials(site)
+        .select { |k, _v| k['recordings'] || k['slides_recordings'] }
+        .map { |k, _v| (k['recordings'] || []) + (k['slides_recordings'] || []) }
+        .flatten
+    end
+
+    def findDuration(duration)
+      if ! duration.nil?
+        eval(duration.gsub(/H/, ' * 3600 + ').gsub(/M/, ' * 60 + ').gsub(/S/, ' + ') + " 0")
+      else
+        0
+      end
+    end
+
+    def list_videos_total_time(site)
+      vids = list_videos(site)
+      vids.map { |v| findDuration(v['length']) }.sum / 3600.0
     end
 
     def list_draft_materials(site)
