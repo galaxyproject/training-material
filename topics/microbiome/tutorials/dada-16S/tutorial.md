@@ -1052,7 +1052,7 @@ The barplot is hard to read here: many families are in white because the color p
 >
 > ampvis2 ({% cite Andersen_2018 %}) team suggests [not using stacked bar charts but heatmaps to represent community diversity](http://albertsenlab.org/ampvis2-heatmap/). You can do that in Galaxy as ampvis2 is available as a tool.
 >
-{: .question}
+{: .comment}
 
 # Conclusion
 
