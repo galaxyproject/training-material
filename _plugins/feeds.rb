@@ -427,15 +427,7 @@ def generate_event_feeds(site)
     end
   end
 
-  # The builder won't let you add a processing instruction, so we have to
-  # serialise it to a string and then parse it again. Ridiculous.
-  finalised = Nokogiri::XML builder.to_xml
-  pi = Nokogiri::XML::ProcessingInstruction.new(
-    finalised, 'xml-stylesheet',
-    %(type="text/xml" href="#{site.config['url']}#{site.baseurl}/feed.xslt.xml")
-  )
-  finalised.root.add_previous_sibling pi
-  File.write(feed_path, finalised.to_xml)
+  serialise(site, feed_path, builder)
 end
 
 # Basically like `PageWithoutAFile`
