@@ -83,7 +83,7 @@ def generate_topic_feeds(site)
         xml.updated(Gtn::ModificationTimes.obtain_time(topic_pages.first.path).to_datetime.rfc3339)
         xml.id("#{site.config['url']}#{site.baseurl}/topics/#{topic}/feed.xml")
         topic_title = site.data[topic]['title']
-        xml.title("Galaxy Training Network - #{topic_title}")
+        xml.title("GTN - #{topic_title}")
         xml.subtitle("Recently added tutorials, slides, and FAQs in the #{topic} topic")
 
         topic_pages.each do |page|
@@ -373,7 +373,7 @@ def generate_event_feeds(site)
       xml.link(href: "#{site.config['url']}#{site.baseurl}/events/feed.xml", rel: 'self')
       xml.updated(updated.to_datetime.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/events/feed.xml")
-      xml.title('Galaxy Training Network - Events')
+      xml.title('GTN - Events')
       xml.subtitle('Events in the Inter-Galactic Network')
 
       events.each do |page|
