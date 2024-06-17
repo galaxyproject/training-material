@@ -27,6 +27,29 @@ def collapse_date_pretty(event)
   end
 end
 
+def serialise(site, feed_path, builder)
+  # The builder won't let you add a processing instruction, so we have to
+  # serialise it to a string and then parse it again. Ridiculous.
+
+  # First the 'default' with explanatory portion
+  finalised = Nokogiri::XML builder.to_xml
+  pi = Nokogiri::XML::ProcessingInstruction.new(
+    finalised, 'xml-stylesheet',
+    %(type="text/xml" href="#{site.config['url']}#{site.baseurl}/feed.xslt.xml")
+  )
+  finalised.root.add_previous_sibling pi
+  File.write(feed_path, finalised.to_xml)
+
+  # Then the widget-compatible version with a more minimal representation:
+  finalised = Nokogiri::XML builder.to_xml
+  pi = Nokogiri::XML::ProcessingInstruction.new(
+    finalised, 'xml-stylesheet',
+    %(type="text/xml" href="#{site.config['url']}#{site.baseurl}/feed-widget.xslt.xml")
+  )
+  finalised.root.add_previous_sibling pi
+  File.write(feed_path.gsub(/\.xml$/, '.w.xml'), finalised.to_xml)
+end
+
 def generate_topic_feeds(site)
   TopicFilter.list_topics(site).each do |topic|
     feed_path = File.join(site.dest, 'topics', topic, 'feed.xml')
@@ -56,6 +79,7 @@ def generate_topic_feeds(site)
         # Set generator also needs a URI attribute
         xml.generator('Jekyll', uri: 'https://jekyllrb.com/')
         xml.link(href: "#{site.config['url']}#{site.baseurl}/topics/#{topic}/feed.xml", rel: 'self')
+        xml.link(rel: 'alternate', href: "#{site.config['url']}#{site.baseurl}/topics/#{topic}/", rel: 'self')
         xml.updated(Gtn::ModificationTimes.obtain_time(topic_pages.first.path).to_datetime.rfc3339)
         xml.id("#{site.config['url']}#{site.baseurl}/topics/#{topic}/feed.xml")
         topic_title = site.data[topic]['title']
@@ -103,15 +127,7 @@ def generate_topic_feeds(site)
       end
     end
 
-    # The builder won't let you add a processing instruction, so we have to
-    # serialise it to a string and then parse it again. Ridiculous.
-    finalised = Nokogiri::XML builder.to_xml
-    pi = Nokogiri::XML::ProcessingInstruction.new(
-      finalised, 'xml-stylesheet',
-      %(type="text/xml" href="#{site.config['url']}#{site.baseurl}/feed.xslt.xml")
-    )
-    finalised.root.add_previous_sibling pi
-    File.write(feed_path, finalised.to_xml)
+    serialise(site, feed_path, builder)
   end
 
   nil
@@ -328,15 +344,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
     end
   end
 
-  # The builder won't let you add a processing instruction, so we have to
-  # serialise it to a string and then parse it again. Ridiculous.
-  finalised = Nokogiri::XML builder.to_xml
-  pi = Nokogiri::XML::ProcessingInstruction.new(
-    finalised, 'xml-stylesheet',
-    %(type="text/xml" href="#{site.config['url']}#{site.baseurl}/feed-html.xslt.xml")
-  )
-  finalised.root.add_previous_sibling pi
-  File.write(feed_path, finalised.to_xml)
+  serialise(site, feed_path, builder)
 end
 
 def generate_event_feeds(site)
