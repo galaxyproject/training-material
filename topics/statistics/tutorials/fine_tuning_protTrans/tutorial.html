@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Fine tune large protein model (ProtTrans) using HuggingFace / Fine tune large protein model (ProtTrans) using HuggingFace / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@7ed0c3c406fe5e914145135382a1c7465e69df90",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ef2bff8a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Fine tune large protein model (ProtTrans) using HuggingFace">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-05-31 12:55:29 +0000">
+<meta name="DC.creator" content="Anup Kumar"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / Fine tune large protein model (ProtTrans) using HuggingFace / Hands-on: Fine tune large protein model (ProtTrans) using HuggingFace">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        
+	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Fine tune large protein model (ProtTrans) using HuggingFace",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-05-31 12:55:29 +0000",
+  "datePublished": "2024-06-17 12:35:27 +0000",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Fine tune large protein model (ProtTrans) using HuggingFace",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.html",
+  "version": 16,
+  "timeRequired": "PT1H",
+  "teaches": "Learn to load and use large protein models from HuggingFace\n - Learn to fine-tune them on specific tasks such as predicting dephosphorylation sites",
+  "keywords": [
+    "Statistics and machine learning",
+    "interactive-tools",
+    "machine-learning",
+    "deep-learning",
+    "jupyter-lab",
+    "fine-tuning",
+    "dephosphorylation-site-prediction"
+  ],
+  "description": "The questions this  addresses are:\n - How to load large protein AI models?\n - How to fine-tune such models on downstream tasks such as post-translational site prediction?\n\n\nThe objectives are:\n - Learn to load and use large protein models from HuggingFace\n - Learn to fine-tune them on specific tasks such as predicting dephosphorylation sites\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html",
+      "name": "JupyterLab in Galaxy",
+      "description": "Hands-on for 'JupyterLab in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.html",
+      "name": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
+      "description": "Hands-on for 'A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/",
+      "name": "Anup Kumar",
+      "image": "https://avatars.githubusercontent.com/anuprulez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/",
+          "name": "EuroScienceGateway",
+          "description": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.\n",
+          "url": "https://galaxyproject.org/projects/esg/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "interactive-tools"
+    },
+    {
+      "@type": "Thing",
+      "name": "machine-learning"
+    },
+    {
+      "@type": "Thing",
+      "name": "deep-learning"
+    },
+    {
+      "@type": "Thing",
+      "name": "jupyter-lab"
+    },
+    {
+      "@type": "Thing",
+      "name": "fine-tuning"
+    },
+    {
+      "@type": "Thing",
+      "name": "dephosphorylation-site-prediction"
+    }
+  ],
+  "abstract": "The advent of [large language models](https://en.wikipedia.org/wiki/Large_language_model) has transformed the field of natural language processing, enabling machines to comprehend and generate human-like language with unprecedented accuracy. Pre-trained language models, such as [BERT](https://arxiv.org/abs/1810.04805), [RoBERTa](https://arxiv.org/abs/1907.11692), and their variants, have achieved state-of-the-art results on various tasks, from sentiment analysis and question answering to language translation and text classification. Moreover, the emergence of transformer-based models, such as Generative Pre-trained Transformer ([GPT](https://openai.com/index/gpt-2-1-5b-release/)) and its variants, has enabled the creation of highly advanced language models to generate coherent and context-specific text. The latest iteration of these models, [ChatGPT](https://openai.com/index/chatgpt/), has taken the concept of conversational AI to new heights, allowing users to engage in natural-sounding conversations with machines. However, despite their impressive capabilities, these models are imperfect, and their performance can be significantly improved through fine-tuning. Fine-tuning involves adapting the pre-trained model to a specific task or domain by adjusting its parameters to optimise its performance on a target dataset. This process allows the model to learn task-specific features and relationships that may not be captured by the pre-trained model alone, resulting in highly accurate and specialised language models that can be applied to a wide range of applications. In this tutorial, we will discuss and fine-tune large language model trained on protein sequences [ProtT5](https://github.com/agemagician/ProtTrans/tree/master/Fine-Tuning), exploring the benefits and challenges of this approach, as well as the various techniques and strategies such as low ranking adaptations (LoRA) that can be employed to fit large language models with billions of parameters on regular GPUs. [Protein large language models](https://ieeexplore.ieee.org/document/9477085) (LLMs) represent a significant advancement in Bioinformatics, leveraging the power of deep learning to understand and predict the behaviour of proteins at an unprecedented scale. These models, exemplified by the [ProtTrans](https://github.com/agemagician/ProtTrans) suite, are inspired by natural language processing (NLP) techniques, applying similar methodologies to biological sequences. ProtTrans models, including BERT and T5 adaptations, are trained on vast datasets of protein sequences from databases such as [UniProt](https://www.uniprot.org/) and [BFD](https://bfd.mmseqs.com/), storing millions of protein sequences and enabling them to capture the complex patterns and functions encoded within amino acid sequences. By interpreting these sequences much like languages, protein LLMs offer transformative potential in drug discovery, disease understanding, and synthetic biology, bridging the gap between computational predictions and experimental biology. In this tutorial, we will fine-tune the ProtT5 pre-trained model for [dephosphorylation](https://en.wikipedia.org/wiki/Dephosphorylation) site prediction, a binary classification task."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Fine tune large protein model (ProtTrans) using HuggingFace</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/anuprulez/" class="contributor-badge contributor-anuprulez"><img src="https://avatars.githubusercontent.com/anuprulez?s=36" alt="Anup Kumar avatar" width="36" class="avatar" />
+    Anup Kumar</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to load large protein AI models?</p>
+</li>
+        
+        <li><p>How to fine-tune such models on downstream tasks such as post-translational site prediction?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn to load and use large protein models from HuggingFace</p>
+</li>
+        
+        <li><p>Learn to fine-tune them on specific tasks such as predicting dephosphorylation sites</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: JupyterLab in Galaxy</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/10986248">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/statistics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 17, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 31, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The advent of <a href="https://en.wikipedia.org/wiki/Large_language_model">large language models</a> has transformed the field of natural language processing, enabling machines to comprehend and generate human-like language with unprecedented accuracy. Pre-trained language models, such as <a href="https://arxiv.org/abs/1810.04805">BERT</a>, <a href="https://arxiv.org/abs/1907.11692">RoBERTa</a>, and their variants, have achieved state-of-the-art results on various tasks, from sentiment analysis and question answering to language translation and text classification. Moreover, the emergence of transformer-based models, such as Generative Pre-trained Transformer (<a href="https://openai.com/index/gpt-2-1-5b-release/">GPT</a>) and its variants, has enabled the creation of highly advanced language models to generate coherent and context-specific text. The latest iteration of these models, <a href="https://openai.com/index/chatgpt/">ChatGPT</a>, has taken the concept of conversational AI to new heights, allowing users to engage in natural-sounding conversations with machines. However, despite their impressive capabilities, these models are imperfect, and their performance can be significantly improved through fine-tuning. Fine-tuning involves adapting the pre-trained model to a specific task or domain by adjusting its parameters to optimise its performance on a target dataset. This process allows the model to learn task-specific features and relationships that may not be captured by the pre-trained model alone, resulting in highly accurate and specialised language models that can be applied to a wide range of applications. In this tutorial, we will discuss and fine-tune large language model trained on protein sequences <a href="https://github.com/agemagician/ProtTrans/tree/master/Fine-Tuning">ProtT5</a>, exploring the benefits and challenges of this approach, as well as the various techniques and strategies such as low ranking adaptations (LoRA) that can be employed to fit large language models with billions of parameters on regular GPUs. <a href="https://ieeexplore.ieee.org/document/9477085">Protein large language models</a> (LLMs) represent a significant advancement in Bioinformatics, leveraging the power of deep learning to understand and predict the behaviour of proteins at an unprecedented scale. These models, exemplified by the <a href="https://github.com/agemagician/ProtTrans">ProtTrans</a> suite, are inspired by natural language processing (NLP) techniques, applying similar methodologies to biological sequences. ProtTrans models, including BERT and T5 adaptations, are trained on vast datasets of protein sequences from databases such as <a href="https://www.uniprot.org/">UniProt</a> and <a href="https://bfd.mmseqs.com/">BFD</a>, storing millions of protein sequences and enabling them to capture the complex patterns and functions encoded within amino acid sequences. By interpreting these sequences much like languages, protein LLMs offer transformative potential in drug discovery, disease understanding, and synthetic biology, bridging the gap between computational predictions and experimental biology. In this tutorial, we will fine-tune the ProtT5 pre-trained model for <a href="https://en.wikipedia.org/wiki/Dephosphorylation">dephosphorylation</a> site prediction, a binary classification task.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#fine-tuning-to-predict-dephosphorylation-sites" id="markdown-toc-fine-tuning-to-predict-dephosphorylation-sites">Fine tuning to predict dephosphorylation sites</a></li>
+  <li><a href="#jupyterlab-in-galaxy-europe" id="markdown-toc-jupyterlab-in-galaxy-europe">JupyterLab in Galaxy Europe</a></li>
+  <li><a href="#fine-tuning-notebook" id="markdown-toc-fine-tuning-notebook">Fine-tuning notebook</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="fine-tuning-to-predict-dephosphorylation-sites">Fine tuning to predict dephosphorylation sites</h2>
+<p>Fine-tuning is a transfer learning method where a pre-trained model (e.g. LLM) is further trained on a new, usually smaller dataset to adapt it to a specific task. This process begins with a model trained on a large, general dataset. By leveraging the knowledge already captured in the pre-trained model’s weights, fine-tuning allows for more targeted and efficient learning on the new dataset, requiring fewer computational resources and less training time than training a model from scratch. The fine-tuning process typically involves adjusting several hyperparameters, such as learning rate, as the pre-trained model’s parameters are updated to fit the new data better. The method is particularly effective in scenarios where the new dataset is too small to train a robust model independently, as it benefits from the general patterns and features learned during the initial (pre) training phase. Fine-tuning keeps a balance between retaining the model’s original capabilities and adapting to the specific nuances of the new task, leading to improved performance in a wide range of applications, from natural language processing to computer vision. The protT5 model used in this tutorial has been trained on <a href="https://www.uniprot.org/help/uniref">UniRef50</a> protein database consisting of 45 million protein sequences. The model captures general features from the large training sequences and is available for further training tasks such as fine-tuning on <a href="https://huggingface.co/">HuggingFace</a>.</p>
+
+<h3 id="dephosphorylation">Dephosphorylation</h3>
+<p>Dephosphorylation is a biochemical process (post-translational modification) involving removing a phosphate group from an organic compound, typically mediated by phosphatase enzymes. This process regulates cellular functions, including signal transduction, metabolism, and protein activity. By removing phosphate groups from proteins, phosphatases counterbalance the actions of kinases, which add phosphate groups, thus maintaining the dynamic equilibrium of phosphorylation states within the cell. Dephosphorylation can activate or deactivate enzymes and receptors, alter protein-protein interactions, and influence the cellular localisation of proteins. This regulation is essential for many physiological processes, such as cell growth, differentiation, and apoptosis. Disruptions in dephosphorylation mechanisms are associated with numerous diseases, including cancer, diabetes, and neurodegenerative disorders, highlighting the importance of precise control over this process for maintaining cellular health and function. Labelled datasets specifying whether a protein sequence contains dephosphorylation sites are scarce. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8264445/">Chaudhari et al.</a> has used deep learning techniques to classify dephosphorylation sites but on a small dataset consisting of around 1,000 protein sequences having dephosphorylation sites at Serine (S), Threonine (T) and Tyrosine (Y). We explore fine-tuning a pre-trained ProtT5 model on a dephosphorylation dataset to showcase an approach for classifying protein sequences. In the tutorial, only those sequences having Y site as dephosphorylated are used for fine-tuning to restrict the training time to a reasonable limit. In the following sections, the GPU-enabled JupyterLab tool in Galaxy is used to fine-tune the ProtT5 model to learn and predict dephosphorylation sites.</p>
+
+<h2 id="jupyterlab-in-galaxy-europe">JupyterLab in Galaxy Europe</h2>
+
+<h3 id="open-jupyterlab">Open JupyterLab</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-gpu-enabled-interactive-jupyter-notebook-for-machine-learning"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: GPU-enabled Interactive Jupyter Notebook for Machine Learning</div>
+
+  <ul>
+    <li><span class="tool" data-tool="interactive_tool_ml_jupyter_notebook" title="GPU-enabled Interactive Jupyter Notebook for Machine Learning tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GPU-enabled Interactive Jupyter Notebook for Machine Learning</strong></span>
+      <ul>
+        <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Start with a code repository</code></li>
+        <li><em>“Online code repository (Git-based) URL”</em>: <code class="language-plaintext highlighter-rouge">https://github.com/anuprulez/fine-tune-protTrans-repository</code></li>
+        <li>Click <em>“Run Tool”</em></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+        <p>The above step automatically fetches the notebook and datasets from the provided GitHub URL and initiates a JupyterLab.
+ If you do not have access to this resource in Galaxy Europe, please apply for it at: <a href="http://usegalaxy.eu/gpu-request">Access GPU-JupyterLab</a>. It may take a day or two to receive access.</p>
+
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<h2 id="fine-tuning-notebook">Fine-tuning notebook</h2>
+<p>From the cloned repository, open the <code class="language-plaintext highlighter-rouge">fine-tune-protTrans-dephophorylation.ipynb</code> notebook. The notebook contains all the necessary scripts for processing protein sequences, creating and configuring protein large language models, training it on the protein sequences evaluating them on the test protein sequences and visualising results. Let’s look at these key steps of fine-tuning.</p>
+
+<h3 id="install-necessary-python-packages">Install necessary Python packages</h3>
+<p>The protein large language model has been developed using Pytorch and the model weights are stored at HuggingFace. Therefore, packages such as Pytorch, Transformers, and SentencePiece must be installed in the notebook to recreate the model. Additional packages such as Scikit-learn, Pandas, Matplotlib and Seaborn are also required for data preprocessing, manipulation and visualisation of model training and test performances. 	All the necessary packages are installed in the notebook using <code class="language-plaintext highlighter-rouge">!pip install</code> command. Note: the installed packages have a lifespan equal to the notebook sessions. When a new session of JupyterLab is created, all the packages need to be installed again.</p>
+
+<h3 id="fetch-and-split-data">Fetch and split data</h3>
+<p>After installing and importing all the necessary packages, protein sequences (available as a FASTA file) and their labels are read into the notebook. These sequences are further divided into training and validation sets. The training set is used for fine-tuning the protein large language model, and the validation set is used for model evaluation after each training epoch.</p>
+
+<h3 id="define-configurations-for-lora-with-transformer-prott5-model">Define configurations for LoRA with transformer (ProtT5) model</h3>
+<p>The protein large language model (ProtT5) used in this tutorial has over 1.2 billion parameters (1,209,193,474). Training such a large model on any commercial GPU with 15GB of memory is impossible. <a href="https://arxiv.org/abs/2106.09685">LoRA</a>, the low-ranking adaption technique, has been devised to make the fine-tuning process feasible on such GPUs. LoRA learns low-rank matrices and, when multiplied, takes the shape of a matrix of the original large language model. During fine-tuning, the weight matrices of the original large language model are kept frozen (not updated) while only these low-rank matrices are updated. Once fine-tuning is finished, these low-rank matrices are combined with the original frozen weight matrices to update the model. The low-rank matrices contain all the knowledge obtained by fine-tuning a small dataset. This approach helps retain the original knowledge of the model while adding the additional knowledge from the fine-tuning dataset. When LoRA is applied to the ProtT5 model, the trainable parameters become a little over 3 million (3,559,426), making it possible to fine-tune on a commercial GPU with at least around 10 GB of memory. The following figure compares <a href="https://magazine.sebastianraschka.com/p/lora-and-dora-from-scratch">fine-tuning with and without LoRA</a>. Fine-tuning without LoRA requires additional weight matrices to be the same size as the original model, which needs much more computational resources than LoRA, where much smaller weight matrices are learned.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="images/lora.png" alt="lora_non_lora. " width="1089" height="472" loading="lazy" /><a target="_blank" href="images/lora.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Low ranking adaptations (LoRA).</figcaption></figure>
+
+<h3 id="create-prott5-model">Create ProtT5 model</h3>
+<p>The ProtT5 model (inspired by <a href="https://huggingface.co/docs/transformers/en/model_doc/t5">T5</a>) has two significant components - <a href="https://github.com/agemagician/ProtTrans/blob/master/Fine-Tuning/PT5_LoRA_Finetuning_per_prot.ipynb">encoder and sequence classifier</a>.  Encoder learns a representation of protein sequences, and classifier is used for downstream classification of the learned representations of sequences. The self-attention technique is used to learn sequence representations by computing weights of highly interacting regions in sequences, thereby establishing long-range dependencies. Amino acids in protein sequences are represented in vector spaces in combination with positional embedding to maintain the order of amino acids in sequences.</p>
+
+<h3 id="create-a-model-training-method-and-train">Create a model training method and train</h3>
+<p>Once the model architecture is created, the weights of the pre-trained ProtT5 are downloaded from <a href="https://huggingface.co/Rostlab/ProstT5">HuggingFace</a>. HuggingFace provides an openly available repository of pre-trained weights of many LLM-like architectures such as ProtT5, <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B">Llama</a>, <a href="https://huggingface.co/microsoft/BioGPT-Large">BioGPT</a> and so on. The download of the pre-trained weights is facilitated by a Python package, <code class="language-plaintext highlighter-rouge">Transformers</code>, which provides methods for downloading weight matrices and tokenisers. After downloading the model weights and tokeniser, the original model is modified by adding LoRA layers to have low-rank matrices and the original weights are frozen. This brings down the number of parameters of the original ProtT5 model from 1.2 billion to 3.5 million. Then, the LoRA updated model is trained for several epochs until the error rate stops decreasing which signifies training stabilisation. Next, the fine-tuned model is saved to a file where it can be reused for prediction.</p>
+
+<h3 id="analyse-results">Analyse results</h3>
+<p>The saved trained model is recreated and used to predict the classes of protein sequences from the test set. Different metrics assess fine-tuning performance, such as Matthews’s correlation coefficient (MCC), specificity, sensitivity, accuracy, ROC-AUC and confusion matrix. The higher the value of MCC and closer to 1, the better the correlation between true and predicted classes. High specificity means few false positive results in the predictions, while high sensitivity refers to a few false negatives. Accuracy provides the fraction of correctly predicted sequences from the entire test set. The ROC-AUC metric specifies how well a classifier distinguishes between two classes in a binary classification problem. Its value varies between 0 and 1, where 1 means the perfect classifier and 0.5 means random guessing. The training history plot below shows the error of the fine-tuning process going down and stabilising around training iteration 20.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="images/training_history.png" alt="training_history_protT5. " width="907" height="462" loading="lazy" /><a target="_blank" href="images/training_history.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Fine-tuning history of ProtT5 with protein sequences.</figcaption></figure>
+
+<p>The performance of the fine-tuned model is reasonable, showing ROC-AUC as 0.8 and an accuracy of 0.74, classifying 37 out of 50 sequences correctly. The confusion matrix further elaborates on the fine-tuning results, showing the classification performance of both classes (0 and 1).</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="images/confusion_matrix.png" alt="confusion_matrix. " width="637" height="535" loading="lazy" /><a target="_blank" href="images/confusion_matrix.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Confusion matrix of prediction on test sequences showing performance for both classes.</figcaption></figure>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>In the tutorial, we have discussed an approach to fine-tune a large language model trained on millions of protein sequences to classify dephosphorylation sites. Using low-ranking adaptation technique, it becomes possible to fine-tune a model having 1.2 billion trainable parameters by reducing it to contain just 3.5 million ones. The availability of the fine-tuning notebook provided with the tutorial and the GPU-JupyterLab infrastructure in Galaxy simplify the complex process of fine-tuning on different datasets. In addition to classification, it is also possible to extract embeddings/representations of entire protein sequences and individual amino acids in protein sequences.</p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/statistics/faqs/">FAQ page for the Statistics and machine learning topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/fine_tuning_protTrans"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/fine_tuning_protTrans">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Anup Kumar,  <b>Fine tune large protein model (ProtTrans) using HuggingFace (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-fine_tuning_protTrans,
+author = "Anup Kumar",
+	title = "Fine tune large protein model (ProtTrans) using HuggingFace (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+		    
+		</blockquote>
+
+		
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+
+			</div>
+			<div class="col-sm-3">
+				<p>
+					<span style="font-size: 1.3em">About Us</span>
+					<ul class="no-bullets">
+						<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+						<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+						<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+						<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+						<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+					</ul>
+				</p>
+				<p>
+					<span style="font-size: 1.3em">Contact</span>
+					<ul class="no-bullets">
+						<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+						<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social">Bluesky</a></li>
+						<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">Matrix Channel</a></li>
+					</ul>
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<p>
+					<span style="font-size: 1.3em">Framework</span>
+					<ul class="no-bullets">
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/7ed0c3c406fe5e914145135382a1c7465e69df90">7ed0c3c</a></li>
+						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+					</ul>
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Page</span>
+				<p>
+					<ul class="no-bullets">
+						
+						
+						
+
+						<li>
+							<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+								Content licensed under Creative Commons Attribution 4.0 International License
+							</a>
+						</li>
+						<li>
+							<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/fine_tuning_protTrans/tutorial.md" title="Edit on GitHub">
+							<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+							</a>
+						</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ef2bff8a.js'></script>
+
+	
+	
+
+    </body>
+</html>
