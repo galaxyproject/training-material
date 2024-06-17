@@ -536,7 +536,7 @@ We now merge the forward and reverse reads together to obtain the full denoised 
 >    - {% icon param-file %} *"Dada results for forward reads"*: output of **dada2: dada** with `#forward` tag
 >    - {% icon param-file %} *"Forward reads"*: output of **Unzip collection** with `#forward` tag
 >    - {% icon param-file %} *"Dada results for reverse reads"*:  output of **dada2: dada** with `#reverse` tag
->    - {% icon param-file %} *"Reverse reads"*: output of **Unzip collection** with `#forward` tag
+>    - {% icon param-file %} *"Reverse reads"*: output of **Unzip collection** with `#reverse` tag
 >    - *"Concatenated rather than merge"*: `No`
 >
 >      > <comment-title>Non-overlapping reads</comment-title>
