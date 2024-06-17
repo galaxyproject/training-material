@@ -1,0 +1,101 @@
+<xsl:stylesheet
+  version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  exclude-result-prefixes="atom"
+>
+  <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:template match="/">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <title>GTN News Widget • <xsl:value-of select="atom:feed/atom:title"/></title>
+        <style type="text/css">
+		h1,h2,h3,h4{font-family: sans-serif;}section{margin:30px 15px}h1{font-size:2em;margin:.67em 0;line-height:1.125em}h2{border-bottom:1px solid #eaecef;padding-bottom:.3em}.alert{background:#fff5b1;padding:4px 12px;margin:0 -12px}a{text-decoration:none}.entry h3{margin-bottom:0}.entry p{margin:4px 0}.authors::before{content: "By: ";}.authors{font-style: italic} body {  margin: 0;  height: 100vh;  display: grid;  grid-template-columns: 1fr;  grid-template-rows: auto 1fr auto;  grid-template-areas:     'header'    'main'    'footer';} header {  background: lightgoldenrodyellow; grid-area: header; padding: 0.5em; border-bottom: 1px solid goldenrod;} main {  grid-area: main;  padding: 15px 5px 10px 5px;                overflow-y: auto; overflow-x: hidden;} footer {  grid-area: footer;  padding: 0.5em; border-top: 1px solid lightskyblue; background: lightblue;}        main {  background:    /* Shadow Cover TOP */    linear-gradient(      white 30%,      rgba(255, 255, 255, 0)    ) center top,        /* Shadow Cover BOTTOM */    linear-gradient(      rgba(255, 255, 255, 0),       white 70%    ) center bottom,        /* Shadow TOP */    radial-gradient(      farthest-side at 50% 0,      rgba(0, 0, 0, 0.2),      rgba(0, 0, 0, 0)    ) center top,        /* Shadow BOTTOM */    radial-gradient(      farthest-side at 50% 100%,      rgba(0, 0, 0, 0.2),      rgba(0, 0, 0, 0)    ) center bottom;    background-repeat: no-repeat;  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;  background-attachment: local, local, scroll, scroll;}
+	</style>
+      </head>
+      <body>
+        <header>
+          <a class="head_link" target="_blank" href="https://training.galaxyproject.org">
+            GTN News
+          </a>
+          •
+          <a class="head_link" target="_blank">
+            <xsl:attribute name="href">
+              <xsl:value-of select="atom:feed/atom:link[@rel='alternate']/@href"/>
+            </xsl:attribute>
+            <xsl:value-of select="atom:feed/atom:title"/>
+          </a>
+        </header>
+        <main>
+          <xsl:apply-templates select="atom:feed/atom:entry" />
+        </main>
+        <footer>
+		© GTN 
+		• 
+		CC-BY 4.0
+		• 
+		<xsl:value-of select="atom:feed/atom:updated"/>
+        </footer>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="atom:feed">
+          <!--
+    <h1><xsl:value-of select="atom:title"/> (Feed Preview)</h1>
+    <xsl:if test="atom:subtitle">
+      <p><strong><xsl:value-of select="atom:subtitle"/></strong></p>
+    </xsl:if>
+          -->
+  </xsl:template>
+
+  <xsl:template match="atom:entry">
+    <div class="entry">
+      <h3>
+        <a target="_blank">
+          <xsl:attribute name="href">
+            <xsl:value-of select="atom:id"/>
+          </xsl:attribute>
+          <xsl:value-of select="atom:title"/>
+        </a>
+      </h3>
+      <p class="authors">
+         <xsl:for-each select="atom:author">
+           <a href="{atom:uri}">
+             <xsl:value-of select="atom:name" />
+           </a>
+           <xsl:if test="position() != last()">
+             <xsl:text>, </xsl:text>
+           </xsl:if>
+         </xsl:for-each>
+      </p>
+      <!-- if summary -->
+      <xsl:choose>
+        <xsl:when test="atom:summary">
+          <p class="summary">
+            <xsl:value-of select="atom:summary"  disable-output-escaping="yes" />
+          </p>
+        </xsl:when>
+        <xsl:when test="atom:content">
+          <p class="summary">
+            <xsl:copy-of select="atom:content" />
+          </p>
+        </xsl:when>
+        </xsl:choose>
+      <!--
+      <small>
+        Published: <xsl:value-of select="atom:updated" /> <br/>
+        Tags:
+        <xsl:for-each select="atom:category">
+          <xsl:value-of select="@term" />
+          <xsl:if test="position() != last()">
+            <xsl:text>, </xsl:text>
+          </xsl:if>
+        </xsl:for-each>
+      </small>
+              -->
+    </div>
+  </xsl:template>
+</xsl:stylesheet>
