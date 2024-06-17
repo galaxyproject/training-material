@@ -31,6 +31,7 @@ contributions:
   - bebatut
   editing:
   - bernt-matthias
+  - clsiguret
 edam_ontology:
 - topic_3697 # Microbial ecology
 - topic_0637 # Taxonomy
