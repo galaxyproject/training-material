@@ -15,6 +15,8 @@ contributions:
 
 The GTN loves leveraging existing standards for both old and new purposes. One of our favourite standards that we adhere to is providing an RSS/Atom news feed for sharing news and events and updates!
 
+**Update 2024 Jun 18**: We've added a new home page for all of our feeds: [GTN feeds home]({% link feeds/index.md %})
+
 ## Why RSS/Atom?
 
 RSS feeds provide access to the latest news and updates from websites. They are a great way to keep up to date with your favourite websites without having to visit them every day, and without having to sign up for a mailing list or social media account. You can subscribe to feeds using a [feed reader](https://aboutfeeds.com/), which will automatically check for updates and display them for you.
