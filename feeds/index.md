@@ -9,18 +9,18 @@ We offer a wide range of RSS feeds to help you keep up to date with the latest t
 
 - [GTN News]({{ site.baseurl }}/feed.xml)
 - [GTN Events]({{ site.baseurl }}/events/feed.xml)
-- Topic Feeds, which include all *new* tutorials, slides, or FAQs.
+- Topic Feeds, which include all *new* tutorials, slides, FAQs, workflows, and events.
     - [Single Cell]({{ site.baseurl }}/topics/single-cell/feed.xml)
     - [Admin Training]({{ site.baseurl }}/topics/admin/feed.xml)
     - ...and every other topic
-- Monthly/Weekly/Daily Rollups, which include all *new* tutorials, slides, FAQs, and events.
+- Monthly/Weekly/Daily Rollups, which include all *new* tutorials, slides, workflows, FAQs, events, and contributors.
     - [GTN Monthly]({{ site.baseurl }}/feeds/matrix-month.xml)
     - [GTN Weekly]({{ site.baseurl }}/feeds/matrix-week.xml)
     - [GTN Daily]({{ site.baseurl }}/feeds/matrix-day.xml)
 - Per-tag Monthly Rollups
     - [Single Cell Month]({{ site.baseurl }}/feeds/single-cell-month.xml)
     - [One Health Month]({{ site.baseurl }}/feeds/one-health-month.xml)
-    - Please request more if you need them, these are currently experimental, and only generated for a handful of topics while we figure out their implementation.
+    - ...and every other topic / tag based topic (i.e. topics linked from the home page)
 
 ## Embedding Feeds
 
