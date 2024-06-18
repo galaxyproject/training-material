@@ -156,6 +156,7 @@ def all_date_sorted_materials(site)
   events = site.pages.select { |x| x['layout'] == 'event' || x['layout'] == 'event-external' }
   materials = TopicFilter.list_all_materials(site).reject { |k, _v| k['draft'] }
   news = site.posts.select { |x| x['layout'] == 'news' }
+  faqs = site.pages.select { |x| x['layout'] == 'faq' }
 
   bucket = events.map do |e|
     [Gtn::PublicationTimes.obtain_time(e.path).to_datetime, 'events', e, ['event'] + e.data.fetch('tags', [])]
@@ -174,6 +175,11 @@ def all_date_sorted_materials(site)
 
   bucket += news.map do |n|
     [n.date.to_datetime, 'news', n, ['news'] + n.data.fetch('tags', [])]
+  end
+
+  bucket += faqs.map do |n|
+    tag = Gtn::PublicationTimes.clean_path(n.path).split('/')[1]
+    [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'faqs', n, ['faqs', tag]]
   end
 
   bucket += site.data['contributors'].map do |k, v|
@@ -303,17 +309,19 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
                 'tutorials' => '📚',
                 'slides' => '🖼️',
                 'news' => '📰',
+                'faqs' => '❓'
               }
 
-              prio = {
-                'news' => 0,
-                'events' => 1,
-                'contributors' => 4,
-                'funders' => 5,
-                'organisations' => 6,
-                'tutorials' => 2,
-                'slides' => 3,
-              }
+              prio = [
+                'news',
+                'events',
+                'tutorials',
+                'slides',
+                'faqs',
+                'contributors',
+                'funders',
+                'organisations'
+              ].map.with_index { |x, i| [x, i] }.to_h
 
               parts.group_by { |x| x[1] }.sort_by { |x| prio[x[1]] }.each do |type, items|
                 xml.h4 "#{icon_for[type]} #{type.capitalize}"
