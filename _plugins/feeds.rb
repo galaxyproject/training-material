@@ -260,6 +260,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       # Set generator also needs a URI attribute
       xml.generator('Jekyll', uri: 'https://jekyllrb.com/')
       xml.link(href: "#{site.config['url']}#{site.baseurl}/#{path}", rel: 'self')
+      xml.link(href: "#{site.config['url']}#{site.baseurl}/", rel: 'alternate')
       # convert '2024-01-01' to date
       xml.updated(DateTime.now.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
@@ -383,6 +384,7 @@ def generate_event_feeds(site)
       # Set generator also needs a URI attribute
       xml.generator('Jekyll', uri: 'https://jekyllrb.com/')
       xml.link(href: "#{site.config['url']}#{site.baseurl}/events/feed.xml", rel: 'self')
+      xml.link(href: "#{site.config['url']}#{site.baseurl}/events/", rel: 'alternate')
       xml.updated(updated.to_datetime.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/events/feed.xml")
       xml.title('Events')
