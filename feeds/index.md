@@ -3,7 +3,7 @@ layout: page
 title: GTN Feeds
 ---
 
-We offer a wide range of RSS feeds to help you keep up to date with the latest training materials and events. You can subscribe to these feeds in your favourite RSS reader, or embed them in your own website.
+We offer a wide range of [RSS feeds]({{ site.baseurl }}/news/2024/06/04/gtn-standards-rss.html) to help you keep up to date with the latest training materials and events. You can subscribe to these feeds in your favourite RSS reader, or embed them in your own website.
 
 ## Feed Directory
 
