@@ -91,6 +91,7 @@ def generate_topic_feeds(site)
         topic_title = site.data[topic]['title']
         xml.title("#{topic_title}")
         xml.subtitle("Recently added tutorials, slides, and FAQs in the #{topic} topic")
+        xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
         topic_pages.each do |page|
           page_type = if page.path =~ %r{faqs/.*.md}
@@ -268,7 +269,8 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
       title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
       xml.title(title_parts.join(' — '))
-      xml.subtitle('An RSS feed with the latest materials, events, news in the GTN.')
+      xml.subtitle('The latest materials, events, news in the GTN.')
+      xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       bucket.each do |date, parts|
         xml.entry do
@@ -386,6 +388,7 @@ def generate_event_feeds(site)
       xml.id("#{site.config['url']}#{site.baseurl}/events/feed.xml")
       xml.title('Events')
       xml.subtitle('Events in the Inter-Galactic Network')
+      xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       events.each do |page|
         xml.entry do
