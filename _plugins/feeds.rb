@@ -476,7 +476,6 @@ end
 # Basically like `PageWithoutAFile`
 Jekyll::Hooks.register :site, :post_write do |site|
   if Jekyll.env == 'production'
-    generate_topic_feeds(site)
     generate_event_feeds(site)
 
     bucket = all_date_sorted_materials(site)
@@ -484,13 +483,11 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
     TopicFilter.list_topics(site).each do |topic|
       generate_topic_feeds(site, topic, bucket)
+      generate_matrix_feed(site, bucket, group_by: 'month', filter_by: topic)
     end
 
     generate_matrix_feed(site, bucket, group_by: 'day')
     generate_matrix_feed(site, bucket, group_by: 'week')
     generate_matrix_feed(site, bucket, group_by: 'month')
-    generate_matrix_feed(site, bucket, group_by: 'month', filter_by: 'single-cell')
-    generate_matrix_feed(site, bucket, group_by: 'month', filter_by: 'genome-annotation')
-    generate_matrix_feed(site, bucket, group_by: 'month', filter_by: 'one-health')
   end
 end

@@ -26,6 +26,8 @@ We offer a wide range of RSS feeds to help you keep up to date with the latest t
 
 Any[^1] of the above feeds can be embedded anywhere you like. Simply replace
 `.xml` with `.w.xml` in the URL and it'll produce a feed preview that is more
+
+[^1]: minus the main news feed currently as that is produced by a third party plugin
 amenable to embedding.
 
 <iframe width="340px" height="600px" src="/training-material/events/feed.w.xml"></iframe>
@@ -68,4 +70,9 @@ These are easily embedded, note the `.w.xml` ending, indicating a widget. (This 
 <iframe width="340px" height="600px" src="/training-material/feeds/one-health-month.w.xml"></iframe>
 ```
 
-[^1]: minus the main news feed currently as that is produced by a third party plugin
+### Differences between feeds
+
+Having two feeds with the same data might seem a bit odd but we have two separate user stories we want to address:
+
+- **Feed Reader**: This is the feed you'd subscribe to in your feed reader, and more importantly, the sort of feed that you'd send to someone else if they were curious how to follow updates to the GTN.
+- **Feed Widget**: This is the feed you'd embed in your website, or in a widget on a page. It's designed to be more visually appealing and easier to read in a small space.
