@@ -11,7 +11,6 @@ examples:
   Incredibly generic box that does not tell you which workflow to import: {}
   Importing a QC workflow: {path: "topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga", title:"Galaxy Workflow Data QC" }
   Importing a pre-treatments workflow: {path: "topics/proteomics/tutorials/metaproteomics/workflows/workflow.ga", title:"Pretreatments"}
-
 ---
 
 {% if include.path %}
