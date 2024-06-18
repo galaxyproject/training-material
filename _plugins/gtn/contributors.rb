@@ -118,7 +118,7 @@ module Gtn
     # Returns:
     # +Hash+ of contributor information
     # +String+ type of contributor (e.g. 'contributor', 'organisation', 'funder')
-    def self.fetch(site, c)
+    def self.fetch(site, c, warn: false)
       if _load_file(site, 'contributors').key?(c)
         return ['contributor', site.data['contributors'][c]]
       elsif _load_file(site, 'organisations').key?(c)
@@ -126,7 +126,9 @@ module Gtn
       elsif _load_file(site, 'funders').key?(c)
         return ['funder', site.data['funders'][c]]
       else
-        Jekyll.logger.warn "Contributor #{c} not found"
+        if ! warn
+          Jekyll.logger.warn "Contributor #{c} not found"
+        end
       end
 
       ['contributor', { 'name' => c }]
@@ -150,8 +152,8 @@ module Gtn
     # +c+:: +String+ of contributor ID
     # Returns:
     # +String+ of contributor name
-    def self.fetch_name(site, c)
-      fetch(site, c)[1].fetch('name', c)
+    def self.fetch_name(site, c, warn: false)
+      fetch(site, c, warn: warn)[1].fetch('name', c)
     end
 
     ##

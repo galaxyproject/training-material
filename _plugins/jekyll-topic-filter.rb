@@ -199,6 +199,9 @@ module TopicFilter
   # Returns:
   # +Hash+:: The tutorial material
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
+    if topic_name.nil?
+      return nil
+    end
     fill_cache(site)
     if site.data['cache_topic_filter'][topic_name].nil?
       Jekyll.logger.warn "Cannot fetch tutorial material for #{topic_name}"
