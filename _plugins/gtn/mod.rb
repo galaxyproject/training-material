@@ -136,7 +136,7 @@ module Gtn
         .map { |x| x.split("\n\n") }
         .select { |x| x.length > 1 }
         .each do |date, files|
-        files.split("\n").grep(/\.(md|html)$/).each do |f|
+        files.split("\n").grep(/\.(md|html|ga)$/).each do |f|
           modification_type, path = f.split("\t")
           if modification_type == 'A'
             # Chase the renames.

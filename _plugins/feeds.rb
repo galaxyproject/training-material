@@ -342,7 +342,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
                 'organisations'
               ].map.with_index { |x, i| [x, i] }.to_h
 
-              parts.group_by { |x| x[1] }.sort_by { |x| prio[x[1]] }.each do |type, items|
+              parts.group_by { |x| x[1] }.sort_by { |x| prio[x[0]] }.each do |type, items|
                 xml.h4 "#{ICON_FOR[type]} #{type.capitalize}"
                 if items.length.positive?
                   xml.ul do
