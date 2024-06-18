@@ -23,14 +23,17 @@
       </head>
       <body>
         <header>
-          <h1>
-          <a class="head_link" target="_blank">
-            <xsl:attribute name="href">
-              <xsl:value-of select="atom:feed/atom:link[@rel='alternate']/@href"/>
-            </xsl:attribute>
-            <xsl:value-of select="atom:feed/atom:title"/>
-          </a>
-          </h1>
+          <hgroup>
+            <h1>
+              <a class="head_link" target="_blank">
+                <xsl:attribute name="href">
+                  <xsl:value-of select="atom:feed/atom:link[@rel='alternate']/@href"/>
+                </xsl:attribute>
+                <xsl:value-of select="atom:feed/atom:title"/>
+              </a>
+            </h1>
+            <p><xsl:value-of select="atom:feed/atom:subtitle"/></p>
+          </hgroup>
           <a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
                   <img src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png" width="30px"/>
           </a>

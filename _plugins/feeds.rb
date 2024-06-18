@@ -351,6 +351,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
           xml.author do
             xml.name('GTN')
             xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/")
+            xml.email('galaxytrainingnetwork@gmail.com')
           end
         end
       end

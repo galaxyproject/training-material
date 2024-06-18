@@ -44,6 +44,14 @@ We created these 'rollups' based on the bot that posted updates to our Matrix ch
 <iframe width="340px" height="600px" src="/training-material/feeds/matrix-week.w.xml"></iframe>
 <iframe width="340px" height="600px" src="/training-material/feeds/matrix-day.w.xml"></iframe>
 
+These can be embedded like so:
+
+```html
+<iframe width="340px" height="600px" src="/training-material/feeds/matrix-month.w.xml"></iframe>
+<iframe width="340px" height="600px" src="/training-material/feeds/matrix-week.w.xml"></iframe>
+<iframe width="340px" height="600px" src="/training-material/feeds/matrix-day.w.xml"></iframe>
+```
+
 ### Community Specific Rollups
 
 Some rollups were created for individual communities:
@@ -54,8 +62,8 @@ Some rollups were created for individual communities:
 These are easily embedded, note the `.w.xml` ending, indicating a widget. (This is simply used to provide an alternate XSLT that renders better in an `iframe`.
 
 ```html
-<iframe width="400px" height="600px" src="/training-material/topics/events/feed.w.xml"></iframe>
-<iframe width="400px" height="600px" src="/training-material/feeds/single-cell-month.w.xml"></iframe>
+<iframe width="340px" height="600px" src="/training-material/feeds/single-cell-month.w.xml"></iframe>
+<iframe width="340px" height="600px" src="/training-material/feeds/one-health-month.w.xml"></iframe>
 ```
 
 [^1]: minus the main news feed currently as that is produced by a third party plugin
