@@ -30,10 +30,12 @@ amenable to embedding.
 
 <iframe width="340px" height="600px" src="/training-material/events/feed.w.xml"></iframe>
 <iframe width="340px" height="600px" src="/training-material/topics/admin/feed.w.xml"></iframe>
+<iframe width="340px" height="600px" src="/training-material/topics/one-health/feed.w.xml"></iframe>
 
 ```html
 <iframe width="340px" height="600px" src="/training-material/events/feed.w.xml"></iframe>
 <iframe width="340px" height="600px" src="/training-material/topics/admin/feed.w.xml"></iframe>
+<iframe width="340px" height="600px" src="/training-material/topics/one-health/feed.w.xml"></iframe>
 ```
 
 ### Rollups

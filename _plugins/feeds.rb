@@ -30,6 +30,9 @@ end
 def serialise(site, feed_path, builder)
   # The builder won't let you add a processing instruction, so we have to
   # serialise it to a string and then parse it again. Ridiculous.
+  if ! Dir.exist?(File.dirname(feed_path))
+    FileUtils.mkdir_p(File.dirname(feed_path))
+  end
 
   # First the 'default' with explanatory portion
   finalised = Nokogiri::XML builder.to_xml
@@ -56,93 +59,80 @@ def markdownify(site, text)
   ).convert(text.to_s)
 end
 
-def generate_topic_feeds(site)
-  TopicFilter.list_topics(site).each do |topic|
-    feed_path = File.join(site.dest, 'topics', topic, 'feed.xml')
-    Jekyll.logger.info "[GTN/Feeds] Generating feed for #{topic}"
+ICON_FOR = {
+  'contributors' => '🧑‍🏫',
+  'funders' => '💰',
+  'organisations' => '🏢',
+  'events' => '📅',
+  'tutorials' => '📚',
+  'slides' => '🖼️',
+  'news' => '📰',
+  'faqs' => '❓'
+}
 
-    topic_pages = site.pages
-                      .select { |x| x.path =~ %r{^\.?/?topics/#{topic}} }
-                      .select { |x| x.path =~ %r{(tutorial.md|slides.html|faqs/.*.md)} }
-                      .reject { |x| x.path =~ /index.md/ }
-                      .reject { |x| x.data.fetch('draft', '').to_s == 'true' }
-                      .reject { |x| x.url =~ /slides-plain.html/ }
-                      .reject { |x| File.symlink?(x.path) } # Remove symlinks to other faqs/tutorials
-                      .uniq(&:path)
-                      .sort_by { |page| Gtn::PublicationTimes.obtain_time(page.path) }
-                      .reverse
+def generate_topic_feeds(site, topic, bucket)
+  mats = bucket.select { |x| x[3].include?(topic) }
+  feed_path = File.join(site.dest, 'topics', topic, 'feed.xml')
+  Jekyll.logger.info "[GTN/Feeds] Generating feed for #{topic} (#{mats.length} items)"
 
-    if topic_pages.empty?
-      Jekyll.logger.warn "No pages for #{topic}"
-      next
-    else
-      Jekyll.logger.debug "Found #{topic_pages.length} pages for #{topic}"
-    end
+  builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+    # Set stylesheet
+    xml.feed(xmlns: 'http://www.w3.org/2005/Atom') do
+      # Set generator also needs a URI attribute
+      xml.generator('Jekyll', uri: 'https://jekyllrb.com/')
+      xml.link(href: "#{site.config['url']}#{site.baseurl}/topics/#{topic}/feed.xml", rel: 'self')
+      xml.link(rel: 'alternate', href: "#{site.config['url']}#{site.baseurl}/topics/#{topic}/")
+      xml.updated(mats.first[0].rfc3339)
+      xml.id("#{site.config['url']}#{site.baseurl}/topics/#{topic}/feed.xml")
+      topic_title = site.data[topic]['title']
+      xml.title("#{topic_title}")
+      xml.subtitle("Recently added tutorials, slides, FAQs, and events in the #{topic} topic")
+      xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
-    builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-      # Set stylesheet
-      xml.feed(xmlns: 'http://www.w3.org/2005/Atom') do
-        # Set generator also needs a URI attribute
-        xml.generator('Jekyll', uri: 'https://jekyllrb.com/')
-        xml.link(href: "#{site.config['url']}#{site.baseurl}/topics/#{topic}/feed.xml", rel: 'self')
-        xml.link(rel: 'alternate', href: "#{site.config['url']}#{site.baseurl}/topics/#{topic}/", rel: 'self')
-        xml.updated(Gtn::ModificationTimes.obtain_time(topic_pages.first.path).to_datetime.rfc3339)
-        xml.id("#{site.config['url']}#{site.baseurl}/topics/#{topic}/feed.xml")
-        topic_title = site.data[topic]['title']
-        xml.title("#{topic_title}")
-        xml.subtitle("Recently added tutorials, slides, and FAQs in the #{topic} topic")
-        xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
+      mats.each do |time, group, page, tags|
+        xml.entry do
+          xml.title(ICON_FOR[group] + " " +page.data['title'])
+          link = "#{site.config['url']}#{site.baseurl}#{page.url}"
+          xml.link(href: link)
+          # Our links are (mostly) stable
+          xml.id(link)
 
-        topic_pages.each do |page|
-          page_type = if page.path =~ %r{faqs/.*.md}
-                        'faq'
-                      else
-                        page.path.split('/').last.split('.').first
-                      end
+          # This is a feed of only NEW tutorials, so we only include publication times.
+          # xml.published(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
+          xml.updated(time.rfc3339)
 
-          xml.entry do
-            xml.title(page.data['title'])
-            link = "#{site.config['url']}#{site.baseurl}#{page.url}"
-            xml.link(href: link)
-            # Our links are (mostly) stable
-            xml.id(link)
+          tags.each do |tag|
+            xml.category(term: tag)
+          end
 
-            # This is a feed of only NEW tutorials, so we only include publication times.
-            # xml.published(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
-            xml.updated(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
-
-            # xml.path(page.path)
-            xml.category(term: "new #{page_type}")
-            xml.category(term: "#{page_type}")
-            # xml.content(page.content, type: "html")
-
+          if page.data.key? 'description'
+            xml.summary(page.data['description'])
+          else
             md = page.content[0..page.content.index("\n")].strip
             html = markdownify(site, md)
             text = Nokogiri::HTML(html).text
             xml.summary(text)
+          end
 
-            Gtn::Contributors.get_authors(page.data).each do |c|
-              xml.author do
-                xml.name(Gtn::Contributors.fetch_name(site, c))
-                xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
-              end
+          Gtn::Contributors.get_authors(page.data).each do |c|
+            xml.author do
+              xml.name(Gtn::Contributors.fetch_name(site, c))
+              xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
             end
+          end
 
-            Gtn::Contributors.get_non_authors(page.data).each do |c|
-              xml.contributor do
-                xml.name(Gtn::Contributors.fetch_name(site, c))
-                xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
-              end
+          Gtn::Contributors.get_non_authors(page.data).each do |c|
+            xml.contributor do
+              xml.name(Gtn::Contributors.fetch_name(site, c))
+              xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
             end
           end
         end
       end
     end
-
-    serialise(site, feed_path, builder)
   end
 
-  nil
+  serialise(site, feed_path, builder)
 end
 
 def generate_tag_topic_feeds(_site)
@@ -461,6 +451,10 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
     bucket = all_date_sorted_materials(site)
     bucket.freeze
+
+    generate_topic_feeds(site, 'admin', bucket)
+    generate_topic_feeds(site, 'one-health', bucket)
+
     generate_matrix_feed(site, bucket, group_by: 'day')
     generate_matrix_feed(site, bucket, group_by: 'week')
     generate_matrix_feed(site, bucket, group_by: 'month')
