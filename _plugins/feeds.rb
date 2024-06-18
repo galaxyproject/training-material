@@ -118,15 +118,19 @@ def generate_topic_feeds(site, topic, bucket)
 
           Gtn::Contributors.get_authors(page.data).each do |c|
             xml.author do
-              xml.name(Gtn::Contributors.fetch_name(site, c))
-              xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+              xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
+              if c !~ / /
+                xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+              end
             end
           end
 
           Gtn::Contributors.get_non_authors(page.data).each do |c|
             xml.contributor do
-              xml.name(Gtn::Contributors.fetch_name(site, c))
-              xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+              xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
+              if c !~ / /
+                xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+              end
             end
           end
         end
@@ -447,7 +451,7 @@ def generate_event_feeds(site)
 
           Gtn::Contributors.get_organisers(page.data).each do |c|
             xml.author do
-              xml.name(Gtn::Contributors.fetch_name(site, c))
+              xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
               xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
               if page.data['contact_email']
                 xml.email(page.data['contact_email'])
@@ -457,7 +461,7 @@ def generate_event_feeds(site)
 
           Gtn::Contributors.get_instructors(page.data).each do |c|
             xml.contributor do
-              xml.name(Gtn::Contributors.fetch_name(site, c))
+              xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
               xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
             end
           end
