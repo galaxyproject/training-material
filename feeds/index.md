@@ -7,6 +7,8 @@ We offer a wide range of [RSS feeds]({{ site.baseurl }}/news/2024/06/04/gtn-stan
 
 ## Feed Directory
 
+{% if jekyll.environment == "production" %}
+
 - [GTN News]({{ site.baseurl }}/feed.xml)
 - [GTN Events]({{ site.baseurl }}/events/feed.xml)
 - Topic Feeds, which include all *new* tutorials, slides, FAQs, workflows, and events.
@@ -21,6 +23,10 @@ We offer a wide range of [RSS feeds]({{ site.baseurl }}/news/2024/06/04/gtn-stan
     - [Single Cell Month]({{ site.baseurl }}/feeds/single-cell-month.xml)
     - [One Health Month]({{ site.baseurl }}/feeds/one-health-month.xml)
     - ...and every other topic / tag based topic (i.e. topics linked from the home page)
+
+{% else %}
+GTN Feed listing is not available in development mode. (This is done so we don't need to generate the feed pages or add an exception to our URL checking, while keeping CI times fast.)
+{% endif %}
 
 ## Embedding Feeds
 
