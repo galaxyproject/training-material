@@ -320,11 +320,11 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
                     items.each do |date, _type, page, _tags|
                       xml.li do
                         if page.is_a?(String)
-                          href = "#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/"
+                          href = "#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news"
                           text = "@#{page}"
                         else
                           text = page.data['title']
-                          href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
+                          href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news"
                         end
                         if group_by != 'day'
                           text += " (#{date.strftime('%B %d, %Y')})"
