@@ -2,6 +2,7 @@
 
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn'
+require 'json'
 
 # TODO: move into a lib somewhere.
 def collapse_date_pretty(event)
@@ -67,7 +68,8 @@ ICON_FOR = {
   'tutorials' => '📚',
   'slides' => '🖼️',
   'news' => '📰',
-  'faqs' => '❓'
+  'faqs' => '❓',
+  'workflows' => '🛠️',
 }
 
 def generate_topic_feeds(site, topic, bucket)
@@ -147,6 +149,7 @@ def all_date_sorted_materials(site)
   materials = TopicFilter.list_all_materials(site).reject { |k, _v| k['draft'] }
   news = site.posts.select { |x| x['layout'] == 'news' }
   faqs = site.pages.select { |x| x['layout'] == 'faq' }
+  workflows = Dir.glob('topics/**/*.ga')
 
   bucket = events.map do |e|
     [Gtn::PublicationTimes.obtain_time(e.path).to_datetime, 'events', e, ['event'] + e.data.fetch('tags', [])]
@@ -170,6 +173,37 @@ def all_date_sorted_materials(site)
   bucket += faqs.map do |n|
     tag = Gtn::PublicationTimes.clean_path(n.path).split('/')[1]
     [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'faqs', n, ['faqs', tag]]
+  end
+
+  bucket += workflows.map do |n|
+    tag = Gtn::PublicationTimes.clean_path(n).split('/')[1]
+    wf_data = JSON.parse(File.read(n))
+    obj = Hash.new
+    obj['__path'] = n
+    obj['title'] = wf_data['name']
+    obj['description'] = wf_data['annotation']
+    obj['tags'] = wf_data['tags']
+    obj['contributors'] = wf_data.fetch('creator', []).map do |c|
+      p ">> #{c}"
+      matched = site.data['contributors'].select{|k, v| v.fetch('orcid', nil) == c.fetch('identifier', false)}.first
+      if matched
+        matched[0]
+      else
+        c['name']
+      end
+    end
+    # Fake a page.
+    def obj.data
+      self
+    end
+    def obj.path
+      self['__path']
+    end
+    def obj.url
+      '/' + self['__path'][0..self['__path'].rindex('/')]
+    end
+
+    [Gtn::PublicationTimes.obtain_time(n).to_datetime, 'workflows', obj, ['workflows', tag] + obj['tags']]
   end
 
   bucket += site.data['contributors'].map do |k, v|
@@ -292,30 +326,20 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
             xml.div(xmlns: 'http://www.w3.org/1999/xhtml') do
               # xml.h4 title
 
-              icon_for = {
-                'contributors' => '🧑‍🏫',
-                'funders' => '💰',
-                'organisations' => '🏢',
-                'events' => '📅',
-                'tutorials' => '📚',
-                'slides' => '🖼️',
-                'news' => '📰',
-                'faqs' => '❓'
-              }
-
               prio = [
                 'news',
                 'events',
                 'tutorials',
                 'slides',
                 'faqs',
+                'workflows',
                 'contributors',
                 'funders',
                 'organisations'
               ].map.with_index { |x, i| [x, i] }.to_h
 
               parts.group_by { |x| x[1] }.sort_by { |x| prio[x[1]] }.each do |type, items|
-                xml.h4 "#{icon_for[type]} #{type.capitalize}"
+                xml.h4 "#{ICON_FOR[type]} #{type.capitalize}"
                 if items.length.positive?
                   xml.ul do
                     items.each do |date, _type, page, _tags|
@@ -454,8 +478,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
     bucket = all_date_sorted_materials(site)
     bucket.freeze
 
-    generate_topic_feeds(site, 'admin', bucket)
-    generate_topic_feeds(site, 'one-health', bucket)
+    TopicFilter.list_topics(site).each do |topic|
+      generate_topic_feeds(site, topic, bucket)
+    end
 
     generate_matrix_feed(site, bucket, group_by: 'day')
     generate_matrix_feed(site, bucket, group_by: 'week')
