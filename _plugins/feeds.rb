@@ -50,6 +50,12 @@ def serialise(site, feed_path, builder)
   File.write(feed_path.gsub(/\.xml$/, '.w.xml'), finalised.to_xml)
 end
 
+def markdownify(site, text)
+  site.find_converter_instance(
+    Jekyll::Converters::Markdown
+  ).convert(text.to_s)
+end
+
 def generate_topic_feeds(site)
   TopicFilter.list_topics(site).each do |topic|
     feed_path = File.join(site.dest, 'topics', topic, 'feed.xml')
@@ -83,7 +89,7 @@ def generate_topic_feeds(site)
         xml.updated(Gtn::ModificationTimes.obtain_time(topic_pages.first.path).to_datetime.rfc3339)
         xml.id("#{site.config['url']}#{site.baseurl}/topics/#{topic}/feed.xml")
         topic_title = site.data[topic]['title']
-        xml.title("GTN - #{topic_title}")
+        xml.title("#{topic_title}")
         xml.subtitle("Recently added tutorials, slides, and FAQs in the #{topic} topic")
 
         topic_pages.each do |page|
@@ -97,7 +103,7 @@ def generate_topic_feeds(site)
             xml.title(page.data['title'])
             link = "#{site.config['url']}#{site.baseurl}#{page.url}"
             xml.link(href: link)
-            # Our links are stable
+            # Our links are (mostly) stable
             xml.id(link)
 
             # This is a feed of only NEW tutorials, so we only include publication times.
@@ -106,8 +112,13 @@ def generate_topic_feeds(site)
 
             # xml.path(page.path)
             xml.category(term: "new #{page_type}")
+            xml.category(term: "#{page_type}")
             # xml.content(page.content, type: "html")
-            xml.summary(page.content.strip.split("\n").first, type: 'html')
+
+            md = page.content[0..page.content.index("\n")].strip
+            html = markdownify(site, md)
+            text = Nokogiri::HTML(html).text
+            xml.summary(text)
 
             Gtn::Contributors.get_authors(page.data).each do |c|
               xml.author do
@@ -155,7 +166,7 @@ def all_date_sorted_materials(site)
       [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
     end
 
-    bucket += m.fetch('ref_tutorials', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
+    bucket += m.fetch('ref_slides', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
       [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
     end
   end
@@ -255,7 +266,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       # convert '2024-01-01' to date
       xml.updated(DateTime.now.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
-      title_parts = ['GTN', filter_title, "#{lookup[group_by]} Updates"].compact
+      title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
       xml.title(title_parts.join(' — '))
       xml.subtitle('An RSS feed with the latest materials, events, news in the GTN.')
 
@@ -263,11 +274,11 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
         xml.entry do
           case group_by
           when 'day'
-            title = "GTN #{lookup[group_by]} updates for #{date.strftime('%B %d, %Y')}"
+            title = "#{date.strftime('%B %d, %Y')}"
           when 'week'
-            title = "GTN #{lookup[group_by]} updates for #{date.strftime('W%W, %Y')}"
+            title = "#{date.strftime('W%W, %Y')}"
           when 'month'
-            title = "GTN #{lookup[group_by]} updates for #{date.strftime('%B %Y')}"
+            title = "#{date.strftime('%B %Y')}"
           end
           xml.title(title)
           # Our IDs should be stable
@@ -373,7 +384,7 @@ def generate_event_feeds(site)
       xml.link(href: "#{site.config['url']}#{site.baseurl}/events/feed.xml", rel: 'self')
       xml.updated(updated.to_datetime.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/events/feed.xml")
-      xml.title('GTN - Events')
+      xml.title('Events')
       xml.subtitle('Events in the Inter-Galactic Network')
 
       events.each do |page|
