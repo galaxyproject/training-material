@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 
+
 title: Visualization workflows for metagenomic amplicon data using the Galaxy framework
 level: Intermediate
 zenodo_link: https://zenodo.org/records/11281381
@@ -20,6 +21,7 @@ contributors:
 - paulzierep
 
 ---
+
 
 
 
@@ -94,6 +96,14 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 >
 > 1. Create a new history for this tutorial
 > 2. If not using your own data, import the files from [Zenodo]({{ page.zenodo_link }}) or from
+
+
+## Get data
+
+> <hands-on-title> Data Upload </hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
@@ -335,6 +345,8 @@ it. And as Number of taxa to show becomes a bit messy (for this data set at leas
 <!-- edited until here. -->
 
 
+
+{: .hands_on}
 
 # Title of the section usually corresponding to a big step in the analysis
 
