@@ -398,14 +398,14 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 # Ecoregionalization workflow
 
 Now you have all you need to run the ecoregionalization Workflow :
- - occurrence formatted file 
+ - Occurrence formatted file 
  - Environment file
 
 ## Merge environment and occurence file with **GeoNearestNeighbor**
 
 ### What it does ?
 
-This Galaxy tool allows you to merge two data tables (tabular format only) according to their latitude and longitude coordinates (in WGS84 projection), finding the closest points. This tool is used in the Ecoregionalization workflow to obtain the occurence data file needed by the BRT prediction tool.
+This Galaxy tool allows you to merge two data tables (tabular format only) according to their latitude and longitude coordinates (in WGS84 projection), finding the closest points. This tool is used in the Ecoregionalization workflow to filter the occurence data file so it can be used on the BRT prediction tool.
 
 ### How to use it ?
 
@@ -435,13 +435,13 @@ This Galaxy tool allows you to merge two data tables (tabular format only) accor
 
 ## Predicting taxa distribution with **BRT tool prediction**
 
-This step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an indicator of probability of taxon presence for each environmental layer pixel. Here, the method boosted regression trees (BRT) was used to adjust the relationship between the presence of a single taxon and the environmental conditions under which the taxon has been detected. BRT modelling is based on a learning algorithm automatic using iterative classification trees. 
+This step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an indicator of probability of taxon presence for each environmental layer pixel. Here, the boosted regression trees (BRT) method was used to adjust the relationship between the presence of a single taxon and the environmental conditions under which the taxon has been detected. BRT modelling is based on an automatic learning algorithm using iterative classification trees. 
 
 ### What it does ?
 
 Two treatments are performed in this tool: the creation of the taxa distribution model and the use of this model to obtain a prediction index. The prediction index obtained from each BRT model for each pixel of the environmental layers is an approximation of the probability of detection of the presence of the taxon.
 
-This tool gives in output a file containing the predictions of the probability of the presence of each taxon for each pixel (latitude, longitude) environmental, a visualization of these pixels for each taxon and graphs showing the percentage of model explanation for each environmental parameter. We'r gonna go back to this in the following workflow, you have an example of these files below. 
+This tool gives as output a file containing the predictions of the probability of the presence of each taxon for each "environment pixel" (latitude, longitude), a visualization of these pixels for each taxon and graphs showing the percentage of model explanation for each environmental parameter. We're gonna go back to this in the following steps. 
 
 ### How to use it ?
 
@@ -464,11 +464,11 @@ This tool gives in output a file containing the predictions of the probability o
 >
 {: .hands_on}
 
-In the 'Prediction files' collection there must be a file containing predictions of the probability of the presence of each taxon for each environmental pixel (latitude, longitude) for each occurrence file you entered.
+In the 'Prediction files' collection there must be a file containing predictions of the probability of the presence of each taxon for each "environmental pixel" (latitude, longitude) for each occurrence file you entered.
 
-In the collection 'Validation files' there must be a file containing for each taxon the validation metrics of the associated model.
+In the 'Validation files' collection there must be a file containing for each taxon the validation metrics of the associated model.
 
-In the collection 'Species distribution prediction map' there must be for each taxon a map representing their probability of presence at each environmental layer pixel. 
+In the 'Species distribution prediction maps' collection there must be for each taxon a map representing their probability of presence at each environmental layer pixel. 
 Here is an example:
 
 ![Species distribution map](./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni__pred_plot.png "Florometra mawsoni distribution from BRT")
@@ -486,17 +486,16 @@ This tool does three things:
 
 - It allows obtaining a summary file for each taxon indicating whether a BRT model was obtained and the number of occurrences per taxon.
 
-- It provides a list of taxa that obtained cleaned BRT models (without "_", "_sp", etc.) to propose the list to WoRMS (World Register Of Marine Species) or another database and obtain more information about the taxa.
+- It provides a list of taxa that obtained cleaned BRT models (without "_", "_sp", etc.) to propose the list to WoRMS (World Register of Marine Species) or another taxonomic database and obtain more information about the taxa.
 
-- It generates a list of taxa that obtained a BRT model that we need in the subsequent ecoregionalization workflow step.
-
+- It generates a list of taxa for which a BRT model was obtained, needed as input of following steps.
 ### How to use it ?
 
 > <hands-on-title> Run TaxaSeeker </hands-on-title>
 >
 > 1. {% tool [TaxaSeeker](toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_taxa_seeker/ecoregion_taxa_seeker/0.1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Environment file (tabular format only)"*: `ceamarc_env.tsv` (Input dataset)
->    - {% icon param-file %} *"Occurences file(s) (tabular format only)"*: `Merge table` (output of **GeoNearestNeighbor** {% icon tool %})
+>    - {% icon param-file %} *"Occurences file(s) (tabular format only)"*: `Merged table` (output of **GeoNearestNeighbor** {% icon tool %})
 >    - {% icon param-file %} *"Predictions file(s)"*: `Prediction files collection` (output of **BRT tool prediction** {% icon tool %})
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
@@ -509,14 +508,14 @@ This tool does three things:
 >
 {: .hands_on}
 
-## Determine the optimal cluster number with **ClusterEstimate**
+## Determine the optimal number of clusters with **ClusterEstimate**
 
 ### What it does ?
 
-This tool enables the determination of the optimal number of clusters for partition-based clustering, along with generating files used in the subsequent ecoregionalization workflow step.
+This tool enables the determination of the optimal number of clusters for partition-based clustering, along with generating files used in the following anlaysis steps.
 
-The tool will produce three outputs. The first two are files that will be used in the following steps of the workflow: a file containing four pieces of information, latitude, longitude, presence prediction and corresponding taxon, and a file containing the data to be partitioned. 
-The third output corresponds to the main information of the tool, a graph presenting the value of the SIH index according to the number of clusters. The silhouette index provides a measure of the separation between clusters and the compactness within each cluster. The silhouette index ranges from -1 to 1. Values close to 1 indicate that objects are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are located at the border between two neighboring clusters. So the optimal number of clusters is the one that maximizes the value of the SIH index.
+The tool will produce three outputs. The first two files that will be used in the following steps of the workflow: a file containing four pieces of information (latitude, longitude, presence prediction and corresponding taxon), and a file containing the data to be partitioned. 
+The third output corresponds to the main information of the tool, a graph presenting the value of the SIH index according to the number of clusters. The silhouette index provides a measure of the separation between clusters and the compactness within each cluster. The silhouette index ranges from -1 to 1. Values close to 1 indicate that objects are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are located at the border between two neighboring clusters. Thus the optimal number of clusters is the one that maximizes the value of the SIH index.
 
 ### How to use it ?
 
@@ -533,23 +532,23 @@ The third output corresponds to the main information of the tool, a graph presen
 >
 >    > <comment-title> Two other parameters </comment-title>
 >    > 
->    > The other two parameters can be left as is. If you need to change them here is a short description of what they do :
+>    > The other two parameters can be left as is. If you need to change them here is a short description of what they do:
 >    >
 >    > The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two 
 >    > points) and Jaccard (defined as the size of the intersection divided by the size of the union of the sample sets)
 >    >
 >    > The second one is the sample size that will be used to perform clustering. 
->    > Indeed, the clara function is used to clustering large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
->    > more efficient. A fairly high value representative of the data is recommended. It is important to note that using too small a sample may result in loss of information compared to using the
+>    > Indeed, the clara function is used to cluster large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
+>    > more efficient. A fairly high value representative of the data is recommended. It is important to note that using a too small sample size may result in loss of information compared to using the
 >    > entire data set.
 >    > 
 >    {: .comment}
 >
 > 2. Check your outputs. You must have three files:
 >
->    - SIH index plot (See example below.)
->    - Data to cluster (Containing the data to be partitioned.)
->    - Data.bio table (Containing four pieces of information, latitude, longitude, presence prediction and corresponding taxon.)
+>    - SIH index plot (See example below)
+>    - Data to cluster (Containing the data to be partitioned)
+>    - Data.bio table (Containing four pieces of information, latitude, longitude, presence prediction and corresponding taxon)
 >
 {: .hands_on}
 
@@ -565,12 +564,11 @@ The third output corresponds to the main information of the tool, a graph presen
 >
 {: .question}
 
-There is the SIH index plot the must have at this step : 
+Here is the SIH index plot you must obtained : 
 
 ![SIH index plot](./Images/SIH_index_plot.png "SIH index plot")
 
-With this graph you will be able to determine the optimal number of clusters that have retained for the construction of ecoregions. As said before, the optimal number of cluster is the one that
-maximizes the SIH index. In this example, the number of clusters that optimizes the SIH index is seven.
+With this graph you will be able to determine the optimal number of clusters retained for the construction of ecoregions. As said before, the optimal number of cluster is the one that maximizes the SIH index. In this example, the number of clusters that optimizes the SIH index is seven.
 
 ## Build ecoregional clusters with **ClaraClust**
 
@@ -592,16 +590,14 @@ clustering process and makes the calculation more efficient.
 >
 >    > <comment-title> Two other parameters </comment-title>
 >    > 
->    > Like the previous step there is two more parameters that can be change. 
->    >
->    > The other two parameters can be left as is. If you need to change them here is a short description of what they do :
+>    > The other two parameters can be left as is. If you need to change them here is a short description of what they do:
 >    >
 >    > The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two 
 >    > points) and Jaccard (defined as the size of the intersection divided by the size of the union of the sample sets)
 >    >
 >    > The second one is the sample size that will be used to perform clustering. 
->    > Indeed, the clara function is used to clustering large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
->    > more efficient. A fairly high value representative of the data is recommended. It is important to note that using too small a sample may result in loss of information compared to using the
+>    > Indeed, the clara function is used to cluster large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
+>    > more efficient. A fairly high value representative of the data is recommended. It is important to note that using a too small sample size may result in loss of information compared to using the
 >    > entire data set.
 >    > 
 >    {: .comment}
@@ -609,8 +605,8 @@ clustering process and makes the calculation more efficient.
 > 2. Check your outputs. You must have three files:
 >
 >    - SIH index plot (See example below.)
->    - Cluster points (Contains the latitude and longitude of the environmental pixel and the associated cluster number. We will use it in the next step of the workflow)
->    - Cluster info (Contains all the information related to the clusters created, that is, in column: the latitude, the longitude, the corresponding cluster number and for each taxon the prediction value.)
+>    - Cluster points (Contains the latitude and longitude of each "environmental pixel" and the associated cluster number. We will use it in the next step of the workflow)
+>    - Cluster info (Contains all the information related to the clusters created, that is, in column: the latitude, the longitude, the corresponding cluster number and for each taxon the prediction value)
 >
 {: .hands_on}
 
@@ -622,14 +618,14 @@ located at the border between two clusters. Here, in the graph below, there is a
 
 ![SIH plot](./Images/SIH_plot.png "SIH plot")
 
-## uild a ecoregionalization map with **EcoMap**
+## Build a ecoregionalization map with **EcoMap**
 
 > <hands-on-title> Run EcoMap </hands-on-title>
 >
 > 1. {% tool [EcoMap](toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_eco_map/ecoregion_eco_map/0.1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Source file (File 'cluster points' from previous step)"*: `cluster_points` (output of **ClaraClust** {% icon tool %})
 >
-> This tool simply need the previous step output "cluster points" file and can make a map representing ecoregions.
+> This tool simply need the previous step "Cluster points" output file to generate a map representing ecoregions.
 >
 > 2. Check output. You must have one Map representing ecoregions.
 >
@@ -641,4 +637,4 @@ This is the output map with our seven clusters representing ecoregions that you 
 
 # Conclusion
 
-Congratulations! You have successfully completed the ecoregionalization workflow. Here is the end of this tutorial aiming in explaining the purpose of the ecoregionalization workflow and how to use it. This workflow provides a systematic and reproducible approach to ecoregionalization, allowing researchers to identify distinct ecological regions based on species occurrences and environmental data.This tutorial shows how to use this workflow and its tools step by step or separately using the Dumont D'Urville sea region use case. It allows you to understand the ecoregion construction. You learn the use of the BRT algorithm for the modeling of species distribution as well as the cluster construction with the k-medoid clustering algorithms (CLARA/PAM). Feel free to explore and adapt this workflow for your specific research needs. If you have any questions or encounter issues during the workflow, refer to the provided documentation or seek assistance from the Galaxy community. Don't hesitate to contact us if you have any questions.
+Congratulations! You have successfully completed the ecoregionalization workflow. Here is the end of this tutorial aiming at explaining the purpose of the ecoregionalization workflow and how to use it. This workflow provides a systematic and reproducible approach to ecoregionalization, allowing researchers to identify distinct ecological regions based on species occurrences and environmental data. This tutorial shows how to use this workflow, step by step, or all in one using the Dumont D'Urville sea region use case with related datasets. It allows you to understand ecoregions construction. You learned the use of the BRT algorithm for modeling species distribution as well as the cluster construction with the k-medoid clustering algorithms (CLARA/PAM). Feel free to explore and adapt this workflow for your specific research needs. If you have any questions or encounter issues during the workflow, refer to the provided documentation or seek assistance from the Galaxy community. Don't hesitate to contact us if you have any questions.
