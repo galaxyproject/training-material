@@ -27,13 +27,13 @@ contributors:
 
 Microbiome analysis using amplicon sequencing is central to many ecological studies.
 The produced amplicon sequencing data are converted to OTU tables and represent the input 
-for the ampvis2 tool, where it can be visualised in various ways.`{% cite Andersen2018 %}`
+for the ampvis2 tool, where it can be visualised in various ways.{% cite Andersen2018 %}
 If you already have amplicon data produced and ready to feed in and visualise it, 
 then you can start with this tutorial. First of all you can put your data into a 
 rarefraction curve to explore reads against number of OTUs. Than you can input your
 data into subsets and finaly create a heatmap, or a boxplot, or an ordination plot
 or even a timeseries plot out of it. Most of them are described in 
-`{% cite ampvis-intro %}`
+{% cite ampvis-intro %}
 ![overview of visualisation methods](./images/overview.png 
 "Overview of posible visualisation methods (taken from: Introduction to ampvis2 by Kasper Skytte Andersen)")
 Your data need to be in an acceptable format for the ampvis_load tool. The tool 
@@ -81,7 +81,7 @@ To create a heatmap, or ordination plot, or boxplot we now use normalised data.
 ## heatmaps
 We now can use our data, put them in subsets and create ungrouped, or grouped output or
 even grouped with facets. 
-The subsets are based on variable we set and available in the metadata. `{% cite Andersen2018 %}`
+The subsets are based on variable we set and available in the metadata. {% cite Andersen2018 %}
 Note: in the next sections, we give you prepared workflows on Galaxy and the set of parameters to choose
 for running the indicated workflow. But some parameters are pre-chosen for you e.g. taxonomic level to 
 aggregate the OTUs.
@@ -128,8 +128,7 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 >
 {: .hands_on}
 
-![Running the workflow](./images/heatmap_no_group.png "Running the workflow, 
-choose the right datasets and mandatory parameters")
+![Running the workflow](./images/choose_parameters.png "Running the workflow, choose the right datasets and mandatory parameters")
 
 Choose the metadata variable as Plant and metadata values as Aalborg East & Aalborg West.
 In the next box you can see the resulting heatmap.
@@ -138,7 +137,7 @@ In the next box you can see the resulting heatmap.
 >
 > Result of the heatmap created with ungrouped data.
 > 
->![Result of the heatmap](./images/choose_parameters.png "Result of the heatmap")
+>![Result of the heatmap](./images/heatmap_no_group.png "Result of the heatmap")
 {: .details}
 
 > <details-title> metadata values error while running workflow </details-title>
@@ -156,9 +155,9 @@ In the next box you can see the resulting heatmap.
 ### heatmap (grouped)
 You can find the workflow "ampvis2 heatmap v2.0 (only group)" on Galaxy and use it for the tutorial.
 We used 2 different metadata subsets:
-1) metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+1) metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West 
    plus grouped by = Plant
-2) metadata we used for this subset: metadata variable = Period and metadata values = Winter & Summer.
+2) metadata we used for this subset: metadata variable = Period and metadata values = Winter & Summer 
    plus grouped by = Year
 
 > <hands-on-title> Run a workflow </hands-on-title>
@@ -189,9 +188,9 @@ We used 2 different metadata subsets:
 ### heatmap (grouped with facets)
 You can find the workflow "ampvis2 heatmap v1.0 (group+facet)" on Galaxy and use it for the tutorial.
 We used 2 different metadata subsets:
-1) metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+1) metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West 
    plus grouped by = Plant and facet by Period 
-2) metadata we used for this subset: metadata variable = Period and metadata values = Winter & Summer.
+2) metadata we used for this subset: metadata variable = Period and metadata values = Winter & Summer 
    plus grouped by = Year and facet by Period 
    
 
@@ -213,19 +212,17 @@ We used 2 different metadata subsets:
 >
 > Result of the first metadata subset heatmap created with grouped by Plant data and facet by Period.
 > 
->![Result of the heatmap](./images/heatmap_plant_period.png "Result of the heatmap created with 
-> grouped by _Plant_ and facet by _Period_")
+>![Result of the heatmap](./images/heatmap_plant_period.png "Result of the heatmap created with grouped by _Plant_ and facet by _Period_")
 > 
 > Result of the second metadata subset heatmap created with grouped by Year data.
 > 
->![Result of the heatmap](./images/heatmap_year_period.png "Result of the heatmap created with 
-> grouped by _Year_ and facet by _Period_")
+>![Result of the heatmap](./images/heatmap_year_period.png "Result of the heatmap created with grouped by _Year_ and facet by _Period_")
 > 
 {: .details}
 
 ## ordination plots
 We now can use our data, put them in subsets and create different plots by using different ordination methods. 
-Like with heatmaps, the subsets are based on variable we set and available in the metadata.`{% cite Andersen2018 %}`
+Like with heatmaps, the subsets are based on variable we set and available in the metadata.{% cite Andersen2018 %}
 Note: in the next sections, we give you prepared workflows on Galaxy and the set of parameters to choose
 for running the indicated workflow. But some parameters are pre-chosen for you e.g. ordination method, 
 transformation (if used) and others like to colour and label the points or frames.
@@ -280,7 +277,7 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 
 ## boxplot
 We now can use our data, put them in subsets and create a boxplot. 
-Like with heatmaps, the subsets are based on variable we set and available in the metadata. `{% cite Andersen2018 %}`
+Like with heatmaps, the subsets are based on variable we set and available in the metadata. {% cite Andersen2018 %}
 Note: in the prepared workflow on Galaxy we provide in this tutorial some parameters are pre-chosen for you 
 e.g. number of taxa to show. The samples are grouped by _Period_.
 Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
