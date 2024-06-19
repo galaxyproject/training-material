@@ -254,7 +254,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     >                - In *"FastQC output"*:
     >                    - {% icon param-repeat %} *"Insert FastQC output"*
     >                        - *"Type of FastQC output?"*: `Raw data`
-    >                        - {% icon param-files %} *"FastQC output"*: collection of `Raw data` outputs of **FastQC** {% icon tool %} done after fastp
+    >                        - {% icon param-files %} *"FastQC output"*: collection of `Raw data` output of **FastQC** {% icon tool %} done after **fastp**
     >        - {% icon param-repeat %} *"Insert Results"*
     >            - *"Which tool was used generate logs?"*: `fastp`
     >                - {% icon param-files %} *"Output of fastp"*: `JSON report` output of **fastp** {% icon tool %}
