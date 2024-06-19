@@ -27,7 +27,7 @@ contributors:
 
 Microbiome analysis using amplicon sequencing is central to many ecological studies.
 The produced amplicon sequencing data are converted to OTU tables and represent the input 
-for the ampvis tool, where it can be visualised in various ways.{% raw %} `{% cite Andersen2018 %}`{% endraw %}
+for the ampvis2 tool, where it can be visualised in various ways.{% raw %} `{% cite Andersen2018 %}`{% endraw %}
 If you already have amplicon data produced and ready to feed in and visualise it, 
 then you can start with this tutorial. First of all you can put your data into a 
 rarefraction curve to explore reads against number of OTUs. Than you can input your
