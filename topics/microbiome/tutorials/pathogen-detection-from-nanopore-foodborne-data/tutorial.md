@@ -195,7 +195,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     >            - {% icon param-files %} *"Data input files"*: `Samples` collection created from the imported Fastq.qz files
     >
     >    > <comment-title></comment-title>
-    >    > This step, as it does not require the results of FastQC to run, can be launched even if FastQC is not ready
+    >    > The `NanoPlot` step, as it does not require the results of FastQC to run, can be launched even if FastQC is not ready
     >    {: .comment}
     >
     > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
