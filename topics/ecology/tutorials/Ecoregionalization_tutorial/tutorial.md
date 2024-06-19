@@ -57,11 +57,11 @@ Let's delve into the tutorial, outlining each step and tool to manage the creati
 
 > <details-title>Some definitions to start</details-title>
 >
-> Ecoregionalization: The process by which a territory is classified into a category of areas that respond to the same environmental factors (including species). 
+> Ecoregionalization: The process by which a territory is classified into a category of area that respond to the same environmental factors taking into account species information. 
 >
 > Occurrences data: Data showing the presence of a species at a particular location.
 >
-> Environmental data: Environmental data are any measurements or information that describe environmental processes, location, or conditions.
+> Environmental data: Environmental data are any measurement or information that describe environmental processes, location, or conditions.
 > 
 > Boosted regression trees (BRT): Boosted Regression Trees is a kind of regression methodology based on Machine Learning. Unlike conventional regression methods (GLMs, GAMs), BRTs combine numerous basic decision trees to enhance the predictive performance. BRTs can handle complex relationships and interactions among predictors, and it is considered a robust technique that can control outliers and nonlinearity.
 > 
@@ -81,15 +81,15 @@ Let's delve into the tutorial, outlining each step and tool to manage the creati
 
 # Before starting 
 
-This part will present the type of data you need to run the ecoregionalization workflow. This data will be download in the next part of the tutorial. 
+This part will present the type of data you need to run the ecoregionalization workflow. This data will be downloaded in the next part of the tutorial. 
 
 ## Environmental data
 
-The first data you will need to run this workflow is environmental data. As defined above, environmental data are any measurements or information that describe environmental processes, location or conditions. This workflow accepts several types of environmental parameters like temperature or soil type. However, there is a mandatory file format, the tabular format (.tsv) and each pixel of the study area must be described in this file by associating latitude and longitude with environmental parameters.
+The first data you will need to run this workflow is environmental data. As defined above, environmental data are any measurement or information that describe environmental processes, location or conditions. This workflow accepts several types of environmental parameters like temperature or soil type. However, there is a mandatory file format, the tabular format (.tsv), and each pixel of the study area must be described in this file by associating latitude and longitude with environmental parameters.
 
-In the Dumont D'Urville sea region use case presented in this tutorial, seventeen abiotic and physical parameters of the Dumont D’Urville sea region are used. They were taken from oceanographic models and in situ measurements {% cite Hemery2011 %}. The physical oceanographic parameters are mean temperature and its standard deviation, mean salinity, and its standard deviation, mean current magnitude and its standard deviation, maximum current bearing, maximum current magnitude and sea ice production. Bathymetric parameters are depth, slope, and rugosity. And finally, the seabed substrate composition was characterized by percentages of biogenic carbonate, biogenic silica, gravel, sand, and mud.  
+In the Dumont D'Urville sea region use case presented in this tutorial, seventeen abiotic and physical parameters of the Dumont D’Urville sea region are used. They were taken from oceanographic models and in situ measurements {% cite Hemery2011 %}. The physical oceanographic parameters are mean temperature and its standard deviation, mean salinity and its standard deviation, mean current magnitude and its standard deviation, maximum current bearing, maximum current magnitude and sea ice production. Bathymetric parameters are depth, slope, and rugosity. And finally, the seabed substrate composition was characterized by percentages of biogenic carbonate, biogenic silica, gravel, sand, and mud.  
 
-This is an example of environmental file input in this workflow: 
+Here an example of environmental file input: 
 
 +------+------+---------+------+------+
 | long | lat  |  Carbo  | Grav | ...  |
@@ -105,11 +105,11 @@ This is an example of environmental file input in this workflow:
 
 The second data file you will need to run this workflow is an occurrences data file. As defined above, occurrences data are showing the presence (1) or absence (0) of a species at a particular location. This data file also needs to be in tabular format (.tsv) and need to be construct as following: 
 
-- Columns latitude and longitude.
+- latitude and longitude columns.
 
 - One column per taxon where each box corresponding to a geographical point is marked 1 if the taxon is present or 0 if the taxon is absent. 
 
-This is an example of occurrence data file input in this workflow:
+Here an example of occurrences data file input:
 
 +----------+-----------+------------------------+-----------+-----+
 |   lat    |   long    |Acanthorhabdus_fragilis | Acarnidae | ... | 
@@ -121,11 +121,11 @@ This is an example of occurrence data file input in this workflow:
 |   ...    |   ...     |...                     |    ...    | ... | 
 +----------+-----------+------------------------+-----------+-----+
 
-For this tutorial, occurrence data from the Dumont d'Urville sea region will be downloaded from the GBIF. These data were collected as part of the CEAMARC program (The Collaborative East Antarctic Marine Census {% cite Hosie_2011 %}) between December 2007 and January 2008 {% cite bea09 %}. Prior to its inclusion in GBIF, these data originated from collections at the Muséum national d’Histoire naturelle (MNHN – Paris). A GBIF filter was used to download only the data of interest, namely the data from the CEAMARC expedition from the Aurora Australis icebreaker. The selected occurrences are invertebrates. In the GBIF query, five collections were selected: the cnidarians collection (IK), the echinoderm collection (IE), the crustaceans collection (IU), the molluscs collection (IM), and the tunicates collection (IT), and only occurrences recorded by “IPEV-AAD-MNHN" which correspond to the CEAMARC expedition.
+For this tutorial, occurrences data from the Dumont d'Urville sea region will be downloaded from the GBIF. These data were collected as part of the CEAMARC program (The Collaborative East Antarctic Marine Census {% cite Hosie_2011 %}) between December 2007 and January 2008 {% cite bea09 %}. Prior to its inclusion in GBIF, these data originated from collections at the Muséum national d’Histoire naturelle (MNHN – Paris). A GBIF filter was used to download only the data of interest, namely the data from the CEAMARC expedition from the Aurora Australis icebreaker. The selected occurrences are invertebrates. In the GBIF query, five collections were selected: the cnidarians collection (IK), the echinoderm collection (IE), the crustaceans collection (IU), the molluscs collection (IM), and the tunicates collection (IT), and only occurrences recorded by “IPEV-AAD-MNHN" which correspond to the CEAMARC expedition.
 
 ## Jupyter notebook for the interactive JupyTool and notebook tool
 
-To switch from the occurrence data download from Gbif to the occurrence data supported by the ecoregionalisation workflow, the final step of data preparation use the Interactive JupyTool and notebook tool who need a jupyter notebook to work. In this Jupyter notebook, we used the pivot_wider function of the tidyr R package to transform our data into a wider format and adapted to subsequent analyses as part of the Galaxy workflow for ecoregionalization. This transformation allowed us to convert our data to a format where each taxon becomes a separate column. We also took care to fill in the missing values with zeros and to sum the individual counts in case of duplications. Then all data >= 1 are replaced by 1 to have only presence (1) or abscence (0) data.
+To switch from the occurrence data download from GBIF to the occurrence data supported by the ecoregionalisation workflow, the final step of data preparation use the Interactive JupyTool and notebook tool who need a jupyter notebook to work. In this Jupyter notebook, we used the pivot_wider function of the tidyr R package to transform our data into a wider format and adapted to subsequent analyses as part of the Galaxy workflow for ecoregionalization. This transformation allowed us to convert our data to a format where each taxon becomes a separate column. We also took care to fill in the missing values with zeros and to sum the individual counts in case of duplications. Then all data >= 1 are replaced by 1 to have only presence (1) or abscence (0) data.
 
 ## Get data
 
@@ -137,27 +137,30 @@ To switch from the occurrence data download from Gbif to the occurrence data sup
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Download from GBIF the occurrence data file.
+> 2. Import occurrence data file from GBIF [GBIF](https://doi.org/10.15468/dl.wjrk2b), environment file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/CYSKQG&version=1.0#) and Jupyter notebook file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/GIEAQN&version=1.0#)
 >
->    Import the occurrence file from [GBIF](https://doi.org/10.15468/dl.wjrk2b) into your local environment.
+>    ```
+>    [https://zenodo.org/record/5932108/files/wolf_tutorial.zip](https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip)
+>    https://data.indores.fr/api/access/datafile/9777 : "ceamarc_env.tab"
+>    https://data.indores.fr/api/access/datafile/9756 : "pivot_wider_jupytool_notebook.ipynb"
+>    ```
 >
->    This link allows you to download a zip file containing multiple information files about the dataset. The file that you need is the 'occurrence.txt' file that we will upload on Galaxy in the following step.
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Download the environment file and Jupyter notebook from InDoRES.
->
->    Import the environment file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/CYSKQG&version=1.0#) into your local environment.
->
->    Import the Jupyter notebook file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/GIEAQN&version=1.0#) into your local environment.
->
-> 4. Import the environment file, occurrence file and Jupyter notebook from your local environment to Galaxy.
->   
 >    {% snippet faqs/galaxy/datasets_import_from_remote_files.md %}
 >
-> 5. Rename the datasets if needed. 
+>
+> 3. The GBIF link allows you to download a zip file containing multiple information files about the dataset. The file that you need is the 'occurrence.txt' file that we will specifically extract on Galaxy in the following step.
+> 
+> 4. Use  {% tool [Unzip a file](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all GBIF archive files will be unzipped
+>
+> 5. Unhide the "occurence" data file then modify datatype to select the "tabular" one
+>
+> 6. Rename the datasets if needed, notably "9756" by "pivot_wider_jupytool_notebook.ipynb" and "9777" by "ceamarc_env.tab". 
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 6. Check that the datatype of the environment file and occurrence file are tabular.
+> 7. Check that the datatype of the environment file and occurrence file are tabular.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
@@ -165,8 +168,8 @@ To switch from the occurrence data download from Gbif to the occurrence data sup
 
 # Data formating
 
-The first step of this tutorial is data formatting because the Ecoregionalisation workflow, as said before, needs specific data format to be run. The occurrence file download from GBIF is not ready yet to 
-be included in the workflow so this part is used to be formatting it.
+The first step of this tutorial is data formatting because the Ecoregionalisation workflow, as said before, needs specific data format to be run. The GBIF species occurrence file is not ready yet to 
+be included in the workflow so this part is used to format it.
 
 ### Keep data columns that we need with **Advanced Cut**
 
@@ -184,11 +187,11 @@ be included in the workflow so this part is used to be formatting it.
 
 > <question-title></question-title>
 >
-> 1. What are the keeped columns ?
+> 1. What are the kept columns ?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The columns we have keeped are : indivdualCount, decimalLatitude, decimalLongitude, phylum, class, order, family, genus, specificEpithet.
+> > 1. The columns we kept are : indivdualCount, decimalLatitude, decimalLongitude, phylum, class, order, family, genus, specificEpithet.
 > >
 > {: .solution}
 >
@@ -210,7 +213,7 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >
 {: .hands_on}
 
-> <hands-on-title> Relace blank space by NAs for the second column </hands-on-title>
+> <hands-on-title> Replace blank space by NAs for the second column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `out_file1` (output of **Column Regex Find And Replace on the fisrt column** {% icon tool %})
@@ -222,7 +225,7 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >
 {: .hands_on}
 
-> <hands-on-title> Relace blank space by NAs for the third column </hands-on-title>
+> <hands-on-title> Replace blank space by NAs for the third column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `out_file2` (output of **Column Regex Find And Replace on the second column** {% icon tool %})
@@ -234,7 +237,7 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >
 {: .hands_on}
 
-> <hands-on-title> Relace blank space by NAs for the fourth column </hands-on-title>
+> <hands-on-title> Replace blank space by NAs for the fourth column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `out_file3` (output of **Column Regex Find And Replace on the third column** {% icon tool %})
