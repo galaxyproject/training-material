@@ -28,6 +28,17 @@ contributions:
   - pndb
   - fnso2019
 
+
+recordings:
+- captioners:
+  - onorvez
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 1H
+  youtube_id: rWfPr-5F3GQ
+  speakers:
+  - onorvez
+
 ---
 
 

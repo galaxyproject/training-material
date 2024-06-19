@@ -147,7 +147,7 @@ We should ONLY be using new_material (if at all possible.)
             {% endif %}
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
-            {% include _includes/resource-video-library.html label=true wrapper=true %}
+            {% include _includes/resource-recordings.html label=true wrapper=true %}
 
 
             {% if tuto_has_docker %}
@@ -424,8 +424,10 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                    </p>
                 </blockquote>
 
+		<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
                 {% if page.contributions %}
-                {% include _includes/funding-statement.md contributions=page.contributions %}
+                {% include _includes/funding-statement.md funders=page.contributions.funding %}
                 {% endif %}
 
 
@@ -510,7 +512,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 		    <ul>
 				{% for feed in feedback[1] %}
 				<li>
-					{{ feed.rating | to_stars }}: 
+					{{ feed.rating | to_stars }}:
 					{% if feed.pro %}<b>Liked</b>: {{ feed.pro }}{% endif %}
 					{% if feed.con %}<b>Disliked</b>: {{ feed.con }}{% endif %}
 				</li>
@@ -519,6 +521,24 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 		    {% endfor %}
 		</blockquote>
 
+		
+
+
+		{% assign upcoming_events = site | get_upcoming_events_for_this: new_material %}
+		{% assign upcoming_event_count = upcoming_events | size %}
+		{% if upcoming_event_count > 0 %}
+		<blockquote class="details hide-when-printing" id="upcoming-events">
+                  <div id="upcoming-events-c" class="box-title">
+                    <button type="button" aria-controls="upcoming-events-c" aria-expanded="false">
+                      <i class="fas fa-calendar" aria-hidden="true"></i>
+                      Upcoming events which cover this topic<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>Want to learn more with a live instructor? Check out these upcoming events:</p>
+		   {% include _includes/event-table.html events=upcoming_events campaign="via-tutorial" %}
+		</blockquote>
+		{% endif %}
 
                 </section>
 

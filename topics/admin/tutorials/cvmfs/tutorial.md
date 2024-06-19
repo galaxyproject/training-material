@@ -28,6 +28,17 @@ subtopic: data
 tags:
   - ansible
   - git-gat
+
+recordings:
+- captioners:
+  - slugger70
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 23M
+  youtube_id: X3iFMZP_fQ8
+  speakers:
+  - slugger70
+
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He

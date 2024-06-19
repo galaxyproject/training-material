@@ -13,6 +13,7 @@ data = `curl -sL "#{url}"`
 contributions_keys = %w[Authorship Editing Testing Infrastructure Translation Funding]
 
 data = CSV.parse(data, col_sep: "\t", headers: true, quote_char: '|')
+count = 0
 
 data.each do |row|
   # Parse
@@ -24,17 +25,18 @@ data.each do |row|
 
   # Skip some testing posts
   if (row['Title'] == 'TESTING') || (row['Title'] == "Wendi's Dog is the Best")
-    puts "Skipping #{filename} as it is a test post"
+    STDERR.puts "Skipping #{filename} as it is a test post"
     next
   end
 
   # Don't overwrite existing posts
   if File.exist?(filename)
-    puts "Skipping #{filename} as it already exists"
+    STDERR.puts "Skipping #{filename} as it already exists"
     next
   end
 
-  puts "Creating #{filename}"
+  STDERR.puts "Creating #{filename}"
+  count += 1
 
   post_metadata = {
     'title' => row['Title'],
@@ -69,3 +71,5 @@ data.each do |row|
     file.puts row['Blog Post'].gsub('  ', "\n\n")
   end
 end
+
+puts count

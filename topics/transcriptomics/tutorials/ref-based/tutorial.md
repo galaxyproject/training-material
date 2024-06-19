@@ -57,6 +57,26 @@ contributions:
     - lldelisle
   editing:
     - hexylena
+
+recordings:
+- youtube_id: AeiW3IItO_c
+  speakers:
+  - lldelisle
+  captioners:
+  - lldelisle
+  date: '2023-05-15'
+  galaxy_version: '23.01'
+  length: 2H50M
+- captioners:
+  - hexylena
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 2H30M
+  youtube_id: j4onRSN650A
+  speakers:
+  - bebatut
+
 ---
 
 
@@ -1196,7 +1216,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 > - sequencing depth (the "Million" part)
 > - gene length (the "Kilobase" part)
 >
-> Let's use the previous example to explain RPK, FPKM and TPM.
+> Let's use the previous example to explain RPKM, FPKM and TPM.
 >
 > For **RPKM** (Reads Per Kilobase Million),
 >

@@ -76,7 +76,7 @@ Firstly, we will retrieve the concatenated ePharmaLib subset representing *P. fa
 >
 > 1. Upload the dataset from the [Zenodo](https://zenodo.org) link provided to your Galaxy history.
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md link="hhttps://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md link="https://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar" %}
 >
 >    > <comment-title>ePharmaLib versions</comment-title>
 >    >

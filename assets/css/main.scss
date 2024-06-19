@@ -391,6 +391,10 @@ figure {
       height: auto;
   }
 
+  & > iframe {
+      margin: auto;
+  }
+
   figcaption {
     text-align: justify;
   }
@@ -441,7 +445,6 @@ div.language-diff .p {
 
 body > footer {
     margin-top: 5em;
-    text-align: center;
 }
 
 footer {
@@ -482,7 +485,7 @@ nav.navbar {
     }
 
     a.navbar-brand {
-	padding-right: 0.5em; // the image seems to work poorly with parent size calculations.
+	padding-right: 2.5em; // the image seems to work poorly with parent size calculations.
     }
 
     // Text decoration not necessary for accessibility here.
@@ -710,16 +713,20 @@ blockquote {
     white-space: pre-wrap;
 }
 
-.card:not(.setup-card){
+.card{
 	background: transparent;
 	border: 1px solid var(--border-light);
 	.card-title {
-		background: var(--brand-color);
-		border-bottom: 1px solid var(--border-light);
-		padding: 1.25rem;
 		color: var(--brand-color-contrast);
 		// margin-left: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
 		// margin-right: -15px;
+	}
+}
+
+.card:not(.setup-card){
+	.card-title {
+		background: var(--brand-color);
+		padding: 1.25rem;
 	}
 
 	.card-body {
@@ -1214,6 +1221,7 @@ nav[data-toggle='toc'] {
 	height: 8em;
 	margin-inline-end: 1em;
 	margin-bottom: 1em;
+    padding: 1em;
 
 	div.avatar {
 		display: flex;
@@ -1221,6 +1229,7 @@ nav[data-toggle='toc'] {
 
 		img.funder-avatar {
 			margin: 0;
+            padding: 0.5em;
 			max-height: 8em;
 			min-width: 8em;
 			max-width: 8em;
@@ -1337,6 +1346,10 @@ body {
 		display: none;
 	}
 
+	.hide-when-galaxy-proxy-active {
+		display: unset;
+	}
+
 	span.tool, span.workflow {
 		border: 1px solid #999;
 		padding: 2px;
@@ -1352,6 +1365,7 @@ body {
 body.galaxy-proxy-active {
 	.show-when-galaxy-proxy-active {
 		cursor: pointer;
+		display: unset;
 	}
 
 	.hide-when-galaxy-proxy-active {
@@ -1640,9 +1654,13 @@ $btn-pink: var(--keypoints-color);
 	padding: 0rem;
 }
 
+ul.no-bullets {
+	list-style: none;
+	padding-inline-start: 0;
+}
 ul.text-list, ol.text-list {
-    list-style: none;
-	  padding-inline-start: 0;
+	list-style: none;
+	padding-inline-start: 0;
 
     li {
         display: inline;
@@ -1717,31 +1735,6 @@ a[target="_blank"]::after {
 /* Not for figures where it's duplicated */
 figure > a[target="_blank"]::after {
 	content: unset;
-}
-
-.tutorials-list {
-/* Big */
-@media (min-width:768px) {
-    .duplicate {
-        display: none;
-    }
-}
-
-/* Skinny */
-@media (max-width:767px) {
-    table.table.table-responsive {
-        display: inline-table;
-    }
-    tr th:not(:first-child) {
-        display: none;
-    }
-    tr td:not(:first-child) {
-        display: none;
-    }r
-    .duplicate {
-        display: unset;
-    }
-}
 }
 
 // For the git-gat learning pathway boxes
@@ -1852,25 +1845,93 @@ section.event {
 
 }
 .nav-tabs {
+	// Tabs default to a text colour that isn't overridden somewhere else.
+
 	.nav-item {
 		margin-bottom: 0;
 		padding-bottom: 0;
-	}
-
-	button.nav-link{
-		border: none;
-		background: none;
-		font-size: 1.2rem;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
+		border: 1px solid transparent;
 
 		&:hover {
 			color: var(--hyperlink-hover);
+			border: 1px solid var(--hyperlink-hover);
 		}
 
-		&.active {
-			background: var(--overview-color);
-			color: white;
+		button.nav-link{
+			color: var(--text-color);
+			cursor: pointer;
+			background: none;
+			font-size: 1.2rem;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+
+			&:hover {
+				color: var(--hyperlink-hover);
+			}
+
+			&.active {
+				background: var(--overview-color);
+				border: 1px solid var(--overview-color);
+				color: white;
+			}
 		}
 	}
+
+}
+
+body[data-brightness="dark"] {
+	img.invert-safe {
+		filter: invert(1);
+	}
+
+	.modal-content {
+		button.close {
+			filter: invert(1);
+		}
+	}
+}
+
+.modal-dialog {
+	border: 1px solid var(--border);
+
+	.modal-content {
+		background: var(--color-background);
+	}
+}
+
+
+.recording {
+}
+
+.recording-video {
+    width: 75%;
+
+    iframe {
+      width:100%;
+      height: 100%;
+      aspect-ratio: 16 / 9;
+    }
+}
+
+.recording-metadata {
+    table tbody {
+      display: block;
+    }
+
+	table tr td {
+		padding: 0.3em;
+        width: 100%;
+        display: table-cell;
+	}
+	table tr td:first-child {
+		text-align: right;
+        display: table-cell;
+        width: 25%;
+	}
+    table tr td:nth-child(2) {
+		text-align: left;
+        display: table-cell;
+        width: 100%;
+	}
+
 }

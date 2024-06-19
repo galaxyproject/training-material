@@ -28,6 +28,17 @@ contributors:
   - pravs3683
 subtopic: multi-omics
 tags: [proteogenomics]
+
+recordings:
+- captioners:
+  - emmaleith
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 40M
+  youtube_id: b_kZf8mXHdo
+  speakers:
+  - jj-umn
+
 ---
 
 
