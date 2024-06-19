@@ -160,7 +160,7 @@ We will run all these steps using a single workflow, then discuss each step and 
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **Workflow 1: Nanopore Preprocessing** {% icon workflow %} using the following parameters
->    - *"Samples Profile"*: `PacBio/Oxford Nanopore read to reference mapping`
+>    - *"Samples Profile"*: `PacBio/Oxford Nanopore read to reference mapping`, which is the technique used for sequencing the samples.
 >
 >    - {% icon param-files %} *"Collection of all samples"*: `Samples` collection created from the imported Fastq.qz files
 >
@@ -296,7 +296,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
 Generally, we are not interested in the food (host) sequences, rather only those originating from the pathogen itself. It is an important to get rid of all host sequences and to only retain sequences that might include a pathogen, both in order to speed up further steps and to avoid host sequences compromising the analysis.
 
-In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as the host and the main pathogen.
+In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as the host and the main pathogen. If the host is not known, **Kraken2** with **Kalamari** database can be used to detect it.
 
 In this tutorial we use:
 1. Map reads to __chicken__ reference genome using **Map with minimap2** and **Chicken (Gallus gallus): galGal6** built in reference genome of __chicken__, and we move forward with the unmapped ones.
@@ -310,7 +310,7 @@ In this tutorial we use:
     >        - *"Using reference genome"*: `Chicken (Gallus gallus): galGal6`
     >    - *"Single or Paired-end reads"*: `Single`
     >        - {% icon param-file %} *"Select fastq dataset"*: `out1` (output of **fastp** {% icon tool %})
-    >        - *"Select a profile of preset options"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19) (map-pb)`
+    >        - *"Select a profile of preset options"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19) (map-pb)`, which is the technique used for sequencing the samples.
     >    - In *"Alignment options"*:
     >        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
     >
@@ -900,7 +900,7 @@ In this training, we are testing _Salmonella enterica_, with different strains o
 > <hands-on-title>Allele based Pathogenic Identification</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_allele_based_pathogen_identification.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/allele_based_pathogen_identification.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
