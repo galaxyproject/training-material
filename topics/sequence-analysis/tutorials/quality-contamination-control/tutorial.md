@@ -123,6 +123,40 @@ The datasets are both FASTQ files.
 > {: .solution}
 {: .question}
 
+{% include _includes/cyoa-choices.html option1="Step-by-step" option2="Workflow" default="Step-by-step" text="Do you want to go step-by-step or using a workflow?" disambiguation="workflow"%}
+
+<div class="Workflow" markdown="1">
+
+In this section we will run a Galaxy workflow that performs the following tasks with the following tools:
+1. Assess the reads quality before preprocessing it using [__FastQC__](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+2. Trimming and filtering reads by length and quality using **Fastp** ({% cite Chen2018 %}).
+3. Find witch microorgasnims are present using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) ({% cite Wood2014 %}).
+4. Extract the species level with **Bracken** (Bayesian Reestimation of Abundance after Classification with Kraken) ({% cite Lu.2017 %}).
+5. Detect minority organisms or contamination using **Recentrifuge** ({% cite marti2019recentrifuge %}).
+
+We will run all these steps using a single workflow, then discuss each step and the results in more detail.
+
+> <hands-on-title>Pre-Processing</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Quality_and_contamination_control_in_bacterial_isolate_using_Illumina_MiSeq_Data.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run **Workflow : Quality and contamination control in bacterial isolate using Illumina MiSeq Data** {% icon workflow %} using the following parameters
+>    - *"DRR187559_1"*: `DRR187559_1`, which is the forward read data.
+>
+>    - *"DRR187559_2"*: `DRR187559_2`, which is the reverse read data.
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
+
+The workflow will take some time. Once completed, results will be available in your history. While waiting, read the next sections for details on each workflow step and the corresponding outputs.
+</div>
+
+
 # Quality Control
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Adapters may also be present if the reads are longer than the fragments sequenced and trimming these may improve the number of reads mapped. **Sequence quality control is therefore an essential first step in any analysis.**
@@ -134,7 +168,7 @@ mainly used for long-read data, like ONT and PACBIO and FastQC for short read,
 like Illumina and Sanger. You can read more in our dedicated [Quality Control
 Tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
-Before doing any assembly, the first questions we should ask about the input
+Before doing any analysis, the first questions we should ask about the input
 reads include:
 
 - What is the coverage of my genome?
@@ -172,15 +206,6 @@ For each position, a boxplot is drawn with:
 - the mean quality, represented by the blue line
 
 For Illumina data it is normal that the first few bases are of some lower quality and how longer the reads get the worse the quality becomes. This is often due to signal decay or phasing during the sequencing run.
-
-
-Before doing any assembly, the first questions we should ask about the input
-reads include:
-
-- What is the coverage of my genome?
-- How good are my reads?
-- Do I need to ask/perform for a new sequencing run?
-- Is it suitable for the analysis I need to do?
 
 Depending on the analysis it could be possible that a certain quality or length
 is needed. In this case we are going to trim the data using **fastp** ({% cite Chen2018 %}):
@@ -460,7 +485,7 @@ To explore **Kraken** report and specially to detect more reliably minority orga
 >    - {% icon param-file %} *"Select taxonomy file tabular formated"*: **Classification** output of **Krancken2** {% icon tool %}
 >    - *"Type of input file (Centrifuge, CLARK, Generic, Kraken, LMAT)"*: `Kraken`
 >    - In *"Database type"*:
->        - *"Cached database whith taxa ID"*: latest
+>        - *"Cached database whith taxa ID"*: `NCBI-2023-06-27`
 >    - In *"Output options"*:
 >        - *"Type of extra output to be generated (default on CSV)"*: `TSV`
 >        - *"Remove the log file"*: `Yes`
