@@ -48,13 +48,13 @@ contributions:
   
     
 answer_histories: 
-    - label: "singlecell.usegalaxy.eu"
-      history: https://singlecell.usegalaxy.eu/u/camila-goclowski/h/seurattool-based-fpe
+    - label: "usegalaxy.eu"
+      history: https://usegalaxy.eu/u/camila-goclowski/h/seurattool-based-fpe
       date: 2024-06-03
 
 input_histories:
-    - label: "singlecell.usegalaxy.eu"
-      history: https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data
+    - label: "usegalaxy.eu"
+      history: https://usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data
 
 ---
 
