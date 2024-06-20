@@ -63,7 +63,9 @@ Like first exploration of your data, you can start with rarefraction curve.
 Rarefaction curves are the smoothen version of accumulation curves and symbolise 
 the means of all pooled samples and therefore display the measured species richness. 
 Rarefaction delivers proper curves for dataset comparison {% cite Gotelli2001 %}.
-For this part we need 'row' data, it shall not be normalised.
+> <comment-title>Note: </comment-title>
+> - for this part we need 'row' data, it shall not be normalised
+{: .comment}
 
 ## Title for a subsection
 ??? _to_do_
@@ -75,15 +77,21 @@ needs to be done..... _to_do_
 # Use case 1: heatmap, ordination plot or boxploot
 
 To create a heatmap, or ordination plot, or boxplot you can continue with your dataset.
-Note: we now use normalised data and a different dataset than for rarefraction curve.
+
+> <comment-title>Note: </comment-title>
+> - we now use normalised data and a different dataset than for rarefraction curve
+{: .comment}
 
 ## heatmaps
 We now can use our data, put them in subsets and create ungrouped, or grouped output or
 even grouped with facets. 
-The subsets are based on variable we set and available in the metadata. {% cite Andersen2018 %}
-Note: in the next sections, we give you prepared workflows on Galaxy and the set of parameters to choose
-for running the indicated workflow. But some parameters are pre-chosen for you e.g. taxonomic level to 
-aggregate the OTUs.
+The subsets are based on variable we set and available in the metadata {% cite Andersen2018 %}.
+> <comment-title>Note: </comment-title>
+> - in the next sections, we give you prepared workflows on Galaxy and the set of parameters to choose
+for running the indicated workflow
+> - some parameters are pre-chosen for you e.g. taxonomic level to 
+aggregate the OTUs
+{: .comment}
 
 ### heatmap (ungrouped)
 You can find the workflow "ampvis2 heatmap v3.0 (no group)" on Galaxy and use it for the tutorial.
@@ -109,7 +117,7 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype
+> 4. Check that the datatype is in the right format
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -145,9 +153,10 @@ In the next box you can see the resulting heatmap.
 > If it says: "parameter 'vals': an invalid option", then click on the button "Run
 > job again". The box is highlighted blue, you just select the values again in the drop down
 > menue and click the "Run Tool" above.
+>
 > Also note, the heatmap generation is paused. When all sets in history except heapmap becomes
-> green, expand the heapmap set and click on "Run jon again". You might have to choose the metadata
-> list again. Make shure you choose the freshly generated one. Once more "Run Tool" above.
+> green, expand the heapmap set and click on "Run job again". You might have to choose the metadata
+> list again. Make sure you choose the freshly generated one. Once more "Run Tool" above.
 > 
 {: .details}
 
@@ -177,11 +186,11 @@ We used 2 different metadata subsets:
 >
 > Result of the first metadata subset heatmap created with grouped by Plant data.
 > 
->![Result of the heatmap](./images/heatmap_gr_by_plant.png "Result of the heatmap created with grouped by _Plant_")
+>![Result of the heatmap](./images/heatmap_gr_by_plant.png "Result of the heatmap created with grouped by **_Plant_**")
 > 
 > Result of the second metadata subset heatmap created with grouped by Year data.
 > 
->![Result of the heatmap](./images/heatmap_gr_by_year.png "Result of the heatmap created with grouped by _Year_")
+>![Result of the heatmap](./images/heatmap_gr_by_year.png "Result of the heatmap created with grouped by **_Year_**")
 {: .details}
 
 ### heatmap (grouped with facets)
@@ -211,20 +220,24 @@ We used 2 different metadata subsets:
 >
 > Result of the first metadata subset heatmap created with grouped by Plant data and facet by Period.
 > 
->![Result of the heatmap](./images/heatmap_plant_period.png "Result of the heatmap created with grouped by _Plant_ and facet by _Period_")
+>![Result of the heatmap](./images/heatmap_plant_period.png "Result of the heatmap created with grouped by **_Plant_** and facet by **_Period_**")
 > 
 > Result of the second metadata subset heatmap created with grouped by Year data.
 > 
->![Result of the heatmap](./images/heatmap_year_period.png "Result of the heatmap created with grouped by _Year_ and facet by _Period_")
+>![Result of the heatmap](./images/heatmap_year_period.png "Result of the heatmap created with grouped by **_Year_** and facet by **_Period_**")
 > 
 {: .details}
 
 ## ordination plots
 We now can use our data, put them in subsets and create different plots by using different ordination methods. 
-Like with heatmaps, the subsets are based on variable we set and available in the metadata.{% cite Andersen2018 %}
-Note: in the next sections, we give you prepared workflows on Galaxy and the set of parameters to choose
-for running the indicated workflow. But some parameters are pre-chosen for you e.g. ordination method, 
-transformation (if used) and others like to colour and label the points or frames.
+Like with heatmaps, the subsets are based on variable we set and available in the metadata {% cite Andersen2018 %}.
+
+> <comment-title> Note: </comment-title>
+> - in the next sections, we give you prepared workflows on Galaxy and the set of parameters to choose
+for running the indicated workflow
+> - some parameters are pre-chosen for you e.g. ordination method, 
+transformation (if used) and others like to colour and label the points or frames
+{: .comment}
 
 ### ordination method: PCA
 You can find the workflow "ampvis2 ordination plot v1.0 (pca)" on Galaxy and use it for the tutorial.
@@ -242,7 +255,7 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 >![Result of the ordiantion plot](./images/ordination_pca.png "Result of the ordination plot created with the method PCA")
 {: .details}
 
-### ordination method: PCA plus trajectory: _date_
+### ordination method: PCA plus trajectory: _date_**
 You can find the workflow "ampvis2 ordination plot v1.1 (pca+trajectory_date)" on Galaxy and use it for the tutorial.
 Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
@@ -276,9 +289,13 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 
 ## boxplot
 We now can use our data, put them in subsets and create a boxplot. 
-Like with heatmaps, the subsets are based on variable we set and available in the metadata. {% cite Andersen2018 %}
-Note: in the prepared workflow on Galaxy we provide in this tutorial some parameters are pre-chosen for you 
-e.g. number of taxa to show. The samples are grouped by _Period_.
+Like with heatmaps, the subsets are based on variable we set and available in the metadata {% cite Andersen2018 %}.
+> <comment-title> Note: </comment-title>
+> - in the prepared workflow on Galaxy we provide in this tutorial some parameters are pre-chosen for you 
+e.g. number of taxa to show
+> - The samples are grouped by _Period_
+{: .comment}
+
 Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 > <comment-title></comment-title>
@@ -311,6 +328,7 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 Time series analysis is mainly known for forecasting. A time series can be seen as 
 an example of a random or stochastic process, which we can use to visualise seasonal 
 differences {% cite DeGooijer2006 %}. 
+
 In our dataset, and with the settings listed below, we can observe the 
 temporal evolution of the 3 most common microorganisms in the plants Aalborg East and Aalborg West 
 over the entire period data was collected.
@@ -318,7 +336,7 @@ over the entire period data was collected.
 ## create a time series plot
 You can find the workflow "ampvis2 timeseries v1.0" on Galaxy and use it for the tutorial.
 Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
-Time variable is mandatory here, as _Date_ is the only valid time variable we can select, we already pre-selected
+Time variable is mandatory here, as **_Date_** is the only valid time variable we can select, we already pre-selected
 it. And as Number of taxa to show becomes a bit messy (for this data set at least) we choose the number of 3. 
 
 > <comment-title></comment-title>
