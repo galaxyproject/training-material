@@ -106,69 +106,46 @@ Once the Pull Request is merged, the interactive table will be created and made 
 
 The interactive table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community. 
 
-Galaxy Tool Metadata Extractor provides 2 optional filters for tools:
-- A list of tools to exclude
-- A list of tools that should definitely be kept.
+Galaxy Tool Metadata Extractor allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you !).
 
-## Add a list of tools to exclude
+The additional filter must be stored in a file called  `tools_status.tsv` located in `data/community/<your community>`. The file must include 3 columns (without header):
+1. The `Galaxy wrapper id` corresponding to the IDs in the `tools.tsv` file in `results/<your community>`. 
+2. Whether the tool should be included in the final table (TRUE/FALSE). 
+3. Whether the tool is deprecated (TRUE/FALSE).
 
-> <hands-on-title>Add a list of tools to exclude</hands-on-title>
+Example of the `tools_status.tsv` file:
+```
+abacas	TRUE	FALSE
+abricate	TRUE	FALSE
+abritamr	TRUE	FALSE
+```
+
+Have a look on the [microGalaxy tool stats TSV](https://github.com/galaxyproject/galaxy_tool_metadata_extractor/blob/main/data/communities/microgalaxy/tool_status.tsv) for 
+an example of the file that is used to manually filter the tools for a community.
+
+## Add a tools status list 
+
+> <hands-on-title>Review tools in your community table</hands-on-title>
 >
-> 1. Open your interactive table
-> 2. Search for some tools to exclude
-> 3. Go to your community folder on [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor)
-> 4. Click on **Add file** drop-down menu on the top
-> 5. Select **Create a new file**
-> 6. Fill in `tools_to_exclude` in `Name of your file`
-> 7. Add the `Galaxy wrapper id` of the tools to exclude, with 1 tool identifier per row
-> 8. Submit your changes as before
-> 9. Wait for the Pull Request to be merged
->
-{: .hands_on}
-
-## Add a list of tools to keep
-
-> <hands-on-title>Add a list of tools to keep</hands-on-title>
->
-> 1. Open your interactive table
-> 2. Search for some tools to keep
-> 3. Go to your community folder on [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor)
-> 4. Click on **Add file** drop-down menu on the top
-> 5. Select **Create a new file**
-> 6. Fill in `tools_to_keep` in `Name of your file`
-> 7. Add the `Galaxy wrapper id` of the tools to keep, with 1 tool identifier per row
-> 8. Submit your changes as before
-> 9. Wait for the Pull Request to be merged
->
-{: .hands_on}
-
-## Review all tools in your table
-
-Once the required filters have been implemented, you can review the full list of tools to ensure that you have created an interactive table reflecting the Galaxy tool landscape for your community.
-
-> <hands-on-title>Review all tools in your table</hands-on-title>
->
-> 1. Download the `tools.tsv` file in `results/<your community>`
-> 2. Open `tools.tsv` with a Spreadsheet Software
+> 1. Download the `tools.tsv` file in `results/<your community>`.
+> 2. Open `tools.tsv` with a Spreadsheet Software.
 > 3. Review each line corresponding to a tool
->    1. Change the value in the `Reviewed` column from `False` to `True`
->    2. Add `True` to the `To keep` column if the tool should be kept, and `False` if not
-> 4. Extract the list of tools to keep
->    1. Create a sheet for the list of tools to keep to
->       1. Filter on the `To keep` column to keep value `True`
->       2. Keep only the `Galaxy wrapper id` column
->    2. Add this list of `Galaxy wrapper id` to the `tools_to_keep` file
-> 5. Extract the list of tools to exclude
->    1. Create a sheet for the list of tools to keep to
->       1. Filter on the `To keep` column to keep value `False`
->       2. Keep only the `Galaxy wrapper id` column
->    2. Add this list of `Galaxy wrapper id` to the `tools_to_exclude` file
-> 6. Submit the changes
+       
+       You can also just review some tools. Those tools that are not reviewed will be have `FALSE` in the `Reviewed` columns the updated table.
+>    1. Change the value in the `Reviewed` column from `FALSE` to `TRUE` (this will be done automatically if an entry of the tool in `tools_status.tsv` exists).
+>    2. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not.
+>    3. Add `TRUE` or `FALSE` also to the `Deprecated` column.
+> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` column in a new table (in that order).
+
+       This can also be done using the reference function of your Spreadsheet Software.
+> 5. Export the new table as TSV (without header).
+> 6. Submit the TSV as `tools_status.tsv` in your community folder.
 > 7. Wait for the Pull Request to be merged
 >
 {: .hands_on}
 
-You should have now an interactive table reflecting the Galaxy tool landscape for your community.
+You should have now an interactive table reflecting the Galaxy tool landscape for your community. You can step-by-step review all tools in your community and update the `tools_status.tsv` file. You could also share this file with your community members and discuss weather the tool should be kept or not. Collaborative work could be established using google spreadsheet.
+
 
 # Embed the interactive table in your community page on the Hub
 
