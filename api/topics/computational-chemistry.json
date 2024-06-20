@@ -115,31 +115,30 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
-      "draft": true,
-      "title": "Running molecular dynamics simulations using NAMD",
-      "zenodo_link": "https://zenodo.org/record/3234841",
+      "title": "Analysis of molecular dynamics simulations",
+      "zenodo_link": "https://zenodo.org/record/2537734",
       "level": "Intermediate",
       "questions": [
-        "How do I use the NAMD engine in Galaxy?",
-        "What is the correct procedure for performing a simple molecular dynamics simulation of a protein?"
+        "Which analysis tools are available?"
       ],
       "objectives": [
-        "Learn about the NAMD engine provided in BRIDGE"
+        "Learn which analysis tools are available.",
+        "Analyse a protein and discuss the meaning behind each analysis."
       ],
       "requirements": [
         {
           "type": "internal",
           "topic_name": "computational-chemistry",
           "tutorials": [
-            "setting-up-molecular-systems"
+            "setting-up-molecular-systems",
+            "md-simulation-namd"
           ]
         }
       ],
-      "time_estimation": "3H",
+      "time_estimation": "1H",
       "key_points": [
-        "Several MD engines are available in BRIDGE",
-        "Workflows are available for common simulations tasks such as equilibration and production dynamics for various ensembles (NVT, NPT)",
-        "You've run an equilibrium and production MD simulation using NAMD"
+        "Multiple analyses including timeseries, RMSD, PCA are available",
+        "Analysis tools allow a further chemical understanding of the system"
       ],
       "follow_up_training": [
         {
@@ -176,221 +175,118 @@
           "id": "simonbray",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
+        },
+        {
+          "name": "Nadia Goué",
+          "email": "nadia.goue@uca.fr",
+          "orcid": "0000-0003-2750-1473",
+          "joined": "2019-07",
+          "id": "nagoue",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nagoue.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nagoue/"
         }
       ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
       },
-      "short_id": "T00052",
-      "url": "/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html",
+      "short_id": "T00047",
+      "url": "/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html",
       "topic_name": "computational-chemistry",
-      "tutorial_name": "md-simulation-namd",
-      "dir": "topics/computational-chemistry/tutorials/md-simulation-namd",
+      "tutorial_name": "analysis-md-simulations",
+      "dir": "topics/computational-chemistry/tutorials/analysis-md-simulations",
       "symlink": null,
-      "id": "computational-chemistry/md-simulation-namd",
+      "id": "computational-chemistry/analysis-md-simulations",
       "hands_on": true,
       "slides": false,
       "mod_date": "2023-11-03 14:30:27 +0000",
       "pub_date": "2019-06-03 07:41:49 +0000",
-      "version": 22,
+      "version": 32,
       "workflows": [
         {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow.ga",
-          "path": "topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow.ga",
-          "wfid": "computational-chemistry-md-simulation-namd",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-md-simulation-namd/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "MD NAMD",
-          "title": "MD NAMD",
-          "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"System Setup\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Energy Minimizer\"];\n  2 -->|setup_crd| 3;\n  2 -->|setup_psf| 3;\n  2 -->|structure_prm| 3;\n  4[\"NAMD MD Simulator NVT\"];\n  3 -->|pdbout| 4;\n  3 -->|pmespec| 4;\n  3 -->|xplorpsfout| 4;\n  3 -->|bbrmsd| 4;\n  3 -->|scrmsd| 4;\n  3 -->|subsrmsd| 4;\n  2 -->|structure_prm| 4;\n  5[\"NAMD MD Simulator NPT\"];\n  3 -->|pdbout| 5;\n  3 -->|pmespec| 5;\n  3 -->|xplorpsfout| 5;\n  4 -->|coorout| 5;\n  4 -->|velout| 5;\n  4 -->|xscout| 5;\n  2 -->|structure_prm| 5;"
-        },
-        {
-          "workflow": "main_workflow_charmmgui.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow_charmmgui.ga",
-          "path": "topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow_charmmgui.ga",
-          "wfid": "computational-chemistry-md-simulation-namd",
-          "wfname": "main_workflow_charmmgui",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-md-simulation-namd/versions/main_workflow_charmmgui",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "NAMD MD From CHARMM GUI",
-          "title": "NAMD MD From CHARMM GUI",
-          "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"NAMD MD Simulator NVT\"];\n  0 -->|output| 4;\n  2 -->|output| 4;\n  1 -->|output| 4;\n  3 -->|output| 4;\n  5[\"NAMD MD Simulator NPT\"];\n  0 -->|output| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  4 -->|coorout| 5;\n  4 -->|velout| 5;\n  4 -->|xscout| 5;\n  3 -->|output| 5;"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.json",
-      "tools": [
-        "minimizer",
-        "namd_npt",
-        "namd_nvt",
-        "setup"
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Computational chemistry",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "tags": [
-        "work-in-progress"
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Protein target prediction of a bioactive ligand with Align-it and ePharmaLib",
-      "level": "Intermediate",
-      "zenodo_link": "https://zenodo.org/record/6055897",
-      "questions": [
-        "What is a pharmacophore model?",
-        "How can I perform protein target prediction with a multi-step workflow or the one-step Zauberkugel workflow?"
-      ],
-      "objectives": [
-        "Create an SMILES file of a bioactive ligand.",
-        "Screen the query ligand against a pharmacophore library.",
-        "Analyze the results of the protein target prediction."
-      ],
-      "time_estimation": "2H",
-      "key_points": [
-        "A pharmacophore is an abstract description of the molecular features of a bioactive ligand.",
-        "Pharmacophore-based target prediction is an efficient and cost-effective method."
-      ],
-      "contributors": [
-        {
-          "name": "Aurélien F. A. Moumbock",
-          "email": "amaf.aurelien@yahoo.com",
-          "orcid": "0000-0002-6034-2016",
-          "twitter": "FMoumbock",
-          "joined": "2022-02",
-          "id": "aurelienmoumbock",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/aurelienmoumbock.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/aurelienmoumbock/"
-        },
-        {
-          "name": "Simon Bray",
-          "joined": "2019-05",
-          "elixir_node": "de",
-          "former_affiliations": [
-            "uni-freiburg",
-            "elixir-europe"
-          ],
-          "id": "simonbray",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
-        }
-      ],
-      "js_requirements": {
-        "mathjax": 6049,
-        "mermaid": false
-      },
-      "short_id": "T00054",
-      "url": "/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html",
-      "topic_name": "computational-chemistry",
-      "tutorial_name": "zauberkugel",
-      "dir": "topics/computational-chemistry/tutorials/zauberkugel",
-      "symlink": null,
-      "id": "computational-chemistry/zauberkugel",
-      "hands_on": true,
-      "slides": false,
-      "mod_date": "2024-06-11 12:02:02 +0000",
-      "pub_date": "2022-02-15 13:56:40 +0000",
-      "version": 23,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga",
-          "path": "topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga",
-          "wfid": "computational-chemistry-zauberkugel",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-zauberkugel/versions/main_workflow",
+          "workflow": "advanced_workflow.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.ga",
+          "path": "topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.ga",
+          "wfid": "computational-chemistry-analysis-md-simulations",
+          "wfname": "advanced_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-analysis-md-simulations/versions/advanced_workflow",
           "license": "MIT",
           "creators": [
             {
               "class": "Person",
-              "email": "mailto:amaf.aurelien@yahoo.com",
-              "identifier": "https://orcid.org/0000-0002-6034-2016",
-              "name": "Aurélien F. A. Moumbock"
-            },
-            {
-              "class": "Organization",
-              "name": "Albert-Ludwigs-Universität Freiburg"
+              "identifier": "",
+              "name": "Chris Barnett"
             }
           ],
-          "name": "Zauberkugel",
-          "title": "Zauberkugel",
+          "name": "Analysis using MDAnalysis",
+          "title": "Analysis using MDAnalysis",
           "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nQuery ligand\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPharmacophore library\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Ligand ionization state generation\"];\n  0 -->|output| 2;\n  3[\"Splitting ePharmaLib into individual pharmacophores\"];\n  1 -->|output| 3;\n  4[\" Low-energy ligand conformer search\"];\n  2 -->|outfile| 4;\n  5[\"Pharmacophore alignment\"];\n  4 -->|outfile| 5;\n  3 -->|list_output_generic| 5;\n  6[\"Concatenating the pharmacophore alignment scores\"];\n  5 -->|score_result_file| 6;\n  7[\"Ranking the predicted protein targets according to the Tversky index 10th column\"];\n  6 -->|out_file1| 7;"
+          "modified": "2024-06-20 00:05:26 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nDCD input\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPDB input\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"RDF Analysis\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  ab90456f-d7ae-4fb1-ba2f-978a59791acc[\"Output\\nRDF Analysis plot\"];\n  2 --> ab90456f-d7ae-4fb1-ba2f-978a59791acc;\n  style ab90456f-d7ae-4fb1-ba2f-978a59791acc stroke:#2c3143,stroke-width:4px;\n  1ee2fe4a-0e50-4a4f-828e-3b60d75120e7[\"Output\\nRDF Analysis raw data\"];\n  2 --> 1ee2fe4a-0e50-4a4f-828e-3b60d75120e7;\n  style 1ee2fe4a-0e50-4a4f-828e-3b60d75120e7 stroke:#2c3143,stroke-width:4px;\n  3[\"Cosine Content\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  5ca6c423-961b-4a55-a821-794a0d311e41[\"Output\\nCosine Content raw data\"];\n  3 --> 5ca6c423-961b-4a55-a821-794a0d311e41;\n  style 5ca6c423-961b-4a55-a821-794a0d311e41 stroke:#2c3143,stroke-width:4px;\n  7854cbf9-187f-4117-b494-73a5a404d06f[\"Output\\nCosine Content plot\"];\n  3 --> 7854cbf9-187f-4117-b494-73a5a404d06f;\n  style 7854cbf9-187f-4117-b494-73a5a404d06f stroke:#2c3143,stroke-width:4px;\n  4[\"Ramachandran Plots\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  aa7afa97-8be6-4e6b-ad2c-5715f3c10362[\"Output\\nRamachandran Plot\"];\n  4 --> aa7afa97-8be6-4e6b-ad2c-5715f3c10362;\n  style aa7afa97-8be6-4e6b-ad2c-5715f3c10362 stroke:#2c3143,stroke-width:4px;\n  178f112a-eb0b-4299-aff5-69efd9ffb52b[\"Output\\nRamachandran Plot raw data\"];\n  4 --> 178f112a-eb0b-4299-aff5-69efd9ffb52b;\n  style 178f112a-eb0b-4299-aff5-69efd9ffb52b stroke:#2c3143,stroke-width:4px;\n  5[\"Distance Analysis\"];\n  0 -->|output| 5;\n  1 -->|output| 5;\n  eac670fb-f01e-49cd-a103-828a15149f48[\"Output\\nDistance Analysis raw data\"];\n  5 --> eac670fb-f01e-49cd-a103-828a15149f48;\n  style eac670fb-f01e-49cd-a103-828a15149f48 stroke:#2c3143,stroke-width:4px;\n  6605884d-7bfa-4f43-bbc6-2352256d2bc7[\"Output\\nDistance Analysis plot\"];\n  5 --> 6605884d-7bfa-4f43-bbc6-2352256d2bc7;\n  style 6605884d-7bfa-4f43-bbc6-2352256d2bc7 stroke:#2c3143,stroke-width:4px;\n  6[\"Dihedral Analysis\"];\n  0 -->|output| 6;\n  1 -->|output| 6;\n  755dbb99-3e3e-425b-a4b2-e375df6e39b4[\"Output\\nDihedral Analysis plot\"];\n  6 --> 755dbb99-3e3e-425b-a4b2-e375df6e39b4;\n  style 755dbb99-3e3e-425b-a4b2-e375df6e39b4 stroke:#2c3143,stroke-width:4px;\n  e0234472-cc44-483e-997b-8b0e0719c8d7[\"Output\\nDihedral Analysis raw data\"];\n  6 --> e0234472-cc44-483e-997b-8b0e0719c8d7;\n  style e0234472-cc44-483e-997b-8b0e0719c8d7 stroke:#2c3143,stroke-width:4px;"
+        },
+        {
+          "workflow": "main_workflow.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/main_workflow.ga",
+          "path": "topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/main_workflow.ga",
+          "wfid": "computational-chemistry-analysis-md-simulations",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-analysis-md-simulations/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "Simple Analysis",
+          "title": "Simple Analysis",
+          "test_results": null,
+          "modified": "2024-06-20 00:05:26 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nprotein_mdsimulation_dcd\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nprotein_pdb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"RMSD Analysis\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  6de2beaf-f80e-4788-8598-229a1c582757[\"Output\\nrmsd_tabular_output\"];\n  2 --> 6de2beaf-f80e-4788-8598-229a1c582757;\n  style 6de2beaf-f80e-4788-8598-229a1c582757 stroke:#2c3143,stroke-width:4px;\n  3[\"RMSF Analysis\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  1f2d715d-230a-4ec5-a509-e8ae501e7634[\"Output\\nrmsf_tabular_output\"];\n  3 --> 1f2d715d-230a-4ec5-a509-e8ae501e7634;\n  style 1f2d715d-230a-4ec5-a509-e8ae501e7634 stroke:#2c3143,stroke-width:4px;\n  4[\"PCA\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  92b7a40f-9ffc-4f56-8cf3-deec52e7b8b5[\"Output\\npca_tabular_output\"];\n  4 --> 92b7a40f-9ffc-4f56-8cf3-deec52e7b8b5;\n  style 92b7a40f-9ffc-4f56-8cf3-deec52e7b8b5 stroke:#2c3143,stroke-width:4px;"
         }
       ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/zauberkugel/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.json",
       "tools": [
-        "sort1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1"
+        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/0.19",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_dihedral/mdanalysis_dihedral/0.19",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_distance/mdanalysis_distance/0.19",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_ramachandran_plot/mdanalysis_ramachandran_plot/0.1.3",
+        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_rdf/mdanalysis_rdf/0.19"
       ],
       "supported_servers": {
         "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": false
+          },
           {
             "url": "https://usegalaxy.cz/",
             "name": "UseGalaxy.cz",
             "usegalaxy": false
           },
           {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
           }
-        ],
-        "inexact": [
-
         ]
       },
       "topic_name_human": "Computational chemistry",
@@ -400,43 +296,85 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "align_it",
-            "owner": "bgruening",
-            "revisions": "06d9381593a4",
+            "name": "bio3d_pca",
+            "owner": "chemteam",
+            "revisions": "994c509873db",
             "tool_panel_section_label": "ChemicalToolBox",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "openbabel_addh",
-            "owner": "bgruening",
-            "revisions": "6e4b7e0c61a6",
+            "name": "bio3d_pca",
+            "owner": "chemteam",
+            "revisions": "24867ab16f36",
             "tool_panel_section_label": "ChemicalToolBox",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "rdconf",
-            "owner": "bgruening",
-            "revisions": "5c501eb8d56c",
+            "name": "bio3d_rmsd",
+            "owner": "chemteam",
+            "revisions": "f871c9a8cb7c",
             "tool_panel_section_label": "ChemicalToolBox",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "split_file_to_collection",
-            "owner": "bgruening",
-            "revisions": "6cbe2f30c2d7",
-            "tool_panel_section_label": "Collection Operations",
+            "name": "bio3d_rmsd",
+            "owner": "chemteam",
+            "revisions": "77e28e1da9f4",
+            "tool_panel_section_label": "ChemicalToolBox",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Text Manipulation",
+            "name": "bio3d_rmsf",
+            "owner": "chemteam",
+            "revisions": "4354d92dc1aa",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bio3d_rmsf",
+            "owner": "chemteam",
+            "revisions": "6bcb804a54c3",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "mdanalysis_cosine_analysis",
+            "owner": "chemteam",
+            "revisions": "ebeb72aa39a8",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "mdanalysis_dihedral",
+            "owner": "chemteam",
+            "revisions": "554f60da9c8f",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "mdanalysis_distance",
+            "owner": "chemteam",
+            "revisions": "489b25966bb9",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "mdanalysis_ramachandran_plot",
+            "owner": "chemteam",
+            "revisions": "d710c7f00ae6",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "mdanalysis_rdf",
+            "owner": "chemteam",
+            "revisions": "49dac57d004a",
+            "tool_panel_section_label": "ChemicalToolBox",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: align_it\n  owner: bgruening\n  revisions: 06d9381593a4\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_addh\n  owner: bgruening\n  revisions: 6e4b7e0c61a6\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rdconf\n  owner: bgruening\n  revisions: 5c501eb8d56c\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: split_file_to_collection\n  owner: bgruening\n  revisions: 6cbe2f30c2d7\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bio3d_pca\n  owner: chemteam\n  revisions: 994c509873db\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_pca\n  owner: chemteam\n  revisions: 24867ab16f36\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_rmsd\n  owner: chemteam\n  revisions: f871c9a8cb7c\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_rmsd\n  owner: chemteam\n  revisions: 77e28e1da9f4\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_rmsf\n  owner: chemteam\n  revisions: 4354d92dc1aa\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_rmsf\n  owner: chemteam\n  revisions: 6bcb804a54c3\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_cosine_analysis\n  owner: chemteam\n  revisions: ebeb72aa39a8\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_dihedral\n  owner: chemteam\n  revisions: 554f60da9c8f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_distance\n  owner: chemteam\n  revisions: 489b25966bb9\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_ramachandran_plot\n  owner: chemteam\n  revisions: d710c7f00ae6\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_rdf\n  owner: chemteam\n  revisions: 49dac57d004a\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "slides_recordings": false,
@@ -452,8 +390,8 @@
       "license": "CC-BY-4.0",
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/zauberkugel/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/zauberkugel/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.json"
       }
     },
     {
@@ -531,7 +469,7 @@
           "name": "GROMACS Training Workflow",
           "title": "GROMACS Training Workflow",
           "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
+          "modified": "2024-06-20 00:05:26 +0000",
           "mermaid": "flowchart TD\n  0[\"Get PDB file\"];\n  1[\"Search in textfiles\"];\n  0 -->|output| 1;\n  2[\"GROMACS initial setup\"];\n  1 -->|output| 2;\n  3[\"GROMACS structure configuration\"];\n  2 -->|output2| 3;\n  4[\"GROMACS solvation and adding ions\"];\n  2 -->|output1| 4;\n  3 -->|output| 4;\n  5[\"GROMACS energy minimization\"];\n  4 -->|output2| 5;\n  4 -->|output1| 5;\n  6[\"NVT equilibration\"];\n  2 -->|output3| 6;\n  4 -->|output2| 6;\n  5 -->|output1| 6;\n  7[\"NPT equilibration\"];\n  2 -->|output3| 7;\n  4 -->|output2| 7;\n  6 -->|output1| 7;\n  6 -->|output5| 7;\n  8[\"MD simulation\"];\n  4 -->|output2| 8;\n  7 -->|output1| 8;\n  7 -->|output5| 8;\n  027305f5-213b-40af-8e2b-c376d5d2e294[\"Output\\nxtc_output\"];\n  8 --> 027305f5-213b-40af-8e2b-c376d5d2e294;\n  style 027305f5-213b-40af-8e2b-c376d5d2e294 stroke:#2c3143,stroke-width:4px;\n  e745fd4c-f607-4215-84e4-c62587c8c07a[\"Output\\ngro_output\"];\n  8 --> e745fd4c-f607-4215-84e4-c62587c8c07a;\n  style e745fd4c-f607-4215-84e4-c62587c8c07a stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -705,562 +643,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Protein-ligand docking",
-      "level": "Intermediate",
-      "zenodo_link": "",
-      "questions": [
-        "What is cheminformatics?",
-        "What is protein-ligand docking?",
-        "How can I perform a simple docking workflow in Galaxy?"
-      ],
-      "objectives": [
-        "Create a small compound library using the ChEMBL database",
-        "Dock a variety of ligands to the active site of the Hsp90 protein"
-      ],
-      "time_estimation": "3H",
-      "key_points": [
-        "Docking allows 'virtual screening' of drug candidates",
-        "Molecular fingerprints encode features into a bitstring",
-        "The ChemicalToolbox contains many tools for cheminformatics analysis"
-      ],
-      "contributors": [
-        {
-          "name": "Simon Bray",
-          "joined": "2019-05",
-          "elixir_node": "de",
-          "former_affiliations": [
-            "uni-freiburg",
-            "elixir-europe"
-          ],
-          "id": "simonbray",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
-        }
-      ],
-      "js_requirements": {
-        "mathjax": 16452,
-        "mermaid": false
-      },
-      "short_id": "T00048",
-      "url": "/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html",
-      "topic_name": "computational-chemistry",
-      "tutorial_name": "cheminformatics",
-      "dir": "topics/computational-chemistry/tutorials/cheminformatics",
-      "symlink": null,
-      "id": "computational-chemistry/cheminformatics",
-      "hands_on": true,
-      "slides": false,
-      "mod_date": "2023-11-03 14:30:27 +0000",
-      "pub_date": "2019-10-19 00:16:01 +0000",
-      "version": 23,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/workflows/main_workflow.ga",
-          "path": "topics/computational-chemistry/tutorials/cheminformatics/workflows/main_workflow.ga",
-          "wfid": "computational-chemistry-cheminformatics",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-cheminformatics/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "CTB Workflow",
-          "title": "CTB Workflow",
-          "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
-          "mermaid": "flowchart TD\n  11[\"Compound Search\"];\n  5 -->|outfile| 11;\n  13[\"Remove duplicated molecules\"];\n  5 -->|outfile| 13;\n  19[\"Remove counterions and fragments\"];\n  13 -->|outfile| 19;\n  2[\"Online data\"];\n  29[\"Filter\"];\n  19 -->|outfile| 29;\n  30[\"Compound Convert\"];\n  19 -->|outfile| 30;\n  31[\"Molecules to Fingerprints\"];\n  19 -->|outfile| 31;\n  39[\"Natural Product\"];\n  29 -->|outfile| 39;\n  40[\"Molecules to Fingerprints\"];\n  29 -->|outfile| 40;\n  44[\"NxN Clustering\"];\n  40 -->|outfile| 44;\n  5[\"Change Title\"];\n  2 -->|output| 5;"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/cheminformatics/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina/docking/1.1.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_box/prepare_box/2021.03.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_receptor/prepare_receptor/1.5.7+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/chembl/chembl/0.10.1+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_butina_clustering/1.5",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/0.2.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_nxn_clustering/0.4",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_nxn_clustering/1.5.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/chemical_data_sources/ctb_online_data_fetch/0.2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/fpocket/fpocket/3.1.4.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/natural_product_likeness/ctb_np-likeness-calculator/2.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_change_title/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_compound_convert/0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_filter/1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_obgrep/0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_remDuplicates/1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_remIons/1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_svg_depiction/openbabel_svg_depiction/3.1.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/sdf_to_tab/sdf_to_tab/2020.03.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Computational chemistry",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "autodock_vina",
-            "owner": "bgruening",
-            "revisions": "7a871df65202",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "autodock_vina_prepare_box",
-            "owner": "bgruening",
-            "revisions": "668c60aa4799",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "autodock_vina_prepare_receptor",
-            "owner": "bgruening",
-            "revisions": "05a13d377b28",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "chembl",
-            "owner": "bgruening",
-            "revisions": "a446ea7e2bc1",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "chemfp",
-            "owner": "bgruening",
-            "revisions": "73de2fe4bf92",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "chemfp",
-            "owner": "bgruening",
-            "revisions": "43a9e7d9b24f",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "chemfp",
-            "owner": "bgruening",
-            "revisions": "73de2fe4bf92",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "chemfp",
-            "owner": "bgruening",
-            "revisions": "e3a7d6cc87af",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "chemfp",
-            "owner": "bgruening",
-            "revisions": "73de2fe4bf92",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "chemical_data_sources",
-            "owner": "bgruening",
-            "revisions": "c2055dd1927b",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fpocket",
-            "owner": "bgruening",
-            "revisions": "4fb73be7f4cb",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "get_pdb",
-            "owner": "bgruening",
-            "revisions": "538790c6c21b",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "natural_product_likeness",
-            "owner": "bgruening",
-            "revisions": "6052dd3fa475",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "openbabel_compound_convert",
-            "owner": "bgruening",
-            "revisions": "e2c36f62e22f",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "openbabel_svg_depiction",
-            "owner": "bgruening",
-            "revisions": "7672039a0bb0",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "sdf_to_tab",
-            "owner": "bgruening",
-            "revisions": "4beb3e026bbb",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Text Manipulation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "f46f0e4f75c4",
-            "tool_panel_section_label": "Text Manipulation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Text Manipulation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "collapse_collections",
-            "owner": "nml",
-            "revisions": "830961c48e42",
-            "tool_panel_section_label": "Collection Operations",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: autodock_vina\n  owner: bgruening\n  revisions: 7a871df65202\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: autodock_vina_prepare_box\n  owner: bgruening\n  revisions: 668c60aa4799\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: autodock_vina_prepare_receptor\n  owner: bgruening\n  revisions: 05a13d377b28\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chembl\n  owner: bgruening\n  revisions: a446ea7e2bc1\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 73de2fe4bf92\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 43a9e7d9b24f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 73de2fe4bf92\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: e3a7d6cc87af\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 73de2fe4bf92\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemical_data_sources\n  owner: bgruening\n  revisions: c2055dd1927b\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fpocket\n  owner: bgruening\n  revisions: 4fb73be7f4cb\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: get_pdb\n  owner: bgruening\n  revisions: 538790c6c21b\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: natural_product_likeness\n  owner: bgruening\n  revisions: 6052dd3fa475\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_compound_convert\n  owner: bgruening\n  revisions: e2c36f62e22f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_svg_depiction\n  owner: bgruening\n  revisions: 7672039a0bb0\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sdf_to_tab\n  owner: bgruening\n  revisions: 4beb3e026bbb\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: f46f0e4f75c4\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 830961c48e42\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/cheminformatics/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/cheminformatics/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Analysis of molecular dynamics simulations",
-      "zenodo_link": "https://zenodo.org/record/2537734",
-      "level": "Intermediate",
-      "questions": [
-        "Which analysis tools are available?"
-      ],
-      "objectives": [
-        "Learn which analysis tools are available.",
-        "Analyse a protein and discuss the meaning behind each analysis."
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "computational-chemistry",
-          "tutorials": [
-            "setting-up-molecular-systems",
-            "md-simulation-namd"
-          ]
-        }
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Multiple analyses including timeseries, RMSD, PCA are available",
-        "Analysis tools allow a further chemical understanding of the system"
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "computational-chemistry",
-          "tutorials": [
-            "analysis-md-simulations"
-          ]
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Christopher Barnett",
-          "joined": "2019-05",
-          "id": "chrisbarnettster",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/chrisbarnettster.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/chrisbarnettster/"
-        },
-        {
-          "name": "Tharindu Senapathi",
-          "joined": "2019-05",
-          "id": "tsenapathi",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/tsenapathi.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tsenapathi/"
-        },
-        {
-          "name": "Simon Bray",
-          "joined": "2019-05",
-          "elixir_node": "de",
-          "former_affiliations": [
-            "uni-freiburg",
-            "elixir-europe"
-          ],
-          "id": "simonbray",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
-        },
-        {
-          "name": "Nadia Goué",
-          "email": "nadia.goue@uca.fr",
-          "orcid": "0000-0003-2750-1473",
-          "joined": "2019-07",
-          "id": "nagoue",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nagoue.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nagoue/"
-        }
-      ],
-      "js_requirements": {
-        "mathjax": null,
-        "mermaid": false
-      },
-      "short_id": "T00047",
-      "url": "/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html",
-      "topic_name": "computational-chemistry",
-      "tutorial_name": "analysis-md-simulations",
-      "dir": "topics/computational-chemistry/tutorials/analysis-md-simulations",
-      "symlink": null,
-      "id": "computational-chemistry/analysis-md-simulations",
-      "hands_on": true,
-      "slides": false,
-      "mod_date": "2023-11-03 14:30:27 +0000",
-      "pub_date": "2019-06-03 07:41:49 +0000",
-      "version": 32,
-      "workflows": [
-        {
-          "workflow": "advanced_workflow.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.ga",
-          "path": "topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.ga",
-          "wfid": "computational-chemistry-analysis-md-simulations",
-          "wfname": "advanced_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-analysis-md-simulations/versions/advanced_workflow",
-          "license": "MIT",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "",
-              "name": "Chris Barnett"
-            }
-          ],
-          "name": "Analysis using MDAnalysis",
-          "title": "Analysis using MDAnalysis",
-          "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nDCD input\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPDB input\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"RDF Analysis\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  ab90456f-d7ae-4fb1-ba2f-978a59791acc[\"Output\\nRDF Analysis plot\"];\n  2 --> ab90456f-d7ae-4fb1-ba2f-978a59791acc;\n  style ab90456f-d7ae-4fb1-ba2f-978a59791acc stroke:#2c3143,stroke-width:4px;\n  1ee2fe4a-0e50-4a4f-828e-3b60d75120e7[\"Output\\nRDF Analysis raw data\"];\n  2 --> 1ee2fe4a-0e50-4a4f-828e-3b60d75120e7;\n  style 1ee2fe4a-0e50-4a4f-828e-3b60d75120e7 stroke:#2c3143,stroke-width:4px;\n  3[\"Cosine Content\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  5ca6c423-961b-4a55-a821-794a0d311e41[\"Output\\nCosine Content raw data\"];\n  3 --> 5ca6c423-961b-4a55-a821-794a0d311e41;\n  style 5ca6c423-961b-4a55-a821-794a0d311e41 stroke:#2c3143,stroke-width:4px;\n  7854cbf9-187f-4117-b494-73a5a404d06f[\"Output\\nCosine Content plot\"];\n  3 --> 7854cbf9-187f-4117-b494-73a5a404d06f;\n  style 7854cbf9-187f-4117-b494-73a5a404d06f stroke:#2c3143,stroke-width:4px;\n  4[\"Ramachandran Plots\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  aa7afa97-8be6-4e6b-ad2c-5715f3c10362[\"Output\\nRamachandran Plot\"];\n  4 --> aa7afa97-8be6-4e6b-ad2c-5715f3c10362;\n  style aa7afa97-8be6-4e6b-ad2c-5715f3c10362 stroke:#2c3143,stroke-width:4px;\n  178f112a-eb0b-4299-aff5-69efd9ffb52b[\"Output\\nRamachandran Plot raw data\"];\n  4 --> 178f112a-eb0b-4299-aff5-69efd9ffb52b;\n  style 178f112a-eb0b-4299-aff5-69efd9ffb52b stroke:#2c3143,stroke-width:4px;\n  5[\"Distance Analysis\"];\n  0 -->|output| 5;\n  1 -->|output| 5;\n  eac670fb-f01e-49cd-a103-828a15149f48[\"Output\\nDistance Analysis raw data\"];\n  5 --> eac670fb-f01e-49cd-a103-828a15149f48;\n  style eac670fb-f01e-49cd-a103-828a15149f48 stroke:#2c3143,stroke-width:4px;\n  6605884d-7bfa-4f43-bbc6-2352256d2bc7[\"Output\\nDistance Analysis plot\"];\n  5 --> 6605884d-7bfa-4f43-bbc6-2352256d2bc7;\n  style 6605884d-7bfa-4f43-bbc6-2352256d2bc7 stroke:#2c3143,stroke-width:4px;\n  6[\"Dihedral Analysis\"];\n  0 -->|output| 6;\n  1 -->|output| 6;\n  755dbb99-3e3e-425b-a4b2-e375df6e39b4[\"Output\\nDihedral Analysis plot\"];\n  6 --> 755dbb99-3e3e-425b-a4b2-e375df6e39b4;\n  style 755dbb99-3e3e-425b-a4b2-e375df6e39b4 stroke:#2c3143,stroke-width:4px;\n  e0234472-cc44-483e-997b-8b0e0719c8d7[\"Output\\nDihedral Analysis raw data\"];\n  6 --> e0234472-cc44-483e-997b-8b0e0719c8d7;\n  style e0234472-cc44-483e-997b-8b0e0719c8d7 stroke:#2c3143,stroke-width:4px;"
-        },
-        {
-          "workflow": "main_workflow.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/main_workflow.ga",
-          "path": "topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/main_workflow.ga",
-          "wfid": "computational-chemistry-analysis-md-simulations",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-analysis-md-simulations/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "name": "Simple Analysis",
-          "title": "Simple Analysis",
-          "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nprotein_mdsimulation_dcd\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nprotein_pdb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"RMSD Analysis\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  6de2beaf-f80e-4788-8598-229a1c582757[\"Output\\nrmsd_tabular_output\"];\n  2 --> 6de2beaf-f80e-4788-8598-229a1c582757;\n  style 6de2beaf-f80e-4788-8598-229a1c582757 stroke:#2c3143,stroke-width:4px;\n  3[\"RMSF Analysis\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  1f2d715d-230a-4ec5-a509-e8ae501e7634[\"Output\\nrmsf_tabular_output\"];\n  3 --> 1f2d715d-230a-4ec5-a509-e8ae501e7634;\n  style 1f2d715d-230a-4ec5-a509-e8ae501e7634 stroke:#2c3143,stroke-width:4px;\n  4[\"PCA\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  92b7a40f-9ffc-4f56-8cf3-deec52e7b8b5[\"Output\\npca_tabular_output\"];\n  4 --> 92b7a40f-9ffc-4f56-8cf3-deec52e7b8b5;\n  style 92b7a40f-9ffc-4f56-8cf3-deec52e7b8b5 stroke:#2c3143,stroke-width:4px;"
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/0.19",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_dihedral/mdanalysis_dihedral/0.19",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_distance/mdanalysis_distance/0.19",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_ramachandran_plot/mdanalysis_ramachandran_plot/0.1.3",
-        "toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_rdf/mdanalysis_rdf/0.19"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxy.mesocentre.uca.fr",
-            "name": "Galaxy@AuBi",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          }
-        ]
-      },
-      "topic_name_human": "Computational chemistry",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "bio3d_pca",
-            "owner": "chemteam",
-            "revisions": "994c509873db",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bio3d_pca",
-            "owner": "chemteam",
-            "revisions": "24867ab16f36",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bio3d_rmsd",
-            "owner": "chemteam",
-            "revisions": "f871c9a8cb7c",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bio3d_rmsd",
-            "owner": "chemteam",
-            "revisions": "77e28e1da9f4",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bio3d_rmsf",
-            "owner": "chemteam",
-            "revisions": "4354d92dc1aa",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bio3d_rmsf",
-            "owner": "chemteam",
-            "revisions": "6bcb804a54c3",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "mdanalysis_cosine_analysis",
-            "owner": "chemteam",
-            "revisions": "ebeb72aa39a8",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "mdanalysis_dihedral",
-            "owner": "chemteam",
-            "revisions": "554f60da9c8f",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "mdanalysis_distance",
-            "owner": "chemteam",
-            "revisions": "489b25966bb9",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "mdanalysis_ramachandran_plot",
-            "owner": "chemteam",
-            "revisions": "d710c7f00ae6",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "mdanalysis_rdf",
-            "owner": "chemteam",
-            "revisions": "49dac57d004a",
-            "tool_panel_section_label": "ChemicalToolBox",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bio3d_pca\n  owner: chemteam\n  revisions: 994c509873db\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_pca\n  owner: chemteam\n  revisions: 24867ab16f36\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_rmsd\n  owner: chemteam\n  revisions: f871c9a8cb7c\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_rmsd\n  owner: chemteam\n  revisions: 77e28e1da9f4\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_rmsf\n  owner: chemteam\n  revisions: 4354d92dc1aa\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bio3d_rmsf\n  owner: chemteam\n  revisions: 6bcb804a54c3\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_cosine_analysis\n  owner: chemteam\n  revisions: ebeb72aa39a8\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_dihedral\n  owner: chemteam\n  revisions: 554f60da9c8f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_distance\n  owner: chemteam\n  revisions: 489b25966bb9\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_ramachandran_plot\n  owner: chemteam\n  revisions: d710c7f00ae6\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mdanalysis_rdf\n  owner: chemteam\n  revisions: 49dac57d004a\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "High Throughput Molecular Dynamics and Analysis",
       "level": "Advanced",
       "zenodo_link": "https://zenodo.org/records/3813283",
@@ -1386,7 +768,7 @@
           "name": "Workflow constructed from history 'Hsp90-MDAnalysis'",
           "title": "Workflow constructed from history 'Hsp90-MDAnalysis'",
           "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
+          "modified": "2024-06-20 00:05:26 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"GROMACS structure configuration\"];\n  0 -->|output| 2;\n  3[\"MDTraj file converter\"];\n  1 -->|output| 3;\n  4[\"RMSD Analysis\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  5[\"RMSF Analysis\"];\n  2 -->|output| 5;\n  3 -->|output| 5;\n  6[\"PCA\"];\n  2 -->|output| 6;\n  3 -->|output| 6;\n  7[\"Cosine Content\"];\n  3 -->|output| 7;\n  2 -->|output| 7;\n  8[\"PCA visualization\"];\n  2 -->|output| 8;\n  3 -->|output| 8;\n  9[\"Hydrogen Bond Analysis using VMD\"];\n  3 -->|output| 9;\n  2 -->|output| 9;\n  10[\"RMSD Analysis\"];\n  2 -->|output| 10;\n  3 -->|output| 10;"
         },
         {
@@ -1404,7 +786,7 @@
           "name": "MD protein-ligand workflow (from PDB structure)",
           "title": "MD protein-ligand workflow (from PDB structure)",
           "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
+          "modified": "2024-06-20 00:05:26 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nPDB code e.g. 6hhr\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nLigand name e.g. AG5E\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"Get PDB file\"];\n  0 -->|output| 2;\n  3[\"Search in textfiles\"];\n  2 -->|output| 3;\n  4[\"Search in textfiles\"];\n  2 -->|output| 4;\n  1 -->|output| 4;\n  5[\"GROMACS initial setup\"];\n  3 -->|output| 5;\n  6[\"Compound conversion\"];\n  4 -->|output| 6;\n  7[\"Generate MD topologies for small molecules\"];\n  6 -->|outfile| 7;\n  8[\"Merge GROMACS topologies\"];\n  7 -->|gro_output| 8;\n  5 -->|output1| 8;\n  5 -->|output2| 8;\n  7 -->|output| 8;\n  9[\"GROMACS structure configuration\"];\n  8 -->|complex_gro| 9;\n  10[\"GROMACS solvation and adding ions\"];\n  8 -->|complex_top| 10;\n  9 -->|output| 10;\n  11[\"GROMACS energy minimization\"];\n  10 -->|output2| 11;\n  10 -->|output1| 11;\n  12[\"GROMACS simulation\"];\n  5 -->|output3| 12;\n  10 -->|output2| 12;\n  11 -->|output1| 12;\n  13[\"GROMACS simulation\"];\n  5 -->|output3| 13;\n  10 -->|output2| 13;\n  12 -->|output1| 13;\n  12 -->|output5| 13;\n  14[\"GROMACS simulation\"];\n  10 -->|output2| 14;\n  13 -->|output1| 14;\n  13 -->|output5| 14;"
         }
       ],
@@ -1784,7 +1166,7 @@
           "name": "Data management in Medicinal Chemistry workflow",
           "title": "Data management in Medicinal Chemistry workflow",
           "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
+          "modified": "2024-06-20 00:05:26 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nBenzenesulfonyl chloride\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nEthylamine\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Compound conversion\"];\n  0 -->|output| 2;\n  aff8fa4f-c254-4f05-9560-52bad6c7e04a[\"Output\\nBenzenesulfonyl chloride SDF\"];\n  2 --> aff8fa4f-c254-4f05-9560-52bad6c7e04a;\n  style aff8fa4f-c254-4f05-9560-52bad6c7e04a stroke:#2c3143,stroke-width:4px;\n  3[\"Search ChEMBL database\"];\n  0 -->|output| 3;\n  044d2c08-92ed-45c9-9868-ee802998d92c[\"Output\\nSubstructures from ChEMBL database\"];\n  3 --> 044d2c08-92ed-45c9-9868-ee802998d92c;\n  style 044d2c08-92ed-45c9-9868-ee802998d92c stroke:#2c3143,stroke-width:4px;\n  4[\"Search ChEMBL database\"];\n  0 -->|output| 4;\n  99274b60-732d-4276-969f-ccc3673a872a[\"Output\\nLipinski substructures from ChEMBL database\"];\n  4 --> 99274b60-732d-4276-969f-ccc3673a872a;\n  style 99274b60-732d-4276-969f-ccc3673a872a stroke:#2c3143,stroke-width:4px;\n  5[\"Compound conversion\"];\n  1 -->|output| 5;\n  77ad7b99-5761-46a3-b9a6-1dd3d8e2baac[\"Output\\nEthylamine SDF\"];\n  5 --> 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac;\n  style 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac stroke:#2c3143,stroke-width:4px;\n  6[\"Reaction maker\"];\n  2 -->|outfile| 6;\n  5 -->|outfile| 6;\n  f9d1d7fd-e854-469b-a464-6811998e058e[\"Output\\nReaction product\"];\n  6 --> f9d1d7fd-e854-469b-a464-6811998e058e;\n  style f9d1d7fd-e854-469b-a464-6811998e058e stroke:#2c3143,stroke-width:4px;\n  b0bd7ed2-a80b-44ce-994b-999e1d472281[\"Output\\nReaction maker logfile\"];\n  6 --> b0bd7ed2-a80b-44ce-994b-999e1d472281;\n  style b0bd7ed2-a80b-44ce-994b-999e1d472281 stroke:#2c3143,stroke-width:4px;\n  7[\"Visualisation\"];\n  6 -->|outfile| 7;\n  fc618f3f-6aa5-4970-841d-56f4eabf47b7[\"Output\\nVisualisation of reaction product\"];\n  7 --> fc618f3f-6aa5-4970-841d-56f4eabf47b7;\n  style fc618f3f-6aa5-4970-841d-56f4eabf47b7 stroke:#2c3143,stroke-width:4px;\n  8[\"Drug-likeness\"];\n  6 -->|outfile| 8;\n  7ad8c184-e10d-4fce-a402-3e79da6e09ac[\"Output\\nDrug-likeness of product molecule\"];\n  8 --> 7ad8c184-e10d-4fce-a402-3e79da6e09ac;\n  style 7ad8c184-e10d-4fce-a402-3e79da6e09ac stroke:#2c3143,stroke-width:4px;"
         }
       ],
@@ -1952,6 +1334,447 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "draft": true,
+      "title": "Running molecular dynamics simulations using NAMD",
+      "zenodo_link": "https://zenodo.org/record/3234841",
+      "level": "Intermediate",
+      "questions": [
+        "How do I use the NAMD engine in Galaxy?",
+        "What is the correct procedure for performing a simple molecular dynamics simulation of a protein?"
+      ],
+      "objectives": [
+        "Learn about the NAMD engine provided in BRIDGE"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "computational-chemistry",
+          "tutorials": [
+            "setting-up-molecular-systems"
+          ]
+        }
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Several MD engines are available in BRIDGE",
+        "Workflows are available for common simulations tasks such as equilibration and production dynamics for various ensembles (NVT, NPT)",
+        "You've run an equilibrium and production MD simulation using NAMD"
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "computational-chemistry",
+          "tutorials": [
+            "analysis-md-simulations"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Christopher Barnett",
+          "joined": "2019-05",
+          "id": "chrisbarnettster",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/chrisbarnettster.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/chrisbarnettster/"
+        },
+        {
+          "name": "Tharindu Senapathi",
+          "joined": "2019-05",
+          "id": "tsenapathi",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tsenapathi.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tsenapathi/"
+        },
+        {
+          "name": "Simon Bray",
+          "joined": "2019-05",
+          "elixir_node": "de",
+          "former_affiliations": [
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "simonbray",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": "T00052",
+      "url": "/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html",
+      "topic_name": "computational-chemistry",
+      "tutorial_name": "md-simulation-namd",
+      "dir": "topics/computational-chemistry/tutorials/md-simulation-namd",
+      "symlink": null,
+      "id": "computational-chemistry/md-simulation-namd",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2023-11-03 14:30:27 +0000",
+      "pub_date": "2019-06-03 07:41:49 +0000",
+      "version": 22,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow.ga",
+          "path": "topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow.ga",
+          "wfid": "computational-chemistry-md-simulation-namd",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-md-simulation-namd/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "MD NAMD",
+          "title": "MD NAMD",
+          "test_results": null,
+          "modified": "2024-06-20 00:05:26 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"System Setup\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Energy Minimizer\"];\n  2 -->|setup_crd| 3;\n  2 -->|setup_psf| 3;\n  2 -->|structure_prm| 3;\n  4[\"NAMD MD Simulator NVT\"];\n  3 -->|pdbout| 4;\n  3 -->|pmespec| 4;\n  3 -->|xplorpsfout| 4;\n  3 -->|bbrmsd| 4;\n  3 -->|scrmsd| 4;\n  3 -->|subsrmsd| 4;\n  2 -->|structure_prm| 4;\n  5[\"NAMD MD Simulator NPT\"];\n  3 -->|pdbout| 5;\n  3 -->|pmespec| 5;\n  3 -->|xplorpsfout| 5;\n  4 -->|coorout| 5;\n  4 -->|velout| 5;\n  4 -->|xscout| 5;\n  2 -->|structure_prm| 5;"
+        },
+        {
+          "workflow": "main_workflow_charmmgui.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow_charmmgui.ga",
+          "path": "topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow_charmmgui.ga",
+          "wfid": "computational-chemistry-md-simulation-namd",
+          "wfname": "main_workflow_charmmgui",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-md-simulation-namd/versions/main_workflow_charmmgui",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "NAMD MD From CHARMM GUI",
+          "title": "NAMD MD From CHARMM GUI",
+          "test_results": null,
+          "modified": "2024-06-20 00:05:26 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"NAMD MD Simulator NVT\"];\n  0 -->|output| 4;\n  2 -->|output| 4;\n  1 -->|output| 4;\n  3 -->|output| 4;\n  5[\"NAMD MD Simulator NPT\"];\n  0 -->|output| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  4 -->|coorout| 5;\n  4 -->|velout| 5;\n  4 -->|xscout| 5;\n  3 -->|output| 5;"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.json",
+      "tools": [
+        "minimizer",
+        "namd_npt",
+        "namd_nvt",
+        "setup"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Computational chemistry",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "tags": [
+        "work-in-progress"
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Protein-ligand docking",
+      "level": "Intermediate",
+      "zenodo_link": "",
+      "questions": [
+        "What is cheminformatics?",
+        "What is protein-ligand docking?",
+        "How can I perform a simple docking workflow in Galaxy?"
+      ],
+      "objectives": [
+        "Create a small compound library using the ChEMBL database",
+        "Dock a variety of ligands to the active site of the Hsp90 protein"
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Docking allows 'virtual screening' of drug candidates",
+        "Molecular fingerprints encode features into a bitstring",
+        "The ChemicalToolbox contains many tools for cheminformatics analysis"
+      ],
+      "contributors": [
+        {
+          "name": "Simon Bray",
+          "joined": "2019-05",
+          "elixir_node": "de",
+          "former_affiliations": [
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "simonbray",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": 16452,
+        "mermaid": false
+      },
+      "short_id": "T00048",
+      "url": "/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html",
+      "topic_name": "computational-chemistry",
+      "tutorial_name": "cheminformatics",
+      "dir": "topics/computational-chemistry/tutorials/cheminformatics",
+      "symlink": null,
+      "id": "computational-chemistry/cheminformatics",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2023-11-03 14:30:27 +0000",
+      "pub_date": "2019-10-19 00:16:01 +0000",
+      "version": 23,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/workflows/main_workflow.ga",
+          "path": "topics/computational-chemistry/tutorials/cheminformatics/workflows/main_workflow.ga",
+          "wfid": "computational-chemistry-cheminformatics",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-cheminformatics/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "name": "CTB Workflow",
+          "title": "CTB Workflow",
+          "test_results": null,
+          "modified": "2024-06-20 00:05:26 +0000",
+          "mermaid": "flowchart TD\n  11[\"Compound Search\"];\n  5 -->|outfile| 11;\n  13[\"Remove duplicated molecules\"];\n  5 -->|outfile| 13;\n  19[\"Remove counterions and fragments\"];\n  13 -->|outfile| 19;\n  2[\"Online data\"];\n  29[\"Filter\"];\n  19 -->|outfile| 29;\n  30[\"Compound Convert\"];\n  19 -->|outfile| 30;\n  31[\"Molecules to Fingerprints\"];\n  19 -->|outfile| 31;\n  39[\"Natural Product\"];\n  29 -->|outfile| 39;\n  40[\"Molecules to Fingerprints\"];\n  29 -->|outfile| 40;\n  44[\"NxN Clustering\"];\n  40 -->|outfile| 44;\n  5[\"Change Title\"];\n  2 -->|output| 5;"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/cheminformatics/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina/docking/1.1.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_box/prepare_box/2021.03.4+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_receptor/prepare_receptor/1.5.7+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/chembl/chembl/0.10.1+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_butina_clustering/1.5",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/0.2.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_nxn_clustering/0.4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_nxn_clustering/1.5.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/chemical_data_sources/ctb_online_data_fetch/0.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/fpocket/fpocket/3.1.4.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/natural_product_likeness/ctb_np-likeness-calculator/2.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_change_title/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_compound_convert/0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_filter/1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_obgrep/0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_remDuplicates/1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel/ctb_remIons/1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_svg_depiction/openbabel_svg_depiction/3.1.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/sdf_to_tab/sdf_to_tab/2020.03.4+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Computational chemistry",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "autodock_vina",
+            "owner": "bgruening",
+            "revisions": "7a871df65202",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "autodock_vina_prepare_box",
+            "owner": "bgruening",
+            "revisions": "668c60aa4799",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "autodock_vina_prepare_receptor",
+            "owner": "bgruening",
+            "revisions": "05a13d377b28",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "chembl",
+            "owner": "bgruening",
+            "revisions": "a446ea7e2bc1",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "chemfp",
+            "owner": "bgruening",
+            "revisions": "73de2fe4bf92",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "chemfp",
+            "owner": "bgruening",
+            "revisions": "43a9e7d9b24f",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "chemfp",
+            "owner": "bgruening",
+            "revisions": "73de2fe4bf92",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "chemfp",
+            "owner": "bgruening",
+            "revisions": "e3a7d6cc87af",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "chemfp",
+            "owner": "bgruening",
+            "revisions": "73de2fe4bf92",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "chemical_data_sources",
+            "owner": "bgruening",
+            "revisions": "c2055dd1927b",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fpocket",
+            "owner": "bgruening",
+            "revisions": "4fb73be7f4cb",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "get_pdb",
+            "owner": "bgruening",
+            "revisions": "538790c6c21b",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "natural_product_likeness",
+            "owner": "bgruening",
+            "revisions": "6052dd3fa475",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "openbabel_compound_convert",
+            "owner": "bgruening",
+            "revisions": "e2c36f62e22f",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "openbabel_svg_depiction",
+            "owner": "bgruening",
+            "revisions": "7672039a0bb0",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "sdf_to_tab",
+            "owner": "bgruening",
+            "revisions": "4beb3e026bbb",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Text Manipulation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "f46f0e4f75c4",
+            "tool_panel_section_label": "Text Manipulation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Text Manipulation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "collapse_collections",
+            "owner": "nml",
+            "revisions": "830961c48e42",
+            "tool_panel_section_label": "Collection Operations",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: autodock_vina\n  owner: bgruening\n  revisions: 7a871df65202\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: autodock_vina_prepare_box\n  owner: bgruening\n  revisions: 668c60aa4799\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: autodock_vina_prepare_receptor\n  owner: bgruening\n  revisions: 05a13d377b28\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chembl\n  owner: bgruening\n  revisions: a446ea7e2bc1\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 73de2fe4bf92\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 43a9e7d9b24f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 73de2fe4bf92\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: e3a7d6cc87af\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemfp\n  owner: bgruening\n  revisions: 73de2fe4bf92\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chemical_data_sources\n  owner: bgruening\n  revisions: c2055dd1927b\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fpocket\n  owner: bgruening\n  revisions: 4fb73be7f4cb\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: get_pdb\n  owner: bgruening\n  revisions: 538790c6c21b\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: natural_product_likeness\n  owner: bgruening\n  revisions: 6052dd3fa475\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_compound_convert\n  owner: bgruening\n  revisions: e2c36f62e22f\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_svg_depiction\n  owner: bgruening\n  revisions: 7672039a0bb0\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sdf_to_tab\n  owner: bgruening\n  revisions: 4beb3e026bbb\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: f46f0e4f75c4\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 830961c48e42\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/cheminformatics/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/cheminformatics/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring",
       "level": "Intermediate",
       "zenodo_link": "https://zenodo.org/record/3730474",
@@ -2029,7 +1852,7 @@
           "name": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "title": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "test_results": null,
-          "modified": "2024-06-19 00:05:29 +0000",
+          "modified": "2024-06-20 00:05:26 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nCandidates\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nMpro-x0195_0_apo-desolv.pdb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nhits.sdf\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Enumerate changes\"];\n  0 -->|output| 3;\n  4[\"Compound conversion\"];\n  1 -->|output| 4;\n  5[\"Create Frankenstein ligand\"];\n  2 -->|output| 5;\n  6[\"Compound conversion\"];\n  3 -->|output| 6;\n  7[\"rDock cavity definition\"];\n  4 -->|outfile| 7;\n  5 -->|outfile| 7;\n  8[\"Split file\"];\n  6 -->|outfile| 8;\n  9[\"rDock docking\"];\n  4 -->|outfile| 9;\n  8 -->|list_output_sdf| 9;\n  7 -->|activesite| 9;\n  10[\"Collapse Collection\"];\n  9 -->|output| 10;\n  11[\"XChem TransFS pose scoring\"];\n  1 -->|output| 11;\n  10 -->|output| 11;\n  12[\"Max SuCOS score\"];\n  11 -->|output| 12;\n  2 -->|output| 12;"
         }
       ],
@@ -2199,6 +2022,183 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/covid19-docking/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/covid19-docking/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Protein target prediction of a bioactive ligand with Align-it and ePharmaLib",
+      "level": "Intermediate",
+      "zenodo_link": "https://zenodo.org/record/6055897",
+      "questions": [
+        "What is a pharmacophore model?",
+        "How can I perform protein target prediction with a multi-step workflow or the one-step Zauberkugel workflow?"
+      ],
+      "objectives": [
+        "Create an SMILES file of a bioactive ligand.",
+        "Screen the query ligand against a pharmacophore library.",
+        "Analyze the results of the protein target prediction."
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "A pharmacophore is an abstract description of the molecular features of a bioactive ligand.",
+        "Pharmacophore-based target prediction is an efficient and cost-effective method."
+      ],
+      "contributors": [
+        {
+          "name": "Aurélien F. A. Moumbock",
+          "email": "amaf.aurelien@yahoo.com",
+          "orcid": "0000-0002-6034-2016",
+          "twitter": "FMoumbock",
+          "joined": "2022-02",
+          "id": "aurelienmoumbock",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/aurelienmoumbock.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/aurelienmoumbock/"
+        },
+        {
+          "name": "Simon Bray",
+          "joined": "2019-05",
+          "elixir_node": "de",
+          "former_affiliations": [
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "simonbray",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": 6049,
+        "mermaid": false
+      },
+      "short_id": "T00054",
+      "url": "/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html",
+      "topic_name": "computational-chemistry",
+      "tutorial_name": "zauberkugel",
+      "dir": "topics/computational-chemistry/tutorials/zauberkugel",
+      "symlink": null,
+      "id": "computational-chemistry/zauberkugel",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-06-11 12:02:02 +0000",
+      "pub_date": "2022-02-15 13:56:40 +0000",
+      "version": 23,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga",
+          "path": "topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.ga",
+          "wfid": "computational-chemistry-zauberkugel",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-zauberkugel/versions/main_workflow",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Person",
+              "email": "mailto:amaf.aurelien@yahoo.com",
+              "identifier": "https://orcid.org/0000-0002-6034-2016",
+              "name": "Aurélien F. A. Moumbock"
+            },
+            {
+              "class": "Organization",
+              "name": "Albert-Ludwigs-Universität Freiburg"
+            }
+          ],
+          "name": "Zauberkugel",
+          "title": "Zauberkugel",
+          "test_results": null,
+          "modified": "2024-06-20 00:05:26 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nQuery ligand\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPharmacophore library\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Ligand ionization state generation\"];\n  0 -->|output| 2;\n  3[\"Splitting ePharmaLib into individual pharmacophores\"];\n  1 -->|output| 3;\n  4[\" Low-energy ligand conformer search\"];\n  2 -->|outfile| 4;\n  5[\"Pharmacophore alignment\"];\n  4 -->|outfile| 5;\n  3 -->|list_output_generic| 5;\n  6[\"Concatenating the pharmacophore alignment scores\"];\n  5 -->|score_result_file| 6;\n  7[\"Ranking the predicted protein targets according to the Tversky index 10th column\"];\n  6 -->|out_file1| 7;"
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/zauberkugel/tutorial.json",
+      "tools": [
+        "sort1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Computational chemistry",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "align_it",
+            "owner": "bgruening",
+            "revisions": "06d9381593a4",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "openbabel_addh",
+            "owner": "bgruening",
+            "revisions": "6e4b7e0c61a6",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "rdconf",
+            "owner": "bgruening",
+            "revisions": "5c501eb8d56c",
+            "tool_panel_section_label": "ChemicalToolBox",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "split_file_to_collection",
+            "owner": "bgruening",
+            "revisions": "6cbe2f30c2d7",
+            "tool_panel_section_label": "Collection Operations",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Text Manipulation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: align_it\n  owner: bgruening\n  revisions: 06d9381593a4\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: openbabel_addh\n  owner: bgruening\n  revisions: 6e4b7e0c61a6\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rdconf\n  owner: bgruening\n  revisions: 5c501eb8d56c\n  tool_panel_section_label: ChemicalToolBox\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: split_file_to_collection\n  owner: bgruening\n  revisions: 6cbe2f30c2d7\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/zauberkugel/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/computational-chemistry/tutorials/zauberkugel/tutorial.json"
       }
     },
     {
