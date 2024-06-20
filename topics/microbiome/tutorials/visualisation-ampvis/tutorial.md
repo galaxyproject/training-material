@@ -10,8 +10,8 @@ questions:
 - How can we visualise amplicon data by using heatmap, ordination plot, boxplot, rarefraction curve or timeseries?
 objectives:
 - use heatmap workflow to analyse and visualise amplicon data
-- or use ordination plot, or boxplot, or rarefraction curve, or timeseries
 - use ungrouped or grouped data or grouped data with facets
+- or use ordination plot, or boxplot, or rarefraction curve, or timeseries
 time_estimation: 2H
 key_points:
 - using different visualisation methods can present data from other points of view
@@ -27,30 +27,26 @@ contributors:
 
 Microbiome analysis using amplicon sequencing is central to many ecological studies.
 The produced amplicon sequencing data are converted to OTU tables and represent the input 
-for the ampvis2 tool, where it can be visualised in various ways.{% cite Andersen2018 %}
+for the ampvis2 tool, where it can be visualised in various ways {% cite Andersen2018 %}.
 If you already have amplicon data produced and ready to feed in and visualise it, 
 then you can start with this tutorial. First of all you can put your data into a 
-rarefraction curve to explore reads against number of OTUs. Than you can input your
+rarefraction curve to explore species richness. Than you can input your
 data into subsets and finaly create a heatmap, or a boxplot, or an ordination plot
 or even a timeseries plot out of it. Most of them are described in 
-{% cite ampvis-intro %}
+[Introduction to ampvis2](https://kasperskytte.github.io/ampvis2/articles/ampvis2.html#heatmap).
 ![overview of visualisation methods](./images/overview.png 
 "Overview of posible visualisation methods (taken from: Introduction to ampvis2 by Kasper Skytte Andersen)")
 Your data need to be in an acceptable format for the ampvis_load tool. The tool 
-needs an OTU table and accepts the following formats for it: phyloseq, biom, 
-dada2_sequencetable or tabular. OTU table is the only mandatory input into the 
-ampvis_load. But you can also input 'sample metadata' (in the formats: tabular or tsv), 
-'taxonomy table' (in the tabular format), 'fasta file' (in the format fasta)
-and 'phylogenetic tree' (in the format newick) and various combinations thereof.
+needs an OTU table and accepts the following formats for it: _phyloseq_, _biom_, 
+_dada2_sequencetable_ or _tabular_. OTU table is the only mandatory input into the 
+ampvis_load. But you can also input _'sample_metadata'_ (in the formats: _tabular_ or _tsv_), 
+_'taxonomy_table'_ (in the _tabular_ format), _'fasta_file'_ (in the format _fasta_)
+and _'phylogenetic_tree'_ (in the format _newick_) and various combinations thereof.
 
 For this tutorial we choosed to demonstrate all visualisation tools with the combination 
 of 3 inputs:
-OTU table, 'sample metadata' and 'taxonomy table', all of them in tabular format.
+OTU table, 'sample metadata' and 'taxonomy table', all of them in _tabular_ format.
 
-<!-- This is a comment. -->
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > <agenda-title></agenda-title>
 >
@@ -64,8 +60,10 @@ OTU table, 'sample metadata' and 'taxonomy table', all of them in tabular format
 # Rarefraction curve
 
 Like first exploration of your data, you can start with rarefraction curve.
-It will plot reads against number of OTUs, so make sure your data is still 'row'
-and not normalised.
+Rarefaction curves are the smoothen version of accumulation curves and symbolise 
+the means of all pooled samples and therefore display the measured species richness. 
+Rarefaction delivers proper curves for dataset comparison {% cite Gotelli2001 %}.
+For this part we need 'row' data, it shall not be normalised.
 
 ## Title for a subsection
 ??? _to_do_
@@ -76,7 +74,8 @@ needs to be done..... _to_do_
 
 # Use case 1: heatmap, ordination plot or boxploot
 
-To create a heatmap, or ordination plot, or boxplot we now use normalised data.
+To create a heatmap, or ordination plot, or boxplot you can continue with your dataset.
+Note: we now use normalised data and a different dataset than for rarefraction curve.
 
 ## heatmaps
 We now can use our data, put them in subsets and create ungrouped, or grouped output or
@@ -309,7 +308,12 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 
 # Use case 2: time series plot
 
-a bit of theory here too... _to_do_
+Time series analysis is mainly known for forecasting. A time series can be seen as 
+an example of a random or stochastic process, which we can use to visualise seasonal 
+differences {% cite DeGooijer2006 %}. 
+In our dataset, and with the settings listed below, we can observe the 
+temporal evolution of the 3 most common microorganisms in the plants Aalborg East and Aalborg West 
+over the entire period data was collected.
 
 ## create a time series plot
 You can find the workflow "ampvis2 timeseries v1.0" on Galaxy and use it for the tutorial.
