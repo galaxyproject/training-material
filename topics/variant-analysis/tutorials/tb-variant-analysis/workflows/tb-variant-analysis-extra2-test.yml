@@ -1,0 +1,32 @@
+---
+- doc: Test the M. Tuberculosis Variant Analysis workflow - extra 2
+  job:
+    'Read 1':
+      location: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_1.fastq.gz
+      class: File
+      filetype: fastqsanger.gz
+    'Read 2':
+      location: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
+      class: File
+      filetype: fastqsanger.gz
+    'FASTA reference genome':
+      location: https://zenodo.org/record/3960260/files/MTB_ancestor_reference.fasta
+      class: File
+      filetype: fasta
+  outputs:
+    mtbva_fastqc1:
+      asserts:
+        has_text:
+          text: 'Per base sequence quality'
+    mtbva_fastqc2:
+      asserts:
+        has_text:
+          text: 'Per base sequence quality'
+    mtbva_snippy_vcf:
+      asserts:
+        has_text:
+          text: '748956'
+    mtbva_samtools_stats:
+      asserts:
+        has_text:
+          text: '107352'
