@@ -31,7 +31,6 @@ contributions:
   authorship:
   - bebatut
   - clsiguret
-  editing:
   funding:
   - abromics
 ---
