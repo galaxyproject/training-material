@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@61e7b9b0821ea8cb0769b9050bf5065eb98a69c5",
+		release: "galaxy-training-network@374441d5edf9f2be0b812383d627bafe27c120bf",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -223,6 +223,158 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<div class="col-md-6">
 		<div class="card">
 		<div class="card-body">
+			<h5 class="card-title">Allele-based Pathogen Identification</h5>
+			<h6 class="card-subtitle mb-2 text-muted">
+				
+				Engy Nasr, 
+				
+				Bérénice Batut, 
+				
+				Paul Zierep
+				
+			</h6>
+
+			<p class="card-text">
+				<small class="text-muted">Last updated Jun 19, 2024</small>
+			</p>
+			<p class="card-text">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/allele_based_pathogen_identification">Launch in Tutorial Mode</span>
+			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
+			<br/>
+
+
+			License: 
+				
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
+				
+				<br/>
+			Tests: ✅
+			Results: Not yet automated
+			</p>
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+    Import or Download
+  </button>
+  <div class="dropdown-menu">
+			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/allele_based_pathogen_identification.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
+			
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/allele_based_pathogen_identification"
+			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
+  </div>
+</div>
+
+	<pre class="mermaid">flowchart TD
+  0["ℹ️ Input Collection\ncollection_of_preprocessed_samples"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Parameter\nsamples_profile"];
+  style 1 fill:#ded,stroke:#393,stroke-width:4px;
+  2["ℹ️ Input Dataset\nreference_genome_of_tested_strain"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["Convert compressed file to uncompressed."];
+  2 -->|output| 3;
+  9d6bde4a-7180-4097-9ffd-6992111a617c["Output\ndecompressed_rg_file"];
+  3 --> 9d6bde4a-7180-4097-9ffd-6992111a617c;
+  style 9d6bde4a-7180-4097-9ffd-6992111a617c stroke:#2c3143,stroke-width:4px;
+  4["Map with minimap2"];
+  1 -->|output| 4;
+  0 -->|output| 4;
+  3 -->|output1| 4;
+  31779c23-4f26-418e-9418-2551e883dbe7["Output\nmap_with_minimap2"];
+  4 --> 31779c23-4f26-418e-9418-2551e883dbe7;
+  style 31779c23-4f26-418e-9418-2551e883dbe7 stroke:#2c3143,stroke-width:4px;
+  5["Clair3"];
+  4 -->|alignment_output| 5;
+  3 -->|output1| 5;
+  1cf1ee6c-4cb7-45e3-9c7b-88a1b678dd53["Output\nclair3_pileup_vcf"];
+  5 --> 1cf1ee6c-4cb7-45e3-9c7b-88a1b678dd53;
+  style 1cf1ee6c-4cb7-45e3-9c7b-88a1b678dd53 stroke:#2c3143,stroke-width:4px;
+  987f9145-83ab-44f1-801a-b0d527ecbce8["Output\nclair3_full_alignment_vcf"];
+  5 --> 987f9145-83ab-44f1-801a-b0d527ecbce8;
+  style 987f9145-83ab-44f1-801a-b0d527ecbce8 stroke:#2c3143,stroke-width:4px;
+  fab82215-f59a-43b1-92d7-37629a1fdb65["Output\nclair3_merged_output"];
+  5 --> fab82215-f59a-43b1-92d7-37629a1fdb65;
+  style fab82215-f59a-43b1-92d7-37629a1fdb65 stroke:#2c3143,stroke-width:4px;
+  6["Samtools depth"];
+  4 -->|alignment_output| 6;
+  7["Samtools coverage"];
+  4 -->|alignment_output| 7;
+  8["bcftools norm"];
+  5 -->|merge_output| 8;
+  3 -->|output1| 8;
+  22553aa1-f5db-4d37-87c4-1164dbb3d2d5["Output\nnormalized_vcf_output"];
+  8 --> 22553aa1-f5db-4d37-87c4-1164dbb3d2d5;
+  style 22553aa1-f5db-4d37-87c4-1164dbb3d2d5 stroke:#2c3143,stroke-width:4px;
+  9["Advanced Cut"];
+  6 -->|output| 9;
+  10["Remove beginning"];
+  7 -->|output| 10;
+  11["SnpSift Filter"];
+  8 -->|output_file| 11;
+  3e7981ec-2205-4571-93eb-10c0dd14b288["Output\nquality_filtered_vcf_output"];
+  11 --> 3e7981ec-2205-4571-93eb-10c0dd14b288;
+  style 3e7981ec-2205-4571-93eb-10c0dd14b288 stroke:#2c3143,stroke-width:4px;
+  12["Table Compute"];
+  9 -->|output| 12;
+  13["Cut"];
+  10 -->|out_file1| 13;
+  14["SnpSift Extract Fields"];
+  11 -->|output| 14;
+  1b0f4f2c-4717-45be-b580-fe10cba78c35["Output\nextracted_fields_from_the_vcf_output"];
+  14 --> 1b0f4f2c-4717-45be-b580-fe10cba78c35;
+  style 1b0f4f2c-4717-45be-b580-fe10cba78c35 stroke:#2c3143,stroke-width:4px;
+  15["bcftools consensus"];
+  11 -->|output| 15;
+  3 -->|output1| 15;
+  49497f3c-9332-4924-bcfd-cb71788ad2c2["Output\nbcftools_consensus"];
+  15 --> 49497f3c-9332-4924-bcfd-cb71788ad2c2;
+  style 49497f3c-9332-4924-bcfd-cb71788ad2c2 stroke:#2c3143,stroke-width:4px;
+  16["Select first"];
+  13 -->|out_file1| 16;
+  17["Remove beginning"];
+  14 -->|output| 17;
+  18["Collapse Collection"];
+  16 -->|outfile| 18;
+  5ee1c158-1a85-45ca-9abd-b30632b3092c["Output\nmapping_coverage_percentage_per_sample"];
+  18 --> 5ee1c158-1a85-45ca-9abd-b30632b3092c;
+  style 5ee1c158-1a85-45ca-9abd-b30632b3092c stroke:#2c3143,stroke-width:4px;
+  19["Count"];
+  17 -->|out_file1| 19;
+  20["Advanced Cut"];
+  18 -->|output| 20;
+  21["Cut"];
+  19 -->|out_file1| 21;
+  22["Paste"];
+  20 -->|output| 22;
+  12 -->|table| 22;
+  25b7b87b-5ef1-487f-90cc-81351a2f81ce["Output\nmapping_mean_depth_per_sample"];
+  22 --> 25b7b87b-5ef1-487f-90cc-81351a2f81ce;
+  style 25b7b87b-5ef1-487f-90cc-81351a2f81ce stroke:#2c3143,stroke-width:4px;
+  23["Select first"];
+  21 -->|out_file1| 23;
+  24["Collapse Collection"];
+  23 -->|outfile| 24;
+  25["Column Regex Find And Replace"];
+  24 -->|output| 25;
+  2852c4ee-24ea-4df7-b59e-54eb6e2f470b["Output\nnumber_of_variants_per_sample"];
+  25 --> 2852c4ee-24ea-4df7-b59e-54eb6e2f470b;
+  style 2852c4ee-24ea-4df7-b59e-54eb6e2f470b stroke:#2c3143,stroke-width:4px;
+	</pre>
+		</div><!-- card-body -->
+	</div><!-- card -->
+</div><!-- col -->
+
+	<div class="col-md-6">
+		<div class="card">
+		<div class="card-body">
 			<h5 class="card-title">Gene-based Pathogen Identification</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
 				
@@ -259,13 +411,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/gene_based_pathogen_identification.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene_based_pathogen_identification"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -380,158 +532,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<div class="col-md-6">
 		<div class="card">
 		<div class="card-body">
-			<h5 class="card-title">Nanopore Allele-based Pathogen Identification</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Engy Nasr, 
-				
-				Bérénice Batut, 
-				
-				Paul Zierep
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Jun 6, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
-				
-				<a href="https://spdx.org/licenses/MIT">MIT</a>
-				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_allele_based_pathogen_identification.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_allele_based_pathogen_identification"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
-
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Collection\ncollection_of_preprocessed_samples"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Parameter\nsamples_profile"];
-  style 1 fill:#ded,stroke:#393,stroke-width:4px;
-  2["ℹ️ Input Dataset\nreference_genome_of_tested_strain"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["Convert compressed file to uncompressed."];
-  2 -->|output| 3;
-  9d6bde4a-7180-4097-9ffd-6992111a617c["Output\ndecompressed_rg_file"];
-  3 --> 9d6bde4a-7180-4097-9ffd-6992111a617c;
-  style 9d6bde4a-7180-4097-9ffd-6992111a617c stroke:#2c3143,stroke-width:4px;
-  4["Map with minimap2"];
-  1 -->|output| 4;
-  0 -->|output| 4;
-  3 -->|output1| 4;
-  31779c23-4f26-418e-9418-2551e883dbe7["Output\nmap_with_minimap2"];
-  4 --> 31779c23-4f26-418e-9418-2551e883dbe7;
-  style 31779c23-4f26-418e-9418-2551e883dbe7 stroke:#2c3143,stroke-width:4px;
-  5["Clair3"];
-  4 -->|alignment_output| 5;
-  3 -->|output1| 5;
-  1cf1ee6c-4cb7-45e3-9c7b-88a1b678dd53["Output\nclair3_pileup_vcf"];
-  5 --> 1cf1ee6c-4cb7-45e3-9c7b-88a1b678dd53;
-  style 1cf1ee6c-4cb7-45e3-9c7b-88a1b678dd53 stroke:#2c3143,stroke-width:4px;
-  987f9145-83ab-44f1-801a-b0d527ecbce8["Output\nclair3_full_alignment_vcf"];
-  5 --> 987f9145-83ab-44f1-801a-b0d527ecbce8;
-  style 987f9145-83ab-44f1-801a-b0d527ecbce8 stroke:#2c3143,stroke-width:4px;
-  fab82215-f59a-43b1-92d7-37629a1fdb65["Output\nclair3_merged_output"];
-  5 --> fab82215-f59a-43b1-92d7-37629a1fdb65;
-  style fab82215-f59a-43b1-92d7-37629a1fdb65 stroke:#2c3143,stroke-width:4px;
-  6["Samtools depth"];
-  4 -->|alignment_output| 6;
-  7["Samtools coverage"];
-  4 -->|alignment_output| 7;
-  8["bcftools norm"];
-  5 -->|merge_output| 8;
-  3 -->|output1| 8;
-  22553aa1-f5db-4d37-87c4-1164dbb3d2d5["Output\nnormalized_vcf_output"];
-  8 --> 22553aa1-f5db-4d37-87c4-1164dbb3d2d5;
-  style 22553aa1-f5db-4d37-87c4-1164dbb3d2d5 stroke:#2c3143,stroke-width:4px;
-  9["Advanced Cut"];
-  6 -->|output| 9;
-  10["Remove beginning"];
-  7 -->|output| 10;
-  11["SnpSift Filter"];
-  8 -->|output_file| 11;
-  3e7981ec-2205-4571-93eb-10c0dd14b288["Output\nquality_filtered_vcf_output"];
-  11 --> 3e7981ec-2205-4571-93eb-10c0dd14b288;
-  style 3e7981ec-2205-4571-93eb-10c0dd14b288 stroke:#2c3143,stroke-width:4px;
-  12["Table Compute"];
-  9 -->|output| 12;
-  13["Cut"];
-  10 -->|out_file1| 13;
-  14["SnpSift Extract Fields"];
-  11 -->|output| 14;
-  1b0f4f2c-4717-45be-b580-fe10cba78c35["Output\nextracted_fields_from_the_vcf_output"];
-  14 --> 1b0f4f2c-4717-45be-b580-fe10cba78c35;
-  style 1b0f4f2c-4717-45be-b580-fe10cba78c35 stroke:#2c3143,stroke-width:4px;
-  15["bcftools consensus"];
-  11 -->|output| 15;
-  3 -->|output1| 15;
-  49497f3c-9332-4924-bcfd-cb71788ad2c2["Output\nbcftools_consensus"];
-  15 --> 49497f3c-9332-4924-bcfd-cb71788ad2c2;
-  style 49497f3c-9332-4924-bcfd-cb71788ad2c2 stroke:#2c3143,stroke-width:4px;
-  16["Select first"];
-  13 -->|out_file1| 16;
-  17["Remove beginning"];
-  14 -->|output| 17;
-  18["Collapse Collection"];
-  16 -->|outfile| 18;
-  5ee1c158-1a85-45ca-9abd-b30632b3092c["Output\nmapping_coverage_percentage_per_sample"];
-  18 --> 5ee1c158-1a85-45ca-9abd-b30632b3092c;
-  style 5ee1c158-1a85-45ca-9abd-b30632b3092c stroke:#2c3143,stroke-width:4px;
-  19["Count"];
-  17 -->|out_file1| 19;
-  20["Advanced Cut"];
-  18 -->|output| 20;
-  21["Cut"];
-  19 -->|out_file1| 21;
-  22["Paste"];
-  20 -->|output| 22;
-  12 -->|table| 22;
-  25b7b87b-5ef1-487f-90cc-81351a2f81ce["Output\nmapping_mean_depth_per_sample"];
-  22 --> 25b7b87b-5ef1-487f-90cc-81351a2f81ce;
-  style 25b7b87b-5ef1-487f-90cc-81351a2f81ce stroke:#2c3143,stroke-width:4px;
-  23["Select first"];
-  21 -->|out_file1| 23;
-  24["Collapse Collection"];
-  23 -->|outfile| 24;
-  25["Column Regex Find And Replace"];
-  24 -->|output| 25;
-  2852c4ee-24ea-4df7-b59e-54eb6e2f470b["Output\nnumber_of_variants_per_sample"];
-  25 --> 2852c4ee-24ea-4df7-b59e-54eb6e2f470b;
-  style 2852c4ee-24ea-4df7-b59e-54eb6e2f470b stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
 			<h5 class="card-title">Nanopore Preprocessing</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
 				
@@ -568,13 +568,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/nanopore_preprocessing.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/nanopore_preprocessing"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -781,13 +781,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/pathogen_detection_pathoGFAIR_samples_aggregation_and_visualisation.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/pathogen_detection_pathogfair_samples_aggrtion_and_visualisation"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -1065,13 +1065,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/taxonomy_profiling_and_visualisation_with_krona.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/taxonomy_profiling_and_visualisation_with_krona"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -1158,7 +1158,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/61e7b9b0821ea8cb0769b9050bf5065eb98a69c5">61e7b9b</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/374441d5edf9f2be0b812383d627bafe27c120bf">374441d</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
