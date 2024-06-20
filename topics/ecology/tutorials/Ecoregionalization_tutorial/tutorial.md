@@ -359,6 +359,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >    - {% icon param-file %} *"File to cut"*: `out_file` (output of **Merge Columns** {% icon tool %})
 >    - *"Operation"*: `Discard`
 >    - *"Cut by"*: `fields`
+>    - *"Delimited by"*: `Tab`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `c['4', '5', '6', '7', '8', '9']`
 > 2. Check your output. Columns “phylum”, “class”, "order", "family", "genus" and "specificEpithet" must have been deleted and your table must have four columns : "individualCount", "decimalLatitude", "DecimalLongitude" and "phylum_class_order_family_genus_specificEpithet".
