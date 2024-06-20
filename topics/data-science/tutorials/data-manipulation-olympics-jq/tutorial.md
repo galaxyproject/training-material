@@ -98,6 +98,10 @@ We will show you many of these commonly needed data manipulation operations, and
 
 Before we can do any manipulation, we will need some data. Let's download our table with Olympics results now.
 
+<!--
+json files at Zenodo repo are missing!
+-->
+
 We can use `jq` just by itself to pretty print the results:
 
 ```bash
@@ -243,8 +247,8 @@ echo '[8,3,null,6]' | jq '.sort'
 `sort_by` however lets us sort multiple entries in an array, by a child key:
 
 ```bash
-echo '[{"foo":4, "bar":10}, {"foo":3, "bar":100}, {"foo":2, "bar":1}]' | jq '.sort_by(.foo)'
-echo '[{"foo":4, "bar":10}, {"foo":3, "bar":100}, {"foo":2, "bar":1}]' | jq '.sort_by(.bar)'
+echo '[{"foo":4, "bar":10}, {"foo":3, "bar":100}, {"foo":2, "bar":1}]' | jq 'sort_by(.foo)'
+echo '[{"foo":4, "bar":10}, {"foo":3, "bar":100}, {"foo":2, "bar":1}]' | jq 'sort_by(.bar)'
 ```
 
 So let's sort our file in chronological order, based on the year of the Olympic games:
@@ -460,7 +464,6 @@ jq -c '[.[] | select(.season == "Summer")]' < olympics.json > summer.json
 > > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. Use the `length` filter, assuming your data is in an array, per the original prompt.
-> > 2. Be careful to consider whether these counts include the header line of the file or not
 > >
 > {: .solution}
 >
@@ -481,15 +484,14 @@ Ok, time to train! let's see if you can use the `select` filter to answer the fo
 >
 > 1. How many gold medals were handed out?
 > 2. How many total medals?
-> 3. How many medals were handed out during the 2018 Olympics?
+> 3. How many gold medals were handed out during the 2018 Olympics?
 > 4. How many medals were won by individuals with a height between 170 and 180 cm? (inclusive)
 > 5. How many gold medals were won by individuals shorter than 160cm or taller than 190?
 >
 > > <solution-title noprefix>Hints</solution-title>
 > >
-> > - Column 17 contains information about medals
+> > - `.medal` key contains information about medals
 > > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
-> > - Don't forget that the output (and line count) may include the header line
 > > - Do not use quotes on number columns (e.g. year)
 > > - You may need parentheses for complex conditions
 > > - You may want to `[ ... query ...] | length` to get a nice length
@@ -504,7 +506,6 @@ Ok, time to train! let's see if you can use the `select` filter to answer the fo
 > >  4. 8,086   (Expression: `select(.medal != null and .height >= 170 and .height <=180)`)
 > >  5. 2,333   (Expression: `select(.medal != null and (.height < 160 or .height > 190))` (note: parentheses are important here))
 > >
-> > Note: these numbers are found by determining the number of lines in the file after each filtering step, and subtracting 1 for the header line.
 > >
 > {: .solution}
 {: .question}
@@ -519,7 +520,7 @@ Let's start by simply counting how many different Olympic Games we have in our d
 We'll need to use the `group_by` filter which takes a key, and then emits arrays with objects with those matching keys:
 
 ```bash
-echo '[{"foo":1, "bar":10}, {"foo":3, "bar":100}, {"foo":1, "bar":1}]' | jq 'group_by(.foo)
+echo '[{"foo":1, "bar":10}, {"foo":3, "bar":100}, {"foo":1, "bar":1}]' | jq 'group_by(.foo)'
 ```
 
 So let's try that with ours:
@@ -579,7 +580,7 @@ jq -r '. | group_by(.year) | .[] | [. | length, .[0].games] | @tsv' < olympics.j
 > <question-title></question-title>
 >
 > 1. How many different Olympic games are in our file?
-> 2. Which Olympic games had the most participations? (Tip: set the parameter *"How should the results be sorted?"* to `most common values first`)
+> 2. Which Olympic games had the most participations? (Tip: after generating count values, `sort_by(.[0])` can be used to sort according to first value )
 >
 > > <solution-title></solution-title>
 > >
@@ -600,7 +601,7 @@ jq -r '. | group_by(.year) | .[] | [. | length, .[0].games] | @tsv' < olympics.j
 > >     ...
 > >     ```
 > >
-> > 2. 1996 Summer Olympics. (10501 participations)
+> > 2. 1996 Summer Olympics. (10501 participations) (`[. | group_by(.games) | .[] | [. | length, .[0].games]] | sort_by(.[0]) | last`)
 > >
 > {: .solution}
 {: .question}
@@ -625,18 +626,16 @@ jq '. | group_by(.games, .sex) | .[] | [. | length, .[0].games, .[0].sex] | @tsv
 > > <solution-title></solution-title>
 > >
 > > 1. 2 women participated in the 1896 Olympics. (note that we cannot be sure if this is two different women, or 1 woman participating twice).
-> >    The file looks something like this:
+> >    The solution command is: `jq '. | group_by(.games, .sex) | [.[] | [. | length, .[0].games, .[0].sex]]  | sort_by(.[0]) | [.[] | select(.[2]=="F")] | first'  < olympics.json` and result looks like:
 > >    ```
-> >    2	F	1896 Summer Olympics
-> >    43	F	1900 Summer Olympics
-> >    17	F	1904 Summer Olympics
-> >    55	F	1908 Summer Olympics
-> >    97	F	1912 Summer Olympics
-> >    132	F	1920 Summer Olympics
-> >    269	F	1924 Summer Olympics
+> >    [
+> >      2,
+> >      "1896 Summer Olympics",
+> >      "F"
+> >    ]
 > >    ```
-> >
-> > 2. 2020 Summer Olympics (4652)
+> >    The solution above, groups and counts data and then selects female counts. As an alternative, you can select/filter female athletes first and then count athletes per game. So, the alternative solution is: `jq  '[.[] | select(.sex == "F")] | group_by(.games) | [.[] | [. | length, .[0].games, .[0].sex]] | sort_by(.[0]) | first' < olympics.json`
+> > 2. 2020 Summer Olympics (4652). Please use `last` instead of `first` in previous solution.
 > >
 > {: .solution}
 {: .question}
@@ -681,13 +680,11 @@ jq '. | group_by(.games) | .[] | [.[0].games, ([.[].sport] | unique | length)] |
 >
 > > <solution-title></solution-title>
 > >
-> > 2. 10 and 38.
-> > 3. The 2020 Summer Olympics had the most different sports (38)
+> > 2. 10 and 38. For first olympics: `. | group_by(.games) | [.[] | {"games": .[0].games, "sports": [.[] | .sport] | unique | length}] | sort_by(.games) | first`
+> > 3. The 2020 Summer Olympics had the most different sports (38) `. | group_by(.games) | [.[] | {"games": .[0].games, "sports": [.[] | .sport] | unique | length}] | sort_by(.sports) | last`
 > >
 > {: .solution}
 {: .question}
-
-Save the output as something descriptive.
 
 ## Exercises
 
@@ -708,7 +705,7 @@ Ok, let's practice!
 > > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. The United States with 17,286 participations (`cat olympics.json | jq '. | group_by(.team) | .[] |  [. | length, .[0].team] | @tsv' -r`)
-> >  2. 15 and 250. (`cat olympics.json | jq '. | group_by(.games) | .[] | [.[0].games, ([.[].team] | unique | length)] | @tsv' -r`)
+> >  2. 15 and 250. (`cat olympics.json | jq '. | group_by(.games) | .[] | [.[0].games, ([.[].team] | unique | length)] | @tsv' -r`). TSV formatted result will give a table which is unsorted. If you want to get the first (lowest) or last (highest) value, after sorting the values in an array and then picking "first" or "last" one will give more precise output: `. | group_by(.games) | [.[] | [.[0].games, ([.[].team] | unique | length)]] | sort_by(.[0]) | first` 
 > >
 > {: .solution}
 {: .question}
@@ -761,7 +758,7 @@ jq '[.[] | select(.birth_year != null) | . += {"age": (.year - .birth_year)}]' <
 >
 > > <solution-title></solution-title>
 > >
-> > 2. Arnaud Boetsch is listed on the first two lines, who turned 27 the year of their Olympics.
+> > 2. Arnaud Boetsch turned 27 the year of their Olympics. `[.[] | select(.birth_year != null) | . += {"age": (.year - .birth_year)}] | .[] | select(.name=="Arnaud Boetsch")`
 > >
 > {: .solution}
 {: .question}
@@ -858,7 +855,7 @@ jq '[.[] | . += {"city": (.city | gsub("Athina"; "Athens"))}]' < olympics.json
 ```
 
 
-Look at the file before and after. Athlete 7 (Patrick Chila) near the top of the `olympics.tsv` file, had a value of Athina in the city column. Verify that it has been changed to Athens.
+Look at the file before and after. Athlete 7 (Patrick Chila) near the top of the `olympics.json` file, had a value of Athina in the city column. Verify that it has been changed to Athens.
 
 This was rather simple example, so let's try a few more examples with slightly more complex expressions.
 
@@ -915,8 +912,8 @@ Read the [documentation for PCRE and gsub](https://stedolan.github.io/jq/manual/
 
 > <question-title></question-title>
 >
-> 1. How do we match on the birthday format? How strict/exact shoule we be here?
-> 2. How do we captures both the day and the month?
+> 1. How do we match on the birthday format? How strict/exact should we be here?
+> 2. How do we capture both the day and the month?
 > 3. How do we refer to the values we captured (for the replacement value)
 >
 > > <solution-title noprefix>Hints</solution-title>
@@ -1015,7 +1012,7 @@ jq '.[] | {"name": .name, "athlete_id": .athlete_id}' < olympics.json
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Yes. For all athletes who participated more than once, the row will be identical.
+> > 1. Yes. For all athletes who participated more than once, there will be identical objects.
 > >
 > {: .solution}
 {: .question}
@@ -1050,6 +1047,10 @@ For example, if we would like to be able to group by continent, to e.g. count at
 We obtained country information data from [DataHub](https://datahub.io/core/country-codes). More information about this file can be found in the description there. It has 56 columns with a wide variety of data about each country (from country codes, to capital city, languages spoken, etc)
 
 Download
+
+<!--
+TODO: file does not exist, and I cannot generate the json file with tsv2json.py as well, so couldn't test the following exercises
+-->
 
 ```
 {{page.zenodo_link}}/files/country-information.json
