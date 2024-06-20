@@ -108,7 +108,10 @@ The interactive table will contain all the tools associated with the ToolShed ca
 
 Galaxy Tool Metadata Extractor allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you !).
 
-The additional filter must be stored in a file called  `tools_status.tsv` located in `data/community/<your community>`. The file must include 3 columns (without header). The first column is the `Galaxy wrapper id` corresponding to the IDs in the `tools.tsv` file in `results/<your community>`. The second column states weather the tool should be included in the final table (TRUE/FALSE). The third column states if the tool is deprecated (TRUE/FALSE).
+The additional filter must be stored in a file called  `tools_status.tsv` located in `data/community/<your community>`. The file must include 3 columns (without header):
+1. The `Galaxy wrapper id` corresponding to the IDs in the `tools.tsv` file in `results/<your community>`. 
+2. Whether the tool should be included in the final table (TRUE/FALSE). 
+3. Whether the tool is deprecated (TRUE/FALSE).
 
 Example of the `tools_status.tsv` file:
 ```
