@@ -137,7 +137,7 @@ Ideally, we'd like to follow the process of test-driven development: write a tes
 
 Let's start by writing a basic test for a very simple API endpoint: `api/version`. The controller for this endpoint is located at `lib/galaxy/webapps/galaxy/api/configuration.py`. You can check the format of the data at `https://usegalaxy.org/api/version`.
 
-First, you need to create a new file at `lib/galaxy_test/api/test_mytutorial.py`. For simplicity, we'll place all new tests in this module. Next, add a class definition for `MyTutorialApiTestCase` that should be a subclass of `ApiTestCase`. Then add a test method, `test_version_is_current`, where you will (1) call the API via the ``_get`` method that returns a response object; and (2) verify that the response contains the "22.09" version number (assuming you have cloned the "dev" branch; otherwise your version may be different).
+First, you need to create a new file at `lib/galaxy_test/api/test_mytutorial.py`. For simplicity, we'll place all new tests in this module. Next, add a class definition for `TestMyTutorialApiTestCase` that should be a subclass of `ApiTestCase`. Then add a test method, `test_version_is_current`, where you will (1) call the API via the ``_get`` method that returns a response object; and (2) verify that the response contains the "24.1" version number (assuming you have cloned the "dev" branch; otherwise your version may be different).
 
 If your test fails, one way to debug it is to insert a `breakpoint()` statement into the body of the test (right after the call to ``_get`` would be a logical spot), and then use [pdb](https://docs.python.org/3/library/pdb.html), Python's interactive debugger, to explore the response at runtime with the test paused (see [Debugging Galaxy]({% link topics/dev/tutorials/debugging/tutorial.md %}) for more details on using pdb to debug Galaxy).
 
@@ -217,7 +217,7 @@ def test_create_role_WRONG(self):
 Everything is straightforward: we verify that there is only n=1 role currently present (a built-in for the test user), we add the role, then retrieve all roles and verify that the new total is n + 1. Unfortunately, ***this is the wrong approach***. Try running this together with the previous version of the test - you'll get an assertion error: there's an extra role in the database! 
 
 ```
-FAILED lib/galaxy_test/api/test_mytutorial.py::MyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
+FAILED lib/galaxy_test/api/test_mytutorial.py::TestMyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
 ```
 
 The reason for that is that we are using the same database for both tests, so whatever artifacts are created in one test will affect the following test if we make any kind of assumptions about the state of the database.
