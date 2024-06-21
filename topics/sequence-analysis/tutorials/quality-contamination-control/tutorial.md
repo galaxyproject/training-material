@@ -190,7 +190,8 @@ FastQC combines quality statistics from all separate reads and combines them in 
 
 DRR187559_1 | DRR187559_2
 ----------- | -----------
-![FastQC plot showing reads that mostly stay in the green](../../images/mrsa/fastqc-1.png) | ![Same as previous plot, but the beginning of the reads are slightly better quality](../../images/mrsa/fastqc-2.png)
+![FastQC plot showing reads that mostly stay in the green](training-material/topics/assembly/images/mrsa
+/fastqc-1.png) | ![Same as previous plot, but the beginning of the reads are slightly better quality](training-material/topics/assembly/images/mrsa/fastqc-2.png)
 
 Here you have the reads sequence length on the x-axes against the quality score (Phred-score) on the y-axis. The y-axis is divided in three sections: 
 - Green = good quality, 
