@@ -228,7 +228,7 @@ We could generate our own unique name, but we can also simply use an existing me
 
 {% include topics/dev/tutorials/writing_tests/api3.md %}
 
-Can't we destroy and create or re-populate the database for each test? We can, and if you absolutely need to do that, there is infrastructure for that in `test/unit/data/model/testing_utils` - you can see examples of its usage in the mapping and migrations unit tests (check these subdirectories). However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible. 
+Can't we destroy and create or re-populate the database for each test? We can, and there is infrastructure for that in `test/unit/data/model/db`. However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible. 
 
 ## Use Galaxy's populators for setting up database state
 
@@ -258,7 +258,7 @@ There are numerous unit tests in the Galaxy code base. However, existing unit te
 
 We'll start by looking at the module `lib/galaxy/util/bytesize.py`. This module is not covered by unit tests. There are 2 obvious targets for unit tests: the `parse bytesize` function and the `to_unit` method of the `ByteSize` class. Our goal is to come up with a reasonable selection of unit tests that verify essential aspects of this functionality.
 
-We'll start with the `parse_bytesize` function. Look at the code of the function and identify the logic that, you think, needs testing. Essentially, you want to ensure that any combination of valid input produces the expected output. Next, add a few tests. (see [https://docs.pytest.org/en/7.1.x/how-to/assert.html](https://docs.pytest.org/en/7.1.x/how-to/assert.html) for examples)
+We'll start with the `parse_bytesize` function. Look at the code of the function and identify the logic that, you think, needs testing. Essentially, you want to ensure that any combination of valid input produces the expected output. Next, add a few tests. (see [https://docs.pytest.org/en/8.2.x/how-to/assert.html](https://docs.pytest.org/en/8.2.x/how-to/assert.html) for examples)
 
 {% include topics/dev/tutorials/writing_tests/unit1.md %}
 
@@ -288,7 +288,7 @@ Run the tests to verify they pass.
 
 Our tests are looking good for the most part, although code duplication is starting to creep in. It's time to refactor! 
 
-Let's start by factoring out the ByteSize object creation into a fixture (see [https://docs.pytest.org/en/7.1.x/how-to/fixtures.html](https://docs.pytest.org/en/7.1.x/how-to/fixtures.html)). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy's testing code.
+Let's start by factoring out the ByteSize object creation into a fixture (see [https://docs.pytest.org/en/8.2.x/how-to/fixtures.html](https://docs.pytest.org/en/8.2.x/how-to/fixtures.html)). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy's testing code.
 
 {% include topics/dev/tutorials/writing_tests/unit4.md %}
 
@@ -296,7 +296,7 @@ Run the tests to verify they pass.
 
 ## Parametrization of test functions
 
-Finally, our `test_bytesize_to_unit` test has a lot of assert statements of the same form. We can do better! Let's use pytest's test parametrization feature (see [https://docs.pytest.org/en/7.1.x/how-to/parametrize.html](https://docs.pytest.org/en/7.1.x/how-to/parametrize.html)) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. Galaxy's tool tests, or integration tests for configuration settings).
+Finally, our `test_bytesize_to_unit` test has a lot of assert statements of the same form. We can do better! Let's use pytest's test parametrization feature (see [https://docs.pytest.org/en/8.2.x/how-to/parametrize.html](https://docs.pytest.org/en/8.2.x/how-to/parametrize.html)) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. Galaxy's tool tests, or integration tests for configuration settings).
 
 {% include topics/dev/tutorials/writing_tests/unit5.md %}
 
@@ -340,7 +340,7 @@ For this, we need to factor out the code that calls the database into its own fu
 
 ## "Monkeypatching" the module under test
 
-Now we can use pytest's "monkeypatch" built-in fixture to replace that function with a stub method and then use it to return `True` or `False` to test both cases. (see [https://docs.pytest.org/en/7.1.x/how-to/monkeypatch.html?highlight=monkeypatch](https://docs.pytest.org/en/7.1.x/how-to/monkeypatch.html?highlight=monkeypatch) for more details).
+Now we can use pytest's "monkeypatch" built-in fixture to replace that function with a stub method and then use it to return `True` or `False` to test both cases. (see [https://docs.pytest.org/en/8.2.x/how-to/monkeypatch.html?highlight=monkeypatch](https://docs.pytest.org/en/8.2.x/how-to/monkeypatch.html?highlight=monkeypatch) for more details).
 
 {% include topics/dev/tutorials/writing_tests/unit8.md %}
 
@@ -376,7 +376,7 @@ Again, run the tests to verify we haven't broken anything.
 
 ## Reformatting for improved readability
 
-Before we add more tests, let's reformat our code to group all the tests that target the `validate_email` function in one class. Keep in mind that each test gets its own instance of the class - so you cannot share instance state across tests. However, grouping related tests makes the testing module easier to navigate (there are more benefits; see [https://docs.pytest.org/en/7.1.x/getting-started.html#group-multiple-tests-in-a-class](https://docs.pytest.org/en/7.1.x/getting-started.html#group-multiple-tests-in-a-class)).
+Before we add more tests, let's reformat our code to group all the tests that target the `validate_email` function in one class. Keep in mind that each test gets its own instance of the class - so you cannot share instance state across tests. However, grouping related tests makes the testing module easier to navigate (there are more benefits; see [https://docs.pytest.org/en/8.2.x/getting-started.html#group-multiple-tests-in-a-class](https://docs.pytest.org/en/8.2.x/getting-started.html#group-multiple-tests-in-a-class)).
 
 {% include topics/dev/tutorials/writing_tests/unit13.md %}
 
