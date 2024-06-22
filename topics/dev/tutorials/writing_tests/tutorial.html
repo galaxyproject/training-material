@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e930a74a3740c72d8fca1463d69f7fb7fb780347",
+		release: "galaxy-training-network@ab87be70eab8e90ebf5c7a031da7b9d832456d62",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Writing Automated Tests for Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-01-23 14:30:52 +0000">
+<meta name="DC.date" content="2024-06-22 05:05:02 +0000">
 <meta name="DC.creator" content="John Davis">
 <meta name="DC.creator" content="John Chilton"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -208,7 +208,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-01-23 14:30:52 +0000",
+  "dateModified": "2024-06-22 05:05:02 +0000",
   "datePublished": "2022-07-15 10:22:17 +0000",
   "identifier": "https://gxy.io/GTN:T00123",
   "accessMode": [
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Writing Automated Tests for Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html",
-  "version": 4,
+  "version": 6,
   "timeRequired": "PT3H",
   "teaches": "Learn about the different types of automated tests in Galaxy\n - Learn to write API tests\n - Learn to write unit tests",
   "keywords": [
@@ -741,7 +741,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 15, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 22, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -759,7 +759,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
 
     </blockquote>
     </section>
@@ -917,7 +917,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Let’s start by writing a basic test for a very simple API endpoint: <code class="language-plaintext highlighter-rouge">api/version</code>. The controller for this endpoint is located at <code class="language-plaintext highlighter-rouge">lib/galaxy/webapps/galaxy/api/configuration.py</code>. You can check the format of the data at <code class="language-plaintext highlighter-rouge">https://usegalaxy.org/api/version</code>.</p>
 
-<p>First, you need to create a new file at <code class="language-plaintext highlighter-rouge">lib/galaxy_test/api/test_mytutorial.py</code>. For simplicity, we’ll place all new tests in this module. Next, add a class definition for <code class="language-plaintext highlighter-rouge">MyTutorialApiTestCase</code> that should be a subclass of <code class="language-plaintext highlighter-rouge">ApiTestCase</code>. Then add a test method, <code class="language-plaintext highlighter-rouge">test_version_is_current</code>, where you will (1) call the API via the <code class="language-plaintext highlighter-rouge">_get</code> method that returns a response object; and (2) verify that the response contains the “22.09” version number (assuming you have cloned the “dev” branch; otherwise your version may be different).</p>
+<p>First, you need to create a new file at <code class="language-plaintext highlighter-rouge">lib/galaxy_test/api/test_mytutorial.py</code>. For simplicity, we’ll place all new tests in this module. Next, add a class definition for <code class="language-plaintext highlighter-rouge">TestMyTutorialApiTestCase</code> that should be a subclass of <code class="language-plaintext highlighter-rouge">ApiTestCase</code>. Then add a test method, <code class="language-plaintext highlighter-rouge">test_version_is_current</code>, where you will (1) call the API via the <code class="language-plaintext highlighter-rouge">_get</code> method that returns a response object; and (2) verify that the response contains the “24.1” version number (assuming you have cloned the “dev” branch; otherwise your version may be different).</p>
 
 <p>If your test fails, one way to debug it is to insert a <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement into the body of the test (right after the call to <code class="language-plaintext highlighter-rouge">_get</code> would be a logical spot), and then use <a href="https://docs.python.org/3/library/pdb.html">pdb</a>, Python’s interactive debugger, to explore the response at runtime with the test paused (see <a href="/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging Galaxy</a> for more details on using pdb to debug Galaxy).</p>
 
@@ -929,13 +929,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
 
 
-<span class="k">class</span> <span class="nc">MyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">TestMyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">test_version_is_current</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sh">"</span><span class="s">version</span><span class="sh">"</span><span class="p">)</span>
         <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="sh">"</span><span class="s">version_major</span><span class="sh">"</span><span class="p">]</span> <span class="o">==</span> <span class="sh">"</span><span class="s">22.09</span><span class="sh">"</span>  <span class="c1"># Assuming you are on the "dev" branch
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="sh">"</span><span class="s">version_major</span><span class="sh">"</span><span class="p">]</span> <span class="o">==</span> <span class="sh">"</span><span class="s">24.1</span><span class="sh">"</span>  <span class="c1"># Assuming you are on the "dev" branch
 </span></code></pre></div>  </div>
 </blockquote>
 
@@ -984,7 +984,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <p>API test for creating an object.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestMyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">test_create_role</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># prepare new role
@@ -1037,7 +1037,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Everything is straightforward: we verify that there is only n=1 role currently present (a built-in for the test user), we add the role, then retrieve all roles and verify that the new total is n + 1. Unfortunately, <strong><em>this is the wrong approach</em></strong>. Try running this together with the previous version of the test - you’ll get an assertion error: there’s an extra role in the database!</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FAILED lib/galaxy_test/api/test_mytutorial.py::MyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FAILED lib/galaxy_test/api/test_mytutorial.py::TestMyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
 </code></pre></div></div>
 
 <p>The reason for that is that we are using the same database for both tests, so whatever artifacts are created in one test will affect the following test if we make any kind of assumptions about the state of the database.</p>
@@ -1055,7 +1055,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <span class="kn">from</span> <span class="n">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
 
 
-<span class="k">class</span> <span class="nc">MyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">TestMyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="nf">super</span><span class="p">().</span><span class="nf">setUp</span><span class="p">()</span>
@@ -1093,7 +1093,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </code></pre></div>  </div>
 </blockquote>
 
-<p>Can’t we destroy and create or re-populate the database for each test? We can, and if you absolutely need to do that, there is infrastructure for that in <code class="language-plaintext highlighter-rouge">test/unit/data/model/testing_utils</code> - you can see examples of its usage in the mapping and migrations unit tests (check these subdirectories). However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible.</p>
+<p>Can’t we destroy and create or re-populate the database for each test? We can, and there is infrastructure for that in <code class="language-plaintext highlighter-rouge">test/unit/data/model/db</code>. However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible.</p>
 
 <h2 id="use-galaxys-populators-for-setting-up-database-state">Use Galaxy’s populators for setting up database state</h2>
 
@@ -1145,7 +1145,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <span class="kn">from</span> <span class="n">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
 
 
-<span class="k">class</span> <span class="nc">MyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">TestMyTutorialApiTestCase</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="nf">super</span><span class="p">().</span><span class="nf">setUp</span><span class="p">()</span>
@@ -1155,7 +1155,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sh">"</span><span class="s">version</span><span class="sh">"</span><span class="p">)</span>
         <span class="n">response</span><span class="p">.</span><span class="nf">raise_for_status</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
-        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="sh">"</span><span class="s">version_major</span><span class="sh">"</span><span class="p">]</span> <span class="o">==</span> <span class="sh">"</span><span class="s">22.09</span><span class="sh">"</span>
+        <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="sh">"</span><span class="s">version_major</span><span class="sh">"</span><span class="p">]</span> <span class="o">==</span> <span class="sh">"</span><span class="s">24.1</span><span class="sh">"</span>
 
     <span class="k">def</span> <span class="nf">test_create_role</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
         <span class="c1"># prepare new role
@@ -1230,7 +1230,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>We’ll start by looking at the module <code class="language-plaintext highlighter-rouge">lib/galaxy/util/bytesize.py</code>. This module is not covered by unit tests. There are 2 obvious targets for unit tests: the <code class="language-plaintext highlighter-rouge">parse bytesize</code> function and the <code class="language-plaintext highlighter-rouge">to_unit</code> method of the <code class="language-plaintext highlighter-rouge">ByteSize</code> class. Our goal is to come up with a reasonable selection of unit tests that verify essential aspects of this functionality.</p>
 
-<p>We’ll start with the <code class="language-plaintext highlighter-rouge">parse_bytesize</code> function. Look at the code of the function and identify the logic that, you think, needs testing. Essentially, you want to ensure that any combination of valid input produces the expected output. Next, add a few tests. (see <a href="https://docs.pytest.org/en/7.1.x/how-to/assert.html">https://docs.pytest.org/en/7.1.x/how-to/assert.html</a> for examples)</p>
+<p>We’ll start with the <code class="language-plaintext highlighter-rouge">parse_bytesize</code> function. Look at the code of the function and identify the logic that, you think, needs testing. Essentially, you want to ensure that any combination of valid input produces the expected output. Next, add a few tests. (see <a href="https://docs.pytest.org/en/8.2.x/how-to/assert.html">https://docs.pytest.org/en/8.2.x/how-to/assert.html</a> for examples)</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1332,7 +1332,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Our tests are looking good for the most part, although code duplication is starting to creep in. It’s time to refactor!</p>
 
-<p>Let’s start by factoring out the ByteSize object creation into a fixture (see <a href="https://docs.pytest.org/en/7.1.x/how-to/fixtures.html">https://docs.pytest.org/en/7.1.x/how-to/fixtures.html</a>). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy’s testing code.</p>
+<p>Let’s start by factoring out the ByteSize object creation into a fixture (see <a href="https://docs.pytest.org/en/8.2.x/how-to/fixtures.html">https://docs.pytest.org/en/8.2.x/how-to/fixtures.html</a>). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy’s testing code.</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1378,7 +1378,7 @@ and then simply pass it as an argument to our tests.</p>
 
 <h2 id="parametrization-of-test-functions">Parametrization of test functions</h2>
 
-<p>Finally, our <code class="language-plaintext highlighter-rouge">test_bytesize_to_unit</code> test has a lot of assert statements of the same form. We can do better! Let’s use pytest’s test parametrization feature (see <a href="https://docs.pytest.org/en/7.1.x/how-to/parametrize.html">https://docs.pytest.org/en/7.1.x/how-to/parametrize.html</a>) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. Galaxy’s tool tests, or integration tests for configuration settings).</p>
+<p>Finally, our <code class="language-plaintext highlighter-rouge">test_bytesize_to_unit</code> test has a lot of assert statements of the same form. We can do better! Let’s use pytest’s test parametrization feature (see <a href="https://docs.pytest.org/en/8.2.x/how-to/parametrize.html">https://docs.pytest.org/en/8.2.x/how-to/parametrize.html</a>) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. Galaxy’s tool tests, or integration tests for configuration settings).</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1560,7 +1560,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 
 <h2 id="monkeypatching-the-module-under-test">“Monkeypatching” the module under test</h2>
 
-<p>Now we can use pytest’s “monkeypatch” built-in fixture to replace that function with a stub method and then use it to return <code class="language-plaintext highlighter-rouge">True</code> or <code class="language-plaintext highlighter-rouge">False</code> to test both cases. (see <a href="https://docs.pytest.org/en/7.1.x/how-to/monkeypatch.html?highlight=monkeypatch">https://docs.pytest.org/en/7.1.x/how-to/monkeypatch.html?highlight=monkeypatch</a> for more details).</p>
+<p>Now we can use pytest’s “monkeypatch” built-in fixture to replace that function with a stub method and then use it to return <code class="language-plaintext highlighter-rouge">True</code> or <code class="language-plaintext highlighter-rouge">False</code> to test both cases. (see <a href="https://docs.pytest.org/en/8.2.x/how-to/monkeypatch.html?highlight=monkeypatch">https://docs.pytest.org/en/8.2.x/how-to/monkeypatch.html?highlight=monkeypatch</a> for more details).</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1747,7 +1747,7 @@ local variables.</li>
 
 <h2 id="reformatting-for-improved-readability">Reformatting for improved readability</h2>
 
-<p>Before we add more tests, let’s reformat our code to group all the tests that target the <code class="language-plaintext highlighter-rouge">validate_email</code> function in one class. Keep in mind that each test gets its own instance of the class - so you cannot share instance state across tests. However, grouping related tests makes the testing module easier to navigate (there are more benefits; see <a href="https://docs.pytest.org/en/7.1.x/getting-started.html#group-multiple-tests-in-a-class">https://docs.pytest.org/en/7.1.x/getting-started.html#group-multiple-tests-in-a-class</a>).</p>
+<p>Before we add more tests, let’s reformat our code to group all the tests that target the <code class="language-plaintext highlighter-rouge">validate_email</code> function in one class. Keep in mind that each test gets its own instance of the class - so you cannot share instance state across tests. However, grouping related tests makes the testing module easier to navigate (there are more benefits; see <a href="https://docs.pytest.org/en/8.2.x/getting-started.html#group-multiple-tests-in-a-class">https://docs.pytest.org/en/8.2.x/getting-started.html#group-multiple-tests-in-a-class</a>).</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1822,7 +1822,7 @@ the fixtures outside the class body, so that they can be reused by other test co
 
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_blocklist_when_allowlist_is_empty</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
     <span class="n">blocklist</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">bad_domain.com</span><span class="sh">'</span><span class="p">]</span>
-    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validation_module</span><span class="p">,</span> <span class="sh">"</span><span class="s">get_email_domain_blocklist_content</span><span class="sh">"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
+    <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="sh">"</span><span class="s">get_email_domain_blocklist_content</span><span class="sh">"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
     <span class="k">assert</span> <span class="sh">"</span><span class="s">enter your permanent email</span><span class="sh">"</span> <span class="ow">in</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="sh">"</span><span class="s">email@bad_domain.com</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
@@ -1891,7 +1891,7 @@ the fixtures outside the class body, so that they can be reused by other test co
 </span>
     <span class="k">def</span> <span class="nf">test_blocklist_when_allowlist_is_empty</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">monkeypatch</span><span class="p">,</span> <span class="n">patch_allowlist</span><span class="p">,</span> <span class="n">patch_check_existing</span><span class="p">):</span>
         <span class="n">blocklist</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">bad_domain.com</span><span class="sh">'</span><span class="p">]</span>
-        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validation_module</span><span class="p">,</span> <span class="sh">"</span><span class="s">get_email_domain_blocklist_content</span><span class="sh">"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
+        <span class="n">monkeypatch</span><span class="p">.</span><span class="nf">setattr</span><span class="p">(</span><span class="n">validate_user_input</span><span class="p">,</span> <span class="sh">"</span><span class="s">get_email_domain_blocklist_content</span><span class="sh">"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">blocklist</span><span class="p">)</span>
         <span class="k">assert</span> <span class="sh">"</span><span class="s">enter your permanent email</span><span class="sh">"</span> <span class="ow">in</span> <span class="nf">validate_email</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="sh">"</span><span class="s">email@bad_domain.com</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div>  </div>
 </blockquote>
@@ -2147,7 +2147,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e930a74a3740c72d8fca1463d69f7fb7fb780347">e930a74</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ab87be70eab8e90ebf5c7a031da7b9d832456d62">ab87be7</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
