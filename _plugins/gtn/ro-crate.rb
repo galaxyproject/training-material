@@ -187,8 +187,9 @@ This workflows is part of the tutorial [#{workflow['name']}](#{url}#{baseurl}/to
       wf_ga['tags'].map! { |t| t.gsub('^name:', '').capitalize }
       wf_ga['tags'].push('GTN')
       wf_ga['tags'].push('Galaxy')
-      # wf_ga.delete('creator')
-      
+      # TODO: Remove this after https://github.com/seek4science/seek/issues/1927
+      wf_ga.delete('creator')
+
       File.write(File.join(wfdir, 'mod.ga'), JSON.pretty_generate(wf_ga))
       # p "Writing #{File.join(wfdir, 'mod.ga')}"
 
