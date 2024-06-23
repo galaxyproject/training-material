@@ -21,7 +21,7 @@ def doUpload(crate_path):
 
     payload = {
         "ro_crate": (crate_path, open(crate_path, "rb")),
-        "workflow[project_ids][]": (None, 63),
+        "workflow[project_ids][]": (None, 63), # GTN's ID.
     }
     headers = {"authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 'User-Agent': 'GTN (github.com/galaxyproject/training-material@1.0)'}
 

@@ -85,8 +85,6 @@ module Gtn
         ['Funder(s)', Gtn::Contributors.get_funders(associated_material).map { |n| name2md(site, n) }],
       ].reject { |_, v| v.empty? }
 
-      pp mat_contribs
-
       description = %Q(
 #{wf_ga['annotation']}
 
@@ -187,7 +185,10 @@ This workflows is part of the tutorial [#{workflow['name']}](#{url}#{baseurl}/to
       File.write(path, JSON.pretty_generate(crate))
 
       wf_ga['tags'].map! { |t| t.gsub('^name:', '').capitalize }
-      wf_ga.delete('creator')
+      wf_ga['tags'].push('GTN')
+      wf_ga['tags'].push('Galaxy')
+      # wf_ga.delete('creator')
+      
       File.write(File.join(wfdir, 'mod.ga'), JSON.pretty_generate(wf_ga))
       # p "Writing #{File.join(wfdir, 'mod.ga')}"
 
