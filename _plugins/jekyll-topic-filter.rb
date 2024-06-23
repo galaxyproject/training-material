@@ -515,11 +515,8 @@ module TopicFilter
         .each do |wo|
           statements.append "k#{wo['uuid'].gsub('-', '')}[color=lightseagreen,label=\"Output\\n#{wo['label']}\"]"
           statements.append "#{id} -> k#{wo['uuid'].gsub('-', '')}"
-          statements.append "k#{wo['uuid'].gsub('-', '')} -> logo"
         end
     end
-
-    statements.append 'logo[image="assets/branding/gtn-workflows.png", label="", color="white"];'
 
     "digraph main {\n" + statements.map { |q| "  #{q}" }.join("\n") + "\n}"
   end
@@ -1040,6 +1037,10 @@ module Jekyll
     #  {% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
     def fetch_tutorial_material(site, topic_name, page_name)
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
+    end
+
+    def fetch_tutorial_material_by_id(site, id)
+      TopicFilter.fetch_tutorial_material(site, id.split('/')[0], id.split('/')[1])
     end
 
     def list_topics_ids(site)

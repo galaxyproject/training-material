@@ -1109,11 +1109,11 @@ module GtnLinter
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|
-          if !test_file.match(/-tests?.yml/)
+          if !test_file.match(/-tests.yml/)
             results += [
               ReviewDogEmitter.file_error(path: path,
-                                          message: 'Please use the extension -test.yml ' \
-                                                   'or -tests.yml for this test file.',
+                                          message: 'Please use the extension -tests.yml ' \
+                                                   'for this test file.',
                                           code: 'GTN:032')
             ]
           end

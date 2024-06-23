@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import yaml
+import json
 import os
 import sys
 import requests
@@ -7,9 +8,12 @@ import glob
 import time
 import multiprocessing
 
-crates = glob.glob(
-    "_site/training-material/api/workflows/**/rocrate.zip", recursive=True
-)
+if len(sys.argv) == 2:
+    crates = [sys.argv[1]]
+else:
+    crates = glob.glob(
+        "_site/training-material/api/workflows/**/rocrate.zip", recursive=True
+    )
 
 def doUpload(crate_path):
     p = crate_path.split("/")
@@ -19,7 +23,7 @@ def doUpload(crate_path):
         "ro_crate": (crate_path, open(crate_path, "rb")),
         "workflow[project_ids][]": (None, 63),
     }
-    headers = {"authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 'User-Agent': 'github.com/galaxyproject/training-material@1.0'}
+    headers = {"authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 'User-Agent': 'GTN (github.com/galaxyproject/training-material@1.0)'}
 
     response = requests.post(
         "https://dev.workflowhub.eu/workflows/submit", files=payload, headers=headers
@@ -29,6 +33,8 @@ def doUpload(crate_path):
         print(f"Error {code} uploading {crate_path}")
         print(response.text)
         return None
+    else:
+        print(json.loads(response.text)['data']['links']['self'])
 
     data = response.json()
     wf_id = data["data"]["id"]

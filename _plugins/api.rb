@@ -6,6 +6,7 @@ require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 require './_plugins/gtn/git'
+require './_plugins/gtn/ro-crate'
 require './_plugins/gtn'
 
 ##
@@ -401,152 +402,16 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
     # Import on-demand
     require 'securerandom'
-    require 'zip'
+
 
     dir = File.join(site.dest, 'api', 'workflows')
-
     # ro-crate-metadata.json
     crate_start = Time.now
     count = 0
     TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
       material['workflows'].each do |workflow|
+        Gtn::RoCrate.write(dir, workflow, site.config['url'], site.config['baseurl'])
         count += 1
-        wfname = workflow['wfname']
-        # {"workflow"=>"galaxy-workflow-mouse_novel_peptide_analysis.ga",
-        # "tests"=>false,
-        # "url"=>
-        # "http://0.0.0.0:4002/training-material/topics/.../workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
-        # "path"=>
-        # "topics/proteomics/tutorials/.../galaxy-workflow-mouse_novel_peptide_analysis.ga",
-        # "wfid"=>"proteomics-proteogenomics-novel-peptide-analysis",
-        # "wfname"=>"galaxy-workflow-mouse_novel_peptide_analysis",
-        # "trs_endpoint"=>
-        # "http://0.0.0.0:4002/training-material/api/.../versions/galaxy-workflow-mouse_novel_peptide_analysis",
-        # "license"=>nil,
-        # "creators"=>[],
-        # "name"=>"GTN Proteogemics3 Novel Peptide Analysis",
-        # "test_results"=>nil,
-        # "modified"=>2023-06-07 12:09:36.12 +0200}
-
-        wfdir = File.join(dir, workflow['topic_id'], workflow['tutorial_id'], wfname)
-        FileUtils.mkdir_p(wfdir)
-        path = File.join(wfdir, 'ro-crate-metadata.json')
-        Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
-        # We have the `dot` graph code in a variable, we need to pass it to `dot -T png ` on the stdin
-        dot_path = File.join(wfdir, "graph.dot")
-        File.write(dot_path, workflow['graph_dot'])
-        Jekyll.logger.debug "[GTN/API/WFRun] dot -T png #{dot_path} > graph.png"
-        `dot -T png '#{dot_path}' > '#{File.join(wfdir, 'graph.png')}'`
-
-        # Replace last / with # to make a valid URL
-        wfurlid = site.config['url'] + site.config['baseurl'] + '/' + workflow['path'].gsub(%r{/workflows/},
-                                                                                            '/workflows#')
-
-        uuids = workflow['creators'].map do |c|
-          if c.key?('identifier') && !c['identifier'].empty?
-            "https://orcid.org/#{c['identifier']}"
-          else
-            "##{SecureRandom.uuid}"
-          end
-        end
-        author_uuids = uuids.map { |u| { '@id' => u.to_s } }
-        author_linked = workflow['creators'].map.with_index do |c, i|
-          {
-            '@id' => (uuids[i]).to_s,
-            '@type' => c['class'],
-            'name' => c['name'],
-          }
-        end
-        license = workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0'
-
-        crate = {
-          '@context' => ['https://w3id.org/ro/crate/1.1/context'],
-          '@graph' => [
-            {
-              '@id': 'ro-crate-metadata.json',
-              '@type': 'CreativeWork',
-              about: {
-                '@id': wfurlid,
-              },
-              conformsTo: {
-                '@id': 'https://w3id.org/ro/crate/1.1'
-              },
-            },
-            {
-              '@id': wfurlid,
-              '@type': 'Dataset',
-              name: workflow['name'],
-              description: 'Galaxy workflow',
-              version: Gtn::ModificationTimes.obtain_modification_count(workflow['path']).to_s,
-              license: license,
-              datePublished: workflow['modified'].strftime('%Y-%m-%dT%H:%M:%S.%L%:z'),
-              # hasPart: [
-              #   {
-              #     '@id': '#assembly-assembly-quality-control'
-              #   }
-              # ],
-              mainEntity: {
-                '@id': "#{wfname}.ga"
-              },
-              hasPart: [
-                {
-                '@id': "#{wfname}.ga"
-                },
-                {
-                '@id': "graph.png"
-                },
-              ]
-            },
-            {
-              '@id': "#{wfname}.ga",
-              '@type': %w[
-                File
-                SoftwareSourceCode
-                ComputationalWorkflow
-              ],
-              author: author_uuids,
-              name: workflow['name'],
-              programmingLanguage: {
-                '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy'
-              },
-              image: {
-                '@id': 'graph.png'
-              }
-            },
-            {
-              '@id': 'graph.png',
-              '@type': [
-                'File',
-                'ImageObject',
-                'WorkflowSketch'
-              ],
-              contentSize: File.size(File.join(wfdir, 'graph.png')),
-            },
-            {
-              '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy',
-              '@type': 'ComputerLanguage',
-              identifier: {
-                '@id': 'https://galaxyproject.org/'
-              },
-              name: 'Galaxy',
-              url: {
-                '@id': 'https://galaxyproject.org/'
-              },
-              version: '23.1'
-            }
-          ]
-        }
-        crate['@graph'] += author_linked
-        File.write(path, JSON.pretty_generate(crate))
-
-        zip_path = File.join(wfdir, 'rocrate.zip')
-        Zip::File.open(zip_path, create: true) do |zipfile|
-          # - The name of the file as it will appear in the archive
-          # - The original file, including the path to find it
-          zipfile.add('ro-crate-metadata.json', path)
-          zipfile.add('graph.png', File.join(wfdir, 'graph.png'))
-          zipfile.add("#{wfname}.ga", workflow['path'])
-        end
       end
     end
 
