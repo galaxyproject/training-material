@@ -134,7 +134,7 @@ if __FILE__ == $PROGRAM_NAME
 
     require 'json'
     tool_list = JSON.parse(`curl -s #{server}/api/tools?in_panel=False`).map{|x| x['id']}
-    pp "Found #{tool_list.length} tools"
+    puts "Found #{tool_list.length} tools in #{server}"
 
     version_smash = tool_list.map{|x|
       if x.count('/') > 4
@@ -147,7 +147,7 @@ if __FILE__ == $PROGRAM_NAME
 
     workflow_tools = JSON.parse(File.open(workflow).read)['steps'].map{|_, x| x['tool_id']}
     workflow_tools.select!{|x| x && x.length.positive?}
-    pp "Found #{workflow_tools.length} tools in the workflow"
+    puts "Found #{workflow_tools.length} tools in the #{workflow}"
 
     workflow_tools.each do |tool|
       if tool_list.include?(tool)
@@ -161,7 +161,21 @@ if __FILE__ == $PROGRAM_NAME
       end
     end
 
+    metadata = {
+      "servers" => [{"url" => server, "name" => "CLI Tested Server"}],
+      "tools" => {}
+    }
+    version_smash.each do |k, v|
+      if k.count('/') > 3
+        metadata["tools"][k] = v.map{|x| [x, [0]]}.to_h
+      else
+        metadata["tools"][k] = {
+          "_" => [0]
+        }
+      end
+    end
 
-    # pp Gtn::Supported.calculate(JSON.parse(File.open('metadata/public-server-tools.json')), ARGV[1])
+    puts "GTN Rendering:"
+    pp Gtn::Supported.calculate(metadata, workflow_tools)
   end
 end
