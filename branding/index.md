@@ -43,6 +43,6 @@ table img {
 
 <div>
 {% for entity in site.data.contributors %}
-<img src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 50 }}" style="width: 33px;margin:0"/>
+<img src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 50 }}" style="width: 33px;margin:0" alt="avatar"/>
 {% endfor %}
 </div>
