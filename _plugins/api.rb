@@ -379,6 +379,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
         path = File.join(site.dest, 'api', directory, 'slides.json')
         p = material.dup
         p.delete('ref')
+        p.delete('ref_slides')
         p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
 
         # Here we un-do the tutorial metadata priority, and overwrite with
@@ -396,6 +397,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
         path = File.join(site.dest, 'api', directory, 'tutorial.json')
         p = material.dup
         p.delete('ref')
+        p.delete('ref_tutorials')
         p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
         if !Dir.exist?(File.dirname(path))
           FileUtils.mkdir_p(File.dirname(path))
