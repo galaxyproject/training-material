@@ -7,7 +7,7 @@ priority: 2
 redirect_from:
   - /topics/transcriptomics/tutorials/scatac-standard-processing-snapatac2/tutorial
 level: Intermediate
-zenodo_link: https://zenodo.org/records/11369811
+zenodo_link: https://zenodo.org/records/11473531
 questions:
 - What does ATAC-seq data tell us about the cell?
 - Which steps are necessary to cluster the cells of single-cell ATAC-seq data?
