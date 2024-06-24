@@ -25,7 +25,10 @@ def doUpload(crate_path):
         "ro_crate": (crate_path, open(crate_path, "rb")),
         "workflow[project_ids][]": (None, GTN_PROJECT_ID), # GTN's ID.
     }
-    headers = {"authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 'User-Agent': 'GTN (github.com/galaxyproject/training-material@1.0)'}
+    headers = {
+        "authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 
+        'User-Agent': 'GTN (github.com/galaxyproject/training-material@1.0)',
+    }
 
     response = requests.post(
         "https://dev.workflowhub.eu/workflows/submit", files=payload, headers=headers
@@ -35,37 +38,37 @@ def doUpload(crate_path):
         print(f"Error {code} uploading {crate_path}")
         print(response.text)
         return None
-    else:
-        print(json.dumps(json.loads(response.text)['data'], indent=2))
-        wfid = json.loads(response.text)['data']['id']
-        permissions_update = {
-          "data": {
-            "id": wfid,
-            "type": "workflows",
-            "attributes": {
-              "policy": {
-                "access": "download",
-                "permissions": [
-                  {
-                    "resource": {
-                      "id": str(GTN_PROJECT_ID),
-                      "type": "projects"
-                    },
-                    "access": "manage"
-                  }
-                ]
+
+    wfid = response.json()['data']['id']
+    permissions_update = {
+      "data": {
+        "id": wfid,
+        "type": "workflows",
+        "attributes": {
+          "policy": {
+            "access": "download",
+            "permissions": [
+              {
+                "resource": {
+                  "id": str(GTN_PROJECT_ID),
+                  "type": "projects"
+                },
+                "access": "manage"
               }
-            }
+            ]
           }
         }
-        response2 = requests.put(f"https://dev.workflowhub.eu/workflows/{wfid}", headers=headers, json=permissions_update)
-        # print("curl -X PUT -d '" + json.dumps(permissions_update) + "' -H 'authorization: Token " + os.environ["DEV_WFH_TOKEN"] + "' https://workflowhub.eu/workflows/" + wfid)
-        print(response2.text)
-        sys.exit(1)
+      }
+    }
+    headers.update({
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+    })
+    response2 = requests.put(f"https://dev.workflowhub.eu/workflows/{wfid}", headers=headers, json=permissions_update)
+    if response2.status_code != 200:
+        print(f"Error {response2.status_code} updating permissions for {wfid}: {response2.text}")
 
-    data = response.json()
-    wf_id = data["data"]["id"]
-    return (topic, tutorial, workflow, wf_id)
+    return (topic, tutorial, workflow, wfid)
 
 
 with multiprocessing.Pool(4) as p:
