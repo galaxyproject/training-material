@@ -31,6 +31,10 @@ module TopicFilter
     list_topics_h(site).values
   end
 
+  def self.cache
+    @@cache ||= Jekyll::Cache.new('JekyllTopicFilter')
+  end
+
   ##
   # Fill the cache with all the topics
   # Params:
@@ -521,6 +525,26 @@ module TopicFilter
     "digraph main {\n" + statements.map { |q| "  #{q}" }.join("\n") + "\n}"
   end
 
+  def self.git_log(wf_path)
+    if Jekyll.env != 'production'
+      return []
+    end
+
+    cache.getset(wf_path) do
+      require 'shellwords'
+
+      commits = %x[git log --format="%H %at %s" #{Shellwords.escape(wf_path)}]
+        .split("\n")
+        .map { |x| x.split(' ', 3) }
+        .map { |x| { 'hash' => x[0], 'unix' => x[1], 'message' => x[2], 'short_hash' => x[0][0..8] } }
+
+      commits.map.with_index do |c, i|
+        c['num'] = commits.length - i
+        c
+      end
+    end
+  end
+
   def self.resolve_material(site, material)
     # We've already
     # looked in every /topic/*/tutorials/* folder, and turn these disparate
@@ -657,6 +681,7 @@ module TopicFilter
           'creators' => creators,
           'name' => wf_json['name'],
           'title' => wftitle,
+          'version' => Gtn::ModificationTimes.obtain_modification_count(wf_path),
           'description' => wf_json['annotation'],
           'tags' => wf_json['tags'],
           'features' => {
@@ -665,6 +690,7 @@ module TopicFilter
             'comments' => (wf_json['comments'] || []).length.positive?,
             'parameters' =>  wf_json['steps'].map{|_, x| x['type']}.any?{|x| x == "parameter_input"},
           },
+          'history' => git_log(wf_path),
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
           'mermaid' => mermaid(wf_json),

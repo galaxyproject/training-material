@@ -4,9 +4,11 @@ layout: base
 
 {% assign material = page.material %}
 {% assign workflow = page.workflow %}
+
 <style>
 hgroup {margin-bottom: 2rem; border-bottom: 1px solid var(--border-light);}
 hgroup p { font-family: monospace; font-size: 0.8rem;}
+.meta ul { padding-left: 1em;}
 </style>
 
 <section>
@@ -18,7 +20,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 	<p>{{ workflow.annotation }}</p>
 	{% endif %}
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-3 meta">
 			{% if workflow.creators %}
 			<b>Author(s)</b>
 			<br/>
@@ -31,7 +33,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			{% icon version %}
 			<b>Version</b>
 			<br/>
-			{{ workflow.path | get_version_number }}
+			{{ workflow.version }}
 
 			<br/>
 
@@ -45,12 +47,15 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			{% icon license %}
 			<b>License</b>
 			<br/>
-				{% if workflow.license %}
-				<a href="https://spdx.org/licenses/{{ workflow.license }}">{{ workflow.license }}</a>
-				{% else %}
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
-				{% endif %}
+
+			{% if workflow.license %}
+			<a href="https://spdx.org/licenses/{{ workflow.license }}">{{ workflow.license }}</a>
+			{% else %}
+			None Specified, defaults to
+			<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+			{% endif %}
+			<br/>
+
 			{% if workflow.tags %}
 			{% icon galaxy-tags %}
 			<b>Tags</b>
@@ -61,7 +66,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 
 			<b>Features</b>
-			{{ workflow.features }}
 			<ul>
 			{% if workflow.features.tests %}
 				<li>Includes <a href="https://training.galaxyproject.org/training-material/faqs/gtn/workflow_run_test.html">Galaxy Workflow Tests</a></li>
@@ -100,7 +104,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 			<hr/>
 
-			<b>FAIR</b>
+			<b>FAIRness</b>
 
 			{% if jekyll.environment == "production" %}
 			{% endif %}
@@ -110,8 +114,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 		</div>
 		<div class="col-md-9">
-			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
-
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="{{ workflow.trs_endpoint }}">Launch in Tutorial Mode</span>
 			<a href="{% link faqs/galaxy/tutorial_mode.md %}" class="show-when-galaxy-proxy-active">{% icon question %}</a>
 			<br/>
@@ -136,10 +138,36 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</span>
 			<pre class="mermaid">{{ workflow.mermaid }}</pre>
 
+			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+
+
 			<h2>Importing into Galaxy</h2>
 			Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
 
 			{% snippet faqs/galaxy/workflows_import.md box_type="hands_on" %}
+
+			<h2>Version History</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Version</th>
+						<th>Commit</th>
+						<th>Time</th>
+						<th>Comments</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for version in workflow.history %}
+					<tr>
+						<td>{{ version.num }}</td>
+						<td><a href="{{ site.github_repository }}/commit/{{ version.hash }}">{{ version.short_hash }}</a></td>
+						<td>{{ version.unix |unix_time_to_date }}</td>
+						<td>{{ version.message }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
 
 			<h2>For Admins</h2>
 			<h3>Installing the workflow tools</h3>
