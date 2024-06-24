@@ -68,6 +68,12 @@ main { overflow-y: auto; overflow-x: hidden; }
         </header>
         <main>
           <xsl:apply-templates select="atom:feed/atom:entry" />
+          <!-- if there are no entries, only applies to Events. -->
+          <xsl:if test="count(atom:feed/atom:entry) = 0">
+            <div class="entry">
+              No upcoming events
+            </div>
+          </xsl:if>
         </main>
         <footer>
           <a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/06/04/gtn-standards-rss.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">GTN RSS</a>

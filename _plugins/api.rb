@@ -156,6 +156,12 @@ module Jekyll
       page2.data['layout'] = nil
       site.pages << page2
 
+      # Feedback Data
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'feedback2.json')
+      page2.content = JSON.generate(site.data['feedback2'])
+      page2.data['layout'] = nil
+      site.pages << page2
+
       # Contributors
       Jekyll.logger.debug '[GTN/API] Contributors, Funders, Organisations'
       %w[contributors funders organisations].each do |type|
@@ -375,6 +381,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
         path = File.join(site.dest, 'api', directory, 'slides.json')
         p = material.dup
         p.delete('ref')
+        p.delete('ref_tutorials')
+        p.delete('ref_slides')
         p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
 
         # Here we un-do the tutorial metadata priority, and overwrite with
@@ -392,6 +400,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
         path = File.join(site.dest, 'api', directory, 'tutorial.json')
         p = material.dup
         p.delete('ref')
+        p.delete('ref_tutorials')
+        p.delete('ref_slides')
         p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
         if !Dir.exist?(File.dirname(path))
           FileUtils.mkdir_p(File.dirname(path))
