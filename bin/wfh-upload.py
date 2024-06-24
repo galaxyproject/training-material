@@ -36,19 +36,14 @@ def doUpload(crate_path):
         print(response.text)
         return None
 
+    add_discussion_channel = False
+
     wfid = response.json()['data']['id']
     permissions_update = {
       "data": {
         "id": wfid,
         "type": "workflows",
         "attributes": {
-          # Adds duplicate links so, commented for now. No bug has been filed.
-          # "discussion_links": [
-          #   {
-          #     "label": "Matrix",
-          #     "url": "https://matrix.to/#/%23galaxyproject_admin:gitter.im"
-          #   }
-          # ],
           "policy": {
             "access": "download",
             "permissions": [
@@ -64,6 +59,18 @@ def doUpload(crate_path):
         }
       }
     }
+
+    if response.json()['data']['attributes']['discussion_links'] and not any(
+        x['label'] == 'GTN Matrix' for x in response.json()['data']['attributes']['discussion_links']
+    ):
+        permissions_update['data']['attributes']['discussion_links'] = [
+            {
+                "label": "GTN Matrix",
+                "url": "https://matrix.to/#/%23galaxyproject_admin:gitter.im" # Must encode the second #
+            }
+        ]
+
+
     headers.update({
         'Content-type': 'application/json',
         'Accept': 'application/json',

@@ -692,7 +692,7 @@ module TopicFilter
             'comments' => (wf_json['comments'] || []).length.positive?,
             'parameters' =>  wf_json['steps'].map{|_, x| x['type']}.any?{|x| x == "parameter_input"},
           },
-          'workflowhub_id' => site.data['workflowhub'][wfhkey],
+          'workflowhub_id' => (site.data['workflowhub'] || {}).fetch(wfhkey, nil),
           'history' => git_log(wf_path),
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
