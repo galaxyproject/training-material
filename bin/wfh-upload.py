@@ -19,7 +19,7 @@ else:
 
 def doUpload(crate_path):
     p = crate_path.split("/")
-    (topic, tutorial, workflow) = p[4:7]
+    (topic, tutorial, workflow) = p[3:6]
 
     payload = {
         "ro_crate": (crate_path, open(crate_path, "rb")),
@@ -78,7 +78,7 @@ results = [x for x in results if x is not None]
 
 data = {}
 for (topic, tutorial, workflow, wf_id) in results:
-    data.setdefault(topic, {}).setdefault(tutorial, {})[workflow] = wf_id
+    data['/'.join([topic, tutorial, workflow])] = wf_id
 
 with open('metadata/workflowhub.yml', 'w') as handle:
     yaml.dump(data, handle)
