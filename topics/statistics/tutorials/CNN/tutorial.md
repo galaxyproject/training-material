@@ -357,7 +357,7 @@ The model builder can be downloaded as a zip file.
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset"*: Select `X_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->        - *"Dataset containing class labels or target values"*: Select the OHE representation of `y_train` dataset
+>        - *"Dataset containing class labels or target values"*: `To categorical on y_train` (the output of the first step)
 >        - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Run Tool"*
 >
