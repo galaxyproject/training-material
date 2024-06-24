@@ -410,7 +410,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
     count = 0
     TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
       material['workflows'].each do |workflow|
-        Gtn::RoCrate.write(dir, workflow, site.config['url'], site.config['baseurl'])
+        Gtn::RoCrate.write(site, dir, material, workflow, site.config['url'], site.config['baseurl'])
         count += 1
       end
     end

@@ -58,8 +58,10 @@ def doUpload(crate_path):
             }
           }
         }
-        response = requests.put(f"https://workflowhub.eu/workflows/{wfid}", headers=headers, json=permissions_update)
-        print(response.text)
+        response2 = requests.put(f"https://dev.workflowhub.eu/workflows/{wfid}", headers=headers, json=permissions_update)
+        # print("curl -X PUT -d '" + json.dumps(permissions_update) + "' -H 'authorization: Token " + os.environ["DEV_WFH_TOKEN"] + "' https://workflowhub.eu/workflows/" + wfid)
+        print(response2.text)
+        sys.exit(1)
 
     data = response.json()
     wf_id = data["data"]["id"]
