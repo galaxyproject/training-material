@@ -155,6 +155,12 @@ module Jekyll
       page2.data['layout'] = nil
       site.pages << page2
 
+      # Feedback Data
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'feedback2.json')
+      page2.content = JSON.generate(site.data['feedback2'])
+      page2.data['layout'] = nil
+      site.pages << page2
+
       # Contributors
       Jekyll.logger.debug '[GTN/API] Contributors, Funders, Organisations'
       %w[contributors funders organisations].each do |type|
