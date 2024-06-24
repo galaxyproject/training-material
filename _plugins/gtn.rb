@@ -711,6 +711,10 @@ module Jekyll
       array.shuffle
     end
 
+    def unix_time_to_date(time)
+      Time.at(time.to_i).strftime('%Y-%m-%d %H:%M:%S')
+    end
+
     def is_date_passed(date)
       if date.nil?
         false
