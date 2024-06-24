@@ -8,6 +8,8 @@ import glob
 import time
 import multiprocessing
 
+GTN_PROJECT_ID = 63
+
 if len(sys.argv) == 2:
     crates = [sys.argv[1]]
 else:
@@ -21,7 +23,7 @@ def doUpload(crate_path):
 
     payload = {
         "ro_crate": (crate_path, open(crate_path, "rb")),
-        "workflow[project_ids][]": (None, 63), # GTN's ID.
+        "workflow[project_ids][]": (None, GTN_PROJECT_ID), # GTN's ID.
     }
     headers = {"authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 'User-Agent': 'GTN (github.com/galaxyproject/training-material@1.0)'}
 
@@ -34,7 +36,30 @@ def doUpload(crate_path):
         print(response.text)
         return None
     else:
-        print(json.loads(response.text)['data']['links']['self'])
+        print(json.dumps(json.loads(response.text)['data'], indent=2))
+        wfid = json.loads(response.text)['data']['id']
+        permissions_update = {
+          "data": {
+            "id": wfid,
+            "type": "workflows",
+            "attributes": {
+              "policy": {
+                "access": "download",
+                "permissions": [
+                  {
+                    "resource": {
+                      "id": str(GTN_PROJECT_ID),
+                      "type": "projects"
+                    },
+                    "access": "manage"
+                  }
+                ]
+              }
+            }
+          }
+        }
+        response = requests.put(f"https://workflowhub.eu/workflows/{wfid}", headers=headers, json=permissions_update)
+        print(response.text)
 
     data = response.json()
     wf_id = data["data"]["id"]
