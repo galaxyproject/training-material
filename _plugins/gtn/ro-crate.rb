@@ -43,9 +43,8 @@ module Gtn
       Jekyll.logger.debug "[GTN/API/WFRun] dot -T png #{dot_path} > graph.png"
       `dot -T png '#{dot_path}' > '#{File.join(wfdir, 'graph.png')}'`
 
-      # Replace last / with # to make a valid URL
-      wfurlid = url + baseurl + '/' + workflow['path'].gsub(%r{/workflows/},
-                                                                                          '/workflows#')
+      # Our new workflow IDs
+      wfurlid = url + baseurl + '/' + workflow['path'].gsub(/.ga$/, '.html')
 
       uuids = workflow['creators'].map do |c|
         if c.key?('identifier') && !c['identifier'].empty?
@@ -195,7 +194,7 @@ This workflows is part of the tutorial [#{workflow['name']}](#{url}#{baseurl}/to
       # p "Writing #{File.join(wfdir, 'mod.ga')}"
 
       zip_path = File.join(wfdir, 'rocrate.zip')
-      p "[GTN/API/WFRun] Zipping #{zip_path}"
+      Jekyll.logger.debug "[GTN/API/WFRun] Zipping #{zip_path}"
       if File.exist?(zip_path)
         File.delete(zip_path)
       end

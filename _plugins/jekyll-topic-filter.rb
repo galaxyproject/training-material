@@ -666,6 +666,8 @@ module TopicFilter
         end
         workflow_test_outputs = nil if workflow_test_outputs.empty?
 
+        wfhkey = [page['topic_name'], page['tutorial_name'], wfname].join('/')
+
         {
           'workflow' => wf,
           'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length.positive?,
@@ -690,6 +692,7 @@ module TopicFilter
             'comments' => (wf_json['comments'] || []).length.positive?,
             'parameters' =>  wf_json['steps'].map{|_, x| x['type']}.any?{|x| x == "parameter_input"},
           },
+          'workflowhub_id' => site.data['workflowhub'][wfhkey],
           'history' => git_log(wf_path),
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
