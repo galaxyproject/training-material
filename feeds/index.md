@@ -24,6 +24,8 @@ We offer a wide range of [RSS feeds]({{ site.baseurl }}/news/2024/06/04/gtn-stan
     - [One Health Month]({{ site.baseurl }}/feeds/one-health-month.xml)
     - ...and every other topic / tag based topic (i.e. topics linked from the home page)
 
+These are available as an [OPML file as well]({{ site.baseurl }}/feeds/gtn.opml).
+
 {% else %}
 GTN Feed listing is not available in development mode. (This is done so we don't need to generate the feed pages or add an exception to our URL checking, while keeping CI times fast.)
 {% endif %}

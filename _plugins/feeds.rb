@@ -72,6 +72,33 @@ ICON_FOR = {
   'workflows' => '🛠️',
 }
 
+def generate_opml(site, groups)
+  builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+    # Set stylesheet
+    xml.opml(version: '2.0') do
+      xml.head do
+        xml.title('Galaxy Training Network')
+        xml.dateCreated(DateTime.now.rfc3339)
+        xml.dateModified(DateTime.now.rfc3339)
+        xml.ownerEmail('galaxytrainingnetwork@gmail.com')
+      end
+      xml.body do
+        groups.each do |group, items|
+          xml.outline(text: group) do
+            items.each do |item|
+              xml.outline(text: item[:title], type: 'rss', version: 'RSS', xmlUrl: item[:url], htmlUrl: item[:url])
+            end
+          end
+        end
+      end
+    end
+  end
+
+  opml_path = File.join(site.dest, 'feeds', 'gtn.opml')
+  finalised = Nokogiri::XML builder.to_xml
+  File.write(opml_path, finalised.to_xml)
+end
+
 def generate_topic_feeds(site, topic, bucket)
   mats = bucket.select { |x| x[3].include?(topic) }
   feed_path = File.join(site.dest, 'topics', topic, 'feed.xml')
@@ -476,18 +503,37 @@ end
 # Basically like `PageWithoutAFile`
 Jekyll::Hooks.register :site, :post_write do |site|
   if Jekyll.env == 'production'
+    opml = {}
     generate_event_feeds(site)
+    opml['GTN Events'] = [
+      {title: 'Events', url: "#{site.config['url']}#{site.baseurl}/events/feed.xml"}
+    ]
 
     bucket = all_date_sorted_materials(site)
     bucket.freeze
 
+    opml['GTN Topics'] = []
+    opml['GTN Topics - Digests'] = []
     TopicFilter.list_topics(site).each do |topic|
       generate_topic_feeds(site, topic, bucket)
+      opml['GTN Topics'] <<
+        {title: "#{topic} all changes", url: "#{site.config['url']}#{site.baseurl}/topic/feed.xml"}
+
       generate_matrix_feed(site, bucket, group_by: 'month', filter_by: topic)
+      opml['GTN Topics - Digests'] <<
+        {title: "#{topic} monthly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/#{topic}-month.xml"}
     end
 
     generate_matrix_feed(site, bucket, group_by: 'day')
     generate_matrix_feed(site, bucket, group_by: 'week')
     generate_matrix_feed(site, bucket, group_by: 'month')
+
+    opml['GTN Digests'] = [
+      {title: "GTN daily changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-daily.xml"},
+      {title: "GTN weekly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-weekly.xml"},
+      {title: "GTN monthly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-monthly.xml"}
+    ]
+
+    generate_opml(site, opml)
   end
 end
