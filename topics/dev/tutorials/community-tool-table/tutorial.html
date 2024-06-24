@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9ac3c3dc47dfe77995710bf91f8e97129a8cad21",
+		release: "galaxy-training-network@397075c2213ce9ea43219c707aa1a8ca10884d83",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creation of an interactive Galaxy tools table for your community">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-20 10:15:46 +0000">
+<meta name="DC.date" content="2024-06-24 14:12:42 +0000">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Development in Galaxy / Creation of an interactive Galaxy tools table for your community / Hands-on: Creation of an interactive Galaxy tools table for your community">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-20 10:15:46 +0000",
+  "dateModified": "2024-06-24 14:12:42 +0000",
   "datePublished": "2024-03-13 15:41:48 +0000",
   "identifier": "https://gxy.io/GTN:T00426",
   "accessMode": [
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Creation of an interactive Galaxy tools table for your community",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html",
-  "version": 7,
+  "version": 8,
   "timeRequired": "PT1H",
   "teaches": "Create a community reviewed table for Galaxy tools within a specific scientific domain\n - Embed an interactive table in a community page",
   "keywords": [
@@ -657,7 +657,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 13, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 20, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 24, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -675,7 +675,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
 
     </blockquote>
     </section>
@@ -696,13 +696,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>The final challenge is also an opportunity: the global nature of Galaxy means that it is a big community. Solving the visibility of tools across this ecosystem and the potential benefits are far-reaching for global collaboration on tool and workflow development.</p>
 
-<p>To provide the research community with a comprehensive list of available Galaxy tools, <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor</a> was developed to collect Galaxy wrappers from a list of Git repositories and automatically extract their metadata (including Conda version, <a href="https://bio.tools/">bio.tools</a> identifiers, and EDAM annotations). The workflow also queries the availability of the tools and usage statistics from the three main Galaxy servers (usegalaxy.*).</p>
+<p>To provide the research community with a comprehensive list of available Galaxy tools, <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex</a> was developed to collect Galaxy wrappers from a list of Git repositories and automatically extract their metadata (including Conda version, <a href="https://bio.tools/">bio.tools</a> identifiers, and EDAM annotations). The workflow also queries the availability of the tools and usage statistics from the three main Galaxy servers (usegalaxy.*).</p>
 
-<figure id="figure-1" style="max-width: 90%;"><img src="./images/galaxy_tool_metadata_extractor_pipeline.png" alt="A diagram illustrating the Galaxy Tool Metadata Extractor pipeline, showcasing the various steps involved in creating a community Galaxy tool table." width="834" height="544" loading="lazy" /><a target="_blank" href="./images/galaxy_tool_metadata_extractor_pipeline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow of the Galaxy Tool Metadata Extractor pipeline. Tool wrappers are parsed from different repositories and additional metadata is retrieved from bio.tools, BioConda, and the main public Galaxy servers. Upon filtering and manual curation of the data for specific scientific communities, the data is transformed into interactive web tables and a tool usage statistic-base word cloud, that can be integrated into any website.</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/galaxy_tool_metadata_extractor_pipeline.png" alt="A diagram illustrating the Galaxy Codex pipeline, showcasing the various steps involved in creating a community Galaxy tool table." width="834" height="544" loading="lazy" /><a target="_blank" href="./images/galaxy_tool_metadata_extractor_pipeline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow of the Galaxy Codex pipeline. Tool wrappers are parsed from different repositories and additional metadata is retrieved from bio.tools, BioConda, and the main public Galaxy servers. Upon filtering and manual curation of the data for specific scientific communities, the data is transformed into interactive web tables and a tool usage statistic-base word cloud, that can be integrated into any website.</figcaption></figure>
 
-<p>The pipeline creates an <a href="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/">interactive table with all tools and their metadata</a>. This table can be <strong>filtered to only include tools that are relevant to a specific research community</strong>. Here is an example for the microbial related tools:</p>
+<p>The pipeline creates an <a href="https://galaxyproject.github.io/galaxy_codex/">interactive table with all tools and their metadata</a>. This table can be <strong>filtered to only include tools that are relevant to a specific research community</strong>. Here is an example for the microbial related tools:</p>
 
-<iframe id="edam" src="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/microgalaxy/" frameborder="0" width="100%" height="600px"> <a href="./images/microgalaxy_tools.png" rel="noopener noreferrer"><img src="./images/microgalaxy_tools.png" alt="Interactive table for microgalaxy tools. " width="2056" height="1142" loading="lazy" /></a> </iframe>
+<iframe id="edam" src="https://galaxyproject.github.io/galaxy_codex/microgalaxy/" frameborder="0" width="100%" height="600px"> <a href="./images/microgalaxy_tools.png" rel="noopener noreferrer"><img src="./images/microgalaxy_tools.png" alt="Interactive table for microgalaxy tools. " width="2056" height="1142" loading="lazy" /></a> </iframe>
 
 <p>The generated community-specific interactive table can be used as it and/or embedded, e.g. into the respective Galaxy Hub page or Galaxy subdomain. This table allows further filtering and searching for fine-grained tool selection.</p>
 
@@ -716,7 +716,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#add-your-community-to-the-galaxy-tool-metadata-extractor-pipeline" id="markdown-toc-add-your-community-to-the-galaxy-tool-metadata-extractor-pipeline">Add your community to the Galaxy Tool Metadata Extractor pipeline</a></li>
+  <li><a href="#add-your-community-to-the-galaxy-codex-pipeline" id="markdown-toc-add-your-community-to-the-galaxy-codex-pipeline">Add your community to the Galaxy Codex pipeline</a></li>
   <li><a href="#review-the-generated-interactive-table" id="markdown-toc-review-the-generated-interactive-table">Review the generated interactive table</a>    <ol>
       <li><a href="#add-a-tools-status-list" id="markdown-toc-add-a-tools-status-list">Add a tools status list</a></li>
     </ol>
@@ -727,15 +727,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 </blockquote>
 
-<h1 id="add-your-community-to-the-galaxy-tool-metadata-extractor-pipeline">Add your community to the Galaxy Tool Metadata Extractor pipeline</h1>
+<h1 id="add-your-community-to-the-galaxy-codex-pipeline">Add your community to the Galaxy Codex pipeline</h1>
 
-<p>To create a table for a community, you first need to create a new folder in the <code class="language-plaintext highlighter-rouge">data/community</code> folder within <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor code source</a>.</p>
+<p>To create a table for a community, you first need to create a new folder in the <code class="language-plaintext highlighter-rouge">data/community</code> folder within <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex code source</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-a-folder-for-your-community"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a folder for your community</div>
 
   <ol>
-    <li>If not already done, fork the <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor">Galaxy Tool Metadata Extractor repository</a></li>
+    <li>If not already done, fork the <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex repository</a></li>
     <li>Go to the <code class="language-plaintext highlighter-rouge">data/communities</code> folder</li>
     <li>Click on <strong>Add file</strong> in the drop-down menu at the top</li>
     <li>Select <strong>Create a new file</strong></li>
@@ -770,10 +770,10 @@ Metagenomics
   </ol>
 </blockquote>
 
-<p>Once you have a list of the ToolShed categories that you wish to keep, you can submit this to Galaxy Tool Metadata Extractor.</p>
+<p>Once you have a list of the ToolShed categories that you wish to keep, you can submit this to Galaxy Codex.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-submit-the-new-community-to-galaxy-tool-metadata-extractor"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Submit the new community to Galaxy Tool Metadata Extractor</div>
+  <div class="box-title hands-on-title" id="hands-on-submit-the-new-community-to-galaxy-codex"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Submit the new community to Galaxy Codex</div>
 
   <ol>
     <li>Click on <strong>Commit changes</strong> at the top</li>
@@ -786,13 +786,13 @@ Metagenomics
 
 <p>The Pull Request will be reviewed. Make sure to respond to any feedback.</p>
 
-<p>Once the Pull Request is merged, the interactive table will be created and made available online at <code class="language-plaintext highlighter-rouge">https://galaxyproject.github.io/galaxy_tool_metadata_extractor/&lt;your community&gt;</code>.</p>
+<p>Once the Pull Request is merged, the interactive table will be created and made available online at <code class="language-plaintext highlighter-rouge">https://galaxyproject.github.io/galaxy_codex/&lt;your community&gt;</code>.</p>
 
 <h1 id="review-the-generated-interactive-table">Review the generated interactive table</h1>
 
 <p>The interactive table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community.</p>
 
-<p>Galaxy Tool Metadata Extractor allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you !).</p>
+<p>Galaxy Codex allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you !).</p>
 
 <p>The additional filter must be stored in a file called  <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> located in <code class="language-plaintext highlighter-rouge">data/community/&lt;your community&gt;</code>. The file must include 3 columns (without header):</p>
 <ol>
@@ -807,7 +807,7 @@ abricate	TRUE	FALSE
 abritamr	TRUE	FALSE
 </code></pre></div></div>
 
-<p>Have a look on the <a href="https://github.com/galaxyproject/galaxy_tool_metadata_extractor/blob/main/data/communities/microgalaxy/tool_status.tsv">microGalaxy tool stats TSV</a> for 
+<p>Have a look on the <a href="https://github.com/galaxyproject/galaxy_codex/blob/main/data/communities/microgalaxy/tool_status.tsv">microGalaxy tool stats TSV</a> for 
 an example of the file that is used to manually filter the tools for a community.</p>
 
 <h2 id="add-a-tools-status-list">Add a tools status list</h2>
@@ -848,7 +848,7 @@ an example of the file that is used to manually filter the tools for a community
   width="100%"
   height="600"
   frameBorder="0"
-  src="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/&lt;your_community&gt;/"&gt;
+  src="https://galaxyproject.github.io/galaxy_codex/&lt;your_community&gt;/"&gt;
 &lt;/iframe&gt;
 </code></pre></div>      </div>
     </li>
@@ -891,7 +891,7 @@ an example of the file that is used to manually filter the tools for a community
                     <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
-                        <li><p>The Galaxy Tool Metadata Extractor extracts all Galaxy tools to create interactive tables</p>
+                        <li><p>The Galaxy Codex extracts all Galaxy tools to create interactive tables</p>
 </li>
                         
                         <li><p>The tool tables can be filtered by ToolShed categories and community-reviewed lists of tools to keep or exclude</p>
@@ -1102,7 +1102,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9ac3c3dc47dfe77995710bf91f8e97129a8cad21">9ac3c3d</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/397075c2213ce9ea43219c707aa1a8ca10884d83">397075c</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
