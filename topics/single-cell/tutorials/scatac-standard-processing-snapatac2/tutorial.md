@@ -923,7 +923,7 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 
 
 # Conclusion
-{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/timn/h/test-of-5k-pbmc-tutorial-workflow), or check out the [full workflow](https://singlecell.usegalaxy.eu/u/timn/w/2combined-snapatac2) for this tutorial.
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/timonschlegel/h/test-of-5k-pbmc-tutorial-workflow), or check out the [full workflow](https://singlecell.usegalaxy.eu/u/timonschlegel/w/2combined-snapatac2) for this tutorial.
 
 In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnData` format and performed: 
 1. Preprocessing: 
