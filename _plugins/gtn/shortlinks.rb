@@ -135,7 +135,7 @@ module Gtn
       workflows = Dir.glob('topics/**/workflows/*.ga')
 
       workflows.each do |workflow|
-        html_path = "/#{workflow.gsub(/ga$/, 'html').gsub('_', '-')}"
+        html_path = "/#{workflow.gsub(/ga$/, 'html')}"
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
