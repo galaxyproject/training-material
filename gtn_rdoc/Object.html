@@ -95,6 +95,7 @@
     <li ><a href="#method-i-format_tutorials">#format_tutorials</a>
     <li ><a href="#method-i-generate_event_feeds">#generate_event_feeds</a>
     <li ><a href="#method-i-generate_matrix_feed">#generate_matrix_feed</a>
+    <li ><a href="#method-i-generate_opml">#generate_opml</a>
     <li ><a href="#method-i-generate_tag_topic_feeds">#generate_tag_topic_feeds</a>
     <li ><a href="#method-i-generate_topic_feeds">#generate_topic_feeds</a>
     <li ><a href="#method-i-group_bucket_by">#group_bucket_by</a>
@@ -228,7 +229,7 @@
           
 
           <div class="method-source-code" id="all_date_sorted_materials-source">
-            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 151</span>
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_date_sorted_materials</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">events</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;event&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;event-external&#39;</span> }
   <span class="ruby-identifier">materials</span> = <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_all_materials</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">_v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>[<span class="ruby-string">&#39;draft&#39;</span>] }
@@ -951,7 +952,7 @@
           
 
           <div class="method-source-code" id="format_contents-source">
-            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 250</span>
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 277</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_contents</span>(<span class="ruby-identifier">xml</span>, <span class="ruby-identifier">site</span>, <span class="ruby-identifier">parts</span>, <span class="ruby-identifier">title</span>, <span class="ruby-value">group_by:</span> <span class="ruby-string">&#39;day&#39;</span>)
   <span class="ruby-comment"># output += &#39;&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1067,7 +1068,7 @@
           
 
           <div class="method-source-code" id="generate_event_feeds-source">
-            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 391</span>
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 418</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_event_feeds</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">events</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;event&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;layout&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;event-external&#39;</span> }
   <span class="ruby-identifier">feed_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">dest</span>, <span class="ruby-string">&#39;events&#39;</span>, <span class="ruby-string">&#39;feed.xml&#39;</span>)
@@ -1171,7 +1172,7 @@
           <p>Our old style matrix bot postsx</p>
 
           <div class="method-source-code" id="generate_matrix_feed-source">
-            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 255</span>
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 282</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_matrix_feed</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">mats</span>, <span class="ruby-value">group_by:</span> <span class="ruby-string">&#39;day&#39;</span>, <span class="ruby-value">filter_by:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-comment"># new materials (tut + sli)</span>
   <span class="ruby-comment"># new funders/contributors/orgs</span>
@@ -1313,6 +1314,52 @@
 
       </div>
 
+      <div id="method-i-generate_opml" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">generate_opml</span><span
+              class="method-args">(site, groups)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="generate_opml-source">
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_opml</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">groups</span>)
+  <span class="ruby-identifier">builder</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">encoding:</span> <span class="ruby-string">&#39;UTF-8&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">xml</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># Set stylesheet</span>
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">opml</span>(<span class="ruby-value">version:</span> <span class="ruby-string">&#39;2.0&#39;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">head</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">title</span>(<span class="ruby-string">&#39;Galaxy Training Network&#39;</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">dateCreated</span>(<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">rfc3339</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">dateModified</span>(<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">rfc3339</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">ownerEmail</span>(<span class="ruby-string">&#39;galaxytrainingnetwork@gmail.com&#39;</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">body</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span>, <span class="ruby-identifier">items</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">outline</span>(<span class="ruby-value">text:</span> <span class="ruby-identifier">group</span>) <span class="ruby-keyword">do</span>
+            <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">outline</span>(<span class="ruby-value">text:</span> <span class="ruby-identifier">item</span>[<span class="ruby-value">:title</span>], <span class="ruby-value">type:</span> <span class="ruby-string">&#39;rss&#39;</span>, <span class="ruby-value">version:</span> <span class="ruby-string">&#39;RSS&#39;</span>, <span class="ruby-value">xmlUrl:</span> <span class="ruby-identifier">item</span>[<span class="ruby-value">:url</span>], <span class="ruby-value">htmlUrl:</span> <span class="ruby-identifier">item</span>[<span class="ruby-value">:url</span>])
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">opml_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">dest</span>, <span class="ruby-string">&#39;feeds&#39;</span>, <span class="ruby-string">&#39;gtn.opml&#39;</span>)
+  <span class="ruby-identifier">finalised</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span> <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">to_xml</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">opml_path</span>, <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">to_xml</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-generate_tag_topic_feeds" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
@@ -1326,7 +1373,7 @@
           
 
           <div class="method-source-code" id="generate_tag_topic_feeds-source">
-            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 144</span>
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_tag_topic_feeds</span>(<span class="ruby-identifier">_site</span>)
   <span class="ruby-comment"># Any new materials in a topic with the equivalent tag</span>
   <span class="ruby-comment"># Any new materials tagged with that tag</span>
@@ -1352,7 +1399,7 @@
           
 
           <div class="method-source-code" id="generate_topic_feeds-source">
-            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 75</span>
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_topic_feeds</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">bucket</span>)
   <span class="ruby-identifier">mats</span> = <span class="ruby-identifier">bucket</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">topic</span>) }
   <span class="ruby-identifier">feed_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">dest</span>, <span class="ruby-string">&#39;topics&#39;</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-string">&#39;feed.xml&#39;</span>)
@@ -1440,7 +1487,7 @@
           
 
           <div class="method-source-code" id="group_bucket_by-source">
-            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 231</span>
+            <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">group_bucket_by</span>(<span class="ruby-identifier">bucket</span>, <span class="ruby-value">group_by:</span> <span class="ruby-string">&#39;day&#39;</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">group_by</span>
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;day&#39;</span>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@74218ef0fa42f57e439b69028e6b96bdfeebdabe",
+		release: "galaxy-training-network@95587d7914ed4e80692a0c138e6a354640185525",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,10 +68,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="TeSS LD+JSON Tester">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-10-04 10:06:56 +0000"><meta name="description" content=" Here you can test how data from a page will be mapped to TeSS fields. This is based on this TeSS Document         Submit   If you supply a full URL, your request will be proxied via corsproxy.io             Profile Property     marginality     Maps to TeSS     Notes/Vocab     🔍 Observed Value                 name     minimum     Title     String                description     minimum     Description     String: markdown-compatible                url     recommended     URL                     keywords     minimum     Keywords     String: a comma separated list of keywords                dateCreated     optional     Date                     license     recommended     License     Expects a SPDX identifier                learningResourceType     recommended     Resource Type     E.g. hands-on tutorials, etc                about     recommended     Scientific Topics     Expects a DefinedTerm with a name property. EDAM                audience     recommended     Target Audience     Pic...">
+<meta name="DC.date" content="2024-06-19 18:59:47 +0000"><meta name="description" content=" Here you can test how data from a page will be mapped to TeSS fields. This is based on this TeSS Document         Submit   If you supply a full URL, your request will be proxied via cors.apps.galaxyproject.eu             Profile Property     marginality     Maps to TeSS     Notes/Vocab     🔍 Observed Value                 name     minimum     Title     String                description     minimum     Description     String: markdown-compatible                url     recommended     URL                     keywords     minimum     Keywords     String: a comma separated list of keywords                dateCreated     optional     Date                     license     recommended     License     Expects a SPDX identifier                learningResourceType     recommended     Resource Type     E.g. hands-on tutorials, etc                about     recommended     Scientific Topics     Expects a DefinedTerm with a name property. EDAM                audience     recommended     Target Au...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="TeSS LD+JSON Tester">
-        <meta property="og:description" content=" Here you can test how data from a page will be mapped to TeSS fields. This is based on this TeSS Document         Submit   If you supply a full URL, your request will be proxied via corsproxy.io             Profile Property     marginality     Maps to TeSS     Notes/Vocab     🔍 Observed Value                 name     minimum     Title     String                description     minimum     Description     String: markdown-compatible                url     recommended     URL                     keywords     minimum     Keywords     String: a comma separated list of keywords                dateCreated     optional     Date                     license     recommended     License     Expects a SPDX identifier                learningResourceType     recommended     Resource Type     E.g. hands-on tutorials, etc                about     recommended     Scientific Topics     Expects a DefinedTerm with a name property. EDAM                audience     recommended     Target Audience     Pic...">
+        <meta property="og:description" content=" Here you can test how data from a page will be mapped to TeSS fields. This is based on this TeSS Document         Submit   If you supply a full URL, your request will be proxied via cors.apps.galaxyproject.eu             Profile Property     marginality     Maps to TeSS     Notes/Vocab     🔍 Observed Value                 name     minimum     Title     String                description     minimum     Description     String: markdown-compatible                url     recommended     URL                     keywords     minimum     Keywords     String: a comma separated list of keywords                dateCreated     optional     Date                     license     recommended     License     Expects a SPDX identifier                learningResourceType     recommended     Resource Type     E.g. hands-on tutorials, etc                about     recommended     Scientific Topics     Expects a DefinedTerm with a name property. EDAM                audience     recommended     Target Au...">
         
 	<meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -214,7 +214,7 @@ Here you can test how data from a page will be mapped to <a href="https://tess.e
   <button id="submit" class="btn btn-primary">Submit</button>
 </div>
 
-<p>If you supply a full URL, your request will be proxied via <a href="https://corsproxy.io/">corsproxy.io</a></p>
+<p>If you supply a full URL, your request will be proxied via <a href="https://cors.apps.galaxyproject.eu/">cors.apps.galaxyproject.eu</a></p>
 
 <table class="table table-striped">
   <thead>
@@ -432,7 +432,7 @@ Here you can test how data from a page will be mapped to <a href="https://tess.e
 document.getElementById("submit").onclick = function(){
 var url = document.getElementById("input-url").value
 if(url.slice(0, 8) === "https://") {
-	url = `https://corsproxy.io/?${url}`
+	url = `https://cors.apps.galaxyproject.eu/${url}`
 }
 
 fetch(url).then(function(response) {
@@ -502,7 +502,7 @@ table tr :nth-child(5) {
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/74218ef0fa42f57e439b69028e6b96bdfeebdabe">74218ef</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/95587d7914ed4e80692a0c138e6a354640185525">95587d7</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>

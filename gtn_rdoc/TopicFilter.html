@@ -1404,6 +1404,7 @@
         <span class="ruby-string">&#39;test_results&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">workflow_test_outputs</span>,
         <span class="ruby-string">&#39;modified&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">mtime</span>(<span class="ruby-identifier">wf_path</span>),
         <span class="ruby-string">&#39;mermaid&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mermaid</span>(<span class="ruby-identifier">wf_json</span>),
+        <span class="ruby-string">&#39;workflow_tools&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">extract_workflow_tool_list</span>(<span class="ruby-identifier">wf_json</span>).<span class="ruby-identifier">uniq</span>,
       }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -1421,8 +1422,7 @@
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;workflows&#39;</span>]&amp;.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">wf</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">wf_path</span> = <span class="ruby-node">&quot;#{folder}/workflows/#{wf[&#39;workflow&#39;]}&quot;</span>
 
-    <span class="ruby-identifier">wf_data</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">wf_path</span>))
-    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">extract_workflow_tool_list</span>(<span class="ruby-identifier">wf_data</span>)
+    <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">wf</span>[<span class="ruby-string">&#39;workflow_tools&#39;</span>]
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>] = <span class="ruby-identifier">page_obj</span>[<span class="ruby-string">&#39;tools&#39;</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
 
