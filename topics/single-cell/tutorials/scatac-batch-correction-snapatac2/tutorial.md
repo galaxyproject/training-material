@@ -2,24 +2,40 @@
 layout: tutorial_hands_on
 
 title: Multi-sample batch correction with Harmony and SnapATAC2
+subtopic: scmultiomics
+priority: 3
+level: Intermediate
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- Why is batch correction important when analyzing data from multiple samples?
+- How is batch correction performed on single cell ATAC-seq data?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Perform batch correction on a collection of single cell ATAC-seq data
+- Learn how Harmony integrates different samples
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Batch correction is important for integration of data from multiple experiments
+- How harmony works
+requirements:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+      - scatac-preprocessing-tenx
+      - scatac-standard-processing-snapatac2
+tags:
+- 10x
+- epigenetics
+abbreviations:
+    scATAC-seq: Single-cell Assay for Transposase-Accessible Chromatin using sequencing
+    QC: quality control
+    TSSe: transcription start site enrichment
+    TSS: transcription start sites
+    UMAP: Uniform Manifold Approximation and Projection
 contributors:
-- contributor1
-- contributor2
+- timonschlegel
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 
 ---
 
@@ -27,28 +43,23 @@ contributors:
 # Introduction
 
 <!-- This is a comment. -->
+Performing biological experiments in replicates is one of the cornerstones of modern science. However, when integrating data from multiple single-cell sequencing experiments, technical confounders might impact the results. 
+To reduce technical confounders, such as different experimenters, experimental protocols, sequencing lanes or sequencing technologies, a batch correction might be beneficial. 
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+In this tutorial, we will perform batch correction on five datasets of {scATAC-seq} data with the algorithm *Harmony* ({% cite Korsunsky2019 %}) and the tool suite [**SnapATAC2**] (https://kzhang.org/SnapATAC2/version/2.5/index.html) ({% cite Zhang2024 %}). 
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+{% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+{% snippet faqs/galaxy/tutorial_mode.md %}
 
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+> <comment-title></comment-title>
+>
+> This tutorial is significantly based on ["Multi-sample Pipeline" tutorial from SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/tutorials/integration.html). 
+> The data analysis is performed with the same tools shown in the tutorial [Single-cell ATAC-seq standard processing with SnapATAC2]( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %} ). 
+> - That tutorial also explains the steps of the ATAC-seq analysis with SnapATAC2 in more detail. 
+> - We recommend completing that tutorial before continuing with this one. 
+>
+{: .comment}
 
 > <agenda-title></agenda-title>
 >
@@ -59,26 +70,9 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Data
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+The datasets for this tutorial are colon samples from multiple donors, provided by the [SnapATAC2 documentation](https://kzhang.org/SnapATAC2/version/2.5/tutorials/integration.html). 
 
 ## Get data
 
@@ -90,50 +84,35 @@ have fun!
 >     -> `{{ page.title }}`):
 >
 >    ```
->    
+>    {{ page.zenodo_link }}/files/colon_multisample.tar
+>    {{ page.zenodo_link }}/files/chrom_sizes.txt
+>    {{ page.zenodo_link }}/files/gencode.v46.annotation.gtf.gz
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 3. Rename the datasets if necessary
+>   
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 4. Check that the datatype of the `colon_multisample` files is set to `bed`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+> 5. Create a dataset collection with all `colon_multisample` datasets.
+> 
+>    {% snippet faqs/galaxy/collections_build_list.mdu name="Colon Multisample" %}
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# SnapATAC2 preprocessing and filtering
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+With our data imported and the collection built, we can now begin the {scATAC-seq} data preprocessing with SnapATAC2. 
 
-![Alternative text](../../images/image_name "Legend of the image")
+The first step is importing the datasets into an AnnData object with the tool *pp.import_data*. Next, the {TSSe} will be calculated. The  {TSS} serves as a {QC} measurement to only filter droplets containing high-quality cells. 
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Preprocessing and Filtering </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Import data fragment files and compute basic QC metrics, using 'pp.import_data'`
