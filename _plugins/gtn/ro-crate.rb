@@ -72,6 +72,7 @@ module Gtn
 
       version = time_based_version ? Time.now.to_i.to_s : Gtn::ModificationTimes.obtain_modification_count(workflow['path']).to_s + ".#{GLOBAL_WORKFLOW_OFFSET}"
 
+      # TODO: move this into jekyll-topic-filter where its discovered.
       features = {
         'Includes [Galaxy Workflow Tests](https://training.galaxyproject.org/training-material/faqs/gtn/workflow_run_test.html)' => workflow['tests'],
         # 'Test results available' => workflow['test_results'],
