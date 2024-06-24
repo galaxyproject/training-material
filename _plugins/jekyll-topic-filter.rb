@@ -591,6 +591,7 @@ module TopicFilter
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
           'mermaid' => mermaid(wf_json),
+          'workflow_tools' => extract_workflow_tool_list(wf_json).uniq,
         }
       end
     end
@@ -608,8 +609,7 @@ module TopicFilter
     page_obj['workflows']&.each do |wf|
       wf_path = "#{folder}/workflows/#{wf['workflow']}"
 
-      wf_data = JSON.parse(File.read(wf_path))
-      page_obj['tools'] += extract_workflow_tool_list(wf_data)
+      page_obj['tools'] += wf['workflow_tools']
     end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
 
