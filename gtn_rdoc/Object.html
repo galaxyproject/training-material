@@ -117,6 +117,7 @@
     <li ><a href="#method-i-safe_load_yaml">#safe_load_yaml</a>
     <li ><a href="#method-i-send_news">#send_news</a>
     <li ><a href="#method-i-serialise">#serialise</a>
+    <li ><a href="#method-i-short_id">#short_id</a>
     <li ><a href="#method-i-show_errors">#show_errors</a>
     <li ><a href="#method-i-split_sentence">#split_sentence</a>
     <li ><a href="#method-i-synthesize">#synthesize</a>
@@ -2224,6 +2225,33 @@
   )
   <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">add_previous_sibling</span> <span class="ruby-identifier">pi</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">feed_path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\.xml$/</span>, <span class="ruby-string">&#39;.w.xml&#39;</span>), <span class="ruby-identifier">finalised</span>.<span class="ruby-identifier">to_xml</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-short_id" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">short_id</span><span
+              class="method-args">(tool_id)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="short_id-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/supported.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">short_id</span>(<span class="ruby-identifier">tool_id</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool_id</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
+    <span class="ruby-identifier">tool_id</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">tool_id</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

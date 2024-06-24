@@ -162,6 +162,12 @@
   <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
 
+  <span class="ruby-comment"># Feedback Data</span>
+  <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-string">&#39;feedback2.json&#39;</span>)
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;feedback2&#39;</span>])
+  <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
+
   <span class="ruby-comment"># Contributors</span>
   <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&#39;[GTN/API] Contributors, Funders, Organisations&#39;</span>
   <span class="ruby-node">%w[contributors funders organisations]</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
