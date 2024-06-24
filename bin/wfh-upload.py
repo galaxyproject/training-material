@@ -18,9 +18,6 @@ else:
     )
 
 def doUpload(crate_path):
-    p = crate_path.split("/")
-    (topic, tutorial, workflow) = p[3:6]
-
     payload = {
         "ro_crate": (crate_path, open(crate_path, "rb")),
         "workflow[project_ids][]": (None, GTN_PROJECT_ID), # GTN's ID.
@@ -45,6 +42,13 @@ def doUpload(crate_path):
         "id": wfid,
         "type": "workflows",
         "attributes": {
+          # Adds duplicate links so, commented for now. No bug has been filed.
+          # "discussion_links": [
+          #   {
+          #     "label": "Matrix",
+          #     "url": "https://matrix.to/#/%23galaxyproject_admin:gitter.im"
+          #   }
+          # ],
           "policy": {
             "access": "download",
             "permissions": [
@@ -68,6 +72,8 @@ def doUpload(crate_path):
     if response2.status_code != 200:
         print(f"Error {response2.status_code} updating permissions for {wfid}: {response2.text}")
 
+    p = crate_path.split("/")
+    (topic, tutorial, workflow) = p[3:6]
     return (topic, tutorial, workflow, wfid)
 
 
