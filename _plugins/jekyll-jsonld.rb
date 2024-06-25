@@ -830,6 +830,10 @@ module Jekyll
                         })
         end
       end
+
+      if description.empty?
+        description.push(material.fetch('content', '').strip.split("\n").first)
+      end
       data['description'] = description.join("\n")
 
       data['inLanguage'] = if material.key?('lang')
@@ -964,9 +968,9 @@ module Jekyll
 
       data['about'] = about
 
-      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
+      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Beginner'
       data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x } }
-      data['abstract'] = material.fetch('content', '').split("\n").first
+      data['abstract'] = material.fetch('content', '').strip.split("\n").first
 
       data
     end
