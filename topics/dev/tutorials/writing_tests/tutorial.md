@@ -33,15 +33,6 @@ requirements:
 subtopic: core
 ---
 
-> <agenda-title></agenda-title>
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-# Testing in Galaxy
-
 The Galaxy code base contains thousands of tests that include tests of different types (unit vs. functional vs. end-to-end; client vs. backend, etc.) that are supported by a variety of testing frameworks and libraries. In this tutorial, we will offer a small, yet representative sample of the types of tests you might write, as well as the concepts and issues you may need to be familiar with when writing tests for Galaxy code, whether as part of a new feature you are implementing, or as a standalone contribution to Galaxy's testing code.
 
 A good way to start learning about Galaxy's testing infrastructure and how to use it is to read the documentation article on the different types of tests that are present in the code base as well as how to determine which type is most appropriate for a given scenario (see [Writing Tests for Galaxy](https://docs.galaxyproject.org/en/master/dev/writing_tests.html)).
@@ -55,6 +46,14 @@ To run Galaxy tests, you may also use the `pytest` command directly (except for 
 Another useful resource is the [Debugging Galaxy]({% link topics/dev/tutorials/debugging/tutorial.md %}) tutorial which contains a lot of useful information on how to debug test failures that occur both locally and remotely.
 
 Finally, nothing can substitute studying Galaxy's test code - we encourage you to always look for examples of similar tests and testing scenarios before you write your own.
+
+
+> <agenda-title></agenda-title>
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # Local development environment setup
 

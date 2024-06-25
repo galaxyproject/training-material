@@ -40,17 +40,17 @@ edam_ontology:
 
 ---
 
-> <comment-title>Sources</comment-title>
->
-> This tutorial is significantly based on [DADA2 Pipeline Tutorial](https://benjjneb.github.io/dada2/tutorial.html) and ["Introduction to dada2"](https://bioconductor.org/packages/devel/bioc/vignettes/dada2/inst/doc/dada2-intro.html)
->
-{: .comment}
-
 The investigation of environmental microbial communities and microbiomes has been revolutionized by the 
 development of high-throughput amplicon sequencing. In amplicon sequencing a particular genetic locus, 
 for example the 16S rRNA gene (or a part of it) in bacteria, is amplified from DNA extracted from the community of interest, 
 and then sequenced on a next-generation sequencing platform. This technique removes the need to culture 
 microbes in order to detect their presence, and cost-effectively provides a deep census of a microbial community.
+
+> <comment-title>Sources</comment-title>
+>
+> This tutorial is significantly based on [DADA2 Pipeline Tutorial](https://benjjneb.github.io/dada2/tutorial.html) and ["Introduction to dada2"](https://bioconductor.org/packages/devel/bioc/vignettes/dada2/inst/doc/dada2-intro.html)
+>
+{: .comment}
 
 {% include topics/microbiome/tutorials/mothur-miseq-sop/background_16S.md %}
 
