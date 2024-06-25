@@ -93,16 +93,18 @@ The datasets for this tutorial are colon samples from multiple donors, provided 
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets if necessary
->   
+> 3. Rename the datasets
+>    - {% icon galaxy-pencil %} **Rename** the file `gencode.v46.annotation.gtf.gz` to `gene_annotation.gtf.gz`
+>
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. Check that the datatype of the `colon_multisample` files is set to `bed`
+> 4. Check that the datatypes of the `colon_multisample` files are set to `bed`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
 > 5. Create a dataset collection with all `colon_multisample` datasets.
 > 
->    {% snippet faqs/galaxy/collections_build_list.mdu name="Colon Multisample" %}
+>    {% snippet faqs/galaxy/collections_build_list.mdu name="Colon Multisample Fragments" %}
 >
 {: .hands_on}
 
@@ -110,436 +112,156 @@ The datasets for this tutorial are colon samples from multiple donors, provided 
 
 With our data imported and the collection built, we can now begin the {scATAC-seq} data preprocessing with SnapATAC2. 
 
-The first step is importing the datasets into an AnnData object with the tool *pp.import_data*. Next, the {TSSe} will be calculated. The  {TSS} serves as a {QC} measurement to only filter droplets containing high-quality cells. 
+The first step is importing the datasets into an AnnData object with the tool *pp.import_data*. Next, the {TSSe} will be calculated. The {TSS} serves as a {QC} measurement to selectively filter droplets containing high-quality cells. 
 
-> <hands-on-title> Preprocessing and Filtering </hands-on-title>
+> <hands-on-title> Preprocessing and QC </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Import data fragment files and compute basic QC metrics, using 'pp.import_data'`
->        - {% icon param-collection %} *"Fragment file, optionally compressed with gzip or zstd"*: `output` (Input dataset collection)
->        - {% icon param-file %} *"A tabular file containing chromosome names and sizes"*: `output` (Input dataset)
+>        - {% icon param-collection %} *"Fragment file, optionally compressed with gzip or zstd"*: `Colon Multisample Fragments` (Input dataset collection)
+>        - {% icon param-file %} *"A tabular file containing chromosome names and sizes"*: `chrom_sizes.txt` (Input dataset)
 >        - *"Number of unique fragments threshold used to filter cells"*: `1000`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Compute the TSS enrichment score (TSSe) for each cell, using 'metrics.tsse'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
->        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `output` (Input dataset)
+>        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas` (dataset collection output of **pp.import_data** {% icon tool %})
+>        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `gene_annotation` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Rename the generated collection to `Colon Multisample AnnDatas TSSe` or add the tag {% icon galaxy-tags %} `TSSe` to the collection:
+> 
+>    {% snippet faqs/galaxy/collections_add_tag.md %}
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 3. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
+>    - *"Method used for plotting"*: `Plot the TSS enrichment vs. number of fragments density figure, using 'pl.tsse'`
+>        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas TSSe` (output of **metrics.tsse** {% icon tool %})
+> 4. {% icon galaxy-eye %} Inspect a few exemplary `.png` outputs of the collection
+> 
 >
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> ![TSSe plot against number of unique fragments]({% link path %})
+High-quality cells can be identified in the plot of {TSSe} scores against a number of unique fragments for each cell. 
+>
+> > <question-title></question-title>
+> >
+> > 1. Where are high-quality cells located in a {TSSe} plot?
+> > 2. Based on this plot, how should the filter be set?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. The cells in the upper right are high-quality cells, enriched for {TSS}. Fragments in the lower left represent low-quality cells or empty droplets and should be filtered out. 
+> > > 2. Setting the minimum {TSSe} to 7.0 will filter out the lowest quality droplets without loosing too much data. 
+> > >
+> > {: .solution}
+> >
+> {: .question}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Filtering the count matrices
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The {TSSe} distributions show that the sample quality differs substantially between batches. In order to retain as much biological data as possible, we need to use a broad filter (f.ex. minimum TSSe = 7.0). 
 
-## Sub-step with **SnapATAC2 Preprocessing**
+Low quality cells might also pass through the filter, but we can assume that these confounding factors will be corrected in later steps with *Harmony*. 
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Filtering </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas TSSe` (output of **metrics.tsse** {% icon tool %})
 >        - *"Minimum TSS enrichemnt score required for a cell to pass filtering"*: `7.0`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Generate cell by bin count matrix, using 'pp.add_tile_matrix'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas filtered` (output of **pp.filter_cells** {% icon tool %})
 >        - *"The size of consecutive genomic regions used to record the counts"*: `5000`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
+> 3. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Perform feature selection, using 'pp.select_features'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas tile_matrix` (output of **pp.add_tile_matrix** {% icon tool %})
 >        - *"Number of features to keep"*: `50000`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <details-title> Bin size and features </details-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    > - *pp.add_tile_matrix* divides the genome into a specified number of bins (f.ex. 5000). For each bin, the ATAC-seq reads of individual cells are checked if they are located that bin. This is counted as a feature and stored in `n_vars`.   
+>    >    - Increasing the bin size greatly reduces compute time at the cost of some biological data. 
+>    > - *pp.select_features* checks the features identified by the previous tool and selects the features which are most accessible across all cells. 
+>    >    - The parameter *"Number of features to keep"* determines the upper limit of features which could be selected. 
+>    >    - Similarly too the *bin_size*, the Number of features to keep can also impact 
+>    {: .details}
 >
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
+> 4. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Compute probability of being a doublet using the scrublet algorithm, using 'pp.scrublet'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas features` (output of **pp.select_features** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
+> 5. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Remove doublets according to the doublet probability or doublet score, using 'pp.filter_doublets'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>        - {% icon param-file %} *"Annotated data matrix"*: `Colon Multisample AnnDatas scrublet` (output of **pp.scrublet** {% icon tool %})
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Concatenate the Collection
+Before we can continue with the analysis and batch correction. We need to extract the datasets out of the collection and merge them into a single AnnData object. 
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Extracting datasets from a collection
 
-## Sub-step with **Extract element identifiers**
+First, we will extract the first dataset out of the collection using the Galaxy tool *Extract dataset*. 
 
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
->    - {% icon param-file %} *"Dataset collection"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+Then, we will remove that first dataset from the collection through element identifiers. 
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+> <comment-title>  </comment-title>
+> Although we could manually remove the first dataset, the method shown here has the advantage that it can be implemented in a workflow. 
+{: .comment}
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **Extract dataset**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Extract datasets </hands-on-title>
 >
-> 1. {% tool [Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
->    - {% icon param-file %} *"Input List"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+> 1. {% tool [Extract element from collection](__EXTRACT_DATASET__) %} with the following parameters:
+>    - {% icon param-collection %} *"Input List"*: `Colon Multisample AnnDatas filtered_doublets` (output of **pp.filter_doublets** {% icon tool %})
 >    - *"How should a dataset be selected?"*: `The first dataset`
+> 2. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+>    - {% icon param-collection %} *"Dataset collection"*: `Colon Multisample AnnDatas filtered_doublets` (output of **pp.filter_doublets** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Select first**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Select first](Show beginning1) %} with the following parameters:
+> 3. {% tool [Select first](Show beginning1) %} with the following parameters:
 >    - *"Select first"*: `1`
->    - {% icon param-file %} *"from"*: `output` (output of **Extract element identifiers** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Filter collection**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Filter collection](__FILTER_FROM_FILE__) %} with the following parameters:
->    - {% icon param-file %} *"Input Collection"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>    - {% icon param-file %} *"from"*: `Element identifiers` (output of **Extract element identifiers** {% icon tool %})
+> 4. {% tool [Filter collection](__FILTER_FROM_FILE__) %} with the following parameters:
+>    - {% icon param-collection %} *"Input Collection"*: `Colon Multisample AnnDatas filtered_doublets` (output of **pp.filter_doublets** {% icon tool %})
 >    - *"How should the elements to remove be determined?"*: `Remove if identifiers are PRESENT in file`
->        - {% icon param-file %} *"Filter out identifiers present in"*: `out_file1` (output of **Select first** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>        - {% icon param-file %} *"Filter out identifiers present in"*: `select_first` (output of **Select first** {% icon tool %})
+> 5. {% icon galaxy-pencil %} Rename the filtered collection `Colon Multisample 02-05`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Concatenate AnnDatas
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Manipulate AnnData**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Concatenate </hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output` (output of **Extract dataset** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `colon_multisample_01` (output of **Extract dataset** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
->        - {% icon param-file %} *"Annotated data matrix to add"*: `output_filtered` (output of **Filter collection** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>        - {% icon param-collection %} *"Annotated data matrix to add"*: `Colon Multisample 02-05` (output of **Filter collection** {% icon tool %})
+>        - *"Join method"*: `Intersection of variables`
+>        - *"Key to add the batch annotation to obs"*: `batch`
+> 2. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData`
+> 3. {% icon galaxy-eye %} Inspect the general information of `Multisample AnnData`
+> 
+> > <question-title></question-title>
+> >
+> > 1. Question1?
+> > 2. Question2?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. Answer for question1
+> > > 2. Answer for question2
+> > >
+> > {: .solution}
+> >
+> {: .question}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Dimension Reduction
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Spectral embedding </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Perform feature selection, using 'pp.select_features'`
