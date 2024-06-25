@@ -506,7 +506,7 @@ We will now check whether the samples have more reads from regions of the genome
 >    >
 >    > > <solution-title></solution-title>
 >    > > 1. In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is expected that certain genomic regions contain more reads (*i.e.* regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.
->    > > 2. To answer this question, run the computeGCbias tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).
+>    > > 2. To answer this question, run the computeGCbias tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [in deepTools' documentation](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).
 >    > {: .solution }
 >    {: .question}
 >
