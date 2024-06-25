@@ -83,6 +83,17 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >
 > 2. Import the ChIP-seq raw data (\*.fastqsanger) from [Zenodo](https://doi.org/10.5281/zenodo.197100).
 >
+>    ```
+>    https://zenodo.org/record/197100/files/G1E_input_R1_downsampled_SRR507859.fastqsanger
+>    https://zenodo.org/record/197100/files/G1E_input_R2_downsampled_SRR507860.fastqsanger
+>    https://zenodo.org/record/197100/files/G1E_Tal1_R1_downsampled_SRR492444.fastqsanger
+>    https://zenodo.org/record/197100/files/G1E_Tal1_R2_downsampled_SRR492445.fastqsanger
+>    https://zenodo.org/record/197100/files/Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger
+>    https://zenodo.org/record/197100/files/Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger
+>    https://zenodo.org/record/197100/files/Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger
+>    https://zenodo.org/record/197100/files/Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger
+>    ```
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Examine the data in a FASTQ file by clicking on the {% icon galaxy-eye %} (eye) icon.
