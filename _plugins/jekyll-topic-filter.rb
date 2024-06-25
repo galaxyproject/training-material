@@ -31,6 +31,10 @@ module TopicFilter
     list_topics_h(site).values
   end
 
+  def self.cache
+    @@cache ||= Jekyll::Cache.new('JekyllTopicFilter')
+  end
+
   ##
   # Fill the cache with all the topics
   # Params:
@@ -455,6 +459,92 @@ module TopicFilter
     "flowchart TD\n" + statements.map { |q| "  #{q}" }.join("\n")
   end
 
+  def self.graph_dot(wf)
+    # We're converting it to Mermaid
+    # flowchart TD
+    #     A[Start] --> B{Is it?}
+    #     B -- Yes --> C[OK]
+    #     C --> D[Rethink]
+    #     D --> B
+    #     B -- No ----> E[End]
+    # digraph test {
+    #
+    #   0[shape=box,style=filled,color=lightblue,label="ℹ️ Input Dataset\nBionano_dataset"]
+    #   1[shape=box,style=filled,color=lightblue,label="ℹ️ Input Dataset\nHi-C_dataset_R"]
+    #   3 -> 6 [label="output"]
+    #   7[shape=box,label="Busco"]
+    #   4 -> 7 [label="out_fa"]
+    #   8[shape=box,label="Busco"]
+    #   5 -> 8 [label="out_fa"]
+
+    statements = [
+      'node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];',
+      'edge [fontname="Atkinson Hyperlegible"];',
+    ]
+    wf['steps'].each_key do |id|
+      step = wf['steps'][id]
+      chosen_label = mermaid_safe_label(step['label'] || step['name'])
+
+      case step['type']
+      when 'data_collection_input'
+        statements.append "#{id}[color=lightblue,label=\"ℹ️ Input Collection\\n#{chosen_label}\"]"
+      when 'data_input'
+        statements.append "#{id}[color=lightblue,label=\"ℹ️ Input Dataset\\n#{chosen_label}\"]"
+      when 'parameter_input'
+        statements.append "#{id}[color=lightgreen,label=\"ℹ️ Input Parameter\\n#{chosen_label}\"]"
+      when 'subworkflow'
+        statements.append "#{id}[color=lightcoral,label=\"🛠️ Subworkflow\\n#{chosen_label}\"]"
+      else
+        statements.append "#{id}[label=\"#{chosen_label}\"]"
+      end
+
+      step = wf['steps'][id]
+      step['input_connections'].each do |_, v|
+        # if v is a list
+        if v.is_a?(Array)
+          v.each do |v2|
+            statements.append "#{v2['id']} -> #{id} [label=\"#{mermaid_safe_label(v2['output_name'])}\"]"
+          end
+        else
+          statements.append "#{v['id']} -> #{id} [label=\"#{mermaid_safe_label(v['output_name'])}\"]"
+        end
+      end
+
+      (step['workflow_outputs'] || [])
+        .reject { |wo| wo['label'].nil? }
+        .map do |wo|
+          wo['uuid'] = SecureRandom.uuid.to_s if wo['uuid'].nil?
+          wo
+        end
+        .each do |wo|
+          statements.append "k#{wo['uuid'].gsub('-', '')}[color=lightseagreen,label=\"Output\\n#{wo['label']}\"]"
+          statements.append "#{id} -> k#{wo['uuid'].gsub('-', '')}"
+        end
+    end
+
+    "digraph main {\n" + statements.map { |q| "  #{q}" }.join("\n") + "\n}"
+  end
+
+  def self.git_log(wf_path)
+    if Jekyll.env != 'production'
+      return []
+    end
+
+    cache.getset(wf_path) do
+      require 'shellwords'
+
+      commits = %x[git log --format="%H %at %s" #{Shellwords.escape(wf_path)}]
+        .split("\n")
+        .map { |x| x.split(' ', 3) }
+        .map { |x| { 'hash' => x[0], 'unix' => x[1], 'message' => x[2], 'short_hash' => x[0][0..8] } }
+
+      commits.map.with_index do |c, i|
+        c['num'] = commits.length - i
+        c
+      end
+    end
+  end
+
   def self.resolve_material(site, material)
     # We've already
     # looked in every /topic/*/tutorials/* folder, and turn these disparate
@@ -559,7 +649,7 @@ module TopicFilter
       workflow_names = workflows.map { |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map do |wf|
         wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
-        wfname = wf.gsub(/.ga/, '').downcase
+        wfname = wf.gsub(/.ga/, '').downcase.gsub(/[^a-z0-9]/, '-')
         trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
         wf_path = "#{folder}/workflows/#{wf}"
         wf_json = JSON.parse(File.read(wf_path))
@@ -576,6 +666,8 @@ module TopicFilter
         end
         workflow_test_outputs = nil if workflow_test_outputs.empty?
 
+        wfhkey = [page['topic_name'], page['tutorial_name'], wfname].join('/')
+
         {
           'workflow' => wf,
           'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length.positive?,
@@ -585,12 +677,27 @@ module TopicFilter
           'wfname' => wfname,
           'trs_endpoint' => "#{domain}/#{trs}",
           'license' => license,
+          'parent_id' => page_obj['id'],
+          'topic_id' => page['topic_name'],
+          'tutorial_id' => page['tutorial_name'],
           'creators' => creators,
           'name' => wf_json['name'],
           'title' => wftitle,
+          'version' => Gtn::ModificationTimes.obtain_modification_count(wf_path),
+          'description' => wf_json['annotation'],
+          'tags' => wf_json['tags'],
+          'features' => {
+            'report' => wf_json['report'],
+            'subworkflows' => wf_json['steps'].map{|_, x| x['type']}.any?{|x| x == "subworkflow"},
+            'comments' => (wf_json['comments'] || []).length.positive?,
+            'parameters' =>  wf_json['steps'].map{|_, x| x['type']}.any?{|x| x == "parameter_input"},
+          },
+          'workflowhub_id' => (site.data['workflowhub'] || {}).fetch(wfhkey, nil),
+          'history' => git_log(wf_path),
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
           'mermaid' => mermaid(wf_json),
+          'graph_dot' => graph_dot(wf_json),
           'workflow_tools' => extract_workflow_tool_list(wf_json).uniq,
         }
       end
@@ -967,6 +1074,10 @@ module Jekyll
     #  {% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
     def fetch_tutorial_material(site, topic_name, page_name)
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
+    end
+
+    def fetch_tutorial_material_by_id(site, id)
+      TopicFilter.fetch_tutorial_material(site, id.split('/')[0], id.split('/')[1])
     end
 
     def list_topics_ids(site)

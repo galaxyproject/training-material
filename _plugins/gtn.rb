@@ -4,6 +4,7 @@ require 'English'
 require './_plugins/gtn/contributors'
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
+require './_plugins/gtn/ro-crate'
 require './_plugins/gtn/images'
 require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
@@ -708,6 +709,10 @@ module Jekyll
 
     def shuffle(array)
       array.shuffle
+    end
+
+    def unix_time_to_date(time)
+      Time.at(time.to_i).strftime('%Y-%m-%d %H:%M:%S')
     end
 
     def is_date_passed(date)

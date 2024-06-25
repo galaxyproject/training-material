@@ -1,0 +1,54 @@
+name: "[Cron] Upload workflows to (DEV)WorkflowHub"
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # We'll run this daily at noon.
+    - cron:  '59 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  runner-job:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 200
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+      - uses: actions/cache@v2
+        with:
+          path: |
+            vendor/bundle
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle pristine ffi
+      # END Dependencies
+
+      # Required to build the RO-Crates
+      - name: Build Site
+        run: |
+          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+
+      - name: Upload workflows
+        run: |
+          python bin/wfh-upload.py
+        env:
+          DEV_WFH_TOKEN: ${{ secrets.DEV_WFH_TOKEN }}
