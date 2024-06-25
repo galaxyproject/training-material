@@ -254,382 +254,164 @@ Then, we will remove that first dataset from the collection through element iden
 > > > 2. Answer for question2
 > > >
 > > {: .solution}
-> >
-> {: .question}
+>  {: .question}
 >
 {: .hands_on}
 
 # Dimension Reduction
+Through concatenation of all samples, the selected features were lost. To solve this issue, they can just be selected again, for all samples. 
 
 > <hands-on-title> Spectral embedding </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Perform feature selection, using 'pp.select_features'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData` (output of **Manipulate AnnData** {% icon tool %})
 >        - *"Number of features to keep"*: `50000`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Clustering**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
+> 
+> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Perform dimension reduction using Laplacian Eigenmap, using 'tl.spectral'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData Features` (output of **pp.select_features** {% icon tool %})
+>        - *"distance metric"*: `cosine`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 3. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData spectral`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Control without batch correction
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Clustering**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> UMAP projection without batch correction </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute Umap, using 'tl.umap'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData spectral` (output of **tl.spectral** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Plotting**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
+> 2. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData UMAP`
+> 3. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the UMAP embedding, using 'pl.umap'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData UMAP` (output of **tl.umap** {% icon tool %})
 >        - *"Color"*: `batch`
 >        - *"Height of the plot"*: `500`
 >
->    ***TODO***: *Check parameter descriptions*
+> 4. {% icon galaxy-pencil %} Rename the generated image `spectral-UMAP-No Batch correction`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 5. {% icon galaxy-eye %} Inspect the `.png` output
 >
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> > <question-title></question-title>
+> >
+> > 1. Question1?
+> > 2. Question2?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. Answer for question1
+> > > 2. Answer for question2
+> > >
+> > {: .solution}
+>  {: .question}
+>
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Batch correction with Harmony
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+We have seen that there are significant batch effects affecting our samples. Now we will correct the technical confounders with *Harmony*. 
 
-## Sub-step with **SnapATAC2 Preprocessing**
+> <details-title> Harmony </details-title>
+> - Harmony explanation
+> - Note: other methods also exist in the snapatac2 package
+{: .details}
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Batch correction and visualization</hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Use harmonypy to integrate different experiments,using 'pp.harmony'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData UMAP` (output of **tl.umap** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Clustering**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute Umap, using 'tl.umap'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Preprocessing** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData harmony` (output of **pp.harmony** {% icon tool %})
 >        - *"Use the indicated representation in `.obsm`"*: `X_spectral_harmony`
 >        - *"`adata.obs` key under which t add cluster labels"*: `umap_harmony`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData harmony UMAP`
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > <comment-title> Key for cluster labels </comment-title>
+>    > - If you add the new *UMAP-embeddings* under the key `umap_harmony`, the non-batch corrected embeddings are still stored in the AnnData object. 
+>    >    - Alternatively, by leaving this parameter empty, the old embeddings will be overwritten. 
 >    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Plotting**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
+> 
+> 4. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the UMAP embedding, using 'pl.umap'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData harmony UMAP` (output of **tl.umap** {% icon tool %})
 >        - *"Color"*: `batch`
 >        - *"Use the indicated representation in .obsm"*: `X_umap_harmony`
 >        - *"Height of the plot"*: `500`
 >
->    ***TODO***: *Check parameter descriptions*
+> 5. {% icon galaxy-pencil %} Rename the generated image `spectral-UMAP-harmony`
+> 
+> 6. {% icon galaxy-eye %} Inspect the `.png` output
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> > <question-title></question-title>
+> >
+> > 1. Question1?
+> > 2. Question2?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. Answer for question1
+> > > 2. Answer for question2
+> > >
+> > {: .solution}
+>  {: .question}
 >
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Clustering of the batch corrected samples
 
-## Sub-step with **SnapATAC2 Clustering**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Leiden clustering and visualization </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute a neighborhood graph of observations, using 'pp.knn'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData harmony UMAP` (output of **tl.umap** {% icon tool %})
 >        - *"The key for the matrix"*: `X_spectral_harmony`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Clustering**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Cluster cells into subgroups, using 'tl.leiden'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData harmony knn` (output of **pp.knn** {% icon tool %})
+>        - *"Whether to use the Constant Potts Model (CPM) or modularity"*: `modularity` 
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnapATAC2 Plotting**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
+> 3. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData harmony leiden`
+> 
+> 4. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the UMAP embedding, using 'pl.umap'`
->        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **SnapATAC2 Clustering** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **tl.leiden** {% icon tool %})
 >        - *"Color"*: `leiden`
 >        - *"Use the indicated representation in .obsm"*: `X_umap_harmony`
 >        - *"Height of the plot"*: `500`
 >
->    ***TODO***: *Check parameter descriptions*
+> 5. {% icon galaxy-pencil %} Rename the generated image `spectral-UMAP-harmony-leiden`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 6. {% icon galaxy-eye %} Inspect the `.png` output
 >
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> > <question-title></question-title>
+> >
+> > 1. Question1?
+> > 2. Question2?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. Answer for question1
+> > > 2. Answer for question2
+> > >
+> > {: .solution}
+>  {: .question}
+>
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial we performed batch correction on five {scATAC-seq} samples from human colons. 
