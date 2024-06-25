@@ -914,6 +914,23 @@ module GtnLinter
     results
   end
 
+  def self.fix_css(contents)
+    results = []
+    results += find_matching_texts(contents, /-(left|right)/)
+               .map do |idx, _text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: '',
+        message: 'Use -start and -end instead of -left and -right to support right-to-left languages See: https://firefox-source-docs.mozilla.org/code-quality/coding-style/rtl_guidelines.html',
+        code: 'GTN:037'
+      )
+    end
+    results
+  end
+
   def self.fix_bib(contents, bib)
     bad_keys = bib_missing_mandatory_fields(bib)
     results = []
@@ -1075,6 +1092,14 @@ module GtnLinter
 
       results = filter_results(results, ignores)
       emit_results(results)
+    when /.s?css$/
+      handle = File.open(path, 'r')
+      contents = handle.read.split("\n")
+
+      results = fix_css(contents)
+
+      results = filter_results(results, ignores)
+      emit_results(results)
     when /.ga$/
       handle = File.open(path, 'r')
       begin
@@ -1228,6 +1253,9 @@ module GtnLinter
                                       code: 'GTN:023')
         )
       end
+    end
+    enumerate_type(/\.s?css$/).each do |path|
+      fix_file(path)
     end
     enumerate_type(/\.ga$/).each do |path|
       fix_file(path)

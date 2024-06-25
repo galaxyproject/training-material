@@ -229,11 +229,11 @@ body {
         vertical-align: 1em;
         float: inline-start;
         border: 1px solid $bg-color;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+        border-start-start-radius: 8px;
+        border-start-end-radius: 8px;
 
         .fa {
-            padding-right: calc($tutorial-box-spacing / 5);
+            padding-inline-end: calc($tutorial-box-spacing / 5);
         }
 
         button {
@@ -247,8 +247,8 @@ body {
 @mixin matrix-table (){
   table {
       width:unset;
-      margin-left:auto;
-      margin-right:auto;
+      margin-inline-start:auto;
+      margin-inline-end:auto;
       margin-top: 20pt;
   }
 
@@ -258,15 +258,15 @@ body {
   }
 
   table td:first-child, table th:first-child  {
-      border-right: 2px solid #777;
+      border-inline-end: 2px solid #777;
       font-weight: bold;
       text-align: left;
   }
 
   table td:not(first-child), table th:not(first-child) {
       text-align: center;
-      border-right: 1px solid #ddd;
-      border-left: 1px solid #ddd;
+      border-inline-end: 1px solid #ddd;
+      border-inline-start: 1px solid #ddd;
   }
 }
 
@@ -431,16 +431,16 @@ div.language-diff .p {
 	border-top: 1px solid #66d9ef;
 	border-bottom: 1px solid #66d9ef;
 
-	border-left: 5px solid #66d9ef;
-	border-right: 5px solid #66d9ef;
+	border-inline-start: 5px solid #66d9ef;
+	border-inline-end: 5px solid #66d9ef;
 
 	font-weight: 900;
 
 	line-height: 3em;
 
-	margin-right: 1em;
-	padding-left: 1em;
-	padding-right: 1em;
+	margin-inline-end: 1em;
+	padding-inline-start: 1em;
+	padding-inline-end: 1em;
 }
 
 body > footer {
@@ -485,7 +485,7 @@ nav.navbar {
     }
 
     a.navbar-brand {
-	padding-right: 2.5em; // the image seems to work poorly with parent size calculations.
+	padding-inline-end: 2.5em; // the image seems to work poorly with parent size calculations.
     }
 
     // Text decoration not necessary for accessibility here.
@@ -532,7 +532,7 @@ nav input.nicer {
 	}
 }
 #search-input {
-	margin-right:1em;
+	margin-inline-end:1em;
 }
 
 /*
@@ -718,8 +718,8 @@ blockquote {
 	border: 1px solid var(--border-light);
 	.card-title {
 		color: var(--brand-color-contrast);
-		// margin-left: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
-		// margin-right: -15px;
+		// margin-inline-start: -15px; // BS has a 15px margin on cards, this makes the card title fill the card.
+		// margin-inline-end: -15px;
 	}
 }
 
@@ -738,8 +738,8 @@ blockquote {
 		// We have to manually exclude the card titles
 		// And also canvases because they apparently calculate their area before the CSS has finished.
 		& > :not(.card-title,canvas){
-			margin-left: 1em;
-			margin-right: 1em;
+			margin-inline-start: 1em;
+			margin-inline-start: 1em;
 		}
 	}
 }
@@ -944,8 +944,8 @@ blockquote {
 @media (max-width: 575px) {
     .navbar > .container {
         position: initial;
-        margin-left: initial;
-        margin-right: initial;
+        margin-inline-start: initial;
+        margin-inline-end: initial;
     }
 }
 
@@ -1034,7 +1034,7 @@ blockquote {
 
 .level {
     color: lightgray;
-    margin-right: 0.5em;
+    margin-inline-end: 0.5em;
 
     .fa {
         font-size: 0.9em;
@@ -1167,8 +1167,8 @@ nav[data-toggle='toc'] {
         i {
             height: 1.5em;
             line-height: 1.5em;
-            margin-left: 0.5em;
-            margin-right: 0.5em;
+            margin-inline-start: 0.5em;
+            margin-inline-end: 0.5em;
         }
     }
 
@@ -1182,7 +1182,7 @@ nav[data-toggle='toc'] {
     align-items: center;
     border-radius: 1em;
     border: 1px dotted var(--hyperlink);
-    padding-right: 0.5em;
+    padding-inline-end: 0.5em;
     margin: 0.2em;
     line-height: 1em;
     flex-shrink: 0;
@@ -1293,7 +1293,7 @@ div.highlight:hover .btn,div.highlight .btn:focus{
     }
     .search_box {
         float: inline-end;
-        i {padding-right: .5rem;}
+        i {padding-inline-end: .5rem;}
     }
     #clear_search{
         cursor: pointer;
@@ -1434,7 +1434,7 @@ video::cue {
     overflow-y: scroll;
 
     tr td:nth-child(1) {
-        padding-right: 1em;
+        padding-inline-end: 1em;
         color: var(--text-color-muted);
     }
 }
@@ -1862,8 +1862,8 @@ section.event {
 			cursor: pointer;
 			background: none;
 			font-size: 1.2rem;
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
+			border-start-start-radius: 0;
+			border-start-end-radius: 0;
 
 			&:hover {
 				color: var(--hyperlink-hover);
