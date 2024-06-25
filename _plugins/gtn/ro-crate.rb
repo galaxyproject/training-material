@@ -79,9 +79,9 @@ module Gtn
       }
 
       mat_contribs = [
+        ['Workflow Author(s)', workflow['creators'].map { |c| c['name'] }],
         ['Tutorial Author(s)', Gtn::Contributors.get_authors(associated_material).map { |n| name2md(site, n) }],
         ['Tutorial Contributor(s)', Gtn::Contributors.get_non_authors(associated_material).map { |n| name2md(site, n) }],
-        ['Workflow Author(s)', workflow['creators'].map { |c| c['name'] }],
         ['Funder(s)', Gtn::Contributors.get_funders(associated_material).map { |n| name2md(site, n) }],
       ].reject { |_, v| v.empty? }
 
@@ -90,7 +90,7 @@ module Gtn
 
 ## Associated Tutorial
 
-This workflows is part of the tutorial [#{workflow['name']}](#{url}#{baseurl}/topics/#{workflow['topic_id']}/tutorials/#{workflow['tutorial_id']}/tutorial.html), available in the [GTN](https://training.galaxyproject.org)
+This workflows is part of the tutorial [#{associated_material['title']}](#{url}#{baseurl}/topics/#{workflow['topic_id']}/tutorials/#{workflow['tutorial_id']}/tutorial.html), available in the [GTN](https://training.galaxyproject.org)
 
 #{"## Features" if features.values.any?}
 
