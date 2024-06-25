@@ -342,10 +342,9 @@ This workflows is part of the tutorial [#{workflow[&#39;name&#39;]}](#{url}#{bas
       <span class="ruby-identifier">wf_ga</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;creator&#39;</span>)
 
       <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">wfdir</span>, <span class="ruby-string">&#39;mod.ga&#39;</span>), <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">wf_ga</span>))
-      <span class="ruby-comment"># p &quot;Writing #{File.join(wfdir, &#39;mod.ga&#39;)}&quot;</span>
 
       <span class="ruby-identifier">zip_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">wfdir</span>, <span class="ruby-string">&#39;rocrate.zip&#39;</span>)
-      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;[GTN/API/WFRun] Zipping #{zip_path}&quot;</span>
+      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;[GTN/API/WFRun] Zipping #{zip_path}&quot;</span>
       <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">zip_path</span>)
         <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">zip_path</span>)
       <span class="ruby-keyword">end</span>
