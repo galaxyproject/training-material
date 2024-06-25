@@ -628,8 +628,9 @@ module Jekyll
     # +Hash+:: The JSON-LD metadata.
     def generate_material_jsonld(material, topic, site)
       langCodeMap = {
-        en: 'English',
-        es: 'Español',
+        "en" => 'English',
+        "es" => 'Español',
+        "fr" => 'Français',
       }
 
       eduLevel = {
