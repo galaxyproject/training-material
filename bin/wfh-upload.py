@@ -72,6 +72,7 @@ def doUpload(crate_path):
       }
     }
 
+    print("Discussion links: ", response.json()['data']['attributes']['discussion_links'])
     if response.json()['data']['attributes']['discussion_links'] and not any(
         x['label'] == 'GTN Matrix' for x in response.json()['data']['attributes']['discussion_links']
     ):
