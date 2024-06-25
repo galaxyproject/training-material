@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 200
+          fetch-depth: 2000
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v2
@@ -37,6 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           gem install bundler
+          pip install pyyaml requests
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           bundle pristine ffi
