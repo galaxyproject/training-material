@@ -429,14 +429,67 @@
           "wfname": "mapping-jbrowse",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-mapping/versions/mapping-jbrowse",
           "license": null,
+          "parent_id": "sequence-analysis/mapping",
+          "topic_id": "sequence-analysis",
+          "tutorial_id": "mapping",
           "creators": [
 
           ],
           "name": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
           "title": "GTN - Sequence Analyses - Mapping - Jbrowse (imported from uploaded file)",
+          "version": 5,
+          "description": "Mapping",
+          "tags": [
+            "sequence-analysis"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "505f7550f2798d344c73ae11ff158fa77cf90584",
+              "unix": "1618939337",
+              "message": "update-workflows",
+              "short_hash": "505f7550f",
+              "num": 5
+            },
+            {
+              "hash": "667ff3de9c4e13d341a6d864bd6dc826ef15ca04",
+              "unix": "1579690769",
+              "message": "annotation",
+              "short_hash": "667ff3de9",
+              "num": 4
+            },
+            {
+              "hash": "eb4d724e0064c77beb20efa626a0f28fd0500676",
+              "unix": "1579084895",
+              "message": "Workflow renaming",
+              "short_hash": "eb4d724e0",
+              "num": 3
+            },
+            {
+              "hash": "469053ce23c700f73325c5f1b668b8fa48d48252",
+              "unix": "1578995047",
+              "message": "avoiding duplicate name",
+              "short_hash": "469053ce2",
+              "num": 2
+            },
+            {
+              "hash": "27d11fd7fc4673db6c431f3a7d9529fd5ade273d",
+              "unix": "1557229186",
+              "message": "add variant with jbrowse output",
+              "short_hash": "27d11fd7f",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:36 +0000",
+          "modified": "2024-06-25 09:19:39 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  6[\"Bowtie2\"];\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  cb22563a-fece-4b63-9d85-ff5817edb5c3[\"Output\\nbowtie2_mapping_stats\"];\n  6 --> cb22563a-fece-4b63-9d85-ff5817edb5c3;\n  style cb22563a-fece-4b63-9d85-ff5817edb5c3 stroke:#2c3143,stroke-width:4px;\n  7[\"Samtools stats\"];\n  6 -->|output| 7;\n  490620d4-f083-4999-bb33-73a2a1f736b4[\"Output\\nbam_stats_1\"];\n  7 --> 490620d4-f083-4999-bb33-73a2a1f736b4;\n  style 490620d4-f083-4999-bb33-73a2a1f736b4 stroke:#2c3143,stroke-width:4px;\n  8[\"JBrowse\"];\n  6 -->|output| 8;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nreads_1\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nreads_2\"]\n  2[label=\"FastQC\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"FastQC\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Trim Galore!\"]\n  0 -> 4 [label=\"output\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"MultiQC\"]\n  3 -> 5 [label=\"text_file\"]\n  2 -> 5 [label=\"text_file\"]\n  6[label=\"Bowtie2\"]\n  4 -> 6 [label=\"trimmed_reads_pair1\"]\n  4 -> 6 [label=\"trimmed_reads_pair2\"]\n  kcb22563afece4b639d85ff5817edb5c3[color=lightseagreen,label=\"Output\\nbowtie2_mapping_stats\"]\n  6 -> kcb22563afece4b639d85ff5817edb5c3\n  7[label=\"Samtools stats\"]\n  6 -> 7 [label=\"output\"]\n  k490620d4f0834999bb3373a2a1f736b4[color=lightseagreen,label=\"Output\\nbam_stats_1\"]\n  7 -> k490620d4f0834999bb3373a2a1f736b4\n  8[label=\"JBrowse\"]\n  6 -> 8 [label=\"output\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
             "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1",
@@ -455,11 +508,56 @@
           "wfname": "mapping",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-mapping/versions/mapping",
           "license": null,
+          "parent_id": "sequence-analysis/mapping",
+          "topic_id": "sequence-analysis",
+          "tutorial_id": "mapping",
           "creators": [
 
           ],
           "name": "GTN - Sequence Analyses - Mapping (imported from uploaded file)",
           "title": "GTN - Sequence Analyses - Mapping (imported from uploaded file)",
+          "version": 4,
+          "description": "Mapping",
+          "tags": [
+            "sequence-analysis"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "505f7550f2798d344c73ae11ff158fa77cf90584",
+              "unix": "1618939337",
+              "message": "update-workflows",
+              "short_hash": "505f7550f",
+              "num": 4
+            },
+            {
+              "hash": "667ff3de9c4e13d341a6d864bd6dc826ef15ca04",
+              "unix": "1579690769",
+              "message": "annotation",
+              "short_hash": "667ff3de9",
+              "num": 3
+            },
+            {
+              "hash": "eb4d724e0064c77beb20efa626a0f28fd0500676",
+              "unix": "1579084895",
+              "message": "Workflow renaming",
+              "short_hash": "eb4d724e0",
+              "num": 2
+            },
+            {
+              "hash": "c06c5b15160d8a4e1f1fc6d254c0590b82865f43",
+              "unix": "1536937277",
+              "message": "Expand mapping tutorial and add workflow + tests",
+              "short_hash": "c06c5b151",
+              "num": 1
+            }
+          ],
           "test_results": {
             "eu": {
               "summary": {
@@ -2236,8 +2334,9 @@
               "version": "0.1"
             }
           },
-          "modified": "2024-06-25 00:05:36 +0000",
+          "modified": "2024-06-25 09:19:39 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"Trim Galore!\"];\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  3 -->|text_file| 5;\n  2 -->|text_file| 5;\n  6[\"Bowtie2\"];\n  4 -->|trimmed_reads_pair1| 6;\n  4 -->|trimmed_reads_pair2| 6;\n  d2674912-28a6-45f3-ac48-6635eabe47b7[\"Output\\nbowtie2_mapping_stats\"];\n  6 --> d2674912-28a6-45f3-ac48-6635eabe47b7;\n  style d2674912-28a6-45f3-ac48-6635eabe47b7 stroke:#2c3143,stroke-width:4px;\n  7[\"Stats\"];\n  6 -->|output| 7;\n  96de3c0c-4d7e-423b-8e9b-9a12a011d726[\"Output\\nbam_stats_1\"];\n  7 --> 96de3c0c-4d7e-423b-8e9b-9a12a011d726;\n  style 96de3c0c-4d7e-423b-8e9b-9a12a011d726 stroke:#2c3143,stroke-width:4px;\n  8[\"Filter\"];\n  6 -->|output| 8;\n  9[\"Stats\"];\n  8 -->|out_file1| 9;\n  9603a94a-dcd8-4c1f-89cd-bb31d8572783[\"Output\\nbam_stats_2\"];\n  9 --> 9603a94a-dcd8-4c1f-89cd-bb31d8572783;\n  style 9603a94a-dcd8-4c1f-89cd-bb31d8572783 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nreads_1\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nreads_2\"]\n  2[label=\"FastQC\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"FastQC\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Trim Galore!\"]\n  0 -> 4 [label=\"output\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"MultiQC\"]\n  3 -> 5 [label=\"text_file\"]\n  2 -> 5 [label=\"text_file\"]\n  6[label=\"Bowtie2\"]\n  4 -> 6 [label=\"trimmed_reads_pair1\"]\n  4 -> 6 [label=\"trimmed_reads_pair2\"]\n  kd267491228a645f3ac486635eabe47b7[color=lightseagreen,label=\"Output\\nbowtie2_mapping_stats\"]\n  6 -> kd267491228a645f3ac486635eabe47b7\n  7[label=\"Stats\"]\n  6 -> 7 [label=\"output\"]\n  k96de3c0c4d7e423b8e9b9a12a011d726[color=lightseagreen,label=\"Output\\nbam_stats_1\"]\n  7 -> k96de3c0c4d7e423b8e9b9a12a011d726\n  8[label=\"Filter\"]\n  6 -> 8 [label=\"output\"]\n  9[label=\"Stats\"]\n  8 -> 9 [label=\"out_file1\"]\n  k9603a94adcd84c1f89cdbb31d8572783[color=lightseagreen,label=\"Output\\nbam_stats_2\"]\n  9 -> k9603a94adcd84c1f89cdbb31d8572783\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
             "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1",
@@ -2290,6 +2389,11 @@
           {
             "url": "https://galaxytrakr.org/",
             "name": "GalaxyTrakr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
             "usegalaxy": false
           },
           {
@@ -2487,6 +2591,9 @@
           "wfname": "ncbi-foreign-contamination-screen",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-ncbi-fcs/versions/ncbi-foreign-contamination-screen",
           "license": "http://www.usa.gov/publicdomain/label/1.0/",
+          "parent_id": "sequence-analysis/ncbi-fcs",
+          "topic_id": "sequence-analysis",
+          "tutorial_id": "ncbi-fcs",
           "creators": [
             {
               "class": "Organization",
@@ -2496,9 +2603,38 @@
           ],
           "name": "NCBI Foreign Contamination Screen",
           "title": "NCBI Foreign Contamination Screen",
+          "version": 2,
+          "description": "This workflow performs contamination cleaning steps on assembled genomes. Users specify an input genome (fasta/fasta.gz) and taxonomic information corresponding to the source organism. There are two screening steps for foreign organism sequences (FCS-GX) and adaptors (FCS-adaptor), each followed by a cleaning step to remove identified contaminants. The final output is a cleaned genome. ",
+          "tags": [
+            "NCBI"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "3cc782f4789a4e769a903fb810a7ad5c72385c6d",
+              "unix": "1713210183",
+              "message": "Modify NIH funder. Add workflow license URL",
+              "short_hash": "3cc782f47",
+              "num": 2
+            },
+            {
+              "hash": "05ae375a039cfb4ac8f226d77c106a6fed0764ae",
+              "unix": "1712757577",
+              "message": "Suggested tutorial changes. Add workflow test.",
+              "short_hash": "05ae375a0",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:36 +0000",
+          "modified": "2024-06-25 09:19:39 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput genome\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FCS-GX screen\"];\n  0 -->|output| 1;\n  9741edf2-4be6-45a3-980d-99b1aea18380[\"Output\\nfcs_gx_action_report\"];\n  1 --> 9741edf2-4be6-45a3-980d-99b1aea18380;\n  style 9741edf2-4be6-45a3-980d-99b1aea18380 stroke:#2c3143,stroke-width:4px;\n  ddedd49f-8c57-4e3e-a158-3d66ce12f05c[\"Output\\nfcs_gx_taxonomy_report\"];\n  1 --> ddedd49f-8c57-4e3e-a158-3d66ce12f05c;\n  style ddedd49f-8c57-4e3e-a158-3d66ce12f05c stroke:#2c3143,stroke-width:4px;\n  2[\"FCS-GX clean\"];\n  1 -->|action_report| 2;\n  0 -->|output| 2;\n  f3a37b43-d304-4ec0-a023-197c9e0ce2e1[\"Output\\ngx_contam_fasta\"];\n  2 --> f3a37b43-d304-4ec0-a023-197c9e0ce2e1;\n  style f3a37b43-d304-4ec0-a023-197c9e0ce2e1 stroke:#2c3143,stroke-width:4px;\n  56716c7c-ac7f-42f7-bbef-62a36b4d3810[\"Output\\ngx_clean_fasta\"];\n  2 --> 56716c7c-ac7f-42f7-bbef-62a36b4d3810;\n  style 56716c7c-ac7f-42f7-bbef-62a36b4d3810 stroke:#2c3143,stroke-width:4px;\n  3[\"FCS-adaptor screen\"];\n  2 -->|clean_fasta| 3;\n  6a4baf46-80b0-4a96-b864-9201fc80cdb7[\"Output\\nfcs_adaptor_report\"];\n  3 --> 6a4baf46-80b0-4a96-b864-9201fc80cdb7;\n  style 6a4baf46-80b0-4a96-b864-9201fc80cdb7 stroke:#2c3143,stroke-width:4px;\n  1cad7ab4-a817-436c-9a63-fd4e3c6b4bbb[\"Output\\nadaptor_clean_fasta\"];\n  3 --> 1cad7ab4-a817-436c-9a63-fd4e3c6b4bbb;\n  style 1cad7ab4-a817-436c-9a63-fd4e3c6b4bbb stroke:#2c3143,stroke-width:4px;\n  4[\"FCS-adaptor clean\"];\n  3 -->|adaptor_report| 4;\n  2 -->|clean_fasta| 4;\n  0da68570-7490-4087-86c8-739522e1a776[\"Output\\nadaptor_contam_fasta\"];\n  4 --> 0da68570-7490-4087-86c8-739522e1a776;\n  style 0da68570-7490-4087-86c8-739522e1a776 stroke:#2c3143,stroke-width:4px;\n  4985eb07-30b0-4872-ab83-52ffeb619900[\"Output\\nfinal_clean_fasta\"];\n  4 --> 4985eb07-30b0-4872-ab83-52ffeb619900;\n  style 4985eb07-30b0-4872-ab83-52ffeb619900 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput genome\"]\n  1[label=\"FCS-GX screen\"]\n  0 -> 1 [label=\"output\"]\n  k9741edf24be645a3980d99b1aea18380[color=lightseagreen,label=\"Output\\nfcs_gx_action_report\"]\n  1 -> k9741edf24be645a3980d99b1aea18380\n  kddedd49f8c574e3ea1583d66ce12f05c[color=lightseagreen,label=\"Output\\nfcs_gx_taxonomy_report\"]\n  1 -> kddedd49f8c574e3ea1583d66ce12f05c\n  2[label=\"FCS-GX clean\"]\n  1 -> 2 [label=\"action_report\"]\n  0 -> 2 [label=\"output\"]\n  kf3a37b43d3044ec0a023197c9e0ce2e1[color=lightseagreen,label=\"Output\\ngx_contam_fasta\"]\n  2 -> kf3a37b43d3044ec0a023197c9e0ce2e1\n  k56716c7cac7f42f7bbef62a36b4d3810[color=lightseagreen,label=\"Output\\ngx_clean_fasta\"]\n  2 -> k56716c7cac7f42f7bbef62a36b4d3810\n  3[label=\"FCS-adaptor screen\"]\n  2 -> 3 [label=\"clean_fasta\"]\n  k6a4baf4680b04a96b8649201fc80cdb7[color=lightseagreen,label=\"Output\\nfcs_adaptor_report\"]\n  3 -> k6a4baf4680b04a96b8649201fc80cdb7\n  k1cad7ab4a817436c9a63fd4e3c6b4bbb[color=lightseagreen,label=\"Output\\nadaptor_clean_fasta\"]\n  3 -> k1cad7ab4a817436c9a63fd4e3c6b4bbb\n  4[label=\"FCS-adaptor clean\"]\n  3 -> 4 [label=\"adaptor_report\"]\n  2 -> 4 [label=\"clean_fasta\"]\n  k0da685707490408786c8739522e1a776[color=lightseagreen,label=\"Output\\nadaptor_contam_fasta\"]\n  4 -> k0da685707490408786c8739522e1a776\n  k4985eb0730b04872ab8352ffeb619900[color=lightseagreen,label=\"Output\\nfinal_clean_fasta\"]\n  4 -> k4985eb0730b04872ab8352ffeb619900\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.0+galaxy0",
             "toolshed.g2.bx.psu.edu/repos/richard-burhans/ncbi_fcs_adaptor/ncbi_fcs_adaptor/0.5.0+galaxy0"
@@ -2696,14 +2832,46 @@
           "wfname": "human-reads-removal",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-human-reads-removal/versions/human-reads-removal",
           "license": null,
+          "parent_id": "sequence-analysis/human-reads-removal",
+          "topic_id": "sequence-analysis",
+          "tutorial_id": "human-reads-removal",
           "creators": [
 
           ],
           "name": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
           "title": "GTN - Sequence Analyses - Removal of human reads from SARS-CoV-2 sequencing data",
+          "version": 2,
+          "description": "Removal of human reads from SARS-CoV-2 sequencing data",
+          "tags": [
+            "sequence-analysis"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "f71f6dde01e2dfe86a4b43526f119d9050693f84",
+              "unix": "1628012579",
+              "message": "Address WF linting issues",
+              "short_hash": "f71f6dde0",
+              "num": 2
+            },
+            {
+              "hash": "f232ad426455a30be4a74af21054384c23b07275",
+              "unix": "1628010649",
+              "message": "Add new tutorial for cleaning SARS-CoV-2 data",
+              "short_hash": "f232ad426",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:36 +0000",
+          "modified": "2024-06-25 09:19:39 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Trimmomatic\"];\n  0 -->|output| 1;\n  2[\"Unzip Collection\"];\n  0 -->|output| 2;\n  3[\"Map with BWA-MEM\"];\n  1 -->|fastq_out_paired| 3;\n  4[\"Samtools fastx\"];\n  3 -->|bam_output| 4;\n  5[\"Select\"];\n  4 -->|forward| 5;\n  6[\"Replace Text\"];\n  5 -->|out_file1| 6;\n  7[\"seqtk_subseq\"];\n  2 -->|forward| 7;\n  6 -->|outfile| 7;\n  8[\"seqtk_subseq\"];\n  2 -->|reverse| 8;\n  6 -->|outfile| 8;\n  9[\"Paired-end collection of cleaned reads\"];\n  7 -->|default| 9;\n  8 -->|default| 9;\n  f24bbf28-dc51-440f-a758-ac05033f0645[\"Output\\nCleaned Data\"];\n  9 --> f24bbf28-dc51-440f-a758-ac05033f0645;\n  style f24bbf28-dc51-440f-a758-ac05033f0645 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Dataset Collection\"]\n  1[label=\"Trimmomatic\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Unzip Collection\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Map with BWA-MEM\"]\n  1 -> 3 [label=\"fastq_out_paired\"]\n  4[label=\"Samtools fastx\"]\n  3 -> 4 [label=\"bam_output\"]\n  5[label=\"Select\"]\n  4 -> 5 [label=\"forward\"]\n  6[label=\"Replace Text\"]\n  5 -> 6 [label=\"out_file1\"]\n  7[label=\"seqtk_subseq\"]\n  2 -> 7 [label=\"forward\"]\n  6 -> 7 [label=\"outfile\"]\n  8[label=\"seqtk_subseq\"]\n  2 -> 8 [label=\"reverse\"]\n  6 -> 8 [label=\"outfile\"]\n  9[label=\"Paired-end collection of cleaned reads\"]\n  7 -> 9 [label=\"default\"]\n  8 -> 9 [label=\"default\"]\n  kf24bbf28dc51440fa758ac05033f0645[color=lightseagreen,label=\"Output\\nCleaned Data\"]\n  9 -> kf24bbf28dc51440fa758ac05033f0645\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1",
             "__UNZIP_COLLECTION__",
@@ -2755,6 +2923,11 @@
           {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
             "usegalaxy": false
           },
           {
@@ -3072,14 +3245,73 @@
           "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/workflows/quality_control.ga",
           "path": "topics/sequence-analysis/tutorials/quality-control/workflows/quality_control.ga",
           "wfid": "sequence-analysis-quality-control",
-          "wfname": "quality_control",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-quality-control/versions/quality_control",
+          "wfname": "quality-control",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-quality-control/versions/quality-control",
           "license": null,
+          "parent_id": "sequence-analysis/quality-control",
+          "topic_id": "sequence-analysis",
+          "tutorial_id": "quality-control",
           "creators": [
 
           ],
           "name": "GTN - Sequence Analyses - Quality Control (imported from uploaded file)",
           "title": "GTN - Sequence Analyses - Quality Control (imported from uploaded file)",
+          "version": 6,
+          "description": "Quality Control",
+          "tags": [
+            "sequence-analysis"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "505f7550f2798d344c73ae11ff158fa77cf90584",
+              "unix": "1618939337",
+              "message": "update-workflows",
+              "short_hash": "505f7550f",
+              "num": 6
+            },
+            {
+              "hash": "667ff3de9c4e13d341a6d864bd6dc826ef15ca04",
+              "unix": "1579690769",
+              "message": "annotation",
+              "short_hash": "667ff3de9",
+              "num": 5
+            },
+            {
+              "hash": "eb4d724e0064c77beb20efa626a0f28fd0500676",
+              "unix": "1579084895",
+              "message": "Workflow renaming",
+              "short_hash": "eb4d724e0",
+              "num": 4
+            },
+            {
+              "hash": "7b4cb6d1d70496ae6f59dbbc4383d5ec6c16c8ad",
+              "unix": "1537804789",
+              "message": "Replace Trim Galore with Cutadapt",
+              "short_hash": "7b4cb6d1d",
+              "num": 3
+            },
+            {
+              "hash": "2204ebb5ee73708e3ade6ece3b20a34cbe333236",
+              "unix": "1536843430",
+              "message": "Expand the QC tutorial and add workflow testing",
+              "short_hash": "2204ebb5e",
+              "num": 2
+            },
+            {
+              "hash": "3048a0c69fe2aee55827dcadb806c11636496884",
+              "unix": "1498583960",
+              "message": "workflows",
+              "short_hash": "3048a0c69",
+              "num": 1
+            }
+          ],
           "test_results": {
             "eu": {
               "summary": {
@@ -4280,8 +4512,9 @@
               "version": "0.1"
             }
           },
-          "modified": "2024-06-25 00:05:36 +0000",
+          "modified": "2024-06-25 09:19:39 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreads_2\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nreads_1\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"FastQC\"];\n  0 -->|output| 2;\n  1f4fad7b-11e7-4ec5-b73d-835080c47e70[\"Output\\nreads_2_fastqc\"];\n  2 --> 1f4fad7b-11e7-4ec5-b73d-835080c47e70;\n  style 1f4fad7b-11e7-4ec5-b73d-835080c47e70 stroke:#2c3143,stroke-width:4px;\n  3[\"Cutadapt\"];\n  1 -->|output| 3;\n  12a1bc96-cfdd-4ed8-b062-433833e09aee[\"Output\\nreads_1_cutadapt\"];\n  3 --> 12a1bc96-cfdd-4ed8-b062-433833e09aee;\n  style 12a1bc96-cfdd-4ed8-b062-433833e09aee stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  1 -->|output| 4;\n  12e19f0b-102a-4470-9bc8-e362bb4e2c91[\"Output\\nreads_1_fastqc\"];\n  4 --> 12e19f0b-102a-4470-9bc8-e362bb4e2c91;\n  style 12e19f0b-102a-4470-9bc8-e362bb4e2c91 stroke:#2c3143,stroke-width:4px;\n  5[\"Cutadapt\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  b7c138cc-10d0-4bd0-b960-a3b5e60f29cd[\"Output\\nreads_cutadapt\"];\n  5 --> b7c138cc-10d0-4bd0-b960-a3b5e60f29cd;\n  style b7c138cc-10d0-4bd0-b960-a3b5e60f29cd stroke:#2c3143,stroke-width:4px;\n  6[\"MultiQC\"];\n  4 -->|text_file| 6;\n  2 -->|text_file| 6;\n  fa7f541d-b9be-4283-afa1-8398d89f345e[\"Output\\nmultiqc\"];\n  6 --> fa7f541d-b9be-4283-afa1-8398d89f345e;\n  style fa7f541d-b9be-4283-afa1-8398d89f345e stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nreads_2\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nreads_1\"]\n  2[label=\"FastQC\"]\n  0 -> 2 [label=\"output\"]\n  k1f4fad7b11e74ec5b73d835080c47e70[color=lightseagreen,label=\"Output\\nreads_2_fastqc\"]\n  2 -> k1f4fad7b11e74ec5b73d835080c47e70\n  3[label=\"Cutadapt\"]\n  1 -> 3 [label=\"output\"]\n  k12a1bc96cfdd4ed8b062433833e09aee[color=lightseagreen,label=\"Output\\nreads_1_cutadapt\"]\n  3 -> k12a1bc96cfdd4ed8b062433833e09aee\n  4[label=\"FastQC\"]\n  1 -> 4 [label=\"output\"]\n  k12e19f0b102a44709bc8e362bb4e2c91[color=lightseagreen,label=\"Output\\nreads_1_fastqc\"]\n  4 -> k12e19f0b102a44709bc8e362bb4e2c91\n  5[label=\"Cutadapt\"]\n  1 -> 5 [label=\"output\"]\n  0 -> 5 [label=\"output\"]\n  kb7c138cc10d04bd0b960a3b5e60f29cd[color=lightseagreen,label=\"Output\\nreads_cutadapt\"]\n  5 -> kb7c138cc10d04bd0b960a3b5e60f29cd\n  6[label=\"MultiQC\"]\n  4 -> 6 [label=\"text_file\"]\n  2 -> 6 [label=\"text_file\"]\n  kfa7f541db9be4283afa18398d89f345e[color=lightseagreen,label=\"Output\\nmultiqc\"]\n  6 -> kfa7f541db9be4283afa18398d89f345e\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
             "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
@@ -4491,9 +4724,12 @@
           "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Sanger1_From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST.ga",
           "path": "topics/sequence-analysis/tutorials/Manage_AB1_Sanger/workflows/Sanger1_From-AB1-to-aligned-consensus-and-primers-fasta-+-BLAST.ga",
           "wfid": "sequence-analysis-Manage_AB1_Sanger",
-          "wfname": "sanger1_from-ab1-to-aligned-consensus-and-primers-fasta-+-blast",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-Manage_AB1_Sanger/versions/sanger1_from-ab1-to-aligned-consensus-and-primers-fasta-+-blast",
+          "wfname": "sanger1-from-ab1-to-aligned-consensus-and-primers-fasta---blast",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-Manage_AB1_Sanger/versions/sanger1-from-ab1-to-aligned-consensus-and-primers-fasta---blast",
           "license": "MIT",
+          "parent_id": "sequence-analysis/Manage_AB1_Sanger",
+          "topic_id": "sequence-analysis",
+          "tutorial_id": "Manage_AB1_Sanger",
           "creators": [
             {
               "class": "Organization",
@@ -4502,9 +4738,38 @@
           ],
           "name": "Sanger1 : From AB1 to aligned consensus and primers fasta + BLAST",
           "title": "Sanger1 : From AB1 to aligned consensus and primers fasta + BLAST",
+          "version": 2,
+          "description": "",
+          "tags": [
+
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "bf907f6d3bcd09d391c9143bb2464b50c0fb9d7a",
+              "unix": "1704192784",
+              "message": "Add creator and license",
+              "short_hash": "bf907f6d3",
+              "num": 2
+            },
+            {
+              "hash": "03e5a4f54d25895ffe16fa5557c895ffa7b81262",
+              "unix": "1702999279",
+              "message": "Remove colons",
+              "short_hash": "03e5a4f54",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:36 +0000",
+          "modified": "2024-06-25 09:19:39 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nL sequences Forward\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nH sequences Reverse\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nLCOI primers\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nHCOI primers\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ab1 to FASTQ converter\"];\n  0 -->|output| 4;\n  5[\"ab1 to FASTQ converter\"];\n  1 -->|output| 5;\n  6[\"What’s your LCOI primer sequence identifier ?\"];\n  2 -->|output| 6;\n  7[\"What’s your HCOI primer sequence identifier ?\"];\n  3 -->|output| 7;\n  8[\"seqtk_trimfq\"];\n  4 -->|output| 8;\n  9[\"seqtk_trimfq\"];\n  5 -->|output| 9;\n  10[\"Degap.seqs\"];\n  6 -->|output| 10;\n  11[\"Degap.seqs\"];\n  7 -->|output| 11;\n  12[\"Sort collection\"];\n  8 -->|default| 12;\n  13[\"FASTQ Groomer\"];\n  9 -->|default| 13;\n  14[\"Reverse-Complement\"];\n  11 -->|out_fasta| 14;\n  15[\"Reverse-Complement\"];\n  13 -->|output_file| 15;\n  16[\"Sort collection\"];\n  15 -->|output| 16;\n  17[\"seqtk_mergepe\"];\n  12 -->|output| 17;\n  16 -->|output| 17;\n  18[\"FASTQ Groomer\"];\n  17 -->|default| 18;\n  19[\"FASTQ to Tabular\"];\n  18 -->|output_file| 19;\n  20[\"Tabular-to-FASTA\"];\n  19 -->|output_file| 20;\n  21[\"Align sequences\"];\n  20 -->|output| 21;\n  22[\"Consensus sequence from aligned FASTA\"];\n  21 -->|aligned_sequences| 22;\n  23[\"Merge.files\"];\n  22 -->|output| 23;\n  24[\"Merge.files\"];\n  23 -->|output| 24;\n  14 -->|output| 24;\n  10 -->|out_fasta| 24;\n  25[\"Regex Find And Replace\"];\n  24 -->|output| 25;\n  26[\"Align sequences\"];\n  25 -->|out_file1| 26;\n  27[\"NCBI BLAST+ blastn\"];\n  25 -->|out_file1| 27;\n  31c2dd1a-918e-4648-a407-d0e3d7172253[\"Output\\nw_blast_output\"];\n  27 --> 31c2dd1a-918e-4648-a407-d0e3d7172253;\n  style 31c2dd1a-918e-4648-a407-d0e3d7172253 stroke:#2c3143,stroke-width:4px;\n  7514514f-809a-4a14-8981-cb08c950b523[\"Output\\nw_consensus_aligned_sequences\"];\n  27 --> 7514514f-809a-4a14-8981-cb08c950b523;\n  style 7514514f-809a-4a14-8981-cb08c950b523 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nL sequences Forward\"]\n  1[color=lightblue,label=\"ℹ️ Input Collection\\nH sequences Reverse\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nLCOI primers\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nHCOI primers\"]\n  4[label=\"ab1 to FASTQ converter\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"ab1 to FASTQ converter\"]\n  1 -> 5 [label=\"output\"]\n  6[label=\"What’s your LCOI primer sequence identifier ?\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"What’s your HCOI primer sequence identifier ?\"]\n  3 -> 7 [label=\"output\"]\n  8[label=\"seqtk_trimfq\"]\n  4 -> 8 [label=\"output\"]\n  9[label=\"seqtk_trimfq\"]\n  5 -> 9 [label=\"output\"]\n  10[label=\"Degap.seqs\"]\n  6 -> 10 [label=\"output\"]\n  11[label=\"Degap.seqs\"]\n  7 -> 11 [label=\"output\"]\n  12[label=\"Sort collection\"]\n  8 -> 12 [label=\"default\"]\n  13[label=\"FASTQ Groomer\"]\n  9 -> 13 [label=\"default\"]\n  14[label=\"Reverse-Complement\"]\n  11 -> 14 [label=\"out_fasta\"]\n  15[label=\"Reverse-Complement\"]\n  13 -> 15 [label=\"output_file\"]\n  16[label=\"Sort collection\"]\n  15 -> 16 [label=\"output\"]\n  17[label=\"seqtk_mergepe\"]\n  12 -> 17 [label=\"output\"]\n  16 -> 17 [label=\"output\"]\n  18[label=\"FASTQ Groomer\"]\n  17 -> 18 [label=\"default\"]\n  19[label=\"FASTQ to Tabular\"]\n  18 -> 19 [label=\"output_file\"]\n  20[label=\"Tabular-to-FASTA\"]\n  19 -> 20 [label=\"output_file\"]\n  21[label=\"Align sequences\"]\n  20 -> 21 [label=\"output\"]\n  22[label=\"Consensus sequence from aligned FASTA\"]\n  21 -> 22 [label=\"aligned_sequences\"]\n  23[label=\"Merge.files\"]\n  22 -> 23 [label=\"output\"]\n  24[label=\"Merge.files\"]\n  23 -> 24 [label=\"output\"]\n  14 -> 24 [label=\"output\"]\n  10 -> 24 [label=\"out_fasta\"]\n  25[label=\"Regex Find And Replace\"]\n  24 -> 25 [label=\"output\"]\n  26[label=\"Align sequences\"]\n  25 -> 26 [label=\"out_file1\"]\n  27[label=\"NCBI BLAST+ blastn\"]\n  25 -> 27 [label=\"out_file1\"]\n  k31c2dd1a918e4648a407d0e3d7172253[color=lightseagreen,label=\"Output\\nw_blast_output\"]\n  27 -> k31c2dd1a918e4648a407d0e3d7172253\n  k7514514f809a4a148981cb08c950b523[color=lightseagreen,label=\"Output\\nw_consensus_aligned_sequences\"]\n  27 -> k7514514f809a4a148981cb08c950b523\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/ecology/ab1_fastq_converter/ab1_fastq_converter/1.20.0",
             "toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3",
@@ -4532,6 +4797,9 @@
           "wfname": "training-sanger-sequences-chd8",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-Manage_AB1_Sanger/versions/training-sanger-sequences-chd8",
           "license": "MIT",
+          "parent_id": "sequence-analysis/Manage_AB1_Sanger",
+          "topic_id": "sequence-analysis",
+          "tutorial_id": "Manage_AB1_Sanger",
           "creators": [
             {
               "class": "Person",
@@ -4541,9 +4809,38 @@
           ],
           "name": "Training Sanger sequences CHD8",
           "title": "Training Sanger sequences CHD8",
+          "version": 2,
+          "description": "",
+          "tags": [
+
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "9b2a39983d90c6094d400a9288bf711577ef5690",
+              "unix": "1704193918",
+              "message": "Update workflow",
+              "short_hash": "9b2a39983",
+              "num": 2
+            },
+            {
+              "hash": "1d51e2dc3ebda3fca99a60be425d69edd4681702",
+              "unix": "1702992927",
+              "message": "Move files from ecology to sequence analysis",
+              "short_hash": "1d51e2dc3",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:36 +0000",
+          "modified": "2024-06-25 09:19:39 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAOPEP_and_CHD8_sequences_20220907.zip?download=1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPrim\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Unzip\"];\n  0 -->|output| 2;\n  3[\"Filter FASTA\"];\n  1 -->|output| 3;\n  4[\"Filter FASTA\"];\n  1 -->|output| 4;\n  5[\"Extract element identifiers\"];\n  2 -->|unzipped| 5;\n  6[\"Degap.seqs\"];\n  3 -->|output| 6;\n  7[\"Degap.seqs\"];\n  4 -->|output| 7;\n  8[\"Regex Find And Replace\"];\n  5 -->|output| 8;\n  9[\"Regex Find And Replace\"];\n  5 -->|output| 9;\n  10[\"Reverse-Complement\"];\n  7 -->|out_fasta| 10;\n  11[\"Filter collection\"];\n  8 -->|out_file1| 11;\n  2 -->|unzipped| 11;\n  12[\"Filter collection\"];\n  9 -->|out_file1| 12;\n  11 -->|output_discarded| 12;\n  13[\"ab1 to FASTQ converter\"];\n  11 -->|output_filtered| 13;\n  14[\"ab1 to FASTQ converter\"];\n  12 -->|output_filtered| 14;\n  15[\"seqtk_trimfq\"];\n  13 -->|output| 15;\n  16[\"seqtk_trimfq\"];\n  14 -->|output| 16;\n  17[\"FASTQ Groomer\"];\n  15 -->|default| 17;\n  18[\"Sort collection\"];\n  16 -->|default| 18;\n  19[\"Sort collection\"];\n  17 -->|output_file| 19;\n  20[\"Reverse-Complement\"];\n  19 -->|output| 20;\n  21[\"seqtk_mergepe\"];\n  18 -->|output| 21;\n  20 -->|output| 21;\n  22[\"FASTQ Groomer\"];\n  21 -->|default| 22;\n  23[\"FASTQ to Tabular\"];\n  22 -->|output_file| 23;\n  24[\"Tabular-to-FASTA\"];\n  23 -->|output_file| 24;\n  25[\"Align sequences\"];\n  24 -->|output| 25;\n  26[\"Consensus sequence from aligned FASTA\"];\n  25 -->|aligned_sequences| 26;\n  27[\"Merge.files\"];\n  26 -->|output| 27;\n  28[\"Merge.files\"];\n  27 -->|output| 28;\n  10 -->|output| 28;\n  6 -->|out_fasta| 28;\n  29[\"Regex Find And Replace\"];\n  28 -->|output| 29;\n  30[\"Align sequences\"];\n  29 -->|out_file1| 30;\n  31[\"NCBI BLAST+ blastn\"];\n  29 -->|out_file1| 31;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nAOPEP_and_CHD8_sequences_20220907.zip?download=1\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nPrim\"]\n  2[label=\"Unzip\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter FASTA\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Filter FASTA\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Extract element identifiers\"]\n  2 -> 5 [label=\"unzipped\"]\n  6[label=\"Degap.seqs\"]\n  3 -> 6 [label=\"output\"]\n  7[label=\"Degap.seqs\"]\n  4 -> 7 [label=\"output\"]\n  8[label=\"Regex Find And Replace\"]\n  5 -> 8 [label=\"output\"]\n  9[label=\"Regex Find And Replace\"]\n  5 -> 9 [label=\"output\"]\n  10[label=\"Reverse-Complement\"]\n  7 -> 10 [label=\"out_fasta\"]\n  11[label=\"Filter collection\"]\n  8 -> 11 [label=\"out_file1\"]\n  2 -> 11 [label=\"unzipped\"]\n  12[label=\"Filter collection\"]\n  9 -> 12 [label=\"out_file1\"]\n  11 -> 12 [label=\"output_discarded\"]\n  13[label=\"ab1 to FASTQ converter\"]\n  11 -> 13 [label=\"output_filtered\"]\n  14[label=\"ab1 to FASTQ converter\"]\n  12 -> 14 [label=\"output_filtered\"]\n  15[label=\"seqtk_trimfq\"]\n  13 -> 15 [label=\"output\"]\n  16[label=\"seqtk_trimfq\"]\n  14 -> 16 [label=\"output\"]\n  17[label=\"FASTQ Groomer\"]\n  15 -> 17 [label=\"default\"]\n  18[label=\"Sort collection\"]\n  16 -> 18 [label=\"default\"]\n  19[label=\"Sort collection\"]\n  17 -> 19 [label=\"output_file\"]\n  20[label=\"Reverse-Complement\"]\n  19 -> 20 [label=\"output\"]\n  21[label=\"seqtk_mergepe\"]\n  18 -> 21 [label=\"output\"]\n  20 -> 21 [label=\"output\"]\n  22[label=\"FASTQ Groomer\"]\n  21 -> 22 [label=\"default\"]\n  23[label=\"FASTQ to Tabular\"]\n  22 -> 23 [label=\"output_file\"]\n  24[label=\"Tabular-to-FASTA\"]\n  23 -> 24 [label=\"output_file\"]\n  25[label=\"Align sequences\"]\n  24 -> 25 [label=\"output\"]\n  26[label=\"Consensus sequence from aligned FASTA\"]\n  25 -> 26 [label=\"aligned_sequences\"]\n  27[label=\"Merge.files\"]\n  26 -> 27 [label=\"output\"]\n  28[label=\"Merge.files\"]\n  27 -> 28 [label=\"output\"]\n  10 -> 28 [label=\"output\"]\n  6 -> 28 [label=\"out_fasta\"]\n  29[label=\"Regex Find And Replace\"]\n  28 -> 29 [label=\"output\"]\n  30[label=\"Align sequences\"]\n  29 -> 30 [label=\"out_file1\"]\n  31[label=\"NCBI BLAST+ blastn\"]\n  29 -> 31 [label=\"out_file1\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
             "toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3",
@@ -5030,6 +5327,11 @@
           {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
             "usegalaxy": false
           },
           {

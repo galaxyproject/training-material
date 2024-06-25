@@ -1,0 +1,18 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nShared file from Make.shared"]
+  1[color=lightblue,label="ℹ️ Input Collection\nSub.sample shared"]
+  2[label="Dist.shared"]
+  0 -> 2 [label="output"]
+  3[label="Collapse Collection"]
+  1 -> 3 [label="output"]
+  4[label="Heatmap.sim"]
+  2 -> 4 [label="distfiles"]
+  5[label="Tree.shared"]
+  2 -> 5 [label="distfiles"]
+  6[label="Venn"]
+  3 -> 6 [label="output"]
+  7[label="Newick Display"]
+  5 -> 7 [label="tre"]
+}

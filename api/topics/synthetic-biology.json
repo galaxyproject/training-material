@@ -174,17 +174,49 @@
           "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga",
           "path": "topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga",
           "wfid": "synthetic-biology-pathway_analysis",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/synthetic-biology-pathway_analysis/versions/main_workflow",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/synthetic-biology-pathway_analysis/versions/main-workflow",
           "license": null,
+          "parent_id": "synthetic-biology/pathway_analysis",
+          "topic_id": "synthetic-biology",
+          "tutorial_id": "pathway_analysis",
           "creators": [
 
           ],
           "name": "Pathway Analysis",
           "title": "Pathway Analysis",
+          "version": 2,
+          "description": "Evaluating and ranking a set of pathways based on multiple metrics",
+          "tags": [
+            "synthetic-biology"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": true
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "25d6ed2bc398ff3ab67a86136615e7597e929ae8",
+              "unix": "1663316015",
+              "message": "fix(main_workflow.ga): add tag and annotation",
+              "short_hash": "25d6ed2bc",
+              "num": 2
+            },
+            {
+              "hash": "47a55fc0c8a916d8f494dbb6158659719a2b0872",
+              "unix": "1660053898",
+              "message": "feat(pathway_analysis): add pathway analysis tutorial",
+              "short_hash": "47a55fc0c",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:37 +0000",
+          "modified": "2024-06-25 09:19:40 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nHeterologous pathways\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nChassis where to produce target from\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nCell compartment ID\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\nBiomass reaction ID\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"Flux balance analysis\"];\n  3 -->|output| 4;\n  2 -->|output| 4;\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Thermo\"];\n  4 -->|pathway_with_fba| 5;\n  6[\"Score Pathway\"];\n  5 -->|pathway_with_thermo| 6;\n  7[\"Rank Pathways\"];\n  6 -->|scored_pathway| 7;\n  8111f525-5845-4ac2-a1d6-c4bfd218cf3f[\"Output\\nRanked Pathways\"];\n  7 --> 8111f525-5845-4ac2-a1d6-c4bfd218cf3f;\n  style 8111f525-5845-4ac2-a1d6-c4bfd218cf3f stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nHeterologous pathways\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nChassis where to produce target from\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nCell compartment ID\"]\n  3[color=lightgreen,label=\"ℹ️ Input Parameter\\nBiomass reaction ID\"]\n  4[label=\"Flux balance analysis\"]\n  3 -> 4 [label=\"output\"]\n  2 -> 4 [label=\"output\"]\n  1 -> 4 [label=\"output\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Thermo\"]\n  4 -> 5 [label=\"pathway_with_fba\"]\n  6[label=\"Score Pathway\"]\n  5 -> 6 [label=\"pathway_with_thermo\"]\n  7[label=\"Rank Pathways\"]\n  6 -> 7 [label=\"scored_pathway\"]\n  k8111f52558454ac2a1d6c4bfd218cf3f[color=lightseagreen,label=\"Output\\nRanked Pathways\"]\n  7 -> k8111f52558454ac2a1d6c4bfd218cf3f\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1",
             "toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1",
@@ -386,14 +418,46 @@
           "wfname": "retrosynthesis",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/synthetic-biology-retrosynthesis_analysis/versions/retrosynthesis",
           "license": null,
+          "parent_id": "synthetic-biology/retrosynthesis_analysis",
+          "topic_id": "synthetic-biology",
+          "tutorial_id": "retrosynthesis_analysis",
           "creators": [
 
           ],
           "name": "RetroSynthesis",
           "title": "RetroSynthesis",
+          "version": 2,
+          "description": "Generating theoretical possible pathways for the production of Lycopene in E.Coli using Retrosynthesis tools",
+          "tags": [
+            "synthetic-biology"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": true
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "79975abd7bac179b3d0d3048445290fc4e44aab6",
+              "unix": "1654774912",
+              "message": "fix(RetroSynthesis.ga): add annotation and tag attribute",
+              "short_hash": "79975abd7",
+              "num": 2
+            },
+            {
+              "hash": "da3d162e53de6c05842e39319e51b74ea97d9adf",
+              "unix": "1654772849",
+              "message": "add new tutorial: RetroSynthesis Analysis",
+              "short_hash": "da3d162e5",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:37 +0000",
+          "modified": "2024-06-25 09:19:40 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nTarget to produce\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"Pick SBML Model\"];\n  dc7acc73-6d5a-4cbb-a8a2-d10a8bd38914[\"Output\\nPick SBML Model - iML1515\"];\n  1 --> dc7acc73-6d5a-4cbb-a8a2-d10a8bd38914;\n  style dc7acc73-6d5a-4cbb-a8a2-d10a8bd38914 stroke:#2c3143,stroke-width:4px;\n  2[\"RRules Parser\"];\n  9fc1e94f-34ea-4173-bdb1-3ecbef49efe3[\"Output\\nRRules Parser(retro, d=['2', '4', '6', '8', '10', '12', '14', '16'])\"];\n  2 --> 9fc1e94f-34ea-4173-bdb1-3ecbef49efe3;\n  style 9fc1e94f-34ea-4173-bdb1-3ecbef49efe3 stroke:#2c3143,stroke-width:4px;\n  3[\"Sink from SBML\"];\n  1 -->|sbml_model| 3;\n  4[\"RetroPath2.0\"];\n  2 -->|out_rules| 4;\n  3 -->|sink| 4;\n  0 -->|output| 4;\n  5[\"RP2paths\"];\n  4 -->|Reaction_Network| 5;\n  6[\"Complete Reactions\"];\n  4 -->|Reaction_Network| 6;\n  5 -->|compounds| 6;\n  5 -->|master_pathways| 6;\n  3 -->|sink| 6;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightgreen,label=\"ℹ️ Input Parameter\\nTarget to produce\"]\n  1[label=\"Pick SBML Model\"]\n  kdc7acc736d5a4cbba8a2d10a8bd38914[color=lightseagreen,label=\"Output\\nPick SBML Model - iML1515\"]\n  1 -> kdc7acc736d5a4cbba8a2d10a8bd38914\n  2[label=\"RRules Parser\"]\n  k9fc1e94f34ea4173bdb13ecbef49efe3[color=lightseagreen,label=\"Output\\nRRules Parser(retro, d=['2', '4', '6', '8', '10', '12', '14', '16'])\"]\n  2 -> k9fc1e94f34ea4173bdb13ecbef49efe3\n  3[label=\"Sink from SBML\"]\n  1 -> 3 [label=\"sbml_model\"]\n  4[label=\"RetroPath2.0\"]\n  2 -> 4 [label=\"out_rules\"]\n  3 -> 4 [label=\"sink\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"RP2paths\"]\n  4 -> 5 [label=\"Reaction_Network\"]\n  6[label=\"Complete Reactions\"]\n  4 -> 6 [label=\"Reaction_Network\"]\n  5 -> 6 [label=\"compounds\"]\n  5 -> 6 [label=\"master_pathways\"]\n  3 -> 6 [label=\"sink\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1",
             "toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6",
@@ -614,17 +678,56 @@
           "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga",
           "path": "topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga",
           "wfid": "synthetic-biology-basic_assembly_analysis",
-          "wfname": "genetic_design_basic_assembly",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/synthetic-biology-basic_assembly_analysis/versions/genetic_design_basic_assembly",
+          "wfname": "genetic-design-basic-assembly",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/synthetic-biology-basic_assembly_analysis/versions/genetic-design-basic-assembly",
           "license": null,
+          "parent_id": "synthetic-biology/basic_assembly_analysis",
+          "topic_id": "synthetic-biology",
+          "tutorial_id": "basic_assembly_analysis",
           "creators": [
 
           ],
           "name": "Genetic Design (BASIC Assembly)",
           "title": "Genetic Design (BASIC Assembly)",
+          "version": 3,
+          "description": "Design plasmids encoding predicted pathways by using the BASIC assembly method.",
+          "tags": [
+            "synthetic-biology"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": true
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "ef543ff8fc3b4e277e4fea70716284dc64680159",
+              "unix": "1647522263",
+              "message": "add slides, more background and new contributors",
+              "short_hash": "ef543ff8f",
+              "num": 3
+            },
+            {
+              "hash": "002bde23969696132aacbc96d5f20e011d478acc",
+              "unix": "1646148305",
+              "message": "add tag synthetic biology",
+              "short_hash": "002bde239",
+              "num": 2
+            },
+            {
+              "hash": "e01203d3bc2a8e9de5f6e1253d1b5fd368e2ef9a",
+              "unix": "1645628230",
+              "message": "add new tutorial for synthetic biology: basic assembly analysis",
+              "short_hash": "e01203d3b",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:37 +0000",
+          "modified": "2024-06-25 09:19:40 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPathway SBML\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nHost taxon ID\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nEnzyme taxon IDs\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nLinkers and user parts\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nDNA-Bot settings\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"Selenzyme\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  0 -->|output| 5;\n  54b833fa-ec4f-458a-b085-23211f4e56ca[\"Output\\nUniprot IDs\"];\n  5 --> 54b833fa-ec4f-458a-b085-23211f4e56ca;\n  style 54b833fa-ec4f-458a-b085-23211f4e56ca stroke:#2c3143,stroke-width:4px;\n  6[\"BasicDesign\"];\n  3 -->|output| 6;\n  5 -->|uniprot_ids| 6;\n  7[\"DNA-Bot\"];\n  4 -->|output| 7;\n  6 -->|Constructs| 7;\n  6 -->|User parts plate| 7;\n  6 -->|Biolegio plate| 7;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPathway SBML\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\nHost taxon ID\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nEnzyme taxon IDs\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nLinkers and user parts\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nDNA-Bot settings\"]\n  5[label=\"Selenzyme\"]\n  2 -> 5 [label=\"output\"]\n  1 -> 5 [label=\"output\"]\n  0 -> 5 [label=\"output\"]\n  k54b833faec4f458ab08523211f4e56ca[color=lightseagreen,label=\"Output\\nUniprot IDs\"]\n  5 -> k54b833faec4f458ab08523211f4e56ca\n  6[label=\"BasicDesign\"]\n  3 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"uniprot_ids\"]\n  7[label=\"DNA-Bot\"]\n  4 -> 7 [label=\"output\"]\n  6 -> 7 [label=\"Constructs\"]\n  6 -> 7 [label=\"User parts plate\"]\n  6 -> 7 [label=\"Biolegio plate\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0",
             "toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4",

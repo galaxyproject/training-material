@@ -1,0 +1,17 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Protein Database Downloader"]
+  1[label="Protein Database Downloader"]
+  2[label="FASTA-to-Tabular"]
+  0 -> 2 [label="output_database"]
+  3[label="Add column"]
+  2 -> 3 [label="output"]
+  4[label="Tabular-to-FASTA"]
+  3 -> 4 [label="out_file1"]
+  5[label="FASTA Merge Files and Filter Unique Sequences"]
+  4 -> 5 [label="output"]
+  1 -> 5 [label="output_database"]
+  6[label="DecoyDatabase"]
+  5 -> 6 [label="output"]
+}

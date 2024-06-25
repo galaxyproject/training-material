@@ -1,0 +1,49 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInterlaced non-rRNA reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nPredicted taxon relative abundances"]
+  2[label="Cut"]
+  1 -> 2 [label="output"]
+  3[label="Metabolic assignation"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  k657973036f124ae895111af40f52e71d[color=lightseagreen,label="Output\nHUMAnN on input dataset(s): Pathways and their abundance"]
+  3 -> k657973036f124ae895111af40f52e71d
+  k5cae6935448b4af9ad787b17490e4d4a[color=lightseagreen,label="Output\nHUMAnN on input dataset(s): Pathways and their coverage"]
+  3 -> k5cae6935448b4af9ad787b17490e4d4a
+  k60492d727b3c45c9b32bb6374ab08228[color=lightseagreen,label="Output\nHUMAnN on input dataset(s): Log"]
+  3 -> k60492d727b3c45c9b32bb6374ab08228
+  kba124b0fcbd54b65b87a84cfa578a927[color=lightseagreen,label="Output\nHUMAnN on input dataset(s): Gene families and their abundance"]
+  3 -> kba124b0fcbd54b65b87a84cfa578a927
+  4[label="Renormalize"]
+  3 -> 4 [label="gene_families_tsv"]
+  5[label="Renormalize"]
+  3 -> 5 [label="pathabundance_tsv"]
+  6[label="Regroup"]
+  3 -> 6 [label="gene_families_tsv"]
+  7[label="Replace"]
+  4 -> 7 [label="output"]
+  8[label="Unpack pathway abundances"]
+  4 -> 8 [label="output"]
+  5 -> 8 [label="output"]
+  9[label="Rename features"]
+  6 -> 9 [label="output"]
+  10[label="Split a HUMAnN table"]
+  6 -> 10 [label="output"]
+  k1ff60d0a4a6444c08b6fbbdfa8566a0c[color=lightseagreen,label="Output\nSplit a HUMAnN table on input dataset(s): Unstratified table"]
+  10 -> k1ff60d0a4a6444c08b6fbbdfa8566a0c
+  k6a65ee933a2e4a8194ff35917396bdfa[color=lightseagreen,label="Output\nSplit a HUMAnN table on input dataset(s): Stratified table"]
+  10 -> k6a65ee933a2e4a8194ff35917396bdfa
+  11[label="Combination of taxonomic and metabolic assignations for gene families"]
+  7 -> 11 [label="outfile"]
+  2 -> 11 [label="out_file1"]
+  kb34cf972ec0c4eccab77bd0e61d8a0e2[color=lightseagreen,label="Output\nCombine MetaPhlAn2 and HUMAnN2 outputs on input dataset(s): Gene family abundances related to genus/species abundances"]
+  11 -> kb34cf972ec0c4eccab77bd0e61d8a0e2
+  12[label="Select"]
+  9 -> 12 [label="output"]
+  13[label="Select"]
+  9 -> 13 [label="output"]
+  14[label="Select"]
+  9 -> 14 [label="output"]
+}

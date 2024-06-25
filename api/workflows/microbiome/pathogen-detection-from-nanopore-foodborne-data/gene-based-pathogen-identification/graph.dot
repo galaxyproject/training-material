@@ -1,0 +1,81 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\ncollection_of_preprocessed_samples"]
+  1[label="Extract element identifiers"]
+  0 -> 1 [label="output"]
+  kd82a93c623a94f85879cecd759a31087[color=lightseagreen,label="Output\nextracted_samples_IDs"]
+  1 -> kd82a93c623a94f85879cecd759a31087
+  2[label="Build list"]
+  0 -> 2 [label="output"]
+  kf5b5b2568ddf4da88111b1f6d3025a0d[color=lightseagreen,label="Output\nlist_of_lists_of_preprocessed_samples"]
+  2 -> kf5b5b2568ddf4da88111b1f6d3025a0d
+  3[label="Split file"]
+  1 -> 3 [label="output"]
+  keb5317bd4bad4cad92193ac379221d6e[color=lightseagreen,label="Output\nsplitted_extracted_samples_IDs"]
+  3 -> keb5317bd4bad4cad92193ac379221d6e
+  4[label="Flye"]
+  2 -> 4 [label="output"]
+  kff0d8c7b2ac74c6da110f71418dad938[color=lightseagreen,label="Output\nflye_consensus_fasta"]
+  4 -> kff0d8c7b2ac74c6da110f71418dad938
+  k2385436ffbe84d77a40b27a097d02941[color=lightseagreen,label="Output\nflye_assembly_graph"]
+  4 -> k2385436ffbe84d77a40b27a097d02941
+  k0e42ce51c46b45d8baa445c0e98ac712[color=lightseagreen,label="Output\nflye_assembly_gfa"]
+  4 -> k0e42ce51c46b45d8baa445c0e98ac712
+  k3f297aed7cee4999bbf469d84de6b64f[color=lightseagreen,label="Output\nflye_assembly_info_tabular"]
+  4 -> k3f297aed7cee4999bbf469d84de6b64f
+  5[label="Parse parameter value"]
+  3 -> 5 [label="list_output_txt"]
+  k3608e170c46242a28003f3f65baa3834[color=lightseagreen,label="Output\nparsed_extracted_samples_IDs_to_text"]
+  5 -> k3608e170c46242a28003f3f65baa3834
+  6[label="medaka consensus pipeline"]
+  4 -> 6 [label="consensus"]
+  0 -> 6 [label="output"]
+  k9e5ad6ecb4084132ba07dec9fa626923[color=lightseagreen,label="Output\nmedaka_gaps_in_draft_bed_file"]
+  6 -> k9e5ad6ecb4084132ba07dec9fa626923
+  kfcbd3e3f2e934798b696dad7db9f2efd[color=lightseagreen,label="Output\nmedaka_log_file"]
+  6 -> kfcbd3e3f2e934798b696dad7db9f2efd
+  k60656aacad2a4c9b9a68b9fb18ae5595[color=lightseagreen,label="Output\nmedaka_propability_h5_file"]
+  6 -> k60656aacad2a4c9b9a68b9fb18ae5595
+  kc790d4348e784df0a0d48f9da0692158[color=lightseagreen,label="Output\nmedaka_calls_of_draft_bam_file"]
+  6 -> kc790d4348e784df0a0d48f9da0692158
+  kdf361e19b6d1405b96ccb48c1ab7c604[color=lightseagreen,label="Output\nsample_all_contigs"]
+  6 -> kdf361e19b6d1405b96ccb48c1ab7c604
+  7[label="Bandage Image"]
+  4 -> 7 [label="assembly_gfa"]
+  k9612a8511f944d54b0015d082bcc9055[color=lightseagreen,label="Output\nbandage_assembly_graph_image"]
+  7 -> k9612a8511f944d54b0015d082bcc9055
+  8[label="Compose text parameter value"]
+  5 -> 8 [label="text_param"]
+  9[label="FASTA-to-Tabular"]
+  6 -> 9 [label="out_consensus"]
+  kde06c3625b0a4c29956efbf02539789a[color=lightseagreen,label="Output\nsample_specific_contigs_tabular_file_preparation"]
+  9 -> kde06c3625b0a4c29956efbf02539789a
+  10[label="ABRicate"]
+  6 -> 10 [label="out_consensus"]
+  k8f227fc72d924c6faf64e841c1315b4f[color=lightseagreen,label="Output\nabricate_with_vfdb_to_identify_genes_with_VFs"]
+  10 -> k8f227fc72d924c6faf64e841c1315b4f
+  11[label="ABRicate"]
+  6 -> 11 [label="out_consensus"]
+  kfa021d98d8854834ac62f30d5792260e[color=lightseagreen,label="Output\nabricate_report_using_ncbi_database_to_indentify_amr"]
+  11 -> kfa021d98d8854834ac62f30d5792260e
+  12[label="Replace"]
+  8 -> 12 [label="out1"]
+  9 -> 12 [label="output"]
+  k174cb2c3ed28453c8afb85150e0b51ad[color=lightseagreen,label="Output\nsample_specific_contigs_tabular_file"]
+  12 -> k174cb2c3ed28453c8afb85150e0b51ad
+  13[label="Replace"]
+  8 -> 13 [label="out1"]
+  10 -> 13 [label="report"]
+  k19e56e006eef4a4e9cc6d93dbf9420ad[color=lightseagreen,label="Output\nvfs"]
+  13 -> k19e56e006eef4a4e9cc6d93dbf9420ad
+  14[label="Replace"]
+  8 -> 14 [label="out1"]
+  11 -> 14 [label="report"]
+  ka8eb74a5362b4f0fa944672e27981a41[color=lightseagreen,label="Output\namrs"]
+  14 -> ka8eb74a5362b4f0fa944672e27981a41
+  15[label="Tabular-to-FASTA"]
+  12 -> 15 [label="outfile"]
+  ka5bb1cbe1bde49a1ad866d57b1319fbe[color=lightseagreen,label="Output\ncontigs"]
+  15 -> ka5bb1cbe1bde49a1ad866d57b1319fbe
+}

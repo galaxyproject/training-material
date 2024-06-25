@@ -1,0 +1,40 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nscRNA Assay Tabular"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nscRNA Phenotype Tabular"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nscRNA Metadata"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nBulk RNA Assay Tabular"]
+  4[color=lightgreen,label="ℹ️ Input Parameter\nBulk RNA Annotation"]
+  5[color=lightgreen,label="ℹ️ Input Parameter\nCell Types List"]
+  6[color=lightblue,label="ℹ️ Input Dataset\nCell Markers C1"]
+  7[color=lightblue,label="ℹ️ Input Dataset\nCell Markers C2"]
+  8[label="Construct scRNA ESet Object"]
+  0 -> 8 [label="output"]
+  2 -> 8 [label="output"]
+  1 -> 8 [label="output"]
+  k872b3dd2322c47ccb5b9071a9f939320[color=lightseagreen,label="Output\nConstruct Expression Set Object on input dataset(s): RData ESet Object"]
+  8 -> k872b3dd2322c47ccb5b9071a9f939320
+  9[label="Construct Bulk RNA ESet Object"]
+  4 -> 9 [label="output"]
+  3 -> 9 [label="output"]
+  10[label="Extract Cell Types"]
+  8 -> 10 [label="out_rds"]
+  11[label="Extract General Info"]
+  8 -> 11 [label="out_rds"]
+  k1733593f847d4adb91f4fd78c077b074[color=lightseagreen,label="Output\nInspect Expression Set Object on input dataset(s): Inspection Result"]
+  11 -> k1733593f847d4adb91f4fd78c077b074
+  12[label="Extract General Info Bulk"]
+  9 -> 12 [label="out_rds"]
+  13[label="Music: Estimate Cell Proportions"]
+  9 -> 13 [label="out_rds"]
+  5 -> 13 [label="output"]
+  8 -> 13 [label="out_rds"]
+  14[label="Music: Compute Dendrogram"]
+  9 -> 14 [label="out_rds"]
+  6 -> 14 [label="output"]
+  7 -> 14 [label="output"]
+  8 -> 14 [label="out_rds"]
+  kdf2e83a5ac67460f8b0fac3f3b63280f[color=lightseagreen,label="Output\nMuSiC on input dataset(s): PDF Plots"]
+  14 -> kdf2e83a5ac67460f8b0fac3f3b63280f
+}

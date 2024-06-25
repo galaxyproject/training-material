@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nmapped_RNASeq.bam"]
+  1[color=lightblue,label="ℹ️ Input Dataset\ngenome_annotation.gff3"]
+  2[color=lightblue,label="ℹ️ Input Dataset\ngenome_assembly.fasta"]
+  3[label="StringTie"]
+  1 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  4[label="gffread"]
+  1 -> 4 [label="output"]
+  5[label="FEELnc"]
+  3 -> 5 [label="output_gtf"]
+  2 -> 5 [label="output"]
+  4 -> 5 [label="output_gtf"]
+  k4055b259173c492d86a45e662b663421[color=lightseagreen,label="Output\nmRNAs"]
+  5 -> k4055b259173c492d86a45e662b663421
+  kabc029bab7ba458688b45e5d758c2f39[color=lightseagreen,label="Output\nlncRNAs"]
+  5 -> kabc029bab7ba458688b45e5d758c2f39
+  k93ff3464d1bb405986af3e703da3e542[color=lightseagreen,label="Output\nClassifier output"]
+  5 -> k93ff3464d1bb405986af3e703da3e542
+  6[label="Concatenate datasets"]
+  4 -> 6 [label="output_gtf"]
+  5 -> 6 [label="candidate_lncRNA"]
+  k7b91b6a4ef6743599c93eabcc021b0fc[color=lightseagreen,label="Output\nfinal_annotation"]
+  6 -> k7b91b6a4ef6743599c93eabcc021b0fc
+}

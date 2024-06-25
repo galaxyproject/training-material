@@ -1,0 +1,20 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nCleaned Sequences"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nCount Table"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nTraining set FASTA"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nTraining set Taxonomy"]
+  4[label="Classify.seqs"]
+  2 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  0 -> 4 [label="output"]
+  3 -> 4 [label="output"]
+  5[label="Remove.lineage"]
+  1 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  4 -> 5 [label="taxonomy_out"]
+  6[label="Summary.seqs"]
+  5 -> 6 [label="count_out"]
+  5 -> 6 [label="fasta_out"]
+}

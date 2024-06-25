@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nair_temperature_at_2_metres.nc"]
+  1[label="NetCDF xarray Coordinate Info"]
+  0 -> 1 [label="output"]
+  2[label="NetCDF xarray Metadata Info"]
+  0 -> 2 [label="output"]
+  3[label="CDO Operations"]
+  0 -> 3 [label="output"]
+  4[label="CDO Operations"]
+  3 -> 4 [label="output_files"]
+  5[label="NetCDF xarray Metadata Info"]
+  4 -> 5 [label="output_files"]
+  6[label="NetCDF xarray map plotting"]
+  4 -> 6 [label="output_files"]
+  5 -> 6 [label="output"]
+  7[label="NetCDF xarray map plotting"]
+  4 -> 7 [label="output_files"]
+  5 -> 7 [label="output"]
+}

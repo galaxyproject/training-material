@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nPeaks"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nGenes"]
+  2[label="Select last"]
+  0 -> 2 [label="output"]
+  3[label="Replace Text"]
+  0 -> 3 [label="output"]
+  4[label="Get flanks"]
+  1 -> 4 [label="output"]
+  5[label="Replace Text"]
+  3 -> 5 [label="outfile"]
+  6[label="Replace Text"]
+  5 -> 6 [label="outfile"]
+  7[label="Convert Genomic Intervals To BED"]
+  6 -> 7 [label="outfile"]
+  8[label="Intersect"]
+  4 -> 8 [label="out_file1"]
+  7 -> 8 [label="output1"]
+  9[label="Group"]
+  8 -> 9 [label="output"]
+  k3dc73daee96b49818a0154976967906d[color=lightseagreen,label="Output\nchr_count"]
+  9 -> k3dc73daee96b49818a0154976967906d
+}

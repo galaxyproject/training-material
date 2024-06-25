@@ -1,0 +1,29 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nreverse_reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nforward_reads"]
+  2[label="Kraken2"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  ka408a64458cd4f5eaf2515b5ea63aa76[color=lightseagreen,label="Output\nkraken_report_reads"]
+  2 -> ka408a64458cd4f5eaf2515b5ea63aa76
+  k54b85a5372ee4b73b1867fd55e8aab9b[color=lightseagreen,label="Output\nkraken_report_tabular"]
+  2 -> k54b85a5372ee4b73b1867fd55e8aab9b
+  3[label="Bracken"]
+  2 -> 3 [label="report_output"]
+  kae6c6464f5f54e5bb616d38166fc0133[color=lightseagreen,label="Output\nbracken_report_tsv"]
+  3 -> kae6c6464f5f54e5bb616d38166fc0133
+  k8ca52af9f83942b6aa74f1a6a1dfbbc8[color=lightseagreen,label="Output\nbracken_kraken_report"]
+  3 -> k8ca52af9f83942b6aa74f1a6a1dfbbc8
+  4[label="Recentrifuge"]
+  2 -> 4 [label="output"]
+  kb5694f2dc8cd4460bfff74fd0792ecb3[color=lightseagreen,label="Output\nrecentrifuge_stats_tabular"]
+  4 -> kb5694f2dc8cd4460bfff74fd0792ecb3
+  kbd947a1d0443465f86585d76d9ce69f8[color=lightseagreen,label="Output\nrecentrifuge_report_html"]
+  4 -> kbd947a1d0443465f86585d76d9ce69f8
+  kc7457acb41bc4191b3fb6716e15fbe57[color=lightseagreen,label="Output\nrecentrifuge_data_tabular"]
+  4 -> kc7457acb41bc4191b3fb6716e15fbe57
+  k94f6ff070e0647ad88f8a058d0808537[color=lightseagreen,label="Output\nrecentrifuge_logfile"]
+  4 -> k94f6ff070e0647ad88f8a058d0808537
+}

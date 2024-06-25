@@ -1,0 +1,23 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nSRR1799908_forward"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nSRR1799908_reverse"]
+  2[label="Du Novo: Make families"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  3[label="Du Novo: Correct barcodes"]
+  2 -> 3 [label="output"]
+  4[label="Du Novo: Align families"]
+  3 -> 4 [label="output"]
+  5[label="Du Novo: Make consensus reads"]
+  4 -> 5 [label="output"]
+  6[label="DCS: Sequence Content Trimmer"]
+  5 -> 6 [label="dcs1"]
+  5 -> 6 [label="dcs2"]
+  7[label="SSCS: Sequence Content Trimmer"]
+  5 -> 7 [label="sscs1"]
+  5 -> 7 [label="sscs2"]
+  k75dfe52d711e4826ba9bb4feed30f5bf[color=lightseagreen,label="Output\n"]
+  7 -> k75dfe52d711e4826ba9bb4feed30f5bf
+}

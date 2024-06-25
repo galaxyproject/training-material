@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nIllumina reads R1"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nIllumina reads R2"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nlong reads"]
+  3[label="fastp on short reads"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  k656e413841ab4561898933de9ac9a2f3[color=lightseagreen,label="Output\nfastp report on short reads html"]
+  3 -> k656e413841ab4561898933de9ac9a2f3
+  k0d53f347036847cb953a2e4dac57e013[color=lightseagreen,label="Output\nfastp filtered R1 reads"]
+  3 -> k0d53f347036847cb953a2e4dac57e013
+  k10fbe1e5400c4ffe87949b776b0d7322[color=lightseagreen,label="Output\nfastp report on short reads json"]
+  3 -> k10fbe1e5400c4ffe87949b776b0d7322
+  k639ed3f70e514e5db6f8081378962109[color=lightseagreen,label="Output\nfastp filtered R2 reads"]
+  3 -> k639ed3f70e514e5db6f8081378962109
+  4[label="fastp on long reads"]
+  2 -> 4 [label="output"]
+  k5e0d2c3d41a44823ae9cb1e4d2826541[color=lightseagreen,label="Output\nfastp report on long reads html"]
+  4 -> k5e0d2c3d41a44823ae9cb1e4d2826541
+  ke6018ad686f44e788cf2ccc8b97022fe[color=lightseagreen,label="Output\nfastp filtered long reads"]
+  4 -> ke6018ad686f44e788cf2ccc8b97022fe
+  k69f8383ba1be4a7495f43dba35e01426[color=lightseagreen,label="Output\nfastp report on long reads json"]
+  4 -> k69f8383ba1be4a7495f43dba35e01426
+}

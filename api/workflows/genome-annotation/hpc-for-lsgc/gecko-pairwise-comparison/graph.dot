@@ -1,0 +1,19 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nQuery sequence"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReference sequence"]
+  2[label="Gecko"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  k6275abc1d74e45a7b8ab3c88426cc488[color=lightseagreen,label="Output\nGecko on input dataset(s): CSV"]
+  2 -> k6275abc1d74e45a7b8ab3c88426cc488
+  3[label="Text reformatting"]
+  2 -> 3 [label="alignments2"]
+  4[label="ClustalW"]
+  3 -> 4 [label="outfile"]
+  kd63c1172a5914bf6b307052ca19e7098[color=lightseagreen,label="Output\nClustalW on input dataset(s): clustal"]
+  4 -> kd63c1172a5914bf6b307052ca19e7098
+  kd7758e3a522d44398c9a03f784284ebd[color=lightseagreen,label="Output\nClustalW on input dataset(s): dnd"]
+  4 -> kd7758e3a522d44398c9a03f784284ebd
+}

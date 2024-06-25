@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nmRNA-Seq Reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nUCSC Genome"]
+  2[label="FastQC"]
+  0 -> 2 [label="output"]
+  3[label="Cutadapt"]
+  0 -> 3 [label="output"]
+  4[label="FastQC"]
+  3 -> 4 [label="out1"]
+  5[label="HISAT2"]
+  3 -> 5 [label="out1"]
+  6[label="featureCounts"]
+  5 -> 6 [label="output_alignments"]
+  k5cb5bd5ddf8144638002e89551780f01[color=lightseagreen,label="Output\noutput_feature_lengths"]
+  6 -> k5cb5bd5ddf8144638002e89551780f01
+  k5dec13e10011472ca72d6715fe55c23c[color=lightseagreen,label="Output\noutput_short"]
+  6 -> k5dec13e10011472ca72d6715fe55c23c
+  7[label="Read Distribution"]
+  5 -> 7 [label="output_alignments"]
+  1 -> 7 [label="output"]
+  8[label="Gene Body Coverage BAM"]
+  5 -> 8 [label="output_alignments"]
+  1 -> 8 [label="output"]
+  9[label="Multi QC raw reads"]
+  2 -> 9 [label="text_file"]
+  4 -> 9 [label="text_file"]
+  3 -> 9 [label="report"]
+  5 -> 9 [label="summary_file"]
+  7 -> 9 [label="output"]
+  8 -> 9 [label="outputtxt"]
+  6 -> 9 [label="output_summary"]
+  k9217af4ee34c4a499d674b3df511ac2c[color=lightseagreen,label="Output\nhtml_report"]
+  9 -> k9217af4ee34c4a499d674b3df511ac2c
+}

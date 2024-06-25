@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@397075c2213ce9ea43219c707aa1a8ca10884d83",
+		release: "galaxy-training-network@9c3bfcc77e95a87afc6fe3af9a7f494881160147",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2024-06-25 09:01:26 +0000">
 <meta name="DC.creator" content="Mallory Freeberg">
 <meta name="DC.creator" content="Mo Heydarian">
 <meta name="DC.creator" content="Vivek Bhardwaj">
@@ -211,7 +211,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2024-06-25 09:01:26 +0000",
   "datePublished": "2016-12-20 14:12:55 +0000",
   "identifier": "https://gxy.io/GTN:T00143",
   "accessMode": [
@@ -240,7 +240,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)",
   "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html",
-  "version": 26,
+  "version": 29,
   "timeRequired": "PT3H",
   "teaches": "Inspect read quality with FastQC\n - Perform read trimming with Trimmomatic\n - Align trimmed reads with BWA\n - Assess quality and reproducibility of experiments\n - Identify TAL1 binding sites with MACS2\n - Determine unique/common TAL1 binding sites from G1E and Megakaryocytes\n - Identify unique/common TAL1 peaks occupying gene promoters\n - Visually inspect TAL1 peaks with Trackster",
   "keywords": [
@@ -704,7 +704,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3169"
     }
   ],
-  "educationalLevel": "Introductory",
+  "educationalLevel": "Beginner",
   "mentions": [
     {
       "@type": "Thing",
@@ -1130,6 +1130,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
     
 	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+	<li>
 		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
 			UseGalaxy.fr <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
 		</a>
@@ -1197,7 +1203,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 20, 2016 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 25, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1217,7 +1223,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 4 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 26 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 29 </div>
 
     </blockquote>
     </section>
@@ -1380,7 +1386,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
 
 <h1 id="quality-control">Quality control</h1>
 
-<p>As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial <a href="/training-material/topics/sequence-analysis">here</a>.</p>
+<p>As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check <a href="/training-material/topics/sequence-analysis/index.html">out the tutorials</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-performing-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Performing quality control</div>
@@ -1395,6 +1401,16 @@ Input control experiments are used to identify and remove sampling bias, for exa
     </li>
     <li>
       <p>Import the ChIP-seq raw data (*.fastqsanger) from <a href="https://doi.org/10.5281/zenodo.197100">Zenodo</a>.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/197100/files/G1E_input_R1_downsampled_SRR507859.fastqsanger
+https://zenodo.org/record/197100/files/G1E_input_R2_downsampled_SRR507860.fastqsanger
+https://zenodo.org/record/197100/files/G1E_Tal1_R1_downsampled_SRR492444.fastqsanger
+https://zenodo.org/record/197100/files/G1E_Tal1_R2_downsampled_SRR492445.fastqsanger
+https://zenodo.org/record/197100/files/Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger
+https://zenodo.org/record/197100/files/Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger
+https://zenodo.org/record/197100/files/Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger
+https://zenodo.org/record/197100/files/Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger
+</code></pre></div>      </div>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
@@ -1439,8 +1455,8 @@ Input control experiments are used to identify and remove sampling bias, for exa
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
-            <li>The phred-score. This score gives the probability of an incorrect base <em>e.g.</em> a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score">here</a> for more information.</li>
-            <li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. See <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">here</a> for more information.</li>
+            <li>The phred-score. This score gives the probability of an incorrect base <em>e.g.</em> a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score">the wikipedia page on Phred</a> for more information.</li>
+            <li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. See <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">this article</a> for more information.</li>
           </ol>
         </blockquote>
       </blockquote>
@@ -1500,7 +1516,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
 <h1 id="aligning-reads-to-a-reference-genome">Aligning reads to a reference genome</h1>
 
 <p>To determine where DNA fragments originated from in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way, however, can take a couple of weeks.
-Nowadays, there are many read alignment programs for sequenced DNA, BWA being one of them. You can read more about the BWA algorithm and tool <a href="https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324">here</a>.</p>
+Nowadays, there are many read alignment programs for sequenced DNA, BWA being one of them. You can read more about the BWA algorithm and tool in <span class="citation"><a href="#Li_2009">Li and Durbin 2009</a></span>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-aligning-reads-to-a-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Aligning reads to a reference genome</div>
@@ -1578,7 +1594,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 
 <p>To assess the similarity between the replicates sequencing datasets, it is a common technique to calculate the correlation of read counts for the different samples.</p>
 
-<p>We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package deepTools for the next few steps. More information on deepTools can be found <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">here</a>.</p>
+<p>We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package deepTools for the next few steps. More information on deepTools can be found <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">in deepTools’ documentation</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-assessing-correlation-between-samples"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing correlation between samples</div>
@@ -1629,7 +1645,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   </ol>
 </blockquote>
 
-<p>Additional information on how to interpret plotCorrelation plots can be found <a href="https://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background">here</a>.</p>
+<p>Additional information on how to interpret plotCorrelation plots can be found <a href="https://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background">in deepTools’ documentation</a>.</p>
 
 <h1 id="assessing-ip-strength">Assessing IP strength</h1>
 
@@ -1679,7 +1695,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   </ol>
 </blockquote>
 
-<p>Additional information on how to interpret plotFingerprint plots can be found <a href="https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background">here</a>.</p>
+<p>Additional information on how to interpret plotFingerprint plots can be found <a href="https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background">in deepTools’ documentation</a>.</p>
 
 <h1 id="determining-tal1-binding-sites">Determining TAL1 binding sites</h1>
 
@@ -1806,7 +1822,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   <ol>
     <li>Open IGV on your local computer.</li>
     <li>Click on each narrow peaks result file from the MACS2 computations on “display with IGV” –&gt; “local Mouse mm10”</li>
-    <li>For more information about IGV see <a href="/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">here</a></li>
+    <li>For more information about IGV see <a href="/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">the IGV Tutorial</a></li>
   </ol>
 </blockquote>
 
@@ -1974,7 +1990,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
           <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is expected that certain genomic regions contain more reads (<em>i.e.</em> regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.</li>
-            <li>To answer this question, run the computeGCbias tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation <a href="https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background">here</a>.</li>
+            <li>To answer this question, run the computeGCbias tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation <a href="https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background">in deepTools’ documentation</a>.</li>
           </ol>
         </blockquote>
       </blockquote>
@@ -2004,7 +2020,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
   </ol>
 </blockquote>
 
-<p>Additional information on how to interpret computeGCbias plots can be found <a href="https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html">here</a>.</p>
+<p>Additional information on how to interpret computeGCbias plots can be found <a href="https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html">in deepTools’ documentation</a>.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -2063,6 +2079,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
                 
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="Zhang_2008">Zhang, Y., T. Liu, C. A. Meyer, J. Eeckhoute, D. S. Johnson <i>et al.</i>, 2008 <b>Model-based Analysis of ChIP-Seq (MACS)</b>. Genome Biology 9: R137. <a href="https://doi.org/10.1186/gb-2008-9-9-r137">10.1186/gb-2008-9-9-r137</a></li>
+<li id="Li_2009">Li, H., and R. Durbin, 2009 <b>Fast and accurate short read alignment with Burrows-Wheeler transform</b>. Bioinformatics 25: 1754–1760. <a href="https://doi.org/10.1093/bioinformatics/btp324">10.1093/bioinformatics/btp324</a></li>
 <li id="Wu_2014">Wu, W., C. S. Morrissey, C. A. Keller, T. Mishra, M. Pimkin <i>et al.</i>, 2014 <b>Dynamic shifts in occupancy by TAL1 are guided by GATA factors and drive large-scale reprogramming of gene expression during hematopoiesis</b>. Genome Research 24: 1945–1962. <a href="https://doi.org/10.1101/gr.164830.113">10.1101/gr.164830.113</a></li></ol>
                 
 
@@ -2335,7 +2352,7 @@ tools:
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/397075c2213ce9ea43219c707aa1a8ca10884d83">397075c</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9c3bfcc77e95a87afc6fe3af9a7f494881160147">9c3bfcc</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>

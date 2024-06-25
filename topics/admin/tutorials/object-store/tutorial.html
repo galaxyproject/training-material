@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@397075c2213ce9ea43219c707aa1a8ca10884d83",
+		release: "galaxy-training-network@9c3bfcc77e95a87afc6fe3af9a7f494881160147",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Distributed Object Storage">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000">
+<meta name="DC.date" content="2024-06-25 08:44:21 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Gianmauro Cuccuru"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2024-06-25 08:44:21 +0000",
   "datePublished": "2019-01-28 04:12:36 +0000",
   "identifier": "https://gxy.io/GTN:T00016",
   "accessMode": [
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Distributed Object Storage",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/tutorial.html",
-  "version": 49,
+  "version": 50,
   "timeRequired": "PT30M",
   "teaches": "Setup Galaxy with both the Hierarachical and Distributed Object Storages",
   "keywords": [
@@ -593,7 +593,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/"
     }
   ],
-  "educationalLevel": "Introductory",
+  "educationalLevel": "Beginner",
   "mentions": [
     {
       "@type": "Thing",
@@ -604,7 +604,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "storage"
     }
   ],
-  "abstract": "> <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: switching object store types will cause issues</div>"
+  "abstract": "You may find that your Galaxy files directory has run out of space, but you don't want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy's hierarchical object store to add an additional file space for Galaxy."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1108,7 +1108,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 28, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 25, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1128,7 +1128,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.5</a> (0 recent ratings, 2 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 49 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 50 </div>
 
     </blockquote>
     </section>
@@ -1143,16 +1143,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: switching object store types will cause issues</div>
-  <p>Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.</p>
-</blockquote>
-
-<h1 id="expanding-storage">Expanding Storage</h1>
-
-<p>You may find that your Galaxy files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy’s hierarchical object store to add an additional file space for Galaxy.</p>
+                <p>You may find that your Galaxy files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy’s hierarchical object store to add an additional file space for Galaxy.</p>
 
 <p>Alternatively, you may wish to write new datasets to more than one filesystem. For this, you can use Galaxy’s distributed object store.</p>
+
+<h1 id="expanding-storage">Expanding Storage</h1>
 
 <p>This tutorial assumes you have done the “Ansible for installing Galaxy” tutorial, it references the base configuration set up in that tutorial in numerous places.</p>
 
@@ -1167,6 +1162,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li><a href="#dropbox" id="markdown-toc-dropbox">Dropbox</a></li>
 </ol>
 
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: switching object store types will cause issues</div>
+  <p>Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.</p>
 </blockquote>
 
 <h1 id="hierarchical-object-store">Hierarchical Object Store</h1>
@@ -1307,7 +1307,7 @@ some example code, and we can include this as a training module for everyone.</p
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues-2"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: switching object store types will cause issues</div>
+  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: switching object store types will cause issues</div>
   <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy’s database. Any datasets that were created as hierarchical will lack the <code class="language-plaintext highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
 
   <ol>
@@ -1793,7 +1793,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/397075c2213ce9ea43219c707aa1a8ca10884d83">397075c</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9c3bfcc77e95a87afc6fe3af9a7f494881160147">9c3bfcc</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>

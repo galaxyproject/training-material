@@ -1,0 +1,38 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nEdited_Mus_Musculus.GRCm38.86"]
+  1[color=lightblue,label="ℹ️ Input Dataset\npeptides for blast"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nPSM Report"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nmz_sqlite"]
+  4[color=lightblue,label="ℹ️ Input Dataset\ngenomic mapping sqlite db"]
+  5[label="NCBI BLAST+ blastp"]
+  1 -> 5 [label="output"]
+  k88461c74131241d5bd54e7d7297ccd76[color=lightseagreen,label="Output\nBLASTP_results"]
+  5 -> k88461c74131241d5bd54e7d7297ccd76
+  6[label="PSM_Novel_Peptides"]
+  5 -> 6 [label="output1"]
+  2 -> 6 [label="output"]
+  k29c9a368a7e64e8b81ca131f63293093[color=lightseagreen,label="Output\nPSM_Novel_Peptides"]
+  6 -> k29c9a368a7e64e8b81ca131f63293093
+  7[label="Novel_Peptides"]
+  6 -> 7 [label="output"]
+  k569546687aac423a89afaecf2b405b94[color=lightseagreen,label="Output\nNovel_Peptides"]
+  7 -> k569546687aac423a89afaecf2b405b94
+  8[label="Peptide Genomic Coodinate"]
+  4 -> 8 [label="output"]
+  3 -> 8 [label="output"]
+  7 -> 8 [label="output"]
+  k60fd3e418cb74a49b5852a43117e9cf8[color=lightseagreen,label="Output\nPeptide Genomic Coodinate on input dataset(s)"]
+  8 -> k60fd3e418cb74a49b5852a43117e9cf8
+  9[label="PepPointer"]
+  8 -> 9 [label="peptide_bed"]
+  0 -> 9 [label="output"]
+  k3c410bedff794774b75c48659d291160[color=lightseagreen,label="Output\nPepPointer on input dataset(s)"]
+  9 -> k3c410bedff794774b75c48659d291160
+  10[label="Final_Summary_Novel_Peptides"]
+  9 -> 10 [label="classified"]
+  6 -> 10 [label="output"]
+  k50e64c95cd6847cb9e0cb3714b2f2431[color=lightseagreen,label="Output\nFinal_Summary_Novel_Peptides"]
+  10 -> k50e64c95cd6847cb9e0cb3714b2f2431
+}

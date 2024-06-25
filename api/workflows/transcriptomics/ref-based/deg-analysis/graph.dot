@@ -1,0 +1,110 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nInput Dataset Collection"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nDrosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nheader"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nKEGG pathways to plot"]
+  4[label="Extract samples’ name"]
+  0 -> 4 [label="output"]
+  5[label="Compute gene length"]
+  1 -> 5 [label="output"]
+  6[label="Extract groups"]
+  4 -> 6 [label="output"]
+  7[label="Change Case"]
+  5 -> 7 [label="length"]
+  8[label="Tag elements with groups"]
+  0 -> 8 [label="output"]
+  6 -> 8 [label="outfile"]
+  9[label="Differential Analysis"]
+  8 -> 9 [label="output"]
+  kc1ff3e9a46d34862adb6076ea951be26[color=lightseagreen,label="Output\nDESeq2_plots"]
+  9 -> kc1ff3e9a46d34862adb6076ea951be26
+  kb430e84ecfa548e892a7ef5630ced1e5[color=lightseagreen,label="Output\nDESeq2_normalized_counts"]
+  9 -> kb430e84ecfa548e892a7ef5630ced1e5
+  10[label="Compute"]
+  9 -> 10 [label="deseq_out"]
+  11[label="Annotate DESeq2/DEXSeq output tables"]
+  1 -> 11 [label="output"]
+  9 -> 11 [label="deseq_out"]
+  12[label="Table Compute"]
+  9 -> 12 [label="counts_out"]
+  13[label="Cut"]
+  10 -> 13 [label="out_file1"]
+  14[label="Concatenate datasets"]
+  2 -> 14 [label="output"]
+  11 -> 14 [label="output"]
+  k11f468377dbb453b962a3c97cb0faad4[color=lightseagreen,label="Output\nDESeq2_annotated_results_with_header"]
+  14 -> k11f468377dbb453b962a3c97cb0faad4
+  15[label="Table Compute"]
+  9 -> 15 [label="counts_out"]
+  12 -> 15 [label="table"]
+  k32004d237c994405a65ffd861b40c949[color=lightseagreen,label="Output\nz_score"]
+  15 -> k32004d237c994405a65ffd861b40c949
+  16[label="Change Case"]
+  13 -> 16 [label="out_file1"]
+  17[label="Filter"]
+  14 -> 17 [label="out_file1"]
+  18[label="goseq"]
+  16 -> 18 [label="out_file1"]
+  7 -> 18 [label="out_file1"]
+  kc06c58d4ab5d49dab481baf668c6fc29[color=lightseagreen,label="Output\ngo_terms"]
+  18 -> kc06c58d4ab5d49dab481baf668c6fc29
+  ka0dd739772624336abd6a915ab6be36a[color=lightseagreen,label="Output\ngo_genes"]
+  18 -> ka0dd739772624336abd6a915ab6be36a
+  k659fec584ed54aee9e507acce21113cb[color=lightseagreen,label="Output\ngo_plot"]
+  18 -> k659fec584ed54aee9e507acce21113cb
+  19[label="goseq"]
+  16 -> 19 [label="out_file1"]
+  7 -> 19 [label="out_file1"]
+  k8d0ac5beac7d4f1085acd3461f561a50[color=lightseagreen,label="Output\nkegg_pathways"]
+  19 -> k8d0ac5beac7d4f1085acd3461f561a50
+  k9872b0179b394cd3b232a305979a782b[color=lightseagreen,label="Output\nkegg_genes"]
+  19 -> k9872b0179b394cd3b232a305979a782b
+  20[label="Cut"]
+  17 -> 20 [label="out_file1"]
+  21[label="Filter"]
+  17 -> 21 [label="out_file1"]
+  22[label="Filter"]
+  18 -> 22 [label="wallenius_tab"]
+  kae7623940e904b9aa7b47cffeccc80a7[color=lightseagreen,label="Output\ngo_underrepresented"]
+  22 -> kae7623940e904b9aa7b47cffeccc80a7
+  23[label="Filter"]
+  18 -> 23 [label="wallenius_tab"]
+  kb788d5b7119c418aa12ba97ef7ea5bf2[color=lightseagreen,label="Output\ngo_overrepresented"]
+  23 -> kb788d5b7119c418aa12ba97ef7ea5bf2
+  24[label="Filter"]
+  19 -> 24 [label="wallenius_tab"]
+  k69f80c89fc7d4bea836f34e68615abcd[color=lightseagreen,label="Output\nkegg_underrepresented"]
+  24 -> k69f80c89fc7d4bea836f34e68615abcd
+  25[label="Filter"]
+  19 -> 25 [label="wallenius_tab"]
+  k930f14610ade4744a83d843108c4b597[color=lightseagreen,label="Output\nkegg_overrepresented"]
+  25 -> k930f14610ade4744a83d843108c4b597
+  26[label="Pathview"]
+  20 -> 26 [label="out_file1"]
+  3 -> 26 [label="output"]
+  k7cdd44756de34c02be8dd76e788980f6[color=lightseagreen,label="Output\npathview_plot"]
+  26 -> k7cdd44756de34c02be8dd76e788980f6
+  27[label="Join two Datasets"]
+  9 -> 27 [label="counts_out"]
+  21 -> 27 [label="out_file1"]
+  28[label="Group"]
+  22 -> 28 [label="out_file1"]
+  kd1ae921d2e2b46d895a24443f5a1b3b4[color=lightseagreen,label="Output\ngo_underrepresented_categories"]
+  28 -> kd1ae921d2e2b46d895a24443f5a1b3b4
+  29[label="Group"]
+  23 -> 29 [label="out_file1"]
+  k4d2d01eb15d24863a5229462c15eb51c[color=lightseagreen,label="Output\ngo_overrepresented_categories"]
+  29 -> k4d2d01eb15d24863a5229462c15eb51c
+  30[label="Cut"]
+  27 -> 30 [label="out_file1"]
+  31[label="heatmap2"]
+  30 -> 31 [label="out_file1"]
+  k42cb6b684ed64b6e9312744b9e0c1442[color=lightseagreen,label="Output\nheatmap_log"]
+  31 -> k42cb6b684ed64b6e9312744b9e0c1442
+  32[label="heatmap2"]
+  30 -> 32 [label="out_file1"]
+  k0ecef5aa76ed4fe792443b32d231e7f3[color=lightseagreen,label="Output\nheatmap_zscore"]
+  32 -> k0ecef5aa76ed4fe792443b32d231e7f3
+}

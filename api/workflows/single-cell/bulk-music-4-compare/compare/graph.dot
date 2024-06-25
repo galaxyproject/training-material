@@ -1,0 +1,22 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nESet Object - Single cell:T2D"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nESet Object - Single cell:normal"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nESet Object - Bulk:normal"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nESet Object - Bulk:T2D"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nESet Object - Single cell Total"]
+  5[label="MuSiC Compare: Like with like"]
+  2 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  3 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  6[label="MuSiC Compare: healthyscref"]
+  2 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  7[label="MuSiC Compare - Altogether"]
+  2 -> 7 [label="output"]
+  3 -> 7 [label="output"]
+  4 -> 7 [label="output"]
+}

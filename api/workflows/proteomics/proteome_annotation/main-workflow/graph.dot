@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nLacombe_et_al_2017.txt"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nBredberg.txt"]
+  10[label="View proteins on Reactome maps"]
+  9 -> 10 [label="kept_lines"]
+  11[label="GO terms classification and enrichment analysis"]
+  5 -> 11 [label="output"]
+  9 -> 11 [label="kept_lines"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nMucilli.txt"]
+  3[label="Build a lung proteome as a background "]
+  4[label="Filter technical contaminants"]
+  0 -> 4 [label="output"]
+  5[label="ID Converter"]
+  3 -> 5 [label="output"]
+  6[label="ID mapping UniProt <-> ENSG ID"]
+  4 -> 6 [label="kept_lines"]
+  7[label="MS/MS datasets comparison"]
+  4 -> 7 [label="kept_lines"]
+  1 -> 7 [label="output"]
+  2 -> 7 [label="output"]
+  8[label="Add expression data"]
+  6 -> 8 [label="output"]
+  9[label="Filter biological contaminants"]
+  8 -> 9 [label="output"]
+}

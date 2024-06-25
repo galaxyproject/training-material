@@ -1,0 +1,17 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput FASTA Sequence File"]
+  1[label="MAFFT"]
+  0 -> 1 [label="output"]
+  ke5d56101daff420b82e9dc6cc923f7ab[color=lightseagreen,label="Output\noutputAlignment"]
+  1 -> ke5d56101daff420b82e9dc6cc923f7ab
+  2[label="FASTTREE"]
+  1 -> 2 [label="outputAlignment"]
+  k632ce28d3086490ebd97949eb2cb385a[color=lightseagreen,label="Output\noutput"]
+  2 -> k632ce28d3086490ebd97949eb2cb385a
+  3[label="IQ-TREE"]
+  1 -> 3 [label="outputAlignment"]
+  kb8434b2b20014b1abd06faeab18519a4[color=lightseagreen,label="Output\ntreefile"]
+  3 -> kb8434b2b20014b1abd06faeab18519a4
+}

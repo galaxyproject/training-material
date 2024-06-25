@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nIllumina reads R1"]
+  1[label="Meryl - count kmers"]
+  0 -> 1 [label="output"]
+  k899ddd934c0f4f81a9738120494ed983[color=lightseagreen,label="Output\nMeryl on input dataset(s): read-db.meryldb"]
+  1 -> k899ddd934c0f4f81a9738120494ed983
+  2[label="Meryl - generate histogram"]
+  1 -> 2 [label="read_db"]
+  3[label="Genomescope"]
+  2 -> 3 [label="read_db_hist"]
+  kefc727b61ef44c4c8cce35c7d3cc8aac[color=lightseagreen,label="Output\nGenomeScope on input dataset(s) Transformed log plot"]
+  3 -> kefc727b61ef44c4c8cce35c7d3cc8aac
+  k701df341576744bcade26af498ab7467[color=lightseagreen,label="Output\nGenomeScope on input dataset(s) Transformed linear plot"]
+  3 -> k701df341576744bcade26af498ab7467
+  k85fa4004b35147b384aa6788d338037a[color=lightseagreen,label="Output\nGenomeScope on input dataset(s) Log plot"]
+  3 -> k85fa4004b35147b384aa6788d338037a
+  kc71ce05598f0435493972f8833b90cc4[color=lightseagreen,label="Output\nGenomeScope on input dataset(s) Linear plot"]
+  3 -> kc71ce05598f0435493972f8833b90cc4
+}

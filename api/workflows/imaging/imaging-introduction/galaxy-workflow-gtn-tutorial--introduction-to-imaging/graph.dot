@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\ninput_image"]
+  1[label="Histogram equalization"]
+  0 -> 1 [label="output"]
+  2[label="Image Info"]
+  0 -> 2 [label="output"]
+  3[label="Filter Image"]
+  0 -> 3 [label="output"]
+  4[label="Filter Image"]
+  0 -> 4 [label="output"]
+  5[label="Convert image"]
+  0 -> 5 [label="output"]
+  6[label="Convert image"]
+  1 -> 6 [label="output"]
+  7[label="Auto Threshold"]
+  3 -> 7 [label="output"]
+  8[label="Histogram equalization"]
+  3 -> 8 [label="output"]
+  9[label="Binary 2 Label"]
+  7 -> 9 [label="output"]
+  10[label="Convert image"]
+  8 -> 10 [label="output"]
+  11[label="Overlay Images"]
+  6 -> 11 [label="output"]
+  9 -> 11 [label="output"]
+  k85029ccbebb34a919ba3d1daefd13efc[color=lightseagreen,label="Output\nout"]
+  11 -> k85029ccbebb34a919ba3d1daefd13efc
+  12[label="Convert image"]
+  9 -> 12 [label="output"]
+  13[label="Count Objects"]
+  9 -> 13 [label="output"]
+  k1446f4bfb031405a84f088acc1a5c8a3[color=lightseagreen,label="Output\noutput"]
+  13 -> k1446f4bfb031405a84f088acc1a5c8a3
+}

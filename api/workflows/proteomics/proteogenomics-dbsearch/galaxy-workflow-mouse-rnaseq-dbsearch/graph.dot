@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nUniprot_cRAP_SAV_indel_translatedbed.FASTA"]
+  1[color=lightblue,label="ℹ️ Input Collection\nMGF Collection"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nReference Protein Accessions"]
+  3[label="Search GUI"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  kd14f948180db4c158afc6fa38ef61deb[color=lightseagreen,label="Output\nSearch GUI on input dataset(s)"]
+  3 -> kd14f948180db4c158afc6fa38ef61deb
+  4[label="Peptide Shaker"]
+  3 -> 4 [label="searchgui_results"]
+  kafe0f1a528bb44bdb32bc634aa2154f3[color=lightseagreen,label="Output\nPeptide Shaker on input dataset(s): mzidentML file"]
+  4 -> kafe0f1a528bb44bdb32bc634aa2154f3
+  5[label="mz to sqlite"]
+  4 -> 5 [label="mzidentML"]
+  1 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  kb43a2136cf594fb0bb2b0d5b446c8ba9[color=lightseagreen,label="Output\nmz to sqlite on input dataset(s)"]
+  5 -> kb43a2136cf594fb0bb2b0d5b446c8ba9
+  6[label="Removing reference proteins"]
+  4 -> 6 [label="output_psm"]
+  4 -> 6 [label="output_psm"]
+  2 -> 6 [label="output"]
+  ka06ad5fa9a004867b9763745c5e59c80[color=lightseagreen,label="Output\nRemoving reference proteins"]
+  6 -> ka06ad5fa9a004867b9763745c5e59c80
+  7[label="Selecting sequence with length >6 and <30"]
+  6 -> 7 [label="output"]
+  kb71e541728644712b5c1c90725976baf[color=lightseagreen,label="Output\nSelecting sequence with length >6 and <30"]
+  7 -> kb71e541728644712b5c1c90725976baf
+  8[label="Peptides for BlastP analysis"]
+  7 -> 8 [label="output"]
+  k1ac3c77680954db185183643dc081006[color=lightseagreen,label="Output\nPeptides_for_BlastP_analysis"]
+  8 -> k1ac3c77680954db185183643dc081006
+}

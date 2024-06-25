@@ -1,0 +1,62 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nGenome assembly"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nRNASeq reads forward"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nRNASeq reads reverse"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nProtein evidence sequences"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nNCBI submission template"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nAlternate annotation gbk"]
+  6[color=lightblue,label="ℹ️ Input Dataset\nAlternate annotation gff3"]
+  7[label="RNA STAR"]
+  0 -> 7 [label="output"]
+  1 -> 7 [label="output"]
+  2 -> 7 [label="output"]
+  k79cf59ea3aef4cb89c705b42e03a5da9[color=lightseagreen,label="Output\nMapped RNASeq"]
+  7 -> k79cf59ea3aef4cb89c705b42e03a5da9
+  8[label="Funannotate predict annotation"]
+  3 -> 8 [label="output"]
+  7 -> 8 [label="mapped_reads"]
+  0 -> 8 [label="output"]
+  9[label="eggNOG Mapper"]
+  8 -> 9 [label="fasta_proteins"]
+  10[label="InterProScan"]
+  8 -> 10 [label="fasta_proteins"]
+  11[label="Funannotate functional"]
+  9 -> 11 [label="annotations"]
+  8 -> 11 [label="annot_gbk"]
+  10 -> 11 [label="outfile_xml"]
+  4 -> 11 [label="output"]
+  kd0694cd16d814d7283b994cb57dc1502[color=lightseagreen,label="Output\nFinal annotation (genbank)"]
+  11 -> kd0694cd16d814d7283b994cb57dc1502
+  k9a1e7b70109041ed863765b7372a9f6c[color=lightseagreen,label="Output\nFinal annotation (CDS sequences)"]
+  11 -> k9a1e7b70109041ed863765b7372a9f6c
+  k99fffa402196491d9a66559ebf2d9561[color=lightseagreen,label="Output\nFinal annotation (mRNA sequences)"]
+  11 -> k99fffa402196491d9a66559ebf2d9561
+  k17b03b7704854176b2b303bfa2d3bcb0[color=lightseagreen,label="Output\nFinal annotation (protein sequences)"]
+  11 -> k17b03b7704854176b2b303bfa2d3bcb0
+  k4a0602fce6d243fc9957344707c22c05[color=lightseagreen,label="Output\nFinal annotation (GFF3)"]
+  11 -> k4a0602fce6d243fc9957344707c22c05
+  12[label="JBrowse"]
+  0 -> 12 [label="output"]
+  11 -> 12 [label="gff3"]
+  7 -> 12 [label="mapped_reads"]
+  kac4d8805f12344d2b30f8ac906cc471f[color=lightseagreen,label="Output\nJBrowse"]
+  12 -> kac4d8805f12344d2b30f8ac906cc471f
+  13[label="Funannotate compare"]
+  5 -> 13 [label="output"]
+  11 -> 13 [label="gbk"]
+  ke531c81ff6b74c82a712c562873ff714[color=lightseagreen,label="Output\nFunannotate compare report"]
+  13 -> ke531c81ff6b74c82a712c562873ff714
+  14[label="AEGeAn ParsEval"]
+  6 -> 14 [label="output"]
+  11 -> 14 [label="gff3"]
+  k0d776b462c1c40839f9da213fa62eb81[color=lightseagreen,label="Output\nAEGeAN report"]
+  14 -> k0d776b462c1c40839f9da213fa62eb81
+  15[label="Busco"]
+  11 -> 15 [label="fa_proteins"]
+  k57a619f5b3314ca68e6e72eb61860032[color=lightseagreen,label="Output\nBusco summary"]
+  15 -> k57a619f5b3314ca68e6e72eb61860032
+  k97d23764ad4a4d69948cc81afb76fbaf[color=lightseagreen,label="Output\nBusco image"]
+  15 -> k97d23764ad4a4d69948cc81afb76fbaf
+}

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition / Microbiome</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@9c3bfcc77e95a87afc6fe3af9a7f494881160147",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/gene_based_pathogen_identification.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.ef2bff8a.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="1970-01-01 00:00:00 +0000"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Microbiome / Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition">
+        <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        
+	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/microbiome/faqs/" title="Check our FAQs for the Microbiome topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/gene_based_pathogen_identification.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/gene_based_pathogen_identification.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+<style>
+hgroup {margin-bottom: 2rem; border-bottom: 1px solid var(--border-light);}
+hgroup p { font-family: monospace; font-size: 0.8rem;}
+.meta ul { padding-left: 1em;}
+</style>
+
+<section>
+	<hgroup>
+		<h1 data-toc-skip>Gene-based Pathogen Identification</h1>
+		<p>microbiome-pathogen-detection-from-nanopore-foodborne-data/gene-based-pathogen-identification</p>
+	</hgroup>
+	
+	<div class="row">
+		<div class="col-md-3 meta">
+			
+			<b>Author(s)</b>
+			<br/>
+			
+			Engy Nasr, 
+			
+			Bérénice Batut, 
+			
+			Paul Zierep
+			
+			
+			<br/>
+
+			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
+			<b>Version</b>
+			<br/>
+			2
+
+			<br/>
+
+			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
+			<b>Last updated</b>
+			<br/>
+			Jun 6, 2024
+
+			<br/>
+
+			<i class="fas fa-balance-scale" aria-hidden="true"></i><span class="visually-hidden">license</span>
+			<b>License</b>
+			<br/>
+
+			
+			<a href="https://spdx.org/licenses/MIT">MIT</a>
+			
+			<br/>
+
+			
+			<i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span>
+			<b>Tags</b>
+			<br/>
+
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #98c7ff; --color-darker: #63b4ff; --color-dimmed: #80bdff;">name:Collection</div>
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffb194; --color-darker: #ff915a; --color-dimmed: #ffa27a;">name:PathoGFAIR</div>
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffaeb4; --color-darker: #ff8d96; --color-dimmed: #ff9ea5;">name:IWC</div>
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #00ddb5; --color-darker: #00c5a1; --color-dimmed: #00d1ab;">name:microGalaxy</div>
+			
+			</br>
+			
+
+
+			<b>Features</b>
+			<ul>
+			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
+			
+			
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_comments.html">Galaxy Workflow Comments</a></li>
+			
+			
+			</ul>
+
+			<hr/>
+
+
+			<b>Tutorial</b>
+			<br/>
+			<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <a href="../tutorial.html">Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition</a>
+			</br>
+
+			
+			
+			<i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> <a href="index.html">Other workflows associated with this material</a>
+			
+
+
+			<hr/>
+			<b>Workflow Testing</b>
+			<br/>
+
+			Tests: ✅ <br/>
+			Results: Not yet automated
+
+			<hr/>
+
+			<b>FAIRness</b>
+
+			<i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span>
+			<b><abbr title="Persistent URL">PURL</abbr></b>
+			<br/>
+			<a href="https://gxy.io/GTN:">https://gxy.io/GTN:</a>
+			<br/>
+
+			
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows///microbiome-pathogen-detection-from-nanopore-foodborne-data/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			
+			
+
+		</div>
+		<div class="col-md-9">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene-based-pathogen-identification">Launch in Tutorial Mode</span>
+			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="show-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
+			<br/>
+
+			<span class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+					<img src="/training-material/assets/images/galaxylogo.png" style="height: 16px" alt="galaxy logo"/> 
+					Run Workflow in Galaxy
+				</button>
+				<ul class="dropdown-menu">
+					
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene-based-pathogen-identification">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene-based-pathogen-identification">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene-based-pathogen-identification">Galaxy Main</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene-based-pathogen-identification">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item hide-when-galaxy-proxy-active">
+						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-pathogen-detection-from-nanopore-foodborne-data/versions/gene-based-pathogen-identification">Import to another server (≥23.0+ only!)</a>
+					</li>
+				</ul>
+			</span>
+			<a class="btn btn-primary" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/gene_based_pathogen_identification.ga">
+				<i class="fas fa-download" aria-hidden="true"></i><span class="visually-hidden">galaxy-download</span>
+				Download
+			</a>
+			<pre class="mermaid">flowchart TD
+  0["ℹ️ Input Collection\ncollection_of_preprocessed_samples"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["Extract element identifiers"];
+  0 -->|output| 1;
+  d82a93c6-23a9-4f85-879c-ecd759a31087["Output\nextracted_samples_IDs"];
+  1 --> d82a93c6-23a9-4f85-879c-ecd759a31087;
+  style d82a93c6-23a9-4f85-879c-ecd759a31087 stroke:#2c3143,stroke-width:4px;
+  2["Build list"];
+  0 -->|output| 2;
+  f5b5b256-8ddf-4da8-8111-b1f6d3025a0d["Output\nlist_of_lists_of_preprocessed_samples"];
+  2 --> f5b5b256-8ddf-4da8-8111-b1f6d3025a0d;
+  style f5b5b256-8ddf-4da8-8111-b1f6d3025a0d stroke:#2c3143,stroke-width:4px;
+  3["Split file"];
+  1 -->|output| 3;
+  eb5317bd-4bad-4cad-9219-3ac379221d6e["Output\nsplitted_extracted_samples_IDs"];
+  3 --> eb5317bd-4bad-4cad-9219-3ac379221d6e;
+  style eb5317bd-4bad-4cad-9219-3ac379221d6e stroke:#2c3143,stroke-width:4px;
+  4["Flye"];
+  2 -->|output| 4;
+  ff0d8c7b-2ac7-4c6d-a110-f71418dad938["Output\nflye_consensus_fasta"];
+  4 --> ff0d8c7b-2ac7-4c6d-a110-f71418dad938;
+  style ff0d8c7b-2ac7-4c6d-a110-f71418dad938 stroke:#2c3143,stroke-width:4px;
+  2385436f-fbe8-4d77-a40b-27a097d02941["Output\nflye_assembly_graph"];
+  4 --> 2385436f-fbe8-4d77-a40b-27a097d02941;
+  style 2385436f-fbe8-4d77-a40b-27a097d02941 stroke:#2c3143,stroke-width:4px;
+  0e42ce51-c46b-45d8-baa4-45c0e98ac712["Output\nflye_assembly_gfa"];
+  4 --> 0e42ce51-c46b-45d8-baa4-45c0e98ac712;
+  style 0e42ce51-c46b-45d8-baa4-45c0e98ac712 stroke:#2c3143,stroke-width:4px;
+  3f297aed-7cee-4999-bbf4-69d84de6b64f["Output\nflye_assembly_info_tabular"];
+  4 --> 3f297aed-7cee-4999-bbf4-69d84de6b64f;
+  style 3f297aed-7cee-4999-bbf4-69d84de6b64f stroke:#2c3143,stroke-width:4px;
+  5["Parse parameter value"];
+  3 -->|list_output_txt| 5;
+  3608e170-c462-42a2-8003-f3f65baa3834["Output\nparsed_extracted_samples_IDs_to_text"];
+  5 --> 3608e170-c462-42a2-8003-f3f65baa3834;
+  style 3608e170-c462-42a2-8003-f3f65baa3834 stroke:#2c3143,stroke-width:4px;
+  6["medaka consensus pipeline"];
+  4 -->|consensus| 6;
+  0 -->|output| 6;
+  9e5ad6ec-b408-4132-ba07-dec9fa626923["Output\nmedaka_gaps_in_draft_bed_file"];
+  6 --> 9e5ad6ec-b408-4132-ba07-dec9fa626923;
+  style 9e5ad6ec-b408-4132-ba07-dec9fa626923 stroke:#2c3143,stroke-width:4px;
+  fcbd3e3f-2e93-4798-b696-dad7db9f2efd["Output\nmedaka_log_file"];
+  6 --> fcbd3e3f-2e93-4798-b696-dad7db9f2efd;
+  style fcbd3e3f-2e93-4798-b696-dad7db9f2efd stroke:#2c3143,stroke-width:4px;
+  60656aac-ad2a-4c9b-9a68-b9fb18ae5595["Output\nmedaka_propability_h5_file"];
+  6 --> 60656aac-ad2a-4c9b-9a68-b9fb18ae5595;
+  style 60656aac-ad2a-4c9b-9a68-b9fb18ae5595 stroke:#2c3143,stroke-width:4px;
+  c790d434-8e78-4df0-a0d4-8f9da0692158["Output\nmedaka_calls_of_draft_bam_file"];
+  6 --> c790d434-8e78-4df0-a0d4-8f9da0692158;
+  style c790d434-8e78-4df0-a0d4-8f9da0692158 stroke:#2c3143,stroke-width:4px;
+  df361e19-b6d1-405b-96cc-b48c1ab7c604["Output\nsample_all_contigs"];
+  6 --> df361e19-b6d1-405b-96cc-b48c1ab7c604;
+  style df361e19-b6d1-405b-96cc-b48c1ab7c604 stroke:#2c3143,stroke-width:4px;
+  7["Bandage Image"];
+  4 -->|assembly_gfa| 7;
+  9612a851-1f94-4d54-b001-5d082bcc9055["Output\nbandage_assembly_graph_image"];
+  7 --> 9612a851-1f94-4d54-b001-5d082bcc9055;
+  style 9612a851-1f94-4d54-b001-5d082bcc9055 stroke:#2c3143,stroke-width:4px;
+  8["Compose text parameter value"];
+  5 -->|text_param| 8;
+  9["FASTA-to-Tabular"];
+  6 -->|out_consensus| 9;
+  de06c362-5b0a-4c29-956e-fbf02539789a["Output\nsample_specific_contigs_tabular_file_preparation"];
+  9 --> de06c362-5b0a-4c29-956e-fbf02539789a;
+  style de06c362-5b0a-4c29-956e-fbf02539789a stroke:#2c3143,stroke-width:4px;
+  10["ABRicate"];
+  6 -->|out_consensus| 10;
+  8f227fc7-2d92-4c6f-af64-e841c1315b4f["Output\nabricate_with_vfdb_to_identify_genes_with_VFs"];
+  10 --> 8f227fc7-2d92-4c6f-af64-e841c1315b4f;
+  style 8f227fc7-2d92-4c6f-af64-e841c1315b4f stroke:#2c3143,stroke-width:4px;
+  11["ABRicate"];
+  6 -->|out_consensus| 11;
+  fa021d98-d885-4834-ac62-f30d5792260e["Output\nabricate_report_using_ncbi_database_to_indentify_amr"];
+  11 --> fa021d98-d885-4834-ac62-f30d5792260e;
+  style fa021d98-d885-4834-ac62-f30d5792260e stroke:#2c3143,stroke-width:4px;
+  12["Replace"];
+  8 -->|out1| 12;
+  9 -->|output| 12;
+  174cb2c3-ed28-453c-8afb-85150e0b51ad["Output\nsample_specific_contigs_tabular_file"];
+  12 --> 174cb2c3-ed28-453c-8afb-85150e0b51ad;
+  style 174cb2c3-ed28-453c-8afb-85150e0b51ad stroke:#2c3143,stroke-width:4px;
+  13["Replace"];
+  8 -->|out1| 13;
+  10 -->|report| 13;
+  19e56e00-6eef-4a4e-9cc6-d93dbf9420ad["Output\nvfs"];
+  13 --> 19e56e00-6eef-4a4e-9cc6-d93dbf9420ad;
+  style 19e56e00-6eef-4a4e-9cc6-d93dbf9420ad stroke:#2c3143,stroke-width:4px;
+  14["Replace"];
+  8 -->|out1| 14;
+  11 -->|report| 14;
+  a8eb74a5-362b-4f0f-a944-672e27981a41["Output\namrs"];
+  14 --> a8eb74a5-362b-4f0f-a944-672e27981a41;
+  style a8eb74a5-362b-4f0f-a944-672e27981a41 stroke:#2c3143,stroke-width:4px;
+  15["Tabular-to-FASTA"];
+  12 -->|outfile| 15;
+  a5bb1cbe-1bde-49a1-ad86-6d57b1319fbe["Output\ncontigs"];
+  15 --> a5bb1cbe-1bde-49a1-ad86-6d57b1319fbe;
+  style a5bb1cbe-1bde-49a1-ad86-6d57b1319fbe stroke:#2c3143,stroke-width:4px;</pre>
+
+			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+
+
+			<h2>Importing into Galaxy</h2>
+			Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
+
+			<!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
+
+			<h2>Version History</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Version</th>
+						<th>Commit</th>
+						<th>Time</th>
+						<th>Comments</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<tr>
+						<td>2</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/cdd93376adc6ce80742881c25d6810bcce85fc05">cdd93376a</a></td>
+						<td>2024-06-06 12:00:29</td>
+						<td>adding tags to some of the workflow outputs, updating the training with the latest PathoGFAIR  workflows updates</td>
+					</tr>
+					
+					<tr>
+						<td>1</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/c63ce23c7a7a631f1256b8e733defce3ca4e009b">c63ce23c7</a></td>
+						<td>2024-05-26 12:29:47</td>
+						<td>updating workflows file names</td>
+					</tr>
+					
+				</tbody>
+			</table>
+
+
+			<h2>For Admins</h2>
+			<h3>Installing the workflow tools</h3>
+
+			<pre>
+wget https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/gene_based_pathogen_identification.ga -O workflow.ga
+workflow-to-tools -w workflow.ga -o tools.yaml
+shed-tools install -g GALAXY -a API_KEY -t tools.yaml
+workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
+			</pre>
+		</div>
+	</div>
+</section>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+
+			</div>
+			<div class="col-sm-3">
+				<p>
+					<span style="font-size: 1.3em">About Us</span>
+					<ul class="no-bullets">
+						<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+						<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+						<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+						<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+						<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+					</ul>
+				</p>
+				<p>
+					<span style="font-size: 1.3em">Contact</span>
+					<ul class="no-bullets">
+						<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+						<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social">Bluesky</a></li>
+						<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">Matrix Channel</a></li>
+					</ul>
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<p>
+					<span style="font-size: 1.3em">Framework</span>
+					<ul class="no-bullets">
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9c3bfcc77e95a87afc6fe3af9a7f494881160147">9c3bfcc</a></li>
+						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+					</ul>
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Page</span>
+				<p>
+					<ul class="no-bullets">
+						
+						
+						
+
+						<li>
+							<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+								Content licensed under Creative Commons Attribution 4.0 International License
+							</a>
+						</li>
+						<li>
+							<a href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/workflows/gene_based_pathogen_identification.html" title="Edit on GitHub">
+							<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+							</a>
+						</li>
+					</ul>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.ef2bff8a.js'></script>
+
+	
+	
+	<script src="/training-material/assets/js/mermaid@10.6.1.js" async></script>
+	<link rel="preload" href="/training-material/assets/js/mermaid@10.6.1.js" as="script" crossorigin>
+	
+
+    </body>
+</html>

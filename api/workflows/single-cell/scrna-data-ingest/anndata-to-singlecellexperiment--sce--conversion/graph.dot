@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nAnnData"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nCell ID column"]
+  2[label="Inspect AnnData"]
+  0 -> 2 [label="output"]
+  k8b9200c296e640faa8e91e99638c733f[color=lightseagreen,label="Output\nInspect AnnData: obs"]
+  2 -> k8b9200c296e640faa8e91e99638c733f
+  3[label="Inspect AnnData"]
+  0 -> 3 [label="output"]
+  k9fc4ce5a8384484db1cdc0f5137cf821[color=lightseagreen,label="Output\nInspect AnnData: X"]
+  3 -> k9fc4ce5a8384484db1cdc0f5137cf821
+  4[label="Transpose"]
+  3 -> 4 [label="X"]
+  5[label="DropletUtils"]
+  4 -> 5 [label="out_file"]
+  6[label="DropletUtils Read10x"]
+  1 -> 6 [label="output"]
+  2 -> 6 [label="obs"]
+  5 -> 6 [label="barcodes_out"]
+  5 -> 6 [label="genes_out"]
+  5 -> 6 [label="matrix_out"]
+  k3256e23f2026407daa250f8c0f3ae3f7[color=lightseagreen,label="Output\nConverted SCE object"]
+  6 -> k3256e23f2026407daa250f8c0f3ae3f7
+}

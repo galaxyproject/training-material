@@ -1,0 +1,64 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nPaired list collection with PE fastqs"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nDrosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz"]
+  2[color=lightcoral,label="🛠️ Subworkflow\nFastQC"]
+  0 -> 2 [label="output"]
+  k5f7652f1e2254ad18dbd4d21544edb89[color=lightseagreen,label="Output\nmultiqc_fastqc_html"]
+  2 -> k5f7652f1e2254ad18dbd4d21544edb89
+  3[color=lightcoral,label="🛠️ Subworkflow\ncutadapt"]
+  0 -> 3 [label="output"]
+  k41c7fbb5655b457c8ba70e2eeab3d7ee[color=lightseagreen,label="Output\nmultiqc_cutadapt_html"]
+  3 -> k41c7fbb5655b457c8ba70e2eeab3d7ee
+  4[color=lightcoral,label="🛠️ Subworkflow\nSTAR + multiQC"]
+  1 -> 4 [label="output"]
+  3 -> 4 [label="out_pairs"]
+  k8aa5ef303f094a93944d0d89101c056a[color=lightseagreen,label="Output\nmultiqc_star_html"]
+  4 -> k8aa5ef303f094a93944d0d89101c056a
+  k11af5c5791b4496c9b0cb02904963f81[color=lightseagreen,label="Output\nSTAR_BAM"]
+  4 -> k11af5c5791b4496c9b0cb02904963f81
+  5[color=lightcoral,label="🛠️ Subworkflow\nmore QC"]
+  1 -> 5 [label="output"]
+  4 -> 5 [label="STAR_BAM"]
+  kb306cb12a2754c6db60947fdc208864b[color=lightseagreen,label="Output\nmultiqc_reads_per_chrom_html"]
+  5 -> kb306cb12a2754c6db60947fdc208864b
+  k3ea82568569849a788fe91381070aac2[color=lightseagreen,label="Output\nmultiqc_dup_html"]
+  5 -> k3ea82568569849a788fe91381070aac2
+  kf2eed352ca214d658810f5a1d3c282b4[color=lightseagreen,label="Output\nmultiqc_read_distrib_html"]
+  5 -> kf2eed352ca214d658810f5a1d3c282b4
+  k3375d63ccdc34fbb8a556f504c934918[color=lightseagreen,label="Output\nmultiqc_gene_body_cov_html"]
+  5 -> k3375d63ccdc34fbb8a556f504c934918
+  6[color=lightcoral,label="🛠️ Subworkflow\nDetermine strandness"]
+  4 -> 6 [label="STAR_BAM"]
+  1 -> 6 [label="output"]
+  4 -> 6 [label="signal_unique_str1"]
+  4 -> 6 [label="signal_unique_str2"]
+  4 -> 6 [label="reads_per_gene"]
+  k9727824a3eb2443092d1b3c40c3041d1[color=lightseagreen,label="Output\npgt"]
+  6 -> k9727824a3eb2443092d1b3c40c3041d1
+  k105313d8e31a405d8fcdcc5fd93275e2[color=lightseagreen,label="Output\nmultiqc_star_counts_html"]
+  6 -> k105313d8e31a405d8fcdcc5fd93275e2
+  kfb810859f2d043f8ac7c5c714c5c6805[color=lightseagreen,label="Output\ninferexperiment"]
+  6 -> kfb810859f2d043f8ac7c5c714c5c6805
+  7[color=lightcoral,label="🛠️ Subworkflow\ncount STAR"]
+  1 -> 7 [label="output"]
+  4 -> 7 [label="reads_per_gene"]
+  k7b7c698b48084b45adf1686f8d273d18[color=lightseagreen,label="Output\nGene length"]
+  7 -> k7b7c698b48084b45adf1686f8d273d18
+  kbd3388e65b454fdc97803efd1c34ebf8[color=lightseagreen,label="Output\ncounts_from_star_sorted"]
+  7 -> kbd3388e65b454fdc97803efd1c34ebf8
+  k5fee8aff402343f1a653f5af5357d798[color=lightseagreen,label="Output\ncounts_from_star"]
+  7 -> k5fee8aff402343f1a653f5af5357d798
+  8[color=lightcoral,label="🛠️ Subworkflow\ncount featureCount"]
+  1 -> 8 [label="output"]
+  4 -> 8 [label="STAR_BAM"]
+  k46c7a2e878194715a0287ad1de9ed605[color=lightseagreen,label="Output\nfeatureCounts"]
+  8 -> k46c7a2e878194715a0287ad1de9ed605
+  k152ba01ed4f24227881287648a1c19ea[color=lightseagreen,label="Output\nmultiqc_featureCounts_html"]
+  8 -> k152ba01ed4f24227881287648a1c19ea
+  k8b9d6c766e824691b8bc9996d6ae1594[color=lightseagreen,label="Output\nfeatureCounts_gene_length"]
+  8 -> k8b9d6c766e824691b8bc9996d6ae1594
+  kf0de47144df8450690d9384537ad663e[color=lightseagreen,label="Output\nfeatureCounts_sorted"]
+  8 -> kf0de47144df8450690d9384537ad663e
+}

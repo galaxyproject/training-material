@@ -1,0 +1,39 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightgreen,label="ℹ️ Input Parameter\nQuery Genomes"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nJupyter Notebook Genbank2Features"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nTarget Molecules Natural Compound Library"]
+  3[label="NCBI Accession Download"]
+  0 -> 3 [label="output"]
+  kfaecdec3711d43babb9138a4b4b3932d[color=lightseagreen,label="Output\nNCBI Accession Download on input dataset(s): Log"]
+  3 -> kfaecdec3711d43babb9138a4b4b3932d
+  kc8857c6fec994d298c98be7a63a9f029[color=lightseagreen,label="Output\nNCBI Accession Download on input dataset(s): Downloaded Files"]
+  3 -> kc8857c6fec994d298c98be7a63a9f029
+  4[label="Molecule to fingerprint"]
+  2 -> 4 [label="output"]
+  5[label="Antismash"]
+  3 -> 5 [label="output"]
+  kcc813ad7f4234cb8ba798201abab206a[color=lightseagreen,label="Output\nAntismash on input dataset(s): HTML report"]
+  5 -> kcc813ad7f4234cb8ba798201abab206a
+  6[label="Collapse clusters in one Genbank entry"]
+  5 -> 6 [label="genbank"]
+  7[label="Extract SMILES qualifiers"]
+  1 -> 7 [label="output"]
+  6 -> 7 [label="output"]
+  8[label="Convert table to smi format"]
+  7 -> 8 [label="output_collection"]
+  9[label="Remove beginning"]
+  8 -> 9 [label="outfile"]
+  10[label="Remove duplicated molecules"]
+  9 -> 10 [label="out_file1"]
+  11[label="Molecule to fingerprint"]
+  10 -> 11 [label="outfile"]
+  12[label="Natural Product"]
+  10 -> 12 [label="outfile"]
+  13[label="Drug-likeness"]
+  10 -> 13 [label="outfile"]
+  14[label="Similarity Search"]
+  11 -> 14 [label="outfile"]
+  4 -> 14 [label="outfile"]
+}

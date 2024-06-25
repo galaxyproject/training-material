@@ -1,0 +1,51 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nReference compound list alkanes"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReference spectra"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nsample_metadata.tsv"]
+  3[color=lightblue,label="ℹ️ Input Collection\nInput Dataset Collection"]
+  4[label="msconvert"]
+  3 -> 4 [label="output"]
+  5[label="MSnbase readMSData"]
+  4 -> 5 [label="output"]
+  6[label="xcms findChromPeaks xcmsSet"]
+  5 -> 6 [label="xsetRData"]
+  7[label="xcms findChromPeaks Merger"]
+  6 -> 7 [label="xsetRData"]
+  2 -> 7 [label="output"]
+  8[label="xcms groupChromPeaks group"]
+  7 -> 8 [label="xsetRData"]
+  9[label="xcms adjustRtime retcor"]
+  8 -> 9 [label="xsetRData"]
+  10[label="xcms groupChromPeaks group"]
+  9 -> 10 [label="xsetRData"]
+  11[label="xcms fillChromPeaks fillPeaks"]
+  10 -> 11 [label="xsetRData"]
+  k940c75491bae4ddd9e9275fc7d2c8eef[color=lightseagreen,label="Output\nFeature (peak) intensities"]
+  11 -> k940c75491bae4ddd9e9275fc7d2c8eef
+  k9f910e82e7a54201b9441845ba6aa2e9[color=lightseagreen,label="Output\nFeature (peak) metadata (mz, rt, ...)"]
+  11 -> k9f910e82e7a54201b9441845ba6aa2e9
+  k5bab8f284df14397af04168546bd0e52[color=lightseagreen,label="Output\nxcmsObj (XCMSnExp)"]
+  11 -> k5bab8f284df14397af04168546bd0e52
+  12[label="RAMClustR"]
+  11 -> 12 [label="xsetRData"]
+  k92fac5e615784e52ac9d2982e19a5b88[color=lightseagreen,label="Output\nDeconvoluted spectra"]
+  12 -> k92fac5e615784e52ac9d2982e19a5b88
+  kf7657c1762934fbbb01428009d495de7[color=lightseagreen,label="Output\nFeature (spectra) intensities"]
+  12 -> kf7657c1762934fbbb01428009d495de7
+  13[label="RIAssigner"]
+  12 -> 13 [label="mass_spectra_merged"]
+  0 -> 13 [label="output"]
+  k7ec6ce025d8348abba0a94976db297e5[color=lightseagreen,label="Output\nRetention indexed spectra"]
+  13 -> k7ec6ce025d8348abba0a94976db297e5
+  14[label="matchms similarity"]
+  13 -> 14 [label="output"]
+  1 -> 14 [label="output"]
+  k024327f713b84ce987089f430d7ceedf[color=lightseagreen,label="Output\nCosineGreedy scores of input dataset(s)"]
+  14 -> k024327f713b84ce987089f430d7ceedf
+  15[label="matchms scores formatter"]
+  14 -> 15 [label="similarity_scores"]
+  k8a7670064b3c41babea518fd100ce930[color=lightseagreen,label="Output\nmatchms_scores"]
+  15 -> k8a7670064b3c41babea518fd100ce930
+}

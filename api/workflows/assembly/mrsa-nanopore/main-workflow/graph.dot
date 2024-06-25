@@ -1,0 +1,51 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nNanopore raw reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nIllumina forward raw reads"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nIllumina reverse raw reads"]
+  3[label="Convert compressed file to uncompressed."]
+  0 -> 3 [label="output"]
+  4[label="FastQC"]
+  0 -> 4 [label="output"]
+  5[label="fastp"]
+  1 -> 5 [label="output"]
+  2 -> 5 [label="output"]
+  6[label="NanoPlot"]
+  3 -> 6 [label="output1"]
+  ka97e6f3381824a3386dd6cfbb83a842d[color=lightseagreen,label="Output\nnanoplot_before_filtering"]
+  6 -> ka97e6f3381824a3386dd6cfbb83a842d
+  7[label="filtlong"]
+  5 -> 7 [label="out1"]
+  5 -> 7 [label="out2"]
+  0 -> 7 [label="output"]
+  8[label="Flye"]
+  7 -> 8 [label="outfile"]
+  kf12e718f1bd5490dbd41f0747aaa41a6[color=lightseagreen,label="Output\nflye_assembly_info"]
+  8 -> kf12e718f1bd5490dbd41f0747aaa41a6
+  9[label="NanoPlot"]
+  7 -> 9 [label="outfile"]
+  k89524090f590434d89e266f0b1a23c7c[color=lightseagreen,label="Output\nnanoplot_after_filtering"]
+  9 -> k89524090f590434d89e266f0b1a23c7c
+  10[label="Bandage Image"]
+  8 -> 10 [label="assembly_gfa"]
+  11[label="BWA-MEM2"]
+  5 -> 11 [label="out2"]
+  8 -> 11 [label="consensus"]
+  12[label="Quast"]
+  8 -> 12 [label="consensus"]
+  kdabfb8fd87914959a9dc9b3c1e57a69c[color=lightseagreen,label="Output\nquast_report_before_polishing"]
+  12 -> kdabfb8fd87914959a9dc9b3c1e57a69c
+  13[label="BWA-MEM2"]
+  5 -> 13 [label="out1"]
+  8 -> 13 [label="consensus"]
+  14[label="Polypolish"]
+  8 -> 14 [label="consensus"]
+  13 -> 14 [label="bam_output"]
+  11 -> 14 [label="bam_output"]
+  15[label="Quast"]
+  14 -> 15 [label="polished_fasta"]
+  8 -> 15 [label="consensus"]
+  k4e465b5168bf42039a7c897f46c70277[color=lightseagreen,label="Output\nquast_report_after_polishing"]
+  15 -> k4e465b5168bf42039a7c897f46c70277
+}

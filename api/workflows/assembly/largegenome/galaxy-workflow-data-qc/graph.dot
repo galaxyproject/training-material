@@ -1,0 +1,20 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput file: long reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nInput file: Illumina reads R1"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nInput file: Illumina reads R2"]
+  3[label="Nanoplot: long reads"]
+  0 -> 3 [label="output"]
+  k73d0e4cf366e41c1810ab269638826b3[color=lightseagreen,label="Output\nNanoPlot on input dataset(s): HTML report"]
+  3 -> k73d0e4cf366e41c1810ab269638826b3
+  4[label="FastQC on R1"]
+  1 -> 4 [label="output"]
+  5[label="FastQC on R2"]
+  2 -> 5 [label="output"]
+  6[label="MultiQC: combine fastQC reports"]
+  4 -> 6 [label="text_file"]
+  5 -> 6 [label="text_file"]
+  k8baf8700876e4a74ad996e656f3ba618[color=lightseagreen,label="Output\nMultiQC on input dataset(s): Webpage"]
+  6 -> k8baf8700876e4a74ad996e656f3ba618
+}

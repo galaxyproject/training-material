@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nAssembly to be polished"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nlong reads"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nminimap setting for long reads"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nIllumina reads R1"]
+  4[color=lightcoral,label="🛠️ Subworkflow\nRacon polish with long reads, x4 - upgraded"]
+  0 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  2 -> 4 [label="output"]
+  5[label="Medaka polish"]
+  4 -> 5 [label="Assembly polished by long reads using Racon"]
+  1 -> 5 [label="output"]
+  ke3136060bce74af387c49dcbb0d1f531[color=lightseagreen,label="Output\nAssembly polished by long reads using Medaka"]
+  5 -> ke3136060bce74af387c49dcbb0d1f531
+  6[label="Fasta statistics after Racon long read polish"]
+  4 -> 6 [label="Assembly polished by long reads using Racon"]
+  7[label="Fasta statistics after Medaka polish"]
+  5 -> 7 [label="out_consensus"]
+  8[color=lightcoral,label="🛠️ Subworkflow\nRacon polish with Illumina reads R1 only, x2 - upgraded"]
+  5 -> 8 [label="out_consensus"]
+  3 -> 8 [label="output"]
+  9[label="Fasta statistics after Racon short read polish"]
+  8 -> 9 [label="Assembly polished by short reads using Racon"]
+}

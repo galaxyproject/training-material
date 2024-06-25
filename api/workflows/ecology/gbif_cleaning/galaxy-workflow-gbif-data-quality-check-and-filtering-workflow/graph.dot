@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Get species occurrences data"]
+  1[label="Filter"]
+  0 -> 1 [label="output"]
+  2[label="Count"]
+  0 -> 2 [label="output"]
+  3[label="Summary Statistics"]
+  1 -> 3 [label="out_file1"]
+  4[label="Summary Statistics"]
+  1 -> 4 [label="out_file1"]
+  5[label="Filter"]
+  1 -> 5 [label="out_file1"]
+  6[label="Filter"]
+  5 -> 6 [label="out_file1"]
+  7[label="Count"]
+  6 -> 7 [label="out_file1"]
+  8[label="Filter"]
+  6 -> 8 [label="out_file1"]
+  9[label="OGR2ogr"]
+  8 -> 9 [label="out_file1"]
+  10[label="OGR2ogr"]
+  8 -> 10 [label="out_file1"]
+}

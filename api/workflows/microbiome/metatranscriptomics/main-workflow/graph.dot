@@ -1,0 +1,15 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nT1A_forward"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nT1A_reverse"]
+  2[color=lightcoral,label="🛠️ Subworkflow\nWorkflow 1: Preprocessing"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  3[color=lightcoral,label="🛠️ Subworkflow\nWorkflow 2: Community Profile"]
+  2 -> 3 [label="Cutadapt on input datasets: Read 1 Output"]
+  2 -> 3 [label="Cutadapt on input datasets: Read 2 Output"]
+  4[color=lightcoral,label="🛠️ Subworkflow\nWorkflow 3: Functional Information"]
+  2 -> 4 [label="FASTQ interlacer pairs from input datasets"]
+  3 -> 4 [label="MetaPhlAn on input datasets: Predicted taxon relative abundances"]
+}

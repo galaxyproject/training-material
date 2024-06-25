@@ -1,0 +1,20 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nGPF DIA mzML Files Dataset collection"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nSPECTRAL OR PROSIT LIBRARY"]
+  2[color=lightblue,label="ℹ️ Input Collection\nEXPERIMENTAL DIA mzML FILES WIDE"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nBACKGROUND PROTEIN FASTA FILE"]
+  4[label="msconvert"]
+  0 -> 4 [label="output"]
+  5[label="msconvert"]
+  2 -> 5 [label="output"]
+  6[label="SearchToLib"]
+  3 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  4 -> 6 [label="output"]
+  7[label="EncyclopeDIA Quantify"]
+  3 -> 7 [label="output"]
+  6 -> 7 [label="elib"]
+  5 -> 7 [label="output"]
+}

@@ -200,9 +200,12 @@
           "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos/workflows/main_workflow.ga",
           "path": "topics/visualisation/tutorials/circos/workflows/main_workflow.ga",
           "wfid": "visualisation-circos",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/visualisation-circos/versions/main_workflow",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/visualisation-circos/versions/main-workflow",
           "license": "AGPL-3.0-or-later",
+          "parent_id": "visualisation/circos",
+          "topic_id": "visualisation",
+          "tutorial_id": "circos",
           "creators": [
             {
               "class": "Person",
@@ -217,9 +220,94 @@
           ],
           "name": "Circos tutorial",
           "title": "Circos tutorial",
+          "version": 11,
+          "description": "Visualisation with Circos",
+          "tags": [
+            "visualisation"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "9171ba4a5eac78f6d11602ae7ae3b0119cf86bd8",
+              "unix": "1684162572",
+              "message": "add license, creators",
+              "short_hash": "9171ba4a5",
+              "num": 10
+            },
+            {
+              "hash": "5cb78929f37d718b2d9940c706dad12700d44db2",
+              "unix": "1684161564",
+              "message": "bump circos versions",
+              "short_hash": "5cb78929f",
+              "num": 9
+            },
+            {
+              "hash": "b267c0f288fcd26ae0993c93dda57299d15b85fa",
+              "unix": "1611269493",
+              "message": "Circos tutorial papercuts v3",
+              "short_hash": "b267c0f28",
+              "num": 8
+            },
+            {
+              "hash": "fdc5b8d63f6af71eb210454389e49ce5f15a3cfd",
+              "unix": "1611268784",
+              "message": "Circos tutorial papercuts v2",
+              "short_hash": "fdc5b8d63",
+              "num": 7
+            },
+            {
+              "hash": "08953e54d37e1fce4e712730467decab3816d5de",
+              "unix": "1611265745",
+              "message": "Circos tutorial papercuts",
+              "short_hash": "08953e54d",
+              "num": 6
+            },
+            {
+              "hash": "cf8b1cb0509e73e534c234076c8bd055379823c5",
+              "unix": "1598836271",
+              "message": "Update some workflow names for consistency",
+              "short_hash": "cf8b1cb05",
+              "num": 5
+            },
+            {
+              "hash": "667ff3de9c4e13d341a6d864bd6dc826ef15ca04",
+              "unix": "1579690769",
+              "message": "annotation",
+              "short_hash": "667ff3de9",
+              "num": 4
+            },
+            {
+              "hash": "eb4d724e0064c77beb20efa626a0f28fd0500676",
+              "unix": "1579084895",
+              "message": "Workflow renaming",
+              "short_hash": "eb4d724e0",
+              "num": 3
+            },
+            {
+              "hash": "7da80b34185f4165852feb3bfe80d692609685db",
+              "unix": "1578668175",
+              "message": "Workflows fix",
+              "short_hash": "7da80b341",
+              "num": 2
+            },
+            {
+              "hash": "e80b7c41c65c1b9880dd6f5ee9947eeda080132d",
+              "unix": "1539959179",
+              "message": "wip",
+              "short_hash": "e80b7c41c",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:38 +0000",
+          "modified": "2024-06-25 09:19:41 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Remove beginning\"];\n  2[\"Remove beginning\"];\n  3[\"Select\"];\n  4[\"Circos\"];\n  5[\"Cut\"];\n  1 -->|out_file1| 5;\n  6[\"Select random lines\"];\n  2 -->|out_file1| 6;\n  7[\"Cut\"];\n  3 -->|out_file1| 7;\n  8[\"Select random lines\"];\n  5 -->|out_file1| 8;\n  9[\"Circos\"];\n  0 -->|output| 9;\n  7 -->|out_file1| 9;\n  10[\"Circos\"];\n  0 -->|output| 10;\n  7 -->|out_file1| 10;\n  11[\"Circos\"];\n  0 -->|output| 11;\n  7 -->|out_file1| 11;\n  8 -->|out_file1| 11;\n  12[\"Circos\"];\n  0 -->|output| 12;\n  7 -->|out_file1| 12;\n  8 -->|out_file1| 12;\n  13[\"Circos\"];\n  0 -->|output| 13;\n  7 -->|out_file1| 13;\n  8 -->|out_file1| 13;\n  14[\"Circos\"];\n  0 -->|output| 14;\n  7 -->|out_file1| 14;\n  8 -->|out_file1| 14;\n  15[\"Circos\"];\n  0 -->|output| 15;\n  7 -->|out_file1| 15;\n  8 -->|out_file1| 15;\n  6 -->|out_file1| 15;\n  16[\"Circos\"];\n  0 -->|output| 16;\n  7 -->|out_file1| 16;\n  8 -->|out_file1| 16;\n  6 -->|out_file1| 16;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"Remove beginning\"]\n  2[label=\"Remove beginning\"]\n  3[label=\"Select\"]\n  4[label=\"Circos\"]\n  5[label=\"Cut\"]\n  1 -> 5 [label=\"out_file1\"]\n  6[label=\"Select random lines\"]\n  2 -> 6 [label=\"out_file1\"]\n  7[label=\"Cut\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Select random lines\"]\n  5 -> 8 [label=\"out_file1\"]\n  9[label=\"Circos\"]\n  0 -> 9 [label=\"output\"]\n  7 -> 9 [label=\"out_file1\"]\n  10[label=\"Circos\"]\n  0 -> 10 [label=\"output\"]\n  7 -> 10 [label=\"out_file1\"]\n  11[label=\"Circos\"]\n  0 -> 11 [label=\"output\"]\n  7 -> 11 [label=\"out_file1\"]\n  8 -> 11 [label=\"out_file1\"]\n  12[label=\"Circos\"]\n  0 -> 12 [label=\"output\"]\n  7 -> 12 [label=\"out_file1\"]\n  8 -> 12 [label=\"out_file1\"]\n  13[label=\"Circos\"]\n  0 -> 13 [label=\"output\"]\n  7 -> 13 [label=\"out_file1\"]\n  8 -> 13 [label=\"out_file1\"]\n  14[label=\"Circos\"]\n  0 -> 14 [label=\"output\"]\n  7 -> 14 [label=\"out_file1\"]\n  8 -> 14 [label=\"out_file1\"]\n  15[label=\"Circos\"]\n  0 -> 15 [label=\"output\"]\n  7 -> 15 [label=\"out_file1\"]\n  8 -> 15 [label=\"out_file1\"]\n  6 -> 15 [label=\"out_file1\"]\n  16[label=\"Circos\"]\n  0 -> 16 [label=\"output\"]\n  7 -> 16 [label=\"out_file1\"]\n  8 -> 16 [label=\"out_file1\"]\n  6 -> 16 [label=\"out_file1\"]\n}",
           "workflow_tools": [
             "Remove beginning1",
             "Grep1",
@@ -234,9 +322,12 @@
           "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos/workflows/nature_workflow.ga",
           "path": "topics/visualisation/tutorials/circos/workflows/nature_workflow.ga",
           "wfid": "visualisation-circos",
-          "wfname": "nature_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/visualisation-circos/versions/nature_workflow",
+          "wfname": "nature-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/visualisation-circos/versions/nature-workflow",
           "license": "AGPL-3.0-or-later",
+          "parent_id": "visualisation/circos",
+          "topic_id": "visualisation",
+          "tutorial_id": "circos",
           "creators": [
             {
               "class": "Person",
@@ -251,9 +342,59 @@
           ],
           "name": "Circos: Nature workflow",
           "title": "Circos: Nature workflow",
+          "version": 5,
+          "description": "Visualisation with Circos",
+          "tags": [
+            "visualisation"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "9171ba4a5eac78f6d11602ae7ae3b0119cf86bd8",
+              "unix": "1684162572",
+              "message": "add license, creators",
+              "short_hash": "9171ba4a5",
+              "num": 5
+            },
+            {
+              "hash": "5cb78929f37d718b2d9940c706dad12700d44db2",
+              "unix": "1684161564",
+              "message": "bump circos versions",
+              "short_hash": "5cb78929f",
+              "num": 4
+            },
+            {
+              "hash": "b267c0f288fcd26ae0993c93dda57299d15b85fa",
+              "unix": "1611269493",
+              "message": "Circos tutorial papercuts v3",
+              "short_hash": "b267c0f28",
+              "num": 3
+            },
+            {
+              "hash": "fdc5b8d63f6af71eb210454389e49ce5f15a3cfd",
+              "unix": "1611268784",
+              "message": "Circos tutorial papercuts v2",
+              "short_hash": "fdc5b8d63",
+              "num": 2
+            },
+            {
+              "hash": "08953e54d37e1fce4e712730467decab3816d5de",
+              "unix": "1611265745",
+              "message": "Circos tutorial papercuts",
+              "short_hash": "08953e54d",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:38 +0000",
+          "modified": "2024-06-25 09:19:41 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Circos\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  1 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Circos\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  1 -->|output| 3;\n  1 -->|output| 3;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[label=\"Circos\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"Circos\"]\n  0 -> 3 [label=\"output\"]\n  1 -> 3 [label=\"output\"]\n  1 -> 3 [label=\"output\"]\n  1 -> 3 [label=\"output\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12"
           ]
@@ -292,6 +433,11 @@
           }
         ],
         "inexact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
           {
             "url": "https://usegalaxy.cz/",
             "name": "UseGalaxy.cz",
@@ -409,9 +555,12 @@
           "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos-microbial/workflows/main_workflow.ga",
           "path": "topics/visualisation/tutorials/circos-microbial/workflows/main_workflow.ga",
           "wfid": "visualisation-circos-microbial",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/visualisation-circos-microbial/versions/main_workflow",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/visualisation-circos-microbial/versions/main-workflow",
           "license": "AGPL-3.0-or-later",
+          "parent_id": "visualisation/circos-microbial",
+          "topic_id": "visualisation",
+          "tutorial_id": "circos-microbial",
           "creators": [
             {
               "class": "Person",
@@ -421,9 +570,32 @@
           ],
           "name": "Circos for E. Coli",
           "title": "Circos for E. Coli",
+          "version": 1,
+          "description": "This workflow will create a simple plot of a microbial sized genome (e.g. E. coli) using a couple of datasets like sequencing depth (bigwigs), gff3 formatted annotations, and some variants.",
+          "tags": [
+            "name:circos",
+            "name:viz"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "42fa4f8afe5470697772183162d5ef7f270c080d",
+              "unix": "1699018150",
+              "message": "add circos microbial tutorial",
+              "short_hash": "42fa4f8af",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:38 +0000",
+          "modified": "2024-06-25 09:19:41 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nGenome\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGenes\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Circos: bigWig to Scatter\"];\n  3 -->|output| 10;\n  11[\"Circos: bigWig to Scatter\"];\n  4 -->|output| 11;\n  12[\"Cut\"];\n  5 -->|output| 12;\n  13[\"Circos: bigWig to Scatter\"];\n  6 -->|output| 13;\n  14[\"Circos: Interval to Tiles\"];\n  8 -->|out_file1| 14;\n  15[\"Circos\"];\n  0 -->|output| 15;\n  10 -->|output| 15;\n  12 -->|out_file1| 15;\n  9 -->|output| 15;\n  11 -->|output| 15;\n  7 -->|output| 15;\n  14 -->|output| 15;\n  14 -->|output| 15;\n  13 -->|output| 15;\n  ad540557-b836-4f68-9d64-7132c059c53e[\"Output\\nplot\"];\n  15 --> ad540557-b836-4f68-9d64-7132c059c53e;\n  style ad540557-b836-4f68-9d64-7132c059c53e stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nRNA Seq Coverage 1\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nRNA Seq Coverage 2\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nDNA Sequencing Coverage\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nVariants\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"GC Skew\"];\n  0 -->|output| 6;\n  7[\"Circos: Interval to Circos Text Labels\"];\n  1 -->|output| 7;\n  8[\"GFF-to-BED\"];\n  1 -->|output| 8;\n  9[\"Circos: bigWig to Scatter\"];\n  2 -->|output| 9;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nGenome\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nGenes\"]\n  10[label=\"Circos: bigWig to Scatter\"]\n  3 -> 10 [label=\"output\"]\n  11[label=\"Circos: bigWig to Scatter\"]\n  4 -> 11 [label=\"output\"]\n  12[label=\"Cut\"]\n  5 -> 12 [label=\"output\"]\n  13[label=\"Circos: bigWig to Scatter\"]\n  6 -> 13 [label=\"output\"]\n  14[label=\"Circos: Interval to Tiles\"]\n  8 -> 14 [label=\"out_file1\"]\n  15[label=\"Circos\"]\n  0 -> 15 [label=\"output\"]\n  10 -> 15 [label=\"output\"]\n  12 -> 15 [label=\"out_file1\"]\n  9 -> 15 [label=\"output\"]\n  11 -> 15 [label=\"output\"]\n  7 -> 15 [label=\"output\"]\n  14 -> 15 [label=\"output\"]\n  14 -> 15 [label=\"output\"]\n  13 -> 15 [label=\"output\"]\n  kad540557b8364f689d647132c059c53e[color=lightseagreen,label=\"Output\\nplot\"]\n  15 -> kad540557b8364f689d647132c059c53e\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nRNA Seq Coverage 1\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nRNA Seq Coverage 2\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nDNA Sequencing Coverage\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nVariants\"]\n  6[label=\"GC Skew\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Circos: Interval to Circos Text Labels\"]\n  1 -> 7 [label=\"output\"]\n  8[label=\"GFF-to-BED\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"Circos: bigWig to Scatter\"]\n  2 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_wiggle_to_scatter/0.69.8+galaxy9",
             "Cut1",
@@ -468,6 +640,11 @@
           {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
             "usegalaxy": false
           },
           {
@@ -907,6 +1084,11 @@
           {
             "url": "https://galaxy.mesocentre.uca.fr",
             "name": "Galaxy@AuBi",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
             "usegalaxy": false
           },
           {

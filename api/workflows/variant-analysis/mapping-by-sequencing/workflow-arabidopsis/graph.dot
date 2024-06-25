@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nA. thaliana TAIR10 ref genome"]
+  1[color=lightblue,label="ℹ️ Input Dataset\naligned reads from outcrossed F2 pool"]
+  2[color=lightblue,label="ℹ️ Input Dataset\naligned reads from Ler mapping strain"]
+  3[label="SnpEff Download"]
+  4[label="Replace parts of text"]
+  0 -> 4 [label="output"]
+  5[label="MiModD Variant Calling"]
+  4 -> 5 [label="outfile"]
+  2 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  6[label="MiModD Extract Variant Sites"]
+  5 -> 6 [label="ofile"]
+  7[label="MiModD NacreousMap"]
+  6 -> 7 [label="output_vcf"]
+  8[label="MiModD VCF Filter"]
+  6 -> 8 [label="output_vcf"]
+  9[label="SnpEff"]
+  8 -> 9 [label="outputfile"]
+  3 -> 9 [label="snpeff_db"]
+  10[label="MiModD Report Variants"]
+  9 -> 10 [label="snpeff_output"]
+}

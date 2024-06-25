@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="EBI SCXA Data Retrieval"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nSingle cell metadata"]
+  2[label="Scanpy Read10x"]
+  0 -> 2 [label="barcode_tsv"]
+  0 -> 2 [label="genes_tsv"]
+  0 -> 2 [label="matrix_mtx"]
+  k6bd01730f0b548248cfcd563cc9c7f7d[color=lightseagreen,label="Output\nScanpy Read10x on input dataset(s): anndata"]
+  2 -> k6bd01730f0b548248cfcd563cc9c7f7d
+  3[label="Inspect AnnData"]
+  2 -> 3 [label="output_h5"]
+  4[label="Transpose"]
+  3 -> 4 [label="X"]
+  5[label="annotateMyIDs"]
+  4 -> 5 [label="out_file"]
+  kc39c7d69550e4b54a412317b599c5e55[color=lightseagreen,label="Output\nannotateMyIDs on input dataset(s): Annotated IDs"]
+  5 -> kc39c7d69550e4b54a412317b599c5e55
+  6[color=lightcoral,label="🛠️ Subworkflow\n1st step removed - Convert from Ensembl to GeneSymbol, summing duplicate genes"]
+  5 -> 6 [label="out_tab"]
+  4 -> 6 [label="out_file"]
+  7[label="Construct Expression Set Object"]
+  6 -> 7 [label="Gene Symbol Count Matrix"]
+  1 -> 7 [label="output"]
+  ke8c91df04e6c4eb29807c2679b494958[color=lightseagreen,label="Output\nConstruct Expression Set Object on input dataset(s): RData ESet Object"]
+  7 -> ke8c91df04e6c4eb29807c2679b494958
+  k2912d09bb1784035b7c87038392e2bf2[color=lightseagreen,label="Output\nConstruct Expression Set Object on input dataset(s): General Info"]
+  7 -> k2912d09bb1784035b7c87038392e2bf2
+  8[label="Manipulate Expression Set Object"]
+  7 -> 8 [label="out_rds"]
+  k08de92d832fe4b479038298cdd13fac5[color=lightseagreen,label="Output\nManipulate Expression Set Object on input dataset(s): ExpressionSet Object"]
+  8 -> k08de92d832fe4b479038298cdd13fac5
+  9[label="Manipulate Expression Set Object"]
+  7 -> 9 [label="out_rds"]
+}

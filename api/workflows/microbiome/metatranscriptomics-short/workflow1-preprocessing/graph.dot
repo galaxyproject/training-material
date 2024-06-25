@@ -1,0 +1,38 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nT1A_forward"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nT1A_reverse"]
+  2[label="Quality control Forward"]
+  0 -> 2 [label="output"]
+  k025f27660802461eafbda716e6f81ba8[color=lightseagreen,label="Output\nFastQC on input dataset(s): RawData"]
+  2 -> k025f27660802461eafbda716e6f81ba8
+  ka54ee2fd7bce439a9f1ff9ec9bf00efd[color=lightseagreen,label="Output\nFastQC on input dataset(s): Webpage"]
+  2 -> ka54ee2fd7bce439a9f1ff9ec9bf00efd
+  3[label="Quality control Reverse"]
+  1 -> 3 [label="output"]
+  4[label="Cutadapt"]
+  0 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  k4bc7c8a4b98541ddb67fa3dfecd38a67[color=lightseagreen,label="Output\nCutadapt on input dataset(s): Read 1 Output"]
+  4 -> k4bc7c8a4b98541ddb67fa3dfecd38a67
+  k36ec0bbae49a47e2b916afec9b35cc3e[color=lightseagreen,label="Output\nCutadapt on input dataset(s): Read 2 Output"]
+  4 -> k36ec0bbae49a47e2b916afec9b35cc3e
+  5[label="MultiQC"]
+  2 -> 5 [label="text_file"]
+  3 -> 5 [label="text_file"]
+  kb9ca21230ee040a0b2eccfc94fa35849[color=lightseagreen,label="Output\nMultiQC on input dataset(s): Stats"]
+  5 -> kb9ca21230ee040a0b2eccfc94fa35849
+  ke94ceb7a0d6b41c8b79d035b315e0a06[color=lightseagreen,label="Output\nMultiQC on input dataset(s): Webpage"]
+  5 -> ke94ceb7a0d6b41c8b79d035b315e0a06
+  6[label="rRNA/rDNA selection"]
+  4 -> 6 [label="out1"]
+  4 -> 6 [label="out2"]
+  7[label="FASTQ interlacer"]
+  6 -> 7 [label="unaligned_forward"]
+  6 -> 7 [label="unaligned_reverse"]
+  kb060eebccd14486e806eaae983bdf52d[color=lightseagreen,label="Output\nFASTQ interlacer singles from input dataset(s)"]
+  7 -> kb060eebccd14486e806eaae983bdf52d
+  k70b738db54514eaa91c0eb445be297fb[color=lightseagreen,label="Output\nFASTQ interlacer pairs from input dataset(s)"]
+  7 -> k70b738db54514eaa91c0eb445be297fb
+}

@@ -1,0 +1,15 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nPolished assembly"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReference genome"]
+  2[label="Busco: assess assembly"]
+  0 -> 2 [label="output"]
+  k219e495236e04b01a407e774b5b02dca[color=lightseagreen,label="Output\nBusco short summary"]
+  2 -> k219e495236e04b01a407e774b5b02dca
+  3[label="Quast: assess assembly"]
+  1 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  k77ab01864cfd460fb71e39a923414ef4[color=lightseagreen,label="Output\nQuast on input dataset(s):  HTML report"]
+  3 -> k77ab01864cfd460fb71e39a923414ef4
+}

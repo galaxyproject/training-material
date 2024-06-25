@@ -1,0 +1,64 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nReads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReference Genome"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nMinimum depth of coverage"]
+  3[color=lightgreen,label="ℹ️ Input Parameter\nMinimum variant allele frequency"]
+  4[color=lightgreen,label="ℹ️ Input Parameter\nAdditional BWA-MEM options"]
+  5[label="fastp"]
+  0 -> 5 [label="output"]
+  6[label="seqret"]
+  1 -> 6 [label="output"]
+  7[label="snippy"]
+  4 -> 7 [label="output"]
+  2 -> 7 [label="output"]
+  3 -> 7 [label="output"]
+  5 -> 7 [label="output_paired_coll"]
+  1 -> 7 [label="output"]
+  8[label="Kraken2"]
+  5 -> 8 [label="output_paired_coll"]
+  kc7abf2bfed4c433ea6959eca61282bb5[color=lightseagreen,label="Output\nreport_output"]
+  8 -> kc7abf2bfed4c433ea6959eca61282bb5
+  k083a0e5177804c91a071dc0e4641d060[color=lightseagreen,label="Output\noutput"]
+  8 -> k083a0e5177804c91a071dc0e4641d060
+  9[label="QualiMap BamQC"]
+  7 -> 9 [label="snpsbam"]
+  10[label="mosdepth"]
+  2 -> 10 [label="output"]
+  7 -> 10 [label="snpsbam"]
+  11[label="TB Variant Filter"]
+  7 -> 11 [label="snpvcf"]
+  12[label="TB-Profiler Profile"]
+  7 -> 12 [label="snpsbam"]
+  k335635b4a4de4980ad0268f0035daeaa[color=lightseagreen,label="Output\noutput_txt"]
+  12 -> k335635b4a4de4980ad0268f0035daeaa
+  13[label="TB Variant Filter"]
+  7 -> 13 [label="snpvcf"]
+  14[label="Flatten collection"]
+  9 -> 14 [label="raw_data"]
+  15[label="Text reformatting"]
+  10 -> 15 [label="output_quantized_bed"]
+  16[label="Text transformation"]
+  11 -> 16 [label="output1"]
+  k007df8c2bd13495f8904abf31d4594d0[color=lightseagreen,label="Output\nFinal annotated VCF"]
+  16 -> k007df8c2bd13495f8904abf31d4594d0
+  17[label="MultiQC"]
+  5 -> 17 [label="report_json"]
+  14 -> 17 [label="output"]
+  k5952823575254ef9881036f1ed0f01f6[color=lightseagreen,label="Output\nhtml_report"]
+  17 -> k5952823575254ef9881036f1ed0f01f6
+  18[label="bcftools consensus"]
+  13 -> 18 [label="output1"]
+  6 -> 18 [label="out_file1"]
+  15 -> 18 [label="outfile"]
+  kc71b135d35f944d0a20ef25528e518af[color=lightseagreen,label="Output\nconsensus_genome"]
+  18 -> kc71b135d35f944d0a20ef25528e518af
+  19[label="TB Variant Report"]
+  16 -> 19 [label="output"]
+  12 -> 19 [label="results_json"]
+  k959528d2f8f2444099cf44fddd6c5069[color=lightseagreen,label="Output\ndrug_resistance_report_html"]
+  19 -> k959528d2f8f2444099cf44fddd6c5069
+  k4d9636eb075b4fd2a1e41a7c37a17fc0[color=lightseagreen,label="Output\nvariants_report_html"]
+  19 -> k4d9636eb075b4fd2a1e41a7c37a17fc0
+}

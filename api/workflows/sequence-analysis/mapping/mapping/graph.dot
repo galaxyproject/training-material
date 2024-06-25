@@ -1,0 +1,31 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nreads_1"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nreads_2"]
+  2[label="FastQC"]
+  0 -> 2 [label="output"]
+  3[label="FastQC"]
+  1 -> 3 [label="output"]
+  4[label="Trim Galore!"]
+  0 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  5[label="MultiQC"]
+  3 -> 5 [label="text_file"]
+  2 -> 5 [label="text_file"]
+  6[label="Bowtie2"]
+  4 -> 6 [label="trimmed_reads_pair1"]
+  4 -> 6 [label="trimmed_reads_pair2"]
+  kd267491228a645f3ac486635eabe47b7[color=lightseagreen,label="Output\nbowtie2_mapping_stats"]
+  6 -> kd267491228a645f3ac486635eabe47b7
+  7[label="Stats"]
+  6 -> 7 [label="output"]
+  k96de3c0c4d7e423b8e9b9a12a011d726[color=lightseagreen,label="Output\nbam_stats_1"]
+  7 -> k96de3c0c4d7e423b8e9b9a12a011d726
+  8[label="Filter"]
+  6 -> 8 [label="output"]
+  9[label="Stats"]
+  8 -> 9 [label="out_file1"]
+  k9603a94adcd84c1f89cdbb31d8572783[color=lightseagreen,label="Output\nbam_stats_2"]
+  9 -> k9603a94adcd84c1f89cdbb31d8572783
+}

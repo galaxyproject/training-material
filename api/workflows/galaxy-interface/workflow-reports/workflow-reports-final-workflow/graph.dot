@@ -1,0 +1,35 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nIris Dataset"]
+  1[label="Convert CSV to tabular"]
+  0 -> 1 [label="output"]
+  2[label="Datamash"]
+  1 -> 2 [label="tabular"]
+  k5381f9b05170484c828e4469ec27ab3e[color=lightseagreen,label="Output\ndatamash_output"]
+  2 -> k5381f9b05170484c828e4469ec27ab3e
+  3[label="Remove beginning"]
+  1 -> 3 [label="tabular"]
+  4[label="Cut"]
+  3 -> 4 [label="out_file1"]
+  5[label="Group"]
+  3 -> 5 [label="out_file1"]
+  k836a57b33657435bb396869af7e2f35e[color=lightseagreen,label="Output\ngroup1"]
+  5 -> k836a57b33657435bb396869af7e2f35e
+  6[label="Group"]
+  3 -> 6 [label="out_file1"]
+  k82e163a48fc54b8e81869fc66cd75b1d[color=lightseagreen,label="Output\ngroup2"]
+  6 -> k82e163a48fc54b8e81869fc66cd75b1d
+  7[label="Scatterplot with ggplot2"]
+  3 -> 7 [label="out_file1"]
+  kbbbac6ca64fb46ad87986c7c5369ccaf[color=lightseagreen,label="Output\nSepal Plot (PNG)"]
+  7 -> kbbbac6ca64fb46ad87986c7c5369ccaf
+  8[label="Scatterplot with ggplot2"]
+  3 -> 8 [label="out_file1"]
+  k74ee0c3c53c244cfb0e82a10c24166c9[color=lightseagreen,label="Output\nPetal Plot (PNG)"]
+  8 -> k74ee0c3c53c244cfb0e82a10c24166c9
+  9[label="Unique"]
+  4 -> 9 [label="out_file1"]
+  k6bcc2f96255e48f5a37b7d6a2c123493[color=lightseagreen,label="Output\nIris Species"]
+  9 -> k6bcc2f96255e48f5a37b7d6a2c123493
+}

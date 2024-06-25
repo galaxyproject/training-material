@@ -1,0 +1,19 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nannotation.txt"]
+  1[color=lightblue,label="ℹ️ Input Dataset\ncounts.txt"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nmt_controls.txt"]
+  3[label="Scater: Calculate QC metrics"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  4[label="Scater: plot library QC"]
+  3 -> 4 [label="output_loom"]
+  5[label="Scater: filter SCE"]
+  3 -> 5 [label="output_loom"]
+  6[label="Scater: plot library QC"]
+  5 -> 6 [label="output_loom"]
+  7[label="Scater: PCA plot"]
+  5 -> 7 [label="output_loom"]
+}

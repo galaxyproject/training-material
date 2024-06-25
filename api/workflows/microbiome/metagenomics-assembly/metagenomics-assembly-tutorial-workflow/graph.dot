@@ -1,0 +1,31 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nInput Dataset Collection"]
+  1[label="metaSPAdes"]
+  0 -> 1 [label="output"]
+  k833d79ffe16f414c9c41db8dbfa8ed6b[color=lightseagreen,label="Output\nmetaSPAdes on input dataset(s): Scaffolds"]
+  1 -> k833d79ffe16f414c9c41db8dbfa8ed6b
+  k10319152d2f947d8be41f956a57e86d3[color=lightseagreen,label="Output\nmetaSPAdes on input dataset(s): Assembly graph"]
+  1 -> k10319152d2f947d8be41f956a57e86d3
+  kb1ffc3a48e394255ac57fd7cfb9c1633[color=lightseagreen,label="Output\nmetaSPAdes on input dataset(s): Assembly graph with scaffolds"]
+  1 -> kb1ffc3a48e394255ac57fd7cfb9c1633
+  kb6b74c9d5a164725a1d111c1f05ee909[color=lightseagreen,label="Output\nmetaSPAdes on input dataset(s): Contigs"]
+  1 -> kb6b74c9d5a164725a1d111c1f05ee909
+  2[label="MEGAHIT"]
+  0 -> 2 [label="output"]
+  3[label="Bowtie2"]
+  0 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  4[label="megahit contig2fastg"]
+  2 -> 4 [label="output"]
+  5[label="Quast"]
+  2 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  6[label="Bandage Image"]
+  4 -> 6 [label="fastg"]
+  7[label="Bandage Info"]
+  4 -> 7 [label="fastg"]
+  8[label="Column join"]
+  7 -> 8 [label="outfile"]
+}

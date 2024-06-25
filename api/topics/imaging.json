@@ -121,17 +121,64 @@
           "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/workflows/main_workflow.ga",
           "path": "topics/imaging/tutorials/object-tracking-using-cell-profiler/workflows/main_workflow.ga",
           "wfid": "imaging-object-tracking-using-cell-profiler",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-object-tracking-using-cell-profiler/versions/main_workflow",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-object-tracking-using-cell-profiler/versions/main-workflow",
           "license": null,
+          "parent_id": "imaging/object-tracking-using-cell-profiler",
+          "topic_id": "imaging",
+          "tutorial_id": "object-tracking-using-cell-profiler",
           "creators": [
 
           ],
           "name": "CP_object_tracking_example",
           "title": "CP_object_tracking_example",
+          "version": 4,
+          "description": "example cellprofiler pipeline",
+          "tags": [
+            "CellProfiler",
+            "imaging"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "df4b9d4a414cc912f4eeb955923a660a34b9d0a5",
+              "unix": "1615762262",
+              "message": "add imaging tag to wf",
+              "short_hash": "df4b9d4a4",
+              "num": 4
+            },
+            {
+              "hash": "02ed9f7276f43c0fedfa5c7e10e72b49f930f69f",
+              "unix": "1615564873",
+              "message": "Tutorial completed and workflow tested.",
+              "short_hash": "02ed9f727",
+              "num": 3
+            },
+            {
+              "hash": "9ebd4b5305f4369f208beddc168d3310ecb7f528",
+              "unix": "1614676803",
+              "message": "update workflow file",
+              "short_hash": "9ebd4b530",
+              "num": 2
+            },
+            {
+              "hash": "e7abfe33423597ddcd26882e1a4a1a076fa9a0ac",
+              "unix": "1614377732",
+              "message": "first skeleton of the tutorial",
+              "short_hash": "e7abfe334",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:35 +0000",
+          "modified": "2024-06-25 09:19:38 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting Modules\"];\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ColorToGray\"];\n  0 -->|output_pipeline| 2;\n  3[\"Unzip\"];\n  1 -->|output| 3;\n  4[\"IdentifyPrimaryObjects\"];\n  2 -->|output_pipeline| 4;\n  5[\"MeasureObjectSizeShape\"];\n  4 -->|output_pipeline| 5;\n  6[\"MeasureObjectIntensity\"];\n  5 -->|output_pipeline| 6;\n  7[\"TrackObjects\"];\n  6 -->|output_pipeline| 7;\n  8[\"OverlayOutlines\"];\n  7 -->|output_pipeline| 8;\n  9[\"Tile\"];\n  8 -->|output_pipeline| 9;\n  10[\"SaveImages\"];\n  9 -->|output_pipeline| 10;\n  11[\"ExportToSpreadsheet\"];\n  10 -->|output_pipeline| 11;\n  12[\"CellProfiler\"];\n  3 -->|unzipped| 12;\n  11 -->|output_pipeline| 12;\n  dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e[\"Output\\nCellProfiler pipeline output files\"];\n  12 --> dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e;\n  style dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting Modules\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[label=\"ColorToGray\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Unzip\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"IdentifyPrimaryObjects\"]\n  2 -> 4 [label=\"output_pipeline\"]\n  5[label=\"MeasureObjectSizeShape\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"MeasureObjectIntensity\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"TrackObjects\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"OverlayOutlines\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Tile\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"SaveImages\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"ExportToSpreadsheet\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"CellProfiler\"]\n  3 -> 12 [label=\"unzipped\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  kdab4a9eefb534c7493f58a0c7f7eb13e[color=lightseagreen,label=\"Output\\nCellProfiler pipeline output files\"]\n  12 -> kdab4a9eefb534c7493f58a0c7f7eb13e\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1",
             "toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0",
@@ -413,9 +460,12 @@
           "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.ga",
           "path": "topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.ga",
           "wfid": "imaging-imaging-introduction",
-          "wfname": "galaxy-workflow-gtn_tutorial__introduction_to_imaging",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-imaging-introduction/versions/galaxy-workflow-gtn_tutorial__introduction_to_imaging",
+          "wfname": "galaxy-workflow-gtn-tutorial--introduction-to-imaging",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-imaging-introduction/versions/galaxy-workflow-gtn-tutorial--introduction-to-imaging",
           "license": "MIT",
+          "parent_id": "imaging/imaging-introduction",
+          "topic_id": "imaging",
+          "tutorial_id": "imaging-introduction",
           "creators": [
             {
               "class": "Person",
@@ -426,9 +476,80 @@
           ],
           "name": "Workflow constructed from Tutorial 'Introduction to image analysis using Galaxy'",
           "title": "Workflow constructed from Tutorial 'Introduction to image analysis using Galaxy'",
+          "version": 8,
+          "description": "",
+          "tags": [
+
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "417cff2ccf2bd267e63d478bec4fec85b8fc04b1",
+              "unix": "1699440926",
+              "message": "fixed json syntax",
+              "short_hash": "417cff2cc",
+              "num": 8
+            },
+            {
+              "hash": "9fd3cf532f4cbe3feff9ee7561ccc45fca40e4ea",
+              "unix": "1699440835",
+              "message": "added `creator` and `license` fields",
+              "short_hash": "9fd3cf532",
+              "num": 7
+            },
+            {
+              "hash": "f1edf310368eae3320d7cad61b45da646dcb24f8",
+              "unix": "1699371738",
+              "message": "updated ga file",
+              "short_hash": "f1edf3103",
+              "num": 6
+            },
+            {
+              "hash": "667ff3de9c4e13d341a6d864bd6dc826ef15ca04",
+              "unix": "1579690769",
+              "message": "annotation",
+              "short_hash": "667ff3de9",
+              "num": 5
+            },
+            {
+              "hash": "eb4d724e0064c77beb20efa626a0f28fd0500676",
+              "unix": "1579084895",
+              "message": "Workflow renaming",
+              "short_hash": "eb4d724e0",
+              "num": 4
+            },
+            {
+              "hash": "faf6d298afa752b6676a1533854c634efefe8075",
+              "unix": "1576155753",
+              "message": "unflatten workflows",
+              "short_hash": "faf6d298a",
+              "num": 3
+            },
+            {
+              "hash": "5eca26d3a4b208e631bbf18232cb1a6727ec99db",
+              "unix": "1565346764",
+              "message": "update images, workflow, and final hands on box",
+              "short_hash": "5eca26d3a",
+              "num": 2
+            },
+            {
+              "hash": "2e42bf8893d877437f600ea4e849c169cbcbb263",
+              "unix": "1565003060",
+              "message": "add workflow",
+              "short_hash": "2e42bf889",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:35 +0000",
+          "modified": "2024-06-25 09:19:38 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput_image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Histogram equalization\"];\n  0 -->|output| 1;\n  2[\"Image Info\"];\n  0 -->|output| 2;\n  3[\"Filter Image\"];\n  0 -->|output| 3;\n  4[\"Filter Image\"];\n  0 -->|output| 4;\n  5[\"Convert image\"];\n  0 -->|output| 5;\n  6[\"Convert image\"];\n  1 -->|output| 6;\n  7[\"Auto Threshold\"];\n  3 -->|output| 7;\n  8[\"Histogram equalization\"];\n  3 -->|output| 8;\n  9[\"Binary 2 Label\"];\n  7 -->|output| 9;\n  10[\"Convert image\"];\n  8 -->|output| 10;\n  11[\"Overlay Images\"];\n  6 -->|output| 11;\n  9 -->|output| 11;\n  85029ccb-ebb3-4a91-9ba3-d1daefd13efc[\"Output\\nout\"];\n  11 --> 85029ccb-ebb3-4a91-9ba3-d1daefd13efc;\n  style 85029ccb-ebb3-4a91-9ba3-d1daefd13efc stroke:#2c3143,stroke-width:4px;\n  12[\"Convert image\"];\n  9 -->|output| 12;\n  13[\"Count Objects\"];\n  9 -->|output| 13;\n  1446f4bf-b031-405a-84f0-88acc1a5c8a3[\"Output\\noutput\"];\n  13 --> 1446f4bf-b031-405a-84f0-88acc1a5c8a3;\n  style 1446f4bf-b031-405a-84f0-88acc1a5c8a3 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput_image\"]\n  1[label=\"Histogram equalization\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Image Info\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter Image\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Filter Image\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Convert image\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Convert image\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"Auto Threshold\"]\n  3 -> 7 [label=\"output\"]\n  8[label=\"Histogram equalization\"]\n  3 -> 8 [label=\"output\"]\n  9[label=\"Binary 2 Label\"]\n  7 -> 9 [label=\"output\"]\n  10[label=\"Convert image\"]\n  8 -> 10 [label=\"output\"]\n  11[label=\"Overlay Images\"]\n  6 -> 11 [label=\"output\"]\n  9 -> 11 [label=\"output\"]\n  k85029ccbebb34a919ba3d1daefd13efc[color=lightseagreen,label=\"Output\\nout\"]\n  11 -> k85029ccbebb34a919ba3d1daefd13efc\n  12[label=\"Convert image\"]\n  9 -> 12 [label=\"output\"]\n  13[label=\"Count Objects\"]\n  9 -> 13 [label=\"output\"]\n  k1446f4bfb031405a84f088acc1a5c8a3[color=lightseagreen,label=\"Output\\noutput\"]\n  13 -> k1446f4bfb031405a84f088acc1a5c8a3\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1",
             "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2",
@@ -690,17 +811,85 @@
           "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/workflows/main_workflow.ga",
           "path": "topics/imaging/tutorials/tutorial-CP/workflows/main_workflow.ga",
           "wfid": "imaging-tutorial-CP",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main_workflow",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main-workflow",
           "license": null,
+          "parent_id": "imaging/tutorial-CP",
+          "topic_id": "imaging",
+          "tutorial_id": "tutorial-CP",
           "creators": [
 
           ],
           "name": "CP_pipeline_IDR_training",
           "title": "CP_pipeline_IDR_training",
+          "version": 7,
+          "description": "Nucleoli segmentation and feature extraction using CellProfiler",
+          "tags": [
+            "CellProfiler",
+            "imaging"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "bd719212c3b71090065923e9941d9f5efbb4e3e3",
+              "unix": "1604492160",
+              "message": "Update main_workflow.ga",
+              "short_hash": "bd719212c",
+              "num": 7
+            },
+            {
+              "hash": "e060051254138ba425caa5775fc10bc5ac93c33e",
+              "unix": "1604488703",
+              "message": "add missing annotation field",
+              "short_hash": "e06005125",
+              "num": 6
+            },
+            {
+              "hash": "ceef3fe076a86ac8ecc50eba9b77ff192385ab60",
+              "unix": "1604444072",
+              "message": "add tag imaging",
+              "short_hash": "ceef3fe07",
+              "num": 5
+            },
+            {
+              "hash": "28a7fb28b785ae9b4804700a389d2334dc0eeb63",
+              "unix": "1604443613",
+              "message": "Update main_workflow.ga",
+              "short_hash": "28a7fb28b",
+              "num": 4
+            },
+            {
+              "hash": "a3a14fb9052dfae1f59ddec213fe4850779b2f1e",
+              "unix": "1593000970",
+              "message": "add annotation and tags to the wf",
+              "short_hash": "a3a14fb90",
+              "num": 3
+            },
+            {
+              "hash": "8fdf6cf2d432e514ebb2fd0a79ede703f2f36efb",
+              "unix": "1592999030",
+              "message": "format wf",
+              "short_hash": "8fdf6cf2d",
+              "num": 2
+            },
+            {
+              "hash": "82051aef73313659e45e3e3fa243c84ca022dce4",
+              "unix": "1592558689",
+              "message": "training_init",
+              "short_hash": "82051aef7",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:35 +0000",
+          "modified": "2024-06-25 09:19:38 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting modules\"];\n  1[\"Download images\"];\n  2[\"Segment complete nuclei\"];\n  0 -->|output_pipeline| 2;\n  3[\"Segmentation mask complete nuclei\"];\n  2 -->|output_pipeline| 3;\n  4[\"Label nuclei\"];\n  3 -->|output_pipeline| 4;\n  5[\"Save labelled nuclei\"];\n  4 -->|output_pipeline| 5;\n  6[\"Detect dark holes in nuclei\"];\n  5 -->|output_pipeline| 6;\n  7[\"Segment nucleoli that fall inside nuclei\"];\n  6 -->|output_pipeline| 7;\n  8[\"Segment nucleoli\"];\n  7 -->|output_pipeline| 8;\n  9[\"Convert the segmented nucleoli into an image\"];\n  8 -->|output_pipeline| 9;\n  10[\"Combine masks nuclei + nucleoli\"];\n  9 -->|output_pipeline| 10;\n  11[\"Save combined segmentation masks\"];\n  10 -->|output_pipeline| 11;\n  12[\"Segment all nuclei\"];\n  11 -->|output_pipeline| 12;\n  13[\"Segmentation mask nucleoli including cells touching borders\"];\n  12 -->|output_pipeline| 13;\n  14[\"Extract background\"];\n  13 -->|output_pipeline| 14;\n  15[\"Measure the image granularity\"];\n  14 -->|output_pipeline| 15;\n  16[\"Measure the nuclei texture\"];\n  15 -->|output_pipeline| 16;\n  17[\"Measure the nuclei intensity\"];\n  16 -->|output_pipeline| 17;\n  18[\"Measure size and shape of nuclei and nucleoli\"];\n  17 -->|output_pipeline| 18;\n  19[\"Relate nucleoli with their parent nuclei\"];\n  18 -->|output_pipeline| 19;\n  20[\"Measure the image quality\"];\n  19 -->|output_pipeline| 20;\n  21[\"Measure the area occupied by nuclei and nucleoli\"];\n  20 -->|output_pipeline| 21;\n  22[\"Measure the image intensity\"];\n  21 -->|output_pipeline| 22;\n  23[\"Export measurements\"];\n  22 -->|output_pipeline| 23;\n  24[\"Run CellProfiler\"];\n  1 -->|output_tar| 24;\n  23 -->|output_pipeline| 24;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting modules\"]\n  1[label=\"Download images\"]\n  2[label=\"Segment complete nuclei\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Segmentation mask complete nuclei\"]\n  2 -> 3 [label=\"output_pipeline\"]\n  4[label=\"Label nuclei\"]\n  3 -> 4 [label=\"output_pipeline\"]\n  5[label=\"Save labelled nuclei\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"Detect dark holes in nuclei\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"Segment nucleoli that fall inside nuclei\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"Segment nucleoli\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Convert the segmented nucleoli into an image\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"Combine masks nuclei + nucleoli\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"Save combined segmentation masks\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"Segment all nuclei\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  13[label=\"Segmentation mask nucleoli including cells touching borders\"]\n  12 -> 13 [label=\"output_pipeline\"]\n  14[label=\"Extract background\"]\n  13 -> 14 [label=\"output_pipeline\"]\n  15[label=\"Measure the image granularity\"]\n  14 -> 15 [label=\"output_pipeline\"]\n  16[label=\"Measure the nuclei texture\"]\n  15 -> 16 [label=\"output_pipeline\"]\n  17[label=\"Measure the nuclei intensity\"]\n  16 -> 17 [label=\"output_pipeline\"]\n  18[label=\"Measure size and shape of nuclei and nucleoli\"]\n  17 -> 18 [label=\"output_pipeline\"]\n  19[label=\"Relate nucleoli with their parent nuclei\"]\n  18 -> 19 [label=\"output_pipeline\"]\n  20[label=\"Measure the image quality\"]\n  19 -> 20 [label=\"output_pipeline\"]\n  21[label=\"Measure the area occupied by nuclei and nucleoli\"]\n  20 -> 21 [label=\"output_pipeline\"]\n  22[label=\"Measure the image intensity\"]\n  21 -> 22 [label=\"output_pipeline\"]\n  23[label=\"Export measurements\"]\n  22 -> 23 [label=\"output_pipeline\"]\n  24[label=\"Run CellProfiler\"]\n  1 -> 24 [label=\"output_tar\"]\n  23 -> 24 [label=\"output_pipeline\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9",
             "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.41",
@@ -750,6 +939,11 @@
       ],
       "supported_servers": {
         "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
@@ -1008,17 +1202,56 @@
           "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.ga",
           "path": "topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.ga",
           "wfid": "imaging-multiplex-tissue-imaging-TMA",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-multiplex-tissue-imaging-TMA/versions/main_workflow",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-multiplex-tissue-imaging-TMA/versions/main-workflow",
           "license": null,
+          "parent_id": "imaging/multiplex-tissue-imaging-TMA",
+          "topic_id": "imaging",
+          "tutorial_id": "multiplex-tissue-imaging-TMA",
           "creators": [
 
           ],
           "name": "GTN_Exemplar_002_TMA_workflow",
           "title": "GTN_Exemplar_002_TMA_workflow",
+          "version": 3,
+          "description": "End-to-End Tissue Microarray Analysis with Galaxy-ME",
+          "tags": [
+            "imaging"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "74c571972f6c9c00bca6242b05cab50a0c947af0",
+              "unix": "1675987355",
+              "message": "update tool IDs, params to tutorial; add updated workflow; add hands-on avivator example to tutorial",
+              "short_hash": "74c571972",
+              "num": 3
+            },
+            {
+              "hash": "b0bac741569e5790eca8b5f21619220cea4ab902",
+              "unix": "1657213046",
+              "message": "update tool IDs in MTI workflow for linting",
+              "short_hash": "b0bac7415",
+              "num": 2
+            },
+            {
+              "hash": "aa2aba190643cbb000c0c2916d4c3656c1988e2d",
+              "unix": "1656910720",
+              "message": "Multiplex Imaging tutorial - initial push",
+              "short_hash": "aa2aba190",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:35 +0000",
+          "modified": "2024-06-25 09:19:38 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmarkers.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"BaSiC Illumination\"];\n  0 -->|output| 3;\n  4[\"ASHLAR\"];\n  3 -->|output_dfp| 4;\n  3 -->|output_ffp| 4;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"UNetCoreograph\"];\n  4 -->|output| 5;\n  6[\"Mesmer\"];\n  5 -->|tma_sections| 6;\n  ee73bee3-59e7-4e1c-87fd-197b8eac7e15[\"Output\\nMesmer on input dataset(s): Mask\"];\n  6 --> ee73bee3-59e7-4e1c-87fd-197b8eac7e15;\n  style ee73bee3-59e7-4e1c-87fd-197b8eac7e15 stroke:#2c3143,stroke-width:4px;\n  7[\"Convert image\"];\n  5 -->|tma_sections| 7;\n  8[\"MCQUANT\"];\n  1 -->|output| 8;\n  5 -->|tma_sections| 8;\n  6 -->|mask| 8;\n  fe28534a-2b3f-4ecc-8ba9-a106b2d1425c[\"Output\\nPrimary Mask Quantification\"];\n  8 --> fe28534a-2b3f-4ecc-8ba9-a106b2d1425c;\n  style fe28534a-2b3f-4ecc-8ba9-a106b2d1425c stroke:#2c3143,stroke-width:4px;\n  9[\"Rename OME-TIFF Channels\"];\n  1 -->|output| 9;\n  7 -->|output| 9;\n  10[\"Convert McMicro Output to Anndata\"];\n  8 -->|cellmask| 10;\n  11[\"Single Cell Phenotyping\"];\n  10 -->|outfile| 11;\n  2 -->|output| 11;\n  12[\"Vitessce Visualization\"];\n  11 -->|output| 12;\n  9 -->|renamed_image| 12;\n  6 -->|mask| 12;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Dataset Collection\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nmarkers.csv\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"]\n  3[label=\"BaSiC Illumination\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"ASHLAR\"]\n  3 -> 4 [label=\"output_dfp\"]\n  3 -> 4 [label=\"output_ffp\"]\n  0 -> 4 [label=\"output\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"UNetCoreograph\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Mesmer\"]\n  5 -> 6 [label=\"tma_sections\"]\n  kee73bee359e74e1c87fd197b8eac7e15[color=lightseagreen,label=\"Output\\nMesmer on input dataset(s): Mask\"]\n  6 -> kee73bee359e74e1c87fd197b8eac7e15\n  7[label=\"Convert image\"]\n  5 -> 7 [label=\"tma_sections\"]\n  8[label=\"MCQUANT\"]\n  1 -> 8 [label=\"output\"]\n  5 -> 8 [label=\"tma_sections\"]\n  6 -> 8 [label=\"mask\"]\n  kfe28534a2b3f4ecc8ba9a106b2d1425c[color=lightseagreen,label=\"Output\\nPrimary Mask Quantification\"]\n  8 -> kfe28534a2b3f4ecc8ba9a106b2d1425c\n  9[label=\"Rename OME-TIFF Channels\"]\n  1 -> 9 [label=\"output\"]\n  7 -> 9 [label=\"output\"]\n  10[label=\"Convert McMicro Output to Anndata\"]\n  8 -> 10 [label=\"cellmask\"]\n  11[label=\"Single Cell Phenotyping\"]\n  10 -> 11 [label=\"outfile\"]\n  2 -> 11 [label=\"output\"]\n  12[label=\"Vitessce Visualization\"]\n  11 -> 12 [label=\"output\"]\n  9 -> 12 [label=\"renamed_image\"]\n  6 -> 12 [label=\"mask\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1",
             "toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1",
@@ -1051,6 +1284,11 @@
 
         ],
         "inexact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
           {
             "url": "https://usegalaxy.no/",
             "name": "UseGalaxy.no",
@@ -1256,9 +1494,12 @@
           "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.ga",
           "path": "topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.ga",
           "wfid": "imaging-hela-screen-analysis",
-          "wfname": "analyze_screen",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze_screen",
+          "wfname": "analyze-screen",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze-screen",
           "license": "MIT",
+          "parent_id": "imaging/hela-screen-analysis",
+          "topic_id": "imaging",
+          "tutorial_id": "hela-screen-analysis",
           "creators": [
             {
               "class": "Person",
@@ -1269,9 +1510,73 @@
           ],
           "name": "analyze_screen",
           "title": "analyze_screen",
+          "version": 9,
+          "description": "Analyse HeLa fluorescence siRNA screen",
+          "tags": [
+
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": true,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "d1e807a669d4a58fee5b1db2eceb8d4e4468fc21",
+              "unix": "1699440970",
+              "message": "fixed json syntax",
+              "short_hash": "d1e807a66",
+              "num": 7
+            },
+            {
+              "hash": "e34767b4ad7f4a1965ce15499e19fac5928806e0",
+              "unix": "1699440539",
+              "message": "added `creator` and `license` fields",
+              "short_hash": "e34767b4a",
+              "num": 6
+            },
+            {
+              "hash": "fab15d8bfc051c7ef280ef9aa08572543b5b24bf",
+              "unix": "1699376551",
+              "message": "updated analyze_screen.ga",
+              "short_hash": "fab15d8bf",
+              "num": 5
+            },
+            {
+              "hash": "667ff3de9c4e13d341a6d864bd6dc826ef15ca04",
+              "unix": "1579690769",
+              "message": "annotation",
+              "short_hash": "667ff3de9",
+              "num": 4
+            },
+            {
+              "hash": "eb4d724e0064c77beb20efa626a0f28fd0500676",
+              "unix": "1579084895",
+              "message": "Workflow renaming",
+              "short_hash": "eb4d724e0",
+              "num": 3
+            },
+            {
+              "hash": "faf6d298afa752b6676a1533854c634efefe8075",
+              "unix": "1576155753",
+              "message": "unflatten workflows",
+              "short_hash": "faf6d298a",
+              "num": 2
+            },
+            {
+              "hash": "96462d6dcda154df6515addd109fdad1489cbe86",
+              "unix": "1565095814",
+              "message": "added second tutorial",
+              "short_hash": "96462d6dc",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:35 +0000",
+          "modified": "2024-06-25 09:19:38 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\ninput images\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nrules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"🛠️ Subworkflow\\nfeature_extraction\"];\n  style 2 fill:#edd,stroke:#900,stroke-width:4px;\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"merge_table\"];\n  2 -->|output| 3;\n  3fc2324d-233b-4785-9fb7-9c30b2daaef4[\"Output\\noutput\"];\n  3 --> 3fc2324d-233b-4785-9fb7-9c30b2daaef4;\n  style 3fc2324d-233b-4785-9fb7-9c30b2daaef4 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\ninput images\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nrules\"]\n  2[color=lightcoral,label=\"🛠️ Subworkflow\\nfeature_extraction\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"merge_table\"]\n  2 -> 3 [label=\"output\"]\n  k3fc2324d233b47859fb79c30b2daaef4[color=lightseagreen,label=\"Output\\noutput\"]\n  3 -> k3fc2324d233b47859fb79c30b2daaef4\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             [
@@ -1290,9 +1595,12 @@
           "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.ga",
           "path": "topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.ga",
           "wfid": "imaging-hela-screen-analysis",
-          "wfname": "feature_extraction",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/feature_extraction",
+          "wfname": "feature-extraction",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/feature-extraction",
           "license": "MIT",
+          "parent_id": "imaging/hela-screen-analysis",
+          "topic_id": "imaging",
+          "tutorial_id": "hela-screen-analysis",
           "creators": [
             {
               "class": "Person",
@@ -1303,9 +1611,73 @@
           ],
           "name": "feature_extraction",
           "title": "feature_extraction",
+          "version": 7,
+          "description": "",
+          "tags": [
+
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": null,
+          "history": [
+            {
+              "hash": "d1e807a669d4a58fee5b1db2eceb8d4e4468fc21",
+              "unix": "1699440970",
+              "message": "fixed json syntax",
+              "short_hash": "d1e807a66",
+              "num": 7
+            },
+            {
+              "hash": "e34767b4ad7f4a1965ce15499e19fac5928806e0",
+              "unix": "1699440539",
+              "message": "added `creator` and `license` fields",
+              "short_hash": "e34767b4a",
+              "num": 6
+            },
+            {
+              "hash": "574ce45a0c0a6defc6795bb6bd67d3e2fd98d4ca",
+              "unix": "1699376568",
+              "message": "updated feature_extraction.ga",
+              "short_hash": "574ce45a0",
+              "num": 5
+            },
+            {
+              "hash": "667ff3de9c4e13d341a6d864bd6dc826ef15ca04",
+              "unix": "1579690769",
+              "message": "annotation",
+              "short_hash": "667ff3de9",
+              "num": 4
+            },
+            {
+              "hash": "eb4d724e0064c77beb20efa626a0f28fd0500676",
+              "unix": "1579084895",
+              "message": "Workflow renaming",
+              "short_hash": "eb4d724e0",
+              "num": 3
+            },
+            {
+              "hash": "faf6d298afa752b6676a1533854c634efefe8075",
+              "unix": "1576155753",
+              "message": "unflatten workflows",
+              "short_hash": "faf6d298a",
+              "num": 2
+            },
+            {
+              "hash": "96462d6dcda154df6515addd109fdad1489cbe86",
+              "unix": "1565095814",
+              "message": "added second tutorial",
+              "short_hash": "96462d6dc",
+              "num": 1
+            }
+          ],
           "test_results": null,
-          "modified": "2024-06-25 00:05:35 +0000",
+          "modified": "2024-06-25 09:19:38 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nrules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter Image\"];\n  0 -->|output| 2;\n  3[\"Auto Threshold\"];\n  2 -->|output| 3;\n  4[\"Split objects\"];\n  3 -->|output| 4;\n  5[\"2D Feature Extraction\"];\n  4 -->|output| 5;\n  6[\"Filter segmentation\"];\n  5 -->|output| 6;\n  4 -->|output| 6;\n  1 -->|output| 6;\n  b90cbc94-33fd-4600-96b5-8cf0bcaf2e94[\"Output\\noutput\"];\n  6 --> b90cbc94-33fd-4600-96b5-8cf0bcaf2e94;\n  style b90cbc94-33fd-4600-96b5-8cf0bcaf2e94 stroke:#2c3143,stroke-width:4px;\n  7[\"2D Feature Extraction\"];\n  6 -->|output| 7;\n  0 -->|output| 7;\n  3d3c037a-50ef-443b-a6f8-8a37db6bfb36[\"Output\\noutput\"];\n  7 --> 3d3c037a-50ef-443b-a6f8-8a37db6bfb36;\n  style 3d3c037a-50ef-443b-a6f8-8a37db6bfb36 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput image\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nrules\"]\n  2[label=\"Filter Image\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Auto Threshold\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Split objects\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"2D Feature Extraction\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Filter segmentation\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  kb90cbc9433fd460096b58cf0bcaf2e94[color=lightseagreen,label=\"Output\\noutput\"]\n  6 -> kb90cbc9433fd460096b58cf0bcaf2e94\n  7[label=\"2D Feature Extraction\"]\n  6 -> 7 [label=\"output\"]\n  0 -> 7 [label=\"output\"]\n  k3d3c037a50ef443ba6f88a37db6bfb36[color=lightseagreen,label=\"Output\\noutput\"]\n  7 -> k3d3c037a50ef443ba6f88a37db6bfb36\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
             "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5",
@@ -1334,6 +1706,11 @@
 
         ],
         "inexact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
           {
             "url": "https://usegalaxy.cz/",
             "name": "UseGalaxy.cz",
@@ -1523,8 +1900,8 @@
       "id": "imaging/bioimage-metadata",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-06-25 00:05:35 +0000",
-      "pub_date": "2024-06-25 00:05:35 +0000",
+      "mod_date": "2024-06-25 09:19:38 +0000",
+      "pub_date": "2024-06-25 09:19:38 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-metadata/tutorial.json",
       "tools": [
@@ -1717,8 +2094,8 @@
       "id": "imaging/bioimage-REMBI",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-06-25 00:05:35 +0000",
-      "pub_date": "2024-06-25 00:05:35 +0000",
+      "mod_date": "2024-06-25 09:19:38 +0000",
+      "pub_date": "2024-06-25 09:19:38 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-REMBI/tutorial.json",
       "tools": [

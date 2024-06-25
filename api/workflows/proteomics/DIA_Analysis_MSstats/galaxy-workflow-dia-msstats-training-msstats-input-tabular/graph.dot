@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nPyProphet MSstats input"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nComparison matrix"]
+  2[label="MSstats"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  3[label="Select"]
+  2 -> 3 [label="comparison_result"]
+  k6e8589bd13fd4a97a9c3ea0a5a0e2326[color=lightseagreen,label="Output\nSelect_Ecoli"]
+  3 -> k6e8589bd13fd4a97a9c3ea0a5a0e2326
+  4[label="Filter"]
+  3 -> 4 [label="out_file1"]
+  k6997a43aa17b418bbb6d7d32a6c277ae[color=lightseagreen,label="Output\nFilter_Ecoli"]
+  4 -> k6997a43aa17b418bbb6d7d32a6c277ae
+  5[label="Histogram"]
+  4 -> 5 [label="out_file1"]
+  kcf3abac382274af8a5516aeae154a0e4[color=lightseagreen,label="Output\nHistogram_Ecoli"]
+  5 -> kcf3abac382274af8a5516aeae154a0e4
+}

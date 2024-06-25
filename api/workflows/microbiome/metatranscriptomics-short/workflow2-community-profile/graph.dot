@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nQC controlled forward reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nQC controlled reverse reads"]
+  2[label="Taxonomic assignation"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  kb3e3198d394e4aebba6c9e73bfe8d049[color=lightseagreen,label="Output\nMetaPhlAn on input dataset(s): SAM file"]
+  2 -> kb3e3198d394e4aebba6c9e73bfe8d049
+  ka4ecdc94d012413fa9cb6f3e9ee70d5b[color=lightseagreen,label="Output\nMetaPhlAn on input dataset(s): Predicted taxon relative abundances"]
+  2 -> ka4ecdc94d012413fa9cb6f3e9ee70d5b
+  k30a9e6928d3145bd924681ddead3ba03[color=lightseagreen,label="Output\nMetaPhlAn on input dataset(s): Bowtie2 output"]
+  2 -> k30a9e6928d3145bd924681ddead3ba03
+  k2465a9aba28e4c58b647b6792f77ddf2[color=lightseagreen,label="Output\nMetaPhlAn on input dataset(s): BIOM file"]
+  2 -> k2465a9aba28e4c58b647b6792f77ddf2
+  3[label="Cut"]
+  2 -> 3 [label="output_file"]
+  4[label="Krona pie chart"]
+  2 -> 4 [label="krona_output_file"]
+  5[label="Export to GraPhlAn"]
+  3 -> 5 [label="out_file1"]
+  kf578de2e6edd4ee09bc49371d6fd957f[color=lightseagreen,label="Output\nExport to GraPhlAn on input dataset(s): Annotation"]
+  5 -> kf578de2e6edd4ee09bc49371d6fd957f
+  k4e9cfae0ee7b434784db5a3e24688e50[color=lightseagreen,label="Output\nExport to GraPhlAn on input dataset(s): Tree"]
+  5 -> k4e9cfae0ee7b434784db5a3e24688e50
+  6[label="Generation, personalization and annotation of tree"]
+  5 -> 6 [label="annotation"]
+  5 -> 6 [label="tree"]
+  kedf4ecafdddd43a3ba4ad683671c1815[color=lightseagreen,label="Output\nGeneration, personalization and annotation of tree on input dataset(s): Tree in PhyloXML"]
+  6 -> kedf4ecafdddd43a3ba4ad683671c1815
+  7[label="Visualisation GraPhlAn"]
+  6 -> 7 [label="output_tree"]
+  kb304fe87de7e48d287749c52d2395fa4[color=lightseagreen,label="Output\nGraPhlAn on input dataset(s): PNG"]
+  7 -> kb304fe87de7e48d287749c52d2395fa4
+}

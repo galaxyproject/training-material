@@ -1,0 +1,39 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nFather data"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nMother data"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nProband data"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nPEDigree data"]
+  4[label="Samtools view"]
+  0 -> 4 [label="output"]
+  5[label="Samtools view"]
+  1 -> 5 [label="output"]
+  6[label="Samtools view"]
+  2 -> 6 [label="output"]
+  7[label="RmDup"]
+  4 -> 7 [label="outputsam"]
+  8[label="RmDup"]
+  5 -> 8 [label="outputsam"]
+  9[label="RmDup"]
+  6 -> 9 [label="outputsam"]
+  10[label="FreeBayes"]
+  7 -> 10 [label="output1"]
+  8 -> 10 [label="output1"]
+  9 -> 10 [label="output1"]
+  11[label="bcftools norm"]
+  10 -> 11 [label="output_vcf"]
+  12[label="SnpEff eff:"]
+  11 -> 12 [label="output_file"]
+  k974b6b15ccf74fe88a712b3fe8b45272[color=lightseagreen,label="Output\nsnpeff_variant_stats"]
+  12 -> k974b6b15ccf74fe88a712b3fe8b45272
+  k083b96865c6d495f92577243896e64d7[color=lightseagreen,label="Output\nnormalized_snpeff_annotated_variants"]
+  12 -> k083b96865c6d495f92577243896e64d7
+  13[label="GEMINI load"]
+  12 -> 13 [label="snpeff_output"]
+  3 -> 13 [label="output"]
+  14[label="GEMINI inheritance pattern"]
+  13 -> 14 [label="outfile"]
+  kc5a648223c68495eb2fd4642b1aabb5a[color=lightseagreen,label="Output\ncandidate_mutations"]
+  14 -> kc5a648223c68495eb2fd4642b1aabb5a
+}

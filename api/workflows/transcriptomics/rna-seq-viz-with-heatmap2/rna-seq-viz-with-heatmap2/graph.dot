@@ -1,0 +1,17 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nheatmap_genes"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nnormalized_counts"]
+  2[label="Join two Datasets"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  3[label="Cut"]
+  2 -> 3 [label="out_file1"]
+  4[label="Transpose"]
+  3 -> 4 [label="out_file1"]
+  5[label="heatmap2"]
+  4 -> 5 [label="out_file"]
+  k7459b1c435c5477481d420a184110691[color=lightseagreen,label="Output\nheatmap_pdf"]
+  5 -> k7459b1c435c5477481d420a184110691
+}

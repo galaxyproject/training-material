@@ -1,0 +1,29 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nPacBio reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReference genome"]
+  2[label="Flye"]
+  0 -> 2 [label="output"]
+  kd7badcb24d384ddab89bb4bd3ffbc64a[color=lightseagreen,label="Output\nFlye on input dataset(s): assembly info"]
+  2 -> kd7badcb24d384ddab89bb4bd3ffbc64a
+  kc8f96c22e06e4fecbbfad993b7b103eb[color=lightseagreen,label="Output\nFlye on input dataset(s): consensus"]
+  2 -> kc8f96c22e06e4fecbbfad993b7b103eb
+  ka288fb935aa5423189e4958c57106978[color=lightseagreen,label="Output\nFlye on input dataset(s): graphical fragment assembly"]
+  2 -> ka288fb935aa5423189e4958c57106978
+  k0e0641815cd442c898f9fe417303956c[color=lightseagreen,label="Output\nFlye on input dataset(s): assembly graph"]
+  2 -> k0e0641815cd442c898f9fe417303956c
+  3[label="Fasta Statistics"]
+  1 -> 3 [label="output"]
+  4[label="Busco"]
+  1 -> 4 [label="output"]
+  5[label="Fasta Statistics"]
+  2 -> 5 [label="consensus"]
+  6[label="Quast"]
+  1 -> 6 [label="output"]
+  2 -> 6 [label="consensus"]
+  kbea191cbf88d4103b8fab3683d77cc93[color=lightseagreen,label="Output\nQuast on input dataset(s):  HTML report"]
+  6 -> kbea191cbf88d4103b8fab3683d77cc93
+  7[label="Busco"]
+  2 -> 7 [label="consensus"]
+}

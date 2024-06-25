@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nreads_1"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nreads_2"]
+  2[label="FastQC"]
+  0 -> 2 [label="output"]
+  3[label="FastQC"]
+  1 -> 3 [label="output"]
+  4[label="Trim Galore!"]
+  0 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  5[label="MultiQC"]
+  3 -> 5 [label="text_file"]
+  2 -> 5 [label="text_file"]
+  6[label="Bowtie2"]
+  4 -> 6 [label="trimmed_reads_pair1"]
+  4 -> 6 [label="trimmed_reads_pair2"]
+  kcb22563afece4b639d85ff5817edb5c3[color=lightseagreen,label="Output\nbowtie2_mapping_stats"]
+  6 -> kcb22563afece4b639d85ff5817edb5c3
+  7[label="Samtools stats"]
+  6 -> 7 [label="output"]
+  k490620d4f0834999bb3373a2a1f736b4[color=lightseagreen,label="Output\nbam_stats_1"]
+  7 -> k490620d4f0834999bb3373a2a1f736b4
+  8[label="JBrowse"]
+  6 -> 8 [label="output"]
+}

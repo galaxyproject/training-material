@@ -1,0 +1,15 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nList of FACS pairs"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nBarcodes"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nGTF file UCSC"]
+  3[label="Flatten Collection"]
+  0 -> 3 [label="output"]
+  4[color=lightcoral,label="🛠️ Subworkflow\nCelSeq2: Single Batch mm10"]
+  1 -> 4 [label="output"]
+  3 -> 4 [label="output"]
+  2 -> 4 [label="output"]
+  5[label="Column Join"]
+  4 -> 5 [label="9:out_counts"]
+}

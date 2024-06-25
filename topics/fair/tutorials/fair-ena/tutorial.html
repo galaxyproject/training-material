@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@397075c2213ce9ea43219c707aa1a8ca10884d83",
+		release: "galaxy-training-network@9c3bfcc77e95a87afc6fe3af9a7f494881160147",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Sequence data submission to ENA">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-26 14:35:58 +0000">
+<meta name="DC.date" content="2024-06-25 09:01:44 +0000">
 <meta name="DC.creator" content="Sonal Henson"><meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAIR Data, Workflows, and Research / Sequence data submission to ENA / Hands-on: Sequence data submission to ENA">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-03-26 14:35:58 +0000",
+  "dateModified": "2024-06-25 09:01:44 +0000",
   "datePublished": "2023-11-01 08:38:03 +0000",
   "identifier": "https://gxy.io/GTN:T00369",
   "accessMode": [
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Sequence data submission to ENA",
   "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-ena/tutorial.html",
-  "version": 7,
+  "version": 10,
   "timeRequired": "PT1H",
   "teaches": "To populate ENA metadata objects through the Webin portal\n - To submit raw reads to ENA using FTP",
   "keywords": [
@@ -463,7 +463,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/fair/"
     }
   ],
-  "educationalLevel": "Introductory",
+  "educationalLevel": "Beginner",
   "mentions": [
     {
       "@type": "Thing",
@@ -474,7 +474,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "ENA"
     }
   ],
-  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>\r"
+  "abstract": "DNA sequencing has become one of the key technologies in molecular biology, with applications in diagnostics, evolutionary biology, drug discovery, forensics and much more. Drop in sequencing costs and breakthroughs in sequencing technologies has seen increasing utilization of sequencing as a research tool, featuring in thousands of life-science publications every year. \r"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -843,7 +843,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 1, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 26, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 25, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -863,7 +863,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 3 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
 
     </blockquote>
     </section>
@@ -878,32 +878,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
-
-  <p>In this tutorial we will deal with:</p>
-
-<ol id="markdown-toc">
-  <li><a href="#01-introduction" id="markdown-toc-01-introduction">01. Introduction</a>    <ol>
-      <li><a href="#ena-submission-routes" id="markdown-toc-ena-submission-routes">ENA Submission Routes</a></li>
-      <li><a href="#ena-metadata-model" id="markdown-toc-ena-metadata-model">ENA Metadata Model</a></li>
-    </ol>
-  </li>
-  <li><a href="#02-submitting-data" id="markdown-toc-02-submitting-data">02. Submitting data</a>    <ol>
-      <li><a href="#1-webin-login" id="markdown-toc-1-webin-login">1. Webin login</a></li>
-      <li><a href="#2-study-metadata" id="markdown-toc-2-study-metadata">2. Study metadata</a></li>
-      <li><a href="#3-sample-metadata" id="markdown-toc-3-sample-metadata">3. Sample metadata</a></li>
-      <li><a href="#4-read-metadata" id="markdown-toc-4-read-metadata">4. Read metadata</a></li>
-      <li><a href="#5-read-data-upload" id="markdown-toc-5-read-data-upload">5. Read data upload</a></li>
-      <li><a href="#6-post-submission-editing" id="markdown-toc-6-post-submission-editing">6. Post-submission editing</a></li>
-    </ol>
-  </li>
-</ol>
-
-</blockquote>
-
-<h1 id="01-introduction">01. Introduction</h1>
-<p>DNA sequencing has become one of the key technologies in molecular biology, with applications in diagnostics, evolutionary biology, drug discovery, forensics and much more. Drop in sequencing costs and breakthroughs in sequencing technologies has seen increasing utilization of sequencing as a research tool, featuring in thousands of life-science publications every year.</p>
+                <p>DNA sequencing has become one of the key technologies in molecular biology, with applications in diagnostics, evolutionary biology, drug discovery, forensics and much more. Drop in sequencing costs and breakthroughs in sequencing technologies has seen increasing utilization of sequencing as a research tool, featuring in thousands of life-science publications every year.</p>
 
 <p>Prior to publication many journals and funders require authors to submit their raw sequence data to one of the three INSDC member databases – <strong>ENA, NCBI or DDBJ</strong> – between which data is synchronised on a daily basis. INSDC is the core infrastructure for sharing nucleotide sequence data and metadata in the public domain. Data in INSDC member databases is available permanently, for free and with unrestricted access. For each submitted sequence a unique accession number is issued which can be reported in the publication.</p>
 
@@ -915,6 +890,27 @@ need to submit data stored on a remote server, you are in the right place. This 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-what-is-curl"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-curl" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: What is cURL?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it’s a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#ena-submission-routes" id="markdown-toc-ena-submission-routes">ENA Submission Routes</a></li>
+  <li><a href="#ena-metadata-model" id="markdown-toc-ena-metadata-model">ENA Metadata Model</a></li>
+  <li><a href="#02-submitting-data" id="markdown-toc-02-submitting-data">02. Submitting data</a>    <ol>
+      <li><a href="#1-webin-login" id="markdown-toc-1-webin-login">1. Webin login</a></li>
+      <li><a href="#2-study-metadata" id="markdown-toc-2-study-metadata">2. Study metadata</a></li>
+      <li><a href="#3-sample-metadata" id="markdown-toc-3-sample-metadata">3. Sample metadata</a></li>
+      <li><a href="#4-read-metadata" id="markdown-toc-4-read-metadata">4. Read metadata</a></li>
+      <li><a href="#5-read-data-upload" id="markdown-toc-5-read-data-upload">5. Read data upload</a></li>
+      <li><a href="#6-post-submission-editing" id="markdown-toc-6-post-submission-editing">6. Post-submission editing</a></li>
+    </ol>
+  </li>
+</ol>
+
 </blockquote>
 
 <h2 id="ena-submission-routes">ENA Submission Routes</h2>
@@ -1188,22 +1184,27 @@ Metadata required for this are:</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-linux-or-osx"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Linux or OSX</div>
   <h4 id="on-a-linux-based-operating-system">On a Linux-based operating system</h4>
-  <p><strong>Step 1</strong>:
-Compress the fastq files for the upload using gzip.</p>
+  <ol>
+    <li>
+      <p>Compress the fastq files for the upload using gzip.</p>
 
-  <p>Open the terminal on your machine then type the commands below. First move to the directory where fastq files are located, then compress the fastq files using gzip command.</p>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># In the command below replace '/path/to/fastq/directory' with the correct path
+      <p>Open the terminal on your machine then type the commands below. First move to the directory where fastq files are located, then compress the fastq files using gzip command.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># In the command below replace '/path/to/fastq/directory' with the correct path
 cd /path/to/fastq/directory
 
 gzip *.fastq
-</code></pre></div>  </div>
-  <p><strong>Step 2</strong>: 
-To enable verification of the integrity of the uploaded fastq file, ENA requires md5 checksum for each file.</p>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>To enable verification of the integrity of the uploaded fastq file, ENA requires md5 checksum for each file.</p>
 
-  <p>Type the command below to calculate and print md5 sums to tab-separated file (for easy cut-and-paste later).</p>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for f in *.gz; do md5 $f | awk '{ gsub(/\(|\)/,""); print $2"\t" $4 }'; done &gt; md5sums.tsv
-</code></pre></div>  </div>
-  <p>md5sums.tsv will contain a tab-separated table of fastq.gz filenames and their md5sum.</p>
+      <p>Type the command below to calculate and print md5 sums to tab-separated file (for easy cut-and-paste later).</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for f in *.gz; do md5 $f | awk '{ gsub(/\(|\)/,""); print $2"\t" $4 }'; done &gt; md5sums.tsv
+</code></pre></div>      </div>
+      <p>md5sums.tsv will contain a tab-separated table of fastq.gz filenames and their md5sum.</p>
+    </li>
+  </ol>
 
 </blockquote>
 
@@ -1547,7 +1548,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/397075c2213ce9ea43219c707aa1a8ca10884d83">397075c</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9c3bfcc77e95a87afc6fe3af9a7f494881160147">9c3bfcc</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>

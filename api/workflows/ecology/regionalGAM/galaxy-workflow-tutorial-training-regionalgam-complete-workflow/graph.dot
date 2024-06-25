@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nregionalGAM.csv"]
+  1[label="Text reformatting"]
+  0 -> 1 [label="output"]
+  2[label="Count"]
+  1 -> 2 [label="outfile"]
+  3[label="Flight curve"]
+  2 -> 3 [label="out_file1"]
+  4[label="Abundance index"]
+  2 -> 4 [label="out_file1"]
+  3 -> 4 [label="output"]
+  5[label="Scatterplot w ggplot2"]
+  3 -> 5 [label="output"]
+  6[label="Expected temporal trend"]
+  4 -> 6 [label="output"]
+  7[label="Model temporal trend"]
+  4 -> 7 [label="output"]
+  6 -> 7 [label="output2"]
+  8[label="Autocorrelation test"]
+  7 -> 8 [label="output2"]
+  9[label="Plot abundance"]
+  4 -> 9 [label="output"]
+  7 -> 9 [label="output2"]
+}

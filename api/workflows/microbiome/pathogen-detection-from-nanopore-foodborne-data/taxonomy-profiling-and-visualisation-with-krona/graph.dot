@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\ncollection_of_preprocessed_samples"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nkraken_database"]
+  2[label="Kraken2"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  k26f9041fd8a44f648a53404d5c7e2f61[color=lightseagreen,label="Output\nkraken2_with_pluspf_database_output"]
+  2 -> k26f9041fd8a44f648a53404d5c7e2f61
+  kf2ddd05b66a04cea9da6ed107eecbe1b[color=lightseagreen,label="Output\nkraken2_with_pluspf_database_output_report"]
+  2 -> kf2ddd05b66a04cea9da6ed107eecbe1b
+  3[label="Krakentools: Convert kraken report file"]
+  2 -> 3 [label="report_output"]
+  kc490ab8d1b1d4914aa51a62a967a4018[color=lightseagreen,label="Output\nconverted_kraken_report"]
+  3 -> kc490ab8d1b1d4914aa51a62a967a4018
+  4[label="Krona pie chart"]
+  3 -> 4 [label="output"]
+  kdcc857c6f5794c7484ecbb6ce3794a56[color=lightseagreen,label="Output\nkrona_pie_chart"]
+  4 -> kdcc857c6f5794c7484ecbb6ce3794a56
+}

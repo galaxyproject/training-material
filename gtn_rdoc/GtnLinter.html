@@ -1240,11 +1240,11 @@
     <span class="ruby-keyword">else</span>
       <span class="ruby-comment"># Load tests and run some quick checks:</span>
       <span class="ruby-identifier">possible_tests</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">test_file</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">test_file</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/-tests?.yml/</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">test_file</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/-tests.yml/</span>)
           <span class="ruby-identifier">results</span> <span class="ruby-operator">+=</span> [
             <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">file_error</span>(<span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>,
-                                        <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Please use the extension -test.yml &#39;</span> \
-                                                 <span class="ruby-string">&#39;or -tests.yml for this test file.&#39;</span>,
+                                        <span class="ruby-value">message:</span> <span class="ruby-string">&#39;Please use the extension -tests.yml &#39;</span> \
+                                                 <span class="ruby-string">&#39;for this test file.&#39;</span>,
                                         <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:032&#39;</span>)
           ]
         <span class="ruby-keyword">end</span>

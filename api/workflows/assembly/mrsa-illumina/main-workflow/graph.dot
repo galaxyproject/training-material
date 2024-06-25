@@ -1,0 +1,30 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nDRR187559_2"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nDRR187559_1"]
+  2[label="FastQC"]
+  0 -> 2 [label="output"]
+  3[label="fastp"]
+  1 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  kda6787a999cf4ea5a321db31ecbe008b[color=lightseagreen,label="Output\nfastp_json"]
+  3 -> kda6787a999cf4ea5a321db31ecbe008b
+  4[label="FastQC"]
+  1 -> 4 [label="output"]
+  5[label="Shovill"]
+  3 -> 5 [label="out1"]
+  3 -> 5 [label="out2"]
+  kadf53ff42afd49ba89792c7e1d2e7f8f[color=lightseagreen,label="Output\nshovill_log"]
+  5 -> kadf53ff42afd49ba89792c7e1d2e7f8f
+  6[label="Quast"]
+  5 -> 6 [label="contigs"]
+  k951d2794328d45eba48d8b9d8e90b384[color=lightseagreen,label="Output\nquast_output"]
+  6 -> k951d2794328d45eba48d8b9d8e90b384
+  7[label="Bandage Image"]
+  5 -> 7 [label="contigs_graph"]
+  8[label="Bandage Info"]
+  5 -> 8 [label="contigs_graph"]
+  k135f19554aad493a9840c2919f189a26[color=lightseagreen,label="Output\nbandage_info_output"]
+  8 -> k135f19554aad493a9840c2919f189a26
+}

@@ -1,0 +1,23 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nbreast-w_train"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nbreast-w_targets"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nbreast-w_test"]
+  3[label="Support vector machines SVMs"]
+  0 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  4[label="Support vector machines SVMs"]
+  2 -> 4 [label="output"]
+  3 -> 4 [label="outfile_fit"]
+  5[label="Plot confusion matrix, precision, recall and ROC and AUC curves"]
+  3 -> 5 [label="outfile_fit"]
+  4 -> 5 [label="outfile_predict"]
+  1 -> 5 [label="output"]
+  k0fac82f3c1b2482fa31f30b623a0f223[color=lightseagreen,label="Output\noutput_roc"]
+  5 -> k0fac82f3c1b2482fa31f30b623a0f223
+  k431f35967b8044f083eedda8c58e1e8c[color=lightseagreen,label="Output\noutput_confusion"]
+  5 -> k431f35967b8044f083eedda8c58e1e8c
+  kab62de11fa694d599ebed5d0562f3c18[color=lightseagreen,label="Output\noutput_prf"]
+  5 -> kab62de11fa694d599ebed5d0562f3c18
+}

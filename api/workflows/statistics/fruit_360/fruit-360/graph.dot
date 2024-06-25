@@ -1,0 +1,28 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\ntest_y_10.tsv"]
+  1[color=lightblue,label="ℹ️ Input Dataset\ntrain_y_10.tsv"]
+  2[color=lightblue,label="ℹ️ Input Dataset\ntrain_X_10.tsv"]
+  3[color=lightblue,label="ℹ️ Input Dataset\ntest_X_10.tsv"]
+  4[label="Create a deep learning model architecture"]
+  5[label="Advanced Cut"]
+  0 -> 5 [label="output"]
+  6[label="Advanced Cut"]
+  1 -> 6 [label="output"]
+  7[label="Create deep learning model"]
+  4 -> 7 [label="outfile"]
+  8[label="To categorical"]
+  6 -> 8 [label="output"]
+  9[label="Deep learning training and evaluation"]
+  7 -> 9 [label="outfile"]
+  2 -> 9 [label="output"]
+  8 -> 9 [label="outfile"]
+  10[label="Model Prediction"]
+  9 -> 10 [label="outfile_object"]
+  9 -> 10 [label="outfile_weights"]
+  3 -> 10 [label="output"]
+  11[label="Machine Learning Visualization Extension"]
+  10 -> 11 [label="outfile_predict"]
+  5 -> 11 [label="output"]
+}

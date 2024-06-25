@@ -1,0 +1,24 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nEdge File"]
+  1[color=lightblue,label="ℹ️ Input Collection\nInput dataset collection"]
+  2[color=lightblue,label="ℹ️ Input Collection\nInput dataset collection"]
+  3[label="DESeq2"]
+  1 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  4[label="Cut"]
+  3 -> 4 [label="deseq_out"]
+  5[label="Cut"]
+  3 -> 5 [label="deseq_out"]
+  6[label="Fit a BUM model"]
+  4 -> 6 [label="out_file1"]
+  7[label="Calculate a Heinz score"]
+  5 -> 7 [label="out_file1"]
+  6 -> 7 [label="dist_params"]
+  8[label="Identify optimal scoring subnetwork"]
+  7 -> 8 [label="score"]
+  0 -> 8 [label="output"]
+  9[label="Visualize"]
+  8 -> 9 [label="subnetwork"]
+}

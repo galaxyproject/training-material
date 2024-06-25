@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nAnnData"]
+  1[label="Inspect AnnData"]
+  0 -> 1 [label="output"]
+  k7bdb825c6a894a34bbd9a79c309c9750[color=lightseagreen,label="Output\nInspect AnnData: obs"]
+  1 -> k7bdb825c6a894a34bbd9a79c309c9750
+  2[label="Inspect AnnData"]
+  0 -> 2 [label="output"]
+  k79a2e3e54bd642de864ca5dc2412cb86[color=lightseagreen,label="Output\nInspect AnnData: var"]
+  2 -> k79a2e3e54bd642de864ca5dc2412cb86
+  3[label="Inspect AnnData"]
+  0 -> 3 [label="output"]
+  k7a2549547e324e8abd4ca79abf9db8d8[color=lightseagreen,label="Output\nInspect AnnData: X"]
+  3 -> k7a2549547e324e8abd4ca79abf9db8d8
+  4[label="Transpose"]
+  3 -> 4 [label="X"]
+  5[label="Monocle3 create"]
+  1 -> 5 [label="obs"]
+  4 -> 5 [label="out_file"]
+  2 -> 5 [label="var"]
+  k6bf4a0ea3cb9470c98630a7eb0bc3d8c[color=lightseagreen,label="Output\nCDS Monocle file"]
+  5 -> k6bf4a0ea3cb9470c98630a7eb0bc3d8c
+}

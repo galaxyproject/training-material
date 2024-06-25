@@ -1,0 +1,22 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nchampbloc_ivr_val.csv"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nchampbloc_ivr.csv"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nficheterrain_val.csv"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nficheterrain.csv"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nchampbloc_qecb_val.csv"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nchampbloc_qecb.csv"]
+  6[label="IVR"]
+  3 -> 6 [label="output"]
+  2 -> 6 [label="output"]
+  0 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  7[label="QECB"]
+  3 -> 7 [label="output"]
+  2 -> 7 [label="output"]
+  4 -> 7 [label="output"]
+  5 -> 7 [label="output"]
+  8[label="Champs blocs indicators"]
+  7 -> 8 [label="output_rds"]
+}

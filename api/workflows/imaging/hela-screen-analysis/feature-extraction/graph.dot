@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\ninput image"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nrules"]
+  2[label="Filter Image"]
+  0 -> 2 [label="output"]
+  3[label="Auto Threshold"]
+  2 -> 3 [label="output"]
+  4[label="Split objects"]
+  3 -> 4 [label="output"]
+  5[label="2D Feature Extraction"]
+  4 -> 5 [label="output"]
+  6[label="Filter segmentation"]
+  5 -> 6 [label="output"]
+  4 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  kb90cbc9433fd460096b58cf0bcaf2e94[color=lightseagreen,label="Output\noutput"]
+  6 -> kb90cbc9433fd460096b58cf0bcaf2e94
+  7[label="2D Feature Extraction"]
+  6 -> 7 [label="output"]
+  0 -> 7 [label="output"]
+  k3d3c037a50ef443ba6f88a37db6bfb36[color=lightseagreen,label="Output\noutput"]
+  7 -> k3d3c037a50ef443ba6f88a37db6bfb36
+}

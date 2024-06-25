@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@397075c2213ce9ea43219c707aa1a8ca10884d83",
+		release: "galaxy-training-network@9c3bfcc77e95a87afc6fe3af9a7f494881160147",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="DNA Methylation data analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-25 11:53:18 +0000">
+<meta name="DC.date" content="2024-06-25 08:44:21 +0000">
 <meta name="DC.creator" content="Joachim Wolff">
 <meta name="DC.creator" content="Devon Ryan"><meta name="description" content="DNA methylation is an epigenetic mechanism used by higher eukaryotes and involved in e.g. gene expression, X-Chromosome inactivating, imprinting, and gene silencing of germline specific gene and repetitive elements.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -208,7 +208,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-05-25 11:53:18 +0000",
+  "dateModified": "2024-06-25 08:44:21 +0000",
   "datePublished": "2017-02-16 08:40:49 +0000",
   "identifier": "https://gxy.io/GTN:T00142",
   "accessMode": [
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "DNA Methylation data analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/tutorial.html",
-  "version": 37,
+  "version": 38,
   "timeRequired": "PT3H",
   "teaches": "Learn how to analyse methylation data\n - Get a first intuition what are common pitfalls.",
   "keywords": [
@@ -523,11 +523,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3173"
     }
   ],
-  "educationalLevel": "Introductory",
+  "educationalLevel": "Beginner",
   "mentions": [
 
   ],
-  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>"
+  "abstract": "We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7)."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -937,6 +937,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
 	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
+    
+	<li>
 		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
 			UseGalaxy.cz
 		</a>
@@ -974,7 +980,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 16, 2017 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 25, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 25, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -994,7 +1000,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (1 recent ratings, 11 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 37 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 38 </div>
 
     </blockquote>
     </section>
@@ -1009,8 +1015,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
+                <p>We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).</p>
+
+<p>This tutorial is based off of <span class="citation"><a href="#Lin2015">Lin <i>et al.</i> 2015</a></span>. The data we use in this tutorial is available at <a href="https://zenodo.org/record/557099">Zenodo</a>.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -1024,10 +1034,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </ol>
 
 </blockquote>
-
-<p>We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).</p>
-
-<p>This tutorial is based off of <span class="citation"><a href="#Lin2015">Lin <i>et al.</i> 2015</a></span>. The data we use in this tutorial is available at <a href="https://zenodo.org/record/557099">Zenodo</a>.</p>
 
 <h1 id="data-upload">Data upload</h1>
 
@@ -1705,7 +1711,7 @@ tools:
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/397075c2213ce9ea43219c707aa1a8ca10884d83">397075c</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9c3bfcc77e95a87afc6fe3af9a7f494881160147">9c3bfcc</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
