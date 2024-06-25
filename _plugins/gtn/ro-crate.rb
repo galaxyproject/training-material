@@ -191,10 +191,9 @@ This workflows is part of the tutorial [#{workflow['name']}](#{url}#{baseurl}/to
       wf_ga.delete('creator')
 
       File.write(File.join(wfdir, 'mod.ga'), JSON.pretty_generate(wf_ga))
-      # p "Writing #{File.join(wfdir, 'mod.ga')}"
 
       zip_path = File.join(wfdir, 'rocrate.zip')
-      Jekyll.logger.debug "[GTN/API/WFRun] Zipping #{zip_path}"
+      Jekyll.logger.info "[GTN/API/WFRun] Zipping #{zip_path}"
       if File.exist?(zip_path)
         File.delete(zip_path)
       end
