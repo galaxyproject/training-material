@@ -60,7 +60,10 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			{% icon galaxy-tags %}
 			<b>Tags</b>
 			<br/>
-			{{ workflow.tags | join: ", " }}
+
+			{% for tag in workflow.tags %}
+			<div class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</div>
+			{% endfor %}
 			</br>
 			{% endif %}
 
@@ -125,9 +128,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<a href="{% link faqs/galaxy/tutorial_mode.md %}" class="show-when-galaxy-proxy-active">{% icon question %}</a>
 			<br/>
 
-			<a class="btn btn-secondary" href="{{ site.url }}{{ site.baseurl }}/{{ workflow.path }}">
-				Download
-			</a>
 			<span class="dropdown">
 				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
 					<img src="{% link assets/images/galaxylogo.png %}" style="height: 16px" alt="galaxy logo"/> 
@@ -143,6 +143,10 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</li>
 				</ul>
 			</span>
+			<a class="btn btn-primary" href="{{ site.url }}{{ site.baseurl }}/{{ workflow.path }}">
+				{% icon galaxy-download %}
+				Download
+			</a>
 			<pre class="mermaid">{{ workflow.mermaid }}</pre>
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
