@@ -233,24 +233,24 @@ First, we need to confirm that your read files are in the correct format. Refer 
 
 > <hands-on-title>Linux or OSX</hands-on-title>
 > #### On a Linux-based operating system
-> **Step 1**:
-> Compress the fastq files for the upload using gzip. 
+> 1. Compress the fastq files for the upload using gzip. 
 >
->  Open the terminal on your machine then type the commands below. First move to the directory where fastq files are located, then compress the fastq files using gzip command.
-> ```
-> # In the command below replace '/path/to/fastq/directory' with the correct path
-> cd /path/to/fastq/directory
-> 
-> gzip *.fastq
-> ``` 
-> **Step 2**: 
-> To enable verification of the integrity of the uploaded fastq file, ENA requires md5 checksum for each file.
-> 
-> Type the command below to calculate and print md5 sums to tab-separated file (for easy cut-and-paste later).
-> ```
-> for f in *.gz; do md5 $f | awk '{ gsub(/\(|\)/,""); print $2"\t" $4 }'; done > md5sums.tsv
-> ```
-> md5sums.tsv will contain a tab-separated table of fastq.gz filenames and their md5sum. 
+>    Open the terminal on your machine then type the commands below. First move to the directory where fastq files are located, then compress the fastq files using gzip command.
+>
+>    ```
+>    # In the command below replace '/path/to/fastq/directory' with the correct path
+>    cd /path/to/fastq/directory
+>
+>    gzip *.fastq
+>    ```
+>
+> 2. To enable verification of the integrity of the uploaded fastq file, ENA requires md5 checksum for each file.
+>
+>    Type the command below to calculate and print md5 sums to tab-separated file (for easy cut-and-paste later).
+>    ```
+>    for f in *.gz; do md5 $f | awk '{ gsub(/\(|\)/,""); print $2"\t" $4 }'; done > md5sums.tsv
+>    ```
+>    md5sums.tsv will contain a tab-separated table of fastq.gz filenames and their md5sum. 
 >
 {: .hands_on}
 
