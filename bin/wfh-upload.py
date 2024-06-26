@@ -8,7 +8,10 @@ import glob
 import time
 import multiprocessing
 
-GTN_PROJECT_ID = 63
+# GTN_BOT_ID = https://workflowhub.eu/people/731
+GTN_PROJECT_ID = 12
+# WORKFLOWHUB = "https://dev.workflowhub.eu"
+WORKFLOWHUB = "https://workflowhub.eu"
 
 if len(sys.argv) == 2:
     crates = [sys.argv[1]]
@@ -34,12 +37,12 @@ def doUpload(crate_path):
         "workflow[project_ids][]": (None, GTN_PROJECT_ID), # GTN's ID.
     }
     headers = {
-        "authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 
+        "authorization": "Token " + os.environ["WFH_TOKEN"], 
         'User-Agent': 'GTN (github.com/galaxyproject/training-material@1.0)',
     }
 
     response = requests.post(
-        "https://dev.workflowhub.eu/workflows/submit", files=payload, headers=headers
+        f"{WORKFLOWHUB}/workflows/submit", files=payload, headers=headers
     )
     code = response.status_code
     if code != 200:
@@ -88,7 +91,7 @@ def doUpload(crate_path):
         'Content-type': 'application/json',
         'Accept': 'application/json',
     })
-    response2 = requests.put(f"https://dev.workflowhub.eu/workflows/{wfid}", headers=headers, json=permissions_update)
+    response2 = requests.put(f"{WORKFLOWHUB}/workflows/{wfid}", headers=headers, json=permissions_update)
     if response2.status_code != 200:
         print(f"Error {response2.status_code} updating permissions for {wfid}: {response2.text}")
 
