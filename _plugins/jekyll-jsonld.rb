@@ -970,7 +970,7 @@ module Jekyll
       data['about'] = about
 
       data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Beginner'
-      data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x } }
+      data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x, url: "#{site['url']}#{site['baseurl']}/tags/#{x}/" } }
       data['abstract'] = material.fetch('content', '').strip.split("\n").first
 
       data
