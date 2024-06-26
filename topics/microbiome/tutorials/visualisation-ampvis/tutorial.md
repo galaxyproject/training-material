@@ -78,7 +78,7 @@ there are 2 datasets **"V4-18S"** and **"COI"** of which we took the one named *
 ## create a rarefaction curve
 You can find the workflow "ampvis2 rarefaction v1.0 " on Galaxy and use it for the tutorial.
 
-We pre-selected the "step size", "colour curves by" and set __"free __scale"__ for "scales of the facets".
+We pre-selected the "step size", "colour curves by" and set __"free__ __scale"__ for "scales of the facets".
 
 > <comment-title></comment-title>
 > - first you need to upload the freshly generated dataset to Galaxy
@@ -104,13 +104,13 @@ We pre-selected the "step size", "colour curves by" and set __"free __scale"__ f
 > > 1. none, it's the same output 
 > > 2. yes, if you run the workflow (with subsets) and select all samples except of __"COI-B2b"__
 > >
-> > <details-title> How it will look like </details-title>
-> >
-> > Result of this boxplot.
-> >
-> > ![Result of ththis rarefaction curve](./images/rarefaction_without.png "Result of the rarefaction curve without __"COI-B2b"__")
-> >
-> {: .details}
+> > > <details-title> How it will look like </details-title>
+> > > 
+> > >  Result of this boxplot.
+> > > 
+> > >  ![Result of ththis rarefaction curve](./images/rarefaction_without.png "Result of the rarefaction curve without __"COI-B2b"__)
+> > > 
+> > {: .details}
 >
 > {: .solution}
 >
@@ -238,13 +238,13 @@ We used 2 different metadata subsets:
 
 > <question-title></question-title>
 >
-> 1. Can we create a heatmap, which shows only the first and the last year of data collection?
-> 2. Can we use the following settings to create a nice heatmap: metadata variable = Year and 
+> 1. Can you create a heatmap, which shows only the first and the last year of data collection?
+> 2. Can you use the following settings to create a nice heatmap: metadata variable = Year and 
 	metadata value = Date plus grouped by = Year?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. yes, with the following settings: metadata we used for this subset: metadata variable = Year and 
+> > 1. yes, with the following settings: metadata variable = Year and 
    metadata values = 2006 & 2015 plus grouped by = Year
 > > 2. no, metadata values must be from the set of metadata variable
 > >
