@@ -20,7 +20,7 @@ else:
 def doUploadWrap(crate_path):
     try:
         return doUpload(crate_path)
-    except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e
+    except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
         try:
             time.sleep(5)
             return doUpload(crate_path)
@@ -50,6 +50,7 @@ def doUpload(crate_path):
     add_discussion_channel = False
 
     wfid = response.json()['data']['id']
+    print(f"Uploaded {crate_path} as {wfid}")
     permissions_update = {
       "data": {
         "id": wfid,
