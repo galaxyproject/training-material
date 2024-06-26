@@ -74,6 +74,84 @@ We looked for a dataset marked "open" and used the following:
 [Environmental DNA metabarcoding data from Marina di Camerota coast (Italy) based on citizen science sampling](https://zenodo.org/records/10362755)
 there are 2 datasets **"V4-18S"** and **"COI"** of which we took the one named **"COI"**.
 
+### Sub-step generate **uploadable datasets from downloaded excel sheet**
+All data (OTU, metadata and tax table) we need separately to upload to Galaxy is combined in one excel sheet and looks like this...
+![data to separate](./images/all_data.png 
+"OTU, metadata and tax table is combined in one sheet and needs to be separated")
+
+> <hands-on-title> Generate separated datasets for Galaxy upload </hands-on-title>
+>
+> 1. for OTU table:
+>    - keep the sample names in first row
+>    - keep the asv+number in the first column
+>    - the first cell (A1) needs to reed ASV or OTU 
+>
+>    > <comment-title> Attention! </comment-title>
+>    >
+>    > make sure sample names have no blank space
+>    {: .comment}
+>    
+>    > <details-title> How it will look like </details-title>
+>    >
+>    > After separeting OTUs from the main data sheet it will look like this...
+>    > 
+>    >![separated OTU table](./images/otu.png "separated OTU table")
+>    {: .details}
+>
+> 2. for metadata table:
+>    - copy the metadata (marked in blue) and the sample names to a new sheet
+>    
+>    > <details-title> How it will look like </details-title>
+>    >
+>    > The copied set of metadata will look like this...
+>    > 
+>    >![copied metadata](./images/meta_row.png "Copied set of metadata")
+>    {: .details}
+>
+>    - transpose the dataset and copy to an new sheet 
+>    - remove blank spaces from sample names 
+>    
+>    > <details-title> How it will look like </details-title>
+>    >
+>    > The transposed set of metadata will look like this...
+>    > 
+>    >![transposed metadata](./images/meta.png "transposed metadata")
+>    {: .details}
+>
+> 3. for tax table:
+>    - keep the asv+number in the first column
+>    - keep the last column "lineage"
+>    - split the "lineage"-column by the delimeter __semicolon__
+>    - give all columns a name 
+>    
+>    > <details-title> How it will look like </details-title>
+>    >
+>    > After separeting the taxa into diferent columns and renaming it will look like this...
+>    > 
+>    >![separated and renamed tax table](./images/taxa.png "separated and renamed tax table")
+>    {: .details}
+>
+> 4. save all 3 data sheets separately
+>
+> 5. convert to tsv format
+>    - e.g. use any free available tool online to convert xlsx to tsv
+>    
+{: .hands_on}
+
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
 ## create a rarefaction curve
 You can find the workflow "ampvis2 rarefaction v1.0 " on Galaxy and use it for the tutorial.
@@ -108,7 +186,7 @@ We pre-selected the "step size", "colour curves by" and set __"free__ __scale"__
 > > > 
 > > >  Result of this boxplot.
 > > > 
-> > >  ![Result of ththis rarefaction curve](./images/rarefaction_without.png "Result of the rarefaction curve without __"COI-B2b"__)
+> > >(./images/rarefaction_without.png "Result of the rarefaction curve without __"COI-B2b"__)
 > > > 
 > > {: .details}
 > > 
@@ -330,11 +408,11 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 
 > <question-title></question-title>
 >
-> 1. Does it make sense to run the following settings: metadata variable = Period and metadata values = Winter & Summer?
+>  Does it make sense to run the following settings: metadata variable = Period and metadata values = Winter & Summer?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. no, you will get a very messy bundle of colours.
+> >  no, you will get a very messy bundle of colours.
 > >
 > {: .solution}
 >
@@ -358,12 +436,12 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 
 > <question-title></question-title>
 >
-> 2. If you take the CCA ordination method with the following settings: metadata variable = Period and metadata values = Winter & Summer.
+>  If you take the CCA ordination method with the following settings: metadata variable = Period and metadata values = Winter & Summer.
 	What do you need to remove from pre-chosen parameters so the ordination plot stays "readable"?
 >
 > > <solution-title></solution-title>
 > >
-> > 2. when you expand the ordination plot set in your history, you see colour, shape, frame, and label by options. Select colour by _Period_ 
+> >  when you expand the ordination plot set in your history, you see colour, shape, frame, and label by options. Select colour by _Period_ 
 and frame by _Periaod_ and deselect the other mentioned options above, so they read _"Nothing_ _selected"_ .
 > >
 > {: .solution}
@@ -467,146 +545,6 @@ it. And as Number of taxa to show becomes a bit messy (for this data set at leas
 
 
 <!-- edited until here. -->
-
-
-
-{: .hands_on}
-
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](./workflows/ampvis2_rarefaction_v1.0_.ga "Rarefaction workflow")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **ampvis2 load**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **ampvis2 subset samples**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: ``
->    - *"Metadata value(s)"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **ampvis2 heatmap**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
->    - *"Group samples"*: ``
->    - *"Facet the samples"*: ``
->    - *"The taxonomic level to aggregate the OTUs"*: `Species`
->    - *"Additional taxonomic level(s) to display"*: ``
->    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
->    - *"Plot the values on the heatmap"*: `Yes`
->    - *"Sort heatmap by most abundant taxa"*: `No`
->    - *"Show functional information about the Genus-level OTUs"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 ## Re-arrange
