@@ -143,11 +143,11 @@
 
 <pre>try:
     return doUpload(crate_path)
-except requests.exceptions.SSLError as e:
+except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e
     try:
         time.sleep(5)
         return doUpload(crate_path)
-    except requests.exceptions.SSLError as e:
+    except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
         print(f&quot;Error uploading {crate_path}: {e}&quot;)
         return None</pre>
 
