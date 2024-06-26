@@ -215,7 +215,8 @@ if response2.status_code != 200:
     print(f&quot;Error {response2.status_code} updating permissions for {wfid}: {response2.text}&quot;)
 
 p = crate_path.split(&quot;/&quot;)
-(topic, tutorial, workflow) = p[3:6]
+windex = p.index(&quot;workflows&quot;)
+(topic, tutorial, workflow) = p[windex + 1:windex + 4]
 return (topic, tutorial, workflow, wfid)</pre>
 
 <p>with multiprocessing.Pool(4) as p:</p>
