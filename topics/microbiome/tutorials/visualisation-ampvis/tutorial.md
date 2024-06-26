@@ -111,11 +111,10 @@ We pre-selected the "step size", "colour curves by" and set __"free__ __scale"__
 > > >  ![Result of ththis rarefaction curve](./images/rarefaction_without.png "Result of the rarefaction curve without __"COI-B2b"__)
 > > > 
 > > {: .details}
->
+> > 
 > {: .solution}
 >
 {: .question}
-
 
 # Use case 1: heatmap, ordination plot or boxploot
 
