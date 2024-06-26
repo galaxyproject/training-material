@@ -18,7 +18,7 @@ Have a look at the existing FAQs in the [`faqs/galaxy/` folder](https://github.c
 
 A news post is a markdown file that looks as follows:
 
-
+{% raw %}
 ```markdown
 ---
 title: Finding Datasets
@@ -27,6 +27,7 @@ box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]
 ---
+{% endraw %}
 
 - To review all active Datasets in your account, go to **User > Datasets**.
 
