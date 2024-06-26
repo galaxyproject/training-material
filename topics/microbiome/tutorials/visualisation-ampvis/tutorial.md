@@ -65,21 +65,64 @@ the means of all pooled samples and therefore display the measured species richn
 Rarefaction delivers proper curves for dataset comparison {% cite Gotelli2001 %}.
 > <comment-title>Note: </comment-title>
 > - for this part we need 'row' data, it shall not be normalised
+> - for this section we used a different dataset than for the rest of the tutorial
 {: .comment}
 
-## Title for a subsection
-??? _to_do_
+## Get data
+If you don't use your own dataset, you can also go to **Zenodo** and find a dataset to download.
+We looked for a dataset marked "open" and used the following:
+[Environmental DNA metabarcoding data from Marina di Camerota coast (Italy) based on citizen science sampling](https://zenodo.org/records/10362755)
+there are 2 datasets **"V4-18S"** and **"COI"** of which we took the one named **"COI"**.
 
-# Hands-on Sections
 
-needs to be done..... _to_do_ 
+## create a rarefaction curve
+You can find the workflow "ampvis2 rarefaction v1.0 " on Galaxy and use it for the tutorial.
+
+We pre-selected the "step size", "colour curves by" and set __"free __scale"__ for "scales of the facets".
+
+> <comment-title></comment-title>
+> - first you need to upload the freshly generated dataset to Galaxy
+> - the steps from heatmap hands-on box (next section) might be helpful
+{: .comment}
+
+> <details-title> How it will look like </details-title>
+>
+> Result of the rarefaction curve.
+> 
+>![Result of the rarefaction curve](./images/rarefaction.png "Result of the rarefaction curve")
+{: .details}
+
+> <question-title></question-title>
+> 
+> 1. If you run the workflow "ampvis2 rarefaction v1.1 (with subset)" on Galaxy and use the following metadata for the subset: metadata variable = sample_id and metadata values = (select all possible samples).
+	What is the difference to the rarefaction curve you generated with the workflow without subsets? 
+> 2. If you consider the output of the rarefaction curve before, one sample has a high curve and the rest is close to each other.
+	Can you make the rest more "visible"?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. none, it's the same output 
+> > 2. yes, if you run the workflow (with subsets) and select all samples except of __"COI-B2b"__
+> >
+> > <details-title> How it will look like </details-title>
+> >
+> > Result of this boxplot.
+> >
+> > ![Result of ththis rarefaction curve](./images/rarefaction_without.png "Result of the rarefaction curve without __"COI-B2b"__")
+> >
+> {: .details}
+>
+> {: .solution}
+>
+{: .question}
+
 
 # Use case 1: heatmap, ordination plot or boxploot
 
 To create a heatmap, or ordination plot, or boxplot you can continue with your dataset.
 
 > <comment-title>Note: </comment-title>
-> - we now use normalised data and a different dataset than for rarefaction curve
+> - we now use normalised data and a different dataset than for rarefaction curve (as it has more metadata)
 {: .comment}
 
 ## Get data
