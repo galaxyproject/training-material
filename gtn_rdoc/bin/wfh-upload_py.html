@@ -143,7 +143,7 @@
 
 <pre>try:
     return doUpload(crate_path)
-except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e
+except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
     try:
         time.sleep(5)
         return doUpload(crate_path)
@@ -174,6 +174,7 @@ if code != 200:
 add_discussion_channel = False
 
 wfid = response.json()[&#39;data&#39;][&#39;id&#39;]
+print(f&quot;Uploaded {crate_path} as {wfid}&quot;)
 permissions_update = {
   &quot;data&quot;: {
     &quot;id&quot;: wfid,
