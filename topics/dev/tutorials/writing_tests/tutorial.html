@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8c7139e255d880bc96c70dd9b43c98abc7ae83a7",
+		release: "galaxy-training-network@d16733b629bd219a08e4a08d107e0b26889ce0f5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1430,7 +1430,6 @@ following. Note that the test function takes 2 additional arguments.</p>
 
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy.security.validate_user_input</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">extract_domain</span><span class="p">,</span>
-    <span class="n">validate_domain_resolves</span><span class="p">,</span>
     <span class="n">validate_email</span><span class="p">,</span>  <span class="c1"># we've added this import
 </span>    <span class="n">validate_email_str</span><span class="p">,</span>
     <span class="n">validate_publicname_str</span><span class="p">,</span>
@@ -1490,13 +1489,8 @@ following. Note that the test function takes 2 additional arguments.</p>
         <span class="n">message</span> <span class="o">=</span> <span class="nf">validate_domain_resolves</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
 
     <span class="c1"># Code to be refactored
-</span>    <span class="nf">if </span><span class="p">(</span>
-        <span class="ow">not</span> <span class="n">message</span>
-        <span class="ow">and</span> <span class="n">check_dup</span>
-        <span class="ow">and</span> <span class="n">trans</span><span class="p">.</span><span class="n">sa_session</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">)</span>
-        <span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="nf">lower</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">table</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="n">email</span><span class="p">.</span><span class="nf">lower</span><span class="p">())</span>
-        <span class="p">.</span><span class="nf">first</span><span class="p">()</span>
-    <span class="p">):</span>
+</span>    <span class="n">stmt</span> <span class="o">=</span> <span class="nf">select</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">).</span><span class="nf">filter</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="nf">lower</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="n">email</span><span class="p">.</span><span class="nf">lower</span><span class="p">()).</span><span class="nf">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">check_dup</span> <span class="ow">and</span> <span class="n">trans</span><span class="p">.</span><span class="n">sa_session</span><span class="p">.</span><span class="nf">scalars</span><span class="p">(</span><span class="n">stmt</span><span class="p">).</span><span class="nf">first</span><span class="p">():</span>
         <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">User with email </span><span class="sh">'</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="sh">'</span><span class="s"> already exists.</span><span class="sh">"</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
@@ -1517,10 +1511,8 @@ following. Note that the test function takes 2 additional arguments.</p>
   <p>Refactored version:</p>
 
   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">check_for_existing_email</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
-    <span class="n">user_record</span> <span class="o">=</span> <span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">sa_session</span><span class="p">.</span><span class="nf">query</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">)</span>
-        <span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="nf">lower</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">table</span><span class="p">.</span><span class="n">c</span><span class="p">.</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="n">email</span><span class="p">.</span><span class="nf">lower</span><span class="p">())</span>
-        <span class="p">.</span><span class="nf">first</span><span class="p">()</span>
-    <span class="p">)</span>
+    <span class="n">stmt</span> <span class="o">=</span> <span class="nf">select</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">).</span><span class="nf">filter</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="nf">lower</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">User</span><span class="p">.</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="n">email</span><span class="p">.</span><span class="nf">lower</span><span class="p">()).</span><span class="nf">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">user_record</span> <span class="o">=</span> <span class="n">trans</span><span class="p">.</span><span class="n">sa_session</span><span class="p">.</span><span class="nf">scalars</span><span class="p">(</span><span class="n">stmt</span><span class="p">).</span><span class="nf">first</span><span class="p">()</span>
     <span class="k">return</span> <span class="nf">bool</span><span class="p">(</span><span class="n">user_record</span><span class="p">)</span>
 
 
@@ -2144,7 +2136,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8c7139e255d880bc96c70dd9b43c98abc7ae83a7">8c7139e</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d16733b629bd219a08e4a08d107e0b26889ce0f5">d16733b</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
