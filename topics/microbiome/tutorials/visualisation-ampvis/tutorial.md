@@ -140,17 +140,19 @@ All data (OTU, metadata and tax table) we need separately to upload to Galaxy is
 
 
 > <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
+> _to_do_
+> 1. Why do you need to ensure that sample names have no blank spaces in the OTU table?
+> 2. Why don't you use the metadata in its untransposed way?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Many bioinformatics tools assume that sample names are continuous strings, and spaces can be 
+interpreted as delimiters or end-of-string characters, leading to incorrect data parsing or analysis failures.
+> > 2. You need the sample names as a column. Bioinformatics tools expect the metadata to be organised as each metadata attribute
+would have its own column.
 > >
 > {: .solution}
->
+> _to_do_
 {: .question}
 
 ## create a rarefaction curve
@@ -547,12 +549,6 @@ it. And as Number of taxa to show becomes a bit messy (for this data set at leas
 <!-- edited until here. -->
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
