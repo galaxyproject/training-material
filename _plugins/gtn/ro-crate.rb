@@ -100,9 +100,8 @@ This workflows is part of the tutorial [#{associated_material['title']}](#{url}#
 
 #{mat_contribs.map { |k, v| "**#{k}**: #{v.join(', ')}" }.join("\n\n")}
 
-[![gtn star logo followed by the word workflows](http://galaxy-training.s3-website.us-east-1.amazonaws.com/misc/gtn-workflows.png)](https://training.galaxyproject.org/training-material/)
+[![gtn star logo followed by the word workflows](https://training.galaxyproject.org/training-material/assets/branding/gtn-workflows.png)](https://training.galaxyproject.org/training-material/)
       ).strip
-      # ![gtn star logo followed by the word workflows](https://training.galaxyproject.org/training-material/assets/branding/gtn-workflows.png)
 
       crate = {
         '@context' => ['https://w3id.org/ro/crate/1.1/context'],
