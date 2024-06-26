@@ -20,11 +20,11 @@ else:
 def doUploadWrap(crate_path):
     try:
         return doUpload(crate_path)
-    except requests.exceptions.SSLError as e:
+    except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e
         try:
             time.sleep(5)
             return doUpload(crate_path)
-        except requests.exceptions.SSLError as e:
+        except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
             print(f"Error uploading {crate_path}: {e}")
             return None
 
