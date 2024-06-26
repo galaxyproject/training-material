@@ -17,6 +17,17 @@ else:
         "_site/training-material/api/workflows/**/rocrate.zip", recursive=True
     )
 
+def doUploadWrap(crate_path):
+    try:
+        return doUpload(crate_path)
+    except requests.exceptions.SSLError as e:
+        try:
+            time.sleep(5)
+            return doUpload(crate_path)
+        except requests.exceptions.SSLError as e:
+            print(f"Error uploading {crate_path}: {e}")
+            return None
+
 def doUpload(crate_path):
     payload = {
         "ro_crate": (crate_path, open(crate_path, "rb")),
@@ -84,12 +95,18 @@ def doUpload(crate_path):
     return (topic, tutorial, workflow, wfid)
 
 
+
 with multiprocessing.Pool(4) as p:
-    results = p.map(doUpload, crates)
+    results = p.map(doUploadWrap, crates)
 
 results = [x for x in results if x is not None]
 
-data = {}
+if os.path.exists('metadata/workflowhub.yml'):
+    with open('metadata/workflowhub.yml') as handle:
+        data = yaml.safe_load(handle)
+else:
+    data = {}
+
 for (topic, tutorial, workflow, wf_id) in results:
     data['/'.join([topic, tutorial, workflow])] = wf_id
 
