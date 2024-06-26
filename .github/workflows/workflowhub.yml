@@ -1,5 +1,9 @@
 name: "[Cron] Upload workflows to (DEV)WorkflowHub"
 
+concurrency:
+  group: wfh-${{ github.head_ref }}
+  cancel-in-progress: false # Not sure about this.
+
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
