@@ -186,9 +186,9 @@ We pre-selected the "step size", "colour curves by" and set __"free__ __scale"__
 >
 > > <details-title> How it will look like </details-title>
 > > 
-> > Result of this boxplot.
+> > Result of this rarefaction curve.
 > > 
-> >(./images/rarefaction_without.png "Result of the rarefaction curve without __"COI-B2b"__)
+> >![Result of this rarefaction curve](./images/rarefaction_without.png "Result of the rarefaction curve without __"COI-B2b"__)
 > > 
 > {: .solution}
 >
