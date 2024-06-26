@@ -92,7 +92,8 @@ def doUpload(crate_path):
         print(f"Error {response2.status_code} updating permissions for {wfid}: {response2.text}")
 
     p = crate_path.split("/")
-    (topic, tutorial, workflow) = p[3:6]
+    windex = p.index("workflows")
+    (topic, tutorial, workflow) = p[windex + 1:windex + 4]
     return (topic, tutorial, workflow, wfid)
 
 
