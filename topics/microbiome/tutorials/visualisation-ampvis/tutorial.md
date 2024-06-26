@@ -140,7 +140,7 @@ All data (OTU, metadata and tax table) we need separately to upload to Galaxy is
 
 
 > <question-title></question-title>
-> _to_do_
+> 
 > 1. Why do you need to ensure that sample names have no blank spaces in the OTU table?
 > 2. Why don't you use the metadata in its untransposed way?
 >
@@ -152,7 +152,7 @@ interpreted as delimiters or end-of-string characters, leading to incorrect data
 would have its own column.
 > >
 > {: .solution}
-> _to_do_
+> 
 {: .question}
 
 ## create a rarefaction curve
