@@ -150,6 +150,41 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</a>
 			<pre class="mermaid">{{ workflow.mermaid }}</pre>
 
+			<h2>Tools</h2>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			{% for tool in workflow.workflow_tools %}
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id={{ tool }}">{{ tool }}</a></td>
+				<td>
+					{% if site.data['toolshed-revisions'][tool] %}
+					{% assign tsdata = site.data['toolshed-revisions'][tool] %}
+					<a href="https://toolshed.g2.bx.psu.edu/view/{{tsdata[0]}}/{{tsdata[1]}}/{{tsdata[2]}}">
+						View in ToolShed
+					</a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+				</tbody>
+			</table>
+
+			<!--
+			<h2>Inputs</h2>
+			Coming Soon™
+
+			<h2>Outputs</h2>
+			Coming Soon™
+			-->
+
+
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
 
