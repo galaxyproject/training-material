@@ -40,6 +40,7 @@ recordings:
   speakers:
   - yvanlebras
 
+subtopic: ecologyanalysis
 ---
 
 
