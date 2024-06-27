@@ -2,20 +2,22 @@
 layout: tutorial_hands_on
 
 
-title: Visualization workflows for metagenomic amplicon data using the Galaxy framework
+title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
 zenodo_link: https://zenodo.org/records/11281381
 questions:
-- If we generated amplicon data, how can we analyse it with Galaxy ampvis2 tools?
-- How can we visualise amplicon data by using heatmap, ordination plot, boxplot, rarefraction curve or timeseries?
+- How can we adapt the plots to our research data?
+- How can we filter the data to show only significant information?
+- How can we compare multiple visualisation methods?
+- How can we use numerical and categorical metadata for amplicon visualization?
 objectives:
-- use heatmap workflow to analyse and visualise amplicon data
-- use ungrouped or grouped data or grouped data with facets
-- or use ordination plot, or boxplot, or rarefraction curve, or timeseries
+- Use heatmap workflow to analyse and visualise amplicon data
+- Use ungrouped or grouped data or grouped data with facets
+- Use ordination plot, or boxplot, or rarefaction curve, or timeseries
 time_estimation: 2H
 key_points:
-- using different visualisation methods can present data from other points of view
-- with enough metadata the data can be visualised w.r.t. groups and facets 
+- Using various visualisation methods can present data from different perspectives
+- With sufficient metadata, the data can be visualised in relation to different groups and facets 
 contributors:
 - lenaarenot
 - paulzierep
@@ -26,26 +28,28 @@ contributors:
 
 
 Microbiome analysis using amplicon sequencing is central to many ecological studies.
-The produced amplicon sequencing data are converted to OTU tables and represent the input 
-for the ampvis2 tool, where it can be visualised in various ways {% cite Andersen2018 %}.
-If you already have amplicon data produced and ready to feed in and visualise it, 
-then you can start with this tutorial. First of all you can put your data into a 
-rarefraction curve to explore species richness. Than you can input your
-data into subsets and finaly create a heatmap, or a boxplot, or an ordination plot
-or even a timeseries plot out of it. Most of them are described in 
+The produced amplicon sequencing data are converted into OTU tables and represent the input 
+for the ampvis2 tool, where they can be visualised in various ways {% cite Andersen2018 %}.
+If you already have amplicon data produced and ready to visualise it, you can start with this tutorial. 
+You can use your own data or download the data we used and follow us step-by-step though the tutorial. 
+
+First of all you can put your data into a 
+rarefaction curve to explore species richness. Then you can input your
+data into subsets and finally create a heatmap, a boxplot, an ordination plot
+or even a timeseries plot. Most of these visualisation methods are described in 
 [Introduction to ampvis2](https://kasperskytte.github.io/ampvis2/articles/ampvis2.html#heatmap).
 ![overview of visualisation methods](./images/overview.png 
 "Overview of posible visualisation methods (taken from: Introduction to ampvis2 by Kasper Skytte Andersen)")
 Your data need to be in an acceptable format for the ampvis_load tool. The tool 
-needs an OTU table and accepts the following formats for it: _phyloseq_, _biom_, 
-_dada2_sequencetable_ or _tabular_. OTU table is the only mandatory input into the 
-ampvis_load. But you can also input _'sample_metadata'_ (in the formats: _tabular_ or _tsv_), 
-_'taxonomy_table'_ (in the _tabular_ format), _'fasta_file'_ (in the format _fasta_)
-and _'phylogenetic_tree'_ (in the format _newick_) and various combinations thereof.
+requires an OTU table and accepts the following formats: _phyloseq_, _biom_, 
+_dada2_sequencetable_ or _tabular_. The OTU table is the only mandatory input for 
+ampvis_load, but you can also input _sample_metadata_ (in _tabular_ or _tsv_ formats), 
+_taxonomy_table_ (in _tabular_ format), _fasta_file_ (in _fasta_ format)
+and _phylogenetic_tree_ (in _newick_ format), as well as various combinations thereof.
 
-For this tutorial we choosed to demonstrate all visualisation tools with the combination 
+For this tutorial we chose to demonstrate all visualisation tools using a combination 
 of 3 inputs:
-OTU table, 'sample metadata' and 'taxonomy table', all of them in _tabular_ format.
+OTU table, sample metadata and taxonomy table, all in _tabular_ format.
 
 
 > <agenda-title></agenda-title>
@@ -57,45 +61,45 @@ OTU table, 'sample metadata' and 'taxonomy table', all of them in _tabular_ form
 >
 {: .agenda}
 
-# Rarefaction curve
+# Rarefaction Curve
 
-Like first exploration of your data, you can start with rarefaction curve.
-Rarefaction curves are the smoothen version of accumulation curves and symbolise 
-the means of all pooled samples and therefore display the measured species richness. 
-Rarefaction delivers proper curves for dataset comparison {% cite Gotelli2001 %}.
+As first exploration of your data, you can start with rarefaction curve.
+Rarefaction curves are the smoothed versions of accumulation curves and represent  
+the means of all pooled samples, thus displaying the measured species richness. 
+Rarefaction provides proper curves for dataset comparison {% cite Gotelli2001 %}.
 > <comment-title>Note: </comment-title>
-> - for this part we need 'row' data, it shall not be normalised
-> - for this section we used a different dataset than for the rest of the tutorial
+> - for this part, we need 'raw' data, it should not be normalised
+> - for this section, we used a different dataset than for the rest of the tutorial
 {: .comment}
 
-## Get data
+## Get Data
 If you don't use your own dataset, you can also go to **Zenodo** and find a dataset to download.
 We looked for a dataset marked "open" and used the following:
-[Environmental DNA metabarcoding data from Marina di Camerota coast (Italy) based on citizen science sampling](https://zenodo.org/records/10362755)
-there are 2 datasets **"V4-18S"** and **"COI"** of which we took the one named **"COI"**.
+[Environmental DNA metabarcoding data from Marina di Camerota coast (Italy) based on citizen science sampling](https://zenodo.org/records/10362755).
+There are 2 datasets: **"V4-18S"** and **"COI"**, of which we used the one named **"COI"**.
 
-### Sub-step generate **uploadable datasets from downloaded excel sheet**
-All data (OTU, metadata and tax table) we need separately to upload to Galaxy is combined in one excel sheet and looks like this...
+### Sub-step: Generate **Uploadable Datasets from Downloaded Excel Sheet**
+All data (OTU, metadata and tax table) we need to upload to Galaxy separately are combined in one excel sheet and looks like this...
 ![data to separate](./images/all_data.png 
 "OTU, metadata and tax table is combined in one sheet and needs to be separated")
 
 > <hands-on-title> Generate separated datasets for Galaxy upload </hands-on-title>
 >
 > 1. for OTU table:
->    - keep the sample names in first row
+>    - keep the sample names in the first row
 >    - keep the asv+number in the first column
 >    - the first cell (A1) needs to reed ASV or OTU 
 >
 >    > <comment-title> Attention! </comment-title>
 >    >
->    > make sure sample names have no blank space
+>    > make sure sample names have no blank spaces
 >    {: .comment}
 >    
 >    > <details-title> How it will look like </details-title>
 >    >
 >    > After separeting OTUs from the main data sheet it will look like this...
 >    > 
->    >![separated OTU table](./images/otu.png "separated OTU table")
+>    >![separated OTU table](./images/otu.png "Separated OTU table")
 >    {: .details}
 >
 > 2. for metadata table:
@@ -108,14 +112,14 @@ All data (OTU, metadata and tax table) we need separately to upload to Galaxy is
 >    >![copied metadata](./images/meta_row.png "Copied set of metadata")
 >    {: .details}
 >
->    - transpose the dataset and copy to an new sheet 
+>    - transpose the dataset and copy to a new sheet 
 >    - remove blank spaces from sample names 
 >    
 >    > <details-title> How it will look like </details-title>
 >    >
 >    > The transposed set of metadata will look like this...
 >    > 
->    >![transposed metadata](./images/meta.png "transposed metadata")
+>    >![transposed metadata](./images/meta.png "Transposed metadata")
 >    {: .details}
 >
 > 3. for tax table:
@@ -126,9 +130,9 @@ All data (OTU, metadata and tax table) we need separately to upload to Galaxy is
 >    
 >    > <details-title> How it will look like </details-title>
 >    >
->    > After separeting the taxa into diferent columns and renaming it will look like this...
+>    > After separeting the taxa into diferent columns and renaming, it will look like this...
 >    > 
->    >![separated and renamed tax table](./images/taxa.png "separated and renamed tax table")
+>    >![separated and renamed tax table](./images/taxa.png "Separated and renamed tax table")
 >    {: .details}
 >
 > 4. save all 3 data sheets separately
@@ -142,14 +146,14 @@ All data (OTU, metadata and tax table) we need separately to upload to Galaxy is
 > <question-title></question-title>
 > 
 > 1. Why do you need to ensure that sample names have no blank spaces in the OTU table?
-> 2. Why don't you use the metadata in its untransposed way?
+> 2. Why don't you use the metadata in its original untransposed form?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. Many bioinformatics tools assume that sample names are continuous strings, and spaces can be 
 interpreted as delimiters or end-of-string characters, leading to incorrect data parsing or analysis failures.
-> > 2. You need the sample names as a column. Bioinformatics tools expect the metadata to be organised as each metadata attribute
-would have its own column.
+> > 2. You need the sample names as a column. Bioinformatics tools expect the metadata to be organised such that 
+each metadata attribute has its own column.
 > >
 > {: .solution}
 > 
@@ -158,11 +162,20 @@ would have its own column.
 ## create a rarefaction curve
 You can find the workflow "ampvis2 rarefaction v1.0 " on Galaxy and use it for the tutorial.
 
-We pre-selected the "step size", "colour curves by" and set __"free__ __scale"__ for "scales of the facets".
+We have pre-selected the "step size", "colour curves by" and set __"free__ __scale"__ for "scales of the facets".
 
 > <comment-title></comment-title>
 > - first you need to upload the freshly generated dataset to Galaxy
 > - the steps from heatmap hands-on box (next section) might be helpful
+>
+> > <details-title> forgot how to upload data? </details-title>
+> >
+> > If you forgot how to upload data to Galaxy, here is a nice tutorial:
+> >
+> > [Data Manipulation Olympics](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html#upload-data)
+> >
+> {: .details}
+>
 {: .comment}
 
 > <details-title> How it will look like </details-title>
@@ -174,15 +187,16 @@ We pre-selected the "step size", "colour curves by" and set __"free__ __scale"__
 
 > <question-title></question-title>
 > 
-> 1. If you run the workflow "ampvis2 rarefaction v1.1 (with subset)" on Galaxy and use the following metadata for the subset: metadata variable = sample_id and metadata values = (select all possible samples).
-	What is the difference to the rarefaction curve you generated with the workflow without subsets? 
-> 2. If you consider the output of the rarefaction curve before, one sample has a high curve and the rest is close to each other.
+> 1. If you run the workflow "ampvis2 rarefaction v1.1 (with subset)" on Galaxy and use the following metadata for the subset: 
+	metadata variable = sample_id and metadata values = (select all possible samples).
+	What is the difference from the rarefaction curve you generated with the workflow without subsets? 
+> 2. If you consider the output of the rarefaction curve before, one sample has a high curve and the rest are close to each other.
 	Can you make the rest more "visible"?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. none, it's the same output 
-> > 2. yes, if you run the workflow (with subsets) and select all samples except of __"COI-B2b"__
+> > 1. There is no difference;, it's the same output 
+> > 2. Yes, if you run the workflow (with subsets) and select all samples except of __"COI-B2b"__
 > >
 > > > <details-title> How it will look like </details-title>
 > > > 
@@ -196,15 +210,15 @@ We pre-selected the "step size", "colour curves by" and set __"free__ __scale"__
 >
 {: .question}
 
-# Use case 1: heatmap, ordination plot or boxploot
+# Use Case 1: Heatmap, Ordination Plot or Boxploot
 
-To create a heatmap, or ordination plot, or boxplot you can continue with your dataset.
+To create a heatmap, ordination plot, or boxplot you can continue with your dataset or use the same as we do for the next sections.
 
 > <comment-title>Note: </comment-title>
-> - we now use normalised data and a different dataset than for rarefaction curve (as it has more metadata)
+> - we now use normalised data and a different dataset than for the rarefaction curve (as it has more metadata)
 {: .comment}
 
-## Get data
+## Get Data
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -232,32 +246,29 @@ To create a heatmap, or ordination plot, or boxplot you can continue with your d
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-> 6. When you have your history created and ready on the right side. You click on "workflow" above.
+> 6. When you have your history created and ready on the right side, click on "workflow" above.
 >	 Choose the needed workflow by clicking on the blue play button in its box(if you hover over it, 
 >	 it says: Run workflow).
 >
-> 7. The workflow will ask you to input mandarory parameter. After done so, click the blue button above
+> 7. The workflow will ask you to input mandatory parameters. After doing so, click the blue button above
 >	 "Run Workflow".
->    See on the next picture how it looks like.
+>    See on the next picture how for how it looks.
 >
 {: .hands_on}
 
 ![Running the workflow](./images/choose_parameters.png "Running the workflow, choose the right datasets and mandatory parameters")
 
-## heatmaps
-We now can use our data, put them in subsets and create ungrouped, or grouped output or
-even grouped with facets. 
-The subsets are based on variable we set and available in the metadata {% cite Andersen2018 %}.
+## Heatmaps
+Now, we can use our data, put them into subsets, and create ungrouped or grouped outputs, including those with facets. 
+The subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 > <comment-title>Note: </comment-title>
-> - in the next sections, we give you prepared workflows on Galaxy and the set of parameters to choose
-for running the indicated workflow
-> - some parameters are pre-chosen for you e.g. taxonomic level to 
-aggregate the OTUs
+> - in the following sections, we provide prepared workflows on Galaxy and a set of parameters for running the indicated workflow
+> - some parameters are pre-selected for you, such as the taxonomic level to aggregate the OTUs
 {: .comment}
 
-### heatmap (ungrouped)
+### Heatmap (ungrouped)
 You can find the workflow "ampvis2 heatmap v3.0 (no group)" on Galaxy and use it for the tutorial.
-Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+We used the following metadata for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 Choose the metadata variable as Plant and metadata values as Aalborg East & Aalborg West.
 In the next box you can see the resulting heatmap.
@@ -269,37 +280,35 @@ In the next box you can see the resulting heatmap.
 >![Result of the heatmap](./images/heatmap_no_group.png "Result of the heatmap")
 {: .details}
 
-> <details-title> metadata values error while running workflow </details-title>
+> <details-title> Error with metadata values while running the workflow </details-title>
 >
-> If a set in history gets red, symbolising an error, click on the set to expand.
-> If it says: "parameter 'vals': an invalid option", then click on the button "Run
-> job again". The box is highlighted blue, you just select the values again in the drop down
-> menue and click the "Run Tool" above.
+> If a set in history shows red, indicating an error, click on the set to expand it.
+> If it says: "parameter 'vals': an invalid option", then click on the "Run
+> job again" button. The 'values' box will be highlighted in blue; simply select the values again from dropdown
+> menue and click "Run Tool" button above.
 >
-> Also note, the heatmap generation is paused. When all sets in history except heapmap becomes
-> green, expand the heapmap set and click on "Run job again". You might have to choose the metadata
-> list again. Make sure you choose the freshly generated one. Once more "Run Tool" above.
+> Additionally, note that the heatmap generation is paused. Once all sets in the history except the heapmap turns
+> green, expand the heapmap set and click "Run job again". You may need to choose the metadata
+> list again, make sure you choose the recently generated one. Click "Run Tool" again.
 > 
 {: .details}
 
-### heatmap (grouped)
+### Heatmap (grouped)
 You can find the workflow "ampvis2 heatmap v2.0 (only group)" on Galaxy and use it for the tutorial.
 We used 2 different metadata subsets:
-- 1) metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West 
-   plus grouped by = Plant
-- 2) metadata we used for this subset: metadata variable = Period and metadata values = Winter & Summer 
-   plus grouped by = Year
+- 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, grouped by = Plant
+- 2) Metadata used for this subset: metadata variable = Period, metadata values = Winter & Summer, grouped by = Year
 
 > <hands-on-title> Run a workflow </hands-on-title>
 >
-> 1. Create a new history (you can use the previous, but if you make a lot of runs, it could
->  	 happen that you don't find your favourite heatmap anymore)
+> 1. Create a new history (you can use the previous, but if you run multiple workflows, it might
+>  	 become difficult to find your heatmap later)
 >  
 > 2. Use the same data and rename if you wish following the hands-on sections above
 >
 > 3. Choose the needed workflow 
 >
-> 4. Choose the mandarory parameters and click the button "Run Workflow".
+> 4. Choose the mandarory parameters and click the "Run Workflow" button.
 >    See on the next pictures how it looks like.
 >
 {: .hands_on}
@@ -317,27 +326,27 @@ We used 2 different metadata subsets:
 
 > <question-title></question-title>
 >
-> 1. Can you create a heatmap, which shows only the first and the last year of data collection?
-> 2. Can you use the following settings to create a nice heatmap: metadata variable = Year and 
+> 1. Can you create a heatmap that shows only the first and the last year of data collection?
+> 2. Can you create a heatmap using the following settings: metadata variable = Year and 
 	metadata value = Date plus grouped by = Year?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. yes, with the following settings: metadata variable = Year and 
-   metadata values = 2006 & 2015 plus grouped by = Year
-> > 2. no, metadata values must be from the set of metadata variable
+> > 1. Yes, with the following settings: metadata variable = Year, 
+   metadata values = 2006 & 2015, grouped by = Year
+> > 2. No, the metadata values must correspond to the metadata variable options
 > >
 > {: .solution}
 >
 {: .question}
 
-### heatmap (grouped with facets)
+### Heatmap (grouped with facets)
 You can find the workflow "ampvis2 heatmap v1.0 (group+facet)" on Galaxy and use it for the tutorial.
 We used 2 different metadata subsets:
-- 1) metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West 
-   plus grouped by = Plant and facet by Period 
-- 2) metadata we used for this subset: metadata variable = Period and metadata values = Winter & Summer 
-   plus grouped by = Year and facet by Period 
+- 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, 
+	grouped by = Plant, facet by = Period 
+- 2) Metadata used for this subset: metadata variable = Period, metadata values = Winter & Summer, 
+   grouped by = Year, facet by = Period 
    
 
 > <hands-on-title> Run a workflow </hands-on-title>
@@ -348,7 +357,7 @@ We used 2 different metadata subsets:
 >
 > 3. Choose the needed workflow 
 >
-> 4. Choose the mandarory parameters and click the button "Run Workflow".
+> 4. Choose the mandarory parameters and click the "Run Workflow" button.
 >    See on the next pictures how it looks like.
 >
 {: .hands_on}
@@ -365,20 +374,20 @@ We used 2 different metadata subsets:
 > 
 {: .details}
 
-## ordination plots
-We now can use our data, put them in subsets and create different plots by using different ordination methods. 
-Like with heatmaps, the subsets are based on variable we set and available in the metadata {% cite Andersen2018 %}.
+## Ordination Plots
+We can now use our data, generate subsets, and create different plots by applying various ordination methods. 
+As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 
 > <comment-title> Note: </comment-title>
-> - in the next sections, we give you prepared workflows on Galaxy and the set of parameters to choose
-for running the indicated workflow
-> - some parameters are pre-chosen for you e.g. ordination method, 
-transformation (if used) and others like to colour and label the points or frames
+> - in the following sections, we provide prepared workflows on Galaxy along with the set of parameters to select
+for running each workflow
+> - some parameters are pre-selected for you, such as ordination method, 
+transformation (if used) and options to colour and label the points or frames
 {: .comment}
 
-### ordination method: PCA
+### Ordination Method: PCA
 You can find the workflow "ampvis2 ordination plot v1.0 (pca)" on Galaxy and use it for the tutorial.
-Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 > <comment-title></comment-title>
 > - use the same data set as for heatmaps
@@ -387,14 +396,14 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the ordination plot created with the method PCA.
+> Result of the ordination plot created with the PCA method.
 > 
->![Result of the ordiantion plot](./images/ordination_pca.png "Result of the ordination plot created with the method PCA")
+>![Result of the ordiantion plot](./images/ordination_pca.png "Result of the ordination plot created with the PCA method")
 {: .details}
 
-### ordination method: PCA plus trajectory: _date_
+### Ordination Method: PCA plus Trajectory: _date_
 You can find the workflow "ampvis2 ordination plot v1.1 (pca+trajectory_date)" on Galaxy and use it for the tutorial.
-Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 > <comment-title></comment-title>
 > - use the same data set as for heatmaps
@@ -403,9 +412,9 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the ordination plot created with the method PCA plus using the trajectory date.
+> Result of the ordination plot created with the PCA method plus using the trajectory date.
 > 
->![Result of the ordiantion plot](./images/ordination_pca_date.png "Result of the ordination plot created with the method PCA plus using the trajectory date")
+>![Result of the ordiantion plot](./images/ordination_pca_date.png "Result of the ordination plot created with the PCA method plus using the trajectory date")
 {: .details}
 
 > <question-title></question-title>
@@ -414,15 +423,15 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 >
 > > <solution-title></solution-title>
 > >
-> >  no, you will get a very messy bundle of colours.
+> >  No, you will get a very messy bundle of colours.
 > >
 > {: .solution}
 >
 {: .question}
 
-### ordination method: CCA
+### Ordination Method: CCA
 You can find the workflow "ampvis2 ordination plot v1.2 (cca transform_hellinger)" on Galaxy and use it for the tutorial.
-Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 > <comment-title></comment-title>
 > - use the same data set as for heatmaps
@@ -431,35 +440,35 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the ordination plot created with the method CCA and the Hellinger transformation.
+> Result of the ordination plot created with the CCA method and the Hellinger transformation.
 > 
->![Result of the ordiantion plot](./images/ordination_cca_hellinger.png "Result of the ordination plot created with the method CCA and the Hellinger transformation")
+>![Result of the ordiantion plot](./images/ordination_cca_hellinger.png "Result of the ordination plot created with the CCA method and the Hellinger transformation")
 {: .details}
 
 > <question-title></question-title>
 >
->  If you take the CCA ordination method with the following settings: metadata variable = Period and metadata values = Winter & Summer.
-	What do you need to remove from pre-chosen parameters so the ordination plot stays "readable"?
+>  If you use the CCA ordination method with the following settings: metadata variable = Period and metadata values = Winter & Summer.
+	What do you need to remove from pre-selected parameters to keep the ordination plot stays readable?
 >
 > > <solution-title></solution-title>
 > >
-> >  when you expand the ordination plot set in your history, you see colour, shape, frame, and label by options. Select colour by _Period_ 
-and frame by _Periaod_ and deselect the other mentioned options above, so they read _"Nothing_ _selected"_ .
+> >  When you expand the ordination plot set in your history, you see options for colour, shape, frame, and label by. Select colour by _Period_ 
+and frame by _Period_ and deselect the other mentioned options above, so they read _"Nothing_ _selected"_ .
 > >
 > {: .solution}
 >
 {: .question}
 
-## boxplot
-We now can use our data, put them in subsets and create a boxplot. 
-Like with heatmaps, the subsets are based on variable we set and available in the metadata {% cite Andersen2018 %}.
+## Boxplot
+We can now use our data, put them into subsets and create a boxplot. 
+As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 > <comment-title> Note: </comment-title>
-> - in the prepared workflow on Galaxy, we provide in this tutorial, some parameters are pre-chosen for you 
-e.g. number of taxa to show
+> - in the prepared workflow on Galaxy provided in this tutorial, some parameters are pre-selected for you, 
+such as the number of taxa to show
 > - The samples are grouped by _Period_
 {: .comment}
 
-Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 > <comment-title></comment-title>
 > - use the same data set as for heatmaps
@@ -473,7 +482,7 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 >![Result of the boxplot](./images/boxplot_period.png "Result of the boxplot grouped by Period")
 {: .details}
 
-> <tip-title>create a different boxplot</tip-title>
+> <tip-title>Create a different boxplot</tip-title>
 >
 > * use the same data set
 > * set metadata variable = Period and metadata values = Summer & Winter
@@ -491,20 +500,20 @@ Metadata we used for this subset: metadata variable = Plant and metadata values 
 > <question-title></question-title>
 >
 > 1. Can you create an output where only odd years are considered?
-> 2. Do you need to change any pre-chosen parameter for question 1?
+> 2. Do you need to change any pre-selected parameter for question 1?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. yes, if you set metadata variable = Year and metadata values = 2007, 2009, 2011, 2013, 2015 
-> > 2. yes, set "group the sample" to _Year_
+> > 1. Yes, if you set metadata variable = Year and metadata values = 2007, 2009, 2011, 2013, 2015 
+> > 2. Yes, set "group the sample" to _Year_
 > >
 > {: .solution}
 >
 {: .question}
 
-# Use case 2: time series plot
+# Use Case 2: Time Series Plot
 
-Time series analysis is mainly known for forecasting. A time series can be seen as 
+Time series analysis is primarily known for forecasting. A time series can be seen as 
 an example of a random or stochastic process, which we can use to visualise seasonal 
 differences {% cite DeGooijer2006 %}. 
 
@@ -512,11 +521,11 @@ In our dataset, and with the settings listed below, we can observe the
 temporal evolution of the 3 most common microorganisms in the plants Aalborg East and Aalborg West 
 over the entire period data was collected.
 
-## create a time series plot
+## Create a Time Series Plot
 You can find the workflow "ampvis2 timeseries v1.0" on Galaxy and use it for the tutorial.
-Metadata we used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
-Time variable is mandatory here, as **_Date_** is the only valid time variable we can select, we already pre-selected
-it. And as Number of taxa to show becomes a bit messy (for this data set at least) we choose the number of 3. 
+Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+The time variable is mandatory here, and as **_Date_** is the only valid time variable we can select, it has already been pre-selected. 
+Since displaying a large number of taxa can make the plot messy (for this data set at least), we have chosen to show only the top 3 taxa.
 
 > <comment-title></comment-title>
 > - use the same data set as for heatmaps
@@ -533,24 +542,23 @@ it. And as Number of taxa to show becomes a bit messy (for this data set at leas
 > <question-title></question-title>
 >
 > 1. If you run the following settings: metadata variable = Period and metadata values = Winter & Summer. 
-	Do you need to change the time variable in the pre-chosen parameters?
-> 2. Can you separate the 3 curves from the main section settings into curves of periods coresponding to the shown Phylum?
+	Do you need to change the time variable in the pre-selected parameters?
+> 2. Can you adjust the settings to separate the 3 curves into distinct curves for each period, corresponding to the shown Phylum?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. no, _Date_ is still the only possible option 
-> > 2. yes, if expand the time series set in the history and run it again with "group the sample by" _Period_
+> > 1. No, _Date_ is still the only possible option 
+> > 2. Yes, you can separate the curves by expanding the time series set in the history and running it again with "group the sample by" _Period_
 > >
 > {: .solution}
 >
 {: .question}
 
 
-<!-- edited until here. -->
-
-
-
 # Conclusion
+This tutorial has equipped you with essential skills for visualising and interpreting microbiome data using ampvis2. 
+By exploring diverse visualisation methods and leveraging metadata effectively, you've learned how to gain valuable insights 
+from complex datasets. Don't hesitate to explore further in Galaxy's toolbox for additional data manipulation tools and 
+continue refining your analysis techniques to enhance your research capabilities. 
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Happy exploring!
