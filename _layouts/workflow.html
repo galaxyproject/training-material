@@ -149,9 +149,46 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">{{ workflow.mermaid }}</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for input in workflow.inputs %}
+				<tr>
+					<td>{{ input.name }}</td>
+					<td>{{ input.label }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for output in workflow.outputs %}
+				<tr>
+					<td>{{ output.tool_id }}</td>
+					<td>{{ output.name }}</td>
+					<td>{{ output.label }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+
 
 			<h2>Tools</h2>
-
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -175,14 +212,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			{% endfor %}
 				</tbody>
 			</table>
-
-			<!--
-			<h2>Inputs</h2>
-			Coming Soon™
-
-			<h2>Outputs</h2>
-			Coming Soon™
-			-->
 
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>

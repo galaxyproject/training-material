@@ -699,7 +699,9 @@ module TopicFilter
           'modified' => File.mtime(wf_path),
           'mermaid' => mermaid(wf_json),
           'graph_dot' => graph_dot(wf_json),
-          'workflow_tools' => extract_workflow_tool_list(wf_json).uniq,
+          'workflow_tools' => extract_workflow_tool_list(wf_json).flatten.uniq.sort,
+          'inputs' => wf_json['steps'].select { |_k, v| ['data_input', 'data_collection_input', 'parameter_input'].include? v['type'] }.map{|_, v| v},
+          'outputs' => wf_json['steps'].select { |_k, v| v['workflow_outputs'] && v['workflow_outputs'].length.positive? }.map{|_, v| v},
         }
       end
     end
