@@ -38,6 +38,7 @@ contributions:
   - gallantries
   - pndb
 
+subtopic ecologyanalysis
 
 recordings:
 - captioners:
@@ -50,7 +51,6 @@ recordings:
   - colineroyaux
 
 
-subtopic ecologyanalysis
 ---
 
 
