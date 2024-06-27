@@ -89,13 +89,20 @@ The 5k {PBMC's} dataset for this tutorial is available for free from [10X Genomi
 
 > <details-title>Fragments File </details-title>
 >
->   The Fragments File is a tabular file in a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1)-like format, containing information about the position of the read on the chromosome. 
+>   The Fragments File is a tabular file in a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1)-like format, containing information about the position of the fragments on the chromosome and their corresponding 10x cell barcodes.  
 >
 {: .details}
 SnapATAC2 requires 3 input files for the standard pathway of processing:
-- `fragments_file.tsv`: A tabular file containing the chromosome positions of the reads and their corresponding 10X cell barcodes. 
-- `chrom_sizes.txt`: A tabular file of the number of bases of the human chromosomes
-- `gene_annotation.gtf.gz`: A tabular file listing genomic features of the human genome (GENCODE GRCh38)
+- `fragments_file.tsv`: A tabular file containing the chromosome positions of the fragments and their corresponding 10x cell barcodes. 
+- `chrom_sizes.txt`: A tabular file of the number of bases of each chromosome of the reference genome 
+- `gene_annotation.gtf.gz`: A tabular file listing genomic features of the reference genome (GENCODE GRCh38)
+
+> <details-title>Chromosome sizes </details-title>
+>
+> - A chromosome sizes file can be generated using the tool {% tool [Compute sequence length](toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.3) %}. 
+> - The reference genome can either be selected from cached genomes or uploaded to the galaxy history.
+>
+{: .details}
 
 > <comment-title></comment-title>
 > - This tutorial starts with a `fragment` file. 
@@ -140,7 +147,7 @@ SnapATAC2 requires 3 input files for the standard pathway of processing:
 > > <solution-title></solution-title>
 > >
 > > 1. There are 25 chromosomes. The 22 autosomes (Chr. 1-22), both sex chromosomes (Chr. X and Y) and the small circular mitochondrial chromosome (Chr. M). 
-> > 2. The cell barcodes are unique 16 bp oligos, located in the column `Name`.  
+> > 2. The cell barcodes are unique 16 bp oligos, located in column 4.  
 > >
 > {: .solution}
 >
@@ -287,7 +294,7 @@ Instead, we need to use a dedicated tool from the **AnnData** suite.
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. 3 peaks are clearly visible (at <100-bp, ~200-bp and ~400-bp). The smallest fragments are from nucleosome-free regions, while the larger peaks (200- and 400-bp) contain mono- and di-nucleosome fragments, respectively. 
+> > > 1. 3 peaks are clearly visible (at <100-bp, ~200-bp and ~400-bp). The smallest fragments are from nucleosome-free regions, while the larger peaks of 200- and 400-bp contain mono- and di-nucleosome fragments, respectively. 
 > > > 2. The small fragments (<100-bp) are from open chromatin reads, since the Tn5 transposase could easily access the loosely packed DNA ({% cite Yan2020 %}). 
 > > > 
 > > {: .solution}
@@ -529,12 +536,14 @@ With the already reduced dimensionality of the data stored in `X_spectral`, the 
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute Umap, using 'tl.umap'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC spectral` (output of **tl.spectral** {% icon tool %})
+>        - *"Use the indicated representation in '.obsm'"*: `X_spectral`
 >
 > 2. Rename the generated file to `Anndata 5k PBMC UMAP` or add the tag  {% icon galaxy-tags %} `UMAP` to the dataset
 {: .hands_on}
 
 # Clustering
-During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* method. This method takes the results of k-nearest neighbor (KNN) method as input data and produces well-connected communities. 
+During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* algorithm. This method takes the k-nearest neighbor (KNN) graph as input data and produces well-connected communities. 
+ 
 
 ## Community clustering
 
@@ -655,10 +664,10 @@ Since our data currently doesn't contain gene information, we have to create a c
 {: .hands_on}
 
 
-## Imputation with scanpy
-Similar to scRNA-seq data, the cell by gene activity matrix is very sparse. Additionally, high gene variance between cells, due to technical confounders, could impact the downstream analysis. In scRNA-seq, filtering and normalization are therefore required to produce a high-quality gene matrix. 
+## Imputation with Scanpy and MAGIC
+Similar to scRNA-seq data, the cell-by-gene-activity matrix is very sparse. Additionally, high gene variance between cells, due to technical confounders, could impact the downstream analysis. In scRNA-seq, filtering and normalization are therefore required to produce a high-quality gene matrix. 
 
-Since the cell by gene activity matrix resembles the cell by gene expression matrix of scRNA-seq, we can use the tools of the [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}) tool suite to continue with our data. 
+Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression* matrix of scRNA-seq, we can use the tools of the [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}) tool suite to continue with our data. 
 
 > <hands-on-title> Filter and normalize </hands-on-title>
 >
@@ -856,24 +865,24 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    - {% icon param-select %} *"Cut columns"*: `c8`
 >    - {% icon param-file %} *"From"*: `5k PBMC observations` (output of **Inspect AnnData** {% icon tool %})
 >
-> 5. Create a new **.csv** file from the following
+> 5. Create a new **tabular** file from the following
 >    ```
->    leiden, cell_type
->    0, Dendritic_cells
->    1, memory_Tcells
->    2, memory_Tcells
->    3, Dendritic_cells
->    4, naive_Tcells
->    5, Monocytes
->    6, Bcells
->    7, naive_Tcells
->    8, memory_Tcells
->    9, NKcells
->    10, Dendritic_cells
->    11, Bcells
->    12, Dendritic_cells
+>    leiden cell_type
+>    0 Dendritic_cells
+>    1 memory_Tcells
+>    2 memory_Tcells
+>    3 Dendritic_cells
+>    4 naive_Tcells
+>    5 Monocytes
+>    6 Bcells
+>    7 naive_Tcells
+>    8 memory_Tcells
+>    9 NKcells
+>    10 Dendritic_cells
+>    11 Bcells
+>    12 Dendritic_cells
 >    ```
->    {% snippet faqs/galaxy/datasets_create_new_file.md format="csv" name="replace_file"%}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md format="csv" name="replace_file" convertspaces%}
 > 
 >    > <details-title>Replace file</details-title>
 >    >
@@ -934,7 +943,7 @@ In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnDa
 3. Clustering of cells via the *Leiden* method
 4. Cluster annotation
    1. Producing and filtering a cell by gene activity matrix
-   2. Data normalization and imputation with **Scanpy**
+   2. Data normalization and imputation with **Scanpy** and the *MAGIC* algorithm
    3. Visualizing marker genes in the clusters
    4. Manually annotating the cell types with selected marker genes
 
