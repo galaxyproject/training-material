@@ -49,6 +49,7 @@ recordings:
   speakers:
   - colineroyaux
 
+subtopic ecologyanalysis
 ---
 
 
