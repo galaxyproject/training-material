@@ -64,9 +64,12 @@ OTU table, sample metadata and taxonomy table, all in _tabular_ format.
 # Rarefaction Curve
 
 As first exploration of your data, you can start with rarefaction curve.
-Rarefaction curves are the smoothed versions of accumulation curves and represent  
-the means of all pooled samples, thus displaying the measured species richness. 
-Rarefaction provides proper curves for dataset comparison {% cite Gotelli2001 %}.
+Rarefaction curves are a refined version of accumulation curves. They help visualize 
+the number of species (species richness) in your samples by showing the average number 
+of species observed as more samples are added. This method pools all the samples 
+together and calculates the mean species richness for different sample sizes, resulting 
+in a smooth curve. Rarefaction curves are particularly useful for comparing different datasets, 
+as they provide a standard way to assess species richness regardless of sample size differences {% cite Gotelli2001 %}.
 > <comment-title>Note: </comment-title>
 > - for this part, we need 'raw' data, it should not be normalised
 > - for this section, we used a different dataset than for the rest of the tutorial
