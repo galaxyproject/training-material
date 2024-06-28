@@ -3,25 +3,26 @@ layout: tutorial_hands_on
 
 title: ERGA post-assembly QC
 questions:
-- "what combination of tools can assess the quality of an post-assembly?"
-- "what metrics can help to analyse the quality?"
-- "how to evaluate the outputs?"
+- "What combination of tools can assess the quality of a genome assembly?"
+- "What metrics can help to analyse the quality of an asembly?"
+- "How do we evaluate the outputs?"
 objectives:
-- "apply the post-assembly-QC-workflow using the necessary tools"
-- "analyse and evaluate the results of the workflow"
+- "Apply the post-assembly-QC-workflow using the necessary tools"
+- "Analyse and evaluate the results of the workflow"
 time_estimation: 3H
 key_points:
-- "The ERGA post-assembly pipeline allows to assess and improve the quality of genome assemblies"
-- "The ERGA post-assembly pipeline contains of three main steps: Genome assembly decontamination and overview with BlobToolKit, providing analysis information and statistics and Hi-C scaffolding."
+- "The ERGA post-assembly pipeline allows users to assess and improve the quality of genome assemblies"
+- "The ERGA post-assembly pipeline consists of three main steps: Genome assembly decontamination and overview with BlobToolKit, providing analysis information and statistics, and Hi-C scaffolding."
 contributors:
 - GitFab93
 - gallardoalba
+- tbrown91
 
 ---
 
-The European Reference Genome Atlas ([ERGA](https://www.erga-biodiversity.eu/), {% cite Mazzoni2023 %}) is a large-scale network of researchers aiming to generate high-quality reference genomes for all eukaryotic life in Europe and build capacity to allow researchers anywhere to generate reference genomes and use them to answer questions regarding species conservation and biodiversity. ERGA uses state-of-the-art sequencing technologies and advanced bioinformatics tools to produce high-quality genome assemblies.
+![](../../images/post-assembly-QC/ERGA.logo.jpg){: width="20px"}
 
-![](../../images/post-assembly-QC/ERGA.logo.jpg){:width="320px"}
+The European Reference Genome Atlas ([ERGA](https://www.erga-biodiversity.eu/), {% cite Mazzoni2023 %}) is a large-scale network of researchers aiming to generate high-quality reference genomes for all eukaryotic life in Europe and build capacity to allow researchers anywhere to generate reference genomes and use them to answer questions regarding species conservation and biodiversity. ERGA uses state-of-the-art sequencing technologies and advanced bioinformatics tools to produce high-quality genome assemblies.
 
 Reference genomes provide a baseline for understanding genetic diversity within and among populations, and can be used to identify populations at risk of genetic erosion. This information is crucial for developing effective conservation strategies and management plans for threatened and endangered species ({% cite Shafer2015 %}). Additionally, by better understanding the genetic basis of important traits, such as disease resistance and adaptation to changing environments, researchers can develop targeted interventions to mitigate the effects of environmental change and prevent the loss of genetic diversity ({% cite Frankham2011 %}). The ERGA project has the potential to greatly benefit biodiversity conservation efforts and advance our understanding of the genetic basis of biodiversity.
 
