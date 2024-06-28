@@ -45,6 +45,23 @@ tags:
 - covid19
 - virology
 - one-health
+
+recordings:
+- youtube_id: hjlmCWQhBvI
+  date: '2023-05-10'
+  speakers:
+  - wm75
+  captioners:
+  - wm75
+  length: 55M
+- captioners:
+  - hexylena
+  date: '2021-08-09'
+  length: 1H30M
+  youtube_id: vnFQ2fR_fzw
+  speakers:
+  - wm75
+
 ---
 
 

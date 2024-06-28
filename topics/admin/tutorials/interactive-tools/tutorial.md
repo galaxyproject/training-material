@@ -34,6 +34,18 @@ requirements:
       - connect-to-compute-cluster
       - job-destinations
 subtopic: features
+
+recordings:
+- captioners:
+  - abretaud
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 44M
+  youtube_id: lACsIhnbTbE
+  speakers:
+  - abretaud
+
 ---
 
 

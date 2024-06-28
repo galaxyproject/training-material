@@ -38,16 +38,7 @@ contributions:
 subtopic: fair-data
 
 ---
-> <agenda-title></agenda-title>
->
-> In this tutorial we will deal with:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
-# 01. Introduction
 DNA sequencing has become one of the key technologies in molecular biology, with applications in diagnostics, evolutionary biology, drug discovery, forensics and much more. Drop in sequencing costs and breakthroughs in sequencing technologies has seen increasing utilization of sequencing as a research tool, featuring in thousands of life-science publications every year. 
 
 Prior to publication many journals and funders require authors to submit their raw sequence data to one of the three INSDC member databases – **ENA, NCBI or DDBJ** – between which data is synchronised on a daily basis. INSDC is the core infrastructure for sharing nucleotide sequence data and metadata in the public domain. Data in INSDC member databases is available permanently, for free and with unrestricted access. For each submitted sequence a unique accession number is issued which can be reported in the publication. 
@@ -61,6 +52,16 @@ If you would like to use Galaxy tools for submission to ENA you may find [Submit
 > <tip-title>What is cURL?</tip-title>
 > cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests. 
 {: .tip}
+
+> <agenda-title></agenda-title>
+>
+> In this tutorial we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 
 ## ENA Submission Routes
 
@@ -232,24 +233,24 @@ First, we need to confirm that your read files are in the correct format. Refer 
 
 > <hands-on-title>Linux or OSX</hands-on-title>
 > #### On a Linux-based operating system
-> **Step 1**:
-> Compress the fastq files for the upload using gzip. 
+> 1. Compress the fastq files for the upload using gzip. 
 >
->  Open the terminal on your machine then type the commands below. First move to the directory where fastq files are located, then compress the fastq files using gzip command.
-> ```
-> # In the command below replace '/path/to/fastq/directory' with the correct path
-> cd /path/to/fastq/directory
-> 
-> gzip *.fastq
-> ``` 
-> **Step 2**: 
-> To enable verification of the integrity of the uploaded fastq file, ENA requires md5 checksum for each file.
-> 
-> Type the command below to calculate and print md5 sums to tab-separated file (for easy cut-and-paste later).
-> ```
-> for f in *.gz; do md5 $f | awk '{ gsub(/\(|\)/,""); print $2"\t" $4 }'; done > md5sums.tsv
-> ```
-> md5sums.tsv will contain a tab-separated table of fastq.gz filenames and their md5sum. 
+>    Open the terminal on your machine then type the commands below. First move to the directory where fastq files are located, then compress the fastq files using gzip command.
+>
+>    ```
+>    # In the command below replace '/path/to/fastq/directory' with the correct path
+>    cd /path/to/fastq/directory
+>
+>    gzip *.fastq
+>    ```
+>
+> 2. To enable verification of the integrity of the uploaded fastq file, ENA requires md5 checksum for each file.
+>
+>    Type the command below to calculate and print md5 sums to tab-separated file (for easy cut-and-paste later).
+>    ```
+>    for f in *.gz; do md5 $f | awk '{ gsub(/\(|\)/,""); print $2"\t" $4 }'; done > md5sums.tsv
+>    ```
+>    md5sums.tsv will contain a tab-separated table of fastq.gz filenames and their md5sum. 
 >
 {: .hands_on}
 

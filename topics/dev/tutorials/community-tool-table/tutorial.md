@@ -11,7 +11,7 @@ objectives:
 - Embed an interactive table in a community page
 time_estimation: 1H
 key_points:
-- The Galaxy Tool Metadata Extractor extracts all Galaxy tools to create interactive tables
+- The Galaxy Codex extracts all Galaxy tools to create interactive tables
 - The tool tables can be filtered by ToolShed categories and community-reviewed lists of tools to keep or exclude
 - The community interactive Galaxy tools table can be embed into any website
 tags:
@@ -29,13 +29,13 @@ While granularity supports the composability of tools into rich domain-specific 
 
 The final challenge is also an opportunity: the global nature of Galaxy means that it is a big community. Solving the visibility of tools across this ecosystem and the potential benefits are far-reaching for global collaboration on tool and workflow development.
 
-To provide the research community with a comprehensive list of available Galaxy tools, [Galaxy Tool Metadata Extractor](https://github.com/galaxyproject/galaxy_tool_metadata_extractor) was developed to collect Galaxy wrappers from a list of Git repositories and automatically extract their metadata (including Conda version, [bio.tools](https://bio.tools/) identifiers, and EDAM annotations). The workflow also queries the availability of the tools and usage statistics from the three main Galaxy servers (usegalaxy.*). 
+To provide the research community with a comprehensive list of available Galaxy tools, [Galaxy Codex](https://github.com/galaxyproject/galaxy_codex) was developed to collect Galaxy wrappers from a list of Git repositories and automatically extract their metadata (including Conda version, [bio.tools](https://bio.tools/) identifiers, and EDAM annotations). The workflow also queries the availability of the tools and usage statistics from the three main Galaxy servers (usegalaxy.*). 
 
-![A diagram illustrating the Galaxy Tool Metadata Extractor pipeline, showcasing the various steps involved in creating a community Galaxy tool table.](./images/galaxy_tool_metadata_extractor_pipeline.png "Workflow of the Galaxy Tool Metadata Extractor pipeline. Tool wrappers are parsed from different repositories and additional metadata is retrieved from bio.tools, BioConda, and the main public Galaxy servers. Upon filtering and manual curation of the data for specific scientific communities, the data is transformed into interactive web tables and a tool usage statistic-base word cloud, that can be integrated into any website.")
+![A diagram illustrating the Galaxy Codex pipeline, showcasing the various steps involved in creating a community Galaxy tool table.](./images/galaxy_tool_metadata_extractor_pipeline.png "Workflow of the Galaxy Codex pipeline. Tool wrappers are parsed from different repositories and additional metadata is retrieved from bio.tools, BioConda, and the main public Galaxy servers. Upon filtering and manual curation of the data for specific scientific communities, the data is transformed into interactive web tables and a tool usage statistic-base word cloud, that can be integrated into any website.")
 
-The pipeline creates an [interactive table with all tools and their metadata](https://galaxyproject.github.io/galaxy_tool_metadata_extractor/). This table can be **filtered to only include tools that are relevant to a specific research community**. Here is an example for the microbial related tools:
+The pipeline creates an [interactive table with all tools and their metadata](https://galaxyproject.github.io/galaxy_codex/). This table can be **filtered to only include tools that are relevant to a specific research community**. Here is an example for the microbial related tools:
 
-<iframe id="edam" src="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/microgalaxy/" frameBorder="0" width="100%" height="600px"> ![Interactive table for microgalaxy tools](./images/microgalaxy_tools.png) </iframe>
+<iframe id="edam" src="https://galaxyproject.github.io/galaxy_codex/microgalaxy/" frameBorder="0" width="100%" height="600px"> ![Interactive table for microgalaxy tools](./images/microgalaxy_tools.png) </iframe>
 
 The generated community-specific interactive table can be used as it and/or embedded, e.g. into the respective Galaxy Hub page or Galaxy subdomain. This table allows further filtering and searching for fine-grained tool selection. 
 
@@ -52,13 +52,13 @@ The aim is this tutorial is to create such table for a community.
 >
 {: .agenda}
 
-# Add your community to the Galaxy Tool Metadata Extractor pipeline
+# Add your community to the Galaxy Codex pipeline
 
-To create a table for a community, you first need to create a new folder in the `data/community` folder within [Galaxy Tool Metadata Extractor code source](https://github.com/galaxyproject/galaxy_tool_metadata_extractor). 
+To create a table for a community, you first need to create a new folder in the `data/community` folder within [Galaxy Codex code source](https://github.com/galaxyproject/galaxy_codex). 
 
 > <hands-on-title>Create a folder for your community</hands-on-title>
 >
-> 1. If not already done, fork the [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor) 
+> 1. If not already done, fork the [Galaxy Codex repository](https://github.com/galaxyproject/galaxy_codex) 
 > 2. Go to the `data/communities` folder
 > 3. Click on **Add file** in the drop-down menu at the top
 > 4. Select **Create a new file**
@@ -87,9 +87,9 @@ One of the filters for the main community table is based on the tool categories 
 > 6. Add any new categories to the `categories` file 
 {: .hands_on}
 
-Once you have a list of the ToolShed categories that you wish to keep, you can submit this to Galaxy Tool Metadata Extractor.
+Once you have a list of the ToolShed categories that you wish to keep, you can submit this to Galaxy Codex.
 
-> <hands-on-title>Submit the new community to Galaxy Tool Metadata Extractor</hands-on-title>
+> <hands-on-title>Submit the new community to Galaxy Codex</hands-on-title>
 >
 > 1. Click on **Commit changes** at the top
 > 2. Fill in the commit message with something like `Add X community`
@@ -100,75 +100,52 @@ Once you have a list of the ToolShed categories that you wish to keep, you can s
 
 The Pull Request will be reviewed. Make sure to respond to any feedback. 
 
-Once the Pull Request is merged, the interactive table will be created and made available online at `https://galaxyproject.github.io/galaxy_tool_metadata_extractor/<your community>`.
+Once the Pull Request is merged, the interactive table will be created and made available online at `https://galaxyproject.github.io/galaxy_codex/<your community>`.
 
 # Review the generated interactive table
 
 The interactive table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community. 
 
-Galaxy Tool Metadata Extractor provides 2 optional filters for tools:
-- A list of tools to exclude
-- A list of tools that should definitely be kept.
+Galaxy Codex allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you !).
 
-## Add a list of tools to exclude
+The additional filter must be stored in a file called  `tools_status.tsv` located in `data/community/<your community>`. The file must include 3 columns (without header):
+1. The `Galaxy wrapper id` corresponding to the IDs in the `tools.tsv` file in `results/<your community>`. 
+2. Whether the tool should be included in the final table (TRUE/FALSE). 
+3. Whether the tool is deprecated (TRUE/FALSE).
 
-> <hands-on-title>Add a list of tools to exclude</hands-on-title>
+Example of the `tools_status.tsv` file:
+```
+abacas	TRUE	FALSE
+abricate	TRUE	FALSE
+abritamr	TRUE	FALSE
+```
+
+Have a look on the [microGalaxy tool stats TSV](https://github.com/galaxyproject/galaxy_codex/blob/main/data/communities/microgalaxy/tool_status.tsv) for 
+an example of the file that is used to manually filter the tools for a community.
+
+## Add a tools status list 
+
+> <hands-on-title>Review tools in your community table</hands-on-title>
 >
-> 1. Open your interactive table
-> 2. Search for some tools to exclude
-> 3. Go to your community folder on [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor)
-> 4. Click on **Add file** drop-down menu on the top
-> 5. Select **Create a new file**
-> 6. Fill in `tools_to_exclude` in `Name of your file`
-> 7. Add the `Galaxy wrapper id` of the tools to exclude, with 1 tool identifier per row
-> 8. Submit your changes as before
-> 9. Wait for the Pull Request to be merged
->
-{: .hands_on}
-
-## Add a list of tools to keep
-
-> <hands-on-title>Add a list of tools to keep</hands-on-title>
->
-> 1. Open your interactive table
-> 2. Search for some tools to keep
-> 3. Go to your community folder on [Galaxy Tool Metadata Extractor repository](https://github.com/galaxyproject/galaxy_tool_metadata_extractor)
-> 4. Click on **Add file** drop-down menu on the top
-> 5. Select **Create a new file**
-> 6. Fill in `tools_to_keep` in `Name of your file`
-> 7. Add the `Galaxy wrapper id` of the tools to keep, with 1 tool identifier per row
-> 8. Submit your changes as before
-> 9. Wait for the Pull Request to be merged
->
-{: .hands_on}
-
-## Review all tools in your table
-
-Once the required filters have been implemented, you can review the full list of tools to ensure that you have created an interactive table reflecting the Galaxy tool landscape for your community.
-
-> <hands-on-title>Review all tools in your table</hands-on-title>
->
-> 1. Download the `tools.tsv` file in `results/<your community>`
-> 2. Open `tools.tsv` with a Spreadsheet Software
+> 1. Download the `tools.tsv` file in `results/<your community>`.
+> 2. Open `tools.tsv` with a Spreadsheet Software.
 > 3. Review each line corresponding to a tool
->    1. Change the value in the `Reviewed` column from `False` to `True`
->    2. Add `True` to the `To keep` column if the tool should be kept, and `False` if not
-> 4. Extract the list of tools to keep
->    1. Create a sheet for the list of tools to keep to
->       1. Filter on the `To keep` column to keep value `True`
->       2. Keep only the `Galaxy wrapper id` column
->    2. Add this list of `Galaxy wrapper id` to the `tools_to_keep` file
-> 5. Extract the list of tools to exclude
->    1. Create a sheet for the list of tools to keep to
->       1. Filter on the `To keep` column to keep value `False`
->       2. Keep only the `Galaxy wrapper id` column
->    2. Add this list of `Galaxy wrapper id` to the `tools_to_exclude` file
-> 6. Submit the changes
+       
+       You can also just review some tools. Those tools that are not reviewed will be have `FALSE` in the `Reviewed` columns the updated table.
+>    1. Change the value in the `Reviewed` column from `FALSE` to `TRUE` (this will be done automatically if an entry of the tool in `tools_status.tsv` exists).
+>    2. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not.
+>    3. Add `TRUE` or `FALSE` also to the `Deprecated` column.
+> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` column in a new table (in that order).
+
+       This can also be done using the reference function of your Spreadsheet Software.
+> 5. Export the new table as TSV (without header).
+> 6. Submit the TSV as `tools_status.tsv` in your community folder.
 > 7. Wait for the Pull Request to be merged
 >
 {: .hands_on}
 
-You should have now an interactive table reflecting the Galaxy tool landscape for your community.
+You should have now an interactive table reflecting the Galaxy tool landscape for your community. You can step-by-step review all tools in your community and update the `tools_status.tsv` file. You could also share this file with your community members and discuss weather the tool should be kept or not. Collaborative work could be established using google spreadsheet.
+
 
 # Embed the interactive table in your community page on the Hub
 
@@ -187,7 +164,7 @@ The interactive table you have created can be embedded in your community page on
 >      width="100%"
 >      height="600"
 >      frameBorder="0"
->      src="https://galaxyproject.github.io/galaxy_tool_metadata_extractor/<your_community>/">
+>      src="https://galaxyproject.github.io/galaxy_codex/<your_community>/">
 >    </iframe>
 >    ```
 >

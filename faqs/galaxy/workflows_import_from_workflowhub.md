@@ -8,10 +8,7 @@ contributors: [gallardoalba, abueg, nekrut]
 
 [WorkflowHub](https://workflowhub.eu/) is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.
 
-> <warning-title>Make sure you are logged in!</warning-title>
-> Ensure that you are logged in into your Galaxy account!
-{: .warning}
-
+1. Ensure that you are logged in to your Galaxy account.
 1. Click on the **Workflow** menu, located in the top bar.
 2. Click on the **Import** button, located in the right corner.
 3. In the section "Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)", click on **Search form**.
@@ -23,5 +20,4 @@ After that, the imported workflows will appear in the main workflow menu. In ord
 
 Below is a short video showing this uncomplicated procedure:
 
-<p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
-{: .hands_on}
+{% include _includes/youtube.html id="hoP36Te5wko" title="Importing from WorkflowHub" %}

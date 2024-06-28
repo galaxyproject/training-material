@@ -31,6 +31,7 @@ contributions:
   - bebatut
   editing:
   - bernt-matthias
+  - clsiguret
 edam_ontology:
 - topic_3697 # Microbial ecology
 - topic_0637 # Taxonomy
@@ -39,17 +40,17 @@ edam_ontology:
 
 ---
 
-> <comment-title>Sources</comment-title>
->
-> This tutorial is significantly based on [DADA2 Pipeline Tutorial](https://benjjneb.github.io/dada2/tutorial.html) and ["Introduction to dada2"](https://bioconductor.org/packages/devel/bioc/vignettes/dada2/inst/doc/dada2-intro.html)
->
-{: .comment}
-
 The investigation of environmental microbial communities and microbiomes has been revolutionized by the 
 development of high-throughput amplicon sequencing. In amplicon sequencing a particular genetic locus, 
 for example the 16S rRNA gene (or a part of it) in bacteria, is amplified from DNA extracted from the community of interest, 
 and then sequenced on a next-generation sequencing platform. This technique removes the need to culture 
 microbes in order to detect their presence, and cost-effectively provides a deep census of a microbial community.
+
+> <comment-title>Sources</comment-title>
+>
+> This tutorial is significantly based on [DADA2 Pipeline Tutorial](https://benjjneb.github.io/dada2/tutorial.html) and ["Introduction to dada2"](https://bioconductor.org/packages/devel/bioc/vignettes/dada2/inst/doc/dada2-intro.html)
+>
+{: .comment}
 
 {% include topics/microbiome/tutorials/mothur-miseq-sop/background_16S.md %}
 
@@ -536,7 +537,7 @@ We now merge the forward and reverse reads together to obtain the full denoised 
 >    - {% icon param-file %} *"Dada results for forward reads"*: output of **dada2: dada** with `#forward` tag
 >    - {% icon param-file %} *"Forward reads"*: output of **Unzip collection** with `#forward` tag
 >    - {% icon param-file %} *"Dada results for reverse reads"*:  output of **dada2: dada** with `#reverse` tag
->    - {% icon param-file %} *"Reverse reads"*: output of **Unzip collection** with `#forward` tag
+>    - {% icon param-file %} *"Reverse reads"*: output of **Unzip collection** with `#reverse` tag
 >    - *"Concatenated rather than merge"*: `No`
 >
 >      > <comment-title>Non-overlapping reads</comment-title>
@@ -902,7 +903,7 @@ We now construct a phyloseq object directly with it and the DADA2 outputs and la
 > 1. {% tool [Create phyloseq object from dada2](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_dada2/phyloseq_from_dada2/1.46.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence table"*: output of **dada2: removeBimeraDenovo**
 >    - {% icon param-file %} *"Taxonomy table"*: output of **dada2: assignTaxonomy and addSpecies**
->    - {% icon param-file %} *"Taxonomy table"*: `Metadata table`
+>    - {% icon param-file %} *"Sample table"*: `Metadata table`
 >
 > 2. {% tool [Phyloseq](interactive_tool_phyloseq) %} with the following parameters:
 >    - {% icon param-file %} *"Phyloseq R object"*: output of **Create phyloseq object from dada2**
@@ -1052,7 +1053,7 @@ The barplot is hard to read here: many families are in white because the color p
 >
 > ampvis2 ({% cite Andersen_2018 %}) team suggests [not using stacked bar charts but heatmaps to represent community diversity](http://albertsenlab.org/ampvis2-heatmap/). You can do that in Galaxy as ampvis2 is available as a tool.
 >
-{: .question}
+{: .comment}
 
 # Conclusion
 

@@ -24,6 +24,17 @@ contributors:
 - pavanvidem
 - beatrizserrano
 
+
+recordings:
+- captioners:
+  - gallardoalba
+  date: '2021-07-25'
+  galaxy_version: '21.05'
+  length: 1H10M
+  youtube_id: wS1X_0Mgw7M
+  speakers:
+  - gallardoalba
+
 ---
 
 

@@ -1,13 +1,22 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Inferring single cell trajectories (Monocle3)'
+title: 'Inferring single cell trajectories with Monocle3'
 subtopic: single-cell-CS
 priority: 5
 zenodo_link: 'https://zenodo.org/records/10397366'
 
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/tutorial
+
+answer_histories:
+  - label: "UseGalaxy.eu (includes AnnData to CDS conversion)"
+    history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monoce3-tutorial-workflow
+    date: 2024-03-04
+
+input_histories:
+  - label: "CDS file (UseGalaxy.eu)"
+    history: https://usegalaxy.eu/u/j.jakiela/h/cds-input-file-for-monocle3-tutorial
 
 questions:
 - How can I prepare input files for Monocle starting from an AnnData object?
@@ -39,7 +48,6 @@ requirements:
 tags:
 - 10x
 - paper-replication
-- R
 
 contributions:
   authorship:
@@ -51,6 +59,16 @@ contributions:
     - nomadscientist
   funding:
     - epsrc-training-grant
+
+recordings:
+- youtube_id: Espl6qSbu3Y
+  date: '2023-04-11'
+  length: 15M
+  speakers:
+  - wee-snufkin
+  captioners:
+  - wee-snufkin
+
 ---
 
 
@@ -72,13 +90,13 @@ In this tutorial we will perform trajectory analysis using [monocle3](https://co
 # Get data
 We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)).
 
-In the previous tutorials, we first created an AnnData object and performed downstream analysis on that file. However, Monocle3 uses another datatype which is Cell Data Set (CDS). To be able to infer trajectories in Monocle, we need to transform our AnnData object into CDS file. And guess what - we already have a tutorial for that! We did it in [format conversion tutorial]({% link topics/single-cell/tutorials/scrna-data-ingest/tutorial.md %}), in the [Anndata -> Cell Data Set (CDS) subsection]({% link topics/single-cell/tutorials/scrna-data-ingest/tutorial.md %}#anndata---cell-data-set-cds). To better understand the structure of CDS object and learn how to create it from expression matrix, cell and gene annotations, it is highly recommended that you complete the mentioned tutorial before importing the prepared CDS file. 
+In the previous tutorials, we first created an AnnData object and performed downstream analysis on that file. However, Monocle3 uses another datatype which is Cell Data Set (CDS). To be able to infer trajectories in Monocle, we need to transform our AnnData object into CDS file. And guess what - we already have a tutorial for that! We did it in [format conversion tutorial]({% link topics/single-cell/tutorials/scrna-data-ingest/tutorial.md %}), in the [Anndata -> Cell Data Set (CDS) subsection]({% link topics/single-cell/tutorials/scrna-data-ingest/tutorial.md %}#anndata---cell-data-set-cds). To better understand the structure of CDS object and learn how to create it from expression matrix, cell and gene annotations, it is highly recommended that you complete the mentioned tutorial before importing the prepared CDS file.
 
 You have two options for uploading the dataset. Importing via history is often faster.
 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 >
-> 1. You can import history where we went from AnnData to CDS file. Then you will also have access to extracted cell metadata, gene metadata, and an expression matrix: [Input history](https://singlecell.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3)
+> 1. You can import [history](https://usegalaxy.eu/u/j.jakiela/h/anndata---cds-conversion-for-monocle3-tutorial) where we went from AnnData to CDS file. Then you will also have access to extracted cell metadata, gene metadata, and an expression matrix. If you want to get the CDS file alone, you can get it in this [input history](https://usegalaxy.eu/u/j.jakiela/h/cds-input-file-for-monocle3-tutorial).
 >
 >
 >    {% snippet faqs/galaxy/histories_import.md %}
