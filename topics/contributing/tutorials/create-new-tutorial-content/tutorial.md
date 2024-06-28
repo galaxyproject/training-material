@@ -921,6 +921,27 @@ The alternative is to figure out the ID for the tool you want to use:
 
 ![Finding the tool ID](../../images/tool-id.png)
 
+## Example Histories
+
+If you have example input histories for your tutorial, perhaps for specific servers where trainees will often follow a tutorial but want to skip a slow input step, then you can provide example histories as part of your tutorial.
+
+> <code-in-title>Tutorial Frontmatter</code-in-title>
+> ```yaml
+> answer_histories:
+>   - label: "UseGalaxy.eu"
+>     history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+>   - label: "Older Alevin version"
+>     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+>     date: 2024-01-01
+> input_histories:
+>   - label: "UseGalaxy.eu"
+>     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+> ```
+{: .code-in}
+
+> <code-out-title>Rendered Tutorial</code-out-title>
+> ![a screenshot of the GTN metadata box showing a dropdown for input histories and answer histories. The answer histories features two examples one on UseGalaxy.eu and an older alevin one, each with a date. In the dropdown is also a link to an FAQ titled how to use this](images/example-histories.png)
+{: .code-out}
 
 ## Workflows
 

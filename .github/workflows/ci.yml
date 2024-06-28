@@ -80,7 +80,7 @@ jobs:
         run: |
           bundle exec ruby bin/check-indent.rb
 
-      - name: Ensure no unexpected jekyll in output
+      - name: Ensure no unexpected jekyll in output. If this fails, generally it means you should add a page.description to the front matter.
         run: |
           ! fgrep -R 'site.pages' _site
 

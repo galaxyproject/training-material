@@ -128,6 +128,14 @@ We should ONLY be using new_material (if at all possible.)
                 <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
 
+            {% if own_material.input_histories %}
+                <li class="btn btn-default supporting_material">{% include _includes/resource-input-histories.html material=own_material topic=topic.name label=true %}</li>
+            {% endif %}
+
+            {% if own_material.answer_histories %}
+                <li class="btn btn-default supporting_material">{% include _includes/resource-answer-histories.html material=own_material topic=topic.name label=true %}</li>
+            {% endif %}
+
             {% if own_material.notebook %}
                 <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
@@ -416,8 +424,10 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                    </p>
                 </blockquote>
 
+		<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
                 {% if page.contributions %}
-                {% include _includes/funding-statement.md contributions=page.contributions %}
+                {% include _includes/funding-statement.md funders=page.contributions.funding %}
                 {% endif %}
 
 
@@ -511,6 +521,24 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 		    {% endfor %}
 		</blockquote>
 
+		
+
+
+		{% assign upcoming_events = site | get_upcoming_events_for_this: new_material %}
+		{% assign upcoming_event_count = upcoming_events | size %}
+		{% if upcoming_event_count > 0 %}
+		<blockquote class="details hide-when-printing" id="upcoming-events">
+                  <div id="upcoming-events-c" class="box-title">
+                    <button type="button" aria-controls="upcoming-events-c" aria-expanded="false">
+                      <i class="fas fa-calendar" aria-hidden="true"></i>
+                      Upcoming events which cover this topic<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>Want to learn more with a live instructor? Check out these upcoming events:</p>
+		   {% include _includes/event-table.html events=upcoming_events campaign="via-tutorial" %}
+		</blockquote>
+		{% endif %}
 
                 </section>
 

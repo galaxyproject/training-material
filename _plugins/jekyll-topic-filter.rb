@@ -346,14 +346,8 @@ module TopicFilter
     shortlinks = site.data['shortlinks']
     shortlinks_reversed = shortlinks['id'].invert
 
-    get_posts(site).each do |post|
-      post.data['short_id'] = shortlinks_reversed[post.url]
-    end
-
     interesting = {}
     pages.each do |page|
-      page.data['short_id'] = shortlinks_reversed[page.url]
-
       # Skip anything outside of topics.
       next if !page.url.include?('/topics/')
 

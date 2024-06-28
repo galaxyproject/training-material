@@ -16,9 +16,9 @@ module Gtn
       if data.key?('contributors')
         data['contributors']
       elsif data.key?('contributions')
-        data['contributions'].keys.map { |k| data['contributions'][k] }.flatten
+        data['contributions'].values.flatten
       else
-        {}
+        []
       end
     end
 
@@ -30,11 +30,39 @@ module Gtn
     # +Array+ of contributor IDs
     def self.get_authors(data)
       if data.key?('contributors')
-        data['contributors']
+        data['contributors'] || []
       elsif data.key?('contributions')
-        data['contributions']['authorship']
+        data['contributions']['authorship'] || []
       else
-        {}
+        []
+      end
+    end
+
+    ##
+    # Returns event organisers
+    # Params:
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of contributor IDs
+    def self.get_organisers(data)
+      if data.key?('contributions') && data['contributions'].key?('organisers')
+        data['contributions']['organisers']
+      else
+        []
+      end
+    end
+
+    ##
+    # Returns event instructors
+    # Params:
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of contributor IDs
+    def self.get_instructors(data)
+      if data.key?('contributions') && data['contributions'].key?('instructors')
+        data['contributions']['instructors']
+      else
+        []
       end
     end
 
@@ -52,6 +80,20 @@ module Gtn
           .reject { |k| k == 'funding' }
           .reject { |k| k == 'authorship' }
           .values.flatten.uniq
+      else
+        []
+      end
+    end
+
+    ##
+    # Get the funders of a material.
+    # Params:
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of contributor IDs
+    def self.get_funders(data)
+      if data.key?('contributions') && data['contributions'].key?('funding')
+        data['contributions']['funding']
       else
         []
       end
