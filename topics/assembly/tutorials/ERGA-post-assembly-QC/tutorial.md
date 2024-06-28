@@ -81,7 +81,7 @@ As a first step we will get the data from Zenodo.
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Collections`
+>    - *"Upload type"*: `Collections`
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
@@ -95,7 +95,7 @@ As a first step we will get the data from Zenodo.
 >   dataset_03   https://zenodo.org/record/7781236/files/m64055e_220615_033108.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
 >   dataset_04   https://zenodo.org/record/7786773/files/m64055e_220603_182128.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
 >       ```
->
+>    - Click on `Build`
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
 >       - Click `Add Definition` button and select `URL`: column `B`
@@ -108,7 +108,7 @@ As a first step we will get the data from Zenodo.
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Datasets`
+>    - *"Upload type"*: `Datasets`
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
@@ -139,6 +139,9 @@ As a first step we will get the data from Zenodo.
 >
 {: .hands_on}
 
+# What data have we imported?
+
+For each species, we have uploaded the fasta file corresponding to the assembly, the raw sequencing data used to generate each assembly - in these cases PacBio HiFi longreads and Illumina Hi-C reads - and databases necessary to run the QC tools included in this tutorial. We will use the taxonomy database `new_taxdump.tar.gz` and the diamond database of protein sequences from the ncbi nt database to identify any sequence from contaminants or symbiont which are in our assembly using `BlobToolKit`.
 
 Once we have imported all the datasets, we will move each one to its correspondent history. 
 
@@ -183,11 +186,11 @@ In this tutorial, we will use BlobToolKit in order to integrate the following da
 
 In the next steps, we will generate the data required for generating the visualization plots with BlobToolKit.
 
-## Generate read coverage data with **HISAT2**
+## Generate read coverage data with **Minimap2**
 
 Read coverage is an essential metric for evaluating the quality of genome assemblies, and it provides valuable information for identifying regions of high and low quality, detecting misassemblies, and identifying potential contaminants. Thus, for example, unexpected regions of low coverage suggests potential errors, such as misassemblies, gaps, or low complexity regions ({% cite Koren2017 %}).
 
-In this tutorial we will use **HISAT2** for generation the coverage data. This tool uses a indexing scheme based on the Burrows-Wheeler transform (BWT) and the Ferragina-Manzini (FM) index, which enables efficient and accurate alignment ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for BlobToolKit.
+In this tutorial we will use **Minimap2** for generation the coverage data. Minimap2 is a multi-purpose aligner which is particularly efficient at aligning long-reads produced by sequencing machines from PacBio or Oxford Nanopore ({% cite Li2018 %}).
 
 > <comment-title>How is coverage information encoded in the BAM file?</comment-title>
 >
@@ -195,17 +198,18 @@ In this tutorial we will use **HISAT2** for generation the coverage data. This t
 >
 {: .comment}
 
-> <hands-on-title>Generate BAM file with HISAT2</hands-on-title>
+> <hands-on-title>Generate BAM file with Minimap2</hands-on-title>
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `CReniformis_Pacbio`
 >
 >
-> 2. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
->    - *"Source for the reference genome"*: `Use a genome from history`
+> 2. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/view/iuc/minimap2/5cc34c3f440d) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Select the reference genome"*: `CReformitis_assembly`
->    - *"Is this a single or paired library"*: `Single-end`
+>    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"FASTA/Q file"*: output of **Collapse Collection** {% icon tool %}
+>    - *"Select a profile of preset options"*: `PacBio HiFi reads vs reference mapping (-k19 -w19 -U50,500 -g10k -A1 -B4 -O6,26 -E2,1 -s200 ) (map-hifi)`
 >
 > 3. Repeat the prevous steps with the datasets from the two remanining species.
 >
@@ -308,7 +312,7 @@ To get a more meaningful analysis and therefore more useful information about ou
 >        - {% icon param-file %} *"BUSCO full table file"*: `Full table` (output of **Busco** {% icon tool %})
 >        - *"BLAST/Diamond hits"*: `Enabled`
 >           - *"BLAST/Diamond hits dataset"*: output of **Diamond** {% icon tool %}
->        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: output of **HISAT2** {% icon tool %}
+>        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: output of **Minimap2** {% icon tool %}
 >
 > 3. {% tool [Interactive BlobToolKit](interactive_tool_blobtoolkit) %} with the following parameters:
 >    - {% icon param-file %} *"Blobdir file"*: output of **BlobToolKit** {% icon tool %}
