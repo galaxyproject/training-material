@@ -70,7 +70,7 @@ of species observed as more samples are added. This method pools all the samples
 together and calculates the mean species richness for different sample sizes, resulting 
 in a smooth curve. Rarefaction curves are particularly useful for comparing different datasets, 
 as they provide a standard way to assess species richness regardless of sample size differences {% cite Gotelli2001 %}.
-> <comment-title>Note: </comment-title>
+> <comment-title> </comment-title>
 > - for this part, we need 'raw' data, it should not be normalised
 > - for this section, we used a different dataset than for the rest of the tutorial
 {: .comment}
@@ -217,7 +217,7 @@ We have pre-selected the "step size", "colour curves by" and set __"free__ __sca
 
 To create a heatmap, ordination plot, or boxplot you can continue with your dataset or use the same as we do for the next sections.
 
-> <comment-title>Note: </comment-title>
+> <comment-title> </comment-title>
 > - we now use normalised data and a different dataset than for the rarefaction curve (as it has more metadata)
 {: .comment}
 
@@ -264,13 +264,14 @@ To create a heatmap, ordination plot, or boxplot you can continue with your data
 ## Heatmaps
 Now, we can use our data, put them into subsets, and create ungrouped or grouped outputs, including those with facets. 
 The subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
-> <comment-title>Note: </comment-title>
+> <comment-title> </comment-title>
 > - in the following sections, we provide prepared workflows on Galaxy and a set of parameters for running the indicated workflow
 > - some parameters are pre-selected for you, such as the taxonomic level to aggregate the OTUs
 {: .comment}
 
 ### Heatmap (ungrouped)
 You can find the workflow "ampvis2 heatmap v3.0 (no group)" on Galaxy and use it for the tutorial.
+
 We used the following metadata for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 Choose the metadata variable as Plant and metadata values as Aalborg East & Aalborg West.
@@ -298,6 +299,7 @@ In the next box you can see the resulting heatmap.
 
 ### Heatmap (grouped)
 You can find the workflow "ampvis2 heatmap v2.0 (only group)" on Galaxy and use it for the tutorial.
+
 We used 2 different metadata subsets:
 - 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, grouped by = Plant
 - 2) Metadata used for this subset: metadata variable = Period, metadata values = Winter & Summer, grouped by = Year
@@ -345,6 +347,7 @@ We used 2 different metadata subsets:
 
 ### Heatmap (grouped with facets)
 You can find the workflow "ampvis2 heatmap v1.0 (group+facet)" on Galaxy and use it for the tutorial.
+
 We used 2 different metadata subsets:
 - 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, 
 	grouped by = Plant, facet by = Period 
@@ -381,7 +384,7 @@ We used 2 different metadata subsets:
 We can now use our data, generate subsets, and create different plots by applying various ordination methods. 
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 
-> <comment-title> Note: </comment-title>
+> <comment-title> </comment-title>
 > - in the following sections, we provide prepared workflows on Galaxy along with the set of parameters to select
 for running each workflow
 > - some parameters are pre-selected for you, such as ordination method, 
@@ -390,6 +393,7 @@ transformation (if used) and options to colour and label the points or frames
 
 ### Ordination Method: PCA
 You can find the workflow "ampvis2 ordination plot v1.0 (pca)" on Galaxy and use it for the tutorial.
+
 Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 > <comment-title></comment-title>
@@ -406,6 +410,7 @@ Metadata used for this subset: metadata variable = Plant and metadata values = A
 
 ### Ordination Method: PCA plus Trajectory: _date_
 You can find the workflow "ampvis2 ordination plot v1.1 (pca+trajectory_date)" on Galaxy and use it for the tutorial.
+
 Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 > <comment-title></comment-title>
@@ -434,6 +439,7 @@ Metadata used for this subset: metadata variable = Plant and metadata values = A
 
 ### Ordination Method: CCA
 You can find the workflow "ampvis2 ordination plot v1.2 (cca transform_hellinger)" on Galaxy and use it for the tutorial.
+
 Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
 
 > <comment-title></comment-title>
@@ -465,7 +471,7 @@ and frame by _Period_ and deselect the other mentioned options above, so they re
 ## Boxplot
 We can now use our data, put them into subsets and create a boxplot. 
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
-> <comment-title> Note: </comment-title>
+> <comment-title> </comment-title>
 > - in the prepared workflow on Galaxy provided in this tutorial, some parameters are pre-selected for you, 
 such as the number of taxa to show
 > - The samples are grouped by _Period_
@@ -526,7 +532,9 @@ over the entire period data was collected.
 
 ## Create a Time Series Plot
 You can find the workflow "ampvis2 timeseries v1.0" on Galaxy and use it for the tutorial.
+
 Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
+
 The time variable is mandatory here, and as **_Date_** is the only valid time variable we can select, it has already been pre-selected. 
 Since displaying a large number of taxa can make the plot messy (for this data set at least), we have chosen to show only the top 3 taxa.
 
