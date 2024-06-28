@@ -439,7 +439,22 @@ After creating the variables, the most accessible features are selected.
 
 ## Doublet removal
 
-Doublets are removed by calling a customized [**scrublet**](https://github.com/swolock/scrublet) algorithm. *pp.scrublet* will identify potential doublets and the function *pp.filter_doublets* removes them. 
+Doublets are removed by calling a customized [**scrublet**](https://github.com/AllonKleinLab/scrublet) ({% cite Wolock2019 %}) algorithm. *pp.scrublet* will identify potential doublets and the function *pp.filter_doublets* removes them. 
+
+> <details-title>Doublets in Single-cell datasets</details-title>
+>
+> - During single-cell sequencing, multiple nuclei can be encapsulated into the same 10x gel bead. The resulting multiplets (>97% of which are doublets) produce sequences from both cells. 
+> - Doublets can confound the results by appearing as "new" clusters or artifactual intermediary cell states. 
+>    - These problematic doublets are called **neotypic** doublets, since they appear as "new" cell types. 
+> - **Scrublet** (Single-cell Remover of Doublets) is an algorithm which can detect neotypic doublets that produce false results. 
+>    - The algorithm produces simulated doublets by combining random pairs of observed cell features. 
+>    - The observed features are then compared to the simulated doublets and scored on their doublet probability. 
+>    - SnapATAC2's *pp.filter_doublets* then removes all cells with a doublet probability >50%. 
+>
+> ![Doublet removal with scrublet]({% link topics/single-cell/images/scatac-standard-snapatac2/doublets-and-scrublet.png %} "Scrublet simulates expected doublets and produces doublet scores for each cell.")
+>
+{: .details}
+
 > <hands-on-title> Scrublet </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy1) %} with the following parameters:
@@ -668,6 +683,19 @@ Since our data currently doesn't contain gene information, we have to create a c
 Similar to scRNA-seq data, the cell-by-gene-activity matrix is very sparse. Additionally, high gene variance between cells, due to technical confounders, could impact the downstream analysis. In scRNA-seq, filtering and normalization are therefore required to produce a high-quality gene matrix. 
 
 Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression* matrix of scRNA-seq, we can use the tools of the [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}) tool suite to continue with our data. 
+
+> <details-title>Imputation with MAGIC</details-title>
+>
+> - The count matrices of single-cell data is sparse and noisy. 
+> - Confounding issues, such as "dropout" effects, where some mRNA or DNA-segments are not detected although they are present in the cell, also result in some cells missing important cell-type defining features. 
+>    - These problems can obscure the data, as only the strongest gene-gene relationships are still detectable. 
+> - The *Markov Affinity-based Graph Imputation of Cells* (MAGIC) algorithm ({%cite vanDijk2018%}) tries to solve these issues by filling in missing data from some cells with transcript information from similar cells. 
+>    - The algorithm calculates the likely gene expression of a single cell based on similar cells, and fills in the missing data to produce the expected expression. 
+>      - *MAGIC* achieves this by building a graph from the data and using data diffusion to smooth out the noise. 
+>
+> ![Imputation with the MAGIC algorithm]({% link topics/single-cell/images/scatac-standard-snapatac2/magic_method.png %} "MAGIC restores noisy and sparse single-cell data using diffusion geometry")
+>
+{: .details}
 
 > <hands-on-title> Filter and normalize </hands-on-title>
 >
@@ -947,3 +975,4 @@ In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnDa
    3. Visualizing marker genes in the clusters
    4. Manually annotating the cell types with selected marker genes
 
+![SnapATAC2 processing pipeline]({% link topics/single-cell/images/scatac-standard-snapatac2/snapatac2-pipeline.png %})
