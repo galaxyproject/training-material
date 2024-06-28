@@ -19,8 +19,9 @@ contributors:
 
 ---
 
+The European Reference Genome Atlas ([ERGA](https://www.erga-biodiversity.eu/), {% cite Mazzoni2023 %}) is a large-scale network of researchers aiming to generate high-quality reference genomes for all eukaryotic life in Europe and build capacity to allow researchers anywhere to generate reference genomes and use them to answer questions regarding species conservation and biodiversity. ERGA uses state-of-the-art sequencing technologies and advanced bioinformatics tools to produce high-quality genome assemblies.
 
-The European Reference Genome Atlas (ERGA) is a large-scale project aimed at generating and integrating high-quality reference genomes for a wide range of European organisms. The project will use state-of-the-art sequencing technologies and advanced bioinformatics tools to produce high-quality genome assemblies.
+![](../../images/post-assembly-QC/ERGA.logo.jpg)
 
 Reference genomes provide a baseline for understanding genetic diversity within and among populations, and can be used to identify populations at risk of genetic erosion. This information is crucial for developing effective conservation strategies and management plans for threatened and endangered species ({% cite Shafer2015 %}). Additionally, by better understanding the genetic basis of important traits, such as disease resistance and adaptation to changing environments, researchers can develop targeted interventions to mitigate the effects of environmental change and prevent the loss of genetic diversity ({% cite Frankham2011 %}). The ERGA project has the potential to greatly benefit biodiversity conservation efforts and advance our understanding of the genetic basis of biodiversity.
 
