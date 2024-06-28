@@ -5,6 +5,8 @@ redirect_from:
 - /preferences
 ---
 
+Tip: [Looking for language settings?]({% link faqs/gtn/translations.md %}) or [Data Privacy Settings]({% link user/privacy.md %})
+
 ## Colour Scheme
 
 We have attempted to decompose our themes into several axes depending on your accessibility needs:
@@ -114,4 +116,3 @@ document.getElementById("font").value = gtnLocalGet("fontMain");
 document.getElementById("font-code").value = gtnLocalGet("fontCode");
 </script>
 
-Are you looking for Data Privacy settings? [They have moved to their own page]({% link user/privacy.md %})
