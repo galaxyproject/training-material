@@ -20,4 +20,6 @@ Now consider that this analysis is done without name tags. This is shown on the 
 
 Right side of the figure shows exactly the same analysis, but using name tags. When the analysis was conducted datasets 4 and 5 were tagged with `#plus` and `#minus`, respectively. When they were used as inputs to Macs2 resulting datasets 6 and 8 automatically inherited them and so on... As a result it is straightforward to trace both branches (plus and minus) of this analysis. 
 
+More informatin is in a [dedicated nametag tutorial]({% link topics/galaxy-interface/tutorials/name-tags/tutorial.md %}).
+
 <!-- Image is here = https://docs.google.com/drawings/d/1iiNsau6ddiE2MV9qMyekUq2mrpDHHcc02bXtcFEAnhY/edit?usp=sharing -->

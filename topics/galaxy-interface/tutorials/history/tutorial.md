@@ -94,6 +94,13 @@ All histories begin with the name 'Unnamed history'. Non-anonymous users can ren
 
 {% snippet faqs/galaxy/histories_annotation.md box_type="none"%}
 
+## Undeleting ... deleted histories
+
+{% snippet faqs/galaxy/histories_undelete.md box_type="none"%}
+
+
+
+
 ## History size, storage selection, and views
 
 The lower part of the history header contains a number of buttons:
@@ -163,45 +170,12 @@ You can **delete** any dataset in your history. Unless you explicitly tell Galax
 
 ## Tagging datasets
 
-{% snippet faqs/galaxy/histories_why_name_tags.md box_type="none"%}
-
-
-Datasets can be tagged. This simplifies tracking of datasets through a single history and across multiple histories. Two types of tags can be associated with datasets:
-
-1. **Standard tags**
-2. **Name tags** also called "hashtags" or "propagation tags"
-
-The difference between these two types is in the fact that **Name tags** propagate: if a dataset is labelled with a name tag all derivatives (children) of this dataset will automatically inherit this tag. 
- 
- [dedicated nametag tutorial is available]({% link topics/galaxy-interface/tutorials/name-tags/tutorial.md %}).
+{% snippet faqs/galaxy/datasets_add_tag.md box_type="none"%}
 
 ## Managing Multiple Datasets Easily
 
-### Multi-selection
-
-You can also hide, delete, and purge multiple datasets at once by **multi-selecting datasets**:
-
-1. {% icon galaxy-selector %} Click the multi-select button containing the checkbox just below the history size.
-2. Checkboxes will appear inside each dataset in the history.
-3. Scroll and click the checkboxes next to the datasets you want to manage.
-4. Click the 'n of N selected' to choose the action. The action will be performed on all selected datasets, except for the ones that don't support the action. That is, if an action doesn't apply to a selected dataset - like deleting a deleted dataset - nothing will happen to that dataset, while all other selected datasets will be deleted.
-5. You can click the multi-select button again to hide the checkboxes again.
-
-![Multiselecting datasets](../../images/multiselect.png "Operating on multiple datasets can be enabled by clicking on the checkbox icon {% icon galaxy-selector %}")
+{% snippet faqs/galaxy/datasets_multiple.md box_type="none"%}
 
 <!-- Including search to deduplicate -->
 {% include topics/galaxy-interface/tutorials/search/search.md %}
 
-### Undeleting ... deleted histories
-
-If you have not purged a history and have only deleted it, it is possible to 'undelete' it and reverse or undo the deletion.
-Since one of the purposes of deleting histories is to remove them from view, we'll use the interface to specifically
-search for deleted histories and then to undelete the one we're interested in.
-
-There is one way to do this currently: via the saved histories page.
-
-1. Go to the "User" menu at the top
-2. Select "Histories"
-3. Click "Advanced Search" below the search box.
-4. Click "Deleted"
-5. Click on the title of the history you want to un-delete, and un-delete it.
