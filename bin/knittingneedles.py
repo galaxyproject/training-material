@@ -35,5 +35,8 @@ def removeWhitespacePrefix(lines):
     return (amount, diff)
 
 
+def removeZwsp(lines):
+    return [x.replace(u'\u200b', '') for x in lines]
+
 def extractCommitMsg(lines):
     return re.match(BOX_CLOSE, lines[-1].strip()).group(1)

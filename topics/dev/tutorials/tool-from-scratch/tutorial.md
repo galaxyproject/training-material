@@ -20,7 +20,8 @@ key_points:
   - Galaxy tools are made in 3 parts -- Conda, tool wrappers, and planemo
   - Anyone can write and deploy a tool wrapper!
 subtopic: tooldev
-contributors:
+contributions:
+  authorship:
   - astrovsky01
   - davebx
   - bernt-matthias
@@ -468,6 +469,19 @@ Note that for using `planemo`from a new shell you will need to activate the pyth
 > 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.
 {: .hands_on}
 
+## Pre-recorded demo
+
+As part of a GTN *experiment*, we've generated a recording of the following steps in the tutorial to create the `bellerophon.xml` file. You can refer to it if you find any step confusing.
+
+<div id="demo"></div>
+<script src="{{ site.baseurl }}/assets/js/asciinema-player@3.6.3.min.js"></script>
+<script>
+AsciinemaPlayer.create('{{ site.baseurl }}/topics/dev/tutorials/tool-from-scratch/tutorial.cast', document.getElementById('demo'), {
+  poster: 'npt:1:15',
+  theme: 'solarized-light'
+});
+</script>
+
 ## Initializing a Tool Wrapper
 
 Initializing a tool wrapper to be run in Galaxy is simple
@@ -489,24 +503,32 @@ Initializing a tool wrapper to be run in Galaxy is simple
 >
 > 4. You can now open the new xml file that has been generated to begin the wrapping. It should look something like this:
 >
->    ```xml
->    <tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
->        <requirements>
->        </requirements>
->        <command detect_errors="exit_code"><![CDATA[
->            TODO: Fill in command template.
->        ]]></command>
->        <inputs>
->        </inputs>
->        <outputs>
->        </outputs>
->        <help><![CDATA[
->            TODO: Fill in help.
->        ]]></help>
->    </tool>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/bellerophon.xml
+>    @@ -0,0 +1,14 @@
+>    +<tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
+>    +    <requirements>
+>    +    </requirements>
+>    +    <command detect_errors="exit_code"><​!​[CDATA[
+>    +        TODO: Fill in command template.
+>    +    ]]></command>
+>    +    <inputs>
+>    +    </inputs>
+>    +    <outputs>
+>    +    </outputs>
+>    +    <help><​!​[CDATA[
+>    +        TODO: Fill in help.
+>    +    ]]></help>
+>    +</tool>
+>    {% endraw %}
 >    ```
+>    {: data-commit="Planemo init"}
 >
 {: .hands_on}
+
+{% snippet topics/admin/faqs/diffs.md %}
 
 ## Galaxy Tool Wrappers
 
@@ -543,9 +565,20 @@ The tool ID and name are defined here as well as which minimum version of Galaxy
 >
 > when complete, the line should appear as follows:
 >
-> ```xml
-> <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -1,4 +1,4 @@
+> -<tool id="bellerophon" name="bellerophon" version="0.1.0" python_template_version="3.5">
+> +<tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+>      <requirements>
+>      </requirements>
+>      <command detect_errors="exit_code"><​!​[CDATA[
+> {% endraw %}
 > ```
+> {: data-commit="Fix tool id"}
+>
 {: .hands_on}
 
 The @TOOL_VERSION@ and @VERSION_SUFFIX@ are what are referred to as "tokens", and will be furter discussed in the "Macros" section.
@@ -557,9 +590,20 @@ The description is simply presented as plaintext between the tags. Bellerophon's
 
 > <hands-on-title>Adding a description</hands-on-title>
 > Add the following description to your tool
-> ```xml
-> <description>chimeric reads from Arima Genomics</description>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -1,4 +1,5 @@
+>  <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+> +    <description>chimeric reads from Arima Genomics</description>
+>      <requirements>
+>      </requirements>
+>      <command detect_errors="exit_code"><​!​[CDATA[
+> {% endraw %}
 > ```
+> {: data-commit="Fix tool description"}
+>
 {: .hands_on}
 
 Which would present the tool's in the toolbar and at the top of the tool form as
@@ -578,12 +622,24 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. 
 
 > <hands-on-title>Macros</hands-on-title>
 > Add the following macros section to your tool:
-> ```xml
-> <macros>
->     <token name="@TOOL_VERSION@">1.0</token>
->     <token name="@VERSION_SUFFIX@">0</token>
-> </macros>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -1,5 +1,9 @@
+>  <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+>      <description>chimeric reads from Arima Genomics</description>
+> +    <macros>
+> +        <token name="@TOOL_VERSION@">1.0</token>
+> +        <token name="@VERSION_SUFFIX@">0</token>
+> +    </macros>
+>      <requirements>
+>      </requirements>
+>      <command detect_errors="exit_code"><​!​[CDATA[
+> {% endraw %}
 > ```
+> {: data-commit="Add macros"}
+>
 {: .hands_on}
 
 This will cause the version string at the beginning to read "1.0+galaxy0", and set the conda package that is pulled to be bellerophon version 1.0.
@@ -624,28 +680,40 @@ We will now add a useful macro entry. With the Galaxy ecosystem is becoming more
 >
 > Let's create a macro xml file next to our tool xml: `bellerophon_macros.xml`
 >
-> ```xml
-> <macros>
->   <xml name="bio_tools">
->     <xrefs>
->         <xref type="bio.tools">Bellerophon</xref>
->     </xrefs>
->   </xml>
-> </macros>
+> {% raw %}
+> ```diff
+> --- /dev/null
+> +++ b/bellerophon_macros.xml
+> @@ -0,0 +1,7 @@
+> +<macros>
+> +  <xml name="bio_tools">
+> +    <xrefs>
+> +        <xref type="bio.tools">Bellerophon</xref>
+> +    </xrefs>
+> +  </xml>
+> +</macros>
+> {% endraw %}
 > ```
+> {: data-commit="Add macros.xml"}
 >
 > Now we can expand the `bio_tools` macro in our tool XML, beneath the tokens:
 >
-> ```xml
-> <macros>
->     <token name="@TOOL_VERSION@">1.0</token>
->     <token name="@VERSION_SUFFIX@">0</token>
-> </macros>
->
-> <import>bellerophon_macros.xml</import>
-> <expand macro="bio_tools"/>
->
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -4,6 +4,8 @@
+>          <token name="@TOOL_VERSION@">1.0</token>
+>          <token name="@VERSION_SUFFIX@">0</token>
+>      </macros>
+> +    <import>bellerophon_macros.xml</import>
+> +    <expand macro="bio_tools"/>
+>      <requirements>
+>      </requirements>
+>      <command detect_errors="exit_code"><​!​[CDATA[
+> {% endraw %}
 > ```
+> {: data-commit="Expand biotools macros"}
 >
 > If your tool does not yet have an entry in bio.tools, we highly encourage you to create one!
 > It takes just 5 minutes to register with bio.tools to start contributing towards this global registry of computational resources.
@@ -668,12 +736,22 @@ This specifies the
 > <hands-on-title>Adding requirements</hands-on-title>
 > In the case of bellerophon, which requires two dependencies, bellerophon and samtools, the requirements section appears like so. Add them to your tool XML.
 >
-> ```xml
->   <requirements>
->         <requirement type="package" version="@TOOL_VERSION@">bellerophon</requirement>
->         <requirement type="package" version="1.12">samtools</requirement>
->   </requirements>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -7,6 +7,8 @@
+>      <import>bellerophon_macros.xml</import>
+>      <expand macro="bio_tools"/>
+>      <requirements>
+> +        <requirement type="package" version="@TOOL_VERSION@">bellerophon</requirement>
+> +        <requirement type="package" version="1.12">samtools</requirement>
+>      </requirements>
+>      <command detect_errors="exit_code"><​!​[CDATA[
+>          TODO: Fill in command template.
+> {% endraw %}
 > ```
+> {: data-commit="Add requirements"}
 {: .hands_on}
 
 This uses the macro token for @TOOL_VERSION@ for the Bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
@@ -769,7 +847,7 @@ otherwise-irrelevant parameters if they don't need to. There are only 4 attribut
 
 The bellerophon tool's help section reads
 
-```txt
+```
 optional arguments:
   -h, --help            show this help message and exit
   --forward FORWARD, -f FORWARD
@@ -805,13 +883,23 @@ but not exposed to the user.
 > > > <solution-title></solution-title>
 > > > To include all of the necessary parameters, then, the inputs section would appear like this
 > > >
-> > > ```xml
-> > > <inputs>
-> > >     <param argument="--forward" type="data" format="qname_sorted.bam,sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
-> > >     <param argument="--reverse" type="data" format="qname_sorted.bam,sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
-> > >     <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
-> > > </inputs>
+> > > {% raw %}
+> > > ```diff
+> > > --- a/bellerophon.xml
+> > > +++ b/bellerophon.xml
+> > > @@ -14,6 +14,9 @@
+> > >          TODO: Fill in command template.
+> > >      ]]></command>
+> > >      <inputs>
+> > > +        <param argument="--forward" type="data" format="qname_sorted.bam,sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
+> > > +        <param argument="--reverse" type="data" format="qname_sorted.bam,sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
+> > > +        <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
+> > >      </inputs>
+> > >      <outputs>
+> > >      </outputs>
+> > > {% endraw %}
 > > > ```
+> > > {: data-commit="Add inputs"}
 > > {: .solution}
 > {: .question}
 {: .hands_on}
@@ -828,11 +916,21 @@ It also defines the format of that file and the name shown to the user in the hi
 > <hands-on-title>Adding your outputs</hands-on-title>
 > As Bellerophon has a single output file, add the following outputs section to your tool:
 >
-> ```xml
-> <outputs>
->     <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
-> </outputs>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -19,6 +19,7 @@
+>          <param argument="--quality" type="integer" value="20" min="0" label="Minimum mapping quality"/>
+>      </inputs>
+>      <outputs>
+> +        <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
+>      </outputs>
+>      <help><​!​[CDATA[
+>          TODO: Fill in help.
+> {% endraw %}
 > ```
+> {: data-commit="Add outputs"}
 {: .hands_on}
 
 This generates a history item called "bellerophon on `<input file name>`", as the ${tool.name} and ${on_string} are reserved values
@@ -955,31 +1053,44 @@ runs the helloworld.py script present in the same folder as the tool xml, then e
 >
 > The bellerophon command section, based on the variables set previously, would be as follows. Please add it to your tool XML.
 >
-> ```xml
->     <command detect_errors="exit_code"><![CDATA[
->         #if $forward.is_of_type("sam"):
->             #set $forward_input = 'forward_input.sam'
->             ln -s '${forward}' '$forward_input' &&
->         #else:
->             #set $forward_input = 'forward_input.bam'
->             ln -s '${forward}' '$forward_input' &&
->         #end if
->         #if $reverse.is_of_type("sam"):
->             #set $reverse_input = 'reverse_input.sam'
->             ln -s '${reverse}' '$reverse_input' &&
->         #else:
->             #set $reverse_input = 'reverse_input.bam'
->             ln -s '${reverse}' '$reverse_input' &&
->         #end if
->         bellerophon
->         --forward $forward_input
->         --reverse $reverse_input
->         --quality $quality
->         --output 'merged_out.bam'
->         && samtools sort --no-PG -O BAM -o '$outfile' -@ \${GALAXY_SLOTS:-1} merged_out.bam
->         ]]>
->     </command>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -11,8 +11,28 @@
+>          <requirement type="package" version="1.12">samtools</requirement>
+>      </requirements>
+>      <command detect_errors="exit_code"><​!​[CDATA[
+> -        TODO: Fill in command template.
+> -    ]]></command>
+> +        #if $forward.is_of_type("sam"):
+> +            #set $forward_input = 'forward_input.sam'
+> +            ln -s '${forward}' '$forward_input' &&
+> +        #else:
+> +            #set $forward_input = 'forward_input.bam'
+> +            ln -s '${forward}' '$forward_input' &&
+> +        #end if
+> +        #if $reverse.is_of_type("sam"):
+> +            #set $reverse_input = 'reverse_input.sam'
+> +            ln -s '${reverse}' '$reverse_input' &&
+> +        #else:
+> +            #set $reverse_input = 'reverse_input.bam'
+> +            ln -s '${reverse}' '$reverse_input' &&
+> +        #end if
+> +        bellerophon
+> +        --forward $forward_input
+> +        --reverse $reverse_input
+> +        --quality $quality
+> +        --output 'merged_out.bam'
+> +        && samtools sort --no-PG -O BAM -o '$outfile' -@ \${GALAXY_SLOTS:-1} merged_out.bam
+> +        ]]>
+> +    </command>
+>      <inputs>
+>          <param argument="--forward" type="data" format="qname_sorted.bam,sam" label="First set of reads" help="This is usually the forward reads in your experiment." />
+>          <param argument="--reverse" type="data" format="qname_sorted.bam,sam" label="Second set of reads" help="This is usually the reverse reads in your experiment." />
+> {% endraw %}
 > ```
+> {: data-commit="Command block"}
 {: .hands_on}
 
 The variables set in the inputs and output sections generate a full command to be run inside the Galaxy environment. When inside a conditional or
@@ -1027,15 +1138,25 @@ As all parameters in bellerophon are accessible at once, and do not contradict o
 
 > <hands-on-title>Adding a test</hands-on-title>
 > Add the following test case to your tool:
-> ```xml
->     <tests>
->         <test expect_num_outputs="1">
->             <param name="forward" value="forward.bam" />
->             <param name="reverse" value="reverse.bam" />
->             <output name="outfile" file="merged-out.bam" ftype="bam" />
->         </test>
->     </tests>
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -44,4 +44,11 @@
+>      <help><​!​[CDATA[
+>          TODO: Fill in help.
+>      ]]></help>
+> +    <tests>
+> +        <test expect_num_outputs="1">
+> +            <param name="forward" value="forward.bam" />
+> +            <param name="reverse" value="reverse.bam" />
+> +            <output name="outfile" file="merged-out.bam" ftype="bam" />
+> +        </test>
+> +    </tests>
+>  </tool>
+> {% endraw %}
 > ```
+> {: data-commit="Adding a test"}
 {: .hands_on}
 
 This runs the tool with the files forward.bam and reverse.bam from a folder named test-data in the tool's directory. Since no quality parameter was specified, it uses the default of 20. The parameter can also be manually set with the same param tag and value attribute, just inputting an applicable value such as "21". It then
@@ -1102,6 +1223,23 @@ Multiple citations can be added by using additional citation tags.
 
 > <hands-on-title>Adding a citation</hands-on-title>
 > Add the citation above using either method (but not both!)
+> {% raw %}
+> ```diff
+> --- a/bellerophon.xml
+> +++ b/bellerophon.xml
+> @@ -44,6 +44,9 @@
+>      <help><​!​[CDATA[
+>          TODO: Fill in help.
+>      ]]></help>
+> +    <citations>
+> +        <citation type="doi">10.1038/s41586-021-03451-0</citation>
+> +    </citations>
+>      <tests>
+>          <test expect_num_outputs="1">
+>              <param name="forward" value="forward.bam" />
+> {% endraw %}
+> ```
+> {: data-commit="Add citation"}
 {: .hands_on}
 
 ## Final wrapper
@@ -1426,3 +1564,8 @@ In order to setup your own tool repository the Galaxy community created a [templ
 
 # Conclusion
 
+
+<script type="text/javascript">
+// Replace all ZWSPs with nothing, to prevent users copying them and them not working.
+document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML.replaceAll("​", "")
+</script>

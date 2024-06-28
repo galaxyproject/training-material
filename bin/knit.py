@@ -88,6 +88,11 @@ for line, text in enumerate(tutorial_contents):
 
         # Knit it anyway
         new_diff = from_patch[1]
+        new_diff = [
+            x.replace("<![CDATA", "<​!​[CDATA")
+            for x in new_diff
+        ]
+        print(new_diff)
         chunks.append(prefix_text + "{% raw %}")
         chunks.append(prefix_text + "```diff")
         chunks.extend([f'{prefix}{amount * " "}{line}' for line in new_diff])
