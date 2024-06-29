@@ -30,18 +30,21 @@ contributors:
 Microbiome analysis using amplicon sequencing is central to many ecological studies.
 The produced amplicon sequencing data are converted into OTU tables and represent the input 
 for the ampvis2 tool, where they can be visualised in various ways {% cite Andersen2018 %}.
+
 _to_do_
+
 These OTU tables can be generated using various tools on Galaxy, such as 
 [Cluster](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0&version=latest), 
 [Hcluster](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_hcluster%2Fmothur_hcluster%2F1.36.1.0&version=latest), 
 or [qiime2 fragment-insertion classify-otus-experimental](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fq2d2%2Fqiime2__fragment_insertion__classify_otus_experimental%2Fqiime2__fragment_insertion__classify_otus_experimental%2F2024.5.0%2Bq2galaxy.2024.5.0&version=latest). 
 Alternatively, you can generate an ASV table using [dada2: makeSequenceTable](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdada2_makesequencetable%2Fdada2_makeSequenceTable%2F1.30.0%2Bgalaxy0&version=latest), 
 wwhich functions similarly to an OTU table and is also accepted in ampvis_load. 
-Galaxy also offers useful workflows, such as [DADA2 (Multiplexed reads to phyloseq tables)](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0&version=latest) 
+Galaxy also offers useful workflows, such as [DADA2 (Multiplexed reads to phyloseq tables)](https://usegalaxy.org/published/workflow?id=5df593510c7d944d) 
 for creating _phyloseq_ tables. The Galaxy Training Network provides nice tutorials on this topic, such as
-[Building an amplicon sequence variant (ASV) table from 16S data using DADA2]
-(https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html).
+[Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html).
+
 _to_do_
+
 If you already have amplicon data and your OTU table created, you are ready to visualise it. You can start with this tutorial
 using your own data or download the data we used, thus follow this tutorial step-by-step. 
 
