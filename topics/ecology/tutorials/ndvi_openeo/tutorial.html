@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b3fbcedd401845b5fa2d8a45e31e140d8baed57f",
+		release: "galaxy-training-network@495c1c1f335cf9f88077d819ece083da7450b39d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="From NDVI data with OpenEO to time series visualisation with Holoviews">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-27 14:24:17 +0000">
+<meta name="DC.date" content="2024-06-28 14:43:15 +0000">
 <meta name="DC.creator" content="Marie Josse"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Ecology / From NDVI data with OpenEO to time series visualisation with Holoviews / Hands-on: From NDVI data with OpenEO to time series visualisation with Holoviews">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-27 14:24:17 +0000",
+  "dateModified": "2024-06-28 14:43:15 +0000",
   "datePublished": "2024-01-24 19:43:59 +0000",
   "identifier": "https://gxy.io/GTN:T00400",
   "accessMode": [
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "From NDVI data with OpenEO to time series visualisation with Holoviews",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ndvi_openeo/tutorial.html",
-  "version": 6,
+  "version": 7,
   "timeRequired": "PT1H",
   "teaches": "Use OpenEo technologies and learn how to download data with them\n - Learn to use Holoviz environment to process csv data\n - Create timeseries and visualisation of the NDVI\n - Handle going form one interactive tool to another",
   "keywords": [
@@ -733,6 +733,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </a>
     <ul class="dropdown-menu">
         
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
     
 
     
@@ -753,7 +768,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 24, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 27, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 28, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -771,7 +786,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
 
     </blockquote>
     </section>
@@ -844,7 +859,7 @@ HoloViz provides high-level Python tools that are designed to work together to s
   <div class="box-title hands-on-title" id="hands-on-launch-the-interactive-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Launch the interactive tool</div>
 
   <ol>
-    <li><span class="tool" data-tool="interactive_tool_copernicus" title="Copernicus Data Space Ecosystem tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Copernicus Data Space Ecosystem</strong></span> with the following parameters:
+    <li><span class="tool" data-tool="interactive_tool_copernicus_notebook" title="Copernicus Data Space Ecosystem tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Copernicus Data Space Ecosystem</strong></span> with the following parameters:
       <ul>
         <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>
         <li><em>“Include data into the environment - optional “</em>: You don’t need anything</li>
@@ -883,9 +898,9 @@ Everytime you press this button you can excecute a one by one the cells.</li>
 <a href="../../images/ndvi_openeo_holoviz/connection_ok.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/connection_ok.png" alt="Image of the successful connection. " width="1920" height="1080" loading="lazy" /></a></li>
     <li>Now, you can go back on your jupyterlab and execute the rest of the notebook.</li>
     <li>Once you executed the entire notebook you should have a new folder in the left pannel named <strong>ndvi-results</strong> go in it.</li>
-    <li>Select the 3 files there and click right, and then copy
+    <li>Select the 3 files (timeseries-basic.csv, timeseries-masked.csv, timeseries-smoothed.csv) there and click right, and then copy
 <a href="../../images/ndvi_openeo_holoviz/copy_paste.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/copy_paste.png" alt="The copy command on the 3 files in the ndvi-results folder. " width="484" height="562" loading="lazy" /></a></li>
-    <li>Then go back to the root of your path and go in the <strong>ouputs</strong> folder. There you can click right and paste the 3 NDVI files. 
+    <li>Then go back to the root of your path and go in the <strong>ouputs</strong> folder. There you can click right and paste the 3 NDVI files (timeseries-basic.csv, timeseries-masked.csv, timeseries-smoothed.csv). 
 <a href="../../images/ndvi_openeo_holoviz/outputs.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/outputs.png" alt="The resulting 3 files in the outputs folder. " width="290" height="562" loading="lazy" /></a></li>
     <li>This part is now finished you just have to correctly close this notebook. On the top left click on <strong>files</strong> and then on <strong>Shut down</strong>.
 <a href="../../images/ndvi_openeo_holoviz/shut_down.png" rel="noopener noreferrer"><img src="../../images/ndvi_openeo_holoviz/shut_down.png" alt="The shut down button to correctly close the jupyterlab. " width="420" height="690" loading="lazy" /></a></li>
@@ -1221,7 +1236,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b3fbcedd401845b5fa2d8a45e31e140d8baed57f">b3fbced</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/495c1c1f335cf9f88077d819ece083da7450b39d">495c1c1</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
