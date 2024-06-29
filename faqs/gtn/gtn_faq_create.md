@@ -1,5 +1,6 @@
 ---
 title: Creating a GTN FAQ
+description: An explanation on how to create a GTN faq
 area: contributors
 layout: faq
 box_type: tip
