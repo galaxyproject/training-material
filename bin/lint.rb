@@ -141,7 +141,7 @@ module GtnLinter
         match_end: selected.end(0) + 1,
         replacement: '',
         message: 'Instead of embedding IFrames to YouTube contents, consider adding this video to the ' \
-                 '[GTN Video Library](https://github.com/gallantries/video-library/issues/) where it will ' \
+                 'GTN tutorial "recordings" metadata where it will ' \
                  'be more visible for others.',
         code: 'GTN:002'
       )
@@ -1109,11 +1109,11 @@ module GtnLinter
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|
-          if !test_file.match(/-tests?.yml/)
+          if !test_file.match(/-tests.yml/)
             results += [
               ReviewDogEmitter.file_error(path: path,
-                                          message: 'Please use the extension -test.yml ' \
-                                                   'or -tests.yml for this test file.',
+                                          message: 'Please use the extension -tests.yml ' \
+                                                   'for this test file.',
                                           code: 'GTN:032')
             ]
           end

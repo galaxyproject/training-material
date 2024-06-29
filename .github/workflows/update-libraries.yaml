@@ -12,15 +12,15 @@ jobs:
       (github.event_name != 'pull_request' ||
        github.event.pull_request.head.repo.full_name == github.repository)
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/cache@v2
+          ruby-version: "3.2"
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -49,4 +49,4 @@ jobs:
           title: Add missing data-library.yaml files
           branch-suffix: timestamp
           commit-message: Adds data-library.yaml for tutorials
-          add-paths: **/data-library.yaml
+          add-paths: '**/data-library.yaml'

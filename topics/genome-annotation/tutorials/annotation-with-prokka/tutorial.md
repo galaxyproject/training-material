@@ -35,6 +35,17 @@ follow_up_training:
     topic_name: genome-annotation
     tutorials:
       - apollo
+
+recordings:
+- captioners:
+  - abretaud
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 20M
+  youtube_id: B8pIQZPf21Y
+  speakers:
+  - abretaud
+
 ---
 
 In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.

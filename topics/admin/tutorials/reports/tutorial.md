@@ -30,6 +30,8 @@ requirements:
       - ansible-galaxy
 ---
 
+The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
+
 > <warning-title>Currently Broken, Requires Separate Domain</warning-title>
 > Reports does not work, under a path prefix (the default setup that most
 > people will use.) It is completely broken and the developers have no plans to fix it in the near term.
@@ -40,8 +42,6 @@ requirements:
 > for your setup. Otherwise, it **will not work.** If you wish to follow this
 > tutorial, please be aware of this.
 {: .warning}
-
-The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
 
 > <agenda-title></agenda-title>
 >

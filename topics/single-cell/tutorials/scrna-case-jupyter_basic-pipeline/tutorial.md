@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)
+title: Filter, plot and explore single-cell RNA-seq data with Scanpy (Python)
 subtopic: single-cell-CS-code
 priority: 2
 zenodo_link: 'https://zenodo.org/record/7053673'

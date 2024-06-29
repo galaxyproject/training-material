@@ -16,8 +16,8 @@ questions:
 
 answer_histories:
   - label: "UseGalaxy.eu"
-    history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
-    date: 2024-05-01
+    history: https://usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-alevin
+    date: 2024-03-22
   - label: "Older Alevin version"
     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
     date: 2024-01-01
@@ -66,6 +66,17 @@ follow_up_training:
     topic_name: single-cell
     tutorials:
         - scrna-case_alevin-combine-datasets
+
+recordings:
+- captioners:
+  - nomadscientist
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: 3ytm2AU6QUc
+  speakers:
+  - nomadscientist
+
 ---
 
 
@@ -132,7 +143,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Rename {% icon galaxy-pencil %} the datasets
+> 3. Rename {% icon galaxy-pencil %} the datasets: Change `SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k` to `N701-Read1` and `SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq` to `N701-Read2`.
 >
 {: .hands_on}
 
@@ -145,7 +156,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Read 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k) contains the cell barcode and UMI because it is significantly shorter (indeed, 20 bp!) compared to the longer, r_2 transcript read. For ease, rename these files N701-Read1 and N701-Read2.
+> > 1. Read 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k) contains the cell barcode and UMI because it is significantly shorter (indeed, 20 bp!) compared to the longer, r_2 transcript read. For ease, it's better to rename these files N701-Read1 and N701-Read2.
 > > 2. You can see Read 1 is only 20 bp long, which for original Drop-Seq is 12 bp for cell barcode and 8 bp for UMI. This is correct! Be warned - 10x Chromium (and many technologies) change their chemistry over time, so particularly when you are accessing public data, you want to check and make sure you have your numbers correct!
 > > 3. 'N701' is referring to an index read. This sample was run alongside 6 other samples, each denoted by an Illumina Nextera Index (N70X). Later, this will tell you batch information. If you look at the 'Experimental Design' file, you'll see that the N701 sample was from a male wildtype neonatal thymus.
 > {: .solution}
@@ -226,7 +237,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > <hands-on-title>Running Alevin</hands-on-title>
 >
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2) %}
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.10.1+galaxy0) %} 
 >
 >     > <question-title></question-title>
 >     >
@@ -250,7 +261,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 >     >   >    - In *"Extra output files"*:
 >     >   >        - {% icon param-check %} `Salmon Quant log file`
 >     >   >        - {% icon param-check %} `Features used by the CB classification and their counts at each cell level (--dumpFeatures)`
->     >   >        
+>     >   >
 >     >   >        - Of course you are welcome to select more options and explore the output files ({% icon warning %} warning: *"Per cell level parsimonious Umi graph (--dumpUmiGraph)"* will generate over 2 thousand single files), but for this tutorial you will only need to select those specified.
 >     >   >    - In *"Advanced options"*:
 >     >   >        - *"Dump cell v transcripts count matrix in MTX format"*: {% icon galaxy-toggle%} `Yes`
@@ -355,7 +366,7 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 ## Generate an unprocessed matrix in a usable format
 
 > <hands-on-title>Stopping Alevin from thresholding</hands-on-title>
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2) %} (Click re-run on the last Alevin output)
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.10.1+galaxy0) %} (Click re-run on the last Alevin output)
 >    - *"Advanced options"*
 >    - *"Fraction of cellular barcodes to keep"*: '1' - i.e. keep them all!
 >    - *"Minimum frequency for a barcode to be considered"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
@@ -498,7 +509,7 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 > How many cell barcodes remain after the emptyDrops treatment? Why might that be?
 >
 >   > <tip-title>Hint</tip-title>
->   > If you click on the `Emptied-Object` in the {% icon galaxy-history %} history, the text in that window says `37 barcodes` or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
+>   > If you click on the `Emptied-Object` in the {% icon galaxy-history %} history, the text in that window says `38 barcodes` or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
 >   > Consider...is this a complete set of data?
 >   {: .tip}
 >
@@ -511,26 +522,25 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 >
 {: .question}
 
-We will nevertheless proceed with your majestic annotated expression matrix of 37 cells, ready to go for further processing and analysis! However, the next tutorials we will link to use a tool suite called Scanpy {% cite Wolf2018 %}. You need to convert this SingleCellExperiment object into a format called `annData`, which is a variant of a file format called `hdf5`.
+We will nevertheless proceed with your majestic annotated expression matrix of 38 cells, ready to go for further processing and analysis! However, the next tutorials we will link to use a tool suite called Scanpy {% cite Wolf2018 %}. You need to convert this SingleCellExperiment object into a format called `annData`, which is a variant of a file format called `hdf5`.
 
 > <hands-on-title>Converting to AnnData format</hands-on-title>
 >
-> 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) %} with the following parameters:
->    - *"Direction of conversion"*: `SingleCellExperiment to AnnData`
->    - {% icon param-file %} *"Input object in SingleCellExperiment RDS format"*: `Emptied-Object`
->    - *"Name of the assay to be transferred as main layer"*: `counts`
+> 1. {% tool [SCEasy Converter](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2) %} with the following parameters:
+>    - *"Convert From / To"*: `SingleCellExperiment to AnnData`
+>    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object` (if the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - just drag the dataset from the history panel and drop into the input field)
 >
 > 2. Rename {% icon galaxy-pencil %} output `N701-400k-AnnData`
 >
 {: .hands_on}
 
-{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3) (if you used Alevin Galaxy Version 1.5.1+galaxy0, you can check the [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key) run with that version of the tool). You can also compare how the subsampled datasets you've generated compare with the [total sample](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---total-n701-answer-key) (using Alevin Galaxy Version 1.5.1+galaxy0).
+{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! You can can check your work against the [example history](https://usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-alevin). You can also compare how the subsampled datasets you've generated compare with the [total sample](https://singlecell.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin---n701-total-sample).
 
 However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
 
 # Analysing multiple FASTQ files
 
-This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-alevin-15) and run them all at once! All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata). To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: [Combining datasets after pre-processing]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %})
+This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://usegalaxy.eu/u/j.jakiela/w/alevin-sc-matrix) and run them all at once! All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://usegalaxy.eu/u/j.jakiela/h/alevin-workflow---all-samples-downsampled-fastq). To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: [Combining datasets after pre-processing]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %})
 
 # Mitochondrial flagging
 

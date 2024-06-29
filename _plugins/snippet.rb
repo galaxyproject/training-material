@@ -61,19 +61,26 @@ module Jekyll
                          metadata['box_type']
                        end
 
+            # Allow overriding the title with an include parameter
+            title = if !p.nil? && p['override_title']
+                      p['override_title']
+                    else
+                      metadata['title']
+                    end
+
             if context.registers[:page]&.key?('lang')
               lang = context.registers[:page].fetch('lang', 'en')
               lang = 'en' if lang.nil?
             end
             lang = 'en' if (lang != 'en') && (lang != 'es')
             if (box_type != 'none') && !box_type.nil?
-              _box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang,
+              _box_id, box_title = Gtn::Boxify.generate_title(box_type, title, lang,
                                                               context.registers[:page]['path'])
               box_start = "> #{box_title}"
               box_end = "\n{: .#{box_type}}"
             end
           end
-          y = x.gsub(/\A---(.|\n)*?---/, '')
+          y = x.split("\n---\n", 2).last
           # if y =~ /contribute/
           # puts "=== step 1   ===\n#{y}\n\n"
           # end

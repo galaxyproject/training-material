@@ -20,6 +20,17 @@ contributors:
   - hexylena
   - shiltemann
   - lldelisle
+
+recordings:
+- captioners:
+  - EngyNasr
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 42M
+  youtube_id: Vw9h5kvRH2k
+  speakers:
+  - bebatut
+
 ---
 
 

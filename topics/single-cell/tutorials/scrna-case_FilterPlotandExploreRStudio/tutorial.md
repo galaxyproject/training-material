@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Filter, plot, and explore single cell RNA-seq data (Seurat, R)'
+title: 'Filter, plot, and explore single cell RNA-seq data with Seurat (R)'
 subtopic: single-cell-CS-code
 priority: 2
 zenodo_link: 'https://zenodo.org/record/7053673'
@@ -239,7 +239,7 @@ We are looking for cell counts with high mitochondrial percentages in their feat
 >
 {: .comment}
 
-These stressed out cells likely won't tell us much biologically, rather, they will contribute noise that we want to filter out of our dataset. With that being said, there is a level of metabolic activity that is expected and will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own datasets. Asking the question "what is an expected proportion of mitochondrial expression in my sample?" can and likely will become a frustrating endeavor if you are analyzing a brand new kind of dataset. scRNA-seq analyses are inherently iterative for this exact reason, so try a threshold, label your folders well, and be prepared to return back to this question if things look strange down the line. 
+These stressed out cells likely won't tell us much biologically, rather, they will contribute noise that we want to filter out of our dataset. With that being said, there is a level of metabolic activity that is expected and will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own datasets. Asking the question "what is an expected proportion of mitochondrial expression in my sample?" can and likely will become a frustrating endeavor if you are analyzing a brand new kind of dataset. scRNA-seq analyses are inherently iterative for this exact reason, so try a threshold, label your folders well, and be prepared to return back to this question if things look strange down the line.
 
 As a general eye-balling rule, I will look for the nCount value at which the perc.mito begind to rise. We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim parameter:
 
@@ -346,9 +346,9 @@ rm(subset_matrix, subset_srt)
 ```
 
 # Processing
-Even after filtering, we still have quite big data. This presents two concerns for downstream analyses: 
+Even after filtering, we still have quite big data. This presents two concerns for downstream analyses:
  1. We already saw in our filtering plots that there are differences in how many transcripts and genes have been counted per cell. This technical variable could, and likely will, distract us from identifying true biological differences.
-    
+
  2. We like to plot things on 2-dimensional (X/Y) plots. For instance, Gapdh could be on one axis, and Actin could be on another, and each cell could be plotted onto that 2D axis based on how many of each transcript they possess.
 
 Although this plotting method would be _fine_, adding in a 3rd dimension (or, indeed, in our case, a dimension for each of the remaining thousands of genes), is a bit trickier.

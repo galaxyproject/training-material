@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require './_plugins/util'
 require 'yaml'
 require 'csv'
 
@@ -37,12 +38,12 @@ def lookup_tuto(topic_id, tuto_id)
 
     file = "topics/#{topic_id}/tutorials/#{tuto_id}/tutorial.md"
     if File.exist? file
-      data = YAML.load_file(file)
+      data = safe_load_yaml(file)
       @cache[key] = data['title']
     else
       file = "topics/#{topic_id}/tutorials/#{tuto_id}/slides.html"
       if File.exist? file
-        data = YAML.load_file(file)
+        data = safe_load_yaml(file)
         @cache[key] = data['title']
       else
         puts "No file for #{topic_id}/#{tuto_id}"
@@ -57,7 +58,7 @@ def lookup_topic(topic_id)
     file = "metadata/#{topic_id}.yaml"
     return nil unless File.exist? file
 
-    data = YAML.load_file(file)
+    data = safe_load_yaml(file)
     @cache[key] = data['title']
   end
 end

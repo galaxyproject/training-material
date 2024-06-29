@@ -76,7 +76,7 @@ To start, we need to select a tool without a bio.tools identifier.
 
 > <hands-on-title>Choose a tool without a bio.tools identifier</hands-on-title>
 >
-> 1. Open [the list of Galaxy tools](https://galaxyproject.github.io/galaxy_tool_metadata_extractor/)
+> 1. Open [the list of Galaxy tools](https://galaxyproject.github.io/galaxy_codex/)
 > 2. Click on **Add Condition**
 > 3. Select *bio.tool id* in **Data** drop-down
 > 4. Select *Empty* in **Condition** drop-down
@@ -183,8 +183,8 @@ To link a Galaxy tool to its corresponding bio.tools entry, we need to first fin
 > 4. Once in the Tool Shed, click on the link to the development repository
 > 5. Fork the repository
 >
-> If the link to the development repository is not correct the column `Galaxy wrapper parsed folder` from the **Galaxy Tool Metadata Extractor** will also show you the location of the wrapper.
-> 1. Open [Galaxy Tool Metadata Extractor](https://galaxyproject.github.io/galaxy_tool_metadata_extractor)
+> If the link to the development repository is not correct the column `Galaxy wrapper parsed folder` from the **Galaxy Codex** will also show you the location of the wrapper.
+> 1. Open [Galaxy Codex](https://galaxyproject.github.io/galaxy_codex)
 > 2. Search your tool
 > 3. Expand the row
 > 4. Open the link shown in the `Galaxy wrapper parsed folder` column

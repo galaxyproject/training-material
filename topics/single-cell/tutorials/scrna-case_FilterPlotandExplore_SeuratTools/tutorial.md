@@ -1,10 +1,15 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Filter, plot, and explore single cell RNA-seq data (Seurat)'
+title: 'Filter, plot, and explore single cell RNA-seq data with Seurat'
 subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data
+
 
 questions:
 - Is my single cell dataset a quality dataset?
@@ -80,10 +85,10 @@ To start, let's get our dataset loaded into Galaxy.
 <div class='Importing-from-a-history' markdown='1'>
 > <hands-on-title>Importing from a history</hands-on-title>
 > You can import [this history](https://singlecell.usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data)
-> 
+>
 > {% snippet faqs/galaxy/histories_import.md %}
-> 
-> This also alleviates the necessity to convert the AnnData object into a Seurat one, which is an additional step you must complete if you choose to use the next method. 
+>
+> This also alleviates the necessity to convert the AnnData object into a Seurat one, which is an additional step you must complete if you choose to use the next method.
 {:.hands_on}
 </div>
 
@@ -92,18 +97,18 @@ To start, let's get our dataset loaded into Galaxy.
 ## Generating a Seurat object
 You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. In order for Seurat tools to work, we will have to convert the data into a format that Seurat recognizes. To do so, we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
 
-This can be accomplished via the Read10x step. **Read10x** tool implements Seurat's function to create a matrix and add in feature and barcode names simultaneously: 
+This can be accomplished via the Read10x step. **Read10x** tool implements Seurat's function to create a matrix and add in feature and barcode names simultaneously:
 
 > <hands-on-title>Read10X</hands-on-title>
 >
 > Run{% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/4.0.4+galaxy0) %} with the following parameters:
 > - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 > - *"Gene table"*: `EBI SCXA Data Retrieval on EMTAB-6945 genes.tsv (Raw filtered counts)`
-> - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)` 
+> - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
 > - *"Cell Metadata"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 > - *"Minimum cells to include features"*: `5`
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
-> 
+>
 > **Rename** {% icon galaxy-pencil %} output `Initial Seurat Object`
 {: .hands_on}
 
@@ -137,7 +142,7 @@ The output of this tool will result in a Seurat object with row/column names as 
 
 ## Generating a Seurat object
 When you uploaded your data from Zenodo, it came in AnnData format, thus we will need to convert this to a Seurat Object. This can be easily accomplished using the Seurat FilterCells tool.
-Simply run the tool without any actual filtering thresholds and with the following parameters: 
+Simply run the tool without any actual filtering thresholds and with the following parameters:
 
 > <hands-on-title>Filter Cells</hands-on-title>
 >
@@ -175,9 +180,9 @@ So let's generate some QC plots. First off, let's visualize the spread of our da
 
 ![Violin Plot of Counts](../../images/scrna-case_FPE_SeuratTools/nCount_RNA_vln_plot.png "Violin Plot of counts.")
 
-This plot will show us the spread of cells in our data containing a given number of counts (or transcripts) observed in a given cell. We can use this plot, and others like it in a moment, to help filter out the uninformative cells. 
+This plot will show us the spread of cells in our data containing a given number of counts (or transcripts) observed in a given cell. We can use this plot, and others like it in a moment, to help filter out the uninformative cells.
 
-In a similar fashion we can visualize the spread of cells in our data expressing a given number of features (or genes): 
+In a similar fashion we can visualize the spread of cells in our data expressing a given number of features (or genes):
 
 > <hands-on-title>Visualize Features</hands-on-title>
 >
@@ -190,7 +195,7 @@ In a similar fashion we can visualize the spread of cells in our data expressing
 
 ![Violin Plot of Features](../../images/scrna-case_FPE_SeuratTools/nFeature_RNA_vln_plot.png "Violin Plot of features.")
 
-Now, we could just pick filtering thresholds based on these plots, and in a typical pipeline we would also plot the proportion of features that map to the mitochondrial genome (a tool coming soon to do so!). In the meantime, let's do some QC checks. 
+Now, we could just pick filtering thresholds based on these plots, and in a typical pipeline we would also plot the proportion of features that map to the mitochondrial genome (a tool coming soon to do so!). In the meantime, let's do some QC checks.
 
 We can, and should, ask a number of questions about the quality of our data before conducting any actual analyses. Batch effect, for example carries the potential to alter the conclusions we make. Let's take a look at whether this may be the case here:  
 
@@ -213,7 +218,7 @@ This plot shows us the number of cells split by the individual (mouse) from whic
 Ideally, we would like to see a relatively even distribution of counts for each individual (or batch) but if there isn’t, fear not, we can regress this variable out in a later step.
 
 ><tip-title>Plotting Lesson</tip-title>
->In order to accurately assess potential batch effects, use the "group.by" parameter to indicate the variable which differed across experiments. 
+>In order to accurately assess potential batch effects, use the "group.by" parameter to indicate the variable which differed across experiments.
 >If you are analyzing your own data, try plotting another variable which you know differed across experiments or even just samples.
 >
 {: .tip}
@@ -253,31 +258,31 @@ Now let's get an idea of how other variables, like  sex or genotype of the mice,
   ![Violin Plot split by Genotype--Mutant versus Control](../../images/scrna-case_FPE_SeuratTools/nCount_split_by_Genotype_vln_plot.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
 
 # Finding Our Filtering Parameters
-Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them. 
+Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them.
 
-In a standard workflow, we would plot the percentage of mitochondrial reads (perc.mt) against the total number of reads per cell (nCount_RNA) and number of genes per cell (nFeature_RNA) to get an idea of our thresholds. 
+In a standard workflow, we would plot the percentage of mitochondrial reads (perc.mt) against the total number of reads per cell (nCount_RNA) and number of genes per cell (nFeature_RNA) to get an idea of our thresholds.
 
 ><comment-title>High Mitochondrial Reads</comment-title>
 >High perc.mt will typically indicate stressed out cells (often due to the extraction, sorting, or sample prep protocols).
 >
 {: .comment}
 
-However, this is not always necessary, and in fact, filtering based on counts and features (indeed, even just counts alone) will often remove the cells with spuriously high mitochondrial transcripts. These tools (and this tutorial) will soon be updated to allow us to do so--in the meantime, please see [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) [Filter, plot and explore single-cell RNA-seq (Scanpy)]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)]({% link topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.md %}) if you hope to include perc.mt in your own data analysis adventures. 
+However, this is not always necessary, and in fact, filtering based on counts and features (indeed, even just counts alone) will often remove the cells with spuriously high mitochondrial transcripts. These tools (and this tutorial) will soon be updated to allow us to do so--in the meantime, please see [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) [Filter, plot and explore single-cell RNA-seq (Scanpy)]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)]({% link topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.md %}) if you hope to include perc.mt in your own data analysis adventures.
 
-For now, we will use just transcript and gene counts to filter our data. Let's take a look back at our nFeature Violin Plot to pick our gene threshold: 
+For now, we will use just transcript and gene counts to filter our data. Let's take a look back at our nFeature Violin Plot to pick our gene threshold:
 
 ![Violin Plot of Features](../../images/scrna-case_FPE_SeuratTools/nFeature_RNA_vln_plot.png "Violin Plot of features.")
 
 ><comment-title>Interpretations</comment-title>
->You can see that very few cells in the dataset contain fewer than ~500 genes. Biologically, this makes sense, and the cells appear to be outliers in the data. As such, we will set our lower threshold of genes (nFeature_RNA) at 500. 
+>You can see that very few cells in the dataset contain fewer than ~500 genes. Biologically, this makes sense, and the cells appear to be outliers in the data. As such, we will set our lower threshold of genes (nFeature_RNA) at 500.
 {: .comment}
 
-Now, what about transcripts (nCount_RNA)? Let's take a look: 
+Now, what about transcripts (nCount_RNA)? Let's take a look:
 
 ![Violin Plot of Counts](../../images/scrna-case_FPE_SeuratTools/nCount_RNA_vln_plot.png "Violin Plot of counts.")
 
 ><comment-title>Interpretations</comment-title>
->This one is a bit more difficult to visualize but we see a severe drop off in the number of cells that contain fewer than 500 and more than 10,000 transcripts. These will be our nCount thresholds that we filter based on. 
+>This one is a bit more difficult to visualize but we see a severe drop off in the number of cells that contain fewer than 500 and more than 10,000 transcripts. These will be our nCount thresholds that we filter based on.
 {: .comment}
 
 These cells won't tell us much biologically, rather, they will contribute noise that we'll want to filter out of the data. With that being said, filtering scRNA-seq data will always be an iterative process--so label your work well and be ready to revisit these thresholds if your analyses seem strange down the line.
@@ -302,7 +307,7 @@ In order to include more than one parameter by which to filter, use the "Insert 
 > - *"Max value"*: `1000000000.0`
 >
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
-> 
+>
 > **Rename** {% icon galaxy-pencil %} output `Filtered Seurat Object`
 {: .hands_on}
 
@@ -312,7 +317,7 @@ Now, genes that do not appear in any cell, or even in only 1 or 2 cells, may bre
 
 Since you’ve removed a whole heap of cells, and the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes still present in your matrix that are not expressed in any of the cells.
 
-The removal of these genes is by no means necessary, but will speed up your analyses. The developers are currently working to enable a means of doing this through the Seurat Tools, but, in the meantime if you are analyzing your own data and would like to filter genes--please see [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) [Filter, plot and explore single-cell RNA-seq (Scanpy)]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)]({% link topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.md %}). 
+The removal of these genes is by no means necessary, but will speed up your analyses. The developers are currently working to enable a means of doing this through the Seurat Tools, but, in the meantime if you are analyzing your own data and would like to filter genes--please see [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) [Filter, plot and explore single-cell RNA-seq (Scanpy)]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), or [Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)]({% link topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.md %}).
 
 # Processing
 Currently, we still have quite big data. We have two issues here
@@ -321,26 +326,26 @@ Currently, we still have quite big data. We have two issues here
 
 Although that would be fine, adding in a 3rd dimension (or, indeed, in our case, a dimension for each of the thousands of genes), is a bit trickier.
 
-So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize: this is commonly referred to as preprocessing of the data and a typical scRNA-seq preprocessing pipeline will include the following steps: 
+So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize: this is commonly referred to as preprocessing of the data and a typical scRNA-seq preprocessing pipeline will include the following steps:
 
-## 1. Normalization 
+## 1. Normalization
 
 What is Normalization?
 
-Normalisation helps reduce the differences between gene and UMI counts by fitting total counts across cells in our data to be comparable to one another. SCTransform regularizes the gene expression profiles via a negative binomial regression while also controlling for overfitting of the data. 
+Normalisation helps reduce the differences between gene and UMI counts by fitting total counts across cells in our data to be comparable to one another. SCTransform regularizes the gene expression profiles via a negative binomial regression while also controlling for overfitting of the data.
 
 > <hands-on-title>Normalize Data</hands-on-title>
 >
 > Run{% tool [Seurat NormaliseData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_normalise_data/seurat_normalise_data/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Filtered Seurat Object` (output of **Seurat FilterCells** {% icon tool %})
 > - *"Normalisation method"*: `Log Normalise`
-> 
+>
 > **Rename** {% icon galaxy-pencil %} output `Normalised Seurat Object`
 {: .hands_on}
 
 ## 2. Identifying Variable Genes
 
-What are variable genes? 
+What are variable genes?
 
 The datasets have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses.
 
@@ -351,17 +356,17 @@ The find variable genes step flags genes that *do* vary across cells to expedite
 > Run{% tool [Seurat FindVariableGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_variable_genes/seurat_find_variable_genes/4.0.4+galaxy0) %} with the following parameters:
 > - *"RDS file"*: `Normalised Seurat Object` (output of **Seurat NormaliseData** {% icon tool %})
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
-> 
+>
 > **Rename** {% icon galaxy-pencil %} output `Normalised Seurat Object with Variable Features`
 {: .hands_on}
 
-This tool will output two new pieces of data into our Galaxy history: 
+This tool will output two new pieces of data into our Galaxy history:
   1. a new Seurat object with variable features identified and flagged
-  2. a tabular file with a list of these variable genes. 
+  2. a tabular file with a list of these variable genes.
 
-This gene list may be used as a sneak peak into understanding what the dataset will look like! We can begin to understand which genes are going to be driving downstream clustering of our cells and maybe even make some decisions about whether we are happy with our filtering based on this list. 
+This gene list may be used as a sneak peak into understanding what the dataset will look like! We can begin to understand which genes are going to be driving downstream clustering of our cells and maybe even make some decisions about whether we are happy with our filtering based on this list.
 
-## 3. Scale Data 
+## 3. Scale Data
 
 Now we will scale the data.
 
@@ -382,19 +387,19 @@ This is an important step to set up our data for further dimensionality reductio
 > - *"Genes to use"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
 > - *"Vars to regress"*: `nCount_RNA`
 > - *"Statistical model"*: `Linear model`
-> 
+>
 > **Rename** {% icon galaxy-pencil %} output `Preprocessed Seurat Object`
 {: .hands_on}
 
-You now have a preprocessed Seurat object! 
+You now have a preprocessed Seurat object!
 
 ><comment-title>Regressing Variables</comment-title>
 > Take note of the "Vars to regress" argument in the above tool. This function allow us to mitigate the effects of confounding factors in our dataset.
-> In true research practice, I often regress out multiple variables including but not limited to perc.mt, cell cycle scoring, and feature count. 
+> In true research practice, I often regress out multiple variables including but not limited to perc.mt, cell cycle scoring, and feature count.
 > As currently written, this tool only allows us to regress out a single variable: so feel free to pick another to regress and see how it changes the downstream analyses!
 {: .comment}
 
-# Dimensionality Reduction 
+# Dimensionality Reduction
 Although we've made our expression values comparable to one another and our overall dataset less computationally demanding, we still have way too many dimensions (n cells x n genes!).
 
 Transcript changes are not usually singular--which is to say, genes function and exist in pathways and groups. It would be easier to analyse our data if we could group these differences. To address this we will run principal component analysis (PCA).
@@ -417,14 +422,14 @@ We can calculate the first handful of principal components in our data to drasti
 > - *"Genes to scale"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
 {: .hands_on}
 
-This tool will output you with four new datasets into your history: 
+This tool will output you with four new datasets into your history:
   1. Seurat RDS which includes all of the following PCA metadata
   2. Embeddings: Principal component values for each of the cells in your dataset
   3. Loadings: Prinicial component values for each of the genes in your dataset  
-  4. Standard deviations of each principal component coordinates 
+  4. Standard deviations of each principal component coordinates
 
 ><tip-title>Visualizing PCA</tip-title>
->In order to use the PCA information which was just calculated, we must visualize it. The currently available tools unfortunately do not [YET] carry the capacity to do so, but I will provide the plot so that we may make an informed decision together: 
+>In order to use the PCA information which was just calculated, we must visualize it. The currently available tools unfortunately do not [YET] carry the capacity to do so, but I will provide the plot so that we may make an informed decision together:
 >
 >![Elbow Plot of Principal Components (PCs) against the standard deviation (variability in the dataset) they each account for](../../images/scrna-case_FPE_SeuratTools/ElbowPlot.png "Elbow Plot")
 >
@@ -453,7 +458,7 @@ Let's now use the 15 PC threshold we chose from the Elbowplot and apply it to fi
 > - *"Assay"*: `RNA`
 {: .hands_on}
 
-Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another: we can identify and label clusters: 
+Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another: we can identify and label clusters:
 
 > <hands-on-title>Find Clusters </hands-on-title>
 >
@@ -463,7 +468,7 @@ Now we can use the neighborhood graph to identify clusters of cells whose transc
 >   - *"Resolution"*: `0.5`
 {: .hands_on}
 
-This tool will output two new datasets: as usual, a new Seurat object which includes a metadata column denoting which cluster each cell was assigned to, and a csv file of the same information. 
+This tool will output two new datasets: as usual, a new Seurat object which includes a metadata column denoting which cluster each cell was assigned to, and a csv file of the same information.
 
 Unfortunately, identifying clusters is not as majestic as biologists often think - the math doesn’t necessarily identify true cell clusters. Every algorithm for identifying cell clusters falls short of a biologist knowing their data, knowing what cells should be there, and proving it in the lab.
 
@@ -490,7 +495,7 @@ Now that we have made note within our object of which cells cluster together, we
 > - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat FIndClusters** {% icon tool %})
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 > - *"Dims"*: `1:15`
-> 
+>
 > **Rename** {% icon galaxy-pencil %} output `Final Preprocessed Seurat Object`
 {: .hands_on}
 
@@ -557,7 +562,7 @@ To do so, we'll run Seurat's FindMarkers function, which will compare each ident
 The marker list that has been output by this tool will be useful to us shortly for identifying which cells types are represented by the various clusters.\
 
 ><comment-title>On Finding Markers</comment-title>
-> Differential expression can be run using any identity class and any two identities within the same class. The tools as of current do not allow for such direct comparisons (but will soon!) and I implore you to try [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) if you hope to conduct marker identification across, say, genotypes. 
+> Differential expression can be run using any identity class and any two identities within the same class. The tools as of current do not allow for such direct comparisons (but will soon!) and I implore you to try [Filter, Plot, and Explore single cell RNA-seq data (Seurat, R)]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) if you hope to conduct marker identification across, say, genotypes.
 {: .comment}
 
 # Biological Interpretations
@@ -581,7 +586,7 @@ Let's take another look at what our clusters look like:
 
 It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are and then going through marker tables we generated) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!
 
-Here are the markers per cell type that the paper uses to classify the avrious cell types which are expected to be present in the data: 
+Here are the markers per cell type that the paper uses to classify the avrious cell types which are expected to be present in the data:
 
 | Markers                 | Cell Type                           |
 |-------------------------|-------------------------------------|
@@ -590,7 +595,7 @@ Here are the markers per cell type that the paper uses to classify the avrious c
 | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
 | Itm2a                   | Mature T-cell                       |
 
-We can plot these markers as a means of discerning which cluster might be representing a given cell type. Let's start with the Mature T-cell marker Itm2a: 
+We can plot these markers as a means of discerning which cluster might be representing a given cell type. Let's start with the Mature T-cell marker Itm2a:
 
 > <hands-on-title>Plot Itm2a </hands-on-title>
 >
@@ -602,9 +607,9 @@ We can plot these markers as a means of discerning which cluster might be repres
 
 ![FeaturePlot of Itm2a expression most highly localized to cluster 3](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Itm2a.png "FeaturePlot of Itm2a")
 
-We can see that Cluster 3 seems to be most highly expressing this gene, and when we look back at the marker list we created earlier, Itm2a appears as a marker for cluster 3 with an average log fold change of 3! Therefore, we can quite conficently say that cluster 3 is likely to be representing Mature T-cells! 
+We can see that Cluster 3 seems to be most highly expressing this gene, and when we look back at the marker list we created earlier, Itm2a appears as a marker for cluster 3 with an average log fold change of 3! Therefore, we can quite conficently say that cluster 3 is likely to be representing Mature T-cells!
 
-Now what about the opposite end of the spectrum: the double negative early T-cells? We can see from our table about that Il2ra is a known marker of this cell type, let's see where it's most strongly expressed in the data: 
+Now what about the opposite end of the spectrum: the double negative early T-cells? We can see from our table about that Il2ra is a known marker of this cell type, let's see where it's most strongly expressed in the data:
 
 > <hands-on-title>Plot Il2ra </hands-on-title>
 >
@@ -616,11 +621,11 @@ Now what about the opposite end of the spectrum: the double negative early T-cel
 
 ![FeaturePlot of Il2ra expression mainly in cluster 2](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Il2ra.png "FeaturePlot of Il2ra")
 
-Il2ra expression seems to be most prominent in Cluster 2 and as seen in our marker list, has a fold change of 2.79! 
+Il2ra expression seems to be most prominent in Cluster 2 and as seen in our marker list, has a fold change of 2.79!
 
-It can, and should, act as a sanity check that the most (and least) differentiated cell types expected in the data appear as two "island" clusters. 
+It can, and should, act as a sanity check that the most (and least) differentiated cell types expected in the data appear as two "island" clusters.
 
-Now for the intermediate populations--which may be a bit more tricky to deconvolute. Based on our known markers, we see that both the double-positive populations express many of the same genes: Cd8b1, Cd8a, and Cd4. Let's make sure that the remaining clusters (0, 1, 3, 4, 5, 6, and 7) all express these: 
+Now for the intermediate populations--which may be a bit more tricky to deconvolute. Based on our known markers, we see that both the double-positive populations express many of the same genes: Cd8b1, Cd8a, and Cd4. Let's make sure that the remaining clusters (0, 1, 3, 4, 5, 6, and 7) all express these:
 
 > <hands-on-title>Plot Cd8b1 </hands-on-title>
 >
@@ -632,7 +637,7 @@ Now for the intermediate populations--which may be a bit more tricky to deconvol
 
 ![FeaturePlot of Cd8b1 expression expressed across each of the "body" clusters (0, 1, 4, 5, 6, and 7)](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8b1.png "FeaturePlot of Cd8b1")
 
-It looks like clusters 1, 4, 5, and 6 pretty strongly express Cd8b1, now what about Cd8a? 
+It looks like clusters 1, 4, 5, and 6 pretty strongly express Cd8b1, now what about Cd8a?
 
 > <hands-on-title>Plot Cd8a </hands-on-title>
 >
@@ -644,7 +649,7 @@ It looks like clusters 1, 4, 5, and 6 pretty strongly express Cd8b1, now what ab
 
 ![FeaturePlot of Cd8a expression in the same clsuters as Cd8b1 (0, 1, 4, 5, 6, and 7)](../../images/scrna-case_FPE_SeuratTools/FeaturePlot_Cd8a.png "FeaturePlot of Cd8a")
 
-This looks pretty consistent with the Cd8b1 plot, which is expected as these are markers of a double positive population! The true discernment between the two populations will be the level of Cd4 expression: 
+This looks pretty consistent with the Cd8b1 plot, which is expected as these are markers of a double positive population! The true discernment between the two populations will be the level of Cd4 expression:
 
 > <hands-on-title>Plot Cd4 </hands-on-title>
 >
@@ -656,9 +661,9 @@ This looks pretty consistent with the Cd8b1 plot, which is expected as these are
 
 ![FeaturePlot of Cd4 expression most highly expressed in cluster 1 and lowly expressed in clusters 4, 5, 6, and 7](../../images/scrna-case_FPE_SeuratTools/FeatuerePlot_Cd4.png "FeaturePlot of Cd4")
 
-Looks like the top portion of these clusters, and mainly cluster 1 hold the vast majority of Cd4 expression. This, coupled with Cd4 being identified as a marker of cluster 1 in our marker table above tells us pretty confidently that the upper part of this "body" cluster are likely the late middle t-cells! 
+Looks like the top portion of these clusters, and mainly cluster 1 hold the vast majority of Cd4 expression. This, coupled with Cd4 being identified as a marker of cluster 1 in our marker table above tells us pretty confidently that the upper part of this "body" cluster are likely the late middle t-cells!
 
-Here is a breakdown of the cell type labeling we just accomplished: 
+Here is a breakdown of the cell type labeling we just accomplished:
 
 | Clusters     | Markers                 | Cell Type                           |
 |--------------|-------------------------|-------------------------------------|
@@ -784,5 +789,3 @@ If we look at the differences between genotypes alone (so the pseudo-bulk), we c
 Ultimately, there are quite a lot ways to analyse your single-cell data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population, suggesting some sort of abberant development of T-cells in the Igf2-p0 hets.
 
 Congratulations! You have interpreted your plots in several important ways!
-
-

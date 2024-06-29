@@ -11,4 +11,5 @@ layout: news
 
 The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial introduced volcano plots and showed how they can be easily generated with the Galaxy Volcano plot tool. This new tutorial shows how you can customise a plot using the R script output from the tool and RStudio in Galaxy. A [short video](https://www.youtube.com/embed/4dspgiwkuxk) for the tutorial is also available on YouTube, created for the [GCC2021 Training week](https://galaxyproject.org/events/gcc2021/training/). 
 Happy plotting!
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4dspgiwkuxk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{% include _includes/youtube.html id="4dspgiwkuxk" title="GTN Tutorial: Volcano Plots in R" %}

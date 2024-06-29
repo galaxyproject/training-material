@@ -7,7 +7,7 @@ FUNDERS = YAML.load_file('FUNDERS.yaml')
 def automagic_loading(f)
   # Remove our documentation
   f.reject! { |k, v| k == 'description' and v.is_a?(String) }
-  f.reject! { |k| k == 'examples' }
+  f.reject! { |k| k == '_examples' }
 
   # Auto-replace CONTRIBUTORS in enums.
   f.each do |k, v|

@@ -31,6 +31,17 @@ contributions:
   - bgruening
   - hexylena
 subtopic: histories
+
+recordings:
+- youtube_id: C3_HSgbbDWc
+  speakers:
+  - shiltemann
+  captioners:
+  - shiltemann
+  length: 18M
+  date: '2023-05-19'
+  galaxy_version: '23.01'
+
 ---
 
 {% snippet faqs/gtn/galaxy_tested_with.md version="24.0" %}

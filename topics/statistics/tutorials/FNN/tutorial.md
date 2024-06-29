@@ -27,6 +27,17 @@ follow_up_training:
 time_estimation: 2H
 contributors:
 - kxk302
+
+recordings:
+- captioners:
+  - kxk302
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H10M
+  youtube_id: VbzJDkyPL4A
+  speakers:
+  - kxk302
+
 ---
 
 

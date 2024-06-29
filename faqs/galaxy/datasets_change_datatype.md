@@ -5,6 +5,11 @@ area: datasets
 box_type: tip
 layout: faq
 contributors: [bebatut,nsoranzo,hexylena,shiltemann,ajadi-abiola,lldelisle,nekrut]
+optional_parameters:
+  datatype: A string representing the Galaxy datatype
+examples:
+  Assign datatype without specifying the datatype: {}
+  Assign datatype with a specific datatype: {datatype: 'fastqsanger'}
 ---
 
 * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
