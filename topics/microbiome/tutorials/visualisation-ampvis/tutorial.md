@@ -231,9 +231,9 @@ To create a heatmap, ordination plot, or boxplot you can continue with your data
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/records/11281381/files/Galaxy11-[MiDAS_otushort_table.tsv].mothur.axes/content
->    https://zenodo.org/api/records/11281381/files/Galaxy1-[MiDAS_metadata.tsv].tabular/content
->    https://zenodo.org/api/records/11281381/files/Galaxy3-[MiDAS_taxtable.tsv].tabular/content
+>    MiDAS_otushort_table.tsv
+>    MiDAS_metadata.tsv
+>    MiDAS_taxtable.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
