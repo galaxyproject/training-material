@@ -16,7 +16,7 @@ To delete multiple datasets at once:
 
 - Click {% icon history-select-multiple %} icon at the top of the history pane;
 - Select datasets you want to delete;
-- Click dropdown that would appear at the top of the history;
+- Click the dropdown that would appear at the top of the history;
 - Select **"Delete"** option.
 
 This action is also reversible: datasets can be undeleted. 
@@ -33,7 +33,7 @@ To delete multiple datasets <font color="red">PERMANENTLY</font>:
 
 - Click {% icon history-select-multiple %} icon at the top of the history pane;
 - Select datasets you want to delete;
-- Click dropdown that would appear at the top of the history;
+- Click the dropdown that would appear at the top of the history;
 - Select **"Delete (permanently)"** option.
 
 
