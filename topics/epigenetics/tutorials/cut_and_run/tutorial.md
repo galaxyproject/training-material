@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: CUT&RUN data analysis
-draft: true
 zenodo_link: https://zenodo.org/record/3862793
 questions:
 - Which binding motif has the transcription factor GATA1?
