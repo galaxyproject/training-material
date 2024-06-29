@@ -6,6 +6,7 @@ box_type: tip
 layout: faq
 contributors: [nekrut]
 ---
+
 Above the current history panel are three buttons: 
 
 - The {% icon new-history %} "**Create new history**" button will create an empty history.

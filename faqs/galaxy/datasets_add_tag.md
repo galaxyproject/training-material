@@ -6,6 +6,7 @@ layout: faq
 box_type: tip
 contributors: [bebatut,wm75,hexylena,shiltemann,nekrut]
 ---
+
 Datasets can be tagged. This simplifies tracking of datasets across the Galaxy interface. Tags can contain any combination of letters or numbers but cannot contain spaces. 
 
 **To tag a dataset**:
