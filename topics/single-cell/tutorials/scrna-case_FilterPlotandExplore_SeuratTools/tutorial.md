@@ -40,10 +40,22 @@ tags:
 contributions:
   authorship:
     - Camila-goclowski
+  infrastructure: 
     - pcm32
   editing:
     - pavanvidem
     - hexylena
+  
+    
+answer_histories: 
+    - label: "usegalaxy.eu"
+      history: https://usegalaxy.eu/u/camila-goclowski/h/seurattool-based-fpe
+      date: 2024-06-03
+
+input_histories:
+    - label: "usegalaxy.eu"
+      history: https://usegalaxy.eu/u/camila-goclowski/h/tool-based-seurat-fpe-input-data
+
 ---
 
 
@@ -387,8 +399,8 @@ This is an important step to set up our data for further dimensionality reductio
 > - *"Genes to use"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
 > - *"Vars to regress"*: `nCount_RNA`
 > - *"Statistical model"*: `Linear model`
->
-> **Rename** {% icon galaxy-pencil %} output `Preprocessed Seurat Object`
+> 
+> **Rename** {% icon galaxy-pencil %} output `Scaled, Preprocessed Seurat Object`
 {: .hands_on}
 
 You now have a preprocessed Seurat object!
@@ -417,9 +429,11 @@ We can calculate the first handful of principal components in our data to drasti
 > <hands-on-title>Run PCA </hands-on-title>
 >
 > Run{% tool [Seurat RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_pca/seurat_run_pca/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat RunPCA** {% icon tool%})
+> - *"RDS file"*: `Scaled, Preprocessed Seurat Object` (output of **Seurat ScaleData** {% icon tool%})
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 > - *"Genes to scale"*: `Seurat FindVariableGenes on data 12: Variable genes tabular file`
+> 
+> **Rename** {% icon galaxy-pencil %} RDS output `PCA Processed Seurat Object`
 {: .hands_on}
 
 This tool will output you with four new datasets into your history:
@@ -452,10 +466,12 @@ Let's now use the 15 PC threshold we chose from the Elbowplot and apply it to fi
 > <hands-on-title>Find Neighbors </hands-on-title>
 >
 > Run{% tool [Seurat FindNeighbours](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_neighbours/seurat_find_neighbours/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat RunPCA** {% icon tool %})
+> - *"RDS file"*: `PCA Processed Seurat Object` (output of **Seurat RunPCA** {% icon tool %})
 > - *"Reduction"*: `pca`
 > - *"Dimensions"*: `1,2,3,4,5,6,7,8,9,10,11,12,13,14,15`
 > - *"Assay"*: `RNA`
+> 
+> **Rename** {% icon galaxy-pencil %} output `Preprocessed Seurat Object with Neighbors`
 {: .hands_on}
 
 Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another: we can identify and label clusters:
@@ -463,9 +479,11 @@ Now we can use the neighborhood graph to identify clusters of cells whose transc
 > <hands-on-title>Find Clusters </hands-on-title>
 >
 > Run{% tool [Seurat FindClusters](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat FindNeighbors** {% icon tool %})
+> - *"RDS file"*: `Preprocessed Seurat Object with Neighbors` (output of **Seurat FindNeighbors** {% icon tool %})
 > - In *"Advanced Options "*
 >   - *"Resolution"*: `0.5`
+> 
+> **Rename** {% icon galaxy-pencil %} output `Preprocessed Seurat Object with Clusters`
 {: .hands_on}
 
 This tool will output two new datasets: as usual, a new Seurat object which includes a metadata column denoting which cluster each cell was assigned to, and a csv file of the same information.
@@ -492,7 +510,7 @@ Now that we have made note within our object of which cells cluster together, we
 > <hands-on-title>Run UMAP </hands-on-title>
 >
 > Run{% tool [Seurat UMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0) %} with the following parameters:
-> - *"RDS file"*: `Preprocessed Seurat Object` (output of **Seurat FIndClusters** {% icon tool %})
+> - *"RDS file"*: `Preprocessed Seurat Object with Clusters` (output of **Seurat FindClusters** {% icon tool %})
 > - *"Choose the format of the output"*: `RDS with a Seurat object`
 > - *"Dims"*: `1:15`
 >
@@ -788,4 +806,5 @@ If we look at the differences between genotypes alone (so the pseudo-bulk), we c
 
 Ultimately, there are quite a lot ways to analyse your single-cell data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population, suggesting some sort of abberant development of T-cells in the Igf2-p0 hets.
 
-Congratulations! You have interpreted your plots in several important ways!
+{% icon congratulations %} Congratulations! You have interpreted your plots in several important ways! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/camila-goclowski/h/seurattool-based-fpe), and check out the [workflow](https://singlecell.usegalaxy.eu/u/camila-goclowski/w/workflow-constructed-from-history-tool-based-fpe) for this tutorial.
+
