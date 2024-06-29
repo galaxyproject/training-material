@@ -12,13 +12,13 @@ To un-delete datasets:
 
 - Type `deleted:true` in the search box
 - Select datasets you want to un-delete
-- Click dropdown that would appear at the top of the history;
+- Click the dropdown that would appear at the top of the history;
 - Select **"Undelete"** option.
 
 ![An animated gif showing how to undelete datasets]({% link shared/images/datasets_undeleting.gif %})
 
-Alternatively you can:
+Alternatively, you can:
 
-- click {% icon galaxy-delete %} **"Include deleted"** button directly above dataset display. This will cause deleted dataset to appear in history along with normal (un-deleted) datasets;
+- click {% icon galaxy-delete %} **"Include deleted"** button directly above dataset display. This will cause deleted datasets to appear in history along with normal (un-deleted) datasets;
 - deleted datasets are distinguished by having {% icon dataset-undelete %} within dataset box. Clicking on this icon will un-delete a given dataset;
 
