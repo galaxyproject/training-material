@@ -8,7 +8,10 @@ import glob
 import time
 import multiprocessing
 
-GTN_PROJECT_ID = 63
+# GTN_BOT_ID = https://workflowhub.eu/people/731
+GTN_PROJECT_ID = 12
+# WORKFLOWHUB = "https://dev.workflowhub.eu"
+WORKFLOWHUB = "https://workflowhub.eu"
 
 if len(sys.argv) == 2:
     crates = [sys.argv[1]]
@@ -34,12 +37,14 @@ def doUpload(crate_path):
         "workflow[project_ids][]": (None, GTN_PROJECT_ID), # GTN's ID.
     }
     headers = {
-        "authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 
+        "authorization": "Token " + os.environ["WFH_TOKEN"], 
         'User-Agent': 'GTN (github.com/galaxyproject/training-material@1.0)',
+        # 'Content-type': 'application/json',
+        'Accept': 'application/json',
     }
 
     response = requests.post(
-        "https://dev.workflowhub.eu/workflows/submit", files=payload, headers=headers
+        f"{WORKFLOWHUB}/workflows/submit", files=payload, headers=headers
     )
     code = response.status_code
     if code != 200:
@@ -71,26 +76,29 @@ def doUpload(crate_path):
         }
       }
     }
-
-    if response.json()['data']['attributes']['discussion_links'] and not any(
+    
+    dls = response.json()['data']['attributes']['discussion_links']
+    print("Discussion links: ", dls)
+    if dls is None or len(dls) == 0 or (not any(
         x['label'] == 'GTN Matrix' for x in response.json()['data']['attributes']['discussion_links']
-    ):
+    )):
         permissions_update['data']['attributes']['discussion_links'] = [
             {
                 "label": "GTN Matrix",
                 "url": "https://matrix.to/#/%23galaxyproject_admin:gitter.im" # Must encode the second #
             }
         ]
-
-
+    
+    
+    print(permissions_update)
     headers.update({
         'Content-type': 'application/json',
         'Accept': 'application/json',
     })
-    response2 = requests.put(f"https://dev.workflowhub.eu/workflows/{wfid}", headers=headers, json=permissions_update)
+    response2 = requests.put(f"{WORKFLOWHUB}/workflows/{wfid}", headers=headers, json=permissions_update)
     if response2.status_code != 200:
         print(f"Error {response2.status_code} updating permissions for {wfid}: {response2.text}")
-
+    
     p = crate_path.split("/")
     windex = p.index("workflows")
     (topic, tutorial, workflow) = p[windex + 1:windex + 4]
