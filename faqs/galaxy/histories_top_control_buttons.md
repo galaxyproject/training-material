@@ -10,7 +10,7 @@ contributors: [nekrut]
 Above the current history panel are three buttons: 
 
 - The {% icon new-history %} "**Create new history**" button will create an empty history.
-- The {% icon switch-histories %} "**Switch to history**" will open a dialog letting you easily swap to any of your other histories.
+- The {% icon switch-histories %} "**Switch to history**" will open a window letting you easily swap to any of your other histories.
 - The {% icon galaxy-history-options %} "**History options**" (formerly the {% icon galaxy-gear %} "Gear menu") gives you access to advanced options to work with your history.
 
 ![The three history buttons]({% link shared/images/history_top_level_buttons.svg %})
