@@ -4,12 +4,12 @@ layout: tutorial_hands_on
 
 title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
-zenodo_link: https://zenodo.org/records/11281381
+zenodo_link: https://zenodo.org/records/12591715
 questions:
 - How can we adapt the plots to our research data?
 - How can we filter the data to show only significant information?
 - How can we compare multiple visualisation methods?
-- How can we use numerical and categorical metadata for amplicon visualization?
+- How can we use numerical and categorical metadata for amplicon visualisation?
 objectives:
 - Use heatmap workflow to analyse and visualise amplicon data
 - Use ungrouped or grouped data or grouped data with facets
