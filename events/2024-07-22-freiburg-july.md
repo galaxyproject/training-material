@@ -9,6 +9,7 @@ description: |
     This course introduces scientists to the data analysis platform Galaxy. The course is a beginner course; there is no requirement of any programming skills.
 
 date_start: 2024-07-22
+date_end: 2024-07-26 
 
 contributions:
   organisers:
@@ -17,11 +18,10 @@ contributions:
   - erxleben
   - teresa-m
   funding:
-  - dataPlant
-  - EOSC Eurosice Gateway 
-  - denbi
+  - eurosciencegateway 
+  - deNBI
 
 location:
-  name: Online
+  name: University of Freiburg, Germany
 
 ---
