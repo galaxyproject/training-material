@@ -2,17 +2,16 @@
 layout: event
 
 # Status of this page, remove these lines when ready
-draft: false  # will hide your event from the GTN events list
-status: wip  # add a banner that warns that the contents of the page are still subject to change
+# draft: true  # will hide your event from the GTN events list
+# status: wip  # add a banner that warns that the contents of the page are still subject to change
 
 
 # Description of your event
 title: Workshop on high-throughput sequencing data analysis with Galaxy
 description: |
   This course introduces scientists to the data analysis platform Galaxy. The course is a beginner course; there is no requirement of any programming skills.
-cover-image:         # image for your corse, put in 'events/images' folder
-cover-image-alt:     # supply alt text describing your image
-
+cover-image:     /assets/images/GTN-event-logo.png 
+cover-image-alt:   GTN logo with Training Event written right lower corner
 
 # Practical Information
 date_start: 2024-07-22
