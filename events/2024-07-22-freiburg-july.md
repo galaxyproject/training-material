@@ -2,7 +2,7 @@
 layout: event
 
 # Status of this page, remove these lines when ready
-draft: true  # will hide your event from the GTN events list
+draft: false  # will hide your event from the GTN events list
 status: wip  # add a banner that warns that the contents of the page are still subject to change
 
 
