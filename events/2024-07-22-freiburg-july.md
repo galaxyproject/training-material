@@ -13,6 +13,13 @@ date_start: 2024-07-22
 contributions:
   organisers:
   - erxleben
+  instructors:
+  - erxleben
+  - teresa-m
+  funding:
+  - dataPlant
+  - EOSC Eurosice Gateway 
+  - denbi
 
 location:
   name: Online
