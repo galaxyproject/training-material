@@ -1,12 +1,12 @@
 ---
 layout: event-external
-title: FAIR data management in single-cell analysis
+title: Workshop on high-throughput sequencing data analysis with Galaxy
 
 
-external: "https://elixiruknode.org/event/fair-single-cell-analysis/"
+external: "https://galaxyproject.org/events/2024-07-22-galaxy-workshop-freiburg/"
 
 description: |
-    This course will introduce the Galaxy Platform, covering the basic functionality for single-cell data processing. It will include an overview of various common single-cell datatypes used in bioinformatics. Participants will gain hands-on experience loading single-cell data from external resources into Galaxy, parsing academic literature to find relevant metadata, and converting the data into the common AnnData format, ready for further analysis in Galaxy.
+    This course introduces scientists to the data analysis platform Galaxy. The course is a beginner course; there is no requirement of any programming skills.
 
 date_start: 2024-07-22
 
