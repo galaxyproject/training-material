@@ -12,4 +12,5 @@ The goals of the GCB are to:
 
  - share resources, tips & best practices to make runnier **SIGs** easier
  - discuss and summarize scientist (user) feedback to help guide the technical development of the Galaxy platform;
- - communicate scientist (user) vision and feedback to the Galaxy Governance structure to advance scientist (user) goals in the Galaxy community.
+ - communicate scientist (user) vision and feedback to the Galaxy Governance structure to advance scientist (user) goals in the Galaxy community; and
+ * develop proposals to advance scientist (user) goals in the Galaxy community.

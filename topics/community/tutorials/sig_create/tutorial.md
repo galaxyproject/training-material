@@ -61,6 +61,9 @@ Before starting a **SIG**, it's important to be aware of the (rather low) requir
   * The current contact/email address for the nominated [Galaxy Community Board](https://galaxyproject.org/community/governance/gcb/) representative
 * Must manage membership and internal communication for itself.
 * Must use at least one public Matrix channel under the Galaxy Matrix space.
+* Must allow participation across different timezones (with the exception of **Regional Communities**).
+
+{% snippet faqs/meeting_times.md %}
 
 {% snippet faqs/governance_structure.md %}
 
