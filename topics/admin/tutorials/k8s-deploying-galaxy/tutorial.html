@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0c1bb891b4f36a94b35693d3d538a47715910b31",
+		release: "galaxy-training-network@6b78e7614bf15259cdcda5fa3619b946284dedc9",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Installation on Kubernetes">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.date" content="2024-06-29 18:35:47 +0000">
 <meta name="DC.creator" content="Pablo Moreno">
 <meta name="DC.creator" content="Enis Afgan">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -211,7 +211,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2024-06-29 18:35:47 +0000",
   "datePublished": "2019-07-02 18:24:39 +0000",
   "identifier": "https://gxy.io/GTN:T00013",
   "accessMode": [
@@ -240,7 +240,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Galaxy Installation on Kubernetes",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html",
-  "version": 8,
+  "version": 9,
   "timeRequired": "PT30M",
   "teaches": "Have an understanding of how to use Galaxy's Helm chart\n - Be able to use Helm to install different flavors of Galaxy for different purposes",
   "keywords": [
@@ -756,7 +756,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 2, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 29, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -776,7 +776,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
 
     </blockquote>
     </section>
@@ -795,37 +795,30 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="overview">Overview</h2>
 
-<p>Galaxy has a minimal number of required dependencies, which makes its basic
-installation quick for both users and developers. However, configuring a
-multi-user production instance is a complex undertaking due to Galaxy’s many
-interacting and dependent systems, components, and configurations. Software
-containerization has become the preferred method of addressing deployment
-challenges across operating environments. Containerization also requires
-orchestration, so that multiple containers can work together to deliver a
-complex application. <a href="https://kubernetes.io/">Kubernetes</a> has emerged as the
-primary container orchestration technology, as it is both container agnostic and
-widely adopted. Kubernetes allows managing, scaling, and deploying different
-pieces of an application–in a standardized way–while providing excellent tooling
-for doing so.</p>
-
-<p>In this tutorial, we’ll take a look at Kubernetes and <a href="https://helm.sh/">Helm</a>
-as tools for deploying containerized Galaxy. The goals for this model of
-deploying Galaxy is to use best-practices from the Galaxy community on how to
-deploy the Galaxy application in a well-defined package. This model can simplify
-deployment and management burden of running Galaxy. While it is possible to
-follow this tutorial by simply copying and pasting supplied commands, and a
-production-grade Galaxy will be installed, it is desirable to have a basic
-understanding of the container concepts and Kubernetes and Helm technologies.</p>
-
-<p>Some of the goals for deploying and running Galaxy in this mode include:</p>
+<p>This tutorial describes how to use the Galaxy Helm Chart to deploy a production
+grade instance of Galaxy on a Kubernetes cluster. The Helm Chart has been designed
+to follow best practices adopted by the community, including the usegalaxy.* federation,
+and will install a Galaxy with the following features by default:</p>
 <ul>
-  <li>Design a mostly stateless model for running Galaxy where processes can be
-horizontally scaled as needed</li>
-  <li>Integrate components from the Galaxy project ecosystem to leverage existing
-resources</li>
-  <li>Provide a unified handling of Galaxy configurations</li>
-  <li>Minimize customized dependencies</li>
-  <li>Minimize the need to build custom components</li>
+  <li>Zero-downtime configuration changes and upgrades</li>
+  <li>Scalable web and job handlers</li>
+  <li>Automatic failure recovery based on liveness and readiness probes</li>
+  <li>A built-in nginx for efficiently serving large files</li>
+  <li>TUSD for resumable uploads</li>
+  <li>Celery for background jobs</li>
+  <li>Access to CVMFS reference data</li>
+  <li>A toolset matching the usegalaxy.* federation (also served off CVMFS)</li>
+  <li>Interactive tools (wildcard DNS mapping required)</li>
+  <li>Minimal privileges, with jobs running as non-root and only having access to datasets they need</li>
+  <li>Automatic maintenance scripts to cleanup the galaxy database and tmp directories</li>
+</ul>
+
+<p>Optionally, the chart can be configured with</p>
+<ul>
+  <li>High-availability components - this includes trivial scaling of clustered Postgres, Rabbit MQ etc.</li>
+  <li>Replacement components - You can replace the built-in operators with a managed or existing Postgres database (e.g. Amazon RDS), RabbitMQ cluster etc.</li>
+  <li>Use S3 as an alternative to CVMFS</li>
+  <li>Automatic scraping of metrics which can be sent to Influxdb</li>
 </ul>
 
 <blockquote class="agenda">
@@ -835,12 +828,8 @@ resources</li>
   <li><a href="#galaxy-helm-chart" id="markdown-toc-galaxy-helm-chart">Galaxy Helm Chart</a>    <ol>
       <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
       <li><a href="#prerequisites" id="markdown-toc-prerequisites">Prerequisites</a></li>
-    </ol>
-  </li>
-  <li><a href="#downloading-the-galaxy-helm-chart" id="markdown-toc-downloading-the-galaxy-helm-chart">Downloading the Galaxy Helm Chart</a></li>
-  <li><a href="#deploying-galaxy" id="markdown-toc-deploying-galaxy">Deploying Galaxy</a>    <ol>
       <li><a href="#deploying-the-default-configuration" id="markdown-toc-deploying-the-default-configuration">Deploying the Default Configuration</a></li>
-      <li><a href="#deploying-a-cvmfs-enabled-configuration" id="markdown-toc-deploying-a-cvmfs-enabled-configuration">Deploying a CVMFS-enabled Configuration</a></li>
+      <li><a href="#setting-the-admin-user-and-changing-the-brand" id="markdown-toc-setting-the-admin-user-and-changing-the-brand">Setting the admin user and changing the brand</a></li>
       <li><a href="#deleting-a-deployed-helm-release" id="markdown-toc-deleting-a-deployed-helm-release">Deleting a Deployed Helm Release</a></li>
     </ol>
   </li>
@@ -850,11 +839,13 @@ resources</li>
 </blockquote>
 
 <h2 id="prerequisites">Prerequisites</h2>
-<p>We’ll be using the <a href="https://github.com/galaxyproject/galaxy-helm">Galaxy Helm chart</a> to install and manage a Galaxy
-deployment. To be able to use this chart, we’ll need access to a Kubernetes
-cluster, with Helm installed. For development and testing purposes this can be
-easily achieved by installing
-<a href="https://www.docker.com/products/kubernetes">Docker Desktop locally and enabling Kubernetes</a>. Afterwards, also install
+<p>Some familarity with Kubernetes is assumed. This includes general administrative
+familarity and how to install and configure Helm Charts.</p>
+
+<p>A running Kubernetes cluster is also required (1.27 or higher), with Helm
+(3.5 or higher) configured to access it.
+For development and testing purposes this can be easily achieved by installing
+<a href="https://www.docker.com/products/kubernetes">Docker Desktop locally and enabling Kubernetes</a>. Afterwards, install
 <a href="https://helm.sh">Helm</a>.</p>
 
 <p>For production deployments, we’ll also need some storage resources for data
@@ -862,40 +853,6 @@ persistence. This can be done by either defining a <a href="https://kubernetes.i
 creating a <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volume and a corresponding Persistent Volume Claim</a>.
 Once created, just keep a note of the resources Persistent Volume Claim ID and
 to use later.</p>
-
-<p>For the CVMFS-enabled version of the chart (more on this below), it is also
-necessary to run Kubernetes version 1.13 or newer because we’ll be using the
-<a href="https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/">Container Storage Interface (CSI)</a>.</p>
-
-<h1 id="downloading-the-galaxy-helm-chart">Downloading the Galaxy Helm Chart</h1>
-<p>The Galaxy Helm Chart is currently under active development with enhancements
-continuously trickling in. As a result, there are no regular releases yet and
-instead we recommend just cloning the GitHub repository with the chart
-implementation. This will be the easiest method to keep up with chart changes
-for the time being.</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-download-the-chart"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Download the chart</div>
-
-  <p>Clone the chart repository from the machine where you would like to deploy
-  Galaxy and change into the chart directory.</p>
-
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  git clone https://github.com/galaxyproject/galaxy-helm
-  <span class="nb">cd </span>galaxy-helm/galaxy
-</code></pre></div>  </div>
-
-</blockquote>
-
-<h1 id="deploying-galaxy">Deploying Galaxy</h1>
-<p>The Galaxy Helm chart packages best-practice solutions for deploying Galaxy
-into a single package that can be readily deployed as a unit. Behind the
-scenes, all the supporting services are started and configured into an
-interoperable system. Specifically, this involves starting a database service
-based on Postgres, using Nginx as a web proxy, and running an independently
-scalable set of web and job handler processes for Galaxy. This follows
-the production-quality deployment recommendation setup for Galaxy and leverages
-some of the Kubernetes features to help with running long-term services (e.g.,
-liveness probes that automatically restart stuck processes).</p>
 
 <h2 id="deploying-the-default-configuration">Deploying the Default Configuration</h2>
 <p>The default set of values for the Galaxy chart configures only a minimal set
@@ -910,130 +867,116 @@ chart later in this tutorial.</p>
 
   <ol>
     <li>
-      <p>First, we need to fetch any dependencies for the chart. One of the
-advantages of using Helm is that we can reuse best-practice deployment
-methods for other software right out of the box by relying on published
-charts and integrating them into the Galaxy chart.</p>
+      <p>First, we need to add the helm repository for the chart. The chart is
+automatically packaged, versioned and uploaded to a helm repository on github
+with each accepted PR. Therefore, the latest version of the chart can be directly
+installed from that repository.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm dependency update
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm repo add galaxyproject https://raw.githubusercontent.com/galaxyproject/helm-charts/master/
+helm repo update
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We can now deploy Galaxy via the Chart. Before running this command make
-sure you are in the chart source code directory (where <code class="language-plaintext highlighter-rouge">values.yaml</code> file
-resides) and note the trailing dot. Running this command will create a new
-Helm release (i.e., chart installation) called <code class="language-plaintext highlighter-rouge">galaxy</code>.</p>
+      <p>We can now deploy Galaxy via the Chart. Running this command will create a new
+Helm release (i.e., chart installation) called <code class="language-plaintext highlighter-rouge">mygalaxy</code>.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install</span> <span class="nt">--name</span> galaxy <span class="nb">.</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install </span>mygalaxy galaxyproject/galaxy
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>It will take about a minute or two for the database to be initialized,
-necessary containers downloaded, and Galaxy processes started. Ultimately,
+      <p>It will take about a minute or two for the necessary containers to download,
+the database to initialize, and Galaxy processes to start. Ultimately,
 while this may depend on the Kubernetes cluster setup you are using,
-Galaxy should be available at the root URI for the given machine. We can
-always check the status of our release by typing <code class="language-plaintext highlighter-rouge">helm status galaxy</code>.</p>
+Galaxy should be available at https://<root URI="">/galaxy for the given machine. We can
+always check the status of our release by typing `helm status galaxy`.</root></p>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="deploying-a-cvmfs-enabled-configuration">Deploying a CVMFS-enabled Configuration</h2>
-<p>The Galaxy Helm chart also comes with a more comprehensive set of configuration
-options that leverage more of the Galaxy project ecosystem. In practice this
-means deploying Galaxy with the same toolset as that of
-<em><a href="https://usegalaxy.org/">usegalaxy.org</a></em> right out of the box. It’s important to note
-that this deployment configuration leverages all the same chart components but
-just defines more configuration options. Namely, we attach to the
-<a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html">Galaxy CVMFS</a> ready-only file system for retrieving the tool
-configurations while leveraging <a href="https://biocontainers.pro/#/">BioContainers</a> for resolving tool dependencies.</p>
+<h2 id="setting-the-admin-user-and-changing-the-brand">Setting the admin user and changing the brand</h2>
+<p>The chart is designed to follow standard Kubernetes and Helm idioms, and therefore,
+it should be intuitively similar to the steps required to change configuration in
+any other Helm chart. For example, ingress paths, resource allocations, container
+images etc. can be changed following standard helm conventions. The list of
+available configuration options are also documented in the Galaxy Helm
+<em><a href="https://github.com/galaxyproject/galaxy-helm/tree/master?tab=readme-ov-file#configuration">Chart repository</a></em></p>
+
+<p>To change Galaxy specific configuration, such as setting the admin user or change the brand in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>,
+we can follow the following steps. Once done, we will also rollback our change to demonstrate how Helm manages
+configuration.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-deploying-the-cvmfs-enabled-configuration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Deploying the CVMFS-enabled Configuration</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-admin-user-and-changing-the-brand"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setting admin user and changing the brand</div>
 
   <ol>
     <li>
-      <p>If you are following this tutorial sequentially and have a release of
-Galaxy already running, let’s delete it (assuming that’s fine and you have
-no data to keep). More details about the deletion process are available in
-the <a href="#deleting-a-deployed-helm-release">Deleting a Deployment section</a>. If
-you’re just playing around, run <code class="language-plaintext highlighter-rouge">helm delete --purge galaxy</code>.</p>
-    </li>
-    <li>
-      <p>The CVMFS variant of the Galaxy chart has an additional dependency on the
-<a href="https://github.com/CloudVE/galaxy-cvmfs-csi-chart">Galaxy CVMFS chart</a>.
-We’ll deploy this chart into its own <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">Namespace</a> to keep its resources
-nicely grouped. We’ll also fetch the chart from a packaged chart
-repository instead of its GitHub repo.</p>
+      <p>Modify the following entries in your <code class="language-plaintext highlighter-rouge">mygalaxy.yml</code>. Make sure to add these
+keys under the <code class="language-plaintext highlighter-rouge">configs:</code> section of the file.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create namespace cvmfs
-helm repo add galaxy https://raw.githubusercontent.com/CloudVE/helm-charts/master/
-helm repo update
-helm <span class="nb">install</span> <span class="nt">--name</span> cvmfs <span class="nt">--namespace</span> cvmfs galaxy/galaxy-cvmfs-csi
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>configs:
+  galaxy.yml:
+    galaxy:
+      brand: "Hello World"
+      admin_users: "admin@mydomain.com"
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We can now install the CVMFS-enabled set of values.</p>
+      <p>Now, let’s upgrade the chart to apply the new configuration.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install</span> <span class="nt">--name</span> galaxy galaxy/galaxy
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">-f</span> mygalaxy.yml mygalaxy galaxyproject/galaxy
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Again, it will take a few minutes for Galaxy to start up. This time most of
-the waiting is due to the tool definition files to be cached on CVMFS and
-loaded into the tool panel. We can check the status of the deployment by
-running <code class="language-plaintext highlighter-rouge">helm status galaxy</code>. We can also watch the boot process by tailing
-the logs of the relevant container with a command similar to
-<code class="language-plaintext highlighter-rouge">kubectl logs -f galaxy-web-7568c58b94-hjl9w</code> where the last argument is
-the name of the desired pod, as printed following the <code class="language-plaintext highlighter-rouge">helm install</code>
-command. Once the boot process has completed, we can access Galaxy at
-<code class="language-plaintext highlighter-rouge">/galaxy/</code> URI (note the trailing <code class="language-plaintext highlighter-rouge">/</code>; it’s significant).</p>
+      <p>Inspect the currently set Helm values by:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm get values mygalaxy
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>List the installed Helm charts again and note that the revision of the chart has changed as expected.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm list
+NAME  	  REVISION	UPDATED                 	STATUS  	CHART                 	APP VERSION	NAMESPACE
+mygalaxy	2       	Wed Jun 26 14:51:17 2023	DEPLOYED	galaxy-5.14.2          	v24.0.2    	default
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Revisit the Galaxy Application in your browser to check whether the settings have changed. This will
+take a short while (&lt; 1 minute) for the new container to come up. You should experience no downtime.</p>
+    </li>
+    <li>
+      <p>Let’s now roll back to the previous revision.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm rollback mygalaxy 1
+</code></pre></div>      </div>
+
+      <p>Use <code class="language-plaintext highlighter-rouge">helm get values</code> again to observe that the values have reverted to
+the previous revision. After a short while, once the new container is up
+and running, Kubernetes will automatically switch over to it and you can
+see that the previous configuration has been restored.</p>
     </li>
   </ol>
 
 </blockquote>
 
 <h2 id="deleting-a-deployed-helm-release">Deleting a Deployed Helm Release</h2>
-<p>After we’re done experimenting with an installation of the chart, we can just
-as easily delete all the resources as we’ve created them. However, that may
-not be desirable so make sure you understand the system you’re working on to
-avoid undesired surprises. Namely, deleting and recreating a Helm release is
-generally not a problem where the processes will just respawn and everything will go back to operational; however, underlying storage configuration may
-interfere here with all the application data being potentially lost. This
-predominantly depends on how the relevant storage class was configured.</p>
+<p>By default, the Helm chart is designed to install all required dependencies, so that it’s easy
+to get an instance up and running quickly for experimentation. However, in production, we
+recommend installing the dependency charts separately, once per cluster, by installing
+Galaxy with helm options
+<code class="language-plaintext highlighter-rouge">--set postgresql.deploy=false --set s3csi.deploy=false --set cvmfs.deploy=false --set rabbitmq.deploy=false</code>.</p>
+
+<p>This is particularly important during uninstallation, where orderly destruction of dependencies is often required
+For example, if the rabbitmq operator is uninstalled before the rest of the Galaxy helm chart is deleted, there will be
+no operator left to cleanup rabbitmq resources. Installing the aforementioned operators separately sidesteps this problem.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-deleting-a-deployed-helm-release"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Deleting a Deployed Helm Release</div>
 
-  <ol>
-    <li>
-      <p>Before we delete a deployment, let’s ensure we understand what will happen
-with the underlying storage used by Galaxy.</p>
-
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl get pv
-NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                   STORAGECLASS      REASON   AGE
-cvmfs-cache-pv                             1000Mi     RWX            Retain           Bound    cvmfs/cvmfs-cache-pvc                   manual                     31m
-pvc-55806281-96c6-11e9-8e96-0251cc6c62f4   1Gi        ROX            Delete           Bound    default/galaxy-cvmfs-gxy-data-pvc       cvmfs-gxy-data             28m
-pvc-5580c830-96c6-11e9-8e96-0251cc6c62f4   1Gi        ROX            Delete           Bound    default/galaxy-cvmfs-gxy-main-pvc       cvmfs-gxy-main             28m
-pvc-55814757-96c6-11e9-8e96-0251cc6c62f4   10Gi       RWX            Delete           Bound    default/galaxy-galaxy-pvc               nfs-provisioner            28m
-pvc-70d4cc48-96be-11e9-8e96-0251cc6c62f4   8Gi        RWO            Delete           Bound    default/data-galaxy-galaxy-postgres-0   nfs-provisioner            84m
-pvc-8cb27bc9-9679-11e9-8e96-0251cc6c62f4   100Gi      RWO            Delete           Bound    cloudman/data-nfs-provisioner-0         ebs-provisioner            9h
-</code></pre></div>      </div>
-
-      <p>As we can see in the command output, the storage resources associated with
-the current deployment have the reclaim policy set to <code class="language-plaintext highlighter-rouge">Delete</code>, which will
-happen once no resources are using the given resource. If what you see is
-the not the intended behavior, you can change the <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/">reclaim policy</a>.</p>
-    </li>
-    <li>
-      <p>Once we’re ok with the state of the resources and are ready to delete a
-a deployment, we can do so with the following commands:</p>
-
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm delete <span class="nt">--purge</span> galaxy
-helm delete <span class="nt">--purge</span> cvmfs
-</code></pre></div>      </div>
-    </li>
-  </ol>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   helm delete mygalaxy
+   helm delete mycvmfs <span class="c"># and any other operators</span>
+</code></pre></div>  </div>
 
 </blockquote>
 
@@ -1407,7 +1350,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0c1bb891b4f36a94b35693d3d538a47715910b31">0c1bb89</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6b78e7614bf15259cdcda5fa3619b946284dedc9">6b78e76</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
