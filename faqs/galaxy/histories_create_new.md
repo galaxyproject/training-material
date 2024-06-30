@@ -7,9 +7,8 @@ layout: faq
 contributors: [bebatut,wm75,shiltemann,hexylena,nomadscientist,nsoranzo,nekrut]
 ---
 
-Click the {% icon new-history %} icon at the top of the history panel:
+To create a new history simply click the {% icon new-history %} icon at the top of the history panel:
 
 ![UI for creating new history]({% link shared/images/history_create_new.svg %})
-
 
 <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing -->
