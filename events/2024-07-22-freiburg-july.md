@@ -12,9 +12,7 @@ date_start: 2024-07-22
 
 contributions:
   organisers:
-  - kkamieniecka
-  - hexhowells
-  - nomadscientist
+  - erxleben
 
 location:
   name: Online
