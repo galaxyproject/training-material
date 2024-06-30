@@ -28,8 +28,8 @@ location:
   geo:
     lat: 47.9960901
     lon: 7.8494005
-  name: University Freiburg    # can be e.g. "Online" for online events (and leave the rest empty)
-  address: Werthmannstrasse 4
+  name: University Freiburg
+  #address: Werthmannstrasse 4
   postcode: 79104
   city: Freiburg
   country: Germany
