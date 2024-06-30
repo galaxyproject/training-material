@@ -1,7 +1,7 @@
 ---
 layout: event
 
-title: Workshop on high-throughput sequencing data analysis with Galaxy
+title: "Workshop on high-throughput sequencing data analysis with Galaxy"
 
 
 # external: "https://galaxyproject.org/events/2024-07-22-galaxy-workshop-freiburg/"
@@ -12,22 +12,17 @@ description: |
 date_start: 2024-07-22
 date_end: 2024-07-26 
 
-cost: free 
-audience: Scientist with no or little Galaxy experience who want to analyse sequencing data.
-contact_email: erxleben@informatik.uni-freiburg.de
-async: false 
-mode: In-person
+# cost: free 
+# audience: Scientist with no or little Galaxy experience who want to analyse sequencing data.
+# contact_email: erxleben@informatik.uni-freiburg.de
+# async: false 
+# mode: In-person
 
 
 contributions:
-  organisers:
-  - erxleben
-  instructors:
-  - erxleben
-  - teresa-m
-  funding:
-  - eurosciencegateway 
-  - deNBI
+  organisers: [erxleben]
+  instructors: [erxleben, teresa-m]
+  funding: [eurosciencegateway, deNBI]
 
 location:
   geo:
