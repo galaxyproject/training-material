@@ -12,7 +12,7 @@ objectives:
   - "Explain the purpose of Special Interest Groups"
   - "Learn how Special Interest Groups interact with the Galaxy governance"
   - "Determine whether you need a Galaxy Special Interest Group"
-time_estimation: "30m"
+time_estimation: "15m"
 key_points:
   - "Special Interest Groups are groups of like-minded Galaxy enthusiasts that enable global collaboration"
   - "There are many existing Special Interest Groups within Galaxy that welcome new members"
@@ -70,6 +70,7 @@ HELP PLEASE: iframe so they can visualise, ideally scroll, and also link out to:
   * website infrastructure and a place on the Galaxy hub to present the Community
   * presentation slot at the annual GCC conference
   * Chat channel/room
+* Set up to gather input from members
 * Represented in the [Galaxy Community Board](https://galaxyproject.org/community/governance/gcb/) which articulates needs to the Galaxy community to influence the next innovations (known to software developers as a Roadmap process: the selection of priorities for the coming years)
 
 # Purpose of a SIG
