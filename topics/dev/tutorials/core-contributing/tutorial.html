@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7d1472474b30864ffe7a947314519531d118575",
+		release: "galaxy-training-network@82efbbc65725a8423c2127bc053dc992c009d8d1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Contributing a New Feature to Galaxy Core">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2024-06-29 13:47:38 +0000">
 <meta name="DC.creator" content="John Chilton">
 <meta name="DC.creator" content="John Davis"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -208,7 +208,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2024-06-29 13:47:38 +0000",
   "datePublished": "2021-06-08 09:41:28 +0000",
   "identifier": "https://gxy.io/GTN:T00113",
   "accessMode": [
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Contributing a New Feature to Galaxy Core",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html",
-  "version": 28,
+  "version": 29,
   "timeRequired": "PT3H",
   "teaches": "Learn to develop extensions to the Galaxy data model\n - Learn to implement new API functionality within Galaxy\n - Learn to extend the Galaxy user interface with VueJS components",
   "keywords": [
@@ -861,7 +861,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 8, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 29, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -879,7 +879,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 28 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 29 </div>
 
     </blockquote>
     </section>
@@ -996,20 +996,12 @@ a clean clone and have not started Galaxy (starting Galaxy will initialize the d
 Initializing the database is necessary because you will be making changes to the database
 schema, which cannot be applied to a database that has not been initialized.</p>
 
-      <p>To initialize the database, you can either start Galaxy (might take some time when executing
+      <p>To initialize the database, you can start Galaxy by executing the following script (might take some time when executing
 for the first time):</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh run.sh
-</code></pre></div>        </div>
-      </blockquote>
-
-      <p>or you may run the following script (faster):</p>
-
-      <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh create_db.sh
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1143,7 +1135,7 @@ for the first time):</p>
 
 <p>For this tutorial, you’ll need to do the following:</p>
 <ol>
-  <li>Create a revision template</li>
+  <li>Create a revision template.</li>
   <li>Edit the revision template, filling in the body of the upgrade and downgrade functions.</li>
   <li>Run the migration.</li>
 </ol>
@@ -1358,7 +1350,7 @@ for the current user.</p>
 <p>Verify this test fails when running stand-alone.</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 </code></pre></div>  </div>
 </blockquote>
@@ -1502,7 +1494,7 @@ implement <code class="language-plaintext highlighter-rouge">get_favorite_extens
 with <code class="language-plaintext highlighter-rouge">add_favorite_extension</code> before finishing with <code class="language-plaintext highlighter-rouge">delete_favorite_extension</code>.</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 </code></pre></div>  </div>
 </blockquote>
@@ -2077,7 +2069,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7d1472474b30864ffe7a947314519531d118575">b7d1472</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/82efbbc65725a8423c2127bc053dc992c009d8d1">82efbbc</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
