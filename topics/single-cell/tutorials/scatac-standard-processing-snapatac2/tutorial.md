@@ -20,9 +20,9 @@ objectives:
 - Identify marker genes for the clusters and annotate clusters
 time_estimation: 2H
 key_points:
-- Single-cell ATAC-seq can identify open chromatin-sites
+- Single-cell ATAC-seq can identify open chromatin sites
 - Dimension reduction is required to simplify the data while preserving important information about the relationships of cells to each other.   
-- Clusters of similar cells can be annotated to different cell-types
+- Clusters of similar cells can be annotated to their respective cell-types
 requirements:
   -
     type: "internal"
@@ -447,8 +447,8 @@ Doublets are removed by calling a customized [**scrublet**](https://github.com/A
 > - Doublets can confound the results by appearing as "new" clusters or artifactual intermediary cell states. 
 >    - These problematic doublets are called **neotypic** doublets, since they appear as "new" cell types. 
 > - **Scrublet** (Single-cell Remover of Doublets) is an algorithm which can detect neotypic doublets that produce false results. 
->    - The algorithm produces simulated doublets by combining random pairs of observed cell features. 
->    - The observed features are then compared to the simulated doublets and scored on their doublet probability. 
+>    - The algorithm first simulates doublets by combining random pairs of observed cell features. 
+>    - The observed features of the "cells" are then compared to the simulated doublets and scored on their doublet probability. 
 >    - SnapATAC2's *pp.filter_doublets* then removes all cells with a doublet probability >50%. 
 >
 > ![Doublet removal with scrublet]({% link topics/single-cell/images/scatac-standard-snapatac2/doublets-and-scrublet.png %} "Scrublet simulates expected doublets and produces doublet scores for each cell.")
@@ -495,17 +495,18 @@ Doublets are removed by calling a customized [**scrublet**](https://github.com/A
 
 # Dimension reduction
 
-Dimension reduction (also known as embedding) is a very important step during the analysis of single cell data. During this, the complex multi-dimensional data is projected into lower-dimensional space, while retaining as much information as possible. Dimension reduction enables quicker downstream analysis since the data is more simplified and thus the memory usage is reduced. 
+Dimension reduction is a very important step during the analysis of single cell data. During this, the complex multi-dimensional data is projected into lower-dimensional space, while the lower-dimensional embedding of the complex data retains as much information as possible. Dimension reduction enables batch correction, data visualization and quicker downstream analysis since the data is more simplified and the memory usage is reduced ({% cite Zhang2024%}).
+
 
 > <details-title>Dimension reduction with SnapATAC2</details-title>
 >
 > - Dimension reduction algorithms can be either linear or non-linear. 
-> - Linear methods are computationally efficient and well scalable. 
+> - Linear methods are generally computationally efficient and well scalable. 
 >   A popular linear dimension reduction algorithm is: 
 >     - **PCA** (Principle Component Analysis), implemented in **Scanpy** (please check out our [Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial for an explanation). 
 > - Nonlinear methods however are well suited for multimodal and complex datasets. 
 >     - As such, they are implemented in many algorithms to visualize the data in 2 dimensions (f.ex. **UMAP** embedding).
-> - The nonlinear dimension reduction algorithm, through *spectral embedding*, used in SnapATAC2 is currently the fastest and most memory efficient non-linear algorithm available ({% cite Zhang2024%}). 
+> - The nonlinear dimension reduction algorithm, through *spectral embedding*, used in **SnapATAC2** is a very fast and memory efficient non-linear algorithm ({% cite Zhang2024%}). 
 >     - **Spectral embedding** utilizes an iterative algorithm to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of a matrix without computing the matrix itself. 
 {: .details}
 
@@ -544,7 +545,7 @@ The dimension reduction, produced by the algorithm *tl.spectral*, is required fo
 >
 {: .hands_on}
 ## UMAP embedding
-With the already reduced dimensionality of the data stored in `X_spectral`, the cells can be further embedded (i.e. transformed into lower dimensions) with {UMAP}. UMAP projects the cells and their relationship to each other into 2-dimensional space, which can be easily visualized. 
+With the already reduced dimensionality of the data stored in `X_spectral`, the cells can be further embedded (i.e. transformed into lower dimensions) with {UMAP}. **UMAP** projects the cells and their relationship to each other into 2-dimensional space, which can be easily visualized ({% cite McInnes2018%}). 
 
 > <hands-on-title> UMAP embedding </hands-on-title>
 >
@@ -557,7 +558,7 @@ With the already reduced dimensionality of the data stored in `X_spectral`, the 
 {: .hands_on}
 
 # Clustering
-During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* algorithm. This method takes the k-nearest neighbor (KNN) graph as input data and produces well-connected communities. 
+During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* algorithm ({% cite Traag2019%}). This method takes the k-nearest neighbor (KNN) graph as input data and produces well-connected communities. 
  
 
 ## Community clustering
@@ -654,7 +655,7 @@ Since our data currently doesn't contain gene information, we have to create a c
 >    >
 >    > - Please note that *pp.make_gene_matrix* removes all annotations except those stored in `obs`. 
 >    > - Therefore it might be necessary to remove propagating tags {% icon galaxy-tags %} (tags starting with `#`) from `Anndata 5k PBMC gene_matrix`. 
->    >    - Tags can be removed by expanding the dataset with a tag and clicking the `x` next to the tag.
+>    >    - Tags can be removed by expanding the dataset with a tag and clicking {% icon galaxy-cross %} next to the tag.
 >    {: .tip}
 >
 > 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
@@ -690,7 +691,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 > - Confounding issues, such as "dropout" effects, where some mRNA or DNA-segments are not detected although they are present in the cell, also result in some cells missing important cell-type defining features. 
 >    - These problems can obscure the data, as only the strongest gene-gene relationships are still detectable. 
 > - The *Markov Affinity-based Graph Imputation of Cells* (MAGIC) algorithm ({%cite vanDijk2018%}) tries to solve these issues by filling in missing data from some cells with transcript information from similar cells. 
->    - The algorithm calculates the likely gene expression of a single cell based on similar cells, and fills in the missing data to produce the expected expression. 
+>    - The algorithm calculates the likely gene expression of a single cell, based on similar cells and fills in the missing data to produce the expected expression. 
 >      - *MAGIC* achieves this by building a graph from the data and using data diffusion to smooth out the noise. 
 >
 > ![Imputation with the MAGIC algorithm]({% link topics/single-cell/images/scatac-standard-snapatac2/magic_method.png %} "MAGIC restores noisy and sparse single-cell data using diffusion geometry")
@@ -910,12 +911,12 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    11 Bcells
 >    12 Dendritic_cells
 >    ```
->    {% snippet faqs/galaxy/datasets_create_new_file.md format="csv" name="replace_file" convertspaces%}
+>    {% snippet faqs/galaxy/datasets_create_new_file.md name='replace_file' format='tabular' convertspaces='True' %}
 > 
 >    > <details-title>Replace file</details-title>
 >    >
 >    > - The first column of the replace file contains the "old" annotations and the second column contains the "new" annotation. 
->    > - {% icon warning %} Spaces between entries can lead to errors. Please use underscores (`_`) instead. 
+>    > - {% icon warning %} Spaces in the new annotations can lead to errors. Please use underscores (`_`) instead. 
 >    >
 >    {: .details}
 > 6. {% tool [Replace column](toolshed.g2.bx.psu.edu/repos/bgruening/replace_column_by_key_value_file/replace_column_with_key_value_file/0.2) %} with the following parameters:
