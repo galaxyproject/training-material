@@ -43,6 +43,33 @@ Galaxy also offers useful workflows, such as [DADA2 (Multiplexed reads to phylos
 for creating _phyloseq_ tables. The Galaxy Training Network provides nice tutorials on this topic, such as
 [Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html).
 
+> <tip-title>Upload .biom file create a phyloseq file</tip-title>
+>
+> * use your own biom dataset or find one online
+> * we used [Gut Microbiome and Metabolome Modulation by Maternal High-Fat Diet and Thermogenic Challenge](https://zenodo.org/records/7020318)
+>
+> > <details-title> How it should look like </details-title>
+> >
+> > Make sure to select "biom2" instead of "Auto-detect".
+> >
+> > ![Select biom](./images/upload_biom.png "Make sure to select "biom2" like shown on the picture")
+> >
+> {: .details}
+>
+> * you can create a phylosec object using this tool: 
+> *   [Create phyloseq object from a BIOM file](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fphyloseq_from_biom%2Fphyloseq_from_biom%2F1.46.0%2Bgalaxy0&version=latest)
+> * biom or phyloseq files can be used for all of the visualisation methods presented in this tutorial 
+>
+> > <details-title> Forgot how to upload data? </details-title>
+> >
+> > If you forgot how to upload data to Galaxy, here is a nice tutorial:
+> >
+> > [Data Manipulation Olympics](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html#upload-data)
+> >
+> {: .details}
+>
+{: .tip}
+
 _to_do_
 
 If you already have amplicon data and your OTU table created, you are ready to visualise it. You can start with this tutorial
@@ -185,14 +212,6 @@ We have pre-selected the "step size", "colour curves by" and set __"free__ __sca
 > <comment-title></comment-title>
 > - first you need to upload the freshly generated dataset to Galaxy
 > - the steps from heatmap hands-on box (next section) might be helpful
->
-> > <details-title> forgot how to upload data? </details-title>
-> >
-> > If you forgot how to upload data to Galaxy, here is a nice tutorial:
-> >
-> > [Data Manipulation Olympics](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html#upload-data)
-> >
-> {: .details}
 >
 {: .comment}
 
