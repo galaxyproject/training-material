@@ -9,6 +9,7 @@ module Gtn
     CATEGORY_NEWS = 'N'
     CATEGORY_PATHWAYS = 'P'
     CATEGORY_EVENTS = 'E'
+    CATEGORY_WORKFLOW = 'W'
 
     def self.mapped?(tutorial, current_mapping)
       current_mapping['id'].values.include? tutorial
@@ -125,6 +126,22 @@ module Gtn
           short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_EVENTS }.length.to_s.rjust(5, '0')
           short_code = CATEGORY_EVENTS + short_code_number
           puts "Discovered event #{short_code}"
+          # If the target of this flavour of short code isn't already in here, then add it
+          current_mapping['id'][short_code] = html_path
+        end
+      end
+
+      # Discover workflows
+      workflows = Dir.glob('topics/**/workflows/*.ga')
+
+      workflows.each do |workflow|
+        html_path = "/#{workflow.gsub(/ga$/, 'html')}"
+        # If it's not already mapped by a key, add it.
+        if !mapped?(html_path, current_mapping)
+          # Generate a short code
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_WORKFLOW }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_WORKFLOW + short_code_number
+          puts "Discovered workflow #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
         end

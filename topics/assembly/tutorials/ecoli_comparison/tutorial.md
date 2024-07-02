@@ -171,7 +171,7 @@ This can be done as a two step process where we first copy the end part of the e
 > 2. Switch to the `Rule-based` tab on the right
 >
 >    > <tip-title>Using the Rule-based Uploader</tip-title>
->    > There is a detailed tutorial on using the [Rule based Uploader](../../../galaxy-data-manipulation/tutorials/upload-rules/tutorial.html) if you want to learn about the more advanced features available.
+>    > There is a detailed tutorial on using the [Rule based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}) if you want to learn about the more advanced features available.
 >    {: .tip}
 >
 >    - *"Upload data as"*: `Collection(s)`

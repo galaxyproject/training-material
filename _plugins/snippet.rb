@@ -80,7 +80,7 @@ module Jekyll
               box_end = "\n{: .#{box_type}}"
             end
           end
-          y = x.gsub(/\A---(.|\n)*?---/, '')
+          y = x.split("\n---\n", 2).last
           # if y =~ /contribute/
           # puts "=== step 1   ===\n#{y}\n\n"
           # end

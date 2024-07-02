@@ -17,6 +17,20 @@ contributors:
   - shiltemann
   - hexylena
   - gallardoalba
+
+recordings:
+- captioners:
+  - beatrizserrano
+  - hexylena
+  - shiltemann
+  - khanteymoori
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 50M
+  youtube_id: tbqeUP67w-Y
+  speakers:
+  - hexylena
+
 ---
 
 

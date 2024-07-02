@@ -5,6 +5,17 @@ area: datasets
 box_type: tip
 layout: faq
 contributors: [bebatut,shiltemann,wm75,hexylena,simonbray]
+optional_parameters:
+  name: The name of the dataset
+  format: The format of the dataset
+  genome: The genome of the dataset
+  convertspaces: Ask the user to convert spaces to tabs in the settings
+examples:
+  Creating a new file: {}
+  Creating a specific file:
+    name: "SARS-CoV-2 feature mapping"
+    format: "tabular"
+    convertspaces: "true"
 ---
 
 * Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel

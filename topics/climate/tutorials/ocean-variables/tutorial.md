@@ -194,14 +194,14 @@ the "Project" Menu tab.
 > <hands-on-title>Save your subset view</hands-on-title>
 > 1. On the top left of your screen, you can see a red save button. Right-click on it.
 > 2. In the pop-up screen go to the folder **ODV**, **galaxy**, **outputs**.
-> 3. In **File name** rename your view (for example subset_Eutrophication_Med_profiles_2022), and **Save**.
+> 3. In **File name** rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44), and **Save**.
 {: .hands_on}
 </div>
 <div class="png" markdown="1">
 > <hands-on-title>Save your subset map</hands-on-title>
 > 1. Click right on the map and select **Save Plot As...**
 > 2. In the pop-up screen go to the folder **ODV**, **galaxy**, **outputs**.
-> 3. In **File name** rename your view (for example subset_Eutrophication_Med_profiles_2022_1)
+> 3. In **File name** rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44)
 > 4. In **Files of type** select `PNG (*.png *.PNG)` and **Save** then **OK** and **OK**.
 {: .hands_on}
 </div>

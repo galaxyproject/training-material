@@ -18,6 +18,13 @@ contributors:
 subtopic: manage
 ---
 
+Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
+
+In this tutorial we assume the following:
+
+- you already have basic understanding of how Galaxy works
+- you have an account in Galaxy
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
@@ -26,17 +33,6 @@ subtopic: manage
 > {:toc}
 >
 {: .agenda}
-
-# Processing many samples at once
-
-Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
-
-#### In this tutorial we assume the following:
-
-- you already have basic understanding of how Galaxy works
-- you have an account in Galaxy
-
-{% icon warning %} *At this time this tutorial is using Galaxy's test server at https://test.galaxyproject.org. Once the main site is updated this tutorial will be edited.*
 
 # Getting data
 [In this history](https://test.galaxyproject.org/u/anton/h/collections-1) are a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):

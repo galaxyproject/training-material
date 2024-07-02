@@ -38,6 +38,18 @@ follow_up_training:
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
+
+recordings:
+- captioners:
+  - mtekman
+  - nomadscientist
+  date: '2021-03-08'
+  galaxy_version: '21.09'
+  length: 20M
+  youtube_id: nfAUXP3W-jM
+  speakers:
+  - nomadscientist
+
 ---
 
 

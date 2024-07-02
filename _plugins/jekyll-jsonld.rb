@@ -527,7 +527,7 @@ module Jekyll
         '@context': 'https://schema.org',
         '@type': 'Course',
         url: "#{site['url']}#{site['baseurl']}#{page['url']}",
-        name: "Learning Pathway " + page['title'],
+        name: "Learning Pathway #{page['title']}",
         keywords: page['tags'] || [],
         description: page['description'],
         about: edam_terms, # TeSS, "scientific topics".
@@ -595,7 +595,7 @@ module Jekyll
       data['hasCourseInstance'] = [
         {
           '@type': 'CourseInstance',
-          courseMode: "online",
+          courseMode: 'online',
           offers: offer,
           isAccessibleForFree: data['isAccessibleForFree'],
         }
@@ -628,8 +628,9 @@ module Jekyll
     # +Hash+:: The JSON-LD metadata.
     def generate_material_jsonld(material, topic, site)
       langCodeMap = {
-        en: 'English',
-        es: 'Español',
+        "en" => 'English',
+        "es" => 'Español',
+        "fr" => 'Français',
       }
 
       eduLevel = {
@@ -830,6 +831,10 @@ module Jekyll
                         })
         end
       end
+
+      if description.empty?
+        description.push(material.fetch('content', '').strip.split("\n").first)
+      end
       data['description'] = description.join("\n")
 
       data['inLanguage'] = if material.key?('lang')
@@ -964,9 +969,9 @@ module Jekyll
 
       data['about'] = about
 
-      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
-      data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x } }
-      data['abstract'] = material.fetch('content', '').split("\n").first
+      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Beginner'
+      data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x, url: "#{site['url']}#{site['baseurl']}/tags/#{x}/" } }
+      data['abstract'] = material.fetch('content', '').strip.split("\n").first
 
       data
     end

@@ -7,6 +7,17 @@ priority: 4
 zenodo_link: "https://zenodo.org/record/7075718"
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
+
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/inferring-trajectories-using-scanpy---example-history
+    date: 2023-12-14
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input
+
+
 objectives:
 - Execute multiple plotting methods designed to identify lineage relationships between cells
 - Interpret these plots
@@ -24,6 +35,7 @@ requirements:
         - scrna-case_basic-pipeline
 tags:
 - 10x
+- paper-replication
 
 contributions:
   authorship:
