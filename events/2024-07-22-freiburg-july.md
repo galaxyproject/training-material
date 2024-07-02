@@ -35,4 +35,16 @@ location:
   country: Germany
 
 
+# Program of your course
+# Add GTN tutorials by supplying the topic and tutorial name
+# For non-GTN sessions, add a "type:custom" session and description
+program:
+  - section: "Monday: Introduction"  # section title is optional
+    description: |
+      Welcome - Galaxy introduction - Quality control - from 9:15am to 4pm
+
+  - section: "Tuesday: ChIP-Sequencing"
+    description: |
+      ChIP-Sequencing - from 9:15am to 5pm
+
 ---
