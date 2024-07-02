@@ -496,7 +496,6 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 
 		   <p>
 		   {% assign feedback_histo = site | get_rating_histogram_chart:own_material_id %}
-
 		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
 		   {% for hist in feedback_histo %}
 			<tr>
@@ -507,6 +506,8 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 		   </table>
 		   </p>
 		{% assign feedbacks = site | get_recent_feedbacks:own_material_id %}
+        {% comment %} Uncomment to debug feedback size: <p>Feedbacks Count: {{ feedbacks.size }}</p> {% endcomment %}
+        {% if feedbacks.size > 0 %}
 		    {% for feedback in feedbacks %}
 		    <b>{{ feedback[0] }}</b>
 		    <ul>
@@ -519,6 +520,9 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
 				{% endfor %}
 		    </ul>
 		    {% endfor %}
+        {% else %}
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        {% endif %}
 		</blockquote>
 
 		
