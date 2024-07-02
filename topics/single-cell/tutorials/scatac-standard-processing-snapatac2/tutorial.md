@@ -505,6 +505,8 @@ Dimension reduction is a very important step during the analysis of single cell 
 >   A popular linear dimension reduction algorithm is: 
 >     - **PCA** (Principle Component Analysis), implemented in **Scanpy** (please check out our [Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial for an explanation). 
 > - Nonlinear methods however are well suited for multimodal and complex datasets. 
+>     - in contrast to linear methods, which often preserve global structures, non-linear methods have a locality-preserving character. 
+>     - This makes non-linear methods relatively insensitive to outliers and noise, while emphasizing natural clusters in the data ({% cite Belkin2003%})
 >     - As such, they are implemented in many algorithms to visualize the data in 2 dimensions (f.ex. **UMAP** embedding).
 > - The nonlinear dimension reduction algorithm, through *spectral embedding*, used in **SnapATAC2** is a very fast and memory efficient non-linear algorithm ({% cite Zhang2024%}). 
 >     - **Spectral embedding** utilizes an iterative algorithm to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of a matrix without computing the matrix itself. 
@@ -519,6 +521,11 @@ The dimension reduction, produced by the algorithm *tl.spectral*, is required fo
 >    - *"Dimension reduction and Clustering"*: `Perform dimension reduction using Laplacian Eigenmap, using 'tl.spectral'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC filter_doublets` (output of **pp.filter_doublets** {% icon tool %})
 >        - *"Distance metric"*: `cosine` 
+>
+>    > <comment-title> Distance metric </comment-title>
+>    >
+>    > - The fast and well scalable *matrix-free spectral embedding* algorithm depends on the distance metric: `cosine`
+>    {: .comment}
 >
 > 2. Rename the generated file to `Anndata 5k PBMC spectral` or add the tag {% icon galaxy-tags %} `spectral` to the dataset
 > 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
@@ -961,7 +968,7 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 
 
 # Conclusion
-{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/timonschlegel/h/test-of-5k-pbmc-tutorial-workflow), or check out the [full workflow](https://singlecell.usegalaxy.eu/u/timonschlegel/w/2combined-snapatac2) for this tutorial.
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://usegalaxy.eu/u/timonschlegel/w/workflow---standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2), or check out the [full workflow](https://singlecell.usegalaxy.eu/u/timonschlegel/w/2combined-snapatac2) for this tutorial.
 
 In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnData` format and performed: 
 1. Preprocessing: 
