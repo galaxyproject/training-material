@@ -404,6 +404,13 @@ After creating the variables, the most accessible features are selected.
 >    >
 >    > - Including more features improves resolution and can reveal finer details, but it may also introduce noise. 
 >    >    - To optimize results, experiment with the `n_features` parameter to find the most appropriate value for your dataset. 
+>    >
+>    >  > <details-title> Different number of features </details-title>
+>    >  > - To demonstrate the differences when selecting features, the following UMAP plots are the outputs from processing with a number of features between 1,000 and 500,000. 
+>    >  > - Fewer features result in fewer, but larger clusters. And selecting a lot of features will output more granular clusters and the compute time will increase. 
+>    >  > ![Different number of features UMAP]({% link topics/single-cell/images/scatac-standard-snapatac2/number_features.png %}"UMAP plots with different selected features")
+>    >  >
+>    >  {: .details}
 >    > - At this step you can provide a blacklist or whitelist to specifically select relevant features. 
 >    >    - For example the [**ENCODE Blacklist**](https://github.com/Boyle-Lab/Blacklist) ({% cite Amemiya2019 %}) can be applied here.  
 >    {: .comment}
@@ -511,6 +518,8 @@ Dimension reduction is a very important step during the analysis of single cell 
 >     - As such, they are implemented in many algorithms to visualize the data in 2 dimensions (f.ex. **UMAP** embedding).
 > - The nonlinear dimension reduction algorithm, through *matrix-free spectral embedding*, used in **SnapATAC2** is a very fast and memory efficient non-linear algorithm ({% cite Zhang2024%}). 
 >     - **Spectral embedding** utilizes an iterative algorithm to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of a matrix without computing the matrix itself. 
+> - For a simple introduction into *spectral embedding* and how it compares to *PCA*, please check out the blog post ["On Laplacian Eigenmaps for Dimensionality Reduction"](https://juanitorduz.github.io/laplacian_eigenmaps_dim_red/) by Juan Orduz. 
+>
 {: .details}
 
 ## Spectral embedding
@@ -702,7 +711,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >    - The algorithm calculates the likely gene expression of a single cell, based on similar cells and fills in the missing data to produce the expected expression. 
 >      - *MAGIC* achieves this by building a graph from the data and using data diffusion to smooth out the noise. 
 >
-> ![Imputation with the MAGIC algorithm]({% link topics/single-cell/images/scatac-standard-snapatac2/magic_method.png %} "MAGIC restores noisy and sparse single-cell data using diffusion geometry")
+> ![Imputation with the MAGIC algorithm]({% link topics/single-cell/images/scatac-standard-snapatac2/magic_method.png %} "MAGIC restores noisy and sparse single-cell data using diffusion geometry ({%cite vanDijk2018%})")
 >
 {: .details}
 
