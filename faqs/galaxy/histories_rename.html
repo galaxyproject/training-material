@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3e2fb66bc75b6ed42bf33abd0c34b248324d9252",
+		release: "galaxy-training-network@b81bd55571065def5daf4cc81c712a15f4de29d1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,14 +70,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Renaming a history">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-02-01 11:11:40 +0000">
+<meta name="DC.date" content="2024-05-13 13:11:18 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Wolfgang Maier">
 <meta name="DC.creator" content="Saskia Hiltemann">
-<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="1. Click on {% icon galaxy-pencil %} (**Edit**) next to the history name (which by default is  Unnamed history ) 2. Type the new name{% if include.name %}: `{{ include.name }}`{% endif %} 3. Click on **Save**  If you do not have the {% icon galaxy-pencil %} (**Edit**) next to the history name:  1. Click on **Unnamed history** (or the current name of the history) (**Click to rename history**) at the top of your history panel 2. Type the new name{% if include.name %}: `{{ include.name }}`{% endif %} 3. Press Enter">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="Explains how to rename a history">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Renaming a history">
-        <meta property="og:description" content="1. Click on {% icon galaxy-pencil %} (**Edit**) next to the history name (which by default is  Unnamed history ) 2. Type the new name{% if include.name %}: `{{ include.name }}`{% endif %} 3. Click on **Save**  If you do not have the {% icon galaxy-pencil %} (**Edit**) next to the history name:  1. Click on **Unnamed history** (or the current name of the history) (**Click to rename history**) at the top of your history panel 2. Type the new name{% if include.name %}: `{{ include.name }}`{% endif %} 3. Press Enter">
+        <meta property="og:description" content="Explains how to rename a history">
         
 	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -234,14 +235,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     Bérénice Batut</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" />
     Wolfgang Maier</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
     Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
-    Helena Rasche</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    Helena Rasche</a><a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
+    Anton Nekrutenko</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
     <hr>
     
 
     <div class="container">
       <div class="row" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
         <div class="col-md-8" itemprop="text">
-           
+           Explains how to rename a history
 
 
            
@@ -250,9 +252,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>
   <li>Type the new name</li>
   <li>Click on <strong>Save</strong></li>
+  <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li>
 </ol>
 
-<p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>
+<p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>
 
 <ol>
   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
@@ -392,7 +395,7 @@ add a button, include configuration options:
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3e2fb66bc75b6ed42bf33abd0c34b248324d9252">3e2fb66</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b81bd55571065def5daf4cc81c712a15f4de29d1">b81bd55</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>

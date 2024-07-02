@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3e2fb66bc75b6ed42bf33abd0c34b248324d9252",
+		release: "galaxy-training-network@b81bd55571065def5daf4cc81c712a15f4de29d1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -316,7 +316,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
 		<div style="font-size: 400%"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
-		<div>details, galaxy-info </div>
+		<div>details, galaxy-info, dataset-info </div>
 	</div>
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
@@ -386,7 +386,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
 		<div style="font-size: 400%"><i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
-		<div>galaxy-chart-select-data </div>
+		<div>galaxy-chart-select-data, galaxy-history-size </div>
 	</div>
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
@@ -406,7 +406,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
 		<div style="font-size: 400%"><i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
-		<div>galaxy-dataset-map </div>
+		<div>galaxy-dataset-map, dataset-related-datasets </div>
 	</div>
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
@@ -435,8 +435,23 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</div>
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fa fa-compress" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>galaxy-dataset-collapse </div>
+	</div>
+
+	<div class="col-md-2 col-sm-3" style="text-align: center">
 		<div style="font-size: 400%"><i class="fas fa-archive" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
 		<div>galaxy-history-archive </div>
+	</div>
+
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fas fa-hard-drive" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>galaxy-history-storage-choice </div>
+	</div>
+
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fas fa-arrows-rotate" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>galaxy-history-refresh </div>
 	</div>
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
@@ -466,7 +481,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
 		<div style="font-size: 400%"><i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
-		<div>galaxy-link </div>
+		<div>galaxy-link, dataset-link </div>
 	</div>
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
@@ -587,6 +602,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<div class="col-md-2 col-sm-3" style="text-align: center">
 		<div style="font-size: 400%"><i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
 		<div>history-share, workflow </div>
+	</div>
+
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fas fa-check-square" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>history-select-multiple </div>
 	</div>
 
 	<div class="col-md-2 col-sm-3" style="text-align: center">
@@ -799,6 +819,31 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<div>version </div>
 	</div>
 
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fas fa-arrow-rotate-right" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>dataset-rerun </div>
+	</div>
+
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>dataset-visualize </div>
+	</div>
+
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fas fa-save" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>dataset-save </div>
+	</div>
+
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fas fa-question" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>dataset-question </div>
+	</div>
+
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%"><i class="fas fa-trash-can-arrow-up" aria-hidden="true"></i><span class="visually-hidden">icon[0][0]</span></div>
+		<div>dataset-undelete </div>
+	</div>
+
 </div>
 
         </div>
@@ -933,7 +978,7 @@ add a button, include configuration options:
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3e2fb66bc75b6ed42bf33abd0c34b248324d9252">3e2fb66</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b81bd55571065def5daf4cc81c712a15f4de29d1">b81bd55</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>

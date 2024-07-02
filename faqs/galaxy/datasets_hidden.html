@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>FAQ: How to unhide "hidden datasets"?</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>FAQ: How to hide datasets?</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3e2fb66bc75b6ed42bf33abd0c34b248324d9252",
+		release: "galaxy-training-network@b81bd55571065def5daf4cc81c712a15f4de29d1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,14 +68,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="How to unhide "hidden datasets"?">
+<meta name="DC.title" content="How to hide datasets?">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-09-28 11:56:59 +0000">
+<meta name="DC.date" content="2024-06-29 12:21:47 +0000">
 <meta name="DC.creator" content="Jennifer Hillman-Jackson">
-<meta name="DC.creator" content="Eshaan Deshmukh"><meta name="description" content="If you have run a workflow with hidden datasets, in your History: - Click the **gear icon** {% icon galaxy-gear %} → Click **Unhide Hidden Datasets** - Or use the toggle ``hidden`` to view them  When using the [Copy Datasets]({% link faqs/galaxy/histories_copy_dataset.md %}) feature, hidden datasets will not be available to transfer from the **Source History** list of datasets. To include them: 1. Click the **gear icon** {% icon galaxy-gear %} → Click **Unhide Hidden Datasets** 2. Click the **gear icon** {% icon galaxy-gear %} → Click **Copy Datasets**  ">
+<meta name="DC.creator" content="Eshaan Deshmukh">
+<meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="To hide datasets:  - Click {% icon history-select-multiple %} icon at the top of the history pane; - Select datasets you want to hide; - Click the dropdown that would appear at the top of the history; - Select ** Hide ** option.     ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="FAQ: How to unhide "hidden datasets"?">
-        <meta property="og:description" content="If you have run a workflow with hidden datasets, in your History: - Click the **gear icon** {% icon galaxy-gear %} → Click **Unhide Hidden Datasets** - Or use the toggle ``hidden`` to view them  When using the [Copy Datasets]({% link faqs/galaxy/histories_copy_dataset.md %}) feature, hidden datasets will not be available to transfer from the **Source History** list of datasets. To include them: 1. Click the **gear icon** {% icon galaxy-gear %} → Click **Unhide Hidden Datasets** 2. Click the **gear icon** {% icon galaxy-gear %} → Click **Copy Datasets**  ">
+	<meta property="og:title" content="FAQ: How to hide datasets?">
+        <meta property="og:description" content="To hide datasets:  - Click {% icon history-select-multiple %} icon at the top of the history pane; - Select datasets you want to hide; - Click the dropdown that would appear at the top of the history; - Select ** Hide ** option.     ">
         
 	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -225,12 +226,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     </ol>
   </nav>
-  <h1 itemprop="name">How to unhide "hidden datasets"?</h1>
+  <h1 itemprop="name">How to hide datasets?</h1>
 
     
     <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/jennaj/" class="contributor-badge contributor-jennaj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jennaj?s=36" alt="Jennifer Hillman-Jackson avatar" width="36" class="avatar" />
     Jennifer Hillman-Jackson</a><a href="/training-material/hall-of-fame/beachyesh/" class="contributor-badge contributor-beachyesh"><img src="https://avatars.githubusercontent.com/beachyesh?s=36" alt="Eshaan Deshmukh avatar" width="36" class="avatar" />
-    Eshaan Deshmukh</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    Eshaan Deshmukh</a><a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
+    Anton Nekrutenko</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
     <hr>
     
 
@@ -242,17 +244,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
            
 
-<p>If you have run a workflow with hidden datasets, in your History:</p>
+<p>To hide datasets:</p>
+
 <ul>
-  <li>Click the <strong>gear icon</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> → Click <strong>Unhide Hidden Datasets</strong></li>
-  <li>Or use the toggle <code class="language-plaintext highlighter-rouge">hidden</code> to view them</li>
+  <li>Click <i class="fas fa-check-square" aria-hidden="true"></i><span class="visually-hidden">history-select-multiple</span> icon at the top of the history pane;</li>
+  <li>Select datasets you want to hide;</li>
+  <li>Click the dropdown that would appear at the top of the history;</li>
+  <li>Select <strong>“Hide”</strong> option.</li>
 </ul>
 
-<p>When using the <a href="/training-material/faqs/galaxy/histories_copy_dataset.html">Copy Datasets</a> feature, hidden datasets will not be available to transfer from the <strong>Source History</strong> list of datasets. To include them:</p>
-<ol>
-  <li>Click the <strong>gear icon</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> → Click <strong>Unhide Hidden Datasets</strong></li>
-  <li>Click the <strong>gear icon</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> → Click <strong>Copy Datasets</strong></li>
-</ol>
+<p><img src="/training-material/shared/images/datasets_hide.gif" alt="An animated gif showing how to hide datasets" /></p>
 
         </div>
         <div class="col-md-4">
@@ -386,7 +387,7 @@ add a button, include configuration options:
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3e2fb66bc75b6ed42bf33abd0c34b248324d9252">3e2fb66</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b81bd55571065def5daf4cc81c712a15f4de29d1">b81bd55</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>
