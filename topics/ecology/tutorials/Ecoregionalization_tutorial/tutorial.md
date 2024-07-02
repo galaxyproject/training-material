@@ -171,7 +171,7 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 The first step of this tutorial is data formatting because the Ecoregionalisation workflow, as said before, needs specific data format to be run. The GBIF species occurrence file is not ready yet to 
 be included in the workflow so this part is used to format it.
 
-### Keep data columns that we need with **Advanced Cut**
+## Keep data columns that we need with **Advanced Cut**
 
 > <hands-on-title> Select the columns we need </hands-on-title>
 >
@@ -197,7 +197,7 @@ be included in the workflow so this part is used to format it.
 >
 {: .question}
 
-### Replace blank space with NAs with **Column Regex Find And Replace**
+## Replace blank space with NAs with **Column Regex Find And Replace**
 
 This step is used to add NAs to replace blank space in the file. We will do that for the four first columns and then remove lines with NA to have a complete dataset.
 
@@ -250,7 +250,7 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >
 {: .hands_on}
 
-### Remove lines with NAs with **Filter Tabular**
+## Remove lines with NAs with **Filter Tabular**
 
 > <hands-on-title> Remove lines with NAs </hands-on-title>
 >
@@ -330,7 +330,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >
 {: .hands_on}
 
-### Merge taxa columns with **Merge Columns**
+## Merge taxa columns with **Merge Columns**
 
 > <hands-on-title> Merge columns “phylum”, “class”, "order", "family", "genus" and "specificEpithet" </hands-on-title>
 >
@@ -351,7 +351,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >
 {: .hands_on}
 
-### Remove columns no longer needed with **Advanced Cut**
+## Remove columns no longer needed with **Advanced Cut**
 
 > <hands-on-title> Remove columns that we don't need anymore </hands-on-title>
 >
@@ -366,7 +366,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >
 {: .hands_on}
 
-### Obtain final data file with **Interactive JupyTool and notebook**
+## Obtain final data file with **Interactive JupyTool and notebook**
 
 > <hands-on-title> Pivot_wider with Jupytool </hands-on-title>
 >
