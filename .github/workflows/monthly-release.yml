@@ -68,6 +68,7 @@ jobs:
           sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^title: .*|title: 'GTN Archive ${SOURCE_TAG}'|g" _config.yml
+          curl -L https://github.com/hexylena/toolshed-version-database/raw/main/tool-meta.json > metadata/tool-meta.json
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | ruby bin/yaml2json.rb > api/swagger.json
