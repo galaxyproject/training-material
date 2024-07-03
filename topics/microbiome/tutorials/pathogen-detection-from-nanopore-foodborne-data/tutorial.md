@@ -908,7 +908,10 @@ In this training, we are testing _Salmonella enterica_, with different strains o
 > 2. Run **Workflow 4: Nanopore Allele-based Pathogen Identification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-files %} *"Collection of preprocessed samples"*: `collection of preprocessed samples` collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing workflow
->    - *"Samples Profile"*: `Nothing selected`, Samples profile is the technique used for sequencing the samples, it is an optional input, if you choose nothing, the tool will automatically detect it based on the input samples reads.
+>    - *"Samples Profile"*: `Nothing selected`
+>
+>       Samples profile is the technique used for sequencing the samples, it is an optional input, if you choose nothing, the tool will automatically detect it based on the input samples reads.
+>
 >    - {% icon param-file %} *"Reference Genome of Tested Strain"*: `Salmonella_Ref_genome.fna.gz`
 >
 {: .hands_on}
