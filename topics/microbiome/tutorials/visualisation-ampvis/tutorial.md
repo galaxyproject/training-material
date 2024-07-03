@@ -60,7 +60,7 @@ _taxonomy_table_ (in _tabular_ format), _fasta_file_ (in _fasta_ format)
 and _phylogenetic_tree_ (in _newick_ format), as well as various combinations thereof.
 
 
-> <tip-title>Upload .biom file create a phyloseq file</tip-title>
+> <tip-title>Upload .biom file; create a phyloseq file</tip-title>
 >
 > * use your own biom dataset or find one online
 > * we used [Gut Microbiome and Metabolome Modulation by Maternal High-Fat Diet and Thermogenic Challenge](https://zenodo.org/records/7020318)
