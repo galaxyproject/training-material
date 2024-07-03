@@ -77,7 +77,7 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 {% for material in topic_material_flat %}
 	{% for workflow in material['workflows'] %}
 		<tr>
-			<td><a href="{{ material.url }}">{{ material.title }}</a></td>
+			<td><a href="{{ site.baseurl }}{{ material.url }}">{{ material.title }}</a></td>
 			<td><a href="{{ workflow.url_html }}">{{ workflow.name }}</a></td>
 			<td>{% if workflow.tests %} ✅ {% else %} ❌ {% endif %}</td>
 			<td>{% if workflow.features.report %} ✅ {% else %} ❌ {% endif %}</td>
