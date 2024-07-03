@@ -31,17 +31,34 @@ Microbiome analysis using amplicon sequencing is central to many ecological stud
 The produced amplicon sequencing data are converted into OTU tables and represent the input 
 for the ampvis2 tool, where they can be visualised in various ways {% cite Andersen2018 %}.
 
-_to_do_
+If you already have amplicon data and your OTU table created, you are ready to visualise it. You can start with this tutorial
+using your own data or download the data we used, thus follow this tutorial step-by-step. 
 
 These OTU tables can be generated using various tools on Galaxy, such as 
 [Cluster](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0&version=latest), 
 [Hcluster](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_hcluster%2Fmothur_hcluster%2F1.36.1.0&version=latest), 
 or [qiime2 fragment-insertion classify-otus-experimental](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fq2d2%2Fqiime2__fragment_insertion__classify_otus_experimental%2Fqiime2__fragment_insertion__classify_otus_experimental%2F2024.5.0%2Bq2galaxy.2024.5.0&version=latest). 
 Alternatively, you can generate an ASV table using [dada2: makeSequenceTable](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdada2_makesequencetable%2Fdada2_makeSequenceTable%2F1.30.0%2Bgalaxy0&version=latest), 
-wwhich functions similarly to an OTU table and is also accepted in ampvis_load. 
+which functions similarly to an OTU table and is also accepted in ampvis_load. 
 Galaxy also offers useful workflows, such as [DADA2 (Multiplexed reads to phyloseq tables)](https://usegalaxy.org/published/workflow?id=5df593510c7d944d) 
 for creating _phyloseq_ tables. The Galaxy Training Network provides nice tutorials on this topic, such as
 [Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html).
+
+First of all you can put your data into a 
+rarefaction curve to explore species richness. Then you can input your
+data into subsets and finally create a heatmap, a boxplot, an ordination plot
+or even a timeseries plot. Most of these visualisation methods are described in 
+[Introduction to ampvis2](https://kasperskytte.github.io/ampvis2/articles/ampvis2.html#heatmap).
+![overview of visualisation methods](./images/overview.png 
+"Overview of posible visualisation methods (taken from: Introduction to ampvis2 by Kasper Skytte Andersen)")
+
+Your data need to be in an acceptable format for the ampvis_load tool. The tool 
+requires an OTU table and accepts the following formats: _phyloseq_, _biom_, 
+_dada2_sequencetable_ or _tabular_. The OTU table is the only mandatory input for 
+ampvis_load, but you can also input _sample_metadata_ (in _tabular_ or _tsv_ formats), 
+_taxonomy_table_ (in _tabular_ format), _fasta_file_ (in _fasta_ format)
+and _phylogenetic_tree_ (in _newick_ format), as well as various combinations thereof.
+
 
 > <tip-title>Upload .biom file create a phyloseq file</tip-title>
 >
@@ -70,24 +87,6 @@ for creating _phyloseq_ tables. The Galaxy Training Network provides nice tutori
 >
 {: .tip}
 
-_to_do_
-
-If you already have amplicon data and your OTU table created, you are ready to visualise it. You can start with this tutorial
-using your own data or download the data we used, thus follow this tutorial step-by-step. 
-
-First of all you can put your data into a 
-rarefaction curve to explore species richness. Then you can input your
-data into subsets and finally create a heatmap, a boxplot, an ordination plot
-or even a timeseries plot. Most of these visualisation methods are described in 
-[Introduction to ampvis2](https://kasperskytte.github.io/ampvis2/articles/ampvis2.html#heatmap).
-![overview of visualisation methods](./images/overview.png 
-"Overview of posible visualisation methods (taken from: Introduction to ampvis2 by Kasper Skytte Andersen)")
-Your data need to be in an acceptable format for the ampvis_load tool. The tool 
-requires an OTU table and accepts the following formats: _phyloseq_, _biom_, 
-_dada2_sequencetable_ or _tabular_. The OTU table is the only mandatory input for 
-ampvis_load, but you can also input _sample_metadata_ (in _tabular_ or _tsv_ formats), 
-_taxonomy_table_ (in _tabular_ format), _fasta_file_ (in _fasta_ format)
-and _phylogenetic_tree_ (in _newick_ format), as well as various combinations thereof.
 
 For this tutorial we chose to demonstrate all visualisation tools using a combination 
 of 3 inputs:
