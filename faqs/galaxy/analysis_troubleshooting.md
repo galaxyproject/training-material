@@ -33,8 +33,7 @@ When something goes wrong in Galaxy, there are a number of things you can do to 
 
 5. **Ask for help!**
    - Where?
-     {% if include.sc %}- In the [User community chatspace in Slack](http://gxy.io/gtn-slack) in our [#single-cell-users](https://gtnsmrgsbord.slack.com/archives/C06PBRR40D7) channel
-     ![](../../images/slack-logo.png "Slack logo")
+     {% if include.sc %}- In the [User community chatspace in Slack]({{site.slack.invite_link}}) in our [#single-cell-users]({{site.slack.single_cell_channel}}) channel
      {% endif %}- In the [GTN Matrix Channel](https://gitter.im/Galaxy-Training-Network/Lobby)
      - In the [Galaxy Matrix Channel](https://gitter.im/galaxyproject/Lobby)
      - Browse the [Galaxy Help Forum](https://help.galaxyproject.org/) to see if others have encountered the same problem before (or post your question).
