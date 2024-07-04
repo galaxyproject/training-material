@@ -42,7 +42,9 @@ anchors.options = {
  visible: 'hover',
  ariaLabel: 'Section'
 };
-anchors.add('h1, h2, h3, .box-title');
+if(document.URL.indexOf("slides.html") == -1){
+  anchors.add('h1, h2, h3, .box-title');
+}
 
 // make boxes collapsible
 //LEGACY
