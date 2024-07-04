@@ -937,6 +937,11 @@ Jekyll::Hooks.register :site, :post_read do |site|
 
   Jekyll.logger.info '[GTN] Annotating events'
   site.pages.select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }.each do |page|
+
+    unless page.data['date_start']
+      # if no date set, use a mock date to prevent build from failihng
+      page.data['date_start'] = Date.parse('2121-01-01')
+    end
     page.data['not_started'] = page.data['date_start'] > Date.today
     page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
 

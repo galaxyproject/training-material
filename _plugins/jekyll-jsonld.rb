@@ -281,18 +281,20 @@ module Jekyll
       end
 
       materials = []
-      page['program'].each do |section|
-        if !section.key? 'tutorials'
-          next
-        end
-
-        section['tutorials'].each do |tutorial|
-          if tutorial.key?('custom')
+      if page['program']
+        page['program'].each do |section|
+          if !section.key? 'tutorials'
             next
           end
 
-          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
-          materials.push(material)
+          section['tutorials'].each do |tutorial|
+            if tutorial.key?('custom')
+              next
+            end
+
+            material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+            materials.push(material)
+          end
         end
       end
       materials.compact!
@@ -322,12 +324,14 @@ module Jekyll
         end
       end
 
-      syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
-        {
-          '@type': 'Syllabus',
-          name: section['section'],
-          description: section.fetch('description', nil),
-        }
+      if page['program']
+        syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
+          {
+            '@type': 'Syllabus',
+            name: section['section'],
+            description: section.fetch('description', nil),
+          }
+        end
       end
 
       data = {
@@ -400,7 +404,7 @@ module Jekyll
 
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
-      if page['cost'].downcase == 'free'
+      if page['cost'] and page['cost'].downcase == 'free'
         data['isAccessibleForFree'] = true
         offer = {
           '@type': 'Offer',
@@ -409,7 +413,7 @@ module Jekyll
           category: 'Free',
           isAccessibleForFree: true,
         }
-      else
+      elsif page['cost']
         data['isAccessibleForFree'] = false
         offer = {
           '@type': 'Offer',
