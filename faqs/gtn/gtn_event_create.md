@@ -36,7 +36,7 @@ Already have a course webpage? Great! In this case, you only have to provide the
 
 The easiest method is to fill in our Google Form:
 
-<a href="https://forms.gle/4KjCKKrZ6kamg81o7"><button type="button" class="btn btn-success">Events Google Form!</button></a>
+[Events Google Form!](https://forms.gle/4KjCKKrZ6kamg81o7){: .btn.btn-success}
 
 Or you can create the event file manually. See also [2024-04-01-example-event-external.md](https://github.com/galaxyproject/training-material/blob/main/events/2024-04-01-example-event-external.md) for an example definition.
 
