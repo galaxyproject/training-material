@@ -54,11 +54,11 @@ data.each do |row|
     'contributions' => {
        'organisers' => row['Organizers already in the GTN CONTRIBUTORS file'].split(',').map(&:strip)
     },
-    'date_start' => event_date.strftime('%Y-%m-%d'),
+    'date_start' => event_date.to_date,
   }
 
   if row['End date']
-    post_metadata['date_end'] = event_date_end.strftime('%Y-%m-%d')
+    post_metadata['date_end'] = event_date_end.to_date
   end
 
   # Serialise to a file
