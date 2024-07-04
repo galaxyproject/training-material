@@ -827,6 +827,12 @@ module Jekyll
         # Zenodo links
       end
 
+      # Mentions are 'external resources' in TeSS.
+      # This could be expanded with
+      # - supported servers
+      # - tools and resources used (e.g. Galaxy) or tools linked to the TS.
+      # - slides (if tutorial) and tutorial (if slides)
+      # - other materials in the same topic?
       if actual_material.key?('workflows')
         mentions.push({
                         '@type': 'Thing',
