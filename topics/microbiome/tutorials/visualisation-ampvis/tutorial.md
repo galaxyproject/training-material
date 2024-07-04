@@ -4,7 +4,9 @@ layout: tutorial_hands_on
 
 title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
-zenodo_links: "https://zenodo.org/records/7020318"; "https://zenodo.org/records/10362755"; "https://zenodo.org/records/12591715" 
+zenodo_link1: "https://zenodo.org/records/12591715" 
+zenodo_link2: "https://zenodo.org/records/10362755"
+zenodo_link3: "https://zenodo.org/records/7020318"
 questions:
 - How can we adapt the plots to our research data?
 - How can we filter the data to show only significant information?
@@ -83,7 +85,7 @@ and _phylogenetic_tree_ (in _newick_ format), as well as various combinations th
 > > <hands-on-title> Download the BIOM dataset with us </hands-on-title>
 > >
 > > 1. Create a new history for this tutorial
-> > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+> > 2. Import the files from [Zenodo]({{ page.zenodo_link3 }}) or from
 > >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 > >     -> `{{ page.title }}`):
 > >
@@ -166,7 +168,7 @@ We looked for a dataset marked "open" and used the following:
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+> 2. Import the files from [Zenodo]({{ page.zenodo_link2 }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
@@ -349,7 +351,7 @@ To create a heatmap, ordination plot, or boxplot you can continue with your data
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+> 2. Import the files from [Zenodo]({{ page.zenodo_link1 }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
