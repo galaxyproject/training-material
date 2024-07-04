@@ -5,6 +5,8 @@ layout: tutorial_hands_on
 title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
 zenodo_link: https://zenodo.org/records/12591715
+zenodo_link: https://zenodo.org/records/10362755
+zenodo_link: https://zenodo.org/records/7020318
 questions:
 - How can we adapt the plots to our research data?
 - How can we filter the data to show only significant information?
@@ -65,6 +67,32 @@ and _phylogenetic_tree_ (in _newick_ format), as well as various combinations th
 > * use your own biom dataset or find one online
 > * we used [Gut Microbiome and Metabolome Modulation by Maternal High-Fat Diet and Thermogenic Challenge](https://zenodo.org/records/7020318)
 >
+> > <hands-on-title> Data Upload </hands-on-title>
+> >
+> > 1. Create a new history for this tutorial
+> > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+> >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+> >     -> `{{ page.title }}`):
+> >
+> >    ```
+> >    closed_otu_table_mc2_w_tax_0.00005_rarefied12000_filtered.biom
+> >    ```
+> >
+> >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> >
+> >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+> >
+> > 3. Rename the datasets
+> > 4. Check that the datatype
+> >
+> >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+> >
+> > 5. Add to each database a tag corresponding to ...
+> >
+> >    {% snippet faqs/galaxy/datasets_add_tag.md %}
+> >
+>{: .hands_on}
+>
 > > <details-title> How it should look like </details-title>
 > >
 > > Make sure to select "biom2" instead of "Auto-detect".
@@ -119,7 +147,33 @@ as they provide a standard way to assess species richness regardless of sample s
 ## Get Data
 If you don't use your own dataset, you can also go to **Zenodo** and find a dataset to download.
 We looked for a dataset marked "open" and used the following:
-[Environmental DNA metabarcoding data from Marina di Camerota coast (Italy) based on citizen science sampling](https://zenodo.org/records/10362755).
+
+> <hands-on-title> Data Upload </hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
+>
+>    ```
+>    BIOMARCS_ASV_tables.xlsx
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 3. Rename the datasets
+> 4. Check that the datatype
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+> 5. Add to each database a tag corresponding to ...
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
 There are 2 datasets: **"V4-18S"** and **"COI"**, of which we used the one named **"COI"**.
 
 ### Sub-step: Generate **Uploadable Datasets from Downloaded Excel Sheet**
@@ -203,16 +257,37 @@ each metadata attribute has its own column.
 > 
 {: .question}
 
-## create a rarefaction curve
-You can find the workflow "ampvis2 rarefaction v1.0 " on Galaxy and use it for the tutorial.
+## Create a rarefaction curve
+Follow this workflow to create a rarefaction curve.
 
-We have pre-selected the "step size", "colour curves by" and set __"free__ __scale"__ for "scales of the facets".
-
-> <comment-title></comment-title>
-> - first you need to upload the freshly generated dataset to Galaxy
-> - the steps from heatmap hands-on box (next section) might be helpful
+> <hands-on-title> Rarefaction curve workflow steps </hands-on-title>
 >
-{: .comment}
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+> 2.1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: ``
+>    - *"Metadata value(s)"*: ``
+>
+> 3.1. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"Step size"*: `5`
+>    - *"Color curves by"*: `sample_id`
+>    - *"Scales of the facets"*: `Free scale`
+>
+> 2.2. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Step size"*: `5`
+>    - *"Color curves by"*: `sample_id`
+>    - *"Scales of the facets"*: `Free scale`
+>
+{: .hands_on}
 
 > <details-title> How it will look like </details-title>
 >
@@ -303,12 +378,32 @@ The subsets are based on variables we define and are available in the metadata {
 {: .comment}
 
 ### Heatmap (ungrouped)
-You can find the workflow "ampvis2 heatmap v3.0 (no group)" on Galaxy and use it for the tutorial.
+Follow this workflow to create a simple heatmap without grouping or faceting data.
 
-We used the following metadata for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
-
-Choose the metadata variable as Plant and metadata values as Aalborg East & Aalborg West.
-In the next box you can see the resulting heatmap.
+> <hands-on-title> Create a simple heatmap </hands-on-title>
+>
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+> 3. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
+>    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
+>    - *"Plot the values on the heatmap"*: `Yes`
+>    - *"Color missing values with the lowest color in the scale"*: `Yes`
+>    - *"Sort heatmap by most abundant taxa"*: `No`
+>    - *"Show functional information about the Genus-level OTUs"*: `No`
+>
+{: .hands_on}
 
 > <details-title> How it will look like </details-title>
 >
@@ -331,23 +426,41 @@ In the next box you can see the resulting heatmap.
 {: .details}
 
 ### Heatmap (grouped)
-You can find the workflow "ampvis2 heatmap v2.0 (only group)" on Galaxy and use it for the tutorial.
+Follow this workflow to create a heatmap by grouping the data.
 
 We used 2 different metadata subsets:
 - 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, grouped by = Plant
 - 2) Metadata used for this subset: metadata variable = Period, metadata values = Winter & Summer, grouped by = Year
 
-> <hands-on-title> Run a workflow </hands-on-title>
+> <hands-on-title> Create a heatmap by grouping the data </hands-on-title>
 >
-> 1. Create a new history (you can use the previous, but if you run multiple workflows, it might
+>    > <comment-title></comment-title>
+>    >
+>    > Consider to create a new history (you can use the previous, but if you run multiple workflows, it might
 >  	 become difficult to find your heatmap later)
->  
-> 2. Use the same data and rename if you wish following the hands-on sections above
+>    {: .comment}
 >
-> 3. Choose the needed workflow 
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
 >
-> 4. Choose the mandarory parameters and click the "Run Workflow" button.
->    See on the next pictures how it looks like.
+> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: `Plant` or `Period`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
+>
+> 3. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"Group samples"*: `Plant` or `Year` 
+>    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
+>    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
+>    - *"Plot the values on the heatmap"*: `Yes`
+>    - *"Color missing values with the lowest color in the scale"*: `Yes`
+>    - *"Sort heatmap by most abundant taxa"*: `No`
+>    - *"Show functional information about the Genus-level OTUs"*: `No`
 >
 {: .hands_on}
 
@@ -379,7 +492,7 @@ We used 2 different metadata subsets:
 {: .question}
 
 ### Heatmap (grouped with facets)
-You can find the workflow "ampvis2 heatmap v1.0 (group+facet)" on Galaxy and use it for the tutorial.
+Follow this workflow to create a heatmap by grouping and faceting the data.
 
 We used 2 different metadata subsets:
 - 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, 
@@ -388,16 +501,36 @@ We used 2 different metadata subsets:
    grouped by = Year, facet by = Period 
    
 
-> <hands-on-title> Run a workflow </hands-on-title>
+> <hands-on-title> Create a heatmap by grouping and faceting the data </hands-on-title>
 >
-> 1. Create a new history (if you wish)
->  
-> 2. Use the same data and rename if you wish following the hands-on sections above
+>    > <comment-title></comment-title>
+>    >
+>    > Consider to create a new history (you can use the previous, but if you run multiple workflows, it might
+>  	 become difficult to find your heatmap later)
+>    {: .comment}
 >
-> 3. Choose the needed workflow 
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
 >
-> 4. Choose the mandarory parameters and click the "Run Workflow" button.
->    See on the next pictures how it looks like.
+> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: `Plant` or `Period`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
+>
+> 3. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"Group samples"*: `Plant` or `Year`
+>    - *"Facet the samples"*: `Period`
+>    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
+>    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
+>    - *"Plot the values on the heatmap"*: `Yes`
+>    - *"Color missing values with the lowest color in the scale"*: `Yes`
+>    - *"Sort heatmap by most abundant taxa"*: `No`
+>    - *"Show functional information about the Genus-level OTUs"*: `No`
 >
 {: .hands_on}
 
@@ -502,20 +635,29 @@ and frame by _Period_ and deselect the other mentioned options above, so they re
 {: .question}
 
 ## Boxplot
-We can now use our data, put them into subsets and create a boxplot. 
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
-> <comment-title> </comment-title>
-> - in the prepared workflow on Galaxy provided in this tutorial, some parameters are pre-selected for you, 
-such as the number of taxa to show
-> - The samples are grouped by _Period_
-{: .comment}
 
-Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
-
-> <comment-title></comment-title>
-> - use the same data set as for heatmaps
-> - the steps from heatmap hands-on boxes remain the same
-{: .comment}
+> <hands-on-title> Create a boxplot </hands-on-title>
+>
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+> 3. {% tool [ampvis2 boxplot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_boxplot/ampvis2_boxplot/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"Group samples"*: `Period`
+>    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
+>    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
+>
+{: .hands_on}
 
 > <details-title> How it will look like </details-title>
 >
@@ -564,12 +706,30 @@ temporal evolution of the 3 most common microorganisms in the plants Aalborg Eas
 over the entire period data was collected.
 
 ## Create a Time Series Plot
-You can find the workflow "ampvis2 timeseries v1.0" on Galaxy and use it for the tutorial.
+Follow this workflow to create a time series plot.
 
-Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
-
-The time variable is mandatory here, and as **_Date_** is the only valid time variable we can select, it has already been pre-selected. 
-Since displaying a large number of taxa can make the plot messy (for this data set at least), we have chosen to show only the top 3 taxa.
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+> 1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+> 1. {% tool [ampvis2 timeseries plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_timeseries/ampvis2_timeseries/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"Time variable"*: `Date`
+>    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
+>    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
+>        - *"Number of taxa to show"*: `3`
+>
+{: .hands_on}
 
 > <comment-title></comment-title>
 > - use the same data set as for heatmaps
