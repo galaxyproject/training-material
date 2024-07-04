@@ -4,9 +4,7 @@ layout: tutorial_hands_on
 
 title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
-zenodo_link: https://zenodo.org/records/12591715
-zenodo_link: https://zenodo.org/records/10362755
-zenodo_link: https://zenodo.org/records/7020318
+zenodo_links: https://zenodo.org/records/7020318; https://zenodo.org/records/10362755; https://zenodo.org/records/12591715 
 questions:
 - How can we adapt the plots to our research data?
 - How can we filter the data to show only significant information?
@@ -270,8 +268,8 @@ Follow this workflow to create a rarefaction curve.
 > 2.1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
 >    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: ``
->    - *"Metadata value(s)"*: ``
+>    - *"Metadata variable"*: `sample_id`
+>    - *"Metadata value(s)"*: `COI-B1b COI-B2a COI-B3 COI-B4 COI-B5 COI-B6 COI-B7 COI-B8 COI-B9 COI-B10 COI-B11 COI-B12 COI-B13 COI-B14 COI-B15 COI-B16 COI-B17 COI-B18 COI-B19 COI-B20 COI-B21 COI-B22 COI-B23`
 >
 > 3.1. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
@@ -372,10 +370,6 @@ To create a heatmap, ordination plot, or boxplot you can continue with your data
 ## Heatmaps
 Now, we can use our data, put them into subsets, and create ungrouped or grouped outputs, including those with facets. 
 The subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
-> <comment-title> </comment-title>
-> - in the following sections, we provide prepared workflows on Galaxy and a set of parameters for running the indicated workflow
-> - some parameters are pre-selected for you, such as the taxonomic level to aggregate the OTUs
-{: .comment}
 
 ### Heatmap (ungrouped)
 Follow this workflow to create a simple heatmap without grouping or faceting data.
@@ -550,22 +544,32 @@ We used 2 different metadata subsets:
 We can now use our data, generate subsets, and create different plots by applying various ordination methods. 
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 
-> <comment-title> </comment-title>
-> - in the following sections, we provide prepared workflows on Galaxy along with the set of parameters to select
-for running each workflow
-> - some parameters are pre-selected for you, such as ordination method, 
-transformation (if used) and options to colour and label the points or frames
-{: .comment}
 
 ### Ordination Method: PCA
-You can find the workflow "ampvis2 ordination plot v1.0 (pca)" on Galaxy and use it for the tutorial.
+Follow this workflow to create a simple ordination plot.
 
-Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
-
-> <comment-title></comment-title>
-> - use the same data set as for heatmaps
-> - the steps from heatmap hands-on boxes remain the same
-{: .comment}
+> <hands-on-title> Create a simple ordination plot </hands-on-title>
+>
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+> 3. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"Ordination method"*: `(PCA) Principal Components Analysis`
+>    - *"Color sample points by"*: `Plant`
+>    - *"Label Frame by"*: `Plant`
+>    - *"Plot species points"*: `No`
+>
+{: .hands_on}
 
 > <details-title> How it will look like </details-title>
 >
@@ -574,15 +578,33 @@ Metadata used for this subset: metadata variable = Plant and metadata values = A
 >![Result of the ordiantion plot](./images/ordination_pca.png "Result of the ordination plot created with the PCA method")
 {: .details}
 
-### Ordination Method: PCA plus Trajectory: _date_
-You can find the workflow "ampvis2 ordination plot v1.1 (pca+trajectory_date)" on Galaxy and use it for the tutorial.
+### Ordination Method: PCA plus Trajectory
+Follow this workflow to create an ordination plot with trajectory.
 
-Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
-
-> <comment-title></comment-title>
-> - use the same data set as for heatmaps
-> - the steps from heatmap hands-on boxes remain the same
-{: .comment}
+> <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
+>
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+> 3. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"Ordination method"*: `(PCA) Principal Components Analysis`
+>    - *"Color sample points by"*: `Plant`
+>    - *"Frame the sample points with a polygon by"*: `Plant`
+>    - *"Label Frame by"*: `Plant`
+>    - *"Make a trajectory between sample points by"*: `Date`
+>    - *"Plot species points"*: `No`
+>
+{: .hands_on}
 
 > <details-title> How it will look like </details-title>
 >
@@ -604,14 +626,34 @@ Metadata used for this subset: metadata variable = Plant and metadata values = A
 {: .question}
 
 ### Ordination Method: CCA
-You can find the workflow "ampvis2 ordination plot v1.2 (cca transform_hellinger)" on Galaxy and use it for the tutorial.
+Follow this workflow to create an ordination plot with the CCA method and the Hellinger transformation.
 
-Metadata used for this subset: metadata variable = Plant and metadata values = Aalborg East & Aalborg West.
-
-> <comment-title></comment-title>
-> - use the same data set as for heatmaps
-> - the steps from heatmap hands-on boxes remain the same
-{: .comment}
+> <hands-on-title> Create an ordination plot with transformation </hands-on-title>
+>
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+> 3. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - *"Ordination method"*: `(CCA) Canonical Correspondence Analysis (considered the constrained version of CA)`
+>        - *"Transforms the abundances before ordination"*: `square root of method = "total" (hellinger)`
+>        - *"Constrain analysis by"*: `Period`
+>    - *"Color sample points by"*: `Period`
+>    - *"Shape sample points by"*: `Plant`
+>    - *"Frame the sample points with a polygon by"*: `TRUE`
+>    - *"Label Frame by"*: `Period`
+>    - *"Plot species points"*: `No`
+>
+{: .hands_on}
 
 > <details-title> How it will look like </details-title>
 >
