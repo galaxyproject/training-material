@@ -39,11 +39,11 @@ using your own data or download the data we used, thus follow this tutorial step
 These OTU tables can be generated using various tools on Galaxy, such as 
 > <hands-on-title> Read trimming and filtering </hands-on-title>
 >
-> 1. {% tool [Cluster](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0&version=latest %} 
+> 1. {% tool [Cluster](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0) %} 
 >
-> 2. {% tool [Hcluster](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_hcluster%2Fmothur_hcluster%2F1.36.1.0&version=latest %} 
+> 2. {% tool [Hcluster](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_hcluster%2Fmothur_hcluster%2F1.36.1.0&version=latest) %} 
 >
-> 3. {% tool [qiime2 fragment-insertion classify-otus-experimental](toolshed.g2.bx.psu.edu%2Frepos%2Fq2d2%2Fqiime2__fragment_insertion__classify_otus_experimental%2Fqiime2__fragment_insertion__classify_otus_experimental%2F2024.5.0%2Bq2galaxy.2024.5.0&version=latest %} 
+> 3. {% tool [qiime2 fragment-insertion classify-otus-experimental](toolshed.g2.bx.psu.edu%2Frepos%2Fq2d2%2Fqiime2__fragment_insertion__classify_otus_experimental%2Fqiime2__fragment_insertion__classify_otus_experimental%2F2024.5.0%2Bq2galaxy.2024.5.0&version=latest) %} 
 >
 >    > <comment-title></comment-title>
 >    > Alternatively, you can generate an ASV table, which functions similarly to an OTU table and is also accepted in ampvis_load.
