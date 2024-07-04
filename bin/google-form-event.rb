@@ -73,12 +73,13 @@ data.each do |row|
 
 
   if row['Organizers not yet in the GTN CONTRIBUTORS file']
-    pr_message += "\nTODO: add the following contributors to the GTN: \n #{row['Organizers not yet in the GTN CONTRIBUTORS file']}"
+    pr_message += "<br>TODO: add the following contributors to the GTN: <br> #{row['Organizers not yet in the GTN CONTRIBUTORS file']}"
   end
   if row['Anything else we should know?']
-    pr_message += "\n\nRemarks from submitter:\n #{row['Anything else we should know?']}"
+    pr_message += "<br><br>Remarks from submitter:<br> #{row['Anything else we should know?']}"
   end
 end
 
+
 puts "new_ids=#{count}"
-puts "pr_message=#{pr_message.gsub(/\n/,"\\n")}"
+puts "pr_message=#{pr_message}"
