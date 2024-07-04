@@ -4,8 +4,7 @@ layout: faq
 area: instructors
 box_type: tip
 google_form_id: 1720085517
-contributors:
-- hexylena
+contributors: [hexylena]
 ---
 
 Every material in the GTN is automatically assigned two short URLs:
