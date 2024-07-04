@@ -17,14 +17,9 @@ key_points:
 - Submission to ENA
 contributions:
     authorship:
-        - Najat AMOUKOU
-    editing:
-        - hexylena
-        - bebatut
-        - natefoo
+        - Najatamk
     translation:
-        - Najat AMOUKOU
-
+        - Najatamk
 
 ---
 
