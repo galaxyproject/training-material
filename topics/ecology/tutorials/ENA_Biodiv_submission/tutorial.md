@@ -44,12 +44,17 @@ The goal is to present a accessible and reproductible workflow for data submissi
 
 > 1. Create a new history for this tutorial
 {% snippet faqs/galaxy/histories_create_new.md %}
-
+>
 {% snippet faqs/galaxy/histories_rename.md %}
 
 > 2. Import the files.
-
-{% snippet faqs/galaxy/datasets_upload.md %}
+> 
+>    ```
+>    https://data.indores.fr/api/access/datafile/3596 : 
+>    https://data.indores.fr/api/access/datafile/3627 : 
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 
 > 3. Build a Collection
 
@@ -66,7 +71,7 @@ The goal is to present a accessible and reproductible workflow for data submissi
 https://usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission
 >
 {% snippet faqs/galaxy/workflows_run.md%}
-> {% snippet faqs/galaxy/workflows_run.md %}
+{% snippet faqs/galaxy/workflows_run.md %}
 >
 > ![Data submission Workflow](./images/image7.PNG)
 
