@@ -36,8 +36,8 @@ for the ampvis2 tool, where they can be visualised in various ways {% cite Ander
 If you already have amplicon data and your OTU table created, you are ready to visualise it. You can start with this tutorial
 using your own data or download the data we used, thus follow this tutorial step-by-step. 
 
-These OTU tables can be generated using various tools on Galaxy, such as 
-> <hands-on-title> Read trimming and filtering </hands-on-title>
+These OTU tables can be generated using various tools on Galaxy: 
+> <hands-on-title> Generate OTU or ASV table with one of this tools </hands-on-title>
 >
 > 1. {% tool [Cluster](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0) %} 
 >
@@ -49,17 +49,17 @@ These OTU tables can be generated using various tools on Galaxy, such as
 >    > Alternatively, you can generate an ASV table, which functions similarly to an OTU table and is also accepted in ampvis_load.
 >    {: .comment}
 >
-> 4. {% tool [dada2: makeSequenceTable](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdada2_makesequencetable%2Fdada2_makeSequenceTable%2F1.30.0%2Bgalaxy0&version=latest %} 
+> 4. {% tool [dada2: makeSequenceTable](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdada2_makesequencetable%2Fdada2_makeSequenceTable%2F1.30.0%2Bgalaxy0&version=latest) %} 
+>
+>    > <comment-title></comment-title>
+>    >
+>    > The Galaxy Training Network provides nice tutorials on this topic, such as 
+	[Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html)
+>    >
+>    {: .comment}
 >
 {: .hands_on}
-[Cluster](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0&version=latest), 
-[Hcluster](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_hcluster%2Fmothur_hcluster%2F1.36.1.0&version=latest), 
-or [qiime2 fragment-insertion classify-otus-experimental](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fq2d2%2Fqiime2__fragment_insertion__classify_otus_experimental%2Fqiime2__fragment_insertion__classify_otus_experimental%2F2024.5.0%2Bq2galaxy.2024.5.0&version=latest). 
-Alternatively, you can generate an ASV table using [dada2: makeSequenceTable](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdada2_makesequencetable%2Fdada2_makeSequenceTable%2F1.30.0%2Bgalaxy0&version=latest), 
-which functions similarly to an OTU table and is also accepted in ampvis_load. 
-Galaxy also offers useful workflows, such as [DADA2 (Multiplexed reads to phyloseq tables)](https://usegalaxy.org/published/workflow?id=5df593510c7d944d) 
-for creating _phyloseq_ tables. The Galaxy Training Network provides nice tutorials on this topic, such as
-[Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html).
+
 
 First of all you can put your data into a 
 rarefaction curve to explore species richness. Then you can input your
@@ -156,7 +156,7 @@ of species observed as more samples are added. This method pools all the samples
 together and calculates the mean species richness for different sample sizes, resulting 
 in a smooth curve. Rarefaction curves are particularly useful for comparing different datasets, 
 as they provide a standard way to assess species richness regardless of sample size differences {% cite Gotelli2001 %}.
-> <comment-title> </comment-title>
+> <comment-title></comment-title>
 > - for this part, we need 'raw' data, it should not be normalised
 > - for this section, we used a different dataset than for the rest of the tutorial
 {: .comment}
@@ -342,7 +342,7 @@ Follow this workflow to create a rarefaction curve.
 
 To create a heatmap, ordination plot, or boxplot you can continue with your dataset or use the same as we do for the next sections.
 
-> <comment-title> </comment-title>
+> <comment-title></comment-title>
 > - we now use normalised data and a different dataset than for the rarefaction curve (as it has more metadata)
 {: .comment}
 
