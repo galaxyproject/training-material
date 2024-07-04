@@ -38,7 +38,7 @@ jobs:
       - name: Update events from Google Form
         id: generate
         run: |
-          echo "new_ids=$(bundle exec ruby bin/google-form-event.rb)" >> $GITHUB_OUTPUT
+          bundle exec ruby bin/google-form-event.rb >> $GITHUB_OUTPUT
 
       - name: Create Pull Request for Events
         # If it's not a Pull Request then commit any changes as a new PR.
@@ -51,3 +51,5 @@ jobs:
           branch-suffix: timestamp
           title: "[Google Form] New Event!"
           add-paths: faqs/
+          body: |
+             ${{steps.generate.outputs.pr_message}}
