@@ -37,7 +37,7 @@ If you already have amplicon data and your OTU table created, you are ready to v
 using your own data or download the data we used, thus follow this tutorial step-by-step. 
 
 These OTU tables can be generated using various tools on Galaxy: 
-> <hands-on-title> Generate OTU or ASV table with one of this tools </hands-on-title>
+> <tip-title> Generate OTU or ASV table with one of this tools</tip-title>
 >
 > 1. {% tool [Cluster](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0) %} 
 >
@@ -58,7 +58,7 @@ These OTU tables can be generated using various tools on Galaxy:
 >    >
 >    {: .comment}
 >
-{: .hands_on}
+{: .tip}
 
 
 First of all you can put your data into a 
@@ -146,6 +146,12 @@ OTU table, sample metadata and taxonomy table, all in _tabular_ format.
 > {:toc}
 >
 {: .agenda}
+
+In this tutorial, we can offer 2 versions:
+- A short version, running prebuilt workflows
+- A long version, going step-by-step
+
+{% include _includes/cyoa-choices.html option1="Short Version" option2="Long Version" default="Short-Version" %}
 
 # Rarefaction Curve
 
@@ -275,6 +281,32 @@ each metadata attribute has its own column.
 {: .question}
 
 ## Create a rarefaction curve
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a rarefaction curve </hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_rarefaction_v2.0.ga) or download it to your computer
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run **Workflow: (without subsempling)** {% icon workflow %} using the following parameters
+>    - *"Step size"*: `5`
+>    - *"Color curves by"*: `sample_id`
+>    - *"Scales of the facets"*: `Free scale`
+>
+>    or
+> 
+> 3. Run **Workflow: (with subsempling)** {% icon workflow %} using the following additional parameters
+>    - *"Metadata variable"*: `sample_id`
+>    - *"Metadata value(s)"*: `COI-B1b COI-B2a COI-B3 COI-B4 COI-B5 COI-B6 COI-B7 COI-B8 COI-B9 COI-B10 COI-B11 COI-B12 COI-B13 COI-B14 COI-B15 COI-B16 COI-B17 COI-B18 COI-B19 COI-B20 COI-B21 COI-B22 COI-B23`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
 Follow this workflow to create a rarefaction curve.
 
 > <hands-on-title> Rarefaction curve workflow steps </hands-on-title>
@@ -305,6 +337,7 @@ Follow this workflow to create a rarefaction curve.
 >    - *"Scales of the facets"*: `Free scale`
 >
 {: .hands_on}
+</div>
 
 > <details-title> How it will look like </details-title>
 >
@@ -770,7 +803,7 @@ over the entire period data was collected.
 ## Create a Time Series Plot
 Follow this workflow to create a time series plot.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Create a time series plot </hands-on-title>
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
