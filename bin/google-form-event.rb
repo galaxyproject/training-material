@@ -81,4 +81,4 @@ data.each do |row|
 end
 
 puts "new_ids=#{count}"
-puts "pr_message=#{pr_message}"
+puts "pr_message=#{pr_message.gsub(/\n/,"\\n")}"
