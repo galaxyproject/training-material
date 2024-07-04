@@ -33,6 +33,16 @@ contributions:
     - gallantries
 level: Intermediate
 subtopic: workflows
+
+recordings:
+- captioners:
+  - shiltemann
+  date: '2022-07-06'
+  length: 30M
+  youtube_id: hrZhpsiGaPM
+  speakers:
+  - shiltemann
+
 ---
 
 

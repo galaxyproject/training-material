@@ -9,6 +9,15 @@ zenodo_link: 'https://zenodo.org/records/10397366'
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/tutorial
 
+answer_histories:
+  - label: "UseGalaxy.eu (includes AnnData to CDS conversion)"
+    history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monoce3-tutorial-workflow
+    date: 2024-03-04
+
+input_histories:
+  - label: "CDS file (UseGalaxy.eu)"
+    history: https://usegalaxy.eu/u/j.jakiela/h/cds-input-file-for-monocle3-tutorial
+
 questions:
 - How can I prepare input files for Monocle starting from an AnnData object?
 - How can I infer lineage relationships between clusters, without a time series?
@@ -39,7 +48,6 @@ requirements:
 tags:
 - 10x
 - paper-replication
-- R
 
 contributions:
   authorship:
@@ -51,6 +59,16 @@ contributions:
     - nomadscientist
   funding:
     - epsrc-training-grant
+
+recordings:
+- youtube_id: Espl6qSbu3Y
+  date: '2023-04-11'
+  length: 15M
+  speakers:
+  - wee-snufkin
+  captioners:
+  - wee-snufkin
+
 ---
 
 
@@ -78,7 +96,7 @@ You have two options for uploading the dataset. Importing via history is often f
 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 >
-> 1. You can import history where we went from AnnData to CDS file. Then you will also have access to extracted cell metadata, gene metadata, and an expression matrix: [Input history](https://singlecell.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3)
+> 1. You can import [history](https://usegalaxy.eu/u/j.jakiela/h/anndata---cds-conversion-for-monocle3-tutorial) where we went from AnnData to CDS file. Then you will also have access to extracted cell metadata, gene metadata, and an expression matrix. If you want to get the CDS file alone, you can get it in this [input history](https://usegalaxy.eu/u/j.jakiela/h/cds-input-file-for-monocle3-tutorial).
 >
 >
 >    {% snippet faqs/galaxy/histories_import.md %}

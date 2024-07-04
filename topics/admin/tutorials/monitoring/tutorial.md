@@ -35,6 +35,17 @@ requirements:
       - gxadmin
 abbreviations:
     TSDB: Time Series Database
+
+recordings:
+- captioners:
+  - shiltemann
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 73M
+  youtube_id: drUaYQtMBLY
+  speakers: []
+
 ---
 
 

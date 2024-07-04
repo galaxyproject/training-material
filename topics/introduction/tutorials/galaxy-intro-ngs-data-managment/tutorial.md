@@ -24,6 +24,17 @@ contributors:
   - mvdbeek
   - tnabtaf
   - blankenberg
+
+recordings:
+- captioners:
+  - nekrut
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 15M
+  youtube_id: 9mIL0tIfZ_o
+  speakers:
+  - nekrut
+
 ---
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.

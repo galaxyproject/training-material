@@ -18,13 +18,8 @@
 >         message = validate_domain_resolves(domain)
 > 
 >     # Code to be refactored
->     if (
->         not message
->         and check_dup
->         and trans.sa_session.query(trans.app.model.User)
->         .filter(func.lower(trans.app.model.User.table.c.email) == email.lower())
->         .first()
->     ):
+>     stmt = select(trans.app.model.User).filter(func.lower(trans.app.model.User.email) == email.lower()).limit(1)
+>     if not message and check_dup and trans.sa_session.scalars(stmt).first():
 >         message = f"User with email '{email}' already exists."
 > 
 >     if not message:
@@ -46,10 +41,8 @@
 > 
 > ```python
 > def check_for_existing_email(trans, email):
->     user_record = (trans.sa_session.query(trans.app.model.User)
->         .filter(func.lower(trans.app.model.User.table.c.email) == email.lower())
->         .first()
->     )
+>     stmt = select(trans.app.model.User).filter(func.lower(trans.app.model.User.email) == email.lower()).limit(1)
+>     user_record = trans.sa_session.scalars(stmt).first()
 >     return bool(user_record)
 > 
 > 

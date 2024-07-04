@@ -50,6 +50,37 @@ edam_ontology:
 - topic_3489 # Database Management
 - topic_0605 # Informatics
 - topic_3071 # Data Management
+
+recordings:
+- captioners:
+  - natefoo
+  - hexylena
+  date: '2022-03-01'
+  galaxy_version: '21.05'
+  length: 2H50M
+  youtube_id: LPK8rP_qUiA
+  speakers:
+  - natefoo
+  - hexylena
+- captioners:
+  - natefoo
+  - hexylena
+  date: '2021-06-28'
+  galaxy_version: '21.05'
+  length: 2H47M
+  youtube_id: zT70luZqPOU
+  speakers:
+  - natefoo
+- captioners:
+  - shiltemann
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 53M
+  youtube_id: il83uApg7Hc
+  speakers:
+  - hexylena
+
 ---
 
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks.  If not, please consider following our [Ansible Tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %}) first.

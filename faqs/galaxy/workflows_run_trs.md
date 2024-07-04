@@ -4,6 +4,13 @@ area: workflows
 box_type: hands_on
 layout: faq
 contributors: [hexylena]
+optional_parameters:
+  path: Path to the on-disk location of the .ga file
+  title: A descriptive title for the workflow, does not need to match the workflow file itself
+examples:
+  Incredibly generic box that does not tell you which workflow to import: {}
+  Importing a QC workflow: {path: "topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga", title:"Galaxy Workflow Data QC" }
+  Importing a pre-treatments workflow: {path: "topics/proteomics/tutorials/metaproteomics/workflows/workflow.ga", title:"Pretreatments"}
 ---
 
 {% if include.path %}
