@@ -451,7 +451,7 @@ module Jekyll
 
       data['offers'] = [offer]
 
-      if page.key?('location') && page['location'] && page['location'].keys.length > 1
+      if page.key?('location') && page['location'].keys.length > 1
         data['location'] = {
           '@type': 'Place',
           name: page['location']['name'],
