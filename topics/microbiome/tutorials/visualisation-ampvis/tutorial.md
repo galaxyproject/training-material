@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 
 title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
-zenodo_links: https://zenodo.org/records/7020318; https://zenodo.org/records/10362755; https://zenodo.org/records/12591715 
+zenodo_links: "https://zenodo.org/records/7020318"; "https://zenodo.org/records/10362755"; "https://zenodo.org/records/12591715" 
 questions:
 - How can we adapt the plots to our research data?
 - How can we filter the data to show only significant information?
@@ -35,6 +35,21 @@ If you already have amplicon data and your OTU table created, you are ready to v
 using your own data or download the data we used, thus follow this tutorial step-by-step. 
 
 These OTU tables can be generated using various tools on Galaxy, such as 
+> <hands-on-title> Read trimming and filtering </hands-on-title>
+>
+> 1. {% tool [Cluster](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0&version=latest %} 
+>
+> 2. {% tool [Hcluster](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_hcluster%2Fmothur_hcluster%2F1.36.1.0&version=latest %} 
+>
+> 3. {% tool [qiime2 fragment-insertion classify-otus-experimental](toolshed.g2.bx.psu.edu%2Frepos%2Fq2d2%2Fqiime2__fragment_insertion__classify_otus_experimental%2Fqiime2__fragment_insertion__classify_otus_experimental%2F2024.5.0%2Bq2galaxy.2024.5.0&version=latest %} 
+>
+>    > <comment-title></comment-title>
+>    > Alternatively, you can generate an ASV table, which functions similarly to an OTU table and is also accepted in ampvis_load.
+>    {: .comment}
+>
+> 4. {% tool [dada2: makeSequenceTable](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdada2_makesequencetable%2Fdada2_makeSequenceTable%2F1.30.0%2Bgalaxy0&version=latest %} 
+>
+{: .hands_on}
 [Cluster](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.39.5.0&version=latest), 
 [Hcluster](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_hcluster%2Fmothur_hcluster%2F1.36.1.0&version=latest), 
 or [qiime2 fragment-insertion classify-otus-experimental](https://usegalaxy.org/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fq2d2%2Fqiime2__fragment_insertion__classify_otus_experimental%2Fqiime2__fragment_insertion__classify_otus_experimental%2F2024.5.0%2Bq2galaxy.2024.5.0&version=latest). 
@@ -65,7 +80,7 @@ and _phylogenetic_tree_ (in _newick_ format), as well as various combinations th
 > * use your own biom dataset or find one online
 > * we used [Gut Microbiome and Metabolome Modulation by Maternal High-Fat Diet and Thermogenic Challenge](https://zenodo.org/records/7020318)
 >
-> > <hands-on-title> Data Upload </hands-on-title>
+> > <hands-on-title> Download the BIOM dataset with us </hands-on-title>
 > >
 > > 1. Create a new history for this tutorial
 > > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -91,7 +106,7 @@ and _phylogenetic_tree_ (in _newick_ format), as well as various combinations th
 > >
 >{: .hands_on}
 >
-> > <details-title> How it should look like </details-title>
+> > <details-title> How the Upload should look like </details-title>
 > >
 > > Make sure to select "biom2" instead of "Auto-detect".
 > >
@@ -99,17 +114,19 @@ and _phylogenetic_tree_ (in _newick_ format), as well as various combinations th
 > >
 > {: .details}
 >
-> * you can create a phylosec object using this tool: 
-> *   [Create phyloseq object from a BIOM file](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fphyloseq_from_biom%2Fphyloseq_from_biom%2F1.46.0%2Bgalaxy0&version=latest)
-> * biom or phyloseq files can be used for all of the visualisation methods presented in this tutorial 
+> * you can create a phylosec object using this workflow: 
 >
-> > <details-title> Forgot how to upload data? </details-title>
+> > <hands-on-title> Task description </hands-on-title>
 > >
-> > If you forgot how to upload data to Galaxy, here is a nice tutorial:
+> > 1. {% tool [Create phyloseq object](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_biom/phyloseq_from_biom/1.46.0+galaxy0) %} with the following parameters:
+> >    - {% icon param-file %} *"BIOM file"*: `output` (Input dataset)
 > >
-> > [Data Manipulation Olympics](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html#upload-data)
+> > 2. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+> >    - {% icon param-file %} *"OTU table"*: `output` (output of **Create phyloseq object** {% icon tool %})
 > >
-> {: .details}
+> {: .hands_on}
+>
+> * biom or phyloseq files can be used as input for all of the visualisation methods presented in this tutorial 
 >
 {: .tip}
 
@@ -430,8 +447,9 @@ We used 2 different metadata subsets:
 >
 >    > <comment-title></comment-title>
 >    >
->    > Consider to create a new history (you can use the previous, but if you run multiple workflows, it might
->  	 become difficult to find your heatmap later)
+>    > Consider to create a new history (you can use the previous, but if you run multiple workflows, it might 
+		become difficult to find your heatmap later)
+>    >
 >    {: .comment}
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
@@ -499,8 +517,8 @@ We used 2 different metadata subsets:
 >
 >    > <comment-title></comment-title>
 >    >
->    > Consider to create a new history (you can use the previous, but if you run multiple workflows, it might
->  	 become difficult to find your heatmap later)
+>    > Consider to create a new history 
+>    >
 >    {: .comment}
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
