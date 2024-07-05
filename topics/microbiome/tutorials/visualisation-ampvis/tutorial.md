@@ -118,7 +118,7 @@ and _phylogenetic_tree_ (in _newick_ format), as well as various combinations th
 >
 > * you can create a phylosec object using this workflow: 
 >
-> > <hands-on-title> Task description </hands-on-title>
+> > <hands-on-title> Create phyloseq </hands-on-title>
 > >
 > > 1. {% tool [Create phyloseq object](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_biom/phyloseq_from_biom/1.46.0+galaxy0) %} with the following parameters:
 > >    - {% icon param-file %} *"BIOM file"*: `output` (Input dataset)
@@ -281,6 +281,7 @@ each metadata attribute has its own column.
 {: .question}
 
 ## Create a rarefaction curve
+Follow this workflow to create a rarefaction curve.
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a rarefaction curve </hands-on-title>
 >
@@ -307,8 +308,6 @@ each metadata attribute has its own column.
 </div>
 
 <div class="Long-Version" markdown="1">
-Follow this workflow to create a rarefaction curve.
-
 > <hands-on-title> Rarefaction curve workflow steps </hands-on-title>
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
@@ -425,7 +424,17 @@ The subsets are based on variables we define and are available in the metadata {
 
 ### Heatmap (ungrouped)
 Follow this workflow to create a simple heatmap without grouping or faceting data.
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a simple heatmap </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+{: .hands_on}
+</div>
 
+<div class="Long-Version" markdown="1">
 > <hands-on-title> Create a simple heatmap </hands-on-title>
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
@@ -450,6 +459,7 @@ Follow this workflow to create a simple heatmap without grouping or faceting dat
 >    - *"Show functional information about the Genus-level OTUs"*: `No`
 >
 {: .hands_on}
+</div>
 
 > <details-title> How it will look like </details-title>
 >
@@ -473,7 +483,18 @@ Follow this workflow to create a simple heatmap without grouping or faceting dat
 
 ### Heatmap (grouped)
 Follow this workflow to create a heatmap by grouping the data.
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a heatmap by grouping the data </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant` or `Period`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
+>    - *"Group samples"*: `Plant` or `Year` 
+>
+{: .hands_on}
+</div>
 
+<div class="Long-Version" markdown="1">
 We used 2 different metadata subsets:
 - 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, grouped by = Plant
 - 2) Metadata used for this subset: metadata variable = Period, metadata values = Winter & Summer, grouped by = Year
@@ -510,6 +531,7 @@ We used 2 different metadata subsets:
 >    - *"Show functional information about the Genus-level OTUs"*: `No`
 >
 {: .hands_on}
+</div>
 
 > <details-title> How it will look like </details-title>
 >
@@ -540,7 +562,19 @@ We used 2 different metadata subsets:
 
 ### Heatmap (grouped with facets)
 Follow this workflow to create a heatmap by grouping and faceting the data.
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a heatmap by grouping and faceting the data </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant` or `Period`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
+>    - *"Group samples"*: `Plant` or `Year` 
+>    - *"Facet the samples"*: `Period`
+>
+{: .hands_on}
+</div>
 
+<div class="Long-Version" markdown="1">
 We used 2 different metadata subsets:
 - 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, 
 	grouped by = Plant, facet by = Period 
@@ -580,6 +614,7 @@ We used 2 different metadata subsets:
 >    - *"Show functional information about the Genus-level OTUs"*: `No`
 >
 {: .hands_on}
+</div>
 
 > <details-title> How it will look like </details-title>
 >
@@ -600,7 +635,17 @@ As with heatmaps, the subsets are based on variables we define and are available
 
 ### Ordination Method: PCA
 Follow this workflow to create a simple ordination plot.
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a simple ordination plot </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+{: .hands_on}
+</div>
 
+<div class="Long-Version" markdown="1">
 > <hands-on-title> Create a simple ordination plot </hands-on-title>
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
@@ -623,6 +668,7 @@ Follow this workflow to create a simple ordination plot.
 >    - *"Plot species points"*: `No`
 >
 {: .hands_on}
+</div>
 
 > <details-title> How it will look like </details-title>
 >
@@ -633,7 +679,18 @@ Follow this workflow to create a simple ordination plot.
 
 ### Ordination Method: PCA plus Trajectory
 Follow this workflow to create an ordination plot with trajectory.
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>    - *"Make a trajectory between sample points by"*: `Date
+>
+{: .hands_on}
+</div>
 
+<div class="Long-Version" markdown="1">
 > <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
@@ -658,6 +715,7 @@ Follow this workflow to create an ordination plot with trajectory.
 >    - *"Plot species points"*: `No`
 >
 {: .hands_on}
+</div>
 
 > <details-title> How it will look like </details-title>
 >
@@ -680,7 +738,20 @@ Follow this workflow to create an ordination plot with trajectory.
 
 ### Ordination Method: CCA
 Follow this workflow to create an ordination plot with the CCA method and the Hellinger transformation.
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>    - *"Ordination method"*: `(CCA) Canonical Correspondence Analysis (considered the constrained version of CA)`
+>        - *"Transforms the abundances before ordination"*: `square root of method = "total" (hellinger)`
+>        - *"Constrain analysis by"*: `Period`
+>
+{: .hands_on}
+</div>
 
+<div class="Long-Version" markdown="1">
 > <hands-on-title> Create an ordination plot with transformation </hands-on-title>
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
@@ -707,6 +778,7 @@ Follow this workflow to create an ordination plot with the CCA method and the He
 >    - *"Plot species points"*: `No`
 >
 {: .hands_on}
+</div>
 
 > <details-title> How it will look like </details-title>
 >
@@ -732,6 +804,20 @@ and frame by _Period_ and deselect the other mentioned options above, so they re
 ## Boxplot
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a boxplot </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>    - *"Group samples"*: `Period`
+>    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
+>        - *"Number of taxa to show"*: `5`
+>
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
 > <hands-on-title> Create a boxplot </hands-on-title>
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
@@ -751,8 +837,10 @@ As with heatmaps, the subsets are based on variables we define and are available
 >    - *"Group samples"*: `Period`
 >    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
+>        - *"Number of taxa to show"*: `5`
 >
 {: .hands_on}
+</div>
 
 > <details-title> How it will look like </details-title>
 >
@@ -802,7 +890,20 @@ over the entire period data was collected.
 
 ## Create a Time Series Plot
 Follow this workflow to create a time series plot.
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a boxplot </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_timeseries_v1.0.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>    - *"Time variable"*: `Date
+>    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
+>        - *"Number of taxa to show"*: `3`
+>
+{: .hands_on}
+</div>
 
+<div class="Long-Version" markdown="1">
 > <hands-on-title> Create a time series plot </hands-on-title>
 >
 > 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
@@ -825,6 +926,7 @@ Follow this workflow to create a time series plot.
 >        - *"Number of taxa to show"*: `3`
 >
 {: .hands_on}
+</div>
 
 > <comment-title></comment-title>
 > - use the same data set as for heatmaps
