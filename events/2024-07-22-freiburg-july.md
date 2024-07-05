@@ -61,3 +61,23 @@ program:
       Metagenomics/ Foodborne - from 9:15am to 5pm
 
 ---
+# Welcome to the Comprehensive Galaxy Workshop: From Introduction to Advanced Applications
+
+
+
+
+Embark on a deep dive into the world of Galaxy, the leading platform for data-intensive biomedical research. This workshop is designed for researchers, students, and data analysts who wish to harness the full potential of Galaxy in various genomic studies. Whether you're a beginner seeking to understand the basics or an intermediate user looking to refine your skills in specific applications, this workshop offers valuable insights and hands-on experiences.
+
+Program Highlights:
+
+    Galaxy Introduction and Quality Control: Start with the fundamentals of navigating Galaxy, understanding its core features, and utilizing its tools for data manipulation and analysis. Learn the importance of quality control and how to implement these practices to ensure the integrity and accuracy of your research data.
+
+    ChIP-seq Analysis: Explore the techniques and tools available in Galaxy for Chromatin Immunoprecipitation Sequencing (ChIP-seq). This session will guide you through the process of analyzing protein-DNA interactions, essential for understanding regulatory networks and mechanisms in genomics.
+
+    RNA-seq Analysis: Delve into RNA sequencing analysis using Galaxy. Learn how to interpret expression data, compare differential gene expression, and uncover the complexities of transcriptomics in a user-friendly environment.
+
+    Variant Calling: Master the methods of variant calling with Galaxy. This part of the workshop focuses on detecting genetic variants from sequencing data, crucial for studies in genetics and personalized medicine.
+
+    Microbiome Analysis: Gain expertise in microbiome data analysis. This session introduces tools and workflows to analyze microbial communities, helping you understand microbiome diversity and its implications on health and disease.
+
+This comprehensive workshop will not only increase your proficiency in using Galaxy but also enhance your ability to conduct sophisticated analyses in various fields of biological research. Connect with experts and peers, gain practical skills, and take your research capabilities to the next level.
