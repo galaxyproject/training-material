@@ -16,6 +16,10 @@ contributions:
 
 ---
 
+##Context
+
+---
+
 ### Context
 
 .center[
@@ -25,6 +29,10 @@ contributions:
 - [Full version of the report, + form export](https://hal.science/hal-04491929) 
 - [Raw data (anonymised) + analysis script](https://entrepot.recherche.data.gouv.fr/dataset.xhtml?persistentId=doi:10.57745/SQMQP1)
 ]
+
+---
+
+## Galaxy Instances' General Characteristics
 
 ---
 
@@ -39,20 +47,6 @@ contributions:
 - 3 categories : <10, circa 20 & circa 50
 - Active vs signed up: no problem having a lot more signed up than active users, no need to delete inactive users (in case they come back)
 ]
-
----
-
-
-### DB Tech
-
-
-.pull-left[![Pie chart. Database Technology. Showing 100% postgresql](../../images/poll-ssa/02-DB-Tech.png)]
-
-
-.pull-right[
-- It is strongly recommended to use PostgreSQL in production
-]
-
 
 ---
 
@@ -88,6 +82,17 @@ contributions:
 
 ---
 
+### Ansible Usage
+
+
+.pull-left[![Pie chart. Ansible usage. Showing 78% positive.](../../images/poll-ssa/18-Galaxy-Upgrades-Ansible.png)]
+
+
+.pull-right[
+Is a highly-used (about 80%) tool that, according to the other sections, greatly simplifies admin.
+]
+
+---
 
 ### Gravity Usage
 
@@ -98,6 +103,9 @@ contributions:
 
 ---
 
+## User Support & Training
+
+---
 
 ### End-User Support Burden
 
@@ -128,8 +136,13 @@ contributions:
 ]
 
 
+
 ---
 
+## Tool & Workflow Development & Maintenance
+
+
+---
 
 ### User Tool Dev & Planemo Usage
 
@@ -180,22 +193,6 @@ contributions:
 ---
 
 
-### Admin Tool Dev Storage
-
-
-.pull-left[![Histogram of amount of admins that use certain tool storage types (multiple-choice question). Showing 7 local filesystem users, 3 public Mercurial toolshed users, and 1 blank answer](../../images/poll-ssa/11-Admin-Tool-Dev-Storage.png)]
-
-
-.pull-right[
-- Most tools are files on the same machine as Galaxy
-- Some tools are used from public toolsheds, none from private ones
-- Currently, admins write the tool (managed in git), test & lint it with Planemo, then publish it locally, sometimes versioned (ex: tool_v1.1)
-]
-
-
----
-
-
 ### Admin Tool Dev Creation Burden
 
 
@@ -219,6 +216,25 @@ Small (1 hour per week avg.) amount of tool dev per month.
 .pull-right[
 - Excluding the extreme values, about an hour a month
 - I wondered if tools became invalid because of non-backwards-compatible format changes, but that does not seem to be the case
+]
+
+
+---
+
+##Tool Storage & Packaging
+
+---
+
+### Admin Tool Dev Storage
+
+
+.pull-left[![Histogram of amount of admins that use certain tool storage types (multiple-choice question). Showing 7 local filesystem users, 3 public Mercurial toolshed users, and 1 blank answer](../../images/poll-ssa/11-Admin-Tool-Dev-Storage.png)]
+
+
+.pull-right[
+- Most tools are files on the same machine as Galaxy
+- Some tools are used from public toolsheds, none from private ones
+- Currently, admins write the tool (managed in git), test & lint it with Planemo, then publish it locally, sometimes versioned (ex: tool_v1.1)
 ]
 
 
@@ -252,6 +268,22 @@ Lots of Conda, a few containers.
 
 ---
 
+## Database-related Characteristics & Tasks
+
+---
+
+### DB Tech
+
+
+.pull-left[![Pie chart. Database Technology. Showing 100% postgresql](../../images/poll-ssa/02-DB-Tech.png)]
+
+
+.pull-right[
+- It is strongly recommended to use PostgreSQL in production
+]
+
+
+---
 
 ### DB Schema Update Frequency
 
@@ -282,18 +314,27 @@ Is very quick and transparent (assuming Ansible usage)
 ---
 
 
-### Ansible
+### DB Backup Frequency
 
 
-.pull-left[![Pie chart. Ansible usage. Showing 78% positive.](../../images/poll-ssa/18-Galaxy-Upgrades-Ansible.png)]
+.pull-left[![Histogram of the average number of weeks between database back-ups. Showing a median of 1 and mean of 11. Nearly everyone answered 1, however there were 2 outliers at 12 and 52.](../../images/poll-ssa/22-DB-Backup-Frequency.jpg)]
 
 
 .pull-right[
-Is a highly-used (about 80%) tool that, according to the other sections, greatly simplifies admin.
+- Many admins keep one (point in time) backup per week
+- The [Ansible role Galaxy uses for Postgres](https://galaxy.ansible.com/ui/standalone/roles/galaxyproject/postgresql/) can be used to configure both point in time recovery or WAL backups. 
+- The general [Galaxy DB Admin](https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html) tutorial covers how to setup backups. 
 ]
 
 
 ---
+
+
+## Galaxy Version & Upgrades
+
+
+---
+
 
 
 ### Current Version & Upgrade Frequency
@@ -331,19 +372,7 @@ Is a highly-used (about 80%) tool that, according to the other sections, greatly
 
 ---
 
-
-### DB Backup Frequency
-
-
-.pull-left[![Histogram of the average number of weeks between database back-ups. Showing a median of 1 and mean of 11. Nearly everyone answered 1, however there were 2 outliers at 12 and 52.](../../images/poll-ssa/22-DB-Backup-Frequency.jpg)]
-
-
-.pull-right[
-- Many admins keep one (point in time) backup per week
-- The [Ansible role Galaxy uses for Postgres](https://galaxy.ansible.com/ui/standalone/roles/galaxyproject/postgresql/) can be used to configure both point in time recovery or WAL backups. 
-- The general [Galaxy DB Admin](https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html) tutorial covers how to setup backups. 
-]
-
+##Miscellaneous: Restarts, Crashes & Other
 
 ---
 
@@ -399,6 +428,9 @@ Is a highly-used (about 80%) tool that, according to the other sections, greatly
 
 ---
 
+##Take Home
+
+---
 
 ### Total Burden, Non-Dev Admin Tasks
 
