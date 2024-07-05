@@ -178,58 +178,7 @@ Once we have imported the datasets, the next step is to import the workflows nec
 
 # Importing workflows
 
-All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below. Note: these are not necessarily the latest versions of the actual workflows, but versions that have been tested for this tutorial. To see the latest versions, see the [Galaxy Project VGP workflows page](https://galaxyproject.org/projects/vgp/workflows/) and click on the Dockstore links to import workflows.
-
-> <hands-on-title>Importing workflows from GitHub</hands-on-title>
->
-> Links to the four workflows that will be used in this tutorial are listed in the table. Follow the procedure described below the table to import each of them into your Galaxy account. 
->
-> | Workflow | Link |
-> |---------|---------|
-> | *K*-mer profiling workflow (WF1) | [https://raw.githubusercontent.com/iwc-workflows/kmer-profiling-hifi-VGP1/v0.1.4/kmer-profiling-hifi-VGP1.ga](https://raw.githubusercontent.com/iwc-workflows/kmer-profiling-hifi-VGP1/v0.1.4/kmer-profiling-hifi-VGP1.ga) |
-> | Assembly (contiging) with Hi-C workflow (WF4) | [https://raw.githubusercontent.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/v0.1.6/Assembly-Hifi-HiC-phasing-VGP4.ga](https://raw.githubusercontent.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/v0.1.6/Assembly-Hifi-HiC-phasing-VGP4.ga) |
-> | Purge duplicate contigs workflow (WF6) | [https://raw.githubusercontent.com/iwc-workflows/Purge-duplicate-contigs-VGP6/v0.3.2/Purge-duplicate-contigs-VGP6.ga](https://raw.githubusercontent.com/iwc-workflows/Purge-duplicate-contigs-VGP6/v0.3.2/Purge-duplicate-contigs-VGP6.ga) |
-> | Scaffolding with Hi-C workflow (WF8) | [https://raw.githubusercontent.com/iwc-workflows/Scaffolding-HiC-VGP8/v0.2/Scaffolding-HiC-VGP8.ga](https://raw.githubusercontent.com/iwc-workflows/Scaffolding-HiC-VGP8/v0.2/Scaffolding-HiC-VGP8.ga)|
->
-> 1. Copy the workflow URL into clipboard
->
->    1. Right click on a URL in the table above.
->    2. Select "Copy link address" option in the dropdown menu that appears.
->    3. Go to Galaxy
->
->    > <warning-title>Make sure you are logged in!</warning-title>
->    > Ensure that you are logged in into your Galaxy account!
->    {: .warning}
->
-> 2. Import the workflow
->
->    1. Click "Workflow" on top of the Galaxy interface.
->    2. On top-right of the middle pane click "{% icon galaxy-upload %} Import" button.
->    3. Paste the URL you copied into the clipboard at Step 1 above to "Archived Workflow URL" box.
->    4. Click "Import workflow" button.
->
-> This entire procedure is shown in the animated figure below. {% icon warning %} **You need to repeat this process for all four workflows**
->
-> ![Upload via URL](../../images/vgp_assembly/importing_via_url_vgp_specific.png "Importing a workflow via URL.")
->
-{: .hands-on}
-
-> <details-title>Other ways to import workflows the data</details-title>
-> You can import workflows from a variety of different sources including [DockStore](https://dockstore.org), [WorkflowHub](https://workflowhub.eu), or a URL:
->
-> {% snippet faqs/galaxy/workflows_import_from_dockstore.md %}
->
-> {% snippet faqs/galaxy/workflows_import_from_workflowhub.md %}
->
-> {% snippet faqs/galaxy/workflows_import.md %}
->
-{: .details}
-
-Once all four workflows are imported, your workflow list should look like this:
-
-![Workflow menu](../../images/vgp_assembly/imported_workflows.png  "Workflow list. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The workflows can be run by clicking in the play icon, marked in red in the image.")
-
-Once we have imported the datasets and the workflows, we can start with the genome assembly.
+All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below. Note: these are not necessarily the latest versions of the actual workflows, but versions that have been tested for this tutorial. To see the latest versions, see the [Galaxy Project VGP workflows page](https://galaxyproject.org/projects/vgp/workflows/) and click on the Dockstore links to import workflows. **Alternatively, for each section of the tutorial, there will be a "Launch [workflow] (View on Dockstore)" link at the beginning, which you can use to launch the workflow.**
 
 # Performing the assembly
 
@@ -241,7 +190,9 @@ Now that our data and workflows are imported, we can run our first workflow. Bef
 
 ### Launching the workflow
 
-> <hands-on-title><b>Launching <i>K</i>-mer profile analysis workflow</b></hands-on-title>
+{% snippet faqs/galaxy/workflows_run_ds.md title="Genome profile analysis (WF1)" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" %}
+
+> <hands-on-title><b>Running <i>K</i>-mer profile analysis workflow</b></hands-on-title>
 >
 > 1. Identify inputs
 >
@@ -290,6 +241,8 @@ This distribution is the result of the Poisson process underlying the generation
 To generate {contigs} we will use [**hifiasm**](https://github.com/chhylp123/hifiasm) assembler. It is a part of the `Assembly with HiC (WF4)` workflow . This workflow uses **hifiasm** (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: [**`gfastats`**](https://github.com/vgl-hub/gfastats), [**`BUSCO`**](https://busco.ezlab.org/) and [**`Merqury`**](https://github.com/marbl/merqury).
 
 ### Launching the workflow
+
+{% snippet faqs/galaxy/workflows_run_ds.md title="Assembly HiFi-HiC phasing (WF4)" dockstore_id="github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main" %}
 
 > <hands-on-title><b>Launching assembly (contiging) workflow</b></hands-on-title>
 >
@@ -409,6 +362,8 @@ An ideal haploid representation would consist of one allelic copy of all heteroz
 
 ### Launching the workflow
 
+{% snippet faqs/galaxy/workflows_run_ds.md title="Purge duplicate contigs (WF6)" dockstore_id="github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main" %}
+
 > <hands-on-title><b>Launching duplicate purging workflow</b></hands-on-title>
 >
 >**Step 1: Identify inputs**
@@ -455,8 +410,10 @@ In this final stage, we will run the **Scaffolding HiC YAHS (WF8)**, which explo
 ### Launching Hi-C scaffolding workflow
 
 > <warning-title>The scaffolding workflow is run on <b>ONE</b> haplotype at a time.</warning-title>
-> Contiging (WF4) and purging (WF6) workflows work with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging -- it hgas to be run independently for each haplotype assembly. In this example (below) we run contiging on hap1 (Primary) assembly only.
+> Contiging (WF4) and purging (WF6) workflows work with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging -- it has to be run independently for each haplotype assembly. In this example (below) we run contiging on hap1 (Primary) assembly only.
 {: .warning}
+
+{% snippet faqs/galaxy/workflows_run_ds.md title="Scaffolding HiC (WF8)" dockstore_id="github.com/iwc-workflows/Scaffolding-HiC-VGP8/main" %}
 
 > <hands-on-title><b>Launching Hi-C scaffolding workflow</b></hands-on-title>
 >
