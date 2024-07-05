@@ -65,7 +65,7 @@ HELP PLEASE: iframe so they can visualise, ideally scroll, and also link out to:
 * Focused on user community development
 * Self-regulated, which includes organising meetings, developing training material and tools, maintaining the Hub and training pages, and choosing a representative for the [Galaxy Community Board](https://galaxyproject.org/community/governance/gcb/)
 * Long-term or transient
-* Supported with administrative infrastructure provided by the Galaxy Project and the [GCB](/community/governance/gcb/), including:
+* Supported with administrative infrastructure provided by the Galaxy Project and the [GCB](https://galaxyproject.org/community/governance/gcb/), including:
   * mailing list
   * website infrastructure and a place on the Galaxy hub to present the Community
   * presentation slot at the annual GCC conference
@@ -129,7 +129,7 @@ If you do not find a SIG that represents your interest, you may want to make one
 
 # Do you need to make a SIG?
 
-Before you make a SIG, make sure that you have learned the basics about Galaxy. Start with our dedicated [**Get Started**](/get-started/) page to get a head-start of what Galaxy is about.
+Before you make a SIG, make sure that you have learned the basics about Galaxy. Start with our dedicated [**Get Started**](https://galaxyproject.org/get-started/) page to get a head-start of what Galaxy is about.
 
 > <comment-title></comment-title>
 > You'll find all the necessary resources and you could even participate in the [**Galaxy Mentorship Network**](https://galaxy-mentor-network.netlify.app/) to get started with the help of a Galaxy Mentor.
