@@ -20,7 +20,7 @@ mode: In-person
 
 registration:
   link: https://docs.google.com/forms/d/e/1FAIpQLSeGHShGhMvFvK0Jf3TNn0xgSMVboabWiTPfP2s3L1iDM0qTzA/viewform
-  deadline: 2024-05-29
+  deadline: 2024-07-29
 
 contributions:
   organisers: [erxleben]
