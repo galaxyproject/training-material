@@ -41,25 +41,37 @@ location:
 # Program of your course
 # Add GTN tutorials by supplying the topic and tutorial name
 program:
-  - section: "Monday: Introduction - from 9:15am to 5pm"  # section title is optional
-    description: "Next you see the shedule for the full week."
+  - section: "Monday: Introduction"  # section title is optional
+    description: |
+      Short description of the program in this section.
+      Markdown formatted
     tutorials:
+      - name: galaxy-intro-short
+        topic: introduction
+        time: "09:00 - 10:00"
+      - name: data-manipulation-olympics
+        topic: introduction
+        time: "10:00"
       - type: custom
-        name: Monday: Introduction and Quality control
-        time: "9:15 - 16:00"
+        name: Coffee Break
+        time: "10:30"
+      - name: data-manipulation-olympics
+        topic: introduction
+        time: "10:45 - 12:00"
+      - name: ansible-galaxy
+        topic: admin
+        time: "13:00"
       - type: custom
-        name: Tuesday: ChIP-Sequencing
-        time: "9:15 - 17:00"
+        name: Custom Session
+        time: "16:00 - 17:00"
+        description: |
+          Description of the custom session here, in markdown, can add
+          [links](https://example.com) if needed
       - type: custom
-        name: Wednesday: RNA-Sequencing
-        time: "9:15 - 17:00"
-      - type: custom
-        name: Thusday: Variant Calling/Exome Seqencing
-        time: "9:15 - 17:00"
-      - type: custom
-        name: Friday: Metagenomics
-        time: "9:15 - 17:00"
-
+        name: Wrap-up & Drinks
+        time: "17:00 - 18:00"
+        description: |
+          Time for some well-deserved drinks and socializing!
 
 ---
 # Welcome to the Comprehensive Galaxy Workshop: From Introduction to Advanced Applications
