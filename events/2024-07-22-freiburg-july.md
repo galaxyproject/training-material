@@ -12,7 +12,7 @@ description: |
 date_start: 2024-07-22
 date_end: 2024-07-26 
 
-# cost: free 
+cost: free 
 # audience: Scientist with no or little Galaxy experience who want to analyse sequencing data.
 # contact_email: erxleben@informatik.uni-freiburg.de
 # async: false 
