@@ -72,16 +72,28 @@ program:
 
 Embark on a deep dive into the world of Galaxy, the leading platform for data-intensive biomedical research. This workshop is designed for researchers, students, and data analysts who wish to harness the full potential of Galaxy in various genomic studies. Whether you're a beginner seeking to understand the basics or an intermediate user looking to refine your skills in specific applications, this workshop offers valuable insights and hands-on experiences.
 
-Topics:
+## Topics:
 
--  Galaxy Introduction and Quality Control
+- Galaxy Introduction and Quality Control
 
--  ChIP-seq Analysis
+- ChIP-seq Analysis
 
 - RNA-seq Analysis
 
--  Variant Calling
+- Variant Calling
 
--  Microbiome Analysis
+- Microbiome Analysis
+
+
+## Learning Objectives:
+
+- To get introduced to Galaxy as data analysis platform and the GTN training material
+- To learn how to use use tools and databases in Galaxy
+- To be able to run different tools and workflows
+
+
+## Registaion
+The number of places in this workshop is limited. The course takes place only in person (not online, not hybrid). There are no fees for the workshop but you need to care for your accommodation, travel costs and catering by yourself.
+
 
 This comprehensive workshop will not only increase your proficiency in using Galaxy but also enhance your ability to conduct sophisticated analyses in various fields of biological research. Connect with experts and peers, gain practical skills, and take your research capabilities to the next level.
