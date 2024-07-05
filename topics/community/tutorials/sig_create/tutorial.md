@@ -23,6 +23,7 @@ contributions:
   authorship:
   - nomadscientist
   editing:
+  - nomadscientist
 abbreviations:
   SIG: Special Interest Group
   CoP: Community of Practice
