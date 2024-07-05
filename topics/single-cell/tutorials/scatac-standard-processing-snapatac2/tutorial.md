@@ -11,7 +11,7 @@ zenodo_link: https://zenodo.org/records/11473531
 questions:
 - What does ATAC-seq data tell us about the cell?
 - Which steps are necessary to cluster the cells of single-cell ATAC-seq data?
-- Why is dimension reduction important for analysis of single-cell data?
+- Why is dimension reduction important for the analysis of single-cell data?
 objectives:
 - Learn how single-cell ATAC-seq data is processed 
 - Create a count-matrix from a 10X fragment file
@@ -52,7 +52,8 @@ By analyzing which genomic sites have an _open_ chromatin state, cell-type speci
 {scATAC-seq} is particularly useful for analyzing tissue containing different cell populations, such as {PBMCs}. 
 
 In this tutorial we will analyze {scATAC-seq} data using the tool suites [SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/index.html) ({% cite Zhang2024 %}) and [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}). 
-With both of these tool suites we will perform preprocessing, clustering and identification of {scATAC-seq} datasets from [10x Genomics](https://www.10xgenomics.com/products/single-cell-atac). The analysis will be performed using a dataset of {PBMCs} containing ~4,620 single nuclei. 
+With both of these tool suites we will perform preprocessing, clustering and identification of {scATAC-seq} datasets from [10x Genomics](https://www.10xgenomics.com/products/single-cell-atac).
+The analysis will be performed using a dataset of {PBMCs} containing ~4,620 single nuclei. 
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
@@ -63,7 +64,7 @@ With both of these tool suites we will perform preprocessing, clustering and ide
 
 > <comment-title></comment-title>
 >
-> This tutorial is significantly based on ["Standard pipeline" tutorial from SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/tutorials/pbmc.html), and can be seen as the {scATAC-seq} counterpart to the scRNA-seq tutorial [Clustering 3K PBMCs with Scanpy]( {% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %} ).
+> This tutorial is significantly based on ["Standard pipeline" tutorial from SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/tutorials/pbmc.html). It can be seen as the {scATAC-seq} counterpart to the scRNA-seq tutorial [Clustering 3K PBMCs with Scanpy]( {% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %} ).
 >
 {: .comment}
 
@@ -78,8 +79,9 @@ With both of these tool suites we will perform preprocessing, clustering and ide
 {: .agenda}
 
 # {scATAC-seq} with 10X Genomics
-ATAC-seq utilizes a hyperactive Tn5 transposase ({% cite Kia2017 %}) to ligate adaptors to genome fragments, created by the transposase. Performing ATAC-seq on individual cells used to be an expensive and time consuming labour. The 10X Chromium NextGEM system made {scATAC-seq} a cost-effective method for gaining high-resolution data with a simple protocol. 
-After transposition of nuclei in bulk, individual nuclei are put into Gel beads in Emulsion (GEM), containing unique 10x cell barcodes and sequencing adaptors for Illumina sequencing. 
+ATAC-seq utilizes a hyperactive Tn5 transposase ({% cite Kia2017 %}) to ligate adaptors to genome fragments, created by the transposase. Performing ATAC-seq on individual cells used to be an expensive and time-consuming labour.
+The 10X Chromium NextGEM system made {scATAC-seq} a cost-effective method for gaining high-resolution data with a simple protocol. 
+After the transposition of nuclei in bulk, individual nuclei are put into Gel beads in Emulsion (GEM), containing unique 10x cell barcodes and sequencing adaptors for Illumina sequencing. 
 ![Library Preparation]({% link topics/single-cell/images/scatac-standard-snapatac2/tenx_libprep_scatac.png %} "An overview of the 10X single-nuclei ATAC-seq library preparation")
 
 
@@ -190,7 +192,8 @@ SnapATAC2 compresses and stores the fragments into an `AnnData` object.
 The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially developed for the [`Scanpy`](https://scanpy.readthedocs.io/en/stable/index.html) package and is now a widely accepted data format to
 store annotated data matrices in a space-efficient manner. 
 
-![Anndata format]({% link topics/single-cell/images/scatac-standard-snapatac2/anndata_schema.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
+![Anndata format]({% link topics/single-cell/images/scatac-standard-snapatac2/anndata_schema.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of
+observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
 
 
 ## Import files to SnapATAC2
@@ -386,7 +389,7 @@ Based on the {TSSe} plot the cells can be filtered by TSSe and fragment counts.
 
 ## Feature selection
 Currently, our AnnData matrix does not contain any variables. The variables will be added in the following step with the function *pp.add_tile_matrix*.
-This creates a cell by bin matrix containing insertion counts across genome-wide 500-bp bins. 
+This creates a cell-by-bin matrix containing insertion counts across genome-wide 500-bp bins. 
 
 After creating the variables, the most accessible features are selected. 
 > <hands-on-title> Select features </hands-on-title>
@@ -407,7 +410,7 @@ After creating the variables, the most accessible features are selected.
 >    >
 >    >  > <details-title> Different number of features </details-title>
 >    >  > - To demonstrate the differences when selecting features, the following UMAP plots are the outputs from processing with a number of features between 1,000 and 500,000. 
->    >  > - Fewer features result in fewer, but larger clusters. And selecting a lot of features will output more granular clusters and the compute time will increase. 
+>    >  > - Fewer features result in fewer, but larger clusters. Selecting a lot of features will output more granular clusters and the compute time will increase. 
 >    >  > ![Different number of features UMAP]({% link topics/single-cell/images/scatac-standard-snapatac2/number_features.png %}"UMAP plots with different selected features")
 >    >  >
 >    >  {: .details}
@@ -514,7 +517,7 @@ Dimension reduction is a very important step during the analysis of single cell 
 >     - **PCA** (Principle Component Analysis), implemented in **Scanpy** (please check out our [Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial for an explanation). 
 > - Nonlinear methods however are well suited for multimodal and complex datasets. 
 >     - in contrast to linear methods, which often preserve global structures, non-linear methods have a locality-preserving character. 
->     - This makes non-linear methods relatively insensitive to outliers and noise, while emphasizing natural clusters in the data ({% cite Belkin2003%})
+>     - This makes non-linear methods relatively insensitive to outliers and noise while emphasizing natural clusters in the data ({% cite Belkin2003%})
 >     - As such, they are implemented in many algorithms to visualize the data in 2 dimensions (f.ex. **UMAP** embedding).
 > - The nonlinear dimension reduction algorithm, through *matrix-free spectral embedding*, used in **SnapATAC2** is a very fast and memory efficient non-linear algorithm ({% cite Zhang2024%}). 
 >     - **Spectral embedding** utilizes an iterative algorithm to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of a matrix without computing the matrix itself. 
@@ -562,7 +565,8 @@ The dimension reduction, produced by the algorithm *tl.spectral*, is required fo
 >
 {: .hands_on}
 ## UMAP embedding
-With the already reduced dimensionality of the data stored in `X_spectral`, the cells can be further embedded (i.e. transformed into lower dimensions) with {UMAP}. **UMAP** projects the cells and their relationship to each other into 2-dimensional space, which can be easily visualized ({% cite McInnes2018%}). 
+With the already reduced dimensionality of the data stored in `X_spectral`, the cells can be further embedded (i.e. transformed into lower dimensions) with {UMAP}.
+**UMAP** projects the cells and their relationship to each other into 2-dimensional space, which can be easily visualized ({% cite McInnes2018%}). 
 
 > <hands-on-title> UMAP embedding </hands-on-title>
 >
@@ -575,7 +579,8 @@ With the already reduced dimensionality of the data stored in `X_spectral`, the 
 {: .hands_on}
 
 # Clustering
-During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* algorithm ({% cite Traag2019%}). This method takes the k-nearest neighbor (KNN) graph as input data and produces well-connected communities. 
+During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* algorithm ({% cite Traag2019%}).
+This method takes the k-nearest neighbor (KNN) graph as input data and produces well-connected communities. 
  
 
 ## Community clustering
@@ -659,7 +664,7 @@ After clustering the cells, they must be annotated. This categorizes the cluster
 Luckily, the marker genes for {PBMCs} are known and can be found in databases such as [PanglaoDB](https://panglaodb.se/markers.html) ({% cite Franzn2019 %}). Thus, we can annotate our clusters manually using known marker genes. 
 
 ## Gene matrix
-Since our data currently doesn't contain gene information, we have to create a cell by gene activity matrix using the function *pp.make_gene_matrix*. 
+Since our data currently doesn't contain gene information, we have to create a cell-by-gene activity matrix using the function *pp.make_gene_matrix*. 
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -698,13 +703,14 @@ Since our data currently doesn't contain gene information, we have to create a c
 
 
 ## Imputation with Scanpy and MAGIC
-Similar to scRNA-seq data, the cell-by-gene-activity matrix is very sparse. Additionally, high gene variance between cells, due to technical confounders, could impact the downstream analysis. In scRNA-seq, filtering and normalization are therefore required to produce a high-quality gene matrix. 
+Similar to scRNA-seq data, the cell-by-gene-activity matrix is very sparse. Additionally, high gene variance between cells, due to technical confounders, could impact the downstream analysis.
+In scRNA-seq, filtering and normalization are therefore required to produce a high-quality gene matrix. 
 
 Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression* matrix of scRNA-seq, we can use the tools of the [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}) tool suite to continue with our data. 
 
 > <details-title>Imputation with MAGIC</details-title>
 >
-> - The count matrices of single-cell data is sparse and noisy. 
+> - The count matrices of single-cell data are sparse and noisy. 
 > - Confounding issues, such as "dropout" effects, where some mRNA or DNA-segments are not detected although they are present in the cell, also result in some cells missing important cell-type defining features. 
 >    - These problems can obscure the data, as only the strongest gene-gene relationships are still detectable. 
 > - The *Markov Affinity-based Graph Imputation of Cells* (MAGIC) algorithm ({%cite vanDijk2018%}) tries to solve these issues by filling in missing data from some cells with transcript information from similar cells. 
@@ -830,7 +836,7 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 > > > <solution-title></solution-title>
 > > >
 > > > 1. Some marker genes, such as `MS4A1` or `LEF1`, are only expressed in a few clusters (clusters 6+11 and clusters 4+7, respectively). 
-> > > 2. The marker genes `TREM1`, `LYZ` and `PPBP` are all expressed in the same clusters (0, 3, 5, 10 and 12). Overlapping expression profiles imply similar cell types since similar cell types have similar marker genes upregulated. The low expression of `PPBP` in particular will make cell type annotation with this marker gene difficult. 
+> > > 2. The marker genes `TREM1`, `LYZ` and `PPBP` are all expressed in the same clusters (0, 3, 5, 10 and 12). Overlapping expression profiles imply similar cell types since similar cell types have similar marker genes upregulated. The low expression of `PPBP` in particular will make cell-type annotation with this marker gene difficult. 
 > > > 
 > > {: .solution}
 > >
