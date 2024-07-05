@@ -26,9 +26,9 @@ contributions:
 
 This tutorial will guide you through the necessary steps to manage and prepare sequencing files (AB1, FASTQ, FASTA) for submission to the genomic database ENA.
 This workflow will take you from raw sequences in AB1 format through all the necessary steps to integrate these sequences into the ENA genomic database. We will convert the files into FASTQ and FASTA formats after performing quality control.
-Additionally, we will perform alignments with the NCBI database to ensure the accuracy of your sequences.You will then need to fill a metadata excel template to use the ENA upload Tool.
-The worklow is made of 17 galaxy tools, we will  present them and explain what they do.
-The goal is to present a accessible and reproductible workflow for data submission.
+Additionally, we will perform alignments with the NCBI database to ensure the accuracy of your sequences.You will then need to fill a metadata Excel template to use the ENA upload Tool.
+The worklow is made of 17 Galaxy tools, we will  present them and explain what they do.
+The goal is to present an accessible and reproductible workflow for data submission.
  
 <!-- This is a comment. -->
 
@@ -195,7 +195,7 @@ The goal is to present a accessible and reproductible workflow for data submissi
 >
 >    > <comment-title> Comment </comment-title>
 >    >
->    > This is to insure that all your files names end with .fastq.gz
+>    > This is to ensure that all your files names end with .fastq.gz
 >    {: .comment}
 >
 {: .hands_on}
@@ -223,12 +223,12 @@ The goal is to present a accessible and reproductible workflow for data submissi
 >
 >    > <comment-title> short description </comment-title>
 >    >
->    > The ENA Database only allows compressed files for submittion
+>    > The ENA Database only allows compressed files for submission
 >    {: .comment}
 >
 {: .hands_on}
 
-## Alignemnts on NCBI database
+## Alignements on NCBI database
 
 > **1. Converting files to fasta format**
 > <hands-on-title> FASTQ to FASTA </hands-on-title>
@@ -317,7 +317,7 @@ The goal is to present a accessible and reproductible workflow for data submissi
 
 ## Adding ENA Webin credentials to your Galaxy user information
 
->    ***TODO***: *Having an ENA Submission Account:Make sure you have a submission account with the European Nucleotide Archive (ENA). You will need the identifier and the password.*
+>    ***TODO***: *Having an ENA Submission Account: Make sure you have a submission account with the European Nucleotide Archive (ENA). You will need the identifier and the password.*
 
 >  <hands-on-title> Add your WEBIN credentials to your Galaxy account </hands-on-title>
 
@@ -366,4 +366,3 @@ For this tutorial we will use the ENA default sample checklist.
 # Conclusion
 
 This tutorial will guide you through analyzing and preparing raw data files for ENA submission. You can then verify that your sequences have been successfully sent by logging into the Test ENA portal (https://wwwdev.ebi.ac.uk/ena/submit/webin/login) and navigating to the Study Report section.
- ![ENA Test server](./images/image5.png "Study Report") 
