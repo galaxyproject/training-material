@@ -16,8 +16,11 @@ cost: free
 audience: Scientist with no or little Galaxy experience who want to analyse sequencing data.
 contact_email: erxleben@informatik.uni-freiburg.de
 # async: false 
-# mode: In-person
+mode: In-person
 
+registration:
+  link: https://docs.google.com/forms/d/e/1FAIpQLSeGHShGhMvFvK0Jf3TNn0xgSMVboabWiTPfP2s3L1iDM0qTzA/viewform
+  deadline: 2024-05-29
 
 contributions:
   organisers: [erxleben]
