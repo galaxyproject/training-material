@@ -41,10 +41,9 @@ location:
 # Program of your course
 # Add GTN tutorials by supplying the topic and tutorial name
 program:
-  - section: "Monday: Introduction"  # section title is optional
+  - section: "Galaxy Freiburg workshop"  # section title is optional
     description: |
-      Short description of the program in this section.
-      Markdown formatted
+      Next you see the shedule for the full week. We will do at least one coffee break in the morning and one in the afternoon, and one 1 h lunch break arount 12 pm. 
     tutorials:
       - name: galaxy-intro-short
         topic: introduction
@@ -62,8 +61,8 @@ program:
         topic: admin
         time: "13:00"
       - type: custom
-        name: Custom Session
-        time: "16:00 - 17:00"
+        name: "Monday: Introduction and Quality control"
+        time: "09:15 - 17:00"
         description: |
           Description of the custom session here, in markdown, can add
           [links](https://example.com) if needed
