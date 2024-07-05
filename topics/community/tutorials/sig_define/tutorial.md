@@ -115,7 +115,7 @@ HELP PLEASE: iframe so they can visualise, ideally scroll, and also link out to:
 
 SIGs send (at least one) representative to the [Galaxy Community Board (GCB)](https://galaxyproject.org/community/governance/gcb/), which meets throughout the year to share useful tips and practices, as well as collects ideas for promoting via the Galaxy Governance structure to enact global change across numerous groups of individuals. Global software development is tricky, and effective communication and representation is key for making things happen to benefit our SIGs.
 
-{% snippet faqs/governance_structure.md %}
+{% snippet topics/community/faqs/governance_structure.md %}
 
 # How to join a SIG
 

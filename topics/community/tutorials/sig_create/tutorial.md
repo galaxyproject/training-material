@@ -63,9 +63,9 @@ Before starting a **SIG**, it's important to be aware of the (rather low) requir
 * Must use at least one public Matrix channel under the Galaxy Matrix space.
 * Must allow participation across different timezones (with the exception of **Regional Communities**).
 
-{% snippet ../faqs/meeting_times.md %}
+{% snippet topics/community/faqs/meeting_times.md %}
 
-{% snippet faqs/governance_structure.md %}
+{% snippet topics/community/faqs/governance_structure.md %}
 
 # Creating a new SIG
 
@@ -78,9 +78,9 @@ Here are the steps for creating a SIG.
 5. Add your SIG & any relevant links to the [SIG directory](https://github.com/galaxyproject/galaxy-hub/blob/master/content/community/sig/index.md)
 6. Send someone to join the Galaxy Community Board, which has tons of resources to support you and also a chat forum on Matrix.
 
-{% snippet faqs/governance_gcb_join.md %}
+{% snippet topics/community/faqs/governance_gcb_join.md %}
 
-{% snippet faqs/governance_gcb.md %}
+{% snippet topics/community/faqs/governance_gcb.md %}
 
 Remember that **SIGs** vary hugely. Some **SIGs** meet and collaborate frequently, while others use their **SIG** to simply provide a key contact individual to represent their group in the Galaxy community. You don't need every link, widget or calendar we create to run a good **SIG**. Just make what fits your group's needs. Above all, think sustainably - someone has to keep things updated, and that someone likely starts with you!
 
