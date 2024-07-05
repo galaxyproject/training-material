@@ -4,9 +4,9 @@ layout: tutorial_hands_on
 
 title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
-zenodo_link1: "https://zenodo.org/records/12591715" 
-zenodo_link2: "https://zenodo.org/records/10362755"
-zenodo_link3: "https://zenodo.org/records/7020318"
+zenodo_link1: https://zenodo.org/records/12591715
+zenodo_link2: https://zenodo.org/records/10362755
+zenodo_link3: https://zenodo.org/records/7020318
 questions:
 - How can we adapt the plots to our research data?
 - How can we filter the data to show only significant information?
@@ -55,7 +55,7 @@ These OTU tables can be generated using various tools on Galaxy:
 >    >
 >    > The Galaxy Training Network provides nice tutorials on this topic, such as 
 	[Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html)
->    >
+>    
 >    {: .comment}
 >
 {: .tip}
@@ -79,9 +79,8 @@ and _phylogenetic_tree_ (in _newick_ format), as well as various combinations th
 
 > <tip-title>Upload .biom file; create a phyloseq file</tip-title>
 >
-> * use your own biom dataset or find one online
-> * we used [Gut Microbiome and Metabolome Modulation by Maternal High-Fat Diet and Thermogenic Challenge](https://zenodo.org/records/7020318)
->
+> * use your own biom dataset or find one online, we used the following:
+> 
 > > <hands-on-title> Download the BIOM dataset with us </hands-on-title>
 > >
 > > 1. Create a new history for this tutorial
@@ -307,6 +306,19 @@ Follow this workflow to create a rarefaction curve.
 {: .hands_on}
 </div>
 
+> <details-title> Error with metadata values while running the workflow </details-title>
+>
+> If a set in history shows red, indicating an error, click on the set to expand it.
+ If it says: "parameter 'vals': an invalid option", then click on the "Run
+ job again" button. The 'values' box will be highlighted in blue; simply select the values again from dropdown
+ menue and click "Run Tool" button above.
+>
+> Additionally, note that the rarefaction curve generation is paused. Once all sets in the history except the heapmap turns
+ green, expand the rarefaction curve set and click "Run job again". You may need to choose the metadata
+ list again, make sure you choose the recently generated one. Click "Run Tool" again.
+> 
+{: .details}
+
 <div class="Long-Version" markdown="1">
 > <hands-on-title> Rarefaction curve workflow steps </hands-on-title>
 >
@@ -466,19 +478,6 @@ Follow this workflow to create a simple heatmap without grouping or faceting dat
 > Result of the heatmap created with ungrouped data.
 > 
 >![Result of the heatmap](./images/heatmap_no_group.png "Result of the heatmap")
-{: .details}
-
-> <details-title> Error with metadata values while running the workflow </details-title>
->
-> If a set in history shows red, indicating an error, click on the set to expand it.
-> If it says: "parameter 'vals': an invalid option", then click on the "Run
-> job again" button. The 'values' box will be highlighted in blue; simply select the values again from dropdown
-> menue and click "Run Tool" button above.
->
-> Additionally, note that the heatmap generation is paused. Once all sets in the history except the heapmap turns
-> green, expand the heapmap set and click "Run job again". You may need to choose the metadata
-> list again, make sure you choose the recently generated one. Click "Run Tool" again.
-> 
 {: .details}
 
 ### Heatmap (grouped)
@@ -851,7 +850,6 @@ As with heatmaps, the subsets are based on variables we define and are available
 
 > <tip-title>Create a different boxplot</tip-title>
 >
-> * use the same data set
 > * set metadata variable = Period and metadata values = Summer & Winter
 >
 > > <details-title> How it will look like </details-title>
