@@ -1,5 +1,6 @@
 ---
 layout: tutorial_hands_on
+priority: 2
 
 title: "Creating a Special Interest Group"
 questions:

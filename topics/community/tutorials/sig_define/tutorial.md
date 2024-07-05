@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-
+priority: 1
 title: "What's a Special Interest Group and should I make one?"
 questions:
   - "What is a Special Interest Group?"
@@ -50,7 +50,7 @@ follow_up_training:
 
 # Special Interest Groups
 
-<div class='right'><img src="/images/undraw-illustrations/mind_map.svg" alt="" width="240" /></div>
+<div class='right'><img src="../images/mind_map.svg" alt="Person looking at a diagram with a central rectangle connected to many other nodes representing people and connections" width="240" /></div>
 
 In Galaxy, the term *[Special Interest Group](/community/sig)* (**SIG**)
 refers to a dedicated scientific community that crosses individual lab boundaries and wants to collaborate, share resources, support each other, and/or collectively advocate on a given theme. We have **SIGs** based on [**region**](/community/sig/#regional-communities), [**domain of science**](/community/sig/#communities-of-practice), and more. You might consider that a **SIG** covers any group of like-minded Galaxy enthusiasts not currently combined into a [**Working Group**](https://galaxyproject.org/community/wg/).
