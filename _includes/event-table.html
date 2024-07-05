@@ -17,7 +17,7 @@
 	  <a class="eventtable-title" href="{% if event.external %}{{event.external}}{% else %}{{site.baseurl}}{{event.url}}{% endif %}{% if include.campaign %}?utm_source=gtn&utm_medium=event-table&utm_campaign={{ include.campaign }}{% endif %}">{{event.title}}{% if event.draft %} (draft, will be hidden) {% endif %}</a>
    <div class="eventtable-description"> {{event.description}} </div>
   </td>
-  <td> {{event.location | format_location_short }} </td>
+  <td> {% if event.location %}{{event.location | format_location_short }} {% endif %} </td>
   <td> {% for org in event.contributions.organisers %}
 			{% include _includes/contributor-badge-inline.html id=org %}
 		{% endfor %}
