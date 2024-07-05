@@ -24,7 +24,7 @@ contributions:
   authorship:
   - nomadscientist
   editing:
-  - nomadscientist
+  - shiltemann
 abbreviations:
   SIG: Special Interest Group
   CoP: Community of Practice
@@ -75,16 +75,17 @@ Before starting a **SIG**, it's important to be aware of the (rather low) requir
 
 Here are the steps for creating a SIG.
 
-1. Copy an updated SIG page (there's a Template in that folder, work in progress!) from here: https://github.com/galaxyproject/galaxy-hub/blob/master/content/community/sig/. We suggest looking through the different SIG pages to see which one has the type of content you would like and copying that one.
+1. Copy an updated SIG page (there's a Template in that folder, work in progress!) [from the Galaxy Community Hub github folder](https://github.com/galaxyproject/galaxy-hub/blob/master/content/community/sig/). We suggest looking through the different SIG pages to see which one has the type of content you would like and copying that one.
 2. Update the text to suit your new SIG
 3. Create a Matrix group within the Galaxy Matrix chat forum space.
 4. (Optional): Create a mailing list for your SIG: https://lists.galaxyproject.org/lists/
 5. Add your SIG & any relevant links to the [SIG directory](https://github.com/galaxyproject/galaxy-hub/blob/master/content/community/sig/index.md)
 6. Send someone to join the Galaxy Community Board, which has tons of resources to support you and also a chat forum on Matrix.
 
-{% snippet topics/community/faqs/governance_gcb_join.md %}
 
-{% snippet topics/community/faqs/governance_gcb.md %}
+    {% snippet topics/community/faqs/governance_gcb.md %}
+
+    {% snippet topics/community/faqs/governance_gcb_join.md %}
 
 Remember that **SIGs** vary hugely. Some **SIGs** meet and collaborate frequently, while others use their **SIG** to simply provide a key contact individual to represent their group in the Galaxy community. You don't need every link, widget or calendar we create to run a good **SIG**. Just make what fits your group's needs. Above all, think sustainably - someone has to keep things updated, and that someone likely starts with you!
 
