@@ -68,7 +68,7 @@ The goal is to present a accessible and reproductible workflow for data submissi
 
 > 4. Run Data Submission Workflow
 >
-https://usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission
+[https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
 >
 {% snippet faqs/galaxy/workflows_run.md%}
 {% snippet faqs/galaxy/workflows_run.md %}
