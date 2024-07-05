@@ -4,9 +4,9 @@ layout: tutorial_hands_on
 
 title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
-zenodo_link1: https://zenodo.org/records/12591715
-zenodo_link2: https://zenodo.org/records/10362755
-zenodo_link3: https://zenodo.org/records/7020318
+zenodo_link: https://zenodo.org/records/12591715
+zenodo_link2: "https://zenodo.org/records/10362755"
+zenodo_link3: "https://zenodo.org/records/7020318"
 questions:
 - How can we adapt the plots to our research data?
 - How can we filter the data to show only significant information?
@@ -306,19 +306,6 @@ Follow this workflow to create a rarefaction curve.
 {: .hands_on}
 </div>
 
-> <details-title> Error with metadata values while running the workflow </details-title>
->
-> If a set in history shows red, indicating an error, click on the set to expand it.
- If it says: "parameter 'vals': an invalid option", then click on the "Run
- job again" button. The 'values' box will be highlighted in blue; simply select the values again from dropdown
- menue and click "Run Tool" button above.
->
-> Additionally, note that the rarefaction curve generation is paused. Once all sets in the history except the heapmap turns
- green, expand the rarefaction curve set and click "Run job again". You may need to choose the metadata
- list again, make sure you choose the recently generated one. Click "Run Tool" again.
-> 
-{: .details}
-
 <div class="Long-Version" markdown="1">
 > <hands-on-title> Rarefaction curve workflow steps </hands-on-title>
 >
@@ -349,6 +336,19 @@ Follow this workflow to create a rarefaction curve.
 >
 {: .hands_on}
 </div>
+
+> <details-title> Error with metadata values while running the workflow </details-title>
+>
+> If a set in history shows red, indicating an error, click on the set to expand it.
+ If it says: "parameter 'vals': an invalid option", then click on the "Run
+ job again" button. The 'values' box will be highlighted in blue; simply select the values again from dropdown
+ menue and click "Run Tool" button above.
+>
+> Additionally, note that the rarefaction curve generation is paused. Once all sets in the history except the heapmap turns
+ green, expand the rarefaction curve set and click "Run job again". You may need to choose the metadata
+ list again, make sure you choose the recently generated one. Click "Run Tool" again.
+> 
+{: .details}
 
 > <details-title> How it will look like </details-title>
 >
@@ -395,7 +395,7 @@ To create a heatmap, ordination plot, or boxplot you can continue with your data
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link1 }}) or from
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
