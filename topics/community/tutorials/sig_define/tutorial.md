@@ -55,6 +55,9 @@ follow_up_training:
 In Galaxy, the term *[Special Interest Group](https://galaxyproject.org/community/sig)* (**SIG**) refers to a dedicated scientific community that crosses individual lab boundaries and wants to collaborate, share resources, support each other, and/or collectively advocate on a given theme. We have **SIGs** based on [**region**](https://galaxyproject.org/community/sig/#regional-communities), [**domain of science**](https://galaxyproject.org/community/sig/#communities-of-practice), and more. You might consider that a **SIG** covers any group of like-minded Galaxy enthusiasts not currently combined into a [**Working Group**](https://galaxyproject.org/community/wg/).
 
 You can find a directory of current [**SIGs** below](https://galaxyproject.org/community/sig/).
+
+<iframe src="https://galaxyproject.org/community/sig/" height="200px" width="400px"></iframe>
+
 HELP PLEASE: iframe so they can visualise, ideally scroll, and also link out to: (https://galaxyproject.org/community/sig/)
 
 ## Characteristics of SIGs
