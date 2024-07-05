@@ -45,32 +45,31 @@ program:
     description: |
       Next you see the shedule for the full week. We will do at least one coffee break in the morning and one in the afternoon, and one 1 h lunch break arount 12 pm. 
     tutorials:
-      - name: galaxy-intro-short
-        topic: introduction
-        time: "09:00 - 10:00"
-      - name: data-manipulation-olympics
-        topic: introduction
-        time: "10:00"
       - type: custom
-        name: Coffee Break
-        time: "10:30"
-      - name: data-manipulation-olympics
-        topic: introduction
-        time: "10:45 - 12:00"
-      - name: ansible-galaxy
-        topic: admin
-        time: "13:00"
+        name: "Monday "
+        time: "09:15 - 16:00"
+        description: |
+          Introduction and Quality control
       - type: custom
-        name: "Monday: Introduction and Quality control"
+        name: "Tuesday "
         time: "09:15 - 17:00"
         description: |
-          Description of the custom session here, in markdown, can add
-          [links](https://example.com) if needed
+          ChIP-Sequencing
       - type: custom
-        name: Wrap-up & Drinks
-        time: "17:00 - 18:00"
+        name: "Wednesday "
+        time: "09:15 - 17:00"
         description: |
-          Time for some well-deserved drinks and socializing!
+          RNA-Sequencing
+      - type: custom
+        name: "Thusday "
+        time: "09:15 - 17:00"
+        description: |
+          Variant Calling/Exome Seqencing
+      - type: custom
+        name: "Friday "
+        time: "09:15 - 17:00"
+        description: |
+          Metagenomics
 
 ---
 # Welcome to the Comprehensive Galaxy Workshop: From Introduction to Advanced Applications
