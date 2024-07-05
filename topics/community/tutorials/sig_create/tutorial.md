@@ -36,10 +36,8 @@ abbreviations:
 
 So you have decided to create a new Special Interest Group (**SIG**)!
 
-
-> <warning​-title>Do not contribute to software smog!</warning​-title>
+> <warning-title>Do not contribute to software smog!</warning-title>
 > Make sure you have read our section [Do you need to make a SIG?]({% link topics/community/tutorials/sig_define/tutorial.md %}#do-you-need-to-make-a-sig) before creating a new **SIG**! Otherwise, you may be re-inventing an existing **SIG**!
->
 {: .warning}
 
 Let's walk you through making a new Galaxy **SIG**!
