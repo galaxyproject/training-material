@@ -1,6 +1,5 @@
 ---
 title: What's the Galaxy Community Board?
-area:
 box_type: details
 layout: faq
 contributors: [nomadscientist]

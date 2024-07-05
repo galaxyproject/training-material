@@ -1,6 +1,5 @@
 ---
 title: How can I plan meetings across timezones?
-area:
 box_type: tip
 layout: faq
 contributors: [nomadscientist]

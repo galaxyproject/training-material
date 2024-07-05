@@ -1,6 +1,5 @@
 ---
 title: How do I join the Galaxy Community Board?
-area:
 box_type: tip
 layout: faq
 contributors: [nomadscientist]

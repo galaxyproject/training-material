@@ -1,6 +1,5 @@
 ---
 title: What is the Galaxy Governance Structure?
-area:
 box_type: details
 layout: faq
 contributors: [nomadscientist]
