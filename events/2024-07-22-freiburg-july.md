@@ -46,4 +46,18 @@ program:
     description: |
       ChIP-Sequencing - from 9:15am to 5pm
 
+  - section: "Wednesday: RNA-Sequencing"
+    description: |
+      RNA-Sequencing - from 9:15am to 5pm
+
+
+  - section: "Thusday: Variant Calling/Exome Seqencing"
+    description: |
+      Variant Calling/Exome Seqencing - from 9:15am to 5pm
+
+
+  - section: "Friday: Metagenomics"
+    description: |
+      Metagenomics/ Foodborne - from 9:15am to 5pm
+
 ---
