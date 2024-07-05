@@ -63,7 +63,7 @@ Before starting a **SIG**, it's important to be aware of the (rather low) requir
 * Must use at least one public Matrix channel under the Galaxy Matrix space.
 * Must allow participation across different timezones (with the exception of **Regional Communities**).
 
-{% snippet faqs/meeting_times.md %}
+{% snippet ../faqs/meeting_times.md %}
 
 {% snippet faqs/governance_structure.md %}
 
