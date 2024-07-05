@@ -20,7 +20,7 @@ mode: In-person
 
 registration:
   link: https://docs.google.com/forms/d/e/1FAIpQLSeGHShGhMvFvK0Jf3TNn0xgSMVboabWiTPfP2s3L1iDM0qTzA/viewform
-  deadline: 2024-07-29
+  deadline: 2024-05-29
 
 contributions:
   organisers: [erxleben]
@@ -42,27 +42,24 @@ location:
 # Add GTN tutorials by supplying the topic and tutorial name
 program:
   - section: "Monday: Introduction - from 9:15am to 5pm"  # section title is optional
-    description: |
-      **Galaxy introduction** - Start with the fundamentals of navigating Galaxy, understanding its core features, and utilizing its tools for data manipulation and analysis
-      **Quality control** -  Learn the importance of quality control and how to implement these practices to ensure the integrity and accuracy of your research data.
+    description: "Next you see the shedule for the full week."
+    tutorials:
+      - type: custom
+        name: Monday: Introduction and Quality control
+        time: "9:15 - 16:00"
+      - type: custom
+        name: Tuesday: ChIP-Sequencing
+        time: "9:15 - 17:00"
+      - type: custom
+        name: Wednesday: RNA-Sequencing
+        time: "9:15 - 17:00"
+      - type: custom
+        name: Thusday: Variant Calling/Exome Seqencing
+        time: "9:15 - 17:00"
+      - type: custom
+        name: Friday: Metagenomics
+        time: "9:15 - 17:00"
 
-  - section: "Tuesday: ChIP-Sequencing - from 9:15am to 5pm"
-    description: |
-      **ChIP-Sequencing** - Explore the techniques and tools available in Galaxy for Chromatin Immunoprecipitation Sequencing (ChIP-seq). This session will guide you through the process of analyzing protein-DNA interactions, essential for understanding regulatory networks and mechanisms in genomics.
-
-  - section: "Wednesday: RNA-Sequencing - from 9:15am to 5pm"
-    description: |
-      **RNA-Sequencing** - Delve into RNA sequencing analysis using Galaxy. Learn how to interpret expression data, compare differential gene expression, and uncover the complexities of transcriptomics in a user-friendly environment.
-
-
-  - section: "Thusday: Variant Calling/Exome Seqencing - from 9:15am to 5pm"
-    description: |
-      **Variant Calling/Exome Seqencing** - Master the methods of variant calling with Galaxy. This part of the workshop focuses on detecting genetic variants from sequencing data, crucial for studies in genetics and personalized medicine.
-
-
-  - section: "Friday: Metagenomics - from 9:15am to 5pm"
-    description: |
-      **Metagenomics/ Foodborne** - Gain expertise in microbiome data analysis. This session introduces tools and workflows to analyze microbial communities, helping you understand microbiome diversity and its implications on health and disease.
 
 ---
 # Welcome to the Comprehensive Galaxy Workshop: From Introduction to Advanced Applications
@@ -91,6 +88,9 @@ Embark on a deep dive into the world of Galaxy, the leading platform for data-in
 - To learn how to use use tools and databases in Galaxy
 - To be able to run different tools and workflows
 
+## Schedule
+
+Please see the Program tab
 
 ## Registaion
 The number of places in this workshop is limited. The course takes place only in person (not online, not hybrid). There are no fees for the workshop but you need to care for your accommodation, travel costs and catering by yourself.
