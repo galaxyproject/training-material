@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 priority: 1
-title: "What's a Special Interest Group and should I make one?"
+title: "What's a Special Interest Group?"
 questions:
   - "What is a Special Interest Group?"
   - "What is the purpose of a Special Interest Group?"
@@ -128,21 +128,6 @@ You can find out how to join any given SIG by going to their SIG page, which you
 {: .comment}
 
 If you do not find a SIG that represents your interest, you may want to make one!
-
-# Do you need to make a SIG?
-
-Before you make a SIG, make sure that you have learned the basics about Galaxy. Start with our dedicated [**Get Started**](https://galaxyproject.org/get-started/) page to get a head-start of what Galaxy is about.
-
-> <comment-title></comment-title>
-> You'll find all the necessary resources and you could even participate in the [**Galaxy Mentorship Network**](https://galaxy-mentor-network.netlify.app/) to get started with the help of a Galaxy Mentor.
-{: .comment}
-
-Starting and running a **SIG** takes time and effort, so it's a good idea to make sure that:
-
- 1. **You have a buddy** Do you already have someone who wants to join this community and help build it with you? There's no sense in starting a **SIG** of one!
- 2. **You are committed** We have resources to help you and are constantly trying to make running a **SIG** easier, but it nevertheless takes time. You don't want to start a **SIG** and then fail to maintain it.
-
-Saying that, running a **SIG** can be deeply rewarding when you see people coming together across disciplines, institutes, and more to find synergy and make cool things happen together.
 
 # Conclusion
 

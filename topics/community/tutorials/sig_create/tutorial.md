@@ -36,9 +36,24 @@ abbreviations:
 
 So you have decided to create a new Special Interest Group (**SIG**)!
 
-> <warning-title>Do not contribute to software smog!</warning-title>
-> Make sure you have read our section [Do you need to make a SIG?]({% link topics/community/tutorials/sig_define/tutorial.md %}#do-you-need-to-make-a-sig) before creating a new **SIG**! Otherwise, you may be re-inventing an existing **SIG**!
-{: .warning}
+# Do you need to make a SIG?
+
+Before you make a SIG, make sure that you have learned the basics about Galaxy. Start with our dedicated [**Get Started**](https://galaxyproject.org/get-started/) page to get a head-start of what Galaxy is about.
+
+> <comment-title></comment-title>
+> You'll find all the necessary resources and you could even participate in the [**Galaxy Mentorship Network**](https://galaxy-mentor-network.netlify.app/) to get started with the help of a Galaxy Mentor.
+{: .comment}
+
+Starting and running a **SIG** takes time and effort, so it's a good idea to make sure that:
+
+ 1. **You have a buddy** Do you already have someone who wants to join this community and help build it with you? There's no sense in starting a **SIG** of one!
+ 2. **You are committed** We have resources to help you and are constantly trying to make running a **SIG** easier, but it nevertheless takes time. You don't want to start a **SIG** and then fail to maintain it.
+
+ > <warning-title>Do not contribute to software smog!</warning-title>
+ > Do not create a SIG that you cannot sustain! Do not create a SIG that already exists!
+ {: .warning}
+
+Saying that, running a **SIG** can be deeply rewarding when you see people coming together across disciplines, institutes, and more to find synergy and make cool things happen together.
 
 Let's walk you through making a new Galaxy **SIG**.
 
@@ -111,7 +126,7 @@ If you collectively decide that the **SIG** is no more, please end your SIG.
 > 1. Update the [SIG Directory on the Hub](https://galaxyproject.org/community/sig/)
 > 2. Remove your individual SIG page from the Hub
 > 3. Notify the [Galaxy Community Board](https://galaxyproject.org/community/governance/gcb/), ideally via their chat channel
-> 
+>
 {: .hands_on}
 
 # Conclusion
