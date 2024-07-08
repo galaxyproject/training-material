@@ -19,4 +19,8 @@ contributions:
   - mblue9
 date_start: 2024-07-24
 date_end: 2024-07-26
+location:
+  name:  Van Andel Institute
+  city: Grand Rapids, MI
+  country: USA 
 ---
