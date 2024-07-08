@@ -18,8 +18,11 @@ key_points:
 contributions:
     authorship:
         - Najatamk
-    translation:
-        - Najatamk
+    testing:
+        - PaulineSGN
+        - yvanlebras
+    funding:
+    - pndb
 
 ---
 
