@@ -12,4 +12,4 @@ contributors: [nomadscientist]
 
 *Time-saving tip*: If you meet every 2 months, you can set up 3 recurring calendar events for each time chosen to recur every 6 months. It's automatic, it's inclusive, and it's less effort!
 
-<img src="../faqs/timezones.png" alt="Time zone map showing England, California, and eastern Australia timezones, with three circles around times that include 2 of the 3 timezones during working hours" style="height:400px;">
+!​[Time zone map showing England, California, and eastern Australia timezones, with three circles around times that include 2 of the 3 timezones during working hours]( {% link topics/community/images/timezones.png %} style="height:400px;")
