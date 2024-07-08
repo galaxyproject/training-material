@@ -21,9 +21,9 @@ contributions:
   - shiltemann
   infrastructure:
   - bgruening
-cover_image: events/images/TBCAPT_NGS_Training_banner.jpg
-cover_image_alt: banner image for the mTB training event showing the name of the course over a background of a touchscreen showing data
-tutorial: https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html
+cover: events/images/TBCAPT_NGS_Training_banner.jpg
+coveralt: banner image for the mTB training event showing the name of the course over a background of a touchscreen showing data
+tutorial: topics/evolution/tutorials/mtb_phylogeny/tutorial.html
 link: https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html#overview
 ---
 Tuberculosis (TB) is a big killer in many countries of the world, particularly in those with low and middle income. Next-generation sequencing has been key in improving our understanding of drug resistance acquisition and of transmission of _Mycobacterium tuberculosis_. Yet, the need for expertise guiding NGS implementation in laboratories and the lack of bioinformatic expertise, are main obstacles hindering the implementation of NGS into TB programs.
