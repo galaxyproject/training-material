@@ -15,7 +15,7 @@ objectives:
 time_estimation: "30m"
 key_points:
   - "Special Interest Groups are a commitment to create and sustain."
-  - "There are centarlised resources to help support running a Special Interest Group."
+  - "There are centralised resources to help support running a Special Interest Group."
   - "SIGs are joyous places for like-minded scientists to interact and share expertise."
 requirements:
 -
