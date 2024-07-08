@@ -2,7 +2,8 @@
 layout: event-external
 google_form_id: 1720188640
 title: Bioconductor North American conference (BioC2024)
-description: BioC2024 is the 2024 edition of the annual North American Bioconductor
+description: |
+  BioC2024 is the 2024 edition of the annual North American Bioconductor
   conference dedicated to the bioinformatics community, highlighting R. The conference
   is tailored for both experienced researchers and those new to the field, offering
   a rich mix of learning, networking, and innovation from a wide range of experts
