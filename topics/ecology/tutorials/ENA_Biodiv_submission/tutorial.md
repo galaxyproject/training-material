@@ -64,7 +64,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 > 
 {: .tip}
 
-> 4. Run Data Submission Workflow
+> 4. Run Prepare Data Submission Workflow
 >
 [https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
 >
@@ -74,7 +74,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 
 >
 
-# Tools used in the Data submission Workflow
+# Tools used in the "Prepare Data submission" Workflow
 
 ## **Converting Ab1 files to Fastq**
 
@@ -96,7 +96,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
 >
->    ***TODO***: *Check on the HTLM files the general quality statistics of your sequences*
+>    ***TODO***: *Check on the HTML files the general quality statistics of your sequences*
 >
 {: .hands_on}
 
@@ -314,14 +314,14 @@ The goal is to present an accessible and reproductible workflow for data submiss
 
 # 2. How to use ENA upload Tool
 
-## Adding ENA Webin credentials to your Galaxy user information
+## Adding ENA "Webin" credentials to your Galaxy user information
 
 >    ***TODO***: *Having an ENA Submission Account: Make sure you have a submission account with the European Nucleotide Archive (ENA). You will need the identifier and the password.*
 
->  <hands-on-title> Add your WEBIN credentials to your Galaxy account </hands-on-title>
+>  <hands-on-title> Add your "WEBIN" credentials to your Galaxy account </hands-on-title>
 
 >  **Instructions:**
->	- From the Menu, click on "User" > "Preferences". Click on "Manage Information". Scroll down to "Your ENA Webin account details" and enter your ENA Webin identifier and password.
+>	- From the Menu, click on "User" > "Preferences". Click on "Manage Information". Scroll down to "Your ENA Webin account details" and enter your ENA "Webin" identifier and password.
 
 >![Adding ENA Webin credentials](./images/imageI.png)
 
@@ -350,7 +350,7 @@ For this tutorial we will use the ENA default sample checklist.
 > <hands-on-title> ENA Upload Tool </hands-on-title>
 
 > 1. {% tool [ENA Upload tool](https://toolshed.g2.bx.psu.edu/view/iuc/ena_upload/5cb6146337d8) %} with the following parameters:
-> - *"Action to execute"**: `Add new (meta)data`
+> - *"Action to execute"*: `Add new (meta)data`
 > - *"Select the metadata input method"*: `Excel file`
 > - *"Select the ENA sample checklist"*: `ENA default sample checklist (ERC000011)`
 > - *"Select input data"*: `Dataset or dataset collection`
@@ -365,4 +365,4 @@ For this tutorial we will use the ENA default sample checklist.
 
 # Conclusion
 
-This tutorial will guide you through analyzing and preparing raw data files for ENA submission. You can then verify that your sequences have been successfully sent by logging into the Test ENA portal (https://wwwdev.ebi.ac.uk/ena/submit/webin/login) and navigating to the Study Report section.
+This tutorial guides you through quality check and preparing raw data files for ENA submission. You can then verify that your sequences have been successfully sent by logging into the Test ENA portal (https://wwwdev.ebi.ac.uk/ena/submit/webin/login) and navigating to the Study Report section.
