@@ -672,6 +672,7 @@ module TopicFilter
           'workflow' => wf,
           'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length.positive?,
           'url' => "#{domain}/#{folder}/workflows/#{wf}",
+          'url_html' => "#{domain}/#{folder}/workflows/#{wf.gsub(/.ga$/, '.html')}",
           'path' => wf_path,
           'wfid' => wfid,
           'wfname' => wfname,
@@ -1124,6 +1125,13 @@ module Jekyll
 
     def list_materials_structured(site, topic_name)
       TopicFilter.list_materials_structured(site, topic_name)
+    end
+
+    def list_materials_flat(site, topic_name)
+      TopicFilter
+        .list_materials_structured(site, topic_name)
+        .map { |k, v| v['materials'] }
+        .flatten
     end
 
     def list_all_tags(site)

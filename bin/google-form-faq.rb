@@ -17,7 +17,7 @@ data.each do |row|
   # Parse
   # 29/01/2024 14:04:47
   post_date = DateTime.strptime(row['Timestamp'], '%d/%m/%Y %H:%M:%S')
-  filename = "faqs/galaxy/#{row['Title'].downcase.gsub(/ /, '-').gsub(/[^a-z0-9\s-]/i, '')}.md"
+  filename = "faqs/#{row['This FAQ Concerns'].downcase}/#{row['Title'].downcase.gsub(/[^a-z0-9\s-]/i, '').gsub(/\s+/, ' ').gsub(/ /, '-')}.md"
 
   # Skip some testing posts
   if (row['Title'] == 'TESTING')

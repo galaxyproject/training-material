@@ -1,9 +1,11 @@
 ---
 title: Creating a GTN FAQ
+description: An explanation on how to create a GTN faq
 area: contributors
 layout: faq
 box_type: tip
 contributors: [hexylena]
+description: "If you have a snippet of knowledge that is reusable, we recommend you to share with the GTN community, and we encourage you to create an FAQ for it!"
 ---
 
 If you have a snippet of knowledge that is reusable, we recommend you to share with the GTN community, and we encourage you to create an FAQ for it!
@@ -27,7 +29,7 @@ box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]
 ---
-{% endraw %}
+
 
 - To review all active Datasets in your account, go to **User > Datasets**.
 
@@ -36,3 +38,4 @@ Notes:
 - If you have more than one browser window open, each with a different Galaxy History loaded, the Upload tool will load data into the most recently used history.
 - Click on refresh icon {% icon galaxy-refresh %} at the top of the History panel to display the current active History with the datasets.
 ```
+{% endraw %}

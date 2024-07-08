@@ -33,7 +33,7 @@ When something goes wrong in Galaxy, there are a number of things you can do to 
 
 5. **Ask for help!**
    - Where?
-     {% if include.sc %}- In the [Single cell user community](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im)
+     {% if include.sc %}- In the [User community chatspace in Slack]({{site.slack.invite_link}}) in our [#single-cell-users]({{site.slack.single_cell_channel}}) channel
      {% endif %}- In the [GTN Matrix Channel](https://gitter.im/Galaxy-Training-Network/Lobby)
      - In the [Galaxy Matrix Channel](https://gitter.im/galaxyproject/Lobby)
      - Browse the [Galaxy Help Forum](https://help.galaxyproject.org/) to see if others have encountered the same problem before (or post your question).
