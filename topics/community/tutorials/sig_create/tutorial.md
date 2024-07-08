@@ -14,8 +14,9 @@ objectives:
   - "Be aware of resources for expanding your Special Interest Group"
 time_estimation: "30m"
 key_points:
-  - "You can highlight questions, tools and hints with a special syntax"
-  - "Self-learning can be done by questions and hidden answers"
+  - "Special Interest Groups are a commitment to create and sustain."
+  - "There are centarlised resources to help support running a Special Interest Group."
+  - "SIGs are joyous places for like-minded scientists to interact and share expertise."
 requirements:
 -
     type: "internal"
