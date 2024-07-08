@@ -48,8 +48,8 @@ The goal is to present an accessible and reproductible workflow for data submiss
 > 2. Import the files.
 > 
 >    ```
->    https://data.indores.fr/api/access/datafile/3596 : 
->    https://data.indores.fr/api/access/datafile/3627 : 
+>    https://data.indores.fr/api/access/datafile/3596
+>    https://data.indores.fr/api/access/datafile/3627 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
