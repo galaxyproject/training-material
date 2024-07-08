@@ -54,6 +54,9 @@ data.each do |row|
     'contributions' => {
        'organisers' => row['Organizers already in the GTN CONTRIBUTORS file'].split(',').map(&:strip)
     },
+    'location' => {
+        'name' => row['Location of the event']
+    },
     'date_start' => event_date.to_date,
   }
 
