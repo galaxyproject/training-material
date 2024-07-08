@@ -45,8 +45,6 @@ The goal is to present an accessible and reproductible workflow for data submiss
 > 1. Create a new history for this tutorial
 {% snippet faqs/galaxy/histories_create_new.md %}
 >
-{% snippet faqs/galaxy/histories_rename.md %}
-
 > 2. Import the files.
 > 
 >    ```
@@ -71,7 +69,6 @@ The goal is to present an accessible and reproductible workflow for data submiss
 [https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
 >
 {% snippet faqs/galaxy/workflows_run.md%}
-{% snippet faqs/galaxy/workflows_run.md %}
 >
 > ![Data submission Workflow](./images/image7.PNG)
 
@@ -81,7 +78,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 
 ## **Converting Ab1 files to Fastq**
 
-> We use Ab1 to Fastq converter to convert the sequences from AB1 format to FASTQ format.
+> We use **Ab1 to Fastq converter** to convert the sequences from AB1 format to FASTQ format.
 
 
 ## **Quality Control**
@@ -132,7 +129,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 
 >    > <comment-title> Quality Control </comment-title>
 >    >
->    > We do a second quality control similar to the first one to check the quality of our sequences after cleaning them.
+>    > We do a second quality control similar to the first one to check the quality of the sequences after cleaning them.
 >    {: .comment}
 >
 > **2.Quality Control with FASTQC and MultiQC**
@@ -172,7 +169,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 >    > <comment-title> Comment </comment-title>
 >    >
->    > Here we descide to keep only sequences of 300bp or above, you may change this parameter depending on your dataset
+>    > Here we descide to only keep sequences of 300bp or above, you may change this parameter depending on your dataset
 >    {: .comment}
 >
 {: .hands_on}
@@ -205,6 +202,8 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 > 1. {% tool [Paste](Paste1) %} 
 >     ***TODO***: *Make sure the output file's datatype is 'tabular' if not change it.*
+>   {% snippet faqs/galaxy/datasets_change_datatype.md%}
+> 
 {: .hands_on}
 
 
