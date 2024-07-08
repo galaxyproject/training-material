@@ -6,12 +6,10 @@ questions:
   - "What is a Special Interest Group?"
   - "What is the purpose of a Special Interest Group?"
   - "How are Special Interest Groups represented in Galaxy?"
-  - "Do I need to make a Special Interest Group?"
 objectives:
   - "Define 'Special Interest Group'"
   - "Explain the purpose of Special Interest Groups"
   - "Learn how Special Interest Groups interact with the Galaxy governance"
-  - "Determine whether you need a Galaxy Special Interest Group"
 time_estimation: "15m"
 key_points:
   - "Special Interest Groups are groups of like-minded Galaxy enthusiasts that enable global collaboration"

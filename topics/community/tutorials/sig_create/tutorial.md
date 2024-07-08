@@ -4,10 +4,12 @@ priority: 2
 
 title: "Creating a Special Interest Group"
 questions:
+  - "Do I need to make a Special Interest Group?"
   - "What are the requirements for a Special Interest Group?"
   - "How can I create a Special Interest Group?"
   - "Where can I go to find Special Interest Group resources?"
 objectives:
+  - "Determine whether you need a Galaxy Special Interest Group"
   - "Create a Special Interest Group"
   - "Be aware of resources for expanding your Special Interest Group"
 time_estimation: "30m"
