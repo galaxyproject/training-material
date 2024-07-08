@@ -10,19 +10,19 @@ tags:
 from_google_form: true
 contributions:
   authorship:
-  - Daniela Brites
-  - Christoph Stritt
-  - Andrea Cabibbe
-  - Arash Ghodousi
-  - Peter van Heusden
-  - Liliana Rutaihwa
-  - Galo A. Goig
+  - dbrites
+  - cstritt
+  - andreacabibbe
+  - arashghodousi
+  - pvanheus
+  - lilianarutaihwa
+  - GaloGS
   testing:
-  - Saskia Hiltemann
+  - shiltemann
   infrastructure:
-  - Björn Grüning
-cover_image: https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html#overview
-cover_image_alt: 
+  - bgruening
+cover_image: events/images/TBCAPT_NGS_Training_banner.jpg
+cover_image_alt: banner image for the mTB training event showing the name of the course over a background of a touchscreen showing data
 tutorial: https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html
 link: https://training.galaxyproject.org/training-material/events/2024-06-10-mtb-ngs.html#overview
 ---
@@ -30,6 +30,6 @@ Tuberculosis (TB) is a big killer in many countries of the world, particularly i
 
 We have conceived a training combining pre-recorded webinars and hands-on bioinformatics tutorials, to present state-of-art TB-specific solutions for generating NGS data and its analysis.
 
-On June 10-14th, we delivered the 4th edition of the training to circa 40 people from all over the world, who autonomously followed the webinars and hands-on bioinformatics tutorials and interacted with a panel of experts via real-time chat and live discussion sessions.
+On June 10-14th, we delivered the [4th edition of the training]({% link events/2024-06-10-mtb-ngs.md %}) to circa 40 people from all over the world, who autonomously followed the webinars and hands-on bioinformatics tutorials and interacted with a panel of experts via real-time chat and live discussion sessions.
 
 Thank you Galaxy!
