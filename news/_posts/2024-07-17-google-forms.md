@@ -8,8 +8,12 @@ tags:
 contributions:
   authorship:
   - hexylena
+  - shiltemann
   infrastructure:
+  - shiltemann
   - hexylena
+cover: news/images/2024-google-forms.png
+coveralt: A screenshot of the GTN Google Form for news contributions. The form is titled "GTN News" and has fields for "Title", with a screenshot of a galaxy single cell news post as the header image.
 ---
 
 Since the last time we [announced GTN news posting via Google Form]({{ site.baseurl }}/news/2024/01/29/simplified-gtn-news-submission-via-google-form.html), we've found that this has been an excellent fit for the community and decided to greatly expand the use of Google Forms for GTN contributions.
