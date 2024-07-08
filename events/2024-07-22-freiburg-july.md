@@ -12,6 +12,7 @@ description: |
 date_start: 2024-07-22
 date_end: 2024-07-26 
 
+
 cost: free 
 audience: Scientist with no or little Galaxy experience who want to analyse sequencing data.
 contact_email: erxleben@informatik.uni-freiburg.de
@@ -21,6 +22,7 @@ mode: In-person
 registration:
   link: https://docs.google.com/forms/d/e/1FAIpQLSeGHShGhMvFvK0Jf3TNn0xgSMVboabWiTPfP2s3L1iDM0qTzA/viewform
   deadline: 2024-05-29
+
 
 contributions:
   organisers: [erxleben]
@@ -73,9 +75,6 @@ program:
 
 ---
 # Welcome to the Comprehensive Galaxy Workshop: From Introduction to Advanced Applications
-
-
-
 
 Embark on a deep dive into the world of Galaxy, the leading platform for data-intensive biomedical research. This workshop is designed for researchers, students, and data analysts who wish to harness the full potential of Galaxy in various genomic studies. Whether you're a beginner seeking to understand the basics or an intermediate user looking to refine your skills in specific applications, this workshop offers valuable insights and hands-on experiences.
 
