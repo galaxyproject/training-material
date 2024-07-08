@@ -339,7 +339,8 @@ For this tutorial we will use the ENA default sample checklist.
 >
 >  <comment-title> ENA Metadata Templates </comment-title>
 > >
-> > You can find metadata templates for each checklist at: [ENA Metadata Templates](https://github.com/ELIXIR-Belgium/E>> {: .comment}
+> > You can find metadata templates for each checklist at:(https://github.com/ELIXIR-Belgium/ENA-metadata-templates)
+> {: .comment}
 > >
 > > You will need to import this file into your Galaxy history. Then, use the ENA Upload Tool to proceed with the submission.
 > {: .comment}
