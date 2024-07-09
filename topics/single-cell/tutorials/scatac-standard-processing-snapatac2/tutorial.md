@@ -18,7 +18,7 @@ objectives:
 - Perform filtering, dimension reduction and clustering on AnnData matrices
 - Generate and filter a cell-by-gene matrix
 - Identify marker genes for the clusters and annotate the cell types
-time_estimation: 2H
+time_estimation: 4H
 key_points:
 - Single-cell ATAC-seq can identify open chromatin sites
 - Dimension reduction is required to simplify the data while preserving important information about the relationships of cells to each other.   
@@ -591,7 +591,7 @@ This method takes the k-nearest neighbor (KNN) graph as input data and produces 
 >
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute a neighborhood graph of observations, using 'pp.knn'`
->        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC umap` (output of **tl.umap** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC UMAP` (output of **tl.umap** {% icon tool %})
 >
 > 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Cluster cells into subgroups, using 'tl.leiden'`
@@ -744,18 +744,18 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 > 4. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata log1p` (output of **log1p** {% icon tool %})
 >    - *"Method used for normalization"*: `Denoising using Markov Affinity-based Graph Imputation of Cells (MAGIC) API 'external.pp.magic'`
->        - *"Denoised genes to return"*: `PCA only`
+>        - *"Denoised genes to return"*: `All genes`
 >        - *"Which solver to use"*: `"approximate", is faster that performs imputation in the PCA space and then projects back to the gene space`
 >
 >    > <warning-title>Large output files!</warning-title>
 >     >   - The settings are important for this step!
->     >   - The setting `Denoised genes to return: 'All genes'` produces a very large output file
->     >      - **57.4 GB** compared to **1.5 GB** with `PCA only`
->     >   - The compute time for `Which solver to use: 'exact'` is very long and not necessary for our purposes. 
+>     >   - The setting `Which solver to use: 'exact'` produces a very large output file
+>     >      - **57.4 GB** compared to **2.2 GB** with `'approximate'`
+>     >      - Additionally, the compute time is very long and the better resolution of the output is not necessary for our purposes. 
 >     >
 >     {: .warning}
 >
-> 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic` or add the tag {% icon galaxy-tags %} `magic` to the dataset
+> 5. Rename the generated file to `Anndata 5k PBMC magic` or add the tag {% icon galaxy-tags %} `magic` to the dataset
 >
 > 6. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
@@ -789,7 +789,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 > <hands-on-title> Copy UMAP embedding </hands-on-title>
 >
 > 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Anndata 5k PBMC gene_matrix magic` (output of **external.pp.magic** {% icon tool %})
+>    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Anndata 5k PBMC magic` (output of **external.pp.magic** {% icon tool %})
 >    - *"Copy embeddings (such as UMAP, tSNE)"*: `Yes`
 >       - *"Keys from embeddings to copy"*: `X_umap`
 >       - {% icon param-file %} *"IAnnData objects with embeddings to copy"*: `Anndata 5k PBMC leiden`
@@ -802,7 +802,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >    > - It is also possible to leave the input *"Keys from embeddings to copy"* empty, to copy all annotations of a given category such as `obsm`. 
 >    {: .comment}
 >
-> 5. Rename the generated file to `Anndata 5k PBMC gene_matrix magic UMAP` or add the tag {% icon galaxy-tags %} `UMAP` to the dataset
+> 5. Rename the generated file to `Anndata 5k PBMC magic UMAP` or add the tag {% icon galaxy-tags %} `UMAP` to the dataset
 >
 > 6. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output, to check if `obsm` contains `X_umap`
 >  
@@ -838,8 +838,8 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. Some marker genes, such as `MS4A1` or `LEF1`, are only expressed in a few clusters (clusters 6+11 and clusters 4+7, respectively). 
-> > > 2. The marker genes `TREM1`, `LYZ` and `PPBP` are all expressed in the same clusters (0, 3, 5, 10 and 12). Overlapping expression profiles imply similar cell types since similar cell types have similar marker genes upregulated. The low expression of `PPBP` in particular will make cell-type annotation with this marker gene difficult. 
+> > > 1. Some marker genes, such as `MS4A1` or `CD8A`, are only expressed in a few clusters (clusters 6+11 and clusters 1+8, respectively). 
+> > > 2. The marker gene `CD3D` is expressed in multiple clusters (1, 2, 4, 7 and 8). Overlapping expression profiles imply similar cell types since similar cell types have similar marker genes upregulated. In this case, `CD3D` expression classifies the cells in these clusters as T-cells. 
 > > > 
 > > {: .solution}
 > >
