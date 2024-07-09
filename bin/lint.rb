@@ -394,6 +394,22 @@ module GtnLinter
       end
   end
 
+  def self.bad_zenodo_links(contents)
+    find_matching_texts(contents, /https:\/\/zenodo.org\/api\//)
+      .reject { |_idx, _text, selected| _text =~ /files-archive/ }
+      .map do |idx, _text, selected|
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0) + 1,
+          replacement: nil,
+          message: 'Please do not use zenodo.org/api/ links, instead it should look like zenodo.org/records/id/files/<filename>',
+          code: 'GTN:040'
+        )
+      end
+  end
+
   def self.snippets_too_close_together(contents)
     prev_line = -2
     res = []
@@ -822,6 +838,7 @@ module GtnLinter
       *check_bad_heading_order(contents),
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
+      *bad_zenodo_links(contents),
       *zenodo_api(contents),
       *empty_alt_text(contents),
       *check_bad_trs_link(contents),

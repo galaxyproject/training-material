@@ -25,9 +25,9 @@ Want to record one of our tutorials? **We welcome video recordings from everybod
 
 Please checkout out our FAQs with instructions for adding your own recordings:
 
-<a href="{% link faqs/gtn/recordings_add.md %}"><button type="button" class="btn btn-info">Submitting Recordings to the GTN</button></a>
+[Submitting Recordings to the GTN]({% link faqs/gtn/recordings_add.md %}){: .btn.btn-info}
 
-<a href="{% link faqs/gtn/recordings_create.md %}"><button type="button" class="btn btn-info">Recording Tips & Tricks</button></a>
+[Recording Tips & Tricks]({% link faqs/gtn/recordings_create.md %}){: .btn.btn-info}
 
 ## What this means for...
 
@@ -42,7 +42,7 @@ GTN Editors & Maintainers    | When a recording is submitted, a pull request wil
 
 This work is based on the work done during the @gtn:gallantries project and the [Video Library 1.0]({{ site.baseurl }}/news/2021/11/23/video-library.html). As that project ended, the features developed during that time have now been rolled into the GTN to ensure their long term sustainability
 
-The number of videos and hours is slightly lower in the GTN version as we have not yet imported every recording, currently we are missing some recordings which are not directly associated with a GTN material (e.g. webinars). 
+The number of videos and hours is slightly lower in the GTN version as we have not yet imported every recording, currently we are missing some recordings which are not directly associated with a GTN material (e.g. webinars).
 
 
 [^1]: They must be a recording of a GTN tutorial being taught. We are not accepting recordings of other training events at this time.

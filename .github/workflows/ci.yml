@@ -71,7 +71,7 @@ jobs:
 
       - name: Ensure no poorly rendered FAQs, generally this is fixed by removing whitespace/blank lines from the frontmatter
         run: |
-          ! fgrep -R 'box_type:' _site/
+          ! fgrep -R -A2 -B2 'box_type:' _site/
 
       - name: Ensure no poorly indented code blocks
         run: |
