@@ -190,7 +190,7 @@ Now that our data and workflows are imported, we can run our first workflow. Bef
 
 ### Launching the workflow
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Genome profile analysis (WF1)" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Genome profile analysis (WF1)" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
 
 > <hands-on-title><b>Running <i>K</i>-mer profile analysis workflow</b></hands-on-title>
 >
@@ -241,7 +241,7 @@ To generate {contigs} we will use [**hifiasm**](https://github.com/chhylp123/hif
 
 ### Launching the workflow
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Assembly HiFi-HiC phasing (WF4)" dockstore_id="github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Assembly HiFi-HiC phasing (WF4)" dockstore_id="github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main" version="v0.1.10" %}
 
 > <hands-on-title><b>Launching assembly (contiging) workflow</b></hands-on-title>
 >
@@ -361,7 +361,7 @@ An ideal haploid representation would consist of one allelic copy of all heteroz
 
 ### Launching the workflow
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Purge duplicate contigs (WF6)" dockstore_id="github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Purge duplicate contigs (WF6)" dockstore_id="github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main" version="v0.3.8" %}
 
 > <hands-on-title><b>Launching duplicate purging workflow</b></hands-on-title>
 >
@@ -412,7 +412,7 @@ In this final stage, we will run the **Scaffolding HiC YAHS (WF8)**, which explo
 > Contiging (WF4) and purging (WF6) workflows work with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging -- it has to be run independently for each haplotype assembly. In this example (below) we run contiging on hap1 (Primary) assembly only.
 {: .warning}
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Scaffolding HiC (WF8)" dockstore_id="github.com/iwc-workflows/Scaffolding-HiC-VGP8/main" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Scaffolding HiC (WF8)" dockstore_id="github.com/iwc-workflows/Scaffolding-HiC-VGP8/main" version="v0.2.4" %}
 
 > <hands-on-title><b>Launching Hi-C scaffolding workflow</b></hands-on-title>
 >
