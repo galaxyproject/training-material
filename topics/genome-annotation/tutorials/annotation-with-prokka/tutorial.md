@@ -35,6 +35,17 @@ follow_up_training:
     topic_name: genome-annotation
     tutorials:
       - apollo
+
+recordings:
+- captioners:
+  - abretaud
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 20M
+  youtube_id: B8pIQZPf21Y
+  speakers:
+  - abretaud
+
 ---
 
 In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.
@@ -98,7 +109,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 
 > <hands-on-title>Visualize the annotation</hands-on-title>
 >
-> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters
 >    - *"Reference genome to display"*: `Use a genome from history`
 >       - {% icon param-file %} *"Select the reference genome"*: `fna` output of {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %}
 >

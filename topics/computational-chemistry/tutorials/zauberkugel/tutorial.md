@@ -76,7 +76,7 @@ Firstly, we will retrieve the concatenated ePharmaLib subset representing *P. fa
 >
 > 1. Upload the dataset from the [Zenodo](https://zenodo.org) link provided to your Galaxy history.
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md link="hhttps://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md link="https://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar" %}
 >
 >    > <comment-title>ePharmaLib versions</comment-title>
 >    >
@@ -123,9 +123,9 @@ In this step, we will manually create an SMI file containing the SMILES of staur
 > >
 > > A SMILES string can automatically be generated from a ligand name or 2D structure with a desktop molecule editor such [ChemDraw®](https://perkinelmerinformatics.com/products/research/chemdraw/) and [Marvin®](https://chemaxon.com/products/marvin), or with web-based molecule editors such as [PubChem Sketcher](https://pubchem.ncbi.nlm.nih.gov//edit3/index.html) and [ChemDraw® JS](https://chemdrawdirect.perkinelmer.cloud/js/sample/index.html). Moreover, the pre-computed SMILES strings of a large number of bioactive compounds can be retrieved from chemical databases such as [PubChem](https://pubchem.ncbi.nlm.nih.gov/). e.g.
 > >
-> >    ```
-> >    https://pubchem.ncbi.nlm.nih.gov/compound/44259#section=Isomeric-SMILES&fullscreen=true
-> >    ```
+> > ```
+> > https://pubchem.ncbi.nlm.nih.gov/compound/44259#section=Isomeric-SMILES&fullscreen=true
+> > ```
 > >
 > {: .tip}
 >

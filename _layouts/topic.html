@@ -32,7 +32,7 @@ layout: base
         <h3 style="margin: unset;">Not sure where to start?</h3>
         <p style="display: flex;justify-content: space-between;align-items: center;vertical-align: bottom;margin-bottom: 0;">
           <span>Try the {{ topic.title }} Learning Pathway!</span>
-          <a href="/training-material/learning-pathways/{{ topic.learning_path_cta }}.html?utm_source=gtn&utm_medium=topic-admin&utm_campaign=home-cta-lp" class="btn btn-success">Start Learning</a>
+	  <a href="/training-material/learning-pathways/{{ topic.learning_path_cta }}.html?utm_source=gtn&utm_medium=topic-{{ topic.name }}&utm_campaign=home-cta-lp" class="btn btn-success">Start Learning</a>
         </p>
       </div>
     </div>
@@ -67,7 +67,11 @@ layout: base
 
     {% unless topic.tag_based %}
     <h2 id="topic-faq">Frequently Asked Questions</h2>
-    Common questions regarding this topic have been collected on a <a href="faqs/">dedicated FAQ page </a>. Common questions related to specific tutorials can be accessed from the tutorials themselves.
+    <p>Common questions regarding this topic have been collected on a <a href="faqs/">dedicated FAQ page </a>. Common questions related to specific tutorials can be accessed from the tutorials themselves.</p>
+
+    {% if jekyll.environment == "production" %}
+    <p><a href="feed.xml">Follow topic updates {% icon rss-feed %}</a> with our RSS Feed</p>
+    {% endif %}
     {% endunless %}
 
     {% if topic.editorial_board %}
@@ -86,10 +90,10 @@ layout: base
     {% assign contributors_list_sorted = topic_material | identify_contributors: site %}
     {% include _includes/contributor-list.html contributors=contributors_list_sorted badge=true %}
 
-    <h2 id="funders">Funders</h2>
-    <p>This material was funded by:</p>
+	<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
     {% assign funders_list_sorted = topic_material | identify_funders: site %}
-    {% include _includes/contributor-list.html contributors=funders_list_sorted badge=true %}
+    {% include _includes/funding-statement.md funders=funders_list_sorted %}
 
     {% if topic.references %}
     <h2 id="references">References</h2>

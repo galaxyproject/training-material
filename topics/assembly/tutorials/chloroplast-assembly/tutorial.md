@@ -23,6 +23,17 @@ key_points:
   - "We can view an assembly, its mapped reads, and its annotations in JBrowse"
 contributors:
   - annasyme
+
+recordings:
+- captioners:
+  - annasyme
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 35M
+  youtube_id: eyfCyINTD_E
+  speakers:
+  - annasyme
+
 ---
 
 # Introduction

@@ -8,7 +8,7 @@
 > from ._framework import ApiTestCase
 > 
 > 
-> class MyTutorialApiTestCase(ApiTestCase):
+> class TestMyTutorialApiTestCase(ApiTestCase):
 > 
 >     def setUp(self):
 >         super().setUp()
@@ -18,7 +18,7 @@
 >         response = self._get("version")
 >         response.raise_for_status()
 >         data = response.json()
->         assert data["version_major"] == "22.09"
+>         assert data["version_major"] == "24.1"
 > 
 >     def test_create_role(self):
 >         # prepare new role

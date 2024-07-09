@@ -16,10 +16,29 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
-subtopic: core
+subtopic: next-steps
 contributors:
   - tnabtaf
   - gallardoalba
+
+recordings:
+- youtube_id: P1mEWZ_tAgQ
+  speakers:
+  - nakucher
+  captioners:
+  - nakucher
+  date: '2023-05-18'
+  length: 1H30M
+  galaxy_version: '23.01'
+- captioners:
+  - tnabtaf
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H30M
+  youtube_id: 1UPCrQxGwcU
+  speakers:
+  - tnabtaf
+
 ---
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.

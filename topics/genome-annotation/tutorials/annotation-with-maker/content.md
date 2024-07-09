@@ -65,20 +65,20 @@ To annotate a genome using Maker, you need the following files:
 >
 >    {% if include.short %}
 >    ```
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/S_pombe_chrIII.fasta
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/S_pombe_trinity_assembly.fasta
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/Swissprot_no_S_pombe.fasta
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/augustus_training_2.tar.gz
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/snap_training_2.snaphmm
+>    https://zenodo.org/records/4406623/files/S_pombe_chrIII.fasta?download=1
+>    https://zenodo.org/records/4406623/files/S_pombe_trinity_assembly.fasta?download=1
+>    https://zenodo.org/records/4406623/files/Swissprot_no_S_pombe.fasta?download=1
+>    https://zenodo.org/records/4406623/files/augustus_training_2.tar.gz?download=1
+>    https://zenodo.org/records/4406623/files/snap_training_2.snaphmm?download=1
 >    ```
 >    {% else %}
 >    ```
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/S_pombe_chrIII.fasta
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/S_pombe_genome.fasta
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/S_pombe_trinity_assembly.fasta
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/Swissprot_no_S_pombe.fasta
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/augustus_training_1.tar.gz
->    https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/augustus_training_2.tar.gz
+>    https://zenodo.org/records/4406623/files/S_pombe_chrIII.fasta?download=1
+>    https://zenodo.org/records/4406623/files/S_pombe_genome.fasta?download=1
+>    https://zenodo.org/records/4406623/files/S_pombe_trinity_assembly.fasta?download=1
+>    https://zenodo.org/records/4406623/files/Swissprot_no_S_pombe.fasta?download=1
+>    https://zenodo.org/records/4406623/files/augustus_training_1.tar.gz?download=1
+>    https://zenodo.org/records/4406623/files/augustus_training_2.tar.gz?download=1
 >    ```
 >    {% endif %}
 >

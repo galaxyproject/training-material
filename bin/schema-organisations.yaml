@@ -1,6 +1,6 @@
 ---
 type: map
-examples: |
+_examples: |
     elixir:
         name: ELIXIR
         bio: We contribute as an organisation!
@@ -15,7 +15,7 @@ mapping:
                 required: true
                 description: |
                     Your preferred name. If you prefer an alias or another name, this is welcome, it does not need to be your legal name.
-                examples:
+                _examples:
                     - 张三
                     - Alice
                     - Jane Doe
@@ -26,19 +26,19 @@ mapping:
                 pattern: /@/
                 description: |
                     Your email address, if you wish to provide it.
-                examples:
+                _examples:
                     - jane.doe@gmail.com
             twitter:
                 type: str
                 pattern: /[0-9a-zA-Z]+/
                 description: Your twitter handle, without the `@`
-                examples:
+                _examples:
                     - gxytraining
             fediverse:
                 type: str
                 pattern: /^https:\/\/[0-9a-zA-Z.]+/@?[0-9a-zA-Z.]+$/
                 description: The URL to your fediverse profile
-                examples:
+                _examples:
                   - http://genomic.social/@abretaud
             fediverse_flavor:
                 type: str
@@ -50,13 +50,13 @@ mapping:
                 type: str
                 description: |
                     A short biography of yourself, if you wish to add additional details or context.
-                examples:
+                _examples:
                     - Research at the [South African National Bioinformatics Institute](https://www.sanbi.ac.za/)
             matrix:
                 type: str
                 pattern: /[0-9a-zA-Z]+:.*/
                 description: Your matrix identifier and home server
-                examples:
+                _examples:
                     - "hexylena:matrix.org"
             linkedin:
                 type: str
@@ -69,18 +69,23 @@ mapping:
                 type: str
                 pattern: /[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}/
                 description: Your identifier at orcid.org
-                examples:
+                _examples:
                     - 0000-0001-9760-8992
             joined:
                 type: str
                 pattern: /[0-9]{4,}-[0-9]{2}/
                 description: The year and month in which you joined
-                examples:
+                _examples:
                     - 2020-01
             avatar:
                 type: str
+            ror:
+                type: str
+                description: ROR ID from https://ror.org/
+                _examples:
+                  - "019w4f821"
             url:
                 type: str
                 description: associated webpage (NOTE, funders only!)
-                examples:
+                _examples:
                   - "https://elixir-europe.org"

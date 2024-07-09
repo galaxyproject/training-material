@@ -81,7 +81,7 @@ Tu “Historial” está en el panel de la derecha.
 > 1. Ve al panel **History** (a la derecha)
 > 2. Haz clic en el nombre del historial (que por defecto es "Unnamed history")
 >
->	![name history](../../../../shared/images/rename_history.png){:width="320px"}
+>    ![name history](../../../../shared/images/rename_history.png){:width="320px"}
 >
 > 3. Teclea el nuevo nombre, por ejemplo, "Mi-Analisis"
 > 4. Presiona <kbd>Enter</kbd> en tu teclado para guardar
@@ -99,18 +99,18 @@ Tus herramientas están en el panel de la izquierda.
 > <hands-on-title>Cargar un archivo desde una dirección URL</hands-on-title>
 > 1. En la parte superior del panel **Tools** (a la derecha), haz clic en {% icon galaxy-upload %} **Upload**
 >
->	![upload button](../../images/upload-data.png)
+>    ![upload button](../../images/upload-data.png)
 >
->	Se desplegará el siguiente cuadro:
+>    Se desplegará el siguiente cuadro:
 >
->	![filebox](../../images/upload-box.png){:width="500px"}
+>    ![filebox](../../images/upload-box.png){:width="500px"}
 >
 > 3. Haz clic en **Paste/Fetch data**
 > 4. Pega la dirección de un archivo:
 >
->	```
->	https://zenodo.org/record/582600/files/mutant_R1.fastq
->	````
+>    ```
+>    https://zenodo.org/record/582600/files/mutant_R1.fastq
+>    ````
 >
 > 5. Haz clic en **Start**
 > 6. Haz clic en **Close**
@@ -130,7 +130,7 @@ Cuando el archivo se haya cargado en Galaxy, aparecerá en color verde.
 > <hands-on-title>Visualizar el contenido de un conjunto de datos</hands-on-title>
 > 1. Haz clic en el icono {% icon galaxy-eye %} (ojo) junto al nombre del conjunto de datos para visualizar su contenido
 >
->	![eye](../../images/eye-icon.png){:width="320px"}
+>    ![eye](../../images/eye-icon.png){:width="320px"}
 {: .hands_on}
 
 El contenido del archivo se desplegará en el panel central de Galaxy.
@@ -147,11 +147,11 @@ Echemos un vistazo a la calidad de las lecturas de este archivo
 > 1. Teclea **FastQC** en el cuadro de búsqueda del panel de herramientas (parte superior)
 > 2. Haz clic en la herramienta {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72) %}
 >
->	La herramienta se desplegará en el panel central de Galaxy.
+>    La herramienta se desplegará en el panel central de Galaxy.
 >
 > 3. Selecciona los siguientes parámetros:
->	- {% icon param-file %} *"Short read data from your current history"*: el archivo en formato FASTQ que cargamos
->	- Deja sin cambios el resto de los parámetros
+>    - {% icon param-file %} *"Short read data from your current history"*: el archivo en formato FASTQ que cargamos
+>    - Deja sin cambios el resto de los parámetros
 > 4. Haz clic en **Execute**
 >
 {: .hands_on}
@@ -172,9 +172,9 @@ Vamos a ver el archivo de salida llamado *FastQC on data 1: Webpage*.
 > <hands-on-title>Visualización de resultados</hands-on-title>
 > * Haz clic en el icono {% icon galaxy-eye %} (ojo) junto a la salida "Webpage".
 >
->	La información se desplegará en el panel central
+>    La información se desplegará en el panel central
 >
->	![fastqc-out](../../images/fastqc-out.png){:width="620px"}
+>    ![fastqc-out](../../images/fastqc-out.png){:width="620px"}
 {: .hands_on}
 
 Esta herramienta resume la información de calidad de todas las lecturas en nuestro archivo FASTQ.
@@ -200,9 +200,9 @@ Vamos a ejecutar otra herramienta para filtrar las lecturas de baja calidad de n
 > 1. Teclea **Filter by quality** en el cuadro de búsqueda del panel de herramientas (parte superior)
 > 2. Haz clic en la herramienta {% tool [Filter by quality](toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1) %}
 > 3. Selecciona los siguientes parámetros:
->	- {% icon param-file %} *"Input FASTQ file"*: Nuestro archivo inicial el formato FASTQ
->	- *"Quality cut-off"*: valor de corte de calidad = 35
->	- *"Minimum percentage"*:  Porcentaje de bases en la secuencia que debe tener calidad mayor o igual al valor de corte de calidad = 80
+>    - {% icon param-file %} *"Input FASTQ file"*: Nuestro archivo inicial el formato FASTQ
+>    - *"Quality cut-off"*: valor de corte de calidad = 35
+>    - *"Minimum percentage"*:  Porcentaje de bases en la secuencia que debe tener calidad mayor o igual al valor de corte de calidad = 80
 > 4. Haz clic en **Execute**
 {: .hands_on}
 
@@ -219,9 +219,9 @@ Podríamos hacer clic en el icono del ojo para ver el contenido de este archivo 
 > <hands-on-title>Obtener metadatos de un archivo</hands-on-title>
 > 1. Haz clic en el nombre de un conjunto de datos de salida en el panel de historial.
 >
->	Esta acción expandirá la información que se tenga sobre el archivo.
+>    Esta acción expandirá la información que se tenga sobre el archivo.
 >
->	![filter1](../../images/filter-fastq1.png)
+>    ![filter1](../../images/filter-fastq1.png)
 >
 {: .hands_on}
 
@@ -241,13 +241,13 @@ Ahora hemos decidido que nuestro conjunto de datos de entrada tiene que ser filt
 > <hands-on-title>Volver a ejecutar la herramienta</hands-on-title>
 > 1. Haz clic en el icono {% icon galaxy-refresh %} (**Run this job again**) para el set de datos de salida **Filter by quality** {% icon tool %}
 >
->	![rerun](../../images/rerun.png)
+>    ![rerun](../../images/rerun.png)
 >
->	La interfaz de la herramienta aparecerá en el panel central con los valores de parámetros que utilizamos previamente para generar este set de datos
+>    La interfaz de la herramienta aparecerá en el panel central con los valores de parámetros que utilizamos previamente para generar este set de datos
 >
 > 2. Cambia los parámetros para un filtrado más estricto
 >
->	Por ejemplo, podrías decidir que el 80 por ciento de las bases tengan una calidad de 36 o superior, en lugar de 35.
+>    Por ejemplo, podrías decidir que el 80 por ciento de las bases tengan una calidad de 36 o superior, en lugar de 35.
 >
 > 3. Haz clic en **Execute**
 > 4. Visualiza los resultados: Haz clic en el nombre del conjunto de datos de salida para expandir la información. (*Nota*: No uses el icono {% icon galaxy-eye %} (ojo))
@@ -285,15 +285,15 @@ Este nuevo historial todavía no tiene datos.
 > <hands-on-title>Visualizar historiales</hands-on-title>
 > 1. Haz clic en el icono **View all histories** ({% icon galaxy-columns %}) en la parte superior derecha de tu historial
 >
->	![view-hist](../../images/galaxy_interface_history_switch.png){:width="320px"}
+>    ![view-hist](../../images/galaxy_interface_history_switch.png){:width="320px"}
 >
->	Aparecerá una nueva página donde se desplegarán todos tus historiales.
+>    Aparecerá una nueva página donde se desplegarán todos tus historiales.
 >
 > 2. Copia un conjunto de datos a tu historial nuevo
->	1. Haz clic en el archivo FASTQ en el historial "Mi-Analisis"
->	2. Arrastralo al historial "Nuevo-Analisis"
+>    1. Haz clic en el archivo FASTQ en el historial "Mi-Analisis"
+>    2. Arrastralo al historial "Nuevo-Analisis"
 >
->	Esto generará una copia del conjunto de datos en tu historial nuevo (sin utilizar espacio de disco adicional)
+>    Esto generará una copia del conjunto de datos en tu historial nuevo (sin utilizar espacio de disco adicional)
 >
 > 3. Haz clic en el icono {% icon galaxy-home %} (o en **Analyze Data** en versiones anteriores de Galaxy) en la parte superior para regresar a la ventana de análisis
 >

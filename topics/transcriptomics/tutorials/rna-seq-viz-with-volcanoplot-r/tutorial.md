@@ -34,6 +34,17 @@ requirements:
         tutorials:
           - rna-seq-viz-with-volcanoplot
           - rna-seq-counts-to-viz-in-r
+
+recordings:
+- captioners:
+  - mblue9
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 15M
+  youtube_id: 4dspgiwkuxk
+  speakers:
+  - mblue9
+
 ---
 
 

@@ -40,8 +40,8 @@
         {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
         {%- elsif page.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
         {%- else %}{% assign coverimage = "/assets/images/GTNLogo1000.png" %}{% endif %}
-        {% assign og_image = page.og_image | default: coverimage | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
-        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
+        {% assign og_image = page.og_image | default: page['cover-image'] | default: topic.og_image | default: coverimage | default: "assets/images/GTNLogo1000.png" %}
+	<meta property="og:image" content="{% if og_image contains 'https://' %}{{ og_image }}{% else %}{{ site.url }}{{ site.baseurl }}/{{ og_image }}{% endif %}">
 
         <script type="application/ld+json">
             {% include _includes/material.jsonld material=page topic=topic site=site %}
@@ -95,9 +95,13 @@ class: center, middle, inverse
 <img src="{{ site.baseurl }}/{% if page.logo %}{{ page.logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" class="cover-logo" />
   {% endif %}
 {% endif %}
+<br/>
+<br/>
 
 # {{ page.title | default: topic.title }}
 
+<br/>
+<br/>
 
 {% include _includes/contributors-line.html page=page authorsonly=true %}
 
@@ -109,12 +113,20 @@ class: center, middle, inverse
 
 
 <!-- other slide formats (video and plain-text) -->
-<div class="footnote" style="bottom: 6em;">
+<div class="footnote" style="bottom: 5em;">
 {% if page.video %}
   {% icon video-slides %} <a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{{locale['video-slides'] | default: "Video slides"}}</a> |
 {% endif %}
 
-  {% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a>
+{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a> |
+
+{% if page.recordings %}
+{% include _includes/resource-recordings.html label="Recordings" %}
+{% endif %}
+
+
+
+
 </div>
 
 
@@ -211,8 +223,16 @@ Useful when presenting."
         }
     </script>
         {{ 'main' | load_bundle }}
-        {% if page.mathjax %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        {% if page.js_requirements.mathjax %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&delayStartupUntil=configured" type="text/javascript"></script>
+	<script>
+	MathJax.Hub.Config({
+          tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+          }
+      });
+      MathJax.Hub.Configured();
+	</script>
         {% endif %}
     </body>
 </html>

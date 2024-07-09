@@ -58,6 +58,7 @@ javascript_bundles:
       - assets/js/bootstrap.min.js     # Everywhere
       - assets/js/bootstrap-toc.min.js # Only tutorials, faqs
       - assets/js/clipboard.min.js     # Used on anything with a pre
+      - assets/js/anchor.min.js        # Used on every page.
       - assets/js/main.js
       # - assets/js/list.min.js # Potentially unused?
 
@@ -87,6 +88,15 @@ abbreviate:
     - tutorial_slides
     - base_slides
 
+# for event pages, invite link expires after 400 uses :s
+# update invite link gxy.io link here when needed: https://github.com/galaxyproject/gxy.io/blob/main/group_vars/all.yaml
+slack:
+  invite_link: http://gxy.io/gtn-slack  # this points to the invite link
+  general_channel: https://gtnsmrgsbord.slack.com/archives/C01MNM98X9V
+  social_channel: https://gtnsmrgsbord.slack.com/archives/C01EDBVMHBQ
+  single_cell_channel: https://gtnsmrgsbord.slack.com/archives/C06PBRR40D7
+
+
 # Icon tag config
 icon-tag:
   announcement: fas fa-bullhorn
@@ -105,25 +115,40 @@ icon-tag:
   external-link: fas fa-external-link-alt
   switch-histories: fas fa-exchange-alt
   event: far fa-calendar
+  event-date: far fa-calendar
+  event-location: fas fa-location-dot
+  event-cost: fas fa-tag
   feedback: far fa-comments
   galaxy-advanced-search: fas fa-angle-double-down
   galaxy-show-active: fa fa-map-marker
-  galaxy-barchart: fas fa-chart-bar
+  galaxy-barchart: fas fa-chart-column
+  galaxy-visualise: fas fa-chart-column
+  galaxy-visualize: fas fa-chart-column
+  galaxy-vis-config: fas fa-angle-double-left
+  galaxy-viz-config: fas fa-angle-double-left
   galaxy-bug: fas fa-bug
   galaxy-chart-select-data: fas fa-database
   galaxy-clear: fas fa-times-circle
   galaxy-columns: fas fa-columns
+  galaxy-multihistory: fas fa-columns
   galaxy-cross: fas fa-times
   galaxy-dataset-map: fas fa-sitemap
   galaxy-delete: fas fa-trash
   galaxy-dropdown: fas fa-caret-down
-  galaxy-history-options: fas fa-caret-down # Replaces gear.
+  galaxy-history-options: fas fa-bars # Replaces gear, fa-caret-down
   galaxy-eye: far fa-eye
   galaxy-gear: fas fa-cog
   galaxy-history: fas fa-columns
+  galaxy-dataset-collapse: fa fa-compress
   galaxy-history-archive: fas fa-archive
+  galaxy-history-size: fas fa-database
+  galaxy-history-storage-choice: fas fa-hard-drive
+  galaxy-history-refresh: fas fa-arrows-rotate
+  galaxy-history-input: fas fa-sign-in-alt
+  galaxy-history-answer: fas fa-sign-out-alt
   galaxy-home: fas fa-home
   galaxy-info: fas fa-info-circle
+  galaxy-lab: fa fa-tv
   galaxy-library: far fa-folder
   galaxy-link: fas fa-link
   galaxy-panelview: fas fa-list
@@ -139,10 +164,12 @@ icon-tag:
   galaxy-tags: fas fa-tags
   galaxy-toggle: fas fa-toggle-on
   galaxy-upload: fas fa-upload
+  galaxy-download: fas fa-download
   galaxy-wf-connection: fas fa-arrows-alt-h
   galaxy-wf-edit: fa fa-edit
   galaxy-wf-new: fas fa-plus
   galaxy-wf-report-download: fas fa-print
+  galaxy-wf-options: fas fa-cog
   galaxy_instance: fas fa-external-link-alt
   github: fab fa-github
   gitter: fab fa-gitter
@@ -152,6 +179,7 @@ icon-tag:
   help: far fa-question-circle
   history-annotate: fas fa-comment
   history-share: fas fa-share-alt
+  history-select-multiple: fas fa-check-square
   instances: fas fa-globe
   interactive_tour: fas fa-magic
   keypoints: fas fa-key
@@ -196,6 +224,7 @@ icon-tag:
   slides: fab fa-slideshare
   solution: far fa-eye
   sticky-note: fas fa-sticky-note
+  subdomain: fa fa-tv
   time: fas fa-hourglass-half
   text-document: fas fa-file-alt
   tip: far fa-lightbulb
@@ -215,6 +244,14 @@ icon-tag:
   zenodo_link: far fa-copy
   version: fas fa-code-commit
   rating: far fa-star
+  dataset-rerun: fas fa-arrow-rotate-right
+  dataset-related-datasets: fas fa-sitemap
+  dataset-visualize: fas fa-chart-bar
+  dataset-save: fas fa-save
+  dataset-link: fas fa-link
+  dataset-question: fas fa-question
+  dataset-info: fas fa-info-circle
+  dataset-undelete: fas fa-trash-can-arrow-up
 
 # To exclude in _site
 exclude:
@@ -257,7 +294,7 @@ plugins:
   - jekyll-feed
   - jekyll-redirect-from
 
-# An announcement to display on the home page
+# An announcement to play on the home page
 #announcement:
 #   class: success
 #   title: GTN Celebrates Pride Month

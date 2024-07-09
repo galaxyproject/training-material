@@ -21,9 +21,20 @@ key_points:
   - "We can assess the quality of this assembly with various tools"
 contributors:
   - annasyme
+
+recordings:
+- youtube_id: BM70nvwWjOY
+  captioners:
+  - annasyme
+  speakers:
+  - annasyme
+  length: 25M
+  date: '2023-05-16'
+  galaxy_version: '23.01'
+
 ---
 
-*Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.*
+*Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.* 
 
 ## What is genome assembly?
 

@@ -1,0 +1,30 @@
+<table class="eventtable table table-striped">
+ <thead>
+  <tr>
+   <th>Date</th>
+   <th>Event</th>
+   <th>Location</th>
+   <th>Contact</th>
+  </tr>
+ </thead>
+ <tbody>
+ {% for event in include.events %}
+ {% unless event.draft and jekyll.environment == "production" %}
+ <tr>
+  <td class="eventtable-date"> {{event | collapse_date_pretty }} </td>
+  <td>
+
+	  <a class="eventtable-title" href="{% if event.external %}{{event.external}}{% else %}{{site.baseurl}}{{event.url}}{% endif %}{% if include.campaign %}?utm_source=gtn&utm_medium=event-table&utm_campaign={{ include.campaign }}{% endif %}">{{event.title}}{% if event.draft %} (draft, will be hidden) {% endif %}</a>
+   <div class="eventtable-description"> {{event.description}} </div>
+  </td>
+  <td> {% if event.location %}{{event.location | format_location_short }} {% endif %} </td>
+  <td> {% for org in event.contributions.organisers %}
+			{% include _includes/contributor-badge-inline.html id=org %}
+		{% endfor %}
+  </td>
+ </tr>
+ {% endunless %}
+ {% endfor %}
+ </tbody>
+</table>
+

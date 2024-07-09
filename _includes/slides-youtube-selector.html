@@ -1,0 +1,54 @@
+<blockquote class="agenda">
+	<div class="box-title hands-on-title" id="slides-{{ include.slides }}">{{ include.title }}</div>
+	<p class="text-muted">This content is available in multiple, equivalent formats. Choose your preferred format below.</p>
+<ul class="nav nav-tabs" id="{{include.id}}-pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="{{include.id}}-pills-home-tab" data-toggle="pill" data-target="#{{include.id}}-pills-home" type="button" role="tab" aria-controls="{{include.id}}-pills-home" aria-selected="true">Teacher Recording</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="{{include.id}}-pills-profile-tab" data-toggle="pill" data-target="#{{include.id}}-pills-profile" type="button" role="tab" aria-controls="{{include.id}}-pills-profile" aria-selected="false">Slides</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="{{include.id}}-pills-contact-tab" data-toggle="pill" data-target="#{{include.id}}-pills-contact" type="button" role="tab" aria-controls="{{include.id}}-pills-contact" aria-selected="false">Plain Text</button>
+  </li>
+</ul>
+<div class="tab-content" id="{{include.id}}-pills-tabContent">
+  <div class="tab-pane show active" id="{{include.id}}-pills-home" role="tabpanel" aria-labelledby="{{include.id}}-pills-home-tab">
+    <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item"
+      credentialless
+      allowfullscreen
+      referrerpolicy="no-referrer"
+      sandbox="allow-scripts allow-same-origin"
+      allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'"
+      src="https://www.youtube-nocookie.com/embed/{{ include.id }}"
+      title="{{ include.title }}"
+      csp="sandbox allow-scripts allow-same-origin;"
+      frameborder="0"
+      loading="lazy"></iframe>
+    </div>
+  </div>
+  <div class="tab-pane" id="{{include.id}}-pills-profile" role="tabpanel" aria-labelledby="{{include.id}}-pills-profile-tab">
+    <a href="{{ site.baseurl }}/{{ include.slides }}/slides.html">Open in new tab</a><br/>
+    <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item"
+      src="{{ site.baseurl }}/{{ include.slides }}/slides.html"
+      title="{{ include.title }}"
+      frameborder="0"
+      loading="lazy"></iframe>
+    </div>
+  </div>
+  <div class="tab-pane" id="{{include.id}}-pills-contact" role="tabpanel" aria-labelledby="{{include.id}}-pills-contact-tab">
+    <a href="{{ site.baseurl }}/{{ include.slides }}/slides-plain.html">Open in new tab</a><br/>
+    <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item"
+      width="100%"
+      height="500"
+      src="{{ site.baseurl }}/{{ include.slides }}/slides-plain.html"
+      title="{{ include.title }}"
+      frameborder="0"
+      loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
+</blockquote>
