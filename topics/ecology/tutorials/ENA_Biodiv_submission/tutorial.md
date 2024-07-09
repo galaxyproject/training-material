@@ -351,6 +351,14 @@ For this tutorial we will use the ENA default sample checklist.
 > {: .comment}
 > >
 > > You will need to import this file into your Galaxy history. Then, use the ENA Upload Tool to proceed with the submission.
+> >
+> > Import the ENA default sample checklist file.
+> >
+> >   ```
+> >   https://github.com/galaxyproject/training-material/raw/24776cf161e38ac0449755749d23e851400020aa/topics/ecology/tutorials/ENA_Biodiv_submission/metadata_GdBqCOI_ERC000011_Test.xlsx
+> >   ```
+> >
+> >   {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > {: .comment}
 >
 {: .hands_on}
