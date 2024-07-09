@@ -725,22 +725,22 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 
 > <hands-on-title> Filter and normalize </hands-on-title>
 >
-> 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy2) %} with the following parameters:
+> 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix` (output of **pp.make_gene_matrix** {% icon tool %})
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - {% icon param-select %} *"Filter"*: `Minimum number of cells expressed`
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
 > 
-> 2. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
+> 2. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata filter_genes` (output of **Filter** {% icon tool %})
 >    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
 >    - {% icon param-toggle %} *"Exclude (very) highly expressed genes for the computation of the normalization factor (size factor) for each cell"*: `No`
 >
-> 3. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy2) %} with the following parameters:
+> 3. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata normalize` (output of **Normalize** {% icon tool %})
 >    - *"Method used for inspecting"*: `Logarithmize the data matrix, using 'pp.log1p'`
 > 
-> 4. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy2) %} with the following parameters:
+> 4. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata log1p` (output of **log1p** {% icon tool %})
 >    - *"Method used for normalization"*: `Denoising using Markov Affinity-based Graph Imputation of Cells (MAGIC) API 'external.pp.magic'`
 >        - *"Denoised genes to return"*: `PCA only`
@@ -820,7 +820,7 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 
 > <hands-on-title> Plot marker genes </hands-on-title>
 >
-> 1. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy2) %} with the following parameters:
+> 1. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, MS4A1, CD3D, LEF1, NKG7, TREM1, LYZ, PPBP`
@@ -960,7 +960,7 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >        - {% icon param-file %} *"Table with new annotations"*: `Cell type annotation`(output of **Replace column** {% icon tool %})
 > 9. Rename the generated file to `Anndata 5k PBMC gene_matrix magic cell_type` or add the tag {% icon galaxy-tags %} `cell_type` to the dataset
 >
-> 10. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy2) %} with the following parameters:
+> 10. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic cell_type` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `cell_type`
@@ -998,7 +998,7 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 
 
 # Conclusion
-{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/timonschlegel/h/test-of-5k-pbmc-tutorial-workflow), or check out the [full workflow](https://usegalaxy.eu/u/timonschlegel/w/workflow---standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2) for this tutorial.
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://live.usegalaxy.eu/u/timonschlegel/h/single-cell-atac-seq-standard-processing-with-snapatac2), or check out the [full workflow](https://usegalaxy.eu/u/timonschlegel/w/workflow---standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2) for this tutorial.
 
 In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnData` format and performed: 
 1. Preprocessing: 
