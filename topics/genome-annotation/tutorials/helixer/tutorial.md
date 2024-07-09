@@ -47,7 +47,7 @@ Annotating the eukaryotic genome represents a somewhat more complex challenge th
 
 In this tutorial we will use a software tool called Helixer to annotate the genome sequence of a small eukaryote: [*Mucor mucedo*](https://en.wikipedia.org/wiki/Mucor_mucedo) (a fungal plant pathogen).
 
-[Helixer](https://github.com/weberlab-hhu/Helixer) is a software package providing a framework for the development and use of a cross-species deep learning model that dramatically improves performance. The software enables models to be configured and trained for *ab initio* prediction of gene structure. In other words, to identify which base pairs in a genome belong to the UTR/CDS/Intron genes.
+[Helixer](https://github.com/weberlab-hhu/Helixer) is an annotation software with a new and different approach: using GPUs, faster execution time and proof-free predictions. The annotation is based on the development and use of a cross-species deep learning model. The software is used to configure and train models for *ab initio* prediction of gene structure. In other words, it identifies the base pairs in a genome that belong to the UTR/CDS/Intron genes.
 
 In this tutorial, you'll learn how to perform a structural annotation of the genome and how to assess its quality. 
 
@@ -90,11 +90,14 @@ To annotate our genome using Helixer, we will use the following files:
 
 We can run [**Helixer**](https://github.com/weberlab-hhu/Helixer) to perfom the structural annotation of the genome.
 
-We need to input the genome sequence. We also specify the lineage. There are 4 differents lineages: invertebrate, vertebrate, land plant ans fungi. As an option, we can also enter the species name.
+We need to input the genome sequence. We also specify the lineage. There are 4 differents lineages: invertebrate, vertebrate, land plant ans fungi. As an option, we can also enter the specie name.
 
 Depending on the lineage selected, default values for certain parameters change. These parameters are:
-- 
+- --subsequence-length
+- --overlap-offset
+- --overlap-core-length
 
+If you have a lineage model in .h5 format and would like to use it for your annotation. You can import it and use the --model-filepath parameter instead of --lineage.
 
 > <hands-on-title></hands-on-title>
 >
@@ -121,7 +124,7 @@ On Galaxy, if you wish to modify these default values, you can do so by entering
 > This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.
 {: .comment}
 
-Helixer produces one output dataset: a .GFF3 file. The GFF3 format is a standard bioinformatics format for storing denomination annotations. Each row describes a genomic entity, with columns detailling ist identifier, location, score and other attributes. Thes fileexons and ohter genomic features.s are widely used yo exchange and store information on genes.
+Helixer produces one output dataset: a .GFF3 file. The GFF3 format is a standard bioinformatics format for storing denomination annotations. Each row describes a genomic entity, with columns detailling ist identifier, location, score and other attributes.
 
 ## Evaluate the quality of structural annotation with **Genome Annotation Statistics**
 
@@ -139,6 +142,13 @@ Two output files are generated:
 - a file containing graphs in pdf format
 - a summary in txt format
 
+> <comment-title>What can we deduce from these results?</comment-title>
+>
+> - The summary file provides statistics on the genome annotation and gives a complete overview of the genomic structure and characteristics of the genes, exons and introns in the analysed genome. 
+> - We can see that there are 19,299 genes, 77% of which are multi-exons (i.e. 14,860) and 23% single-exons (i.e. 4,439).  
+> - We can obtain other information such as the average size of exons, the percentage in GC or the average size of transcripts. 
+>
+{: .comment}
 
 
 ## Evaluation with **Busco**
@@ -164,6 +174,15 @@ Several output files will be generated:
 - summary image : graphics and visualizations to visually represent the results of the evaluation, such as bar charts showing the proportion of complete, partial and missing genes.
 - GFF : contain information on gene locations, exons, introns, etc.
 
+> <comment-title>What can we deduce from these results?</comment-title>
+>
+> - The summary file provides information on the completeness of the genome annotated by Helixer.
+> - Here are a few explanations. 
+> - 95.2% of genes are complete, so the assembly is of high quality in terms of genomic completeness.
+> - The duplication rate is low, with 0.4% of genes duplicated. 
+> -  These statistics show that the genome annotated by Helixer is of high quality, with high completeness and low duplication. 
+>
+{: .comment}
 
 ## Evaluation with **Compleasm**
 
@@ -185,6 +204,22 @@ Several output files will be generated:
 - full table
 - miniprot (gff3 format)
 - translated proteins (fasta format)
+
+If you want to compare the results with BUSCO, click on "dataset details" of a Compleasm output, then on "tool standard output". This will give you information on the number of single-copy, duplicated and absent genes.
+
+> <comment-title>What can we deduce from these results?</comment-title>
+>
+> - Results: S (95.59%, 2341), D (0.82%, 20), F (0%), M (0%), N (2449)
+> -  
+> - 95.2% of genes are complete, so the assembly is of high quality in terms of genomic completeness.
+> - The duplication rate is low, with 0.4% of genes duplicated. 
+> -  These statistics show that the genome annotated by Helixer is of high quality, with high completeness and low duplication. 
+> - Of the 2449 BUSCO genes, 95.59% are complete and in a single copy, which is an excellent indicator of the completeness of the genomic assembly.
+> - Duplication is very low with 20 genes, i.e. 0.82 of the BUSCO genes. 
+> - These results show that your genome is of high quality, with the vast majority of essential genes present and correctly assembled. 
+> - If you compare these results with those of BUSCO, the results are very close and both show that the gneome is well assembled with high quality and completeness. 
+>
+{: .comment}
 
 # Visualisation with a genome browser
 
