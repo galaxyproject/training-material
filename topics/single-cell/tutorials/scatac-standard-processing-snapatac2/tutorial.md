@@ -999,7 +999,7 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 
 
 # Conclusion
-{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://live.usegalaxy.eu/u/timonschlegel/h/single-cell-atac-seq-standard-processing-with-snapatac2), or check out the [full workflow](https://usegalaxy.eu/u/timonschlegel/w/workflow---standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2) for this tutorial.
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/timonschlegel/h/single-cell-atac-seq-standard-processing-with-snapatac2), or check out the [full workflow](https://usegalaxy.eu/u/timonschlegel/w/workflow---standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2) for this tutorial.
 
 In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnData` format and performed: 
 1. Preprocessing: 
