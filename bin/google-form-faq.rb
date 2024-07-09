@@ -5,6 +5,7 @@ require 'yaml'
 require 'net/http'
 require 'csv'
 require 'date'
+require './_plugins/util'
 
 # Fetch data from a google sheet
 url = 'https://docs.google.com/spreadsheets/d/1RFF3G9_bP8EpfACBk8lnF-Ib43ZGGAMm3ewPwW7eFT0/export?format=tsv'
@@ -27,7 +28,7 @@ data.each do |row|
 
   # Don't overwrite existing posts
   if File.exist?(filename)
-    other_file = YAML.load_file(filename)
+    other_file = safe_load_yaml(filename)
     if other_file['google_form_id'] == post_date.to_time.to_i
       STDERR.puts "Skipping #{filename} as it already exists"
       next
