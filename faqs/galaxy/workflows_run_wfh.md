@@ -19,7 +19,7 @@ examples:
 <div class="show-when-galaxy-proxy-active">
 
 <span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/{{ include.wfhub_id }}/versions/{{ include.version }}">
-  Launch <strong>{{ include.title }} ({{ include.version }})</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
+  Launch <strong>{{ include.title }} (v{{ include.version }})</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
 </span>
 (<a target="_blank" href="{{ external_page }}">View on WorkflowHub</a>)
 
@@ -28,7 +28,7 @@ examples:
 <div class="hide-when-galaxy-proxy-active">
 
 <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ include.wfhub_id }}%26trs_version={{ include.version }}">
-  Launch <strong>{{ include.title }} ({{ include.version }})</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
+  Launch <strong>{{ include.title }} (v{{ include.version }})</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
 </a>
 (<a href="{{ external_page }}">View on WorkflowHub</a>)
 
