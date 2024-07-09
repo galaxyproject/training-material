@@ -12,7 +12,9 @@ contributions:
   organisers:
   - mblue9
 location:
-  name: Van Andel Institute, Grand Rapids, MI, USA
+  name: Van Andel Institute
+  city: Grand Rapids, MI
+  country: USA
 date_start: 2024-07-22
 date_end: 2024-07-23
 ---
