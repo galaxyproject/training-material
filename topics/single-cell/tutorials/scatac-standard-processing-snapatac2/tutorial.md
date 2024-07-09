@@ -747,13 +747,11 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >        - *"Denoised genes to return"*: `All genes`
 >        - *"Which solver to use"*: `"approximate", is faster that performs imputation in the PCA space and then projects back to the gene space`
 >
->    > <warning-title>Large output files!</warning-title>
->     >   - The settings are important for this step!
->     >   - The setting `Which solver to use: 'exact'` produces a very large output file
->     >      - **57.4 GB** compared to **2.2 GB** with `'approximate'`
->     >      - Additionally, the compute time is very long and the better resolution of the output is not necessary for our purposes. 
+>    > <comment-title> </comment-title>
+>     >   - Choosing the setting `Which solver to use: 'exact'` will result in a output file with better resolution. 
+>     >   - This is not necessary for our purposes, since the compute time also increases with this setting. 
 >     >
->     {: .warning}
+>     {: .comment}
 >
 > 5. Rename the generated file to `Anndata 5k PBMC magic` or add the tag {% icon galaxy-tags %} `magic` to the dataset
 >
