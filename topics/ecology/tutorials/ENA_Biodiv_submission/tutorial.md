@@ -345,6 +345,9 @@ For this tutorial we will use the ENA default sample checklist.
 > > You can find metadata templates for each checklist at:(https://github.com/ELIXIR-Belgium/ENA-metadata-templates)
 > >
 > > Direct download link of the ENA default sample checklist: https://github.com/ELIXIR-Belgium/ENA-metadata-templates/raw/main/templates/ERC000011/metadata_template_ERC000011.xlsx
+> >
+> > Direct download link of the ENA default sample checklist filled with elements fo the training: https://github.com/galaxyproject/training-material/raw/24776cf161e38ac0449755749d23e851400020aa/topics/ecology/tutorials/ENA_Biodiv_submission/metadata_GdBqCOI_ERC000011_Test.xlsx
+> >
 > {: .comment}
 > >
 > > You will need to import this file into your Galaxy history. Then, use the ENA Upload Tool to proceed with the submission.
