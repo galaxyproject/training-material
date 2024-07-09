@@ -27,8 +27,10 @@ examples:
 
 <div class="hide-when-galaxy-proxy-active">
 
-<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/{{ include.dockstore_id }}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a>
-(<a href="https://dockstore.org/workflows/{{ include.dockstore_id }}">View on Dockstore</a>)
+<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/{{ include.dockstore_id }}%26trs_version={{ include.version }}">
+  Launch <strong>{{ include.title }} ({{ include.version }})</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
+</a>
+(<a href="{{ external_page }}">View on Dockstore</a>)
 
 </div>
 
