@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d5897f3381e046db578c11e21f2eccc518cc6370",
+		release: "galaxy-training-network@ed63131738b4cb1fb18c4318ae0675626b44c009",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-03 14:30:27 +0000">
+<meta name="DC.date" content="2024-07-09 11:31:33 +0000">
 <meta name="DC.creator" content="Anup Kumar"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Statistics and machine learning / A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy / Hands-on: A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-03 14:30:27 +0000",
+  "dateModified": "2024-07-09 11:31:33 +0000",
   "datePublished": "2022-04-06 17:18:13 +0000",
   "identifier": "https://gxy.io/GTN:T00266",
   "accessMode": [
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.html",
-  "version": 16,
+  "version": 18,
   "timeRequired": "PT1H",
   "teaches": "Learn to use Jupyterlab - an online Python editor designed for developing AI algorithms\n - Explore several of its features such as Git, workflow of jupyter notebook, integration to Galaxy\n - Develop AI algorithms using Tensorflow\n - Send long-running jobs to Galaxy's cluster and save results in its history\n - Reproduce results from recent scientific publications - COVID CT scan segmentation and 3D protein structure prediction",
   "keywords": [
@@ -932,7 +932,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 6, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 9, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -950,7 +950,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 18 </div>
 
     </blockquote>
     </section>
@@ -999,10 +999,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h2 id="features-of-jupyterlab">Features of Jupyterlab</h2>
 <p><a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyterlab</a> notebook has been augmented with several useful features and together they make it ready-to-use for quick prototyping and end-to-end artificial intelligence (AI) projects. Being able to <strong>serve online</strong> makes it convenient to share it with other researchers and users. Its features can be broadly classified into two categories - features that have been added solely as Python packages and those that have been added also as Python packages but have their respective user interfaces. We will briefly discuss these features and later, we will use some of those for building and using AI models.</p>
 
-<h4 id="features-python-packages">Features (Python packages)</h4>
+<h3 id="features-python-packages">Features (Python packages)</h3>
 <p>Accessibility to many features has been made possible by adding several compatible Python packages, the most prominent ones are Bioblend, <a href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> and ONNX. Using Bioblend the notebook can be <strong>connected to Galaxy</strong> and its histories, tools and workflows can be accessed and operated using various commands from the notebook. GPUs have accelerated AI research, especially deep learning. Therefore, the backend of the Jupyterlab is <strong>powered by GPU</strong> to make long-running AI training programs finish faster by parallelizing matrix multiplications. CUDA acts as a bridge between GPU and AI algorithms. In addition, a standard AI model format, <strong>open neural network exchange (ONNX)</strong>, has been supported in the notebook to transform Scikit-learn and Tensorflow models to <code class="language-plaintext highlighter-rouge">onnx</code> files. These model files can be conveniently shared and used for inference. Galaxy also supports <code class="language-plaintext highlighter-rouge">onnx</code> file format which makes it easier to interoperate such models from a notebook to Galaxy and vice-versa. Galaxy tool for <strong>remote training</strong> can also run on GPU. There are several additional packages, suited for performing machine learning tasks such as Scikit-learn and Tensorflow for developing AI algorithms, <a href="https://github.com/opencv/opencv">Open-CV</a> and <a href="https://scikit-image.org/">Scikit-Image</a> for image processing, <a href="https://nipy.org/nibabel/">NiBabel</a> package for processing images files have been made available to researchers.</p>
 
-<h4 id="features-python-packages-with-user-interfaces">Features (Python packages with user interfaces)</h4>
+<h3 id="features-python-packages-with-user-interfaces">Features (Python packages with user interfaces)</h3>
 <p>There are other features, added as Python packages, that have user interface components. These include <strong><a href="https://github.com/rapidsai/jupyterlab-nvdashboard">GPU utilization dashboards</a></strong> for monitoring the GPU usage and system memory utilization, <strong><a href="https://github.com/voila-dashboards/voila">Voila</a></strong> for rendering output cells of a notebook in a separate tab hiding all code cells, interactive <strong><a href="https://github.com/bqplot/bqplot">Bqplots</a></strong> for plotting, <strong><a href="https://github.com/jupyterlab/jupyterlab-git">Git</a></strong> version control to clone, commit and maintain codebase directly from the notebook and <strong><a href="https://elyra.readthedocs.io/en/stable/">Elyra AI</a></strong> pipelines for knitting together multiple notebooks to create a workflow. Many notebooks are created for processing datasets in different ways. These notebooks can be knit together to form one pipeline where each notebook transforms datasets taking a different form of data from its previous notebook and passing on the transformed datasets to its next notebook. An example workflow created using Elyra AI can be found by the name “METABRIC_ML.pipeline” in the “elyra” folder of a typical Jupyterlab instance. These pipelines can also be executed remotely on multiple “runtimes” supported by docker containers. An example pipeline created in the notebook can be seen in Figure 1. These features, integrated into the Jupyterlab notebook, are useful for the efficient execution and management of data science projects.</p>
 
 <figure id="figure-1" style="max-width: 90%;"><img src="../../images/elyra_ai_pipeline.png" alt="Elyra AI pipeline. " width="966" height="482" loading="lazy" /><a target="_blank" href="../../images/elyra_ai_pipeline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An example ML pipeline created using Elyra AI in a notebook. Each connected block of the pipeline is a different notebook</figcaption></figure>
@@ -1209,7 +1209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           <li>
             <p>Click on the title of the history (by default the title is <code class="language-plaintext highlighter-rouge">Unnamed history</code>)</p>
 
-            <p><a href="../../../../shared/images/rename_history.png" rel="noopener noreferrer"><img src="../../../../shared/images/rename_history.png" alt="Renaming history. " width="270" height="320" loading="lazy" /></a></p>
+            <p><a href="/training-material/shared/images/rename_history.png" rel="noopener noreferrer"><img src="/training-material/shared/images/rename_history.png" alt="Renaming history. " width="270" height="320" loading="lazy" /></a></p>
           </li>
           <li>Type <code class="language-plaintext highlighter-rouge">Galaxy Introduction</code> as the name</li>
           <li>Press <kbd>Enter</kbd></li>
@@ -1595,7 +1595,7 @@ tools: []
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d5897f3381e046db578c11e21f2eccc518cc6370">d5897f3</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ed63131738b4cb1fb18c4318ae0675626b44c009">ed63131</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>

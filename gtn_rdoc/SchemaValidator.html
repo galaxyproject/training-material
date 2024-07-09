@@ -218,6 +218,14 @@
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">lintable?</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
 
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;cover&#39;</span>) 
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cover&#39;</span>].<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;https://&#39;</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cover&#39;</span>])
+        <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;Cover image #{data[&#39;cover&#39;]} does not exist&quot;</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">data</span>, <span class="ruby-ivar">@news_validator</span>))
   <span class="ruby-identifier">errs</span>
 <span class="ruby-keyword">end</span></pre>
@@ -240,7 +248,7 @@
           
 
           <div class="method-source-code" id="lint_quiz_file-source">
-            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 203</span>
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_quiz_file</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-identifier">errs</span> = []
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">lintable?</span>(<span class="ruby-identifier">fn</span>)
@@ -355,7 +363,7 @@
           
 
           <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 232</span>
+            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 240</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run</span>
   <span class="ruby-identifier">errors</span> = []
   <span class="ruby-comment"># Topics</span>
