@@ -13,6 +13,8 @@ examples:
   Load a v0.1.3 of a specific IWC workflow: {dockstore_id: "github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main", title: "Kmer Profiling HiFi VGP1", version: "v0.1.3"}
 ---
 
+<!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->
+
 {% if include.wfhub_id %}
 {% capture external_page %}https://workflowhub.eu/workflows/{{ include.wfhub_id }}?version={{ include.version }}{% endcapture %}
 
