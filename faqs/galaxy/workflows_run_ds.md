@@ -1,14 +1,16 @@
 ---
-title: Importing and Launching a Dockstore workflow
+title: Importing and Launching a Dockstore Workflow
 area: workflows
 box_type: hands_on
 layout: faq
 contributors: [hexylena]
 optional_parameters:
-  dockstore_id: The Dockstore ID of the workflow you want to import
+  dockstore_id: The Dockstore ID of the workflow you want to import, minus the "#workflow/" portion
   title: The title of the workflow you want to import, can be any text
+  version: Version of the workflow you want to pin
 examples:
   Load a workflow by Dockstore ID: {dockstore_id: "github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow", title: "My Cool Workflow"}
+  Load a v0.1.3 of a specific IWC workflow: {dockstore_id: "github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main", title: "Kmer Profiling HiFi VGP1", version: "v0.1.3"}
 ---
 
 {% if include.dockstore_id %}
