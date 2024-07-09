@@ -27,7 +27,7 @@ Many of these updates have been covered in previous blog posts on the GTN, but w
 - [📆 GTN Event Pages]({{ site.baseurl }}/news/2024/05/22/introducing-gtn-event-pages.html)
 - [🎞 GTN Video Library]({{ site.baseurl }}/news/2024/06/14/gtn-video-library.html)
 - [🗞 News feeds, automating dissemination]({{ site.baseurl }}/news/2024/06/04/gtn-standards-rss.html)
-- [Training beyond the Galaxy](topics/ai4life/index.md)
+- [Training beyond the Galaxy]({% link topics/ai4life/index.md %})
 
 [See the presentation]({{ page.link }}){:.btn.btn-primary}
 
