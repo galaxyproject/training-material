@@ -14,12 +14,14 @@ examples:
 ---
 
 {% if include.dockstore_id %}
-
+{% capture external_page %}https://dockstore.org/workflows/{{ include.dockstore_id }}:{{ include.version }}{% endcapture %}
 <div class="show-when-galaxy-proxy-active">
 
-<span class="workflow" data-workflow="https://dockstore.org/api/ga4gh/trs/v2/tools/#workflow/{{ include.dockstore_id }}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span>
-(<a href="https://dockstore.org/workflows/{{ include.dockstore_id }}">View on Dockstore</a>)
 
+<a class="workflow" target="_top" href="/workflows/trs_import?trs_server=dockstore.org&run_form=true&trs_id=%23workflow/{{ include.dockstore_id }}&trs_version={{ include.version }}">
+  Launch <strong>{{ include.title }} ({{ include.version }})</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
+</a>
+(<a target="_blank" href="{{ external_page }}">View on Dockstore</a>)
 
 </div>
 
