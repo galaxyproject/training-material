@@ -475,6 +475,7 @@ Doublets are removed by calling a customized [**scrublet**](https://github.com/A
 > 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Remove doublets according to the doublet probability or doublet score, using 'pp.filter_doublets'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata scrublet` (output of **pp.scrublet** {% icon tool %})
+>        - *"Threshold for doublet probability"*: `0.5`
 > 3. Rename the generated file to `Anndata 5k PBMC filter_doublets` or add the tag {% icon galaxy-tags %} `filter_doublets` to the dataset
 > 4. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
 >
@@ -823,7 +824,7 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 > 1. {% tool [Plot with Scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **AnnData Operations** {% icon tool %})
 >    - *"Method used for plotting"*: `Embeddings: Scatter plot in UMAP basis, using 'pl.umap'`
->        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, MS4A1, CD3D, LEF1, NKG7, TREM1, LYZ, PPBP`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `leiden, CD3D, CD8A, CD4, MS4A1, NKG7, CD14, FCER1A`
 >        - {% icon param-toggle %} *"Show edges?"*: `No`
 >        - In *"Plot attributes"*
 >           - *"Number of panels per row"*: `2`
