@@ -1,8 +1,6 @@
 ---
 layout: event
-
 title: "Workshop on high-throughput sequencing data analysis with Galaxy"
-
 
 # external: "https://galaxyproject.org/events/2024-07-22-galaxy-workshop-freiburg/"
 
@@ -11,7 +9,6 @@ description: |
 
 date_start: 2024-07-22
 date_end: 2024-07-26 
-
 
 cost: free 
 audience: Scientists with no or little Galaxy experience who want to analyse sequencing data.
@@ -22,7 +19,6 @@ mode: In-person
 registration:
   link: https://docs.google.com/forms/d/e/1FAIpQLSeGHShGhMvFvK0Jf3TNn0xgSMVboabWiTPfP2s3L1iDM0qTzA/viewform
   deadline: 2024-05-29
-
 
 contributions:
   organisers: [erxleben]
@@ -39,14 +35,12 @@ location:
   city: Freiburg
   country: Germany
 
-
 infrastructure:
   tiaas: true    # tiaas = Training Infrastructure as a Service, and can be requested (for free) from all major Galaxies
 
   servers:
     - server: https://usegalaxy.eu
       name: Galaxy EU
-
 
 # Program of your course
 # Add GTN tutorials by supplying the topic and tutorial name
@@ -102,7 +96,6 @@ this workshop offers valuable insights and hands-on experiences.
 - RNA-seq Analysis
 - Variant Calling
 - Microbiome Analysis
-
 
 ## Learning Objectives:
 
