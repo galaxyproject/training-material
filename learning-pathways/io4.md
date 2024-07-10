@@ -14,7 +14,7 @@ title: Gallantries Grant - Intellectual Output 4 - Data analysis and modelling f
 description: |
   This Learning Pathway collects the results of Intellectual Output 4 in the Gallantries Project
 
-cover-image: ./shared/images/Gallantries_logo.png
+cover-image: shared/images/Gallantries_logo.png
 cover-image-alt: "Gallantries logo with the carpentries wrench in galaxy 2 stripes 1 strip colour scheme."
 
 priority: 5

@@ -1,0 +1,56 @@
+{% assign locale = site.data.lang[page.lang] %}
+
+{% assign tuto_recordings = include.material.recordings | default: page.recordings  %}
+{% assign slides_recordings = include.material.slides_recordings %}
+
+{% if slides_recordings %}
+  {% assign slides_recordings = slides_recordings | sort: 'date' | reverse %}
+{% endif %}
+
+{% if tuto_recordings %}
+  {% assign tuto_recordings = tuto_recordings | sort: 'date' | reverse %}
+{% endif %}
+
+{% if tuto_recordings or include.material.slides_recordings %}
+
+{% if include.wrapper %}
+<li class="btn btn-default supporting_material">
+{% else %}
+<div class="btn-group">
+{% endif %}
+
+  <!-- dropdown with all recordings -->
+  <a href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        {% icon video %}{% if include.label %}&nbsp;Recordings{% endif %}
+  </a>
+
+
+  <ul class="dropdown-menu">
+    {% for rec in slides_recordings %}
+    <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/index.html#lecture-recording-{{rec.date | date: "%-d %B %Y" | slugify}}" title="View recording for this lecture">
+                {% icon video %} Lecture ({{rec.date | date: "%B %Y" }}) - {{rec.length | downcase }}</a>
+    </li>
+    {% endfor %}
+
+    {% for rec in tuto_recordings %}
+      {% unless include.material.slides_recordings contains rec %}
+      {% assign type = rec.type | default: 'Tutorial' %}
+      {% if page.layout == 'tutorial_slides' or page.layout == 'base_slides' %} {% assign type = 'Lecture' %}{% endif %}
+    <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/index.html#{{type | downcase}}-recording-{{rec.date | date: "%-d %B %Y" | slugify}}" title="View the recording for this tutorial">
+                {% icon video %} {{type}} ({{rec.date | date: "%B %Y" }}) - {{rec.length | downcase }}</a>
+    </li>
+      {% endunless %}
+    {% endfor %}
+    <li><a class="dropdown-item" href="{{site.baseurl}}/topics/{{include.material.topic_name | default: page.topic_name}}/tutorials/{{include.material.tutorial_name | default: page.tutorial_name}}/recordings/" title="View all recordings for this tutorial">
+                {% icon video %} View All</a>
+    </li>
+
+  </ul>
+
+  {% if include.wrapper %}
+</li>
+  {% else %}
+</div>
+  {% endif %}
+
+{% endif %}

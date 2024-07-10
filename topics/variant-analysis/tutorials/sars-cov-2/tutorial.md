@@ -30,6 +30,16 @@ contributions:
    editing:
      - wm75
 
+recordings:
+- captioners:
+  - nekrut
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 15M
+  youtube_id: 9mIL0tIfZ_o
+  speakers:
+  - nekrut
+
 ---
 
 

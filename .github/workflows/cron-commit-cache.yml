@@ -12,15 +12,15 @@ jobs:
       (github.event_name != 'pull_request' ||
        github.event.pull_request.head.repo.full_name == github.repository)
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1000
 
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/cache@v2
+          ruby-version: "3.2"
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -49,11 +49,16 @@ jobs:
 
           bundle exec ruby bin/commit-cache-update.rb
 
+      - name: Update geocoding of events
+        id: geocode
+        run: |
+          bundle exec ruby bin/geocode.rb
+
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
         uses: peter-evans/create-pull-request@v3
         with:
           title: Update Cached Commit Data
-          branch-suffix: commitcache
+          branch-suffix: timestamp
           commit-message: Update Cached Commit Data
-          add-paths: metadata/
+          add-paths: metadata/,events/

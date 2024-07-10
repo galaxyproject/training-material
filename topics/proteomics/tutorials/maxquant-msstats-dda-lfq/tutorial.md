@@ -24,6 +24,17 @@ requirements:
       - maxquant-label-free
 subtopic: id-quant
 tags: [label-free]
+
+recordings:
+- captioners:
+  - foellmelanie
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H
+  youtube_id: IXdLAt2PAT4
+  speakers:
+  - foellmelanie
+
 ---
 
 

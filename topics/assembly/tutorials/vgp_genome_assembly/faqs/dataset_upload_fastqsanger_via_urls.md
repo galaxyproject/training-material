@@ -4,8 +4,7 @@ area: data upload
 box_type: tip
 layout: faq
 contributors: [nekrut]
-redirect_from:
- - /faqs/galaxy/dataset_upload_fastqsanger_via_urls
+redirect_from: [/faqs/galaxy/dataset_upload_fastqsanger_via_urls]
 ---
 
 Uploading `fastqsanger` or `fastqsanger.gz` datasets via URL.

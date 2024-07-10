@@ -1,0 +1,15 @@
+{% assign startdate = include.start | default: page.date_start %}
+{% assign enddate = include.end | default: page.date_end | default: page.date_start %}
+{% assign eventurl = include.url | default: page.url | prepend: site.baseurl | prepend: site.url %}
+{% assign eventname = include.name | default: page.title | default: ""%}
+
+{% assign location = "unspecified" %}
+{% if include.location or page.location %}
+{% assign location = include.location | default: page.location | format_location_simple %}
+{% endif %}
+
+<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{startdate | date: '%Y%m%d'}}%2F{{enddate | date: '%Y%m%d'}}&details=Event%20Information%20{{eventurl}}&location={{location}}&text={{eventname}}" class="btn btn-info btn-sm" alt="Add to Google Calendar">Google</a>
+
+<a href="https://outlook.live.com/calendar/0/deeplink/compose?body=Event%20Information%20{{eventurl}}&enddt={{enddate | date: '%Y-%m-%d'}}&location={{location}}&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt={{startdate | date: '%Y-%m-%d'}}&subject={{eventname}}" class="btn btn-info btn-sm">Outlook</a>
+
+<a href="https://outlook.office.com/calendar/0/deeplink/compose/?body=Event%20Information%20{{eventurl}}&enddt={{enddate | date: '%Y-%m-%d'}}&allday=true&location={{location}}&path=%2fcalendar%2faction%2fcompose&rru=addevent&startdt={{startdate | date: '%Y-%m-%d'}}&subject={{eventname}}" class="btn btn-info btn-sm">Office 365</a>

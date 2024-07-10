@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy 101"
+title: "Galaxy Basics for genomics"
 zenodo_link: "https://doi.org/10.5281/zenodo.4104428"
 level: Introductory
 questions:
@@ -21,6 +21,7 @@ key_points:
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
 subtopic: core
+priority: 2
 contributors:
   - shiltemann
   - nsoranzo
@@ -29,6 +30,16 @@ contributors:
   - bgruening
   - pajanne
   - hexylena
+
+recordings:
+- captioners:
+  - shiltemann
+  date: '2021-07-21'
+  length: 13M
+  youtube_id: D5HgJWdfOWw
+  speakers:
+  - nekrut
+
 ---
 
 This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.

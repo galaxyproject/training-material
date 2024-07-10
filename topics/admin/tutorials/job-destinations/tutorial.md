@@ -41,6 +41,17 @@ requirements:
       - connect-to-compute-cluster
 abbreviations:
   TPV: Total Perspective Vortex
+
+recordings:
+- captioners:
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 31M
+  youtube_id: qX8GjTJwnAk
+  speakers:
+  - hexylena
+
 ---
 
 

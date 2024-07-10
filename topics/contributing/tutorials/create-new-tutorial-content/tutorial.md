@@ -349,6 +349,8 @@ Surround your math expression with two `$` signs on each side (like in LaTeX mat
 
    $$ 5 + 5 $$
 
+- Note: if inline mode is not working correctly, you can force it by using the following delimiters instead of dollar signs: `\\( 5 +5 \\)`
+
 Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
 
 
@@ -919,10 +921,50 @@ The alternative is to figure out the ID for the tool you want to use:
 
 ![Finding the tool ID](../../images/tool-id.png)
 
+## Example Histories
+
+If you have example input histories for your tutorial, perhaps for specific servers where trainees will often follow a tutorial but want to skip a slow input step, then you can provide example histories as part of your tutorial.
+
+> <code-in-title>Tutorial Frontmatter</code-in-title>
+> ```yaml
+> answer_histories:
+>   - label: "UseGalaxy.eu"
+>     history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+>   - label: "Older Alevin version"
+>     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+>     date: 2024-01-01
+> input_histories:
+>   - label: "UseGalaxy.eu"
+>     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+> ```
+{: .code-in}
+
+> <code-out-title>Rendered Tutorial</code-out-title>
+> ![a screenshot of the GTN metadata box showing a dropdown for input histories and answer histories. The answer histories features two examples one on UseGalaxy.eu and an older alevin one, each with a date. In the dropdown is also a link to an FAQ titled how to use this](images/example-histories.png)
+{: .code-out}
 
 ## Workflows
 
 In some tutorials you aren't as interested in teaching users the individual steps for analysing data, but rather want to focus on some downstream aspects of analysis, or to showcase the best practice workflows that are already available for a user to use! In those cases it can be useful to have a nicer way of inviting the user to execute those steps.
+
+If you are accessing these in tutorial mode, they should function as button that, when clicked, launch the workflow directly. Outside of tutorial mode, they will link to our redirection service which will let you supply which Galaxy you plan to use.
+
+Note that if for some reason the 'fancy' method doesn't work, there are fallback tip boxes to help a user execute a similar procedure manually.
+
+### GTN Workflows
+
+If you've included the workflow in the GTN but haven't uploaded to a repository yet:
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" title="Galaxy Workflow Data QC" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" title="Galaxy Workflow Data QC" %}
+
 
 ### WorkflowHub
 
@@ -942,17 +984,17 @@ Note that it links to a specific workflow, on any Galaxy server. When this tutor
 
 ### Dockstore
 
-Please note that the dockstore ID should be provided without the `#` character.
+Please note that the dockstore ID should be provided without the `#workflow/` prefix, so starting from `github.com`.
 
 {% raw %}
 ```markdown
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
 ```
 {% endraw %}
 
 Rendered:
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
 
 This snippet has the same behaviour, it will use my.galaxy.training links to make them server independent, but in Tutorial Mode it will open on the current server.
 

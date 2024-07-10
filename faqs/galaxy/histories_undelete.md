@@ -4,10 +4,14 @@ description: Undelete your deleted histories
 area: histories
 box_type: tip
 layout: faq
-contributors: [gatwirival]
+contributors: [gatwirival,nekrut]
 ---
-* Click on **User** then select **Histories**
-* Click on **Advanced search** on the top left side below  **Saved Histories**
-* On **Status** click **Deleted**
-* Select the history you want to undelete using the **checkbox** on the left side
-* Click **Undelete** button below the deleted histories
+
+Deleted histories can be **undeleted**:
+
+1. Select "Histories" from the activity bar on the left
+2. Toggle "Advanced search"
+3. Click "Deleted"
+4. Click on the title of the history you want to un-delete and un-delete it!
+
+![Undeleting a deleted history]({% link faqs/galaxy/images/histories_undelete.gif %})

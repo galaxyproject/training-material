@@ -4,8 +4,7 @@ area: format
 box_type: details
 layout: faq
 contributors: [bebatut]
-redirect_from:
-- /topics/metagenomics/faqs/kraken
+redirect_from: [/topics/metagenomics/faqs/kraken]
 ---
 
 In the $$k$$-mer approach for taxonomy classification, we use a database containing DNA sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length $$k$$ (called $$k$$-mers), usually 30bp.

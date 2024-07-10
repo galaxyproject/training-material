@@ -53,6 +53,25 @@ follow_up_training:
 
 subtopic: eukaryote
 priority: 2
+
+recordings:
+- youtube_id: p0NBxZk5964
+  speakers:
+  - abretaud
+  date: '2023-05-12'
+  galaxy_version: '23.01'
+  length: 1H10M
+  captioners:
+  - abretaud
+- captioners:
+  - abretaud
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 1H10M
+  youtube_id: r-wU6BhqIpk
+  speakers:
+  - abretaud
+
 ---
 
 

@@ -25,7 +25,8 @@ key_points:
   - "View the output files by clicking on the eye icon."
   - "View all your histories and move files between them. Switch to a different history."
   - "Log out of your Galaxy server. When you log back in (to the same server), your histories will all be there."
-subtopic: core
+subtopic: first
+priority: 2
 translations:
   - es
 contributions:
@@ -87,7 +88,7 @@ Your "History" is in the panel at the right.
 > 1. Go to the **History** panel (on the right)
 > 2. Click on {% icon galaxy-pencil %} (**Edit**) next to the history name (which by default is "Unnamed history")
 >
->    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.](../../../../shared/images/rename_history.png){:width="250px"}
+>    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.]({% link shared/images/rename_history.png %}){:width="250px"}
 >
 >    > <comment-title></comment-title>
 >    >
