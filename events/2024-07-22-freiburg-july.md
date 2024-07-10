@@ -83,13 +83,9 @@ this workshop offers valuable insights and hands-on experiences.
 ## Topics:
 
 - Galaxy Introduction and Quality Control
-
 - ChIP-seq Analysis
-
 - RNA-seq Analysis
-
 - Variant Calling
-
 - Microbiome Analysis
 
 
