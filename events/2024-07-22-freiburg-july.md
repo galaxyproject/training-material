@@ -26,7 +26,7 @@ registration:
 
 contributions:
   organisers: [erxleben]
-  instructors: [erxleben, teresa-m]
+  instructors: [erxleben, pavanvidem, Nilchia, teresa-m, wm75, EngyNasr, paulzierep]
   funding: [eurosciencegateway, deNBI]
 
 location:
@@ -51,22 +51,34 @@ program:
         name: "Monday "
         time: "09:15 - 16:00"
         description: Introduction and Quality control
+      - name: galaxy-intro-peaks2genes
+        topic: introduction  
+      - name: quality-control
+        topic: sequence-analysis
       - type: custom
         name: "Tuesday "
         time: "09:15 - 17:00"
         description: ChIP-Sequencing
+      - name: formation_of_super-structures_on_xi
+        topic: epigenetics
       - type: custom
         name: "Wednesday "
         time: "09:15 - 17:00"
         description: RNA-Sequencing
+      - name: ref-based
+        topic: transcriptomics
       - type: custom
         name: "Thursday "
         time: "09:15 - 17:00"
         description: Variant Calling/Exome Sequencing
+      - name: exome-seq
+        topic: variant-analysis
       - type: custom
         name: "Friday "
         time: "09:15 - 17:00"
         description: Metagenomics
+      - name: pathogen-detection-from-nanopore-foodborne-data
+        topic: microbiome
 
 ---
 # Welcome to the Comprehensive Galaxy Workshop: From Introduction to Advanced Applications
