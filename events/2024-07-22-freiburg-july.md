@@ -50,28 +50,23 @@ program:
       - type: custom
         name: "Monday "
         time: "09:15 - 16:00"
-        description: |
-          Introduction and Quality control
+        description: Introduction and Quality control
       - type: custom
         name: "Tuesday "
         time: "09:15 - 17:00"
-        description: |
-          ChIP-Sequencing
+        description: ChIP-Sequencing
       - type: custom
         name: "Wednesday "
         time: "09:15 - 17:00"
-        description: |
-          RNA-Sequencing
+        description: RNA-Sequencing
       - type: custom
-        name: "Thusday "
+        name: "Thursday "
         time: "09:15 - 17:00"
-        description: |
-          Variant Calling/Exome Seqencing
+        description: Variant Calling/Exome Sequencing
       - type: custom
         name: "Friday "
         time: "09:15 - 17:00"
-        description: |
-          Metagenomics
+        description: Metagenomics
 
 ---
 # Welcome to the Comprehensive Galaxy Workshop: From Introduction to Advanced Applications
