@@ -7,13 +7,13 @@ priority: 2
 redirect_from:
   - /topics/transcriptomics/tutorials/scatac-standard-processing-snapatac2/tutorial
 level: Intermediate
-zenodo_link: https://zenodo.org/records/11473531
+zenodo_link: https://zenodo.org/records/12707159
 questions:
 - What does ATAC-seq data tell us about the cell?
 - Which steps are necessary to cluster the cells of single-cell ATAC-seq data?
 - Why is dimension reduction important for the analysis of single-cell data?
 objectives:
-- Learn how single-cell ATAC-seq data is processed 
+- Learn how single-cell ATAC-seq data is processed
 - Create a count-matrix from a 10X fragment file
 - Perform filtering, dimension reduction and clustering on AnnData matrices
 - Generate and filter a cell-by-gene matrix
@@ -21,7 +21,7 @@ objectives:
 time_estimation: 4H
 key_points:
 - Single-cell ATAC-seq can identify open chromatin sites
-- Dimension reduction is required to simplify the data while preserving important information about the relationships of cells to each other.   
+- Dimension reduction is required to simplify the data while preserving important information about the relationships of cells to each other.
 - Clusters of similar cells can be annotated to their respective cell-types
 requirements:
   -
@@ -32,6 +32,7 @@ requirements:
 tags:
 - 10x
 - epigenetics
+- single-cell
 abbreviations:
     scATAC-seq: Single-cell Assay for Transposase-Accessible Chromatin using sequencing
     PBMCs: peripheral blood mononuclear cells
@@ -39,21 +40,26 @@ abbreviations:
     TSSe: transcription start site enrichment
     TSS: transcription start sites
     UMAP: Uniform Manifold Approximation and Projection
-
-contributors:
-- timonschlegel
+contributions:
+  authorship:
+    - timonschlegel
+  editing:
+    - pavanvidem
+    - bgruening
+  testing:
+    - pavanvidem
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 ---
 
-{scATAC-seq} analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin. 
-By analyzing which genomic sites have an _open_ chromatin state, cell-type specific patterns of gene accessibility can be determined. 
-{scATAC-seq} is particularly useful for analyzing tissue containing different cell populations, such as {PBMCs}. 
+{scATAC-seq} analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. "open") chromatin and not in closed chromatin.
+By analyzing which genomic sites have an _open_ chromatin state, cell-type specific patterns of gene accessibility can be determined.
+{scATAC-seq} is particularly useful for analyzing tissue containing different cell populations, such as {PBMCs}.
 
-In this tutorial we will analyze {scATAC-seq} data using the tool suites [SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/index.html) ({% cite Zhang2024 %}) and [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}). 
+In this tutorial we will analyze {scATAC-seq} data using the tool suites [SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/index.html) ({% cite Zhang2024 %}) and [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}).
 With both of these tool suites we will perform preprocessing, clustering and identification of {scATAC-seq} datasets from [10x Genomics](https://www.10xgenomics.com/products/single-cell-atac).
-The analysis will be performed using a dataset of {PBMCs} containing ~4,620 single nuclei. 
+The analysis will be performed using a dataset of {PBMCs} containing ~4,620 single nuclei.
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
@@ -80,37 +86,37 @@ The analysis will be performed using a dataset of {PBMCs} containing ~4,620 sing
 
 # {scATAC-seq} with 10X Genomics
 ATAC-seq utilizes a hyperactive Tn5 transposase ({% cite Kia2017 %}) to ligate adaptors to genome fragments, created by the transposase. Performing ATAC-seq on individual cells used to be an expensive and time-consuming labour.
-The 10X Chromium NextGEM system made {scATAC-seq} a cost-effective method for gaining high-resolution data with a simple protocol. 
-After the transposition of nuclei in bulk, individual nuclei are put into Gel beads in Emulsion (GEM), containing unique 10x cell barcodes and sequencing adaptors for Illumina sequencing. 
+The 10X Chromium NextGEM system made {scATAC-seq} a cost-effective method for gaining high-resolution data with a simple protocol.
+After the transposition of nuclei in bulk, individual nuclei are put into Gel beads in Emulsion (GEM), containing unique 10x cell barcodes and sequencing adaptors for Illumina sequencing.
 ![Library Preparation]({% link topics/single-cell/images/scatac-standard-snapatac2/tenx_libprep_scatac.png %} "An overview of the 10X single-nuclei ATAC-seq library preparation")
 
 
 # Data
 
-The 5k {PBMCs} dataset for this tutorial is available for free from [10X Genomics](https://www.10xgenomics.com/datasets/5-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-next-gem-v-1-1-1-1-standard-2-0-0). The blood samples were collected from a healthy donor and were prepared following the Chromium Next GEM scATAC-seq protocol. After sequencing on Illumina NovaSeq, the reads were processed by the **Cell Ranger ATAC 2.0.0** pipeline from 10X to generate a [*Fragments File*](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/output/fragments). 
+The 5k {PBMCs} dataset for this tutorial is available for free from [10X Genomics](https://www.10xgenomics.com/datasets/5-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-next-gem-v-1-1-1-1-standard-2-0-0). The blood samples were collected from a healthy donor and were prepared following the Chromium Next GEM scATAC-seq protocol. After sequencing on Illumina NovaSeq, the reads were processed by the **Cell Ranger ATAC 2.0.0** pipeline from 10X to generate a [*Fragments File*](https://support.10xgenomics.com/single-cell-atac/software/pipelines/latest/output/fragments).
 
 > <details-title>Fragments File </details-title>
 >
->   The Fragments File is a tabular file in a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1)-like format, containing information about the position of the fragments on the chromosome and their corresponding 10x cell barcodes.  
+>   The Fragments File is a tabular file in a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1)-like format, containing information about the position of the fragments on the chromosome and their corresponding 10x cell barcodes.
 >
 {: .details}
 SnapATAC2 requires 3 input files for the standard pathway of processing:
-- `fragments_file.tsv`: A tabular file containing the chromosome positions of the fragments and their corresponding 10x cell barcodes. 
-- `chrom_sizes.txt`: A tabular file of the number of bases of each chromosome of the reference genome 
+- `fragments_file.tsv`: A tabular file containing the chromosome positions of the fragments and their corresponding 10x cell barcodes.
+- `chrom_sizes.txt`: A tabular file of the number of bases of each chromosome of the reference genome
 - `gene_annotation.gtf.gz`: A tabular file listing genomic features of the reference genome (GENCODE GRCh38)
 
 > <details-title>Chromosome sizes </details-title>
 >
-> - A chromosome sizes file can be generated using the tool {% tool [Compute sequence length](toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.3) %}. 
+> - A chromosome sizes file can be generated using the tool {% tool [Compute sequence length](toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.3) %}.
 > - The reference genome can either be selected from cached genomes or uploaded to the galaxy history.
 >
 {: .details}
 
 > <comment-title></comment-title>
-> - This tutorial starts with a `fragment` file. 
+> - This tutorial starts with a `fragment` file.
 > - SnapATAC2 also accepts mapped reads in a `BAM` file.
 > - To learn how to get a `fragment` file or `BAM` file from raw `.FASTQ`-reads, please check out the tutorial ["Pre-processing of 10X Single-Cell ATAC-seq Datasets"]( {% link topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.md %} )
-> - If you would like to start the analysis with a `BAM` file, you can expand the details section ["Details: Creating a fragment file"]( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %}#creating-a-fragment-file). 
+> - If you would like to start the analysis with a `BAM` file, you can expand the details section ["Details: Creating a fragment file"]( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %}#creating-a-fragment-file).
 {: .comment}
 
 
@@ -123,7 +129,7 @@ SnapATAC2 requires 3 input files for the standard pathway of processing:
 >
 >
 >    ```
->    {{ page.zenodo_link }}/files/atac_pbmc_5k_nextgem_fragments.tsv
+>    {{ page.zenodo_link }}/files/atac_pbmc_5k_nextgem_fragments.tsv.gz
 >    {{ page.zenodo_link }}/files/chrom_sizes.txt
 >    {{ page.zenodo_link }}/files/gencode.v46.annotation.gtf.gz
 >    ```
@@ -135,10 +141,10 @@ SnapATAC2 requires 3 input files for the standard pathway of processing:
 > 3. Rename the datasets
 >   - {% icon galaxy-pencil %} **Rename** the file `atac_pbmc_5k_nextgem_fragments.tsv` to `fragments_file.tsv`
 >   - {% icon galaxy-pencil %} **Rename** the file `gencode.v46.annotation.gtf.gz` to `gene_annotation.gtf.gz`
-> 
+>
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. Inspect `chrom_sizes` and `fragments_file` 
+> 4. Inspect `chrom_sizes` and `fragments_file`
 {: .hands_on}
 
 > <question-title></question-title>
@@ -148,8 +154,8 @@ SnapATAC2 requires 3 input files for the standard pathway of processing:
 >
 > > <solution-title></solution-title>
 > >
-> > 1. There are 25 chromosomes. The 22 autosomes (Chr. 1-22), both sex chromosomes (Chr. X and Y) and the small circular mitochondrial chromosome (Chr. M). 
-> > 2. The cell barcodes are unique 16 bp oligos, located in column 4.  
+> > 1. There are 25 chromosomes. The 22 autosomes (Chr. 1-22), both sex chromosomes (Chr. X and Y) and the small circular mitochondrial chromosome (Chr. M).
+> > 2. The cell barcodes are unique 16 bp oligos, located in column 4.
 > >
 > {: .solution}
 >
@@ -162,36 +168,36 @@ SnapATAC2 requires 3 input files for the standard pathway of processing:
 >  > ```
 >  > {{ page.zenodo_link }}/files/BAM_500-PBMC.bam
 >  > ```
->  >   - This dataset contains mapped reads in the `BAM` format. 
+>  >   - This dataset contains mapped reads in the `BAM` format.
 >  >   - It was generated by following the tutorial ["Pre-processing of 10X Single-Cell ATAC-seq Datasets"]( {% link topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.md %} ) until the output of {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18) %}
 >  > 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
 >  >    - *"Method used for preprocessing"*: `Convert a BAM file to a fragment file, using 'pp.make_fragment_file'`
 >  >        - {% icon param-file %} *"File name of the BAM file"*: `BAM_500-PBMC` (Input dataset)
 >  >        - {% icon param-toggle %} *"Indicate whether the BAM file contain paired-end reads"*: `Yes`
 >  >        - *"How to extract barcodes from BAM records?"*: `From read names using regular expressions`
->  >          - *"Extract barcodes from read names of BAM records using regular expressions"*: `(................):` 
->  > 
+>  >          - *"Extract barcodes from read names of BAM records using regular expressions"*: `(................):`
+>  >
 >  >    > <comment-title></comment-title>
->  >    > - Not every regular expression type is supported. 
->  >    > - This expression selects 16 characters if they are followed by a colon. Only the cell barcodes of the `BAM` file will match. 
+>  >    > - Not every regular expression type is supported.
+>  >    > - This expression selects 16 characters if they are followed by a colon. Only the cell barcodes of the `BAM` file will match.
 >  >    {: .comment}
->  > 
+>  >
 >  > 3. Rename the generated file to `Fragments 500 PBMC`
->  > 4. Now you can continue with either the `fragments_file` from earlier or the new file `Fragments 500 PBMC`. 
+>  > 4. Now you can continue with either the `fragments_file` from earlier or the new file `Fragments 500 PBMC`.
 >  >    - {% icon galaxy-info %} The tool `pp.make_fragment_file` {% icon tool %} has implemented additional {QC} measures. These filter out larger fragments, which will be noticeable in the log-scale fragment size distribution.
->  >    - {% icon galaxy-info %} Please note that `Fragments 500 PBMC` only contains 500 {PBMCs} and thus the clustering will produce different outputs compared to the outputs generated by `fragments_file` (with 5k PBMC). 
+>  >    - {% icon galaxy-info %} Please note that `Fragments 500 PBMC` only contains 500 {PBMCs} and thus the clustering will produce different outputs compared to the outputs generated by `fragments_file` (with 5k PBMC).
 >  {: .hands_on}
 {: .details}
 
 # Preprocessing
 
-Preprocessing of the scATAC-seq data contained in the `fragment` file with SnapATAC2 begins with importing the files and computing basic {QC} metrics. 
+Preprocessing of the scATAC-seq data contained in the `fragment` file with SnapATAC2 begins with importing the files and computing basic {QC} metrics.
 
-SnapATAC2 compresses and stores the fragments into an `AnnData` object. 
+SnapATAC2 compresses and stores the fragments into an `AnnData` object.
 
 ## AnnData
 The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially developed for the [`Scanpy`](https://scanpy.readthedocs.io/en/stable/index.html) package and is now a widely accepted data format to
-store annotated data matrices in a space-efficient manner. 
+store annotated data matrices in a space-efficient manner.
 
 ![Anndata format]({% link topics/single-cell/images/scatac-standard-snapatac2/anndata_schema.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of
 observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
@@ -205,14 +211,14 @@ observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</co
 >    - *"Method used for preprocessing"*: `Import data fragment files and compute basic QC metrics, using 'pp.import_data'`
 >        - {% icon param-file %} *"Fragment file, optionally compressed with gzip or zstd"*: `fragments_file.tsv` (Input dataset)
 >        - {% icon param-file %} *"A tabular file containing chromosome names and sizes"*: `chrom_sizes.txt` (Input dataset)
->        - {% icon param-toggle %} *"Whether the fragment file has been sorted by cell barcodes"*: `No` 
+>        - {% icon param-toggle %} *"Whether the fragment file has been sorted by cell barcodes"*: `No`
 >
 >    > <details-title>Sorted by barcodes</details-title>
->    > - This tool requires the fragment file to be sorted according to cell barcodes. 
->    > - If **pp.make_fragment_file** {% icon tool %} was used to generate the fragment file, this has automatically been done. 
->    >   - Otherwise, the setting *"sorted by cell barcodes"* should remain `No`. 
+>    > - This tool requires the fragment file to be sorted according to cell barcodes.
+>    > - If **pp.make_fragment_file** {% icon tool %} was used to generate the fragment file, this has automatically been done.
+>    >   - Otherwise, the setting *"sorted by cell barcodes"* should remain `No`.
 >    {: .details}
-> 
+>
 > 2. Rename the generated file to `Anndata 5k PBMC`
 >
 > 3. Check that the format is `h5ad`
@@ -239,12 +245,12 @@ Instead, we need to use a dedicated tool from the **AnnData** suite.
 >    > ```
 >    >
 >    > 1. How many observations are there? What do they represent?
->    > 2. How many variables are there? 
+>    > 2. How many variables are there?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
 >    > > 1. There are 14232 observations, representing the cells.
->    > > 2. There are 0 variables, representing genomic regions. This is because genome-wide 500-bp bins are only added after initial filtering. 
+>    > > 2. There are 0 variables, representing genomic regions. This is because genome-wide 500-bp bins are only added after initial filtering.
 >    > >
 >    > {: .solution}
 >    >
@@ -262,7 +268,7 @@ Instead, we need to use a dedicated tool from the **AnnData** suite.
 >    >      -    14232 × 0
 >    >      ```
 >    >    * {% icon details %} This feature isn't the most reliable and might display:
->    >      
+>    >
 >    >      ```
 >    >      [n_obs x n_vars]
 >    >      -    1 × 1
@@ -298,19 +304,19 @@ Instead, we need to use a dedicated tool from the **AnnData** suite.
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. 3 peaks are clearly visible (at <100-bp, ~200-bp and ~400-bp). The smallest fragments are from nucleosome-free regions, while the larger peaks of 200- and 400-bp contain mono- and di-nucleosome fragments, respectively. 
-> > > 2. The small fragments (<100-bp) are from open chromatin reads, since the Tn5 transposase could easily access the loosely packed DNA ({% cite Yan2020 %}). 
-> > > 
+> > > 1. 3 peaks are clearly visible (at <100-bp, ~200-bp and ~400-bp). The smallest fragments are from nucleosome-free regions, while the larger peaks of 200- and 400-bp contain mono- and di-nucleosome fragments, respectively.
+> > > 2. The small fragments (<100-bp) are from open chromatin reads, since the Tn5 transposase could easily access the loosely packed DNA ({% cite Yan2020 %}).
+> > >
 > > {: .solution}
 > >
 > {: .question}
 {: .hands_on}
 
 
-The {TSSe} is another important {QC} metric. Nucleosome-free fragments are expected to be enriched at {TSS}. TSSe shows increased fragmentation of chromatin around the TSS. This suggests open and accessible nucleosome-free chromatin. 
+The {TSSe} is another important {QC} metric. Nucleosome-free fragments are expected to be enriched at {TSS}. TSSe shows increased fragmentation of chromatin around the TSS. This suggests open and accessible nucleosome-free chromatin.
 
-{TSSe} is used as a QC metric, since an increased enrichment around TSS regions suggests that the experiment has captured biological meaningful genomic features. 
-TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tsse* function. 
+{TSSe} is used as a QC metric, since an increased enrichment around TSS regions suggests that the experiment has captured biological meaningful genomic features.
+TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tsse* function.
 
 > <hands-on-title> Calculate and Plot TSSe </hands-on-title>
 >
@@ -320,7 +326,7 @@ TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tss
 >        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `gene_annotation.gtf.gz` (Input dataset)
 >
 > 2. Rename the generated file to `Anndata 5k PBMC TSSe` or add the tag {% icon galaxy-tags %} `TSSe` to the dataset:
-> 
+>
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 >
@@ -328,10 +334,10 @@ TSSe scores of individual cells can be calculated using SnapATAC2's *metrics.tss
 >    - *"Method used for plotting"*: `Plot the TSS enrichment vs. number of fragments density figure, using 'pl.tsse'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC TSSe` (output of **metrics.tsse** {% icon tool %})
 > 4. {% icon galaxy-eye %} Inspect the `.png` output
-> 
+>
 >
 > ![TSSe plot against number of unique fragments]({% link topics/single-cell/images/scatac-standard-snapatac2/pl.tsse.png %})
-High-quality cells can be identified in the plot of {TSSe} scores against a number of unique fragments for each cell. 
+> High-quality cells can be identified in the plot of {TSSe} scores against a number of unique fragments for each cell.
 >
 > > <question-title></question-title>
 > >
@@ -340,8 +346,8 @@ High-quality cells can be identified in the plot of {TSSe} scores against a numb
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. The cells in the upper right are high-quality cells, enriched for {TSS}. Fragments in the lower left represent low-quality cells or empty droplets and should be filtered out. 
-> > > 2. Setting the minimum number of counts at 5,000 and the minimum TSS enrichment to 10.0 is an adequate filter. 
+> > > 1. The cells in the upper right are high-quality cells, enriched for {TSS}. Fragments in the lower left represent low-quality cells or empty droplets and should be filtered out.
+> > > 2. Setting the minimum number of counts at 5,000 and the minimum TSS enrichment to 10.0 is an adequate filter.
 > > >
 > > {: .solution}
 > >
@@ -377,22 +383,22 @@ Based on the {TSSe} plot the cells can be filtered by TSSe and fragment counts.
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. There are only 4564 observations, compared to the initial 14232 observations. 
->    > >    
+>    > > 1. There are only 4564 observations, compared to the initial 14232 observations.
+>    > >
 >    > >    And the `obs: 'tsse'` has been added (but already during **metrics.tsse**{% icon tool %})
->    > > 2. The empty droplets and low-quality cells have been filtered out, leaving us with 4564 high-quality cells. 
+>    > > 2. The empty droplets and low-quality cells have been filtered out, leaving us with 4564 high-quality cells.
 >    > >
 >    > {: .solution}
 >    >
 >    {: .question}
-> 
+>
 {: .hands_on}
 
 ## Feature selection
 Currently, our AnnData matrix does not contain any variables. The variables will be added in the following step with the function *pp.add_tile_matrix*.
-This creates a cell-by-bin matrix containing insertion counts across genome-wide 500-bp bins. 
+This creates a cell-by-bin matrix containing insertion counts across genome-wide 500-bp bins.
 
-After creating the variables, the most accessible features are selected. 
+After creating the variables, the most accessible features are selected.
 > <hands-on-title> Select features </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
@@ -406,17 +412,17 @@ After creating the variables, the most accessible features are selected.
 >
 >    > <comment-title> Select features </comment-title>
 >    >
->    > - Including more features improves resolution and can reveal finer details, but it may also introduce noise. 
->    >    - To optimize results, experiment with the `n_features` parameter to find the most appropriate value for your dataset. 
+>    > - Including more features improves resolution and can reveal finer details, but it may also introduce noise.
+>    >    - To optimize results, experiment with the `n_features` parameter to find the most appropriate value for your dataset.
 >    >
 >    >  > <details-title> Different number of features </details-title>
->    >  > - To demonstrate the differences when selecting features, the following UMAP plots are the outputs from processing with a number of features between 1,000 and 500,000. 
->    >  > - Fewer features result in fewer, but larger clusters. Selecting a lot of features will output more granular clusters and the compute time will increase. 
+>    >  > - To demonstrate the differences when selecting features, the following UMAP plots are the outputs from processing with a number of features between 1,000 and 500,000.
+>    >  > - Fewer features result in fewer, but larger clusters. Selecting a lot of features will output more granular clusters and the compute time will increase.
 >    >  > ![Different number of features UMAP]({% link topics/single-cell/images/scatac-standard-snapatac2/number_features.png %}"UMAP plots with different selected features")
 >    >  >
 >    >  {: .details}
->    > - At this step you can provide a blacklist or whitelist to specifically select relevant features. 
->    >    - For example the [**ENCODE Blacklist**](https://github.com/Boyle-Lab/Blacklist) ({% cite Amemiya2019 %}) can be applied here.  
+>    > - At this step you can provide a blacklist or whitelist to specifically select relevant features.
+>    >    - For example the [**ENCODE Blacklist**](https://github.com/Boyle-Lab/Blacklist) ({% cite Amemiya2019 %}) can be applied here.
 >    {: .comment}
 >
 > 3. Rename the generated file to `Anndata 5k PBMC select_features` or add the tag {% icon galaxy-tags %} `select_features` to the dataset
@@ -438,8 +444,8 @@ After creating the variables, the most accessible features are selected.
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. There are 6,062,095 variables, compared to 0 in `TSSe filtered`. 
->    > > 2. Selected features are stored in `var: 'selected'`. 
+>    > > 1. There are 6,062,095 variables, compared to 0 in `TSSe filtered`.
+>    > > 2. Selected features are stored in `var: 'selected'`.
 >    > >
 >    > {: .solution}
 >    >
@@ -450,17 +456,17 @@ After creating the variables, the most accessible features are selected.
 
 ## Doublet removal
 
-Doublets are removed by calling a customized [**scrublet**](https://github.com/AllonKleinLab/scrublet) ({% cite Wolock2019 %}) algorithm. *pp.scrublet* will identify potential doublets and the function *pp.filter_doublets* removes them. 
+Doublets are removed by calling a customized [**scrublet**](https://github.com/AllonKleinLab/scrublet) ({% cite Wolock2019 %}) algorithm. *pp.scrublet* will identify potential doublets and the function *pp.filter_doublets* removes them.
 
 > <details-title>Doublets in Single-cell datasets</details-title>
 >
-> - During single-cell sequencing, multiple nuclei can be encapsulated into the same 10x gel bead. The resulting multiplets (>97% of which are doublets) produce sequences from both cells. 
-> - Doublets can confound the results by appearing as "new" clusters or artifactual intermediary cell states. 
->    - These problematic doublets are called **neotypic** doublets, since they appear as "new" cell types. 
-> - **Scrublet** (Single-cell Remover of Doublets) is an algorithm which can detect neotypic doublets that produce false results. 
->    - The algorithm first simulates doublets by combining random pairs of observed cell features. 
->    - The observed features of the "cells" are then compared to the simulated doublets and scored on their doublet probability. 
->    - SnapATAC2's *pp.filter_doublets* then removes all cells with a doublet probability >50%. 
+> - During single-cell sequencing, multiple nuclei can be encapsulated into the same 10x gel bead. The resulting multiplets (>97% of which are doublets) produce sequences from both cells.
+> - Doublets can confound the results by appearing as "new" clusters or artifactual intermediary cell states.
+>    - These problematic doublets are called **neotypic** doublets, since they appear as "new" cell types.
+> - **Scrublet** (Single-cell Remover of Doublets) is an algorithm which can detect neotypic doublets that produce false results.
+>    - The algorithm first simulates doublets by combining random pairs of observed cell features.
+>    - The observed features of the "cells" are then compared to the simulated doublets and scored on their doublet probability.
+>    - SnapATAC2's *pp.filter_doublets* then removes all cells with a doublet probability >50%.
 >
 > ![Doublet removal with scrublet]({% link topics/single-cell/images/scatac-standard-snapatac2/doublets-and-scrublet.png %} "Scrublet simulates expected doublets and produces doublet scores for each cell. ({% cite Wolock2019 %})")
 >
@@ -494,8 +500,8 @@ Doublets are removed by calling a customized [**scrublet**](https://github.com/A
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. Cell doublets were removed. `n_obs` was reduced from 4564 to 4430 cells. 
->    > > 2. The outputs of **pp.scrublet** are stored in observations `obs: 'doublet_probability', 'doublet_score'` and in unstructured annotations `uns: 'scrublet_sim_doublet_score'`. The output of **pp.filter_doublets** is stored in `uns: 'doublet_rate'`. 
+>    > > 1. Cell doublets were removed. `n_obs` was reduced from 4564 to 4430 cells.
+>    > > 2. The outputs of **pp.scrublet** are stored in observations `obs: 'doublet_probability', 'doublet_score'` and in unstructured annotations `uns: 'scrublet_sim_doublet_score'`. The output of **pp.filter_doublets** is stored in `uns: 'doublet_rate'`.
 >    > >
 >    > {: .solution}
 >    >
@@ -512,30 +518,30 @@ Dimension reduction is a very important step during the analysis of single cell 
 
 > <details-title>Dimension reduction with SnapATAC2</details-title>
 >
-> - Dimension reduction algorithms can be either linear or non-linear. 
-> - Linear methods are generally computationally efficient and well scalable. 
+> - Dimension reduction algorithms can be either linear or non-linear.
+> - Linear methods are generally computationally efficient and well scalable.
 >
->   A popular linear dimension reduction algorithm is: 
->     - **PCA** (Principle Component Analysis), implemented in **Scanpy** (please check out our [Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial for an explanation). 
-> - Nonlinear methods however are well suited for multimodal and complex datasets. 
->     - in contrast to linear methods, which often preserve global structures, non-linear methods have a locality-preserving character. 
+>   A popular linear dimension reduction algorithm is:
+>     - **PCA** (Principle Component Analysis), implemented in **Scanpy** (please check out our [Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial for an explanation).
+> - Nonlinear methods however are well suited for multimodal and complex datasets.
+>     - in contrast to linear methods, which often preserve global structures, non-linear methods have a locality-preserving character.
 >     - This makes non-linear methods relatively insensitive to outliers and noise while emphasizing natural clusters in the data ({% cite Belkin2003%})
 >     - As such, they are implemented in many algorithms to visualize the data in 2 dimensions (f.ex. **UMAP** embedding).
-> - The nonlinear dimension reduction algorithm, through *matrix-free spectral embedding*, used in **SnapATAC2** is a very fast and memory efficient non-linear algorithm ({% cite Zhang2024%}). 
->     - **Spectral embedding** utilizes an iterative algorithm to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of a matrix without computing the matrix itself. 
-> - For a simple introduction into *spectral embedding* and how it compares to *PCA*, please check out the blog post ["On Laplacian Eigenmaps for Dimensionality Reduction"](https://juanitorduz.github.io/laplacian_eigenmaps_dim_red/) by Juan Orduz. 
+> - The nonlinear dimension reduction algorithm, through *matrix-free spectral embedding*, used in **SnapATAC2** is a very fast and memory efficient non-linear algorithm ({% cite Zhang2024%}).
+>     - **Spectral embedding** utilizes an iterative algorithm to calculate the **spectrum** (*eigenvalues* and *eigenvectors*) of a matrix without computing the matrix itself.
+> - For a simple introduction into *spectral embedding* and how it compares to *PCA*, please check out the blog post ["On Laplacian Eigenmaps for Dimensionality Reduction"](https://juanitorduz.github.io/laplacian_eigenmaps_dim_red/) by Juan Orduz.
 >
 {: .details}
 
 ## Spectral embedding
-The dimension reduction, produced by the algorithm *tl.spectral*, is required for later steps, such as plotting and clustering. 
+The dimension reduction, produced by the algorithm *tl.spectral*, is required for later steps, such as plotting and clustering.
 
 > <hands-on-title> Spectral embedding </hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Perform dimension reduction using Laplacian Eigenmap, using 'tl.spectral'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC filter_doublets` (output of **pp.filter_doublets** {% icon tool %})
->        - *"Distance metric"*: `cosine` 
+>        - *"Distance metric"*: `cosine`
 >
 >    > <comment-title> Distance metric </comment-title>
 >    >
@@ -559,7 +565,7 @@ The dimension reduction, produced by the algorithm *tl.spectral*, is required fo
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > The outputs of **tl.spectral** are stored in unstructured annotations `uns: 'spectral_eigenvalue'` and as multidimensional observations `obsm: 'X_spectral'`. 
+>    > > The outputs of **tl.spectral** are stored in unstructured annotations `uns: 'spectral_eigenvalue'` and as multidimensional observations `obsm: 'X_spectral'`.
 >    > >
 >    > {: .solution}
 >    >
@@ -568,7 +574,7 @@ The dimension reduction, produced by the algorithm *tl.spectral*, is required fo
 {: .hands_on}
 ## UMAP embedding
 With the already reduced dimensionality of the data stored in `X_spectral`, the cells can be further embedded (i.e. transformed into lower dimensions) with {UMAP}.
-**UMAP** projects the cells and their relationship to each other into 2-dimensional space, which can be easily visualized ({% cite McInnes2018%}). 
+**UMAP** projects the cells and their relationship to each other into 2-dimensional space, which can be easily visualized ({% cite McInnes2018%}).
 
 > <hands-on-title> UMAP embedding </hands-on-title>
 >
@@ -582,8 +588,8 @@ With the already reduced dimensionality of the data stored in `X_spectral`, the 
 
 # Clustering
 During clustering, cells that share similar accessibility profiles are organized into clusters. **SnapATAC2** utilizes graph-based community clustering with the *Leiden* algorithm ({% cite Traag2019%}).
-This method takes the k-nearest neighbor (KNN) graph as input data and produces well-connected communities. 
- 
+This method takes the k-nearest neighbor (KNN) graph as input data and produces well-connected communities.
+
 
 ## Community clustering
 
@@ -596,12 +602,12 @@ This method takes the k-nearest neighbor (KNN) graph as input data and produces 
 > 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Cluster cells into subgroups, using 'tl.leiden'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Anndata knn` (output of **pp.knn** {% icon tool %})
->        - *"Whether to use the Constant Potts Model (CPM) or modularity"*: `modularity` 
-> 
+>        - *"Whether to use the Constant Potts Model (CPM) or modularity"*: `modularity`
+>
 >    > <comment-title> CPM or modularity </comment-title>
 >    > - make sure you selected `modularity`
 >    > - the clusters produced by `CPM` are not represented well in the UMAP projections
->    > 
+>    >
 >    {: .comment}
 > 2. Rename the generated file to `Anndata 5k PBMC leiden` or add the tag {% icon galaxy-tags %} `leiden` to the dataset
 > 3. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output
@@ -626,12 +632,12 @@ This method takes the k-nearest neighbor (KNN) graph as input data and produces 
 >    > {: .solution}
 >    >
 >    {: .question}
-> 
+>
 {: .hands_on}
 
 
 ## Plotting of clusters
-Now that we have produced **UMAP** embeddings of our cells and have organized the cells into **leiden** clusters, we can now visualize this information with *pl.umap*. 
+Now that we have produced **UMAP** embeddings of our cells and have organized the cells into **leiden** clusters, we can now visualize this information with *pl.umap*.
 
 > <hands-on-title> Plotting the clusters </hands-on-title>
 >
@@ -651,9 +657,9 @@ Now that we have produced **UMAP** embeddings of our cells and have organized th
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. There are 13 leiden clusters. 
-> > > 2. Clusters in close proximity (f.ex. clusters 0 and 5) share a similar chromatin accessibility profile (and very likely also a similar cell type), compared to a cluster further away (f.ex. cluster 9). 
-> > > 
+> > > 1. There are 13 leiden clusters.
+> > > 2. Clusters in close proximity (f.ex. clusters 0 and 5) share a similar chromatin accessibility profile (and very likely also a similar cell type), compared to a cluster further away (f.ex. cluster 9).
+> > >
 > > {: .solution}
 > >
 > {: .question}
@@ -661,13 +667,13 @@ Now that we have produced **UMAP** embeddings of our cells and have organized th
 
 # Cell cluster annotation
 
-After clustering the cells, they must be annotated. This categorizes the clusters into known cell types. **Manual Cell Annotation** requires known marker genes and varying expression profiles of the marker genes among clusters. 
+After clustering the cells, they must be annotated. This categorizes the clusters into known cell types. **Manual Cell Annotation** requires known marker genes and varying expression profiles of the marker genes among clusters.
 
-Luckily, the marker genes for {PBMCs} are known ({% cite Sun2019 %}). 
-Marker genes for other single cell datasets can also be found in databases such as [PanglaoDB](https://panglaodb.se/markers.html) ({% cite Franzn2019 %}). Using the known marker genes we can now annotate our clusters manually. 
+Luckily, the marker genes for {PBMCs} are known ({% cite Sun2019 %}).
+Marker genes for other single cell datasets can also be found in databases such as [PanglaoDB](https://panglaodb.se/markers.html) ({% cite Franzn2019 %}). Using the known marker genes we can now annotate our clusters manually.
 
 ## Gene matrix
-Since our data currently doesn't contain gene information, we have to create a cell-by-gene activity matrix using the function *pp.make_gene_matrix*. 
+Since our data currently doesn't contain gene information, we have to create a cell-by-gene activity matrix using the function *pp.make_gene_matrix*.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -678,8 +684,8 @@ Since our data currently doesn't contain gene information, we have to create a c
 > 2. Rename the generated file to `Anndata 5k PBMC gene_matrix` or add the tag {% icon galaxy-tags %} `gene_matrix` to the dataset
 >    > <tip-title> Gene matrix </tip-title>
 >    >
->    > - Please note that *pp.make_gene_matrix* removes all annotations except those stored in `obs`. 
->    > - Therefore it might be necessary to remove propagating tags {% icon galaxy-tags %} (tags starting with `#`) from `Anndata 5k PBMC gene_matrix`. 
+>    > - Please note that *pp.make_gene_matrix* removes all annotations except those stored in `obs`.
+>    > - Therefore it might be necessary to remove propagating tags {% icon galaxy-tags %} (tags starting with `#`) from `Anndata 5k PBMC gene_matrix`.
 >    >    - Tags can be removed by expanding the dataset with a tag and clicking {% icon galaxy-cross %} next to the tag.
 >    {: .tip}
 >
@@ -696,7 +702,7 @@ Since our data currently doesn't contain gene information, we have to create a c
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > - The variables now represent accessible genes. There are 60606 accessible genes in our samples. In `Anndata 5k PBMC leiden` and all earlier AnnData the variables represented the 6062095 fixed-sized genomic bins. 
+>    > > - The variables now represent accessible genes. There are 60606 accessible genes in our samples. In `Anndata 5k PBMC leiden` and all earlier AnnData the variables represented the 6062095 fixed-sized genomic bins.
 >    > >
 >    > {: .solution}
 >    >
@@ -707,18 +713,18 @@ Since our data currently doesn't contain gene information, we have to create a c
 
 ## Imputation with Scanpy and MAGIC
 Similar to scRNA-seq data, the cell-by-gene-activity matrix is very sparse. Additionally, high gene variance between cells, due to technical confounders, could impact the downstream analysis.
-In scRNA-seq, filtering and normalization are therefore required to produce a high-quality gene matrix. 
+In scRNA-seq, filtering and normalization are therefore required to produce a high-quality gene matrix.
 
-Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression* matrix of scRNA-seq, we can use the tools of the [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}) tool suite to continue with our data. 
+Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression* matrix of scRNA-seq, we can use the tools of the [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({%cite Wolf2018%}) tool suite to continue with our data.
 
 > <details-title>Imputation with MAGIC</details-title>
 >
-> - The count matrices of single-cell data are sparse and noisy. 
-> - Confounding issues, such as "dropout" effects, where some mRNA or DNA-segments are not detected although they are present in the cell, also result in some cells missing important cell-type defining features. 
->    - These problems can obscure the data, as only the strongest gene-gene relationships are still detectable. 
-> - The *Markov Affinity-based Graph Imputation of Cells* (MAGIC) algorithm ({%cite vanDijk2018%}) tries to solve these issues by filling in missing data from some cells with transcript information from similar cells. 
->    - The algorithm calculates the likely gene expression of a single cell, based on similar cells and fills in the missing data to produce the expected expression. 
->      - *MAGIC* achieves this by building a graph from the data and using data diffusion to smooth out the noise. 
+> - The count matrices of single-cell data are sparse and noisy.
+> - Confounding issues, such as "dropout" effects, where some mRNA or DNA-segments are not detected although they are present in the cell, also result in some cells missing important cell-type defining features.
+>    - These problems can obscure the data, as only the strongest gene-gene relationships are still detectable.
+> - The *Markov Affinity-based Graph Imputation of Cells* (MAGIC) algorithm ({%cite vanDijk2018%}) tries to solve these issues by filling in missing data from some cells with transcript information from similar cells.
+>    - The algorithm calculates the likely gene expression of a single cell, based on similar cells and fills in the missing data to produce the expected expression.
+>      - *MAGIC* achieves this by building a graph from the data and using data diffusion to smooth out the noise.
 >
 > ![Imputation with the MAGIC algorithm]({% link topics/single-cell/images/scatac-standard-snapatac2/magic_method.png %} "MAGIC restores noisy and sparse single-cell data using diffusion geometry ({%cite vanDijk2018%})")
 >
@@ -731,7 +737,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - {% icon param-select %} *"Filter"*: `Minimum number of cells expressed`
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `5`
-> 
+>
 > 2. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata filter_genes` (output of **Filter** {% icon tool %})
 >    - *"Method used for normalization"*: `Normalize counts per cell, using 'pp.normalize_total'`
@@ -740,7 +746,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 > 3. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata normalize` (output of **Normalize** {% icon tool %})
 >    - *"Method used for inspecting"*: `Logarithmize the data matrix, using 'pp.log1p'`
-> 
+>
 > 4. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.9.6+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata log1p` (output of **log1p** {% icon tool %})
 >    - *"Method used for normalization"*: `Denoising using Markov Affinity-based Graph Imputation of Cells (MAGIC) API 'external.pp.magic'`
@@ -748,8 +754,8 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >        - *"Which solver to use"*: `"approximate", is faster that performs imputation in the PCA space and then projects back to the gene space`
 >
 >    > <comment-title> </comment-title>
->     >   - Choosing the setting `Which solver to use: 'exact'` will result in a output file with better resolution. 
->     >   - This is not necessary for our purposes, since the compute time also increases with this setting. 
+>     >   - Choosing the setting `Which solver to use: 'exact'` will result in a output file with better resolution.
+>     >   - This is not necessary for our purposes, since the compute time also increases with this setting.
 >     >
 >     {: .comment}
 >
@@ -774,7 +780,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The number of genes was reduced from 60606 to 55106 by the filtering. Additional annotations were added, such as: `obs: 'n_genes', 'n_counts'`, `var: 'n_cells', 'n_counts'` and `uns: 'log1p'`.
->    > > 2. The UMAP embeddings `obsm: 'X_umap'` are missing and should be added to the Anndata in the next step. Without `X_umap` it won't be possible to visualize the plots. 
+>    > > 2. The UMAP embeddings `obsm: 'X_umap'` are missing and should be added to the Anndata in the next step. Without `X_umap` it won't be possible to visualize the plots.
 >    > >
 >    > {: .solution}
 >    >
@@ -794,16 +800,16 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >
 >    > <comment-title> Annotations to copy </comment-title>
 >    >
->    > - This tutorial only focuses on producing an **UMAP** plot with marker-genes. 
->    > - If further analysis, with tools requiring more annotations, is intended, these can be added in a similar way as shown above.  
->    >     - f.ex. *Peak and Motif Analysis* with {% tool [Snapatac2 peaks and motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.5.3+galaxy2) %} requires annotations from `uns`. 
->    > - It is also possible to leave the input *"Keys from embeddings to copy"* empty, to copy all annotations of a given category such as `obsm`. 
+>    > - This tutorial only focuses on producing an **UMAP** plot with marker-genes.
+>    > - If further analysis, with tools requiring more annotations, is intended, these can be added in a similar way as shown above.
+>    >     - f.ex. *Peak and Motif Analysis* with {% tool [Snapatac2 peaks and motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.5.3+galaxy2) %} requires annotations from `uns`.
+>    > - It is also possible to leave the input *"Keys from embeddings to copy"* empty, to copy all annotations of a given category such as `obsm`.
 >    {: .comment}
 >
 > 5. Rename the generated file to `Anndata 5k PBMC magic UMAP` or add the tag {% icon galaxy-tags %} `UMAP` to the dataset
 >
 > 6. {% icon galaxy-eye %} Inspect the general information of the `.h5ad` output, to check if `obsm` contains `X_umap`
->  
+>
 >   ```
 >   AnnData object with n_obs × n_vars = 4430 × 55106
 >    obs: obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden', 'n_genes', 'n_counts'
@@ -815,7 +821,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 {: .hands_on}
 
 ## Visualize gene activity of marker genes
-The gene activity of selected marker genes can now be visualized with Scanpy. 
+The gene activity of selected marker genes can now be visualized with Scanpy.
 
 > <hands-on-title> Plot marker genes </hands-on-title>
 >
@@ -836,16 +842,16 @@ The gene activity of selected marker genes can now be visualized with Scanpy.
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. Some marker genes, such as `MS4A1` or `CD8A`, are only expressed in a few clusters (clusters 6+11 and clusters 1+8, respectively). 
-> > > 2. The marker gene `CD3D` is expressed in multiple clusters (1, 2, 4, 7 and 8). Overlapping expression profiles imply similar cell types since similar cell types have similar marker genes upregulated. In this case, `CD3D` expression classifies the cells in these clusters as T-cells. 
-> > > 
+> > > 1. Some marker genes, such as `MS4A1` or `CD8A`, are only expressed in a few clusters (clusters 6+11 and clusters 1+8, respectively).
+> > > 2. The marker gene `CD3D` is expressed in multiple clusters (1, 2, 4, 7 and 8). Overlapping expression profiles imply similar cell types since similar cell types have similar marker genes upregulated. In this case, `CD3D` expression classifies the cells in these clusters as T-cells.
+> > >
 > > {: .solution}
 > >
 > {: .question}
 {: .hands_on}
 
 ## Manual cluster annotation
-Comparison of marker gene expression in our clusters with a table of canonical marker genes ({% cite Sun2019 %}), enables us to annotate the clusters manually. 
+Comparison of marker gene expression in our clusters with a table of canonical marker genes ({% cite Sun2019 %}), enables us to annotate the clusters manually.
 
 Cell type | Marker genes
 --- | ---
@@ -875,12 +881,12 @@ Cluster | Cell type
 12 | Dendritic cells
 
 > <comment-title></comment-title>
-> Note that some clusters contain subtypes (f.ex. the annotated B cell clusters contain both naive and memory B cells). The cell-type annotation can be refined by choosing more specific marker genes. 
+> Note that some clusters contain subtypes (f.ex. the annotated B cell clusters contain both naive and memory B cells). The cell-type annotation can be refined by choosing more specific marker genes.
 {: .comment}
 
-To manually annotate the *Leiden* clusters, we will need to perform multiple steps: 
+To manually annotate the *Leiden* clusters, we will need to perform multiple steps:
 
-1. **Inspect** the key-indexed observations of `Anndata 5k PBMC gene_matrix magic UMAP` 
+1. **Inspect** the key-indexed observations of `Anndata 5k PBMC gene_matrix magic UMAP`
 2. **Cut** the *Leiden* annotations out of the table
 3. **Upload** a *replace file* containing the new cell type annotations for the *Leiden* clusters
 4. **Replace** the values of the cluster annotation with cell type annotation
@@ -898,8 +904,8 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    > <question-title></question-title>
 >    > In which column is the **Leiden** annotation located?
 >    > > <solution-title></solution-title>
->    > > The **Leiden** annotation is in column 8. 
->    > > 
+>    > > The **Leiden** annotation is in column 8.
+>    > >
 >    > > Column 1 | Column 2 | Column 3 | Column 4 | Column 5 | Column 6 | Column 7 | Column 8 | Column 9 | Column 10
 >    > > --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 >    > > "" | n_fragment | frac_dup | frac_mito | tsse | doublet_probability | doublet_score | leiden | n_genes | n_counts
@@ -907,7 +913,7 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    > > AAACGAAAGATTGACA-1 | 10500 | 0.5345125681606597 | 0.0 | 29.10551296093465 | 0.004668403569267374 | 0.001088139281828074 | 1 | 54501 | 15020.42495602328
 >    > > AAACGAAAGGGTCCCT-1 | 19201 | 0.5101785714285714 | 0.0 | 19.90011850347046 | 0.004634433324822066 | 0.009276437847866418 | 5 | 54212 | 16294.751533305309
 >    > > AAACGAACAATTGTGC-1 | 13242 | 0.487399837417257 | 0.0 | 29.060913705583758 | 0.004660125753854076 | 0.0022172949002217295 | 7 | 53530 | 15456.629863655084
->    > > 
+>    > >
 >    > {: .solution}
 >    >
 >    {: .question}
@@ -935,23 +941,23 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    12 Dendritic_cells
 >    ```
 >    {% snippet faqs/galaxy/datasets_create_new_file.md name='replace_file' format='tabular' convertspaces='True' %}
-> 
+>
 >    > <details-title>Replace file</details-title>
 >    >
->    > - The first column of the replace file contains the "old" annotations and the second column contains the "new" annotation. 
->    > - {% icon warning %} Spaces in the new annotations can lead to errors. Please use underscores (`_`) instead. 
+>    > - The first column of the replace file contains the "old" annotations and the second column contains the "new" annotation.
+>    > - {% icon warning %} Spaces in the new annotations can lead to errors. Please use underscores (`_`) instead.
 >    >
 >    {: .details}
 > 6. {% tool [Replace column](toolshed.g2.bx.psu.edu/repos/bgruening/replace_column_by_key_value_file/replace_column_with_key_value_file/0.2) %} with the following parameters:
 >    - {% icon param-file %} *"File in which you want to replace some values"*: `Cut columns leiden` (output of **Cut columns** {% icon tool %})
->    - {% icon param-file %} *"Replace information file"*: `replace_file` 
+>    - {% icon param-file %} *"Replace information file"*: `replace_file`
 >    - *"Which column should be replaced?*: `Column: 1`
 > 7. Rename the generated file to `Cell type annotation` and {% icon galaxy-eye %} inspect the file to check if the replacement was successful
 >    - check if the datatype is set to `tabular`
 >    - you may need to change the datatype manually
-> 
+>
 >      {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular"%}
-> 
+>
 > 8. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Anndata 5k PBMC gene_matrix magic UMAP`
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
@@ -974,7 +980,7 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    > <question-title></question-title>
 >    > 1. Are clusters with the same assigned cell type located close to each other?
 >    > 2. Are the [expected cell type percentages of {PBMCs}](https://www.akadeum.com/blog/what-are-pbmc-human-pbmc-cells/) visible in the annotated plot?
->    >    
+>    >
 >    >    Cell Type | Expected Percentage
 >    >    --- | ---
 >    >    CD3+ T cells | 50-70%
@@ -984,11 +990,11 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 >    >    NK cells | <5%
 >    >    Monocytes | 10-30%
 >    >    Dendritic cells | <2%
->    > 
+>    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. Yes. B-cells are far away from NK and T cells. Only the myeloid lineage of monocytes and dendritic cells are located close to each other. This might be due to the common progenitor cell lineage and thus a similar chromatin profile.  
->    > > 2. Yes. The most common cell types are T cells, followed by Monocytes and B cells. NK cells and Dendritic cells only make up a small percentage of PBMCs.  
+>    > > 1. Yes. B-cells are far away from NK and T cells. Only the myeloid lineage of monocytes and dendritic cells are located close to each other. This might be due to the common progenitor cell lineage and thus a similar chromatin profile.
+>    > > 2. Yes. The most common cell types are T cells, followed by Monocytes and B cells. NK cells and Dendritic cells only make up a small percentage of PBMCs.
 >    > {: .solution}
 >    >
 >    {: .question}
@@ -997,10 +1003,10 @@ To manually annotate the *Leiden* clusters, we will need to perform multiple ste
 
 
 # Conclusion
-{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://usegalaxy.eu/u/timonschlegel/h/single-cell-atac-seq-standard-processing-with-snapatac2), or check out the [full workflow](https://usegalaxy.eu/u/timonschlegel/w/workflow---standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2) for this tutorial.
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://usegalaxy.eu/u/videmp/h/standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2), or check out the [full workflow](https://usegalaxy.eu/u/videmp/w/standard-processing-of-10x-single-cell-atac-seq-data-with-snapatac2) for this tutorial.
 
-In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnData` format and performed: 
-1. Preprocessing: 
+In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnData` format and performed:
+1. Preprocessing:
    1. Plotting the fragment-size distributions
    2. Calculating and plotting {TSSe} scores
    3. Filtering cells and selecting features (fixed-size genomic bins)
