@@ -1,0 +1,132 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nFragment_file"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nchromosome_sizes.tabular"]
+  2[color=lightblue,label="ℹ️ Input Dataset\ngene_annotation"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nBam-file"]
+  4[color=lightgreen,label="ℹ️ Input Parameter\nKeys for annotations of obs/cells or vars/genes"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nReplace_file"]
+  6[label="pp.import_data"]
+  1 -> 6 [label="output"]
+  0 -> 6 [label="output"]
+  7[label="pp.make_fragment_file"]
+  3 -> 7 [label="output"]
+  8[label="pl.frag_size_distr"]
+  6 -> 8 [label="anndata_out"]
+  k265d602044e2408c9eb602cbc9ac23a7[color=lightseagreen,label="Output\nplot frag_size"]
+  8 -> k265d602044e2408c9eb602cbc9ac23a7
+  9[label="pl.frag_size_distr_log"]
+  6 -> 9 [label="anndata_out"]
+  ka37cd3c3e07e4bea899fee44cee8370b[color=lightseagreen,label="Output\nplot log frag_size"]
+  9 -> ka37cd3c3e07e4bea899fee44cee8370b
+  10[label="metrics.tsse"]
+  6 -> 10 [label="anndata_out"]
+  2 -> 10 [label="output"]
+  k233284e5c1844330a1d32d03951c4ce7[color=lightseagreen,label="Output\nanndata tsse"]
+  10 -> k233284e5c1844330a1d32d03951c4ce7
+  11[label="pp.import_data-sorted_by_barcodes"]
+  1 -> 11 [label="output"]
+  7 -> 11 [label="fragments_out"]
+  k50ef9fe7bb084957bc45079ed78f9ee8[color=lightseagreen,label="Output\nanndata"]
+  11 -> k50ef9fe7bb084957bc45079ed78f9ee8
+  12[label="pl.tsse"]
+  10 -> 12 [label="anndata_out"]
+  k9a5c0f9c04234822871eba8317f2fa7b[color=lightseagreen,label="Output\nplot tsse"]
+  12 -> k9a5c0f9c04234822871eba8317f2fa7b
+  13[label="pp.filter_cells"]
+  10 -> 13 [label="anndata_out"]
+  kb58dc4ad6bf04f3199f44f8deb13427c[color=lightseagreen,label="Output\nanndata filter cells"]
+  13 -> kb58dc4ad6bf04f3199f44f8deb13427c
+  14[label="pp.add_tile_matrix"]
+  13 -> 14 [label="anndata_out"]
+  kd4b64fc4fd354781b7990d07fe8fe438[color=lightseagreen,label="Output\nanndata tile matrix"]
+  14 -> kd4b64fc4fd354781b7990d07fe8fe438
+  15[label="pp.select_features"]
+  14 -> 15 [label="anndata_out"]
+  kf531f6bd3fc648b9bb3366de7928e670[color=lightseagreen,label="Output\nanndata select features"]
+  15 -> kf531f6bd3fc648b9bb3366de7928e670
+  16[label="pp.scrublet"]
+  15 -> 16 [label="anndata_out"]
+  k5b17aa3a3694440f9022cf9761feb760[color=lightseagreen,label="Output\nanndata scrublet"]
+  16 -> k5b17aa3a3694440f9022cf9761feb760
+  17[label="pp.filter_doublets"]
+  16 -> 17 [label="anndata_out"]
+  k3838cf9da0184aa78852893b2f60ec2a[color=lightseagreen,label="Output\nanndata filter doublets"]
+  17 -> k3838cf9da0184aa78852893b2f60ec2a
+  18[label="tl.spectral"]
+  17 -> 18 [label="anndata_out"]
+  k778835168ac440b58b755750639d9fc4[color=lightseagreen,label="Output\nanndata spectral"]
+  18 -> k778835168ac440b58b755750639d9fc4
+  19[label="tl.umap"]
+  18 -> 19 [label="anndata_out"]
+  k062a54717b7a4d9bbf6cfe9bbbc5d2ad[color=lightseagreen,label="Output\nanndata umap"]
+  19 -> k062a54717b7a4d9bbf6cfe9bbbc5d2ad
+  20[label="pp.knn"]
+  19 -> 20 [label="anndata_out"]
+  kb7ebe580993848e587184df197126615[color=lightseagreen,label="Output\nanndata knn"]
+  20 -> kb7ebe580993848e587184df197126615
+  21[label="tl.leiden"]
+  20 -> 21 [label="anndata_out"]
+  k9970eb96013b4d97bbbf2d1f4663b73c[color=lightseagreen,label="Output\nanndata_leiden_clustering"]
+  21 -> k9970eb96013b4d97bbbf2d1f4663b73c
+  22[label="pl.umap"]
+  21 -> 22 [label="anndata_out"]
+  k4fff8ec87d6f48719e42d6c1791d6aa9[color=lightseagreen,label="Output\numap_leiden-clusters"]
+  22 -> k4fff8ec87d6f48719e42d6c1791d6aa9
+  23[label="make_gene_matrix"]
+  21 -> 23 [label="anndata_out"]
+  2 -> 23 [label="output"]
+  k9a5c2e235b5941aeaceb0e47ce9e7b1a[color=lightseagreen,label="Output\nanndata gene matrix"]
+  23 -> k9a5c2e235b5941aeaceb0e47ce9e7b1a
+  24[label="scanpy_filter_genes"]
+  23 -> 24 [label="anndata_out"]
+  k7a9b22dfe0e549d99fa12efe316d6d66[color=lightseagreen,label="Output\nanndata filter genes"]
+  24 -> k7a9b22dfe0e549d99fa12efe316d6d66
+  25[label="Normalize"]
+  24 -> 25 [label="anndata_out"]
+  k7dddd4c819444f50b331857d03cc9631[color=lightseagreen,label="Output\nanndata normalize"]
+  25 -> k7dddd4c819444f50b331857d03cc9631
+  26[label="pp.log1p"]
+  25 -> 26 [label="anndata_out"]
+  k40ace30a21e14bf28e08ad93b62fb2ee[color=lightseagreen,label="Output\nanndata log1p"]
+  26 -> k40ace30a21e14bf28e08ad93b62fb2ee
+  27[label="external.pp.magic"]
+  26 -> 27 [label="anndata_out"]
+  k8c1c7aa9b9dd467b971573773aea093f[color=lightseagreen,label="Output\nanndata_magic"]
+  27 -> k8c1c7aa9b9dd467b971573773aea093f
+  28[label="Copy obsm"]
+  21 -> 28 [label="anndata_out"]
+  27 -> 28 [label="anndata_out"]
+  k2c3825d371514eef97d0c8a31ca6fd3e[color=lightseagreen,label="Output\nanndata_gene-matrix_leiden"]
+  28 -> k2c3825d371514eef97d0c8a31ca6fd3e
+  29[label="umap_plot_with_scanpy"]
+  28 -> 29 [label="output_h5ad"]
+  4 -> 29 [label="output"]
+  k4cfbbb70156b48d7b14bdb21198d9b6d[color=lightseagreen,label="Output\numap_marker-genes"]
+  29 -> k4cfbbb70156b48d7b14bdb21198d9b6d
+  30[label="Inspect observations"]
+  28 -> 30 [label="output_h5ad"]
+  31[label="Cut leiden from table"]
+  30 -> 31 [label="obs"]
+  k11c22200a54e458582c48457dbbfb53c[color=lightseagreen,label="Output\nleiden annotation"]
+  31 -> k11c22200a54e458582c48457dbbfb53c
+  32[label="Replace leiden"]
+  31 -> 32 [label="out_file1"]
+  5 -> 32 [label="output"]
+  k467de06179e641488a65c06383a14012[color=lightseagreen,label="Output\ncell type annotation"]
+  32 -> k467de06179e641488a65c06383a14012
+  33[label="Manipulate AnnData"]
+  28 -> 33 [label="output_h5ad"]
+  32 -> 33 [label="outfile_replace"]
+  kcbba6173f4394fd58423946aa625112b[color=lightseagreen,label="Output\nanndata_cell_type"]
+  33 -> kcbba6173f4394fd58423946aa625112b
+  34[label="Plot cell types"]
+  33 -> 34 [label="anndata"]
+  kc28c53ae8ee747d78a00352908bb7c1a[color=lightseagreen,label="Output\numap_cell-type"]
+  34 -> kc28c53ae8ee747d78a00352908bb7c1a
+  35[label="Final Anndata general info"]
+  33 -> 35 [label="anndata"]
+  k379a85d1a2044b0b8b3386e5582fc51f[color=lightseagreen,label="Output\ngeneral"]
+  35 -> k379a85d1a2044b0b8b3386e5582fc51f
+}
