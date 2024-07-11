@@ -8,15 +8,16 @@ questions:
 - What are the species in bacterial isolate sequencing data?
 objectives:
 - Run tools to evaluate sequencing data on quality and quantity
-- 0Process the output of quality control tools
+- Process the output of quality control tools
 - Improve the quality of sequencing data
 - Run a series of tool to identify species in bacterial isolate sequencing data
 - Visualize the species abundance
 time_estimation: 2H
 key_points:
-- Kraken assigns taxons to sequences
-- Bracken extracts species from Kraken assignations 
-- Recentrifuge extracts stats and creates visualization from Kraken report
+- Conduct quality control on every dataset before performing any other bioinformatics analysis
+- Review the quality metrics and, if necessary, improve the quality of your data
+- Check the impact of the quality control
+- Different tools are available to provide information on possible contamination
 tags:
 - illumina
 - bacteria
@@ -175,6 +176,7 @@ reads include:
 - Do I need to ask/perform for a new sequencing run?
 - Is it suitable for the analysis I need to do?
 
+<div class="Step-by-step" markdown="1">
 > <hands-on-title>Quality Control</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} with the following parameters:
@@ -185,8 +187,9 @@ reads include:
 > 2. Inspect the webpage outputs
 >
 {: .hands_on}
+</div>
 
-FastQC combines quality statistics from all separate reads and combines them in plots. An important plot is the Per base sequence quality. 
+**FastQC** combines quality statistics from all separate reads and combines them in plots. An important plot is the Per base sequence quality. 
 
 DRR187559_1 | DRR187559_2
 ----------- | -----------
@@ -206,6 +209,8 @@ For each position, a boxplot is drawn with:
 
 For Illumina data it is normal that the first few bases are of some lower quality and how longer the reads get the worse the quality becomes. This is often due to signal decay or phasing during the sequencing run.
 
+## Quality improvement
+
 Depending on the analysis it could be possible that a certain quality or length
 is needed. In this case we are going to trim the data using **fastp** ({% cite Chen2018 %}):
 
@@ -215,6 +220,8 @@ is needed. In this case we are going to trim the data using **fastp** ({% cite C
   
 - Filter for reads to keep only reads with at least 30 bases: Anything shorter will complicate the assembly
 
+
+<div class="Step-by-step" markdown="1">
 > <hands-on-title>Quality improvement</hands-on-title>
 >
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0) %} with the following parameters:
@@ -237,6 +244,7 @@ is needed. In this case we are going to trim the data using **fastp** ({% cite C
 >    1. Remove the `#unfiltered` tag
 >    2. Add a new tag `#filtered`
 {: .hands_on}
+</div>
 
 **fastp** generates also a report, similar to FASTQC, useful to compare the impact of the trimming and filtering.
 
@@ -269,6 +277,7 @@ To find out which microorganisms are present, we will compare the filtered reads
 
 For this tutorial, we will use the PlusPF database which contains the Standard (archaea, bacteria, viral, plasmid, human, UniVec_Core), protozoa and fungi data.
 
+<div class="Step-by-step" markdown="1">
 > <hands-on-title> Assign taxonomic labels with Kraken2</hands-on-title>
 >
 > 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy1) %} with the following parameters:
@@ -281,6 +290,9 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
 >    - *"Select a Kraken2 database"*: `PlusPF-16`
 >
 {: .hands_on}
+</div>
+
+**Kraken2** generates 2 outputs:
 
 - **Classification**: tabular files with one line for each sequence classified by Kraken and 5 columns:
 
@@ -379,6 +391,7 @@ In Kraken output, there are quite a lot of identified taxa with different levels
 
 __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken) is a "simple and worthwile addition to Kraken for better abundance estimates" ({% cite Ye.2019 %}). Instead of only using proportions of classified reads, it takes a probabilistic approach to generate final abundance profiles. It works by re-distributing reads in the taxonomic tree: "Reads assigned to nodes above the species level are distributed down to the species nodes, while reads assigned at the strain level are re-distributed upward to their parent species" ({% cite Lu.2017 %}).
 
+<div class="Step-by-step" markdown="1">
 > <hands-on-title>Extract species with Bracken</hands-on-title>
 >
 > 1. {% tool [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.9+galaxy0) %} with the following parameters:
@@ -391,7 +404,9 @@ __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken
 >     - *"Produce Kraken-Style Bracken report"*: `Yes`
 >
 {: .hands_on}
+</div>
 
+**Bracken** generates 2 outputs:
 
 - **Kraken style report**: tabular files with one line per taxon and 6 columns or fields. Same configuration as the **Report** output of **Kraken**:
 
@@ -478,6 +493,7 @@ As expected *Staphylococcus aureus* represents most of the reads in the data.
 
 To explore **Kraken** report and specially to detect more reliably minority organisms or contamination, we will use **Recentrifuge** ({% cite marti2019recentrifuge %}).
 
+<div class="Step-by-step" markdown="1">
 > <hands-on-title> Identify contamination </hands-on-title>
 >
 > 1. {% tool [Recentrifuge](toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0) %} with the following parameters:
@@ -492,6 +508,7 @@ To explore **Kraken** report and specially to detect more reliably minority orga
 >        - *"Strain level instead of species as the resolution limit for the robust contamination removal algorithm; use with caution, this is an experimental feature"*: `Yes`
 >
 {: .hands_on}
+</div>
 
 **Recentrifuge** generates 3 outputs:
 
@@ -543,4 +560,5 @@ To explore **Kraken** report and specially to detect more reliably minority orga
 
 # Conclusion
 
-In this tutorial, we checked bacterial isolate sequencing data for expected species and potential contamination.
+In this tutorial, we inspected the quality of the bacterial isolate sequencing data and checked the expected species and potential contamination. Prepared short reads can be used in downstream analysis, like [Genome Assembly]({% link topics/assembly/tutorials/mrsa-illumina/tutorial.md %}).
+If you want to learn more about data quality control, you can follow this tutorial: [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
