@@ -196,6 +196,14 @@ module SchemaValidator
     data = lintable?(fn)
     return data if data.nil? || data.is_a?(Array)
 
+    if data.key?('cover') 
+      if !data['cover'].start_with?('https://')
+        if !File.exist?(data['cover'])
+          errs.push("Cover image #{data['cover']} does not exist")
+        end
+      end
+    end
+
     errs.push(*validate_document(data, @news_validator))
     errs
   end

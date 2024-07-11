@@ -1,5 +1,9 @@
 name: Deploy Website
 
+concurrency:
+  group: deploy-${{ github.head_ref }}
+  cancel-in-progress: false # Not sure about this.
+
 on:
   push:
     branches:

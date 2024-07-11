@@ -86,7 +86,7 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 With `make serve-quick`, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).
 
 
-> <tip-title>Tips</tip-title>
+> <tip-title></tip-title>
 >
 > 1. Use `make serve` instead of `make serve-quick` to get all plugins, but also configure the post, host and pass additional flags. This however can be quite slow.
 >

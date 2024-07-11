@@ -1,0 +1,447 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+
+title: "Galaxy Administrator Time Burden and Technology Usage"
+
+contributions:
+  authorship:
+  - vladvisan
+  data:
+  - bernt-matthias
+  - lldelisle
+  - hrhotz
+  editing:
+  - hexylena
+
+tags: [deploying, maintenance, survey]
+subtopic: maintenance
+---
+
+##Context
+
+---
+
+### Context
+
+.center[
+- Have you wondered how difficult Galaxy is to run? How much time people must spend to run Galaxy?
+- In February 2024, we collected 9 responses from the [Galaxy Small Scale Admin group](https://galaxyproject.org/community/sig/small-scale-admins/)
+- Questions about various time burdens and technological choices
+- [Full version of the report, + form export](https://hal.science/hal-04491929) 
+- [Raw data (anonymised) + analysis script](https://entrepot.recherche.data.gouv.fr/dataset.xhtml?persistentId=doi:10.57745/SQMQP1)
+]
+
+---
+
+## Overview of Participants' Galaxy Instances'
+
+---
+
+
+### Active Users
+
+
+.pull-left[![Histogram of active users, showing a median of 20 and mean of 21, ranging from as few as 1-5 users and as many as 50](../../images/poll-ssa/01-Active-Users.jpg)]
+
+
+.pull-right[
+- 3 categories : <10, circa 20 & circa 50
+- Active vs signed up: no problem having a lot more signed up than active users, no need to delete inactive users (in case they come back)
+]
+
+---
+
+
+### Computing Method
+
+
+.pull-left[![Pie chart. Computing Method. Showing 11% Pulsar, 33% Local, 44% Batch scheduler & 11% Other](../../images/poll-ssa/03-Computing-Method.png)]
+
+
+.pull-right[
+- Admins generally use a batch scheduler (often HTCondor)
+- Some admins use Pulsar to send jobs to remote machines
+- And a few use the local scheduler which will not survive a machine restart.
+]
+
+
+---
+
+
+### Object Store Backend
+
+
+.pull-left[![Pie chart. Object store backend. Showing 11% Local, 44% NAS & 44% S3](../../images/poll-ssa/04-Object-Store-Backend.png)]
+
+
+.pull-right[
+- Local storage (SSD/HDDs attached to the machine) and NASs are popular options for data storage
+- S3 is a less common option amongst small scale admins
+- You can use whatever storage you have available
+]
+
+
+---
+
+### Ansible Usage
+
+
+.pull-left[![Pie chart. Ansible usage. Showing 78% positive.](../../images/poll-ssa/18-Galaxy-Upgrades-Ansible.png)]
+
+
+.pull-right[
+Is a highly-used (about 80%) tool that, according to the other sections, greatly simplifies admin.
+]
+
+---
+
+### Gravity Usage
+
+
+- Since Galaxy 23.0, Gravity is used to manage Galaxy processes
+- If you use Ansible to setup Galaxy, this process is mostly transparent, and you may not know you're using Gravity
+
+
+---
+
+## User Support & Training
+
+---
+
+### End-User Support Burden
+
+
+.pull-left[![Histogram of the average monthly hours per month dedicated to end-user support. Showing a median of 5 and mean of 6. Large variability, ranging from 0 to 20.](../../images/poll-ssa/06-End-User-Support-Burden.jpg)]
+
+
+.pull-right[
+- 1 hour per week average end-user support
+- Lots of training (though that’s part of the next question)
+- Lots of developing &/or debugging users’ tools/workflows for them.
+]
+
+
+---
+
+
+### User Training Burden
+
+
+.pull-left[![Histogram of the average monthly hours per month dedicated to user training. Showing a median of 5 and mean of 6. Large variability, ranging from 0 to 10.](../../images/poll-ssa/07-User-Training-Burden.jpg)]
+
+
+.pull-right[
+- 1 hour per week average user training
+- Usually makes use of existing Galaxy tutorials, sometimes in-person
+- The tutorials aren’t always specific enough, requiring some custom Q&A
+]
+
+
+
+---
+
+## Tool & Workflow Dev & Maintenance
+
+
+---
+
+### User Tool Dev & Planemo Usage
+
+.pull-left-large[
+.image-45[![Pie chart. Do users develop tools themselves? Showing 33% positive.](../../images/poll-ssa/08A-User-Tool-Dev-Local.png)]
+.image-45[![Pie chart. If users develop tools themselves, do they use Planemo? Showing, once filtered, 33% positive.)](../../images/poll-ssa/08B-User-Tool-Dev-Planemo.png)]
+]
+
+
+.pull-right-small[
+- Users developing their own tools is rare, and if they do, they rarely use Planemo.
+- Tool creation is actually mostly done through copy/pasting XMLs
+- Planemo shines when it comes to tool testing, linting and publishing
+]
+
+
+---
+
+
+### Admin Workflow Dev Burden
+
+
+.pull-left[![Histogram of the average monthly hours per month dedicated to developing workflows, by the admin. Showing a median of 4 and mean of 3. Large variability, ranging from 0 to 8.](../../images/poll-ssa/09-Admin-Workflow-Dev-Burden.jpg)]
+
+
+.pull-right[
+- The administrative burden of running Galaxy is highly variable
+- On average admins spend 4 hours a month managing Galaxy
+]
+
+
+---
+
+
+### Admin Tool Dev Planemo
+
+
+.pull-left[![Pie chart. Do admins use Planemo? Showing 56% positive.](../../images/poll-ssa/10-Admin-Tool-Dev-Planemo.png)]
+
+
+.pull-right[
+- Many small scale Galaxy admins will find themselves responsible for developing tools
+- Amongst tool-developing admins, 5/7 use Planemo 
+- Planemo is a useful tool for tool testing, linting and publishing tools for your local Galaxy
+]
+
+
+---
+
+
+### Admin Tool Dev Creation Burden
+
+
+.pull-left[![Histogram of the average monthly hours per month dedicated to creating tools, by the admin. Showing a median of 4 and mean of 6. Centered around 5, with an outlier at 20.](../../images/poll-ssa/12-Admin-Tool-Dev-Creation-Burden.jpg)]
+
+
+.pull-right[
+Small (1 hour per week avg.) amount of tool dev per month.
+]
+
+
+---
+
+
+### Admin Tool Dev Updating Burden
+
+
+.pull-left[![Histogram of the average monthly hours per month dedicated to updating tools, by the admin. Showing a median of 1.5 and mean of 4. Mostly 1, several others lower than 5, and an outlier at 16.](../../images/poll-ssa/13-Admin-Tool-Dev-Updating-Burden.jpg)]
+
+
+.pull-right[
+- Excluding the extreme values, about an hour a month
+- I wondered if tools became invalid because of non-backwards-compatible format changes, but that does not seem to be the case
+]
+
+
+---
+
+##Tool Storage & Packaging
+
+---
+
+### Admin Tool Dev Storage
+
+
+.pull-left[![Histogram of amount of admins that use certain tool storage types (multiple-choice question). Showing 7 local filesystem users, 3 public Mercurial toolshed users, and 1 blank answer](../../images/poll-ssa/11-Admin-Tool-Dev-Storage.png)]
+
+
+.pull-right[
+- Most tools are files on the same machine as Galaxy
+- Some tools are used from public toolsheds, none from private ones
+- Currently, admins write the tool (managed in git), test & lint it with Planemo, then publish it locally, sometimes versioned (ex: tool_v1.1)
+]
+
+
+---
+
+
+### Tool Dev Packaging Method
+
+
+.pull-left[![Histogram of amount of admins that use certain tool packaging methods (multiple-choice question). Showing 7 conda users, 2 container users, and 2 blank answers](../../images/poll-ssa/14-Tool-Dev-Packaging-Method.png)]
+
+
+.pull-right[
+Lots of Conda, a few containers.
+]
+
+
+---
+
+
+### Tool Dev Packaging Burden
+
+
+.pull-left[![Histogram of the average monthly hours per month dedicated to tool packaging. 100% answered 1.](../../images/poll-ssa/15-Tool-Dev-Packaging-Burden.jpg)]
+
+
+.pull-right[
+- Admins generally spend very little time managing conda environments in Galaxy.
+- Galaxy can automatically create and manage conda environments for every installed tool
+]
+
+---
+
+## Database-related Characteristics & Tasks
+
+---
+
+### DB Tech
+
+
+.pull-left[![Pie chart. Database Technology. Showing 100% postgresql](../../images/poll-ssa/02-DB-Tech.png)]
+
+
+.pull-right[
+- It is strongly recommended to use PostgreSQL in production
+]
+
+
+---
+
+### DB Schema Update Frequency
+
+
+.pull-left[![Histogram of the average number of months between upgrades of their Galaxy instance's database's schema. Showing a median of 12 and mean of 11. Large variability, ranging from 4 to 24.](../../images/poll-ssa/16-DB-Schema-Update-Frequency.jpg)]
+
+
+.pull-right[
+- Happens on average once a year.
+- If Galaxy is managed with Ansible, this happens automatically as part of updating Galaxy.
+]
+
+
+---
+
+
+### DB Schema Update Duration
+
+
+.pull-left[![Histogram of the average duration, in hours, a database schema migration takes. Showing a median of 1 and mean of 0.6. All answers were 0 or 1.](../../images/poll-ssa/17-DB-Schema-Update-Duration.jpg)]
+
+
+.pull-right[
+Is very quick and transparent (assuming Ansible usage)
+]
+
+
+---
+
+
+### DB Backup Frequency
+
+
+.pull-left[![Histogram of the average number of weeks between database back-ups. Showing a median of 1 and mean of 11. Nearly everyone answered 1, however there were 2 outliers at 12 and 52.](../../images/poll-ssa/22-DB-Backup-Frequency.jpg)]
+
+
+.pull-right[
+- Many admins keep one (point in time) backup per week
+- The [Ansible role Galaxy uses for Postgres](https://galaxy.ansible.com/ui/standalone/roles/galaxyproject/postgresql/) can be used to configure both point in time recovery or WAL backups. 
+- The general [Galaxy DB Admin](https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html) tutorial covers how to setup backups. 
+]
+
+
+---
+
+
+## Galaxy Version & Upgrades
+
+
+---
+
+
+
+### Current Version & Upgrade Frequency
+
+
+.pull-left-large[
+.image-45[![Histogram of the current Galaxy version. Showing a median of 22 and mean of 22. 2 using 21, 3 using 22 & 4 using 23.](../../images/poll-ssa/19-Galaxy-Upgrades-Current-Version.jpg)]
+.image-45[![Histogram of the average number of months between upgrades of their Galaxy instance's version. Showing a median of 12 and mean of 12. Large variability, ranging from 4 to 24.](../../images/poll-ssa/20-Galaxy-Upgrades-Frequency.jpg)]
+]
+
+
+.pull-right-small[
+- Half the respondents are able to continue using a version that is 2-3 years old
+- This is not recommended as versions older than a year do not receive security updates
+- But most update about once a year
+]
+
+
+---
+
+
+### Galaxy Upgrades Duration (excluding DB schema migration duration)
+
+
+.pull-left[![Histogram of the average duration, in hours, an upgrade takes. Showing a median of 3 and mean of 4. Mostly under 3, but a few values around 7.](../../images/poll-ssa/21-Galaxy-Upgrades-Duration.jpg)]
+
+
+.pull-right[
+- Avg 3 hours, big variance, which doesn’t seem proportional to the amount of users, but rather other factors
+- Some updates are very simple, especially if you use Ansible 
+- Some non-backwards-compatible changes like uWSGI to Gunicorn take longer, but these changes are not a regular occurrence in Galaxy.
+- Some admins take longer because of custom plugins (that need to be updated) or test deployment environments that need to be maintained.
+]
+
+
+---
+
+##Miscellaneous: Restarts, Crashes & Other
+
+---
+
+
+### Intentional Restarts Frequency
+
+
+.pull-left[![Histogram of the number of intentional Galaxy restarts per year. Showing a median of 12 and a mean of 21. Lots of variability between 4 and 20. An outlier at 100.](../../images/poll-ssa/23-Intentional-Restarts-Frequency.jpg)]
+
+
+.pull-right[
+
+- If you configure Galaxy to use a job scheduler (SLURM, HTCondor, etc), restarts will not interrupt existing jobs.
+- Generally admins restart about once a month, in order to apply system updates or reconfigure Galaxy or its tools
+- Some Galaxy / tools reconfiguration is possible without restarting 
+]
+
+
+---
+
+
+### Crashes Frequency
+
+
+.pull-left[![Histogram of the number of crashes per year. Showing a median of 4 and a mean of 3. Lots of variability between 0 and 8.](../../images/poll-ssa/24-Crashes-Frequency.jpg)]
+
+
+.pull-right[
+- Avg. once every 3-4 months
+- Causes: Storage space full, or access rights problems, or very rarely TUS (but a solution was found for this since the poll (see the full report))
+]
+
+
+---
+
+
+### Other Recurrent Tasks Duration
+
+
+.pull-left[![Histogram of the amount of hours spent per month, on other administrative tasks not yet covered. Showing a median of 4, a mean of 14. Nearly all around 2, but a few outliers at 10, 40 and 50.](../../images/poll-ssa/25-Other-Recurrent-Tasks-Duration.jpg)]
+
+
+.pull-right[
+- 3h per month avg
+- Cleaning "paused" jobs
+- Adjusting user quotas & notifying users
+- Networking with other admins
+- Troubleshooting tools
+- Testing new Galaxy versions
+- Custom welcome-pages
+]
+
+
+---
+
+##Take Home
+
+---
+
+### Total Burden, Non-Dev Admin Tasks
+
+
+.center[
+![Table showing how the total amount of non-dev admin tasks, in hours per month, was calculated. By showing the initial frequency (eg weekly, monthly, annually), the hours taken, and then multiplying the hours by the ratio to bring it to the monthly equivalent. Results: end-user support : 5, user training: 5, DB migration: 0, Galaxy upgrade: .3, DB back-up: 0, intentional restart: 1, crashes: .6, other: 3, total: 15.](../../images/poll-ssa/26-Total-Time-Non-Dev-Admin-Tasks.png)
+
+- Per month: circa 15 hours
+- Per week: half a working day
+- Reasonable amount
+- Actually slightly less because there is some overlap in user training between the "End-user support" and "User training" questions
+]
