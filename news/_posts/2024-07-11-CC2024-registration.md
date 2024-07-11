@@ -4,12 +4,11 @@ layout: news
 contributions:
   authorship:
     - teresa-m
-link: "https://biont-training.eu/CarpentryConnect2024.html"
 ---
 
 Are you interested in training and want to connect with other enthusiastic traineres? Than join the BioNT Community Event & CarpentryConnect - Heidelberg 2024. The Carpentries and other learning communities will meet to network and collaborate during this 3-day event. The GTN will is presten with a Poster, Lightning Talks and a Mini-hackathons. 
 
-[Check out the event]({{ page.link }}){:.btn.btn-primary}
+[Check out the event](https://biont-training.eu/CarpentryConnect2024.html){:.btn.btn-primary}
 
 You can register to participate remotely or in-person before 15th September.
 
