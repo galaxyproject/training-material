@@ -56,8 +56,12 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
-
-> 3. Build a Collection
+> 3. Rename your datafiles
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+> 3673 becomes A2_RC_8F2_B.pl_HCOI.ab1
+> 3609 becomes A12_RC_9G4_B.md_HCOI.ab1
+>    
+> 5. Build a Collection
 
 {% snippet faqs/galaxy/collections_build_list.md%}
 
@@ -67,7 +71,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 > 
 {: .tip}
 
-> 4. Run Prepare Data Submission Workflow
+> 5. Run Prepare Data Submission Workflow
 >
 [https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
 >
