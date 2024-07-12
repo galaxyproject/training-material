@@ -284,7 +284,7 @@ To find out which microorganisms are present, we will compare the filtered reads
 
 {% snippet topics/microbiome/faqs/kraken.md %}
 
-For this tutorial, we will use the PlusPF database which contains the Standard (archaea, bacteria, viral, plasmid, human, UniVec_Core), protozoa and fungi data.
+For this tutorial, we will use the PlusPF database which contains the RefSeq Standard (archaea, bacteria, viral, plasmid, human, UniVec_Core), protozoa and fungi data.
 
 <div class="Step-by-step" markdown="1">
 > <hands-on-title> Assign taxonomic labels with Kraken2</hands-on-title>
