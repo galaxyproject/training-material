@@ -255,7 +255,7 @@ is needed. In this case we are going to trim the data using **fastp** ({% cite C
 {: .hands_on}
 </div>
 
-**fastp** generates also a report, similar to FASTQC, useful to compare the impact of the trimming and filtering.
+**fastp** generates also a report, similar to **FastQC**, useful to compare the impact of the trimming and filtering.
 
 > <question-title></question-title>
 >
