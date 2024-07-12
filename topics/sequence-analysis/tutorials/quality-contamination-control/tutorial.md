@@ -8,7 +8,7 @@ questions:
 - What are the species in bacterial isolate sequencing data?
 objectives:
 - Run tools to evaluate sequencing data on quality and quantity
-- Process the output of quality control tools
+- Evaluate the output of quality control tools
 - Improve the quality of sequencing data
 - Run a series of tool to identify species in bacterial isolate sequencing data
 - Visualize the species abundance
@@ -17,7 +17,8 @@ key_points:
 - Conduct quality control on every dataset before performing any other bioinformatics analysis
 - Review the quality metrics and, if necessary, improve the quality of your data
 - Check the impact of the quality control
-- Different tools are available to provide information on possible contamination
+- Detect witch microorganisms are present and extract the species level
+- Check possible contamination in a bacterial isolate
 tags:
 - illumina
 - bacteria
@@ -157,7 +158,7 @@ The workflow will take some time. Once completed, results will be available in y
 </div>
 
 
-# Quality Control
+# Read quality control and improvement
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Adapters may also be present if the reads are longer than the fragments sequenced and trimming these may improve the number of reads mapped. **Sequence quality control is therefore an essential first step in any analysis.**
 
@@ -176,6 +177,8 @@ reads include:
 - Do I need to ask/perform for a new sequencing run?
 - Is it suitable for the analysis I need to do?
 
+## Quality control
+
 <div class="Step-by-step" markdown="1">
 > <hands-on-title>Quality Control</hands-on-title>
 >
@@ -192,7 +195,7 @@ reads include:
 <div class="Workflow" markdown="1">
 
 > <hands-on-title>Quality Control</hands-on-title>
-> 1. Inspect the webpage outputs of **FastQC**
+> Inspect the webpage outputs of **FastQC**
 >
 {: .hands_on}
 
@@ -216,7 +219,15 @@ For each position, a boxplot is drawn with:
 - the 10% and 90% values in the upper and lower whiskers
 - the mean quality, represented by the blue line
 
-For Illumina data it is normal that the first few bases are of some lower quality and how longer the reads get the worse the quality becomes. This is often due to signal decay or phasing during the sequencing run.
+> <question-title></question-title>
+>
+> How does the mean quality score change along the sequence?
+>
+> > <solution-title></solution-title>
+> > The mean quality score (blue line) decreases at the sequences end. It is common for the mean quality to drop towards the end of the sequences, as the sequencers are incorporating more incorrect nucleotides at the end. For Illumina data it is normal that the first few bases are of some lower quality and how longer the reads get the worse the quality becomes. This is often due to signal decay or phasing during the sequencing run.
+> >
+> {: .solution }
+{: .question}
 
 ## Quality improvement
 
@@ -278,7 +289,11 @@ is needed. In this case we are going to trim the data using **fastp** ({% cite C
 > {: .solution}
 {: .question}
 
-# Taxonomic profiling
+# Identification of expected species and detection of contamination
+
+When working with bacterial isolates, it is crucial to verify whether the expected species or strains are present in the data and to identify any potential contamination. Ensuring the presence of the intended species is essential for the accuracy and reliability of the research, as deviations could lead to erroneous conclusions. Additionally, detecting contamination is vital to maintain the integrity of the samples and to avoid misleading results that could compromise subsequent analyses and applications.
+
+## Taxonomic profiling
 
 To find out which microorganisms are present, we will compare the filtered reads of the sample to a reference database, i.e. sequences of known microorganisms stored in a database, using **Kraken2** ({% cite wood2019improved %}).
 
@@ -394,9 +409,11 @@ For this tutorial, we will use the PlusPF database which contains the RefSeq Sta
    >
    {: .question}
 
-# Species extraction
+## Species identification
 
-In Kraken output, there are quite a lot of identified taxa with different levels. To extract the species level, we will use __Bracken__. 
+In Kraken output, there are quite a lot of identified taxa with different levels. To obtain a more accurate and detailed understanding at the species level, we will use __Bracken__. 
+
+__Bracken__ refines the Kraken results by re-estimating the abundances of species in metagenomic samples, providing a more precise and reliable identification of species, which is crucial for downstream analysis and interpretation.
 
 __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken) is a "simple and worthwile addition to Kraken for better abundance estimates" ({% cite Ye.2019 %}). Instead of only using proportions of classified reads, it takes a probabilistic approach to generate final abundance profiles. It works by re-distributing reads in the taxonomic tree: "Reads assigned to nodes above the species level are distributed down to the species nodes, while reads assigned at the strain level are re-distributed upward to their parent species" ({% cite Lu.2017 %}).
 
@@ -498,9 +515,13 @@ __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken
 
 As expected *Staphylococcus aureus* represents most of the reads in the data.
 
-# Contamination identification
+## Contamination detection
 
-To explore **Kraken** report and specially to detect more reliably minority organisms or contamination, we will use **Recentrifuge** ({% cite marti2019recentrifuge %}).
+To explore **Kraken** report and specially to detect more reliably minority organisms or contamination, we will use **Recentrifuge** ({% cite marti2019recentrifuge %}). 
+
+**Recentrifuge** enhances analysis by reanalyzing metagenomic classifications with interactive charts that highlight confidence levels. It supports 48 taxonomic ranks of the [NCBI Taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy), including strains, and generates plots for shared and exclusive taxa, facilitating robust comparative analysis. 
+
+**Recentrifuge** includes a novel contamination removal algorithm, useful when negative control samples are available, ensuring data integrity with control-subtracted plots. It also excels in detecting minority organisms in complex datasets, crucial for sensitive applications such as clinical and environmental studies.
 
 <div class="Step-by-step" markdown="1">
 > <hands-on-title> Identify contamination </hands-on-title>
@@ -567,7 +588,10 @@ To explore **Kraken** report and specially to detect more reliably minority orga
    >
    {: .question}
 
+Once we have identified contamination, if any is present, the next step is to **remove the contaminated sequences** from the dataset to ensure the integrity of the remaining data. This can be done using bioinformatics tools designed to filter out unwanted sequences. Additionally, it's important to document and **report the contamination findings** to maintain transparency and guide any necessary adjustments in sample collection or processing protocols.
+
 # Conclusion
 
-In this tutorial, we inspected the quality of the bacterial isolate sequencing data and checked the expected species and potential contamination. Prepared short reads can be used in downstream analysis, like [Genome Assembly]({% link topics/assembly/tutorials/mrsa-illumina/tutorial.md %}).
-If you want to learn more about data quality control, you can follow this tutorial: [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
+In this tutorial, we inspected the quality of the bacterial isolate sequencing data and checked the expected species and potential contamination. Prepared short reads **can be used in downstream analysis**, like [Genome Assembly]({% link topics/assembly/tutorials/mrsa-illumina/tutorial.md %}).
+
+To learn more about data quality control, you can follow this tutorial: [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
