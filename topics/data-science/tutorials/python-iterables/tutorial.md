@@ -38,7 +38,7 @@ notebook:
   pyolite: true
 ---
 
-
+Doing calculations with hundreds of variables called `pressure_001`, `pressure_002`, etc. would be at least as slow as doing them by hand. Using a *list* to store many values together solves that problems. Lists are surrounded by square brackets: `[`, `]`, with values separated by commas:
 
 > <agenda-title></agenda-title>
 >
@@ -49,9 +49,6 @@ notebook:
 >
 {: .agenda}
 
-# Lists
-
-Doing calculations with a hundred variables called `pressure_001`, `pressure_002`, etc. would be at least as slow as doing them by hand. Using a *list* to store many values together solves that problems. Lists are surrounded by square brackets: `[`, `]`, with values separated by commas:
 
 ```python
 pressures = [0.273, 0.275, 0.277, 0.275, 0.276]

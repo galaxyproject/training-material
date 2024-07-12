@@ -1,0 +1,53 @@
+name: "[Cron] Update FAQs from Google Form"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * 1-5'
+jobs:
+  runner-job:
+    runs-on: ubuntu-latest
+    # Only run on main repo on and PRs that match the main repo.
+    if: |
+      github.repository == 'galaxyproject/training-material' &&
+      (github.event_name != 'pull_request' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # BEGIN Dependencies
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle pristine ffi
+      # END Dependencies
+
+      - name: Update FAQs from Google Form
+        id: generate
+        run: |
+          echo "new_ids=$(bundle exec ruby bin/google-form-faq.rb)" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request for FAQs
+        # If it's not a Pull Request then commit any changes as a new PR.
+        if: |
+          github.event_name != 'pull_request' &&
+          steps.generate.outputs.new_ids != '0'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Import FAQs from Google Form
+          branch-suffix: timestamp
+          title: "[Google Form] New FAQ!"
+          add-paths: faqs/
