@@ -189,6 +189,15 @@ reads include:
 {: .hands_on}
 </div>
 
+<div class="Workflow" markdown="1">
+
+> <hands-on-title>Quality Control</hands-on-title>
+> 1. Inspect the webpage outputs of **FastQC**
+>
+{: .hands_on}
+
+</div>
+
 **FastQC** combines quality statistics from all separate reads and combines them in plots. An important plot is the Per base sequence quality. 
 
 DRR187559_1 | DRR187559_2
