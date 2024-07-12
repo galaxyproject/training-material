@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Quality and contamination control in bacterial isolate using Illumina MiSeq Data
 zenodo_link: 'https://zenodo.org/record/10669812'
 questions:
-- How to check the quality of the MiSeq data?
+- How to check the quality of MiSeq data?
 - What are the species in bacterial isolate sequencing data?
 objectives:
 - Run tools to evaluate sequencing data on quality and quantity
