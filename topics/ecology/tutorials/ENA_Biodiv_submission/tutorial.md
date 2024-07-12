@@ -370,7 +370,11 @@ For this tutorial we will use the ENA default sample checklist.
 > - *"Select the metadata input method"*: `Excel file`
 > - *"Select the ENA sample checklist"*: `ENA default sample checklist (ERC000011)`
 > - *"Select input data"*: `Dataset or dataset collection`
-
+>    > <comment-title> Datatype </comment-title>
+>    >
+>    > The ENA upload tool only allows .fastq.gz files for submission
+>    {: .comment}
+>    
 > <warning-title> Danger: Submit to ENA test server! </warning-title>
 > We suggest you first submit to the test server before making a public submission!
 {: .warning}
