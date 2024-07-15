@@ -29,7 +29,6 @@ These are available as an [OPML file as well]({{ site.baseurl }}/feeds/gtn.opml)
 
 {% else %}
 GTN Feed listing is not available in development mode. (This is done so we don't need to generate the feed pages or add an exception to our URL checking, while keeping CI times fast.)
-They are, however, available as an [OPML file as well]({{ site.baseurl }}/feeds/gtn.opml).
 {% endif %}
 
 ## Embedding Feeds
