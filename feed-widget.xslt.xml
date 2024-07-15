@@ -8,8 +8,8 @@
   <xsl:template match="/">
     <html xmlns="http://www.w3.org/1999/xhtml">
       <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
         <title><xsl:value-of select="atom:feed/atom:title"/> • GTN News </title>
         <link rel="icon" type="image/png">
           <xsl:attribute name="href">
@@ -18,8 +18,8 @@
         </link>
         <link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"/>
         <style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -31,7 +31,7 @@ div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-dec
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
 .authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
