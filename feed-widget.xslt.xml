@@ -30,7 +30,8 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
 body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
@@ -131,19 +132,39 @@ main { overflow-y: auto; overflow-x: hidden; }
           </xsl:otherwise>
         </xsl:choose>
       </h2>
-      <!-- If author isn't "GTN" -->
-      <xsl:if test="atom:author/atom:name != 'GTN'">
-      <p class="authors">
-       <i>By: </i><xsl:for-each select="atom:author">
-           <a href="{atom:uri}">
-             <xsl:value-of select="atom:name" />
-           </a>
-           <xsl:if test="position() != last()">
-             <xsl:text>, </xsl:text>
-           </xsl:if>
-         </xsl:for-each>
-      </p>
-      </xsl:if>
+      <div class="meta">
+        <!-- If author isn't "GTN" -->
+        <xsl:if test="atom:author/atom:name != 'GTN'">
+          <span class="authors">
+           <i>By: </i><xsl:for-each select="atom:author">
+               <a href="{atom:uri}">
+                 <xsl:value-of select="atom:name" />
+               </a>
+               <xsl:if test="position() != last()">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+             </xsl:for-each>
+          </span>
+        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="atom:posted">
+            <time>
+              <xsl:attribute name="datetime">
+                <xsl:value-of select="atom:posted"/>
+              </xsl:attribute>
+              <xsl:value-of select="atom:posted"/>
+            </time>
+          </xsl:when>
+          <xsl:otherwise>
+            <time>
+              <xsl:attribute name="datetime">
+                <xsl:value-of select="atom:updated"/>
+              </xsl:attribute>
+              <xsl:value-of select="atom:updated"/>
+            </time>
+          </xsl:otherwise>
+        </xsl:choose>
+      </div>
       <!-- if summary -->
       <p class="summary">
         <xsl:choose>
