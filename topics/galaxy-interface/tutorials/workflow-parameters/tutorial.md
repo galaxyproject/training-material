@@ -19,6 +19,7 @@ key_points:
 contributors:
 - mvdbeek
 - hexylena
+- RZ9082
 level: Intermediate
 subtopic: workflows
 
@@ -222,6 +223,7 @@ In this example we will construct a workflow where we calculate the sum of all v
 
 With this you're ready to run the workflow!
 
+> <a name="running-the-workflow-2"></a>
 > <hands-on-title>Running the workflow</hands-on-title>
 >
 > 1. Upload a dataset using "Paste/Fetch data" with the contents, and set the filetype manually to "tabular" during upload
@@ -259,6 +261,46 @@ the first column.
 >   You can create or compute a dataset for each parameter you would like to try and run the
 >   `Parse parameter value` tool on it, running all downstream tools once for each parameter.
 {: .tip}
+
+# Rename sub-workflow outputs utilizing workflow variables
+
+Oftentimes it is useful to use variables enabling users to determine text inputs, queries, output names, etc.
+This approach is particularly beneficial when employing sub-workflows, such as when a sub-workflow is used multiple times and each instance requires a unique output name.
+In the following example we will construct a straightforward workflow, and utilize variables to facilitate the renaming of outputs when running the workflow.
+
+> <hands-on-title>Construct sub-workflow utilizing variables to rename outputs</hands-on-title>
+> 
+> 1. {% icon galaxy-wf-new %} Create a new workflow and choose a unique name for it
+> 2. Add an **input dataset** {% icon tool %}
+> 3. Add **Add column** {% icon tool %} to the workflow
+>    - Connect **Input dataset** to {% icon wf-input %} **to Dataset**
+>    - Click on **Add column** and scroll down the right panel
+>    - Open the **Configure Output: 'out_file1'** section
+>    - Write `${my label}` into **Rename dataset**
+> 4. Add an **input parameter** and give it the label `my label` (Leave it unconnected)
+> 5. {% icon galaxy-save %} Save the workflow
+{: .hands_on }
+
+> <hands-on-title>Construct main workflow</hands-on-title>
+> 
+> 1. {% icon galaxy-wf-new %} Create a new workflow and choose a unique name for it
+> 2. Scroll the left sidebar down, click on **Workflow**, and add the sub-workflow created in the steps above twice
+> 3. Add 2x **input parameter** {% icon tool %}
+>    - Name the first one `First workflow output name` and connect to {% icon wf-input %} **my label** in the first sub-workflow
+>    - Name the second one `Second workflow output name` and connect to {% icon wf-input %} **my label** in the second sub-workflow
+> 4. Add an **input dataset** {% icon tool %} and connect it to both {% icon wf-input %} **Input dataset** of the sub-workflows
+> 5. {% icon galaxy-save %} Save the workflow
+{: .hands_on }
+
+> <hands-on-title>Running the main workflow</hands-on-title>
+>
+> 1. Upload/reuse the tabular file from the following [section](#running-the-workflow-2)
+> 2. Navigate to Workflow tab
+> 3. Click on {% icon workflow-run %} **Run workflow**
+> 4. Select the tabular file as your input
+> 5. Define the name you want for your first and second output datasets
+> 6. {% icon workflow-run %} Run the workflow
+{: .hands_on }
 
 # Conclusion
 
