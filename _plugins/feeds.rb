@@ -700,6 +700,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
         {title: "#{topic} all changes", url: "#{site.config['url']}#{site.baseurl}/topic/feed.xml"}
 
       generate_matrix_feed(site, bucket, group_by: 'month', filter_by: topic)
+      generate_matrix_feed_itemized(site, bucket, group_by: nil, filter_by: topic)
+
       opml['GTN Topics - Digests'] <<
         {title: "#{topic} monthly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/#{topic}-month.xml"}
     end
