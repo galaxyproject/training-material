@@ -9,6 +9,7 @@ def request(url)
   uri = URI.parse(url)
   request = Net::HTTP::Get.new(uri)
   request['Accept'] = 'application/json'
+  request['User-Agent'] = 'GTN-geocode/1.0 (+https://github.com/galaxyproject/training-material)'
   req_options = {
     use_ssl: uri.scheme == 'https',
   }
