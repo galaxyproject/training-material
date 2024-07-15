@@ -66,6 +66,8 @@ def collapse_date_pretty(event)
   end
 end
 
+FEED_WIDGET_XSLT = Nokogiri::XSLT(File.read('feed-widget.xslt.xml'))
+
 def serialise(site, feed_path, builder)
   # The builder won't let you add a processing instruction, so we have to
   # serialise it to a string and then parse it again. Ridiculous.
@@ -90,6 +92,9 @@ def serialise(site, feed_path, builder)
   )
   finalised.root.add_previous_sibling pi
   File.write(feed_path.gsub(/\.xml$/, '.w.xml'), finalised.to_xml)
+
+  # Write out HTML version since Safari doesn't support XSLT on XML. Rip.
+  File.write(feed_path.gsub(/\.xml$/, '.w.html'), FEED_WIDGET_XSLT.transform(finalised))
 end
 
 def markdownify(site, text)
