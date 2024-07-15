@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@19ab85f3535272c188eec9a87f9cca800b0d6f27",
+		release: "galaxy-training-network@dd2d822d5b4718012898dd458c4b3d24c6d658e6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Detection of AMR genes in bacterial genomes">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-29 13:14:47 +0000"><meta name="description" content="This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy. ">
+<meta name="DC.date" content="2024-06-20 13:13:16 +0000"><meta name="description" content="This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Learning Pathway: Detection of AMR genes in bacterial genomes">
         <meta property="og:description" content="This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy. ">
@@ -314,6 +314,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   ],
   "audience": null,
   "teaches": [
+    "Run tools to evaluate sequencing data on quality and quantity",
+    "Evaluate the output of quality control tools",
+    "Improve the quality of sequencing data",
     "Run a series of tool to identify species in bacterial isolate sequencing data",
     "Visualize the species abundance",
     "Run tools to evaluate sequencing data on quality and quantity",
@@ -404,7 +407,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     {
       "@type": "Syllabus",
       "name": "Module: Species and contamination checking",
-      "description": "Taxonomic assignation is useful in AMR detection to check contamination and confirm species\n"
+      "description": "Quality control and taxonomic assignation is useful in AMR detection to verify the quality of the data but also to check contamination and confirm species\n"
     },
     {
       "@type": "Syllabus",
@@ -427,7 +430,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "description": null
     }
   ],
-  "dateModified": "2024-02-29 13:14:47 +0000",
+  "dateModified": "2024-06-20 13:13:16 +0000",
   "datePublished": "2024-01-23 16:20:06 +0000",
   "isAccessibleForFree": true,
   "offers": [
@@ -476,7 +479,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     
         <h3 id="st-module-species-and-contamination-checking">Module: Species and contamination checking</h3>
-        <p><p>Taxonomic assignation is useful in AMR detection to check contamination and confirm species</p>
+        <p><p>Quality control and taxonomic assignation is useful in AMR detection to verify the quality of the data but also to check contamination and confirm species</p>
 </p>
 
 	
@@ -505,7 +508,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   
   
-        <!-- MAT: ecology/bacterial-isolate-species-contamination-checking -->
+        <!-- MAT: sequence-analysis/quality-contamination-control -->
       
       <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
 
@@ -517,8 +520,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           <td class="tutorial_title">
             
             
-            <a href="/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html">
-                Checking expected species and contamination in bacterial isolate
+            <a href="/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html">
+                Quality and contamination control in bacterial isolate using Illumina MiSeq Data
             </a>
             
 
@@ -537,11 +540,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcf95; --color-darker: #fbb200; --color-dimmed: #ffc062;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #fdb300; --color-darker: #e29f00; --color-dimmed: #efa900;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search2.html?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffcf8c; --color-darker: #f6b400; --color-dimmed: #ffc14b;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              <a href="/training-material/search2.html?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #f8b600; --color-darker: #dda100; --color-dimmed: #ebab00;" title="Click to show all tutorials tagged bacteria">bacteria</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #cec500; --color-darker: #b7b000; --color-dimmed: #c2ba00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -557,7 +560,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
               
     <div class="btn-group">
-        <a href="/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+        <a href="/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html" class="btn btn-default" title="Follow the tutorial">
             <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
         </a>
         <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
@@ -569,49 +572,49 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li class="dropdown-item"><strong>Automatic translations</strong></li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			Deutsch
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			Español
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			中文
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			Français
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			日本語
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			Português
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			العربية
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			More Languages
 		</a>
 	</li>
@@ -647,7 +650,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
  </td>
           <td> 
     <div class="btn-group">
-        <a href="/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+        <a href="/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html" class="btn btn-default" title="Follow the tutorial">
             <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
         </a>
         <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
@@ -659,49 +662,49 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li class="dropdown-item"><strong>Automatic translations</strong></li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			Deutsch
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			Español
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			中文
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			Français
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			日本語
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			Português
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			العربية
 		</a>
 	</li>
         
 	<li class="dropdown-item">
-		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/ecology/tutorials/bacterial-isolate-species-contamination-checking/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-contamination-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
 			More Languages
 		</a>
 	</li>
@@ -804,11 +807,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcf95; --color-darker: #fbb200; --color-dimmed: #ffc062;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #fdb300; --color-darker: #e29f00; --color-dimmed: #efa900;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc7e5; --color-darker: #ffa3d7; --color-dimmed: #ffb6de;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffa5d8; --color-darker: #ff80cc; --color-dimmed: #ff93d2;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #cec500; --color-darker: #b7b000; --color-dimmed: #c2ba00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -1027,17 +1030,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #b6dbff; --color-darker: #7dc6ff; --color-dimmed: #9cd1ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search2.html?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #82c8ff; --color-darker: #27b6ff; --color-dimmed: #60bfff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc7e5; --color-darker: #ffa3d7; --color-dimmed: #ffb6de;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffa5d8; --color-darker: #ff80cc; --color-dimmed: #ff93d2;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search2.html?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c9d6ff; --color-darker: #a5beff; --color-dimmed: #b7caff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search2.html?query=amr" class="label label-default tutorial_tag" style="--color-primary: #a8c0ff; --color-darker: #85aaff; --color-dimmed: #97b5ff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffd175; --color-darker: #eeb700; --color-dimmed: #fcc300;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #f0b900; --color-darker: #d6a400; --color-dimmed: #e3af00;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f3c9ff; --color-darker: #eda5ff; --color-dimmed: #f0b8ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eda8ff; --color-darker: #e885ff; --color-dimmed: #ea97ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #cec500; --color-darker: #b7b000; --color-dimmed: #c2ba00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -1310,15 +1313,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffd175; --color-darker: #eeb700; --color-dimmed: #fcc300;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #f0b900; --color-darker: #d6a400; --color-dimmed: #e3af00;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcf95; --color-darker: #fbb200; --color-dimmed: #ffc062;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #fdb300; --color-darker: #e29f00; --color-dimmed: #efa900;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search2.html?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffcf8c; --color-darker: #f6b400; --color-dimmed: #ffc14b;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              <a href="/training-material/search2.html?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #f8b600; --color-darker: #dda100; --color-dimmed: #ebab00;" title="Click to show all tutorials tagged bacteria">bacteria</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #cec500; --color-darker: #b7b000; --color-dimmed: #c2ba00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f3c9ff; --color-darker: #eda5ff; --color-dimmed: #f0b8ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eda8ff; --color-darker: #e885ff; --color-dimmed: #ea97ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
             
             </div>
@@ -1591,17 +1594,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffd175; --color-darker: #eeb700; --color-dimmed: #fcc300;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #f0b900; --color-darker: #d6a400; --color-dimmed: #e3af00;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcf95; --color-darker: #fbb200; --color-dimmed: #ffc062;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #fdb300; --color-darker: #e29f00; --color-dimmed: #efa900;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search2.html?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c9d6ff; --color-darker: #a5beff; --color-dimmed: #b7caff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search2.html?query=amr" class="label label-default tutorial_tag" style="--color-primary: #a8c0ff; --color-darker: #85aaff; --color-dimmed: #97b5ff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #99ee00; --color-darker: #88d400; --color-dimmed: #90e100;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #89d600; --color-darker: #79be00; --color-dimmed: #81ca00;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f3c9ff; --color-darker: #eda5ff; --color-dimmed: #f0b8ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #eda8ff; --color-darker: #e885ff; --color-dimmed: #ea97ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #cec500; --color-darker: #b7b000; --color-dimmed: #c2ba00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -1874,17 +1877,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e6dc00; --color-darker: #ccc400; --color-dimmed: #d9d000;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #cec500; --color-darker: #b7b000; --color-dimmed: #c2ba00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search2.html?query=Nanopore data analysis" class="label label-default tutorial_tag" style="--color-primary: #00eff0; --color-darker: #00d5d6; --color-dimmed: #00e2e3;" title="Click to show all tutorials tagged Nanopore data analysis">Nanopore data analysis</a>
+              <a href="/training-material/search2.html?query=Nanopore data analysis" class="label label-default tutorial_tag" style="--color-primary: #00d6d7; --color-darker: #00bfc0; --color-dimmed: #00cacb;" title="Click to show all tutorials tagged Nanopore data analysis">Nanopore data analysis</a>
               
-              <a href="/training-material/search2.html?query=Pathogens detection" class="label label-default tutorial_tag" style="--color-primary: #abeb00; --color-darker: #97d100; --color-dimmed: #a1de00;" title="Click to show all tutorials tagged Pathogens detection">Pathogens detection</a>
+              <a href="/training-material/search2.html?query=Pathogens detection" class="label label-default tutorial_tag" style="--color-primary: #99d300; --color-darker: #88bc00; --color-dimmed: #90c700;" title="Click to show all tutorials tagged Pathogens detection">Pathogens detection</a>
               
-              <a href="/training-material/search2.html?query=Phylogenetic tree" class="label label-default tutorial_tag" style="--color-primary: #00f77d; --color-darker: #00dc6e; --color-dimmed: #00e976;" title="Click to show all tutorials tagged Phylogenetic tree">Phylogenetic tree</a>
+              <a href="/training-material/search2.html?query=Phylogenetic tree" class="label label-default tutorial_tag" style="--color-primary: #00de6f; --color-darker: #00c563; --color-dimmed: #00d269;" title="Click to show all tutorials tagged Phylogenetic tree">Phylogenetic tree</a>
               
-              <a href="/training-material/search2.html?query=Heatmap" class="label label-default tutorial_tag" style="--color-primary: #ffc7ea; --color-darker: #ffa1de; --color-dimmed: #ffb5e4;" title="Click to show all tutorials tagged Heatmap">Heatmap</a>
+              <a href="/training-material/search2.html?query=Heatmap" class="label label-default tutorial_tag" style="--color-primary: #ffa4df; --color-darker: #ff7ed6; --color-dimmed: #ff92da;" title="Click to show all tutorials tagged Heatmap">Heatmap</a>
               
-              <a href="/training-material/search2.html?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffc6ef; --color-darker: #ffa0e7; --color-dimmed: #ffb4eb;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              <a href="/training-material/search2.html?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffa3e7; --color-darker: #ff7ce0; --color-dimmed: #ff90e3;" title="Click to show all tutorials tagged cyoa">cyoa</a>
               
             
             </div>
@@ -2172,7 +2175,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>This material is reviewed by our Editorial Board:</p>
 	
 	<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
-    Bérénice Batut</a>
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/clsiguret/" class="contributor-badge contributor-clsiguret"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/clsiguret?s=36" alt="Clea Siguret avatar" width="36" class="avatar" />
+    Clea Siguret</a>
 
 	
 	<h2 id="funding">Funding</h2>
@@ -2272,7 +2276,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<p>
 					<span style="font-size: 1.3em">Framework</span>
 					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/19ab85f3535272c188eec9a87f9cca800b0d6f27">19ab85f</a></li>
+						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/dd2d822d5b4718012898dd458c4b3d24c6d658e6">dd2d822</a></li>
 						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 						<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 					</ul>

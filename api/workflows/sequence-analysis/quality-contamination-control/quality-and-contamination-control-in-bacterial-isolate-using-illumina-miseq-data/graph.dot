@@ -1,0 +1,52 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nDRR187559_1"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nDRR187559_2"]
+  2[label="FastQC forward"]
+  0 -> 2 [label="output"]
+  kd3aed14e51b840b09d6d548fff2ab63a[color=lightseagreen,label="Output\nFastQC text_file (forward)"]
+  2 -> kd3aed14e51b840b09d6d548fff2ab63a
+  k6c9273387e024599a01d014a35a529e8[color=lightseagreen,label="Output\nFastQC html_file (forward)"]
+  2 -> k6c9273387e024599a01d014a35a529e8
+  3[label="FastQC reverse"]
+  1 -> 3 [label="output"]
+  k30d76c09809d4415a1e6f244cfc34065[color=lightseagreen,label="Output\nFastQC html_file (reverse)"]
+  3 -> k30d76c09809d4415a1e6f244cfc34065
+  kbbafb0728b124908ae0f10cc7f9086d3[color=lightseagreen,label="Output\nFastQC text_file (reverse)"]
+  3 -> kbbafb0728b124908ae0f10cc7f9086d3
+  4[label="fastp"]
+  0 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  k1a089ca0445a4322b74f60c7aefc7cd8[color=lightseagreen,label="Output\nfastp report_html"]
+  4 -> k1a089ca0445a4322b74f60c7aefc7cd8
+  kb634addfdcb843e68016341de7eb5b87[color=lightseagreen,label="Output\nDRR187559_filtered_"]
+  4 -> kb634addfdcb843e68016341de7eb5b87
+  k0a57afa4e75e470dad7b13e567ce54a3[color=lightseagreen,label="Output\nDRR187559_filtered_1"]
+  4 -> k0a57afa4e75e470dad7b13e567ce54a3
+  kbb98c4d1bd1d47bdac564ac0e1e49d50[color=lightseagreen,label="Output\nfastp_json"]
+  4 -> kbb98c4d1bd1d47bdac564ac0e1e49d50
+  5[label="Kraken2"]
+  4 -> 5 [label="out1"]
+  4 -> 5 [label="out2"]
+  k54b85a5372ee4b73b1867fd55e8aab9b[color=lightseagreen,label="Output\nkraken_report_tabular"]
+  5 -> k54b85a5372ee4b73b1867fd55e8aab9b
+  ka408a64458cd4f5eaf2515b5ea63aa76[color=lightseagreen,label="Output\nkraken_report_reads"]
+  5 -> ka408a64458cd4f5eaf2515b5ea63aa76
+  6[label="Bracken"]
+  5 -> 6 [label="report_output"]
+  k8ca52af9f83942b6aa74f1a6a1dfbbc8[color=lightseagreen,label="Output\nbracken_kraken_report"]
+  6 -> k8ca52af9f83942b6aa74f1a6a1dfbbc8
+  kae6c6464f5f54e5bb616d38166fc0133[color=lightseagreen,label="Output\nbracken_report_tsv"]
+  6 -> kae6c6464f5f54e5bb616d38166fc0133
+  7[label="Recentrifuge"]
+  5 -> 7 [label="output"]
+  kbd947a1d0443465f86585d76d9ce69f8[color=lightseagreen,label="Output\nrecentrifuge_report_html"]
+  7 -> kbd947a1d0443465f86585d76d9ce69f8
+  kc7457acb41bc4191b3fb6716e15fbe57[color=lightseagreen,label="Output\nrecentrifuge_data_tabular"]
+  7 -> kc7457acb41bc4191b3fb6716e15fbe57
+  kb5694f2dc8cd4460bfff74fd0792ecb3[color=lightseagreen,label="Output\nrecentrifuge_stats_tabular"]
+  7 -> kb5694f2dc8cd4460bfff74fd0792ecb3
+  k94f6ff070e0647ad88f8a058d0808537[color=lightseagreen,label="Output\nrecentrifuge_logfile"]
+  7 -> k94f6ff070e0647ad88f8a058d0808537
+}
