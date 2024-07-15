@@ -89,6 +89,18 @@ main { overflow-y: auto; overflow-x: hidden; }
            🔗
           </a>
         </footer>
+        <script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+        <script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' &amp;&amp; navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script>
       </body>
     </html>
   </xsl:template>
@@ -100,6 +112,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         <xsl:when test="atom:link/@href">true</xsl:when>
         <xsl:otherwise>false</xsl:otherwise>
         </xsl:choose>
+      </xsl:attribute>
+      <xsl:attribute name="id">
+        <xsl:value-of select="atom:id"/>
       </xsl:attribute>
       <h2>
         <xsl:choose>
