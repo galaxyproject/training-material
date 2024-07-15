@@ -397,8 +397,13 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
               xml.entry do
 
                 # This is a feed of only NEW tutorials, so we only include publication times.
-                xml.published(bucket_date.to_euro_lunch.rfc3339)
-                xml.updated(bucket_date.to_euro_lunch.rfc3339)
+                if group_by.nil?
+                  xml.published(bucket_date.rfc3339)
+                  xml.updated(bucket_date.rfc3339)
+                else
+                  xml.published(bucket_date.to_euro_lunch.rfc3339)
+                  xml.updated(bucket_date.to_euro_lunch.rfc3339)
+                end
 
                 href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
 
