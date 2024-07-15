@@ -34,7 +34,7 @@ GTN Feed listing is not available in development mode. (This is done so we don't
 ## Embedding Feeds
 
 Any[^1] of the above feeds can be embedded anywhere you like. Simply replace
-`.xml` with `.w.xml` in the URL and it'll produce a feed preview that is more
+`.xml` with `.w.html` in the URL and it'll produce a feed preview that can be embedded in an iframe easily. (`.w.xml` is also available but does not work for Safari users, ~10% of our traffic.)
 
 [^1]: minus the main news feed currently as that is produced by a third party plugin
 amenable to embedding.

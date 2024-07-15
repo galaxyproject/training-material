@@ -2,6 +2,7 @@
 
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn'
+require './_plugins/util'
 require 'json'
 
 class DateTime
@@ -46,30 +47,6 @@ def objectify(attrs, url, path)
   end
 
   obj
-end
-
-# TODO: move into a lib somewhere.
-def collapse_date_pretty(event)
-  s = event['date_start']
-  e = if event['date_end'].nil?
-        s
-      else
-        event['date_end']
-      end
-  # want dates like "Mar 22-25, 2024" or "Mar 22-May 1, 2024"
-  if s.year == e.year
-    if s.month == e.month
-      if s.day == e.day
-        "#{s.strftime('%B')} #{s.day}, #{s.year}"
-      else
-        "#{s.strftime('%B')} #{s.day}-#{e.day}, #{s.year}"
-      end
-    else
-      "#{s.strftime('%B')} #{s.day}-#{e.strftime('%B')} #{e.day}, #{s.year}"
-    end
-  else
-    "#{s.strftime('%B')} #{s.day}, #{s.year}-#{e.strftime('%B')} #{e.day}, #{e.year}"
-  end
 end
 
 FEED_WIDGET_XSLT = Nokogiri::XSLT(File.read('feed-widget.xslt.xml'))
@@ -316,7 +293,10 @@ def all_date_sorted_materials(site)
     end
   end.compact
 
-  bucket.sort_by { |x| x[0] }.reverse
+  bucket
+    .reject{|x| x[0] > DateTime.now } # Remove future-dated materials
+    .sort_by {|x| x[0] } # Date-sorted, not strictly necessary since will be grouped.
+    .reverse
 end
 
 def group_bucket_by(bucket, group_by: 'day')
@@ -648,7 +628,7 @@ def generate_event_feeds(site)
 
       events.each do |page|
         xml.entry do
-          pdate = collapse_date_pretty(page.data)
+          pdate = collapse_event_date_pretty(page.data)
           xml.title("[#{pdate}] #{page.data['title']}")
           link = "#{site.config['url']}#{site.baseurl}#{page.url}"
           xml.link(href: link)
