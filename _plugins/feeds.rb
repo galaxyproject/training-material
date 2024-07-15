@@ -679,7 +679,7 @@ end
 
 # Basically like `PageWithoutAFile`
 Jekyll::Hooks.register :site, :post_write do |site|
-  if Jekyll.env == 'production' || true
+  if Jekyll.env == 'production'
     opml = {}
     generate_event_feeds(site)
     opml['GTN Events'] = [
@@ -709,6 +709,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
     opml['GTN Digests'] = [
       {title: "GTN daily changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-daily.xml"},
+      {title: "GTN daily changes (itemized, one change per entry)", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-daily.i.xml"},
       {title: "GTN weekly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-weekly.xml"},
       {title: "GTN monthly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-monthly.xml"}
     ]
