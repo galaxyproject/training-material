@@ -4,6 +4,12 @@ require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn'
 require 'json'
 
+class DateTime
+  def to_euro_lunch
+    self.to_date.to_datetime + 0.6
+  end
+end
+
 TRACKING = "?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news"
 
 PRIO = [
@@ -218,12 +224,6 @@ def generate_tag_topic_feeds(_site)
   ''
 end
 
-class DateTime
-  def to_euro_lunch
-    self.to_date.to_datetime + 0.5
-  end
-end
-
 def all_date_sorted_materials(site)
   events = site.pages.select { |x| x['layout'] == 'event' || x['layout'] == 'event-external' }
   materials = TopicFilter.list_all_materials(site).reject { |k, _v| k['draft'] }
@@ -334,7 +334,18 @@ def group_bucket_by(bucket, group_by: 'day')
       .group_by { |x| x[0].strftime('%Y-%m') }
       .to_h { |_k, v| [v.map { |x| x[0] }.min, v] }
   else
-    raise "Unknown group_by: #{group_by}"
+    # Pretend this is an h
+    # bucket
+    #   .map { |x| [x[0], x] }
+    #   .to_h
+    bucket
+      .map.with_index { |x, i| [x[0] + i / 100000000.0, [x]] }
+      .to_h
+    # We add an artificial separator in the range of miliseconds to each file,
+    # should never grow more than 1s, likely, to ensure each of these are
+    # individual items. This is kludge-y, yeah, but downstream processing wants
+    # to group_by in places, and we don't want to trigger it collapsing there
+    # too.
   end
 end
 
@@ -365,7 +376,8 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
   lookup = {
     'day' => 'Daily',
     'week' => 'Weekly',
-    'month' => 'Monthly'
+    'month' => 'Monthly',
+    nil => 'Firehose'
   }
 
   path = "feeds/matrix-#{group_by}.i.xml"
@@ -426,7 +438,7 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
                 end
 
                 prefix = type.gsub(/s$/, '').capitalize.gsub(/Faq/, 'FAQ').gsub(/New$/, 'Post')
-                title = "New #{prefix}: #{page.data['title']}"
+                title = "#{ICON_FOR[type]} New #{prefix}: #{page.data['title']}"
 
                 xml.title(title)
 
@@ -716,7 +728,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
     generate_matrix_feed(site, bucket, group_by: 'week')
     generate_matrix_feed(site, bucket, group_by: 'month')
 
-    generate_matrix_feed_itemized(site, bucket)
+    generate_matrix_feed_itemized(site, bucket, group_by: nil)
     generate_matrix_feed_itemized(site, bucket, group_by: 'day')
 
     opml['GTN Digests'] = [
