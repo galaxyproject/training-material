@@ -588,10 +588,14 @@ To explore **Kraken** report and specially to detect more reliably minority orga
    >
    {: .question}
 
-Once we have identified contamination, if any is present, the next step is to **remove the contaminated sequences** from the dataset to ensure the integrity of the remaining data. This can be done using bioinformatics tools designed to filter out unwanted sequences. Additionally, it's important to document and **report the contamination findings** to maintain transparency and guide any necessary adjustments in sample collection or processing protocols.
+Once we have identified contamination, if any is present, the next step is to **remove the contaminated sequences** from the dataset to ensure the integrity of the remaining data. This can be done using bioinformatics tools designed to filter out unwanted sequences, such as **BBduk** ({% cite Bushnell2017 %}).
+
+**BBduk** {% icon tool %} is a member of the [BBTools](https://sourceforge.net/projects/bbmap/) package, where 'Duk' stands for *Decontamination Using Kmers*. **BBduk** filters or trims reads for adapters and contaminants using k-mers, effectively removing unwanted sequences and improving the quality of the dataset.
+
+Additionally, it's important to document and **report the contamination findings** to maintain transparency and guide any necessary adjustments in sample collection or processing protocols.
 
 # Conclusion
 
-In this tutorial, we inspected the quality of the bacterial isolate sequencing data and checked the expected species and potential contamination. Prepared short reads **can be used in downstream analysis**, like [Genome Assembly]({% link topics/assembly/tutorials/mrsa-illumina/tutorial.md %}).
+In this tutorial, we inspected the quality of the bacterial isolate sequencing data and checked the expected species and potential contamination. Prepared short reads **can be used in downstream analysis**, like [Genome Assembly]({% link topics/assembly/tutorials/mrsa-illumina/tutorial.md %}). Even after the assembly, you can identify contamination using a tool like **CheckM** ({% cite Parks_2015 %}). **CheckM** {% icon tool %} can be used for screening the 'cleanness' of bacterial assemblies.
 
 To learn more about data quality control, you can follow this tutorial: [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
