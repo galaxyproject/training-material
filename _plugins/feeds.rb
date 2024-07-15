@@ -35,6 +35,10 @@ def objectify(attrs, url, path)
     self['__url']
   end
 
+  def obj.content
+    self.fetch('content', 'NO CONTENT AVAILABLE')
+  end
+
   obj
 end
 
@@ -164,7 +168,7 @@ def generate_topic_feeds(site, topic, bucket)
           # xml.published(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
           xml.updated(time.rfc3339)
 
-          tags.each do |tag|
+          tags.uniq.each do |tag|
             xml.category(term: tag)
           end
 
@@ -235,7 +239,7 @@ def all_date_sorted_materials(site)
     [n.date.to_datetime, 'news', n, ['news'] + n.data.fetch('tags', [])]
   end
 
-  bucket += faqs.reject {|x| File.symlink?(x.path) }.map do |n|
+  bucket += faqs.map do |n|
     tag = Gtn::PublicationTimes.clean_path(n.path).split('/')[1]
     [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'faqs', n, ['faqs', tag]]
   end
@@ -244,43 +248,60 @@ def all_date_sorted_materials(site)
     tag = Gtn::PublicationTimes.clean_path(n).split('/')[1]
     wf_data = JSON.parse(File.read(n))
 
-    attrs = Hash.new
-    attrs['title'] = wf_data['name']
-    attrs['description'] = wf_data['annotation']
-    attrs['tags'] = wf_data['tags']
-    attrs['contributors'] = wf_data.fetch('creator', []).map do |c|
-      p ">> #{c}"
-      matched = site.data['contributors'].select{|k, v| v.fetch('orcid', nil) == c.fetch('identifier', false)}.first
-      if matched
-        matched[0]
-      else
-        c['name']
+    attrs = {
+      'title' => wf_data['name'],
+      'description' => wf_data['annotation'],
+      'tags' => wf_data['tags'],
+      'contributors' => wf_data.fetch('creator', []).map do |c|
+        p ">> #{c}"
+        matched = site.data['contributors'].select{|k, v| v.fetch('orcid', nil) == c.fetch('identifier', false)}.first
+        if matched
+          matched[0]
+        else
+          c['name']
+        end
       end
-    end
+    }
 
-    obj = objectify(attrs, '/' + n.path[0..n.path.rindex('/')], n)
+    # These aren't truly stable. I'm not sure what to do about that.
+    obj = objectify(attrs, '/' + n.gsub(/\.ga$/, '.html'), n)
+    # obj = objectify(attrs, '/' + n.path[0..n.path.rindex('/')], n)
+
 
     [Gtn::PublicationTimes.obtain_time(n).to_datetime, 'workflows', obj, ['workflows', tag] + obj['tags']]
   end
 
-  bucket += site.data['contributors'].map do |k, v|
-    obj = objectify({'title' => k}, "/hall-of-fame/#{k}/", k)
+  # Remove symlinks from bucket.
+  bucket = bucket.reject { |date, type, page, tags|
+    File.symlink?(page.path) || File.symlink?(File.dirname(page.path)) || File.symlink?(File.dirname(File.dirname(page.path)))
+  }
 
-    [DateTime.parse("#{v['joined']}-01"), 'contributors', obj, ['contributor']]
+  bucket += site.data['contributors'].map do |k, v|
+    a = {'title' => "@#{k}",
+         'content' => "GTN Contributions from #{k}"}
+    obj = objectify(a, "/hall-of-fame/#{k}/", k)
+
+    [DateTime.parse("#{v['joined']}-01T12:00:00", 'content' => "GTN Contributions from #{k}"), 'contributors', obj, ['contributor']]
   end
+
   bucket += site.data['funders'].map do |k, v|
-    obj = objectify({'title' => k}, "/hall-of-fame/#{k}/", k)
+    a = {'title' => "@#{k}",
+         'content' => "GTN Contributions from #{k}"}
+    obj = objectify(a, "/hall-of-fame/#{k}/", k)
 
     # TODO: backdate funders, organisations
     if v['joined']
-      [DateTime.parse("#{v['joined']}-01"), 'funders', obj, ['funder']]
+      [DateTime.parse("#{v['joined']}-01T12:00:00"), 'funders', obj, ['funder']]
     end
   end.compact
+
   bucket += site.data['organisations'].map do |k, v|
-    obj = objectify({'title' => k}, "/hall-of-fame/#{k}/", k)
+    a = {'title' => "@#{k}",
+         'content' => "GTN Contributions from #{k}"}
+    obj = objectify(a, "/hall-of-fame/#{k}/", k)
 
     if v['joined']
-      [DateTime.parse("#{v['joined']}-01"), 'organisations', obj, ['organisation']]
+      [DateTime.parse("#{v['joined']}-01T12:00:00"), 'organisations', obj, ['organisation']]
     end
   end.compact
 
@@ -363,7 +384,7 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
       xml.subtitle('The latest materials, events, news in the GTN.')
       xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
-      bucket.each do |date, parts|
+      bucket.each do |bucket_date, parts|
         parts.group_by { |x| x[1] }.sort_by { |x| PRIO[x[0]] }.each do |type, items|
           if items.length.positive?
             items.each do |date, type, page, tags|
@@ -371,32 +392,61 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
               xml.entry do
 
                 # This is a feed of only NEW tutorials, so we only include publication times.
-                xml.published(date.to_datetime.rfc3339)
-                xml.updated(date.to_datetime.rfc3339)
-                xml.summary()
+                xml.published(bucket_date.to_datetime.rfc3339)
+                xml.updated(bucket_date.to_datetime.rfc3339)
 
-                if page.is_a?(String)
-                  href = "#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/"
-                  text = "@#{page}"
-                else
-                  text = page.data['title']
-                  href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
-                end
+                href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
 
                 xml.id(href)
                 xml.link(href: href + TRACKING)
-                if page.data && page.data.key?('description')
-                  xml.summary(page.data['description'])
-                end
-                tags.each do |tag|
+
+                tags.uniq.each do |tag|
                   xml.category(term: tag)
                 end
                 xml.category(term: "new #{page['layout']}")
 
-                title = "New #{type.gsub(/s$/, '').capitalize.gsub(/Faq/, 'FAQ').gsub(/New$/, 'Post')}: #{text}"
+                if page.data.key?('description')
+                  xml.summary(page.data['description'])
+                else
+                  md = page.content[0..page.content.index("\n")].strip
+                  html = markdownify(site, md)
+                  text = Nokogiri::HTML(html).text
+                  xml.summary(text)
+                end
+
+                prefix = type.gsub(/s$/, '').capitalize.gsub(/Faq/, 'FAQ').gsub(/New$/, 'Post')
+                title = "New #{prefix}: #{page.data['title']}"
 
                 xml.title(title)
-                # xml.contents()
+
+                had_authors = false
+                Gtn::Contributors.get_authors(page.data).each do |c|
+                  xml.author do
+                    had_authors = true
+                    xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
+                    if c !~ / /
+                      xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+                    end
+                  end
+                end
+
+                if !had_authors
+                  xml.author do
+                    xml.name('GTN')
+                    xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/")
+                    xml.email('galaxytrainingnetwork@gmail.com')
+                  end
+                end
+
+                Gtn::Contributors.get_non_authors(page.data).each do |c|
+                  xml.contributor do
+                    xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
+                    if c !~ / /
+                      xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+                    end
+                  end
+                end
+
               end
             end
           end
