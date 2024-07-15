@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Variant Analysis • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
+h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
+p { margin: 0; }
+a{text-decoration:none; color: var(--brand);}
+div.entry { position: relative; pointer: cursor; margin-bottom: 0.6rem; padding: 0.4rem; border: 1px solid var(--brand);}
+div.entry[data-has-link="true"]:hover { box-shadow: 4px 4px 0px #782760; }
+div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
+div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
+div small {display: none;}
+div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
+.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
+body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
+header img {margin-right: 0.5em}
+main { grid-area: main; padding: 15px 5px 10px 5px;}
+footer { grid-area: footer; padding: 0.5em; border-top: 2px solid var(--secondary); }
+div.entry ul a { text-decoration: underline; }
+div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
+footer a { text-decoration: underline; }
+footer a:hover{ font-weight:700; }
+main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
+main { overflow-y: auto; overflow-x: hidden; }
+
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Variant Analysis</a></h1><p>Recently added tutorials, slides, FAQs, and events in the variant-analysis topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/pox-tiled-amplicon/workflows/pox-virus-tiled-amplicon-ref-masking.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ pox-virus-tiled-amplicon-ref-masking</a></h2>
+<p class="authors"><i>By: </i><a href="">Viktoria Isabel Schwarz</a>, <a href="">Wolfgang Maier</a></p>
+<p class="summary">From a reference and a primer scheme generate two masked half-genome references for ITR-aware pox virus sequencing data analysis.</p>
+<small>
+        Published: 2023-05-15T10:22:16+00:00<br>
+        Tags:
+        workflows, variant-analysis, GTN</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/pox-tiled-amplicon/workflows/pox-virus-tiled-amplicon-ref-masking.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/pox-tiled-amplicon/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Pox virus genome analysis from tiled-amplicon sequencing data</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/TKlingstrom/">Tomas Klingström</a></p>
+<p class="summary">Pox viruses (Poxviridae) are a large family of viruses, and members of it have various vertebrate and arthropod species as their natural hosts. The most widely known species in the family are the now extinct variola virus from the genus orthopoxvirus as the cause of smallpox, and vaccinia virus, a related, likely horsepox virus, which served as the source for the smallpox vaccine that allowed eradication of that disease.
+</p>
+<small>
+        Published: 2023-05-15T10:22:16+00:00<br>
+        Tags:
+        variant-analysis, virology, one-health</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/pox-tiled-amplicon/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/aiv-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Avian influenza viral strain analysis from gene segment sequencing data</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<p class="summary">Of the four species of influenza viruses (Influenza A-D), Influenza A is the most virulent in human hosts and subtypes of it have been responsible for all historic flu pandemics.
+</p>
+<small>
+        Published: 2022-11-21T16:45:21+00:00<br>
+        Tags:
+        variant-analysis, virology, one-health</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/aiv-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variant-discovery/workflows/Somatic-Variant-Discovery-from-WES-Data-Using-Control-FREEC.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Somatic-Variant-Discovery-from-WES-Data-Using-Control-FREEC</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<p class="summary">This workflow is created as part of a tutorial listed on GTN. The workflow shows the steps in human copy number variance detection using the Contrl_FREEC tool. </p>
+<small>
+        Published: 2022-10-05T09:28:06+00:00<br>
+        Tags:
+        workflows, variant-analysis, hCNV, MIRACUM</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variant-discovery/workflows/Somatic-Variant-Discovery-from-WES-Data-Using-Control-FREEC.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variant-discovery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Somatic Variant Discovery from WES Data Using Control-FREEC</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/d-salgado/">David Salgado</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<p class="summary">Human Copy Number Variations (hCNVs) are the result of structural genomic rearrangements that result in the duplication or deletion of DNA segments. These changes contribute significantly to human genetic variability, diseases, and somatic genome variations in cancer and other diseases Nam et al. 2015. hCNVs can be routinely investigated by genomic hybridisation and sequencing technologies
+
+</p>
+<small>
+        Published: 2022-10-05T09:28:06+00:00<br>
+        Tags:
+        variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variant-discovery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Trio Analysis Tutorial</a></h2>
+<p class="authors"><i>By: </i><a href="">Jasper Ouwerkerk</a></p>
+<p class="summary">Trio Analysis using Synthetic Datasets from RD-Connect GPAP</p>
+<small>
+        Published: 2022-05-19T12:25:33+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Trio Analysis using Synthetic Datasets from RD-Connect GPAP</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/JasperO98/">Jasper Ouwerkerk</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<p class="summary">To discover causal mutations of inherited diseases it’s common practice to do a trio analysis. In a trio analysis DNA is sequenced of both the patient and parents. Using this method, it’s possible to identify multiple inheritance patterns. Some examples of these patterns are autosomal recessive, autosomal dominant, and  de-novo variants, which are represented in the figure below. To elaborate, the most left tree shows an autosomal dominant inhertitance pattern where the offspring inherits a faulty copy of the gene from one of the parents. The center subfigure represents an autosomal recessive disease, here the offspring inherited a faulty copy of the same gene from both parents. In the right subfigure a de-novo mutation is shown, which is caused by a mutation during the offspring’s lifetime.
+</p>
+<small>
+        Published: 2022-05-19T12:25:33+00:00<br>
+        Tags:
+        variant-analysis, cyoa</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/faqs/key-error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ TB Variant Report crashes (with an error about KeyError: 'protein')</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<p class="summary">This is a bug present in TB Variant Report (aka tbvcfreport) version 0.1.8 and earlier. In this case it is triggered by the presence of variants in Rv3798. You only see this bug, however, if you forget to run tb_variant_filter (TB Variant Filter). Rv3798 is a suspected transposase and any variants in this gene region would be filtered out by tb_variant_filter, so if you see this crash, make sure you have run the filter step before the TB Variant Report step.
+</p>
+<small>
+        Published: 2022-03-17T11:01:17+00:00<br>
+        Tags:
+        faqs, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/faqs/key-error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/faqs/tool_order.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Do I have to run the tools in the order of the tutorial?</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a></p>
+<p class="summary">The tools are presented in the order that a typical analysis would use. If you want to run some tools in parallel (to save time) you can do so. This workflow illustrates the analysis done in the tutorial and shows that there are multiple “paths” leading to outputs that have some steps that could be run at the same time: MultiQC, Kraken2, JBrowse and TB Variant Report.
+</p>
+<small>
+        Published: 2022-03-02T15:46:20+00:00<br>
+        Tags:
+        faqs, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/faqs/tool_order.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/faqs/runtime.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ My snippy is running for a very long time. Is this normal?</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a></p>
+<p class="summary">As this tutorial uses real world data some of the tools can run for quite a while. During a course we can expected longer run times as the Galaxy servers are heavily used. Typically expected runtimes are approximately:
+</p>
+<small>
+        Published: 2022-03-02T15:46:20+00:00<br>
+        Tags:
+        faqs, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/faqs/runtime.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<p class="summary">Sequence-based monitoring of global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for surveilling the emergence and spread of new viral variants, and for understanding the evolutionary dynamics of the virus.
+</p>
+<small>
+        Published: 2021-06-30T06:20:05+00:00<br>
+        Tags:
+        variant-analysis, covid19, virology, one-health</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2021/06/30/tutorial-sars-cov-2-variant-discovery.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Tutorial: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<p class="summary">Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.
+</p>
+<small>
+        Published: 2021-06-30T00:00:00+00:00<br>
+        Tags:
+        news, new tutorial, variant-analysis, covid-19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2021/06/30/tutorial-sars-cov-2-variant-discovery.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ vcf2lineage</a></h2>
+<p class="authors"><i>By: </i><a href="">Wolfgang Maier</a></p>
+<p class="summary">workflow-automation</p>
+<small>
+        Published: 2021-06-08T08:34:12+00:00<br>
+        Tags:
+        workflows, galaxy-interface, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Automating Galaxy workflows using the command line</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<p class="summary">Galaxy is well-known as a web-based data analysis platform which provides a graphical interface for executing common bioinformatics tools in a reproducible manner. However, Galaxy is not just a user-friendly interface for executing one tool at a time. It provides two very useful features which allow scaling data analyses up to a high-throughput level: dataset collections and workflows.
+</p>
+<small>
+        Published: 2021-06-08T08:34:12+00:00<br>
+        Tags:
+        galaxy-interface, workflows, variant-analysis, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variants/workflows/somatic_variants_tutorial_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Identification of somatic and germline variants from tumor and normal sample pairs tutorial</a></h2>
+<p class="summary">Identification of somatic and germline variants from tumor and normal sample pairs tutorial</p>
+<small>
+        Published: 2020-10-10T20:50:51+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variants/workflows/somatic_variants_tutorial_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/workflows/tb-variant-analysis.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ TB Variant Analysis v1.0</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a></p>
+<p class="summary">Predict variants and drug resistance from M. tuberculosis sequence samples (Illumina)</p>
+<small>
+        Published: 2020-07-25T20:58:54+00:00<br>
+        Tags:
+        workflows, variant-analysis, pathogen, tuberculosis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/workflows/tb-variant-analysis.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 M. tuberculosis Variant Analysis</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/thobalose/">Thoba Lose</a></p>
+<p class="summary">Tuberculosis (TB) is an infectious disease caused by the bacterium Mycobacterium tuberculosis. According to the WHO, in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world’s most deadly infectious disease. The publication of the genome of M. tuberculosis H37Rv in 1998 gave researchers a powerful new tool for understanding this pathogen. This genome has been revised since then, with the latest version being available
+
+</p>
+<small>
+        Published: 2020-07-25T20:58:54+00:00<br>
+        Tags:
+        variant-analysis, prokaryote, one-health, microgalaxy, tuberculosis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Simple COVID-19 - PE Variation</a></h2>
+<p class="summary">Analysis of variation within individual COVID-19 samples (Paired End Illumina). Does not use paured</p>
+<small>
+        Published: 2020-06-24T15:38:29+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/">Dave Clements</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/">Anton Nekrutenko</a></p>
+<p class="summary">The aim of this tutorial is twofold:
+</p>
+<small>
+        Published: 2020-06-24T15:38:29+00:00<br>
+        Tags:
+        variant-analysis, covid19, virology, one-health</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/workflows/Calling_variants_in_non-diploid_systems.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Calling variants in non-diploid systems</a></h2>
+<p class="summary">Calling variants in non-diploid systems</p>
+<small>
+        Published: 2020-03-15T19:26:44+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/workflows/Calling_variants_in_non-diploid_systems.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_full.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Exome Seq Training Full W Cached Ref</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<p class="summary">Exome sequencing data analysis for diagnosing a genetic disease</p>
+<small>
+        Published: 2019-06-26T17:26:19+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_full.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_from_premapped.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Exome Seq Training Pre-Mapped W Cached Ref</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<p class="summary">Exome sequencing data analysis for diagnosing a genetic disease; short version starting from pre-mapped reads</p>
+<small>
+        Published: 2019-06-26T17:26:19+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_from_premapped.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variants/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Identification of somatic and germline variants from tumor and normal sample pairs</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<p class="summary">When sequencing genomic material from a human tumor, the underlying clinical or
+
+</p>
+<small>
+        Published: 2019-03-13T10:31:31+00:00<br>
+        Tags:
+        variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variants/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dip/workflows/diploid.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Diploid</a></h2>
+<p class="summary">Calling variants in diploid systems</p>
+<small>
+        Published: 2019-01-03T07:57:50+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dip/workflows/diploid.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/workflows/variant-calling.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Du Novo GTN Tutorial - Variant Calling</a></h2>
+<p class="summary">Run this on the trimmed consensus reads (DCS or SSCS) from Du Novo.
+</p>
+<small>
+        Published: 2018-08-17T11:18:16+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/workflows/variant-calling.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/workflows/dunovo.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Du Novo GTN Tutorial - Make Consensus Sequences</a></h2>
+<p class="summary">Run this on raw duplex sequencing reads to produce duplex consensus sequences.
+</p>
+<small>
+        Published: 2018-08-17T11:18:16+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/workflows/dunovo.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/microbial-variants/workflows/microbial_variant_calling.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Microbial Variant Calling</a></h2>
+<p class="summary">Microbial Variant Calling</p>
+<small>
+        Published: 2018-04-06T19:46:09+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/microbial-variants/workflows/microbial_variant_calling.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/workflows/workflow-arabidopsis.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Mapping And Molecular Identification Of Phenotype Causing Mutations</a></h2>
+<p class="summary">Reproduce the tutorial analysis at https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html</p>
+<small>
+        Published: 2018-03-16T10:56:52+00:00<br>
+        Tags:
+        workflows, variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/workflows/workflow-arabidopsis.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Mapping and molecular identification of phenotype-causing mutations</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<p class="summary">In order to map and identify phenotype-causing mutations efficiently from a
+
+</p>
+<small>
+        Published: 2018-03-07T15:58:55+00:00<br>
+        Tags:
+        variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/microbial-variants/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Microbial Variant Calling</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/">Anna Syme</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/">Torsten Seemann</a></p>
+<p class="summary">Variant calling is the process of identifying differences between two genome samples. Usually differences are limited to single nucleotide polymorphisms (SNPs) and small insertions and deletions (indels). Larger structural variation such as inversions, duplications and large deletions are not typically covered by “variant calling”.
+</p>
+<small>
+        Published: 2018-02-26T16:12:34+00:00<br>
+        Tags:
+        variant-analysis, prokaryote, microgalaxy, gmod, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/microbial-variants/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dip/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Calling variants in diploid systems</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/">Anton Nekrutenko</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></p>
+<p class="summary">Today we hear a lot about personalized medicine. Yet the personalization is defined by the genetic make up of the individual. In this tutorial we will discuss how this information can be uncovered from the genomic sequencing data.
+</p>
+<small>
+        Published: 2017-02-20T22:21:58+00:00<br>
+        Tags:
+        variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dip/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Calling variants in non-diploid systems</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/">Anton Nekrutenko</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a></p>
+<p class="summary">The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant’s chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes (Rebolledo-Jaramillo et al. 2014, Li et al. 2015).
+</p>
+<small>
+        Published: 2017-02-16T16:45:19+00:00<br>
+        Tags:
+        variant-analysis, prokaryote, microgalaxy</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/non-dip/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/introduction/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Introduction to Variant analysis</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/">Yvan Le Bras</a></p>
+<p class="summary">What is Exome sequencing?
+</p>
+<small>
+        Published: 2016-08-19T14:05:48+00:00<br>
+        Tags:
+        variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/introduction/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Exome sequencing data analysis for diagnosing a genetic disease</a></h2>
+<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/torhou/">Torsten Houwaart</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<p class="summary">Exome sequencing is a method that enables the selective sequencing of the
+
+</p>
+<small>
+        Published: 2016-08-19T14:05:48+00:00<br>
+        Tags:
+        variant-analysis</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div></main><footer><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/06/04/gtn-standards-rss.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">GTN RSS</a>
+           •
+          <a target="_blank" href="https://spdx.org/licenses/CC-BY-4.0">CC-BY 4.0</a>
+           •
+          <a target="_blank" href="https://training.galaxyproject.org/training-material/faqs/gtn/fair_training.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">FAIR</a>
+           •
+          <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
+           🔗
+          </a></footer></body></html>
