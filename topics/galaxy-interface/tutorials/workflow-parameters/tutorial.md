@@ -223,7 +223,6 @@ In this example we will construct a workflow where we calculate the sum of all v
 
 With this you're ready to run the workflow!
 
-> <a name="running-the-workflow-2"></a>
 > <hands-on-title>Running the workflow</hands-on-title>
 >
 > 1. Upload a dataset using "Paste/Fetch data" with the contents, and set the filetype manually to "tabular" during upload
@@ -294,7 +293,7 @@ In the following example we will construct a straightforward workflow, and utili
 
 > <hands-on-title>Running the main workflow</hands-on-title>
 >
-> 1. Upload/reuse the tabular file from the following [section](#running-the-workflow-2)
+> 1. Upload/reuse the tabular file from the following [section](#hands-on-running-the-workflow-1)
 > 2. Navigate to Workflow tab
 > 3. Click on {% icon workflow-run %} **Run workflow**
 > 4. Select the tabular file as your input
