@@ -242,7 +242,7 @@ def all_date_sorted_materials(site)
       'tags' => wf_data['tags'],
       'contributors' => wf_data.fetch('creator', []).map do |c|
         p ">> #{c}"
-        matched = site.data['contributors'].select{|k, v| v.fetch('orcid', nil) == c.fetch('identifier', false)}.first
+        matched = site.data['contributors'].select{|k, v| v.fetch('orcid', nil) == c.fetch('identifier', false).gsub('https://orcid.org/', '')}.first
         if matched
           matched[0]
         else
