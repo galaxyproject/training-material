@@ -14,6 +14,9 @@ contributions:
   organisers:
   - mblue9
 location:
+  geo:
+    lat: 51.7520131
+    lon: -1.2578499
   name: University of Oxford
   city: Oxford
   country: UK
