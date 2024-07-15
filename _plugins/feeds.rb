@@ -218,6 +218,12 @@ def generate_tag_topic_feeds(_site)
   ''
 end
 
+class DateTime
+  def to_euro_lunch
+    self.to_date.to_datetime + 0.5
+  end
+end
+
 def all_date_sorted_materials(site)
   events = site.pages.select { |x| x['layout'] == 'event' || x['layout'] == 'event-external' }
   materials = TopicFilter.list_all_materials(site).reject { |k, _v| k['draft'] }
@@ -397,8 +403,8 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
               xml.entry do
 
                 # This is a feed of only NEW tutorials, so we only include publication times.
-                xml.published(bucket_date.to_datetime.rfc3339)
-                xml.updated(bucket_date.to_datetime.rfc3339)
+                xml.published(bucket_date.to_euro_lunch.rfc3339)
+                xml.updated(bucket_date.to_euro_lunch.rfc3339)
 
                 href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
 
@@ -710,9 +716,11 @@ Jekyll::Hooks.register :site, :post_write do |site|
     generate_matrix_feed(site, bucket, group_by: 'week')
     generate_matrix_feed(site, bucket, group_by: 'month')
 
+    generate_matrix_feed_itemized(site, bucket)
     generate_matrix_feed_itemized(site, bucket, group_by: 'day')
 
     opml['GTN Digests'] = [
+      {title: "GTN Firehose", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix.i.xml"},
       {title: "GTN daily changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-daily.xml"},
       {title: "GTN daily changes (itemized, one change per entry)", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-daily.i.xml"},
       {title: "GTN weekly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-weekly.xml"},
